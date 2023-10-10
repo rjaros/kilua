@@ -22,7 +22,6 @@
 
 package dev.kilua.html.delegates
 
-import dev.kilua.core.CssSize
 import dev.kilua.html.*
 import org.w3c.dom.HTMLElement
 
@@ -514,5 +513,5 @@ public interface TagStyle<E : HTMLElement> {
     public fun getStyle(name: String): String?
     public fun removeStyle(name: String)
 
-    public fun elementWithStyle(element: E)
+    public fun elementWithStyle(element: E?)
 }

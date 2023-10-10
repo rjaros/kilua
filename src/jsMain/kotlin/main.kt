@@ -23,6 +23,7 @@
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.NoLiveLiterals
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -84,22 +85,22 @@ public class App : Application() {
 
             div {
                 for (name in list) {
-//                    key(name) {
-                    div {
-                        +name
-                        button {
-                            +"click"
-                            DisposableEffect("button") {
-                                val f = { _: Event ->
-                                    console.log("click $name of ${list.size}")
-                                }
-                                element.addEventListener("click", f)
-                                onDispose {
-                                    element.removeEventListener("click", f)
+                    key(name) {
+                        div {
+                            +name
+                            button {
+                                +"click"
+                                DisposableEffect("button") {
+                                    val f = { _: Event ->
+                                        console.log("click $name of ${list.size}")
+                                    }
+                                    element?.addEventListener("click", f)
+                                    onDispose {
+                                        element?.removeEventListener("click", f)
+                                    }
                                 }
                             }
                         }
-                        //                      }
                     }
                 }
             }
@@ -185,9 +186,9 @@ public class App : Application() {
                                     val f = { _: Event ->
                                         console.log("button2 click")
                                     }
-                                    element.addEventListener("click", f)
+                                    element?.addEventListener("click", f)
                                     onDispose {
-                                        element.removeEventListener("click", f)
+                                        element?.removeEventListener("click", f)
                                     }
                                 }
                             }
@@ -200,7 +201,7 @@ public class App : Application() {
                     }
                 }
                 DisposableEffect("code") {
-                    element.firstChild?.unsafeCast<Text>()?.data = "ala ma kota"
+                    element?.firstChild?.unsafeCast<Text>()?.data = "ala ma kota"
                     onDispose { }
                 }
             }
@@ -269,7 +270,7 @@ public class App2 : Application() {
             state.value = part + state.value.dropLast(count)
         }
 
-        root("root") {
+        val root = root("root") {
             div {
                 setStyle("display", "flex")
                 div {
@@ -293,12 +294,13 @@ public class App2 : Application() {
                 }
             }
         }
-        window.setInterval({
-            rotateState()
-        }, 0)
+        println(root.renderToString())
+//        window.setInterval({
+//            rotateState()
+//        }, 0)
     }
 }
 
 public fun main() {
-    startApplication(::App2, js("import.meta.webpackHot").unsafeCast<Hot?>())
+    startApplication(::App2/*, js("import.meta.webpackHot").unsafeCast<Hot?>()*/)
 }

@@ -22,24 +22,27 @@
 
 package dev.kilua.core
 
-import org.w3c.dom.Node
-
 public interface Component {
     public var visible: Boolean
-    public val node: Node
     public val parent: Component?
     public val children: List<Component>
-    public fun insertChild(index: Int, component: Component)
-    public fun removeChildren(index: Int, count: Int)
-    public fun moveChildren(from: Int, to: Int, count: Int)
-    public fun removeAll()
     public fun show() {
         visible = true
     }
+
     public fun hide() {
         visible = false
     }
+
     public fun toggle() {
         visible = !visible
+    }
+
+    public fun renderToStringBuilder(builder: StringBuilder)
+
+    public fun renderToString(): String {
+        val builder = StringBuilder()
+        renderToStringBuilder(builder)
+        return builder.toString()
     }
 }

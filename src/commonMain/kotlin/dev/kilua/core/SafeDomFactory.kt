@@ -20,17 +20,31 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.core
 
-public expect class Object
+import dev.kilua.utils.isDom
+import kotlinx.browser.document
+import org.w3c.dom.Element
+import org.w3c.dom.Text
 
-public expect fun obj(): Object
+public object SafeDomFactory {
 
-public expect fun isDom(): Boolean
+    public fun createElement(name: String, renderConfig: RenderConfig): Element? {
+        return if (renderConfig.isDom() && isDom()) {
+            document.createElement(name)
+        } else null
+    }
 
-public expect annotation class JsNonModule()
+    public fun createTextNode(text: String, renderConfig: RenderConfig): Text? {
+        return if (renderConfig.isDom() && isDom()) {
+            document.createTextNode(text)
+        } else null
+    }
 
-@Suppress("NOTHING_TO_INLINE")
-public inline fun <T> useCssModule(cssModule: T) {
-    // empty body
+    public fun getElementById(id: String, renderConfig: RenderConfig): Element? {
+        return if (renderConfig.isDom() && isDom()) {
+            document.getElementById(id)
+        } else null
+    }
+
 }

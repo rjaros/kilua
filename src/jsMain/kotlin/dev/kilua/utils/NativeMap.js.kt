@@ -22,7 +22,7 @@
 
 package dev.kilua.utils
 
-public actual class NativeMap<V> : Map<String, V> {
+public actual class NativeMap<out V> : Map<String, V> {
 
     private var nativeMap: dynamic = js("{}")
 
@@ -62,13 +62,13 @@ public actual class NativeMap<V> : Map<String, V> {
         return obj
     }
 
-    public actual fun putAll(from: Map<out String, V>) {
+    public actual fun putAll(from: Map<out String, @UnsafeVariance V>) {
         from.forEach {
             nativeMap[it.key] = it.value
         }
     }
 
-    public actual fun put(key: String, value: V): V? {
+    public actual fun put(key: String, value: @UnsafeVariance V): V? {
         val obj = nativeMap[key]
         nativeMap[key] = value
         @Suppress("UnsafeCastFromDynamic")
@@ -80,7 +80,7 @@ public actual class NativeMap<V> : Map<String, V> {
         return nativeMap[key]
     }
 
-    override fun containsValue(value: V): Boolean {
+    override fun containsValue(value: @UnsafeVariance V): Boolean {
         return keysArray.find {
             nativeMap[it] == value
         } != null

@@ -22,11 +22,11 @@
 
 package dev.kilua.utils
 
-public expect class NativeMap<V> : Map<String, V> {
-    public fun put(key: String, value: V): V?
+public expect class NativeMap<out V> : Map<String, V> {
+    public fun put(key: String, value: @UnsafeVariance V): V?
     public fun clear()
     public fun remove(key: String): V?
-    public fun putAll(from: Map<out String, V>)
+    public fun putAll(from: Map<out String, @UnsafeVariance V>)
 }
 
 public expect fun <V> nativeMapOf(vararg pairs: Pair<String, V>): NativeMap<V>

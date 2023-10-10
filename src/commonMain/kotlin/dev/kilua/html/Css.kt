@@ -22,7 +22,6 @@
 
 package dev.kilua.html
 
-import dev.kilua.core.CssSize
 import dev.kilua.utils.asString
 
 /**
@@ -46,6 +45,11 @@ public enum class CssUnit(public val cssUnit: String) {
     auto("auto"),
     normal("normal")
 }
+
+/**
+ * This type is used for defining CSS dimensions (width, heights, margins, paddings, etc.).
+ */
+public typealias CssSize = Pair<Number, CssUnit>
 
 /**
  * Definitions of CSS border styles.
@@ -818,14 +822,14 @@ public open class Background(
         val posY = positionY?.asString()
         val sX = sizeX?.asString()
         val sY = sizeY?.asString()
-        return color?.asString().orEmpty() + " " + img.orEmpty() + " " + posX.orEmpty() + " " + posY.orEmpty() +
+        return (color?.asString().orEmpty() + " " + img.orEmpty() + " " + posX.orEmpty() + " " + posY.orEmpty() +
                 if (sX != null || sY != null || size != null) {
                     (if (posX != null || posY != null) " / " else " 0px 0px / ") +
                             sX.orEmpty() + " " + sY.orEmpty() + " " + (size?.size).orEmpty()
                 } else {
                     ""
                 } + " " + (repeat?.repeat).orEmpty() + " " + (origin?.origin).orEmpty() + " " +
-                (clip?.clip).orEmpty() + " " + (attachment?.attachment).orEmpty()
+                (clip?.clip).orEmpty() + " " + (attachment?.attachment).orEmpty()).trim()
     }
 
     override fun toString(): String = asString()
@@ -843,9 +847,9 @@ public open class TextDecoration(
 ) {
 
     public fun asString(): String {
-        return (line?.textDecorationLine).orEmpty() + " " +
+        return ((line?.textDecorationLine).orEmpty() + " " +
                 (style?.textDecorationStyle).orEmpty() + " " +
-                color?.asString().orEmpty()
+                color?.asString().orEmpty()).trim()
     }
 
     override fun toString(): String = asString()
@@ -864,10 +868,10 @@ public open class TextShadow(
 ) {
 
     public fun asString(): String {
-        return (hShadow?.asString()).orEmpty() + " " +
+        return ((hShadow?.asString()).orEmpty() + " " +
                 (vShadow?.asString()).orEmpty() + " " +
                 (blurRadius?.asString()).orEmpty() + " " +
-                color?.asString().orEmpty()
+                color?.asString().orEmpty()).trim()
     }
 
     override fun toString(): String = asString()
@@ -889,11 +893,11 @@ public open class BoxShadow(
 ) {
 
     public fun asString(): String {
-        return if (inset) "inset " else "" + (hOffset?.asString()).orEmpty() + " " +
+        return (if (inset) "inset " else "" + (hOffset?.asString()).orEmpty() + " " +
                 (vOffset?.asString()).orEmpty() + " " +
                 (blurRadius?.asString()).orEmpty() + " " +
                 (spreadRadius?.asString()).orEmpty() + " " +
-                color?.asString().orEmpty()
+                color?.asString().orEmpty()).trim()
     }
 
     override fun toString(): String = asString()
@@ -913,7 +917,7 @@ public open class Transition(
     protected val delay: Double? = null
 ) {
     public fun asString(): String {
-        return "$property ${duration}s ${timingFunction ?: ""} ${delay?.let { it.toString() + "s" } ?: ""}"
+        return ("$property ${duration}s ${timingFunction ?: ""} ${delay?.let { it.toString() + "s" } ?: ""}").trim()
     }
 
     override fun toString(): String = asString()
@@ -935,7 +939,7 @@ public open class ListStyle(
         val img = image?.let {
             "url($image)"
         }
-        return "${type?.type.orEmpty()} ${position?.position.orEmpty()} ${img.orEmpty()}"
+        return ("${type?.type.orEmpty()} ${position?.position.orEmpty()} ${img.orEmpty()}").trim()
     }
 
     override fun toString(): String = asString()

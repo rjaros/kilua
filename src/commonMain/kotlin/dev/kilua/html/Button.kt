@@ -27,9 +27,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.compose.DomScope
-import dev.kilua.utils.AbortController
-import dev.kilua.utils.buildAddEventListenerOptions
+import dev.kilua.compose.ComponentScope
+import dev.kilua.core.ComponentBase
+import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.RenderConfig
 import org.w3c.dom.HTMLButtonElement
 
 /**
@@ -41,28 +42,40 @@ public enum class ButtonType(internal val buttonType: String) {
     Reset("reset")
 }
 
-public open class Button(type: ButtonType = ButtonType.Button, disabled: Boolean = false, className: String? = null) :
-    Tag<HTMLButtonElement>("button", className),
-    DomScope<HTMLButtonElement> {
+public open class Button(
+    type: ButtonType = ButtonType.Button,
+    disabled: Boolean = false,
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLButtonElement>("button", className, renderConfig), ComponentScope<HTMLButtonElement> {
 
-    public open var type: ButtonType by managedProperty(type) {
+    public open var type: ButtonType by managedProperty(type, skipUpdates) {
         element.type = it.buttonType
     }
 
-    public open var disabled: Boolean by managedProperty(disabled) {
+    public open var disabled: Boolean by managedProperty(disabled, skipUpdates) {
         element.disabled = it
+    }
+
+    override fun renderToStringBuilder(builder: StringBuilder) {
+        builder.append("<button>")
+        children.forEach {
+            it.renderToStringBuilder(builder)
+        }
+        builder.append("<button>")
     }
 
 }
 
 @Composable
-public fun button(
+public fun ComponentBase.button(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean = false,
     className: String? = null,
     content: @Composable Button.() -> Unit = {}
 ): Button {
-    val button by remember { mutableStateOf(Button(type, disabled, className)) }
+    val button by remember { mutableStateOf(Button(type, disabled, className, renderConfig)) }
     ComponentNode(button, {
         set(type) { updateManagedProperty(Button::type, it) }
         set(disabled) { updateManagedProperty(Button::disabled, it) }
@@ -72,7 +85,7 @@ public fun button(
 }
 
 @Composable
-public fun button(
+public fun ComponentBase.button(
     label: String? = null,
     type: ButtonType = ButtonType.Button,
     disabled: Boolean = false,

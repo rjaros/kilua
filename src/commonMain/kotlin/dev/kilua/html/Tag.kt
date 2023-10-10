@@ -29,32 +29,66 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.compose.DomScope
+import dev.kilua.compose.ComponentScope
 import dev.kilua.core.ComponentBase
+import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.RenderConfig
+import dev.kilua.core.SafeDomFactory
 import dev.kilua.html.delegates.TagAttrs
 import dev.kilua.html.delegates.TagAttrsDelegate
 import dev.kilua.html.delegates.TagStyle
 import dev.kilua.html.delegates.TagStyleDelegate
 import dev.kilua.utils.AbortController
+import dev.kilua.utils.NativeMap
 import dev.kilua.utils.buildAddEventListenerOptions
-import kotlinx.browser.document
+import dev.kilua.utils.isDom
+import dev.kilua.utils.nativeMapOf
+import dev.kilua.utils.renderAsCssStyle
+import dev.kilua.utils.renderAsHtmlAttributes
 import org.w3c.dom.HTMLElement
 
-public open class Tag<E : HTMLElement>(tagName: String, className: String? = null) :
-    ComponentBase(document.createElement(tagName)), DomScope<E>,
-    TagAttrs<E> by TagAttrsDelegate(), TagStyle<E> by TagStyleDelegate() {
+public open class Tag<E : HTMLElement> private constructor(
+    protected val tagName: String,
+    className: String? = null,
+    renderConfig: RenderConfig,
+    protected val attributes: NativeMap<Any>,
+    protected val styles: NativeMap<String>
+) :
+    ComponentBase(SafeDomFactory.createElement(tagName, renderConfig), renderConfig), ComponentScope<E>,
+    TagAttrs<E> by TagAttrsDelegate(!renderConfig.isDom() || !isDom(), attributes),
+    TagStyle<E> by TagStyleDelegate(!renderConfig.isDom() || !isDom(), styles) {
 
-    @Suppress("LeakingThis")
-    public open val element: E = node.unsafeCast<E>()
+    public constructor(
+        tagName: String,
+        className: String? = null,
+        renderConfig: RenderConfig = DefaultRenderConfig()
+    ) : this(
+        tagName,
+        className,
+        renderConfig,
+        nativeMapOf(),
+        nativeMapOf()
+    )
+
+    public open val element: E
+        get() = node?.unsafeCast<E>()
+            ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
+
+    override val DisposableEffectScope.element: E
+        get() = this@Tag.element
+
+    public open val elementAvailable: Boolean = node != null
 
     init {
         @Suppress("LeakingThis")
-        elementWithAttrs(element)
+        elementWithAttrs(node?.unsafeCast<E>())
         @Suppress("LeakingThis")
-        elementWithStyle(element)
+        elementWithStyle(node?.unsafeCast<E>())
     }
 
-    public open var className: String? by managedProperty(className) {
+    protected val skipUpdates: Boolean = node == null
+
+    public open var className: String? by managedProperty(className, skipUpdates) {
         if (it != null) {
             element.className = it
         } else {
@@ -65,7 +99,7 @@ public open class Tag<E : HTMLElement>(tagName: String, className: String? = nul
         }
     }
 
-    override var visible: Boolean by unmanagedProperty(true) {
+    override var visible: Boolean by unmanagedProperty(true, skipUpdates) {
         if (it) {
             element.style.removeProperty("display")
         } else {
@@ -88,22 +122,39 @@ public open class Tag<E : HTMLElement>(tagName: String, className: String? = nul
             if (value != null) {
                 abortController?.abort()
                 abortController = AbortController()
-                node.addEventListener("click", { value() }, buildAddEventListenerOptions(abortController!!.signal))
+                node?.addEventListener("click", { value() }, buildAddEventListenerOptions(abortController!!.signal))
             }
         }
 
-    override val DisposableEffectScope.element: E
-        get() = this@Tag.element
+    override fun renderToStringBuilder(builder: StringBuilder) {
+        if (visible) {
+            builder.append("<$tagName")
+            if (attributes.isNotEmpty()) {
+                builder.append(" ${attributes.renderAsHtmlAttributes()}")
+            }
+            className?.let {
+                builder.append(" class=\"$it\"")
+            }
+            if (styles.isNotEmpty()) {
+                builder.append(" style=\"${styles.renderAsCssStyle()}\"")
+            }
+            builder.append(">")
+            children.forEach {
+                it.renderToStringBuilder(builder)
+            }
+            builder.append("</$tagName>")
+        }
+    }
 }
 
 @Composable
-public fun <E : HTMLElement> tag(
+public fun <E : HTMLElement> ComponentBase.tag(
     tagName: String,
     className: String? = null,
     content: @Composable Tag<E>.() -> Unit = {}
 ): Tag<E> {
     return key(tagName) {
-        val tag by remember { mutableStateOf(Tag<E>(tagName, className)) }
+        val tag by remember { mutableStateOf(Tag<E>(tagName, className, renderConfig)) }
         ComponentNode(tag, {
             set(className) { updateManagedProperty(Tag<HTMLElement>::className, it) }
         }, content)
@@ -112,7 +163,7 @@ public fun <E : HTMLElement> tag(
 }
 
 @Composable
-public fun tag(
+public fun ComponentBase.tag(
     tagName: String,
     className: String? = null,
     content: @Composable Tag<HTMLElement>.() -> Unit = {}

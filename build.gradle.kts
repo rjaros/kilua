@@ -87,6 +87,11 @@ kotlin {
                     }
                 }
             }
+            nodejs {
+                testTask {
+                    useMocha()
+                }
+            }
             binaries.executable()
         }
     }

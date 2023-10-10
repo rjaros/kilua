@@ -20,11 +20,34 @@
  * SOFTWARE.
  */
 
-package dev.kilua.compose
 
-import androidx.compose.runtime.DisposableEffectScope
-import org.w3c.dom.Node
+package dev.kilua.core
 
-public interface DomScope<out E : Node> {
-    public val DisposableEffectScope.element: E
+public interface RenderConfig {
+    public fun isDom(): Boolean
+
+}
+
+public class DefaultRenderConfig : RenderConfig {
+    override fun isDom(): Boolean {
+        return dev.kilua.utils.isDom()
+    }
+}
+
+public class DomRenderConfig : RenderConfig {
+
+    init {
+        require(dev.kilua.utils.isDom()) { "DOM rendering is not supported in this environment" }
+    }
+
+    override fun isDom(): Boolean {
+        return true
+    }
+
+}
+
+public class HeadlessRenderConfig : RenderConfig {
+    override fun isDom(): Boolean {
+        return false
+    }
 }

@@ -28,32 +28,47 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.compose.DomScope
+import dev.kilua.compose.ComponentScope
 import dev.kilua.core.ComponentBase
-import kotlinx.browser.document
+import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.RenderConfig
+import dev.kilua.core.SafeDomFactory
+import dev.kilua.utils.cast
 import org.w3c.dom.Text
 
-public open class TextNode(text: String) : ComponentBase(document.createTextNode(text)),
-    DomScope<Text> {
+public open class TextNode(
+    text: String,
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+) : ComponentBase(SafeDomFactory.createTextNode(text, renderConfig), renderConfig), ComponentScope<Text> {
 
-    @Suppress("LeakingThis")
-    public open val element: Text = node.unsafeCast<Text>()
-
-    public open var text: String by managedProperty(text) {
-        element.data = it
-    }
-
-    override var visible: Boolean by unmanagedProperty(true) {
-        element.data = if (it) text else ""
-    }
+    public open val element: Text
+        get() = node?.unsafeCast<Text>()
+            ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
 
     override val DisposableEffectScope.element: Text
         get() = this@TextNode.element
+
+    public open val elementAvailable: Boolean = node != null
+
+    private val skipUpdates = node == null
+
+    public open var text: String by managedProperty(text, skipUpdates) {
+        element.data = it
+    }
+
+    override var visible: Boolean by unmanagedProperty(true, skipUpdates) {
+        element.data = if (it) text else ""
+    }
+
+    override fun renderToStringBuilder(builder: StringBuilder) {
+        builder.append(if (visible) propertyValues[::text.name]?.cast<String>() ?: "" else "")
+    }
 }
 
 @Composable
 public fun text(text: String, content: TextNode.() -> Unit = {}): TextNode {
-    val textNode by remember { mutableStateOf(TextNode(text)) }
+    // Always using DefaultRenderConfig because of plus operator String receiver.
+    val textNode by remember { mutableStateOf(TextNode(text, DefaultRenderConfig())) }
     ComponentNode(textNode, {
         set(text) { updateManagedProperty(TextNode::text, it) }
     }) {

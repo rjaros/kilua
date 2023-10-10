@@ -24,6 +24,7 @@ package dev.kilua
 
 import dev.kilua.compose.Root
 import dev.kilua.utils.Object
+import dev.kilua.utils.isDom
 import kotlinx.browser.document
 import kotlinx.dom.clear
 import kotlin.js.Promise
@@ -63,17 +64,48 @@ interface DomSpec : TestSpec {
 
     fun getTestId() = "test"
 
+    fun runWhenDomAvailable(code: () -> Unit) {
+        beforeTest()
+        if (isDom()) {
+            run(code)
+        }
+        afterTest()
+    }
+
     override fun beforeTest() {
-        val fixture = "<div style=\"display: none\" id=\"pretest\">" +
-                "<div id=\"${getTestId()}\"></div></div>"
-        document.body?.insertAdjacentHTML("afterbegin", fixture)
+        if (isDom()) {
+            val fixture = "<div style=\"display: none\" id=\"pretest\">" +
+                    "<div id=\"${getTestId()}\"></div></div>"
+            document.body?.insertAdjacentHTML("afterbegin", fixture)
+        }
     }
 
     override fun afterTest() {
-        val div = document.getElementById("pretest")
-        div?.clear()
-        val modalBackdrop = document.getElementById(".modal-backdrop")
-        modalBackdrop?.remove()
+        if (isDom()) {
+            val div = document.getElementById("pretest")
+            div?.clear()
+            val modalBackdrop = document.getElementById(".modal-backdrop")
+            modalBackdrop?.remove()
+        }
         Root.disposeAllRoots()
     }
+}
+
+/**
+ * Format a HTML string in a standardized manner, with one HTML element per line.
+ * This helps with highlighting HTML differences in test assertions.
+ */
+public fun normalizeHtml(raw: String): String {
+    return raw
+        .replace("<", "\n<")
+        .replace(">", ">\n")
+        .split("\n")
+        .map { it.trim() }
+        .filter { it.isNotBlank() }
+        .joinToString("\n")
+}
+
+/** @see [normalizeHtml] */
+public fun normalizeHtml(raw: String?): String? {
+    return if (raw == null) null else normalizeHtml(raw)
 }

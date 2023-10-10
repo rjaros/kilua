@@ -27,14 +27,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.compose.DomScope
+import dev.kilua.compose.ComponentScope
+import dev.kilua.core.ComponentBase
+import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.RenderConfig
 import org.w3c.dom.HTMLDivElement
 
-public open class Div(className: String? = null) : Tag<HTMLDivElement>("div", className), DomScope<HTMLDivElement>
+public open class Div(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
+    Tag<HTMLDivElement>("div", className, renderConfig), ComponentScope<HTMLDivElement>
 
 @Composable
-public fun div(className: String? = null, content: @Composable Div.() -> Unit = {}): Div {
-    val div by remember { mutableStateOf(Div(className)) }
+public fun ComponentBase.div(className: String? = null, content: @Composable Div.() -> Unit = {}): Div {
+    val div by remember { mutableStateOf(Div(className, renderConfig)) }
     ComponentNode(div, {
         set(className) { updateManagedProperty(Div::className, it) }
     }, content)

@@ -24,19 +24,26 @@ package dev.kilua.html.delegates
 
 import dev.kilua.core.PropertyDelegate
 import dev.kilua.utils.NativeMap
-import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.set
 import org.w3c.dom.HTMLElement
 
-public open class TagAttrsDelegate<E : HTMLElement> : TagAttrs<E>, PropertyDelegate() {
+public open class TagAttrsDelegate<E : HTMLElement>(
+    protected val skipUpdates: Boolean,
+    protected val attributes: NativeMap<Any>
+) : TagAttrs<E>,
+    PropertyDelegate(attributes) {
 
     protected lateinit var element: E
+    protected var elementNullable: E? = null
 
-    override fun elementWithAttrs(element: E) {
-        this.element = element
+    override fun elementWithAttrs(element: E?) {
+        this.elementNullable = element
+        if (!skipUpdates && element != null) {
+            this.element = element
+        }
     }
 
-    override var id: String? by unmanagedProperty {
+    override var id: String? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.id = it
         } else {
@@ -44,7 +51,7 @@ public open class TagAttrsDelegate<E : HTMLElement> : TagAttrs<E>, PropertyDeleg
         }
     }
 
-    override var title: String? by unmanagedProperty {
+    override var title: String? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.title = it
         } else {
@@ -52,7 +59,7 @@ public open class TagAttrsDelegate<E : HTMLElement> : TagAttrs<E>, PropertyDeleg
         }
     }
 
-    override var tabindex: Int? by unmanagedProperty {
+    override var tabindex: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.tabIndex = it
         } else {
@@ -60,7 +67,7 @@ public open class TagAttrsDelegate<E : HTMLElement> : TagAttrs<E>, PropertyDeleg
         }
     }
 
-    override var draggable: Boolean? by unmanagedProperty {
+    override var draggable: Boolean? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.draggable = it
         } else {
@@ -68,7 +75,7 @@ public open class TagAttrsDelegate<E : HTMLElement> : TagAttrs<E>, PropertyDeleg
         }
     }
 
-    override var role: String? by unmanagedProperty {
+    override var role: String? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.setAttribute("role", it)
         } else {
@@ -76,7 +83,7 @@ public open class TagAttrsDelegate<E : HTMLElement> : TagAttrs<E>, PropertyDeleg
         }
     }
 
-    override var ariaLabel: String? by unmanagedProperty(null) {
+    override var ariaLabel: String? by unmanagedProperty(null, skipUpdates) {
         if (it != null) {
             element.setAttribute("aria-label", it)
         } else {
@@ -84,7 +91,7 @@ public open class TagAttrsDelegate<E : HTMLElement> : TagAttrs<E>, PropertyDeleg
         }
     }
 
-    override var ariaLabelledby: String? by unmanagedProperty(null) {
+    override var ariaLabelledby: String? by unmanagedProperty(null, skipUpdates) {
         if (it != null) {
             element.setAttribute("aria-labelledby", it)
         } else {
@@ -92,28 +99,26 @@ public open class TagAttrsDelegate<E : HTMLElement> : TagAttrs<E>, PropertyDeleg
         }
     }
 
-    protected val attributes: NativeMap<String?> = nativeMapOf()
-
     override fun setAttribute(name: String, value: String?) {
         if (attributes[name] != value) {
             if (value != null) {
                 attributes[name] = value
-                element.setAttribute(name, value)
+                elementNullable?.setAttribute(name, value)
             } else {
                 attributes.remove(name)
-                element.removeAttribute(name)
+                elementNullable?.removeAttribute(name)
             }
         }
     }
 
     override fun getAttribute(name: String): String? {
-        return attributes[name]
+        return attributes[name].toString()
     }
 
     override fun removeAttribute(name: String) {
         if (attributes[name] != null) {
             attributes.remove(name)
-            element.removeAttribute(name)
+            elementNullable?.removeAttribute(name)
         }
     }
 }

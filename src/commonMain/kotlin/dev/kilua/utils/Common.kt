@@ -22,8 +22,7 @@
 
 package dev.kilua.utils
 
-import dev.kilua.core.CssSize
-import dev.kilua.core.StringPair
+import dev.kilua.html.CssSize
 import dev.kilua.html.CssUnit
 
 /**
@@ -180,6 +179,20 @@ public operator fun CssSize?.minus(i: Number): CssSize {
 }
 
 /**
+ * Render map of properties to an CSS style string.
+ */
+public fun Map<String, Any>.renderAsHtmlAttributes(): String {
+    return this.map { "${it.key.toKebabCase()}=\"${it.value}\"" }.joinToString(" ")
+}
+
+/**
+ * Render map of properties to an CSS style string.
+ */
+public fun Map<String, Any>.renderAsCssStyle(): String {
+    return this.map { "${it.key.toKebabCase()}: ${it.value};" }.joinToString(" ")
+}
+
+/**
  * Utility extension function to synchronise elements of the MutableList.
  */
 public fun <T> MutableList<T>.syncWithList(list: List<T>) {
@@ -196,6 +209,11 @@ public fun <T> MutableList<T>.syncWithList(list: List<T>) {
         }
     }
 }
+
+/**
+ * Helper type used to define CSS style attributes.
+ */
+public typealias StringPair = Pair<String, String>
 
 /**
  * Utility extension function to convert List<String> into List<StringPair>.

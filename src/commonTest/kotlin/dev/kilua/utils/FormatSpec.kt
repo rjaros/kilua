@@ -40,4 +40,10 @@ class FormatSpec : SimpleSpec {
         assertEquals("marginTop", marginTop, "Should convert a kebab-case string to camelCase")
     }
 
+    @Test
+    fun toKebabCase() {
+        val marginTop = "marginTop".toKebabCase()
+        assertEquals("margin-top", marginTop, "Should convert a camelCase string to kebab-case")
+    }
+
 }

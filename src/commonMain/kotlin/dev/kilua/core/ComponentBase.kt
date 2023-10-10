@@ -23,70 +23,86 @@
 package dev.kilua.core
 
 import dev.kilua.utils.NativeList
-import dev.kilua.utils.cast
+import dev.kilua.utils.NativeMap
 import dev.kilua.utils.nativeListOf
+import dev.kilua.utils.nativeMapOf
 import kotlinx.dom.clear
 import org.w3c.dom.Node
 import org.w3c.dom.get
 
-public abstract class ComponentBase(override val node: Node) : Component, PropertyDelegate() {
+public abstract class ComponentBase(
+    protected val node: Node?,
+    internal val renderConfig: RenderConfig,
+) : Component, PropertyDelegate(nativeMapOf()) {
 
     override var parent: Component? = null
-    override val children: NativeList<Component> = nativeListOf()
+    override val children: NativeList<ComponentBase> = nativeListOf()
 
-    override fun insertChild(index: Int, component: Component) {
-        component.cast<ComponentBase>().parent = this
+    internal fun insertChild(index: Int, component: ComponentBase) {
+        component.parent = this
         val size = children.size
         if (index < size) {
             children.add(index, component)
-            node.insertBefore(component.node, node.childNodes[index]!!)
+            if (node != null && component.node != null) {
+                node.insertBefore(component.node, node.childNodes[index]!!)
+            }
         } else {
             children.add(component)
-            node.appendChild(component.node)
+            if (node != null && component.node != null) {
+                node.appendChild(component.node)
+            }
         }
     }
 
-    override fun removeChildren(index: Int, count: Int) {
+    internal fun removeChildren(index: Int, count: Int) {
         repeat(count) {
             val child = children.removeAt(index)
-            child.cast<ComponentBase>().parent = null
-            node.removeChild(node.childNodes[index]!!)
+            child.parent = null
+            node?.removeChild(node.childNodes[index]!!)
         }
     }
 
-    override fun moveChildren(from: Int, to: Int, count: Int) {
+    internal fun moveChildren(from: Int, to: Int, count: Int) {
         if (from != to) {
             if (count == 1 && (from == to + 1 || from == to - 1)) {
                 val fromEl = children[from]
                 val toEl = children.set(to, fromEl)
                 children[from] = toEl
-                val toIndex = if (from > to) to else to - 1
-                val childElement = node.removeChild(node.childNodes[from]!!)
-                node.insertBefore(childElement, node.childNodes[toIndex]!!)
+                if (node != null) {
+                    val toIndex = if (from > to) to else to - 1
+                    val childElement = node.removeChild(node.childNodes[from]!!)
+                    node.insertBefore(childElement, node.childNodes[toIndex]!!)
+                }
             } else {
                 for (i in 0..<count) {
                     val fromIndex = if (from > to) from + i else from
                     val toIndex = if (from > to) to + i else to + count - 2
                     val child = children.removeAt(fromIndex)
-                    val childElement = node.removeChild(node.childNodes[fromIndex]!!)
+                    val childElement = node?.let {
+                        it.removeChild(it.childNodes[fromIndex]!!)
+                    }
                     if (toIndex < children.size) {
                         children.add(toIndex, child)
-                        node.insertBefore(childElement, node.childNodes[toIndex]!!)
+                        if (node != null && childElement != null) {
+                            node.insertBefore(childElement, node.childNodes[toIndex]!!)
+                        }
                     } else {
                         children.add(child)
-                        node.appendChild(childElement)
+                        if (node != null && childElement != null) {
+                            node.appendChild(childElement)
+                        }
                     }
                 }
             }
         }
     }
 
-    override fun removeAll() {
+    internal fun removeAll() {
         children.forEach {
-            it.cast<ComponentBase>().parent = null
+            it.parent = null
         }
         children.clear()
-        node.clear()
+        node?.clear()
     }
 
 }

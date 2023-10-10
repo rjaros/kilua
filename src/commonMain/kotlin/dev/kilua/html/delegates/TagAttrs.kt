@@ -38,5 +38,5 @@ public interface TagAttrs<E : HTMLElement> {
     public fun getAttribute(name: String): String?
     public fun removeAttribute(name: String)
 
-    public fun elementWithAttrs(element: E)
+    public fun elementWithAttrs(element: E?)
 }

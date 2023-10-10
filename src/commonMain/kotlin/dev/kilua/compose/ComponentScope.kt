@@ -20,16 +20,11 @@
  * SOFTWARE.
  */
 
-package dev.kilua.core
+package dev.kilua.compose
 
-import dev.kilua.html.CssUnit
+import androidx.compose.runtime.DisposableEffectScope
+import org.w3c.dom.Node
 
-/**
- * Helper type used to define CSS style attributes.
- */
-public typealias StringPair = Pair<String, String>
-
-/**
- * This type is used for defining CSS dimensions (width, heights, margins, paddings, etc.).
- */
-public typealias CssSize = Pair<Number, CssUnit>
+public interface ComponentScope<out E : Node> {
+    public val DisposableEffectScope.element: E
+}

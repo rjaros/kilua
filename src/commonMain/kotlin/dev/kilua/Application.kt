@@ -22,6 +22,7 @@
 package dev.kilua
 
 import dev.kilua.compose.Root
+import dev.kilua.utils.isDom
 import kotlinx.browser.document
 
 /**
@@ -82,7 +83,7 @@ public fun startApplication(
         it.data
     }
 
-    if (document.body != null) {
+    if (!isDom() || document.body != null) {
         application = start(state)
     } else {
         application = null

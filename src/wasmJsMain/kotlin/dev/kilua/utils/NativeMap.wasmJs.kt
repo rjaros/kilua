@@ -22,7 +22,7 @@
 
 package dev.kilua.utils
 
-public actual class NativeMap<V>(private val internalMap: MutableMap<String, V> = mutableMapOf()) :
+public actual class NativeMap<out V>(private val internalMap: MutableMap<String, V> = mutableMapOf()) :
     Map<String, V> by internalMap {
 
     public actual fun clear() {
@@ -33,11 +33,11 @@ public actual class NativeMap<V>(private val internalMap: MutableMap<String, V> 
         return internalMap.remove(key)
     }
 
-    public actual fun putAll(from: Map<out String, V>) {
+    public actual fun putAll(from: Map<out String, @UnsafeVariance V>) {
         internalMap.putAll(from)
     }
 
-    public actual fun put(key: String, value: V): V? {
+    public actual fun put(key: String, value: @UnsafeVariance V): V? {
         return internalMap.put(key, value)
     }
 }

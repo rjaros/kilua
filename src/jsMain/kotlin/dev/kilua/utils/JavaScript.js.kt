@@ -29,6 +29,11 @@ public actual inline fun obj(): Object {
     return js("{}")
 }
 
+public actual fun isDom(): Boolean {
+    @Suppress("UnsafeCastFromDynamic")
+    return js("typeof document !== 'undefined'")
+}
+
 public actual typealias JsNonModule = kotlin.js.JsNonModule
 
 /**

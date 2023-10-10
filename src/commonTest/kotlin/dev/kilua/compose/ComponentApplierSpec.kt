@@ -28,15 +28,17 @@ package dev.kilua.compose
 import androidx.compose.runtime.Applier
 import dev.kilua.SimpleSpec
 import dev.kilua.core.Component
+import dev.kilua.core.HeadlessRenderConfig
+import dev.kilua.core.SafeDomFactory
 import dev.kilua.html.Tag
-import kotlinx.browser.document
 import org.w3c.dom.HTMLElement
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class DomApplierSpec : SimpleSpec {
-    private val root = RootComponent(document.createElement("div"))
-    private val applier = DomApplier(root)
+class ComponentApplierSpec : SimpleSpec {
+    private val headlessRenderConfig = HeadlessRenderConfig()
+    private val root = Root(SafeDomFactory.createElement("div", headlessRenderConfig), headlessRenderConfig)
+    private val applier = ComponentApplier(root)
 
     private fun <T> Applier<T>.insert(index: Int, instance: T) {
         insertBottomUp(index, instance)

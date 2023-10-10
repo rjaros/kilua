@@ -27,4 +27,7 @@ public actual external class Object : JsAny
 @JsFun("() => ( {} )")
 public actual external fun obj(): Object
 
+@JsFun("ref => typeof document !== 'undefined'")
+public actual external fun isDom(): Boolean
+
 public actual annotation class JsNonModule actual constructor()

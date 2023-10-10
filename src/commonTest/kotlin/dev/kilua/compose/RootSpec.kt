@@ -23,21 +23,58 @@
 package dev.kilua.compose
 
 import dev.kilua.DomSpec
+import dev.kilua.html.Border
+import dev.kilua.html.BorderStyle
+import dev.kilua.html.Col
+import dev.kilua.html.Color
 import dev.kilua.html.div
+import dev.kilua.html.unaryPlus
+import dev.kilua.normalizeHtml
+import dev.kilua.utils.isDom
+import dev.kilua.utils.px
 import kotlinx.browser.document
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class RootSpec: DomSpec {
+class RootSpec : DomSpec {
+
+    @Test
+    fun renderToString() {
+        run {
+            val root = root {
+                div("a_class") {
+                    id = "main"
+                    border = Border(1.px, BorderStyle.Dotted, Color.name(Col.Red))
+                    div {
+                        +"Some content"
+                    }
+                }
+            }
+            assertEquals(
+                normalizeHtml("""<div><div id="main" class="a_class" style="border: 1px dotted red;"><div>Some content</div></div></div>"""),
+                normalizeHtml(root.renderToString()),
+                "Should render root element with some content to a String"
+            )
+        }
+    }
 
     @Test
     fun render() {
-        run {
-            val element = document.getElementById("test")!!
-            root(element) {
-                div()
+        runWhenDomAvailable {
+            val root = root("test") {
+                div("a_class") {
+                    id = "main"
+                    border = Border(1.px, BorderStyle.Dotted, Color.name(Col.Red))
+                    div {
+                        +"Some content"
+                    }
+                }
             }
-            assertEquals("""<div></div>""", element.innerHTML, "Should render root element with some content")
+            assertEquals(
+                normalizeHtml("""<div id="test"><div id="main" class="a_class" style="border: 1px dotted red;"><div>Some content</div></div></div>"""),
+                normalizeHtml(root.element?.outerHTML ?: ""),
+                "Should render root element with some content to DOM"
+            )
         }
     }
 }

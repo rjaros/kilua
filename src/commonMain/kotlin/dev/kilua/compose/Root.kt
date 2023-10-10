@@ -27,24 +27,48 @@ import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ControlledComposition
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.runtime.Recomposer
-import dev.kilua.core.Component
 import dev.kilua.core.ComponentBase
-import kotlinx.browser.document
+import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.HeadlessRenderConfig
+import dev.kilua.core.RenderConfig
+import dev.kilua.core.SafeDomFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
 import kotlinx.dom.clear
 import org.w3c.dom.Element
 
-public class Root(private val element: Element, private val composition: Composition) {
+public class Root(
+    public val element: Element?,
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    content: @Composable Root.() -> Unit = {}
+) : ComponentBase(element, renderConfig) {
+
+    // Not used
+    override var visible: Boolean = true
+
+    private val composition: Composition
 
     init {
         roots.add(this)
+        composition = rootComposable(this, defaultMonotonicFrameClock, content)
+    }
+
+    override fun renderToStringBuilder(builder: StringBuilder) {
+        builder.append("<${element?.tagName ?: "div"}")
+        if (element?.id != null) {
+            builder.append(" id=\"${element.id}\"")
+        }
+        builder.append(">")
+        children.forEach {
+            it.renderToStringBuilder(builder)
+        }
+        builder.append("</${element?.tagName ?: "div"}>")
     }
 
     public fun dispose() {
         composition.dispose()
-        element.clear()
+        element?.clear()
     }
 
     public companion object {
@@ -57,17 +81,12 @@ public class Root(private val element: Element, private val composition: Composi
     }
 }
 
-internal class RootComponent(element: Element) : ComponentBase(element) {
-    // Not used
-    override var visible: Boolean = true
-}
-
 internal expect val defaultMonotonicFrameClock: MonotonicFrameClock
 
-public fun <C : Component> rootComposable(
-    root: C,
+internal fun rootComposable(
+    root: Root,
     monotonicFrameClock: MonotonicFrameClock = defaultMonotonicFrameClock,
-    content: @Composable C.() -> Unit
+    content: @Composable Root.() -> Unit
 ): Composition {
     GlobalSnapshotManager.ensureStarted()
 
@@ -79,7 +98,7 @@ public fun <C : Component> rootComposable(
     }
 
     val composition = ControlledComposition(
-        applier = DomApplier(root),
+        applier = ComponentApplier(root),
         parent = recomposer
     )
 
@@ -89,12 +108,26 @@ public fun <C : Component> rootComposable(
     return composition
 }
 
-public fun root(element: Element, content: @Composable ComponentBase.() -> Unit = {}): Root {
-    return Root(element, rootComposable(RootComponent(element)) {
+public fun root(
+    element: Element?,
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    content: @Composable Root.() -> Unit = {}
+): Root {
+    return Root(element, renderConfig) {
         content()
-    })
+    }
 }
 
-public fun root(id: String, content: @Composable ComponentBase.() -> Unit = {}): Root {
-    return root(document.getElementById(id)!!, content = content)
+public fun root(
+    id: String,
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    content: @Composable Root.() -> Unit = {}
+): Root {
+    return root(SafeDomFactory.getElementById(id, renderConfig), renderConfig, content)
+}
+
+public fun root(
+    content: @Composable Root.() -> Unit = {}
+): Root {
+    return root(null, HeadlessRenderConfig(), content)
 }

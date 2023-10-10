@@ -35,3 +35,10 @@ public fun String.toCamelCase(): String {
         it.value.drop(1).uppercase()
     }
 }
+
+/**
+ * Utility extension function to convert string from camelCase to kebab-case.
+ */
+public fun String.toKebabCase(): String {
+    return this.replace(Regex("(?<=.)[A-Z]"), "-$0").lowercase()
+}
