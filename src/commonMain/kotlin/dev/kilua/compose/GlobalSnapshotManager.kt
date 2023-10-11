@@ -1,87 +1,49 @@
-/**
- * Copyright 2020-2021 JetBrains s.r.o. and and respective authors and developers.
+/*
+ * Copyright (c) 2023-present Robert Jaros
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 package dev.kilua.compose
 
-import androidx.compose.runtime.snapshots.ObserverHandle
 import androidx.compose.runtime.snapshots.Snapshot
-import dev.kilua.compose.GlobalSnapshotManager.ensureStarted
+import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 
-/**
- * Platform-specific mechanism for starting a monitor of global snapshot state writes
- * in order to schedule the periodic dispatch of snapshot apply notifications.
- * This process should remain platform-specific; it is tied to the threading and update model of
- * a particular platform and framework target.
- *
- * Composition bootstrapping mechanisms for a particular platform/framework should call
- * [ensureStarted] during setup to initialize periodic global snapshot notifications.
- */
 internal object GlobalSnapshotManager {
-    private var started = false
-    private var commitPending = false
-    private var removeWriteObserver: (ObserverHandle)? = null
-
+    private val started = atomic(false)
     private val scheduleScope = CoroutineScope(PromiseDispatcher() + SupervisorJob())
 
     fun ensureStarted() {
-        if (!started) {
-            started = true
-            removeWriteObserver = Snapshot.registerGlobalWriteObserver(globalWriteObserver)
-        }
-    }
-
-    private val globalWriteObserver: (Any) -> Unit = {
-        // Race, but we don't care too much if we end up with multiple calls scheduled.
-        if (!commitPending) {
-            commitPending = true
-            schedule {
-                commitPending = false
-                Snapshot.sendApplyNotifications()
+        if (started.compareAndSet(expect = false, update = true)) {
+            val channel = Channel<Unit>(Channel.CONFLATED)
+            scheduleScope.launch {
+                channel.consumeEach {
+                    Snapshot.sendApplyNotifications()
+                }
             }
-        }
-    }
-
-    /**
-     * List of deferred callbacks to run serially. Guarded by its own monitor lock.
-     */
-    private val scheduledCallbacks = mutableListOf<() -> Unit>()
-
-    /**
-     * Guarded by [scheduledCallbacks]'s monitor lock.
-     */
-    private var isSynchronizeScheduled = false
-
-    /**
-     * Synchronously executes any outstanding callbacks and brings snapshots into a
-     * consistent, updated state.
-     */
-    private fun synchronize() {
-        scheduledCallbacks.forEach { it.invoke() }
-        scheduledCallbacks.clear()
-        isSynchronizeScheduled = false
-    }
-
-    private fun schedule(block: () -> Unit) {
-        scheduledCallbacks.add(block)
-        if (!isSynchronizeScheduled) {
-            isSynchronizeScheduled = true
-            scheduleScope.launch { synchronize() }
+            Snapshot.registerGlobalWriteObserver {
+                channel.trySend(Unit)
+            }
         }
     }
 }
