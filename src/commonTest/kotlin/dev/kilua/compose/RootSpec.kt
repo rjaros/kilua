@@ -22,19 +22,26 @@
 
 package dev.kilua.compose
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import dev.kilua.DomSpec
 import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
+import dev.kilua.html.Button
 import dev.kilua.html.Col
 import dev.kilua.html.Color
+import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.unaryPlus
 import dev.kilua.normalizeHtml
-import dev.kilua.utils.isDom
+import dev.kilua.utils.console
 import dev.kilua.utils.px
-import kotlinx.browser.document
+import kotlinx.coroutines.delay
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class RootSpec : DomSpec {
 
@@ -76,5 +83,30 @@ class RootSpec : DomSpec {
                 "Should render root element with some content to DOM"
             )
         }
+    }
+
+    @Test
+    fun recompose() = runWhenDomAvailableAsync {
+        lateinit var button: Button
+        val root = root("test") {
+            var counter by remember { mutableStateOf(0) }
+            div {
+                +"Counter: $counter"
+                button = button {
+                    +"Increment"
+                    onClick {
+                        counter++
+                    }
+                }
+            }
+        }
+        button.click()
+        button.click()
+        delay(1)
+        assertEquals(
+            normalizeHtml("""<div>Counter: 2<button type="button">Increment</button></div>"""),
+            normalizeHtml(root.element?.innerHTML ?: ""),
+            "Should recompose DOM nodes when state changes"
+        )
     }
 }

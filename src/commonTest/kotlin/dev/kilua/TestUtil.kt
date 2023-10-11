@@ -24,12 +24,20 @@ package dev.kilua
 
 import dev.kilua.compose.Root
 import dev.kilua.utils.Object
+import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
 import kotlinx.browser.document
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.promise
 import kotlinx.dom.clear
 import kotlin.js.Promise
 
+val testScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+
 interface TestSpec {
+
     fun beforeTest()
 
     fun afterTest()
@@ -40,13 +48,13 @@ interface TestSpec {
         afterTest()
     }
 
-    fun runAsync(code: (resolve: () -> Unit) -> Unit): Promise<Object> {
+    fun runAsync(code: suspend () -> Unit): Promise<Object> {
         beforeTest()
-        return Promise { resolve, _ ->
-            code { resolve(Object()) }
+        return testScope.promise {
+            code()
         }.finally {
             afterTest()
-        }
+        }.cast()
     }
 }
 
@@ -72,6 +80,15 @@ interface DomSpec : TestSpec {
         afterTest()
     }
 
+    fun runWhenDomAvailableAsync(code: suspend () -> Unit): Promise<Object> {
+        beforeTest()
+        return testScope.promise {
+            if (isDom()) code()
+        }.finally {
+            afterTest()
+        }.cast()
+    }
+
     override fun beforeTest() {
         if (isDom()) {
             val fixture = "<div style=\"display: none\" id=\"pretest\">" +
@@ -95,7 +112,7 @@ interface DomSpec : TestSpec {
  * Format a HTML string in a standardized manner, with one HTML element per line.
  * This helps with highlighting HTML differences in test assertions.
  */
-public fun normalizeHtml(raw: String): String {
+fun normalizeHtml(raw: String): String {
     return raw
         .replace("<", "\n<")
         .replace(">", ">\n")
@@ -106,6 +123,6 @@ public fun normalizeHtml(raw: String): String {
 }
 
 /** @see [normalizeHtml] */
-public fun normalizeHtml(raw: String?): String? {
+fun normalizeHtml(raw: String?): String? {
     return if (raw == null) null else normalizeHtml(raw)
 }

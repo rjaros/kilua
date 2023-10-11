@@ -58,6 +58,10 @@ public open class Button(
         element.disabled = it
     }
 
+    public open fun click() {
+        elementNullable?.click()
+    }
+
     override fun renderToStringBuilder(builder: StringBuilder) {
         builder.append("<button>")
         children.forEach {

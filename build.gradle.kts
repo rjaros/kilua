@@ -117,8 +117,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(compose.runtime)
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                api(compose.runtime)
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation(npm("css-loader", cssLoaderVersion))
                 implementation(npm("style-loader", styleLoaderVersion))
                 implementation(npm("imports-loader", importsLoaderVersion))

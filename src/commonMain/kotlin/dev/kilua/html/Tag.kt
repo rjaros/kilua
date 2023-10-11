@@ -62,10 +62,12 @@ public open class Tag<E : HTMLElement>(
         get() = node?.unsafeCast<E>()
             ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
 
-    override val DisposableEffectScope.element: E
-        get() = this@Tag.element
+    public open val elementNullable: E? = node?.unsafeCast<E>()
 
     public open val elementAvailable: Boolean = node != null
+
+    override val DisposableEffectScope.element: E
+        get() = this@Tag.element
 
     init {
         @Suppress("LeakingThis")
