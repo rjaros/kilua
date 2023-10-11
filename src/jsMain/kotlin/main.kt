@@ -314,5 +314,5 @@ public class App2 : Application() {
 }
 
 public fun main() {
-    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>())
+    startApplication(::App2, js("import.meta.webpackHot").unsafeCast<Hot?>())
 }

@@ -27,7 +27,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.compose.ComponentScope
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
@@ -48,13 +47,13 @@ public open class Button(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLButtonElement>("button", className, renderConfig), ComponentScope<HTMLButtonElement> {
+    Tag<HTMLButtonElement>("button", className, renderConfig) {
 
-    public open var type: ButtonType by managedProperty(type, skipUpdates) {
+    public open var type: ButtonType by managedProperty(type, skipUpdate) {
         element.type = it.buttonType
     }
 
-    public open var disabled: Boolean by managedProperty(disabled, skipUpdates) {
+    public open var disabled: Boolean by managedProperty(disabled, skipUpdate) {
         element.disabled = it
     }
 

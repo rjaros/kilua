@@ -21,6 +21,7 @@
  */
 
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NoLiveLiterals
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -121,10 +122,19 @@ public class App : Application() {
             console.log(x2)
             button(type = type) {
                 +"test span"
+                if (type == ButtonType.Button) {
+                    DisposableEffect("type") {
+                        element
+                        console.log("back to button")
+                        onDispose {  }
+                    }
+                }
                 onEvent<MouseEvent>("click") {
                     disabled = !disabled
+                    type = ButtonType.Submit
                     window.setTimeout({
                         disabled = !disabled
+                        type = ButtonType.Button
                         obj()
                     }, 1000)
                 }

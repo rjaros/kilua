@@ -23,10 +23,8 @@
 package dev.kilua.html
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffectScope
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.compose.ComponentScope
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
@@ -37,24 +35,23 @@ import org.w3c.dom.Text
 public open class TextNode(
     text: String,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-) : ComponentBase(SafeDomFactory.createTextNode(text, renderConfig), renderConfig), ComponentScope<Text> {
+) : ComponentBase(SafeDomFactory.createTextNode(text, renderConfig), renderConfig) {
 
     public open val element: Text
         get() = node?.unsafeCast<Text>()
             ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
 
-    override val DisposableEffectScope.element: Text
-        get() = this@TextNode.element
+    public open val elementNullable: Text? = node?.unsafeCast<Text>()
 
     public open val elementAvailable: Boolean = node != null
 
-    private val skipUpdates = node == null
+    private val skipUpdate = node == null
 
-    public open var text: String by managedProperty(text, skipUpdates) {
+    public open var text: String by managedProperty(text, skipUpdate) {
         element.data = it
     }
 
-    override var visible: Boolean by unmanagedProperty(true, skipUpdates) {
+    override var visible: Boolean by unmanagedProperty(true, skipUpdate) {
         element.data = if (it) text else ""
     }
 

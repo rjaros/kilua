@@ -23,11 +23,9 @@
 package dev.kilua.html
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffectScope
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.compose.ComponentScope
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
@@ -53,21 +51,10 @@ public open class Tag<E : HTMLElement>(
     protected val styles: MutableMap<String, Any> = nativeMapOf(),
     protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>> = nativeMapOf()
 ) :
-    ComponentBase(SafeDomFactory.createElement(tagName, renderConfig), renderConfig), ComponentScope<E>,
+    ComponentBase(SafeDomFactory.createElement(tagName, renderConfig), renderConfig),
     TagAttrs<E> by TagAttrsDelegate(!renderConfig.isDom() || !isDom(), attributes),
     TagStyle<E> by TagStyleDelegate(!renderConfig.isDom() || !isDom(), styles),
     TagEvents<E> by TagEventsDelegate(!renderConfig.isDom() || !isDom(), events) {
-
-    public open val element: E
-        get() = node?.unsafeCast<E>()
-            ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
-
-    public open val elementNullable: E? = node?.unsafeCast<E>()
-
-    public open val elementAvailable: Boolean = node != null
-
-    override val DisposableEffectScope.element: E
-        get() = this@Tag.element
 
     init {
         @Suppress("LeakingThis")
@@ -78,9 +65,17 @@ public open class Tag<E : HTMLElement>(
         elementWithEvents(node?.unsafeCast<E>())
     }
 
-    protected val skipUpdates: Boolean = node == null
+    public open val element: E
+        get() = node?.unsafeCast<E>()
+            ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
 
-    public open var className: String? by managedProperty(className, skipUpdates) {
+    public open val elementNullable: E? = node?.unsafeCast<E>()
+
+    public open val elementAvailable: Boolean = node != null
+
+    protected val skipUpdate: Boolean = node == null
+
+    public open var className: String? by managedProperty(className, skipUpdate) {
         if (it != null) {
             element.className = it
         } else {
@@ -91,7 +86,7 @@ public open class Tag<E : HTMLElement>(
         }
     }
 
-    override var visible: Boolean by unmanagedProperty(true, skipUpdates) {
+    override var visible: Boolean by unmanagedProperty(true, skipUpdate) {
         if (it) {
             element.style.removeProperty("display")
         } else {

@@ -27,14 +27,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.compose.ComponentScope
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import org.w3c.dom.HTMLDivElement
 
 public open class Div(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDivElement>("div", className, renderConfig), ComponentScope<HTMLDivElement>
+    Tag<HTMLDivElement>("div", className, renderConfig)
 
 @Composable
 public fun ComponentBase.div(className: String? = null, content: @Composable Div.() -> Unit = {}): Div {
