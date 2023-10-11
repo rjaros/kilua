@@ -22,14 +22,16 @@
 
 package dev.kilua.core
 
-import dev.kilua.utils.NativeMap
 import dev.kilua.utils.cast
 import dev.kilua.utils.nativeMapOf
-import dev.kilua.utils.set
+import kotlin.collections.MutableMap
+import kotlin.collections.MutableSet
+import kotlin.collections.mutableSetOf
+import kotlin.collections.set
 import kotlin.reflect.KProperty
 
-public open class PropertyDelegate(protected val propertyValues: NativeMap<Any>) {
-    protected val managedPropertyUpdateFunctions: NativeMap<Any> = nativeMapOf()
+public open class PropertyDelegate(protected val propertyValues: MutableMap<String, Any>) {
+    protected val managedPropertyUpdateFunctions: MutableMap<String, Any> = nativeMapOf()
     protected val managedPropertiesSet: MutableSet<String> = mutableSetOf()
 
     @Suppress("NOTHING_TO_INLINE")

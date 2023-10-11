@@ -46,6 +46,7 @@ import dev.kilua.utils.useCssModule
 import kotlinx.browser.window
 import org.w3c.dom.Text
 import org.w3c.dom.events.Event
+import org.w3c.dom.events.MouseEvent
 import kotlin.math.PI
 import kotlin.math.floor
 import kotlin.math.sin
@@ -84,14 +85,8 @@ public class App : Application() {
                         +name
                         button {
                             +"click"
-                            DisposableEffect("button") {
-                                val f = { _: Event ->
-                                    console.log("click $name of ${list.size}")
-                                }
-                                element.addEventListener("click", f)
-                                onDispose {
-                                    element.removeEventListener("click", f)
-                                }
+                            onClick {
+                                console.log("click $name of ${list.size}")
                             }
                         }
                         //                      }
@@ -99,13 +94,13 @@ public class App : Application() {
                 }
             }
             val xb = button("add $size") {
-                onClick = {
+                onClick {
                     list = list + "test"
                 }
             }
             button {
                 +"remove"
-                onClick = {
+                onClick {
                     list = list.filterIndexed { index, s -> index != 1 }
                     xb.label = "changed label"
                 }
@@ -126,7 +121,7 @@ public class App : Application() {
             console.log(x2)
             button(type = type) {
                 +"test span"
-                onClick = {
+                onEvent<MouseEvent>("click") {
                     disabled = !disabled
                     window.setTimeout({
                         disabled = !disabled
@@ -140,7 +135,7 @@ public class App : Application() {
                     +"even $evenSize"
                     button {
                         +"button even$evenSize"
-                        onClick = {
+                        onClick {
                             evenSize++
                         }
                     }
@@ -150,7 +145,7 @@ public class App : Application() {
                     +"odd $oddSize"
                     button {
                         +"button odd$oddSize"
-                        onClick = {
+                        onClick {
                             oddSize++
                         }
                     }
@@ -166,7 +161,7 @@ public class App : Application() {
                         +"c"
                         button(disabled = (size % 4 == 0)) {
                             +"button1"
-                            onClick = {
+                            onClick {
                                 divB.label = "test"
                                 size++
                             }
@@ -174,7 +169,7 @@ public class App : Application() {
                         if (size % 2 == 0) {
                             button {
                                 +"button2"
-                                onClick = {
+                                onClick {
                                     size++
                                 }
                                 DisposableEffect("button2") {
@@ -307,5 +302,5 @@ public class App2 : Application() {
 }
 
 public fun main() {
-    startApplication(::App2)
+    startApplication(::App)
 }

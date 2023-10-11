@@ -22,16 +22,6 @@
 
 package dev.kilua.utils
 
-public expect class NativeMap<out V> : Map<String, V> {
-    public fun put(key: String, value: @UnsafeVariance V): V?
-    public fun clear()
-    public fun remove(key: String): V?
-    public fun putAll(from: Map<out String, @UnsafeVariance V>)
-}
+public expect class NativeMap<V> : MutableMap<String, V>
 
-public expect fun <V> nativeMapOf(vararg pairs: Pair<String, V>): NativeMap<V>
-
-@Suppress("NOTHING_TO_INLINE")
-public inline operator fun <V> NativeMap<V>.set(key: String, value: V) {
-    put(key, value)
-}
+public expect fun <V> nativeMapOf(vararg pairs: Pair<String, V>): MutableMap<String, V>

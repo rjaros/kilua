@@ -22,8 +22,6 @@
 
 package dev.kilua.core
 
-import dev.kilua.utils.NativeList
-import dev.kilua.utils.NativeMap
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.nativeMapOf
 import kotlinx.dom.clear
@@ -36,7 +34,7 @@ public abstract class ComponentBase(
 ) : Component, PropertyDelegate(nativeMapOf()) {
 
     override var parent: Component? = null
-    override val children: NativeList<ComponentBase> = nativeListOf()
+    override val children: MutableList<ComponentBase> = nativeListOf()
 
     internal fun insertChild(index: Int, component: ComponentBase) {
         component.parent = this

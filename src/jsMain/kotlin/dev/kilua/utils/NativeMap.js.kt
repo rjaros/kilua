@@ -22,32 +22,38 @@
 
 package dev.kilua.utils
 
-public actual class NativeMap<out V> : Map<String, V> {
+public actual class NativeMap<V> : MutableMap<String, V> {
 
     private var nativeMap: dynamic = js("{}")
 
     protected val keysArray: Array<String>
         get() = js("Object").keys(nativeMap).unsafeCast<Array<String>>()
 
-    override val entries: Set<Map.Entry<String, V>>
+    override val entries: MutableSet<MutableMap.MutableEntry<String, V>>
         get() = keysArray.mapNotNull {
             get(it)?.let { value ->
-                object : Map.Entry<String, V> {
+                object : MutableMap.MutableEntry<String, V> {
                     override val key: String = it
                     override val value: V = value
+                    override fun setValue(newValue: V): V {
+                        val oldValue = nativeMap[it]
+                        nativeMap[it] = newValue
+                        @Suppress("UnsafeCastFromDynamic")
+                        return oldValue
+                    }
                 }
             }
-        }.toSet()
-    override val keys: Set<String>
-        get() = keysArray.toSet()
+        }.toMutableSet()
+    override val keys: MutableSet<String>
+        get() = keysArray.toMutableSet()
 
 
     override val size: Int
         get() = keysArray.size
-    override val values: Collection<V>
-        get() = keysArray.mapNotNull { get(it) }
+    override val values: MutableCollection<V>
+        get() = keysArray.mapNotNull { get(it) }.toMutableList()
 
-    public actual fun clear() {
+    override fun clear() {
         nativeMap = js("{}")
     }
 
@@ -55,20 +61,20 @@ public actual class NativeMap<out V> : Map<String, V> {
         return size == 0
     }
 
-    public actual fun remove(key: String): V? {
+    override fun remove(key: String): V? {
         val obj = nativeMap[key]
         delete(nativeMap, key)
         @Suppress("UnsafeCastFromDynamic")
         return obj
     }
 
-    public actual fun putAll(from: Map<out String, @UnsafeVariance V>) {
+    override fun putAll(from: Map<out String, V>) {
         from.forEach {
             nativeMap[it.key] = it.value
         }
     }
 
-    public actual fun put(key: String, value: @UnsafeVariance V): V? {
+    override fun put(key: String, value: V): V? {
         val obj = nativeMap[key]
         nativeMap[key] = value
         @Suppress("UnsafeCastFromDynamic")
@@ -80,7 +86,7 @@ public actual class NativeMap<out V> : Map<String, V> {
         return nativeMap[key]
     }
 
-    override fun containsValue(value: @UnsafeVariance V): Boolean {
+    override fun containsValue(value: V): Boolean {
         return keysArray.find {
             nativeMap[it] == value
         } != null
@@ -92,7 +98,7 @@ public actual class NativeMap<out V> : Map<String, V> {
 
 }
 
-public actual fun <V> nativeMapOf(vararg pairs: Pair<String, V>): NativeMap<V> {
+public actual fun <V> nativeMapOf(vararg pairs: Pair<String, V>): MutableMap<String, V> {
     val map = NativeMap<V>()
     if (pairs.isNotEmpty()) {
         map.putAll(pairs.toMap())

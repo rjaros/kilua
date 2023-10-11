@@ -24,8 +24,6 @@ package dev.kilua.html
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffectScope
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.compose.ComponentScope
@@ -68,7 +66,7 @@ public open class TextNode(
 @Composable
 public fun text(text: String, content: TextNode.() -> Unit = {}): TextNode {
     // Always using DefaultRenderConfig because of plus operator String receiver.
-    val textNode by remember { mutableStateOf(TextNode(text, DefaultRenderConfig())) }
+    val textNode = remember { TextNode(text, DefaultRenderConfig()) }
     ComponentNode(textNode, {
         set(text) { updateManagedProperty(TextNode::text, it) }
     }) {

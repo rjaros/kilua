@@ -23,13 +23,13 @@
 package dev.kilua.html.delegates
 
 import dev.kilua.core.PropertyDelegate
-import dev.kilua.utils.NativeMap
-import dev.kilua.utils.set
 import org.w3c.dom.HTMLElement
+import kotlin.collections.MutableMap
+import kotlin.collections.set
 
 public open class TagAttrsDelegate<E : HTMLElement>(
     protected val skipUpdates: Boolean,
-    protected val attributes: NativeMap<Any>
+    protected val attributes: MutableMap<String, Any>
 ) : TagAttrs<E>,
     PropertyDelegate(attributes) {
 

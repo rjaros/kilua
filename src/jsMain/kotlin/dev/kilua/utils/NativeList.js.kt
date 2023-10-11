@@ -22,16 +22,16 @@
 
 package dev.kilua.utils
 
-public actual class NativeList<E> : List<E> {
+public actual class NativeList<E> : MutableList<E> {
 
     private val nativeList: Array<E> = emptyArray()
 
-    public actual fun add(element: E): Boolean {
+    override fun add(element: E): Boolean {
         nativeList.asDynamic().push(element)
         return true
     }
 
-    public actual fun remove(element: E): Boolean {
+    override fun remove(element: E): Boolean {
         nativeList.indexOf(element).let {
             if (it >= 0) {
                 nativeList.asDynamic().splice(it, 1)
@@ -41,22 +41,22 @@ public actual class NativeList<E> : List<E> {
         return false
     }
 
-    public actual fun clear() {
+    override fun clear() {
         nativeList.asDynamic().splice(0, nativeList.size)
     }
 
-    public actual operator fun set(index: Int, element: E): E {
+    override operator fun set(index: Int, element: E): E {
         val oldElement = nativeList[index]
         nativeList[index] = element
         return oldElement
     }
 
-    public actual fun add(index: Int, element: E) {
+    override fun add(index: Int, element: E) {
         nativeList.asDynamic().splice(index, 0, element)
     }
 
     @Suppress("UnsafeCastFromDynamic")
-    public actual fun addAll(elements: Collection<E>): Boolean {
+    override fun addAll(elements: Collection<E>): Boolean {
         if (elements.isNotEmpty()) {
             elements.forEach {
                 nativeList.asDynamic().push(it)
@@ -66,14 +66,32 @@ public actual class NativeList<E> : List<E> {
         return false
     }
 
-    public actual fun removeAt(index: Int): E {
+    override fun removeAt(index: Int): E {
         val element = nativeList[index]
         nativeList.asDynamic().splice(index, 1)
         return element
     }
 
+    override fun subList(fromIndex: Int, toIndex: Int): MutableList<E> {
+        throw UnsupportedOperationException("Not implemented")
+    }
+
+    override fun retainAll(elements: Collection<E>): Boolean {
+        throw UnsupportedOperationException("Not implemented")
+    }
+
     override val size: Int
         get() = nativeList.size
+
+    override fun addAll(index: Int, elements: Collection<E>): Boolean {
+        if (elements.isNotEmpty()) {
+            elements.forEach { element ->
+                nativeList.asDynamic().splice(index, 0, element)
+            }
+            return true
+        }
+        return false
+    }
 
     override fun get(index: Int): E {
         return nativeList[index]
@@ -83,20 +101,20 @@ public actual class NativeList<E> : List<E> {
         return nativeList.isEmpty()
     }
 
-    override fun iterator(): Iterator<E> {
-        return nativeList.iterator()
+    override fun iterator(): MutableIterator<E> {
+        return nativeList.toMutableList().iterator()
     }
 
-    override fun listIterator(): ListIterator<E> {
-        return nativeList.asList().listIterator()
+    override fun listIterator(): MutableListIterator<E> {
+        throw UnsupportedOperationException("Not implemented")
     }
 
-    override fun listIterator(index: Int): ListIterator<E> {
-        return nativeList.asList().listIterator(index)
+    override fun listIterator(index: Int): MutableListIterator<E> {
+        throw UnsupportedOperationException("Not implemented")
     }
 
-    override fun subList(fromIndex: Int, toIndex: Int): List<E> {
-        return nativeList.asList().subList(fromIndex, toIndex)
+    override fun removeAll(elements: Collection<E>): Boolean {
+        throw UnsupportedOperationException("Not implemented")
     }
 
     override fun lastIndexOf(element: E): Int {
@@ -115,12 +133,9 @@ public actual class NativeList<E> : List<E> {
         return nativeList.contains(element)
     }
 
-//    override fun equals(other: Any?): Boolean {
-  //      return toList() == other
-    //}
 }
 
-public actual fun <E> nativeListOf(vararg elements: E): NativeList<E> {
+public actual fun <E> nativeListOf(vararg elements: E): MutableList<E> {
     val list = NativeList<E>()
     if (elements.isNotEmpty()) {
         elements.forEach {

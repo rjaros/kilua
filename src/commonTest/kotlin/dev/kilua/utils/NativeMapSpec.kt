@@ -75,4 +75,15 @@ class NativeMapSpec : SimpleSpec {
         map.clear()
         assertTrue(map.isEmpty())
     }
+
+    @Test
+    fun forEach() {
+        val map = nativeMapOf("1" to 2, "2" to 3, "3" to 4)
+        var counter = 0
+        map.forEach { (_, value) ->
+            counter += value
+        }
+        assertEquals(9, counter)
+    }
+
 }

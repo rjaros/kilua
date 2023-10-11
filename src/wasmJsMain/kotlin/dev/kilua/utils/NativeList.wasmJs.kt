@@ -23,38 +23,8 @@
 package dev.kilua.utils
 
 public actual open class NativeList<E>(private val internalList: MutableList<E> = mutableListOf()) :
-    List<E> by internalList {
+    MutableList<E> by internalList
 
-    public actual fun add(element: E): Boolean {
-        return internalList.add(element)
-    }
-
-    public actual fun add(index: Int, element: E) {
-        internalList.add(index, element)
-    }
-
-    public actual fun remove(element: E): Boolean {
-        return internalList.remove(element)
-    }
-
-    public actual fun addAll(elements: Collection<E>): Boolean {
-        return internalList.addAll(elements)
-    }
-
-    public actual fun clear() {
-        internalList.clear()
-    }
-
-    public actual operator fun set(index: Int, element: E): E {
-        return internalList.set(index, element)
-    }
-
-    public actual fun removeAt(index: Int): E {
-        return internalList.removeAt(index)
-    }
-
-}
-
-public actual fun <E> nativeListOf(vararg elements: E): NativeList<E> {
+public actual fun <E> nativeListOf(vararg elements: E): MutableList<E> {
     return NativeList(mutableListOf(*elements))
 }

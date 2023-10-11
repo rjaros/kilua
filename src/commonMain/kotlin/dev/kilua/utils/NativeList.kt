@@ -22,14 +22,6 @@
 
 package dev.kilua.utils
 
-public expect class NativeList<E> : List<E> {
-    public fun add(element: E): Boolean
-    public fun remove(element: E): Boolean
-    public fun addAll(elements: Collection<E>): Boolean
-    public fun clear(): Unit
-    public operator fun set(index: Int, element: E): E
-    public fun add(index: Int, element: E): Unit
-    public fun removeAt(index: Int): E
-}
+public expect class NativeList<E> : MutableList<E>
 
-public expect fun <E> nativeListOf(vararg elements: E): NativeList<E>
+public expect fun <E> nativeListOf(vararg elements: E): MutableList<E>

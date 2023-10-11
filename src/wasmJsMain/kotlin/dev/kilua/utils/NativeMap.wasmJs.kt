@@ -22,26 +22,9 @@
 
 package dev.kilua.utils
 
-public actual class NativeMap<out V>(private val internalMap: MutableMap<String, V> = mutableMapOf()) :
-    Map<String, V> by internalMap {
+public actual class NativeMap<V>(private val internalMap: MutableMap<String, V> = mutableMapOf()) :
+    MutableMap<String, V> by internalMap
 
-    public actual fun clear() {
-        internalMap.clear()
-    }
-
-    public actual fun remove(key: String): V? {
-        return internalMap.remove(key)
-    }
-
-    public actual fun putAll(from: Map<out String, @UnsafeVariance V>) {
-        internalMap.putAll(from)
-    }
-
-    public actual fun put(key: String, value: @UnsafeVariance V): V? {
-        return internalMap.put(key, value)
-    }
-}
-
-public actual fun <V> nativeMapOf(vararg pairs: Pair<String, V>): NativeMap<V> {
+public actual fun <V> nativeMapOf(vararg pairs: Pair<String, V>): MutableMap<String, V> {
     return NativeMap(mutableMapOf(*pairs))
 }

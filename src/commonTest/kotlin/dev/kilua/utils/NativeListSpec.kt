@@ -82,4 +82,14 @@ class NativeListSpec : SimpleSpec {
         list.clear()
         assertEquals(0, list.size)
     }
+
+    @Test
+    fun forEach() {
+        val list = nativeListOf(1, 2, 3)
+        var counter = 0
+        list.forEach {
+            counter += it
+        }
+        assertEquals(6, counter)
+    }
 }

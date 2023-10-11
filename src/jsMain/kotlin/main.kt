@@ -79,9 +79,9 @@ public class App : Application() {
             var size by remember { mutableStateOf(1) }
             var evenSize by remember { mutableStateOf(1) }
             var oddSize by remember { mutableStateOf(1) }
-            var tn by remember { mutableStateOf("address") }
+            val tn by remember { mutableStateOf("address") }
             var list by remember { mutableStateOf(listOf("cat", "dog", "mouse")) }
-            var type by remember { mutableStateOf(ButtonType.Button) }
+            val type by remember { mutableStateOf(ButtonType.Button) }
 
             div {
                 for (name in list) {
@@ -94,9 +94,9 @@ public class App : Application() {
                                     val f = { _: Event ->
                                         console.log("click $name of ${list.size}")
                                     }
-                                    element?.addEventListener("click", f)
+                                    element.addEventListener("click", f)
                                     onDispose {
-                                        element?.removeEventListener("click", f)
+                                        element.removeEventListener("click", f)
                                     }
                                 }
                             }
@@ -105,13 +105,13 @@ public class App : Application() {
                 }
             }
             val xb = button("add $size") {
-                onClick = {
+                onClick {
                     list = list + "test"
                 }
             }
             button {
                 +"remove"
-                onClick = {
+                onClick {
                     list = list.filterIndexed { index, s -> index != 1 }
                     xb.label = "changed label"
                 }
@@ -132,7 +132,7 @@ public class App : Application() {
             console.log(x2)
             button(type = type) {
                 +"test span"
-                onClick = {
+                onClick {
                     disabled = !disabled
                     window.setTimeout({
                         disabled = !disabled
@@ -145,7 +145,7 @@ public class App : Application() {
                     +"even $evenSize"
                     button {
                         +"button even$evenSize"
-                        onClick = {
+                        onClick {
                             evenSize++
                         }
                     }
@@ -153,10 +153,22 @@ public class App : Application() {
             } else {
                 div {
                     +"odd $oddSize"
-                    button {
+                    val x = button {
                         +"button odd$oddSize"
-                        onClick = {
+                        onClick {
+                            console.log("click")
                             oddSize++
+                        }
+                        onDblclick {
+                            console.log("dblclick")
+                            oddSize--
+                        }
+                    }
+                    button("odd test") {
+                        onClick {
+                            x.onClickDirect {
+                                console.log("click 2")
+                            }
                         }
                     }
                 }
@@ -171,7 +183,7 @@ public class App : Application() {
                         +"c"
                         button(disabled = (size % 4 == 0)) {
                             +"button1"
-                            onClick = {
+                            onClick {
                                 divB.label = "test"
                                 size++
                             }
@@ -179,16 +191,16 @@ public class App : Application() {
                         if (size % 2 == 0) {
                             button {
                                 +"button2"
-                                onClick = {
+                                onClick {
                                     size++
                                 }
                                 DisposableEffect("button2") {
                                     val f = { _: Event ->
                                         console.log("button2 click")
                                     }
-                                    element?.addEventListener("click", f)
+                                    element.addEventListener("click", f)
                                     onDispose {
-                                        element?.removeEventListener("click", f)
+                                        element.removeEventListener("click", f)
                                     }
                                 }
                             }
@@ -201,7 +213,7 @@ public class App : Application() {
                     }
                 }
                 DisposableEffect("code") {
-                    element?.firstChild?.unsafeCast<Text>()?.data = "ala ma kota"
+                    element.firstChild?.unsafeCast<Text>()?.data = "ala ma kota"
                     onDispose { }
                 }
             }
@@ -295,12 +307,12 @@ public class App2 : Application() {
             }
         }
         println(root.renderToString())
-//        window.setInterval({
-//            rotateState()
-//        }, 0)
+        window.setInterval({
+            rotateState()
+        }, 0)
     }
 }
 
 public fun main() {
-    startApplication(::App2/*, js("import.meta.webpackHot").unsafeCast<Hot?>()*/)
+    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>())
 }

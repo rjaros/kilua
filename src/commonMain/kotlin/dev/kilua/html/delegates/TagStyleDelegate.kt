@@ -24,14 +24,13 @@ package dev.kilua.html.delegates
 
 import dev.kilua.core.PropertyDelegate
 import dev.kilua.html.*
-import dev.kilua.utils.NativeMap
 import dev.kilua.utils.asString
-import dev.kilua.utils.set
+import dev.kilua.utils.cast
 import org.w3c.dom.HTMLElement
 
 public open class TagStyleDelegate<E : HTMLElement>(
     protected val skipUpdates: Boolean,
-    protected val styles: NativeMap<String>
+    protected val styles: MutableMap<String, Any>
 ) : TagStyle<E>, PropertyDelegate(styles) {
 
     protected lateinit var element: E
@@ -836,7 +835,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
     }
 
     override fun getStyle(name: String): String? {
-        return styles[name]
+        return styles[name]?.cast()
     }
 
     override fun removeStyle(name: String) {

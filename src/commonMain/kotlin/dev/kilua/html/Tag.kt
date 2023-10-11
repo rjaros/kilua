@@ -24,9 +24,7 @@ package dev.kilua.html
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffectScope
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.compose.ComponentScope
@@ -36,39 +34,29 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.html.delegates.TagAttrs
 import dev.kilua.html.delegates.TagAttrsDelegate
+import dev.kilua.html.delegates.TagEvents
+import dev.kilua.html.delegates.TagEventsDelegate
 import dev.kilua.html.delegates.TagStyle
 import dev.kilua.html.delegates.TagStyleDelegate
-import dev.kilua.utils.AbortController
-import dev.kilua.utils.NativeMap
-import dev.kilua.utils.buildAddEventListenerOptions
 import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.renderAsHtmlAttributes
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.events.Event
 
-public open class Tag<E : HTMLElement> private constructor(
+public open class Tag<E : HTMLElement>(
     protected val tagName: String,
     className: String? = null,
-    renderConfig: RenderConfig,
-    protected val attributes: NativeMap<Any>,
-    protected val styles: NativeMap<String>
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    protected val attributes: MutableMap<String, Any> = nativeMapOf(),
+    protected val styles: MutableMap<String, Any> = nativeMapOf(),
+    protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>> = nativeMapOf()
 ) :
     ComponentBase(SafeDomFactory.createElement(tagName, renderConfig), renderConfig), ComponentScope<E>,
     TagAttrs<E> by TagAttrsDelegate(!renderConfig.isDom() || !isDom(), attributes),
-    TagStyle<E> by TagStyleDelegate(!renderConfig.isDom() || !isDom(), styles) {
-
-    public constructor(
-        tagName: String,
-        className: String? = null,
-        renderConfig: RenderConfig = DefaultRenderConfig()
-    ) : this(
-        tagName,
-        className,
-        renderConfig,
-        nativeMapOf(),
-        nativeMapOf()
-    )
+    TagStyle<E> by TagStyleDelegate(!renderConfig.isDom() || !isDom(), styles),
+    TagEvents<E> by TagEventsDelegate(!renderConfig.isDom() || !isDom(), events) {
 
     public open val element: E
         get() = node?.unsafeCast<E>()
@@ -84,6 +72,8 @@ public open class Tag<E : HTMLElement> private constructor(
         elementWithAttrs(node?.unsafeCast<E>())
         @Suppress("LeakingThis")
         elementWithStyle(node?.unsafeCast<E>())
+        @Suppress("LeakingThis")
+        elementWithEvents(node?.unsafeCast<E>())
     }
 
     protected val skipUpdates: Boolean = node == null
@@ -111,19 +101,6 @@ public open class Tag<E : HTMLElement> private constructor(
         get() = children.firstOrNull()?.let { it as? TextNode }?.text
         set(value) {
             children.firstOrNull()?.let { it as? TextNode }?.text = value ?: ""
-        }
-
-
-    private var abortController: AbortController? = null
-
-    public open var onClick: (() -> Unit)? = null
-        set(value) {
-            field = value
-            if (value != null) {
-                abortController?.abort()
-                abortController = AbortController()
-                node?.addEventListener("click", { value() }, buildAddEventListenerOptions(abortController!!.signal))
-            }
         }
 
     override fun renderToStringBuilder(builder: StringBuilder) {
@@ -154,7 +131,7 @@ public fun <E : HTMLElement> ComponentBase.tag(
     content: @Composable Tag<E>.() -> Unit = {}
 ): Tag<E> {
     return key(tagName) {
-        val tag by remember { mutableStateOf(Tag<E>(tagName, className, renderConfig)) }
+        val tag = remember { Tag<E>(tagName, className, renderConfig) }
         ComponentNode(tag, {
             set(className) { updateManagedProperty(Tag<HTMLElement>::className, it) }
         }, content)
