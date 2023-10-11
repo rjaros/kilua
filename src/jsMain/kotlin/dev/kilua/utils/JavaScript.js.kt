@@ -29,9 +29,8 @@ public actual inline fun obj(): Object {
     return js("{}")
 }
 
-public actual fun isDom(): Boolean {
-    @Suppress("UnsafeCastFromDynamic")
-    return js("typeof document !== 'undefined'")
+public actual val isDom: Boolean by lazy {
+    js("typeof document !== 'undefined'")
 }
 
 public actual typealias JsNonModule = kotlin.js.JsNonModule
@@ -56,3 +55,5 @@ public external fun delete(p: dynamic): Boolean
 public fun delete(thing: dynamic, key: String) {
     delete(thing[key])
 }
+
+public actual fun size(array: Object): Int = array.cast<Array<*>>().size

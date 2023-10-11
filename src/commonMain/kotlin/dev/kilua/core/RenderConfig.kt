@@ -24,30 +24,21 @@
 package dev.kilua.core
 
 public interface RenderConfig {
-    public fun isDom(): Boolean
-
+    public val isDom: Boolean
 }
 
 public class DefaultRenderConfig : RenderConfig {
-    override fun isDom(): Boolean {
-        return dev.kilua.utils.isDom()
-    }
+    override val isDom: Boolean = dev.kilua.utils.isDom
 }
 
 public class DomRenderConfig : RenderConfig {
-
     init {
-        require(dev.kilua.utils.isDom()) { "DOM rendering is not supported in this environment" }
+        require(dev.kilua.utils.isDom) { "DOM rendering is not supported in this environment" }
     }
 
-    override fun isDom(): Boolean {
-        return true
-    }
-
+    override val isDom: Boolean = true
 }
 
 public class HeadlessRenderConfig : RenderConfig {
-    override fun isDom(): Boolean {
-        return false
-    }
+    override val isDom: Boolean = false
 }

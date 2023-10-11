@@ -76,6 +76,22 @@ public class App : Application() {
                 border = Border(1.px, BorderStyle.Dashed, Color.hex(0xaabbcc))
             }
 
+            div {
+                border = Border(1.px, BorderStyle.Solid, Color.name(Col.Black))
+                width = 100.px
+                height = 100.px
+                setDragDropData("text/plain", "test 1")
+            }
+
+            div {
+                border = Border(1.px, BorderStyle.Solid, Color.name(Col.Black))
+                width = 100.px
+                height = 100.px
+                setDropTarget("text/plain") {
+                    console.log(it.dataTransfer?.getData("text/plain"))
+                }
+            }
+
             var size by remember { mutableStateOf(1) }
             var evenSize by remember { mutableStateOf(1) }
             var oddSize by remember { mutableStateOf(1) }
@@ -314,5 +330,5 @@ public class App2 : Application() {
 }
 
 public fun main() {
-    startApplication(::App2, js("import.meta.webpackHot").unsafeCast<Hot?>())
+    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>())
 }

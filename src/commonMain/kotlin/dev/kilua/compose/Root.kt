@@ -38,6 +38,8 @@ import kotlinx.coroutines.launch
 import kotlinx.dom.clear
 import org.w3c.dom.Element
 
+internal expect val defaultMonotonicFrameClock: MonotonicFrameClock
+
 public class Root(
     public val element: Element?,
     renderConfig: RenderConfig = DefaultRenderConfig(),
@@ -81,11 +83,9 @@ public class Root(
     }
 }
 
-internal expect val defaultMonotonicFrameClock: MonotonicFrameClock
-
 internal fun rootComposable(
     root: Root,
-    monotonicFrameClock: MonotonicFrameClock = defaultMonotonicFrameClock,
+    monotonicFrameClock: MonotonicFrameClock,
     content: @Composable Root.() -> Unit
 ): Composition {
     GlobalSnapshotManager.ensureStarted()

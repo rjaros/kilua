@@ -29,7 +29,6 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
-import dev.kilua.utils.cast
 import org.w3c.dom.Text
 
 public open class TextNode(
@@ -45,7 +44,7 @@ public open class TextNode(
 
     public open val elementAvailable: Boolean = node != null
 
-    private val skipUpdate = node == null
+    protected val skipUpdate: Boolean = node == null
 
     public open var text: String by managedProperty(text, skipUpdate) {
         element.data = it
@@ -56,7 +55,7 @@ public open class TextNode(
     }
 
     override fun renderToStringBuilder(builder: StringBuilder) {
-        builder.append(if (visible) propertyValues[::text.name]?.cast<String>() ?: "" else "")
+        builder.append(text)
     }
 }
 

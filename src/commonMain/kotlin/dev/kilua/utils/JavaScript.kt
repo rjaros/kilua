@@ -26,7 +26,7 @@ public expect class Object
 
 public expect fun obj(): Object
 
-public expect fun isDom(): Boolean
+public expect val isDom: Boolean
 
 public expect annotation class JsNonModule()
 
@@ -34,3 +34,5 @@ public expect annotation class JsNonModule()
 public inline fun <T> useCssModule(cssModule: T) {
     // empty body
 }
+
+public expect fun size(array: Object): Int

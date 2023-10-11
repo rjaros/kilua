@@ -25,6 +25,8 @@ package dev.kilua.core
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.nativeMapOf
 import kotlinx.dom.clear
+import org.w3c.dom.CustomEvent
+import org.w3c.dom.CustomEventInit
 import org.w3c.dom.Node
 import org.w3c.dom.get
 
@@ -101,6 +103,11 @@ public abstract class ComponentBase(
         }
         children.clear()
         node?.clear()
+    }
+
+    public open fun dispatchEvent(type: String, eventInitDict: CustomEventInit): Boolean {
+        val event = CustomEvent(type, eventInitDict)
+        return node?.dispatchEvent(event) ?: true
     }
 
 }

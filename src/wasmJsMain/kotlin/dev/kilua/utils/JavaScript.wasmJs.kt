@@ -28,6 +28,10 @@ public actual external class Object : JsAny
 public actual external fun obj(): Object
 
 @JsFun("ref => typeof document !== 'undefined'")
-public actual external fun isDom(): Boolean
+private external fun isDom(): Boolean
+
+public actual val isDom: Boolean by lazy { isDom() }
 
 public actual annotation class JsNonModule actual constructor()
+
+public actual fun size(array: Object): Int = array.cast<JsArray<*>>().length

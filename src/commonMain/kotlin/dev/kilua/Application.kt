@@ -83,7 +83,7 @@ public fun startApplication(
         it.data
     }
 
-    if (!isDom() || document.body != null) {
+    if (!isDom || document.body != null) {
         application = start(state)
     } else {
         application = null

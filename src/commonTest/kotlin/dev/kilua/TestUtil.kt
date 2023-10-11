@@ -74,7 +74,7 @@ interface DomSpec : TestSpec {
 
     fun runWhenDomAvailable(code: () -> Unit) {
         beforeTest()
-        if (isDom()) {
+        if (isDom) {
             run(code)
         }
         afterTest()
@@ -83,14 +83,14 @@ interface DomSpec : TestSpec {
     fun runWhenDomAvailableAsync(code: suspend () -> Unit): Promise<Object> {
         beforeTest()
         return testScope.promise {
-            if (isDom()) code()
+            if (isDom) code()
         }.finally {
             afterTest()
         }.cast()
     }
 
     override fun beforeTest() {
-        if (isDom()) {
+        if (isDom) {
             val fixture = "<div style=\"display: none\" id=\"pretest\">" +
                     "<div id=\"${getTestId()}\"></div></div>"
             document.body?.insertAdjacentHTML("afterbegin", fixture)
@@ -98,7 +98,7 @@ interface DomSpec : TestSpec {
     }
 
     override fun afterTest() {
-        if (isDom()) {
+        if (isDom) {
             val div = document.getElementById("pretest")
             div?.clear()
             val modalBackdrop = document.getElementById(".modal-backdrop")

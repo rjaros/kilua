@@ -32,6 +32,8 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.html.delegates.TagAttrs
 import dev.kilua.html.delegates.TagAttrsDelegate
+import dev.kilua.html.delegates.TagDnd
+import dev.kilua.html.delegates.TagDndDelegate
 import dev.kilua.html.delegates.TagEvents
 import dev.kilua.html.delegates.TagEventsDelegate
 import dev.kilua.html.delegates.TagStyle
@@ -40,6 +42,9 @@ import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.renderAsHtmlAttributes
+import org.w3c.dom.CustomEvent
+import org.w3c.dom.CustomEventInit
+import org.w3c.dom.DragEvent
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.Event
 
@@ -52,9 +57,10 @@ public open class Tag<E : HTMLElement>(
     protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>> = nativeMapOf()
 ) :
     ComponentBase(SafeDomFactory.createElement(tagName, renderConfig), renderConfig),
-    TagAttrs<E> by TagAttrsDelegate(!renderConfig.isDom() || !isDom(), attributes),
-    TagStyle<E> by TagStyleDelegate(!renderConfig.isDom() || !isDom(), styles),
-    TagEvents<E> by TagEventsDelegate(!renderConfig.isDom() || !isDom(), events) {
+    TagAttrs<E> by TagAttrsDelegate(!renderConfig.isDom || !isDom, attributes),
+    TagStyle<E> by TagStyleDelegate(!renderConfig.isDom || !isDom, styles),
+    TagEvents<E> by TagEventsDelegate(!renderConfig.isDom || !isDom, events),
+    TagDnd<E> by TagDndDelegate(!renderConfig.isDom || !isDom) {
 
     init {
         @Suppress("LeakingThis")
@@ -63,6 +69,8 @@ public open class Tag<E : HTMLElement>(
         elementWithStyle(node?.unsafeCast<E>())
         @Suppress("LeakingThis")
         elementWithEvents(node?.unsafeCast<E>())
+        @Suppress("LeakingThis")
+        tagWithDnd(this)
     }
 
     public open val element: E
