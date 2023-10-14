@@ -26,12 +26,12 @@ public actual class NativeList<E> : MutableList<E> {
 
     private val nativeList: Array<E> = emptyArray()
 
-    override fun add(element: E): Boolean {
+    actual override fun add(element: E): Boolean {
         nativeList.asDynamic().push(element)
         return true
     }
 
-    override fun remove(element: E): Boolean {
+    actual override fun remove(element: E): Boolean {
         nativeList.indexOf(element).let {
             if (it >= 0) {
                 nativeList.asDynamic().splice(it, 1)
@@ -41,22 +41,22 @@ public actual class NativeList<E> : MutableList<E> {
         return false
     }
 
-    override fun clear() {
+    actual override fun clear() {
         nativeList.asDynamic().splice(0, nativeList.size)
     }
 
-    override operator fun set(index: Int, element: E): E {
+    actual override operator fun set(index: Int, element: E): E {
         val oldElement = nativeList[index]
         nativeList[index] = element
         return oldElement
     }
 
-    override fun add(index: Int, element: E) {
+    actual override fun add(index: Int, element: E) {
         nativeList.asDynamic().splice(index, 0, element)
     }
 
     @Suppress("UnsafeCastFromDynamic")
-    override fun addAll(elements: Collection<E>): Boolean {
+    actual override fun addAll(elements: Collection<E>): Boolean {
         if (elements.isNotEmpty()) {
             elements.forEach {
                 nativeList.asDynamic().push(it)
@@ -66,24 +66,24 @@ public actual class NativeList<E> : MutableList<E> {
         return false
     }
 
-    override fun removeAt(index: Int): E {
+    actual override fun removeAt(index: Int): E {
         val element = nativeList[index]
         nativeList.asDynamic().splice(index, 1)
         return element
     }
 
-    override fun subList(fromIndex: Int, toIndex: Int): MutableList<E> {
+    actual override fun subList(fromIndex: Int, toIndex: Int): MutableList<E> {
         throw UnsupportedOperationException("Not implemented")
     }
 
-    override fun retainAll(elements: Collection<E>): Boolean {
+    actual override fun retainAll(elements: Collection<E>): Boolean {
         throw UnsupportedOperationException("Not implemented")
     }
 
-    override val size: Int
+    actual override val size: Int
         get() = nativeList.size
 
-    override fun addAll(index: Int, elements: Collection<E>): Boolean {
+    actual override fun addAll(index: Int, elements: Collection<E>): Boolean {
         if (elements.isNotEmpty()) {
             elements.forEach { element ->
                 nativeList.asDynamic().splice(index, 0, element)
@@ -93,43 +93,43 @@ public actual class NativeList<E> : MutableList<E> {
         return false
     }
 
-    override fun get(index: Int): E {
+    actual override fun get(index: Int): E {
         return nativeList[index]
     }
 
-    override fun isEmpty(): Boolean {
+    actual override fun isEmpty(): Boolean {
         return nativeList.isEmpty()
     }
 
-    override fun iterator(): MutableIterator<E> {
+    actual override fun iterator(): MutableIterator<E> {
         return nativeList.toMutableList().iterator()
     }
 
-    override fun listIterator(): MutableListIterator<E> {
+    actual override fun listIterator(): MutableListIterator<E> {
         throw UnsupportedOperationException("Not implemented")
     }
 
-    override fun listIterator(index: Int): MutableListIterator<E> {
+    actual override fun listIterator(index: Int): MutableListIterator<E> {
         throw UnsupportedOperationException("Not implemented")
     }
 
-    override fun removeAll(elements: Collection<E>): Boolean {
+    actual override fun removeAll(elements: Collection<E>): Boolean {
         throw UnsupportedOperationException("Not implemented")
     }
 
-    override fun lastIndexOf(element: E): Int {
+    actual override fun lastIndexOf(element: E): Int {
         return nativeList.lastIndexOf(element)
     }
 
-    override fun indexOf(element: E): Int {
+    actual override fun indexOf(element: E): Int {
         return nativeList.indexOf(element)
     }
 
-    override fun containsAll(elements: Collection<E>): Boolean {
+    actual override fun containsAll(elements: Collection<E>): Boolean {
         return nativeList.asList().containsAll(elements)
     }
 
-    override fun contains(element: E): Boolean {
+    actual override fun contains(element: E): Boolean {
         return nativeList.contains(element)
     }
 

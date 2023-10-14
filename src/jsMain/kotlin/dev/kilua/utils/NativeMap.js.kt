@@ -29,7 +29,7 @@ public actual class NativeMap<V> : MutableMap<String, V> {
     protected val keysArray: Array<String>
         get() = js("Object").keys(nativeMap).unsafeCast<Array<String>>()
 
-    override val entries: MutableSet<MutableMap.MutableEntry<String, V>>
+    actual override val entries: MutableSet<MutableMap.MutableEntry<String, V>>
         get() = keysArray.mapNotNull {
             get(it)?.let { value ->
                 object : MutableMap.MutableEntry<String, V> {
@@ -44,37 +44,37 @@ public actual class NativeMap<V> : MutableMap<String, V> {
                 }
             }
         }.toMutableSet()
-    override val keys: MutableSet<String>
+    actual override val keys: MutableSet<String>
         get() = keysArray.toMutableSet()
 
 
-    override val size: Int
+    actual override val size: Int
         get() = keysArray.size
-    override val values: MutableCollection<V>
+    actual override val values: MutableCollection<V>
         get() = keysArray.mapNotNull { get(it) }.toMutableList()
 
-    override fun clear() {
+    actual override fun clear() {
         nativeMap = js("{}")
     }
 
-    override fun isEmpty(): Boolean {
+    actual override fun isEmpty(): Boolean {
         return size == 0
     }
 
-    override fun remove(key: String): V? {
+    actual override fun remove(key: String): V? {
         val obj = nativeMap[key]
         delete(nativeMap, key)
         @Suppress("UnsafeCastFromDynamic")
         return obj
     }
 
-    override fun putAll(from: Map<out String, V>) {
+    actual override fun putAll(from: Map<out String, V>) {
         from.forEach {
             nativeMap[it.key] = it.value
         }
     }
 
-    override fun put(key: String, value: V): V? {
+    actual override fun put(key: String, value: V): V? {
         val obj = nativeMap[key]
         nativeMap[key] = value
         @Suppress("UnsafeCastFromDynamic")
@@ -82,17 +82,17 @@ public actual class NativeMap<V> : MutableMap<String, V> {
     }
 
     @Suppress("UnsafeCastFromDynamic")
-    override operator fun get(key: String): V? {
+    actual override operator fun get(key: String): V? {
         return nativeMap[key]
     }
 
-    override fun containsValue(value: V): Boolean {
+    actual override fun containsValue(value: V): Boolean {
         return keysArray.find {
             nativeMap[it] == value
         } != null
     }
 
-    override fun containsKey(key: String): Boolean {
+    actual override fun containsKey(key: String): Boolean {
         return keysArray.contains(key)
     }
 

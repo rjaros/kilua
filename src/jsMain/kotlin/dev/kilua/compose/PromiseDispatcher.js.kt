@@ -29,7 +29,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.js.Promise
 
 internal actual class PromiseDispatcher : CoroutineDispatcher() {
-    override fun dispatch(context: CoroutineContext, block: Runnable) {
+    actual override fun dispatch(context: CoroutineContext, block: Runnable) {
         Promise.resolve(obj()).then {
             block.run()
         }

@@ -23,5 +23,9 @@
 package dev.kilua.compose
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Runnable
+import kotlin.coroutines.CoroutineContext
 
-internal expect class PromiseDispatcher() : CoroutineDispatcher
+internal expect class PromiseDispatcher() : CoroutineDispatcher {
+    override fun dispatch(context: CoroutineContext, block: Runnable)
+}

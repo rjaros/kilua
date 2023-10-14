@@ -26,6 +26,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("multiplatform") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     val composeVersion: String by System.getProperties()
     id("org.jetbrains.compose") version composeVersion
 }
@@ -52,6 +53,7 @@ val buildTarget: String by project
 val kotlinVersion: String by System.getProperties()
 val serializationVersion: String by project
 val coroutinesVersion: String by project
+val dateTimeVersion: String by project
 
 val cssLoaderVersion: String by project
 val styleLoaderVersion: String by project
@@ -119,6 +121,8 @@ kotlin {
             dependencies {
                 api(compose.runtime)
                 api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                api("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+                api("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
                 implementation(npm("css-loader", cssLoaderVersion))
                 implementation(npm("style-loader", styleLoaderVersion))
                 implementation(npm("imports-loader", importsLoaderVersion))
