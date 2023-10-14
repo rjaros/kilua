@@ -30,18 +30,18 @@ import dev.kilua.DomSpec
 import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
 import dev.kilua.html.Button
+import dev.kilua.html.ButtonType
 import dev.kilua.html.Col
 import dev.kilua.html.Color
+import dev.kilua.html.TextAlign
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.unaryPlus
 import dev.kilua.normalizeHtml
-import dev.kilua.utils.console
 import dev.kilua.utils.px
 import kotlinx.coroutines.delay
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class RootSpec : DomSpec {
 
@@ -51,14 +51,18 @@ class RootSpec : DomSpec {
             val root = root {
                 div("a_class") {
                     id = "main"
+                    textAlign = TextAlign.Center
                     border = Border(1.px, BorderStyle.Dotted, Color.name(Col.Red))
+                    setAttribute("custom", "value")
+                    setStyle("padding-top", "2px")
                     div {
                         +"Some content"
                     }
+                    button("A button", type = ButtonType.Submit)
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><div id="main" class="a_class" style="border: 1px dotted red;"><div>Some content</div></div></div>"""),
+                normalizeHtml("""<div><div class="a_class" id="main" custom="value" style="text-align: center; border: 1px dotted red; padding-top: 2px;"><div>Some content</div><button type="submit">A button</button></div></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render root element with some content to a String"
             )
@@ -71,15 +75,19 @@ class RootSpec : DomSpec {
             val root = root("test") {
                 div("a_class") {
                     id = "main"
+                    textAlign = TextAlign.Center
                     border = Border(1.px, BorderStyle.Dotted, Color.name(Col.Red))
+                    setAttribute("custom", "value")
+                    setStyle("padding-top", "2px")
                     div {
                         +"Some content"
                     }
+                    button("A button", type = ButtonType.Submit)
                 }
             }
             assertEquals(
-                normalizeHtml("""<div id="test"><div id="main" class="a_class" style="border: 1px dotted red;"><div>Some content</div></div></div>"""),
-                normalizeHtml(root.element?.outerHTML ?: ""),
+                normalizeHtml("""<div id="test"><div class="a_class" id="main" custom="value" style="text-align: center; border: 1px dotted red; padding-top: 2px;"><div>Some content</div><button type="submit">A button</button></div></div>"""),
+                normalizeHtml(root.element?.outerHTML),
                 "Should render root element with some content to DOM"
             )
         }

@@ -20,11 +20,10 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html.delegates
+package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.Tag
-import dev.kilua.utils.Object
 import dev.kilua.utils.cast
 import dev.kilua.utils.size
 import org.w3c.dom.DragEvent

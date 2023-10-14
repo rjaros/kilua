@@ -23,6 +23,7 @@
 package dev.kilua.html
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
@@ -60,18 +61,24 @@ public open class TextNode(
 }
 
 @Composable
-public fun text(text: String, content: TextNode.() -> Unit = {}): TextNode {
+public fun textNode(text: String, content: TextNode.() -> Unit = {}): TextNode {
     // Always using DefaultRenderConfig because of plus operator String receiver.
-    val textNode = remember { TextNode(text, DefaultRenderConfig()) }
-    ComponentNode(textNode, {
+    val component = remember { TextNode(text, DefaultRenderConfig()) }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
         set(text) { updateManagedProperty(TextNode::text, it) }
     }) {
-        content(textNode)
+        content(component)
     }
-    return textNode
+    return component
 }
 
 @Composable
 public operator fun String.unaryPlus() {
-    text(this)
+    textNode(this)
 }

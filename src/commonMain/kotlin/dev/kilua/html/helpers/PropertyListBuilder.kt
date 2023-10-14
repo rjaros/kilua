@@ -20,31 +20,28 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html
+package dev.kilua.html.helpers
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
-import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
-import dev.kilua.core.DefaultRenderConfig
-import dev.kilua.core.RenderConfig
-import org.w3c.dom.HTMLDivElement
+import dev.kilua.utils.nativeListOf
+import kotlin.reflect.KProperty
 
-public open class Div(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDivElement>("div", className, renderConfig)
+public interface PropertyListBuilder {
+    public fun add(vararg property: KProperty<*>)
+    public fun addAll(properties: List<KProperty<*>>) {
+        properties.forEach { add(it) }
+    }
+}
 
-@Composable
-public fun ComponentBase.div(className: String? = null, content: @Composable Div.() -> Unit = {}): Div {
-    val component = remember { Div(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
+internal class PropertyListBuilderImpl : PropertyListBuilder {
+
+    val properties = nativeListOf<KProperty<*>>()
+
+    override fun add(vararg property: KProperty<*>) {
+        property.forEach {
+            properties.add(it)
         }
     }
-    ComponentNode(component, {
-        set(className) { updateManagedProperty(Div::className, it) }
-    }, content)
-    return component
 }
+
+public fun buildPropertyList(delegate: (builder: PropertyListBuilder) -> Unit): List<KProperty<*>> =
+    PropertyListBuilderImpl().also { delegate(it) }.properties

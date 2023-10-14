@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html.delegates
+package dev.kilua.html.helpers
 
 import dev.kilua.core.PropertyDelegate
 import org.w3c.dom.HTMLElement

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html.delegates
+package dev.kilua.html.helpers
 
 import dev.kilua.core.PropertyDelegate
 import dev.kilua.html.*
@@ -93,7 +93,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var display: Display? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.display = it.display
+            element.style.display = it.value
         } else {
             element.style.removeProperty("display")
         }
@@ -101,7 +101,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var position: Position? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.position = it.position
+            element.style.position = it.value
         } else {
             element.style.removeProperty("position")
         }
@@ -149,7 +149,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var overflow: Overflow? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.setProperty("overflow", it.overflow)
+            element.style.setProperty("overflow", it.value)
         } else {
             element.style.removeProperty("overflow")
         }
@@ -157,7 +157,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var overflowX: Overflow? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.overflowX = it.overflow
+            element.style.overflowX = it.value
         } else {
             element.style.removeProperty("overflow-x")
         }
@@ -165,7 +165,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var overflowY: Overflow? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.overflowY = it.overflow
+            element.style.overflowY = it.value
         } else {
             element.style.removeProperty("overflow-y")
         }
@@ -173,7 +173,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var overflowWrap: OverflowWrap? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.overflowWrap = it.overflowWrap
+            element.style.overflowWrap = it.value
         } else {
             element.style.removeProperty("overflow-wrap")
         }
@@ -181,7 +181,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var resize: Resize? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.resize = it.resize
+            element.style.resize = it.value
         } else {
             element.style.removeProperty("resize")
         }
@@ -335,7 +335,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
      *
      * This property gives a convenient way to set the value of [color] property e.g.:
      *
-     * c.colorName = Col.GREEN
+     * c.colorName = Col.Green
      *
      * The value read from this property is always null.
      */
@@ -367,7 +367,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var direction: Direction? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.direction = it.direction
+            element.style.direction = it.value
         } else {
             element.style.removeProperty("direction")
         }
@@ -391,7 +391,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var textAlign: TextAlign? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.textAlign = it.textAlign
+            element.style.textAlign = it.value
         } else {
             element.style.removeProperty("text-align")
         }
@@ -423,7 +423,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var textTransform: TextTransform? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.textTransform = it.textTransform
+            element.style.textTransform = it.value
         } else {
             element.style.removeProperty("text-transform")
         }
@@ -431,7 +431,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var textOverflow: TextOverflow? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.textOverflow = it.textOverflow
+            element.style.textOverflow = it.value
         } else {
             element.style.removeProperty("text-overflow")
         }
@@ -439,7 +439,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var unicodeBidi: UnicodeBidi? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.unicodeBidi = it.unicodeBidi
+            element.style.unicodeBidi = it.value
         } else {
             element.style.removeProperty("unicode-bidi")
         }
@@ -447,7 +447,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var verticalAlign: VerticalAlign? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.verticalAlign = it.verticalAlign
+            element.style.verticalAlign = it.value
         } else {
             element.style.removeProperty("vertical-align")
         }
@@ -455,7 +455,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var whiteSpace: WhiteSpace? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.whiteSpace = it.whiteSpace
+            element.style.whiteSpace = it.value
         } else {
             element.style.removeProperty("white-space")
         }
@@ -487,7 +487,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var fontStyle: FontStyle? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.fontStyle = it.fontStyle
+            element.style.fontStyle = it.value
         } else {
             element.style.removeProperty("font-style")
         }
@@ -495,7 +495,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var fontWeight: FontWeight? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.fontWeight = it.fontWeight
+            element.style.fontWeight = it.value
         } else {
             element.style.removeProperty("font-weight")
         }
@@ -503,7 +503,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var fontVariant: FontVariant? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.fontVariant = it.fontVariant
+            element.style.fontVariant = it.value
         } else {
             element.style.removeProperty("font-variant")
         }
@@ -511,7 +511,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var float: CssFloat? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.cssFloat = it.cssFloat
+            element.style.cssFloat = it.value
         } else {
             element.style.removeProperty("float")
         }
@@ -519,7 +519,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var clear: Clear? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.clear = it.clear
+            element.style.clear = it.value
         } else {
             element.style.removeProperty("clear")
         }
@@ -527,7 +527,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var wordBreak: WordBreak? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.wordBreak = it.wordBreak
+            element.style.wordBreak = it.value
         } else {
             element.style.removeProperty("word-break")
         }
@@ -535,7 +535,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var lineBreak: LineBreak? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.lineBreak = it.lineBreak
+            element.style.lineBreak = it.value
         } else {
             element.style.removeProperty("line-break")
         }
@@ -543,7 +543,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var cursor: Cursor? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.cursor = it.cursor
+            element.style.cursor = it.value
         } else {
             element.style.removeProperty("cursor")
         }
@@ -551,7 +551,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var flexDirection: FlexDirection? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.flexDirection = it.flexDirection
+            element.style.flexDirection = it.value
         } else {
             element.style.removeProperty("flex-direction")
         }
@@ -559,7 +559,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var flexWrap: FlexWrap? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.flexWrap = it.flexWrap
+            element.style.flexWrap = it.value
         } else {
             element.style.removeProperty("flex-wrap")
         }
@@ -567,7 +567,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var justifyItems: JustifyItems? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.setProperty("justify-items", it.justifyItems)
+            element.style.setProperty("justify-items", it.value)
         } else {
             element.style.removeProperty("justify-items")
         }
@@ -575,7 +575,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var justifyContent: JustifyContent? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.justifyContent = it.justifyContent
+            element.style.justifyContent = it.value
         } else {
             element.style.removeProperty("justify-content")
         }
@@ -583,7 +583,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var alignItems: AlignItems? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.alignItems = it.alignItems
+            element.style.alignItems = it.value
         } else {
             element.style.removeProperty("align-items")
         }
@@ -591,7 +591,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var alignContent: AlignContent? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.alignContent = it.alignContent
+            element.style.alignContent = it.value
         } else {
             element.style.removeProperty("align-content")
         }
@@ -631,7 +631,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var alignSelf: AlignItems? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.alignSelf = it.alignItems
+            element.style.alignSelf = it.value
         } else {
             element.style.removeProperty("align-self")
         }
@@ -639,7 +639,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var justifySelf: JustifyItems? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.setProperty("justify-self", it.justifyItems)
+            element.style.setProperty("justify-self", it.value)
         } else {
             element.style.removeProperty("justify-self")
         }
@@ -663,7 +663,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var gridAutoFlow: GridAutoFlow? by unmanagedProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.setProperty("grid-auto-flow", it.gridAutoFlow)
+            element.style.setProperty("grid-auto-flow", it.value)
         } else {
             element.style.removeProperty("grid-auto-flow")
         }

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html.delegates
+package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

@@ -23,6 +23,7 @@
 package dev.kilua.html
 
 import dev.kilua.utils.asString
+import dev.kilua.utils.toKebabCase
 
 /**
  * Definitions of CSS units.
@@ -54,657 +55,890 @@ public typealias CssSize = Pair<Number, CssUnit>
 /**
  * Definitions of CSS border styles.
  */
-public enum class BorderStyle(public val borderStyle: String) {
-    None("none"),
-    Hidden("hidden"),
-    Dotted("dotted"),
-    Dashed("dashed"),
-    Solid("solid"),
-    Double("double"),
-    Groove("groove"),
-    Ridge("ridge"),
-    Inset("inset"),
-    Outset("outset"),
-    Initial("initial"),
-    Inherit("inherit"),
-    Unset("unset")
+public enum class BorderStyle {
+    None,
+    Hidden,
+    Dotted,
+    Dashed,
+    Solid,
+    Double,
+    Groove,
+    Ridge,
+    Inset,
+    Outset,
+    Initial,
+    Inherit,
+    Unset;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
 }
 
 /**
  * Definitions of CSS outline styles.
  */
-public enum class OutlineStyle(public val outlineStyle: String) {
-    Auto("auto"),
-    None("none"),
-    Hidden("hidden"),
-    Dotted("dotted"),
-    Dashed("dashed"),
-    Solid("solid"),
-    Double("double"),
-    Groove("groove"),
-    Ridge("ridge"),
-    Inset("inset"),
-    Outset("outset"),
-    Initial("initial"),
-    Inherit("inherit"),
-    Unset("unset")
+public enum class OutlineStyle {
+    Auto,
+    None,
+    Hidden,
+    Dotted,
+    Dashed,
+    Solid,
+    Double,
+    Groove,
+    Ridge,
+    Inset,
+    Outset,
+    Initial,
+    Inherit,
+    Unset;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS color names.
  */
-public enum class Col(public val color: String) {
-    Aliceblue("aliceblue"),
-    Antiquewhite("antiquewhite"),
-    Aqua("aqua"),
-    Aquamarine("aquamarine"),
-    Azure("azure"),
-    Beige("beige"),
-    Bisque("bisque"),
-    Black("black"),
-    Blanchedalmond("blanchedalmond"),
-    Blue("blue"),
-    Blueviolet("blueviolet"),
-    Brown("brown"),
-    Burlywood("burlywood"),
-    Cadetblue("cadetblue"),
-    Chartreuse("chartreuse"),
-    Chocolate("chocolate"),
-    Coral("coral"),
-    Cornflowerblue("cornflowerblue"),
-    Cornsilk("cornsilk"),
-    Crimson("crimson"),
-    Cyan("cyan"),
-    Darkblue("darkblue"),
-    Darkcyan("darkcyan"),
-    Darkgoldenrod("darkgoldenrod"),
-    Darkgray("darkgray"),
-    Darkgreen("darkgreen"),
-    Darkkhaki("darkkhaki"),
-    Darkmagenta("darkmagenta"),
-    Darkolivegreen("darkolivegreen"),
-    Darkorange("darkorange"),
-    Darkorchid("darkorchid"),
-    Darkred("darkred"),
-    Darksalmon("darksalmon"),
-    Darkseagreen("darkseagreen"),
-    Darkslateblue("darkslateblue"),
-    Darkslategray("darkslategray"),
-    Darkturquoise("darkturquoise"),
-    Darkviolet("darkviolet"),
-    Deeppink("deeppink"),
-    Deepskyblue("deepskyblue"),
-    Dimgray("dimgray"),
-    Dodgerblue("dodgerblue"),
-    Firebrick("firebrick"),
-    Floralwhite("floralwhite"),
-    Forestgreen("forestgreen"),
-    Fuchsia("fuchsia"),
-    Gainsboro("gainsboro"),
-    Ghostwhite("ghostwhite"),
-    Gold("gold"),
-    Goldenrod("goldenrod"),
-    Gray("gray"),
-    Green("green"),
-    Greenyellow("greenyellow"),
-    Honeydew("honeydew"),
-    Hotpink("hotpink"),
-    Indianred("indianred"),
-    Indigo("indigo"),
-    Ivory("ivory"),
-    Khaki("khaki"),
-    Lavender("lavender"),
-    Lavenderblush("lavenderblush"),
-    Lawngreen("lawngreen"),
-    Lemonchiffon("lemonchiffon"),
-    Lightblue("lightblue"),
-    Lightcoral("lightcoral"),
-    Lightcyan("lightcyan"),
-    Lightgoldenrodyellow("lightgoldenrodyellow"),
-    Lightgray("lightgray"),
-    Lightgreen("lightgreen"),
-    Lightpink("lightpink"),
-    Lightsalmon("lightsalmon"),
-    Lightseagreen("lightseagreen"),
-    Lightskyblue("lightskyblue"),
-    Lightslategray("lightslategray"),
-    Lightsteelblue("lightsteelblue"),
-    Lightyellow("lightyellow"),
-    Lime("lime"),
-    Limegreen("limegreen"),
-    Linen("linen"),
-    Magenta("magenta"),
-    Maroon("maroon"),
-    Mediumaquamarine("mediumaquamarine"),
-    Mediumblue("mediumblue"),
-    Mediumorchid("mediumorchid"),
-    Mediumpurple("mediumpurple"),
-    Mediumseagreen("mediumseagreen"),
-    Mediumslateblue("mediumslateblue"),
-    Mediumspringgreen("mediumspringgreen"),
-    Mediumturquoise("mediumturquoise"),
-    Mediumvioletred("mediumvioletred"),
-    Midnightblue("midnightblue"),
-    Mintcream("mintcream"),
-    Mistyrose("mistyrose"),
-    Moccasin("moccasin"),
-    Navajowhite("navajowhite"),
-    Navy("navy"),
-    Oldlace("oldlace"),
-    Olive("olive"),
-    Olivedrab("olivedrab"),
-    Orange("orange"),
-    Orangered("orangered"),
-    Orchid("orchid"),
-    Palegoldenrod("palegoldenrod"),
-    Palegreen("palegreen"),
-    Paleturquoise("paleturquoise"),
-    Palevioletred("palevioletred"),
-    Papayawhip("papayawhip"),
-    Peachpuff("peachpuff"),
-    Peru("peru"),
-    Pink("pink"),
-    Plum("plum"),
-    Powderblue("powderblue"),
-    Purple("purple"),
-    Rebeccapurple("rebeccapurple"),
-    Red("red"),
-    Rosybrown("rosybrown"),
-    Royalblue("royalblue"),
-    Saddlebrown("saddlebrown"),
-    Salmon("salmon"),
-    Sandybrown("sandybrown"),
-    Seagreen("seagreen"),
-    Seashell("seashell"),
-    Sienna("sienna"),
-    Silver("silver"),
-    Skyblue("skyblue"),
-    Slateblue("slateblue"),
-    Slategray("slategray"),
-    Snow("snow"),
-    Springgreen("springgreen"),
-    Steelblue("steelblue"),
-    Tan("tan"),
-    Teal("teal"),
-    Thistle("thistle"),
-    Tomato("tomato"),
-    Turquoise("turquoise"),
-    Violet("violet"),
-    Wheat("wheat"),
-    White("white"),
-    Whitesmoke("whitesmoke"),
-    Yellow("yellow"),
-    Yellowgreen("yellowgreen")
+public enum class Col {
+    Aliceblue,
+    Antiquewhite,
+    Aqua,
+    Aquamarine,
+    Azure,
+    Beige,
+    Bisque,
+    Black,
+    Blanchedalmond,
+    Blue,
+    Blueviolet,
+    Brown,
+    Burlywood,
+    Cadetblue,
+    Chartreuse,
+    Chocolate,
+    Coral,
+    Cornflowerblue,
+    Cornsilk,
+    Crimson,
+    Cyan,
+    Darkblue,
+    Darkcyan,
+    Darkgoldenrod,
+    Darkgray,
+    Darkgreen,
+    Darkkhaki,
+    Darkmagenta,
+    Darkolivegreen,
+    Darkorange,
+    Darkorchid,
+    Darkred,
+    Darksalmon,
+    Darkseagreen,
+    Darkslateblue,
+    Darkslategray,
+    Darkturquoise,
+    Darkviolet,
+    Deeppink,
+    Deepskyblue,
+    Dimgray,
+    Dodgerblue,
+    Firebrick,
+    Floralwhite,
+    Forestgreen,
+    Fuchsia,
+    Gainsboro,
+    Ghostwhite,
+    Gold,
+    Goldenrod,
+    Gray,
+    Green,
+    Greenyellow,
+    Honeydew,
+    Hotpink,
+    Indianred,
+    Indigo,
+    Ivory,
+    Khaki,
+    Lavender,
+    Lavenderblush,
+    Lawngreen,
+    Lemonchiffon,
+    Lightblue,
+    Lightcoral,
+    Lightcyan,
+    Lightgoldenrodyellow,
+    Lightgray,
+    Lightgreen,
+    Lightpink,
+    Lightsalmon,
+    Lightseagreen,
+    Lightskyblue,
+    Lightslategray,
+    Lightsteelblue,
+    Lightyellow,
+    Lime,
+    Limegreen,
+    Linen,
+    Magenta,
+    Maroon,
+    Mediumaquamarine,
+    Mediumblue,
+    Mediumorchid,
+    Mediumpurple,
+    Mediumseagreen,
+    Mediumslateblue,
+    Mediumspringgreen,
+    Mediumturquoise,
+    Mediumvioletred,
+    Midnightblue,
+    Mintcream,
+    Mistyrose,
+    Moccasin,
+    Navajowhite,
+    Navy,
+    Oldlace,
+    Olive,
+    Olivedrab,
+    Orange,
+    Orangered,
+    Orchid,
+    Palegoldenrod,
+    Palegreen,
+    Paleturquoise,
+    Palevioletred,
+    Papayawhip,
+    Peachpuff,
+    Peru,
+    Pink,
+    Plum,
+    Powderblue,
+    Purple,
+    Rebeccapurple,
+    Red,
+    Rosybrown,
+    Royalblue,
+    Saddlebrown,
+    Salmon,
+    Sandybrown,
+    Seagreen,
+    Seashell,
+    Sienna,
+    Silver,
+    Skyblue,
+    Slateblue,
+    Slategray,
+    Snow,
+    Springgreen,
+    Steelblue,
+    Tan,
+    Teal,
+    Thistle,
+    Tomato,
+    Turquoise,
+    Violet,
+    Wheat,
+    White,
+    Whitesmoke,
+    Yellow,
+    Yellowgreen;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS background size.
  */
-public enum class BgSize(public val size: String) {
-    Cover("cover"),
-    Contain("contain")
+public enum class BgSize {
+    Cover,
+    Contain;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS background repeat options.
  */
-public enum class BgRepeat(public val repeat: String) {
-    Repeat("repeat"),
-    RepeatX("repeat-x"),
-    RepeatY("repeat-y"),
-    NoRepeat("no-repeat")
+public enum class BgRepeat {
+    Repeat,
+    RepeatX,
+    RepeatY,
+    NoRepeat;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS background attachment options.
  */
-public enum class BgAttach(public val attachment: String) {
-    Scroll("scroll"),
-    Fixed("fixed"),
-    Local("local")
+public enum class BgAttach {
+    Scroll,
+    Fixed,
+    Local;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS background origin options.
  */
-public enum class BgOrigin(public val origin: String) {
-    PaddingBox("padding-box"),
-    BorderBox("border-box"),
-    ContentBox("content-box")
+public enum class BgOrigin {
+    PaddingBox,
+    BorderBox,
+    ContentBox;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS background clipping options.
  */
-public enum class BgClip(public val clip: String) {
-    PaddingBox("padding-box"),
-    BorderBox("border-box"),
-    ContentBox("content-box")
+public enum class BgClip {
+    PaddingBox,
+    BorderBox,
+    ContentBox;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS display options.
  */
-public enum class Display(public val display: String) {
-    Inline("inline"),
-    Block("block"),
-    Flex("flex"),
-    Grid("grid"),
-    InlineBlock("inline-block"),
-    InlineFlex("inline-flex"),
-    InlineGrid("inline-grid"),
-    InlineTable("inline-table"),
-    ListItem("list-item"),
-    RunIn("run-in"),
-    Table("table"),
-    TableCaption("table-caption"),
-    TableColumnGroup("table-column-group"),
-    TableHeaderGroup("table-header-group"),
-    TableFooterGroup("table-footer-group"),
-    TableRowGroup("table-row-group"),
-    TableCell("table-cell"),
-    TableColumn("table-column"),
-    TableTow("table-row"),
-    Contents("contents"),
-    None("none"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class Display {
+    Inline,
+    Block,
+    Flex,
+    Grid,
+    InlineBlock,
+    InlineFlex,
+    InlineGrid,
+    InlineTable,
+    ListItem,
+    RunIn,
+    Table,
+    TableCaption,
+    TableColumnGroup,
+    TableHeaderGroup,
+    TableFooterGroup,
+    TableRowGroup,
+    TableCell,
+    TableColumn,
+    TableTow,
+    Contents,
+    None,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS position options.
  */
-public enum class Position(public val position: String) {
-    Static("static"),
-    Relative("relative"),
-    Fixed("fixed"),
-    Absolute("absolute"),
-    Sticky("sticky")
+public enum class Position {
+    Static,
+    Relative,
+    Fixed,
+    Absolute,
+    Sticky;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS overflow options.
  */
-public enum class Overflow(public val overflow: String) {
-    Visible("visible"),
-    Hidden("hidden"),
-    Scroll("scroll"),
-    Auto("auto"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class Overflow {
+    Visible,
+    Hidden,
+    Scroll,
+    Auto,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS overflow-wrap options.
  */
-public enum class OverflowWrap(public val overflowWrap: String) {
-    Normal("normal"),
-    BreakWord("break-word"),
-    Anywhere("anywhere")
+public enum class OverflowWrap {
+    Normal,
+    BreakWord,
+    Anywhere;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS resize options.
  */
-public enum class Resize(public val resize: String) {
-    None("none"),
-    Both("both"),
-    Horizontal("horizontal"),
-    Vertical("vertical"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class Resize {
+    None,
+    Both,
+    Horizontal,
+    Vertical,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS text direction options.
  */
-public enum class Direction(public val direction: String) {
-    Ltr("ltr"),
-    Rtl("rtl"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class Direction {
+    Ltr,
+    Rtl,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS text align options.
  */
-public enum class TextAlign(public val textAlign: String) {
-    Left("left"),
-    Right("right"),
-    Center("center"),
-    Justify("justify"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class TextAlign {
+    Left,
+    Right,
+    Center,
+    Justify,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS text decoration line options.
  */
-public enum class TextDecorationLine(public val textDecorationLine: String) {
-    None("none"),
-    Underline("underline"),
-    Overline("overline"),
-    LineThrough("line-through"),
-    Justify("justify"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class TextDecorationLine {
+    None,
+    Underline,
+    Overline,
+    LineThrough,
+    Justify,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS text decoration style options.
  */
-public enum class TextDecorationStyle(public val textDecorationStyle: String) {
-    Solid("solid"),
-    Double("double"),
-    Dotted("dotted"),
-    Dashed("dashed"),
-    Wavy("wavy"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class TextDecorationStyle {
+    Solid,
+    Double,
+    Dotted,
+    Dashed,
+    Wavy,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS text transform options.
  */
-public enum class TextTransform(public val textTransform: String) {
-    None("none"),
-    Capitalize("capitalize"),
-    Uppercase("uppercase"),
-    Lowercase("lowercase"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class TextTransform {
+    None,
+    Capitalize,
+    Uppercase,
+    Lowercase,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS text overflow options.
  */
-public enum class TextOverflow(public val textOverflow: String) {
-    Clip("clip"),
-    Ellipsis("ellipsis"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class TextOverflow {
+    Clip,
+    Ellipsis,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS unicode-bidi options.
  */
-public enum class UnicodeBidi(public val unicodeBidi: String) {
-    Normal("normal"),
-    Embed("embed"),
-    BidiOverride("bidi-override"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class UnicodeBidi {
+    Normal,
+    Embed,
+    BidiOverride,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS vertical align options.
  */
-public enum class VerticalAlign(public val verticalAlign: String) {
-    Baseline("baseline"),
-    Sub("sub"),
-    Super("super"),
-    Top("top"),
-    TextTop("text-top"),
-    Middle("middle"),
-    Bottom("bottom"),
-    TextBottom("text-bottom"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class VerticalAlign {
+    Baseline,
+    Sub,
+    Super,
+    Top,
+    TextTop,
+    Middle,
+    Bottom,
+    TextBottom,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS white space options.
  */
-public enum class WhiteSpace(public val whiteSpace: String) {
-    Normal("normal"),
-    Nowrap("nowrap"),
-    Pre("pre"),
-    PreLine("pre-line"),
-    PreWrap("pre-wrap"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class WhiteSpace {
+    Normal,
+    Nowrap,
+    Pre,
+    PreLine,
+    PreWrap,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS font style options.
  */
-public enum class FontStyle(public val fontStyle: String) {
-    Normal("normal"),
-    Italic("italic"),
-    Oblique("oblique"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class FontStyle {
+    Normal,
+    Italic,
+    Oblique,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS font variant options.
  */
-public enum class FontVariant(public val fontVariant: String) {
-    Normal("normal"),
-    SmallCaps("small-caps"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class FontVariant {
+    Normal,
+    SmallCaps,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS font weight options.
  */
-public enum class FontWeight(public val fontWeight: String) {
-    Normal("normal"),
-    Bold("bold"),
-    Bolder("bolder"),
-    Lighter("lighter"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class FontWeight {
+    Normal,
+    Bold,
+    Bolder,
+    Lighter,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS float options.
  */
-public enum class CssFloat(public val cssFloat: String) {
-    None("none"),
-    Left("left"),
-    Right("right"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class CssFloat {
+    None,
+    Left,
+    Right,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS clear options.
  */
-public enum class Clear(public val clear: String) {
-    None("none"),
-    Left("left"),
-    Right("right"),
-    Both("both"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class Clear {
+    None,
+    Left,
+    Right,
+    Both,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS word-break options.
  */
-public enum class WordBreak(public val wordBreak: String) {
-    Normal("normal"),
-    KeepAll("keep-all"),
-    BreakAll("break-all")
+public enum class WordBreak {
+    Normal,
+    KeepAll,
+    BreakAll;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * Definitions of CSS line-break options.
  */
-public enum class LineBreak(public val lineBreak: String) {
-    Auto("auto"),
-    Loose("loose"),
-    Normal("normal"),
-    Strict("strict"),
-    Anywhere("anywhere")
+public enum class LineBreak {
+    Auto,
+    Loose,
+    Normal,
+    Strict,
+    Anywhere;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
-public enum class Cursor(public val cursor: String) {
-    Default("default"),
-    Auto("auto"),
-    None("none"),
-    Alias("alias"),
-    AllScroll("all-scroll"),
-    Cell("cell"),
-    ContextMenu("context-menu"),
-    ColResize("col-resize"),
-    Copy("copy"),
-    Crosshair("crosshair"),
-    EResize("e-resize"),
-    EwResize("ew-resize"),
-    Grab("grab"),
-    Grabbing("grabbing"),
-    Help("help"),
-    Move("move"),
-    NResize("n-resize"),
-    NeResize("ne-resize"),
-    NeswResize("nesw-resize"),
-    NsResize("ns-resize"),
-    NwResize("nw-resize"),
-    NwseResize("nwse-resize"),
-    NoDrop("no-drop"),
-    NotAllowed("not-allowed"),
-    Pointer("pointer"),
-    Progress("progress"),
-    RowResize("row-resize"),
-    SResize("s-resize"),
-    SeResize("se-resize"),
-    SwResize("sw-resize"),
-    Text("text"),
-    VerticalText("vertical-text"),
-    WResize("w-resize"),
-    Wait("wait"),
-    ZoomIn("zoom-in"),
-    ZoomOut("zoom-out"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class Cursor {
+    Default,
+    Auto,
+    None,
+    Alias,
+    AllScroll,
+    Cell,
+    ContextMenu,
+    ColResize,
+    Copy,
+    Crosshair,
+    EResize,
+    EwResize,
+    Grab,
+    Grabbing,
+    Help,
+    Move,
+    NResize,
+    NeResize,
+    NeswResize,
+    NsResize,
+    NwResize,
+    NwseResize,
+    NoDrop,
+    NotAllowed,
+    Pointer,
+    Progress,
+    RowResize,
+    SResize,
+    SeResize,
+    SwResize,
+    Text,
+    VerticalText,
+    WResize,
+    Wait,
+    ZoomIn,
+    ZoomOut,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * CSS flexbox directions.
  */
-public enum class FlexDirection(public val flexDirection: String) {
-    Row("row"),
-    RowReverse("row-reverse"),
-    Column("column"),
-    ColumnReverse("column-reverse")
+public enum class FlexDirection {
+    Row,
+    RowReverse,
+    Column,
+    ColumnReverse;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * CSS flexbox wrap modes.
  */
-public enum class FlexWrap(public val flexWrap: String) {
-    Nowrap("nowrap"),
-    Wrap("wrap"),
-    WrapReverse("wrap-reverse")
+public enum class FlexWrap {
+    Nowrap,
+    Wrap,
+    WrapReverse;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * CSS grid items justification options.
  */
-public enum class JustifyItems(public val justifyItems: String) {
-    Start("start"),
-    End("end"),
-    Center("center"),
-    Stretch("stretch")
+public enum class JustifyItems {
+    Start,
+    End,
+    Center,
+    Stretch;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * CSS flexbox/grid content justification options.
  */
-public enum class JustifyContent(public val justifyContent: String) {
-    FlexStart("flex-start"),
-    FlexEnd("flex-end"),
-    Center("center"),
-    SpaceBetween("space-between"),
-    SpaceAround("space-around"),
-    SpaceEvenly("space-evenly"),
-    Start("start"),
-    End("end"),
-    Stretch("stretch")
+public enum class JustifyContent {
+    FlexStart,
+    FlexEnd,
+    Center,
+    SpaceBetween,
+    SpaceAround,
+    SpaceEvenly,
+    Start,
+    End,
+    Stretch;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * CSS flexbox/grid items alignments options.
  */
-public enum class AlignItems(public val alignItems: String) {
-    FlexStart("flex-start"),
-    FlexEnd("flex-end"),
-    Center("center"),
-    Baseline("baseline"),
-    Stretch("stretch"),
-    Start("start"),
-    End("end")
+public enum class AlignItems {
+    FlexStart,
+    FlexEnd,
+    Center,
+    Baseline,
+    Stretch,
+    Start,
+    End;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * CSS flexbox/grid content alignment options.
  */
-public enum class AlignContent(public val alignContent: String) {
-    FlexStart("flex-start"),
-    FlexEnd("flex-end"),
-    Center("center"),
-    SpaceBetween("space-between"),
-    SpaceAround("space-around"),
-    Stretch("stretch"),
-    Start("start"),
-    End("end"),
-    SpaceEvenly("space-evenly")
+public enum class AlignContent {
+    FlexStart,
+    FlexEnd,
+    Center,
+    SpaceBetween,
+    SpaceAround,
+    Stretch,
+    Start,
+    End,
+    SpaceEvenly;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * CSS grid flow options.
  */
-public enum class GridAutoFlow(public val gridAutoFlow: String) {
+public enum class GridAutoFlow(public val value: String) {
     Row("row"),
     Column("column"),
+    Dense("dense"),
     RowDense("row dense"),
-    ColumnDense("column dense")
+    ColumnDense("column dense");
+
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * CSS list style type options.
  */
-public enum class ListStyleType(public val type: String) {
-    Disc("disc"),
-    Circle("circle"),
-    Square("square"),
-    Decimal("decimal"),
-    CjkDecimal("cjk-decimal"),
-    DecimalLeadingZero("decimal-leading-zero"),
-    LowerRoman("lower-roman"),
-    UpperRoman("upper-roman"),
-    LowerGreek("lower-greek"),
-    LowerLatin("lower-latin"),
-    UpperAlpha("upper-alpha"),
-    LowerAlpha("lower-alpha"),
-    UpperLatin("upper-latin"),
-    ArabicIndic("arabic-indic"),
-    Armenian("armenian"),
-    Bengali("bengali"),
-    Cambodian("cambodian"),
-    CjkIdeographic("cjk-ideographic"),
-    Georgian("georgian"),
-    Hebrew("hebrew"),
-    Hiragana("hiragana"),
-    HiraganaIroha("hiragana-iroha"),
-    JapaneseFormal("japanese-formal"),
-    JapaneseInformal("japanese-informal"),
-    Katakana("katakana"),
-    KatakanaIroha("katakana-iroha"),
-    None("none"),
-    Initial("initial"),
-    Inherit("inherit")
+public enum class ListStyleType {
+    Disc,
+    Circle,
+    Square,
+    Decimal,
+    CjkDecimal,
+    DecimalLeadingZero,
+    LowerRoman,
+    UpperRoman,
+    LowerGreek,
+    LowerLatin,
+    UpperAlpha,
+    LowerAlpha,
+    UpperLatin,
+    ArabicIndic,
+    Armenian,
+    Bengali,
+    Cambodian,
+    CjkIdeographic,
+    Georgian,
+    Hebrew,
+    Hiragana,
+    HiraganaIroha,
+    JapaneseFormal,
+    JapaneseInformal,
+    Katakana,
+    KatakanaIroha,
+    None,
+    Initial,
+    Inherit;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
  * CSS list style position options.
  */
-public enum class ListStylePosition(public val position: String) {
-    Inside("inside"),
-    Outside("outside")
+public enum class ListStylePosition {
+    Inside,
+    Outside;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+
 }
 
 /**
@@ -720,7 +954,7 @@ public open class Border(
 
     public fun asString(): String {
         val w = width?.asString()
-        return w.orEmpty() + " " + (style?.borderStyle).orEmpty() + " " + color?.asString().orEmpty()
+        return w.orEmpty() + " " + (style?.value).orEmpty() + " " + color?.asString().orEmpty()
     }
 
     override fun toString(): String = asString()
@@ -739,7 +973,7 @@ public open class Outline(
 
     public fun asString(): String {
         val w = width?.asString()
-        return w.orEmpty() + " " + (style?.outlineStyle).orEmpty() + " " + color?.asString().orEmpty()
+        return w.orEmpty() + " " + (style?.value).orEmpty() + " " + color?.asString().orEmpty()
     }
 
     override fun toString(): String = asString()
@@ -772,7 +1006,7 @@ public open class Color(protected val color: String? = null) {
          * @param color color named constant
          */
         public fun name(color: Col): Color {
-            return Color(color.color)
+            return Color(color.value)
         }
 
         /**
@@ -825,11 +1059,11 @@ public open class Background(
         return (color?.asString().orEmpty() + " " + img.orEmpty() + " " + posX.orEmpty() + " " + posY.orEmpty() +
                 if (sX != null || sY != null || size != null) {
                     (if (posX != null || posY != null) " / " else " 0px 0px / ") +
-                            sX.orEmpty() + " " + sY.orEmpty() + " " + (size?.size).orEmpty()
+                            sX.orEmpty() + " " + sY.orEmpty() + " " + (size?.value).orEmpty()
                 } else {
                     ""
-                } + " " + (repeat?.repeat).orEmpty() + " " + (origin?.origin).orEmpty() + " " +
-                (clip?.clip).orEmpty() + " " + (attachment?.attachment).orEmpty()).trim()
+                } + " " + (repeat?.value).orEmpty() + " " + (origin?.value).orEmpty() + " " +
+                (clip?.value).orEmpty() + " " + (attachment?.value).orEmpty()).trim()
     }
 
     override fun toString(): String = asString()
@@ -847,8 +1081,8 @@ public open class TextDecoration(
 ) {
 
     public fun asString(): String {
-        return ((line?.textDecorationLine).orEmpty() + " " +
-                (style?.textDecorationStyle).orEmpty() + " " +
+        return ((line?.value).orEmpty() + " " +
+                (style?.value).orEmpty() + " " +
                 color?.asString().orEmpty()).trim()
     }
 
@@ -939,7 +1173,7 @@ public open class ListStyle(
         val img = image?.let {
             "url($image)"
         }
-        return ("${type?.type.orEmpty()} ${position?.position.orEmpty()} ${img.orEmpty()}").trim()
+        return ("${type?.value.orEmpty()} ${position?.value.orEmpty()} ${img.orEmpty()}").trim()
     }
 
     override fun toString(): String = asString()

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html.delegates
+package dev.kilua.html.helpers
 
 import dev.kilua.html.*
 import org.w3c.dom.HTMLElement
@@ -213,7 +213,7 @@ public interface TagStyle<E : HTMLElement> {
      *
      * This property gives a convenient way to set the value of [color] property e.g.:
      *
-     * c.colorName = Col.GREEN
+     * c.colorName = Col.Green
      *
      * The value read from this property is always null.
      */

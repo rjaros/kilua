@@ -109,7 +109,7 @@ interface DomSpec : TestSpec {
 }
 
 /**
- * Format a HTML string in a standardized manner, with one HTML element per line.
+ * Format an HTML string in a standardized manner, with one HTML element per line.
  * This helps with highlighting HTML differences in test assertions.
  */
 fun normalizeHtml(raw: String): String {

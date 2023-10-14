@@ -182,7 +182,13 @@ public operator fun CssSize?.minus(i: Number): CssSize {
  * Render map of properties to an CSS style string.
  */
 public fun Map<String, Any>.renderAsHtmlAttributes(): String {
-    return this.map { "${it.key.toKebabCase()}=\"${it.value}\"" }.joinToString(" ")
+    return this.map {
+        if (it.value == true) {
+            it.key.toKebabCase()
+        } else {
+            "${it.key.toKebabCase()}=\"${it.value}\""
+        }
+    }.joinToString(" ")
 }
 
 /**
