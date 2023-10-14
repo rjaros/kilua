@@ -39,6 +39,6 @@ public class DomRenderConfig : RenderConfig {
     override val isDom: Boolean = true
 }
 
-public class HeadlessRenderConfig : RenderConfig {
+public class StringRenderConfig : RenderConfig {
     override val isDom: Boolean = false
 }

@@ -24,14 +24,13 @@ package dev.kilua.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Composition
-import androidx.compose.runtime.ControlledComposition
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.runtime.Recomposer
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
-import dev.kilua.core.HeadlessRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
+import dev.kilua.core.StringRenderConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
@@ -97,7 +96,7 @@ internal fun rootComposable(
         recomposer.runRecomposeAndApplyChanges()
     }
 
-    val composition = ControlledComposition(
+    val composition = Composition(
         applier = ComponentApplier(root),
         parent = recomposer
     )
@@ -129,5 +128,5 @@ public fun root(
 public fun root(
     content: @Composable Root.() -> Unit = {}
 ): Root {
-    return root(null, HeadlessRenderConfig(), content)
+    return root(null, StringRenderConfig(), content)
 }
