@@ -87,6 +87,7 @@ public fun startApplication(
         application = start(state)
     } else {
         application = null
+        @Suppress("MoveLambdaOutsideParentheses")
         document.addEventListener("DOMContentLoaded", { application = start(state) })
     }
 }
