@@ -22,6 +22,7 @@
 
 package dev.kilua.core
 
+import dev.kilua.utils.console
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.nativeMapOf
 import kotlinx.dom.clear
@@ -34,6 +35,8 @@ public abstract class ComponentBase(
     protected val node: Node?,
     internal val renderConfig: RenderConfig,
 ) : Component, PropertyDelegate(nativeMapOf()) {
+
+    public override val componentId: Int = counter++
 
     override var parent: Component? = null
     override val children: MutableList<ComponentBase> = nativeListOf()
@@ -110,4 +113,15 @@ public abstract class ComponentBase(
         return node?.dispatchEvent(event) ?: true
     }
 
+    public open fun onInsert() {
+        console.log("onInsert $componentId")
+    }
+
+    public open fun onRemove() {
+        console.log("onRemove $componentId")
+    }
+
+    public companion object {
+        protected var counter: Int = 0
+    }
 }

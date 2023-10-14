@@ -23,9 +23,12 @@
 package dev.kilua.core
 
 public interface Component {
+    public val componentId: Int
+
     public var visible: Boolean
     public val parent: Component?
     public val children: List<Component>
+
     public fun show() {
         visible = true
     }
@@ -45,4 +48,5 @@ public interface Component {
         renderToStringBuilder(builder)
         return builder.toString()
     }
+
 }
