@@ -20,6 +20,25 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+/**
+ * Utility extension function to format a Double with a given number of digits after the decimal point.
+ */
+public expect fun Double.toFixed(size: Int = 2): String
+
+/**
+ * Utility extension function to convert string from kebab-case to camelCase.
+ */
+public fun String.toCamelCase(): String {
+    return this.replace(Regex("(-\\w)")) {
+        it.value.drop(1).uppercase()
+    }
+}
+
+/**
+ * Utility extension function to convert string from camelCase to kebab-case.
+ */
+public fun String.toKebabCase(): String {
+    return this.replace(Regex("(?<=.)[A-Z]"), "-$0").lowercase()
+}

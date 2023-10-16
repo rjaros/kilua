@@ -20,6 +20,30 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+import dev.kilua.SimpleSpec
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+class FormatSpec : SimpleSpec {
+
+    @Test
+    fun toFixed() {
+        val formatted = 123.346.toFixed(2)
+        assertEquals("123.35", formatted)
+    }
+
+    @Test
+    fun toCamelCase() {
+        val marginTop = "margin-top".toCamelCase()
+        assertEquals("marginTop", marginTop, "Should convert a kebab-case string to camelCase")
+    }
+
+    @Test
+    fun toKebabCase() {
+        val marginTop = "marginTop".toKebabCase()
+        assertEquals("margin-top", marginTop, "Should convert a camelCase string to kebab-case")
+    }
+
+}

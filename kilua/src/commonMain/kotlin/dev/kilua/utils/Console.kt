@@ -20,6 +20,21 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+/**
+ * JavaScript console class
+ */
+public external class Console {
+    public fun log(message: String?)
+}
+
+/**
+ * Log to JavaScript console
+ */
+public expect fun Console.log(ob: Any?)
+
+/**
+ * JavaScript console object
+ */
+public external val console: Console

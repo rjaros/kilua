@@ -20,6 +20,12 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+internal external class NumberWithToFixed : JsAny {
+    fun toFixed(digits: Int): String
+}
+
+public actual fun Double.toFixed(size: Int): String {
+    return this.toJsNumber().unsafeCast<NumberWithToFixed>().toFixed(size)
+}

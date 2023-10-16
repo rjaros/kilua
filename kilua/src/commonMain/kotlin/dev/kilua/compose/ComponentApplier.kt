@@ -20,6 +20,32 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.compose
+
+import androidx.compose.runtime.AbstractApplier
+import dev.kilua.core.ComponentBase
+
+internal class ComponentApplier(
+    root: ComponentBase
+) : AbstractApplier<ComponentBase>(root) {
+
+    override fun insertTopDown(index: Int, instance: ComponentBase) {
+        //  Ignored as the tree is built top-down.
+    }
+
+    override fun insertBottomUp(index: Int, instance: ComponentBase) {
+        current.insertChild(index, instance)
+    }
+
+    override fun remove(index: Int, count: Int) {
+        current.removeChildren(index, count)
+    }
+
+    override fun move(from: Int, to: Int, count: Int) {
+        current.moveChildren(from, to, count)
+    }
+
+    override fun onClear() {
+        root.removeAll()
+    }
+}

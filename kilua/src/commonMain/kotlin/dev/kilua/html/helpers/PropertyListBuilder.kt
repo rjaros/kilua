@@ -20,6 +20,28 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.html.helpers
+
+import dev.kilua.utils.nativeListOf
+import kotlin.reflect.KProperty
+
+public interface PropertyListBuilder {
+    public fun add(vararg property: KProperty<*>)
+    public fun addAll(properties: List<KProperty<*>>) {
+        properties.forEach { add(it) }
+    }
+}
+
+internal class PropertyListBuilderImpl : PropertyListBuilder {
+
+    val properties = nativeListOf<KProperty<*>>()
+
+    override fun add(vararg property: KProperty<*>) {
+        property.forEach {
+            properties.add(it)
+        }
+    }
+}
+
+public fun buildPropertyList(delegate: (builder: PropertyListBuilder) -> Unit): List<KProperty<*>> =
+    PropertyListBuilderImpl().also { delegate(it) }.properties

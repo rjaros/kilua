@@ -20,6 +20,9 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+@Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+public actual inline fun <T> Any?.cast(): T {
+    return this as T
+}

@@ -19,7 +19,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package dev.kilua
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+/**
+ * Helper interface for Hot Module Replacement (HMR).
+ */
+public external interface Module {
+    public val hot: Hot?
+}
+
+/**
+ * Helper interface for Hot Module Replacement (HMR).
+ */
+public external interface HmrState {
+    public var appState: String?
+}
+
+/**
+ * Helper interface for Hot Module Replacement (HMR).
+ */
+public external interface Hot {
+    public val data: HmrState
+
+    public fun accept()
+    public fun accept(dependency: String, callback: () -> Unit)
+
+    public fun dispose(callback: (data: HmrState) -> Unit)
+}

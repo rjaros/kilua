@@ -19,7 +19,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package dev.kilua.state
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+/**
+ * An interface for observable state.
+ */
+public interface ObservableState<S> {
+    /**
+     * Get current state.
+     */
+    public val value: S
+
+    /**
+     * Subscribe for the state change notifications. Calls the observer with the current state.
+     */
+    public fun subscribe(observer: (S) -> Unit): () -> Unit
+
+}
+
+/**
+ * An interface for mutable observable state.
+ */
+public interface MutableState<S> : ObservableState<S> {
+    /**
+     * Set current state.
+     */
+    public override var value: S
+}

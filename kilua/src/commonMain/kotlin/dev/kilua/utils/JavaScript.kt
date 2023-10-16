@@ -20,6 +20,19 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+public expect class Object
+
+public expect fun obj(): Object
+
+public expect val isDom: Boolean
+
+public expect annotation class JsNonModule()
+
+@Suppress("NOTHING_TO_INLINE")
+public inline fun <T> useCssModule(cssModule: T) {
+    // empty body
+}
+
+public expect fun size(array: Object): Int

@@ -20,6 +20,11 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+public actual open class NativeList<E>(private val internalList: MutableList<E> = mutableListOf()) :
+    MutableList<E> by internalList
+
+public actual fun <E> nativeListOf(vararg elements: E): MutableList<E> {
+    return NativeList(mutableListOf(*elements))
+}

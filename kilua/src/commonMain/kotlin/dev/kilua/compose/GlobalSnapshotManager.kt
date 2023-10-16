@@ -19,7 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package dev.kilua.compose
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+import androidx.compose.runtime.snapshots.Snapshot
+import kotlinx.atomicfu.atomic
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
+
+internal object GlobalSnapshotManager {
+    private val started = atomic(false)
+    private val scheduleScope = CoroutineScope(PromiseDispatcher() + SupervisorJob())
+
+    fun ensureStarted() {
+        if (started.compareAndSet(expect = false, update = true)) {
+            val channel = Channel<Unit>(Channel.CONFLATED)
+            scheduleScope.launch {
+                channel.consumeEach {
+                    Snapshot.sendApplyNotifications()
+                }
+            }
+            Snapshot.registerGlobalWriteObserver {
+                channel.trySend(Unit)
+            }
+        }
+    }
+}

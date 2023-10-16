@@ -20,6 +20,18 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+public actual external class Object : JsAny
+
+@JsFun("() => ( {} )")
+public actual external fun obj(): Object
+
+@JsFun("ref => typeof document !== 'undefined'")
+private external fun isDom(): Boolean
+
+public actual val isDom: Boolean by lazy { isDom() }
+
+public actual annotation class JsNonModule actual constructor()
+
+public actual fun size(array: Object): Int = array.cast<JsArray<*>>().length

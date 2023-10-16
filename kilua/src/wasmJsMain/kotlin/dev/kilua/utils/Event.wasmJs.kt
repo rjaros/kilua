@@ -20,6 +20,13 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+import org.w3c.dom.AddEventListenerOptions
+
+public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
+    return buildAddEventListenerOptionsInternal(signal)
+}
+
+@JsFun("(signal) => ({ 'signal': signal })")
+internal external fun buildAddEventListenerOptionsInternal(signal: AbortSignal): AddEventListenerOptions

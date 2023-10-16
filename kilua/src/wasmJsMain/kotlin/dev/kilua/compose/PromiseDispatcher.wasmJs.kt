@@ -20,6 +20,19 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.compose
+
+import dev.kilua.utils.obj
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Runnable
+import kotlin.coroutines.CoroutineContext
+import kotlin.js.Promise
+
+internal actual class PromiseDispatcher : CoroutineDispatcher() {
+    actual override fun dispatch(context: CoroutineContext, block: Runnable) {
+        Promise.resolve(obj()).then {
+            block.run()
+            obj()
+        }
+    }
+}

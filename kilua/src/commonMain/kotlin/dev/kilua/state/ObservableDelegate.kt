@@ -20,6 +20,30 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.state
+
+import dev.kilua.utils.nativeListOf
+
+/**
+ * The observable delegate class.
+ */
+public open class ObservableDelegate<S> {
+    protected val observers: MutableList<(S) -> Unit> = nativeListOf()
+
+    public fun notifyObservers(value: S) {
+        val copy = observers.map { it }
+        copy.forEach {
+            if (observers.contains(it)) {
+                it(value)
+            }
+        }
+    }
+
+    public fun subscribe(currentValue: S, observer: (S) -> Unit): () -> Unit {
+        observers.add(observer)
+        observer(currentValue)
+        return {
+            observers.remove(observer)
+        }
+    }
+}

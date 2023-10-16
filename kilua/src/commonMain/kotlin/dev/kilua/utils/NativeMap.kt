@@ -20,6 +20,30 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+public expect class NativeMap<V> : MutableMap<String, V> {
+    override val size: Int
+
+    override fun containsKey(key: String): Boolean
+
+    override fun containsValue(value: V): Boolean
+
+    override fun get(key: String): V?
+
+    override fun isEmpty(): Boolean
+
+    override val entries: MutableSet<MutableMap.MutableEntry<String, V>>
+    override val keys: MutableSet<String>
+    override val values: MutableCollection<V>
+
+    override fun clear()
+
+    override fun put(key: String, value: V): V?
+
+    override fun putAll(from: Map<out String, V>)
+
+    override fun remove(key: String): V?
+}
+
+public expect fun <V> nativeMapOf(vararg pairs: Pair<String, V>): MutableMap<String, V>

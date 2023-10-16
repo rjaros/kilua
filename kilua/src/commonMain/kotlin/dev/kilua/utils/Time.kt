@@ -20,6 +20,25 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.todayIn
+
+public fun today(): LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
+
+public fun hour(): LocalTime {
+    val untrimmedNow: LocalTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).time
+    return LocalTime(untrimmedNow.hour, untrimmedNow.minute)
+}
+
+public fun now(): LocalDateTime {
+    val today = today()
+    val time = hour()
+    return LocalDateTime(today.year, today.monthNumber, today.dayOfMonth, time.hour, time.minute)
+}

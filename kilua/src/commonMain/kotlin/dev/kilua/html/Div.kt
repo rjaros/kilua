@@ -20,6 +20,31 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.html
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.remember
+import dev.kilua.compose.ComponentNode
+import dev.kilua.core.ComponentBase
+import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.RenderConfig
+import org.w3c.dom.HTMLDivElement
+
+public open class Div(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
+    Tag<HTMLDivElement>("div", className, renderConfig)
+
+@Composable
+public fun ComponentBase.div(className: String? = null, content: @Composable Div.() -> Unit = {}): Div {
+    val component = remember { Div(className, renderConfig) }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(className) { updateManagedProperty(Div::className, it) }
+    }, content)
+    return component
+}

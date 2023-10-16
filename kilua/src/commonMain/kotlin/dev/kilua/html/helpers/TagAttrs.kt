@@ -20,6 +20,23 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.html.helpers
+
+import org.w3c.dom.HTMLElement
+
+public interface TagAttrs<E : HTMLElement> {
+    public var id: String?
+    public var title: String?
+    public var tabindex: Int?
+    public var draggable: Boolean?
+
+    public var role: String?
+    public var ariaLabel: String?
+    public var ariaLabelledby: String?
+
+    public fun setAttribute(name: String, value: String?)
+    public fun getAttribute(name: String): String?
+    public fun removeAttribute(name: String)
+
+    public fun elementWithAttrs(element: E?)
+}

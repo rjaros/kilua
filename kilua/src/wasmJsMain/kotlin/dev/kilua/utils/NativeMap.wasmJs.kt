@@ -20,6 +20,11 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+public actual class NativeMap<V>(private val internalMap: MutableMap<String, V> = mutableMapOf()) :
+    MutableMap<String, V> by internalMap
+
+public actual fun <V> nativeMapOf(vararg pairs: Pair<String, V>): MutableMap<String, V> {
+    return NativeMap(mutableMapOf(*pairs))
+}

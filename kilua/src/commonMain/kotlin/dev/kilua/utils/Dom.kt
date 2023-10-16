@@ -20,6 +20,39 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+import kotlinx.browser.window
+
+public object Dom {
+
+    private var tasks = nativeListOf<() -> Unit>()
+
+    private var scheduled = false
+
+    private fun schedule() {
+        if (!scheduled) {
+            scheduled = true
+            window.requestAnimationFrame {
+                runTasks()
+                scheduled = false
+            }
+        }
+    }
+
+    private fun runTasks() {
+        tasks.forEach {
+            try {
+                it()
+            } catch (e: Throwable) {
+                // ignore
+            }
+        }
+        tasks.clear()
+    }
+
+    public fun mutate(task: () -> Unit) {
+        tasks.add(task)
+        schedule()
+    }
+}

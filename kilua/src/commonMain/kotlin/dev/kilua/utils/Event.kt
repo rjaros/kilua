@@ -20,6 +20,15 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.utils
+
+import org.w3c.dom.AddEventListenerOptions
+
+public external class AbortSignal
+
+public external class AbortController {
+    public val signal: AbortSignal
+    public fun abort()
+}
+
+public expect fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions

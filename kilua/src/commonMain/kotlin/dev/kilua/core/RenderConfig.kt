@@ -20,6 +20,25 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+
+package dev.kilua.core
+
+public interface RenderConfig {
+    public val isDom: Boolean
+}
+
+public class DefaultRenderConfig : RenderConfig {
+    override val isDom: Boolean = dev.kilua.utils.isDom
+}
+
+public class DomRenderConfig : RenderConfig {
+    init {
+        require(dev.kilua.utils.isDom) { "DOM rendering is not supported in this environment" }
+    }
+
+    override val isDom: Boolean = true
+}
+
+public class StringRenderConfig : RenderConfig {
+    override val isDom: Boolean = false
+}

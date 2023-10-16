@@ -20,6 +20,33 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.core
+
+public interface Component {
+    public val componentId: Int
+
+    public var visible: Boolean
+    public val parent: Component?
+    public val children: List<Component>
+
+    public fun show() {
+        visible = true
+    }
+
+    public fun hide() {
+        visible = false
+    }
+
+    public fun toggle() {
+        visible = !visible
+    }
+
+    public fun renderToStringBuilder(builder: StringBuilder)
+
+    public fun renderToString(): String {
+        val builder = StringBuilder()
+        renderToStringBuilder(builder)
+        return builder.toString()
+    }
+
+}

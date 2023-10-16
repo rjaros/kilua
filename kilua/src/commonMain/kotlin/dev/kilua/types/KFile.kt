@@ -20,6 +20,13 @@
  * SOFTWARE.
  */
 
-config.module.rules.push({test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, type: 'asset'});
-config.module.rules.push({test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, type: 'asset/resource'});
+package dev.kilua.types
+
+import kotlinx.serialization.Serializable
+
+@Serializable
+public data class KFile(
+    val name: String,
+    val size: Int,
+    val content: String? = null
+)
