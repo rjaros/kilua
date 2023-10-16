@@ -21,7 +21,6 @@
  */
 
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NoLiveLiterals
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +28,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.compose.root
+import dev.kilua.form.InputType
+import dev.kilua.form.number.range
+import dev.kilua.form.number.spinner
+import dev.kilua.form.text.WrapType
+import dev.kilua.form.text.text
+import dev.kilua.form.text.textArea
+import dev.kilua.form.time.date
+import dev.kilua.form.time.dateTime
+import dev.kilua.form.time.time
 import dev.kilua.html.Background
 import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
@@ -39,16 +47,20 @@ import dev.kilua.html.Div
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.tag
-import dev.kilua.html.text
+import dev.kilua.html.textNode
 import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.console
-import dev.kilua.utils.log
+import dev.kilua.utils.hour
+import dev.kilua.utils.now
 import dev.kilua.utils.obj
 import dev.kilua.utils.px
+import dev.kilua.utils.today
 import dev.kilua.utils.useCssModule
 import kotlinx.browser.window
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.minus
 import org.w3c.dom.Text
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
@@ -67,9 +79,125 @@ public class App : Application() {
     }
 
     override fun start() {
+        val today = today()
+        val now = now()
+        val hour = hour()
 
         root("root") {
             console.log("recomposing")
+
+            text(type = InputType.File) {
+                onChange {
+                    console.log("$value")
+                }
+            }
+            div()
+
+            val time = time(hour, step = 1) {
+                onChange {
+                    console.log("time change $value")
+                }
+            }
+            button("test time") {
+                onClick {
+                    console.log(time.value.toString())
+                }
+            }
+            button("test2 time up").onClick {
+                time.stepUp()
+            }
+            button("test2 time down").onClick {
+                time.stepDown()
+            }
+            div()
+
+            val dateTime = dateTime(now) {
+                onChange {
+                    console.log("dateTime change $value")
+                }
+            }
+            button("test dateTime") {
+                onClick {
+                    console.log(dateTime.value.toString())
+                }
+            }
+            button("test2 dateTime up").onClick {
+                dateTime.stepUp()
+            }
+            button("test2 dateTime down").onClick {
+                dateTime.stepDown()
+            }
+
+            val date = date(today) {
+                defaultValue = today.minus(2, DateTimeUnit.DAY)
+                onChange {
+                    console.log("date change $value")
+                }
+            }
+            button("test date") {
+                onClick {
+                    console.log(date.value.toString())
+                }
+            }
+            button("test2 date up").onClick {
+                date.stepUp()
+            }
+            button("test2 date down").onClick {
+                date.stepDown()
+            }
+
+            var counter by remember { mutableStateOf(0) }
+            div {
+                +"$counter"
+            }
+
+            val range = range(counter, min = 10, max = 20) {
+                onChange {
+                    console.log("range change $value")
+                }
+            }
+            button("test range") {
+                onClick {
+                    console.log("" + (range.value!!.toInt() + 10))
+                    range.stepUp()
+                }
+            }
+
+            val spin = spinner(counter, min = 10, max = 20) {
+                onChange {
+                    console.log("spinner change $value")
+                }
+            }
+            spin.subscribe { console.log("spinner $it") }
+            button("test spinner") {
+                onClick {
+                    spin.stepUp()
+                }
+            }
+            button("test spinner2") {
+                onClick {
+                    console.log("" + spin.value)
+                }
+            }
+
+
+            var wrap by remember { mutableStateOf(WrapType.Soft) }
+
+            val ta = textArea("$wrap", cols = 30, rows = 10) {
+                autofocus = true
+                this.wrap = wrap
+            }
+            button("test ta") {
+                onClick {
+                    console.log(ta.value)
+                }
+            }
+            button("test ta2") {
+                onClick {
+                    wrap = WrapType.Hard
+                }
+            }
+
             val x = tag("address", "address3") {
                 +"address2"
                 setStyle("color", "red")
@@ -137,23 +265,23 @@ public class App : Application() {
                 draggable = true
                 setAttribute("aria-label", "Ala ma kota")
             }
-            val x2 = text("Ala ma kota")
+            val x2 = textNode("Ala ma kota")
             console.log("x")
-            console.log(x2)
+            console.log(x2.text)
             button(type = type) {
                 +"test span"
                 if (type == ButtonType.Button) {
                     DisposableEffect("type") {
                         element
                         console.log("back to button")
-                        onDispose {  }
+                        onDispose { }
                     }
                 }
                 onEvent<MouseEvent>("click") {
-                    disabled = !disabled
+                    disabled = !(disabled ?: false)
                     type = ButtonType.Submit
                     window.setTimeout({
-                        disabled = !disabled
+                        disabled = !(disabled ?: false)
                         type = ButtonType.Button
                         obj()
                     }, 1000)

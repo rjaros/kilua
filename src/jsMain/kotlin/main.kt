@@ -20,37 +20,34 @@
  * SOFTWARE.
  */
 
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.NoLiveLiterals
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.Hot
 import dev.kilua.compose.root
+import dev.kilua.form.number.range
+import dev.kilua.form.number.spinner
+import dev.kilua.form.text.WrapType
+import dev.kilua.form.text.text
+import dev.kilua.form.text.textArea
 import dev.kilua.html.Background
-import dev.kilua.html.Border
-import dev.kilua.html.BorderStyle
 import dev.kilua.html.ButtonType
-import dev.kilua.html.Col
 import dev.kilua.html.Color
-import dev.kilua.html.Div
 import dev.kilua.html.button
 import dev.kilua.html.div
-import dev.kilua.html.tag
-import dev.kilua.html.text
+import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.console
 import dev.kilua.utils.log
-import dev.kilua.utils.px
+import dev.kilua.utils.obj
 import dev.kilua.utils.useCssModule
 import kotlinx.browser.window
-import org.w3c.dom.Text
-import org.w3c.dom.events.Event
+import kotlinx.coroutines.delay
 import kotlin.js.Date
 import kotlin.math.PI
 import kotlin.math.floor
@@ -70,6 +67,121 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+
+            var counter by remember { mutableStateOf(0) }
+            div {
+                +"$counter"
+            }
+
+            val range = range(counter, min = 10, max = 20) {
+                onChange {
+                    console.log("range change $value")
+                }
+            }
+            button("test range") {
+                onClick {
+                    console.log(range.value)
+                    range.stepUp()
+                }
+            }
+
+            val spin = spinner(counter, min = 10, max = 20) {
+                onChange {
+                    console.log("spinner change $value")
+                }
+            }
+            button("test spinner") {
+                onClick {
+                    spin.stepUp()
+                }
+            }
+
+
+            var wrap by remember { mutableStateOf(WrapType.Soft) }
+
+            val ta = textArea("$wrap", cols = 30, rows = 10) {
+                autofocus = true
+                this.wrap = wrap
+            }
+            button("test ta") {
+                onClick {
+                    console.log(ta.value)
+                }
+            }
+            button("test ta2") {
+                onClick {
+                    wrap = WrapType.Hard
+                }
+            }
+
+            var type by remember { mutableStateOf(ButtonType.Button) }
+
+            val i1 = text(type.value, className = "test")
+            i1.subscribe {
+                console.log("sub $it")
+            }
+
+            val b2 = button(type) {
+                +"test span"
+                onClickLaunch {
+                    console.log("abc")
+                    delay(1000)
+                    console.log("def")
+                    disabled = !(disabled ?: false)
+                    type = ButtonType.Submit
+                    i1.className = "test2 test3"
+                    window.setTimeout({
+                        disabled = !(disabled ?: false)
+                        type = ButtonType.Button
+                        i1.className = "test3"
+                        obj()
+                    }, 2000)
+                }
+            }
+            if (type != ButtonType.Submit) {
+                button("test b2") {
+                    onClick {
+                        console.log(i1.value)
+                    }
+                }
+            }
+            button("set b2") {
+                onClick {
+                    this@root.dispose()
+                }
+            }
+
+            /*val inp = input {
+                defaultValue = "ala ma kota"
+                value = "test"
+                autocomplete = Autocomplete.On
+            }
+            button("get value") {
+                onClick {
+                    console.log(inp.value)
+                }
+            }
+            button("set value") {
+                onClick {
+                    inp.value = "new value"
+                }
+            }
+            button("set null") {
+                onClick {
+                    inp.value = null
+                }
+            }
+            button("set external value") {
+                onClick {
+                    inp.element.value = "ext"
+                }
+            }
+            button("set external null") {
+                onClick {
+                    inp.element.value = ""
+                }
+            }
+
             val x = tag("address", "address3") {
                 +"address23"
                 colorName = Col.Blue
@@ -97,7 +209,6 @@ public class App : Application() {
             var oddSize by remember { mutableStateOf(1) }
             val tn by remember { mutableStateOf("address") }
             var list by remember { mutableStateOf(listOf("cat", "dog", "mouse")) }
-            val type by remember { mutableStateOf(ButtonType.Button) }
 
             div {
                 for (name in list) {
@@ -143,18 +254,9 @@ public class App : Application() {
                 draggable = true
                 setAttribute("aria-label", "Ala ma kota")
             }
-            val x2 = text("Ala ma kota")
+            val x2 = textNode("Ala ma kota")
             console.log("x")
             console.log(x2)
-            button(type = type) {
-                +"test span"
-                onClick {
-                    disabled = !disabled
-                    window.setTimeout({
-                        disabled = !disabled
-                    }, 1000)
-                }
-            }
 
             if (size % 2 == 0) {
                 div {
@@ -232,7 +334,7 @@ public class App : Application() {
                     element.firstChild?.unsafeCast<Text>()?.data = "ala ma kota"
                     onDispose { }
                 }
-            }
+            }*/
             /*            var countDiv by remember { mutableStateOf(0) }
                         button(if (countDiv == 0 || countDiv == 3) null else "$countDiv", {
                             println("empty button")

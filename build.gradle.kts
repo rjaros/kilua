@@ -58,12 +58,14 @@ val dateTimeVersion: String by project
 val cssLoaderVersion: String by project
 val styleLoaderVersion: String by project
 val importsLoaderVersion: String by project
+val splitjsVersion: String by project
 
 rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
     rootProject.the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().apply {
         resolution("css-loader", cssLoaderVersion)
         resolution("style-loader", styleLoaderVersion)
         resolution("imports-loader", importsLoaderVersion)
+        resolution("split.js", splitjsVersion)
     }
 }
 
@@ -126,6 +128,7 @@ kotlin {
                 implementation(npm("css-loader", cssLoaderVersion))
                 implementation(npm("style-loader", styleLoaderVersion))
                 implementation(npm("imports-loader", importsLoaderVersion))
+                implementation(npm("split.js", splitjsVersion))
             }
         }
         val commonTest by getting {
