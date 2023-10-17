@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "kilua"
 include(":kilua")
+include(":examples:playground")
