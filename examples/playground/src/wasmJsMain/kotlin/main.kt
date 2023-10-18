@@ -25,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
+import dev.kilua.CoreModule
 import dev.kilua.compose.root
 import dev.kilua.form.number.range
 import dev.kilua.html.Border
@@ -103,5 +104,5 @@ public class App : Application() {
 }
 
 public fun main() {
-    startApplication(::App)
+    startApplication(::App, null, CoreModule)
 }

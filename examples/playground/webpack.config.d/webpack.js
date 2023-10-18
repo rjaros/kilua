@@ -1,4 +1,3 @@
-config.resolve.modules.push("../../../../kilua/src/wasmJsMain/js");
 config.resolve.modules.push("../../processedResources/js/main");
 config.resolve.modules.push("../../processedResources/wasmJs/main");
 
