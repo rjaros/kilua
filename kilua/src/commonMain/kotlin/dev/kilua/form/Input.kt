@@ -43,7 +43,7 @@ public abstract class Input<T : Any>(
 
     protected val observableDelegate: ObservableDelegate<T?> = ObservableDelegate()
 
-    public override var value: T? by managedProperty(
+    public override var value: T? by updatingProperty(
         value,
         skipUpdate,
         notifyFunction = { observableDelegate.notifyObservers(it) }) {
@@ -52,11 +52,11 @@ public abstract class Input<T : Any>(
         }
     }
 
-    public open var type: InputType by managedProperty(type, skipUpdate) {
+    public open var type: InputType by updatingProperty(type, skipUpdate) {
         element.type = it.value
     }
 
-    public override var name: String? by managedProperty(name, skipUpdate) {
+    public override var name: String? by updatingProperty(name, skipUpdate) {
         if (it != null) {
             element.name = it
         } else {
@@ -64,7 +64,7 @@ public abstract class Input<T : Any>(
         }
     }
 
-    public var maxlength: Int? by managedProperty(maxlength, skipUpdate) {
+    public var maxlength: Int? by updatingProperty(maxlength, skipUpdate) {
         if (it != null) {
             element.maxLength = it
         } else {
@@ -72,7 +72,7 @@ public abstract class Input<T : Any>(
         }
     }
 
-    public var placeholder: String? by managedProperty(placeholder, skipUpdate) {
+    public var placeholder: String? by updatingProperty(placeholder, skipUpdate) {
         if (it != null) {
             element.placeholder = it
         } else {
@@ -80,7 +80,7 @@ public abstract class Input<T : Any>(
         }
     }
 
-    public override var disabled: Boolean? by managedProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -88,7 +88,7 @@ public abstract class Input<T : Any>(
         }
     }
 
-    public open var autocomplete: Autocomplete? by unmanagedProperty(skipUpdate = skipUpdate) {
+    public open var autocomplete: Autocomplete? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.autocomplete = it.value
         } else {
@@ -96,7 +96,7 @@ public abstract class Input<T : Any>(
         }
     }
 
-    public open var autofocus: Boolean? by unmanagedProperty(skipUpdate = skipUpdate) {
+    public open var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.autofocus = it
         } else {
@@ -104,7 +104,7 @@ public abstract class Input<T : Any>(
         }
     }
 
-    public open var readonly: Boolean? by unmanagedProperty(skipUpdate = skipUpdate) {
+    public open var readonly: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.readOnly = it
         } else {
@@ -112,7 +112,7 @@ public abstract class Input<T : Any>(
         }
     }
 
-    public open var list: String? by unmanagedProperty(skipUpdate = skipUpdate) {
+    public open var list: String? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.setAttribute("list", it)
         } else {

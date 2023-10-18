@@ -55,11 +55,11 @@ public open class Button(
 ) :
     Tag<HTMLButtonElement>("button", className, renderConfig) {
 
-    public open var type: ButtonType by managedProperty(type, skipUpdate) {
+    public open var type: ButtonType by updatingProperty(type, skipUpdate) {
         element.type = it.value
     }
 
-    public open var disabled: Boolean? by managedProperty(disabled, skipUpdate) {
+    public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -103,9 +103,9 @@ public fun ComponentBase.button(
         }
     }
     ComponentNode(component, {
-        set(type) { updateManagedProperty(Button::type, it) }
-        set(disabled) { updateManagedProperty(Button::disabled, it) }
-        set(className) { updateManagedProperty(Button::className, it) }
+        set(type) { updateProperty(Button::type, it) }
+        set(disabled) { updateProperty(Button::disabled, it) }
+        set(className) { updateProperty(Button::className, it) }
     }, content)
     return component
 }

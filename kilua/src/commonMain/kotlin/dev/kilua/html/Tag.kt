@@ -79,7 +79,7 @@ public open class Tag<E : HTMLElement>(
 
     protected val skipUpdate: Boolean = node == null
 
-    public open var className: String? by managedProperty(className, skipUpdate) {
+    public open var className: String? by updatingProperty(className, skipUpdate) {
         updateElementClassList(internalClassName, it)
     }
 
@@ -181,7 +181,7 @@ public fun <E : HTMLElement> ComponentBase.tag(
             }
         }
         ComponentNode(component, {
-            set(className) { updateManagedProperty(Tag<HTMLElement>::className, it) }
+            set(className) { updateProperty(Tag<HTMLElement>::className, it) }
         }, content)
         component
     }

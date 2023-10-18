@@ -64,14 +64,14 @@ public open class TextArea(
 
     protected val observableDelegate: ObservableDelegate<String?> = ObservableDelegate()
 
-    public override var value: String? by managedProperty(
+    public override var value: String? by updatingProperty(
         value,
         skipUpdate,
         notifyFunction = { observableDelegate.notifyObservers(it) }) {
         element.value = it ?: ""
     }
 
-    public var cols: Int? by managedProperty(cols, skipUpdate) {
+    public var cols: Int? by updatingProperty(cols, skipUpdate) {
         if (it != null) {
             element.cols = it
         } else {
@@ -79,7 +79,7 @@ public open class TextArea(
         }
     }
 
-    public var rows: Int? by managedProperty(rows, skipUpdate) {
+    public var rows: Int? by updatingProperty(rows, skipUpdate) {
         if (it != null) {
             element.rows = it
         } else {
@@ -87,7 +87,7 @@ public open class TextArea(
         }
     }
 
-    public override var name: String? by managedProperty(name, skipUpdate) {
+    public override var name: String? by updatingProperty(name, skipUpdate) {
         if (it != null) {
             element.name = it
         } else {
@@ -95,7 +95,7 @@ public open class TextArea(
         }
     }
 
-    public var maxlength: Int? by managedProperty(maxlength, skipUpdate) {
+    public var maxlength: Int? by updatingProperty(maxlength, skipUpdate) {
         if (it != null) {
             element.maxLength = it
         } else {
@@ -103,7 +103,7 @@ public open class TextArea(
         }
     }
 
-    public var placeholder: String? by managedProperty(placeholder, skipUpdate) {
+    public var placeholder: String? by updatingProperty(placeholder, skipUpdate) {
         if (it != null) {
             element.placeholder = it
         } else {
@@ -111,7 +111,7 @@ public open class TextArea(
         }
     }
 
-    public override var disabled: Boolean? by managedProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -119,7 +119,7 @@ public open class TextArea(
         }
     }
 
-    public open var autofocus: Boolean? by unmanagedProperty(skipUpdate = skipUpdate) {
+    public open var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         console.log("set autofocus $it")
         if (it != null) {
             element.autofocus = it
@@ -128,7 +128,7 @@ public open class TextArea(
         }
     }
 
-    public open var readonly: Boolean? by unmanagedProperty(skipUpdate = skipUpdate) {
+    public open var readonly: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.readOnly = it
         } else {
@@ -136,7 +136,7 @@ public open class TextArea(
         }
     }
 
-    public open var wrap: WrapType? by unmanagedProperty(skipUpdate = skipUpdate) {
+    public open var wrap: WrapType? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.wrap = it.value
         } else {
@@ -224,14 +224,14 @@ public fun ComponentBase.textArea(
         }
     }
     ComponentNode(component, {
-        set(value) { updateManagedProperty(TextArea::value, it) }
-        set(cols) { updateManagedProperty(TextArea::cols, it) }
-        set(rows) { updateManagedProperty(TextArea::rows, it) }
-        set(name) { updateManagedProperty(TextArea::name, it) }
-        set(maxlength) { updateManagedProperty(TextArea::maxlength, it) }
-        set(placeholder) { updateManagedProperty(TextArea::placeholder, it) }
-        set(disabled) { updateManagedProperty(TextArea::disabled, it) }
-        set(className) { updateManagedProperty(TextArea::className, it) }
+        set(value) { updateProperty(TextArea::value, it) }
+        set(cols) { updateProperty(TextArea::cols, it) }
+        set(rows) { updateProperty(TextArea::rows, it) }
+        set(name) { updateProperty(TextArea::name, it) }
+        set(maxlength) { updateProperty(TextArea::maxlength, it) }
+        set(placeholder) { updateProperty(TextArea::placeholder, it) }
+        set(disabled) { updateProperty(TextArea::disabled, it) }
+        set(className) { updateProperty(TextArea::className, it) }
     }, content)
     return component
 }

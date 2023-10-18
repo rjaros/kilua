@@ -43,7 +43,7 @@ public open class TagAttrsDelegate<E : HTMLElement>(
         }
     }
 
-    override var id: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var id: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.id = it
         } else {
@@ -51,7 +51,7 @@ public open class TagAttrsDelegate<E : HTMLElement>(
         }
     }
 
-    override var title: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var title: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.title = it
         } else {
@@ -59,7 +59,7 @@ public open class TagAttrsDelegate<E : HTMLElement>(
         }
     }
 
-    override var tabindex: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var tabindex: Int? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.tabIndex = it
         } else {
@@ -67,7 +67,7 @@ public open class TagAttrsDelegate<E : HTMLElement>(
         }
     }
 
-    override var draggable: Boolean? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var draggable: Boolean? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.draggable = it
         } else {
@@ -75,7 +75,7 @@ public open class TagAttrsDelegate<E : HTMLElement>(
         }
     }
 
-    override var role: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var role: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.setAttribute("role", it)
         } else {
@@ -83,7 +83,7 @@ public open class TagAttrsDelegate<E : HTMLElement>(
         }
     }
 
-    override var ariaLabel: String? by unmanagedProperty(null, skipUpdates) {
+    override var ariaLabel: String? by updatingProperty(null, skipUpdates) {
         if (it != null) {
             element.setAttribute("aria-label", it)
         } else {
@@ -91,7 +91,7 @@ public open class TagAttrsDelegate<E : HTMLElement>(
         }
     }
 
-    override var ariaLabelledby: String? by unmanagedProperty(null, skipUpdates) {
+    override var ariaLabelledby: String? by updatingProperty(null, skipUpdates) {
         if (it != null) {
             element.setAttribute("aria-labelledby", it)
         } else {

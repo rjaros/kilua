@@ -44,7 +44,7 @@ public fun ComponentBase.div(className: String? = null, content: @Composable Div
         }
     }
     ComponentNode(component, {
-        set(className) { updateManagedProperty(Div::className, it) }
+        set(className) { updateProperty(Div::className, it) }
     }, content)
     return component
 }

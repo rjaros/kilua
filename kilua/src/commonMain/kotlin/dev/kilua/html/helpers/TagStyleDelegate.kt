@@ -43,7 +43,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var width: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var width: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.width = it.asString()
         } else {
@@ -51,7 +51,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var minWidth: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var minWidth: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.minWidth = it.asString()
         } else {
@@ -59,7 +59,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var maxWidth: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var maxWidth: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.maxWidth = it.asString()
         } else {
@@ -67,7 +67,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var height: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var height: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.height = it.asString()
         } else {
@@ -75,7 +75,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var minHeight: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var minHeight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.minHeight = it.asString()
         } else {
@@ -83,7 +83,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var maxHeight: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var maxHeight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.maxHeight = it.asString()
         } else {
@@ -91,7 +91,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var display: Display? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var display: Display? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.display = it.value
         } else {
@@ -99,7 +99,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var position: Position? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var position: Position? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.position = it.value
         } else {
@@ -107,7 +107,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var top: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var top: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.top = it.asString()
         } else {
@@ -115,7 +115,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var left: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var left: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.left = it.asString()
         } else {
@@ -123,7 +123,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var right: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var right: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.right = it.asString()
         } else {
@@ -131,7 +131,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var bottom: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var bottom: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.bottom = it.asString()
         } else {
@@ -139,7 +139,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var zIndex: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var zIndex: Int? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.zIndex = it.toString()
         } else {
@@ -147,7 +147,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var overflow: Overflow? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var overflow: Overflow? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("overflow", it.value)
         } else {
@@ -155,7 +155,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var overflowX: Overflow? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var overflowX: Overflow? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.overflowX = it.value
         } else {
@@ -163,7 +163,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var overflowY: Overflow? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var overflowY: Overflow? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.overflowY = it.value
         } else {
@@ -171,7 +171,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var overflowWrap: OverflowWrap? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var overflowWrap: OverflowWrap? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.overflowWrap = it.value
         } else {
@@ -179,7 +179,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var resize: Resize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var resize: Resize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.resize = it.value
         } else {
@@ -187,7 +187,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var border: Border? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var border: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.border = it.asString()
         } else {
@@ -195,7 +195,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var borderTop: Border? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var borderTop: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.borderTop = it.asString()
         } else {
@@ -203,7 +203,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var borderRight: Border? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var borderRight: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.borderRight = it.asString()
         } else {
@@ -211,7 +211,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var borderBottom: Border? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var borderBottom: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.borderBottom = it.asString()
         } else {
@@ -219,7 +219,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var borderLeft: Border? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var borderLeft: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.borderLeft = it.asString()
         } else {
@@ -227,7 +227,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var margin: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var margin: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.margin = it.asString()
         } else {
@@ -235,7 +235,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var marginTop: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var marginTop: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.marginTop = it.asString()
         } else {
@@ -243,7 +243,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var marginRight: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var marginRight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.marginRight = it.asString()
         } else {
@@ -251,7 +251,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var marginBottom: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var marginBottom: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.marginBottom = it.asString()
         } else {
@@ -259,7 +259,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var marginLeft: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var marginLeft: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.marginLeft = it.asString()
         } else {
@@ -267,7 +267,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var padding: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var padding: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.padding = it.asString()
         } else {
@@ -275,7 +275,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var paddingTop: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var paddingTop: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.paddingTop = it.asString()
         } else {
@@ -283,7 +283,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var paddingRight: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var paddingRight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.paddingRight = it.asString()
         } else {
@@ -291,7 +291,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var paddingBottom: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var paddingBottom: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.paddingBottom = it.asString()
         } else {
@@ -299,7 +299,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var paddingLeft: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var paddingLeft: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.paddingLeft = it.asString()
         } else {
@@ -307,7 +307,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var color: Color? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var color: Color? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.color = it.asString()
         } else {
@@ -348,7 +348,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
     /**
      * Opacity of the current component.
      */
-    override var opacity: Double? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var opacity: Double? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.opacity = it.toString()
         } else {
@@ -357,7 +357,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
     }
 
 
-    override var background: Background? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var background: Background? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.background = it.asString()
         } else {
@@ -365,7 +365,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var direction: Direction? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var direction: Direction? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.direction = it.value
         } else {
@@ -373,7 +373,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var letterSpacing: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var letterSpacing: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.letterSpacing = it.asString()
         } else {
@@ -381,7 +381,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var lineHeight: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var lineHeight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.lineHeight = it.asString()
         } else {
@@ -389,7 +389,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var textAlign: TextAlign? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var textAlign: TextAlign? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.textAlign = it.value
         } else {
@@ -397,7 +397,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var textDecoration: TextDecoration? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var textDecoration: TextDecoration? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.textDecoration = it.asString()
         } else {
@@ -405,7 +405,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var textIndent: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var textIndent: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.textIndent = it.asString()
         } else {
@@ -413,7 +413,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var textShadow: TextShadow? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var textShadow: TextShadow? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.textShadow = it.asString()
         } else {
@@ -421,7 +421,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var textTransform: TextTransform? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var textTransform: TextTransform? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.textTransform = it.value
         } else {
@@ -429,7 +429,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var textOverflow: TextOverflow? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var textOverflow: TextOverflow? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.textOverflow = it.value
         } else {
@@ -437,7 +437,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var unicodeBidi: UnicodeBidi? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var unicodeBidi: UnicodeBidi? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.unicodeBidi = it.value
         } else {
@@ -445,7 +445,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var verticalAlign: VerticalAlign? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var verticalAlign: VerticalAlign? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.verticalAlign = it.value
         } else {
@@ -453,7 +453,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var whiteSpace: WhiteSpace? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var whiteSpace: WhiteSpace? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.whiteSpace = it.value
         } else {
@@ -461,7 +461,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var wordSpacing: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var wordSpacing: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.wordSpacing = it.asString()
         } else {
@@ -469,7 +469,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var fontFamily: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var fontFamily: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.fontFamily = it
         } else {
@@ -477,7 +477,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var fontSize: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var fontSize: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.fontSize = it.asString()
         } else {
@@ -485,7 +485,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var fontStyle: FontStyle? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var fontStyle: FontStyle? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.fontStyle = it.value
         } else {
@@ -493,7 +493,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var fontWeight: FontWeight? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var fontWeight: FontWeight? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.fontWeight = it.value
         } else {
@@ -501,7 +501,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var fontVariant: FontVariant? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var fontVariant: FontVariant? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.fontVariant = it.value
         } else {
@@ -509,7 +509,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var float: CssFloat? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var float: CssFloat? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.cssFloat = it.value
         } else {
@@ -517,7 +517,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var clear: Clear? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var clear: Clear? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.clear = it.value
         } else {
@@ -525,7 +525,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var wordBreak: WordBreak? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var wordBreak: WordBreak? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.wordBreak = it.value
         } else {
@@ -533,7 +533,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var lineBreak: LineBreak? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var lineBreak: LineBreak? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.lineBreak = it.value
         } else {
@@ -541,7 +541,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var cursor: Cursor? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var cursor: Cursor? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.cursor = it.value
         } else {
@@ -549,7 +549,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var flexDirection: FlexDirection? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var flexDirection: FlexDirection? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.flexDirection = it.value
         } else {
@@ -557,7 +557,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var flexWrap: FlexWrap? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var flexWrap: FlexWrap? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.flexWrap = it.value
         } else {
@@ -565,7 +565,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var justifyItems: JustifyItems? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var justifyItems: JustifyItems? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("justify-items", it.value)
         } else {
@@ -573,7 +573,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var justifyContent: JustifyContent? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var justifyContent: JustifyContent? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.justifyContent = it.value
         } else {
@@ -581,7 +581,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var alignItems: AlignItems? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var alignItems: AlignItems? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.alignItems = it.value
         } else {
@@ -589,7 +589,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var alignContent: AlignContent? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var alignContent: AlignContent? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.alignContent = it.value
         } else {
@@ -597,7 +597,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var order: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var order: Int? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.order = it.toString()
         } else {
@@ -605,7 +605,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var flexGrow: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var flexGrow: Int? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.flexGrow = it.toString()
         } else {
@@ -613,7 +613,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var flexShrink: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var flexShrink: Int? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.flexShrink = it.toString()
         } else {
@@ -621,7 +621,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var flexBasis: CssSize? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var flexBasis: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.flexBasis = it.asString()
         } else {
@@ -629,7 +629,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var alignSelf: AlignItems? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var alignSelf: AlignItems? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.alignSelf = it.value
         } else {
@@ -637,7 +637,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var justifySelf: JustifyItems? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var justifySelf: JustifyItems? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("justify-self", it.value)
         } else {
@@ -645,7 +645,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridAutoColumns: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridAutoColumns: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-auto-columns", it)
         } else {
@@ -653,7 +653,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridAutoRows: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridAutoRows: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-auto-rows", it)
         } else {
@@ -661,7 +661,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridAutoFlow: GridAutoFlow? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridAutoFlow: GridAutoFlow? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-auto-flow", it.value)
         } else {
@@ -669,7 +669,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridTemplateColumns: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridTemplateColumns: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-template-columns", it)
         } else {
@@ -677,7 +677,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridTemplateRows: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridTemplateRows: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-template-rows", it)
         } else {
@@ -685,7 +685,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridTemplateAreas: List<String>? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridTemplateAreas: List<String>? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-template-areas", it.joinToString("\n"))
         } else {
@@ -693,7 +693,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridColumnGap: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridColumnGap: Int? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-column-gap", "${it}px")
         } else {
@@ -701,7 +701,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridRowGap: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridRowGap: Int? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-row-gap", "${it}px")
         } else {
@@ -709,7 +709,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridColumnStart: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridColumnStart: Int? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-column-start", it.toString())
         } else {
@@ -717,7 +717,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridRowStart: Int? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridRowStart: Int? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-row-start", it.toString())
         } else {
@@ -725,7 +725,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridColumnEnd: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridColumnEnd: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-column-end", it)
         } else {
@@ -733,7 +733,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridRowEnd: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridRowEnd: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-row-end", it)
         } else {
@@ -741,7 +741,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var gridArea: String? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var gridArea: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.setProperty("grid-area", it)
         } else {
@@ -749,7 +749,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var outline: Outline? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var outline: Outline? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.outline = it.asString()
         } else {
@@ -757,7 +757,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var boxShadow: BoxShadow? by unmanagedProperty {
+    override var boxShadow: BoxShadow? by updatingProperty {
         if (it != null && boxShadowList != null) boxShadowList = null
         if (it != null) {
             elementNullable?.style?.boxShadow = it.asString()
@@ -766,7 +766,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var boxShadowList: List<BoxShadow>? by unmanagedProperty {
+    override var boxShadowList: List<BoxShadow>? by updatingProperty {
         if (it != null && boxShadow != null) boxShadow = null
         val value = it?.joinToString { s -> s.asString() }
         if (value != null) {
@@ -776,7 +776,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var transition: Transition? by unmanagedProperty {
+    override var transition: Transition? by updatingProperty {
         if (it != null && transitionList != null) transitionList = null
         if (it != null) {
             elementNullable?.style?.transition = it.asString()
@@ -785,7 +785,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var transitionList: List<Transition>? by unmanagedProperty {
+    override var transitionList: List<Transition>? by updatingProperty {
         if (it != null && transition != null) transition = null
         val value = it?.joinToString { s -> s.asString() }
         if (value != null) {
@@ -795,7 +795,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var borderRadius: CssSize? by unmanagedProperty {
+    override var borderRadius: CssSize? by updatingProperty {
         if (it != null && borderRadiusList != null) borderRadiusList = null
         if (it != null) {
             elementNullable?.style?.borderRadius = it.asString()
@@ -804,7 +804,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var borderRadiusList: List<CssSize>? by unmanagedProperty {
+    override var borderRadiusList: List<CssSize>? by updatingProperty {
         if (it != null && borderRadius != null) borderRadius = null
         val value = it?.joinToString(" ") { s -> s.asString() }
         if (value != null) {
@@ -814,7 +814,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
         }
     }
 
-    override var listStyle: ListStyle? by unmanagedProperty(skipUpdate = skipUpdates) {
+    override var listStyle: ListStyle? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.style.listStyle = it.asString()
         } else {

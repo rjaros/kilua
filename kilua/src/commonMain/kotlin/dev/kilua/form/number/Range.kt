@@ -33,8 +33,6 @@ import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.form.NumberFormControl
 import dev.kilua.html.helpers.PropertyListBuilder
-import dev.kilua.utils.console
-import dev.kilua.utils.log
 
 internal const val RANGE_DEFAULT_MIN = 0
 internal const val RANGE_DEFAULT_MAX = 100
@@ -52,15 +50,15 @@ public open class Range(
 ) : Input<Number>(value, InputType.Range, name, null, null, disabled, className, renderConfig),
     NumberFormControl {
 
-    public open var min: Int by managedProperty(min, skipUpdate) {
+    public open var min: Int by updatingProperty(min, skipUpdate) {
         element.min = it.toString()
     }
 
-    public open var max: Int by managedProperty(max, skipUpdate) {
+    public open var max: Int by updatingProperty(max, skipUpdate) {
         element.max = it.toString()
     }
 
-    public open var step: Int by managedProperty(step, skipUpdate) {
+    public open var step: Int by updatingProperty(step, skipUpdate) {
         element.step = it.toString()
     }
 
@@ -121,13 +119,13 @@ public fun ComponentBase.range(
         }
     }
     ComponentNode(component, {
-        set(value) { updateManagedProperty(Spinner::value, it) }
-        set(min) { updateManagedProperty(Spinner::min, it) }
-        set(max) { updateManagedProperty(Spinner::max, it) }
-        set(step) { updateManagedProperty(Spinner::step, it) }
-        set(name) { updateManagedProperty(Spinner::name, it) }
-        set(disabled) { updateManagedProperty(Spinner::disabled, it) }
-        set(className) { updateManagedProperty(Spinner::className, it) }
+        set(value) { updateProperty(Spinner::value, it) }
+        set(min) { updateProperty(Spinner::min, it) }
+        set(max) { updateProperty(Spinner::max, it) }
+        set(step) { updateProperty(Spinner::step, it) }
+        set(name) { updateProperty(Spinner::name, it) }
+        set(disabled) { updateProperty(Spinner::disabled, it) }
+        set(className) { updateProperty(Spinner::className, it) }
     }, content)
     return component
 }

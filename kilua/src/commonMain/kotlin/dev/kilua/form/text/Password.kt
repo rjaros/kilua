@@ -59,12 +59,12 @@ public fun ComponentBase.password(
         }
     }
     ComponentNode(component, {
-        set(value) { updateManagedProperty(Password::value, it) }
-        set(name) { updateManagedProperty(Password::name, it) }
-        set(maxlength) { updateManagedProperty(Password::maxlength, it) }
-        set(placeholder) { updateManagedProperty(Password::placeholder, it) }
-        set(disabled) { updateManagedProperty(Password::disabled, it) }
-        set(className) { updateManagedProperty(Password::className, it) }
+        set(value) { updateProperty(Password::value, it) }
+        set(name) { updateProperty(Password::name, it) }
+        set(maxlength) { updateProperty(Password::maxlength, it) }
+        set(placeholder) { updateProperty(Password::placeholder, it) }
+        set(disabled) { updateProperty(Password::disabled, it) }
+        set(className) { updateProperty(Password::className, it) }
     }, content)
     return component
 }

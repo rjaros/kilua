@@ -52,7 +52,7 @@ public open class Date(
 ) : Input<LocalDate>(value, InputType.Date, name, maxlength, placeholder, disabled, className, renderConfig),
     DateFormControl {
 
-    public open var min: LocalDate? by managedProperty(min, skipUpdate) {
+    public open var min: LocalDate? by updatingProperty(min, skipUpdate) {
         if (it != null) {
             element.min = it.toString()
         } else {
@@ -60,7 +60,7 @@ public open class Date(
         }
     }
 
-    public open var max: LocalDate? by managedProperty(max, skipUpdate) {
+    public open var max: LocalDate? by updatingProperty(max, skipUpdate) {
         if (it != null) {
             element.max = it.toString()
         } else {
@@ -68,7 +68,7 @@ public open class Date(
         }
     }
 
-    public open var step: Int by managedProperty(step, skipUpdate) {
+    public open var step: Int by updatingProperty(step, skipUpdate) {
         element.step = it.toString()
     }
 
@@ -147,15 +147,15 @@ public fun ComponentBase.date(
         }
     }
     ComponentNode(component, {
-        set(value) { updateManagedProperty(Date::value, it) }
-        set(min) { updateManagedProperty(Date::min, it) }
-        set(max) { updateManagedProperty(Date::max, it) }
-        set(step) { updateManagedProperty(Date::step, it) }
-        set(name) { updateManagedProperty(Date::name, it) }
-        set(maxlength) { updateManagedProperty(Date::maxlength, it) }
-        set(placeholder) { updateManagedProperty(Date::placeholder, it) }
-        set(disabled) { updateManagedProperty(Date::disabled, it) }
-        set(className) { updateManagedProperty(Date::className, it) }
+        set(value) { updateProperty(Date::value, it) }
+        set(min) { updateProperty(Date::min, it) }
+        set(max) { updateProperty(Date::max, it) }
+        set(step) { updateProperty(Date::step, it) }
+        set(name) { updateProperty(Date::name, it) }
+        set(maxlength) { updateProperty(Date::maxlength, it) }
+        set(placeholder) { updateProperty(Date::placeholder, it) }
+        set(disabled) { updateProperty(Date::disabled, it) }
+        set(className) { updateProperty(Date::className, it) }
     }, content)
     return component
 }

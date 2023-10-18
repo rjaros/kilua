@@ -73,13 +73,13 @@ public fun ComponentBase.text(
         }
     }
     ComponentNode(component, {
-        set(value) { updateManagedProperty(Text::value, it) }
-        set(type) { updateManagedProperty(Text::type, it) }
-        set(name) { updateManagedProperty(Text::name, it) }
-        set(maxlength) { updateManagedProperty(Text::maxlength, it) }
-        set(placeholder) { updateManagedProperty(Text::placeholder, it) }
-        set(disabled) { updateManagedProperty(Text::disabled, it) }
-        set(className) { updateManagedProperty(Text::className, it) }
+        set(value) { updateProperty(Text::value, it) }
+        set(type) { updateProperty(Text::type, it) }
+        set(name) { updateProperty(Text::name, it) }
+        set(maxlength) { updateProperty(Text::maxlength, it) }
+        set(placeholder) { updateProperty(Text::placeholder, it) }
+        set(disabled) { updateProperty(Text::disabled, it) }
+        set(className) { updateProperty(Text::className, it) }
     }, content)
     return component
 }

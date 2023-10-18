@@ -47,11 +47,11 @@ public open class TextNode(
 
     protected val skipUpdate: Boolean = node == null
 
-    public open var text: String by managedProperty(text, skipUpdate) {
+    public open var text: String by updatingProperty(text, skipUpdate) {
         element.data = it
     }
 
-    override var visible: Boolean by unmanagedProperty(true, skipUpdate) {
+    override var visible: Boolean by updatingProperty(true, skipUpdate) {
         element.data = if (it) text else ""
     }
 
@@ -71,7 +71,7 @@ public fun textNode(text: String, content: TextNode.() -> Unit = {}): TextNode {
         }
     }
     ComponentNode(component, {
-        set(text) { updateManagedProperty(TextNode::text, it) }
+        set(text) { updateProperty(TextNode::text, it) }
     }) {
         content(component)
     }

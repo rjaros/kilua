@@ -28,94 +28,59 @@ import kotlin.collections.set
 import kotlin.reflect.KProperty
 
 public open class PropertyDelegate(protected val propertyValues: MutableMap<String, Any>) {
-    protected val managedPropertyNotifyFunctions: MutableMap<String, Any> = nativeMapOf()
-    protected val managedPropertyUpdateFunctions: MutableMap<String, Any> = nativeMapOf()
-    protected val managedPropertyUpdateFunctionsWithOldValue: MutableMap<String, Any> = nativeMapOf()
-    protected val managedPropertiesSet: MutableSet<String> = mutableSetOf()
+    protected val notifyFunctions: MutableMap<String, Any> = nativeMapOf()
+    protected val updateFunctions: MutableMap<String, Any> = nativeMapOf()
+    protected val updateFunctionsWithOldValue: MutableMap<String, Any> = nativeMapOf()
+    protected val propertiesSet: MutableSet<String> = mutableSetOf()
 
     @Suppress("NOTHING_TO_INLINE")
-    protected inline fun <T> managedProperty(
+    protected inline fun <T> updatingProperty(
         skipUpdate: Boolean = false,
         noinline notifyFunction: ((T) -> Unit)? = null,
         noinline updateFunction: ((T) -> Unit)? = null,
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(null, skipUpdate, managed = true, notifyFunction, updateFunction, null)
+        ManagedPropertyDelegateProvider(null, skipUpdate, notifyFunction, updateFunction, null)
 
     @Suppress("NOTHING_TO_INLINE")
-    protected inline fun <T> managedProperty(
+    protected inline fun <T> updatingProperty(
         initialValue: T,
         skipUpdate: Boolean = false,
         noinline notifyFunction: ((T) -> Unit)? = null,
         noinline updateFunction: ((T) -> Unit)? = null
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(initialValue, skipUpdate, managed = true, notifyFunction, updateFunction, null)
+        ManagedPropertyDelegateProvider(initialValue, skipUpdate, notifyFunction, updateFunction, null)
 
     @Suppress("NOTHING_TO_INLINE")
-    protected inline fun <T> unmanagedProperty(
-        skipUpdate: Boolean = false,
-        noinline notifyFunction: ((T) -> Unit)? = null,
-        noinline updateFunction: ((T) -> Unit)? = null
-    ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(null, skipUpdate, managed = false, notifyFunction, updateFunction, null)
-
-    @Suppress("NOTHING_TO_INLINE")
-    protected inline fun <T> unmanagedProperty(
-        initialValue: T,
-        skipUpdate: Boolean = false,
-        noinline notifyFunction: ((T) -> Unit)? = null,
-        noinline updateFunction: ((T) -> Unit)? = null
-    ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(initialValue, skipUpdate, managed = false, notifyFunction, updateFunction, null)
-
-    @Suppress("NOTHING_TO_INLINE")
-    protected inline fun <T> managedPropertyWithOldValue(
+    protected inline fun <T> updatingPropertyWithOldValue(
         skipUpdate: Boolean = false,
         noinline notifyFunction: ((T) -> Unit)? = null,
         noinline updateFunction: ((T, T) -> Unit)? = null
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(null, skipUpdate, managed = true, notifyFunction, null, updateFunction)
+        ManagedPropertyDelegateProvider(null, skipUpdate, notifyFunction, null, updateFunction)
 
     @Suppress("NOTHING_TO_INLINE")
-    protected inline fun <T> managedPropertyWithOldValue(
+    protected inline fun <T> updatingPropertyWithOldValue(
         initialValue: T,
         skipUpdate: Boolean = false,
         noinline notifyFunction: ((T) -> Unit)? = null,
         noinline updateFunction: ((T, T) -> Unit)? = null
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(initialValue, skipUpdate, managed = true, notifyFunction, null, updateFunction)
-
-    @Suppress("NOTHING_TO_INLINE")
-    protected inline fun <T> unmanagedPropertyWithOldValue(
-        skipUpdate: Boolean = false,
-        noinline notifyFunction: ((T) -> Unit)? = null,
-        noinline updateFunction: ((T, T) -> Unit)? = null
-    ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(null, skipUpdate, managed = false, notifyFunction, null, updateFunction)
-
-    @Suppress("NOTHING_TO_INLINE")
-    protected inline fun <T> unmanagedPropertyWithOldValue(
-        initialValue: T,
-        skipUpdate: Boolean = false,
-        noinline notifyFunction: ((T) -> Unit)? = null,
-        noinline updateFunction: ((T, T) -> Unit) = { _, _ -> }
-    ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(initialValue, skipUpdate, managed = false, notifyFunction, null, updateFunction)
+        ManagedPropertyDelegateProvider(initialValue, skipUpdate, notifyFunction, null, updateFunction)
 
     protected inner class ManagedPropertyDelegateProvider<T>(
         private val initialValue: T?,
         private val skipUpdate: Boolean,
-        private val managed: Boolean,
         private val notifyFunction: ((T) -> Unit)?,
         private val updateFunction: ((T) -> Unit)?,
         private val updateFunctionWithOldValue: ((T, T) -> Unit)?,
     ) {
         public operator fun provideDelegate(thisRef: Any?, prop: KProperty<*>): UpdatingPropertyDelegate<T> {
             if (initialValue != null) propertyValues[prop.name] = initialValue
-            notifyFunction?.let { managedPropertyNotifyFunctions[prop.name] = notifyFunction }
-            if (!skipUpdate && managed) {
-                updateFunction?.let { managedPropertyUpdateFunctions[prop.name] = updateFunction }
+            notifyFunction?.let { notifyFunctions[prop.name] = notifyFunction }
+            if (!skipUpdate) {
+                updateFunction?.let { updateFunctions[prop.name] = updateFunction }
                 updateFunctionWithOldValue?.let {
-                    managedPropertyUpdateFunctionsWithOldValue[prop.name] = updateFunctionWithOldValue
+                    updateFunctionsWithOldValue[prop.name] = updateFunctionWithOldValue
                 }
             }
             return UpdatingPropertyDelegate(
@@ -129,7 +94,7 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
 
     protected inner class UpdatingPropertyDelegate<T>(
         private val skipUpdate: Boolean,
-        private val notfiyFunction: ((T) -> Unit)?,
+        private val notifyFunction: ((T) -> Unit)?,
         private val updateFunction: ((T) -> Unit)?,
         private val updateFunctionWithOldValue: ((T, T) -> Unit)?
     ) {
@@ -143,7 +108,7 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
         }
 
         public operator fun setValue(thisRef: PropertyDelegate, property: KProperty<*>, value: T) {
-            managedPropertiesSet.add(property.name)
+            propertiesSet.add(property.name)
             val oldValue = propertyValues[property.name].cast<T>()
             if (oldValue != value) {
                 if (value == null) {
@@ -151,7 +116,7 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
                 } else {
                     propertyValues[property.name] = value
                 }
-                notfiyFunction?.invoke(value)
+                notifyFunction?.invoke(value)
                 if (!skipUpdate) {
                     updateFunction?.invoke(value)
                     updateFunctionWithOldValue?.invoke(value, oldValue)
@@ -160,8 +125,8 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
         }
     }
 
-    public fun <T> updateManagedProperty(property: KProperty<*>, value: T) {
-        if (!managedPropertiesSet.contains(property.name)) {
+    public fun <T> updateProperty(property: KProperty<*>, value: T) {
+        if (!propertiesSet.contains(property.name)) {
             val oldValue = propertyValues[property.name].cast<T>()
             if (oldValue != value) {
                 if (value == null) {
@@ -170,8 +135,8 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
                     propertyValues[property.name] = value
                 }
             }
-            managedPropertyUpdateFunctions[property.name]?.cast<(T) -> Unit>()?.invoke(value)
-            managedPropertyUpdateFunctionsWithOldValue[property.name]?.cast<(T, T) -> Unit>()?.invoke(value, oldValue)
+            updateFunctions[property.name]?.cast<(T) -> Unit>()?.invoke(value)
+            updateFunctionsWithOldValue[property.name]?.cast<(T, T) -> Unit>()?.invoke(value, oldValue)
         }
     }
 }
