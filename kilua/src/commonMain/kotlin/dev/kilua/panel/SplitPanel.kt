@@ -22,3 +22,277 @@
 
 package dev.kilua.panel
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.remember
+import dev.kilua.compose.ComponentNode
+import dev.kilua.core.ComponentBase
+import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.RenderConfig
+import dev.kilua.html.Div
+import dev.kilua.html.Tag
+import dev.kilua.html.div
+import dev.kilua.utils.buildCustomEventInit
+import dev.kilua.utils.cast
+import dev.kilua.utils.toKebabCase
+import org.w3c.dom.HTMLDivElement
+import org.w3c.dom.HTMLElement
+import kotlin.math.ceil
+
+internal class SplitJsOptions(
+    val sizes: List<Int>,
+    val direction: Dir = Dir.Vertical,
+    val gutterSize: Int = 0,
+    val gutterAlign: GutterAlign? = null,
+    val minSize: Int = 0,
+    val maxSize: Int? = null,
+    val expandToMin: Boolean? = null,
+    val snapOffset: Int = 0,
+    val dragInterval: Int? = null,
+    val gutter: (index: Int, direction: String) -> HTMLElement,
+    val onDrag: (sizes: List<Number>, index: Int) -> Unit,
+    val onDragStart: (sizes: List<Number>, index: Int) -> Unit,
+    val onDragEnd: (sizes: List<Number>, index: Int) -> Unit,
+)
+
+public external class SplitJsInstance {
+    public fun destroy()
+}
+
+internal expect fun splitJs(elements: List<HTMLElement>, options: SplitJsOptions): SplitJsInstance
+
+/**
+ * Split panel direction.
+ */
+public enum class Dir {
+    Horizontal,
+    Vertical;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
+ * Split panel gutter alignment.
+ */
+public enum class GutterAlign {
+    Center,
+    Start,
+    End;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+public open class SplitPanel(
+    dir: Dir = Dir.Vertical,
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLDivElement>("div", className, renderConfig) {
+
+    /**
+     * Split panel direction.
+     */
+    public open var dir: Dir by updatingProperty(dir, skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The gutter size.
+     */
+    public open var gutterSize: Int by updatingProperty(10, skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The gutter align.
+     */
+    public open var gutterAlign: GutterAlign? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The minimum size.
+     */
+    public open var minSize: Int by updatingProperty(0, skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The maximum size.
+     */
+    public open var maxSize: Int? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Expand to minimum size.
+     */
+    public open var expandToMin: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The snap offset.
+     */
+    public open var snapOffset: Int by updatingProperty(0, skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The drag interval.
+     */
+    public open var dragInterval: Int? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    public var splitJsInstance: SplitJsInstance? = null
+
+    init {
+        internalCssClasses.add("splitpanel-$dir")
+        internalClassName = internalCssClasses.joinToString(" ")
+        @Suppress("LeakingThis")
+        updateElementClassList(internalClassName, className)
+    }
+
+    override fun onInsert() {
+        super.onInsert()
+        initializeSplitJs()
+    }
+
+    override fun onRemove() {
+        super.onRemove()
+        splitJsInstance?.destroy()
+    }
+
+    protected open fun refresh() {
+        splitJsInstance?.destroy()
+        internalCssClasses.remove("splitpanel-horizontal")
+        internalCssClasses.remove("splitpanel-vertical")
+        internalCssClasses.add("splitpanel-$dir")
+        internalClassName = internalCssClasses.joinToString(" ")
+        updateElementClassList(internalClassName, className)
+        initializeSplitJs()
+    }
+
+    protected open fun initializeSplitJs() {
+        if (children.size == 3) {
+            val mainBoundingRect = elementNullable?.getBoundingClientRect()
+            val splitChildren = listOf(children[0], children[2])
+            val splitter = children[1]
+            val sizes = splitChildren.map {
+                val boundingRect = it.cast<Tag<*>>().elementNullable?.getBoundingClientRect()
+                if (dir == Dir.Horizontal) {
+                    val mainHeight = mainBoundingRect?.height?.toInt() ?: 0
+                    val childHeight = boundingRect?.height?.toInt() ?: 0
+                    ceil(childHeight.toDouble() * 100 / mainHeight.toDouble()).toInt()
+                } else {
+                    val mainWidth = mainBoundingRect?.width?.toInt() ?: 0
+                    val childWidth = boundingRect?.width?.toInt() ?: 0
+                    ceil(childWidth.toDouble() * 100 / mainWidth.toDouble()).toInt()
+                }
+            }
+            splitJsInstance = splitJs(splitChildren.map { it.cast<Tag<*>>().element }, SplitJsOptions(
+                sizes = sizes,
+                direction = dir,
+                gutterSize = gutterSize,
+                gutterAlign = gutterAlign,
+                minSize = minSize,
+                maxSize = maxSize,
+                expandToMin = expandToMin,
+                snapOffset = snapOffset,
+                dragInterval = dragInterval,
+                gutter = { _, _ ->
+                    splitter.cast<Tag<*>>().className = "splitter-$dir"
+                    splitter.cast<Tag<*>>().element.style.removeProperty("width")
+                    splitter.cast<Tag<*>>().element.style.removeProperty("height")
+                    splitter.cast<Tag<*>>().element
+                },
+                onDrag = { eventSizes, _ ->
+                    dispatchEvent("dragSplitPanel", buildCustomEventInit(eventSizes.cast()))
+                },
+                onDragStart = { eventSizes, _ ->
+                    dispatchEvent("dragStartSplitPanel", buildCustomEventInit(eventSizes.cast()))
+                },
+                onDragEnd = { eventSizes, _ ->
+                    for (i in eventSizes.indices) {
+                        if (dir == Dir.Horizontal) {
+                            splitChildren[i].cast<Tag<*>>().setStyle(
+                                "height",
+                                "calc(" + eventSizes[i].toDouble() + "% - " + (gutterSize / 2) + "px)"
+                            )
+                        } else {
+                            splitChildren[i].cast<Tag<*>>().setStyle(
+                                "width",
+                                "calc(" + eventSizes[i].toDouble() + "% - " + (gutterSize / 2) + "px)"
+                            )
+                        }
+                    }
+                    dispatchEvent("dragEndSplitPanel", buildCustomEventInit(eventSizes.cast()))
+                }
+            ))
+        }
+    }
+
+}
+
+public class SplitPanelBuilder {
+    internal var self: @Composable (SplitPanel.() -> Unit)? = null
+    internal var first: @Composable (Div.() -> Unit)? = null
+    internal var second: @Composable (Div.() -> Unit)? = null
+    public fun self(content: @Composable SplitPanel.() -> Unit) {
+        self = content
+    }
+
+    public fun left(content: @Composable Div.() -> Unit) {
+        first = content
+    }
+
+    public fun top(content: @Composable Div.() -> Unit) {
+        first = content
+    }
+
+    public fun right(content: @Composable Div.() -> Unit) {
+        second = content
+    }
+
+    public fun bottom(content: @Composable Div.() -> Unit) {
+        second = content
+    }
+}
+
+@Composable
+public fun ComponentBase.splitPanel(
+    dir: Dir = Dir.Vertical,
+    className: String? = null,
+    contentBuilder: @Composable SplitPanelBuilder.() -> Unit = {}
+): SplitPanel {
+    val component = remember { SplitPanel(dir, className, renderConfig) }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(dir) { updateProperty(SplitPanel::direction, it) }
+        set(className) { updateProperty(SplitPanel::className, it) }
+    }) {
+        val splitPanelBuilder = SplitPanelBuilder()
+        contentBuilder(splitPanelBuilder)
+        splitPanelBuilder.self?.invoke(component)
+        div {
+            splitPanelBuilder.first?.invoke(this)
+        }
+        div()
+        div {
+            splitPanelBuilder.second?.invoke(this)
+        }
+    }
+    return component
+}
