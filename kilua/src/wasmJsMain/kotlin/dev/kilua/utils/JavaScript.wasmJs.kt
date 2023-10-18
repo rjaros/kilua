@@ -34,4 +34,19 @@ public actual val isDom: Boolean by lazy { isDom() }
 
 public actual annotation class JsNonModule actual constructor()
 
+/**
+ * Helper function for creating JavaScript objects with given type.
+ */
+public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
+    return (obj().unsafeCast<T>()).apply(init)
+}
+
 public actual fun size(array: Object): Int = array.cast<JsArray<*>>().length
+
+public inline fun <reified T : JsAny> JsArray<T>.toArray(): Array<T> {
+    return Array(length) { get(it)!! }
+}
+
+public fun <T : JsAny> JsArray<T>.toList(): List<T> {
+    return List(length) { get(it)!! }
+}

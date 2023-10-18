@@ -23,6 +23,7 @@
 package dev.kilua.utils
 
 import org.w3c.dom.AddEventListenerOptions
+import org.w3c.dom.CustomEventInit
 
 public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
     return buildAddEventListenerOptionsInternal(signal)
@@ -30,3 +31,9 @@ public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventLis
 
 @JsFun("(signal) => ({ 'signal': signal })")
 internal external fun buildAddEventListenerOptionsInternal(signal: AbortSignal): AddEventListenerOptions
+
+public actual fun buildCustomEventInit(detail: Object?): CustomEventInit {
+    return obj {
+        if (detail != null) this.detail = detail
+    }
+}

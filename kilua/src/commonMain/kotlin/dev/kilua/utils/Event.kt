@@ -23,6 +23,7 @@
 package dev.kilua.utils
 
 import org.w3c.dom.AddEventListenerOptions
+import org.w3c.dom.CustomEventInit
 
 public external class AbortSignal
 
@@ -32,3 +33,5 @@ public external class AbortController {
 }
 
 public expect fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions
+
+public expect fun buildCustomEventInit(detail: Object?): CustomEventInit

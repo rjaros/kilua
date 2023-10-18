@@ -23,9 +23,16 @@
 package dev.kilua.utils
 
 import org.w3c.dom.AddEventListenerOptions
+import org.w3c.dom.CustomEventInit
 
 public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
     return obj<AddEventListenerOptions> {
         this.asDynamic()["signal"] = signal
+    }
+}
+
+public actual fun buildCustomEventInit(detail: Object?): CustomEventInit {
+    return obj<CustomEventInit> {
+        if (detail != null) this.detail = detail
     }
 }
