@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-@file:JsModule("kvmodule.mjs")
+@file:JsModule("kilua-assets/js/array.mjs")
 
 package dev.kilua.utils
 

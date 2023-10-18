@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-present Robert Jaros
+ * Copyright (c) 2017-present Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,30 @@
  * SOFTWARE.
  */
 
-function jsArrayOf() {
-    return Array.from(arguments)
+package dev.kilua
+
+import dev.kilua.utils.JsNonModule
+import dev.kilua.utils.useCssModule
+
+/**
+ * Kilua Module initializer.
+ */
+public interface ModuleInitializer {
+    /**
+     * Initialize Kilua module.
+     */
+    public fun initialize()
 }
 
-export {jsArrayOf};
+@JsModule("kilua-assets/css/style.css")
+@JsNonModule
+internal external object styleCss
+
+/**
+ * Initializer for Kilua core module.
+ */
+public object CoreModule : ModuleInitializer {
+    override fun initialize() {
+        useCssModule(styleCss)
+    }
+}

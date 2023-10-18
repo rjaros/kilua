@@ -53,15 +53,20 @@ public abstract class Application {
 }
 
 /**
- * Main function for creating KVision applications.
- * Initialize KVision modules.
+ * Main function for creating Kilua applications.
+ * Initialize Kilua modules.
  * @param builder application builder function
  * @param hot HMR module
  */
 public fun startApplication(
     builder: () -> Application,
-    hot: Hot? = null
+    hot: Hot? = null,
+    vararg moduleInitializer: ModuleInitializer
 ) {
+
+    moduleInitializer.forEach {
+        it.initialize()
+    }
 
     fun start(state: HmrState?): Application {
         val application = builder()

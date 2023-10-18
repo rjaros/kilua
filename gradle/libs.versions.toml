@@ -2,10 +2,12 @@
 kotlin = "1.9.20-Beta2"
 compose = "1.5.1-dev-wasm01"
 compose-plugin = "1.5.2.1-Beta"
+npm-publish = "3.4.1"
 kilua = "0.0.1"
 kotlinx-coroutines = "1.7.2-wasm1"
 kotlinx-serialization = "1.6.0-wasm0"
 kotlinx-datetime = "0.4.0-wasm2"
+npm-kilua-assets = "0.0.1"
 css-loader = "6.8.1"
 style-loader = "3.3.3"
 imports-loader = "4.0.1"
@@ -21,3 +23,4 @@ kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+npm-publish = { id = "dev.petuska.npm.publish", version.ref = "npm-publish" }

@@ -23,6 +23,7 @@ val buildTarget: String by project
 
 rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
     rootProject.the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().apply {
+        resolution("kilua-assets", libs.versions.npm.kilua.assets.get())
         resolution("css-loader", libs.versions.css.loader.get())
         resolution("style-loader", libs.versions.style.loader.get())
         resolution("imports-loader", libs.versions.imports.loader.get())
@@ -69,6 +70,7 @@ kotlin {
                 api(libs.kotlinx.coroutines)
                 api(libs.kotlinx.serialization.json)
                 api(libs.kotlinx.datetime)
+                implementation(npm("kilua-assets", libs.versions.npm.kilua.assets.get()))
                 implementation(npm("css-loader", libs.versions.css.loader.get()))
                 implementation(npm("style-loader", libs.versions.style.loader.get()))
                 implementation(npm("imports-loader", libs.versions.imports.loader.get()))
