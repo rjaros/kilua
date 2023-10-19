@@ -31,7 +31,7 @@ Early in development. Main concepts have been tested, but everything is a subjec
 - [X] Compose runtime integration
 - [X] Basic project architecture
 - [X] HMR support (JS target only)
-- [X] Testing environment (Wasm tests with external NPM dependencies are broken for now)
+- [X] Testing environment
 - [X] Typesafe CSS style properties
 - [X] A few basic HTML tags
 - [X] A few basic form input components with `StateFlow` integration

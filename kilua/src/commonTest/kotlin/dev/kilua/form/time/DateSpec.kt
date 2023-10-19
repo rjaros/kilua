@@ -34,13 +34,13 @@ import kotlin.test.assertEquals
 
 class DateSpec : DomSpec {
 
-    /*
+
     @Test
     fun render() {
         runWhenDomAvailable {
             val day = LocalDate(2023, 10, 15)
             val root = root("test") {
-                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name ="date")
+                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
             }
             assertEquals(
                 normalizeHtml("""<input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1">"""),
@@ -55,7 +55,7 @@ class DateSpec : DomSpec {
         run {
             val root = root {
                 val day = LocalDate(2023, 10, 15)
-                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name ="date")
+                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
             }
             assertEquals(
                 normalizeHtml("""<div><input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1"></input></div>"""),
@@ -64,6 +64,4 @@ class DateSpec : DomSpec {
             )
         }
     }
-
-     */
 }
