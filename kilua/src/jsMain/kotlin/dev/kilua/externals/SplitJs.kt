@@ -20,36 +20,16 @@
  * SOFTWARE.
  */
 
-package dev.kilua.panel
+package dev.kilua.externals
 
-import dev.kilua.utils.jsArrayOf
+import dev.kilua.panel.Dir
 import dev.kilua.utils.obj
-import dev.kilua.utils.toList
 import org.w3c.dom.HTMLElement
-
-internal external class SplitJsOptionsExt : JsAny {
-    var sizes: JsArray<JsNumber>
-    var direction: String
-    var gutterSize: Int = definedExternally
-    var gutterAlign: String? = definedExternally
-    var minSize: Int = definedExternally
-    var maxSize: Int? = definedExternally
-    var expandToMin: Boolean? = definedExternally
-    var snapOffset: Int = definedExternally
-    var dragInterval: Int? = definedExternally
-    var gutter: (index: Int, direction: String) -> HTMLElement = definedExternally
-    var onDrag: (sizes: JsArray<JsNumber>, index: Int) -> Unit = definedExternally
-    var onDragStart: (sizes: JsArray<JsNumber>, index: Int) -> Unit = definedExternally
-    var onDragEnd: (sizes: JsArray<JsNumber>, index: Int) -> Unit = definedExternally
-}
-
-@JsModule("split.js")
-internal external fun splitJsExt(elements: JsArray<HTMLElement>, options: SplitJsOptionsExt): SplitJsInstance
 
 internal actual fun splitJs(elements: List<HTMLElement>, options: SplitJsOptions): SplitJsInstance {
     val splitJsDirection = if (options.direction == Dir.Horizontal) "vertical" else "horizontal"
-    return splitJsExt(jsArrayOf<HTMLElement>(*elements.toTypedArray()), obj {
-        sizes = jsArrayOf(*options.sizes.toTypedArray().toIntArray())
+    return splitJsExt(elements.toTypedArray(), obj<SplitJsOptionsExt> {
+        sizes = options.sizes.toTypedArray()
         direction = splitJsDirection
         gutterSize = options.gutterSize
         if (options.gutterAlign != null) gutterAlign = options.gutterAlign.toString()

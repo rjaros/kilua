@@ -27,6 +27,9 @@ import dev.kilua.html.Tag
 import org.w3c.dom.DragEvent
 import org.w3c.dom.HTMLElement
 
+/**
+ * Common drag and drop methods.
+ */
 public interface TagDnd<E : HTMLElement> {
     /**
      * Sets D&D data for the current widget. It also makes it draggable.
@@ -77,6 +80,9 @@ public interface TagDnd<E : HTMLElement> {
      */
     public fun clearDropTarget()
 
+    /**
+     * Connects delegate with the Tag component.
+     */
     public fun tagWithDnd(tag: Tag<E>)
 
 }

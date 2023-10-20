@@ -29,6 +29,10 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 
+/**
+ * Platform-specific mechanism for starting a monitor of global snapshot state writes
+ * in order to schedule the periodic dispatch of snapshot apply notifications.
+ */
 internal object GlobalSnapshotManager {
     private val started = atomic(false)
     private val scheduleScope = CoroutineScope(PromiseDispatcher() + SupervisorJob())

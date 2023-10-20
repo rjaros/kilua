@@ -38,6 +38,9 @@ import kotlinx.datetime.toLocalDate
 
 internal const val DATE_DEFAULT_STEP = 1
 
+/**
+ * Date input component.
+ */
 public open class Date(
     value: LocalDate? = null,
     min: LocalDate? = null,
@@ -52,6 +55,9 @@ public open class Date(
 ) : Input<LocalDate>(value, InputType.Date, name, maxlength, placeholder, disabled, className, renderConfig),
     DateFormControl {
 
+    /**
+     * The minimum value of the date.
+     */
     public open var min: LocalDate? by updatingProperty(min, skipUpdate) {
         if (it != null) {
             element.min = it.toString()
@@ -60,6 +66,9 @@ public open class Date(
         }
     }
 
+    /**
+     * The maximum value of the date.
+     */
     public open var max: LocalDate? by updatingProperty(max, skipUpdate) {
         if (it != null) {
             element.max = it.toString()
@@ -68,6 +77,9 @@ public open class Date(
         }
     }
 
+    /**
+     * The step value of the date.
+     */
     public open var step: Int by updatingProperty(step, skipUpdate) {
         element.step = it.toString()
     }
@@ -109,6 +121,9 @@ public open class Date(
         }
     }
 
+    /**
+     * Increments the value by the step value.
+     */
     public open fun stepUp() {
         elementNullable?.let {
             it.stepUp()
@@ -116,6 +131,9 @@ public open class Date(
         }
     }
 
+    /**
+     * Decrements the value by the step value.
+     */
     public open fun stepDown() {
         elementNullable?.let {
             it.stepDown()
@@ -125,6 +143,22 @@ public open class Date(
 
 }
 
+/**
+ * Creates a [Date] component.
+ *
+ * @param value the initial value
+ * @param min the minimum value
+ * @param max the maximum value
+ * @param step the step value
+ * @param name the name attribute of the generated HTML input element
+ * @param maxlength the maxlength attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param className the CSS class name
+ * @param content a function for setting up the component
+ * @return a [Date] component
+ *
+ */
 @Composable
 public fun ComponentBase.date(
     value: LocalDate? = null,

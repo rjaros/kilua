@@ -22,8 +22,14 @@
 
 package dev.kilua.utils.internal
 
+/**
+ * Helper class JS/Wasm compatibility.
+ */
 internal external class Console {
     fun log(message: JsAny?)
 }
 
+/**
+ * Helper object for JS/Wasm compatibility.
+ */
 internal external val console: Console

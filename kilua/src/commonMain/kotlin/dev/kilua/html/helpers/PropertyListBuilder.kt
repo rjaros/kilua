@@ -25,6 +25,9 @@ package dev.kilua.html.helpers
 import dev.kilua.utils.nativeListOf
 import kotlin.reflect.KProperty
 
+/**
+ * Property list builder interface.
+ */
 public interface PropertyListBuilder {
     public fun add(vararg property: KProperty<*>)
     public fun addAll(properties: List<KProperty<*>>) {
@@ -32,6 +35,9 @@ public interface PropertyListBuilder {
     }
 }
 
+/**
+ * Property list builder implementation.
+ */
 internal class PropertyListBuilderImpl : PropertyListBuilder {
 
     val properties = nativeListOf<KProperty<*>>()
@@ -43,5 +49,8 @@ internal class PropertyListBuilderImpl : PropertyListBuilder {
     }
 }
 
+/**
+ * Build a list of properties.
+ */
 public fun buildPropertyList(delegate: (builder: PropertyListBuilder) -> Unit): List<KProperty<*>> =
     PropertyListBuilderImpl().also { delegate(it) }.properties

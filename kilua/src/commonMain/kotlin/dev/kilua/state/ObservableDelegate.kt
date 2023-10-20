@@ -28,8 +28,14 @@ import dev.kilua.utils.nativeListOf
  * The observable delegate class.
  */
 public open class ObservableDelegate<S> {
+    /**
+     * The list of observers.
+     */
     protected val observers: MutableList<(S) -> Unit> = nativeListOf()
 
+    /**
+     * Notify all observers.
+     */
     public fun notifyObservers(value: S) {
         val copy = observers.map { it }
         copy.forEach {
@@ -39,6 +45,9 @@ public open class ObservableDelegate<S> {
         }
     }
 
+    /**
+     * Subscribe an observer.
+     */
     public fun subscribe(currentValue: S, observer: (S) -> Unit): () -> Unit {
         observers.add(observer)
         observer(currentValue)

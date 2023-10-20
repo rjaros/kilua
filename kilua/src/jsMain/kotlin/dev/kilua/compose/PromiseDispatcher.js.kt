@@ -28,6 +28,9 @@ import kotlinx.coroutines.Runnable
 import kotlin.coroutines.CoroutineContext
 import kotlin.js.Promise
 
+/**
+ * Coroutine dispatcher based on JavaScript Promise.
+ */
 internal actual class PromiseDispatcher : CoroutineDispatcher() {
     actual override fun dispatch(context: CoroutineContext, block: Runnable) {
         Promise.resolve(obj()).then {

@@ -24,19 +24,62 @@ package dev.kilua.html.helpers
 
 import org.w3c.dom.HTMLElement
 
+/**
+ * Common tag attributes.
+ */
 public interface TagAttrs<E : HTMLElement> {
+    /**
+     * The ID attribute.
+     */
     public var id: String?
+
+    /**
+     * The title attribute.
+     */
     public var title: String?
+
+    /**
+     * The tabindex attribute.
+     */
     public var tabindex: Int?
+
+    /**
+     * The draggable attribute.
+     */
     public var draggable: Boolean?
 
+    /**
+     * The role attribute.
+     */
     public var role: String?
+
+    /**
+     * The aria-label attribute.
+     */
     public var ariaLabel: String?
+
+    /**
+     * The aria-labelledby attribute.
+     */
     public var ariaLabelledby: String?
 
+    /**
+     * Set value for a given attribute name.
+     */
     public fun setAttribute(name: String, value: String?)
+
+    /**
+     * Get value of the given attribute.
+     */
     public fun getAttribute(name: String): String?
+
+    /**
+     * Remove attribute with the given name.
+     */
     public fun removeAttribute(name: String)
 
+    /**
+     * Connects delegate with the DOM element.
+     */
     public fun elementWithAttrs(element: E?)
 }

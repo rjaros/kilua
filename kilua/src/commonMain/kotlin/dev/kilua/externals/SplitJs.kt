@@ -20,37 +20,40 @@
  * SOFTWARE.
  */
 
+package dev.kilua.externals
 
-package dev.kilua.core
+import dev.kilua.panel.Dir
+import dev.kilua.panel.GutterAlign
+import org.w3c.dom.HTMLElement
 
 /**
- * Render configuration interface.
+ * Split.js native instance.
  */
-public interface RenderConfig {
-    public val isDom: Boolean
+public external class SplitJsInstance {
+    public fun destroy()
 }
 
 /**
- * Default render configuration. Auto-detects if DOM rendering is supported.
+ * A common interface to the Split.js library for both JS and Wasm targets.
+ * Implemented with expect/actual function and target specific external declarations.
  */
-public class DefaultRenderConfig : RenderConfig {
-    override val isDom: Boolean = dev.kilua.utils.isDom
-}
+internal class SplitJsOptions(
+    val sizes: List<Int>,
+    val direction: Dir = Dir.Vertical,
+    val gutterSize: Int = 0,
+    val gutterAlign: GutterAlign? = null,
+    val minSize: Int = 0,
+    val maxSize: Int? = null,
+    val expandToMin: Boolean? = null,
+    val snapOffset: Int = 0,
+    val dragInterval: Int? = null,
+    val gutter: (index: Int, direction: String) -> HTMLElement,
+    val onDrag: (sizes: List<Number>, index: Int) -> Unit,
+    val onDragStart: (sizes: List<Number>, index: Int) -> Unit,
+    val onDragEnd: (sizes: List<Number>, index: Int) -> Unit,
+)
 
 /**
- * DOM render configuration. Throws exception if DOM rendering is not supported.
+ * Create a Split.js instance.
  */
-public class DomRenderConfig : RenderConfig {
-    init {
-        require(dev.kilua.utils.isDom) { "DOM rendering is not supported in this environment" }
-    }
-
-    override val isDom: Boolean = true
-}
-
-/**
- * String render configuration. Disables DOM rendering.
- */
-public class StringRenderConfig : RenderConfig {
-    override val isDom: Boolean = false
-}
+internal expect fun splitJs(elements: List<HTMLElement>, options: SplitJsOptions): SplitJsInstance

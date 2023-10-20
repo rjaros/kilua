@@ -29,6 +29,10 @@ import androidx.compose.runtime.SkippableUpdater
 import androidx.compose.runtime.Updater
 import androidx.compose.runtime.currentComposer
 
+/**
+ * Main composable function that emits Kilua components to the compose tree.
+ * Makes the given component available as the receiver in the content block.
+ */
 @Composable
 @ExplicitGroupsComposable
 public inline fun <C> ComponentNode(
@@ -52,6 +56,10 @@ public inline fun <C> ComponentNode(
     currentComposer.endNode()
 }
 
+/**
+ * A simplified composable function that emits Kilua components to the compose tree.
+ * Makes the given component available as the receiver in the content block.
+ */
 @Composable
 @ExplicitGroupsComposable
 public inline fun <C> ComponentNode(
@@ -59,5 +67,5 @@ public inline fun <C> ComponentNode(
     update: @DisallowComposableCalls Updater<C>.() -> Unit,
     content: @Composable C.() -> Unit
 ) {
-    ComponentNode({ componentInScope }, componentInScope, update, {}, { content(componentInScope) })
+    ComponentNode({ componentInScope }, componentInScope, update, {}, content)
 }

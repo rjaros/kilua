@@ -32,27 +32,45 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import org.w3c.dom.Text
 
+/**
+ * Text node component.
+ */
 public open class TextNode(
     text: String,
     renderConfig: RenderConfig = DefaultRenderConfig(),
 ) : ComponentBase(SafeDomFactory.createTextNode(text, renderConfig), renderConfig) {
 
-    public open val element: Text
+    /**
+     * The DOM text node.
+     */
+    public open val textNode: Text
         get() = node?.unsafeCast<Text>()
             ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
 
-    public open val elementNullable: Text? = node?.unsafeCast<Text>()
+    /**
+     * The DOM text node or null if the current render configuration doesn't support DOM.
+     */
+    public open val textNodeNullable: Text? = node?.unsafeCast<Text>()
 
-    public open val elementAvailable: Boolean = node != null
+    /**
+     * The DOM text node or null if the current render configuration doesn't support DOM.
+     */
+    public open val textNodeAvailable: Boolean = node != null
 
+    /**
+     * Whether to skip updating the DOM text node of the current component.
+     */
     protected val skipUpdate: Boolean = node == null
 
+    /**
+     * The text of the node.
+     */
     public open var text: String by updatingProperty(text, skipUpdate) {
-        element.data = it
+        textNode.data = it
     }
 
     override var visible: Boolean by updatingProperty(true, skipUpdate) {
-        element.data = if (it) text else ""
+        textNode.data = if (it) text else ""
     }
 
     override fun renderToStringBuilder(builder: StringBuilder) {
@@ -60,6 +78,12 @@ public open class TextNode(
     }
 }
 
+/**
+ * Creates a [TextNode] component.
+ * @param text the text of the node
+ * @param content a function for setting up the component
+ * @return a [TextNode] component
+ */
 @Composable
 public fun textNode(text: String, content: TextNode.() -> Unit = {}): TextNode {
     // Always using DefaultRenderConfig because of plus operator String receiver.
@@ -78,6 +102,9 @@ public fun textNode(text: String, content: TextNode.() -> Unit = {}): TextNode {
     return component
 }
 
+/**
+ * Creates a [TextNode] component with unary + operator.
+ */
 @Composable
 public operator fun String.unaryPlus() {
     textNode(this)

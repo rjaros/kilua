@@ -25,6 +25,9 @@ package dev.kilua.html.helpers
 import dev.kilua.html.*
 import org.w3c.dom.HTMLElement
 
+/**
+ * Common tag CSS styles.
+ */
 public interface TagStyle<E : HTMLElement> {
 
     /**
@@ -509,9 +512,23 @@ public interface TagStyle<E : HTMLElement> {
      */
     public var listStyle: ListStyle?
 
+    /**
+     * Set value for a given CSS style name.
+     */
     public fun setStyle(name: String, value: String?)
+
+    /**
+     * Get value of the given CSS style.
+     */
     public fun getStyle(name: String): String?
+
+    /**
+     * Remove CSS style with the given name.
+     */
     public fun removeStyle(name: String)
 
+    /**
+     * Connects delegate with the DOM element.
+     */
     public fun elementWithStyle(element: E?)
 }

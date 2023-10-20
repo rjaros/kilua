@@ -28,6 +28,9 @@ import dev.kilua.utils.asString
 import dev.kilua.utils.cast
 import org.w3c.dom.HTMLElement
 
+/**
+ * Common tag CSS styles delegate implementation.
+ */
 public open class TagStyleDelegate<E : HTMLElement>(
     protected val skipUpdates: Boolean,
     protected val styles: MutableMap<String, Any>

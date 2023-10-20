@@ -29,37 +29,16 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
-import dev.kilua.html.Div
+import dev.kilua.externals.SplitJsInstance
+import dev.kilua.externals.SplitJsOptions
+import dev.kilua.externals.splitJs
 import dev.kilua.html.Tag
 import dev.kilua.html.div
 import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.utils.cast
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLDivElement
-import org.w3c.dom.HTMLElement
 import kotlin.math.ceil
-
-internal class SplitJsOptions(
-    val sizes: List<Int>,
-    val direction: Dir = Dir.Vertical,
-    val gutterSize: Int = 0,
-    val gutterAlign: GutterAlign? = null,
-    val minSize: Int = 0,
-    val maxSize: Int? = null,
-    val expandToMin: Boolean? = null,
-    val snapOffset: Int = 0,
-    val dragInterval: Int? = null,
-    val gutter: (index: Int, direction: String) -> HTMLElement,
-    val onDrag: (sizes: List<Number>, index: Int) -> Unit,
-    val onDragStart: (sizes: List<Number>, index: Int) -> Unit,
-    val onDragEnd: (sizes: List<Number>, index: Int) -> Unit,
-)
-
-public external class SplitJsInstance {
-    public fun destroy()
-}
-
-internal expect fun splitJs(elements: List<HTMLElement>, options: SplitJsOptions): SplitJsInstance
 
 /**
  * Split panel direction.
@@ -88,6 +67,9 @@ public enum class GutterAlign {
     }
 }
 
+/**
+ * Split panel component.
+ */
 public open class SplitPanel(
     dir: Dir = Dir.Vertical,
     className: String? = null,
@@ -151,13 +133,16 @@ public open class SplitPanel(
         refresh()
     }
 
+    /**
+     * The native Split.js instance.
+     */
     public var splitJsInstance: SplitJsInstance? = null
 
     init {
         internalCssClasses.add("splitpanel-$dir")
         internalClassName = internalCssClasses.joinToString(" ")
         @Suppress("LeakingThis")
-        updateElementClassList(internalClassName, className)
+        updateElementClassList()
     }
 
     override fun onInsert() {
@@ -170,16 +155,22 @@ public open class SplitPanel(
         splitJsInstance?.destroy()
     }
 
+    /**
+     * Refresh split panel by destroying and recreating it.
+     */
     protected open fun refresh() {
         splitJsInstance?.destroy()
         internalCssClasses.remove("splitpanel-horizontal")
         internalCssClasses.remove("splitpanel-vertical")
         internalCssClasses.add("splitpanel-$dir")
         internalClassName = internalCssClasses.joinToString(" ")
-        updateElementClassList(internalClassName, className)
+        updateElementClassList()
         initializeSplitJs()
     }
 
+    /**
+     * Create and initialize Split.js instance.
+     */
     protected open fun initializeSplitJs() {
         if (children.size == 3) {
             val mainBoundingRect = elementNullable?.getBoundingClientRect()
@@ -241,31 +232,13 @@ public open class SplitPanel(
 
 }
 
-public class SplitPanelBuilder {
-    internal var self: @Composable (SplitPanel.() -> Unit)? = null
-    internal var first: @Composable (Div.() -> Unit)? = null
-    internal var second: @Composable (Div.() -> Unit)? = null
-    public fun self(content: @Composable SplitPanel.() -> Unit) {
-        self = content
-    }
-
-    public fun left(content: @Composable Div.() -> Unit) {
-        first = content
-    }
-
-    public fun top(content: @Composable Div.() -> Unit) {
-        first = content
-    }
-
-    public fun right(content: @Composable Div.() -> Unit) {
-        second = content
-    }
-
-    public fun bottom(content: @Composable Div.() -> Unit) {
-        second = content
-    }
-}
-
+/**
+ * Create [SplitPanel] component.
+ * @param dir the split panel direction
+ * @param className the CSS class name
+ * @param contentBuilder the content of the component declared with the help of [SplitPanelBuilder]
+ * @return the [SplitPanel] component
+ */
 @Composable
 public fun ComponentBase.splitPanel(
     dir: Dir = Dir.Vertical,

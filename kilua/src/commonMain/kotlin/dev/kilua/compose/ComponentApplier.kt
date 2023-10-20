@@ -25,12 +25,16 @@ package dev.kilua.compose
 import androidx.compose.runtime.AbstractApplier
 import dev.kilua.core.ComponentBase
 
+/**
+ * The compose applier.
+ * Builds the tree bottom-up.
+ */
 internal class ComponentApplier(
     root: ComponentBase
 ) : AbstractApplier<ComponentBase>(root) {
 
     override fun insertTopDown(index: Int, instance: ComponentBase) {
-        //  Ignored as the tree is built top-down.
+        //  Ignored as the tree is built bottom-up.
     }
 
     override fun insertBottomUp(index: Int, instance: ComponentBase) {

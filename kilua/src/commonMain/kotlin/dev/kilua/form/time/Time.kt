@@ -38,6 +38,9 @@ import kotlinx.datetime.toLocalTime
 
 internal const val TIME_DEFAULT_STEP = 60
 
+/**
+ * Time input component.
+ */
 public open class Time(
     value: LocalTime? = null,
     min: LocalTime? = null,
@@ -60,6 +63,9 @@ public open class Time(
     renderConfig
 ), TimeFormControl {
 
+    /**
+     * The minimum value of the time.
+     */
     public open var min: LocalTime? by updatingProperty(min, skipUpdate) {
         if (it != null) {
             element.min = it.toString()
@@ -68,6 +74,9 @@ public open class Time(
         }
     }
 
+    /**
+     * The maximum value of the time.
+     */
     public open var max: LocalTime? by updatingProperty(max, skipUpdate) {
         if (it != null) {
             element.max = it.toString()
@@ -76,6 +85,9 @@ public open class Time(
         }
     }
 
+    /**
+     * The step value of the time.
+     */
     public open var step: Int by updatingProperty(step, skipUpdate) {
         element.step = it.toString()
     }
@@ -117,6 +129,9 @@ public open class Time(
         }
     }
 
+    /**
+     * Increments the value by the step value.
+     */
     public open fun stepUp() {
         elementNullable?.let {
             it.stepUp()
@@ -124,6 +139,9 @@ public open class Time(
         }
     }
 
+    /**
+     * Decrements the value by the step value.
+     */
     public open fun stepDown() {
         elementNullable?.let {
             it.stepDown()
@@ -133,6 +151,21 @@ public open class Time(
 
 }
 
+/**
+ * Creates a [Time] component.
+ *
+ * @param value the initial value
+ * @param min the minimum value
+ * @param max the maximum value
+ * @param step the step value
+ * @param name the name attribute of the generated HTML input element
+ * @param maxlength the maxlength attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param className the CSS class name
+ * @param content a function for setting up the component
+ * @return a [Time] component
+ */
 @Composable
 public fun ComponentBase.time(
     value: LocalTime? = null,

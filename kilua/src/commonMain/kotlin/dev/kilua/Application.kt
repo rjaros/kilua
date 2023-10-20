@@ -57,14 +57,15 @@ public abstract class Application {
  * Initialize Kilua modules.
  * @param builder application builder function
  * @param hot HMR module
+ * @param moduleInitializers optional module initializers
  */
 public fun startApplication(
     builder: () -> Application,
     hot: Hot? = null,
-    vararg moduleInitializer: ModuleInitializer
+    vararg moduleInitializers: ModuleInitializer
 ) {
 
-    moduleInitializer.forEach {
+    moduleInitializers.forEach {
         it.initialize()
     }
 
@@ -92,7 +93,7 @@ public fun startApplication(
         application = start(state)
     } else {
         application = null
-        @Suppress("MoveLambdaOutsideParentheses")
+        @Suppress("MoveLambdaOutsideParentheses", "RedundantSuppression")
         document.addEventListener("DOMContentLoaded", { application = start(state) })
     }
 }

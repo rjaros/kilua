@@ -24,9 +24,11 @@ package dev.kilua.html.helpers
 
 import dev.kilua.core.PropertyDelegate
 import org.w3c.dom.HTMLElement
-import kotlin.collections.MutableMap
 import kotlin.collections.set
 
+/**
+ * Common tag attributes delegate implementation.
+ */
 public open class TagAttrsDelegate<E : HTMLElement>(
     protected val skipUpdates: Boolean,
     protected val attributes: MutableMap<String, Any>

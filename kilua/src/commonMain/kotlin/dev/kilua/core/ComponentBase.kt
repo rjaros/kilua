@@ -31,6 +31,9 @@ import org.w3c.dom.CustomEventInit
 import org.w3c.dom.Node
 import org.w3c.dom.get
 
+/**
+ * Base class for all components.
+ */
 public abstract class ComponentBase(
     protected val node: Node?,
     internal val renderConfig: RenderConfig,
@@ -41,6 +44,10 @@ public abstract class ComponentBase(
     override var parent: Component? = null
     override val children: MutableList<ComponentBase> = nativeListOf()
 
+    /**
+     * Insert child component at the given position.
+     * @param index position where to insert the child
+     */
     internal fun insertChild(index: Int, component: ComponentBase) {
         component.parent = this
         val size = children.size
@@ -57,6 +64,11 @@ public abstract class ComponentBase(
         }
     }
 
+    /**
+     * Remove child components at the given position.
+     * @param index index of the first child to remove
+     * @param count number of children to remove
+     */
     internal fun removeChildren(index: Int, count: Int) {
         repeat(count) {
             val child = children.removeAt(index)
@@ -65,6 +77,12 @@ public abstract class ComponentBase(
         }
     }
 
+    /**
+     * Move children components to another position.
+     * @param from index of the first child to move
+     * @param to index of the destination position
+     * @param count number of children to move
+     */
     internal fun moveChildren(from: Int, to: Int, count: Int) {
         if (from != to) {
             if (count == 1 && (from == to + 1 || from == to - 1)) {
@@ -100,6 +118,9 @@ public abstract class ComponentBase(
         }
     }
 
+    /**
+     * Remove all children components.
+     */
     internal fun removeAll() {
         children.forEach {
             it.parent = null
@@ -108,20 +129,32 @@ public abstract class ComponentBase(
         node?.clear()
     }
 
+    /**
+     * Dispatches a custom event.
+     */
     public open fun dispatchEvent(type: String, eventInitDict: CustomEventInit): Boolean {
         val event = CustomEvent(type, eventInitDict)
         return node?.dispatchEvent(event) ?: true
     }
 
+    /**
+     * Function called after the component is inserted in the composition.
+     */
     public open fun onInsert() {
         console.log("onInsert $componentId")
     }
 
+    /**
+     * Function called after the component is removed from the composition.
+     */
     public open fun onRemove() {
         console.log("onRemove $componentId")
     }
 
     public companion object {
+        /**
+         * Counter used to generate unique component ids.
+         */
         protected var counter: Int = 0
     }
 }

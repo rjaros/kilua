@@ -22,17 +22,35 @@
 
 package dev.kilua.utils
 
+/**
+ * JavaScript Object class
+ */
 public expect class Object
 
+/**
+ * Return empty JS Object
+ */
 public expect fun obj(): Object
 
+/**
+ * Whether the DOM is available
+ */
 public expect val isDom: Boolean
 
+/**
+ * Helper annotation for JS/Wasm compatibility.
+ */
 public expect annotation class JsNonModule()
 
+/**
+ * Helper function for JS/Wasm compatibility.
+ */
 @Suppress("NOTHING_TO_INLINE")
 public inline fun <T> useCssModule(cssModule: T) {
     // empty body
 }
 
+/**
+ * Helper function for JS/Wasm compatibility.
+ */
 public expect fun size(array: Object): Int

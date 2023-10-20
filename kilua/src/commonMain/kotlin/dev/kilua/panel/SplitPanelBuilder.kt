@@ -20,39 +20,51 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.panel
 
-import kotlinx.browser.window
+import androidx.compose.runtime.Composable
+import dev.kilua.html.Div
 
-public object Dom {
+/**
+ * Builder for SplitPanel DSL style content declaration.
+ */
+public class SplitPanelBuilder {
+    internal var self: @Composable (SplitPanel.() -> Unit)? = null
+    internal var first: @Composable (Div.() -> Unit)? = null
+    internal var second: @Composable (Div.() -> Unit)? = null
 
-    private var tasks = nativeListOf<() -> Unit>()
-
-    private var scheduled = false
-
-    private fun schedule() {
-        if (!scheduled) {
-            scheduled = true
-            window.requestAnimationFrame {
-                runTasks()
-                scheduled = false
-            }
-        }
+    /**
+     * Configure SplitPanel instance.
+     */
+    public fun self(content: @Composable SplitPanel.() -> Unit) {
+        self = content
     }
 
-    private fun runTasks() {
-        tasks.forEach {
-            try {
-                it()
-            } catch (e: Throwable) {
-                // ignore
-            }
-        }
-        tasks.clear()
+    /**
+     * Configure left side of the SplitPanel.
+     */
+    public fun left(content: @Composable Div.() -> Unit) {
+        first = content
     }
 
-    public fun mutate(task: () -> Unit) {
-        tasks.add(task)
-        schedule()
+    /**
+     * Configure top side of the SplitPanel.
+     */
+    public fun top(content: @Composable Div.() -> Unit) {
+        first = content
+    }
+
+    /**
+     * Configure right side of the SplitPanel.
+     */
+    public fun right(content: @Composable Div.() -> Unit) {
+        second = content
+    }
+
+    /**
+     * Configure bottom side of the SplitPanel.
+     */
+    public fun bottom(content: @Composable Div.() -> Unit) {
+        second = content
     }
 }

@@ -26,4 +26,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
+/**
+ * Kilua coroutine scope.
+ */
 public val KiluaScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())

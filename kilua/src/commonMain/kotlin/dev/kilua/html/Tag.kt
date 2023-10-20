@@ -50,6 +50,9 @@ import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.Event
 import kotlin.reflect.KProperty
 
+/**
+ * Base class for all HTML tags components.
+ */
 public open class Tag<E : HTMLElement>(
     protected val tagName: String,
     className: String? = null,
@@ -64,23 +67,48 @@ public open class Tag<E : HTMLElement>(
     TagEvents<E> by TagEventsDelegate(!renderConfig.isDom || !isDom, events),
     TagDnd<E> by TagDndDelegate(!renderConfig.isDom || !isDom) {
 
+    /**
+     * A list of properties rendered as html attributes for the current component.
+     */
     protected val htmlPropertyList: List<KProperty<*>> by lazy { buildPropertyList(::buildHtmlPropertyList) }
 
+    /**
+     * An internal list of CSS classes for the current component.
+     */
     protected val internalCssClasses: MutableList<String> = nativeListOf()
+
+    /**
+     * An internal CSS class for the current component.
+     */
     protected var internalClassName: String? = null
 
+    /**
+     * The DOM element of the current component.
+     */
     public open val element: E
         get() = node?.unsafeCast<E>()
             ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
 
+    /**
+     * The DOM element of the current component or null if the current render configuration doesn't support DOM.
+     */
     public open val elementNullable: E? = node?.unsafeCast<E>()
 
+    /**
+     * Whether the DOM element of the current component is available.
+     */
     public open val elementAvailable: Boolean = node != null
 
+    /**
+     * Whether to skip updating the DOM element of the current component.
+     */
     protected val skipUpdate: Boolean = node == null
 
+    /**
+     * The CSS class of the current component.
+     */
     public open var className: String? by updatingProperty(className, skipUpdate) {
-        updateElementClassList(internalClassName, it)
+        updateElementClassList()
     }
 
     override var visible: Boolean = true
@@ -89,6 +117,9 @@ public open class Tag<E : HTMLElement>(
             display = if (visible) null else Display.None
         }
 
+    /**
+     * The label of the current component or null if the first child is not a TextNode.
+     */
     public open var label: String?
         get() = children.firstOrNull()?.let { it as? TextNode }?.text
         set(value) {
@@ -105,24 +136,25 @@ public open class Tag<E : HTMLElement>(
         @Suppress("LeakingThis")
         tagWithDnd(this)
         @Suppress("LeakingThis")
-        elementNullable?.let {
-            if (className != null) {
-                it.className = className
-            }
-        }
+        updateElementClassList()
     }
 
-    protected open fun updateElementClassList(internalClassName: String?, className: String?) {
-        if (internalClassName != null && className != null) {
-            element.className = "$internalClassName $className"
-        } else if (className != null) {
-            element.className = className
-        } else if (internalClassName != null) {
-            element.className = internalClassName
-        } else {
-            val classList = element.classList
-            while (classList.length > 0) {
-                classList.remove(classList.item(0).toString())
+    /**
+     * Updates the CSS class of the DOM element of the current component.
+     */
+    protected open fun updateElementClassList() {
+        if (elementAvailable) {
+            if (internalClassName != null && className != null) {
+                element.className = "$internalClassName $className"
+            } else if (className != null) {
+                element.className = className!!
+            } else if (internalClassName != null) {
+                element.className = internalClassName!!
+            } else {
+                val classList = element.classList
+                while (classList.length > 0) {
+                    classList.remove(classList.item(0).toString())
+                }
             }
         }
     }
@@ -166,6 +198,14 @@ public open class Tag<E : HTMLElement>(
     }
 }
 
+/**
+ * Creates a [Tag] component.
+ *
+ * @param tagName the name of the HTML tag
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [Tag] component
+ */
 @Composable
 public fun <E : HTMLElement> ComponentBase.tag(
     tagName: String,

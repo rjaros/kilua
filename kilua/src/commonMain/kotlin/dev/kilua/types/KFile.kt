@@ -24,6 +24,9 @@ package dev.kilua.types
 
 import kotlinx.serialization.Serializable
 
+/**
+ * The uploaded file representation.
+ */
 @Serializable
 public data class KFile(
     val name: String,

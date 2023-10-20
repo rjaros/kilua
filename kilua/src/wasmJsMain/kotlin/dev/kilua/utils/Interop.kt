@@ -1,3 +1,5 @@
+@file:JsModule("kilua-assets/js/array.mjs")
+
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -20,9 +22,13 @@
  * SOFTWARE.
  */
 
-@file:JsModule("kilua-assets/js/array.mjs")
-
 package dev.kilua.utils
+
+/**
+ * Helper functions which allow to create JS arrays and pass them as arguments
+ * to external functions from Kotlin/Wasm code.
+ * They are using external JS module published on the NPM repository.
+ */
 
 public external fun <T : JsAny> jsArrayOf(vararg obj: T): JsArray<T>
 

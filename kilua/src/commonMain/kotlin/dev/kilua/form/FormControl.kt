@@ -48,7 +48,7 @@ public interface FormControl<T> : MutableState<T> {
     public var disabled: Boolean?
 
     /**
-     * The name attribute of the generated HTML input element.
+     * The name attribute of the generated HTML element.
      */
     public var name: String?
 }

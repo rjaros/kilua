@@ -43,10 +43,16 @@ public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
 
 public actual fun size(array: Object): Int = array.cast<JsArray<*>>().length
 
+/**
+ * Convert JsArray to Kotlin Array.
+ */
 public inline fun <reified T : JsAny> JsArray<T>.toArray(): Array<T> {
     return Array(length) { get(it)!! }
 }
 
+/**
+ * Convert JsArray to Kotlin List.
+ */
 public fun <T : JsAny> JsArray<T>.toList(): List<T> {
     return List(length) { get(it)!! }
 }

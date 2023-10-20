@@ -30,13 +30,22 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.todayIn
 
+/**
+ * Return current date.
+ */
 public fun today(): LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
 
+/**
+ * Return current time trimmed to hours and minutes.
+ */
 public fun hour(): LocalTime {
     val untrimmedNow: LocalTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).time
     return LocalTime(untrimmedNow.hour, untrimmedNow.minute)
 }
 
+/**
+ * Return current date and time trimmed to hours and minutes.
+ */
 public fun now(): LocalDateTime {
     val today = today()
     val time = hour()

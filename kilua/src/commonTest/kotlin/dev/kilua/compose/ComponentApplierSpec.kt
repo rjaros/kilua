@@ -1,4 +1,7 @@
 /*
+ * Modelled after NodeApplierTest in Mosaic project by Jake Wharton
+ * https://github.com/JakeWharton/mosaic/blob/trunk/mosaic-runtime/src/commonTest/kotlin/com/jakewharton/mosaic/NodeApplierTest.kt
+ *
  * Copyright (c) 2023 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +37,7 @@ import kotlin.test.assertEquals
 
 class ComponentApplierSpec : SimpleSpec {
     private val stringRenderConfig = StringRenderConfig()
-    private val root = Root(SafeDomFactory.createElement("div", stringRenderConfig), stringRenderConfig)
+    private val root = Root(SafeDomFactory.createElement("div", stringRenderConfig), renderConfig = stringRenderConfig)
     private val applier = ComponentApplier(root)
 
     private fun <T> Applier<T>.insert(index: Int, instance: T) {

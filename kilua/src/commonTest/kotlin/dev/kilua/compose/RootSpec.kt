@@ -94,6 +94,31 @@ class RootSpec : DomSpec {
     }
 
     @Test
+    fun recomposeToString() = runAsync {
+        lateinit var button: Button
+        val root = root("test") {
+            var counter by remember { mutableStateOf(0) }
+            div {
+                +"Counter: $counter"
+                button = button {
+                    +"Increment"
+                    onClick {
+                        counter++
+                    }
+                }
+            }
+        }
+        button.click()
+        button.click()
+        delay(10)
+        assertEquals(
+            normalizeHtml("""<div id="test"><div>Counter: 2<button type="button">Increment</button></div></div>"""),
+            normalizeHtml(root.renderToString()),
+            "Should recompose when state changes"
+        )
+    }
+
+    @Test
     fun recompose() = runWhenDomAvailableAsync {
         lateinit var button: Button
         val root = root("test") {
@@ -110,7 +135,7 @@ class RootSpec : DomSpec {
         }
         button.click()
         button.click()
-        delay(1)
+        delay(10)
         assertEquals(
             normalizeHtml("""<div>Counter: 2<button type="button">Increment</button></div>"""),
             normalizeHtml(root.element?.innerHTML ?: ""),

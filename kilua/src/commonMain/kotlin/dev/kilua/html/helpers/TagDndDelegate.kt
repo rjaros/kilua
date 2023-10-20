@@ -29,6 +29,9 @@ import dev.kilua.utils.size
 import org.w3c.dom.DragEvent
 import org.w3c.dom.HTMLElement
 
+/**
+ * Common drag and drop methods delegate implementation.
+ */
 public open class TagDndDelegate<E : HTMLElement>(
     protected val skipUpdates: Boolean,
 ) : TagDnd<E> {

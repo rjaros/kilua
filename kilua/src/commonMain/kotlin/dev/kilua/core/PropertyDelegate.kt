@@ -27,12 +27,19 @@ import dev.kilua.utils.nativeMapOf
 import kotlin.collections.set
 import kotlin.reflect.KProperty
 
+/**
+ * Helper delegate used to define properties with custom update and notify functions.
+ */
 public open class PropertyDelegate(protected val propertyValues: MutableMap<String, Any>) {
     protected val notifyFunctions: MutableMap<String, Any> = nativeMapOf()
     protected val updateFunctions: MutableMap<String, Any> = nativeMapOf()
     protected val updateFunctionsWithOldValue: MutableMap<String, Any> = nativeMapOf()
     protected val propertiesSet: MutableSet<String> = mutableSetOf()
 
+    /**
+     * Create a property with a custom update and notify functions.
+     * @param skipUpdate if true, the update function will not be called when the property is set
+     */
     @Suppress("NOTHING_TO_INLINE")
     protected inline fun <T> updatingProperty(
         skipUpdate: Boolean = false,
@@ -41,6 +48,11 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
     ): ManagedPropertyDelegateProvider<T> =
         ManagedPropertyDelegateProvider(null, skipUpdate, notifyFunction, updateFunction, null)
 
+    /**
+     * Create a property with a custom update and notify functions.
+     * @param initialValue initial value of the property
+     * @param skipUpdate if true, the update function will not be called when the property is set
+     */
     @Suppress("NOTHING_TO_INLINE")
     protected inline fun <T> updatingProperty(
         initialValue: T,
@@ -50,6 +62,10 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
     ): ManagedPropertyDelegateProvider<T> =
         ManagedPropertyDelegateProvider(initialValue, skipUpdate, notifyFunction, updateFunction, null)
 
+    /**
+     * Create a property with a custom update and notify functions.
+     * @param skipUpdate if true, the update function will not be called when the property is set
+     */
     @Suppress("NOTHING_TO_INLINE")
     protected inline fun <T> updatingPropertyWithOldValue(
         skipUpdate: Boolean = false,
@@ -59,6 +75,11 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
         ManagedPropertyDelegateProvider(null, skipUpdate, notifyFunction, null, updateFunction)
 
     @Suppress("NOTHING_TO_INLINE")
+    /**
+     * Create a property with a custom update and notify functions.
+     * @param initialValue initial value of the property
+     * @param skipUpdate if true, the update function will not be called when the property is set
+     */
     protected inline fun <T> updatingPropertyWithOldValue(
         initialValue: T,
         skipUpdate: Boolean = false,
@@ -67,6 +88,9 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
     ): ManagedPropertyDelegateProvider<T> =
         ManagedPropertyDelegateProvider(initialValue, skipUpdate, notifyFunction, null, updateFunction)
 
+    /**
+     * A delegate provider.
+     */
     protected inner class ManagedPropertyDelegateProvider<T>(
         private val initialValue: T?,
         private val skipUpdate: Boolean,
@@ -92,12 +116,18 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
         }
     }
 
+    /**
+     * A delegate for a property with custom update and notify functions.
+     */
     protected inner class UpdatingPropertyDelegate<T>(
         private val skipUpdate: Boolean,
         private val notifyFunction: ((T) -> Unit)?,
         private val updateFunction: ((T) -> Unit)?,
         private val updateFunctionWithOldValue: ((T, T) -> Unit)?
     ) {
+        /**
+         * Get the value of the property.
+         */
         public operator fun getValue(thisRef: PropertyDelegate, property: KProperty<*>): T {
             val value = propertyValues[property.name]
             return if (value != null) {
@@ -107,6 +137,9 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
             }
         }
 
+        /**
+         * Set the value of the property.
+         */
         public operator fun setValue(thisRef: PropertyDelegate, property: KProperty<*>, value: T) {
             propertiesSet.add(property.name)
             val oldValue = propertyValues[property.name].cast<T>()
@@ -125,6 +158,9 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
         }
     }
 
+    /**
+     * Update the value of the property with lower priority (called by the compose runtime).
+     */
     public fun <T> updateProperty(property: KProperty<*>, value: T) {
         if (!propertiesSet.contains(property.name)) {
             val oldValue = propertyValues[property.name].cast<T>()

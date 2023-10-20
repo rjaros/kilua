@@ -22,6 +22,9 @@
 
 package dev.kilua.utils
 
+/**
+ * A mutable map implementation based on a native JS object on JS target.
+ */
 public expect class NativeMap<V> : MutableMap<String, V> {
     override val size: Int
 
@@ -46,4 +49,7 @@ public expect class NativeMap<V> : MutableMap<String, V> {
     override fun remove(key: String): V?
 }
 
+/**
+ * Create a new native map instance.
+ */
 public expect fun <V> nativeMapOf(vararg pairs: Pair<String, V>): MutableMap<String, V>

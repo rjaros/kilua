@@ -22,6 +22,9 @@
 
 package dev.kilua.utils
 
+/**
+ * A mutable list implementation based on a native array on JS target.
+ */
 public expect class NativeList<E> : MutableList<E> {
     override val size: Int
 
@@ -66,4 +69,7 @@ public expect class NativeList<E> : MutableList<E> {
     override fun subList(fromIndex: Int, toIndex: Int): MutableList<E>
 }
 
+/**
+ * Create a native list instance.
+ */
 public expect fun <E> nativeListOf(vararg elements: E): MutableList<E>

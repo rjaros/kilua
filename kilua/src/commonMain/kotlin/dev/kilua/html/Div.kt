@@ -31,9 +31,19 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import org.w3c.dom.HTMLDivElement
 
+/**
+ * Div component.
+ */
 public open class Div(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
     Tag<HTMLDivElement>("div", className, renderConfig)
 
+/**
+ * Creates a [Div] component.
+ *
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [Div] component
+ */
 @Composable
 public fun ComponentBase.div(className: String? = null, content: @Composable Div.() -> Unit = {}): Div {
     val component = remember { Div(className, renderConfig) }

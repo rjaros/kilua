@@ -38,6 +38,9 @@ internal const val RANGE_DEFAULT_MIN = 0
 internal const val RANGE_DEFAULT_MAX = 100
 internal const val RANGE_DEFAULT_STEP = 1
 
+/**
+ * Range input component.
+ */
 public open class Range(
     value: Number? = null,
     min: Int = RANGE_DEFAULT_MIN,
@@ -50,14 +53,23 @@ public open class Range(
 ) : Input<Number>(value, InputType.Range, name, null, null, disabled, className, renderConfig),
     NumberFormControl {
 
+    /**
+     * The minimum value of the range.
+     */
     public open var min: Int by updatingProperty(min, skipUpdate) {
         element.min = it.toString()
     }
 
+    /**
+     * The maximum value of the range.
+     */
     public open var max: Int by updatingProperty(max, skipUpdate) {
         element.max = it.toString()
     }
 
+    /**
+     * The step value of the range.
+     */
     public open var step: Int by updatingProperty(step, skipUpdate) {
         element.step = it.toString()
     }
@@ -84,6 +96,9 @@ public open class Range(
         }
     }
 
+    /**
+     * Increments the value by the step value.
+     */
     public open fun stepUp() {
         elementNullable?.let {
             it.stepUp()
@@ -91,6 +106,9 @@ public open class Range(
         }
     }
 
+    /**
+     * Decrements the value by the step value.
+     */
     public open fun stepDown() {
         elementNullable?.let {
             it.stepDown()
@@ -100,6 +118,18 @@ public open class Range(
 
 }
 
+/**
+ * Creates a [Range] component.
+ * @param value the initial value
+ * @param min the minimum value of the range
+ * @param max the maximum value of the range
+ * @param step the step value of the range
+ * @param name the name attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param className the CSS class name
+ * @param content a function for setting up the component
+ * @return a [Range] component
+ */
 @Composable
 public fun ComponentBase.range(
     value: Number? = null,

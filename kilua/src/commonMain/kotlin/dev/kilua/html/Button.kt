@@ -32,6 +32,7 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLButtonElement
+import org.w3c.dom.events.Event
 
 /**
  * Button types.
@@ -47,6 +48,9 @@ public enum class ButtonType {
     }
 }
 
+/**
+ * Button component.
+ */
 public open class Button(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
@@ -55,10 +59,16 @@ public open class Button(
 ) :
     Tag<HTMLButtonElement>("button", className, renderConfig) {
 
+    /**
+     * The type of the button.
+     */
     public open var type: ButtonType by updatingProperty(type, skipUpdate) {
         element.type = it.value
     }
 
+    /**
+     * Whether the button is disabled.
+     */
     public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
         if (it != null) {
             element.disabled = it
@@ -77,8 +87,15 @@ public open class Button(
         }
     }
 
+    /**
+     * Clicks the button.
+     */
     public open fun click() {
-        elementNullable?.click()
+        if (elementAvailable) {
+            element.click()
+        } else {
+            events["click"]?.forEach { it.value(Event("click")) }
+        }
     }
 
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
@@ -88,6 +105,15 @@ public open class Button(
 
 }
 
+/**
+ * Creates a [Button] component.
+ *
+ * @param type the type of the button
+ * @param disabled whether the button is disabled
+ * @param className the CSS class name
+ * @param content a function for setting up the component
+ * @return the [Button] component
+ */
 @Composable
 public fun ComponentBase.button(
     type: ButtonType = ButtonType.Button,
@@ -110,6 +136,16 @@ public fun ComponentBase.button(
     return component
 }
 
+/**
+ * Creates a [Button] component with a given label.
+ *
+ * @param label the label of the button
+ * @param type the type of the button
+ * @param disabled whether the button is disabled
+ * @param className the CSS class name
+ * @param content a function for setting up the component
+ * @return the [Button] component
+ */
 @Composable
 public fun ComponentBase.button(
     label: String? = null,

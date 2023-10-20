@@ -26,6 +26,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Runnable
 import kotlin.coroutines.CoroutineContext
 
+/**
+ * Coroutine dispatcher based on JavaScript Promise.
+ */
 internal expect class PromiseDispatcher() : CoroutineDispatcher {
     override fun dispatch(context: CoroutineContext, block: Runnable)
 }

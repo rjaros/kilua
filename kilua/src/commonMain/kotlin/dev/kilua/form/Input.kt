@@ -30,6 +30,9 @@ import dev.kilua.state.ObservableDelegate
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
 
+/**
+ * Base abstract class for HTML input components.
+ */
 public abstract class Input<T : Any>(
     value: T? = null,
     type: InputType = InputType.Text,
@@ -52,10 +55,16 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * The type attribute of the generated HTML input element.
+     */
     public open var type: InputType by updatingProperty(type, skipUpdate) {
         element.type = it.value
     }
 
+    /**
+     * The name attribute of the generated HTML input element.
+     */
     public override var name: String? by updatingProperty(name, skipUpdate) {
         if (it != null) {
             element.name = it
@@ -64,6 +73,9 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * The maxlength attribute of the generated HTML input element.
+     */
     public var maxlength: Int? by updatingProperty(maxlength, skipUpdate) {
         if (it != null) {
             element.maxLength = it
@@ -72,6 +84,9 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * The placeholder attribute of the generated HTML input element.
+     */
     public var placeholder: String? by updatingProperty(placeholder, skipUpdate) {
         if (it != null) {
             element.placeholder = it
@@ -80,6 +95,9 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * The disabled attribute of the generated HTML input element.
+     */
     public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
         if (it != null) {
             element.disabled = it
@@ -88,6 +106,9 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * The autocomplete attribute of the generated HTML input element.
+     */
     public open var autocomplete: Autocomplete? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.autocomplete = it.value
@@ -96,6 +117,9 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * The autofocus attribute of the generated HTML input element.
+     */
     public open var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.autofocus = it
@@ -104,6 +128,9 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * The readonly attribute of the generated HTML input element.
+     */
     public open var readonly: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.readOnly = it
@@ -112,6 +139,9 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * The list attribute of the generated HTML input element.
+     */
     public open var list: String? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.setAttribute("list", it)
@@ -120,6 +150,9 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * The value attribute of the generated HTML input element.
+     */
     public open var defaultValue: T? = null
         set(value) {
             field = value

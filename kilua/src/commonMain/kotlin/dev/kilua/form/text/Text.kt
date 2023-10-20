@@ -33,6 +33,9 @@ import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.form.StringFormControl
 
+/**
+ * Text input component.
+ */
 public open class Text(
     value: String? = null,
     type: InputType = InputType.Text,
@@ -54,6 +57,19 @@ public open class Text(
 
 }
 
+/**
+ * Creates [Text] component.
+ *
+ * @param value initial value
+ * @param type the type of the input
+ * @param name the name of the input
+ * @param maxlength the maximum length of the input
+ * @param placeholder the placeholder text
+ * @param disabled whether the input is disabled
+ * @param className the CSS class name
+ * @param content a function for setting up the component
+ * @return a [Text] component
+ */
 @Composable
 public fun ComponentBase.text(
     value: String? = null,

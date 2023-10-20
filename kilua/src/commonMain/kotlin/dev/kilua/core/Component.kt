@@ -22,31 +22,62 @@
 
 package dev.kilua.core
 
+/**
+ * Base component interface.
+ */
 public interface Component {
+    /**
+     * Unique component id.
+     */
     public val componentId: Int
 
+    /**
+     * Component visibility.
+     */
     public var visible: Boolean
+
+    /**
+     * Parent component.
+     */
     public val parent: Component?
+
+    /**
+     * List of child components.
+     */
     public val children: List<Component>
 
+    /**
+     * Show the component.
+     */
     public fun show() {
         visible = true
     }
 
+    /**
+     * Hide the component.
+     */
     public fun hide() {
         visible = false
     }
 
+    /**
+     * Toggle the component visibility.
+     */
     public fun toggle() {
         visible = !visible
     }
 
+    /**
+     * Render the component to the given [builder].
+     */
     public fun renderToStringBuilder(builder: StringBuilder)
 
+    /**
+     * Render the component to string.
+     */
     public fun renderToString(): String {
         val builder = StringBuilder()
         renderToStringBuilder(builder)
         return builder.toString()
     }
-
 }

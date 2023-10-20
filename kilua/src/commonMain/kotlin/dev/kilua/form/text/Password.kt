@@ -31,6 +31,9 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.InputType
 
+/**
+ * Password input component.
+ */
 public open class Password(
     value: String? = null,
     name: String? = null,
@@ -41,6 +44,18 @@ public open class Password(
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) : Text(value, InputType.Password, name, maxlength, placeholder, disabled, className, renderConfig)
 
+/**
+ * Creates [Password] component.
+ *
+ * @param value initial value
+ * @param name the name of the input
+ * @param maxlength the maximum length of the input
+ * @param placeholder the placeholder text
+ * @param disabled whether the input is disabled
+ * @param className the CSS class name
+ * @param content a function for setting up the component
+ * @return a [Password] component
+ */
 @Composable
 public fun ComponentBase.password(
     value: String? = null,

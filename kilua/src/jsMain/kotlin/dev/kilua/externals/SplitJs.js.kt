@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.panel
+package dev.kilua.externals
 
 import org.w3c.dom.HTMLElement
 

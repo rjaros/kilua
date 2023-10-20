@@ -38,7 +38,7 @@ import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLTextAreaElement
 
 /**
- * Button types.
+ * Textarea wrap types.
  */
 public enum class WrapType {
     Soft,
@@ -50,6 +50,9 @@ public enum class WrapType {
     }
 }
 
+/**
+ * Textarea component.
+ */
 public open class TextArea(
     value: String? = null,
     cols: Int? = null,
@@ -71,6 +74,9 @@ public open class TextArea(
         element.value = it ?: ""
     }
 
+    /**
+     * The number of columns of the textarea.
+     */
     public var cols: Int? by updatingProperty(cols, skipUpdate) {
         if (it != null) {
             element.cols = it
@@ -79,6 +85,9 @@ public open class TextArea(
         }
     }
 
+    /**
+     * The number of rows of the textarea.
+     */
     public var rows: Int? by updatingProperty(rows, skipUpdate) {
         if (it != null) {
             element.rows = it
@@ -95,6 +104,9 @@ public open class TextArea(
         }
     }
 
+    /**
+     * The maxlength attribute of the generated HTML textarea element.
+     */
     public var maxlength: Int? by updatingProperty(maxlength, skipUpdate) {
         if (it != null) {
             element.maxLength = it
@@ -103,6 +115,9 @@ public open class TextArea(
         }
     }
 
+    /**
+     * The placeholder attribute of the generated HTML textarea element.
+     */
     public var placeholder: String? by updatingProperty(placeholder, skipUpdate) {
         if (it != null) {
             element.placeholder = it
@@ -119,6 +134,9 @@ public open class TextArea(
         }
     }
 
+    /**
+     * The autofocus attribute of the generated HTML textarea element.
+     */
     public open var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         console.log("set autofocus $it")
         if (it != null) {
@@ -128,6 +146,9 @@ public open class TextArea(
         }
     }
 
+    /**
+     * The readonly attribute of the generated HTML textarea element.
+     */
     public open var readonly: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.readOnly = it
@@ -136,6 +157,9 @@ public open class TextArea(
         }
     }
 
+    /**
+     * The wrap attribute of the generated HTML textarea element.
+     */
     public open var wrap: WrapType? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.wrap = it.value
@@ -203,6 +227,20 @@ public open class TextArea(
     }
 }
 
+/**
+ * Creates a [TextArea] component.
+ *
+ * @param value the initial value
+ * @param cols the number of columns of the textarea
+ * @param rows the number of rows of the textarea
+ * @param name the name attribute of the generated HTML textarea element
+ * @param maxlength the maxlength attribute of the generated HTML textarea element
+ * @param placeholder the placeholder attribute of the generated HTML textarea element
+ * @param disabled determines if the field is disabled
+ * @param className the CSS class name
+ * @param content a function for setting up the component
+ * @return A [TextArea] component.
+ */
 @Composable
 public fun ComponentBase.textArea(
     value: String? = null,

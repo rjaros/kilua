@@ -27,24 +27,35 @@ import kotlinx.browser.document
 import org.w3c.dom.Element
 import org.w3c.dom.Text
 
+/**
+ * Helper factory to safely call methods on the document object.
+ */
 public object SafeDomFactory {
 
+    /**
+     * Create DOM element.
+     */
     public fun createElement(name: String, renderConfig: RenderConfig): Element? {
         return if (renderConfig.isDom && isDom) {
             document.createElement(name)
         } else null
     }
 
+    /**
+     * Create DOM text node.
+     */
     public fun createTextNode(text: String, renderConfig: RenderConfig): Text? {
         return if (renderConfig.isDom && isDom) {
             document.createTextNode(text)
         } else null
     }
 
+    /**
+     * Get DOM element by id.
+     */
     public fun getElementById(id: String, renderConfig: RenderConfig): Element? {
         return if (renderConfig.isDom && isDom) {
             document.getElementById(id)
         } else null
     }
-
 }

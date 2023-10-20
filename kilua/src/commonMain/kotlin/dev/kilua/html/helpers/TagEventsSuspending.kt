@@ -32,7 +32,7 @@ import org.w3c.dom.events.InputEvent
 import org.w3c.dom.events.MouseEvent
 
 /**
- * An extension function for defining on click suspending event handlers.
+ * An extension function for defining on click suspending event handlers (composable).
  */
 @Composable
 public fun <E : HTMLElement, C : TagEvents<E>> C.onClickLaunch(
@@ -47,7 +47,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onClickLaunch(
 }
 
 /**
- * An extension function for defining on click suspending event handlers.
+ * An extension function for defining on click suspending event handlers (not composable).
  */
 public fun <E : HTMLElement, C : TagEvents<E>> C.onClickDirectLaunch(
     coroutineScope: CoroutineScope = KiluaScope,
@@ -61,7 +61,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onClickDirectLaunch(
 }
 
 /**
- * An extension function for defining on input suspending event handlers.
+ * An extension function for defining on input suspending event handlers (composable).
  */
 @Composable
 public fun <E : HTMLElement, C : TagEvents<E>> C.onInputLaunch(
@@ -76,7 +76,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onInputLaunch(
 }
 
 /**
- * An extension function for defining on input suspending event handlers.
+ * An extension function for defining on input suspending event handlers (not composable).
  */
 public fun <E : HTMLElement, C : TagEvents<E>> C.onInputDirectLaunch(
     coroutineScope: CoroutineScope = KiluaScope,
@@ -90,7 +90,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onInputDirectLaunch(
 }
 
 /**
- * An extension function for defining on change suspending event handlers.
+ * An extension function for defining on change suspending event handlers (composable).
  */
 @Composable
 public fun <E : HTMLElement, C : TagEvents<E>> C.onChangeLaunch(
@@ -105,7 +105,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onChangeLaunch(
 }
 
 /**
- * An extension function for defining on change suspending event handlers.
+ * An extension function for defining on change suspending event handlers (not composable).
  */
 public fun <E : HTMLElement, C : TagEvents<E>> C.onChangeDirectLaunch(
     coroutineScope: CoroutineScope = KiluaScope,
@@ -119,7 +119,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onChangeDirectLaunch(
 }
 
 /**
- * An extension function for defining on change suspending event handlers.
+ * An extension function for defining on change suspending event handlers (composable).
  */
 @Composable
 public fun <EV : Event, E : HTMLElement, C : TagEvents<E>> C.onEventLaunch(
@@ -135,7 +135,7 @@ public fun <EV : Event, E : HTMLElement, C : TagEvents<E>> C.onEventLaunch(
 }
 
 /**
- * An extension function for defining on change suspending event handlers.
+ * An extension function for defining on change suspending event handlers (not composable).
  */
 public fun <EV : Event, E : HTMLElement, C : TagEvents<E>> C.onEventDirectLaunch(
     name: String,
