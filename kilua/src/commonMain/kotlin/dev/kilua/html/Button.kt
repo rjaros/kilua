@@ -51,7 +51,7 @@ public enum class ButtonType {
 }
 
 /**
- * Button component.
+ * HTML Button component.
  */
 public open class Button(
     type: ButtonType = ButtonType.Button,

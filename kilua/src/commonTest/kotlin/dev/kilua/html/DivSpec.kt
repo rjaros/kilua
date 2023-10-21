@@ -46,7 +46,7 @@ class DivSpec : DomSpec {
             assertEquals(
                 normalizeHtml("""<div class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></div>"""),
                 normalizeHtml(root.element?.innerHTML),
-                "Should render a DIV HTML tag to DOM"
+                "Should render an HTML Div tag to DOM"
             )
         }
     }
@@ -67,7 +67,7 @@ class DivSpec : DomSpec {
             assertEquals(
                 normalizeHtml("""<div><div class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></div></div>"""),
                 normalizeHtml(root.renderToString()),
-                "Should render a DIV HTML tag to a String"
+                "Should render an HTML Div tag to a String"
             )
         }
     }

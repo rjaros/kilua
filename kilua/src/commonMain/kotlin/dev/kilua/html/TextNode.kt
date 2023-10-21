@@ -33,7 +33,7 @@ import dev.kilua.core.SafeDomFactory
 import org.w3c.dom.Text
 
 /**
- * Text node component.
+ * HTML text node component.
  */
 public open class TextNode(
     text: String,

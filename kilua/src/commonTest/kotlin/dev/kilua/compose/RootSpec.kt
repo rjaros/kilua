@@ -31,7 +31,7 @@ import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
 import dev.kilua.html.Button
 import dev.kilua.html.ButtonType
-import dev.kilua.html.Col
+import dev.kilua.html.C
 import dev.kilua.html.Color
 import dev.kilua.html.TextAlign
 import dev.kilua.html.button
@@ -52,7 +52,7 @@ class RootSpec : DomSpec {
                 div("a_class") {
                     id = "main"
                     textAlign = TextAlign.Center
-                    border = Border(1.px, BorderStyle.Dotted, Color.name(Col.Red))
+                    border = Border(1.px, BorderStyle.Dotted, Color.name(C.Red))
                     setAttribute("custom", "value")
                     setStyle("padding-top", "2px")
                     div {
@@ -76,7 +76,7 @@ class RootSpec : DomSpec {
                 div("a_class") {
                     id = "main"
                     textAlign = TextAlign.Center
-                    border = Border(1.px, BorderStyle.Dotted, Color.name(Col.Red))
+                    border = Border(1.px, BorderStyle.Dotted, Color.name(C.Red))
                     setAttribute("custom", "value")
                     setStyle("padding-top", "2px")
                     div {

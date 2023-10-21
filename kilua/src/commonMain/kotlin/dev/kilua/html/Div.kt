@@ -32,7 +32,7 @@ import dev.kilua.core.RenderConfig
 import org.w3c.dom.HTMLDivElement
 
 /**
- * Div component.
+ * HTML Div component.
  */
 public open class Div(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
     Tag<HTMLDivElement>("div", className, renderConfig)
