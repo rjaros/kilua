@@ -73,7 +73,7 @@ public enum class OutlineStyle {
 /**
  * Definitions of CSS color names.
  */
-public enum class Col {
+public enum class C {
     Aliceblue,
     Antiquewhite,
     Aqua,
@@ -888,7 +888,7 @@ public open class Color(protected val color: String? = null) {
          * Creates CSS Color with color given with named constant.
          * @param color color named constant
          */
-        public fun name(color: Col): Color {
+        public fun name(color: C): Color {
             return Color(color.value)
         }
 

@@ -341,7 +341,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
      *
      * The value read from this property is always null.
      */
-    override var colorName: Col?
+    override var colorName: C?
         get() = null
         set(value) {
             color = if (value != null) Color.name(value) else null

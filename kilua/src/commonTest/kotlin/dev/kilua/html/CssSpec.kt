@@ -42,7 +42,7 @@ class CssSpec : SimpleSpec {
     @Test
     fun colorName() {
         run {
-            val color = Color.name(Col.Blue)
+            val color = Color.name(C.Blue)
             assertEquals(
                 "blue",
                 color.toString(),

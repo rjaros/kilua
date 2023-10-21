@@ -216,11 +216,11 @@ public interface TagStyle<E : HTMLElement> {
      *
      * This property gives a convenient way to set the value of [color] property e.g.:
      *
-     * c.colorName = Col.Green
+     * c.colorName = C.Green
      *
      * The value read from this property is always null.
      */
-    public var colorName: Col?
+    public var colorName: C?
 
     /**
      * Opacity of the current component.
