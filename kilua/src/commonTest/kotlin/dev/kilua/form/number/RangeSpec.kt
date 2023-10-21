@@ -20,32 +20,28 @@
  * SOFTWARE.
  */
 
-package dev.kilua.form.time
+package dev.kilua.form.number
 
 import dev.kilua.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.normalizeHtml
-import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.minus
-import kotlinx.datetime.plus
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class DateSpec : DomSpec {
-
+class RangeSpec : DomSpec {
 
     @Test
     fun render() {
         runWhenDomAvailable {
-            val day = LocalDate(2023, 10, 15)
             val root = root("test") {
-                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
+                range(15, 10, 20, name = "test") {
+                    autofocus = true
+                }
             }
             assertEquals(
-                normalizeHtml("""<input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1">"""),
+                normalizeHtml("""<input type="range" name="test" min="10" max="20" step="1" autofocus="">"""),
                 normalizeHtml(root.element?.innerHTML),
-                "Should render date input element to DOM"
+                "Should render range input element to DOM"
             )
         }
     }
@@ -54,13 +50,14 @@ class DateSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                val day = LocalDate(2023, 10, 15)
-                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
+                range(15, 10, 20, name = "test") {
+                    autofocus = true
+                }
             }
             assertEquals(
-                normalizeHtml("""<div><input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1"></input></div>"""),
+                normalizeHtml("""<div><input type="range" name="test" autofocus min="10" max="20" step="1"></input></div>"""),
                 normalizeHtml(root.renderToString()),
-                "Should render date input element to a String"
+                "Should render range input element to a String"
             )
         }
     }
@@ -68,18 +65,18 @@ class DateSpec : DomSpec {
     @Test
     fun stepUpDown() {
         run {
-            lateinit var date: Date
-            val day = LocalDate(2023, 10, 15)
+            lateinit var range: Range
             root("test") {
-                date = date(day, day.minus(5, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
+                range = range(19, 10, 20, step = 0.5) {
+                    autofocus = true
+                }
             }
-            repeat(2) {
-                date.stepUp()
+            repeat(4) {
+                range.stepUp()
             }
-            assertEquals(LocalDate(2023, 10, 16), date.value)
-            date.stepDown()
-            assertEquals(LocalDate(2023, 10, 15), date.value)
+            assertEquals(20.0, range.value)
+            range.stepDown()
+            assertEquals(19.5, range.value)
         }
     }
-
 }

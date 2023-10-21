@@ -36,9 +36,9 @@ import dev.kilua.html.Color
 import dev.kilua.html.TextAlign
 import dev.kilua.html.button
 import dev.kilua.html.div
+import dev.kilua.html.px
 import dev.kilua.html.unaryPlus
 import dev.kilua.normalizeHtml
-import dev.kilua.utils.px
 import kotlinx.coroutines.delay
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -96,7 +96,7 @@ class RootSpec : DomSpec {
     @Test
     fun recomposeToString() = runAsync {
         lateinit var button: Button
-        val root = root("test") {
+        val root = root {
             var counter by remember { mutableStateOf(0) }
             div {
                 +"Counter: $counter"
@@ -112,7 +112,7 @@ class RootSpec : DomSpec {
         button.click()
         delay(10)
         assertEquals(
-            normalizeHtml("""<div id="test"><div>Counter: 2<button type="button">Increment</button></div></div>"""),
+            normalizeHtml("""<div><div>Counter: 2<button type="button">Increment</button></div></div>"""),
             normalizeHtml(root.renderToString()),
             "Should recompose when state changes"
         )

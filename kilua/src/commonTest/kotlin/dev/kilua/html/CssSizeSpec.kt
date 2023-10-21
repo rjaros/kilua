@@ -20,45 +20,40 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.html
 
 import dev.kilua.SimpleSpec
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
-class CommonSpec : SimpleSpec {
+class CssSizeSpec : SimpleSpec {
 
     @Test
-    fun syncWithList() {
-        val list = mutableListOf(1, 2, 3)
-        list.syncWithList(listOf(2, 3))
-        assertEquals(list.toString(), listOf(2, 3).toString())
+    fun toStringFunc() {
+        val size = 10.px
+        assertEquals("10px", size.toString())
+        val size2 = auto
+        assertEquals("auto", size2.toString())
+        val size3 = normal
+        assertEquals("normal", size3.toString())
     }
 
     @Test
-    fun pairs() {
-        val pairs = listOf("A", "B", "C").pairs()
-        assertEquals(listOf("A" to "A", "B" to "B", "C" to "C"), pairs)
+    fun plus() {
+        val size = 10.pt
+        val size2 = size + 20
+        val str = size2.toString()
+        assertTrue(str.startsWith("30") && str.endsWith("pt"))
     }
 
     @Test
-    fun listOfPairs() {
-        val list = listOfPairs("A", "B", "C")
-        assertEquals(listOf("A" to "A", "B" to "B", "C" to "C"), list)
-    }
-
-    @Test
-    fun renderAsHtmlAttributes() {
-        val props = mapOf("zIndex" to "3", "ariaLabel" to "test", "href" to "https://google.com")
-        val str = props.renderAsHtmlAttributes()
-        assertEquals("""z-index="3" aria-label="test" href="https://google.com"""", str)
-    }
-
-    @Test
-    fun renderAsCssStyle() {
-        val props = mapOf("border" to "1px solid red", "color" to "blue", "marginTop" to "10px")
-        val str = props.renderAsCssStyle()
-        assertEquals("border: 1px solid red; color: blue; margin-top: 10px;", str)
+    fun minus() {
+        val size = 50.perc
+        val size2 = size - 10
+        val str = size2.toString()
+        assertTrue(str.startsWith("40") && str.endsWith("%"))
     }
 
 }
+

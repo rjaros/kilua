@@ -25,27 +25,30 @@ package dev.kilua.form.time
 import dev.kilua.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.normalizeHtml
-import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.minus
-import kotlinx.datetime.plus
+import kotlinx.datetime.LocalTime
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class DateSpec : DomSpec {
-
+class TimeSpec : DomSpec {
 
     @Test
     fun render() {
         runWhenDomAvailable {
-            val day = LocalDate(2023, 10, 15)
+            val localTime = LocalTime(12, 30, 0)
             val root = root("test") {
-                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
+                time(
+                    localTime,
+                    LocalTime(12, 0, 0),
+                    LocalTime(12, 50, 0),
+                    name = "time"
+                ) {
+                    defaultValue = localTime
+                }
             }
             assertEquals(
-                normalizeHtml("""<input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1">"""),
+                normalizeHtml("""<input type="time" name="time" min="12:00" max="12:50" step="60" value="12:30">"""),
                 normalizeHtml(root.element?.innerHTML),
-                "Should render date input element to DOM"
+                "Should render time input element to DOM"
             )
         }
     }
@@ -54,13 +57,20 @@ class DateSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                val day = LocalDate(2023, 10, 15)
-                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
+                val localTime = LocalTime(12, 30, 0)
+                time(
+                    localTime,
+                    LocalTime(12, 0, 0),
+                    LocalTime(12, 50, 0),
+                    name = "time"
+                ) {
+                    defaultValue = localTime
+                }
             }
             assertEquals(
-                normalizeHtml("""<div><input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1"></input></div>"""),
+                normalizeHtml("""<div><input type="time" name="time" min="12:00" max="12:50" step="60" value="12:30"></input></div>"""),
                 normalizeHtml(root.renderToString()),
-                "Should render date input element to a String"
+                "Should render time input element to a String"
             )
         }
     }
@@ -68,18 +78,22 @@ class DateSpec : DomSpec {
     @Test
     fun stepUpDown() {
         run {
-            lateinit var date: Date
-            val day = LocalDate(2023, 10, 15)
+            lateinit var time: Time
+            val localTime = LocalTime(12, 30)
             root("test") {
-                date = date(day, day.minus(5, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
+                time = time(
+                    localTime,
+                    LocalTime(12, 0),
+                    LocalTime(12, 31),
+                    name = "time"
+                )
             }
             repeat(2) {
-                date.stepUp()
+                time.stepUp()
             }
-            assertEquals(LocalDate(2023, 10, 16), date.value)
-            date.stepDown()
-            assertEquals(LocalDate(2023, 10, 15), date.value)
+            assertEquals(LocalTime(12, 31), time.value)
+            time.stepDown()
+            assertEquals(LocalTime(12, 30), time.value)
         }
     }
-
 }

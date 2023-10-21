@@ -20,32 +20,35 @@
  * SOFTWARE.
  */
 
-package dev.kilua.form.time
+package dev.kilua.panel
 
 import dev.kilua.DomSpec
 import dev.kilua.compose.root
+import dev.kilua.html.tag
+import dev.kilua.html.unaryPlus
 import dev.kilua.normalizeHtml
-import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.minus
-import kotlinx.datetime.plus
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class DateSpec : DomSpec {
-
+class SplitPanelSpec : DomSpec {
 
     @Test
     fun render() {
-        runWhenDomAvailable {
-            val day = LocalDate(2023, 10, 15)
+        runWhenDomAvailableAsync {
             val root = root("test") {
-                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
+                splitPanel(Dir.Vertical) {
+                    left {
+                        tag("span") { +"abc" }
+                    }
+                    right {
+                        tag("span") { +"def" }
+                    }
+                }
             }
             assertEquals(
-                normalizeHtml("""<input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1">"""),
+                normalizeHtml("""<div class="splitpanel-vertical"><div style="width: calc(0% - 5px);"><span>abc</span></div><div class="splitter-vertical" style="width: 10px;"></div><div style="width: calc(0% - 5px);"><span>def</span></div></div>"""),
                 normalizeHtml(root.element?.innerHTML),
-                "Should render date input element to DOM"
+                "Should render a SplitPanel component to DOM"
             )
         }
     }
@@ -54,32 +57,20 @@ class DateSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                val day = LocalDate(2023, 10, 15)
-                date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
+                splitPanel(Dir.Vertical) {
+                    left {
+                        tag("span") { +"abc" }
+                    }
+                    right {
+                        tag("span") { +"def" }
+                    }
+                }
             }
             assertEquals(
-                normalizeHtml("""<div><input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1"></input></div>"""),
+                normalizeHtml("""<div><div class="splitpanel-vertical"><div><span>abc</span></div><div></div><div><span>def</span></div></div></div>"""),
                 normalizeHtml(root.renderToString()),
-                "Should render date input element to a String"
+                "Should render a SplitPanel component to a String"
             )
         }
     }
-
-    @Test
-    fun stepUpDown() {
-        run {
-            lateinit var date: Date
-            val day = LocalDate(2023, 10, 15)
-            root("test") {
-                date = date(day, day.minus(5, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
-            }
-            repeat(2) {
-                date.stepUp()
-            }
-            assertEquals(LocalDate(2023, 10, 16), date.value)
-            date.stepDown()
-            assertEquals(LocalDate(2023, 10, 15), date.value)
-        }
-    }
-
 }

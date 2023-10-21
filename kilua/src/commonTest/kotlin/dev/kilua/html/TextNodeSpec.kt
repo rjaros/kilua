@@ -20,45 +20,43 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.html
 
-import dev.kilua.SimpleSpec
+import dev.kilua.DomSpec
+import dev.kilua.compose.root
+import dev.kilua.normalizeHtml
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class CommonSpec : SimpleSpec {
+class TextNodeSpec : DomSpec {
 
     @Test
-    fun syncWithList() {
-        val list = mutableListOf(1, 2, 3)
-        list.syncWithList(listOf(2, 3))
-        assertEquals(list.toString(), listOf(2, 3).toString())
+    fun render() {
+        runWhenDomAvailable {
+            val root = root("test") {
+                textNode("test")
+            }
+            assertEquals(
+                normalizeHtml("""test"""),
+                normalizeHtml(root.element?.innerHTML),
+                "Should render an HTML text node to DOM"
+            )
+        }
     }
 
     @Test
-    fun pairs() {
-        val pairs = listOf("A", "B", "C").pairs()
-        assertEquals(listOf("A" to "A", "B" to "B", "C" to "C"), pairs)
-    }
-
-    @Test
-    fun listOfPairs() {
-        val list = listOfPairs("A", "B", "C")
-        assertEquals(listOf("A" to "A", "B" to "B", "C" to "C"), list)
-    }
-
-    @Test
-    fun renderAsHtmlAttributes() {
-        val props = mapOf("zIndex" to "3", "ariaLabel" to "test", "href" to "https://google.com")
-        val str = props.renderAsHtmlAttributes()
-        assertEquals("""z-index="3" aria-label="test" href="https://google.com"""", str)
-    }
-
-    @Test
-    fun renderAsCssStyle() {
-        val props = mapOf("border" to "1px solid red", "color" to "blue", "marginTop" to "10px")
-        val str = props.renderAsCssStyle()
-        assertEquals("border: 1px solid red; color: blue; margin-top: 10px;", str)
+    fun renderToString() {
+        run {
+            val root = root {
+                textNode("test")
+            }
+            assertEquals(
+                normalizeHtml("""<div>test</div>"""),
+                normalizeHtml(root.renderToString()),
+                "Should render an HTML text node to a String"
+            )
+        }
     }
 
 }
+

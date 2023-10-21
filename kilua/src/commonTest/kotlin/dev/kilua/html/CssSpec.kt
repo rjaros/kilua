@@ -19,46 +19,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package dev.kilua.utils
+package dev.kilua.html
 
 import dev.kilua.SimpleSpec
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class CommonSpec : SimpleSpec {
+class CssSpec : SimpleSpec {
 
     @Test
-    fun syncWithList() {
-        val list = mutableListOf(1, 2, 3)
-        list.syncWithList(listOf(2, 3))
-        assertEquals(list.toString(), listOf(2, 3).toString())
+    fun colorHex() {
+        run {
+            val color = Color.hex(0x112233)
+            assertEquals(
+                "#112233",
+                color.toString(),
+                "Should generate color from hex integer"
+            )
+        }
     }
 
     @Test
-    fun pairs() {
-        val pairs = listOf("A", "B", "C").pairs()
-        assertEquals(listOf("A" to "A", "B" to "B", "C" to "C"), pairs)
+    fun colorName() {
+        run {
+            val color = Color.name(Col.Blue)
+            assertEquals(
+                "blue",
+                color.toString(),
+                "Should generate color from name"
+            )
+        }
     }
 
     @Test
-    fun listOfPairs() {
-        val list = listOfPairs("A", "B", "C")
-        assertEquals(listOf("A" to "A", "B" to "B", "C" to "C"), list)
+    fun colorRgb() {
+        run {
+            val color = Color.rgb(17, 34, 51)
+            assertEquals(
+                "#112233",
+                color.toString(),
+                "Should generate color from RGB values"
+            )
+        }
     }
 
     @Test
-    fun renderAsHtmlAttributes() {
-        val props = mapOf("zIndex" to "3", "ariaLabel" to "test", "href" to "https://google.com")
-        val str = props.renderAsHtmlAttributes()
-        assertEquals("""z-index="3" aria-label="test" href="https://google.com"""", str)
+    fun colorRgba() {
+        run {
+            val color = Color.rgba(17, 34, 51, 221)
+            assertEquals(
+                "#112233dd",
+                color.toString(),
+                "Should generate color from RGBA values"
+            )
+        }
     }
-
-    @Test
-    fun renderAsCssStyle() {
-        val props = mapOf("border" to "1px solid red", "color" to "blue", "marginTop" to "10px")
-        val str = props.renderAsCssStyle()
-        assertEquals("border: 1px solid red; color: blue; margin-top: 10px;", str)
-    }
-
 }
