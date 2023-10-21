@@ -43,9 +43,9 @@ internal const val RANGE_DEFAULT_STEP = 1
  */
 public open class Range(
     value: Number? = null,
-    min: Int = RANGE_DEFAULT_MIN,
-    max: Int = RANGE_DEFAULT_MAX,
-    step: Int = RANGE_DEFAULT_STEP,
+    min: Number = RANGE_DEFAULT_MIN,
+    max: Number = RANGE_DEFAULT_MAX,
+    step: Number = RANGE_DEFAULT_STEP,
     name: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
@@ -56,21 +56,21 @@ public open class Range(
     /**
      * The minimum value of the range.
      */
-    public open var min: Int by updatingProperty(min, skipUpdate) {
+    public open var min: Number by updatingProperty(min, skipUpdate) {
         element.min = it.toString()
     }
 
     /**
      * The maximum value of the range.
      */
-    public open var max: Int by updatingProperty(max, skipUpdate) {
+    public open var max: Number by updatingProperty(max, skipUpdate) {
         element.max = it.toString()
     }
 
     /**
      * The step value of the range.
      */
-    public open var step: Int by updatingProperty(step, skipUpdate) {
+    public open var step: Number by updatingProperty(step, skipUpdate) {
         element.step = it.toString()
     }
 
@@ -100,9 +100,12 @@ public open class Range(
      * Increments the value by the step value.
      */
     public open fun stepUp() {
-        elementNullable?.let {
-            it.stepUp()
-            setValueFromString(it.value)
+        if (elementAvailable) {
+            element.stepUp()
+            setValueFromString(element.value)
+        } else {
+            val newValue = (value?.toDouble() ?: min.toDouble()) + step.toDouble()
+            value = if (newValue > max.toDouble()) max else newValue
         }
     }
 
@@ -110,9 +113,12 @@ public open class Range(
      * Decrements the value by the step value.
      */
     public open fun stepDown() {
-        elementNullable?.let {
-            it.stepDown()
-            setValueFromString(it.value)
+        if (elementAvailable) {
+            element.stepDown()
+            setValueFromString(element.value)
+        } else {
+            val newValue = (value?.toDouble() ?: max.toDouble()) - step.toDouble()
+            value = if (newValue < min.toDouble()) min else newValue
         }
     }
 
@@ -133,9 +139,9 @@ public open class Range(
 @Composable
 public fun ComponentBase.range(
     value: Number? = null,
-    min: Int = RANGE_DEFAULT_MIN,
-    max: Int = RANGE_DEFAULT_MAX,
-    step: Int = RANGE_DEFAULT_STEP,
+    min: Number = RANGE_DEFAULT_MIN,
+    max: Number = RANGE_DEFAULT_MAX,
+    step: Number = RANGE_DEFAULT_STEP,
     name: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
