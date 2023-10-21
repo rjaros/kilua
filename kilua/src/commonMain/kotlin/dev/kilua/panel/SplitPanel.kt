@@ -172,7 +172,7 @@ public open class SplitPanel(
      * Create and initialize Split.js instance.
      */
     protected open fun initializeSplitJs() {
-        if (children.size == 3) {
+        if (elementAvailable && children.size == 3) {
             val mainBoundingRect = elementNullable?.getBoundingClientRect()
             val splitChildren = listOf(children[0], children[2])
             val splitter = children[1]
