@@ -29,7 +29,7 @@ import dev.kilua.CoreModule
 import dev.kilua.compose.root
 import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
-import dev.kilua.html.Col
+import dev.kilua.html.C
 import dev.kilua.html.Color
 import dev.kilua.html.button
 import dev.kilua.html.perc
@@ -68,7 +68,7 @@ public class App : Application() {
             if (visible) {
                 sp = splitPanel(Dir.Vertical) {
                     self {
-                        border = Border(1.px, BorderStyle.Solid, Color.name(Col.Black))
+                        border = Border(1.px, BorderStyle.Solid, Color.name(C.Black))
                         width = 800.px
                         height = 300.px
                         onEvent<CustomEvent>("dragEndSplitPanel") {
