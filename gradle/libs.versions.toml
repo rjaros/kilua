@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.20-Beta2"
+kotlin = "1.9.20-RC"
 compose = "1.5.1-dev-wasm01"
 compose-plugin = "1.5.2.1-Beta"
 npm-publish = "3.4.1"
