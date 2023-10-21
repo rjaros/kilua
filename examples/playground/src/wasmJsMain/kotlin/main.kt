@@ -27,31 +27,23 @@ import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.CoreModule
 import dev.kilua.compose.root
-import dev.kilua.form.number.range
 import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
 import dev.kilua.html.Col
 import dev.kilua.html.Color
 import dev.kilua.html.button
-import dev.kilua.html.div
+import dev.kilua.html.perc
+import dev.kilua.html.px
 import dev.kilua.html.unaryPlus
 import dev.kilua.panel.Dir
-import dev.kilua.panel.GutterAlign
 import dev.kilua.panel.SplitPanel
 import dev.kilua.panel.splitPanel
 import dev.kilua.startApplication
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
 import dev.kilua.utils.console
-import dev.kilua.utils.hour
-import dev.kilua.utils.log
-import dev.kilua.utils.now
-import dev.kilua.utils.perc
-import dev.kilua.utils.px
-import dev.kilua.utils.today
 import dev.kilua.utils.useCssModule
 import org.w3c.dom.CustomEvent
-import org.w3c.dom.events.Event
 
 @JsModule("./css/style.css")
 @JsNonModule

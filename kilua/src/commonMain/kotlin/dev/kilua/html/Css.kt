@@ -22,35 +22,7 @@
 
 package dev.kilua.html
 
-import dev.kilua.utils.asString
 import dev.kilua.utils.toKebabCase
-
-/**
- * Definitions of CSS units.
- */
-public enum class CssUnit(public val cssUnit: String) {
-    px("px"),
-    pt("pt"),
-    em("em"),
-    cm("cm"),
-    mm("mm"),
-    `in`("in"),
-    pc("pc"),
-    ch("ch"),
-    rem("rem"),
-    vw("vw"),
-    vh("vh"),
-    vmin("vmin"),
-    vmax("vmax"),
-    perc("%"),
-    auto("auto"),
-    normal("normal")
-}
-
-/**
- * This type is used for defining CSS dimensions (width, heights, margins, paddings, etc.).
- */
-public typealias CssSize = Pair<Number, CssUnit>
 
 /**
  * Definitions of CSS border styles.
@@ -71,9 +43,7 @@ public enum class BorderStyle {
     Unset;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 }
 
 /**
@@ -96,9 +66,7 @@ public enum class OutlineStyle {
     Unset;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -249,9 +217,7 @@ public enum class Col {
     Yellowgreen;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -263,9 +229,7 @@ public enum class BgSize {
     Contain;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -279,9 +243,7 @@ public enum class BgRepeat {
     NoRepeat;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -294,9 +256,7 @@ public enum class BgAttach {
     Local;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -309,9 +269,7 @@ public enum class BgOrigin {
     ContentBox;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -324,9 +282,7 @@ public enum class BgClip {
     ContentBox;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -359,9 +315,7 @@ public enum class Display {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -376,9 +330,7 @@ public enum class Position {
     Sticky;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -394,9 +346,7 @@ public enum class Overflow {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -409,9 +359,7 @@ public enum class OverflowWrap {
     Anywhere;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -427,9 +375,7 @@ public enum class Resize {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -443,9 +389,7 @@ public enum class Direction {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -461,9 +405,7 @@ public enum class TextAlign {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -480,9 +422,7 @@ public enum class TextDecorationLine {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -499,9 +439,7 @@ public enum class TextDecorationStyle {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -517,9 +455,7 @@ public enum class TextTransform {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -533,9 +469,7 @@ public enum class TextOverflow {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -550,9 +484,7 @@ public enum class UnicodeBidi {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -572,9 +504,7 @@ public enum class VerticalAlign {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -591,9 +521,7 @@ public enum class WhiteSpace {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -608,9 +536,7 @@ public enum class FontStyle {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -624,9 +550,7 @@ public enum class FontVariant {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -642,9 +566,7 @@ public enum class FontWeight {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -659,9 +581,7 @@ public enum class CssFloat {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -677,9 +597,7 @@ public enum class Clear {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -692,9 +610,7 @@ public enum class WordBreak {
     BreakAll;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -709,9 +625,7 @@ public enum class LineBreak {
     Anywhere;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -756,9 +670,7 @@ public enum class Cursor {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -772,9 +684,7 @@ public enum class FlexDirection {
     ColumnReverse;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -787,9 +697,7 @@ public enum class FlexWrap {
     WrapReverse;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -803,9 +711,7 @@ public enum class JustifyItems {
     Stretch;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -824,9 +730,7 @@ public enum class JustifyContent {
     Stretch;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -843,9 +747,7 @@ public enum class AlignItems {
     End;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -864,9 +766,7 @@ public enum class AlignContent {
     SpaceEvenly;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -880,9 +780,7 @@ public enum class GridAutoFlow(public val value: String) {
     RowDense("row dense"),
     ColumnDense("column dense");
 
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -921,9 +819,7 @@ public enum class ListStyleType {
     Inherit;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -935,9 +831,7 @@ public enum class ListStylePosition {
     Outside;
 
     public val value: String = name.toKebabCase()
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 
 }
 
@@ -951,13 +845,8 @@ public open class Border(
     protected val width: CssSize? = null, protected val style: BorderStyle? = null,
     protected val color: Color? = null
 ) {
-
-    public fun asString(): String {
-        val w = width?.asString()
-        return w.orEmpty() + " " + (style?.value).orEmpty() + " " + color?.asString().orEmpty()
-    }
-
-    override fun toString(): String = asString()
+    public val value: String = listOfNotNull(width?.toString(), style?.toString(), color?.toString()).joinToString(" ")
+    override fun toString(): String = value
 }
 
 /**
@@ -970,13 +859,9 @@ public open class Outline(
     protected val width: CssSize? = null, protected val style: OutlineStyle? = null,
     protected val color: Color? = null
 ) {
+    public val value: String = listOfNotNull(width?.toString(), style?.toString(), color?.toString()).joinToString(" ")
 
-    public fun asString(): String {
-        val w = width?.asString()
-        return w.orEmpty() + " " + (style?.value).orEmpty() + " " + color?.asString().orEmpty()
-    }
-
-    override fun toString(): String = asString()
+    override fun toString(): String = value
 }
 
 /**
@@ -985,11 +870,9 @@ public open class Outline(
  */
 public open class Color(protected val color: String? = null) {
 
-    public fun asString(): String {
-        return color.orEmpty()
-    }
+    public val value: String = color.orEmpty()
 
-    override fun toString(): String = asString()
+    override fun toString(): String = value
 
     public companion object {
         /**
@@ -1048,25 +931,28 @@ public open class Background(
     protected val attachment: BgAttach? = null
 ) {
 
-    public fun asString(): String {
+    public val value: String = asString()
+
+    protected fun asString(): String {
         val img = image?.let {
             "url($image)"
         }
-        val posX = positionX?.asString()
-        val posY = positionY?.asString()
-        val sX = sizeX?.asString()
-        val sY = sizeY?.asString()
-        return (color?.asString().orEmpty() + " " + img.orEmpty() + " " + posX.orEmpty() + " " + posY.orEmpty() +
-                if (sX != null || sY != null || size != null) {
-                    (if (posX != null || posY != null) " / " else " 0px 0px / ") +
-                            sX.orEmpty() + " " + sY.orEmpty() + " " + (size?.value).orEmpty()
-                } else {
-                    ""
-                } + " " + (repeat?.value).orEmpty() + " " + (origin?.value).orEmpty() + " " +
-                (clip?.value).orEmpty() + " " + (attachment?.value).orEmpty()).trim()
+        val posX = positionX?.toString()
+        val posY = positionY?.toString()
+        val sX = sizeX?.toString()
+        val sY = sizeY?.toString()
+        return listOfNotNull(
+            color?.toString(), img, posX, posY,
+            if (sX != null || sY != null || size != null) {
+                (if (posX != null || posY != null) " / " else " 0px 0px / ") +
+                        sX.orEmpty() + " " + sY.orEmpty() + " " + (size?.value).orEmpty()
+            } else {
+                null
+            }, repeat?.toString(), origin?.toString(), clip?.toString(), attachment?.toString()
+        ).joinToString(" ")
     }
 
-    override fun toString(): String = asString()
+    override fun toString(): String = value
 }
 
 /**
@@ -1080,13 +966,9 @@ public open class TextDecoration(
     protected val color: Color? = null
 ) {
 
-    public fun asString(): String {
-        return ((line?.value).orEmpty() + " " +
-                (style?.value).orEmpty() + " " +
-                color?.asString().orEmpty()).trim()
-    }
+    public val value: String = listOfNotNull(line?.toString(), style?.toString(), color?.toString()).joinToString(" ")
 
-    override fun toString(): String = asString()
+    override fun toString(): String = value
 }
 
 /**
@@ -1101,14 +983,11 @@ public open class TextShadow(
     protected val blurRadius: CssSize? = null, protected val color: Color? = null
 ) {
 
-    public fun asString(): String {
-        return ((hShadow?.asString()).orEmpty() + " " +
-                (vShadow?.asString()).orEmpty() + " " +
-                (blurRadius?.asString()).orEmpty() + " " +
-                color?.asString().orEmpty()).trim()
-    }
+    public val value: String =
+        listOfNotNull(hShadow?.toString(), vShadow?.toString(), blurRadius?.toString(), color?.toString())
+            .joinToString(" ")
 
-    override fun toString(): String = asString()
+    override fun toString(): String = value
 }
 
 /**
@@ -1126,15 +1005,12 @@ public open class BoxShadow(
     protected val color: Color? = null, protected val inset: Boolean = false
 ) {
 
-    public fun asString(): String {
-        return (if (inset) "inset " else "" + (hOffset?.asString()).orEmpty() + " " +
-                (vOffset?.asString()).orEmpty() + " " +
-                (blurRadius?.asString()).orEmpty() + " " +
-                (spreadRadius?.asString()).orEmpty() + " " +
-                color?.asString().orEmpty()).trim()
-    }
+    public val value: String = listOfNotNull(
+        if (inset) "inset" else null, hOffset?.toString(), vOffset?.toString(),
+        blurRadius?.toString(), spreadRadius?.toString(), color?.toString()
+    ).joinToString(" ")
 
-    override fun toString(): String = asString()
+    override fun toString(): String = value
 }
 
 /**
@@ -1150,11 +1026,10 @@ public open class Transition(
     protected val timingFunction: String? = null,
     protected val delay: Double? = null
 ) {
-    public fun asString(): String {
-        return ("$property ${duration}s ${timingFunction ?: ""} ${delay?.let { it.toString() + "s" } ?: ""}").trim()
-    }
+    public val value: String = listOfNotNull(property, "${duration}s", timingFunction, delay?.let { "${it}s" })
+        .joinToString(" ")
 
-    override fun toString(): String = asString()
+    override fun toString(): String = value
 }
 
 /**
@@ -1169,12 +1044,8 @@ public open class ListStyle(
     protected val image: String? = null,
 ) {
 
-    public fun asString(): String {
-        val img = image?.let {
-            "url($image)"
-        }
-        return ("${type?.value.orEmpty()} ${position?.value.orEmpty()} ${img.orEmpty()}").trim()
-    }
+    public val value: String = listOfNotNull(type?.toString(), position?.toString(), image?.let { "url($image)" })
+        .joinToString(" ")
 
-    override fun toString(): String = asString()
+    override fun toString(): String = value
 }

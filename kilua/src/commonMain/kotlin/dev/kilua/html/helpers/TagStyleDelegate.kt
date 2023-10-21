@@ -24,7 +24,6 @@ package dev.kilua.html.helpers
 
 import dev.kilua.core.PropertyDelegate
 import dev.kilua.html.*
-import dev.kilua.utils.asString
 import dev.kilua.utils.cast
 import org.w3c.dom.HTMLElement
 
@@ -48,7 +47,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var width: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.width = it.asString()
+            element.style.width = it.toString()
         } else {
             element.style.removeProperty("width")
         }
@@ -56,7 +55,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var minWidth: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.minWidth = it.asString()
+            element.style.minWidth = it.toString()
         } else {
             element.style.removeProperty("min-width")
         }
@@ -64,7 +63,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var maxWidth: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.maxWidth = it.asString()
+            element.style.maxWidth = it.toString()
         } else {
             element.style.removeProperty("max-width")
         }
@@ -72,7 +71,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var height: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.height = it.asString()
+            element.style.height = it.toString()
         } else {
             element.style.removeProperty("height")
         }
@@ -80,7 +79,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var minHeight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.minHeight = it.asString()
+            element.style.minHeight = it.toString()
         } else {
             element.style.removeProperty("min-height")
         }
@@ -88,7 +87,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var maxHeight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.maxHeight = it.asString()
+            element.style.maxHeight = it.toString()
         } else {
             element.style.removeProperty("max-height")
         }
@@ -112,7 +111,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var top: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.top = it.asString()
+            element.style.top = it.toString()
         } else {
             element.style.removeProperty("top")
         }
@@ -120,7 +119,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var left: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.left = it.asString()
+            element.style.left = it.toString()
         } else {
             element.style.removeProperty("left")
         }
@@ -128,7 +127,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var right: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.right = it.asString()
+            element.style.right = it.toString()
         } else {
             element.style.removeProperty("right")
         }
@@ -136,7 +135,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var bottom: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.bottom = it.asString()
+            element.style.bottom = it.toString()
         } else {
             element.style.removeProperty("bottom")
         }
@@ -192,7 +191,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var border: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.border = it.asString()
+            element.style.border = it.toString()
         } else {
             element.style.removeProperty("border")
         }
@@ -200,7 +199,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var borderTop: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.borderTop = it.asString()
+            element.style.borderTop = it.toString()
         } else {
             element.style.removeProperty("border-top")
         }
@@ -208,7 +207,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var borderRight: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.borderRight = it.asString()
+            element.style.borderRight = it.toString()
         } else {
             element.style.removeProperty("border-right")
         }
@@ -216,7 +215,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var borderBottom: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.borderBottom = it.asString()
+            element.style.borderBottom = it.toString()
         } else {
             element.style.removeProperty("border-bottom")
         }
@@ -224,7 +223,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var borderLeft: Border? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.borderLeft = it.asString()
+            element.style.borderLeft = it.toString()
         } else {
             element.style.removeProperty("border-left")
         }
@@ -232,7 +231,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var margin: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.margin = it.asString()
+            element.style.margin = it.toString()
         } else {
             element.style.removeProperty("margin")
         }
@@ -240,7 +239,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var marginTop: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.marginTop = it.asString()
+            element.style.marginTop = it.toString()
         } else {
             element.style.removeProperty("margin-top")
         }
@@ -248,7 +247,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var marginRight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.marginRight = it.asString()
+            element.style.marginRight = it.toString()
         } else {
             element.style.removeProperty("margin-right")
         }
@@ -256,7 +255,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var marginBottom: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.marginBottom = it.asString()
+            element.style.marginBottom = it.toString()
         } else {
             element.style.removeProperty("margin-bottom")
         }
@@ -264,7 +263,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var marginLeft: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.marginLeft = it.asString()
+            element.style.marginLeft = it.toString()
         } else {
             element.style.removeProperty("margin-left")
         }
@@ -272,7 +271,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var padding: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.padding = it.asString()
+            element.style.padding = it.toString()
         } else {
             element.style.removeProperty("padding")
         }
@@ -280,7 +279,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var paddingTop: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.paddingTop = it.asString()
+            element.style.paddingTop = it.toString()
         } else {
             element.style.removeProperty("padding-top")
         }
@@ -288,7 +287,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var paddingRight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.paddingRight = it.asString()
+            element.style.paddingRight = it.toString()
         } else {
             element.style.removeProperty("padding-right")
         }
@@ -296,7 +295,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var paddingBottom: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.paddingBottom = it.asString()
+            element.style.paddingBottom = it.toString()
         } else {
             element.style.removeProperty("padding-bottom")
         }
@@ -304,7 +303,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var paddingLeft: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.paddingLeft = it.asString()
+            element.style.paddingLeft = it.toString()
         } else {
             element.style.removeProperty("padding-left")
         }
@@ -312,7 +311,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var color: Color? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.color = it.asString()
+            element.style.color = it.toString()
         } else {
             element.style.removeProperty("color")
         }
@@ -362,7 +361,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var background: Background? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.background = it.asString()
+            element.style.background = it.toString()
         } else {
             element.style.removeProperty("background")
         }
@@ -378,7 +377,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var letterSpacing: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.letterSpacing = it.asString()
+            element.style.letterSpacing = it.toString()
         } else {
             element.style.removeProperty("letter-spacing")
         }
@@ -386,7 +385,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var lineHeight: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.lineHeight = it.asString()
+            element.style.lineHeight = it.toString()
         } else {
             element.style.removeProperty("line-height")
         }
@@ -402,7 +401,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var textDecoration: TextDecoration? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.textDecoration = it.asString()
+            element.style.textDecoration = it.toString()
         } else {
             element.style.removeProperty("text-decoration")
         }
@@ -410,7 +409,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var textIndent: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.textIndent = it.asString()
+            element.style.textIndent = it.toString()
         } else {
             element.style.removeProperty("text-indent")
         }
@@ -418,7 +417,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var textShadow: TextShadow? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.textShadow = it.asString()
+            element.style.textShadow = it.toString()
         } else {
             element.style.removeProperty("text-shadow")
         }
@@ -466,7 +465,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var wordSpacing: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.wordSpacing = it.asString()
+            element.style.wordSpacing = it.toString()
         } else {
             element.style.removeProperty("word-spacing")
         }
@@ -482,7 +481,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var fontSize: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.fontSize = it.asString()
+            element.style.fontSize = it.toString()
         } else {
             element.style.removeProperty("font-size")
         }
@@ -626,7 +625,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var flexBasis: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.flexBasis = it.asString()
+            element.style.flexBasis = it.toString()
         } else {
             element.style.removeProperty("flex-basis")
         }
@@ -754,7 +753,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var outline: Outline? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.outline = it.asString()
+            element.style.outline = it.toString()
         } else {
             element.style.removeProperty("outline")
         }
@@ -763,7 +762,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
     override var boxShadow: BoxShadow? by updatingProperty {
         if (it != null && boxShadowList != null) boxShadowList = null
         if (it != null) {
-            elementNullable?.style?.boxShadow = it.asString()
+            elementNullable?.style?.boxShadow = it.toString()
         } else {
             elementNullable?.style?.removeProperty("box-shadow")
         }
@@ -771,7 +770,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var boxShadowList: List<BoxShadow>? by updatingProperty {
         if (it != null && boxShadow != null) boxShadow = null
-        val value = it?.joinToString { s -> s.asString() }
+        val value = it?.joinToString { s -> s.toString() }
         if (value != null) {
             elementNullable?.style?.boxShadow = value
         } else {
@@ -782,7 +781,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
     override var transition: Transition? by updatingProperty {
         if (it != null && transitionList != null) transitionList = null
         if (it != null) {
-            elementNullable?.style?.transition = it.asString()
+            elementNullable?.style?.transition = it.toString()
         } else {
             elementNullable?.style?.removeProperty("transition")
         }
@@ -790,7 +789,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var transitionList: List<Transition>? by updatingProperty {
         if (it != null && transition != null) transition = null
-        val value = it?.joinToString { s -> s.asString() }
+        val value = it?.joinToString { s -> s.toString() }
         if (value != null) {
             elementNullable?.style?.transition = value
         } else {
@@ -801,7 +800,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
     override var borderRadius: CssSize? by updatingProperty {
         if (it != null && borderRadiusList != null) borderRadiusList = null
         if (it != null) {
-            elementNullable?.style?.borderRadius = it.asString()
+            elementNullable?.style?.borderRadius = it.toString()
         } else {
             elementNullable?.style?.removeProperty("border-radius")
         }
@@ -809,7 +808,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var borderRadiusList: List<CssSize>? by updatingProperty {
         if (it != null && borderRadius != null) borderRadius = null
-        val value = it?.joinToString(" ") { s -> s.asString() }
+        val value = it?.joinToString(" ") { s -> s.toString() }
         if (value != null) {
             elementNullable?.style?.borderRadius = value
         } else {
@@ -819,7 +818,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var listStyle: ListStyle? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.listStyle = it.asString()
+            element.style.listStyle = it.toString()
         } else {
             element.style.removeProperty("list-style")
         }
