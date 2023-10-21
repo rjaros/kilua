@@ -49,5 +49,5 @@ public fun hour(): LocalTime {
 public fun now(): LocalDateTime {
     val today = today()
     val time = hour()
-    return LocalDateTime(today.year, today.monthNumber, today.dayOfMonth, time.hour, time.minute)
+    return LocalDateTime(today, time)
 }

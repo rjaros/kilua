@@ -33,7 +33,13 @@ import dev.kilua.form.DateTimeFormControl
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.html.helpers.PropertyListBuilder
+import dev.kilua.utils.now
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
+import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
 internal const val DATETIME_DEFAULT_STEP = 60
@@ -134,9 +140,16 @@ public open class DateTime(
      * Increments the value by the step value.
      */
     public open fun stepUp() {
-        elementNullable?.let {
-            it.stepUp()
-            setValueFromString(it.value)
+        if (elementAvailable) {
+            element.stepUp()
+            setValueFromString(element.value)
+        } else {
+            val now = now()
+            val newValue = (value ?: min ?: now)
+                .toInstant(TimeZone.currentSystemDefault())
+                .plus(step, DateTimeUnit.SECOND)
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+            value = if (max != null && newValue > max!!) max else newValue
         }
     }
 
@@ -144,9 +157,16 @@ public open class DateTime(
      * Decrements the value by the step value.
      */
     public open fun stepDown() {
-        elementNullable?.let {
-            it.stepDown()
-            setValueFromString(it.value)
+        if (elementAvailable) {
+            element.stepDown()
+            setValueFromString(element.value)
+        } else {
+            val now = now()
+            val newValue = (value ?: max ?: now)
+                .toInstant(TimeZone.currentSystemDefault())
+                .minus(step, DateTimeUnit.SECOND)
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+            value = if (min != null && newValue < min!!) min else newValue
         }
     }
 

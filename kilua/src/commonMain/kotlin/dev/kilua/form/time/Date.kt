@@ -33,7 +33,11 @@ import dev.kilua.form.DateFormControl
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.html.helpers.PropertyListBuilder
+import dev.kilua.utils.today
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDate
 
 internal const val DATE_DEFAULT_STEP = 1
@@ -125,9 +129,12 @@ public open class Date(
      * Increments the value by the step value.
      */
     public open fun stepUp() {
-        elementNullable?.let {
-            it.stepUp()
-            setValueFromString(it.value)
+        if (elementAvailable) {
+            element.stepUp()
+            setValueFromString(element.value)
+        } else {
+            val newValue = (value ?: min ?: today()).plus(step, DateTimeUnit.DAY)
+            value = if (max != null && newValue > max!!) max else newValue
         }
     }
 
@@ -135,9 +142,12 @@ public open class Date(
      * Decrements the value by the step value.
      */
     public open fun stepDown() {
-        elementNullable?.let {
-            it.stepDown()
-            setValueFromString(it.value)
+        if (elementAvailable) {
+            element.stepDown()
+            setValueFromString(element.value)
+        } else {
+            val newValue = (value ?: min ?: today()).minus(step, DateTimeUnit.DAY)
+            value = if (min != null && newValue < min!!) min else newValue
         }
     }
 

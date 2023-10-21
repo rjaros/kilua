@@ -33,7 +33,16 @@ import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.form.TimeFormControl
 import dev.kilua.html.helpers.PropertyListBuilder
+import dev.kilua.utils.hour
+import dev.kilua.utils.today
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.toLocalTime
 
 internal const val TIME_DEFAULT_STEP = 60
@@ -133,9 +142,17 @@ public open class Time(
      * Increments the value by the step value.
      */
     public open fun stepUp() {
-        elementNullable?.let {
-            it.stepUp()
-            setValueFromString(it.value)
+        if (elementAvailable) {
+            element.stepUp()
+            setValueFromString(element.value)
+        } else {
+            val today = today()
+            val now = hour()
+            val newValue = LocalDateTime(today, (value ?: min ?: now))
+                .toInstant(TimeZone.currentSystemDefault())
+                .plus(step, DateTimeUnit.SECOND)
+                .toLocalDateTime(TimeZone.currentSystemDefault()).time
+            value = if (max != null && newValue > max!!) max else newValue
         }
     }
 
@@ -143,9 +160,17 @@ public open class Time(
      * Decrements the value by the step value.
      */
     public open fun stepDown() {
-        elementNullable?.let {
-            it.stepDown()
-            setValueFromString(it.value)
+        if (elementAvailable) {
+            element.stepDown()
+            setValueFromString(element.value)
+        } else {
+            val today = today()
+            val now = hour()
+            val newValue = LocalDateTime(today, (value ?: max ?: now))
+                .toInstant(TimeZone.currentSystemDefault())
+                .minus(step, DateTimeUnit.SECOND)
+                .toLocalDateTime(TimeZone.currentSystemDefault()).time
+            value = if (min != null && newValue < min!!) min else newValue
         }
     }
 
