@@ -55,7 +55,7 @@ class RangeSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><input type="range" name="test" autofocus min="10" max="20" step="1"></input></div>"""),
+                normalizeHtml("""<div><input type="range" name="test" autofocus min="10" max="20" step="1"></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render range input element to a String"
             )

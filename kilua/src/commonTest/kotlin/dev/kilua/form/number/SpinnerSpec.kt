@@ -55,7 +55,7 @@ class SpinnerSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><input type="number" name="test" autofocus min="10" max="20" step="1"></input></div>"""),
+                normalizeHtml("""<div><input type="number" name="test" autofocus min="10" max="20" step="1"></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render number input element to a String"
             )

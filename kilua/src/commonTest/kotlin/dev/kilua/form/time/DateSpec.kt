@@ -58,7 +58,7 @@ class DateSpec : DomSpec {
                 date(day, day.minus(1, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
             }
             assertEquals(
-                normalizeHtml("""<div><input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1"></input></div>"""),
+                normalizeHtml("""<div><input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1"></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render date input element to a String"
             )

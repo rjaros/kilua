@@ -190,11 +190,20 @@ public open class Tag<E : HTMLElement>(
                 builder.append(" style=\"${styles.renderAsCssStyle()}\"")
             }
             builder.append(">")
-            children.forEach {
-                it.renderToStringBuilder(builder)
+            if (!voidTags.contains(tagName)) {
+                children.forEach {
+                    it.renderToStringBuilder(builder)
+                }
+                builder.append("</$tagName>")
             }
-            builder.append("</$tagName>")
         }
+    }
+
+    public companion object {
+        protected val voidTags: Set<String> = setOf(
+            "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param",
+            "source", "track", "wbr"
+        )
     }
 }
 

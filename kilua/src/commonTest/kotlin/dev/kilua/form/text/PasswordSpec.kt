@@ -57,7 +57,7 @@ class PasswordSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><input type="password" name="test" maxlength="200" placeholder="A placeholder" autofocus readonly></input></div>"""),
+                normalizeHtml("""<div><input type="password" name="test" maxlength="200" placeholder="A placeholder" autofocus readonly></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render password element to a String"
             )

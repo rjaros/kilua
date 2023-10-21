@@ -68,7 +68,7 @@ class TimeSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><input type="time" name="time" min="12:00" max="12:50" step="60" value="12:30"></input></div>"""),
+                normalizeHtml("""<div><input type="time" name="time" min="12:00" max="12:50" step="60" value="12:30"></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render time input element to a String"
             )

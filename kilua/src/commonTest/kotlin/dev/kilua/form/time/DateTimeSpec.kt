@@ -75,7 +75,7 @@ class DateTimeSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><input type="datetime-local" name="date" min="2023-10-14T00:00" max="2023-10-16T00:00" step="60" value="2023-10-15T12:30"></input></div>"""),
+                normalizeHtml("""<div><input type="datetime-local" name="date" min="2023-10-14T00:00" max="2023-10-16T00:00" step="60" value="2023-10-15T12:30"></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render date and time input element to a String"
             )
