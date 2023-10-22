@@ -24,8 +24,8 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.kilua.utils.AbortController
-import dev.kilua.utils.buildAddEventListenerOptions
+import dev.kilua.externals.AbortController
+import dev.kilua.externals.buildAddEventListenerOptions
 import dev.kilua.utils.cast
 import dev.kilua.utils.nativeMapOf
 import org.w3c.dom.HTMLElement

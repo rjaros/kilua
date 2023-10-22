@@ -27,6 +27,9 @@ import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.CoreModule
 import dev.kilua.compose.root
+import dev.kilua.externals.obj
+import dev.kilua.form.number.range
+import dev.kilua.form.number.spinner
 import dev.kilua.html.*
 import dev.kilua.panel.Dir
 import dev.kilua.panel.SplitPanel
@@ -35,7 +38,6 @@ import dev.kilua.startApplication
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
 import dev.kilua.utils.console
-import dev.kilua.utils.obj
 import dev.kilua.utils.useCssModule
 import kotlinx.browser.window
 import org.w3c.dom.CustomEvent
@@ -54,6 +56,20 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+
+            range(step = 0.5) {
+                onChange {
+                    console.log(this.value?.toString())
+                }
+            }
+
+            spinner {
+                onChange {
+                    console.log(this.value?.toString())
+                }
+            }
+
+            hr()
 
             var count by remember { mutableStateOf(4) }
             var start by remember { mutableStateOf(1) }

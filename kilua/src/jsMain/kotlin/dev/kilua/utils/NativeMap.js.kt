@@ -22,6 +22,8 @@
 
 package dev.kilua.utils
 
+import dev.kilua.externals.delete
+
 public actual class NativeMap<V> : MutableMap<String, V> {
 
     private var nativeMap: dynamic = js("{}")

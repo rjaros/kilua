@@ -22,7 +22,7 @@
 
 package dev.kilua.compose
 
-import dev.kilua.utils.obj
+import dev.kilua.externals.obj
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Runnable
 import kotlin.coroutines.CoroutineContext

@@ -20,22 +20,8 @@
  * SOFTWARE.
  */
 
-package dev.kilua.compose
+package dev.kilua.externals
 
-import dev.kilua.externals.obj
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Runnable
-import kotlin.coroutines.CoroutineContext
-import kotlin.js.Promise
-
-/**
- * Coroutine dispatcher based on JavaScript Promise.
- */
-internal actual class PromiseDispatcher : CoroutineDispatcher() {
-    actual override fun dispatch(context: CoroutineContext, block: Runnable) {
-        Promise.resolve(obj()).then {
-            block.run()
-            obj()
-        }
-    }
+internal external class NumberWithToFixed : JsAny {
+    fun toFixed(digits: Int): String
 }

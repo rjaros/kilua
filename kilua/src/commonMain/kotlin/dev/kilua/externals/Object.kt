@@ -20,22 +20,14 @@
  * SOFTWARE.
  */
 
-package dev.kilua.compose
-
-import dev.kilua.externals.obj
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Runnable
-import kotlin.coroutines.CoroutineContext
-import kotlin.js.Promise
+package dev.kilua.externals
 
 /**
- * Coroutine dispatcher based on JavaScript Promise.
+ * JavaScript Object class
  */
-internal actual class PromiseDispatcher : CoroutineDispatcher() {
-    actual override fun dispatch(context: CoroutineContext, block: Runnable) {
-        Promise.resolve(obj()).then {
-            block.run()
-            obj()
-        }
-    }
-}
+public expect class Object
+
+/**
+ * Return empty JS Object
+ */
+public expect fun obj(): Object

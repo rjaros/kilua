@@ -22,39 +22,9 @@
 
 package dev.kilua.utils
 
-public actual external class Object
-
-@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-public actual inline fun obj(): Object {
-    return js("{}")
-}
-
-public actual val isDom: Boolean by lazy {
-    js("typeof document !== 'undefined'")
-}
+import dev.kilua.externals.Object
 
 public actual typealias JsNonModule = kotlin.js.JsNonModule
-
-/**
- * Helper function for creating JavaScript objects with given type.
- */
-public inline fun <T : Any> obj(init: T.() -> Unit): T {
-    return (js("{}").unsafeCast<T>()).apply(init)
-}
-
-/**
- * Helper function for creating JavaScript objects.
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun obj(noinline init: dynamic.() -> Unit): dynamic {
-    return (js("{}")).apply(init)
-}
-
-public external fun delete(p: dynamic): Boolean
-
-public fun delete(thing: dynamic, key: String) {
-    delete(thing[key])
-}
 
 public actual fun size(array: Object): Int = array.cast<Array<*>>().size
 

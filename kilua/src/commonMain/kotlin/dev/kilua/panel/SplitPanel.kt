@@ -34,7 +34,7 @@ import dev.kilua.externals.SplitJsOptions
 import dev.kilua.externals.splitJs
 import dev.kilua.html.Tag
 import dev.kilua.html.div
-import dev.kilua.utils.buildCustomEventInit
+import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.utils.cast
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLDivElement

@@ -22,6 +22,10 @@
 
 package dev.kilua.utils
 
+public actual val isDom: Boolean by lazy {
+    js("typeof document !== 'undefined'")
+}
+
 @Suppress("NOTHING_TO_INLINE")
 public actual inline fun <T> Any?.cast(): T {
     return this.unsafeCast<T>()

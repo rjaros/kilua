@@ -22,6 +22,11 @@
 
 package dev.kilua.utils
 
+@JsFun("ref => typeof document !== 'undefined'")
+private external fun isDom(): Boolean
+
+public actual val isDom: Boolean by lazy { isDom() }
+
 @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 public actual inline fun <T> Any?.cast(): T {
     return this as T

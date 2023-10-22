@@ -24,8 +24,8 @@ package dev.kilua.compose
 
 import androidx.compose.runtime.DefaultMonotonicFrameClock
 import androidx.compose.runtime.MonotonicFrameClock
+import dev.kilua.externals.obj
 import dev.kilua.utils.isDom
-import dev.kilua.utils.obj
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.js.Promise

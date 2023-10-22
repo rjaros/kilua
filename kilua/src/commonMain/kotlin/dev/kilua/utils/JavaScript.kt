@@ -22,20 +22,12 @@
 
 package dev.kilua.utils
 
-/**
- * JavaScript Object class
- */
-public expect class Object
+import dev.kilua.externals.Object
 
 /**
- * Return empty JS Object
+ * Utility extension function for casting. Uses unsafeCast() on JS.
  */
-public expect fun obj(): Object
-
-/**
- * Whether the DOM is available
- */
-public expect val isDom: Boolean
+public expect inline fun <T> Any?.cast(): T
 
 /**
  * Helper annotation for JS/Wasm compatibility.

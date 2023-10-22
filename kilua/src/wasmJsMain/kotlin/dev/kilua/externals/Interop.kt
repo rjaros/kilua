@@ -1,3 +1,5 @@
+@file:JsModule("kilua-assets/js/array.mjs")
+
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -20,22 +22,18 @@
  * SOFTWARE.
  */
 
-package dev.kilua.compose
-
-import dev.kilua.externals.obj
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Runnable
-import kotlin.coroutines.CoroutineContext
-import kotlin.js.Promise
+package dev.kilua.externals
 
 /**
- * Coroutine dispatcher based on JavaScript Promise.
+ * Helper functions which allow to create JS arrays and pass them as arguments
+ * to external functions from Kotlin/Wasm code.
+ * They are using external JS module published on the NPM repository.
  */
-internal actual class PromiseDispatcher : CoroutineDispatcher() {
-    actual override fun dispatch(context: CoroutineContext, block: Runnable) {
-        Promise.resolve(obj()).then {
-            block.run()
-            obj()
-        }
-    }
-}
+
+public external fun <T : JsAny> jsArrayOf(vararg obj: T): JsArray<T>
+
+public external fun jsArrayOf(vararg obj: JsAny): JsArray<JsAny>
+
+public external fun jsArrayOf(vararg obj: Int): JsArray<JsNumber>
+
+public external fun jsArrayOf(vararg obj: String): JsArray<JsString>

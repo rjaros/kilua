@@ -23,9 +23,9 @@
 package dev.kilua.utils
 
 /**
- * Utility extension function for casting. Uses unsafeCast() on JS.
+ * Whether the DOM is available
  */
-public expect inline fun <T> Any?.cast(): T
+public expect val isDom: Boolean
 
 /**
  * Render map of properties to an CSS style string.

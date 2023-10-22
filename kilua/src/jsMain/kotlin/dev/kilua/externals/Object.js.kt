@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-present Robert Jaros
+ * Copyright (c) 2023 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,19 +20,38 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.externals
 
-import org.w3c.dom.AddEventListenerOptions
-import org.w3c.dom.CustomEventInit
+public actual external class Object
 
-public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
-    return obj<AddEventListenerOptions> {
-        this.asDynamic()["signal"] = signal
-    }
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+public actual inline fun obj(): Object {
+    return js("{}")
 }
 
-public actual fun buildCustomEventInit(detail: Object?): CustomEventInit {
-    return obj<CustomEventInit> {
-        if (detail != null) this.detail = detail
-    }
+/**
+ * Helper function for creating JavaScript objects with given type.
+ */
+public inline fun <T : Any> obj(init: T.() -> Unit): T {
+    return (js("{}").unsafeCast<T>()).apply(init)
+}
+
+/**
+ * Helper function for creating JavaScript objects.
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun obj(noinline init: dynamic.() -> Unit): dynamic {
+    return (js("{}")).apply(init)
+}
+
+/**
+ * Delete property from JavaScript object.
+ */
+public external fun delete(p: dynamic): Boolean
+
+/**
+ * Delete property from JavaScript object by key.
+ */
+public fun delete(thing: dynamic, key: String) {
+    delete(thing[key])
 }

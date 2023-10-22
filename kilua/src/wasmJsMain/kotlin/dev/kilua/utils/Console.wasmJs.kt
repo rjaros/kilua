@@ -23,5 +23,5 @@
 package dev.kilua.utils
 
 public actual fun Console.log(ob: Any?) {
-    dev.kilua.utils.internal.console.log(ob?.cast())
+    dev.kilua.externals.console.log(ob?.cast())
 }

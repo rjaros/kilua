@@ -20,22 +20,16 @@
  * SOFTWARE.
  */
 
-package dev.kilua.compose
-
-import dev.kilua.externals.obj
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Runnable
-import kotlin.coroutines.CoroutineContext
-import kotlin.js.Promise
+package dev.kilua.externals
 
 /**
- * Coroutine dispatcher based on JavaScript Promise.
+ * Helper class JS/Wasm compatibility.
  */
-internal actual class PromiseDispatcher : CoroutineDispatcher() {
-    actual override fun dispatch(context: CoroutineContext, block: Runnable) {
-        Promise.resolve(obj()).then {
-            block.run()
-            obj()
-        }
-    }
+internal external class Console {
+    fun log(message: JsAny?)
 }
+
+/**
+ * Helper object for JS/Wasm compatibility.
+ */
+internal external val console: Console

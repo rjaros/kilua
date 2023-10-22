@@ -20,20 +20,19 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.externals
 
 import org.w3c.dom.AddEventListenerOptions
 import org.w3c.dom.CustomEventInit
 
 public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
-    return buildAddEventListenerOptionsInternal(signal)
+    return obj<AddEventListenerOptions> {
+        this.asDynamic()["signal"] = signal
+    }
 }
 
-@JsFun("(signal) => ({ 'signal': signal })")
-internal external fun buildAddEventListenerOptionsInternal(signal: AbortSignal): AddEventListenerOptions
-
 public actual fun buildCustomEventInit(detail: Object?): CustomEventInit {
-    return obj {
+    return obj<CustomEventInit> {
         if (detail != null) this.detail = detail
     }
 }

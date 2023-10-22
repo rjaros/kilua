@@ -22,24 +22,9 @@
 
 package dev.kilua.utils
 
-public actual external class Object : JsAny
-
-@JsFun("() => ( {} )")
-public actual external fun obj(): Object
-
-@JsFun("ref => typeof document !== 'undefined'")
-private external fun isDom(): Boolean
-
-public actual val isDom: Boolean by lazy { isDom() }
+import dev.kilua.externals.Object
 
 public actual annotation class JsNonModule actual constructor()
-
-/**
- * Helper function for creating JavaScript objects with given type.
- */
-public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
-    return (obj().unsafeCast<T>()).apply(init)
-}
 
 public actual fun size(array: Object): Int = array.cast<JsArray<*>>().length
 

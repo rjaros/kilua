@@ -23,8 +23,6 @@
 package dev.kilua.externals
 
 import dev.kilua.panel.Dir
-import dev.kilua.utils.jsArrayOf
-import dev.kilua.utils.obj
 import dev.kilua.utils.toList
 import org.w3c.dom.HTMLElement
 

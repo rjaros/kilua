@@ -20,30 +20,20 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.externals
 
 import org.w3c.dom.AddEventListenerOptions
 import org.w3c.dom.CustomEventInit
 
-/**
- * JavaScript AbortSignal class
- */
-public external class AbortSignal
-
-/**
- * JavaScript AbortController class
- */
-public external class AbortController {
-    public val signal: AbortSignal
-    public fun abort()
+public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
+    return buildAddEventListenerOptionsInternal(signal)
 }
 
-/**
- * Build AddEventListenerOptions with a signal controller to remove the listener.
- */
-public expect fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions
+@JsFun("(signal) => ({ 'signal': signal })")
+internal external fun buildAddEventListenerOptionsInternal(signal: AbortSignal): AddEventListenerOptions
 
-/**
- * Build CustomEventInit with a detail object.
- */
-public expect fun buildCustomEventInit(detail: Object?): CustomEventInit
+public actual fun buildCustomEventInit(detail: Object?): CustomEventInit {
+    return obj {
+        if (detail != null) this.detail = detail
+    }
+}

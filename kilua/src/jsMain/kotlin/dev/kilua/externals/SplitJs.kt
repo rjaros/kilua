@@ -23,7 +23,6 @@
 package dev.kilua.externals
 
 import dev.kilua.panel.Dir
-import dev.kilua.utils.obj
 import org.w3c.dom.HTMLElement
 
 internal actual fun splitJs(elements: List<HTMLElement>, options: SplitJsOptions): SplitJsInstance {

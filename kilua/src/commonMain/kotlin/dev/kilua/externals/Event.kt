@@ -20,16 +20,30 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils.internal
+package dev.kilua.externals
+
+import org.w3c.dom.AddEventListenerOptions
+import org.w3c.dom.CustomEventInit
 
 /**
- * Helper class JS/Wasm compatibility.
+ * JavaScript AbortSignal class
  */
-internal external class Console {
-    fun log(message: JsAny?)
+public external class AbortSignal
+
+/**
+ * JavaScript AbortController class
+ */
+public external class AbortController {
+    public val signal: AbortSignal
+    public fun abort()
 }
 
 /**
- * Helper object for JS/Wasm compatibility.
+ * Build AddEventListenerOptions with a signal controller to remove the listener.
  */
-internal external val console: Console
+public expect fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions
+
+/**
+ * Build CustomEventInit with a detail object.
+ */
+public expect fun buildCustomEventInit(detail: Object?): CustomEventInit

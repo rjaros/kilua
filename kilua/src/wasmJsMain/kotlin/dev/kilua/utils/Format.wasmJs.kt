@@ -22,9 +22,7 @@
 
 package dev.kilua.utils
 
-internal external class NumberWithToFixed : JsAny {
-    fun toFixed(digits: Int): String
-}
+import dev.kilua.externals.NumberWithToFixed
 
 public actual fun Double.toFixed(size: Int): String {
     return this.toJsNumber().unsafeCast<NumberWithToFixed>().toFixed(size)
