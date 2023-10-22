@@ -32,6 +32,8 @@ import dev.kilua.html.BorderStyle
 import dev.kilua.html.C
 import dev.kilua.html.Color
 import dev.kilua.html.button
+import dev.kilua.html.div
+import dev.kilua.html.link
 import dev.kilua.html.perc
 import dev.kilua.html.px
 import dev.kilua.html.unaryPlus
@@ -59,6 +61,40 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+
+            var label by remember { mutableStateOf("A link") }
+            var url by remember { mutableStateOf("https://google.com") }
+            var labelFirst by remember { mutableStateOf(true) }
+
+            val link = link(url, label, labelFirst) {
+                div()
+            }
+
+            button("Test link label") {
+                onClick {
+                    label = "Another link"
+                }
+            }
+            button("Test link url") {
+                onClick {
+                    url = "https://github.com"
+                }
+            }
+            button("Test link labelFirst") {
+                onClick {
+                    labelFirst = !labelFirst
+                }
+            }
+            button("Test link target") {
+                onClick {
+                    link.target = "_blank"
+                }
+            }
+            button("Test link label") {
+                onClick {
+                    console.log(link.label)
+                }
+            }
 
             var visible by remember { mutableStateOf(true) }
 

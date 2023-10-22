@@ -34,7 +34,7 @@ class ButtonSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                button("test", ButtonType.Submit)
+                button("test", type = ButtonType.Submit)
             }
             assertEquals(
                 normalizeHtml("""<button type="submit">test</button>"""),
@@ -48,7 +48,7 @@ class ButtonSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                button("test", ButtonType.Submit)
+                button("test", type = ButtonType.Submit)
             }
             assertEquals(
                 normalizeHtml("""<div><button type="submit">test</button></div>"""),
@@ -64,7 +64,7 @@ class ButtonSpec : DomSpec {
             var counter = 0
             lateinit var button: Button
             root {
-                button = button("test", ButtonType.Submit) {
+                button = button("test", type = ButtonType.Submit) {
                     onClick { counter++ }
                 }
             }

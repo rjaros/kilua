@@ -29,24 +29,84 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
-import org.w3c.dom.HTMLLinkElement
+import dev.kilua.html.helpers.PropertyListBuilder
+import org.w3c.dom.HTMLAnchorElement
 
 /**
- * HTML Link component.
+ * HTML A component.
  */
-public open class Link(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLLinkElement>("link", className, renderConfig)
+public open class Link(
+    href: String? = null,
+    target: String? = null,
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLAnchorElement>("a", className, renderConfig) {
+
+    public open var href: String? by updatingProperty(href, skipUpdate) {
+        if (it != null) {
+            element.href = it
+        } else {
+            element.removeAttribute("href")
+        }
+    }
+
+    public open var target: String? by updatingProperty(target, skipUpdate) {
+        if (it != null) {
+            element.target = it
+        } else {
+            element.removeAttribute("target")
+        }
+    }
+
+    public open var download: String? by updatingProperty(skipUpdate = skipUpdate) {
+        if (it != null) {
+            element.download = it
+        } else {
+            element.removeAttribute("download")
+        }
+    }
+
+    init {
+        @Suppress("LeakingThis")
+        elementNullable?.let {
+            if (href != null) {
+                it.href = href
+            }
+            if (target != null) {
+                it.target = target
+            }
+        }
+    }
+
+    override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
+        super.buildHtmlPropertyList(propertyListBuilder)
+        propertyListBuilder.add(::href, ::target, ::download)
+    }
+
+}
 
 /**
  * Creates a [Link] component.
  *
+ * @param href the link URL
+ * @param label the link label
+ * @param labelFirst determines if the label is put before children elements (defaults to true)
+ * @param target the link target
  * @param className the CSS class name
  * @param content the content of the component
  * @return the [Link] component
  */
 @Composable
-public fun ComponentBase.link(className: String? = null, content: @Composable Link.() -> Unit = {}): Link {
-    val component = remember { Link(className, renderConfig) }
+public fun ComponentBase.link(
+    href: String? = null,
+    label: String? = null,
+    labelFirst: Boolean = true,
+    target: String? = null,
+    className: String? = null,
+    content: @Composable Link.() -> Unit = {}
+): Link {
+    val component = remember { Link(href, target, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,7 +114,21 @@ public fun ComponentBase.link(className: String? = null, content: @Composable Li
         }
     }
     ComponentNode(component, {
+        set(href) { updateProperty(Link::href, it) }
+        set(target) { updateProperty(Link::target, it) }
         set(className) { updateProperty(Link::className, it) }
-    }, content)
+    }) {
+        if (labelFirst) {
+            if (label != null) {
+                +label
+            }
+            content()
+        } else {
+            content()
+            if (label != null) {
+                +label
+            }
+        }
+    }
     return component
 }

@@ -29,24 +29,24 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
-import org.w3c.dom.HTMLAnchorElement
+import org.w3c.dom.HTMLLinkElement
 
 /**
- * HTML A component.
+ * HTML Link component.
  */
-public open class A(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLAnchorElement>("a", className, renderConfig)
+public open class LinkTag(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
+    Tag<HTMLLinkElement>("link", className, renderConfig)
 
 /**
- * Creates a [A] component.
+ * Creates a [LinkTag] component.
  *
  * @param className the CSS class name
  * @param content the content of the component
- * @return the [A] component
+ * @return the [LinkTag] component
  */
 @Composable
-public fun ComponentBase.a(className: String? = null, content: @Composable A.() -> Unit = {}): A {
-    val component = remember { A(className, renderConfig) }
+public fun ComponentBase.linkTag(className: String? = null, content: @Composable LinkTag.() -> Unit = {}): LinkTag {
+    val component = remember { LinkTag(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,7 +54,7 @@ public fun ComponentBase.a(className: String? = null, content: @Composable A.() 
         }
     }
     ComponentNode(component, {
-        set(className) { updateProperty(A::className, it) }
+        set(className) { updateProperty(LinkTag::className, it) }
     }, content)
     return component
 }

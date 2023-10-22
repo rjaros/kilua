@@ -28,13 +28,13 @@ import dev.kilua.normalizeHtml
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class ASpec : DomSpec {
+class LinkTagSpec : DomSpec {
 
     @Test
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                a("test") {
+                linkTag("test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,9 +44,9 @@ class ASpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<a class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></a>"""),
+                normalizeHtml("""<link class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">"""),
                 normalizeHtml(root.element?.innerHTML),
-                "Should render an HTML A tag to DOM"
+                "Should render an HTML Link tag to DOM"
             )
         }
     }
@@ -55,7 +55,7 @@ class ASpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                a("test") {
+                linkTag("test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,9 +65,9 @@ class ASpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><a class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></a></div>"""),
+                normalizeHtml("""<div><link class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></div>"""),
                 normalizeHtml(root.renderToString()),
-                "Should render an HTML A tag to a String"
+                "Should render an HTML Link tag to a String"
             )
         }
     }

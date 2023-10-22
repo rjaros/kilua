@@ -34,19 +34,17 @@ class LinkSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                link("test") {
+                link(href = "https://google.com", label = "A link", target = "_blank", className = "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
                     setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<link class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">"""),
+                normalizeHtml("""<a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a>"""),
                 normalizeHtml(root.element?.innerHTML),
-                "Should render an HTML Link tag to DOM"
+                "Should render an HTML A tag to DOM"
             )
         }
     }
@@ -55,19 +53,17 @@ class LinkSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                link("test") {
+                link(href = "https://google.com", label = "A link", target = "_blank", className = "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
                     setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><link class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></div>"""),
+                normalizeHtml("""<div><a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a></div>"""),
                 normalizeHtml(root.renderToString()),
-                "Should render an HTML Link tag to a String"
+                "Should render an HTML A tag to a String"
             )
         }
     }
