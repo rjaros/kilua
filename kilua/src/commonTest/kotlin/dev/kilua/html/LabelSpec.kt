@@ -34,17 +34,12 @@ class LabelSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                label("test") {
+                label("id", "test") {
                     id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<label class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></label>"""),
+                normalizeHtml("""<label class="test" for="id" id="test-id"></label>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Label tag to DOM"
             )
@@ -55,17 +50,12 @@ class LabelSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                label("test") {
+                label("id", "test") {
                     id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><label class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></label></div>"""),
+                normalizeHtml("""<div><label class="test" for="id" id="test-id"></label></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Label tag to a String"
             )

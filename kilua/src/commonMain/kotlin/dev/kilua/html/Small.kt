@@ -58,3 +58,23 @@ public fun ComponentBase.small(className: String? = null, content: @Composable S
     }, content)
     return component
 }
+
+/**
+ * Creates a [Small] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [Small] component
+ */
+@Composable
+public fun ComponentBase.smallt(
+    text: String,
+    className: String? = null,
+    content: @Composable Small.() -> Unit = {}
+): Small {
+    return small(className) {
+        +text
+        content()
+    }
+}

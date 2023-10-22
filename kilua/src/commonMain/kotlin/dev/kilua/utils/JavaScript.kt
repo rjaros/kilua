@@ -54,3 +54,8 @@ public inline fun <T> useCssModule(cssModule: T) {
  * Helper function for JS/Wasm compatibility.
  */
 public expect fun size(array: Object): Int
+
+/**
+ * Helper function for JS/Wasm compatibility.
+ */
+public expect fun jsString(value: String): Object

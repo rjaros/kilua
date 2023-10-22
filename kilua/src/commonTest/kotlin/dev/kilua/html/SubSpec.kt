@@ -34,7 +34,7 @@ class SubSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                sub("test") {
+                subt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class SubSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<sub class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></sub>"""),
+                normalizeHtml("""<sub class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</sub>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Sub tag to DOM"
             )
@@ -55,7 +55,7 @@ class SubSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                sub("test") {
+                subt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class SubSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><sub class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></sub></div>"""),
+                normalizeHtml("""<div><sub class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</sub></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Sub tag to a String"
             )

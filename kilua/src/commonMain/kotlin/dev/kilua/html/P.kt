@@ -58,3 +58,19 @@ public fun ComponentBase.p(className: String? = null, content: @Composable P.() 
     }, content)
     return component
 }
+
+/**
+ * Creates a [P] component with some text.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [P] component
+ */
+@Composable
+public fun ComponentBase.pt(text: String, className: String? = null, content: @Composable P.() -> Unit = {}): P {
+    return p(className) {
+        +text
+        content()
+    }
+}

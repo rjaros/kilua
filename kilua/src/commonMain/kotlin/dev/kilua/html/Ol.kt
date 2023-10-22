@@ -29,24 +29,101 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.helpers.PropertyListBuilder
 import org.w3c.dom.HTMLOListElement
+
+/**
+ * Numbered list types.
+ */
+public enum class OlType {
+    a,
+    A,
+    i,
+    I;
+
+    public val value: String = name
+    override fun toString(): String {
+        return value
+    }
+}
 
 /**
  * HTML Ol component.
  */
-public open class Ol(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLOListElement>("ol", className, renderConfig)
+public open class Ol(
+    type: OlType? = null,
+    start: Int? = null,
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLOListElement>("ol", className, renderConfig) {
+
+    /**
+     * The type of the numbered list.
+     */
+    public open var type: OlType? by updatingProperty(type, skipUpdate) {
+        if (it != null) {
+            element.type = it.value
+        } else {
+            element.removeAttribute("type")
+        }
+    }
+
+    /**
+     * A starting number.
+     */
+    public open var start: Int? by updatingProperty(start, skipUpdate) {
+        if (it != null) {
+            element.start = it
+        } else {
+            element.removeAttribute("start")
+        }
+    }
+
+    /**
+     * Number items from high to low.
+     */
+    public open var reversed: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+        if (it != null) {
+            element.reversed = it
+        } else {
+            element.removeAttribute("reversed")
+        }
+    }
+
+    init {
+        @Suppress("LeakingThis")
+        elementNullable?.let {
+            if (type != null) {
+                it.type = type.value
+            }
+            if (start != null) {
+                it.start = start
+            }
+        }
+    }
+
+    override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
+        super.buildHtmlPropertyList(propertyListBuilder)
+        propertyListBuilder.add(::type, ::start, ::reversed)
+    }
+
+}
 
 /**
  * Creates a [Ol] component.
  *
+ * @param type the type of the numbered list
+ * @param start a starting number
  * @param className the CSS class name
  * @param content the content of the component
  * @return the [Ol] component
  */
 @Composable
-public fun ComponentBase.ol(className: String? = null, content: @Composable Ol.() -> Unit = {}): Ol {
-    val component = remember { Ol(className, renderConfig) }
+public fun ComponentBase.ol(
+    type: OlType? = null, start: Int? = null, className: String? = null, content: @Composable Ol.() -> Unit = {}
+): Ol {
+    val component = remember { Ol(type, start, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,6 +131,8 @@ public fun ComponentBase.ol(className: String? = null, content: @Composable Ol.(
         }
     }
     ComponentNode(component, {
+        set(type) { updateProperty(Ol::type, it) }
+        set(start) { updateProperty(Ol::start, it) }
         set(className) { updateProperty(Ol::className, it) }
     }, content)
     return component

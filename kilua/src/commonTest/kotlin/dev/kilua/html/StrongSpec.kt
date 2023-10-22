@@ -34,7 +34,7 @@ class StrongSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                strong("test") {
+                strongt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class StrongSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<strong class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></strong>"""),
+                normalizeHtml("""<strong class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</strong>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Strong tag to DOM"
             )
@@ -55,7 +55,7 @@ class StrongSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                strong("test") {
+                strongt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class StrongSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><strong class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></strong></div>"""),
+                normalizeHtml("""<div><strong class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</strong></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Strong tag to a String"
             )

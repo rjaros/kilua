@@ -34,7 +34,7 @@ class OptgroupSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                optgroup("test") {
+                optgroup("A label", className = "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class OptgroupSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<optgroup class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></optgroup>"""),
+                normalizeHtml("""<optgroup class="test" label="A label" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></optgroup>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Optgroup tag to DOM"
             )
@@ -55,7 +55,7 @@ class OptgroupSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                optgroup("test") {
+                optgroup("A label", className = "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class OptgroupSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><optgroup class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></optgroup></div>"""),
+                normalizeHtml("""<div><optgroup class="test" label="A label" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></optgroup></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Optgroup tag to a String"
             )

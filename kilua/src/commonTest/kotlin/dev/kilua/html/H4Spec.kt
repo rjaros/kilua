@@ -34,7 +34,7 @@ class H4Spec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                h4("test") {
+                h4t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class H4Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<h4 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h4>"""),
+                normalizeHtml("""<h4 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h4>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML H4 tag to DOM"
             )
@@ -55,7 +55,7 @@ class H4Spec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                h4("test") {
+                h4t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class H4Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><h4 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h4></div>"""),
+                normalizeHtml("""<div><h4 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h4></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML H4 tag to a String"
             )

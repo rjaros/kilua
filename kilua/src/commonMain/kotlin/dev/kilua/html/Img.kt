@@ -43,6 +43,9 @@ public open class Img(
 ) :
     Tag<HTMLImageElement>("img", className, renderConfig) {
 
+    /**
+     * The source of the image.
+     */
     public open var src: String? by updatingProperty(src, skipUpdate) {
         if (it != null) {
             element.src = it
@@ -51,6 +54,9 @@ public open class Img(
         }
     }
 
+    /**
+     * The alternative text of the image.
+     */
     public open var alt: String? by updatingProperty(alt, skipUpdate) {
         if (it != null) {
             element.alt = it

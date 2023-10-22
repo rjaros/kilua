@@ -58,3 +58,19 @@ public fun ComponentBase.sup(className: String? = null, content: @Composable Sup
     }, content)
     return component
 }
+
+/**
+ * Creates a [Sup] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [Sup] component
+ */
+@Composable
+public fun ComponentBase.supt(text: String, className: String? = null, content: @Composable Sup.() -> Unit = {}): Sup {
+    return sup(className) {
+        +text
+        content()
+    }
+}

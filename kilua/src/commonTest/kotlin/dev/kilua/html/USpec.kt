@@ -34,7 +34,7 @@ class USpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                u("test") {
+                ut("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class USpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<u class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></u>"""),
+                normalizeHtml("""<u class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</u>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML U tag to DOM"
             )
@@ -55,7 +55,7 @@ class USpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                u("test") {
+                ut("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class USpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><u class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></u></div>"""),
+                normalizeHtml("""<div><u class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</u></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML U tag to a String"
             )

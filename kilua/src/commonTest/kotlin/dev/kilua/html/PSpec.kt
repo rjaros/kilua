@@ -34,7 +34,7 @@ class PSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                p("test") {
+                pt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class PSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<p class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></p>"""),
+                normalizeHtml("""<p class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</p>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML P tag to DOM"
             )
@@ -55,7 +55,7 @@ class PSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                p("test") {
+                pt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class PSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><p class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></p></div>"""),
+                normalizeHtml("""<div><p class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</p></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML P tag to a String"
             )

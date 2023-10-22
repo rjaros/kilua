@@ -33,7 +33,6 @@ import dev.kilua.form.StringFormControl
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.ObservableDelegate
-import dev.kilua.utils.console
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLTextAreaElement
 

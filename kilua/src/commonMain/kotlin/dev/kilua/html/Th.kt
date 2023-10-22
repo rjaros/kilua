@@ -29,13 +29,89 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
-import org.w3c.dom.HTMLTableRowElement
+import dev.kilua.html.helpers.PropertyListBuilder
+import dev.kilua.utils.toKebabCase
+import org.w3c.dom.HTMLTableCellElement
+
+/**
+ * Table header scopes.
+ */
+public enum class ThScope {
+    Row,
+    Col,
+    Rowgroup,
+    Colgroup;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
 
 /**
  * HTML Th component.
  */
-public open class Th(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableRowElement>("th", className, renderConfig)
+public open class Th(
+    colspan: Int? = null,
+    rowspan: Int? = null,
+    scope: ThScope? = null,
+    className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLTableCellElement>("th", className, renderConfig) {
+
+    /**
+     * The number of columns the cell extends.
+     */
+    public open var colspan: Int? by updatingProperty(colspan, skipUpdate) {
+        if (it != null) {
+            element.colSpan = it
+        } else {
+            element.removeAttribute("colspan")
+        }
+    }
+
+    /**
+     * The number of rows the cell extends.
+     */
+    public open var rowspan: Int? by updatingProperty(rowspan, skipUpdate) {
+        if (it != null) {
+            element.rowSpan = it
+        } else {
+            element.removeAttribute("rowspan")
+        }
+    }
+
+    /**
+     * The cells that the header element relates to.
+     */
+    public open var scope: ThScope? by updatingProperty(scope, skipUpdate) {
+        if (it != null) {
+            element.scope = it.value
+        } else {
+            element.removeAttribute("scope")
+        }
+    }
+
+    init {
+        @Suppress("LeakingThis")
+        elementNullable?.let {
+            if (colspan != null) {
+                it.colSpan = colspan
+            }
+            if (rowspan != null) {
+                it.rowSpan = rowspan
+            }
+            if (scope != null) {
+                it.scope = scope.value
+            }
+        }
+    }
+
+    override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
+        super.buildHtmlPropertyList(propertyListBuilder)
+        propertyListBuilder.add(::colspan, ::rowspan, ::scope)
+    }
+}
 
 /**
  * Creates a [Th] component.
@@ -45,8 +121,11 @@ public open class Th(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [Th] component
  */
 @Composable
-public fun ComponentBase.th(className: String? = null, content: @Composable Th.() -> Unit = {}): Th {
-    val component = remember { Th(className, renderConfig) }
+public fun ComponentBase.th(
+    colspan: Int? = null, rowspan: Int? = null,
+    scope: ThScope? = null, className: String? = null, content: @Composable Th.() -> Unit = {}
+): Th {
+    val component = remember { Th(colspan, rowspan, scope, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,6 +133,9 @@ public fun ComponentBase.th(className: String? = null, content: @Composable Th.(
         }
     }
     ComponentNode(component, {
+        set(colspan) { updateProperty(Th::colspan, it) }
+        set(rowspan) { updateProperty(Th::rowspan, it) }
+        set(scope) { updateProperty(Th::scope, it) }
         set(className) { updateProperty(Th::className, it) }
     }, content)
     return component

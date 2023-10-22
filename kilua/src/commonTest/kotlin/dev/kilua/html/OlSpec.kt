@@ -34,17 +34,15 @@ class OlSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                ol("test") {
+                ol(OlType.A, 2, "test") {
                     id = "test-id"
                     title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    li { +"Item 1" }
+                    li { +"Item 2" }
                 }
             }
             assertEquals(
-                normalizeHtml("""<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></ol>"""),
+                normalizeHtml("""<ol class="test" type="A" start="2" id="test-id" title="A title"><li>Item 1</li><li>Item 2</li></ol>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Ol tag to DOM"
             )
@@ -55,17 +53,15 @@ class OlSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                ol("test") {
+                ol(OlType.A, 2, "test") {
                     id = "test-id"
                     title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    li { +"Item 1" }
+                    li { +"Item 2" }
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></ol></div>"""),
+                normalizeHtml("""<div><ol class="test" type="A" start="2" id="test-id" title="A title"><li>Item 1</li><li>Item 2</li></ol></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Ol tag to a String"
             )

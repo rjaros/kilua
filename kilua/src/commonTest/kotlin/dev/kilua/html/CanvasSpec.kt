@@ -25,6 +25,8 @@ package dev.kilua.html
 import dev.kilua.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.normalizeHtml
+import dev.kilua.utils.jsString
+import org.w3c.dom.ImageData
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -34,17 +36,12 @@ class CanvasSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                canvas("test") {
+                canvas(300, 200, "test") {
                     id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<canvas class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></canvas>"""),
+                normalizeHtml("""<canvas class="test" width="300" height="200" id="test-id"></canvas>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Canvas tag to DOM"
             )
@@ -52,20 +49,36 @@ class CanvasSpec : DomSpec {
     }
 
     @Test
+    fun context2D() {
+        runWhenDomAvailable {
+            lateinit var imageData: ImageData
+            root("test") {
+                canvas(300, 200) {
+                    context2D?.let {
+                        it.beginPath()
+                        it.strokeStyle = jsString("black")
+                        it.moveTo(0.0, 0.0)
+                        it.lineTo(100.0, 100.0)
+                        it.stroke()
+                        imageData = it.getImageData(1.0, 1.0, 2.0, 2.0)
+                    }
+                }
+            }
+            assertEquals(2, imageData.width, "Should return an image data with correct width")
+            assertEquals(2, imageData.height, "Should return an image data with correct height")
+        }
+    }
+
+    @Test
     fun renderToString() {
         run {
             val root = root {
-                canvas("test") {
+                canvas(300, 200, "test") {
                     id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><canvas class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></canvas></div>"""),
+                normalizeHtml("""<div><canvas class="test" width="300" height="200" id="test-id"></canvas></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Canvas tag to a String"
             )

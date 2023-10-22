@@ -58,3 +58,23 @@ public fun ComponentBase.span(className: String? = null, content: @Composable Sp
     }, content)
     return component
 }
+
+/**
+ * Creates a [Span] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [Span] component
+ */
+@Composable
+public fun ComponentBase.spant(
+    text: String,
+    className: String? = null,
+    content: @Composable Span.() -> Unit = {}
+): Span {
+    return span(className) {
+        +text
+        content()
+    }
+}

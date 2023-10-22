@@ -34,7 +34,7 @@ class H1Spec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                h1("test") {
+                h1t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class H1Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<h1 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h1>"""),
+                normalizeHtml("""<h1 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h1>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML H1 tag to DOM"
             )
@@ -55,7 +55,7 @@ class H1Spec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                h1("test") {
+                h1t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class H1Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><h1 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h1></div>"""),
+                normalizeHtml("""<div><h1 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h1></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML H1 tag to a String"
             )

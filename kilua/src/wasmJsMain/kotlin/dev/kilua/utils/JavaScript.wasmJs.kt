@@ -43,6 +43,10 @@ public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
 
 public actual fun size(array: Object): Int = array.cast<JsArray<*>>().length
 
+public actual fun jsString(value: String): Object {
+    return value.toJsString().unsafeCast()
+}
+
 /**
  * Convert JsArray to Kotlin Array.
  */

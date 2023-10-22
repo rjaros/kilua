@@ -34,7 +34,7 @@ class BSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                b("test") {
+                bt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class BSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<b class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></b>"""),
+                normalizeHtml("""<b class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</b>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML B tag to DOM"
             )
@@ -55,7 +55,7 @@ class BSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                b("test") {
+                bt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class BSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><b class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></b></div>"""),
+                normalizeHtml("""<div><b class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</b></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML B tag to a String"
             )

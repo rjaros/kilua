@@ -43,6 +43,9 @@ public open class Link(
 ) :
     Tag<HTMLAnchorElement>("a", className, renderConfig) {
 
+    /**
+     * The URL of the link.
+     */
     public open var href: String? by updatingProperty(href, skipUpdate) {
         if (it != null) {
             element.href = it
@@ -51,6 +54,9 @@ public open class Link(
         }
     }
 
+    /**
+     * The target of the link.
+     */
     public open var target: String? by updatingProperty(target, skipUpdate) {
         if (it != null) {
             element.target = it
@@ -59,6 +65,9 @@ public open class Link(
         }
     }
 
+    /**
+     * The download attribute of the link.
+     */
     public open var download: String? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.download = it

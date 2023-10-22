@@ -29,24 +29,74 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.helpers.PropertyListBuilder
 import org.w3c.dom.HTMLTableCellElement
 
 /**
  * HTML Td component.
  */
-public open class Td(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableCellElement>("td", className, renderConfig)
+public open class Td(
+    colspan: Int? = null,
+    rowspan: Int? = null,
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLTableCellElement>("td", className, renderConfig) {
+
+    /**
+     * The number of columns the cell extends.
+     */
+    public open var colspan: Int? by updatingProperty(colspan, skipUpdate) {
+        if (it != null) {
+            element.colSpan = it
+        } else {
+            element.removeAttribute("colspan")
+        }
+    }
+
+    /**
+     * The number of rows the cell extends.
+     */
+    public open var rowspan: Int? by updatingProperty(rowspan, skipUpdate) {
+        if (it != null) {
+            element.rowSpan = it
+        } else {
+            element.removeAttribute("rowspan")
+        }
+    }
+
+    init {
+        @Suppress("LeakingThis")
+        elementNullable?.let {
+            if (colspan != null) {
+                it.colSpan = colspan
+            }
+            if (rowspan != null) {
+                it.rowSpan = rowspan
+            }
+        }
+    }
+
+    override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
+        super.buildHtmlPropertyList(propertyListBuilder)
+        propertyListBuilder.add(::colspan, ::rowspan)
+    }
+}
 
 /**
  * Creates a [Td] component.
  *
+ * @param colspan the number of columns the cell extends
+ * @param rowspan the number of rows the cell extends
  * @param className the CSS class name
  * @param content the content of the component
  * @return the [Td] component
  */
 @Composable
-public fun ComponentBase.td(className: String? = null, content: @Composable Td.() -> Unit = {}): Td {
-    val component = remember { Td(className, renderConfig) }
+public fun ComponentBase.td(
+    colspan: Int? = null, rowspan: Int? = null, className: String? = null, content: @Composable Td.() -> Unit = {}
+): Td {
+    val component = remember { Td(colspan, rowspan, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,6 +104,8 @@ public fun ComponentBase.td(className: String? = null, content: @Composable Td.(
         }
     }
     ComponentNode(component, {
+        set(colspan) { updateProperty(Td::colspan, it) }
+        set(rowspan) { updateProperty(Td::rowspan, it) }
         set(className) { updateProperty(Td::className, it) }
     }, content)
     return component

@@ -34,7 +34,7 @@ class ThSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                th("test") {
+                th(colspan = 2, rowspan = 1, scope = ThScope.Col, "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class ThSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<th class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th>"""),
+                normalizeHtml("""<th class="test" colspan="2" rowspan="1" scope="col" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Th tag to DOM"
             )
@@ -55,7 +55,7 @@ class ThSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                th("test") {
+                th(colspan = 2, rowspan = 1, scope = ThScope.Col, "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class ThSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><th class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th></div>"""),
+                normalizeHtml("""<div><th class="test" colspan="2" rowspan="1" scope="col" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Th tag to a String"
             )

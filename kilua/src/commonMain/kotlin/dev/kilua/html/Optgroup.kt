@@ -29,24 +29,77 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.helpers.PropertyListBuilder
 import org.w3c.dom.HTMLOptGroupElement
 
 /**
  * HTML Optgroup component.
  */
-public open class Optgroup(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLOptGroupElement>("optgroup", className, renderConfig)
+public open class Optgroup(
+    label: String? = null,
+    disabled: Boolean? = null,
+    className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLOptGroupElement>("optgroup", className, renderConfig) {
+
+    /**
+     * The label of the option group.
+     */
+    public open var label: String? by updatingProperty(label, skipUpdate) {
+        if (it != null) {
+            element.label = it
+        } else {
+            element.removeAttribute("label")
+        }
+    }
+
+    /**
+     * Whether the option group is disabled.
+     */
+    public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+        if (it != null) {
+            element.disabled = it
+        } else {
+            element.removeAttribute("disabled")
+        }
+    }
+
+    init {
+        @Suppress("LeakingThis")
+        elementNullable?.let {
+            if (label != null) {
+                it.label = label
+            }
+            if (disabled != null) {
+                it.disabled = disabled
+            }
+        }
+    }
+
+    override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
+        super.buildHtmlPropertyList(propertyListBuilder)
+        propertyListBuilder.add(::label, ::disabled)
+    }
+
+}
 
 /**
  * Creates a [Optgroup] component.
  *
+ * @param label the label of the option group
+ * @param disabled whether the option group is disabled
  * @param className the CSS class name
  * @param content the content of the component
  * @return the [Optgroup] component
  */
 @Composable
-public fun ComponentBase.optgroup(className: String? = null, content: @Composable Optgroup.() -> Unit = {}): Optgroup {
-    val component = remember { Optgroup(className, renderConfig) }
+public fun ComponentBase.optgroup(
+    label: String? = null,
+    disabled: Boolean? = null,
+    className: String? = null,
+    content: @Composable Optgroup.() -> Unit = {}
+): Optgroup {
+    val component = remember { Optgroup(label, disabled, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,6 +107,8 @@ public fun ComponentBase.optgroup(className: String? = null, content: @Composabl
         }
     }
     ComponentNode(component, {
+        set(label) { updateProperty(Optgroup::label, it) }
+        set(disabled) { updateProperty(Optgroup::disabled, it) }
         set(className) { updateProperty(Optgroup::className, it) }
     }, content)
     return component

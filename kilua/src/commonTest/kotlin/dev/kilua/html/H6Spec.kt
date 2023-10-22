@@ -34,7 +34,7 @@ class H6Spec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                h6("test") {
+                h6t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class H6Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<h6 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h6>"""),
+                normalizeHtml("""<h6 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h6>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML H6 tag to DOM"
             )
@@ -55,7 +55,7 @@ class H6Spec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                h6("test") {
+                h6t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class H6Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><h6 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h6></div>"""),
+                normalizeHtml("""<div><h6 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h6></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML H6 tag to a String"
             )

@@ -34,7 +34,7 @@ class H5Spec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                h5("test") {
+                h5t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class H5Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<h5 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h5>"""),
+                normalizeHtml("""<h5 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h5>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML H5 tag to DOM"
             )
@@ -55,7 +55,7 @@ class H5Spec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                h5("test") {
+                h5t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class H5Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><h5 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h5></div>"""),
+                normalizeHtml("""<div><h5 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h5></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML H5 tag to a String"
             )

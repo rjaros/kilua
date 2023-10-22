@@ -58,3 +58,19 @@ public fun ComponentBase.h5(className: String? = null, content: @Composable H5.(
     }, content)
     return component
 }
+
+/**
+ * Creates a [H5] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [H5] component
+ */
+@Composable
+public fun ComponentBase.h5t(text: String, className: String? = null, content: @Composable H5.() -> Unit = {}): H5 {
+    return h5(className) {
+        +text
+        content()
+    }
+}

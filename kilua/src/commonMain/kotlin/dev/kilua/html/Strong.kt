@@ -58,3 +58,23 @@ public fun ComponentBase.strong(className: String? = null, content: @Composable 
     }, content)
     return component
 }
+
+/**
+ * Creates a [Strong] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [Strong] component
+ */
+@Composable
+public fun ComponentBase.strongt(
+    text: String,
+    className: String? = null,
+    content: @Composable Strong.() -> Unit = {}
+): Strong {
+    return strong(className) {
+        +text
+        content()
+    }
+}

@@ -49,7 +49,6 @@ import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.renderAsHtmlAttributes
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.Event
-import kotlin.reflect.KProperty
 
 /**
  * Base class for all HTML tags components.
@@ -71,7 +70,7 @@ public open class Tag<E : HTMLElement>(
     /**
      * A list of properties rendered as html attributes for the current component.
      */
-    protected val htmlPropertyList: List<KProperty<*>> by lazy { buildPropertyList(::buildHtmlPropertyList) }
+    protected val htmlPropertyList: List<String> by lazy { buildPropertyList(::buildHtmlPropertyList) }
 
     /**
      * An internal list of CSS classes for the current component.
@@ -119,9 +118,9 @@ public open class Tag<E : HTMLElement>(
         }
 
     /**
-     * The label of the current component or null if the first child is not a TextNode.
+     * The text content of the current component or null if the first child is not a TextNode.
      */
-    public open var label: String?
+    public open var textContent: String?
         get() = children.find { it is TextNode }?.cast<TextNode>()?.text
         set(value) {
             children.find { it is TextNode }?.cast<TextNode>()?.text = value ?: ""
@@ -178,11 +177,11 @@ public open class Tag<E : HTMLElement>(
             } else if (internalClassName != null) {
                 builder.append(" class=\"$internalClassName\"")
             }
-            val htmlPropertis = htmlPropertyList.mapNotNull { prop ->
-                propertyValues[prop.name]?.let { prop.name to it }
+            val htmlProperties = htmlPropertyList.mapNotNull { prop ->
+                propertyValues[prop]?.let { prop to it }
             }.toMap()
-            if (htmlPropertis.isNotEmpty()) {
-                builder.append(" ${htmlPropertis.renderAsHtmlAttributes()}")
+            if (htmlProperties.isNotEmpty()) {
+                builder.append(" ${htmlProperties.renderAsHtmlAttributes()}")
             }
             if (attributes.isNotEmpty()) {
                 builder.append(" ${attributes.renderAsHtmlAttributes()}")

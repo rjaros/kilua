@@ -34,7 +34,7 @@ class H3Spec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                h3("test") {
+                h3t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class H3Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<h3 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h3>"""),
+                normalizeHtml("""<h3 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h3>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML H3 tag to DOM"
             )
@@ -55,7 +55,7 @@ class H3Spec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                h3("test") {
+                h3t("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class H3Spec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><h3 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></h3></div>"""),
+                normalizeHtml("""<div><h3 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h3></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML H3 tag to a String"
             )

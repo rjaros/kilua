@@ -39,54 +39,70 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
     /**
      * Create a property with a custom update and notify functions.
      * @param skipUpdate if true, the update function will not be called when the property is set
+     * @param name the name of the property
+     * @param notifyFunction the notify function
+     * @param updateFunction the update function
      */
     @Suppress("NOTHING_TO_INLINE")
     protected inline fun <T> updatingProperty(
         skipUpdate: Boolean = false,
+        name: String? = null,
         noinline notifyFunction: ((T) -> Unit)? = null,
         noinline updateFunction: ((T) -> Unit)? = null,
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(null, skipUpdate, notifyFunction, updateFunction, null)
+        ManagedPropertyDelegateProvider(null, skipUpdate, name, notifyFunction, updateFunction, null)
 
     /**
      * Create a property with a custom update and notify functions.
      * @param initialValue initial value of the property
      * @param skipUpdate if true, the update function will not be called when the property is set
+     * @param name the name of the property
+     * @param notifyFunction the notify function
+     * @param updateFunction the update function
      */
     @Suppress("NOTHING_TO_INLINE")
     protected inline fun <T> updatingProperty(
         initialValue: T,
         skipUpdate: Boolean = false,
+        name: String? = null,
         noinline notifyFunction: ((T) -> Unit)? = null,
         noinline updateFunction: ((T) -> Unit)? = null
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(initialValue, skipUpdate, notifyFunction, updateFunction, null)
+        ManagedPropertyDelegateProvider(initialValue, skipUpdate, name, notifyFunction, updateFunction, null)
 
     /**
      * Create a property with a custom update and notify functions.
      * @param skipUpdate if true, the update function will not be called when the property is set
+     * @param name the name of the property
+     * @param notifyFunction the notify function
+     * @param updateFunction the update function
      */
     @Suppress("NOTHING_TO_INLINE")
     protected inline fun <T> updatingPropertyWithOldValue(
         skipUpdate: Boolean = false,
+        name: String? = null,
         noinline notifyFunction: ((T) -> Unit)? = null,
         noinline updateFunction: ((T, T) -> Unit)? = null
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(null, skipUpdate, notifyFunction, null, updateFunction)
+        ManagedPropertyDelegateProvider(null, skipUpdate, name, notifyFunction, null, updateFunction)
 
     @Suppress("NOTHING_TO_INLINE")
     /**
      * Create a property with a custom update and notify functions.
      * @param initialValue initial value of the property
      * @param skipUpdate if true, the update function will not be called when the property is set
+     * @param name the name of the property
+     * @param notifyFunction the notify function
+     * @param updateFunction the update function
      */
     protected inline fun <T> updatingPropertyWithOldValue(
         initialValue: T,
         skipUpdate: Boolean = false,
+        name: String? = null,
         noinline notifyFunction: ((T) -> Unit)? = null,
         noinline updateFunction: ((T, T) -> Unit)? = null
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(initialValue, skipUpdate, notifyFunction, null, updateFunction)
+        ManagedPropertyDelegateProvider(initialValue, skipUpdate, name, notifyFunction, null, updateFunction)
 
     /**
      * A delegate provider.
@@ -94,21 +110,24 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
     protected inner class ManagedPropertyDelegateProvider<T>(
         private val initialValue: T?,
         private val skipUpdate: Boolean,
+        private val name: String?,
         private val notifyFunction: ((T) -> Unit)?,
         private val updateFunction: ((T) -> Unit)?,
         private val updateFunctionWithOldValue: ((T, T) -> Unit)?,
     ) {
         public operator fun provideDelegate(thisRef: Any?, prop: KProperty<*>): UpdatingPropertyDelegate<T> {
-            if (initialValue != null) propertyValues[prop.name] = initialValue
-            notifyFunction?.let { notifyFunctions[prop.name] = notifyFunction }
+            val propName = name ?: prop.name
+            if (initialValue != null) propertyValues[propName] = initialValue
+            notifyFunction?.let { notifyFunctions[propName] = notifyFunction }
             if (!skipUpdate) {
-                updateFunction?.let { updateFunctions[prop.name] = updateFunction }
+                updateFunction?.let { updateFunctions[propName] = updateFunction }
                 updateFunctionWithOldValue?.let {
-                    updateFunctionsWithOldValue[prop.name] = updateFunctionWithOldValue
+                    updateFunctionsWithOldValue[propName] = updateFunctionWithOldValue
                 }
             }
             return UpdatingPropertyDelegate(
                 skipUpdate,
+                propName,
                 notifyFunction,
                 updateFunction,
                 updateFunctionWithOldValue
@@ -121,6 +140,7 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
      */
     protected inner class UpdatingPropertyDelegate<T>(
         private val skipUpdate: Boolean,
+        private val propName: String,
         private val notifyFunction: ((T) -> Unit)?,
         private val updateFunction: ((T) -> Unit)?,
         private val updateFunctionWithOldValue: ((T, T) -> Unit)?
@@ -129,7 +149,7 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
          * Get the value of the property.
          */
         public operator fun getValue(thisRef: PropertyDelegate, property: KProperty<*>): T {
-            val value = propertyValues[property.name]
+            val value = propertyValues[propName]
             return if (value != null) {
                 value.cast()
             } else {
@@ -141,13 +161,13 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
          * Set the value of the property.
          */
         public operator fun setValue(thisRef: PropertyDelegate, property: KProperty<*>, value: T) {
-            propertiesSet.add(property.name)
-            val oldValue = propertyValues[property.name].cast<T>()
+            propertiesSet.add(propName)
+            val oldValue = propertyValues[propName].cast<T>()
             if (oldValue != value) {
                 if (value == null) {
-                    propertyValues.remove(property.name)
+                    propertyValues.remove(propName)
                 } else {
-                    propertyValues[property.name] = value
+                    propertyValues[propName] = value
                 }
                 notifyFunction?.invoke(value)
                 if (!skipUpdate) {
@@ -161,18 +181,25 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
     /**
      * Update the value of the property with lower priority (called by the compose runtime).
      */
-    public fun <T> updateProperty(property: KProperty<*>, value: T) {
-        if (!propertiesSet.contains(property.name)) {
-            val oldValue = propertyValues[property.name].cast<T>()
+    public fun <T> updateProperty(property: String, value: T) {
+        if (!propertiesSet.contains(property)) {
+            val oldValue = propertyValues[property].cast<T>()
             if (oldValue != value) {
                 if (value == null) {
-                    propertyValues.remove(property.name)
+                    propertyValues.remove(property)
                 } else {
-                    propertyValues[property.name] = value
+                    propertyValues[property] = value
                 }
             }
-            updateFunctions[property.name]?.cast<(T) -> Unit>()?.invoke(value)
-            updateFunctionsWithOldValue[property.name]?.cast<(T, T) -> Unit>()?.invoke(value, oldValue)
+            updateFunctions[property]?.cast<(T) -> Unit>()?.invoke(value)
+            updateFunctionsWithOldValue[property]?.cast<(T, T) -> Unit>()?.invoke(value, oldValue)
         }
+    }
+
+    /**
+     * Update the value of the property with lower priority (called by the compose runtime).
+     */
+    public fun <T> updateProperty(property: KProperty<*>, value: T) {
+        updateProperty(property.name, value)
     }
 }

@@ -29,13 +29,44 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.helpers.PropertyListBuilder
 import org.w3c.dom.HTMLLabelElement
 
 /**
  * HTML Label component.
  */
-public open class Label(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLLabelElement>("label", className, renderConfig)
+public open class Label(
+    htmlFor: String? = null,
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLLabelElement>("label", className, renderConfig) {
+
+    /**
+     * The ID of the labeled element.
+     */
+    public open var htmlFor: String? by updatingProperty(htmlFor, skipUpdate, "for") {
+        if (it != null) {
+            element.htmlFor = it
+        } else {
+            element.removeAttribute("for")
+        }
+    }
+
+    init {
+        @Suppress("LeakingThis")
+        elementNullable?.let {
+            if (htmlFor != null) {
+                it.htmlFor = htmlFor
+            }
+        }
+    }
+
+    override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
+        super.buildHtmlPropertyList(propertyListBuilder)
+        propertyListBuilder.addByName("for")
+    }
+}
 
 /**
  * Creates a [Label] component.
@@ -45,8 +76,12 @@ public open class Label(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Label] component
  */
 @Composable
-public fun ComponentBase.label(className: String? = null, content: @Composable Label.() -> Unit = {}): Label {
-    val component = remember { Label(className, renderConfig) }
+public fun ComponentBase.label(
+    htmlFor: String? = null,
+    className: String? = null,
+    content: @Composable Label.() -> Unit = {}
+): Label {
+    val component = remember { Label(htmlFor, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,6 +89,7 @@ public fun ComponentBase.label(className: String? = null, content: @Composable L
         }
     }
     ComponentNode(component, {
+        set(htmlFor) { updateProperty("for", it) }
         set(className) { updateProperty(Label::className, it) }
     }, content)
     return component

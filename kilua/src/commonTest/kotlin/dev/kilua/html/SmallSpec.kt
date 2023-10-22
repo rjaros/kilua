@@ -34,7 +34,7 @@ class SmallSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                small("test") {
+                smallt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class SmallSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<small class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></small>"""),
+                normalizeHtml("""<small class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</small>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Small tag to DOM"
             )
@@ -55,7 +55,7 @@ class SmallSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                small("test") {
+                smallt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class SmallSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><small class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></small></div>"""),
+                normalizeHtml("""<div><small class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</small></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Small tag to a String"
             )

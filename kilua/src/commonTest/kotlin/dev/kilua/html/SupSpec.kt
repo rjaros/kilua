@@ -34,7 +34,7 @@ class SupSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                sup("test") {
+                supt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class SupSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<sup class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></sup>"""),
+                normalizeHtml("""<sup class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</sup>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Sup tag to DOM"
             )
@@ -55,7 +55,7 @@ class SupSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                sup("test") {
+                supt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class SupSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><sup class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></sup></div>"""),
+                normalizeHtml("""<div><sup class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</sup></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Sup tag to a String"
             )

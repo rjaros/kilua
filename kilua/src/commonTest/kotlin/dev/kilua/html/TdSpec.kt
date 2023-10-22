@@ -34,7 +34,7 @@ class TdSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                td("test") {
+                td(colspan = 2, rowspan = 1, className = "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class TdSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<td class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></td>"""),
+                normalizeHtml("""<td class="test" colspan="2" rowspan="1" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></td>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Td tag to DOM"
             )
@@ -55,7 +55,7 @@ class TdSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                td("test") {
+                td(colspan = 2, rowspan = 1, "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class TdSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><td class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></td></div>"""),
+                normalizeHtml("""<div><td class="test" colspan="2" rowspan="1" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></td></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Td tag to a String"
             )

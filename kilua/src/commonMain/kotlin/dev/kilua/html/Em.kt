@@ -58,3 +58,19 @@ public fun ComponentBase.em(className: String? = null, content: @Composable Em.(
     }, content)
     return component
 }
+
+/**
+ * Creates a [Em] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [Em] component
+ */
+@Composable
+public fun ComponentBase.emt(text: String, className: String? = null, content: @Composable Em.() -> Unit = {}): Em {
+    return em(className) {
+        +text
+        content()
+    }
+}

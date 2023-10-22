@@ -58,3 +58,18 @@ public fun ComponentBase.h2(className: String? = null, content: @Composable H2.(
     }, content)
     return component
 }
+/**
+ * Creates a [H2] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [H2] component
+ */
+@Composable
+public fun ComponentBase.h2t(text: String, className: String? = null, content: @Composable H2.() -> Unit = {}): H2 {
+    return h2(className) {
+        +text
+        content()
+    }
+}

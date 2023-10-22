@@ -34,7 +34,7 @@ class EmSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                em("test") {
+                emt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class EmSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<em class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></em>"""),
+                normalizeHtml("""<em class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</em>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Em tag to DOM"
             )
@@ -55,7 +55,7 @@ class EmSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                em("test") {
+                emt("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class EmSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><em class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></em></div>"""),
+                normalizeHtml("""<div><em class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</em></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Em tag to a String"
             )

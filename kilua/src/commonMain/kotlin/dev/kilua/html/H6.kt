@@ -58,3 +58,19 @@ public fun ComponentBase.h6(className: String? = null, content: @Composable H6.(
     }, content)
     return component
 }
+
+/**
+ * Creates a [H6] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [H6] component
+ */
+@Composable
+public fun ComponentBase.h6t(text: String, className: String? = null, content: @Composable H6.() -> Unit = {}): H6 {
+    return h6(className) {
+        +text
+        content()
+    }
+}

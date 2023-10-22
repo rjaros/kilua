@@ -58,3 +58,19 @@ public fun ComponentBase.sub(className: String? = null, content: @Composable Sub
     }, content)
     return component
 }
+
+/**
+ * Creates a [Sub] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [Sub] component
+ */
+@Composable
+public fun ComponentBase.subt(text: String, className: String? = null, content: @Composable Sub.() -> Unit = {}): Sub {
+    return sub(className) {
+        +text
+        content()
+    }
+}

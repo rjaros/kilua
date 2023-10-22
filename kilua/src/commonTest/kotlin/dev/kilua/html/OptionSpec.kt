@@ -34,17 +34,13 @@ class OptionSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                option("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
-                }
+                option("test1", true) { +"Test 1" }
+                option("test2") { +"Test 2" }
+                option("test3", label = "Test 3") { +"Test 3" }
+                option("test4", disabled = true) { +"Test 4" }
             }
             assertEquals(
-                normalizeHtml("""<option class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></option>"""),
+                normalizeHtml("""<option value="test1" selected="">Test 1</option><option value="test2">Test 2</option><option value="test3" label="Test 3">Test 3</option><option value="test4" disabled="">Test 4</option>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Option tag to DOM"
             )
@@ -55,17 +51,13 @@ class OptionSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                option("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
-                }
+                option("test1", true) { +"Test 1" }
+                option("test2") { +"Test 2" }
+                option("test3", label = "Test 3") { +"Test 3" }
+                option("test4", disabled = true) { +"Test 4" }
             }
             assertEquals(
-                normalizeHtml("""<div><option class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></option></div>"""),
+                normalizeHtml("""<div><option value="test1" selected>Test 1</option><option value="test2">Test 2</option><option value="test3" label="Test 3">Test 3</option><option value="test4" disabled>Test 4</option></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Option tag to a String"
             )

@@ -57,3 +57,7 @@ public fun delete(thing: dynamic, key: String) {
 }
 
 public actual fun size(array: Object): Int = array.cast<Array<*>>().size
+
+public actual fun jsString(value: String): Object {
+    return value.unsafeCast<Object>()
+}

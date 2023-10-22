@@ -58,3 +58,19 @@ public fun ComponentBase.h3(className: String? = null, content: @Composable H3.(
     }, content)
     return component
 }
+
+/**
+ * Creates a [H3] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [H3] component
+ */
+@Composable
+public fun ComponentBase.h3t(text: String, className: String? = null, content: @Composable H3.() -> Unit = {}): H3 {
+    return h3(className) {
+        +text
+        content()
+    }
+}

@@ -34,17 +34,18 @@ class IframeSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                iframe("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
+                iframe(
+                    "https://google.com",
+                    iframeWidth = 300,
+                    iframeHeight = 200,
+                    name = "test",
+                    sandbox = setOf(Sandbox.AllowPopups, Sandbox.AllowForms)
+                ) {
                     margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<iframe class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></iframe>"""),
+                normalizeHtml("""<iframe src="https://google.com" name="test" width="300" height="200" sandbox="allow-popups allow-forms" style="margin: 10px;"></iframe>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Iframe tag to DOM"
             )
@@ -55,17 +56,18 @@ class IframeSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                iframe("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
+                iframe(
+                    "https://google.com",
+                    iframeWidth = 300,
+                    iframeHeight = 200,
+                    name = "test",
+                    sandbox = setOf(Sandbox.AllowPopups, Sandbox.AllowForms)
+                ) {
                     margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><iframe class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></iframe></div>"""),
+                normalizeHtml("""<div><iframe src="https://google.com" name="test" width="300" height="200" sandbox="allow-popups allow-forms" style="margin: 10px;"></iframe></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Iframe tag to a String"
             )

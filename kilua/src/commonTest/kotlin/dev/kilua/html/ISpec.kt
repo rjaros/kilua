@@ -34,7 +34,7 @@ class ISpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                i("test") {
+                it("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class ISpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<i class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></i>"""),
+                normalizeHtml("""<i class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</i>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML I tag to DOM"
             )
@@ -55,7 +55,7 @@ class ISpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                i("test") {
+                it("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class ISpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><i class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></i></div>"""),
+                normalizeHtml("""<div><i class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</i></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML I tag to a String"
             )

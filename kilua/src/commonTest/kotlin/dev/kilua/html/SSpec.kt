@@ -34,7 +34,7 @@ class SSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                s("test") {
+                st("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -44,7 +44,7 @@ class SSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<s class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></s>"""),
+                normalizeHtml("""<s class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</s>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML S tag to DOM"
             )
@@ -55,7 +55,7 @@ class SSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                s("test") {
+                st("Lorem ipsum", "test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -65,7 +65,7 @@ class SSpec : DomSpec {
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><s class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></s></div>"""),
+                normalizeHtml("""<div><s class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</s></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML S tag to a String"
             )

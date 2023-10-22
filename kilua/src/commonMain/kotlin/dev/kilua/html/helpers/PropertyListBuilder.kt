@@ -29,7 +29,12 @@ import kotlin.reflect.KProperty
  * Property list builder interface.
  */
 public interface PropertyListBuilder {
+    public fun addByName(vararg property: String)
     public fun add(vararg property: KProperty<*>)
+    public fun addAllByName(properties: List<String>) {
+        properties.forEach { addByName(it) }
+    }
+
     public fun addAll(properties: List<KProperty<*>>) {
         properties.forEach { add(it) }
     }
@@ -40,11 +45,17 @@ public interface PropertyListBuilder {
  */
 internal class PropertyListBuilderImpl : PropertyListBuilder {
 
-    val properties = nativeListOf<KProperty<*>>()
+    val properties = nativeListOf<String>()
+
+    override fun addByName(vararg property: String) {
+        property.forEach {
+            properties.add(it)
+        }
+    }
 
     override fun add(vararg property: KProperty<*>) {
         property.forEach {
-            properties.add(it)
+            properties.add(it.name)
         }
     }
 }
@@ -52,5 +63,5 @@ internal class PropertyListBuilderImpl : PropertyListBuilder {
 /**
  * Build a list of properties.
  */
-public fun buildPropertyList(delegate: (builder: PropertyListBuilder) -> Unit): List<KProperty<*>> =
+public fun buildPropertyList(delegate: (builder: PropertyListBuilder) -> Unit): List<String> =
     PropertyListBuilderImpl().also { delegate(it) }.properties

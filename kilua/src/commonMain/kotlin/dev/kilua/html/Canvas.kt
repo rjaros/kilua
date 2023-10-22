@@ -29,24 +29,87 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.helpers.PropertyListBuilder
+import dev.kilua.utils.cast
+import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.HTMLCanvasElement
 
 /**
  * HTML Canvas component.
  */
-public open class Canvas(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLCanvasElement>("canvas", className, renderConfig)
+public open class Canvas(
+    canvasWidth: Int? = null,
+    canvasHeight: Int? = null,
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLCanvasElement>("canvas", className, renderConfig) {
+
+    /**
+     * The width of the canvas.
+     */
+    public open var canvasWidth: Int? by updatingProperty(canvasWidth, skipUpdate, "width") {
+        if (it != null) {
+            element.width = it
+        } else {
+            element.removeAttribute("width")
+        }
+    }
+
+    /**
+     * The height of the canvas.
+     */
+    public open var canvasHeight: Int? by updatingProperty(canvasHeight, skipUpdate, "height") {
+        if (it != null) {
+            element.height = it
+        } else {
+            element.removeAttribute("height")
+        }
+    }
+
+    /**
+     * The canvas rendering context.
+     */
+    public val context2D: CanvasRenderingContext2D?
+
+    init {
+        @Suppress("LeakingThis")
+        if (elementAvailable) {
+            if (canvasWidth != null) {
+                element.width = canvasWidth
+            }
+            if (canvasHeight != null) {
+                element.height = canvasHeight
+            }
+            context2D = element.getContext("2d").cast()
+        } else {
+            context2D = null
+        }
+    }
+
+    override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
+        super.buildHtmlPropertyList(propertyListBuilder)
+        propertyListBuilder.addByName("width", "height")
+    }
+
+}
 
 /**
  * Creates a [Canvas] component.
  *
+ * @param canvasWidth the width of the canvas
+ * @param canvasHeight the height of the canvas
  * @param className the CSS class name
  * @param content the content of the component
  * @return the [Canvas] component
  */
 @Composable
-public fun ComponentBase.canvas(className: String? = null, content: @Composable Canvas.() -> Unit = {}): Canvas {
-    val component = remember { Canvas(className, renderConfig) }
+public fun ComponentBase.canvas(
+    canvasWidth: Int? = null,
+    canvasHeight: Int? = null,
+    className: String? = null, content: @Composable Canvas.() -> Unit = {}
+): Canvas {
+    val component = remember { Canvas(canvasWidth, canvasHeight, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,6 +117,8 @@ public fun ComponentBase.canvas(className: String? = null, content: @Composable 
         }
     }
     ComponentNode(component, {
+        set(canvasWidth) { updateProperty("width", it) }
+        set(canvasHeight) { updateProperty("height", it) }
         set(className) { updateProperty(Canvas::className, it) }
     }, content)
     return component

@@ -29,24 +29,112 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.helpers.PropertyListBuilder
 import org.w3c.dom.HTMLOptionElement
 
 /**
  * HTML Option component.
  */
-public open class Option(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLOptionElement>("option", className, renderConfig)
+public open class Option(
+    value: String? = null,
+    selected: Boolean? = null,
+    label: String? = null,
+    disabled: Boolean? = null,
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLOptionElement>("option", className, renderConfig) {
+
+    /**
+     * The value of the option.
+     */
+    public open var value: String? by updatingProperty(value, skipUpdate) {
+        if (it != null) {
+            element.value = it
+        } else {
+            element.removeAttribute("value")
+        }
+    }
+
+    /**
+     * The selected state of the option.
+     */
+    public open var selected: Boolean? by updatingProperty(selected, skipUpdate) {
+        if (it != null) {
+            element.defaultSelected = it
+        } else {
+            element.removeAttribute("selected")
+        }
+    }
+
+    /**
+     * The label of the option.
+     */
+    public open var label: String? by updatingProperty(label, skipUpdate) {
+        if (it != null) {
+            element.label = it
+        } else {
+            element.removeAttribute("label")
+        }
+    }
+
+    /**
+     * Whether the option is disabled.
+     */
+    public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+        if (it != null) {
+            element.disabled = it
+        } else {
+            element.removeAttribute("disabled")
+        }
+    }
+
+    init {
+        @Suppress("LeakingThis")
+        elementNullable?.let {
+            if (value != null) {
+                it.value = value
+            }
+            if (selected != null) {
+                it.defaultSelected = selected
+            }
+            if (label != null) {
+                it.label = label
+            }
+            if (disabled != null) {
+                it.disabled = disabled
+            }
+        }
+    }
+
+    override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
+        super.buildHtmlPropertyList(propertyListBuilder)
+        propertyListBuilder.add(::value, ::selected, ::label, ::disabled)
+    }
+
+}
 
 /**
  * Creates a [Option] component.
  *
+ * @param value the value of the option
+ * @param selected the selected state of the option
+ * @param label the label of the option
+ * @param disabled whether the option is disabled
  * @param className the CSS class name
  * @param content the content of the component
  * @return the [Option] component
  */
 @Composable
-public fun ComponentBase.option(className: String? = null, content: @Composable Option.() -> Unit = {}): Option {
-    val component = remember { Option(className, renderConfig) }
+public fun ComponentBase.option(
+    value: String? = null,
+    selected: Boolean? = null,
+    label: String? = null,
+    disabled: Boolean? = null,
+    className: String? = null,
+    content: @Composable Option.() -> Unit = {}
+): Option {
+    val component = remember { Option(value, selected, label, disabled, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,6 +142,10 @@ public fun ComponentBase.option(className: String? = null, content: @Composable 
         }
     }
     ComponentNode(component, {
+        set(value) { updateProperty(Option::value, it) }
+        set(selected) { updateProperty(Option::selected, it) }
+        set(label) { updateProperty(Option::label, it) }
+        set(disabled) { updateProperty(Option::disabled, it) }
         set(className) { updateProperty(Option::className, it) }
     }, content)
     return component

@@ -58,3 +58,19 @@ public fun ComponentBase.h4(className: String? = null, content: @Composable H4.(
     }, content)
     return component
 }
+
+/**
+ * Creates a [H4] component.
+ *
+ * @param text the text of the component
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [H4] component
+ */
+@Composable
+public fun ComponentBase.h4t(text: String, className: String? = null, content: @Composable H4.() -> Unit = {}): H4 {
+    return h4(className) {
+        +text
+        content()
+    }
+}

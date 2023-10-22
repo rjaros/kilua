@@ -27,17 +27,7 @@ import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.CoreModule
 import dev.kilua.compose.root
-import dev.kilua.html.Border
-import dev.kilua.html.BorderStyle
-import dev.kilua.html.C
-import dev.kilua.html.Color
-import dev.kilua.html.button
-import dev.kilua.html.div
-import dev.kilua.html.hr
-import dev.kilua.html.link
-import dev.kilua.html.perc
-import dev.kilua.html.px
-import dev.kilua.html.unaryPlus
+import dev.kilua.html.*
 import dev.kilua.panel.Dir
 import dev.kilua.panel.SplitPanel
 import dev.kilua.panel.splitPanel
@@ -45,7 +35,9 @@ import dev.kilua.startApplication
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
 import dev.kilua.utils.console
+import dev.kilua.utils.obj
 import dev.kilua.utils.useCssModule
+import kotlinx.browser.window
 import org.w3c.dom.CustomEvent
 
 @JsModule("./css/style.css")
@@ -62,6 +54,60 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+
+            var count by remember { mutableStateOf(4) }
+            var start by remember { mutableStateOf(1) }
+
+            val ol = ol(start = start) {
+                for (i in 0..<count) {
+                    li {
+                        +"Item ${i + 1}"
+                    }
+                }
+            }
+            button("Add item") {
+                onClick {
+                    count++
+                }
+            }
+            button("Inc start") {
+                onClick {
+                    start++
+                    ol.reversed = !(ol.reversed ?: false)
+                }
+            }
+
+            hr()
+
+            var id by remember { mutableStateOf("id") }
+
+            label(id) {
+                +"Label"
+            }
+
+            button("test label") {
+                onClick {
+                    id = "id2"
+                }
+            }
+
+            hr()
+
+            var src by remember { mutableStateOf("https://www.finn.pl") }
+
+            val iframe = iframe(src, iframeWidth = 300, iframeHeight = 200, sandbox = setOf(Sandbox.AllowForms))
+
+            button("test iframe") {
+                onClick {
+                    //src = "https://www.onet.pl"
+                    //iframe.sandbox = setOf(Sandbox.AllowPopups)
+                    window.setTimeout({
+                        console.log(iframe.renderToString())
+                        obj()
+                    }, 0)
+                }
+            }
+
             var marg by remember { mutableStateOf(1) }
             hr {
                 margin = marg.px
@@ -96,7 +142,7 @@ public class App : Application() {
             }
             button("Test link label") {
                 onClick {
-                    console.log(link.label)
+                    console.log(link.textContent)
                 }
             }
 
