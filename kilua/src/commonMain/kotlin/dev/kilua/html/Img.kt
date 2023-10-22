@@ -29,24 +29,68 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.helpers.PropertyListBuilder
 import org.w3c.dom.HTMLImageElement
 
 /**
  * HTML Img component.
  */
-public open class Img(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLImageElement>("img", className, renderConfig)
+public open class Img(
+    src: String,
+    alt: String? = null,
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
+) :
+    Tag<HTMLImageElement>("img", className, renderConfig) {
+
+    public open var src: String? by updatingProperty(src, skipUpdate) {
+        if (it != null) {
+            element.src = it
+        } else {
+            element.removeAttribute("src")
+        }
+    }
+
+    public open var alt: String? by updatingProperty(alt, skipUpdate) {
+        if (it != null) {
+            element.alt = it
+        } else {
+            element.removeAttribute("alt")
+        }
+    }
+
+    init {
+        @Suppress("LeakingThis")
+        elementNullable?.let {
+            it.src = src
+            if (alt != null) {
+                it.alt = alt
+            }
+        }
+    }
+
+    override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
+        super.buildHtmlPropertyList(propertyListBuilder)
+        propertyListBuilder.add(::src, ::alt)
+    }
+
+}
 
 /**
  * Creates a [Img] component.
  *
+ * @param src the source of the image
+ * @param alt the alternative text of the image
  * @param className the CSS class name
  * @param content the content of the component
  * @return the [Img] component
  */
 @Composable
-public fun ComponentBase.img(className: String? = null, content: @Composable Img.() -> Unit = {}): Img {
-    val component = remember { Img(className, renderConfig) }
+public fun ComponentBase.img(
+    src: String, alt: String? = null,
+    className: String? = null, content: @Composable Img.() -> Unit = {}
+): Img {
+    val component = remember { Img(src, alt, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -54,6 +98,8 @@ public fun ComponentBase.img(className: String? = null, content: @Composable Img
         }
     }
     ComponentNode(component, {
+        set(src) { updateProperty(Img::src, it) }
+        set(alt) { updateProperty(Img::alt, it) }
         set(className) { updateProperty(Img::className, it) }
     }, content)
     return component

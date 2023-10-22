@@ -34,17 +34,13 @@ class ImgSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                img("test") {
+                img("/image.png", "An image", "test") {
                     id = "test-id"
                     title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<img class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">"""),
+                normalizeHtml("""<img class="test" src="/image.png" alt="An image" id="test-id" title="A title">"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML Img tag to DOM"
             )
@@ -55,17 +51,13 @@ class ImgSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                img("test") {
+                img("/image.png", "An image", "test") {
                     id = "test-id"
                     title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><img class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></div>"""),
+                normalizeHtml("""<div><img class="test" src="/image.png" alt="An image" id="test-id" title="A title"></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML Img tag to a String"
             )
