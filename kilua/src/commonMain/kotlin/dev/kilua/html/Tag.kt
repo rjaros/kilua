@@ -122,9 +122,9 @@ public open class Tag<E : HTMLElement>(
      * The label of the current component or null if the first child is not a TextNode.
      */
     public open var label: String?
-        get() = children.firstOrNull()?.let { it as? TextNode }?.text
+        get() = children.find { it is TextNode }?.cast<TextNode>()?.text
         set(value) {
-            children.firstOrNull()?.let { it as? TextNode }?.text = value ?: ""
+            children.find { it is TextNode }?.cast<TextNode>()?.text = value ?: ""
         }
 
     init {
