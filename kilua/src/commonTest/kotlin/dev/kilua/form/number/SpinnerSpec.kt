@@ -67,16 +67,16 @@ class SpinnerSpec : DomSpec {
         run {
             lateinit var spinner: Spinner
             root("test") {
-                spinner = spinner(19, 10, 20, step = 0.5) {
+                spinner = spinner(19, 10, 20, step = 1) {
                     autofocus = true
                 }
             }
-            repeat(4) {
+            repeat(2) {
                 spinner.stepUp()
             }
-            assertEquals(20.0, spinner.value)
+            assertEquals(20, spinner.value)
             spinner.stepDown()
-            assertEquals(19.5, spinner.value)
+            assertEquals(19, spinner.value)
         }
     }
 }

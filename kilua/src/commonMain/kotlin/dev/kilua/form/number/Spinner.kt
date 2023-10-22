@@ -41,9 +41,9 @@ internal const val SPINNER_DEFAULT_STEP = 1
  */
 public open class Spinner(
     value: Number? = null,
-    min: Number? = null,
-    max: Number? = null,
-    step: Number = SPINNER_DEFAULT_STEP,
+    min: Int? = null,
+    max: Int? = null,
+    step: Int = SPINNER_DEFAULT_STEP,
     name: String? = null,
     maxlength: Int? = null,
     placeholder: String? = null,
@@ -56,7 +56,7 @@ public open class Spinner(
     /**
      * The minimum value of the spinner.
      */
-    public open var min: Number? by updatingProperty(min, skipUpdate) {
+    public open var min: Int? by updatingProperty(min, skipUpdate) {
         if (it != null) {
             element.min = it.toString()
         } else {
@@ -67,7 +67,7 @@ public open class Spinner(
     /**
      * The maximum value of the spinner.
      */
-    public open var max: Number? by updatingProperty(max, skipUpdate) {
+    public open var max: Int? by updatingProperty(max, skipUpdate) {
         if (it != null) {
             element.max = it.toString()
         } else {
@@ -78,7 +78,7 @@ public open class Spinner(
     /**
      * The step value of the spinner.
      */
-    public open var step: Number by updatingProperty(step, skipUpdate) {
+    public open var step: Int by updatingProperty(step, skipUpdate) {
         element.step = it.toString()
     }
 
@@ -104,10 +104,10 @@ public open class Spinner(
         value = if (text.isNullOrEmpty()) {
             null
         } else {
-            text.toDoubleOrNull()?.let {
-                if (min != null && it < (min!!.toDouble()))
+            text.toIntOrNull()?.let {
+                if (min != null && it < min!!)
                     min
-                else if (max != null && it > (max!!.toDouble()))
+                else if (max != null && it > max!!)
                     max
                 else it
             }
@@ -122,8 +122,8 @@ public open class Spinner(
             element.stepUp()
             setValueFromString(element.value)
         } else {
-            val newValue = (value?.toDouble() ?: min?.toDouble() ?: 0.0) + step.toDouble()
-            value = if (max != null && newValue > max!!.toDouble()) max else newValue
+            val newValue = (value?.toInt() ?: min ?: 0) + step
+            value = if (max != null && newValue > max!!) max else newValue
         }
     }
 
@@ -135,8 +135,8 @@ public open class Spinner(
             element.stepDown()
             setValueFromString(element.value)
         } else {
-            val newValue = (value?.toDouble() ?: max?.toDouble() ?: 0.0) - step.toDouble()
-            value = if (min != null && newValue < min!!.toDouble()) min else newValue
+            val newValue = (value?.toInt() ?: max ?: 0) - step
+            value = if (min != null && newValue < min!!) min else newValue
         }
     }
 
@@ -159,9 +159,9 @@ public open class Spinner(
 @Composable
 public fun ComponentBase.spinner(
     value: Number? = null,
-    min: Number? = null,
-    max: Number? = null,
-    step: Number = SPINNER_DEFAULT_STEP,
+    min: Int? = null,
+    max: Int? = null,
+    step: Int = SPINNER_DEFAULT_STEP,
     name: String? = null,
     maxlength: Int? = null,
     placeholder: String? = null,
