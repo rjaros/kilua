@@ -137,8 +137,7 @@ public open class TextArea(
     /**
      * The autofocus attribute of the generated HTML textarea element.
      */
-    public open var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
-        console.log("set autofocus $it")
+    public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.autofocus = it
         } else {

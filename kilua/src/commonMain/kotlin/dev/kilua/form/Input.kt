@@ -120,7 +120,7 @@ public abstract class Input<T : Any>(
     /**
      * The autofocus attribute of the generated HTML input element.
      */
-    public open var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.autofocus = it
         } else {

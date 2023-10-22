@@ -41,10 +41,11 @@ class TagSpec : DomSpec {
                     setAttribute("data-test", "test")
                     margin = 10.px
                     display = Display.Flex
+                    autofocus = true
                 }
             }
             assertEquals(
-                normalizeHtml("""<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></ol>"""),
+                normalizeHtml("""<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus="" style="margin: 10px; display: flex;"></ol>"""),
                 normalizeHtml(root.element?.innerHTML),
                 "Should render an HTML tag to DOM"
             )
@@ -62,10 +63,11 @@ class TagSpec : DomSpec {
                     setAttribute("data-test", "test")
                     margin = 10.px
                     display = Display.Flex
+                    autofocus = true
                 }
             }
             assertEquals(
-                normalizeHtml("""<div><ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></ol></div>"""),
+                normalizeHtml("""<div><ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus style="margin: 10px; display: flex;"></ol></div>"""),
                 normalizeHtml(root.renderToString()),
                 "Should render an HTML tag to a String"
             )

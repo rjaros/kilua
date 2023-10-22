@@ -64,6 +64,16 @@ public interface TagAttrs<E : HTMLElement> {
     public var ariaLabelledby: String?
 
     /**
+     * The accesskey attribute.
+     */
+    public var accesskey: Char?
+
+    /**
+     * The autofocus attribute.
+     */
+    public var autofocus: Boolean?
+
+    /**
      * Set value for a given attribute name.
      */
     public fun setAttribute(name: String, value: String?)

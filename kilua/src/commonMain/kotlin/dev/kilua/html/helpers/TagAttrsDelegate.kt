@@ -101,6 +101,22 @@ public open class TagAttrsDelegate<E : HTMLElement>(
         }
     }
 
+    override var accesskey: Char? by updatingProperty(null, skipUpdates) {
+        if (it != null) {
+            element.accessKey = it.toString()
+        } else {
+            element.removeAttribute("accesskey")
+        }
+    }
+
+    override var autofocus: Boolean? by updatingProperty(null, skipUpdates) {
+        if (it != null) {
+            element.setAttribute("autofocus", "")
+        } else {
+            element.removeAttribute("autofocus")
+        }
+    }
+
     override fun setAttribute(name: String, value: String?) {
         if (attributes[name] != value) {
             if (value != null) {

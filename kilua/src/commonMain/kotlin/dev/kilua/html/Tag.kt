@@ -41,6 +41,7 @@ import dev.kilua.html.helpers.TagEventsDelegate
 import dev.kilua.html.helpers.TagStyle
 import dev.kilua.html.helpers.TagStyleDelegate
 import dev.kilua.html.helpers.buildPropertyList
+import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.nativeMapOf
@@ -197,6 +198,20 @@ public open class Tag<E : HTMLElement>(
                 builder.append("</$tagName>")
             }
         }
+    }
+
+    /**
+     * Makes the element focused.
+     */
+    public open fun focus() {
+        elementNullable?.focus()
+    }
+
+    /**
+     * Makes the element blur.
+     */
+    public open fun blur() {
+        elementNullable?.blur()
     }
 
     public companion object {
