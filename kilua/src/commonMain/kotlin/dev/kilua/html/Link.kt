@@ -91,7 +91,6 @@ public open class Link(
  *
  * @param href the link URL
  * @param label the link label
- * @param labelFirst determines if the label is put before children elements (defaults to true)
  * @param target the link target
  * @param className the CSS class name
  * @param content the content of the component
@@ -101,7 +100,6 @@ public open class Link(
 public fun ComponentBase.link(
     href: String? = null,
     label: String? = null,
-    labelFirst: Boolean = true,
     target: String? = null,
     className: String? = null,
     content: @Composable Link.() -> Unit = {}
@@ -118,17 +116,10 @@ public fun ComponentBase.link(
         set(target) { updateProperty(Link::target, it) }
         set(className) { updateProperty(Link::className, it) }
     }) {
-        if (labelFirst) {
-            if (label != null) {
-                +label
-            }
-            content()
-        } else {
-            content()
-            if (label != null) {
-                +label
-            }
+        if (label != null) {
+            +label
         }
+        content()
     }
     return component
 }

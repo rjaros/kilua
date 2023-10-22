@@ -64,9 +64,8 @@ public class App : Application() {
 
             var label by remember { mutableStateOf("A link") }
             var url by remember { mutableStateOf("https://google.com") }
-            var labelFirst by remember { mutableStateOf(true) }
 
-            val link = link(url, label, labelFirst) {
+            val link = link(url, label) {
                 div()
             }
 
@@ -78,11 +77,6 @@ public class App : Application() {
             button("Test link url") {
                 onClick {
                     url = "https://github.com"
-                }
-            }
-            button("Test link labelFirst") {
-                onClick {
-                    labelFirst = !labelFirst
                 }
             }
             button("Test link target") {

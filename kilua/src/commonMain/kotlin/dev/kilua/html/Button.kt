@@ -114,7 +114,6 @@ public open class Button(
  * Creates a [Button] component.
  *
  * @param label the label of the button
- * @param labelFirst determines if the label is put before children elements (defaults to true)
  * @param type the type of the button
  * @param disabled whether the button is disabled
  * @param className the CSS class name
@@ -124,7 +123,6 @@ public open class Button(
 @Composable
 public fun ComponentBase.button(
     label: String? = null,
-    labelFirst: Boolean = true,
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
@@ -142,17 +140,10 @@ public fun ComponentBase.button(
         set(disabled) { updateProperty(Button::disabled, it) }
         set(className) { updateProperty(Button::className, it) }
     }) {
-        if (labelFirst) {
-            if (label != null) {
-                +label
-            }
-            content()
-        } else {
-            content()
-            if (label != null) {
-                +label
-            }
+        if (label != null) {
+            +label
         }
+        content()
     }
     return component
 }
