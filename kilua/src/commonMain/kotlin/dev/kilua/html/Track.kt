@@ -41,11 +41,11 @@ public open class Track(className: String? = null, renderConfig: RenderConfig = 
  * Creates a [Track] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Track] component
  */
 @Composable
-public fun ComponentBase.track(className: String? = null, content: @Composable Track.() -> Unit = {}): Track {
+public fun ComponentBase.track(className: String? = null, setup: Track.() -> Unit = {}): Track {
     val component = remember { Track(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.track(className: String? = null, content: @Composable T
     }
     ComponentNode(component, {
         set(className) { updateProperty(Track::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

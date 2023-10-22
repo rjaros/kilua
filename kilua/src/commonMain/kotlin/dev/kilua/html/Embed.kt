@@ -41,11 +41,11 @@ public open class Embed(className: String? = null, renderConfig: RenderConfig = 
  * Creates a [Embed] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Embed] component
  */
 @Composable
-public fun ComponentBase.embed(className: String? = null, content: @Composable Embed.() -> Unit = {}): Embed {
+public fun ComponentBase.embed(className: String? = null, setup: Embed.() -> Unit = {}): Embed {
     val component = remember { Embed(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.embed(className: String? = null, content: @Composable E
     }
     ComponentNode(component, {
         set(className) { updateProperty(Embed::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

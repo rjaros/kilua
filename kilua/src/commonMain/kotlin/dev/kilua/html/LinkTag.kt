@@ -41,11 +41,11 @@ public open class LinkTag(className: String? = null, renderConfig: RenderConfig 
  * Creates a [LinkTag] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [LinkTag] component
  */
 @Composable
-public fun ComponentBase.linkTag(className: String? = null, content: @Composable LinkTag.() -> Unit = {}): LinkTag {
+public fun ComponentBase.linkTag(className: String? = null, setup: LinkTag.() -> Unit = {}): LinkTag {
     val component = remember { LinkTag(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.linkTag(className: String? = null, content: @Composable
     }
     ComponentNode(component, {
         set(className) { updateProperty(LinkTag::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

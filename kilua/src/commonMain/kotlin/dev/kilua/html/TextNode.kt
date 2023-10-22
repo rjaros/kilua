@@ -81,11 +81,11 @@ public open class TextNode(
 /**
  * Creates a [TextNode] component.
  * @param text the text of the node
- * @param content a function for setting up the component
+ * @param setup a function for setting up the component
  * @return a [TextNode] component
  */
 @Composable
-public fun textNode(text: String, content: TextNode.() -> Unit = {}): TextNode {
+public fun textNode(text: String, setup: TextNode.() -> Unit = {}): TextNode {
     // Always using DefaultRenderConfig because of plus operator String receiver.
     val component = remember { TextNode(text, DefaultRenderConfig()) }
     DisposableEffect(component.componentId) {
@@ -97,7 +97,7 @@ public fun textNode(text: String, content: TextNode.() -> Unit = {}): TextNode {
     ComponentNode(component, {
         set(text) { updateProperty(TextNode::text, it) }
     }) {
-        content(component)
+        setup(component)
     }
     return component
 }

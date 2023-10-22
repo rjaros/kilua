@@ -41,11 +41,11 @@ public open class Base(className: String? = null, renderConfig: RenderConfig = D
  * Creates a [Base] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Base] component
  */
 @Composable
-public fun ComponentBase.base(className: String? = null, content: @Composable Base.() -> Unit = {}): Base {
+public fun ComponentBase.base(className: String? = null, setup: Base.() -> Unit = {}): Base {
     val component = remember { Base(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.base(className: String? = null, content: @Composable Ba
     }
     ComponentNode(component, {
         set(className) { updateProperty(Base::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

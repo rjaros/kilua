@@ -41,11 +41,11 @@ public open class Hr(className: String? = null, renderConfig: RenderConfig = Def
  * Creates a [Hr] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Hr] component
  */
 @Composable
-public fun ComponentBase.hr(className: String? = null, content: @Composable Hr.() -> Unit = {}): Hr {
+public fun ComponentBase.hr(className: String? = null, setup: Hr.() -> Unit = {}): Hr {
     val component = remember { Hr(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.hr(className: String? = null, content: @Composable Hr.(
     }
     ComponentNode(component, {
         set(className) { updateProperty(Hr::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

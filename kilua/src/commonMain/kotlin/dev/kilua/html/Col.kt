@@ -41,11 +41,11 @@ public open class Col(className: String? = null, renderConfig: RenderConfig = De
  * Creates a [Col] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Col] component
  */
 @Composable
-public fun ComponentBase.col(className: String? = null, content: @Composable Col.() -> Unit = {}): Col {
+public fun ComponentBase.col(className: String? = null, setup: Col.() -> Unit = {}): Col {
     val component = remember { Col(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.col(className: String? = null, content: @Composable Col
     }
     ComponentNode(component, {
         set(className) { updateProperty(Col::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

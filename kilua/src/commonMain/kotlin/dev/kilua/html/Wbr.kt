@@ -41,11 +41,11 @@ public open class Wbr(className: String? = null, renderConfig: RenderConfig = De
  * Creates a [Wbr] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Wbr] component
  */
 @Composable
-public fun ComponentBase.wbr(className: String? = null, content: @Composable Wbr.() -> Unit = {}): Wbr {
+public fun ComponentBase.wbr(className: String? = null, setup: Wbr.() -> Unit = {}): Wbr {
     val component = remember { Wbr(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.wbr(className: String? = null, content: @Composable Wbr
     }
     ComponentNode(component, {
         set(className) { updateProperty(Wbr::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

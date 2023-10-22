@@ -41,11 +41,11 @@ public open class Area(className: String? = null, renderConfig: RenderConfig = D
  * Creates a [Area] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Area] component
  */
 @Composable
-public fun ComponentBase.area(className: String? = null, content: @Composable Area.() -> Unit = {}): Area {
+public fun ComponentBase.area(className: String? = null, setup: Area.() -> Unit = {}): Area {
     val component = remember { Area(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.area(className: String? = null, content: @Composable Ar
     }
     ComponentNode(component, {
         set(className) { updateProperty(Area::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

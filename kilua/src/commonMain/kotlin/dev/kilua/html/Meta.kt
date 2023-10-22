@@ -41,11 +41,11 @@ public open class Meta(className: String? = null, renderConfig: RenderConfig = D
  * Creates a [Meta] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Meta] component
  */
 @Composable
-public fun ComponentBase.meta(className: String? = null, content: @Composable Meta.() -> Unit = {}): Meta {
+public fun ComponentBase.meta(className: String? = null, setup: Meta.() -> Unit = {}): Meta {
     val component = remember { Meta(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.meta(className: String? = null, content: @Composable Me
     }
     ComponentNode(component, {
         set(className) { updateProperty(Meta::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

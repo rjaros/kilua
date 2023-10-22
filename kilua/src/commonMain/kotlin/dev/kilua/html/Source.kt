@@ -41,11 +41,11 @@ public open class Source(className: String? = null, renderConfig: RenderConfig =
  * Creates a [Source] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Source] component
  */
 @Composable
-public fun ComponentBase.source(className: String? = null, content: @Composable Source.() -> Unit = {}): Source {
+public fun ComponentBase.source(className: String? = null, setup: Source.() -> Unit = {}): Source {
     val component = remember { Source(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.source(className: String? = null, content: @Composable 
     }
     ComponentNode(component, {
         set(className) { updateProperty(Source::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

@@ -41,11 +41,11 @@ public open class Br(className: String? = null, renderConfig: RenderConfig = Def
  * Creates a [Br] component.
  *
  * @param className the CSS class name
- * @param content the content of the component
+ * @param setup a function for setting up the component
  * @return the [Br] component
  */
 @Composable
-public fun ComponentBase.br(className: String? = null, content: @Composable Br.() -> Unit = {}): Br {
+public fun ComponentBase.br(className: String? = null, setup: Br.() -> Unit = {}): Br {
     val component = remember { Br(className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
@@ -55,6 +55,8 @@ public fun ComponentBase.br(className: String? = null, content: @Composable Br.(
     }
     ComponentNode(component, {
         set(className) { updateProperty(Br::className, it) }
-    }, content)
+    }) {
+        setup(component)
+    }
     return component
 }

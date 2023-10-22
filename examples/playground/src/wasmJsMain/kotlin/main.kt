@@ -33,6 +33,7 @@ import dev.kilua.html.C
 import dev.kilua.html.Color
 import dev.kilua.html.button
 import dev.kilua.html.div
+import dev.kilua.html.hr
 import dev.kilua.html.link
 import dev.kilua.html.perc
 import dev.kilua.html.px
@@ -61,6 +62,15 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+            var marg by remember { mutableStateOf(1) }
+            hr {
+                margin = marg.px
+            }
+            button("test hr") {
+                onClick {
+                    marg++
+                }
+            }
 
             var label by remember { mutableStateOf("A link") }
             var url by remember { mutableStateOf("https://google.com") }
