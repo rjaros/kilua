@@ -28,6 +28,9 @@ import dev.kilua.Application
 import dev.kilua.CoreModule
 import dev.kilua.compose.root
 import dev.kilua.externals.obj
+import dev.kilua.form.check.checkBox
+import dev.kilua.form.check.radio
+import dev.kilua.form.check.triStateCheckBox
 import dev.kilua.form.number.numeric
 import dev.kilua.form.number.range
 import dev.kilua.form.number.spinner
@@ -61,6 +64,76 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+
+            val rad = radio(true) {
+                defaultChecked = true
+                subscribe {
+                    console.log(this.value.toString())
+                }
+            }
+
+            button("test radio") {
+                onClick {
+                    console.log(rad.value.toString())
+                }
+            }
+
+            button("set radio") {
+                onClick {
+                    rad.value = !rad.value
+                }
+            }
+
+            hr()
+
+            val tri = triStateCheckBox {
+                subscribe {
+                    console.log(this.value.toString())
+                }
+            }
+
+            button("test tri") {
+                onClick {
+                    console.log(tri.value.toString())
+                }
+            }
+
+            button("null tri") {
+                onClick {
+                    tri.value = null
+                }
+            }
+
+            button("set tri") {
+                onClick {
+                    tri.value = tri.value != true
+                }
+            }
+
+            hr()
+
+            var checked by remember { mutableStateOf(false) }
+
+            val check = checkBox(checked, disabled = true) {
+                extraValue = "teston"
+                subscribe {
+                    console.log(this.value.toString())
+                }
+            }
+
+            button("test check") {
+                onClick {
+                    console.log(check.value.toString())
+                }
+            }
+
+            button("set check") {
+                onClick {
+                    checked = !checked
+                }
+            }
+
+            hr()
 
             val c = colorPicker("#ff0000") {
                 onChange {

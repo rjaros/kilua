@@ -97,6 +97,17 @@ public open class TriStateCheckBox(
     }
 
     /**
+     * The checked attribute of the generated HTML input element.
+     */
+    public open var defaultChecked: Boolean? by updatingProperty(skipUpdate = skipUpdate, "checked") {
+        if (it != null) {
+            element.defaultChecked = it
+        } else {
+            element.removeAttribute("checked")
+        }
+    }
+
+    /**
      * The additional value attribute of the generated HTML input element.
      */
     public open var extraValue: String? = null
@@ -121,6 +132,8 @@ public open class TriStateCheckBox(
                 it.disabled = disabled
             }
         }
+        @Suppress("LeakingThis")
+        setAttribute("type", "checkbox")
         @Suppress("LeakingThis")
         onEventDirect<Event>("click") {
             cycleValue()
@@ -161,6 +174,7 @@ public open class TriStateCheckBox(
             ::disabled,
             ::autofocus,
         )
+        propertyListBuilder.addByName("checked")
     }
 }
 

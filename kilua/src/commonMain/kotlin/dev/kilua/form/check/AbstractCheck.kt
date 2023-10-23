@@ -99,6 +99,17 @@ public abstract class AbstractCheck(
     }
 
     /**
+     * The checked attribute of the generated HTML input element.
+     */
+    public open var defaultChecked: Boolean? by updatingProperty(skipUpdate = skipUpdate, "checked") {
+        if (it != null) {
+            element.defaultChecked = it
+        } else {
+            element.removeAttribute("checked")
+        }
+    }
+
+    /**
      * The additional value attribute of the generated HTML input element.
      */
     public open var extraValue: String? = null
@@ -119,6 +130,8 @@ public abstract class AbstractCheck(
                 it.disabled = disabled
             }
         }
+        @Suppress("LeakingThis")
+        setAttribute("type", type.value)
         @Suppress("LeakingThis")
         onEventDirect<Event>("click") {
             setInternalValueFromBoolean(element.checked)
@@ -154,5 +167,6 @@ public abstract class AbstractCheck(
             ::disabled,
             ::autofocus,
         )
+        propertyListBuilder.addByName("checked")
     }
 }
