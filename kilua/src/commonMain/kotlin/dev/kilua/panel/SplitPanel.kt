@@ -80,56 +80,56 @@ public open class SplitPanel(
     /**
      * Split panel direction.
      */
-    public open var dir: Dir by updatingProperty(dir, skipUpdate) {
+    public open var dir: Dir by updatingProperty(dir) {
         refresh()
     }
 
     /**
      * The gutter size.
      */
-    public open var gutterSize: Int by updatingProperty(10, skipUpdate) {
+    public open var gutterSize: Int by updatingProperty(10) {
         refresh()
     }
 
     /**
      * The gutter align.
      */
-    public open var gutterAlign: GutterAlign? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var gutterAlign: GutterAlign? by updatingProperty {
         refresh()
     }
 
     /**
      * The minimum size.
      */
-    public open var minSize: Int by updatingProperty(0, skipUpdate) {
+    public open var minSize: Int by updatingProperty(0) {
         refresh()
     }
 
     /**
      * The maximum size.
      */
-    public open var maxSize: Int? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var maxSize: Int? by updatingProperty {
         refresh()
     }
 
     /**
      * Expand to minimum size.
      */
-    public open var expandToMin: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var expandToMin: Boolean? by updatingProperty {
         refresh()
     }
 
     /**
      * The snap offset.
      */
-    public open var snapOffset: Int by updatingProperty(0, skipUpdate) {
+    public open var snapOffset: Int by updatingProperty(0) {
         refresh()
     }
 
     /**
      * The drag interval.
      */
-    public open var dragInterval: Int? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var dragInterval: Int? by updatingProperty {
         refresh()
     }
 

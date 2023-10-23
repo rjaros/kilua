@@ -123,11 +123,9 @@ public open class Iframe(
     /**
      * The sandbox options of the iframe.
      */
-    public open var sandbox: Set<Sandbox>? = sandbox
-        set(value) {
-            field = value
-            setAttribute("sandbox", value?.joinToString(" ") { it.value })
-        }
+    public open var sandbox: Set<Sandbox>? by updatingProperty {
+        setAttribute("sandbox", it?.joinToString(" ") { it.value })
+    }
 
     init {
         @Suppress("LeakingThis")
