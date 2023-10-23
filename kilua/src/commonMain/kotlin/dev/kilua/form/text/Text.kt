@@ -47,8 +47,8 @@ public open class Text(
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) : Input<String>(value, type, name, maxlength, placeholder, disabled, className, renderConfig), StringFormControl {
 
-    override fun setValueFromString(text: String?) {
-        value = if (text.isNullOrEmpty()) {
+    override fun stringToValue(text: String?): String? {
+        return if (text.isNullOrEmpty()) {
             null
         } else {
             text

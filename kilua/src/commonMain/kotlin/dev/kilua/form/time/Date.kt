@@ -106,8 +106,8 @@ public open class Date(
         propertyListBuilder.add(::min, ::max, ::step)
     }
 
-    override fun setValueFromString(text: String?) {
-        value = if (text.isNullOrEmpty()) {
+    override fun stringToValue(text: String?): LocalDate? {
+        return if (text.isNullOrEmpty()) {
             null
         } else {
             val date = try {
@@ -131,7 +131,7 @@ public open class Date(
     public open fun stepUp() {
         if (elementAvailable) {
             element.stepUp()
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         } else {
             val newValue = (value ?: min ?: today()).plus(step, DateTimeUnit.DAY)
             value = if (max != null && newValue > max!!) max else newValue
@@ -144,7 +144,7 @@ public open class Date(
     public open fun stepDown() {
         if (elementAvailable) {
             element.stepDown()
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         } else {
             val newValue = (value ?: min ?: today()).minus(step, DateTimeUnit.DAY)
             value = if (min != null && newValue < min!!) min else newValue

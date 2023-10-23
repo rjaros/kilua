@@ -51,7 +51,7 @@ public abstract class Input<T : Any>(
         skipUpdate,
         notifyFunction = { observableDelegate.notifyObservers(it) }) {
         if (type != InputType.File) {
-            element.value = it?.toString() ?: ""
+            element.value = valueToString(it) ?: ""
         }
     }
 
@@ -159,7 +159,7 @@ public abstract class Input<T : Any>(
             if (this.value == null) {
                 this.value = value
             }
-            setAttribute("value", defaultValue?.toString())
+            setAttribute("value", valueToString(defaultValue))
         }
 
     init {
@@ -184,8 +184,39 @@ public abstract class Input<T : Any>(
         }
         @Suppress("LeakingThis")
         onEventDirect<Event>("input") {
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         }
+    }
+
+    /**
+     * Set value from string without setting element value again.
+     */
+    protected open fun setInternalValueFromString(text: String?) {
+        val newValue = stringToValue(text)
+        if (value != newValue) {
+            if (newValue != null) {
+                propertyValues["value"] = newValue
+            } else {
+                propertyValues.remove("value")
+            }
+            observableDelegate.notifyObservers(newValue)
+        }
+    }
+
+    /**
+     * Convert string to value.
+     */
+    protected abstract fun stringToValue(text: String?): T?
+
+    /**
+     * Convert value to String.
+     */
+    protected open fun valueToString(value: T?): String? {
+        return value?.toString()
+    }
+
+    override fun getValueAsString(): String? {
+        return valueToString(value)
     }
 
     override fun subscribe(observer: (T?) -> Unit): () -> Unit {

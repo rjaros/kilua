@@ -119,8 +119,8 @@ public open class Time(
         propertyListBuilder.add(::min, ::max, ::step)
     }
 
-    override fun setValueFromString(text: String?) {
-        value = if (text.isNullOrEmpty()) {
+    override fun stringToValue(text: String?): LocalTime? {
+        return if (text.isNullOrEmpty()) {
             null
         } else {
             val date = try {
@@ -144,7 +144,7 @@ public open class Time(
     public open fun stepUp() {
         if (elementAvailable) {
             element.stepUp()
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         } else {
             val today = today()
             val now = hour()
@@ -162,7 +162,7 @@ public open class Time(
     public open fun stepDown() {
         if (elementAvailable) {
             element.stepDown()
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         } else {
             val today = today()
             val now = hour()

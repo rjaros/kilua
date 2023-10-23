@@ -100,8 +100,8 @@ public open class Spinner(
         propertyListBuilder.add(::min, ::max, ::step)
     }
 
-    override fun setValueFromString(text: String?) {
-        value = if (text.isNullOrEmpty()) {
+    override fun stringToValue(text: String?): Number? {
+        return if (text.isNullOrEmpty()) {
             null
         } else {
             text.toIntOrNull()?.let {
@@ -120,7 +120,7 @@ public open class Spinner(
     public open fun stepUp() {
         if (elementAvailable) {
             element.stepUp()
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         } else {
             val newValue = (value?.toInt() ?: min ?: 0) + step
             value = if (max != null && newValue > max!!) max else newValue
@@ -133,7 +133,7 @@ public open class Spinner(
     public open fun stepDown() {
         if (elementAvailable) {
             element.stepDown()
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         } else {
             val newValue = (value?.toInt() ?: max ?: 0) - step
             value = if (min != null && newValue < min!!) min else newValue

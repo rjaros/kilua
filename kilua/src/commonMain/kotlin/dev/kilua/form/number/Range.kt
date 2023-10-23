@@ -88,8 +88,8 @@ public open class Range(
         propertyListBuilder.add(::min, ::max, ::step)
     }
 
-    override fun setValueFromString(text: String?) {
-        value = if (text.isNullOrEmpty()) {
+    override fun stringToValue(text: String?): Number? {
+        return if (text.isNullOrEmpty()) {
             null
         } else {
             text.toDoubleOrNull()
@@ -102,7 +102,7 @@ public open class Range(
     public open fun stepUp() {
         if (elementAvailable) {
             element.stepUp()
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         } else {
             val newValue = (value?.toDouble() ?: min.toDouble()) + step.toDouble()
             value = if (newValue > max.toDouble()) max else newValue
@@ -115,7 +115,7 @@ public open class Range(
     public open fun stepDown() {
         if (elementAvailable) {
             element.stepDown()
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         } else {
             val newValue = (value?.toDouble() ?: max.toDouble()) - step.toDouble()
             value = if (newValue < min.toDouble()) min else newValue

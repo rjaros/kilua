@@ -193,7 +193,7 @@ public open class TextArea(
         }
         @Suppress("LeakingThis")
         onInputDirect {
-            setValueFromString(element.value)
+            setInternalValueFromString(element.value)
         }
     }
 
@@ -216,11 +216,30 @@ public open class TextArea(
         )
     }
 
-    override fun setValueFromString(text: String?) {
-        if (text.isNullOrEmpty()) {
-            this.value = null
+    override fun getValueAsString(): String? {
+        return value
+    }
+
+    protected open fun stringToValue(text: String?): String? {
+        return if (text.isNullOrEmpty()) {
+            null
         } else {
-            this.value = text
+            text
+        }
+    }
+
+    /**
+     * Set value from string without setting element value again.
+     */
+    protected open fun setInternalValueFromString(text: String?) {
+        val newValue = stringToValue(text)
+        if (value != newValue) {
+            if (newValue != null) {
+                propertyValues["value"] = newValue
+            } else {
+                propertyValues.remove("value")
+            }
+            observableDelegate.notifyObservers(newValue)
         }
     }
 }
