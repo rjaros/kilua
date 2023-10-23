@@ -31,6 +31,7 @@ import dev.kilua.externals.obj
 import dev.kilua.form.number.numeric
 import dev.kilua.form.number.range
 import dev.kilua.form.number.spinner
+import dev.kilua.form.color.colorPicker
 import dev.kilua.form.text.textArea
 import dev.kilua.form.time.date
 import dev.kilua.html.*
@@ -60,6 +61,20 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+
+            val c = colorPicker("#ff0000") {
+                onChange {
+                    console.log(this.value)
+                }
+            }
+
+            button("test color picker") {
+                onClick {
+                    console.log(c.value)
+                }
+            }
+
+            hr()
 
             textArea("ala ma kota", cols = 20, rows = 20) {
                 //+"ala ma kota"

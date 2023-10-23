@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.form.text
+package dev.kilua.form.color
 
 import dev.kilua.DomSpec
 import dev.kilua.compose.root

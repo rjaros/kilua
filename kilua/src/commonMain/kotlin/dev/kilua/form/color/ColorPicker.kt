@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.form.text
+package dev.kilua.form.color
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -30,6 +30,7 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.InputType
+import dev.kilua.form.text.Text
 
 /**
  * Color picker input component.
