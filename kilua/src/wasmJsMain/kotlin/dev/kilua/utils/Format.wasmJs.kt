@@ -22,8 +22,16 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.NumberWithToFixed
+import dev.kilua.externals.NumberExt
 
 public actual fun Double.toFixed(size: Int): String {
-    return this.toJsNumber().unsafeCast<NumberWithToFixed>().toFixed(size)
+    return this.toJsNumber().unsafeCast<NumberExt>().toFixed(size)
+}
+
+public actual fun Double.toLocaleString(locale: String): String {
+    return this.toJsNumber().unsafeCast<NumberExt>().toLocaleString(locale)
+}
+
+public actual fun Int.toLocaleString(locale: String): String {
+    return this.toJsNumber().unsafeCast<NumberExt>().toLocaleString(locale)
 }

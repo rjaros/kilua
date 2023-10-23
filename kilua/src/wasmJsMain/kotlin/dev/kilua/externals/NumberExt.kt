@@ -22,6 +22,7 @@
 
 package dev.kilua.externals
 
-internal external class NumberWithToFixed : JsAny {
+internal external class NumberExt : JsAny {
     fun toFixed(digits: Int): String
+    fun toLocaleString(locale: String): String
 }

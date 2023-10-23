@@ -38,11 +38,6 @@ public interface FormControl<T> : MutableState<T> {
     public fun getValueAsString(): String?
 
     /**
-     * Parse the string value.
-     */
-    public fun setValueFromString(text: String?)
-
-    /**
      * Determines if the field is disabled.
      */
     public var disabled: Boolean?
@@ -61,11 +56,6 @@ public interface GenericFormControl<T : Any> : FormControl<T?> {
      * Generic value.
      */
     public override var value: T?
-
-    /**
-     * Returns the value as a string.
-     */
-    public override fun getValueAsString(): String? = value?.toString()
 }
 
 /**
@@ -76,23 +66,12 @@ public interface GenericNonNullableFormControl<T : Any> : FormControl<T> {
      * Generic value.
      */
     override var value: T
-
-    /**
-     * Returns the value as a string.
-     */
-    public override fun getValueAsString(): String = value.toString()
 }
 
 /**
  * Base interface of a form control with a text value.
  */
-public interface StringFormControl : GenericFormControl<String> {
-    /**
-     * Returns the value as a string.
-     */
-    override fun getValueAsString(): String? = value
-}
-
+public interface StringFormControl : GenericFormControl<String>
 /**
  * Base interface of a form control with a numeric value.
  */

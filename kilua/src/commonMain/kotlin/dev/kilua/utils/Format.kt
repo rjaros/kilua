@@ -22,10 +22,23 @@
 
 package dev.kilua.utils
 
+import kotlin.math.floor
+import kotlin.math.pow
+
 /**
  * Utility extension function to format a Double with a given number of digits after the decimal point.
  */
 public expect fun Double.toFixed(size: Int = 2): String
+
+/**
+ * Utility extension function to format a Double according to the given locale.
+ */
+public expect fun Double.toLocaleString(locale: String): String
+
+/**
+ * Utility extension function to format a Double according to the given locale.
+ */
+public expect fun Int.toLocaleString(locale: String): String
 
 /**
  * Utility extension function to convert string from kebab-case to camelCase.
@@ -41,4 +54,12 @@ public fun String.toCamelCase(): String {
  */
 public fun String.toKebabCase(): String {
     return this.replace(Regex("(?<=.)[A-Z]"), "-$0").lowercase()
+}
+
+/**
+ * Formats a number to fixed decimal digits without rounding.
+ */
+public fun Number.toFixedNoRound(precision: Int): String {
+    val factor = 10.0.pow(precision)
+    return (floor(this.toDouble() * factor) / factor).toString()
 }

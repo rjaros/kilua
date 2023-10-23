@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-present Robert Jaros
+ * Copyright (c) 2023 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,19 +20,18 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.i18n
 
-@Suppress("UnsafeCastFromDynamic")
-public actual fun Double.toFixed(size: Int): String {
-    return this.asDynamic().toFixed(size)
-}
+import dev.kilua.externals.Intl
+import dev.kilua.utils.isDom
+import kotlinx.browser.window
 
-@Suppress("UnsafeCastFromDynamic")
-public actual fun Double.toLocaleString(locale: String): String {
-    return this.asDynamic().toLocaleString(locale)
-}
 
-@Suppress("UnsafeCastFromDynamic")
-public actual fun Int.toLocaleString(locale: String): String {
-    return this.asDynamic().toLocaleString(locale)
+/**
+ * Auto-detected default locale.
+ */
+public class DefaultLocale : Locale {
+    override val language: String = if (isDom) window.navigator.language.split("-")[0] else Intl.DateTimeFormat()
+        .resolvedOptions().locale.split("-")[0]
+    override val decimalSeparator: Char = decimalSeparator(language)
 }

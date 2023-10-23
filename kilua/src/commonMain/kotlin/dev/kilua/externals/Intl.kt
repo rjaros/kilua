@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-present Robert Jaros
+ * Copyright (c) 2023 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,19 +20,30 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.externals
 
-@Suppress("UnsafeCastFromDynamic")
-public actual fun Double.toFixed(size: Int): String {
-    return this.asDynamic().toFixed(size)
+/**
+ * I18n API
+ */
+public external object Intl {
+    public class DateTimeFormat {
+        public fun resolvedOptions(): ResolvedOptions
+    }
 }
 
-@Suppress("UnsafeCastFromDynamic")
-public actual fun Double.toLocaleString(locale: String): String {
-    return this.asDynamic().toLocaleString(locale)
-}
-
-@Suppress("UnsafeCastFromDynamic")
-public actual fun Int.toLocaleString(locale: String): String {
-    return this.asDynamic().toLocaleString(locale)
+public external class ResolvedOptions {
+    public val locale: String
+    public val calendar: String
+    public val numberingSystem: String
+    public val timeZone: String
+    public val hour12: String
+    public val weekday: String
+    public val era: String
+    public val year: String
+    public val month: String
+    public val day: String
+    public val hour: String
+    public val minute: String
+    public val second: String
+    public val timeZoneName: String
 }
