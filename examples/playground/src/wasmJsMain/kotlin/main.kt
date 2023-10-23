@@ -28,8 +28,11 @@ import dev.kilua.Application
 import dev.kilua.CoreModule
 import dev.kilua.compose.root
 import dev.kilua.externals.obj
+import dev.kilua.form.number.numeric
 import dev.kilua.form.number.range
 import dev.kilua.form.number.spinner
+import dev.kilua.form.text.textArea
+import dev.kilua.form.time.date
 import dev.kilua.html.*
 import dev.kilua.panel.Dir
 import dev.kilua.panel.SplitPanel
@@ -38,6 +41,7 @@ import dev.kilua.startApplication
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
 import dev.kilua.utils.console
+import dev.kilua.utils.today
 import dev.kilua.utils.useCssModule
 import kotlinx.browser.window
 import org.w3c.dom.CustomEvent
@@ -56,6 +60,44 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+
+            textArea("ala ma kota", cols = 20, rows = 20) {
+                //+"ala ma kota"
+                subscribe {
+                    console.log(it)
+                }
+            }
+
+            hr()
+
+            date(today()) {
+                onChange {
+                    console.log(this.value?.toString())
+                }
+            }
+
+            hr()
+
+            val num = numeric(9.123, min = 1, max = 10, decimals = 3) {
+                onChange {
+                    console.log(this.value?.toString())
+                }
+            }
+
+            button("test numeric") {
+                onClick {
+                    console.log(num.value.toString())
+                    console.log(num.getValueAsString())
+                }
+            }
+
+            button("set numeric") {
+                onClick {
+                    num.value = 123.456
+                }
+            }
+
+            hr()
 
             range(step = 0.5) {
                 onChange {
