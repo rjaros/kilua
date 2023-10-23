@@ -36,7 +36,7 @@ public expect fun Double.toFixed(size: Int = 2): String
 public expect fun Double.toLocaleString(locale: String): String
 
 /**
- * Utility extension function to format a Double according to the given locale.
+ * Utility extension function to format an Int according to the given locale.
  */
 public expect fun Int.toLocaleString(locale: String): String
 
