@@ -67,7 +67,7 @@ public open class Text(
  * @param placeholder the placeholder text
  * @param disabled whether the input is disabled
  * @param className the CSS class name
- * @param content a function for setting up the component
+ * @param setup a function for setting up the component
  * @return a [Text] component
  */
 @Composable
@@ -79,7 +79,7 @@ public fun ComponentBase.text(
     placeholder: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Text.() -> Unit = {}
+    setup: @Composable Text.() -> Unit = {}
 ): Text {
     val component = remember { Text(value, type, name, maxlength, placeholder, disabled, className, renderConfig) }
     DisposableEffect(component.componentId) {
@@ -96,6 +96,6 @@ public fun ComponentBase.text(
         set(placeholder) { updateProperty(Text::placeholder, it) }
         set(disabled) { updateProperty(Text::disabled, it) }
         set(className) { updateProperty(Text::className, it) }
-    }, content)
+    }, setup)
     return component
 }

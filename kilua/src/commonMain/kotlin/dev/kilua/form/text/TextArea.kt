@@ -255,7 +255,7 @@ public open class TextArea(
  * @param placeholder the placeholder attribute of the generated HTML textarea element
  * @param disabled determines if the field is disabled
  * @param className the CSS class name
- * @param content a function for setting up the component
+ * @param setup a function for setting up the component
  * @return A [TextArea] component.
  */
 @Composable
@@ -268,7 +268,7 @@ public fun ComponentBase.textArea(
     placeholder: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable TextArea.() -> Unit = {}
+    setup: @Composable TextArea.() -> Unit = {}
 ): TextArea {
     val component =
         remember { TextArea(value, cols, rows, name, maxlength, placeholder, disabled, className, renderConfig) }
@@ -287,6 +287,6 @@ public fun ComponentBase.textArea(
         set(placeholder) { updateProperty(TextArea::placeholder, it) }
         set(disabled) { updateProperty(TextArea::disabled, it) }
         set(className) { updateProperty(TextArea::className, it) }
-    }, content)
+    }, setup)
     return component
 }

@@ -188,7 +188,7 @@ public open class Time(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param className the CSS class name
- * @param content a function for setting up the component
+ * @param setup a function for setting up the component
  * @return a [Time] component
  */
 @Composable
@@ -202,7 +202,7 @@ public fun ComponentBase.time(
     placeholder: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Time.() -> Unit = {}
+    setup: @Composable Time.() -> Unit = {}
 ): Time {
     val component =
         remember { Time(value, min, max, step, name, maxlength, placeholder, disabled, className, renderConfig) }
@@ -222,6 +222,6 @@ public fun ComponentBase.time(
         set(placeholder) { updateProperty(Date::placeholder, it) }
         set(disabled) { updateProperty(Date::disabled, it) }
         set(className) { updateProperty(Date::className, it) }
-    }, content)
+    }, setup)
     return component
 }

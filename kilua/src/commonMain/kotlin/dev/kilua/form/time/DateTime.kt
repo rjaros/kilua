@@ -184,7 +184,7 @@ public open class DateTime(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param className the CSS class name
- * @param content a function for setting up the component
+ * @param setup a function for setting up the component
  * @return a [DateTime] component
  */
 @Composable
@@ -198,7 +198,7 @@ public fun ComponentBase.dateTime(
     placeholder: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable DateTime.() -> Unit = {}
+    setup: @Composable DateTime.() -> Unit = {}
 ): DateTime {
     val component =
         remember { DateTime(value, min, max, step, name, maxlength, placeholder, disabled, className, renderConfig) }
@@ -218,6 +218,6 @@ public fun ComponentBase.dateTime(
         set(placeholder) { updateProperty(Date::placeholder, it) }
         set(disabled) { updateProperty(Date::disabled, it) }
         set(className) { updateProperty(Date::className, it) }
-    }, content)
+    }, setup)
     return component
 }

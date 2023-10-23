@@ -50,7 +50,7 @@ public open class ColorPicker(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param className the CSS class name
- * @param content a function for setting up the component
+ * @param setup a function for setting up the component
  * @return a [ColorPicker] component
  */
 @Composable
@@ -59,7 +59,7 @@ public fun ComponentBase.colorPicker(
     name: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable ColorPicker.() -> Unit = {}
+    setup: @Composable ColorPicker.() -> Unit = {}
 ): ColorPicker {
     val component = remember { ColorPicker(value, name, disabled, className, renderConfig) }
     DisposableEffect(component.componentId) {
@@ -73,6 +73,6 @@ public fun ComponentBase.colorPicker(
         set(name) { updateProperty(ColorPicker::name, it) }
         set(disabled) { updateProperty(ColorPicker::disabled, it) }
         set(className) { updateProperty(ColorPicker::className, it) }
-    }, content)
+    }, setup)
     return component
 }

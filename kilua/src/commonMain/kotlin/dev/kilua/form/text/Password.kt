@@ -53,7 +53,7 @@ public open class Password(
  * @param placeholder the placeholder text
  * @param disabled whether the input is disabled
  * @param className the CSS class name
- * @param content a function for setting up the component
+ * @param setup a function for setting up the component
  * @return a [Password] component
  */
 @Composable
@@ -64,7 +64,7 @@ public fun ComponentBase.password(
     placeholder: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Password.() -> Unit = {}
+    setup: @Composable Password.() -> Unit = {}
 ): Password {
     val component = remember { Password(value, name, maxlength, placeholder, disabled, className, renderConfig) }
     DisposableEffect(component.componentId) {
@@ -80,6 +80,6 @@ public fun ComponentBase.password(
         set(placeholder) { updateProperty(Password::placeholder, it) }
         set(disabled) { updateProperty(Password::disabled, it) }
         set(className) { updateProperty(Password::className, it) }
-    }, content)
+    }, setup)
     return component
 }

@@ -153,7 +153,7 @@ public open class Spinner(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param className the CSS class name
- * @param content a function for setting up the component
+ * @param setup a function for setting up the component
  * @return a [Spinner] component
  */
 @Composable
@@ -167,7 +167,7 @@ public fun ComponentBase.spinner(
     placeholder: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Spinner.() -> Unit = {}
+    setup: @Composable Spinner.() -> Unit = {}
 ): Spinner {
     val component =
         remember { Spinner(value, min, max, step, name, maxlength, placeholder, disabled, className, renderConfig) }
@@ -187,6 +187,6 @@ public fun ComponentBase.spinner(
         set(placeholder) { updateProperty(Spinner::placeholder, it) }
         set(disabled) { updateProperty(Spinner::disabled, it) }
         set(className) { updateProperty(Spinner::className, it) }
-    }, content)
+    }, setup)
     return component
 }

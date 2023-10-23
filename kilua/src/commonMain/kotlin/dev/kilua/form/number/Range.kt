@@ -133,7 +133,7 @@ public open class Range(
  * @param name the name attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param className the CSS class name
- * @param content a function for setting up the component
+ * @param setup a function for setting up the component
  * @return a [Range] component
  */
 @Composable
@@ -145,7 +145,7 @@ public fun ComponentBase.range(
     name: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Range.() -> Unit = {}
+    setup: @Composable Range.() -> Unit = {}
 ): Range {
     val component = remember { Range(value, min, max, step, name, disabled, className, renderConfig) }
     DisposableEffect(component.componentId) {
@@ -162,6 +162,6 @@ public fun ComponentBase.range(
         set(name) { updateProperty(Spinner::name, it) }
         set(disabled) { updateProperty(Spinner::disabled, it) }
         set(className) { updateProperty(Spinner::className, it) }
-    }, content)
+    }, setup)
     return component
 }
