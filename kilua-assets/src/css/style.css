@@ -83,3 +83,7 @@
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAICAQAAADdTl4aAAAAIElEQVQoz2MwrTD9TxFsZ7jPcV+IIsjFQAUw6hFqegQA+xzRHT2p7pEAAAAASUVORK5CYII=') center center no-repeat #cecece;
     cursor: row-resize;
 }
+
+.kilua-radio-inline {
+    display: inline-block;
+}
