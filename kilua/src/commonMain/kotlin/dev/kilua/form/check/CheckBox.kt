@@ -29,6 +29,9 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.div
+import dev.kilua.html.label
+import dev.kilua.html.unaryPlus
 
 /**
  * CheckBox input component.
@@ -73,4 +76,37 @@ public fun ComponentBase.checkBox(
         set(className) { updateProperty(CheckBox::className, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates [CheckBox] component with a label.
+ *
+ * @param label the label of the input
+ * @param value initial value
+ * @param name the name of the input
+ * @param disabled whether the input is disabled
+ * @param className the CSS class name
+ * @param groupClassName the CSS class name of the grouping div
+ * @param setup a function for setting up the component
+ * @return a [CheckBox] component
+ */
+@Composable
+public fun ComponentBase.checkBox(
+    label: String,
+    value: Boolean = false,
+    name: String? = null,
+    disabled: Boolean? = null,
+    className: String? = null,
+    groupClassName: String? = null,
+    setup: @Composable CheckBox.() -> Unit = {}
+): CheckBox {
+    lateinit var checkBox: CheckBox
+    div(groupClassName) {
+        checkBox = checkBox(value, name, disabled, className) {
+            id = "id_${componentId}"
+            setup()
+        }
+        label(checkBox.id) { +label }
+    }
+    return checkBox
 }

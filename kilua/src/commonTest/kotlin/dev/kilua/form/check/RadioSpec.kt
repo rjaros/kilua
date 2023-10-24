@@ -80,7 +80,7 @@ class RadioSpec : DomSpec {
     }
 
     @Test
-    fun renderToStringWithLabel() {
+    fun renderWithLabelToString() {
         run {
             val root = root {
                 radio("A radio", true, name = "test") {

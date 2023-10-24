@@ -24,9 +24,7 @@ package dev.kilua.form.check
 
 import dev.kilua.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.normalizeHtml
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class TriStateCheckBoxSpec : DomSpec {
 
@@ -39,10 +37,27 @@ class TriStateCheckBoxSpec : DomSpec {
                     extraValue = "extra"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<input type="checkbox" name="test" checked="" value="extra">"""),
-                normalizeHtml(root.element?.innerHTML),
+            assertEqualsHtml(
+                """<input type="checkbox" name="test" checked="" value="extra">""",
+                root.element?.innerHTML,
                 "Should render tri-state checkbox element to DOM"
+            )
+        }
+    }
+
+    @Test
+    fun renderWithLabel() {
+        runWhenDomAvailable {
+            val root = root("test") {
+                triStateCheckBox("A checkbox", true, name = "test") {
+                    defaultChecked = true
+                    extraValue = "extra"
+                }
+            }
+            assertEqualsHtml(
+                """<div><input type="checkbox" name="test" checked="" value="extra" id="id"><label for="id">A checkbox</label></div>""",
+                root.element?.innerHTML,
+                "Should render tri-state checkbox with a label to DOM"
             )
         }
     }
@@ -56,9 +71,26 @@ class TriStateCheckBoxSpec : DomSpec {
                     extraValue = "extra"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><input name="test" checked type="checkbox" value="extra"></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<input name="test" checked type="checkbox" value="extra">""",
+                root.innerHTML,
+                "Should render tri-state checkbox element to a String"
+            )
+        }
+    }
+
+    @Test
+    fun renderWithLabelToString() {
+        run {
+            val root = root {
+                triStateCheckBox("A checkbox", true, name = "test") {
+                    defaultChecked = true
+                    extraValue = "extra"
+                }
+            }
+            assertEqualsHtml(
+                """<div><input type="checkbox" name="test" checked="" value="extra" id="id"><label for="id">A checkbox</label></div>""",
+                root.innerHTML,
                 "Should render tri-state checkbox element to a String"
             )
         }

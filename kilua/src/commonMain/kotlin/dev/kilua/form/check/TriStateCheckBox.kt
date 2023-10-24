@@ -32,7 +32,10 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.form.InputType
 import dev.kilua.form.TriStateFormControl
 import dev.kilua.html.Tag
+import dev.kilua.html.div
 import dev.kilua.html.helpers.PropertyListBuilder
+import dev.kilua.html.label
+import dev.kilua.html.unaryPlus
 import dev.kilua.state.ObservableDelegate
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
@@ -210,4 +213,37 @@ public fun ComponentBase.triStateCheckBox(
         set(className) { updateProperty(TriStateCheckBox::className, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates [TriStateCheckBox] component with a label.
+ *
+ * @param label the label of the input
+ * @param value initial value
+ * @param name the name of the input
+ * @param disabled whether the input is disabled
+ * @param className the CSS class name
+ * @param groupClassName the CSS class name of the grouping div
+ * @param setup a function for setting up the component
+ * @return a [TriStateCheckBox] component
+ */
+@Composable
+public fun ComponentBase.triStateCheckBox(
+    label: String,
+    value: Boolean = false,
+    name: String? = null,
+    disabled: Boolean? = null,
+    className: String? = null,
+    groupClassName: String? = null,
+    setup: @Composable TriStateCheckBox.() -> Unit = {}
+): TriStateCheckBox {
+    lateinit var triStateCheckBox: TriStateCheckBox
+    div(groupClassName) {
+        triStateCheckBox = triStateCheckBox(value, name, disabled, className) {
+            id = "id_${componentId}"
+            setup()
+        }
+        label(triStateCheckBox.id) { +label }
+    }
+    return triStateCheckBox
 }
