@@ -24,9 +24,7 @@ package dev.kilua.form.check
 
 import dev.kilua.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.normalizeHtml
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class RadioSpec : DomSpec {
 
@@ -39,10 +37,27 @@ class RadioSpec : DomSpec {
                     extraValue = "extra"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<input type="radio" name="test" checked="" value="extra">"""),
-                normalizeHtml(root.element?.innerHTML),
+            assertEqualsHtml(
+                """<input type="radio" name="test" checked="" value="extra">""",
+                root.element?.innerHTML,
                 "Should render radio button element to DOM"
+            )
+        }
+    }
+
+    @Test
+    fun renderWithLabel() {
+        runWhenDomAvailable {
+            val root = root("test") {
+                radio("A radio", true, name = "test") {
+                    defaultChecked = true
+                    extraValue = "extra"
+                }
+            }
+            assertEqualsHtml(
+                """<div><input type="radio" name="test" id="id" checked="" value="extra"><label for="id">A radio</label></div>""",
+                root.element?.innerHTML,
+                "Should render radio button with a label to DOM"
             )
         }
     }
@@ -56,10 +71,27 @@ class RadioSpec : DomSpec {
                     extraValue = "extra"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><input name="test" checked type="radio" value="extra"></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<input type="radio" name="test" checked="" value="extra">""",
+                root.innerHTML,
                 "Should render radio button element to a String"
+            )
+        }
+    }
+
+    @Test
+    fun renderToStringWithLabel() {
+        run {
+            val root = root {
+                radio("A radio", true, name = "test") {
+                    defaultChecked = true
+                    extraValue = "extra"
+                }
+            }
+            assertEqualsHtml(
+                """<div><input type="radio" name="test" id="id" checked="" value="extra"><label for="id">A radio</label></div>""",
+                root.innerHTML,
+                "Should render radio button with a label to a String"
             )
         }
     }

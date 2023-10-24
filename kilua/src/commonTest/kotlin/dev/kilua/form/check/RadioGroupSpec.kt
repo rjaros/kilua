@@ -24,7 +24,6 @@ package dev.kilua.form.check
 
 import dev.kilua.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.normalizeHtml
 import dev.kilua.utils.listOfPairs
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -37,9 +36,9 @@ class RadioGroupSpec : DomSpec {
             val root = root("test") {
                 radioGroup(listOfPairs("A", "B"), name = "test", inline = true)
             }
-            assertEquals(
-                normalizeHtml("""<div><div class="kilua-radio-inline"><input type="radio" name="test" id="id_88" value="A"><label for="id_88">A</label></div><div class="kilua-radio-inline"><input type="radio" name="test" id="id_92" value="B"><label for="id_92">B</label></div></div>""".replace(Regex("id_[0-9]+"), "id")),
-                normalizeHtml(root.element?.innerHTML?.replace(Regex("id_[0-9]+"), "id")),
+            assertEqualsHtml(
+                """<div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="A"><label for="id">A</label></div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="B"><label for="id">B</label></div></div>""",
+                root.element?.innerHTML,
                 "Should render radio button group  to DOM"
             )
         }
@@ -51,9 +50,9 @@ class RadioGroupSpec : DomSpec {
             val root = root {
                 radioGroup(listOfPairs("A", "B"), name = "test", inline = true)
             }
-            assertEquals(
-                normalizeHtml("""<div><div><div class="kilua-radio-inline"><input name="test" type="radio" id="id_88" value="A"><label for="id_88">A</label></div><div class="kilua-radio-inline"><input name="test" type="radio" id="id_92" value="B"><label for="id_92">B</label></div></div></div>""".replace(Regex("id_[0-9]+"), "id")),
-                normalizeHtml(root.renderToString().replace(Regex("id_[0-9]+"), "id")),
+            assertEqualsHtml(
+                """<div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="A"><label for="id">A</label></div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="B"><label for="id">B</label></div></div>""",
+                root.innerHTML,
                 "Should render radio button group to a String"
             )
         }

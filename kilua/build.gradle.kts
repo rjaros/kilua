@@ -28,6 +28,7 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
         resolution("style-loader", libs.versions.style.loader.get())
         resolution("imports-loader", libs.versions.imports.loader.get())
         resolution("split.js", libs.versions.splitjs.get())
+        resolution("html-differ", libs.versions.html.differ.get())
     }
 }
 
@@ -82,6 +83,7 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+                implementation(npm("html-differ", libs.versions.html.differ.get()))
             }
         }
         if (buildTarget == "js" || !isInIdea) {

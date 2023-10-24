@@ -33,6 +33,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.promise
 import kotlinx.dom.clear
 import kotlin.js.Promise
+import kotlin.test.DefaultAsserter.assertTrue
 
 val testScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
@@ -106,10 +107,41 @@ interface DomSpec : TestSpec {
         }
         Root.disposeAllRoots()
     }
+
+    fun assertEqualsHtml(
+        expected: String?,
+        actual: String?,
+        message: String? = null,
+        normalizeHtml: Boolean = true,
+    ) {
+        val normalizedExpected = if (normalizeHtml) normalizeHtml(expected) else expected
+        val normalizedActual = if (normalizeHtml) normalizeHtml(actual) else actual
+        assertTrue(
+            {
+                (if (message == null) "" else "$message. ") +
+                        "Expected <$normalizedExpected>, actual <$normalizedActual>."
+            },
+            htmlDifferEquals(expected, actual)
+        )
+    }
+
+    companion object {
+
+        private val htmlDiffer = HtmlDiffer("bem")
+
+        fun htmlDifferEquals(expected: String?, actual: String?): Boolean {
+            return if (expected.isNullOrBlank() || actual.isNullOrBlank()) {
+                false
+            } else {
+                htmlDiffer.isEqual(expected, actual)
+            }
+        }
+    }
 }
 
 /**
  * Format an HTML string in a standardized manner, with one HTML element per line.
+ * Removes auto-generated IDs from the HTML.
  * This helps with highlighting HTML differences in test assertions.
  */
 fun normalizeHtml(raw: String): String {

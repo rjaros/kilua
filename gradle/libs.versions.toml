@@ -12,6 +12,7 @@ css-loader = "6.8.1"
 style-loader = "3.3.3"
 imports-loader = "4.0.1"
 splitjs = "1.6.5"
+html-differ = "1.4.0"
 
 [libraries]
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
