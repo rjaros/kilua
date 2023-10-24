@@ -151,10 +151,7 @@ public open class Tag<E : HTMLElement>(
             } else if (internalClassName != null) {
                 element.className = internalClassName!!
             } else {
-                val classList = element.classList
-                while (classList.length > 0) {
-                    classList.remove(classList.item(0).toString())
-                }
+                element.removeAttribute("class")
             }
         }
     }
