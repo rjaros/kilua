@@ -21,6 +21,7 @@
  */
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -30,6 +31,7 @@ import dev.kilua.compose.root
 import dev.kilua.externals.obj
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.check.radio
+import dev.kilua.form.check.radioGroup
 import dev.kilua.form.check.triStateCheckBox
 import dev.kilua.form.number.numeric
 import dev.kilua.form.number.range
@@ -64,6 +66,54 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+
+            val options = remember { mutableStateListOf("a" to "Ala", "b" to "Bela", "c" to "Cela") }
+
+            val rg = radioGroup(options, "b", name = "a_group") {
+                autofocus = true
+                inline = true
+                onChange {
+                    console.log(this.value.toString())
+                }
+            }
+
+            button("test radio group") {
+                onClick {
+                    options.add("d" to "Dela")
+                }
+            }
+
+            button("set value") {
+                onClick {
+                    rg.value = "xxx"
+                }
+            }
+
+            button("get value") {
+                onClick {
+                    console.log(rg.value.toString())
+                }
+            }
+
+            button("set name") {
+                onClick {
+                    rg.name = "new_name"
+                }
+            }
+
+            button("set disabled") {
+                onClick {
+                    rg.disabled = !(rg.disabled ?: false)
+                }
+            }
+
+            button("test inline") {
+                onClick {
+                    rg.inline = !rg.inline
+                }
+            }
+
+            hr()
 
             val rad = radio(true) {
                 defaultChecked = true
