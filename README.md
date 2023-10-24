@@ -36,7 +36,7 @@ Early in development. Main concepts have been tested, but everything is a subjec
 - [X] A few basic HTML tags
 - [X] A few basic form input components with `StateFlow` integration
 - [X] A component based on external NPM library (`SplitPanel`)
-- [ ] Implement all standard HTML tags
+- [X] Implement all standard HTML tags
 - [ ] Implement all standard form input components
 - [ ] Implement advanced form input components (based on external NPM libraries - TempusDominus, TomSelect, Imask, Trix)
 - [ ] Typesafe forms support with buit-in validation 
