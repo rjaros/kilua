@@ -90,6 +90,17 @@ public open class Option(
     }
 
     /**
+     * Whether the option is hidden.
+     */
+    public open var hidden: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+        if (it != null) {
+            element.hidden = it
+        } else {
+            element.removeAttribute("hidden")
+        }
+    }
+
+    /**
      * Whether the option is currently selected.
      */
     public open var currentlySelected: Boolean by updatingProperty(selected ?: false, skipUpdate) {
