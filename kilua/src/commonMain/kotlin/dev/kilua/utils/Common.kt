@@ -31,11 +31,11 @@ public expect val isDom: Boolean
  * Render map of properties to an CSS style string.
  */
 public fun Map<String, Any>.renderAsHtmlAttributes(): String {
-    return this.map {
-        if (it.value == true) {
-            it.key.toKebabCase()
-        } else {
-            "${it.key.toKebabCase()}=\"${it.value}\""
+    return this.mapNotNull {
+        when (it.value) {
+            true -> it.key.toKebabCase()
+            false -> null
+            else -> "${it.key.toKebabCase()}=\"${it.value}\""
         }
     }.joinToString(" ")
 }
