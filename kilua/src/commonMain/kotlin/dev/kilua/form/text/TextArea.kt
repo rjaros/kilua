@@ -170,7 +170,7 @@ public open class TextArea(
         @Suppress("LeakingThis")
         elementNullable?.let {
             if (value != null) {
-                it.value = value.toString()
+                it.value = value
             }
             if (cols != null) {
                 it.cols = cols
