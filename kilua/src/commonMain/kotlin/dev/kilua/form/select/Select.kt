@@ -41,9 +41,9 @@ import dev.kilua.utils.nativeListOf
 import org.w3c.dom.HTMLSelectElement
 
 /**
- * The value of the placeholder option.
+ * The special value for an empty option.
  */
-internal const val SELECT_PLACEHOLDER_VALUE = "kilua_select_placeholder"
+public const val SELECT_EMPTY_VALUE: String = "kilua_select_empty_value"
 
 /**
  * Select component.
@@ -183,7 +183,7 @@ public open class Select(
      * Finds all not empty Option components inside this Select.
      */
     protected open fun findAllNotEmptyOptions(): List<Option> {
-        return findAllOptions().filter { it.value != "" }
+        return findAllOptions().filter { it.value != SELECT_EMPTY_VALUE }
     }
 
     override fun subscribe(observer: (String?) -> Unit): () -> Unit {
@@ -213,7 +213,8 @@ public open class Select(
         findAllOptions().forEach { option ->
             // set selected state for all options which value is contained in the current value
             // selects empty option if available and value is null
-            option.currentlySelected = values?.contains(option.value ?: option.label) ?: (option.value == "")
+            option.currentlySelected =
+                values?.contains(option.value ?: option.label) ?: (option.value == SELECT_EMPTY_VALUE)
         }
     }
 
@@ -228,16 +229,16 @@ public open class Select(
             }.map {
                 it.value ?: it.label
             }.joinToString(",")
-        } else if (value == null && elementNullable?.value.isNullOrEmpty()) {
-            // first option value is automatically mapped if nothing is selected
+        } else if (value == null && elementNullable == null) {
+            // first option value is automatically mapped if nothing is selected and element is null
             findAllOptions().firstOrNull()?.let { option ->
-                option.value ?: option.label
+                (if (option.value == SELECT_EMPTY_VALUE) null else option.value) ?: option.label
             }
-        } else if (elementNullable?.value != SELECT_PLACEHOLDER_VALUE) {
-            // a selected value if not a placeholder
+        } else if (elementNullable?.value != SELECT_EMPTY_VALUE) {
+            // a selected value if not an empty option
             elementNullable?.value
         } else {
-            // a placeholder option
+            // an empty option
             null
         }
         value = newValue?.ifEmpty { null }
@@ -307,12 +308,13 @@ public fun ComponentBase.select(
     }) {
         setup(component)
         if (placeholder != null) {
-            option(value = SELECT_PLACEHOLDER_VALUE, label = placeholder, disabled = true, selected = true) {
+            setAttribute("required", "")
+            option(value = "", label = placeholder, disabled = true, selected = true) {
                 hidden = true
             }
         }
         if (emptyOption) {
-            option(value = "", label = "")
+            option(value = SELECT_EMPTY_VALUE, label = "")
         }
         options?.forEach { option ->
             option(

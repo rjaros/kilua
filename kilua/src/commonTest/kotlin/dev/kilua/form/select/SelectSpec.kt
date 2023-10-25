@@ -38,7 +38,7 @@ class SelectSpec : DomSpec {
                 select(listOfPairs("A", "B"), name = "test", emptyOption = true, placeholder = "A placeholder")
             }
             assertEqualsHtml(
-                """<select name="test"><option value="kilua_select_placeholder" label="A placeholder" selected="" disabled="" hidden=""></option><option value="" label=""></option><option value="A" label="A"></option><option value="B" label="B"></option></select>""",
+                """<select name="test" required=""><option value="" label="A placeholder" selected="" disabled="" hidden=""></option><option value="$SELECT_EMPTY_VALUE" label=""></option><option value="A" label="A"></option><option value="B" label="B"></option></select>""",
                 root.element?.innerHTML,
                 "Should render select element to DOM"
             )
@@ -73,7 +73,7 @@ class SelectSpec : DomSpec {
                 select(listOfPairs("A", "B"), name = "test", emptyOption = true, placeholder = "A placeholder")
             }
             assertEqualsHtml(
-                """<select name="test"><option value="kilua_select_placeholder" label="A placeholder" selected="" disabled="" hidden=""></option><option value="" label=""></option><option value="A" label="A"></option><option value="B" label="B"></option></select>""",
+                """<select name="test" required=""><option value="" label="A placeholder" selected="" disabled="" hidden=""></option><option value="$SELECT_EMPTY_VALUE" label=""></option><option value="A" label="A"></option><option value="B" label="B"></option></select>""",
                 root.innerHTML,
                 "Should render select element to a String"
             )
