@@ -34,6 +34,9 @@ import dev.kilua.html.Div
 import dev.kilua.state.ObservableDelegate
 import dev.kilua.utils.StringPair
 
+/**
+ * Radio button group component.
+ */
 public open class RadioGroup(
     value: String? = null,
     inline: Boolean = false,
@@ -92,6 +95,9 @@ public open class RadioGroup(
         }
     }
 
+    /**
+     * Find all radio button components in this group.
+     */
     protected open fun findAllRadios(): List<Radio> {
         return children.flatMap { child ->
             if (child is Div) {
