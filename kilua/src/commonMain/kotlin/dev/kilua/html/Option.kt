@@ -127,7 +127,7 @@ public open class Option(
 
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
         super.buildHtmlPropertyList(propertyListBuilder)
-        propertyListBuilder.add(::value, ::label, ::selected, ::disabled)
+        propertyListBuilder.add(::value, ::label, ::selected, ::disabled, ::hidden)
     }
 
 }
