@@ -37,6 +37,7 @@ import dev.kilua.form.number.numeric
 import dev.kilua.form.number.range
 import dev.kilua.form.number.spinner
 import dev.kilua.form.color.colorPicker
+import dev.kilua.form.select.select
 import dev.kilua.form.text.textArea
 import dev.kilua.form.time.date
 import dev.kilua.html.*
@@ -68,6 +69,58 @@ public class App : Application() {
             console.log("recomposing")
 
             val options = remember { mutableStateListOf("a" to "Ala", "b" to "Bela", "c" to "Cela") }
+            var place by remember { mutableStateOf<String?>("First") }
+
+            val sel = select(options, multiple = true) {
+//                option("", "")
+//                autofocus = true
+//                optgroup("first group") {
+                //option("a", "Ala")
+                //    option("b", "Bela")
+                //}
+                //option("c", "Cela")
+                onChange {
+                    console.log(this.value.toString())
+                }
+            }
+
+            button("test select") {
+                onClick {
+                    console.log(sel.value)
+                    console.log(sel.selectedLabel)
+                    console.log(sel.selectedIndex.toString())
+                }
+            }
+
+            button("set select") {
+                onClick {
+                    sel.selectedIndex = 1
+                }
+            }
+
+            button("clear select") {
+                onClick {
+                    sel.value = null
+                }
+            }
+
+            button("test multiple") {
+                onClick {
+                    sel.multiple = !sel.multiple
+                }
+            }
+
+            button("test placeholder") {
+                onClick {
+                    if (place != null) {
+                        place = null
+                    } else {
+                        place = "Test"
+                    }
+                }
+            }
+
+            hr()
 
             val rg = radioGroup(options, "b", name = "a_group") {
                 autofocus = true
