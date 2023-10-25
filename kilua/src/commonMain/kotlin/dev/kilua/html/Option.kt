@@ -37,8 +37,8 @@ import org.w3c.dom.HTMLOptionElement
  */
 public open class Option(
     value: String? = null,
-    selected: Boolean? = null,
     label: String? = null,
+    selected: Boolean? = null,
     disabled: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
@@ -57,17 +57,6 @@ public open class Option(
     }
 
     /**
-     * The selected state of the option.
-     */
-    public open var selected: Boolean? by updatingProperty(selected, skipUpdate) {
-        if (it != null) {
-            element.defaultSelected = it
-        } else {
-            element.removeAttribute("selected")
-        }
-    }
-
-    /**
      * The label of the option.
      */
     public open var label: String? by updatingProperty(label, skipUpdate) {
@@ -75,6 +64,17 @@ public open class Option(
             element.label = it
         } else {
             element.removeAttribute("label")
+        }
+    }
+
+    /**
+     * The selected attribute of the generated HTML option element.
+     */
+    public open var selected: Boolean? by updatingProperty(selected, skipUpdate) {
+        if (it != null) {
+            element.defaultSelected = it
+        } else {
+            element.removeAttribute("selected")
         }
     }
 
@@ -89,17 +89,24 @@ public open class Option(
         }
     }
 
+    /**
+     * Whether the option is currently selected.
+     */
+    public open var currentlySelected: Boolean by updatingProperty(selected ?: false, skipUpdate) {
+        element.selected = it
+    }
+
     init {
         @Suppress("LeakingThis")
         elementNullable?.let {
             if (value != null) {
                 it.value = value
             }
-            if (selected != null) {
-                it.defaultSelected = selected
-            }
             if (label != null) {
                 it.label = label
+            }
+            if (selected != null) {
+                it.defaultSelected = selected
             }
             if (disabled != null) {
                 it.disabled = disabled
@@ -109,7 +116,7 @@ public open class Option(
 
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
         super.buildHtmlPropertyList(propertyListBuilder)
-        propertyListBuilder.add(::value, ::selected, ::label, ::disabled)
+        propertyListBuilder.add(::value, ::label, ::selected, ::disabled)
     }
 
 }
@@ -118,8 +125,8 @@ public open class Option(
  * Creates a [Option] component.
  *
  * @param value the value of the option
- * @param selected the selected state of the option
  * @param label the label of the option
+ * @param selected the selected state of the option
  * @param disabled whether the option is disabled
  * @param className the CSS class name
  * @param content the content of the component
@@ -128,13 +135,13 @@ public open class Option(
 @Composable
 public fun ComponentBase.option(
     value: String? = null,
-    selected: Boolean? = null,
     label: String? = null,
+    selected: Boolean? = null,
     disabled: Boolean? = null,
     className: String? = null,
     content: @Composable Option.() -> Unit = {}
 ): Option {
-    val component = remember { Option(value, selected, label, disabled, className, renderConfig) }
+    val component = remember { Option(value, label, selected, disabled, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -143,8 +150,8 @@ public fun ComponentBase.option(
     }
     ComponentNode(component, {
         set(value) { updateProperty(Option::value, it) }
-        set(selected) { updateProperty(Option::selected, it) }
         set(label) { updateProperty(Option::label, it) }
+        set(selected) { updateProperty(Option::selected, it) }
         set(disabled) { updateProperty(Option::disabled, it) }
         set(className) { updateProperty(Option::className, it) }
     }, content)

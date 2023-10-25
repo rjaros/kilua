@@ -34,7 +34,7 @@ class OptionSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                option("test1", true) { +"Test 1" }
+                option("test1", selected = true) { +"Test 1" }
                 option("test2") { +"Test 2" }
                 option("test3", label = "Test 3") { +"Test 3" }
                 option("test4", disabled = true) { +"Test 4" }
@@ -51,7 +51,7 @@ class OptionSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                option("test1", true) { +"Test 1" }
+                option("test1", selected = true) { +"Test 1" }
                 option("test2") { +"Test 2" }
                 option("test3", label = "Test 3") { +"Test 3" }
                 option("test4", disabled = true) { +"Test 4" }
