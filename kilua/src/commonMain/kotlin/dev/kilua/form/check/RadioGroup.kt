@@ -144,6 +144,7 @@ public fun ComponentBase.radioGroup(
     }
     ComponentNode(component, {
         set(value) { updateProperty(RadioGroup::value, it) }
+        set(inline) { updateProperty(RadioGroup::inline, it) }
         set(name) { updateProperty(RadioGroup::name, it) }
         set(disabled) { updateProperty(RadioGroup::disabled, it) }
         set(className) { updateProperty(RadioGroup::className, it) }
