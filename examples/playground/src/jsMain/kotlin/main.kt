@@ -3,6 +3,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import app.softwork.routingcompose.BrowserRouter
 import dev.kilua.Application
 import dev.kilua.CoreModule
 import dev.kilua.Hot
@@ -19,7 +20,9 @@ import dev.kilua.form.number.spinner
 import dev.kilua.form.select.select
 import dev.kilua.form.text.textArea
 import dev.kilua.form.time.date
+import dev.kilua.form.upload.upload
 import dev.kilua.html.*
+import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.panel.Dir
 import dev.kilua.panel.SplitPanel
 import dev.kilua.panel.splitPanel
@@ -33,6 +36,70 @@ class App : Application() {
 
     override fun start() {
         root("root") {
+            div {
+                gridTemplateAreas = listOf("a b", "c d")
+            }
+
+            val upload = upload(multiple = true, accept = listOf("text/plain", "image/*")) {
+                onChange {
+                    console.log(this.value.toString())
+                }
+            }
+
+            button("test upload") {
+                onClick {
+                    console.log(upload.value.toString())
+                }
+            }
+
+            button("test upload content") {
+                onClickLaunch {
+                    console.log(upload.getFilesWithContent().toString())
+                }
+            }
+
+            button("clear upload") {
+                onClick {
+                    upload.value = null
+                }
+            }
+
+            hr()
+
+            link("https://google.com", "google")
+
+            hr()
+
+            BrowserRouter("/") {
+                route("/test1") {
+                    div {
+                        +"test1"
+                    }
+                    navLink("/test2", "go to test2")
+                }
+                route("/test2") {
+                    div {
+                        +"test2"
+                    }
+                    navLink("/test3/5", "go to test3 (5)")
+                }
+                route("/test3") {
+                    int {
+                        div {
+                            +"test3 ($it)"
+                        }
+                        navLink("/test4", "go to no match", hide = true)
+                    }
+                }
+                noMatch {
+                    div {
+                        +"no match"
+                    }
+                    navLink("/test1", "go to test1")
+                }
+            }
+
+            hr()
 
             val options = remember { mutableStateListOf("a" to "Ala", "b" to "Bela", "c" to "Cela") }
             var place by remember { mutableStateOf<String?>("First") }

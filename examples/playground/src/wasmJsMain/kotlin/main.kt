@@ -41,7 +41,9 @@ import dev.kilua.form.number.spinner
 import dev.kilua.form.select.select
 import dev.kilua.form.text.textArea
 import dev.kilua.form.time.date
+import dev.kilua.form.upload.upload
 import dev.kilua.html.*
+import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.panel.Dir
 import dev.kilua.panel.SplitPanel
 import dev.kilua.panel.splitPanel
@@ -68,6 +70,33 @@ public class App : Application() {
 
         root("root") {
             console.log("recomposing")
+            div {
+                gridTemplateAreas = listOf("a b", "c d")
+            }
+
+            hr()
+
+            val upload = upload(multiple = true, accept = listOf("text/plain", "image/*"))
+
+            button("test upload") {
+                onClick {
+                    console.log(upload.value.toString())
+                }
+            }
+
+            button("test upload content") {
+                onClickLaunch {
+                    console.log(upload.getFilesWithContent().toString())
+                }
+            }
+
+            button("clear upload") {
+                onClick {
+                    upload.value = null
+                }
+            }
+
+            hr()
 
             link("https://google.com", "google")
 
