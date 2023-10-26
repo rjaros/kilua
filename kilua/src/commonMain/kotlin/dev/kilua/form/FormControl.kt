@@ -106,15 +106,9 @@ public interface TimeFormControl : GenericFormControl<LocalTime>
  * Base interface of a form control with a list of files value.
  */
 public interface KFilesFormControl : GenericFormControl<List<KFile>> {
-    /**
-     * Returns the value as a string.
-     */
-    override fun getValueAsString(): String? = value?.joinToString(",") { it.name }
 
     /**
-     * Returns the native JavaScript File object.
-     * @param kFile KFile object
-     * @return File object
+     * Returns the list of selected files with content.
      */
-    public fun getNativeFile(kFile: KFile): File?
+    public suspend fun getFilesWithContent(): List<KFile>?
 }
