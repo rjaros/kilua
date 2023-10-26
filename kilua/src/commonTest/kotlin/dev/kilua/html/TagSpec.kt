@@ -42,11 +42,15 @@ class TagSpec : DomSpec {
                     margin = 10.px
                     display = Display.Flex
                     autofocus = true
+                    gridTemplateAreas = listOf("a a a", "b c c", "b c c")
+                    boxShadowList = listOf(BoxShadow(hOffset = 10.px, vOffset = 20.px, color = Color.hex(0x00ffff)), BoxShadow(hOffset = 30.px, vOffset = 40.px, color = Color.hex(0x00eeee)))
+                    transitionList = listOf(Transition("width", 0.5), Transition("height", 0.6))
+                    borderRadiusList = listOf(10.px, 20.px)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus="" style="margin: 10px; display: flex;"></ol>"""),
-                normalizeHtml(root.element?.innerHTML),
+            assertEqualsHtml(
+                """<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus="" style="margin: 10px; display: flex; grid-template-areas: &quot;a a a&quot; &quot;b c c&quot; &quot;b c c&quot;; box-shadow: rgb(0, 255, 255) 10px 20px, rgb(0, 238, 238) 30px 40px; transition: width 0.5s ease 0s, height 0.6s ease 0s; border-radius: 10px 20px;"></ol>""",
+                root.element?.innerHTML,
                 "Should render an HTML tag to DOM"
             )
         }
@@ -64,11 +68,15 @@ class TagSpec : DomSpec {
                     margin = 10.px
                     display = Display.Flex
                     autofocus = true
+                    gridTemplateAreas = listOf("a a a", "b c c", "b c c")
+                    boxShadowList = listOf(BoxShadow(hOffset = 10.px, vOffset = 20.px, color = Color.hex(0x00ffff)), BoxShadow(hOffset = 30.px, vOffset = 40.px, color = Color.hex(0x00eeee)))
+                    transitionList = listOf(Transition("width", 0.5), Transition("height", 0.6))
+                    borderRadiusList = listOf(10.px, 20.px)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus style="margin: 10px; display: flex;"></ol></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus="" style="margin: 10px; display: flex; grid-template-areas: &quot;a a a&quot; &quot;b c c&quot; &quot;b c c&quot;; box-shadow: 10px 20px #00ffff, 30px 40px #00eeee; transition: width 0.5s, height 0.6s; border-radius: 10px 20px;"></ol>""",
+                root.innerHTML,
                 "Should render an HTML tag to a String"
             )
         }

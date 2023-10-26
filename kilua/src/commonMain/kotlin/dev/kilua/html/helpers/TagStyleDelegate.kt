@@ -689,7 +689,7 @@ public open class TagStyleDelegate<E : HTMLElement>(
 
     override var gridTemplateAreas: List<String>? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.setProperty("grid-template-areas", it.joinToString("\n"))
+            element.style.setProperty("grid-template-areas", it.joinToString(" ") { "\"" + it + "\"" })
         } else {
             element.style.removeProperty("grid-template-areas")
         }
