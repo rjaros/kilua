@@ -42,7 +42,7 @@ Early in development. Main concepts have been tested, but everything is a subjec
 - [ ] Typesafe forms support with built-in validation 
 - [ ] Implement Tabulator component
 - [ ] Bootstrap module with basic components (tabs, toasts, dropdowns, modals etc.)
-- [ ] Routing support
+- [X] Routing support
 - [ ] I18n support
 - [ ] Gradle plugin and KSP compiler plugin
 - [ ] Fullstack support with SSR
