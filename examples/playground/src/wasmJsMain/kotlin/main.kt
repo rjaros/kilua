@@ -25,6 +25,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import app.softwork.routingcompose.BrowserRouter
 import dev.kilua.Application
 import dev.kilua.CoreModule
 import dev.kilua.compose.root
@@ -33,10 +34,10 @@ import dev.kilua.form.check.checkBox
 import dev.kilua.form.check.radio
 import dev.kilua.form.check.radioGroup
 import dev.kilua.form.check.triStateCheckBox
+import dev.kilua.form.color.colorPicker
 import dev.kilua.form.number.numeric
 import dev.kilua.form.number.range
 import dev.kilua.form.number.spinner
-import dev.kilua.form.color.colorPicker
 import dev.kilua.form.select.select
 import dev.kilua.form.text.textArea
 import dev.kilua.form.time.date
@@ -68,10 +69,45 @@ public class App : Application() {
         root("root") {
             console.log("recomposing")
 
+            link("https://google.com", "google")
+
+            hr()
+
+            BrowserRouter("/") {
+                route("/test1") {
+                    div {
+                        +"test1"
+                    }
+                    navLink("/test2", "go to test2")
+                }
+                route("/test2") {
+                    div {
+                        +"test2"
+                    }
+                    navLink("/test3/5", "go to test3 (5)")
+                }
+                route("/test3") {
+                    int {
+                        div {
+                            +"test3 ($it)"
+                        }
+                        navLink("/test4", "go to no match", hide = true)
+                    }
+                }
+                noMatch {
+                    div {
+                        +"no match"
+                    }
+                    navLink("/test1", "go to test1")
+                }
+            }
+
+            hr()
+
             val options = remember { mutableStateListOf("a" to "Ala", "b" to "Bela", "c" to "Cela") }
             var place by remember { mutableStateOf<String?>("First") }
 
-            val sel = select(options, multiple = true) {
+            val sel = select(options, emptyOption = true, placeholder = "test") {
 //                option("", "")
 //                autofocus = true
 //                optgroup("first group") {
