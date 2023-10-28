@@ -58,12 +58,12 @@ import org.w3c.dom.CustomEvent
 
 @JsModule("./css/style.css")
 @JsNonModule
-public external object css
+public external object Css
 
 public class App : Application() {
 
     init {
-        useCssModule(css)
+        useCssModule(Css)
     }
 
     override fun start() {
