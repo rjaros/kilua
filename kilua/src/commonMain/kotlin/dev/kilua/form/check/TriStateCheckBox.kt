@@ -120,19 +120,18 @@ public open class TriStateCheckBox(
         }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (value != null) {
-                it.checked = value
+                element.checked = value
             } else {
-                it.indeterminate = true
+                element.indeterminate = true
             }
-            it.type = InputType.Checkbox.value
+            element.type = InputType.Checkbox.value
             if (name != null) {
-                it.name = name
+                element.name = name
             }
             if (disabled != null) {
-                it.disabled = disabled
+                element.disabled = disabled
             }
         }
         @Suppress("LeakingThis")

@@ -78,10 +78,10 @@ public open class Numeric(
     public open var locale: Locale by updatingProperty(locale)
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (value != null) {
-                it.value = valueToString(value) ?: ""
+                @Suppress("LeakingThis")
+                element.value = valueToString(value) ?: ""
             }
         }
         @Suppress("LeakingThis")
@@ -112,7 +112,7 @@ public open class Numeric(
         if (value != null) {
             value = value!!.toFixedNoRound(decimals).toDouble()
         }
-        if (elementAvailable) {
+        if (renderConfig.isDom) {
             element.value = valueToString(value) ?: ""
         }
     }

@@ -93,16 +93,15 @@ public open class Th(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (colspan != null) {
-                it.colSpan = colspan
+                element.colSpan = colspan
             }
             if (rowspan != null) {
-                it.rowSpan = rowspan
+                element.rowSpan = rowspan
             }
             if (scope != null) {
-                it.scope = scope.value
+                element.scope = scope.value
             }
         }
     }

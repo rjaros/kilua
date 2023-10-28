@@ -65,13 +65,12 @@ public open class Optgroup(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (label != null) {
-                it.label = label
+                element.label = label
             }
             if (disabled != null) {
-                it.disabled = disabled
+                element.disabled = disabled
             }
         }
     }

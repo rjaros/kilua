@@ -66,13 +66,12 @@ public open class Td(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (colspan != null) {
-                it.colSpan = colspan
+                element.colSpan = colspan
             }
             if (rowspan != null) {
-                it.rowSpan = rowspan
+                element.rowSpan = rowspan
             }
         }
     }

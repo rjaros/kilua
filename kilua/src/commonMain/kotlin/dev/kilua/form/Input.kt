@@ -163,28 +163,27 @@ public abstract class Input<T : Any>(
         }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (value != null) {
-                it.value = value.toString()
+                element.value = value.toString()
             }
-            it.type = type.value
+            element.type = type.value
             if (name != null) {
-                it.name = name
+                element.name = name
             }
             if (maxlength != null) {
-                it.maxLength = maxlength
+                element.maxLength = maxlength
             }
             if (placeholder != null) {
-                it.placeholder = placeholder
+                element.placeholder = placeholder
             }
             if (disabled != null) {
-                it.disabled = disabled
+                element.disabled = disabled
             }
-        }
-        @Suppress("LeakingThis")
-        onEventDirect<Event>("input") {
-            setInternalValueFromString(element.value)
+            @Suppress("LeakingThis")
+            onEventDirect<Event>("input") {
+                setInternalValueFromString(element.value)
+            }
         }
     }
 

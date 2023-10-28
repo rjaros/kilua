@@ -30,10 +30,8 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
-import dev.kilua.utils.isDom
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLButtonElement
-import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
 
 /**
@@ -80,11 +78,10 @@ public open class Button(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
-            it.type = type.value
+        if (renderConfig.isDom) {
+            element.type = type.value
             if (disabled != null) {
-                it.disabled = disabled
+                element.disabled = disabled
             }
         }
     }
@@ -93,12 +90,11 @@ public open class Button(
      * Clicks the button.
      */
     public open fun click() {
-        if (elementAvailable) {
+        if (renderConfig.isDom) {
             element.click()
         } else {
             events["click"]?.forEach {
-                val event = if (isDom) MouseEvent("click") else Event("click")
-                it.value(event)
+                it.value(MouseEvent("click"))
             }
         }
     }

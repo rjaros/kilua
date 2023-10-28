@@ -119,27 +119,26 @@ public abstract class AbstractCheck(
         }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
-            it.checked = value
-            it.type = type.value
+        if (renderConfig.isDom) {
+            element.checked = value
+            element.type = type.value
             if (name != null) {
-                it.name = name
+                element.name = name
             }
             if (disabled != null) {
-                it.disabled = disabled
+                element.disabled = disabled
+            }
+            @Suppress("LeakingThis")
+            onEventDirect<Event>("click") {
+                setInternalValueFromBoolean(element.checked)
+            }
+            @Suppress("LeakingThis")
+            onEventDirect<Event>("change") {
+                setInternalValueFromBoolean(element.checked)
             }
         }
         @Suppress("LeakingThis")
         setAttribute("type", type.value)
-        @Suppress("LeakingThis")
-        onEventDirect<Event>("click") {
-            setInternalValueFromBoolean(element.checked)
-        }
-        @Suppress("LeakingThis")
-        onEventDirect<Event>("change") {
-            setInternalValueFromBoolean(element.checked)
-        }
     }
 
     /**

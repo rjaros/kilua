@@ -73,8 +73,7 @@ public open class Canvas(
     public val context2D: CanvasRenderingContext2D?
 
     init {
-        @Suppress("LeakingThis")
-        if (elementAvailable) {
+        if (renderConfig.isDom) {
             if (canvasWidth != null) {
                 element.width = canvasWidth
             }

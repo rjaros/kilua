@@ -108,19 +108,18 @@ public open class Option(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (value != null) {
-                it.value = value
+                element.value = value
             }
             if (label != null) {
-                it.label = label
+                element.label = label
             }
             if (selected != null) {
-                it.defaultSelected = selected
+                element.defaultSelected = selected
             }
             if (disabled != null) {
-                it.disabled = disabled
+                element.disabled = disabled
             }
         }
     }

@@ -78,13 +78,12 @@ public open class Link(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (href != null) {
-                it.href = href
+                element.href = href
             }
             if (target != null) {
-                it.target = target
+                element.target = target
             }
         }
     }

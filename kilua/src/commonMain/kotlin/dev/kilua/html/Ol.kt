@@ -92,13 +92,12 @@ public open class Ol(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (type != null) {
-                it.type = type.value
+                element.type = type.value
             }
             if (start != null) {
-                it.start = start
+                element.start = start
             }
         }
     }

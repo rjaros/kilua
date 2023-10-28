@@ -22,6 +22,8 @@
 
 package dev.kilua.core
 
+import dev.kilua.externals.nodeJsCreateElement
+import dev.kilua.externals.nodeJsCreateText
 import dev.kilua.utils.isDom
 import kotlinx.browser.document
 import org.w3c.dom.Element
@@ -35,26 +37,26 @@ public object SafeDomFactory {
     /**
      * Create DOM element.
      */
-    public fun createElement(name: String, renderConfig: RenderConfig): Element? {
-        return if (renderConfig.isDom && isDom) {
+    public fun createElement(name: String): Element {
+        return if (isDom) {
             document.createElement(name)
-        } else null
+        } else nodeJsCreateElement()
     }
 
     /**
      * Create DOM text node.
      */
-    public fun createTextNode(text: String, renderConfig: RenderConfig): Text? {
-        return if (renderConfig.isDom && isDom) {
+    public fun createTextNode(text: String): Text {
+        return if (isDom) {
             document.createTextNode(text)
-        } else null
+        } else nodeJsCreateText()
     }
 
     /**
      * Get DOM element by id.
      */
-    public fun getElementById(id: String, renderConfig: RenderConfig): Element? {
-        return if (renderConfig.isDom && isDom) {
+    public fun getElementById(id: String): Element? {
+        return if (isDom) {
             document.getElementById(id)
         } else null
     }

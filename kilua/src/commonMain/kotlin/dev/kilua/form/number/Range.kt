@@ -75,11 +75,10 @@ public open class Range(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
-            it.min = min.toString()
-            it.max = max.toString()
-            it.step = step.toString()
+        if (renderConfig.isDom) {
+            element.min = min.toString()
+            element.max = max.toString()
+            element.step = step.toString()
         }
     }
 
@@ -100,7 +99,7 @@ public open class Range(
      * Increments the value by the step value.
      */
     public open fun stepUp() {
-        if (elementAvailable) {
+        if (renderConfig.isDom) {
             element.stepUp()
             setInternalValueFromString(element.value)
         } else {
@@ -113,7 +112,7 @@ public open class Range(
      * Decrements the value by the step value.
      */
     public open fun stepDown() {
-        if (elementAvailable) {
+        if (renderConfig.isDom) {
             element.stepDown()
             setInternalValueFromString(element.value)
         } else {

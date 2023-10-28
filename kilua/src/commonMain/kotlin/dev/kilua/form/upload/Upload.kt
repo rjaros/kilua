@@ -121,16 +121,15 @@ public open class Upload(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (multiple) {
-                it.multiple = multiple
+                element.multiple = multiple
             }
             if (!accept.isNullOrEmpty()) {
-                it.accept = accept.joinToString(",")
+                element.accept = accept.joinToString(",")
             }
             if (capture != null) {
-                it.setAttribute("capture", capture.toString())
+                element.setAttribute("capture", capture.toString())
             }
         }
     }
@@ -140,13 +139,15 @@ public open class Upload(
      */
     protected open fun getFiles(): List<KFile>? {
         nativeFiles.clear()
-        return elementNullable?.files?.let { files ->
-            files.asList().map { file ->
-                val kfile = KFile(file.name, file.size.toInt())
-                nativeFiles[kfile] = file
-                kfile
-            }
-        }?.ifEmpty { null }
+        return if (renderConfig.isDom) {
+            element.files?.let { files ->
+                files.asList().map { file ->
+                    val kfile = KFile(file.name, file.size.toInt())
+                    nativeFiles[kfile] = file
+                    kfile
+                }
+            }?.ifEmpty { null }
+        } else null
     }
 
     /**
@@ -154,7 +155,7 @@ public open class Upload(
      */
     protected open fun clearFiles() {
         nativeFiles.clear()
-        elementNullable?.value = ""
+        if (renderConfig.isDom) element.value = ""
     }
 
     override fun stringToValue(text: String?): List<KFile>? {

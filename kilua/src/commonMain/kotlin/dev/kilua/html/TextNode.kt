@@ -38,29 +38,21 @@ import org.w3c.dom.Text
 public open class TextNode(
     text: String,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-) : ComponentBase(SafeDomFactory.createTextNode(text, renderConfig), renderConfig) {
+) : ComponentBase(SafeDomFactory.createTextNode(text), renderConfig) {
 
     /**
      * The DOM text node.
      */
-    public open val textNode: Text
-        get() = node?.unsafeCast<Text>()
-            ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
-
-    /**
-     * The DOM text node or null if the current render configuration doesn't support DOM.
-     */
-    public open val textNodeNullable: Text? = node?.unsafeCast<Text>()
-
-    /**
-     * The DOM text node or null if the current render configuration doesn't support DOM.
-     */
-    public open val textNodeAvailable: Boolean = node != null
+    public open val textNode: Text by lazy {
+        if (renderConfig.isDom) node.unsafeCast<Text>() else {
+            throw IllegalStateException("Can't use DOM element with the current render configuration")
+        }
+    }
 
     /**
      * Whether to skip updating the DOM text node of the current component.
      */
-    protected val skipUpdate: Boolean = node == null
+    protected val skipUpdate: Boolean = !renderConfig.isDom
 
     /**
      * The text of the node.

@@ -128,22 +128,21 @@ public open class Iframe(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (src != null) {
-                it.src = src
+                element.src = src
             }
             if (srcdoc != null) {
-                it.srcdoc = srcdoc
+                element.srcdoc = srcdoc
             }
             if (name != null) {
-                it.name = name
+                element.name = name
             }
             if (iframeWidth != null) {
-                it.width = iframeWidth.toString()
+                element.width = iframeWidth.toString()
             }
             if (iframeHeight != null) {
-                it.height = iframeHeight.toString()
+                element.height = iframeHeight.toString()
             }
         }
         @Suppress("LeakingThis")

@@ -61,7 +61,7 @@ public open class Tag<E : HTMLElement>(
     protected val styles: MutableMap<String, Any> = nativeMapOf(),
     protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>> = nativeMapOf()
 ) :
-    ComponentBase(SafeDomFactory.createElement(tagName, renderConfig), renderConfig),
+    ComponentBase(SafeDomFactory.createElement(tagName), renderConfig),
     TagAttrs<E> by TagAttrsDelegate(!renderConfig.isDom || !isDom, attributes),
     TagStyle<E> by TagStyleDelegate(!renderConfig.isDom || !isDom, styles),
     TagEvents<E> by TagEventsDelegate(!renderConfig.isDom || !isDom, events),
@@ -85,24 +85,16 @@ public open class Tag<E : HTMLElement>(
     /**
      * The DOM element of the current component.
      */
-    public open val element: E
-        get() = node?.unsafeCast<E>()
-            ?: throw IllegalStateException("Can't use DOM element with the current render configuration")
-
-    /**
-     * The DOM element of the current component or null if the current render configuration doesn't support DOM.
-     */
-    public open val elementNullable: E? = node?.unsafeCast<E>()
-
-    /**
-     * Whether the DOM element of the current component is available.
-     */
-    public open val elementAvailable: Boolean = node != null
+    public val element: E by lazy {
+        if (renderConfig.isDom) node.unsafeCast<E>() else {
+            throw IllegalStateException("Can't use DOM element with the current render configuration")
+        }
+    }
 
     /**
      * Whether to skip updating the DOM element of the current component.
      */
-    protected val skipUpdate: Boolean = node == null
+    protected val skipUpdate: Boolean = !renderConfig.isDom
 
     /**
      * The CSS class of the current component.
@@ -127,12 +119,13 @@ public open class Tag<E : HTMLElement>(
         }
 
     init {
+        val elementNullable = if (renderConfig.isDom) element else null
         @Suppress("LeakingThis")
-        elementWithAttrs(node?.unsafeCast<E>())
+        elementWithAttrs(elementNullable)
         @Suppress("LeakingThis")
-        elementWithStyle(node?.unsafeCast<E>())
+        elementWithStyle(elementNullable)
         @Suppress("LeakingThis")
-        elementWithEvents(node?.unsafeCast<E>())
+        elementWithEvents(elementNullable)
         @Suppress("LeakingThis")
         tagWithDnd(this)
         @Suppress("LeakingThis")
@@ -143,7 +136,7 @@ public open class Tag<E : HTMLElement>(
      * Updates the CSS class of the DOM element of the current component.
      */
     protected open fun updateElementClassList() {
-        if (elementAvailable) {
+        if (renderConfig.isDom) {
             if (internalClassName != null && className != null) {
                 element.className = "$internalClassName $className"
             } else if (className != null) {
@@ -200,14 +193,14 @@ public open class Tag<E : HTMLElement>(
      * Makes the element focused.
      */
     public open fun focus() {
-        elementNullable?.focus()
+        if (renderConfig.isDom) element.focus()
     }
 
     /**
      * Makes the element blur.
      */
     public open fun blur() {
-        elementNullable?.blur()
+        if (renderConfig.isDom) element.blur()
     }
 
     public companion object {

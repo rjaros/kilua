@@ -137,17 +137,16 @@ public open class Select(
         get() = findAllNotEmptyOptions().getOrNull(selectedIndex)?.label
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
-            it.multiple = multiple
+        if (renderConfig.isDom) {
+            element.multiple = multiple
             if (size != null) {
-                it.size = size
+                element.size = size
             }
             if (name != null) {
-                it.name = name
+                element.name = name
             }
             if (disabled != null) {
-                it.disabled = disabled
+                element.disabled = disabled
             }
         }
         @Suppress("LeakingThis")
@@ -222,10 +221,13 @@ public open class Select(
      * Map the states of the option components inside this Select to the current value.
      */
     protected open fun mapOptionsToValue() {
+        val elementNullable = if (renderConfig.isDom) element else null
         val newValue = if (multiple) {
             // selected values are joined to a comma separated string
             findAllOptions().filter {
-                it.elementNullable?.selected == true
+                if (renderConfig.isDom) {
+                    it.element.selected
+                } else false
             }.map {
                 it.value ?: it.label
             }.joinToString(",")

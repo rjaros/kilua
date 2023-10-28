@@ -42,13 +42,11 @@ internal expect val defaultMonotonicFrameClock: MonotonicFrameClock
 /**
  * A root component for the component tree.
  * @param element the root HTML element
- * @param id ID of the root HTML element
  * @param renderConfig the render configuration
  * @param content the composable content
  */
 public class Root(
-    public val element: Element?,
-    public val id: String? = null,
+    public val element: Element,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     content: @Composable Root.() -> Unit = {}
 ) : ComponentBase(element, renderConfig) {
@@ -64,7 +62,9 @@ public class Root(
     }
 
     override fun renderToStringBuilder(builder: StringBuilder) {
-        builder.append("<${element?.tagName?.lowercase() ?: "div"}")
+        val tagName = if (renderConfig.isDom) element.tagName.lowercase() else "div"
+        val id = if (renderConfig.isDom) element.id else null
+        builder.append("<$tagName")
         if (id != null) {
             builder.append(" id=\"$id\"")
         }
@@ -72,7 +72,7 @@ public class Root(
         children.forEach {
             it.renderToStringBuilder(builder)
         }
-        builder.append("</${element?.tagName?.lowercase() ?: "div"}>")
+        builder.append("</$tagName>")
     }
 
     /**
@@ -92,10 +92,11 @@ public class Root(
      */
     public fun dispose() {
         composition.dispose()
-        element?.clear()
+        if (renderConfig.isDom) element.clear()
     }
 
     public companion object {
+
         private val roots: MutableList<Root> = mutableListOf()
 
         /**
@@ -140,12 +141,11 @@ internal fun rootComposable(
  * Main entry-point for building component tree with composable functions.
  */
 public fun root(
-    element: Element?,
-    id: String? = null,
+    element: Element,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     content: @Composable Root.() -> Unit = {}
 ): Root {
-    return Root(element, id ?: element?.id, renderConfig) {
+    return Root(element, renderConfig) {
         content()
     }
 }
@@ -158,7 +158,8 @@ public fun root(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     content: @Composable Root.() -> Unit = {}
 ): Root {
-    return root(SafeDomFactory.getElementById(id, renderConfig), id, renderConfig, content)
+    val element = SafeDomFactory.getElementById(id) ?: SafeDomFactory.createElement("div")
+    return root(element, renderConfig, content)
 }
 
 /**
@@ -167,5 +168,7 @@ public fun root(
 public fun root(
     content: @Composable Root.() -> Unit = {}
 ): Root {
-    return root(null, null, StringRenderConfig(), content)
+    val renderConfig = StringRenderConfig()
+    val element = SafeDomFactory.createElement("div")
+    return root(element, renderConfig, content)
 }

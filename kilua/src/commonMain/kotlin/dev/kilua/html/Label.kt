@@ -54,10 +54,9 @@ public open class Label(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (htmlFor != null) {
-                it.htmlFor = htmlFor
+                element.htmlFor = htmlFor
             }
         }
     }

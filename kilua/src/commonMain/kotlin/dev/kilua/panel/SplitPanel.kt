@@ -31,10 +31,10 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.SplitJsInstance
 import dev.kilua.externals.SplitJsOptions
+import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.externals.splitJs
 import dev.kilua.html.Tag
 import dev.kilua.html.div
-import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.utils.cast
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLDivElement
@@ -172,19 +172,19 @@ public open class SplitPanel(
      * Create and initialize Split.js instance.
      */
     protected open fun initializeSplitJs() {
-        if (elementAvailable && children.size == 3) {
-            val mainBoundingRect = elementNullable?.getBoundingClientRect()
+        if (renderConfig.isDom && children.size == 3) {
+            val mainBoundingRect = element.getBoundingClientRect()
             val splitChildren = listOf(children[0], children[2])
             val splitter = children[1]
             val sizes = splitChildren.map {
-                val boundingRect = it.cast<Tag<*>>().elementNullable?.getBoundingClientRect()
+                val boundingRect = it.cast<Tag<*>>().element.getBoundingClientRect()
                 if (dir == Dir.Horizontal) {
-                    val mainHeight = mainBoundingRect?.height?.toInt() ?: 0
-                    val childHeight = boundingRect?.height?.toInt() ?: 0
+                    val mainHeight = mainBoundingRect.height.toInt()
+                    val childHeight = boundingRect.height.toInt()
                     ceil(childHeight.toDouble() * 100 / mainHeight.toDouble()).toInt()
                 } else {
-                    val mainWidth = mainBoundingRect?.width?.toInt() ?: 0
-                    val childWidth = boundingRect?.width?.toInt() ?: 0
+                    val mainWidth = mainBoundingRect.width.toInt()
+                    val childWidth = boundingRect.width.toInt()
                     ceil(childWidth.toDouble() * 100 / mainWidth.toDouble()).toInt()
                 }
             }

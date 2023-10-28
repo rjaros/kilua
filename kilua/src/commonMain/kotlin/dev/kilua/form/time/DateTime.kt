@@ -100,15 +100,14 @@ public open class DateTime(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (min != null) {
-                it.min = min.toString()
+                element.min = min.toString()
             }
             if (max != null) {
-                it.max = max.toString()
+                element.max = max.toString()
             }
-            it.step = step.toString()
+            element.step = step.toString()
         }
     }
 
@@ -140,7 +139,7 @@ public open class DateTime(
      * Increments the value by the step value.
      */
     public open fun stepUp() {
-        if (elementAvailable) {
+        if (renderConfig.isDom) {
             element.stepUp()
             setInternalValueFromString(element.value)
         } else {
@@ -157,7 +156,7 @@ public open class DateTime(
      * Decrements the value by the step value.
      */
     public open fun stepDown() {
-        if (elementAvailable) {
+        if (renderConfig.isDom) {
             element.stepDown()
             setInternalValueFromString(element.value)
         } else {

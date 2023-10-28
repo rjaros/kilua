@@ -66,11 +66,10 @@ public open class Img(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
-            it.src = src
+        if (renderConfig.isDom) {
+            element.src = src
             if (alt != null) {
-                it.alt = alt
+                element.alt = alt
             }
         }
     }

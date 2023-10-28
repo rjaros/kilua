@@ -35,7 +35,7 @@ import org.w3c.dom.get
  * Base class for all components.
  */
 public abstract class ComponentBase(
-    protected val node: Node?,
+    protected val node: Node,
     internal val renderConfig: RenderConfig,
 ) : Component, PropertyDelegate(nativeMapOf()) {
 
@@ -53,12 +53,12 @@ public abstract class ComponentBase(
         val size = children.size
         if (index < size) {
             children.add(index, component)
-            if (node != null && component.node != null) {
+            if (renderConfig.isDom) {
                 node.insertBefore(component.node, node.childNodes[index]!!)
             }
         } else {
             children.add(component)
-            if (node != null && component.node != null) {
+            if (renderConfig.isDom) {
                 node.appendChild(component.node)
             }
         }
@@ -73,7 +73,7 @@ public abstract class ComponentBase(
         repeat(count) {
             val child = children.removeAt(index)
             child.parent = null
-            node?.removeChild(node.childNodes[index]!!)
+            if (renderConfig.isDom) node.removeChild(node.childNodes[index]!!)
         }
     }
 
@@ -89,7 +89,7 @@ public abstract class ComponentBase(
                 val fromEl = children[from]
                 val toEl = children.set(to, fromEl)
                 children[from] = toEl
-                if (node != null) {
+                if (renderConfig.isDom) {
                     val toIndex = if (from > to) to else to - 1
                     val childElement = node.removeChild(node.childNodes[from]!!)
                     node.insertBefore(childElement, node.childNodes[toIndex]!!)
@@ -99,17 +99,17 @@ public abstract class ComponentBase(
                     val fromIndex = if (from > to) from + i else from
                     val toIndex = if (from > to) to + i else to + count - 2
                     val child = children.removeAt(fromIndex)
-                    val childElement = node?.let {
-                        it.removeChild(it.childNodes[fromIndex]!!)
-                    }
+                    val childElement = if (renderConfig.isDom) {
+                        node.removeChild(node.childNodes[fromIndex]!!)
+                    } else null
                     if (toIndex < children.size) {
                         children.add(toIndex, child)
-                        if (node != null && childElement != null) {
+                        if (childElement != null) {
                             node.insertBefore(childElement, node.childNodes[toIndex]!!)
                         }
                     } else {
                         children.add(child)
-                        if (node != null && childElement != null) {
+                        if (childElement != null) {
                             node.appendChild(childElement)
                         }
                     }
@@ -126,7 +126,7 @@ public abstract class ComponentBase(
             it.parent = null
         }
         children.clear()
-        node?.clear()
+        if (renderConfig.isDom) node.clear()
     }
 
     /**
@@ -134,7 +134,7 @@ public abstract class ComponentBase(
      */
     public open fun dispatchEvent(type: String, eventInitDict: CustomEventInit): Boolean {
         val event = CustomEvent(type, eventInitDict)
-        return node?.dispatchEvent(event) ?: true
+        return if (renderConfig.isDom) node.dispatchEvent(event) else true
     }
 
     /**

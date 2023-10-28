@@ -167,33 +167,32 @@ public open class TextArea(
     }
 
     init {
-        @Suppress("LeakingThis")
-        elementNullable?.let {
+        if (renderConfig.isDom) {
             if (value != null) {
-                it.value = value
+                element.value = value
             }
             if (cols != null) {
-                it.cols = cols
+                element.cols = cols
             }
             if (rows != null) {
-                it.rows = rows
+                element.rows = rows
             }
             if (name != null) {
-                it.name = name
+                element.name = name
             }
             if (maxlength != null) {
-                it.maxLength = maxlength
+                element.maxLength = maxlength
             }
             if (placeholder != null) {
-                it.placeholder = placeholder
+                element.placeholder = placeholder
             }
             if (disabled != null) {
-                it.disabled = disabled
+                element.disabled = disabled
             }
-        }
-        @Suppress("LeakingThis")
-        onInputDirect {
-            setInternalValueFromString(element.value)
+            @Suppress("LeakingThis")
+            onInputDirect {
+                setInternalValueFromString(element.value)
+            }
         }
     }
 
