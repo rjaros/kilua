@@ -45,7 +45,7 @@ class OptgroupSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<optgroup class="test" label="A label" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></optgroup>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Optgroup tag to DOM"
             )
         }

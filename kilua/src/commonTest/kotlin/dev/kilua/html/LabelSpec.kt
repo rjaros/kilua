@@ -40,7 +40,7 @@ class LabelSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<label class="test" for="id" id="test-id"></label>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Label tag to DOM"
             )
         }

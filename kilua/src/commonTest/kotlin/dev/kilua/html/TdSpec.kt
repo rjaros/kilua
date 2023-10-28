@@ -45,7 +45,7 @@ class TdSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<td class="test" colspan="2" rowspan="1" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></td>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Td tag to DOM"
             )
         }

@@ -45,7 +45,7 @@ class SSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<s class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</s>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML S tag to DOM"
             )
         }

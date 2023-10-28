@@ -41,7 +41,7 @@ class PasswordSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="password" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="">"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render password element to DOM"
             )
         }

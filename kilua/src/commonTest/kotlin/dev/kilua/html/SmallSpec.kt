@@ -45,7 +45,7 @@ class SmallSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<small class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</small>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Small tag to DOM"
             )
         }

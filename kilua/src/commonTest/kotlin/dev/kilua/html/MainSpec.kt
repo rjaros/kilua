@@ -45,7 +45,7 @@ class MainSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<main class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></main>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Main tag to DOM"
             )
         }

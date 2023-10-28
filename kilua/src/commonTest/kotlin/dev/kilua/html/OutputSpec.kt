@@ -45,7 +45,7 @@ class OutputSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<output class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></output>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Output tag to DOM"
             )
         }

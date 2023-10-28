@@ -46,7 +46,7 @@ class IframeSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<iframe src="https://google.com" name="test" width="300" height="200" sandbox="allow-popups allow-forms" style="margin: 10px;"></iframe>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Iframe tag to DOM"
             )
         }

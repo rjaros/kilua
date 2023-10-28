@@ -45,7 +45,7 @@ class CiteSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<cite class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></cite>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Cite tag to DOM"
             )
         }

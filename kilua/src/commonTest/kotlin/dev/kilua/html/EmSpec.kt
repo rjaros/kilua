@@ -45,7 +45,7 @@ class EmSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<em class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</em>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Em tag to DOM"
             )
         }

@@ -39,7 +39,7 @@ class SelectSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<select name="test" required=""><option value="" label="A placeholder" selected="" disabled="" hidden=""></option><option value="$SELECT_EMPTY_VALUE" label=""></option><option value="A" label="A"></option><option value="B" label="B"></option></select>""",
-                root.element?.innerHTML,
+                root.element.innerHTML,
                 "Should render select element to DOM"
             )
         }

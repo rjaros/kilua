@@ -38,7 +38,7 @@ class ButtonSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<button type="submit">test</button>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render a BUTTON HTML tag to DOM"
             )
         }

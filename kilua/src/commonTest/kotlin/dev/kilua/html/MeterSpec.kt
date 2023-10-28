@@ -45,7 +45,7 @@ class MeterSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<meter class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></meter>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Meter tag to DOM"
             )
         }

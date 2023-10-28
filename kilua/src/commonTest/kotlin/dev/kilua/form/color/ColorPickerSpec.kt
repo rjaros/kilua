@@ -40,7 +40,7 @@ class ColorPickerSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="color" name="test" autofocus="">"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render color picker element to DOM"
             )
         }

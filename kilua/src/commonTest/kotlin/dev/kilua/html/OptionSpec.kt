@@ -41,7 +41,7 @@ class OptionSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<option value="test1" selected="">Test 1</option><option value="test2">Test 2</option><option value="test3" label="Test 3">Test 3</option><option value="test4" disabled="">Test 4</option>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Option tag to DOM"
             )
         }

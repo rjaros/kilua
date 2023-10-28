@@ -45,7 +45,7 @@ class ThSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<th class="test" colspan="2" rowspan="1" scope="col" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Th tag to DOM"
             )
         }

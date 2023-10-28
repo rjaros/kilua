@@ -54,7 +54,7 @@ class DateTimeSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="datetime-local" name="date" min="2023-10-14T00:00" max="2023-10-16T00:00" step="60" value="2023-10-15T12:30">"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render date and time input element to DOM"
             )
         }
@@ -87,7 +87,6 @@ class DateTimeSpec : DomSpec {
         run {
             lateinit var dateTime: DateTime
             val date = LocalDateTime(2023, 10, 15, 12, 30)
-            val time = LocalTime(12, 30)
             root("test") {
                 dateTime = dateTime(
                     date,

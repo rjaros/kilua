@@ -41,7 +41,7 @@ class NumericSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="text" maxlength="14" value="1,235.32">"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render numeric input element to DOM"
             )
         }

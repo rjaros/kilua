@@ -39,7 +39,7 @@ class TriStateCheckBoxSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<input type="checkbox" name="test" checked="" value="extra">""",
-                root.element?.innerHTML,
+                root.element.innerHTML,
                 "Should render tri-state checkbox element to DOM"
             )
         }
@@ -56,7 +56,7 @@ class TriStateCheckBoxSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<div><input type="checkbox" name="test" checked="" value="extra" id="id"><label for="id">A checkbox</label></div>""",
-                root.element?.innerHTML,
+                root.element.innerHTML,
                 "Should render tri-state checkbox with a label to DOM"
             )
         }

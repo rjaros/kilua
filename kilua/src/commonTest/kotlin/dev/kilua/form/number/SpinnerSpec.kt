@@ -40,7 +40,7 @@ class SpinnerSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="number" name="test" min="10" max="20" step="1" autofocus="">"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render spinner input element to DOM"
             )
         }

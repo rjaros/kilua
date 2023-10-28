@@ -45,7 +45,7 @@ class FormSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<form class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></form>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Form tag to DOM"
             )
         }

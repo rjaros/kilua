@@ -45,7 +45,7 @@ class BlockquoteSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<blockquote class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></blockquote>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Blockquote tag to DOM"
             )
         }

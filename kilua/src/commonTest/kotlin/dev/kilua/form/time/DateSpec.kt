@@ -44,7 +44,7 @@ class DateSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1">"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render date input element to DOM"
             )
         }

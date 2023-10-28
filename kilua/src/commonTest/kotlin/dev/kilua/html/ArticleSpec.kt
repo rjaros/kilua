@@ -45,7 +45,7 @@ class ArticleSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<article class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></article>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Article tag to DOM"
             )
         }

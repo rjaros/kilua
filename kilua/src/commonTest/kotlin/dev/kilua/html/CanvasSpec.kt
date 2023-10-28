@@ -42,7 +42,7 @@ class CanvasSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<canvas class="test" width="300" height="200" id="test-id"></canvas>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Canvas tag to DOM"
             )
         }

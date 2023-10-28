@@ -45,7 +45,7 @@ class H1Spec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<h1 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h1>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML H1 tag to DOM"
             )
         }

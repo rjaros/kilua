@@ -45,7 +45,7 @@ class DtSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<dt class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></dt>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Dt tag to DOM"
             )
         }

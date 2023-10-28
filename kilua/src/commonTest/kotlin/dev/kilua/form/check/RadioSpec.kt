@@ -39,7 +39,7 @@ class RadioSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<input type="radio" name="test" checked="" value="extra">""",
-                root.element?.innerHTML,
+                root.element.innerHTML,
                 "Should render radio button element to DOM"
             )
         }
@@ -56,7 +56,7 @@ class RadioSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<div><input type="radio" name="test" id="id" checked="" value="extra"><label for="id">A radio</label></div>""",
-                root.element?.innerHTML,
+                root.element.innerHTML,
                 "Should render radio button with a label to DOM"
             )
         }

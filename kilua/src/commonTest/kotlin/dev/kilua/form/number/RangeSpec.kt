@@ -40,7 +40,7 @@ class RangeSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="range" name="test" min="10" max="20" step="1" autofocus="">"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render range input element to DOM"
             )
         }
@@ -74,9 +74,9 @@ class RangeSpec : DomSpec {
             repeat(4) {
                 range.stepUp()
             }
-            assertEquals(20.0, range.value)
+            assertEquals(20.0, range.value?.toDouble())
             range.stepDown()
-            assertEquals(19.5, range.value)
+            assertEquals(19.5, range.value?.toDouble())
         }
     }
 }

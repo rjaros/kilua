@@ -45,7 +45,7 @@ class RpSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<rp class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></rp>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Rp tag to DOM"
             )
         }

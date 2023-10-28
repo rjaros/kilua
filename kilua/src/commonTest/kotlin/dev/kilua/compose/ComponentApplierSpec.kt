@@ -37,7 +37,7 @@ import kotlin.test.assertEquals
 
 class ComponentApplierSpec : SimpleSpec {
     private val stringRenderConfig = StringRenderConfig()
-    private val root = Root(SafeDomFactory.createElement("div", stringRenderConfig), renderConfig = stringRenderConfig)
+    private val root = Root(SafeDomFactory.createElement("div"), renderConfig = stringRenderConfig)
     private val applier = ComponentApplier(root)
 
     private fun <T> Applier<T>.insert(index: Int, instance: T) {

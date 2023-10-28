@@ -45,7 +45,7 @@ class SpanSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<span class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</span>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Span tag to DOM"
             )
         }

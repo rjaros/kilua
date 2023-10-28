@@ -43,7 +43,7 @@ class LinkSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML A tag to DOM"
             )
         }

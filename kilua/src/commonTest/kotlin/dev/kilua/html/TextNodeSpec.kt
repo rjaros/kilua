@@ -38,7 +38,7 @@ class TextNodeSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""test"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML text node to DOM"
             )
         }

@@ -41,7 +41,7 @@ class ImgSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<img class="test" src="/image.png" alt="An image" id="test-id" title="A title">"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Img tag to DOM"
             )
         }

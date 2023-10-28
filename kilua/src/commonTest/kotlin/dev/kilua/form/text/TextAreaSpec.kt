@@ -42,7 +42,7 @@ class TextAreaSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<textarea cols="12" rows="13" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="" wrap="hard"></textarea>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render html area element to DOM"
             )
         }

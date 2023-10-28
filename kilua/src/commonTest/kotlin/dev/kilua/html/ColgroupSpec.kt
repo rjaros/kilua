@@ -45,7 +45,7 @@ class ColgroupSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<colgroup class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></colgroup>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Colgroup tag to DOM"
             )
         }

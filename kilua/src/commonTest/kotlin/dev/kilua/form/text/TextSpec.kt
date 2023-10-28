@@ -41,7 +41,7 @@ class TextSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="text" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="">"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render text element to DOM"
             )
         }

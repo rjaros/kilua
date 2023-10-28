@@ -38,7 +38,7 @@ class UploadSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<input type="file" name="test" multiple="" accept="text/plain,image/*" autofocus="">""",
-                root.element?.innerHTML,
+                root.element.innerHTML,
                 "Should render file input element to DOM"
             )
         }

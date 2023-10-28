@@ -45,7 +45,7 @@ class NoscriptSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<noscript class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></noscript>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Noscript tag to DOM"
             )
         }

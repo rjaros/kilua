@@ -47,7 +47,7 @@ class SplitPanelSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<div class="splitpanel-vertical"><div style="width: calc(0% - 5px);"><span>abc</span></div><div class="splitter-vertical" style="width: 10px;"></div><div style="width: calc(0% - 5px);"><span>def</span></div></div>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render a SplitPanel component to DOM"
             )
         }

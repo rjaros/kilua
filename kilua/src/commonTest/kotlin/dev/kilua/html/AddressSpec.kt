@@ -45,7 +45,7 @@ class AddressSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<address class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></address>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML Address tag to DOM"
             )
         }

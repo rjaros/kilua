@@ -45,7 +45,7 @@ class H2Spec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<h2 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h2>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML H2 tag to DOM"
             )
         }

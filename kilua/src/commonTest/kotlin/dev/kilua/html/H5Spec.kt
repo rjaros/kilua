@@ -45,7 +45,7 @@ class H5Spec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<h5 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h5>"""),
-                normalizeHtml(root.element?.innerHTML),
+                normalizeHtml(root.element.innerHTML),
                 "Should render an HTML H5 tag to DOM"
             )
         }
