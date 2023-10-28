@@ -55,7 +55,7 @@ public fun Map<String, Any>.renderAsCssStyle(): String {
     return this.map {
         @Suppress("UNCHECKED_CAST")
         when (it.key) {
-            "gridTemplateAreas" -> "grid-template-areas: " + (it.value as List<String>).joinToString(" ") { "&quot;" + it + "&quot;" } + ";"
+            "gridTemplateAreas" -> "grid-template-areas: " + (it.value as List<String>).joinToString(" ") { "&quot;$it&quot;" } + ";"
             "boxShadowList" -> "box-shadow: " + (it.value as List<BoxShadow>).joinToString(", ") { it.toString() } + ";"
             "transitionList" -> "transition: " + (it.value as List<Transition>).joinToString(", ") { it.toString() } + ";"
             "borderRadiusList" -> "border-radius: " + (it.value as List<CssSize>).joinToString(" ") { it.toString() } + ";"

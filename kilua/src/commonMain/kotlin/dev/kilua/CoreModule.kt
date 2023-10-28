@@ -37,13 +37,13 @@ public interface ModuleInitializer {
 
 @JsModule("kilua-assets/css/style.css")
 @JsNonModule
-internal external object styleCss
+internal external object StyleCss
 
 /**
  * Initializer for Kilua core module.
  */
 public object CoreModule : ModuleInitializer {
     override fun initialize() {
-        useCssModule(styleCss)
+        useCssModule(StyleCss)
     }
 }

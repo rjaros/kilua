@@ -32,7 +32,7 @@ import kotlin.js.Promise
 
 /**
  * A simple MonotonicFrameClock implementation without using DOM.
- * Used to run compose runtime in NodeJS environment.
+ * Used to run compose runtime in Node.js environment.
  */
 private class NoDomMonotonicClockImpl : MonotonicFrameClock {
     var counter = 0L

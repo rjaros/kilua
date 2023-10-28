@@ -1,5 +1,5 @@
 /*
- * Fake DOM classes for NodeJS.
+ * Fake DOM classes for Node.js.
  */
 
 if (typeof process !== 'undefined') {

@@ -86,6 +86,7 @@ public actual class NativeList<E> : MutableList<E> {
     actual override fun addAll(index: Int, elements: Collection<E>): Boolean {
         if (elements.isNotEmpty()) {
             elements.forEach { element ->
+                @Suppress("UnsafeCastFromDynamic")
                 nativeList.asDynamic().splice(index, 0, element)
             }
             return true

@@ -61,7 +61,7 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
     private var match by mutableStateOf(Match.NoMatch)
 
     private enum class Match {
-        Constant, Integer, String, Uuid, NoMatch
+        Constant, Integer, String, NoMatch
     }
 
     /**

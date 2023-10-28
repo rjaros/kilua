@@ -28,7 +28,7 @@ public actual class NativeMap<V> : MutableMap<String, V> {
 
     private var nativeMap: dynamic = js("{}")
 
-    protected val keysArray: Array<String>
+    private val keysArray: Array<String>
         get() = js("Object").keys(nativeMap).unsafeCast<Array<String>>()
 
     actual override val entries: MutableSet<MutableMap.MutableEntry<String, V>>

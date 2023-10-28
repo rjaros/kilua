@@ -26,7 +26,6 @@ import dev.kilua.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.utils.listOfPairs
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class RadioGroupSpec : DomSpec {
 

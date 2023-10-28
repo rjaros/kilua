@@ -26,11 +26,11 @@ import org.w3c.dom.Element
 import org.w3c.dom.Text
 
 /**
- * Create a fake DOM Element on NodeJS.
+ * Create a fake DOM Element on Node.js.
  */
 internal expect fun nodeJsCreateElement(): Element
 
 /**
- * Create a fake DOM TextNode on NodeJS.
+ * Create a fake DOM TextNode on Node.js.
  */
 internal expect fun nodeJsCreateText(): Text

@@ -24,9 +24,7 @@ package dev.kilua.html
 
 import dev.kilua.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.normalizeHtml
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class TagSpec : DomSpec {
 

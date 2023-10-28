@@ -26,7 +26,6 @@ import dev.kilua.types.KFile
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
-import org.w3c.files.File
 
 /**
  * Input controls validation status.
