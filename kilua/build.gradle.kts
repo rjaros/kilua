@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -62,6 +63,11 @@ kotlin {
                     }
                 }
             }
+            nodejs {
+                testTask {
+                    useMocha()
+                }
+            }
         }
     }
     sourceSets {
@@ -99,6 +105,15 @@ kotlin {
             }
         }
     }
+}
+
+rootProject.the<NodeJsRootExtension>().apply {
+    nodeVersion = "22.0.0-v8-canary20231027fc15c384ea"
+    nodeDownloadBaseUrl = "https://mirrors.dotsrc.org/nodejs/v8-canary"
+}
+
+rootProject.tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask>().configureEach {
+    args.add("--ignore-engines")
 }
 
 compose {
