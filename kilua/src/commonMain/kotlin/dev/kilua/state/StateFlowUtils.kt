@@ -19,17 +19,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package dev.kilua.state
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import dev.kilua.KiluaScope
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 /**
  * Extension function returning a substate flow.
@@ -39,20 +42,14 @@ public fun <T, S> StateFlow<S>.subFlow(contextScope: CoroutineScope = KiluaScope
 }
 
 /**
- * Extension property returning a StateFlow<S> for an ObservableState<S>.
+ * Collects values from this component and represents its latest value via [State].
+ * The [StateFlow.value] is used as an initial value. Every time there would be new value posted
+ * into the [StateFlow] the returned [State] will be updated causing recomposition of every
+ * [State.value] usage.
+ *
+ * @param context [CoroutineContext] to use for collecting.
  */
-public inline val <S> ObservableState<S>.stateFlow: StateFlow<S>
-    get() = MutableStateFlow(value).apply {
-        this@stateFlow.subscribe { this.value = it }
-    }
-
-/**
- * Extension property returning a MutableStateFlow<S> for a MutableState<S>.
- */
-public inline val <S> MutableState<S>.mutableStateFlow: MutableStateFlow<S>
-    get() = MutableStateFlow(value).apply {
-        this@mutableStateFlow.subscribe { this.value = it }
-        this.onEach {
-            this@mutableStateFlow.value = it
-        }.launchIn(KiluaScope)
-    }
+@Composable
+public fun <T> WithStateFlow<T>.collectAsState(context: CoroutineContext = EmptyCoroutineContext): State<T> {
+    return stateFlow.collectAsState(context)
+}
