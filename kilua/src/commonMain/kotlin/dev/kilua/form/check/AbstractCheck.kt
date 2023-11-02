@@ -25,9 +25,11 @@ package dev.kilua.form.check
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.BoolFormControl
+import dev.kilua.state.WithStateFlow
+import dev.kilua.state.WithStateFlowDelegate
+import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
-import dev.kilua.state.ObservableDelegate
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
@@ -52,16 +54,17 @@ public abstract class AbstractCheck(
     value: Boolean = false,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
-) : Tag<HTMLInputElement>("input", className, renderConfig), BoolFormControl {
-
-    protected val observableDelegate: ObservableDelegate<Boolean> = ObservableDelegate()
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean> = WithStateFlowDelegateImpl()
+) : Tag<HTMLInputElement>("input", className, renderConfig), BoolFormControl,
+    WithStateFlow<Boolean> by withStateFlowDelegate {
 
     public override var value: Boolean by updatingProperty(
         value,
         skipUpdate,
-        notifyFunction = { observableDelegate.notifyObservers(it) }) {
+        notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         element.checked = it
     }
 
@@ -84,6 +87,17 @@ public abstract class AbstractCheck(
             element.disabled = it
         } else {
             element.removeAttribute("disabled")
+        }
+    }
+
+    /**
+     * The required attribute of the generated HTML input element.
+     */
+    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+        if (it != null) {
+            element.required = it
+        } else {
+            element.removeAttribute("required")
         }
     }
 
@@ -119,6 +133,8 @@ public abstract class AbstractCheck(
         }
 
     init {
+        @Suppress("LeakingThis")
+        withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             element.checked = value
             element.type = type.value
@@ -127,6 +143,9 @@ public abstract class AbstractCheck(
             }
             if (disabled != null) {
                 element.disabled = disabled
+            }
+            if (required != null) {
+                element.required = required
             }
             @Suppress("LeakingThis")
             onEventDirect<Event>("click") {
@@ -147,7 +166,7 @@ public abstract class AbstractCheck(
     protected open fun setInternalValueFromBoolean(boolean: Boolean) {
         if (value != boolean) {
             propertyValues["value"] = boolean
-            observableDelegate.notifyObservers(boolean)
+            withStateFlowDelegate.updateStateFlow(boolean)
         }
     }
 
@@ -155,15 +174,12 @@ public abstract class AbstractCheck(
         return value.toString()
     }
 
-    override fun subscribe(observer: (Boolean) -> Unit): () -> Unit {
-        return observableDelegate.subscribe(value, observer)
-    }
-
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
         super.buildHtmlPropertyList(propertyListBuilder)
         propertyListBuilder.add(
             ::name,
             ::disabled,
+            ::required,
             ::autofocus,
         )
         propertyListBuilder.addByName("checked")

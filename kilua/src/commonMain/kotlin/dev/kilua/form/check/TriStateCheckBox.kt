@@ -31,12 +31,14 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.InputType
 import dev.kilua.form.TriStateFormControl
+import dev.kilua.state.WithStateFlow
+import dev.kilua.state.WithStateFlowDelegate
+import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.html.Tag
 import dev.kilua.html.div
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.html.label
 import dev.kilua.html.unaryPlus
-import dev.kilua.state.ObservableDelegate
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
 
@@ -47,16 +49,17 @@ public open class TriStateCheckBox(
     value: Boolean? = null,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
-) : Tag<HTMLInputElement>("input", className, renderConfig), TriStateFormControl {
-
-    protected val observableDelegate: ObservableDelegate<Boolean?> = ObservableDelegate()
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean?> = WithStateFlowDelegateImpl()
+) : Tag<HTMLInputElement>("input", className, renderConfig), TriStateFormControl,
+    WithStateFlow<Boolean?> by withStateFlowDelegate {
 
     public override var value: Boolean? by updatingProperty(
         value,
         skipUpdate,
-        notifyFunction = { observableDelegate.notifyObservers(it) }) {
+        notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         if (it != null) {
             element.checked = it
             element.indeterminate = false
@@ -85,6 +88,17 @@ public open class TriStateCheckBox(
             element.disabled = it
         } else {
             element.removeAttribute("disabled")
+        }
+    }
+
+    /**
+     * The required attribute of the generated HTML input element.
+     */
+    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+        if (it != null) {
+            element.required = it
+        } else {
+            element.removeAttribute("required")
         }
     }
 
@@ -120,6 +134,8 @@ public open class TriStateCheckBox(
         }
 
     init {
+        @Suppress("LeakingThis")
+        withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             if (value != null) {
                 element.checked = value
@@ -132,6 +148,9 @@ public open class TriStateCheckBox(
             }
             if (disabled != null) {
                 element.disabled = disabled
+            }
+            if (required != null) {
+                element.required = required
             }
         }
         @Suppress("LeakingThis")
@@ -165,15 +184,12 @@ public open class TriStateCheckBox(
         return value?.toString()
     }
 
-    override fun subscribe(observer: (Boolean?) -> Unit): () -> Unit {
-        return observableDelegate.subscribe(value, observer)
-    }
-
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
         super.buildHtmlPropertyList(propertyListBuilder)
         propertyListBuilder.add(
             ::name,
             ::disabled,
+            ::required,
             ::autofocus,
         )
         propertyListBuilder.addByName("checked")
@@ -186,6 +202,7 @@ public open class TriStateCheckBox(
  * @param value initial value
  * @param name the name of the input
  * @param disabled whether the input is disabled
+ * @param required whether the input is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [TriStateCheckBox] component
@@ -195,10 +212,11 @@ public fun ComponentBase.triStateCheckBox(
     value: Boolean? = null,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable TriStateCheckBox.() -> Unit = {}
 ): TriStateCheckBox {
-    val component = remember { TriStateCheckBox(value, name, disabled, className, renderConfig) }
+    val component = remember { TriStateCheckBox(value, name, disabled, required, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -209,6 +227,7 @@ public fun ComponentBase.triStateCheckBox(
         set(value) { updateProperty(TriStateCheckBox::value, it) }
         set(name) { updateProperty(TriStateCheckBox::name, it) }
         set(disabled) { updateProperty(TriStateCheckBox::disabled, it) }
+        set(required) { updateProperty(TriStateCheckBox::required, it) }
         set(className) { updateProperty(TriStateCheckBox::className, it) }
     }, setup)
     return component
@@ -221,6 +240,7 @@ public fun ComponentBase.triStateCheckBox(
  * @param value initial value
  * @param name the name of the input
  * @param disabled whether the input is disabled
+ * @param required whether the input is required
  * @param className the CSS class name
  * @param groupClassName the CSS class name of the grouping div
  * @param setup a function for setting up the component
@@ -232,13 +252,14 @@ public fun ComponentBase.triStateCheckBox(
     value: Boolean = false,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     groupClassName: String? = null,
     setup: @Composable TriStateCheckBox.() -> Unit = {}
 ): TriStateCheckBox {
     lateinit var triStateCheckBox: TriStateCheckBox
     div(groupClassName) {
-        triStateCheckBox = triStateCheckBox(value, name, disabled, className) {
+        triStateCheckBox = triStateCheckBox(value, name, disabled, required, className) {
             id = "id_${componentId}"
             setup()
         }

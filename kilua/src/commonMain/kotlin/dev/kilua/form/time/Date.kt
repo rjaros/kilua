@@ -54,9 +54,10 @@ public open class Date(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<LocalDate>(value, InputType.Date, name, maxlength, placeholder, disabled, className, renderConfig),
+) : Input<LocalDate>(value, InputType.Date, name, maxlength, placeholder, disabled, required, className, renderConfig),
     DateFormControl {
 
     /**
@@ -163,6 +164,7 @@ public open class Date(
  * @param maxlength the maxlength attribute of the generated HTML input element
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Date] component
@@ -178,11 +180,26 @@ public fun ComponentBase.date(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable Date.() -> Unit = {}
 ): Date {
     val component =
-        remember { Date(value, min, max, step, name, maxlength, placeholder, disabled, className, renderConfig) }
+        remember {
+            Date(
+                value,
+                min,
+                max,
+                step,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -198,6 +215,7 @@ public fun ComponentBase.date(
         set(maxlength) { updateProperty(Date::maxlength, it) }
         set(placeholder) { updateProperty(Date::placeholder, it) }
         set(disabled) { updateProperty(Date::disabled, it) }
+        set(required) { updateProperty(Date::required, it) }
         set(className) { updateProperty(Date::className, it) }
     }, setup)
     return component

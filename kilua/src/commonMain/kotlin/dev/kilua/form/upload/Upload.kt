@@ -62,9 +62,10 @@ public open class Upload(
     capture: Capture? = null,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<List<KFile>>(null, InputType.File, name, null, null, disabled, className, renderConfig), KFilesFormControl {
+) : Input<List<KFile>>(null, InputType.File, name, null, null, disabled, required, className, renderConfig), KFilesFormControl {
 
     /**
      * Temporary external value (used in tests)
@@ -84,7 +85,7 @@ public open class Upload(
         set(value) {
             if (value == null) clearFiles()
             tmpValue = value
-            observableDelegate.notifyObservers(value)
+            withStateFlowDelegate.updateStateFlow(value)
         }
 
 
@@ -121,6 +122,8 @@ public open class Upload(
     }
 
     init {
+        @Suppress("LeakingThis")
+        withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             if (multiple) {
                 element.multiple = multiple
@@ -192,6 +195,7 @@ public open class Upload(
  * @param capture file upload input capture mode
  * @param name the name of the input
  * @param disabled whether the input is disabled
+ * @param required whether the input is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Upload] component
@@ -203,10 +207,11 @@ public fun ComponentBase.upload(
     capture: Capture? = null,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable Upload.() -> Unit = {}
 ): Upload {
-    val component = remember { Upload(multiple, accept, capture, name, disabled, className, renderConfig) }
+    val component = remember { Upload(multiple, accept, capture, name, disabled, required, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -219,6 +224,7 @@ public fun ComponentBase.upload(
         set(capture) { updateProperty(Upload::capture, it) }
         set(name) { updateProperty(Upload::name, it) }
         set(disabled) { updateProperty(Upload::disabled, it) }
+        set(required) { updateProperty(Upload::required, it) }
         set(className) { updateProperty(Upload::className, it) }
     }, setup)
     return component

@@ -48,9 +48,10 @@ public open class Range(
     step: Number = RANGE_DEFAULT_STEP,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<Number>(value, InputType.Range, name, null, null, disabled, className, renderConfig),
+) : Input<Number>(value, InputType.Range, name, null, null, disabled, required, className, renderConfig),
     NumberFormControl {
 
     /**
@@ -131,6 +132,7 @@ public open class Range(
  * @param step the step value of the range
  * @param name the name attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Range] component
@@ -143,10 +145,11 @@ public fun ComponentBase.range(
     step: Number = RANGE_DEFAULT_STEP,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable Range.() -> Unit = {}
 ): Range {
-    val component = remember { Range(value, min, max, step, name, disabled, className, renderConfig) }
+    val component = remember { Range(value, min, max, step, name, disabled, required, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -154,13 +157,14 @@ public fun ComponentBase.range(
         }
     }
     ComponentNode(component, {
-        set(value) { updateProperty(Spinner::value, it) }
-        set(min) { updateProperty(Spinner::min, it) }
-        set(max) { updateProperty(Spinner::max, it) }
-        set(step) { updateProperty(Spinner::step, it) }
-        set(name) { updateProperty(Spinner::name, it) }
-        set(disabled) { updateProperty(Spinner::disabled, it) }
-        set(className) { updateProperty(Spinner::className, it) }
+        set(value) { updateProperty(Range::value, it) }
+        set(min) { updateProperty(Range::min, it) }
+        set(max) { updateProperty(Range::max, it) }
+        set(step) { updateProperty(Range::step, it) }
+        set(name) { updateProperty(Range::name, it) }
+        set(disabled) { updateProperty(Range::disabled, it) }
+        set(required) { updateProperty(Range::required, it) }
+        set(className) { updateProperty(Range::className, it) }
     }, setup)
     return component
 }

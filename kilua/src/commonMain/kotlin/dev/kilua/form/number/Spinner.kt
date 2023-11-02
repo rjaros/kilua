@@ -31,7 +31,7 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
-import dev.kilua.form.NumberFormControl
+import dev.kilua.form.IntFormControl
 import dev.kilua.html.helpers.PropertyListBuilder
 
 internal const val SPINNER_DEFAULT_STEP = 1
@@ -40,7 +40,7 @@ internal const val SPINNER_DEFAULT_STEP = 1
  * Spinner input component.
  */
 public open class Spinner(
-    value: Number? = null,
+    value: Int? = null,
     min: Int? = null,
     max: Int? = null,
     step: Int = SPINNER_DEFAULT_STEP,
@@ -48,10 +48,11 @@ public open class Spinner(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<Number>(value, InputType.Number, name, maxlength, placeholder, disabled, className, renderConfig),
-    NumberFormControl {
+) : Input<Int>(value, InputType.Number, name, maxlength, placeholder, disabled, required, className, renderConfig),
+    IntFormControl {
 
     /**
      * The minimum value of the spinner.
@@ -99,7 +100,7 @@ public open class Spinner(
         propertyListBuilder.add(::min, ::max, ::step)
     }
 
-    override fun stringToValue(text: String?): Number? {
+    override fun stringToValue(text: String?): Int? {
         return if (text.isNullOrEmpty()) {
             null
         } else {
@@ -121,7 +122,7 @@ public open class Spinner(
             element.stepUp()
             setInternalValueFromString(element.value)
         } else {
-            val newValue = (value?.toInt() ?: min ?: 0) + step
+            val newValue = (value ?: min ?: 0) + step
             value = if (max != null && newValue > max!!) max else newValue
         }
     }
@@ -134,7 +135,7 @@ public open class Spinner(
             element.stepDown()
             setInternalValueFromString(element.value)
         } else {
-            val newValue = (value?.toInt() ?: max ?: 0) - step
+            val newValue = (value ?: max ?: 0) - step
             value = if (min != null && newValue < min!!) min else newValue
         }
     }
@@ -151,13 +152,14 @@ public open class Spinner(
  * @param maxlength the maxlength attribute of the generated HTML input element
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Spinner] component
  */
 @Composable
 public fun ComponentBase.spinner(
-    value: Number? = null,
+    value: Int? = null,
     min: Int? = null,
     max: Int? = null,
     step: Int = SPINNER_DEFAULT_STEP,
@@ -165,11 +167,26 @@ public fun ComponentBase.spinner(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable Spinner.() -> Unit = {}
 ): Spinner {
     val component =
-        remember { Spinner(value, min, max, step, name, maxlength, placeholder, disabled, className, renderConfig) }
+        remember {
+            Spinner(
+                value,
+                min,
+                max,
+                step,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -185,6 +202,7 @@ public fun ComponentBase.spinner(
         set(maxlength) { updateProperty(Spinner::maxlength, it) }
         set(placeholder) { updateProperty(Spinner::placeholder, it) }
         set(disabled) { updateProperty(Spinner::disabled, it) }
+        set(required) { updateProperty(Spinner::required, it) }
         set(className) { updateProperty(Spinner::className, it) }
     }, setup)
     return component

@@ -40,9 +40,10 @@ public open class Password(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Text(value, InputType.Password, name, maxlength, placeholder, disabled, className, renderConfig)
+) : Text(value, InputType.Password, name, maxlength, placeholder, disabled, required, className, renderConfig)
 
 /**
  * Creates [Password] component.
@@ -52,6 +53,7 @@ public open class Password(
  * @param maxlength the maximum length of the input
  * @param placeholder the placeholder text
  * @param disabled whether the input is disabled
+ * @param required whether the input is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Password] component
@@ -63,10 +65,12 @@ public fun ComponentBase.password(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable Password.() -> Unit = {}
 ): Password {
-    val component = remember { Password(value, name, maxlength, placeholder, disabled, className, renderConfig) }
+    val component =
+        remember { Password(value, name, maxlength, placeholder, disabled, required, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -79,6 +83,7 @@ public fun ComponentBase.password(
         set(maxlength) { updateProperty(Password::maxlength, it) }
         set(placeholder) { updateProperty(Password::placeholder, it) }
         set(disabled) { updateProperty(Password::disabled, it) }
+        set(required) { updateProperty(Password::required, it) }
         set(className) { updateProperty(Password::className, it) }
     }, setup)
     return component

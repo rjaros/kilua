@@ -30,12 +30,14 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
+import dev.kilua.state.WithStateFlow
+import dev.kilua.state.WithStateFlowDelegate
+import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.html.Optgroup
 import dev.kilua.html.Option
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.html.option
-import dev.kilua.state.ObservableDelegate
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.nativeListOf
 import org.w3c.dom.HTMLSelectElement
@@ -54,15 +56,16 @@ public open class Select(
     size: Int? = null,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
-) : Tag<HTMLSelectElement>("select", className, renderConfig), StringFormControl {
-
-    protected val observableDelegate: ObservableDelegate<String?> = ObservableDelegate()
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
+) : Tag<HTMLSelectElement>("select", className, renderConfig), StringFormControl,
+    WithStateFlow<String?> by withStateFlowDelegate {
 
     public override var value: String? by updatingProperty(
         value,
-        notifyFunction = { observableDelegate.notifyObservers(it) }) {
+        notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         mapValueToOptions()
     }
 
@@ -97,6 +100,14 @@ public open class Select(
             element.disabled = it
         } else {
             element.removeAttribute("disabled")
+        }
+    }
+
+    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+        if (it != null) {
+            element.required = it
+        } else {
+            element.removeAttribute("required")
         }
     }
 
@@ -137,6 +148,8 @@ public open class Select(
         get() = findAllNotEmptyOptions().getOrNull(selectedIndex)?.label
 
     init {
+        @Suppress("LeakingThis")
+        withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             element.multiple = multiple
             if (size != null) {
@@ -147,6 +160,9 @@ public open class Select(
             }
             if (disabled != null) {
                 element.disabled = disabled
+            }
+            if (required != null) {
+                element.required = required
             }
         }
         @Suppress("LeakingThis")
@@ -185,10 +201,6 @@ public open class Select(
         return findAllOptions().filter { it.value != SELECT_EMPTY_VALUE }
     }
 
-    override fun subscribe(observer: (String?) -> Unit): () -> Unit {
-        return observableDelegate.subscribe(value, observer)
-    }
-
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
         super.buildHtmlPropertyList(propertyListBuilder)
         propertyListBuilder.add(
@@ -196,6 +208,7 @@ public open class Select(
             ::size,
             ::name,
             ::disabled,
+            ::required,
             ::autofocus,
         )
     }
@@ -273,9 +286,10 @@ public open class Select(
  * @param value initial value
  * @param multiple determines if multiple value selection is allowed
  * @param size the number of visible options
- * @param name the name of the input
+ * @param name the name of the select
  * @param placeholder the placeholder for the select component
- * @param disabled whether the input is disabled
+ * @param disabled whether the select is disabled
+ * @param required whether the select is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Select] component
@@ -290,10 +304,11 @@ public fun ComponentBase.select(
     name: String? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable Select.() -> Unit = {}
 ): Select {
-    val component = remember { Select(value, multiple, size, name, disabled, className, renderConfig) }
+    val component = remember { Select(value, multiple, size, name, disabled, required, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -306,11 +321,12 @@ public fun ComponentBase.select(
         set(size) { updateProperty(Select::size, it) }
         set(name) { updateProperty(Select::name, it) }
         set(disabled) { updateProperty(Select::disabled, it) }
+        set(required) { updateProperty(Select::required, it) }
         set(className) { updateProperty(Select::className, it) }
     }) {
         setup(component)
         if (placeholder != null) {
-            setAttribute("required", "")
+            this.required = true
             option(value = "", label = placeholder, disabled = true, selected = true) {
                 hidden = true
             }

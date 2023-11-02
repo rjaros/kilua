@@ -30,8 +30,10 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
+import dev.kilua.state.WithStateFlow
+import dev.kilua.state.WithStateFlowDelegate
+import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.html.Div
-import dev.kilua.state.ObservableDelegate
 import dev.kilua.utils.StringPair
 
 /**
@@ -42,16 +44,16 @@ public open class RadioGroup(
     inline: Boolean = false,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
-) : Div(className, renderConfig), StringFormControl {
-
-    protected val observableDelegate: ObservableDelegate<String?> = ObservableDelegate()
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
+) : Div(className, renderConfig), StringFormControl, WithStateFlow<String?> by withStateFlowDelegate {
 
     public override var value: String? by updatingProperty(
         value,
         skipUpdate,
-        notifyFunction = { observableDelegate.notifyObservers(it) }) {
+        notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         findAllRadios().forEach { radio ->
             radio.value = radio.extraValue == it
         }
@@ -87,12 +89,26 @@ public open class RadioGroup(
     }
 
     /**
+     * The required attribute of the generated HTML radio input elements.
+     */
+    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+        findAllRadios().forEach { radio ->
+            radio.required = it
+        }
+    }
+
+    /**
      * The autofocus attribute of the generated HTML radio input elements.
      */
     public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         findAllRadios().firstOrNull()?.let { radio ->
             radio.autofocus = it
         }
+    }
+
+    init {
+        @Suppress("LeakingThis")
+        withStateFlowDelegate.formControl(this)
     }
 
     /**
@@ -113,10 +129,6 @@ public open class RadioGroup(
     override fun getValueAsString(): String? {
         return value.toString()
     }
-
-    override fun subscribe(observer: (String?) -> Unit): () -> Unit {
-        return observableDelegate.subscribe(value, observer)
-    }
 }
 
 /**
@@ -127,6 +139,7 @@ public open class RadioGroup(
  * @param inline determines if the options are rendered inline
  * @param name the name of the input
  * @param disabled whether the input is disabled
+ * @param required whether the input is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [RadioGroup] component
@@ -138,10 +151,11 @@ public fun ComponentBase.radioGroup(
     inline: Boolean = false,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable RadioGroup.() -> Unit = {}
 ): RadioGroup {
-    val component = remember { RadioGroup(value, inline, name, disabled, className, renderConfig) }
+    val component = remember { RadioGroup(value, inline, name, disabled, required, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -153,6 +167,7 @@ public fun ComponentBase.radioGroup(
         set(inline) { updateProperty(RadioGroup::inline, it) }
         set(name) { updateProperty(RadioGroup::name, it) }
         set(disabled) { updateProperty(RadioGroup::disabled, it) }
+        set(required) { updateProperty(RadioGroup::required, it) }
         set(className) { updateProperty(RadioGroup::className, it) }
     }) {
         setup(component)
@@ -162,6 +177,7 @@ public fun ComponentBase.radioGroup(
                 value = option.first == component.value,
                 name = component.name ?: "name_${component.componentId}",
                 disabled = component.disabled,
+                required = component.required,
                 groupClassName = if (component.inline) "kilua-radio-inline" else null
             ) {
                 if (index == 0 && component.autofocus == true) {

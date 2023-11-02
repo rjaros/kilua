@@ -21,8 +21,9 @@
  */
 package dev.kilua.form
 
-import dev.kilua.state.MutableState
+import dev.kilua.state.WithStateFlow
 import dev.kilua.types.KFile
+import dev.kilua.utils.cast
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -30,11 +31,21 @@ import kotlinx.datetime.LocalTime
 /**
  * Input controls validation status.
  */
-public interface FormControl<T> : MutableState<T> {
+public interface FormControl<T>: WithStateFlow<T> {
+    /**
+     * The current value of the form control.
+     */
+    public var value: T
+
     /**
      * Returns the value as a string.
      */
     public fun getValueAsString(): String?
+
+    /**
+     * Determines if the field is visible.
+     */
+    public var visible: Boolean
 
     /**
      * Determines if the field is disabled.
@@ -42,9 +53,38 @@ public interface FormControl<T> : MutableState<T> {
     public var disabled: Boolean?
 
     /**
+     * Determines if the field is required.
+     */
+    public var required: Boolean?
+
+    /**
      * The name attribute of the generated HTML element.
      */
     public var name: String?
+
+    /**
+     * Sets the value of the form control.
+     */
+    public fun setValue(value: Any?) {
+        this.value = value.cast()
+    }
+
+    /**
+     * Returns the value of the form control.
+     */
+    public fun getValue(): Any? {
+        return this.value
+    }
+
+    /**
+     * Focus the form control.
+     */
+    public fun focus()
+
+    /**
+     * Blur the form control.
+     */
+    public fun blur()
 }
 
 /**
@@ -71,15 +111,25 @@ public interface GenericNonNullableFormControl<T : Any> : FormControl<T> {
  * Base interface of a form control with a text value.
  */
 public interface StringFormControl : GenericFormControl<String>
+
 /**
  * Base interface of a form control with a numeric value.
  */
 public interface NumberFormControl : GenericFormControl<Number>
 
 /**
+ * Base interface of a form control with an integer value.
+ */
+public interface IntFormControl : GenericFormControl<Int>
+
+/**
  * Base interface of a form control with a boolean value.
  */
-public interface BoolFormControl : GenericNonNullableFormControl<Boolean>
+public interface BoolFormControl : GenericNonNullableFormControl<Boolean> {
+    override fun setValue(value: Any?) {
+        this.value = value?.cast() ?: false
+    }
+}
 
 /**
  * Base interface of a form control with a nullable boolean value.

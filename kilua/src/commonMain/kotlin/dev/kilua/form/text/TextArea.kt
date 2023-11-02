@@ -30,9 +30,11 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
+import dev.kilua.state.WithStateFlow
+import dev.kilua.state.WithStateFlowDelegate
+import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
-import dev.kilua.state.ObservableDelegate
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLTextAreaElement
 
@@ -60,16 +62,17 @@ public open class TextArea(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
-) : Tag<HTMLTextAreaElement>("textarea", className, renderConfig), StringFormControl {
-
-    protected val observableDelegate: ObservableDelegate<String?> = ObservableDelegate()
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
+) : Tag<HTMLTextAreaElement>("textarea", className, renderConfig),
+    StringFormControl, WithStateFlow<String?> by withStateFlowDelegate {
 
     public override var value: String? by updatingProperty(
         value,
         skipUpdate,
-        notifyFunction = { observableDelegate.notifyObservers(it) }) {
+        notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         element.value = it ?: ""
     }
 
@@ -133,6 +136,14 @@ public open class TextArea(
         }
     }
 
+    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+        if (it != null) {
+            element.required = it
+        } else {
+            element.removeAttribute("required")
+        }
+    }
+
     /**
      * The autofocus attribute of the generated HTML textarea element.
      */
@@ -167,6 +178,8 @@ public open class TextArea(
     }
 
     init {
+        @Suppress("LeakingThis")
+        withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             if (value != null) {
                 element.value = value
@@ -189,15 +202,14 @@ public open class TextArea(
             if (disabled != null) {
                 element.disabled = disabled
             }
+            if (required != null) {
+                element.required = required
+            }
             @Suppress("LeakingThis")
             onInputDirect {
                 setInternalValueFromString(element.value)
             }
         }
-    }
-
-    override fun subscribe(observer: (String?) -> Unit): () -> Unit {
-        return observableDelegate.subscribe(value, observer)
     }
 
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
@@ -209,6 +221,7 @@ public open class TextArea(
             ::maxlength,
             ::placeholder,
             ::disabled,
+            ::required,
             ::autofocus,
             ::readonly,
             ::wrap
@@ -238,7 +251,7 @@ public open class TextArea(
             } else {
                 propertyValues.remove("value")
             }
-            observableDelegate.notifyObservers(newValue)
+            withStateFlowDelegate.updateStateFlow(newValue)
         }
     }
 }
@@ -253,6 +266,7 @@ public open class TextArea(
  * @param maxlength the maxlength attribute of the generated HTML textarea element
  * @param placeholder the placeholder attribute of the generated HTML textarea element
  * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return A [TextArea] component.
@@ -266,11 +280,25 @@ public fun ComponentBase.textArea(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable TextArea.() -> Unit = {}
 ): TextArea {
     val component =
-        remember { TextArea(value, cols, rows, name, maxlength, placeholder, disabled, className, renderConfig) }
+        remember {
+            TextArea(
+                value,
+                cols,
+                rows,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -285,6 +313,7 @@ public fun ComponentBase.textArea(
         set(maxlength) { updateProperty(TextArea::maxlength, it) }
         set(placeholder) { updateProperty(TextArea::placeholder, it) }
         set(disabled) { updateProperty(TextArea::disabled, it) }
+        set(required) { updateProperty(TextArea::required, it) }
         set(className) { updateProperty(TextArea::className, it) }
     }, setup)
     return component

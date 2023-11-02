@@ -59,6 +59,7 @@ public open class Time(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) : Input<LocalTime>(
@@ -68,6 +69,7 @@ public open class Time(
     maxlength,
     placeholder,
     disabled,
+    required,
     className,
     renderConfig
 ), TimeFormControl {
@@ -186,6 +188,7 @@ public open class Time(
  * @param maxlength the maxlength attribute of the generated HTML input element
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Time] component
@@ -200,11 +203,26 @@ public fun ComponentBase.time(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable Time.() -> Unit = {}
 ): Time {
     val component =
-        remember { Time(value, min, max, step, name, maxlength, placeholder, disabled, className, renderConfig) }
+        remember {
+            Time(
+                value,
+                min,
+                max,
+                step,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -212,15 +230,16 @@ public fun ComponentBase.time(
         }
     }
     ComponentNode(component, {
-        set(value) { updateProperty(Date::value, it) }
-        set(min) { updateProperty(Date::min, it) }
-        set(max) { updateProperty(Date::max, it) }
-        set(step) { updateProperty(Date::step, it) }
-        set(name) { updateProperty(Date::name, it) }
-        set(maxlength) { updateProperty(Date::maxlength, it) }
-        set(placeholder) { updateProperty(Date::placeholder, it) }
-        set(disabled) { updateProperty(Date::disabled, it) }
-        set(className) { updateProperty(Date::className, it) }
+        set(value) { updateProperty(Time::value, it) }
+        set(min) { updateProperty(Time::min, it) }
+        set(max) { updateProperty(Time::max, it) }
+        set(step) { updateProperty(Time::step, it) }
+        set(name) { updateProperty(Time::name, it) }
+        set(maxlength) { updateProperty(Time::maxlength, it) }
+        set(placeholder) { updateProperty(Time::placeholder, it) }
+        set(disabled) { updateProperty(Time::disabled, it) }
+        set(required) { updateProperty(Time::required, it) }
+        set(className) { updateProperty(Time::className, it) }
     }, setup)
     return component
 }

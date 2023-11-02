@@ -40,9 +40,10 @@ public open class Radio(
     value: Boolean = false,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : AbstractCheck(CheckInputType.Radio, value, name, disabled, className, renderConfig)
+) : AbstractCheck(CheckInputType.Radio, value, name, disabled, required, className, renderConfig)
 
 /**
  * Creates [Radio] component.
@@ -50,6 +51,7 @@ public open class Radio(
  * @param value initial value
  * @param name the name of the input
  * @param disabled whether the input is disabled
+ * @param required whether the input is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Radio] component
@@ -59,10 +61,11 @@ public fun ComponentBase.radio(
     value: Boolean = false,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable Radio.() -> Unit = {}
 ): Radio {
-    val component = remember { Radio(value, name, disabled, className, renderConfig) }
+    val component = remember { Radio(value, name, disabled, required, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -73,6 +76,7 @@ public fun ComponentBase.radio(
         set(value) { updateProperty(Radio::value, it) }
         set(name) { updateProperty(Radio::name, it) }
         set(disabled) { updateProperty(Radio::disabled, it) }
+        set(required) { updateProperty(Radio::required, it) }
         set(className) { updateProperty(Radio::className, it) }
     }, setup)
     return component
@@ -85,6 +89,7 @@ public fun ComponentBase.radio(
  * @param value initial value
  * @param name the name of the input
  * @param disabled whether the input is disabled
+ * @param required whether the input is required
  * @param className the CSS class name
  * @param groupClassName the CSS class name of the grouping div
  * @param setup a function for setting up the component
@@ -96,13 +101,14 @@ public fun ComponentBase.radio(
     value: Boolean = false,
     name: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     groupClassName: String? = null,
     setup: @Composable Radio.() -> Unit = {}
 ): Radio {
     lateinit var radio: Radio
     div(groupClassName) {
-        radio = radio(value, name, disabled, className) {
+        radio = radio(value, name, disabled, required, className) {
             id = "id_${componentId}"
             setup()
         }

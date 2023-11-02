@@ -56,6 +56,7 @@ public open class DateTime(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) : Input<LocalDateTime>(
@@ -65,6 +66,7 @@ public open class DateTime(
     maxlength,
     placeholder,
     disabled,
+    required,
     className,
     renderConfig
 ),
@@ -182,6 +184,7 @@ public open class DateTime(
  * @param maxlength the maxlength attribute of the generated HTML input element
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [DateTime] component
@@ -196,11 +199,26 @@ public fun ComponentBase.dateTime(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable DateTime.() -> Unit = {}
 ): DateTime {
     val component =
-        remember { DateTime(value, min, max, step, name, maxlength, placeholder, disabled, className, renderConfig) }
+        remember {
+            DateTime(
+                value,
+                min,
+                max,
+                step,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -208,15 +226,16 @@ public fun ComponentBase.dateTime(
         }
     }
     ComponentNode(component, {
-        set(value) { updateProperty(Date::value, it) }
-        set(min) { updateProperty(Date::min, it) }
-        set(max) { updateProperty(Date::max, it) }
-        set(step) { updateProperty(Date::step, it) }
-        set(name) { updateProperty(Date::name, it) }
-        set(maxlength) { updateProperty(Date::maxlength, it) }
-        set(placeholder) { updateProperty(Date::placeholder, it) }
-        set(disabled) { updateProperty(Date::disabled, it) }
-        set(className) { updateProperty(Date::className, it) }
+        set(value) { updateProperty(DateTime::value, it) }
+        set(min) { updateProperty(DateTime::min, it) }
+        set(max) { updateProperty(DateTime::max, it) }
+        set(step) { updateProperty(DateTime::step, it) }
+        set(name) { updateProperty(DateTime::name, it) }
+        set(maxlength) { updateProperty(DateTime::maxlength, it) }
+        set(placeholder) { updateProperty(DateTime::placeholder, it) }
+        set(disabled) { updateProperty(DateTime::disabled, it) }
+        set(required) { updateProperty(DateTime::required, it) }
+        set(className) { updateProperty(DateTime::className, it) }
     }, setup)
     return component
 }

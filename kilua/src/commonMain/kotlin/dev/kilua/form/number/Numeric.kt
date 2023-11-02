@@ -52,9 +52,10 @@ public open class Numeric(
     name: String? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<Number>(value, InputType.Text, name, 14, placeholder, disabled, className, renderConfig),
+) : Input<Number>(value, InputType.Text, name, 14, placeholder, disabled, required, className, renderConfig),
     NumberFormControl {
 
     /**
@@ -129,6 +130,7 @@ public open class Numeric(
  * @param name the name attribute of the generated HTML input element
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Numeric] component
@@ -143,11 +145,26 @@ public fun ComponentBase.numeric(
     name: String? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
     setup: @Composable Numeric.() -> Unit = {}
 ): Numeric {
     val component =
-        remember { Numeric(value, min, max, decimals, locale, name, placeholder, disabled, className, renderConfig) }
+        remember {
+            Numeric(
+                value,
+                min,
+                max,
+                decimals,
+                locale,
+                name,
+                placeholder,
+                disabled,
+                required,
+                className,
+                renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -163,6 +180,7 @@ public fun ComponentBase.numeric(
         set(name) { updateProperty(Numeric::name, it) }
         set(placeholder) { updateProperty(Numeric::placeholder, it) }
         set(disabled) { updateProperty(Numeric::disabled, it) }
+        set(required) { updateProperty(Numeric::required, it) }
         set(className) { updateProperty(Numeric::className, it) }
     }, setup)
     return component

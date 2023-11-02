@@ -26,7 +26,9 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
-import dev.kilua.state.ObservableDelegate
+import dev.kilua.state.WithStateFlow
+import dev.kilua.state.WithStateFlowDelegate
+import dev.kilua.state.WithStateFlowDelegateImpl
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
 
@@ -40,16 +42,17 @@ public abstract class Input<T : Any>(
     maxlength: Int? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     className: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
-) : Tag<HTMLInputElement>("input", className, renderConfig), GenericFormControl<T> {
-
-    protected val observableDelegate: ObservableDelegate<T?> = ObservableDelegate()
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+    protected val withStateFlowDelegate: WithStateFlowDelegate<T?> = WithStateFlowDelegateImpl()
+) : Tag<HTMLInputElement>("input", className, renderConfig), GenericFormControl<T>,
+    WithStateFlow<T?> by withStateFlowDelegate {
 
     public override var value: T? by updatingProperty(
         value,
         skipUpdate,
-        notifyFunction = { observableDelegate.notifyObservers(it) }) {
+        notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         if (type != InputType.File) {
             element.value = valueToString(it) ?: ""
         }
@@ -103,6 +106,14 @@ public abstract class Input<T : Any>(
             element.disabled = it
         } else {
             element.removeAttribute("disabled")
+        }
+    }
+
+    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+        if (it != null) {
+            element.required = it
+        } else {
+            element.removeAttribute("required")
         }
     }
 
@@ -163,6 +174,8 @@ public abstract class Input<T : Any>(
         }
 
     init {
+        @Suppress("LeakingThis")
+        withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             if (value != null) {
                 element.value = value.toString()
@@ -179,6 +192,9 @@ public abstract class Input<T : Any>(
             }
             if (disabled != null) {
                 element.disabled = disabled
+            }
+            if (required != null) {
+                element.required = required
             }
             @Suppress("LeakingThis")
             onEventDirect<Event>("input") {
@@ -198,7 +214,7 @@ public abstract class Input<T : Any>(
             } else {
                 propertyValues.remove("value")
             }
-            observableDelegate.notifyObservers(newValue)
+            withStateFlowDelegate.updateStateFlow(newValue)
         }
     }
 
@@ -218,10 +234,6 @@ public abstract class Input<T : Any>(
         return valueToString(value)
     }
 
-    override fun subscribe(observer: (T?) -> Unit): () -> Unit {
-        return observableDelegate.subscribe(value, observer)
-    }
-
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
         super.buildHtmlPropertyList(propertyListBuilder)
         propertyListBuilder.add(
@@ -230,6 +242,7 @@ public abstract class Input<T : Any>(
             ::maxlength,
             ::placeholder,
             ::disabled,
+            ::required,
             ::autocomplete,
             ::autofocus,
             ::readonly
