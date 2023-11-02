@@ -22,7 +22,9 @@
 
 package dev.kilua.externals
 
-public actual external class Object : JsAny
+import dev.kilua.utils.toArray
+
+public actual open external class Object : JsAny
 
 @JsFun("() => ( {} )")
 public actual external fun obj(): Object
@@ -32,4 +34,62 @@ public actual external fun obj(): Object
  */
 public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
     return (obj().unsafeCast<T>()).apply(init)
+}
+
+@JsFun("(obj, key, value) => ( obj[key] = value )")
+private external fun objSet(obj: JsAny, key: String, value: JsAny)
+
+@JsFun("(obj, key) => ( obj[key] )")
+private external fun objGet(obj: JsAny, key: String): JsAny?
+
+/**
+ * Operator to set property on JS Object
+ */
+public actual operator fun Object.set(key: String, value: Object) {
+    objSet(this, key, value)
+}
+
+/**
+ * Operator to get property from JS Object
+ */
+public actual operator fun Object.get(key: String): Object? {
+    return objGet(this, key)?.unsafeCast()
+}
+
+@JsFun("(obj) => ( Object.keys(obj) )")
+private external fun jsKeys(obj: JsAny): JsArray<JsString>
+
+/**
+ * Get the list of keys from JS Object
+ */
+public actual fun keys(o: Object): List<String> {
+    return jsKeys(o).toArray().asList().map { it.toString() }
+}
+
+/**
+ * Convert String value to JS Object for JS/Wasm interop
+ */
+public actual fun String.toJsObject(): Object {
+    return this.toJsString().unsafeCast()
+}
+
+/**
+ * Convert Boolean value to JS Object for JS/Wasm interop
+ */
+public actual fun Boolean.toJsObject(): Object {
+    return this.toJsBoolean().unsafeCast()
+}
+
+/**
+ * Convert Int value to JS Object for JS/Wasm interop
+ */
+public actual fun Int.toJsObject(): Object {
+    return this.toJsNumber().unsafeCast()
+}
+
+/**
+ * Convert Double value to JS Object for JS/Wasm interop
+ */
+public actual fun Double.toJsObject(): Object {
+    return this.toJsNumber().unsafeCast()
 }

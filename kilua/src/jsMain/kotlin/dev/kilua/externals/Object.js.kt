@@ -45,6 +45,28 @@ public inline fun obj(noinline init: dynamic.() -> Unit): dynamic {
 }
 
 /**
+ * Operator to set property on JS Object
+ */
+public actual operator fun Object.set(key: String, value: Object) {
+    this.asDynamic()[key] = value
+}
+
+/**
+ * Operator to get property from JS Object
+ */
+@Suppress("UnsafeCastFromDynamic")
+public actual operator fun Object.get(key: String): Object? {
+    return this.asDynamic()[key]
+}
+
+/**
+ * Get the list of keys from JS Object
+ */
+public actual fun keys(o: Object): List<String> {
+    return js("Object").keys(o).unsafeCast<Array<String>>().toList()
+}
+
+/**
  * Delete property from JavaScript object.
  */
 public external fun delete(p: dynamic): Boolean
@@ -54,4 +76,32 @@ public external fun delete(p: dynamic): Boolean
  */
 public fun delete(thing: dynamic, key: String) {
     delete(thing[key])
+}
+
+/**
+ * Convert String value to JS Object for JS/Wasm interop
+ */
+public actual fun String.toJsObject(): Object {
+    return this.unsafeCast<Object>()
+}
+
+/**
+ * Convert Boolean value to JS Object for JS/Wasm interop
+ */
+public actual fun Boolean.toJsObject(): Object {
+    return this.unsafeCast<Object>()
+}
+
+/**
+ * Convert Int value to JS Object for JS/Wasm interop
+ */
+public actual fun Int.toJsObject(): Object {
+    return this.unsafeCast<Object>()
+}
+
+/**
+ * Convert Double value to JS Object for JS/Wasm interop
+ */
+public actual fun Double.toJsObject(): Object {
+    return this.unsafeCast<Object>()
 }

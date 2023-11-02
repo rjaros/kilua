@@ -20,50 +20,16 @@
  * SOFTWARE.
  */
 
-package dev.kilua.externals
+package dev.kilua.utils
 
-/**
- * JavaScript Object class
- */
-public expect class Object
+import dev.kilua.externals.Object
 
-/**
- * Return empty JS Object
- */
-public expect fun obj(): Object
+public actual object JSON {
+    public actual fun stringify(o: Object?): String {
+        return dev.kilua.externals.JSON.stringify(o)
+    }
 
-
-/**
- * Operator to set property on JS Object
- */
-public expect operator fun Object.set(key: String, value: Object)
-
-/**
- * Operator to get property from JS Object
- */
-public expect operator fun Object.get(key: String): Object?
-
-/**
- * Get the list of keys from JS Object
- */
-public expect fun keys(o: Object): List<String>
-
-/**
- * Convert String value to JS Object for JS/Wasm interop
- */
-public expect fun String.toJsObject(): Object
-
-/**
- * Convert Boolean value to JS Object for JS/Wasm interop
- */
-public expect fun Boolean.toJsObject(): Object
-
-/**
- * Convert Int value to JS Object for JS/Wasm interop
- */
-public expect fun Int.toJsObject(): Object
-
-/**
- * Convert Double value to JS Object for JS/Wasm interop
- */
-public expect fun Double.toJsObject(): Object
+    public actual fun <T : Object> parse(text: String): T {
+        return dev.kilua.externals.JSON.parse(text)
+    }
+}
