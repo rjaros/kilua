@@ -7,6 +7,7 @@ import app.softwork.routingcompose.BrowserRouter
 import dev.kilua.Application
 import dev.kilua.CoreModule
 import dev.kilua.Hot
+import dev.kilua.KiluaScope
 import dev.kilua.compose.root
 import dev.kilua.externals.obj
 import dev.kilua.form.check.checkBox
@@ -30,6 +31,8 @@ import dev.kilua.startApplication
 import dev.kilua.utils.cast
 import dev.kilua.utils.today
 import kotlinx.browser.window
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.w3c.dom.CustomEvent
 
 class App : Application() {
@@ -203,9 +206,9 @@ class App : Application() {
 
             val rad = radio(true) {
                 defaultChecked = true
-                subscribe {
+                stateFlow.onEach {
                     dev.kilua.utils.console.log(this.value.toString())
-                }
+                }.launchIn(KiluaScope)
             }
 
             button("test radio") {
@@ -223,9 +226,9 @@ class App : Application() {
             hr()
 
             val tri = triStateCheckBox {
-                subscribe {
+                stateFlow.onEach {
                     dev.kilua.utils.console.log(this.value.toString())
-                }
+                }.launchIn(KiluaScope)
             }
 
             button("test tri") {
@@ -252,9 +255,9 @@ class App : Application() {
 
             val check = checkBox(checked, disabled = true) {
                 extraValue = "teston"
-                subscribe {
+                stateFlow.onEach {
                     dev.kilua.utils.console.log(this.value.toString())
-                }
+                }.launchIn(KiluaScope)
             }
 
             button("test check") {
@@ -287,9 +290,9 @@ class App : Application() {
 
             textArea("ala ma kota", cols = 20, rows = 20) {
                 //+"ala ma kota"
-                subscribe {
+                stateFlow.onEach {
                     dev.kilua.utils.console.log(it)
-                }
+                }.launchIn(KiluaScope)
             }
 
             hr()
@@ -441,7 +444,9 @@ class App : Application() {
                         height = 300.px
                         onEvent<CustomEvent>("dragEndSplitPanel") {
                             dev.kilua.utils.console.log(it.detail.toString())
-                            dev.kilua.utils.console.log((it.detail?.cast<List<Number>>()?.get(0)?.toDouble() ?: 0.0).toString())
+                            dev.kilua.utils.console.log(
+                                (it.detail?.cast<List<Number>>()?.get(0)?.toDouble() ?: 0.0).toString()
+                            )
                             widthv = it.detail?.cast<List<Number>>()?.get(0)?.toDouble() ?: 0.0
                         }
                     }

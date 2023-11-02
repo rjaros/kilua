@@ -27,11 +27,6 @@ kotlin {
                     }
                 }
             }
-            nodejs {
-                testTask {
-                    useMocha()
-                }
-            }
             binaries.executable()
         }
     }
@@ -49,11 +44,6 @@ kotlin {
                     useKarma {
                         useChromeHeadlessWasmGc()
                     }
-                }
-            }
-            nodejs {
-                testTask {
-                    useMocha()
                 }
             }
             binaries.executable()
