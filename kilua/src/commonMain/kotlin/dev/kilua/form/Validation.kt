@@ -20,41 +20,29 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html
+package dev.kilua.form
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
-import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
-import dev.kilua.core.DefaultRenderConfig
-import dev.kilua.core.RenderConfig
-import org.w3c.dom.HTMLFormElement
+import kotlin.reflect.KProperty1
 
 /**
- * HTML Form component.
+ * Result of the single form field validation.
  */
-public open class Form(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLFormElement>("form", className, renderConfig)
+public data class FieldValidation(
+    val isEmptyWhenRequired: Boolean = false,
+    val isInvalid: Boolean = false,
+    val validMessage: String? = null,
+    val invalidMessage: String? = null,
+)
 
 /**
- * Creates a [Form] component.
- *
- * @param className the CSS class name
- * @param content the content of the component
- * @return the [Form] component
+ * Result of the form validation.
  */
-@Composable
-public fun ComponentBase.form(className: String? = null, content: @Composable Form.() -> Unit = {}): Form {
-    val component = remember { Form(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
-    ComponentNode(component, {
-        set(className) { updateProperty(Form::className, it) }
-    }, content)
-    return component
+public data class Validation<K : Any>(
+    val isInvalid: Boolean = false,
+    val validMessage: String? = null,
+    val invalidMessage: String? = null,
+    private val fieldsValidations: Map<String, FieldValidation> = emptyMap()
+) {
+    public operator fun get(key: String): FieldValidation? = fieldsValidations[key]
+    public operator fun get(key: KProperty1<K, Boolean?>): FieldValidation? = fieldsValidations[key.name]
 }
