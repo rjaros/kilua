@@ -87,9 +87,4 @@ public interface TagAttrs<E : HTMLElement> {
      * Remove attribute with the given name.
      */
     public fun removeAttribute(name: String)
-
-    /**
-     * Connects delegate with the DOM element.
-     */
-    public fun elementWithAttrs(element: E?)
 }

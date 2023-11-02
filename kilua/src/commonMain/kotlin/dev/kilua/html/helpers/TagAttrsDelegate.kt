@@ -23,17 +23,35 @@
 package dev.kilua.html.helpers
 
 import dev.kilua.core.PropertyDelegate
+import dev.kilua.utils.nativeMapOf
 import org.w3c.dom.HTMLElement
 import kotlin.collections.set
 
 /**
+ * Common tag attributes delegate.
+ */
+public interface TagAttrsDelegate<E : HTMLElement> : TagAttrs<E> {
+
+    /**
+     * The map of attributes.
+     */
+    public val attributesMap: Map<String, Any>
+
+    /**
+     * Connects the delegate with the given element.
+     */
+    public fun elementWithAttrs(element: E?)
+}
+
+/**
  * Common tag attributes delegate implementation.
  */
-public open class TagAttrsDelegate<E : HTMLElement>(
+public open class TagAttrsDelegateImpl<E : HTMLElement>(
     protected val skipUpdates: Boolean,
-    protected val attributes: MutableMap<String, Any>
-) : TagAttrs<E>,
-    PropertyDelegate(attributes) {
+    protected val attributes: MutableMap<String, Any> = nativeMapOf()
+) : TagAttrsDelegate<E>, PropertyDelegate(attributes) {
+
+    public override val attributesMap: Map<String, Any> = attributes
 
     protected lateinit var element: E
     protected var elementNullable: E? = null

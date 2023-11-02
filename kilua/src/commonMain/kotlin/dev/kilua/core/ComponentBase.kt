@@ -36,6 +36,7 @@ import org.w3c.dom.get
  */
 public abstract class ComponentBase(
     protected val node: Node,
+    @PublishedApi
     internal val renderConfig: RenderConfig,
 ) : Component, PropertyDelegate(nativeMapOf()) {
 

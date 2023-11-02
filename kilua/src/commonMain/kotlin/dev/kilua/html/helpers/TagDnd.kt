@@ -23,7 +23,6 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import dev.kilua.html.Tag
 import org.w3c.dom.DragEvent
 import org.w3c.dom.HTMLElement
 
@@ -79,10 +78,5 @@ public interface TagDnd<E : HTMLElement> {
      * Unsets the current component as a D&D drop target.
      */
     public fun clearDropTarget()
-
-    /**
-     * Connects delegate with the Tag component.
-     */
-    public fun tagWithDnd(tag: Tag<E>)
 
 }

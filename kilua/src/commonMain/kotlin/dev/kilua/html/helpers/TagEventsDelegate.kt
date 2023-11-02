@@ -39,12 +39,29 @@ import kotlin.collections.component2
 import kotlin.collections.set
 
 /**
+ * Common tag events delegate.
+ */
+public interface TagEventsDelegate<E : HTMLElement> : TagEvents<E> {
+    /**
+     * The map of events.
+     */
+    public val eventsMap: Map<String, Map<String, (Event) -> Unit>>
+
+    /**
+     * Connects the delegate with the given element.
+     */
+    public fun elementWithEvents(element: E?)
+}
+
+/**
  * Common tag events delegate implementation.
  */
-public open class TagEventsDelegate<E : HTMLElement>(
+public open class TagEventsDelegateImpl<E : HTMLElement>(
     protected val skipUpdates: Boolean,
-    protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>>
-) : TagEvents<E> {
+    protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>> = nativeMapOf()
+) : TagEventsDelegate<E> {
+
+    public override val eventsMap: Map<String, Map<String, (Event) -> Unit>> = events
 
     protected val eventsAbortControllers: MutableMap<String, AbortController> = nativeMapOf()
 

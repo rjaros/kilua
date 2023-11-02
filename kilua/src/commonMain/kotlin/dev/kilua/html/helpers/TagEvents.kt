@@ -159,9 +159,4 @@ public interface TagEvents<E : HTMLElement> {
      * Remove event listener by event name and ID.
      */
     public fun removeEventListener(name: String, id: Int? = null)
-
-    /**
-     * Connects delegate with the DOM element.
-     */
-    public fun elementWithEvents(element: E?)
 }

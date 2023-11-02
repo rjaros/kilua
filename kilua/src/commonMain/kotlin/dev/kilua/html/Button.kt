@@ -93,7 +93,7 @@ public open class Button(
         if (renderConfig.isDom) {
             element.click()
         } else {
-            events["click"]?.forEach {
+            tagEvents.eventsMap["click"]?.forEach {
                 it.value(MouseEvent("click"))
             }
         }

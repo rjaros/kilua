@@ -25,15 +25,31 @@ package dev.kilua.html.helpers
 import dev.kilua.core.PropertyDelegate
 import dev.kilua.html.*
 import dev.kilua.utils.cast
+import dev.kilua.utils.nativeMapOf
 import org.w3c.dom.HTMLElement
+import kotlin.collections.Map
+
+public interface TagStyleDelegate<E : HTMLElement> : TagStyle<E> {
+    /**
+     * The map of CSS styles.
+     */
+    public val stylesMap: Map<String, Any>
+
+    /**
+     * Connects the delegate with the given element.
+     */
+    public fun elementWithStyle(element: E?)
+}
 
 /**
  * Common tag CSS styles delegate implementation.
  */
-public open class TagStyleDelegate<E : HTMLElement>(
+public open class TagStyleDelegateImpl<E : HTMLElement>(
     protected val skipUpdates: Boolean,
-    protected val styles: MutableMap<String, Any>
-) : TagStyle<E>, PropertyDelegate(styles) {
+    protected val styles: MutableMap<String, Any> = nativeMapOf()
+) : TagStyleDelegate<E>, PropertyDelegate(styles) {
+
+    public override val stylesMap: Map<String, Any> = styles
 
     protected lateinit var element: E
     protected var elementNullable: E? = null

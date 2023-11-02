@@ -30,11 +30,21 @@ import org.w3c.dom.DragEvent
 import org.w3c.dom.HTMLElement
 
 /**
+ * Common drag and drop methods delegate.
+ */
+public interface TagDndDelegate<E : HTMLElement> : TagDnd<E> {
+    /**
+     * Connects the delegate with the given Tag.
+     */
+    public fun tagWithDnd(tag: Tag<E>)
+}
+
+/**
  * Common drag and drop methods delegate implementation.
  */
-public open class TagDndDelegate<E : HTMLElement>(
+public open class TagDndDelegateImpl<E : HTMLElement>(
     protected val skipUpdates: Boolean,
-) : TagDnd<E> {
+) : TagDndDelegate<E> {
 
     protected lateinit var tag: Tag<E>
 

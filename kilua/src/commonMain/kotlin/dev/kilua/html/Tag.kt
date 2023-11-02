@@ -34,21 +34,23 @@ import dev.kilua.core.SafeDomFactory
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.html.helpers.TagAttrs
 import dev.kilua.html.helpers.TagAttrsDelegate
+import dev.kilua.html.helpers.TagAttrsDelegateImpl
 import dev.kilua.html.helpers.TagDnd
 import dev.kilua.html.helpers.TagDndDelegate
+import dev.kilua.html.helpers.TagDndDelegateImpl
 import dev.kilua.html.helpers.TagEvents
 import dev.kilua.html.helpers.TagEventsDelegate
+import dev.kilua.html.helpers.TagEventsDelegateImpl
 import dev.kilua.html.helpers.TagStyle
 import dev.kilua.html.helpers.TagStyleDelegate
+import dev.kilua.html.helpers.TagStyleDelegateImpl
 import dev.kilua.html.helpers.buildPropertyList
 import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
-import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.renderAsHtmlAttributes
 import org.w3c.dom.HTMLElement
-import org.w3c.dom.events.Event
 
 /**
  * Base class for all HTML tags components.
@@ -57,15 +59,13 @@ public open class Tag<E : HTMLElement>(
     protected val tagName: String,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-    protected val attributes: MutableMap<String, Any> = nativeMapOf(),
-    protected val styles: MutableMap<String, Any> = nativeMapOf(),
-    protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>> = nativeMapOf()
+    protected val tagAttrs: TagAttrsDelegate<E> = TagAttrsDelegateImpl(!renderConfig.isDom || !isDom),
+    protected val tagStyle: TagStyleDelegate<E> = TagStyleDelegateImpl(!renderConfig.isDom || !isDom),
+    protected val tagEvents: TagEventsDelegate<E> = TagEventsDelegateImpl(!renderConfig.isDom || !isDom),
+    protected val tagDnd: TagDndDelegate<E> = TagDndDelegateImpl(!renderConfig.isDom || !isDom)
 ) :
     ComponentBase(SafeDomFactory.createElement(tagName), renderConfig),
-    TagAttrs<E> by TagAttrsDelegate(!renderConfig.isDom || !isDom, attributes),
-    TagStyle<E> by TagStyleDelegate(!renderConfig.isDom || !isDom, styles),
-    TagEvents<E> by TagEventsDelegate(!renderConfig.isDom || !isDom, events),
-    TagDnd<E> by TagDndDelegate(!renderConfig.isDom || !isDom) {
+    TagAttrs<E> by tagAttrs, TagStyle<E> by tagStyle, TagEvents<E> by tagEvents, TagDnd<E> by tagDnd {
 
     /**
      * A list of properties rendered as html attributes for the current component.
@@ -120,14 +120,10 @@ public open class Tag<E : HTMLElement>(
 
     init {
         val elementNullable = if (renderConfig.isDom) element else null
-        @Suppress("LeakingThis")
-        elementWithAttrs(elementNullable)
-        @Suppress("LeakingThis")
-        elementWithStyle(elementNullable)
-        @Suppress("LeakingThis")
-        elementWithEvents(elementNullable)
-        @Suppress("LeakingThis")
-        tagWithDnd(this)
+        tagAttrs.elementWithAttrs(elementNullable)
+        tagStyle.elementWithStyle(elementNullable)
+        tagEvents.elementWithEvents(elementNullable)
+        tagDnd.tagWithDnd(this)
         @Suppress("LeakingThis")
         updateElementClassList()
     }
@@ -173,11 +169,11 @@ public open class Tag<E : HTMLElement>(
             if (htmlProperties.isNotEmpty()) {
                 builder.append(" ${htmlProperties.renderAsHtmlAttributes()}")
             }
-            if (attributes.isNotEmpty()) {
-                builder.append(" ${attributes.renderAsHtmlAttributes()}")
+            if (tagAttrs.attributesMap.isNotEmpty()) {
+                builder.append(" ${tagAttrs.attributesMap.renderAsHtmlAttributes()}")
             }
-            if (styles.isNotEmpty()) {
-                builder.append(" style=\"${styles.renderAsCssStyle()}\"")
+            if (tagStyle.stylesMap.isNotEmpty()) {
+                builder.append(" style=\"${tagStyle.stylesMap.renderAsCssStyle()}\"")
             }
             builder.append(">")
             if (!voidTags.contains(tagName)) {

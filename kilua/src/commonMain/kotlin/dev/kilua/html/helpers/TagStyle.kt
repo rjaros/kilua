@@ -527,8 +527,4 @@ public interface TagStyle<E : HTMLElement> {
      */
     public fun removeStyle(name: String)
 
-    /**
-     * Connects delegate with the DOM element.
-     */
-    public fun elementWithStyle(element: E?)
 }
