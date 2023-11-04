@@ -30,14 +30,14 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
-import dev.kilua.state.WithStateFlow
-import dev.kilua.state.WithStateFlowDelegate
-import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.html.Optgroup
 import dev.kilua.html.Option
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.html.option
+import dev.kilua.state.WithStateFlow
+import dev.kilua.state.WithStateFlowDelegate
+import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.nativeListOf
 import org.w3c.dom.HTMLSelectElement
@@ -120,6 +120,10 @@ public open class Select(
         } else {
             element.removeAttribute("autofocus")
         }
+    }
+
+    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+        element.setCustomValidity(it ?: "")
     }
 
     /**

@@ -41,7 +41,7 @@ public data class Validation<K : Any>(
     val isInvalid: Boolean = false,
     val validMessage: String? = null,
     val invalidMessage: String? = null,
-    private val fieldsValidations: Map<String, FieldValidation> = emptyMap()
+    val fieldsValidations: Map<String, FieldValidation> = emptyMap()
 ) {
     public operator fun get(key: String): FieldValidation? = fieldsValidations[key]
     public operator fun get(key: KProperty1<K, Boolean?>): FieldValidation? = fieldsValidations[key.name]

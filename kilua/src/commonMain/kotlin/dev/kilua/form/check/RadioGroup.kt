@@ -30,10 +30,11 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
+import dev.kilua.form.fieldWithLabel
+import dev.kilua.html.Div
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.html.Div
 import dev.kilua.utils.StringPair
 
 /**
@@ -106,6 +107,12 @@ public open class RadioGroup(
         }
     }
 
+    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+        findAllRadios().forEach { radio ->
+            radio.customValidity = it
+        }
+    }
+
     init {
         @Suppress("LeakingThis")
         withStateFlowDelegate.formControl(this)
@@ -172,20 +179,20 @@ public fun ComponentBase.radioGroup(
     }) {
         setup(component)
         options?.forEachIndexed { index, option ->
-            radio(
-                label = option.second,
-                value = option.first == component.value,
-                name = component.name ?: "name_${component.componentId}",
-                disabled = component.disabled,
-                required = component.required,
-                groupClassName = if (component.inline) "kilua-radio-inline" else null
-            ) {
-                if (index == 0 && component.autofocus == true) {
-                    this.autofocus = true
-                }
-                this.extraValue = option.first
-                onChange {
-                    component.value = this.extraValue
+            fieldWithLabel(option.second, labelAfter = true, groupClassName = if (component.inline) "kilua-radio-inline" else null) {
+                radio(
+                    value = option.first == component.value,
+                    name = component.name ?: "name_${component.componentId}",
+                    disabled = component.disabled,
+                    required = component.required
+                ) {
+                    if (index == 0 && component.autofocus == true) {
+                        this.autofocus = true
+                    }
+                    this.extraValue = option.first
+                    onChange {
+                        component.value = this.extraValue
+                    }
                 }
             }
         }

@@ -46,23 +46,6 @@ class RadioSpec : DomSpec {
     }
 
     @Test
-    fun renderWithLabel() {
-        runWhenDomAvailable {
-            val root = root("test") {
-                radio("A radio", true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
-                }
-            }
-            assertEqualsHtml(
-                """<div><input type="radio" name="test" id="id" checked="" value="extra"><label for="id">A radio</label></div>""",
-                root.element.innerHTML,
-                "Should render radio button with a label to DOM"
-            )
-        }
-    }
-
-    @Test
     fun renderToString() {
         run {
             val root = root {
@@ -75,23 +58,6 @@ class RadioSpec : DomSpec {
                 """<input type="radio" name="test" checked="" value="extra">""",
                 root.innerHTML,
                 "Should render radio button element to a String"
-            )
-        }
-    }
-
-    @Test
-    fun renderWithLabelToString() {
-        run {
-            val root = root {
-                radio("A radio", true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
-                }
-            }
-            assertEqualsHtml(
-                """<div><input type="radio" name="test" id="id" checked="" value="extra"><label for="id">A radio</label></div>""",
-                root.innerHTML,
-                "Should render radio button with a label to a String"
             )
         }
     }

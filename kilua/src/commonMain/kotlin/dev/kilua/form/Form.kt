@@ -705,13 +705,16 @@ public open class Form<K : Any>(
             @Suppress("UNCHECKED_CAST")
             val fieldsParams = (fieldsParams[key] as FieldParams<*, FormControl<*>>)
             val required = control.required ?: false
-            val isEmptyWhenRequired = control.getValue() == null && control.visible && required
+            val isEmptyWhenRequired = (control.getValue() == null || control.value == false)
+                    && control.visible && required
+            val requiredMessage = if (isEmptyWhenRequired) "Value is required" else null
             val isInvalid = control.visible && !(fieldsParams.validator?.invoke(control) ?: true)
             val invalidMessage = if (isInvalid) {
                 fieldsParams.validatorMessage?.invoke(control) ?: "Invalid value"
             } else {
                 null
             }
+            getControl(key)?.customValidity = invalidMessage ?: requiredMessage
             val validMessage = if (!isInvalid) {
                 fieldsParams.validatorMessage?.invoke(control)
             } else {
@@ -720,8 +723,8 @@ public open class Form<K : Any>(
             val fieldValidation = FieldValidation(
                 isEmptyWhenRequired,
                 isInvalid,
-                invalidMessage,
-                validMessage
+                validMessage,
+                invalidMessage
             )
             key to fieldValidation
         }.toMap()
@@ -893,7 +896,7 @@ public inline fun <reified K : Any> ComponentBase.form(
         }
     }
     ComponentNode(component, {
-        set(initialData) { if (it != null) setDataFromCompose(it) else clearDataFromCompose() }
+        set(initialData) { if (it != null) setDataFromCompose(it) }
         set(method) { updateProperty(Form<K>::method, it) }
         set(action) { updateProperty(Form<K>::action, it) }
         set(enctype) { updateProperty(Form<K>::enctype, it) }
@@ -948,7 +951,7 @@ public fun ComponentBase.form(
         }
     }
     ComponentNode(component, {
-        set(initialData) { if (it != null) setDataFromCompose(it) else clearDataFromCompose() }
+        set(initialData) { if (it != null) setDataFromCompose(it) }
         set(method) { updateProperty(Form<Map<String, Any?>>::method, it) }
         set(action) { updateProperty(Form<Map<String, Any?>>::action, it) }
         set(enctype) { updateProperty(Form<Map<String, Any?>>::enctype, it) }

@@ -173,6 +173,10 @@ public abstract class Input<T : Any>(
             setAttribute("value", valueToString(defaultValue))
         }
 
+    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+        element.setCustomValidity(it ?: "")
+    }
+
     init {
         @Suppress("LeakingThis")
         withStateFlowDelegate.formControl(this)

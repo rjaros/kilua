@@ -46,23 +46,6 @@ class TriStateCheckBoxSpec : DomSpec {
     }
 
     @Test
-    fun renderWithLabel() {
-        runWhenDomAvailable {
-            val root = root("test") {
-                triStateCheckBox("A checkbox", true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
-                }
-            }
-            assertEqualsHtml(
-                """<div><input type="checkbox" name="test" checked="" value="extra" id="id"><label for="id">A checkbox</label></div>""",
-                root.element.innerHTML,
-                "Should render tri-state checkbox with a label to DOM"
-            )
-        }
-    }
-
-    @Test
     fun renderToString() {
         run {
             val root = root {
@@ -73,23 +56,6 @@ class TriStateCheckBoxSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<input name="test" checked type="checkbox" value="extra">""",
-                root.innerHTML,
-                "Should render tri-state checkbox element to a String"
-            )
-        }
-    }
-
-    @Test
-    fun renderWithLabelToString() {
-        run {
-            val root = root {
-                triStateCheckBox("A checkbox", true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
-                }
-            }
-            assertEqualsHtml(
-                """<div><input type="checkbox" name="test" checked="" value="extra" id="id"><label for="id">A checkbox</label></div>""",
                 root.innerHTML,
                 "Should render tri-state checkbox element to a String"
             )

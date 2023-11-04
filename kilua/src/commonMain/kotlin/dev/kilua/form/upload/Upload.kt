@@ -65,7 +65,8 @@ public open class Upload(
     required: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<List<KFile>>(null, InputType.File, name, null, null, disabled, required, className, renderConfig), KFilesFormControl {
+) : Input<List<KFile>>(null, InputType.File, name, null, null, disabled, required, className, renderConfig),
+    KFilesFormControl {
 
     /**
      * Temporary external value (used in tests)

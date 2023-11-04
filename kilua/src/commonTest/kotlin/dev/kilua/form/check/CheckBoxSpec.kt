@@ -46,23 +46,6 @@ class CheckBoxSpec : DomSpec {
     }
 
     @Test
-    fun renderWithLabel() {
-        runWhenDomAvailable {
-            val root = root("test") {
-                checkBox("A checkbox", true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
-                }
-            }
-            assertEqualsHtml(
-                """<div><input type="checkbox" name="test" checked="" value="extra" id="id"><label for="id">A checkbox</label></div>""",
-                root.element.innerHTML,
-                "Should render checkbox with a label to DOM"
-            )
-        }
-    }
-
-    @Test
     fun renderToString() {
         run {
             val root = root {
@@ -73,23 +56,6 @@ class CheckBoxSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<input type="checkbox" name="test" checked="" value="extra">""",
-                root.innerHTML,
-                "Should render checkbox element to a String"
-            )
-        }
-    }
-
-    @Test
-    fun renderWithLabelToString() {
-        run {
-            val root = root {
-                checkBox("A checkbox", true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
-                }
-            }
-            assertEqualsHtml(
-                """<div><input type="checkbox" name="test" checked="" value="extra" id="id"><label for="id">A checkbox</label></div>""",
                 root.innerHTML,
                 "Should render checkbox element to a String"
             )

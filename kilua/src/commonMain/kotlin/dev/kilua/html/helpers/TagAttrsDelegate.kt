@@ -119,6 +119,14 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
+    override var ariaDescribedby: String? by updatingProperty(null, skipUpdates) {
+        if (it != null) {
+            element.setAttribute("aria-describedby", it)
+        } else {
+            element.removeAttribute("aria-describedby")
+        }
+    }
+
     override var accesskey: Char? by updatingProperty(null, skipUpdates) {
         if (it != null) {
             element.accessKey = it.toString()

@@ -97,3 +97,16 @@ public fun List<String>.pairs(): List<StringPair> = this.map { it to it }
  * Builds List<StringPair> out of given Strings.
  */
 public fun listOfPairs(vararg params: String): List<StringPair> = params.asList().pairs()
+
+/**
+ * Useful operator to concatenate two strings with a space (for CSS class names)
+ */
+public operator fun String?.rem(str: String?): String? {
+    return if (this == null) {
+        str
+    } else if (str == null) {
+        this
+    } else {
+        "$this $str"
+    }
+}

@@ -64,6 +64,11 @@ public interface TagAttrs<E : HTMLElement> {
     public var ariaLabelledby: String?
 
     /**
+     * The aria-describedby attribute.
+     */
+    public var ariaDescribedby: String?
+
+    /**
      * The accesskey attribute.
      */
     public var accesskey: Char?

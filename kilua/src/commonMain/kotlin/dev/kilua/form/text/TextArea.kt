@@ -30,11 +30,11 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
+import dev.kilua.html.Tag
+import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.html.Tag
-import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLTextAreaElement
 
@@ -175,6 +175,10 @@ public open class TextArea(
         } else {
             element.removeAttribute("wrap")
         }
+    }
+
+    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+        element.setCustomValidity(it ?: "")
     }
 
     init {

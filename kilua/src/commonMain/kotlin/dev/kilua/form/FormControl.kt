@@ -31,7 +31,7 @@ import kotlinx.datetime.LocalTime
 /**
  * Input controls validation status.
  */
-public interface FormControl<T>: WithStateFlow<T> {
+public interface FormControl<T> : WithStateFlow<T> {
     /**
      * The current value of the form control.
      */
@@ -58,9 +58,19 @@ public interface FormControl<T>: WithStateFlow<T> {
     public var required: Boolean?
 
     /**
+     * The ID attribute of the generated HTML element.
+     */
+    public var id: String?
+
+    /**
      * The name attribute of the generated HTML element.
      */
     public var name: String?
+
+    /**
+     * The custom validity of the HTML element.
+     */
+    public var customValidity: String?
 
     /**
      * Sets the value of the form control.
