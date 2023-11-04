@@ -20,246 +20,133 @@
  * SOFTWARE.
  */
 
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import dev.kilua.Application
-import dev.kilua.CoreModule
-import dev.kilua.KiluaScope
 import dev.kilua.compose.root
 import dev.kilua.form.check.checkBox
-import dev.kilua.form.check.triStateCheckBox
+import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
-import dev.kilua.form.number.numeric
-import dev.kilua.form.number.spinner
+import dev.kilua.form.select.select
 import dev.kilua.form.text.text
-import dev.kilua.form.time.date
-import dev.kilua.form.time.dateTime
-import dev.kilua.form.time.time
-import dev.kilua.form.upload.upload
-import dev.kilua.html.Border
-import dev.kilua.html.BorderStyle
 import dev.kilua.html.button
 import dev.kilua.html.div
-import dev.kilua.html.hr
+import dev.kilua.html.pt
 import dev.kilua.html.px
+import dev.kilua.html.span
+import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
-import dev.kilua.state.collectAsState
-import dev.kilua.types.KFile
-import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.console
-import dev.kilua.utils.hour
-import dev.kilua.utils.log
-import dev.kilua.utils.now
-import dev.kilua.utils.today
-import dev.kilua.utils.useCssModule
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.LocalTime
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.descriptors.buildClassSerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
+import dev.kilua.utils.listOfPairs
+import dev.kilua.utils.rem
 
-@JsModule("./css/style.css")
-@JsNonModule
-public external object Css
-class ObjectId(val id: Int) {
-    override fun toString(): String {
-        return "$id"
-    }
-}
-
-object ObjectIdSerializer : KSerializer<ObjectId> {
-    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("ObjectId")
-    override fun deserialize(decoder: Decoder): ObjectId {
-        val str = decoder.decodeString()
-        return ObjectId(str.toInt())
-    }
-
-    override fun serialize(encoder: Encoder, value: ObjectId) {
-        encoder.encodeString(value.id.toString())
-    }
-}
-
-
-@Serializable
-data class DataForm(
-    val string: String? = null,
-    val boolean: Boolean? = null,
-    val booleanStrict: Boolean = false,
-    val int: Int? = null,
-    val double: Double? = null,
-    val date: LocalDate? = null,
-    val time: LocalTime? = null,
-    val dateTime: LocalDateTime? = null,
-    val files: List<KFile>? = null,
-    @Contextual val objectId: ObjectId? = null
-)
-
-public class App : Application() {
-
-    init {
-        useCssModule(Css)
-    }
+class App : Application() {
 
     override fun start() {
 
         root("root") {
-            console.log("recomposing")
-
             div {
-                val value by spinner(1, min = 1).collectAsState()
-                div {
-                    console.log("recomposing div")
-                    div {
-                        console.log("recomposing div2")
-                        border = Border(1.px, BorderStyle.Solid)
-                        width = (value ?: 0).px
-                        height = 100.px
+                margin = 20.px
+                form(novalidate = true, className = "row g-3 needs-validation") {
+                    val validation by validationStateFlow.collectAsState()
+
+                    if (validation.isInvalid) {
+                        pt("form is invalid: ${validation.invalidMessage}")
+                        validation.fieldsValidations.forEach { (key, value) ->
+                            if (value.isEmptyWhenRequired) pt("field is empty: $key")
+                            if (value.isInvalid) pt("field is invalid: $key - ${value.invalidMessage}")
+                        }
+                    } else if (validation.validMessage != null) {
+                        pt("form is valid: ${validation.validMessage}")
                     }
-                }
-            }
 
-
-            var dataForm by remember {
-                mutableStateOf(
-                    DataForm(
-                        string = "Test value",
-                        boolean = true,
-                        booleanStrict = true,
-                        int = 123,
-                        double = 123.456,
-                        date = today(),
-                        time = hour(),
-                        dateTime = now(),
-                        files = listOf(KFile("test.txt", 123, "ABC")),
-                        objectId = ObjectId(123)
-                    )
-                )
-            }
-
-            var visible by remember { mutableStateOf(true) }
-            if (visible) {
-                val form = form<DataForm>(dataForm, customSerializers = mapOf(ObjectId::class to ObjectIdSerializer)) {
-                    text().bind(DataForm::string)
-                    triStateCheckBox().bind(DataForm::boolean)
-                    checkBox().bind(DataForm::booleanStrict)
-                    spinner().bind(DataForm::int)
-                    numeric().bind(DataForm::double)
-                    date().bind(DataForm::date)
-                    time().bind(DataForm::time)
-                    dateTime().bind(DataForm::dateTime)
-                    upload().bind(DataForm::files)
-                    text().bindCustom(DataForm::objectId)
-                    DisposableEffect("stateFlow") {
-                        val job = stateFlow.onEach {
-                            console.log("form changed")
-                            console.log(it.toString())
-                        }.launchIn(KiluaScope)
-                        onDispose {
-                            console.log("form disposed")
-                            job.cancel()
+                    fieldWithLabel("First name", "form-label", groupClassName = "col-md-4") {
+                        text("Mark", required = true, className = "form-control").bind("firstName").also {
+                            div("valid-feedback") {
+                                +"Looks good!"
+                            }
                         }
                     }
-                }
-                val initialData = form.getData()
-                //            console.log(initialData.toString())
-                /*val data = DataForm(
-                    string = "Test value",
-                    boolean = true,
-                    booleanStrict = true,
-                    int = 123,
-                    double = 123.456,
-                    date = today(),
-                    time = hour(),
-                    dateTime = now(),
-                    files = listOf(KFile("test.txt", 123, "ABC")),
-                    objectId = ObjectId(123)
-                )
-                form.setData(data)*/
-                //            console.log("xxx")
-                button("test 1") {
-                    onClick {
-                        val result = form.getData()
-                        console.log(result.toString())
-                        console.log(result.objectId?.id.toString())
-                        console.log(form.getDataJson())
+                    fieldWithLabel("Last name", "form-label", groupClassName = "col-md-4") {
+                        text("Otto", required = true, className = "form-control").bind("lastName").also {
+                            div("valid-feedback") {
+                                +"Looks good!"
+                            }
+                        }
                     }
+                    fieldWithLabel(
+                        "Username", "form-label", groupClassName = "col-md-4",
+                        wrapperClassName = "input-group has-validation"
+                    ) {
+                        span("input-group-text") {
+                            id = "inputGroupPrepend"
+                            +"@"
+                        }
+                        val invalidClass = if (validation["username"]?.isInvalid == true) "is-invalid" else null
+                        text(required = true, className = "form-control" % invalidClass) {
+                            ariaDescribedby = "inputGroupPrepend"
+                        }.bind("username", {
+                            "Username must be at least 10 characters long."
+                        }) {
+                            it.value == null || it.value!!.length > 10
+                        }.also {
+                            div("invalid-feedback") {
+                                +(validation["username"]?.invalidMessage ?: "Please choose a username.")
+                            }
+                        }
+                    }
+                    fieldWithLabel("City", "form-label", groupClassName = "col-md-6") {
+                        text(required = true, className = "form-control").bind("city").also {
+                            div("invalid-feedback") {
+                                +"Please provide a valid city."
+                            }
+                        }
+                    }
+                    fieldWithLabel("State", "form-label", groupClassName = "col-md-3") {
+                        select(listOfPairs("Alaska"), className = "form-select", placeholder = "Choose...")
+                            .bind("state").also {
+                                div("invalid-feedback") {
+                                    +"Please select a valid state."
+                                }
+                            }
+                    }
+                    fieldWithLabel("Zip", "form-label", groupClassName = "col-md-3") {
+                        text(required = true, className = "form-control").bind("zip").also {
+                            div("invalid-feedback") {
+                                +"Please provide a valid zip."
+                            }
+                        }
+                    }
+                    div("col-12") {
+                        div("form-check") {
+                            fieldWithLabel("Agree to terms and conditions", "form-check-label", labelAfter = true) {
+                                checkBox(className = "form-check-input", required = true).bind("agree")
+                            }
+                            div("invalid-feedback") {
+                                +"You must agree before submitting."
+                            }
+                        }
+                    }
+                    div("col-12") {
+                        button("Submit form", className = "btn btn-primary") {
+                            onClick {
+                                val x = this@form.validate()
+                                console.log(x.toString())
+                                this@form.className = "row g-3 was-validated"
+                                val data = this@form.getData()
+                                console.log(data.toString())
+                            }
+                        }
+                    }
+//                    stateFlow.onEach {
+//                        this.validate()
+//                    }.launchIn(KiluaScope)
                 }
             }
-            button("test 1") {
-                onClick {
-                    dataForm = DataForm(string = "baba jaga", boolean = false, double = 5.5)
-                }
-            }
-            button("test 2") {
-                onClick {
-                    dataForm = DataForm(string = "ala ma kota", boolean = true, double = 6.0)
-                }
-            }
-            button("test 3") {
-                onClick {
-                    visible = !visible
-                }
-            }
-
-            hr()
-
-            val form2 = form {
-/*                text().bind("string")
-                triStateCheckBox().bind("boolean")
-                checkBox().bind("booleanStrict")
-                spinner().bind("int")
-                numeric().bind("double")
-                date().bind("date")
-                time().bind("time")
-                dateTime().bind("dateTime")
-                upload().bind("files")*/
-            }
-            val initialData2 = form2.getData()
-//            console.log(initialData2.toString())
-            val data2 = mapOf(
-                "string" to "Test value",
-                "boolean" to true,
-                "booleanStrict" to true,
-                "int" to 123,
-                "double" to 123.456,
-                "date" to today(),
-                "time" to hour(),
-                "dateTime" to now(),
-                "files" to listOf(KFile("test.txt", 123, "ABC"))
-            )
-            form2.setData(data2)
-//            console.log("xxx")
-            button("test2 1") {
-                onClick {
-                    val result = form2.getData()
-                    console.log(result.toString())
-                }
-            }
-            button("test2 2") {
-                onClick {
-                    form2.setData(mapOf("string" to "Test value 2", "boolean" to false, "time" to hour()))
-                }
-            }
-            button("test2 3") {
-                onClick {
-                    form2.clearData()
-                }
-            }
-
         }
     }
 }
 
 public fun main() {
-    startApplication(::App, null, CoreModule)
+    startApplication(::App)
 }
