@@ -49,9 +49,10 @@ public open class Spinner(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<Int>(value, InputType.Number, name, maxlength, placeholder, disabled, required, className, renderConfig),
+) : Input<Int>(value, InputType.Number, name, maxlength, placeholder, disabled, required, id, className, renderConfig),
     IntFormControl {
 
     /**
@@ -153,6 +154,7 @@ public open class Spinner(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
+ * @param id the ID of the component
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Spinner] component
@@ -168,6 +170,7 @@ public fun ComponentBase.spinner(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable Spinner.() -> Unit = {}
 ): Spinner {
@@ -183,6 +186,7 @@ public fun ComponentBase.spinner(
                 placeholder,
                 disabled,
                 required,
+                id,
                 className,
                 renderConfig
             )
@@ -203,6 +207,7 @@ public fun ComponentBase.spinner(
         set(placeholder) { updateProperty(Spinner::placeholder, it) }
         set(disabled) { updateProperty(Spinner::disabled, it) }
         set(required) { updateProperty(Spinner::required, it) }
+        set(id) { updateProperty(Spinner::id, it) }
         set(className) { updateProperty(Spinner::className, it) }
     }, setup)
     return component

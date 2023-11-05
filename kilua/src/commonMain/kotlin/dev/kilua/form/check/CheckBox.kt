@@ -38,9 +38,10 @@ public open class CheckBox(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : AbstractCheck(CheckInputType.Checkbox, value, name, disabled, required, className, renderConfig)
+) : AbstractCheck(CheckInputType.Checkbox, value, name, disabled, required, id, className, renderConfig)
 
 /**
  * Creates [CheckBox] component.
@@ -49,6 +50,7 @@ public open class CheckBox(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
+ * @param id the ID of the input
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [CheckBox] component
@@ -59,10 +61,11 @@ public fun ComponentBase.checkBox(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable CheckBox.() -> Unit = {}
 ): CheckBox {
-    val component = remember { CheckBox(value, name, disabled, required, className, renderConfig) }
+    val component = remember { CheckBox(value, name, disabled, required, id, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -74,6 +77,7 @@ public fun ComponentBase.checkBox(
         set(name) { updateProperty(CheckBox::name, it) }
         set(disabled) { updateProperty(CheckBox::disabled, it) }
         set(required) { updateProperty(CheckBox::required, it) }
+        set(id) { updateProperty(CheckBox::id, it) }
         set(className) { updateProperty(CheckBox::className, it) }
     }, setup)
     return component

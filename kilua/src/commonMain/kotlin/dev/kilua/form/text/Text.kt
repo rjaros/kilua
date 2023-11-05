@@ -44,9 +44,10 @@ public open class Text(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<String>(value, type, name, maxlength, placeholder, disabled, required, className, renderConfig),
+) : Input<String>(value, type, name, maxlength, placeholder, disabled, required, id, className, renderConfig),
     StringFormControl {
 
     override fun stringToValue(text: String?): String? {
@@ -69,6 +70,7 @@ public open class Text(
  * @param placeholder the placeholder text
  * @param disabled whether the input is disabled
  * @param required whether the input is required
+ * @param id the ID of the input
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Text] component
@@ -82,11 +84,12 @@ public fun ComponentBase.text(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable Text.() -> Unit = {}
 ): Text {
     val component =
-        remember { Text(value, type, name, maxlength, placeholder, disabled, required, className, renderConfig) }
+        remember { Text(value, type, name, maxlength, placeholder, disabled, required, id, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -101,6 +104,7 @@ public fun ComponentBase.text(
         set(placeholder) { updateProperty(Text::placeholder, it) }
         set(disabled) { updateProperty(Text::disabled, it) }
         set(required) { updateProperty(Text::required, it) }
+        set(id) { updateProperty(Text::id, it) }
         set(className) { updateProperty(Text::className, it) }
     }, setup)
     return component

@@ -63,6 +63,7 @@ public open class TextArea(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
@@ -214,6 +215,8 @@ public open class TextArea(
                 setInternalValueFromString(element.value)
             }
         }
+        @Suppress("LeakingThis")
+        if (id != null) this.id = id
     }
 
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
@@ -271,6 +274,7 @@ public open class TextArea(
  * @param placeholder the placeholder attribute of the generated HTML textarea element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
+ * @param id the ID of the component
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return A [TextArea] component.
@@ -285,6 +289,7 @@ public fun ComponentBase.textArea(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable TextArea.() -> Unit = {}
 ): TextArea {
@@ -299,6 +304,7 @@ public fun ComponentBase.textArea(
                 placeholder,
                 disabled,
                 required,
+                id,
                 className,
                 renderConfig
             )
@@ -318,6 +324,7 @@ public fun ComponentBase.textArea(
         set(placeholder) { updateProperty(TextArea::placeholder, it) }
         set(disabled) { updateProperty(TextArea::disabled, it) }
         set(required) { updateProperty(TextArea::required, it) }
+        set(id) { updateProperty(TextArea::id, it) }
         set(className) { updateProperty(TextArea::className, it) }
     }, setup)
     return component

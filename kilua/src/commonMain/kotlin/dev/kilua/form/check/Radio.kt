@@ -38,9 +38,10 @@ public open class Radio(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : AbstractCheck(CheckInputType.Radio, value, name, disabled, required, className, renderConfig)
+) : AbstractCheck(CheckInputType.Radio, value, name, disabled, required, id, className, renderConfig)
 
 /**
  * Creates [Radio] component.
@@ -49,6 +50,7 @@ public open class Radio(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
+ * @param id the ID of the input
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Radio] component
@@ -59,10 +61,11 @@ public fun ComponentBase.radio(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable Radio.() -> Unit = {}
 ): Radio {
-    val component = remember { Radio(value, name, disabled, required, className, renderConfig) }
+    val component = remember { Radio(value, name, disabled, required, id, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -74,6 +77,7 @@ public fun ComponentBase.radio(
         set(name) { updateProperty(Radio::name, it) }
         set(disabled) { updateProperty(Radio::disabled, it) }
         set(required) { updateProperty(Radio::required, it) }
+        set(id) { updateProperty(Radio::id, it) }
         set(className) { updateProperty(Radio::className, it) }
     }, setup)
     return component

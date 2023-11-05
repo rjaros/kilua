@@ -43,6 +43,7 @@ public abstract class Input<T : Any>(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<T?> = WithStateFlowDelegateImpl()
@@ -205,6 +206,8 @@ public abstract class Input<T : Any>(
                 setInternalValueFromString(element.value)
             }
         }
+        @Suppress("LeakingThis")
+        if (id != null) this.id = id
     }
 
     /**

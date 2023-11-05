@@ -47,6 +47,7 @@ public open class TriStateCheckBox(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean?> = WithStateFlowDelegateImpl()
@@ -160,6 +161,8 @@ public open class TriStateCheckBox(
         onEventDirect<Event>("click") {
             cycleValue()
         }
+        @Suppress("LeakingThis")
+        if (id != null) this.id = id
     }
 
     /**
@@ -204,6 +207,7 @@ public open class TriStateCheckBox(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
+ * @param id the ID of the input
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [TriStateCheckBox] component
@@ -214,10 +218,11 @@ public fun ComponentBase.triStateCheckBox(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable TriStateCheckBox.() -> Unit = {}
 ): TriStateCheckBox {
-    val component = remember { TriStateCheckBox(value, name, disabled, required, className, renderConfig) }
+    val component = remember { TriStateCheckBox(value, name, disabled, required, id, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -229,6 +234,7 @@ public fun ComponentBase.triStateCheckBox(
         set(name) { updateProperty(TriStateCheckBox::name, it) }
         set(disabled) { updateProperty(TriStateCheckBox::disabled, it) }
         set(required) { updateProperty(TriStateCheckBox::required, it) }
+        set(id) { updateProperty(TriStateCheckBox::id, it) }
         set(className) { updateProperty(TriStateCheckBox::className, it) }
     }, setup)
     return component

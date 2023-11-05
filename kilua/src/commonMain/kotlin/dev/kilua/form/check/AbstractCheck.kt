@@ -55,6 +55,7 @@ public abstract class AbstractCheck(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean> = WithStateFlowDelegateImpl()
@@ -162,6 +163,8 @@ public abstract class AbstractCheck(
         }
         @Suppress("LeakingThis")
         setAttribute("type", type.value)
+        @Suppress("LeakingThis")
+        if (id != null) this.id = id
     }
 
     /**

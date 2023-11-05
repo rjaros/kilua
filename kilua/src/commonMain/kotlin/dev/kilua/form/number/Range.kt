@@ -49,9 +49,10 @@ public open class Range(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<Number>(value, InputType.Range, name, null, null, disabled, required, className, renderConfig),
+) : Input<Number>(value, InputType.Range, name, null, null, disabled, required, id, className, renderConfig),
     NumberFormControl {
 
     /**
@@ -133,6 +134,7 @@ public open class Range(
  * @param name the name attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
+ * @param id the ID of the component
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Range] component
@@ -146,10 +148,11 @@ public fun ComponentBase.range(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable Range.() -> Unit = {}
 ): Range {
-    val component = remember { Range(value, min, max, step, name, disabled, required, className, renderConfig) }
+    val component = remember { Range(value, min, max, step, name, disabled, required, id, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -164,6 +167,7 @@ public fun ComponentBase.range(
         set(name) { updateProperty(Range::name, it) }
         set(disabled) { updateProperty(Range::disabled, it) }
         set(required) { updateProperty(Range::required, it) }
+        set(id) { updateProperty(Range::id, it) }
         set(className) { updateProperty(Range::className, it) }
     }, setup)
     return component

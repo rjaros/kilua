@@ -46,6 +46,7 @@ public open class RadioGroup(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
@@ -116,6 +117,8 @@ public open class RadioGroup(
     init {
         @Suppress("LeakingThis")
         withStateFlowDelegate.formControl(this)
+        @Suppress("LeakingThis")
+        if (id != null) this.id = id
     }
 
     /**
@@ -147,6 +150,7 @@ public open class RadioGroup(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
+ * @param id the ID of the input
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [RadioGroup] component
@@ -159,10 +163,11 @@ public fun ComponentBase.radioGroup(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable RadioGroup.() -> Unit = {}
 ): RadioGroup {
-    val component = remember { RadioGroup(value, inline, name, disabled, required, className, renderConfig) }
+    val component = remember { RadioGroup(value, inline, name, disabled, required, id, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -175,16 +180,22 @@ public fun ComponentBase.radioGroup(
         set(name) { updateProperty(RadioGroup::name, it) }
         set(disabled) { updateProperty(RadioGroup::disabled, it) }
         set(required) { updateProperty(RadioGroup::required, it) }
+        set(id) { updateProperty(RadioGroup::id, it) }
         set(className) { updateProperty(RadioGroup::className, it) }
     }) {
         setup(component)
         options?.forEachIndexed { index, option ->
-            fieldWithLabel(option.second, labelAfter = true, groupClassName = if (component.inline) "kilua-radio-inline" else null) {
+            fieldWithLabel(
+                option.second,
+                labelAfter = true,
+                groupClassName = if (component.inline) "kilua-radio-inline" else null
+            ) {
                 radio(
                     value = option.first == component.value,
                     name = component.name ?: "name_${component.componentId}",
                     disabled = component.disabled,
-                    required = component.required
+                    required = component.required,
+                    id = it
                 ) {
                     if (index == 0 && component.autofocus == true) {
                         this.autofocus = true

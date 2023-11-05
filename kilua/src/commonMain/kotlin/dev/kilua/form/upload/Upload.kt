@@ -63,9 +63,10 @@ public open class Upload(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<List<KFile>>(null, InputType.File, name, null, null, disabled, required, className, renderConfig),
+) : Input<List<KFile>>(null, InputType.File, name, null, null, disabled, required, id, className, renderConfig),
     KFilesFormControl {
 
     /**
@@ -197,6 +198,7 @@ public open class Upload(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
+ * @param id the ID of the input
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Upload] component
@@ -209,10 +211,11 @@ public fun ComponentBase.upload(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable Upload.() -> Unit = {}
 ): Upload {
-    val component = remember { Upload(multiple, accept, capture, name, disabled, required, className, renderConfig) }
+    val component = remember { Upload(multiple, accept, capture, name, disabled, required, id, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -226,6 +229,7 @@ public fun ComponentBase.upload(
         set(name) { updateProperty(Upload::name, it) }
         set(disabled) { updateProperty(Upload::disabled, it) }
         set(required) { updateProperty(Upload::required, it) }
+        set(id) { updateProperty(Upload::id, it) }
         set(className) { updateProperty(Upload::className, it) }
     }, setup)
     return component

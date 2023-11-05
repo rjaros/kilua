@@ -57,6 +57,7 @@ public open class Select(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
@@ -173,6 +174,8 @@ public open class Select(
         onChangeDirect {
             mapOptionsToValue()
         }
+        @Suppress("LeakingThis")
+        if (id != null) this.id = id
     }
 
     /**
@@ -294,6 +297,7 @@ public open class Select(
  * @param placeholder the placeholder for the select component
  * @param disabled whether the select is disabled
  * @param required whether the select is required
+ * @param id the ID of the select component
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Select] component
@@ -309,10 +313,11 @@ public fun ComponentBase.select(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable Select.() -> Unit = {}
 ): Select {
-    val component = remember { Select(value, multiple, size, name, disabled, required, className, renderConfig) }
+    val component = remember { Select(value, multiple, size, name, disabled, required, id, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -326,6 +331,7 @@ public fun ComponentBase.select(
         set(name) { updateProperty(Select::name, it) }
         set(disabled) { updateProperty(Select::disabled, it) }
         set(required) { updateProperty(Select::required, it) }
+        set(id) { updateProperty(Select::id, it) }
         set(className) { updateProperty(Select::className, it) }
     }) {
         setup(component)

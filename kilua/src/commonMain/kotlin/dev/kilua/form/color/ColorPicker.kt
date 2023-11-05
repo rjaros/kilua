@@ -40,9 +40,10 @@ public open class ColorPicker(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Text(value, InputType.Color, name, null, null, disabled, required, className, renderConfig)
+) : Text(value, InputType.Color, name, null, null, disabled, required, id, className, renderConfig)
 
 /**
  * Creates [ColorPicker] component.
@@ -51,6 +52,7 @@ public open class ColorPicker(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
+ * @param id the ID of the input
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [ColorPicker] component
@@ -61,10 +63,11 @@ public fun ComponentBase.colorPicker(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    id: String? = null,
     className: String? = null,
     setup: @Composable ColorPicker.() -> Unit = {}
 ): ColorPicker {
-    val component = remember { ColorPicker(value, name, disabled, required, className, renderConfig) }
+    val component = remember { ColorPicker(value, name, disabled, required, id, className, renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -76,6 +79,7 @@ public fun ComponentBase.colorPicker(
         set(name) { updateProperty(ColorPicker::name, it) }
         set(disabled) { updateProperty(ColorPicker::disabled, it) }
         set(required) { updateProperty(ColorPicker::required, it) }
+        set(id) { updateProperty(ColorPicker::id, it) }
         set(className) { updateProperty(ColorPicker::className, it) }
     }, setup)
     return component
