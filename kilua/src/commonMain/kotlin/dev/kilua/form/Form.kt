@@ -740,7 +740,7 @@ public open class Form<K : Any>(
             null
         }
         val hasInvalidField = fieldsValidations.map { it.value }.find { it.isInvalid || it.isEmptyWhenRequired } != null
-        val validation = Validation<K>(isInvalid || hasInvalidField, validMessage, invalidMessage, fieldsValidations)
+        val validation = Validation<K>(true, isInvalid || hasInvalidField, validMessage, invalidMessage, fieldsValidations)
         if (updateState) _mutableValidationStateFlow.value = validation
         return !validation.isInvalid
     }

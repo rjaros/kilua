@@ -38,6 +38,7 @@ public data class FieldValidation(
  * Result of the form validation.
  */
 public data class Validation<K : Any>(
+    val wasValidated: Boolean = false,
     val isInvalid: Boolean = false,
     val validMessage: String? = null,
     val invalidMessage: String? = null,
