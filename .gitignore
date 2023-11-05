@@ -4,3 +4,5 @@ build
 refresh.sh
 refreshW.sh
 
+/bsrefresh.sh
+/bsrefreshW.sh
