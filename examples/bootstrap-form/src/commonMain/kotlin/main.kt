@@ -91,7 +91,7 @@ class App : Application() {
                         }.bind("username", {
                             "Username must be at least 10 characters long."
                         }) {
-                            it.value == null || it.value!!.length > 10
+                            it.value == null || it.value!!.length >= 10
                         }.also {
                             div("invalid-feedback") {
                                 +(validation["username"]?.invalidMessage ?: "Please choose a username.")
