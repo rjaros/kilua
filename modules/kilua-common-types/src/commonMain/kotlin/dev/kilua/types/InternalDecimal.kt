@@ -19,17 +19,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package dev.kilua.types
 
-import kotlinx.serialization.Serializable
-
 /**
- * The uploaded file representation.
+ * A decimal number type.
  */
-@Serializable
-public data class KFile(
-    val name: String,
-    val size: Int,
-    val content: String? = null
-)
+public expect class InternalDecimal

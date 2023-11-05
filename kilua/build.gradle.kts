@@ -34,6 +34,7 @@ kotlin {
                 api(libs.kotlinx.coroutines)
                 api(libs.kotlinx.serialization.json)
                 api(libs.kotlinx.datetime)
+                api(project(":modules:kilua-common-types"))
                 implementation(npm("kilua-assets", libs.versions.npm.kilua.assets.get()))
                 implementation(npm("css-loader", libs.versions.css.loader.get()))
                 implementation(npm("style-loader", libs.versions.style.loader.get()))

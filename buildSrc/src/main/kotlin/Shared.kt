@@ -1,3 +1,4 @@
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
@@ -47,6 +48,19 @@ fun KotlinMultiplatformExtension.kotlinWasmTargets(buildTarget: String, isInIdea
                 testTask {
                     useMocha()
                 }
+            }
+        }
+    }
+}
+
+fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = "17") {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(target))
+    }
+    jvm {
+        compilations.configureEach {
+            compilerOptions.configure {
+                freeCompilerArgs.add("-Xjsr305=strict")
             }
         }
     }
