@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
+    kotlin("multiplatform")
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.compose)
     id("maven-publish")
@@ -10,16 +9,6 @@ plugins {
 }
 
 val isInIdea = System.getProperty("idea.vendor.name") != null
-
-group = "dev.kilua"
-version = libs.versions.kilua.get()
-
-allprojects {
-    if (hasProperty("SNAPSHOT")) {
-        version = "$version-SNAPSHOT"
-    }
-}
-
 val buildTarget: String by project
 
 rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
@@ -33,43 +22,11 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
     }
 }
 
-@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     explicitApi()
-    if (buildTarget == "js" || !isInIdea) {
-        js(IR) {
-            useEsModules()
-            browser {
-                testTask {
-                    useKarma {
-                        useChromeHeadless()
-                    }
-                }
-            }
-            nodejs {
-                testTask {
-                    useMocha()
-                }
-            }
-        }
-    }
-    if (buildTarget == "wasm" || !isInIdea) {
-        wasmJs {
-            useEsModules()
-            browser {
-                testTask {
-                    useKarma {
-                        useChromeHeadlessWasmGc()
-                    }
-                }
-            }
-            nodejs {
-                testTask {
-                    useMocha()
-                }
-            }
-        }
-    }
+    compilerOptions()
+    kotlinJsTargets(buildTarget, isInIdea)
+    kotlinWasmTargets(buildTarget, isInIdea)
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -89,7 +46,7 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation(npm("html-differ", libs.versions.html.differ.get()))
+                implementation(project(":modules:kilua-testutils"))
             }
         }
         if (buildTarget == "js" || !isInIdea) {

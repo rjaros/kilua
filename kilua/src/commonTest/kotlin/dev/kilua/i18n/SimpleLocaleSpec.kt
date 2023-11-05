@@ -22,7 +22,7 @@
 
 package dev.kilua.i18n
 
-import dev.kilua.SimpleSpec
+import dev.kilua.test.SimpleSpec
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -22,7 +22,7 @@
 
 package dev.kilua.form.upload
 
-import dev.kilua.DomSpec
+import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import kotlin.test.Test
 

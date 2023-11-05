@@ -26,7 +26,7 @@
 package dev.kilua.compose
 
 import androidx.compose.runtime.Applier
-import dev.kilua.SimpleSpec
+import dev.kilua.test.SimpleSpec
 import dev.kilua.core.Component
 import dev.kilua.core.StringRenderConfig
 import dev.kilua.core.SafeDomFactory

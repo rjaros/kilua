@@ -22,7 +22,7 @@
 
 package dev.kilua.form.select
 
-import dev.kilua.DomSpec
+import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.utils.listOfPairs
 import kotlin.test.Test

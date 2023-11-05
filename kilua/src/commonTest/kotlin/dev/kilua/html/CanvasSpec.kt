@@ -22,9 +22,9 @@
 
 package dev.kilua.html
 
-import dev.kilua.DomSpec
+import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.normalizeHtml
+import dev.kilua.test.normalizeHtml
 import dev.kilua.utils.jsString
 import org.w3c.dom.ImageData
 import kotlin.test.Test

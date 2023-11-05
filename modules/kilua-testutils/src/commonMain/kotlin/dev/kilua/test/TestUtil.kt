@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua
+package dev.kilua.test
 
 import dev.kilua.compose.Root
 import dev.kilua.externals.Object
@@ -35,21 +35,21 @@ import kotlinx.dom.clear
 import kotlin.js.Promise
 import kotlin.test.DefaultAsserter.assertTrue
 
-val testScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+public val testScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
-interface TestSpec {
+public interface TestSpec {
 
-    fun beforeTest()
+    public fun beforeTest()
 
-    fun afterTest()
+    public fun afterTest()
 
-    fun run(code: () -> Unit) {
+    public fun run(code: () -> Unit) {
         beforeTest()
         code()
         afterTest()
     }
 
-    fun runAsync(code: suspend () -> Unit): Promise<Object> {
+    public fun runAsync(code: suspend () -> Unit): Promise<Object> {
         beforeTest()
         return testScope.promise {
             code()
@@ -59,7 +59,7 @@ interface TestSpec {
     }
 }
 
-interface SimpleSpec : TestSpec {
+public interface SimpleSpec : TestSpec {
 
     override fun beforeTest() {
     }
@@ -69,11 +69,11 @@ interface SimpleSpec : TestSpec {
 
 }
 
-interface DomSpec : TestSpec {
+public interface DomSpec : TestSpec {
 
-    fun getTestId() = "test"
+    public fun getTestId(): String = "test"
 
-    fun runWhenDomAvailable(code: () -> Unit) {
+    public fun runWhenDomAvailable(code: () -> Unit) {
         beforeTest()
         if (isDom) {
             run(code)
@@ -81,7 +81,7 @@ interface DomSpec : TestSpec {
         afterTest()
     }
 
-    fun runWhenDomAvailableAsync(code: suspend () -> Unit): Promise<Object> {
+    public fun runWhenDomAvailableAsync(code: suspend () -> Unit): Promise<Object> {
         beforeTest()
         return testScope.promise {
             if (isDom) code()
@@ -108,7 +108,7 @@ interface DomSpec : TestSpec {
         Root.disposeAllRoots()
     }
 
-    fun assertEqualsHtml(
+    public fun assertEqualsHtml(
         expected: String?,
         actual: String?,
         message: String? = null,
@@ -125,11 +125,11 @@ interface DomSpec : TestSpec {
         )
     }
 
-    companion object {
+    public companion object {
 
         private val htmlDiffer = HtmlDiffer("bem")
 
-        fun htmlDifferEquals(expected: String?, actual: String?): Boolean {
+        public fun htmlDifferEquals(expected: String?, actual: String?): Boolean {
             return if (expected.isNullOrBlank() || actual.isNullOrBlank()) {
                 false
             } else {
@@ -144,7 +144,7 @@ interface DomSpec : TestSpec {
  * Removes auto-generated IDs from the HTML.
  * This helps with highlighting HTML differences in test assertions.
  */
-fun normalizeHtml(raw: String): String {
+public fun normalizeHtml(raw: String): String {
     return raw
         .replace("<", "\n<")
         .replace(">", ">\n")
@@ -155,6 +155,6 @@ fun normalizeHtml(raw: String): String {
 }
 
 /** @see [normalizeHtml] */
-fun normalizeHtml(raw: String?): String? {
+public fun normalizeHtml(raw: String?): String? {
     return if (raw == null) null else normalizeHtml(raw)
 }

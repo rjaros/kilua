@@ -22,9 +22,9 @@
 
 package dev.kilua.form.time
 
-import dev.kilua.DomSpec
+import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.normalizeHtml
+import dev.kilua.test.normalizeHtml
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus

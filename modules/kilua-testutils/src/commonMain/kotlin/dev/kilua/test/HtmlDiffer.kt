@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-package dev.kilua
+package dev.kilua.test
 
-external class HtmlDiffer(preset: String = definedExternally) {
-    fun isEqual(html1: String, html2: String): Boolean
+public external class HtmlDiffer(preset: String = definedExternally) {
+    public fun isEqual(html1: String, html2: String): Boolean
 }

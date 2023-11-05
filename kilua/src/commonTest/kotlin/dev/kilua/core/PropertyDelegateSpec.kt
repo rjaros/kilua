@@ -22,7 +22,7 @@
 
 package dev.kilua.core
 
-import dev.kilua.SimpleSpec
+import dev.kilua.test.SimpleSpec
 import dev.kilua.utils.nativeMapOf
 import kotlin.test.Test
 import kotlin.test.assertEquals

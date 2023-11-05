@@ -26,7 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import dev.kilua.DomSpec
+import dev.kilua.test.DomSpec
 import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
 import dev.kilua.html.Button
@@ -38,7 +38,7 @@ import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.px
 import dev.kilua.html.unaryPlus
-import dev.kilua.normalizeHtml
+import dev.kilua.test.normalizeHtml
 import kotlinx.coroutines.delay
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -22,9 +22,9 @@
 
 package dev.kilua.form.number
 
-import dev.kilua.DomSpec
+import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.normalizeHtml
+import dev.kilua.test.normalizeHtml
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

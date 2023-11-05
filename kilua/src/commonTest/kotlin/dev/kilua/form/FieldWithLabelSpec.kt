@@ -22,7 +22,7 @@
 
 package dev.kilua.form
 
-import dev.kilua.DomSpec
+import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.form.check.CheckBox
 import dev.kilua.form.check.checkBox
