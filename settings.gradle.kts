@@ -24,3 +24,4 @@ rootProject.name = "kilua"
 include(":kilua")
 include(":kilua-assets")
 include(":examples:playground")
+include(":examples:bootstrap-form")
