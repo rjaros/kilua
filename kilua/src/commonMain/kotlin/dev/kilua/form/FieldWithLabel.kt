@@ -23,13 +23,14 @@
 package dev.kilua.form
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import dev.kilua.core.ComponentBase
 import dev.kilua.html.div
 import dev.kilua.html.label
 import dev.kilua.html.unaryPlus
 
 /**
- * Creates a given fields with a connected label.
+ * Creates a block with an associated label.
  * @param label the label text
  * @param className the optional CSS class name for the label
  * @param labelAfter whether the label should be placed after the field
@@ -37,50 +38,44 @@ import dev.kilua.html.unaryPlus
  * @param wrapperClassName the optional CSS class name for the direct wrapper of the field
  */
 @Composable
-public fun <C : FormControl<*>> ComponentBase.fieldWithLabel(
+public fun ComponentBase.fieldWithLabel(
     label: String,
     className: String? = null,
     labelAfter: Boolean = false,
     groupClassName: String? = null,
     wrapperClassName: String? = null,
-    factory: @Composable ComponentBase.() -> C,
-): C {
+    content: @Composable ComponentBase.(id: String) -> Unit,
+) {
     @Composable
-    fun ComponentBase.fieldFactory(id: String): C {
-        lateinit var input: C
+    fun ComponentBase.generateContent(id: String) {
         if (wrapperClassName != null) {
             div(wrapperClassName) {
-                input = factory().also { it.id = id }
+                content(id)
             }
         } else {
-            input = factory().also { it.id = id }
+            content(id)
         }
-        return input
     }
 
     @Composable
-    fun ComponentBase.labelFactory(id: String): C {
-        lateinit var input: C
+    fun ComponentBase.generateLabelWithContent(id: String) {
         if (labelAfter) {
-            input = fieldFactory(id)
+            generateContent(id)
             label(id, className) { +label }
         } else {
             label(id, className) { +label }
-            input = fieldFactory(id)
+            generateContent(id)
         }
-        return input
     }
 
-    lateinit var input: C
-    val forId = "for_id_${FieldWithLabel.forIdCounter++}"
+    val forId = remember { "for_id_${FieldWithLabel.forIdCounter++}" }
     if (groupClassName != null) {
         div(groupClassName) {
-            input = labelFactory(forId)
+            generateLabelWithContent(forId)
         }
     } else {
-        input = labelFactory(forId)
+        generateLabelWithContent(forId)
     }
-    return input
 }
 
 internal object FieldWithLabel {

@@ -22,21 +22,10 @@
 
 package dev.kilua.form
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.form.check.CheckBox
-import dev.kilua.form.check.checkBox
-import dev.kilua.form.text.Text
 import dev.kilua.form.text.text
-import dev.kilua.types.KFile
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.LocalTime
-import kotlinx.serialization.Serializable
+import dev.kilua.test.DomSpec
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
 class FieldWithLabelSpec : DomSpec {
 
@@ -45,7 +34,7 @@ class FieldWithLabelSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 fieldWithLabel("A label", "form-label", groupClassName = "group", wrapperClassName = "wrapper") {
-                    text()
+                    text(id = it)
                 }
             }
             assertEqualsHtml(
@@ -61,7 +50,7 @@ class FieldWithLabelSpec : DomSpec {
         run {
             val root = root {
                 fieldWithLabel("A label", "form-label", groupClassName = "group", wrapperClassName = "wrapper") {
-                    text()
+                    text(id = it)
                 }
             }
             assertEqualsHtml(
@@ -77,8 +66,14 @@ class FieldWithLabelSpec : DomSpec {
     fun fieldWithLabelAfter() {
         runWhenDomAvailable {
             val root = root("test") {
-                fieldWithLabel("A label", "form-label", labelAfter = true, groupClassName = "group", wrapperClassName = "wrapper") {
-                    text()
+                fieldWithLabel(
+                    "A label",
+                    "form-label",
+                    labelAfter = true,
+                    groupClassName = "group",
+                    wrapperClassName = "wrapper"
+                ) {
+                    text(id = it)
                 }
             }
             assertEqualsHtml(
@@ -93,8 +88,14 @@ class FieldWithLabelSpec : DomSpec {
     fun fieldWithLabelAfterToString() {
         run {
             val root = root {
-                fieldWithLabel("A label", "form-label", labelAfter = true, groupClassName = "group", wrapperClassName = "wrapper") {
-                    text()
+                fieldWithLabel(
+                    "A label",
+                    "form-label",
+                    labelAfter = true,
+                    groupClassName = "group",
+                    wrapperClassName = "wrapper"
+                ) {
+                    text(id = it)
                 }
             }
             assertEqualsHtml(
