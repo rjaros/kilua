@@ -201,28 +201,6 @@ public interface TagStyle<E : HTMLElement> {
     public var color: Color?
 
     /**
-     * Text color for the current component given in hex format (write only).
-     *
-     * This property gives a convenient way to set the value of [color] property e.g.:
-     *
-     * c.colorHex = 0x00ff00
-     *
-     * The value read from this property is always null.
-     */
-    public var colorHex: Int?
-
-    /**
-     * Text color for the current component given with named constant (write only).
-     *
-     * This property gives a convenient way to set the value of [color] property e.g.:
-     *
-     * c.colorName = C.Green
-     *
-     * The value read from this property is always null.
-     */
-    public var colorName: C?
-
-    /**
      * Opacity of the current component.
      */
     public var opacity: Double?

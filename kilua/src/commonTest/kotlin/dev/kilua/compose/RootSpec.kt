@@ -26,18 +26,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import dev.kilua.test.DomSpec
 import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
 import dev.kilua.html.Button
 import dev.kilua.html.ButtonType
-import dev.kilua.html.C
 import dev.kilua.html.Color
 import dev.kilua.html.TextAlign
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.px
 import dev.kilua.html.unaryPlus
+import dev.kilua.test.DomSpec
 import dev.kilua.test.normalizeHtml
 import kotlinx.coroutines.delay
 import kotlin.test.Test
@@ -52,7 +51,7 @@ class RootSpec : DomSpec {
                 div("a_class") {
                     id = "main"
                     textAlign = TextAlign.Center
-                    border = Border(1.px, BorderStyle.Dotted, Color.name(C.Red))
+                    border = Border(1.px, BorderStyle.Dotted, Color.Red)
                     setAttribute("custom", "value")
                     setStyle("padding-top", "2px")
                     div {
@@ -76,7 +75,7 @@ class RootSpec : DomSpec {
                 div("a_class") {
                     id = "main"
                     textAlign = TextAlign.Center
-                    border = Border(1.px, BorderStyle.Dotted, Color.name(C.Red))
+                    border = Border(1.px, BorderStyle.Dotted, Color.Red)
                     setAttribute("custom", "value")
                     setStyle("padding-top", "2px")
                     div {

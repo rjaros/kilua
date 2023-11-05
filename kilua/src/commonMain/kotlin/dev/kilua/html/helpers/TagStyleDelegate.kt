@@ -334,36 +334,6 @@ public open class TagStyleDelegateImpl<E : HTMLElement>(
     }
 
     /**
-     * Text color for the current component given in hex format (write only).
-     *
-     * This property gives a convenient way to set the value of [color] property e.g.:
-     *
-     * c.colorHex = 0x00ff00
-     *
-     * The value read from this property is always null.
-     */
-    override var colorHex: Int?
-        get() = null
-        set(value) {
-            color = if (value != null) Color.hex(value) else null
-        }
-
-    /**
-     * Text color for the current component given with named constant (write only).
-     *
-     * This property gives a convenient way to set the value of [color] property e.g.:
-     *
-     * c.colorName = Col.Green
-     *
-     * The value read from this property is always null.
-     */
-    override var colorName: C?
-        get() = null
-        set(value) {
-            color = if (value != null) Color.name(value) else null
-        }
-
-    /**
      * Opacity of the current component.
      */
     override var opacity: Double? by updatingProperty(skipUpdate = skipUpdates) {

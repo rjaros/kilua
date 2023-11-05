@@ -71,157 +71,6 @@ public enum class OutlineStyle {
 }
 
 /**
- * Definitions of CSS color names.
- */
-public enum class C {
-    Aliceblue,
-    Antiquewhite,
-    Aqua,
-    Aquamarine,
-    Azure,
-    Beige,
-    Bisque,
-    Black,
-    Blanchedalmond,
-    Blue,
-    Blueviolet,
-    Brown,
-    Burlywood,
-    Cadetblue,
-    Chartreuse,
-    Chocolate,
-    Coral,
-    Cornflowerblue,
-    Cornsilk,
-    Crimson,
-    Cyan,
-    Darkblue,
-    Darkcyan,
-    Darkgoldenrod,
-    Darkgray,
-    Darkgreen,
-    Darkkhaki,
-    Darkmagenta,
-    Darkolivegreen,
-    Darkorange,
-    Darkorchid,
-    Darkred,
-    Darksalmon,
-    Darkseagreen,
-    Darkslateblue,
-    Darkslategray,
-    Darkturquoise,
-    Darkviolet,
-    Deeppink,
-    Deepskyblue,
-    Dimgray,
-    Dodgerblue,
-    Firebrick,
-    Floralwhite,
-    Forestgreen,
-    Fuchsia,
-    Gainsboro,
-    Ghostwhite,
-    Gold,
-    Goldenrod,
-    Gray,
-    Green,
-    Greenyellow,
-    Honeydew,
-    Hotpink,
-    Indianred,
-    Indigo,
-    Ivory,
-    Khaki,
-    Lavender,
-    Lavenderblush,
-    Lawngreen,
-    Lemonchiffon,
-    Lightblue,
-    Lightcoral,
-    Lightcyan,
-    Lightgoldenrodyellow,
-    Lightgray,
-    Lightgreen,
-    Lightpink,
-    Lightsalmon,
-    Lightseagreen,
-    Lightskyblue,
-    Lightslategray,
-    Lightsteelblue,
-    Lightyellow,
-    Lime,
-    Limegreen,
-    Linen,
-    Magenta,
-    Maroon,
-    Mediumaquamarine,
-    Mediumblue,
-    Mediumorchid,
-    Mediumpurple,
-    Mediumseagreen,
-    Mediumslateblue,
-    Mediumspringgreen,
-    Mediumturquoise,
-    Mediumvioletred,
-    Midnightblue,
-    Mintcream,
-    Mistyrose,
-    Moccasin,
-    Navajowhite,
-    Navy,
-    Oldlace,
-    Olive,
-    Olivedrab,
-    Orange,
-    Orangered,
-    Orchid,
-    Palegoldenrod,
-    Palegreen,
-    Paleturquoise,
-    Palevioletred,
-    Papayawhip,
-    Peachpuff,
-    Peru,
-    Pink,
-    Plum,
-    Powderblue,
-    Purple,
-    Rebeccapurple,
-    Red,
-    Rosybrown,
-    Royalblue,
-    Saddlebrown,
-    Salmon,
-    Sandybrown,
-    Seagreen,
-    Seashell,
-    Sienna,
-    Silver,
-    Skyblue,
-    Slateblue,
-    Slategray,
-    Snow,
-    Springgreen,
-    Steelblue,
-    Tan,
-    Teal,
-    Thistle,
-    Tomato,
-    Turquoise,
-    Violet,
-    Wheat,
-    White,
-    Whitesmoke,
-    Yellow,
-    Yellowgreen;
-
-    public val value: String = name.toKebabCase()
-    override fun toString(): String = value
-
-}
-
-/**
  * Definitions of CSS background size.
  */
 public enum class BgSize {
@@ -885,14 +734,6 @@ public open class Color(protected val color: String? = null) {
         }
 
         /**
-         * Creates CSS Color with color given with named constant.
-         * @param color color named constant
-         */
-        public fun name(color: C): Color {
-            return Color(color.value)
-        }
-
-        /**
          * Creates CSS Color with red, green and blue components
          */
         public fun rgb(red: Int, green: Int, blue: Int): Color {
@@ -905,6 +746,148 @@ public open class Color(protected val color: String? = null) {
         public fun rgba(red: Int, green: Int, blue: Int, alpha: Int): Color {
             return Color("#" + listOf(red, green, blue, alpha).joinToString("") { it.toString(16).padStart(2, '0') })
         }
+
+        public val Aliceblue: Color = Color("aliceblue")
+        public val Antiquewhite: Color = Color("antiquewhite")
+        public val Aqua: Color = Color("aqua")
+        public val Aquamarine: Color = Color("aquamarine")
+        public val Azure: Color = Color("azure")
+        public val Beige: Color = Color("beige")
+        public val Bisque: Color = Color("bisque")
+        public val Black: Color = Color("black")
+        public val Blanchedalmond: Color = Color("blanchedalmond")
+        public val Blue: Color = Color("blue")
+        public val Blueviolet: Color = Color("blueviolet")
+        public val Brown: Color = Color("brown")
+        public val Burlywood: Color = Color("burlywood")
+        public val Cadetblue: Color = Color("cadetblue")
+        public val Chartreuse: Color = Color("chartreuse")
+        public val Chocolate: Color = Color("chocolate")
+        public val Coral: Color = Color("coral")
+        public val Cornflowerblue: Color = Color("cornflowerblue")
+        public val Cornsilk: Color = Color("cornsilk")
+        public val Crimson: Color = Color("crimson")
+        public val Cyan: Color = Color("cyan")
+        public val Darkblue: Color = Color("darkblue")
+        public val Darkcyan: Color = Color("darkcyan")
+        public val Darkgoldenrod: Color = Color("darkgoldenrod")
+        public val Darkgray: Color = Color("darkgray")
+        public val Darkgreen: Color = Color("darkgreen")
+        public val Darkkhaki: Color = Color("darkkhaki")
+        public val Darkmagenta: Color = Color("darkmagenta")
+        public val Darkolivegreen: Color = Color("darkolivegreen")
+        public val Darkorange: Color = Color("darkorange")
+        public val Darkorchid: Color = Color("darkorchid")
+        public val Darkred: Color = Color("darkred")
+        public val Darksalmon: Color = Color("darksalmon")
+        public val Darkseagreen: Color = Color("darkseagreen")
+        public val Darkslateblue: Color = Color("darkslateblue")
+        public val Darkslategray: Color = Color("darkslategray")
+        public val Darkturquoise: Color = Color("darkturquoise")
+        public val Darkviolet: Color = Color("darkviolet")
+        public val Deeppink: Color = Color("deeppink")
+        public val Deepskyblue: Color = Color("deepskyblue")
+        public val Dimgray: Color = Color("dimgray")
+        public val Dodgerblue: Color = Color("dodgerblue")
+        public val Firebrick: Color = Color("firebrick")
+        public val Floralwhite: Color = Color("floralwhite")
+        public val Forestgreen: Color = Color("forestgreen")
+        public val Fuchsia: Color = Color("fuchsia")
+        public val Gainsboro: Color = Color("gainsboro")
+        public val Ghostwhite: Color = Color("ghostwhite")
+        public val Gold: Color = Color("gold")
+        public val Goldenrod: Color = Color("goldenrod")
+        public val Gray: Color = Color("gray")
+        public val Green: Color = Color("green")
+        public val Greenyellow: Color = Color("greenyellow")
+        public val Honeydew: Color = Color("honeydew")
+        public val Hotpink: Color = Color("hotpink")
+        public val Indianred: Color = Color("indianred")
+        public val Indigo: Color = Color("indigo")
+        public val Ivory: Color = Color("ivory")
+        public val Khaki: Color = Color("khaki")
+        public val Lavender: Color = Color("lavender")
+        public val Lavenderblush: Color = Color("lavenderblush")
+        public val Lawngreen: Color = Color("lawngreen")
+        public val Lemonchiffon: Color = Color("lemonchiffon")
+        public val Lightblue: Color = Color("lightblue")
+        public val Lightcoral: Color = Color("lightcoral")
+        public val Lightcyan: Color = Color("lightcyan")
+        public val Lightgoldenrodyellow: Color = Color("lightgoldenrodyellow")
+        public val Lightgray: Color = Color("lightgray")
+        public val Lightgreen: Color = Color("lightgreen")
+        public val Lightpink: Color = Color("lightpink")
+        public val Lightsalmon: Color = Color("lightsalmon")
+        public val Lightseagreen: Color = Color("lightseagreen")
+        public val Lightskyblue: Color = Color("lightskyblue")
+        public val Lightslategray: Color = Color("lightslategray")
+        public val Lightsteelblue: Color = Color("lightsteelblue")
+        public val Lightyellow: Color = Color("lightyellow")
+        public val Lime: Color = Color("lime")
+        public val Limegreen: Color = Color("limegreen")
+        public val Linen: Color = Color("linen")
+        public val Magenta: Color = Color("magenta")
+        public val Maroon: Color = Color("maroon")
+        public val Mediumaquamarine: Color = Color("mediumaquamarine")
+        public val Mediumblue: Color = Color("mediumblue")
+        public val Mediumorchid: Color = Color("mediumorchid")
+        public val Mediumpurple: Color = Color("mediumpurple")
+        public val Mediumseagreen: Color = Color("mediumseagreen")
+        public val Mediumslateblue: Color = Color("mediumslateblue")
+        public val Mediumspringgreen: Color = Color("mediumspringgreen")
+        public val Mediumturquoise: Color = Color("mediumturquoise")
+        public val Mediumvioletred: Color = Color("mediumvioletred")
+        public val Midnightblue: Color = Color("midnightblue")
+        public val Mintcream: Color = Color("mintcream")
+        public val Mistyrose: Color = Color("mistyrose")
+        public val Moccasin: Color = Color("moccasin")
+        public val Navajowhite: Color = Color("navajowhite")
+        public val Navy: Color = Color("navy")
+        public val Oldlace: Color = Color("oldlace")
+        public val Olive: Color = Color("olive")
+        public val Olivedrab: Color = Color("olivedrab")
+        public val Orange: Color = Color("orange")
+        public val Orangered: Color = Color("orangered")
+        public val Orchid: Color = Color("orchid")
+        public val Palegoldenrod: Color = Color("palegoldenrod")
+        public val Palegreen: Color = Color("palegreen")
+        public val Paleturquoise: Color = Color("paleturquoise")
+        public val Palevioletred: Color = Color("palevioletred")
+        public val Papayawhip: Color = Color("papayawhip")
+        public val Peachpuff: Color = Color("peachpuff")
+        public val Peru: Color = Color("peru")
+        public val Pink: Color = Color("pink")
+        public val Plum: Color = Color("plum")
+        public val Powderblue: Color = Color("powderblue")
+        public val Purple: Color = Color("purple")
+        public val Rebeccapurple: Color = Color("rebeccapurple")
+        public val Red: Color = Color("red")
+        public val Rosybrown: Color = Color("rosybrown")
+        public val Royalblue: Color = Color("royalblue")
+        public val Saddlebrown: Color = Color("saddlebrown")
+        public val Salmon: Color = Color("salmon")
+        public val Sandybrown: Color = Color("sandybrown")
+        public val Seagreen: Color = Color("seagreen")
+        public val Seashell: Color = Color("seashell")
+        public val Sienna: Color = Color("sienna")
+        public val Silver: Color = Color("silver")
+        public val Skyblue: Color = Color("skyblue")
+        public val Slateblue: Color = Color("slateblue")
+        public val Slategray: Color = Color("slategray")
+        public val Snow: Color = Color("snow")
+        public val Springgreen: Color = Color("springgreen")
+        public val Steelblue: Color = Color("steelblue")
+        public val Tan: Color = Color("tan")
+        public val Teal: Color = Color("teal")
+        public val Thistle: Color = Color("thistle")
+        public val Tomato: Color = Color("tomato")
+        public val Turquoise: Color = Color("turquoise")
+        public val Violet: Color = Color("violet")
+        public val Wheat: Color = Color("wheat")
+        public val White: Color = Color("white")
+        public val Whitesmoke: Color = Color("whitesmoke")
+        public val Yellow: Color = Color("yellow")
+        public val Yellowgreen: Color = Color("yellowgreen")
     }
 }
 
