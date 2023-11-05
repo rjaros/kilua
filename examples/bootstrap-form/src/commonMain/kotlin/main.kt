@@ -38,6 +38,18 @@ import dev.kilua.startApplication
 import dev.kilua.utils.console
 import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.rem
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class UserForm(
+    val firstName: String? = null,
+    val lastName: String? = null,
+    val username: String? = null,
+    val city: String? = null,
+    val state: String? = null,
+    val zip: String? = null,
+    val agree: Boolean = false
+)
 
 class App : Application() {
 
@@ -46,7 +58,7 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
-                form(novalidate = true, className = "row g-3 needs-validation") {
+                form<UserForm>(novalidate = true, className = "row g-3 needs-validation") {
                     val validation by validationStateFlow.collectAsState()
 
                     if (validation.wasValidated) {
@@ -64,17 +76,15 @@ class App : Application() {
                     }
 
                     fieldWithLabel("First name", "form-label", groupClassName = "col-md-4") {
-                        text("Mark", required = true, className = "form-control").bind("firstName").also {
-                            div("valid-feedback") {
-                                +"Looks good!"
-                            }
+                        text("Mark", required = true, id = it, className = "form-control").bind(UserForm::firstName)
+                        div("valid-feedback") {
+                            +"Looks good!"
                         }
                     }
                     fieldWithLabel("Last name", "form-label", groupClassName = "col-md-4") {
-                        text("Otto", required = true, className = "form-control").bind("lastName").also {
-                            div("valid-feedback") {
-                                +"Looks good!"
-                            }
+                        text("Otto", required = true, id = it, className = "form-control").bind(UserForm::lastName)
+                        div("valid-feedback") {
+                            +"Looks good!"
                         }
                     }
                     fieldWithLabel(
@@ -85,45 +95,41 @@ class App : Application() {
                             id = "inputGroupPrepend"
                             +"@"
                         }
-                        val invalidClass = if (validation["username"]?.isInvalid == true) "is-invalid" else null
-                        text(required = true, className = "form-control" % invalidClass) {
+                        val invalidClass = if (validation[UserForm::username]?.isInvalid == true) "is-invalid" else null
+                        text(required = true, id = it, className = "form-control" % invalidClass) {
                             ariaDescribedby = "inputGroupPrepend"
-                        }.bind("username", {
+                        }.bind(UserForm::username, {
                             "Username must be at least 10 characters long."
-                        }) {
-                            it.value == null || it.value!!.length >= 10
-                        }.also {
-                            div("invalid-feedback") {
-                                +(validation["username"]?.invalidMessage ?: "Please choose a username.")
-                            }
+                        }) { text ->
+                            text.value == null || text.value!!.length >= 10
+                        }
+                        div("invalid-feedback") {
+                            +(validation[UserForm::username]?.invalidMessage ?: "Please choose a username.")
                         }
                     }
                     fieldWithLabel("City", "form-label", groupClassName = "col-md-6") {
-                        text(required = true, className = "form-control").bind("city").also {
-                            div("invalid-feedback") {
-                                +"Please provide a valid city."
-                            }
+                        text(required = true, id = it, className = "form-control").bind(UserForm::city)
+                        div("invalid-feedback") {
+                            +"Please provide a valid city."
                         }
                     }
                     fieldWithLabel("State", "form-label", groupClassName = "col-md-3") {
-                        select(listOfPairs("Alaska"), className = "form-select", placeholder = "Choose...")
-                            .bind("state").also {
-                                div("invalid-feedback") {
-                                    +"Please select a valid state."
-                                }
-                            }
+                        select(listOfPairs("Alaska"), id = it, className = "form-select", placeholder = "Choose...")
+                            .bind(UserForm::state)
+                        div("invalid-feedback") {
+                            +"Please select a valid state."
+                        }
                     }
                     fieldWithLabel("Zip", "form-label", groupClassName = "col-md-3") {
-                        text(required = true, className = "form-control").bind("zip").also {
-                            div("invalid-feedback") {
-                                +"Please provide a valid zip."
-                            }
+                        text(required = true, id = it, className = "form-control").bind(UserForm::zip)
+                        div("invalid-feedback") {
+                            +"Please provide a valid zip."
                         }
                     }
                     div("col-12") {
                         div("form-check") {
                             fieldWithLabel("Agree to terms and conditions", "form-check-label", labelAfter = true) {
-                                checkBox(className = "form-check-input", required = true).bind("agree")
+                                checkBox(className = "form-check-input", required = true, id = it).bind(UserForm::agree)
                             }
                             div("invalid-feedback") {
                                 +"You must agree before submitting."
@@ -133,14 +139,15 @@ class App : Application() {
                     div("col-12") {
                         button("Submit form", className = "btn btn-primary") {
                             onClick {
-                                val x = this@form.validate()
-                                console.log(x.toString())
+                                val isValid = this@form.validate()
+                                console.log("isValid = $isValid")
                                 this@form.className = "row g-3 was-validated"
-                                val data = this@form.getData()
-                                console.log(data.toString())
+                                val userForm = this@form.getData()
+                                console.log(userForm.toString())
                             }
                         }
                     }
+//                    Dynamic validation
 //                    stateFlow.onEach {
 //                        this.validate()
 //                    }.launchIn(KiluaScope)
