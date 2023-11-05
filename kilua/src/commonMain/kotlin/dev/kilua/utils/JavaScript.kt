@@ -38,7 +38,7 @@ public expect annotation class JsNonModule()
  * Helper function for JS/Wasm compatibility.
  */
 @Suppress("NOTHING_TO_INLINE")
-public inline fun <T> useCssModule(cssModule: T) {
+public inline fun <T> useCssModule(@Suppress("UNUSED_PARAMETER") cssModule: T) {
     // empty body
 }
 
