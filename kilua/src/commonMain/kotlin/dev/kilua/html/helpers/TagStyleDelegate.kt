@@ -46,10 +46,10 @@ public interface TagStyleDelegate<E : HTMLElement> : TagStyle<E> {
  */
 public open class TagStyleDelegateImpl<E : HTMLElement>(
     protected val skipUpdates: Boolean,
-    protected val styles: MutableMap<String, Any> = nativeMapOf()
-) : TagStyleDelegate<E>, PropertyDelegate(styles) {
+    onSetCallback: ((Map<String, Any>) -> Unit)? = null
+) : TagStyleDelegate<E>, PropertyDelegate(nativeMapOf(), onSetCallback) {
 
-    public override val stylesMap: Map<String, Any> = styles
+    public override val stylesMap: Map<String, Any> = propertyValues
 
     protected lateinit var element: E
     protected var elementNullable: E? = null
@@ -811,24 +811,24 @@ public open class TagStyleDelegateImpl<E : HTMLElement>(
     }
 
     override fun setStyle(name: String, value: String?) {
-        if (styles[name] != value) {
+        if (propertyValues[name] != value) {
             if (value != null) {
-                styles[name] = value
+                propertyValues[name] = value
                 elementNullable?.style?.setProperty(name, value)
             } else {
-                styles.remove(name)
+                propertyValues.remove(name)
                 elementNullable?.style?.removeProperty(name)
             }
         }
     }
 
     override fun getStyle(name: String): String? {
-        return styles[name]?.cast()
+        return propertyValues[name]?.cast()
     }
 
     override fun removeStyle(name: String) {
-        if (styles[name] != null) {
-            styles.remove(name)
+        if (propertyValues[name] != null) {
+            propertyValues.remove(name)
             elementNullable?.style?.removeProperty(name)
         }
     }

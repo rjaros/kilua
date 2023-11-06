@@ -48,10 +48,9 @@ public interface TagAttrsDelegate<E : HTMLElement> : TagAttrs<E> {
  */
 public open class TagAttrsDelegateImpl<E : HTMLElement>(
     protected val skipUpdates: Boolean,
-    protected val attributes: MutableMap<String, Any> = nativeMapOf()
-) : TagAttrsDelegate<E>, PropertyDelegate(attributes) {
+) : TagAttrsDelegate<E>, PropertyDelegate(nativeMapOf()) {
 
-    public override val attributesMap: Map<String, Any> = attributes
+    public override val attributesMap: Map<String, Any> = propertyValues
 
     protected lateinit var element: E
     protected var elementNullable: E? = null
@@ -144,24 +143,24 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
     }
 
     override fun setAttribute(name: String, value: String?) {
-        if (attributes[name] != value) {
+        if (propertyValues[name] != value) {
             if (value != null) {
-                attributes[name] = value
+                propertyValues[name] = value
                 elementNullable?.setAttribute(name, value)
             } else {
-                attributes.remove(name)
+                propertyValues.remove(name)
                 elementNullable?.removeAttribute(name)
             }
         }
     }
 
     override fun getAttribute(name: String): String? {
-        return attributes[name].toString()
+        return propertyValues[name].toString()
     }
 
     override fun removeAttribute(name: String) {
-        if (attributes[name] != null) {
-            attributes.remove(name)
+        if (propertyValues[name] != null) {
+            propertyValues.remove(name)
             elementNullable?.removeAttribute(name)
         }
     }

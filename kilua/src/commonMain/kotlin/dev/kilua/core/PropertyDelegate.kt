@@ -30,7 +30,10 @@ import kotlin.reflect.KProperty
 /**
  * Helper delegate used to define properties with custom update and notify functions.
  */
-public open class PropertyDelegate(protected val propertyValues: MutableMap<String, Any>) {
+public open class PropertyDelegate(
+    protected val propertyValues: MutableMap<String, Any>,
+    protected val onSetCallback: ((values: Map<String, Any>) -> Unit)? = null
+) {
     protected val notifyFunctions: MutableMap<String, Any> = nativeMapOf()
     protected val updateFunctions: MutableMap<String, Any> = nativeMapOf()
     protected val updateFunctionsWithOldValue: MutableMap<String, Any> = nativeMapOf()
@@ -174,6 +177,7 @@ public open class PropertyDelegate(protected val propertyValues: MutableMap<Stri
                     updateFunction?.invoke(value)
                     updateFunctionWithOldValue?.invoke(value, oldValue)
                 }
+                onSetCallback?.invoke(propertyValues)
             }
         }
     }
