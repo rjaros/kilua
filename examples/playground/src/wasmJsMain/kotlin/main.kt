@@ -27,15 +27,24 @@ import dev.kilua.compose.root
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
+import dev.kilua.form.number.range
 import dev.kilua.form.select.select
 import dev.kilua.form.text.text
+import dev.kilua.html.Background
+import dev.kilua.html.Border
+import dev.kilua.html.BorderStyle
+import dev.kilua.html.Color
+import dev.kilua.html.style.PClass
 import dev.kilua.html.button
 import dev.kilua.html.div
+import dev.kilua.html.h1t
 import dev.kilua.html.pt
 import dev.kilua.html.px
 import dev.kilua.html.span
+import dev.kilua.html.style.style
 import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
+import dev.kilua.state.collectAsState
 import dev.kilua.utils.console
 import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.rem
@@ -45,7 +54,30 @@ class App : Application() {
     override fun start() {
 
         root("root") {
-            div {
+
+            val i by range(0, 1, 255).collectAsState()
+
+            val className = style(".test") {
+                background = Background(color = Color.rgb(i?.toInt() ?: 0, 0, 0))
+                style("h1", PClass.Hover) {
+                    color = Color.Green
+                }
+                style("h1") {
+                    style("div") {
+                        color = Color.Blue
+                    }
+                }
+                style("input", PClass.Focus) {
+                    border = Border(1.px, BorderStyle.Solid, Color.Red)
+                }
+            }
+
+            div(className) {
+                h1t("Ala ma kota") {
+                    div {
+                        +"test"
+                    }
+                }
                 margin = 20.px
                 form(novalidate = true, className = "row g-3 needs-validation") {
                     val validation by validationStateFlow.collectAsState()
@@ -120,7 +152,7 @@ class App : Application() {
                     div("col-12") {
                         div("form-check") {
                             fieldWithLabel("Agree to terms and conditions", "form-check-label", labelAfter = true) {
-                                checkBox(className = "form-check-input", required = true).bind("agree")
+                                checkBox(className = "form-check-input", required = true).bind("agree").also {}
                             }
                             div("invalid-feedback") {
                                 +"You must agree before submitting."
