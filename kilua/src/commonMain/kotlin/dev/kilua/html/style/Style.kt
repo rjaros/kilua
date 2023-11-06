@@ -20,41 +20,47 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html
+package dev.kilua.html.style
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.Tag
 import org.w3c.dom.HTMLStyleElement
 
 /**
- * HTML Style component.
+ * Internal HTML Style component.
  */
-public open class Style(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLStyleElement>("style", className, renderConfig)
+internal class Style(cssText: String, renderConfig: RenderConfig = DefaultRenderConfig()) :
+    Tag<HTMLStyleElement>("style", null, renderConfig) {
 
-/**
- * Creates a [Style] component.
- *
- * @param className the CSS class name
- * @param content the content of the component
- * @return the [Style] component
- */
-@Composable
-public fun ComponentBase.style(className: String? = null, content: @Composable Style.() -> Unit = {}): Style {
-    val component = remember { Style(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
+    var cssText: String by updatingProperty(cssText, skipUpdate) {
+        element.innerHTML = it
+    }
+
+    init {
+        if (renderConfig.isDom) {
+            element.innerHTML = cssText
         }
     }
+
+    override fun renderToStringBuilder(builder: StringBuilder) {
+        builder.append("<$tagName>")
+        builder.append(cssText)
+        builder.append("</$tagName>")
+    }
+}
+
+/**
+ * Internal function to emit HTML style element.
+ */
+@Composable
+internal fun ComponentBase.style(cssText: String) {
+    val component = remember { Style(cssText, renderConfig) }
     ComponentNode(component, {
-        set(className) { updateProperty(Style::className, it) }
-    }, content)
-    return component
+        set(cssText) { updateProperty(Style::cssText, it) }
+    }, {})
 }

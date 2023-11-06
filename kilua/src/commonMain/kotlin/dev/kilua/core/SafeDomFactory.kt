@@ -60,4 +60,14 @@ public object SafeDomFactory {
             document.getElementById(id)
         } else null
     }
+
+    /**
+     * Get first DOM element by tag name.
+     */
+    public fun getFirstElementByTagName(tagName: String): Element? {
+        return if (isDom) {
+            val collection = document.getElementsByTagName(tagName)
+            if (collection.length > 0) collection.item(0) else null
+        } else null
+    }
 }

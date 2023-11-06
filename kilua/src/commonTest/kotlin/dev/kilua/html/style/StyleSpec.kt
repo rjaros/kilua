@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html
+package dev.kilua.html.style
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
+import dev.kilua.test.DomSpec
 import dev.kilua.test.normalizeHtml
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -34,18 +34,11 @@ class StyleSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                style("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
-                }
+                style(".test { }")
             }
-            assertEquals(
-                normalizeHtml("""<style class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></style>"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<style>.test { }</style>""",
+                root.element.innerHTML,
                 "Should render an HTML Style tag to DOM"
             )
         }
@@ -55,18 +48,11 @@ class StyleSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                style("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
-                }
+                style(".test { }")
             }
-            assertEquals(
-                normalizeHtml("""<div><style class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></style></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<style>.test { }</style>""",
+                root.innerHTML,
                 "Should render an HTML Style tag to a String"
             )
         }

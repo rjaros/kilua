@@ -31,6 +31,8 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.core.StringRenderConfig
+import dev.kilua.html.style.StyleParams
+import dev.kilua.html.style.style
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
@@ -97,13 +99,14 @@ public class Root(
 
     public companion object {
 
-        private val roots: MutableList<Root> = mutableListOf()
+        internal val roots: MutableList<Root> = mutableListOf()
 
         /**
          * Disposes all root components and associated compositions.
          */
         public fun disposeAllRoots() {
             roots.forEach { it.dispose() }
+            StyleParams.styles.clear()
             roots.clear()
         }
     }
@@ -145,6 +148,15 @@ public fun root(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     content: @Composable Root.() -> Unit = {}
 ): Root {
+    if (Root.roots.isEmpty() && renderConfig.isDom) {
+        SafeDomFactory.getFirstElementByTagName("head")?.let {
+            Root(it, renderConfig) {
+                StyleParams.styles.values.forEach { styleParams ->
+                    style(styleParams.renderAsCss())
+                }
+            }
+        }
+    }
     return Root(element, renderConfig) {
         content()
     }
