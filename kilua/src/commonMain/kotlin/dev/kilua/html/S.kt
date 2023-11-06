@@ -47,12 +47,6 @@ public open class S(className: String? = null, renderConfig: RenderConfig = Defa
 @Composable
 public fun ComponentBase.s(className: String? = null, content: @Composable S.() -> Unit = {}): S {
     val component = remember { S(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(S::className, it) }
     }, content)

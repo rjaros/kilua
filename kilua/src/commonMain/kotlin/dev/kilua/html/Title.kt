@@ -47,12 +47,6 @@ public open class Title(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.title(className: String? = null, content: @Composable Title.() -> Unit = {}): Title {
     val component = remember { Title(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Title::className, it) }
     }, content)

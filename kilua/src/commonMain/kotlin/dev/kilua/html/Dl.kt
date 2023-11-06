@@ -47,12 +47,6 @@ public open class Dl(className: String? = null, renderConfig: RenderConfig = Def
 @Composable
 public fun ComponentBase.dl(className: String? = null, content: @Composable Dl.() -> Unit = {}): Dl {
     val component = remember { Dl(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Dl::className, it) }
     }, content)

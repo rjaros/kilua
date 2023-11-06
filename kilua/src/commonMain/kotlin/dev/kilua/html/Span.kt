@@ -47,12 +47,6 @@ public open class Span(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.span(className: String? = null, content: @Composable Span.() -> Unit = {}): Span {
     val component = remember { Span(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Span::className, it) }
     }, content)

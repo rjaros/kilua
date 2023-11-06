@@ -96,12 +96,6 @@ public fun ComponentBase.img(
     className: String? = null, content: @Composable Img.() -> Unit = {}
 ): Img {
     val component = remember { Img(src, alt, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(src) { updateProperty(Img::src, it) }
         set(alt) { updateProperty(Img::alt, it) }

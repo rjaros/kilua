@@ -47,12 +47,6 @@ public open class Embed(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.embed(className: String? = null, setup: Embed.() -> Unit = {}): Embed {
     val component = remember { Embed(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Embed::className, it) }
     }) {

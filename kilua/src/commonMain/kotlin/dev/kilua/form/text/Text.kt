@@ -90,12 +90,6 @@ public fun ComponentBase.text(
 ): Text {
     val component =
         remember { Text(value, type, name, maxlength, placeholder, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(Text::value, it) }
         set(type) { updateProperty(Text::type, it) }

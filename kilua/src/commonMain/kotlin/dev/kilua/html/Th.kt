@@ -125,12 +125,6 @@ public fun ComponentBase.th(
     scope: ThScope? = null, className: String? = null, content: @Composable Th.() -> Unit = {}
 ): Th {
     val component = remember { Th(colspan, rowspan, scope, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(colspan) { updateProperty(Th::colspan, it) }
         set(rowspan) { updateProperty(Th::rowspan, it) }

@@ -47,12 +47,6 @@ public open class Ul(className: String? = null, renderConfig: RenderConfig = Def
 @Composable
 public fun ComponentBase.ul(className: String? = null, content: @Composable Ul.() -> Unit = {}): Ul {
     val component = remember { Ul(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Ul::className, it) }
     }, content)

@@ -47,12 +47,6 @@ public open class Bdo(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.bdo(className: String? = null, content: @Composable Bdo.() -> Unit = {}): Bdo {
     val component = remember { Bdo(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Bdo::className, it) }
     }, content)

@@ -223,12 +223,6 @@ public fun ComponentBase.triStateCheckBox(
     setup: @Composable TriStateCheckBox.() -> Unit = {}
 ): TriStateCheckBox {
     val component = remember { TriStateCheckBox(value, name, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(TriStateCheckBox::value, it) }
         set(name) { updateProperty(TriStateCheckBox::name, it) }

@@ -47,12 +47,6 @@ public open class Template(className: String? = null, renderConfig: RenderConfig
 @Composable
 public fun ComponentBase.template(className: String? = null, content: @Composable Template.() -> Unit = {}): Template {
     val component = remember { Template(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Template::className, it) }
     }, content)

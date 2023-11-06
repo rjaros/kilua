@@ -47,12 +47,6 @@ public open class Area(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.area(className: String? = null, setup: Area.() -> Unit = {}): Area {
     val component = remember { Area(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Area::className, it) }
     }) {

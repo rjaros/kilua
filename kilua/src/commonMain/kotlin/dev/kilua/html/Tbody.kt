@@ -47,12 +47,6 @@ public open class Tbody(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.tbody(className: String? = null, content: @Composable Tbody.() -> Unit = {}): Tbody {
     val component = remember { Tbody(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Tbody::className, it) }
     }, content)

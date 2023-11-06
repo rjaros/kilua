@@ -168,12 +168,6 @@ public fun ComponentBase.radioGroup(
     setup: @Composable RadioGroup.() -> Unit = {}
 ): RadioGroup {
     val component = remember { RadioGroup(value, inline, name, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(RadioGroup::value, it) }
         set(inline) { updateProperty(RadioGroup::inline, it) }

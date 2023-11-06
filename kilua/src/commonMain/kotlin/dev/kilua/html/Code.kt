@@ -47,12 +47,6 @@ public open class Code(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.code(className: String? = null, content: @Composable Code.() -> Unit = {}): Code {
     val component = remember { Code(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Code::className, it) }
     }, content)

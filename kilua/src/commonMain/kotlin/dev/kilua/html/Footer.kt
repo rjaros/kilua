@@ -47,12 +47,6 @@ public open class Footer(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.footer(className: String? = null, content: @Composable Footer.() -> Unit = {}): Footer {
     val component = remember { Footer(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Footer::className, it) }
     }, content)

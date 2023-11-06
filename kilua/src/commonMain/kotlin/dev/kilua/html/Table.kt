@@ -47,12 +47,6 @@ public open class Table(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.table(className: String? = null, content: @Composable Table.() -> Unit = {}): Table {
     val component = remember { Table(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Table::className, it) }
     }, content)

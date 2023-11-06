@@ -47,12 +47,6 @@ public open class Hgroup(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.hgroup(className: String? = null, content: @Composable Hgroup.() -> Unit = {}): Hgroup {
     val component = remember { Hgroup(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Hgroup::className, it) }
     }, content)

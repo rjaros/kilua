@@ -216,12 +216,6 @@ public fun ComponentBase.upload(
     setup: @Composable Upload.() -> Unit = {}
 ): Upload {
     val component = remember { Upload(multiple, accept, capture, name, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(multiple) { updateProperty(Upload::multiple, it) }
         set(accept) { updateProperty(Upload::accept, it) }

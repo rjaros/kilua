@@ -47,12 +47,6 @@ public open class Legend(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.legend(className: String? = null, content: @Composable Legend.() -> Unit = {}): Legend {
     val component = remember { Legend(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Legend::className, it) }
     }, content)

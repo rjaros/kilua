@@ -47,12 +47,6 @@ public open class Address(className: String? = null, renderConfig: RenderConfig 
 @Composable
 public fun ComponentBase.address(className: String? = null, content: @Composable Address.() -> Unit = {}): Address {
     val component = remember { Address(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Address::className, it) }
     }, content)

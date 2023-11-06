@@ -47,12 +47,6 @@ public open class Time(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.time(className: String? = null, content: @Composable Time.() -> Unit = {}): Time {
     val component = remember { Time(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Time::className, it) }
     }, content)

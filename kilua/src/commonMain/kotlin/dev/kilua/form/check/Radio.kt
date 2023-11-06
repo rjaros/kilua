@@ -66,12 +66,6 @@ public fun ComponentBase.radio(
     setup: @Composable Radio.() -> Unit = {}
 ): Radio {
     val component = remember { Radio(value, name, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(Radio::value, it) }
         set(name) { updateProperty(Radio::name, it) }

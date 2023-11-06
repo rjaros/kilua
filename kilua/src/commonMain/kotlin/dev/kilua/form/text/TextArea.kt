@@ -309,12 +309,6 @@ public fun ComponentBase.textArea(
                 renderConfig
             )
         }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(TextArea::value, it) }
         set(cols) { updateProperty(TextArea::cols, it) }

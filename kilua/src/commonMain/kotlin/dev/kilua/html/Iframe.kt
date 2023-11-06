@@ -180,12 +180,6 @@ public fun ComponentBase.iframe(
     className: String? = null, content: @Composable Iframe.() -> Unit = {}
 ): Iframe {
     val component = remember { Iframe(src, srcdoc, name, iframeWidth, iframeHeight, sandbox, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(src) { updateProperty(Iframe::src, it) }
         set(srcdoc) { updateProperty(Iframe::srcdoc, it) }

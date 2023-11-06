@@ -109,12 +109,6 @@ public fun ComponentBase.canvas(
     className: String? = null, content: @Composable Canvas.() -> Unit = {}
 ): Canvas {
     val component = remember { Canvas(canvasWidth, canvasHeight, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(canvasWidth) { updateProperty("width", it) }
         set(canvasHeight) { updateProperty("height", it) }

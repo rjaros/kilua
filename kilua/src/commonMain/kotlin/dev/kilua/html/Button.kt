@@ -125,12 +125,6 @@ public fun ComponentBase.button(
     content: @Composable Button.() -> Unit = {}
 ): Button {
     val component = remember { Button(type, disabled, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(type) { updateProperty(Button::type, it) }
         set(disabled) { updateProperty(Button::disabled, it) }

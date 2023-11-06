@@ -47,12 +47,6 @@ public open class Aside(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.aside(className: String? = null, content: @Composable Aside.() -> Unit = {}): Aside {
     val component = remember { Aside(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Aside::className, it) }
     }, content)

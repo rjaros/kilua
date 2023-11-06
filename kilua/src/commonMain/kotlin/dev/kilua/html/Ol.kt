@@ -123,12 +123,6 @@ public fun ComponentBase.ol(
     type: OlType? = null, start: Int? = null, className: String? = null, content: @Composable Ol.() -> Unit = {}
 ): Ol {
     val component = remember { Ol(type, start, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(type) { updateProperty(Ol::type, it) }
         set(start) { updateProperty(Ol::start, it) }

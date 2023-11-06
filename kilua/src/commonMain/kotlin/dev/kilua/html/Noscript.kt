@@ -47,12 +47,6 @@ public open class Noscript(className: String? = null, renderConfig: RenderConfig
 @Composable
 public fun ComponentBase.noscript(className: String? = null, content: @Composable Noscript.() -> Unit = {}): Noscript {
     val component = remember { Noscript(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Noscript::className, it) }
     }, content)

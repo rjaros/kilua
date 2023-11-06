@@ -114,12 +114,6 @@ public fun ComponentBase.link(
     content: @Composable Link.() -> Unit = {}
 ): Link {
     val component = remember { Link(href, target, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(href) { updateProperty(Link::href, it) }
         set(target) { updateProperty(Link::target, it) }

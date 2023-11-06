@@ -47,12 +47,6 @@ public open class Header(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.header(className: String? = null, content: @Composable Header.() -> Unit = {}): Header {
     val component = remember { Header(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Header::className, it) }
     }, content)

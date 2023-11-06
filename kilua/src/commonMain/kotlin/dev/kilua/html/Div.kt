@@ -47,12 +47,6 @@ public open class Div(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.div(className: String? = null, content: @Composable Div.() -> Unit = {}): Div {
     val component = remember { Div(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Div::className, it) }
     }, content)

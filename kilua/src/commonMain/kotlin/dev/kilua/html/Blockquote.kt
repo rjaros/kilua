@@ -50,12 +50,6 @@ public fun ComponentBase.blockquote(
     content: @Composable Blockquote.() -> Unit = {}
 ): Blockquote {
     val component = remember { Blockquote(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Blockquote::className, it) }
     }, content)

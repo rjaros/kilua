@@ -96,12 +96,6 @@ public fun ComponentBase.td(
     colspan: Int? = null, rowspan: Int? = null, className: String? = null, content: @Composable Td.() -> Unit = {}
 ): Td {
     val component = remember { Td(colspan, rowspan, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(colspan) { updateProperty(Td::colspan, it) }
         set(rowspan) { updateProperty(Td::rowspan, it) }

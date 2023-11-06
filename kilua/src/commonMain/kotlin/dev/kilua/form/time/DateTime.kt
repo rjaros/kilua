@@ -224,12 +224,6 @@ public fun ComponentBase.dateTime(
                 renderConfig
             )
         }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(DateTime::value, it) }
         set(min) { updateProperty(DateTime::min, it) }

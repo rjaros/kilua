@@ -47,12 +47,6 @@ public open class Html(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.html(className: String? = null, content: @Composable Html.() -> Unit = {}): Html {
     val component = remember { Html(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Html::className, it) }
     }, content)

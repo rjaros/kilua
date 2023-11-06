@@ -191,12 +191,6 @@ public fun ComponentBase.spinner(
                 renderConfig
             )
         }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(Spinner::value, it) }
         set(min) { updateProperty(Spinner::min, it) }

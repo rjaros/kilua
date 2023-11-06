@@ -47,12 +47,6 @@ public open class Sub(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.sub(className: String? = null, content: @Composable Sub.() -> Unit = {}): Sub {
     val component = remember { Sub(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Sub::className, it) }
     }, content)

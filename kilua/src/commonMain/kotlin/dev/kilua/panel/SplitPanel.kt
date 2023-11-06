@@ -146,12 +146,10 @@ public open class SplitPanel(
     }
 
     override fun onInsert() {
-        super.onInsert()
         initializeSplitJs()
     }
 
     override fun onRemove() {
-        super.onRemove()
         splitJsInstance?.destroy()
     }
 

@@ -47,12 +47,6 @@ public open class Hr(className: String? = null, renderConfig: RenderConfig = Def
 @Composable
 public fun ComponentBase.hr(className: String? = null, setup: Hr.() -> Unit = {}): Hr {
     val component = remember { Hr(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Hr::className, it) }
     }) {

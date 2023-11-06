@@ -81,12 +81,6 @@ public fun ComponentBase.label(
     content: @Composable Label.() -> Unit = {}
 ): Label {
     val component = remember { Label(htmlFor, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(htmlFor) { updateProperty("for", it) }
         set(className) { updateProperty(Label::className, it) }

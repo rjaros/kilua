@@ -47,12 +47,6 @@ public open class Source(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.source(className: String? = null, setup: Source.() -> Unit = {}): Source {
     val component = remember { Source(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Source::className, it) }
     }) {

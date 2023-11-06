@@ -267,7 +267,6 @@ public open class Select(
     }
 
     override fun onInsert() {
-        super.onInsert()
         if (value == null)
             mapOptionsToValue()
         else

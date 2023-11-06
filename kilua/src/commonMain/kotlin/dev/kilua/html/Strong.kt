@@ -47,12 +47,6 @@ public open class Strong(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.strong(className: String? = null, content: @Composable Strong.() -> Unit = {}): Strong {
     val component = remember { Strong(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Strong::className, it) }
     }, content)

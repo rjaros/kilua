@@ -47,12 +47,6 @@ public open class Map(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.map(className: String? = null, content: @Composable Map.() -> Unit = {}): Map {
     val component = remember { Map(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Map::className, it) }
     }, content)

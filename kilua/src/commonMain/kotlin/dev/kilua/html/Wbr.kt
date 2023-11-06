@@ -47,12 +47,6 @@ public open class Wbr(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.wbr(className: String? = null, setup: Wbr.() -> Unit = {}): Wbr {
     val component = remember { Wbr(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Wbr::className, it) }
     }) {

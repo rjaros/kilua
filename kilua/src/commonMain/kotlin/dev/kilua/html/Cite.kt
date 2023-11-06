@@ -47,12 +47,6 @@ public open class Cite(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.cite(className: String? = null, content: @Composable Cite.() -> Unit = {}): Cite {
     val component = remember { Cite(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Cite::className, it) }
     }, content)

@@ -47,12 +47,6 @@ public open class Tfoot(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.tfoot(className: String? = null, content: @Composable Tfoot.() -> Unit = {}): Tfoot {
     val component = remember { Tfoot(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Tfoot::className, it) }
     }, content)

@@ -47,12 +47,6 @@ public open class Figcaption(className: String? = null, renderConfig: RenderConf
 @Composable
 public fun ComponentBase.figcaption(className: String? = null, content: @Composable Figcaption.() -> Unit = {}): Figcaption {
     val component = remember { Figcaption(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Figcaption::className, it) }
     }, content)

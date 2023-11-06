@@ -47,12 +47,6 @@ public open class Portal(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.portal(className: String? = null, content: @Composable Portal.() -> Unit = {}): Portal {
     val component = remember { Portal(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Portal::className, it) }
     }, content)

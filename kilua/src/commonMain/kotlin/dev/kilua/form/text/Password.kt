@@ -74,12 +74,6 @@ public fun ComponentBase.password(
 ): Password {
     val component =
         remember { Password(value, name, maxlength, placeholder, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(Password::value, it) }
         set(name) { updateProperty(Password::name, it) }

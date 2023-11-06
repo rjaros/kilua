@@ -47,12 +47,6 @@ public open class Menu(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.menu(className: String? = null, content: @Composable Menu.() -> Unit = {}): Menu {
     val component = remember { Menu(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Menu::className, it) }
     }, content)

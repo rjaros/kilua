@@ -47,12 +47,6 @@ public open class LinkTag(className: String? = null, renderConfig: RenderConfig 
 @Composable
 public fun ComponentBase.linkTag(className: String? = null, setup: LinkTag.() -> Unit = {}): LinkTag {
     val component = remember { LinkTag(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(LinkTag::className, it) }
     }) {

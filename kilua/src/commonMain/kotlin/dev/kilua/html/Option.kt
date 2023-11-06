@@ -152,12 +152,6 @@ public fun ComponentBase.option(
     content: @Composable Option.() -> Unit = {}
 ): Option {
     val component = remember { Option(value, label, selected, disabled, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(Option::value, it) }
         set(label) { updateProperty(Option::label, it) }

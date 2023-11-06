@@ -47,12 +47,6 @@ public open class Head(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.head(className: String? = null, content: @Composable Head.() -> Unit = {}): Head {
     val component = remember { Head(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Head::className, it) }
     }, content)

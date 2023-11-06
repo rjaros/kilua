@@ -142,14 +142,12 @@ public abstract class ComponentBase(
      * Function called after the component is inserted in the composition.
      */
     public open fun onInsert() {
-        console.log("onInsert $componentId")
     }
 
     /**
      * Function called after the component is removed from the composition.
      */
     public open fun onRemove() {
-        console.log("onRemove $componentId")
     }
 
     public companion object {

@@ -47,12 +47,6 @@ public open class Col(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.col(className: String? = null, setup: Col.() -> Unit = {}): Col {
     val component = remember { Col(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Col::className, it) }
     }) {

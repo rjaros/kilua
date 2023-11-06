@@ -47,12 +47,6 @@ public open class Ruby(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.ruby(className: String? = null, content: @Composable Ruby.() -> Unit = {}): Ruby {
     val component = remember { Ruby(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Ruby::className, it) }
     }, content)

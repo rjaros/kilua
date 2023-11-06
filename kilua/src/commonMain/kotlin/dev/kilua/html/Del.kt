@@ -47,12 +47,6 @@ public open class Del(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.del(className: String? = null, content: @Composable Del.() -> Unit = {}): Del {
     val component = remember { Del(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Del::className, it) }
     }, content)

@@ -47,12 +47,6 @@ public open class Search(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.search(className: String? = null, content: @Composable Search.() -> Unit = {}): Search {
     val component = remember { Search(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Search::className, it) }
     }, content)

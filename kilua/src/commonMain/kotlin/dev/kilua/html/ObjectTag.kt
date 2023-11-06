@@ -50,12 +50,6 @@ public fun ComponentBase.objectTag(
     content: @Composable ObjectTag.() -> Unit = {}
 ): ObjectTag {
     val component = remember { ObjectTag(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(ObjectTag::className, it) }
     }, content)

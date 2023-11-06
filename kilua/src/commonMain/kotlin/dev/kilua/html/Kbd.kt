@@ -47,12 +47,6 @@ public open class Kbd(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.kbd(className: String? = null, content: @Composable Kbd.() -> Unit = {}): Kbd {
     val component = remember { Kbd(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Kbd::className, it) }
     }, content)

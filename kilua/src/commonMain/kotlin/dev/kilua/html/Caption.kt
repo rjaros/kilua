@@ -47,12 +47,6 @@ public open class Caption(className: String? = null, renderConfig: RenderConfig 
 @Composable
 public fun ComponentBase.caption(className: String? = null, content: @Composable Caption.() -> Unit = {}): Caption {
     val component = remember { Caption(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Caption::className, it) }
     }, content)

@@ -47,12 +47,6 @@ public open class Body(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.body(className: String? = null, content: @Composable Body.() -> Unit = {}): Body {
     val component = remember { Body(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Body::className, it) }
     }, content)

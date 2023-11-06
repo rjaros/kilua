@@ -47,12 +47,6 @@ public open class Audio(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.audio(className: String? = null, content: @Composable Audio.() -> Unit = {}): Audio {
     val component = remember { Audio(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Audio::className, it) }
     }, content)

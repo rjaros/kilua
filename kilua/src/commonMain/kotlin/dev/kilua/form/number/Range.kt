@@ -153,12 +153,6 @@ public fun ComponentBase.range(
     setup: @Composable Range.() -> Unit = {}
 ): Range {
     val component = remember { Range(value, min, max, step, name, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(Range::value, it) }
         set(min) { updateProperty(Range::min, it) }

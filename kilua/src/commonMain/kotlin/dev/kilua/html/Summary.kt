@@ -47,12 +47,6 @@ public open class Summary(className: String? = null, renderConfig: RenderConfig 
 @Composable
 public fun ComponentBase.summary(className: String? = null, content: @Composable Summary.() -> Unit = {}): Summary {
     val component = remember { Summary(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Summary::className, it) }
     }, content)

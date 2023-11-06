@@ -47,12 +47,6 @@ public open class Dialog(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.dialog(className: String? = null, content: @Composable Dialog.() -> Unit = {}): Dialog {
     val component = remember { Dialog(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Dialog::className, it) }
     }, content)

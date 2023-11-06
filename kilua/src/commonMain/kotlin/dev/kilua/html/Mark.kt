@@ -47,12 +47,6 @@ public open class Mark(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.mark(className: String? = null, content: @Composable Mark.() -> Unit = {}): Mark {
     val component = remember { Mark(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Mark::className, it) }
     }, content)

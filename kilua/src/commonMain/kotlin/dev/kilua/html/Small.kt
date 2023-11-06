@@ -47,12 +47,6 @@ public open class Small(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.small(className: String? = null, content: @Composable Small.() -> Unit = {}): Small {
     val component = remember { Small(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Small::className, it) }
     }, content)

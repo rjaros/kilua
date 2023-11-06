@@ -99,12 +99,6 @@ public fun ComponentBase.optgroup(
     content: @Composable Optgroup.() -> Unit = {}
 ): Optgroup {
     val component = remember { Optgroup(label, disabled, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(label) { updateProperty(Optgroup::label, it) }
         set(disabled) { updateProperty(Optgroup::disabled, it) }

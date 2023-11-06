@@ -47,12 +47,6 @@ public open class Abbr(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.abbr(className: String? = null, content: @Composable Abbr.() -> Unit = {}): Abbr {
     val component = remember { Abbr(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Abbr::className, it) }
     }, content)

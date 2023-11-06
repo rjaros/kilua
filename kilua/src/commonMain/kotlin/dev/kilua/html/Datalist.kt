@@ -47,12 +47,6 @@ public open class Datalist(className: String? = null, renderConfig: RenderConfig
 @Composable
 public fun ComponentBase.datalist(className: String? = null, content: @Composable Datalist.() -> Unit = {}): Datalist {
     val component = remember { Datalist(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Datalist::className, it) }
     }, content)

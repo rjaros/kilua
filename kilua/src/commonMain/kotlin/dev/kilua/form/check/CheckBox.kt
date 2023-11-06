@@ -66,12 +66,6 @@ public fun ComponentBase.checkBox(
     setup: @Composable CheckBox.() -> Unit = {}
 ): CheckBox {
     val component = remember { CheckBox(value, name, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(CheckBox::value, it) }
         set(name) { updateProperty(CheckBox::name, it) }

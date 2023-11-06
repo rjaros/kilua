@@ -47,12 +47,6 @@ public open class Tr(className: String? = null, renderConfig: RenderConfig = Def
 @Composable
 public fun ComponentBase.tr(className: String? = null, content: @Composable Tr.() -> Unit = {}): Tr {
     val component = remember { Tr(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Tr::className, it) }
     }, content)

@@ -80,12 +80,6 @@ public open class TextNode(
 public fun textNode(text: String, setup: TextNode.() -> Unit = {}): TextNode {
     // Always using DefaultRenderConfig because of plus operator String receiver.
     val component = remember { TextNode(text, DefaultRenderConfig()) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(text) { updateProperty(TextNode::text, it) }
     }) {

@@ -228,12 +228,6 @@ public fun ComponentBase.time(
                 renderConfig
             )
         }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(Time::value, it) }
         set(min) { updateProperty(Time::min, it) }

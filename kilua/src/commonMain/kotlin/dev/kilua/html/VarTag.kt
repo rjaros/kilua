@@ -47,12 +47,6 @@ public open class VarTag(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.varTag(className: String? = null, content: @Composable VarTag.() -> Unit = {}): VarTag {
     val component = remember { VarTag(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(VarTag::className, it) }
     }, content)

@@ -47,12 +47,6 @@ public open class Fieldset(className: String? = null, renderConfig: RenderConfig
 @Composable
 public fun ComponentBase.fieldset(className: String? = null, content: @Composable Fieldset.() -> Unit = {}): Fieldset {
     val component = remember { Fieldset(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Fieldset::className, it) }
     }, content)

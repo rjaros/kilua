@@ -47,12 +47,6 @@ public open class Meta(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.meta(className: String? = null, setup: Meta.() -> Unit = {}): Meta {
     val component = remember { Meta(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Meta::className, it) }
     }) {

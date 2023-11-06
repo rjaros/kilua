@@ -47,12 +47,6 @@ public open class Samp(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.samp(className: String? = null, content: @Composable Samp.() -> Unit = {}): Samp {
     val component = remember { Samp(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Samp::className, it) }
     }, content)

@@ -47,12 +47,6 @@ public open class Sup(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.sup(className: String? = null, content: @Composable Sup.() -> Unit = {}): Sup {
     val component = remember { Sup(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Sup::className, it) }
     }, content)

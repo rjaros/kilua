@@ -47,12 +47,6 @@ public open class Track(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.track(className: String? = null, setup: Track.() -> Unit = {}): Track {
     val component = remember { Track(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Track::className, it) }
     }) {

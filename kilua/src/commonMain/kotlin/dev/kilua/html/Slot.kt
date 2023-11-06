@@ -47,12 +47,6 @@ public open class Slot(className: String? = null, renderConfig: RenderConfig = D
 @Composable
 public fun ComponentBase.slot(className: String? = null, content: @Composable Slot.() -> Unit = {}): Slot {
     val component = remember { Slot(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Slot::className, it) }
     }, content)

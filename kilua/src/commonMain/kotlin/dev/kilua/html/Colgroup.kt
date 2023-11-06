@@ -47,12 +47,6 @@ public open class Colgroup(className: String? = null, renderConfig: RenderConfig
 @Composable
 public fun ComponentBase.colgroup(className: String? = null, content: @Composable Colgroup.() -> Unit = {}): Colgroup {
     val component = remember { Colgroup(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Colgroup::className, it) }
     }, content)

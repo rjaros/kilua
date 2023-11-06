@@ -47,12 +47,6 @@ public open class Pre(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.pre(className: String? = null, content: @Composable Pre.() -> Unit = {}): Pre {
     val component = remember { Pre(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Pre::className, it) }
     }, content)

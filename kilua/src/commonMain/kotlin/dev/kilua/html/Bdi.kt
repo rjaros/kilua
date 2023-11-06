@@ -47,12 +47,6 @@ public open class Bdi(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.bdi(className: String? = null, content: @Composable Bdi.() -> Unit = {}): Bdi {
     val component = remember { Bdi(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Bdi::className, it) }
     }, content)

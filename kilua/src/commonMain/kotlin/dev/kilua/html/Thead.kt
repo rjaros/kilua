@@ -47,12 +47,6 @@ public open class Thead(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.thead(className: String? = null, content: @Composable Thead.() -> Unit = {}): Thead {
     val component = remember { Thead(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Thead::className, it) }
     }, content)

@@ -169,12 +169,6 @@ public fun ComponentBase.numeric(
                 renderConfig
             )
         }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(Numeric::value, it) }
         set(min) { updateProperty(Numeric::min, it) }

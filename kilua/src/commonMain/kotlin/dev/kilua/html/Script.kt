@@ -47,12 +47,6 @@ public open class Script(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.script(className: String? = null, content: @Composable Script.() -> Unit = {}): Script {
     val component = remember { Script(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Script::className, it) }
     }, content)

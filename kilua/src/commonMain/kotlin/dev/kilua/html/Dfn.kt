@@ -47,12 +47,6 @@ public open class Dfn(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.dfn(className: String? = null, content: @Composable Dfn.() -> Unit = {}): Dfn {
     val component = remember { Dfn(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Dfn::className, it) }
     }, content)

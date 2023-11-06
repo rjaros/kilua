@@ -68,12 +68,6 @@ public fun ComponentBase.colorPicker(
     setup: @Composable ColorPicker.() -> Unit = {}
 ): ColorPicker {
     val component = remember { ColorPicker(value, name, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(value) { updateProperty(ColorPicker::value, it) }
         set(name) { updateProperty(ColorPicker::name, it) }

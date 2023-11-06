@@ -47,12 +47,6 @@ public open class Nav(className: String? = null, renderConfig: RenderConfig = De
 @Composable
 public fun ComponentBase.nav(className: String? = null, content: @Composable Nav.() -> Unit = {}): Nav {
     val component = remember { Nav(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Nav::className, it) }
     }, content)

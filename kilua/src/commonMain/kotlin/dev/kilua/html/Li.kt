@@ -47,12 +47,6 @@ public open class Li(className: String? = null, renderConfig: RenderConfig = Def
 @Composable
 public fun ComponentBase.li(className: String? = null, content: @Composable Li.() -> Unit = {}): Li {
     val component = remember { Li(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Li::className, it) }
     }, content)

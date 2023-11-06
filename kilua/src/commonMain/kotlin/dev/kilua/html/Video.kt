@@ -47,12 +47,6 @@ public open class Video(className: String? = null, renderConfig: RenderConfig = 
 @Composable
 public fun ComponentBase.video(className: String? = null, content: @Composable Video.() -> Unit = {}): Video {
     val component = remember { Video(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Video::className, it) }
     }, content)

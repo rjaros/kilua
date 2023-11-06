@@ -47,12 +47,6 @@ public open class Progress(className: String? = null, renderConfig: RenderConfig
 @Composable
 public fun ComponentBase.progress(className: String? = null, content: @Composable Progress.() -> Unit = {}): Progress {
     val component = remember { Progress(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Progress::className, it) }
     }, content)

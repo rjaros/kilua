@@ -47,12 +47,6 @@ public open class Figure(className: String? = null, renderConfig: RenderConfig =
 @Composable
 public fun ComponentBase.figure(className: String? = null, content: @Composable Figure.() -> Unit = {}): Figure {
     val component = remember { Figure(className, renderConfig) }
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
     ComponentNode(component, {
         set(className) { updateProperty(Figure::className, it) }
     }, content)
