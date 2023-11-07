@@ -106,14 +106,14 @@ class App : Application() {
                     div("jumbotron") {
                         div("row") {
                             div("col-md-6") {
-                                h1("h1") {
+                                h1 {
                                     +"Kilua"
                                 }
                             }
                             div("col-md-6") {
                                 div("row") {
                                     div("col-sm-6 smallpad") {
-                                        button("Create 1,000 rows", className = "btn-block") {
+                                        button("Create 1,000 rows", className = "btn btn-primary btn-block") {
                                             id = "run"
                                             onClick {
                                                 data = buildData(1000)
@@ -121,7 +121,7 @@ class App : Application() {
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Create 10,000 rows", className = "btn-block") {
+                                        button("Create 10,000 rows", className = "btn btn-primary btn-block") {
                                             id = "runlots"
                                             onClick {
                                                 data = buildData(10_000)
@@ -129,7 +129,7 @@ class App : Application() {
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Append 1,000 rows", className = "btn-block") {
+                                        button("Append 1,000 rows", className = "btn btn-primary btn-block") {
                                             id = "add"
                                             onClick {
                                                 data += buildData(1000)
@@ -137,7 +137,7 @@ class App : Application() {
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Update every 10th row", className = "btn-block") {
+                                        button("Update every 10th row", className = "btn btn-primary btn-block") {
                                             id = "update"
                                             onClick {
                                                 data = data.mapIndexed { index, row ->
@@ -151,7 +151,7 @@ class App : Application() {
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Clear", className = "btn-block") {
+                                        button("Clear", className = "btn btn-primary btn-block") {
                                             id = "clear"
                                             onClick {
                                                 data = emptyList()
@@ -159,7 +159,7 @@ class App : Application() {
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Swap Rows", className = "btn-block") {
+                                        button("Swap Rows", className = "btn btn-primary btn-block") {
                                             id = "swaprows"
                                             onClick {
                                                 if (data.size > 998) {
