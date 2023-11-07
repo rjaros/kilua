@@ -23,7 +23,6 @@
 package dev.kilua.html
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import app.softwork.routingcompose.Router
 import dev.kilua.compose.ComponentNode

@@ -123,6 +123,7 @@ public open class Tag<E : HTMLElement>(
         tagAttrs.elementWithAttrs(elementNullable)
         tagStyle.elementWithStyle(elementNullable)
         tagEvents.elementWithEvents(elementNullable)
+        @Suppress("LeakingThis")
         tagDnd.tagWithDnd(this)
         @Suppress("LeakingThis")
         updateElementClassList()

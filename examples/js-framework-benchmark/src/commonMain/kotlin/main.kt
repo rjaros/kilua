@@ -37,7 +37,7 @@ import dev.kilua.html.tr
 import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
 
-var idCounter = 1;
+var idCounter = 1
 
 data class Row(val id: Int, val label: String, val selected: Boolean = false)
 

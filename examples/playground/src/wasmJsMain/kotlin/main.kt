@@ -152,7 +152,7 @@ class App : Application() {
                     div("col-12") {
                         div("form-check") {
                             fieldWithLabel("Agree to terms and conditions", "form-check-label", labelAfter = true) {
-                                checkBox(className = "form-check-input", required = true).bind("agree").also {}
+                                checkBox(className = "form-check-input", required = true).bind("agree")
                             }
                             div("invalid-feedback") {
                                 +"You must agree before submitting."
@@ -179,6 +179,6 @@ class App : Application() {
     }
 }
 
-public fun main() {
+fun main() {
     startApplication(::App)
 }

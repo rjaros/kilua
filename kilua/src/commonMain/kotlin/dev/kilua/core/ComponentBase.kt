@@ -22,7 +22,6 @@
 
 package dev.kilua.core
 
-import dev.kilua.utils.console
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.nativeMapOf
 import kotlinx.dom.clear

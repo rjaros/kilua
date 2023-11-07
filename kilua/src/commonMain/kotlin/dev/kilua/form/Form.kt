@@ -458,14 +458,6 @@ public open class Form<K : Any>(
     }
 
     /**
-     * Sets the values of all controls to null when not already set by setData or clearData.
-     */
-    @PublishedApi
-    internal open fun clearDataFromCompose() {
-        if (!dataSet) clearDataInternal()
-    }
-
-    /**
      * Returns current data model.
      * @return data model
      */
