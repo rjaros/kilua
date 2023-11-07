@@ -57,8 +57,11 @@ kotlin {
                     "--inline-functions-with-loops",
                     "--traps-never-happen",
                     "--fast-math",
-                    "-O1",
-                    "-c" // Run passes while binary size decreases
+                    "--closed-world",
+                    "--metrics",
+                    "-O3", "--gufa", "--metrics",
+                    "-O3", "--gufa", "--metrics",
+                    "-O3", "--gufa", "--metrics",
                 )
             }
         }
