@@ -26,6 +26,6 @@ package dev.kilua.form
  * Internal data class containing form field parameters.
  */
 internal data class FieldParams<T, in F : FormControl<T>>(
-    val validatorMessage: ((F) -> String?)? = null,
-    val validator: ((F) -> Boolean?)? = null
+    val validator: ((F) -> Boolean)? = null,
+    val validatorWithMessage: ((F) -> Pair<Boolean, String?>)? = null
 )

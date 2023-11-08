@@ -62,9 +62,8 @@ class FormSpec : DomSpec {
                     method = FormMethod.Get,
                     action = "/action",
                     enctype = FormEnctype.Multipart,
-                    novalidate = true
                 ) {
-                    text().bind(DataForm::string)
+                    text().bind(DataForm::string) { it.value != null }
                     checkBox().bind(DataForm::boolean)
                 }
             }
@@ -84,10 +83,9 @@ class FormSpec : DomSpec {
                     method = FormMethod.Get,
                     action = "/action",
                     enctype = FormEnctype.Multipart,
-                    novalidate = true
                 ) {
                     text().bind(DataForm::string)
-                    checkBox().bind(DataForm::boolean)
+                    checkBox().bind(DataForm::boolean) { it.value }
                 }
             }
             assertEqualsHtml(
