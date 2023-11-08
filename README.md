@@ -39,6 +39,7 @@ Early in development. Main concepts have been tested, but everything is a subjec
 - [X] Implement all standard HTML tags
 - [X] Implement all standard form input components
 - [ ] Implement advanced form input components (based on external NPM libraries - TempusDominus, TomSelect, Imask, Trix)
+- [X] CSS styles declarations
 - [X] Typesafe forms support with built-in validation 
 - [ ] Implement Tabulator component
 - [ ] Bootstrap module with basic components (tabs, toasts, dropdowns, modals etc.)
