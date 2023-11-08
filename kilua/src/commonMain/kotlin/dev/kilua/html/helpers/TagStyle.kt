@@ -416,14 +416,14 @@ public interface TagStyle<E : HTMLElement> {
     public var gridTemplateAreas: List<String>?
 
     /**
-     * CSS grid column gap.
+     * CSS grid/flex column gap.
      */
-    public var gridColumnGap: Int?
+    public var columnGap: CssSize?
 
     /**
-     * CSS grid row gap.
+     * CSS grid/flex row gap.
      */
-    public var gridRowGap: Int?
+    public var rowGap: CssSize?
 
     /**
      * CSS grid column start.

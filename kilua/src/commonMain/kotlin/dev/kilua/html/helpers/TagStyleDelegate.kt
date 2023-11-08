@@ -681,19 +681,19 @@ public open class TagStyleDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var gridColumnGap: Int? by updatingProperty(skipUpdate = skipUpdates) {
+    override var columnGap: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.setProperty("grid-column-gap", "${it}px")
+            element.style.setProperty("column-gap", it.toString())
         } else {
-            element.style.removeProperty("grid-column-gap")
+            element.style.removeProperty("column-gap")
         }
     }
 
-    override var gridRowGap: Int? by updatingProperty(skipUpdate = skipUpdates) {
+    override var rowGap: CssSize? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
-            element.style.setProperty("grid-row-gap", "${it}px")
+            element.style.setProperty("row-gap", it.toString())
         } else {
-            element.style.removeProperty("grid-row-gap")
+            element.style.removeProperty("row-gap")
         }
     }
 

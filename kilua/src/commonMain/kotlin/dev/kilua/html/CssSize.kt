@@ -41,7 +41,9 @@ public enum class CssUnit(public val cssUnit: String) {
     vmax("vmax"),
     perc("%"),
     auto("auto"),
-    normal("normal")
+    normal("normal"),
+    initial("initial"),
+    inherit("inherit"),
 }
 
 /**
@@ -52,6 +54,8 @@ public open class CssSize(protected val cssSize: Number, protected val unit: Css
     public val value: String = when (this.unit) {
         CssUnit.auto -> "auto"
         CssUnit.normal -> "normal"
+        CssUnit.initial -> "initial"
+        CssUnit.inherit -> "inherit"
         else -> this.cssSize.toString() + this.unit.cssUnit
     }
 
@@ -194,3 +198,13 @@ public val auto: CssSize = CssSize(0, CssUnit.auto)
  * Helper property to describe CSS normal value.
  */
 public val normal: CssSize = CssSize(0, CssUnit.normal)
+
+/**
+ * Helper property to describe CSS initial value.
+ */
+public val initial: CssSize = CssSize(0, CssUnit.initial)
+
+/**
+ * Helper property to describe CSS initial value.
+ */
+public val inherit: CssSize = CssSize(0, CssUnit.inherit)
