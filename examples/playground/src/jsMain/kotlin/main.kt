@@ -29,16 +29,24 @@ import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.Hot
 import dev.kilua.compose.root
+import dev.kilua.form.number.range
 import dev.kilua.form.text.text
 import dev.kilua.html.Background
+import dev.kilua.html.Border
+import dev.kilua.html.BorderStyle
 import dev.kilua.html.ButtonType
 import dev.kilua.html.Color
 import dev.kilua.html.Div
 import dev.kilua.html.button
 import dev.kilua.html.div
+import dev.kilua.html.h1t
+import dev.kilua.html.px
+import dev.kilua.html.style.PClass
+import dev.kilua.html.style.style
 import dev.kilua.html.tag
 import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
+import dev.kilua.state.collectAsState
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.console
 import dev.kilua.utils.log
@@ -64,6 +72,32 @@ class App : Application() {
     override fun start() {
 
         root("root") {
+
+            val i by range(0, 1, 255).collectAsState()
+
+            val className = style(".test") {
+                background = Background(color = Color.rgb(i?.toInt() ?: 0, 0, 0))
+                style("h1", PClass.Hover) {
+                    color = Color.Green
+                }
+                style("h1") {
+                    style("div") {
+                        color = Color.Blue
+                    }
+                }
+                style("input", PClass.Focus) {
+                    border = Border(1.px, BorderStyle.Solid, Color.Red)
+                }
+            }
+
+            div(className) {
+                h1t("Ala ma kota") {
+                    div {
+                        +"test"
+                    }
+                }
+            }
+
             console.log("recomposing")
             val x = tag("address", "address3") {
                 +"address23"
@@ -114,7 +148,6 @@ class App : Application() {
             tag(tn) {
                 +"address2 $size"
                 id = "test"
-                className = "address3"
                 title = "Some title"
                 role = "button"
                 tabindex = 5
@@ -279,9 +312,9 @@ class App2 : Application() {
                         setStyle("justify-items", "center")
                         for (i in state.value) {
                             //key("${i.index}") {
-                                div {
-                                    background = i.bg
-                                }
+                            div {
+                                background = i.bg
+                            }
                             //}
                         }
                     }

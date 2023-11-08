@@ -34,13 +34,13 @@ import dev.kilua.html.Background
 import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
 import dev.kilua.html.Color
-import dev.kilua.html.style.PClass
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1t
 import dev.kilua.html.pt
 import dev.kilua.html.px
 import dev.kilua.html.span
+import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
 import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
