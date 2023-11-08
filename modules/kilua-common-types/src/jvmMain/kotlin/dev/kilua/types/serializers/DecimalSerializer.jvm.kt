@@ -34,13 +34,13 @@ import java.math.BigDecimal
  * A serializer for [Decimal] that uses double value serialization.
  */
 public actual object DecimalSerializer : KSerializer<Decimal> {
-    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("java.math.BigDecimal")
+    actual override val descriptor: SerialDescriptor = buildClassSerialDescriptor("java.math.BigDecimal")
 
-    override fun deserialize(decoder: Decoder): BigDecimal {
+    actual override fun deserialize(decoder: Decoder): BigDecimal {
         return decoder.decodeDouble().toBigDecimal()
     }
 
-    override fun serialize(encoder: Encoder, value: BigDecimal) {
+    actual override fun serialize(encoder: Encoder, value: BigDecimal) {
         encoder.encodeDouble(value.toDouble())
     }
 }
