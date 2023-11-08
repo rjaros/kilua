@@ -35,12 +35,12 @@ import kotlinx.serialization.encoding.Encoder
  */
 public actual object DecimalSerializer : KSerializer<Decimal> {
 
-    override val descriptor: SerialDescriptor =
+    actual override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("Decimal", PrimitiveKind.DOUBLE)
 
-    override fun deserialize(decoder: Decoder): Decimal = decoder.decodeDouble()
+    actual override fun deserialize(decoder: Decoder): Decimal = decoder.decodeDouble()
 
-    override fun serialize(encoder: Encoder, value: Decimal) {
+    actual override fun serialize(encoder: Encoder, value: Decimal) {
         encoder.encodeDouble(value)
     }
 }

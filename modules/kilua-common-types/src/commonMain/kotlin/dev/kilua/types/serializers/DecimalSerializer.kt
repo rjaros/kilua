@@ -24,8 +24,15 @@ package dev.kilua.types.serializers
 
 import dev.kilua.types.Decimal
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * A serializer for [Decimal] that uses double value serialization.
  */
-public expect object DecimalSerializer : KSerializer<Decimal>
+public expect object DecimalSerializer : KSerializer<Decimal> {
+    override val descriptor: SerialDescriptor
+    override fun serialize(encoder: Encoder, value: Decimal)
+    override fun deserialize(decoder: Decoder): Decimal
+}
