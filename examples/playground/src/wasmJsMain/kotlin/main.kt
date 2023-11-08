@@ -79,7 +79,7 @@ class App : Application() {
                     }
                 }
                 margin = 20.px
-                form(novalidate = true, className = "row g-3 needs-validation") {
+                form(true, className = "row g-3 needs-validation") {
                     val validation by validationStateFlow.collectAsState()
 
                     if (validation.isInvalid) {
@@ -117,10 +117,10 @@ class App : Application() {
                         val invalidClass = if (validation["username"]?.isInvalid == true) "is-invalid" else null
                         text(required = true, className = "form-control" % invalidClass) {
                             ariaDescribedby = "inputGroupPrepend"
-                        }.bind("username", {
-                            "Username must be at least 10 characters long."
-                        }) {
-                            it.value == null || it.value!!.length > 10
+                        }.bindWithValidationMessage("username") { text ->
+                            val result = text.value == null || text.value!!.length >= 10
+                            val message = if (!result) "Username must be at least 10 characters long." else null
+                            result to message
                         }.also {
                             div("invalid-feedback") {
                                 +(validation["username"]?.invalidMessage ?: "Please choose a username.")
