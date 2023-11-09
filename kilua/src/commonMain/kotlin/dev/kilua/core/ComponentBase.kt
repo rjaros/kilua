@@ -83,6 +83,7 @@ public abstract class ComponentBase(
      * @param to index of the destination position
      * @param count number of children to move
      */
+    @Suppress("NestedBlockDepth")
     internal fun moveChildren(from: Int, to: Int, count: Int) {
         if (from != to) {
             if (count == 1 && (from == to + 1 || from == to - 1)) {

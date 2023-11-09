@@ -16,9 +16,13 @@
  */
 package app.softwork.routingcompose
 
-import androidx.compose.runtime.*
-import kotlinx.browser.*
-import org.w3c.dom.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import kotlinx.browser.window
+import org.w3c.dom.Location
 
 /**
  * A router leveraging the History API (https://developer.mozilla.org/en-US/docs/Web/API/History).

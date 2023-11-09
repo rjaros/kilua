@@ -728,6 +728,7 @@ public open class Color(protected val color: String? = null) {
          * Creates CSS Color with color given in hex format.
          * @param color color in hex format
          */
+        @Suppress("MagicNumber")
         @OptIn(ExperimentalStdlibApi::class)
         public fun hex(color: Int): Color {
             return Color("#" + color.toHexString().takeLast(6))
@@ -736,6 +737,7 @@ public open class Color(protected val color: String? = null) {
         /**
          * Creates CSS Color with red, green and blue components
          */
+        @Suppress("MagicNumber")
         public fun rgb(red: Int, green: Int, blue: Int): Color {
             return Color("#" + listOf(red, green, blue).joinToString("") { it.toString(16).padStart(2, '0') })
         }
@@ -743,6 +745,7 @@ public open class Color(protected val color: String? = null) {
         /**
          * Creates CSS Color with red, green, blue and alpha channel components
          */
+        @Suppress("MagicNumber")
         public fun rgba(red: Int, green: Int, blue: Int, alpha: Int): Color {
             return Color("#" + listOf(red, green, blue, alpha).joinToString("") { it.toString(16).padStart(2, '0') })
         }

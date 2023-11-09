@@ -4,6 +4,7 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.compose)
+    alias(libs.plugins.detekt)
     id("maven-publish")
     id("signing")
 }
@@ -20,6 +21,12 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
         resolution("split.js", libs.versions.splitjs.get())
         resolution("html-differ", libs.versions.html.differ.get())
     }
+}
+
+detekt {
+    toolVersion = libs.versions.detekt.get()
+    config.setFrom("../detekt-config.yml")
+    buildUponDefaultConfig = true
 }
 
 kotlin {

@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+@file:Suppress("WildcardImport")
 
 package dev.kilua.html.helpers
 
@@ -44,6 +45,7 @@ public interface TagStyleDelegate<E : HTMLElement> : TagStyle<E> {
 /**
  * Common tag CSS styles delegate implementation.
  */
+@Suppress("LargeClass")
 public open class TagStyleDelegateImpl<E : HTMLElement>(
     protected val skipUpdates: Boolean,
     onSetCallback: ((Map<String, Any>) -> Unit)? = null

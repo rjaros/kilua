@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization) apply false
     alias(libs.plugins.compose) apply false
     alias(libs.plugins.npm.publish) apply false
+    alias(libs.plugins.detekt) apply false
 }
 
 group = "dev.kilua"

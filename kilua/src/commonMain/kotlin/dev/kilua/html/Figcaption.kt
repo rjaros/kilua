@@ -44,7 +44,10 @@ public open class Figcaption(className: String? = null, renderConfig: RenderConf
  * @return the [Figcaption] component
  */
 @Composable
-public fun ComponentBase.figcaption(className: String? = null, content: @Composable Figcaption.() -> Unit = {}): Figcaption {
+public fun ComponentBase.figcaption(
+    className: String? = null,
+    content: @Composable Figcaption.() -> Unit = {}
+): Figcaption {
     val component = remember { Figcaption(className, renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Figcaption::className, it) }

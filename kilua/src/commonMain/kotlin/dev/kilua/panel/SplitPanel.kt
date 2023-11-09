@@ -40,6 +40,8 @@ import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLDivElement
 import kotlin.math.ceil
 
+internal const val SPLIT_PANEL_DEFAULT_GUTTER_SIZE = 10
+
 /**
  * Split panel direction.
  */
@@ -87,7 +89,7 @@ public open class SplitPanel(
     /**
      * The gutter size.
      */
-    public open var gutterSize: Int by updatingProperty(10) {
+    public open var gutterSize: Int by updatingProperty(SPLIT_PANEL_DEFAULT_GUTTER_SIZE) {
         refresh()
     }
 
@@ -169,6 +171,7 @@ public open class SplitPanel(
     /**
      * Create and initialize Split.js instance.
      */
+    @Suppress("MagicNumber")
     protected open fun initializeSplitJs() {
         if (renderConfig.isDom && children.size == 3) {
             val mainBoundingRect = element.getBoundingClientRect()

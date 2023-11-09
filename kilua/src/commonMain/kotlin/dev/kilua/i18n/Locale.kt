@@ -22,6 +22,7 @@
 
 package dev.kilua.i18n
 
+import dev.kilua.utils.console
 import dev.kilua.utils.toLocaleString
 
 /**
@@ -42,10 +43,12 @@ public interface Locale {
 /**
  * Calculate decimal separator for the given language.
  */
+@Suppress("TooGenericExceptionCaught", "MagicNumber")
 public fun decimalSeparator(language: String): Char {
     return try {
         (1.1).toLocaleString(language).dropLast(1).last()
     } catch (e: Exception) {
+        console.log("Cannot determine decimal separator for language: $language (${e.message})")
         '.'
     }
 }

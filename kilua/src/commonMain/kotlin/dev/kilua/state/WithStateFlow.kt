@@ -56,7 +56,7 @@ public interface WithStateFlowDelegate<T> : WithStateFlow<T> {
 public open class WithStateFlowDelegateImpl<T> : WithStateFlowDelegate<T> {
 
     protected lateinit var formControl: FormControl<T>
-    protected var initialized: Boolean = false
+    private var initialized: Boolean = false
 
     public override fun formControl(formControl: FormControl<T>) {
         this.formControl = formControl
@@ -65,7 +65,7 @@ public open class WithStateFlowDelegateImpl<T> : WithStateFlowDelegate<T> {
     /**
      * Internal mutable state flow instance (lazily initialized)
      */
-    protected val _mutableStateFlow: MutableStateFlow<T> by lazy {
+    private val _mutableStateFlow: MutableStateFlow<T> by lazy {
         initialized = true
         MutableStateFlow(formControl.value)
     }

@@ -38,6 +38,7 @@ import dev.kilua.utils.toLocaleString
 import org.w3c.dom.events.Event
 
 internal const val NUMERIC_DEFAULT_DECIMALS = 2
+internal const val NUMERIC_MAX_LENGTH = 14
 
 /**
  * Numeric input component.
@@ -55,7 +56,18 @@ public open class Numeric(
     id: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<Number>(value, InputType.Text, name, 14, placeholder, disabled, required, id, className, renderConfig),
+) : Input<Number>(
+    value,
+    InputType.Text,
+    name,
+    NUMERIC_MAX_LENGTH,
+    placeholder,
+    disabled,
+    required,
+    id,
+    className,
+    renderConfig
+),
     NumberFormControl {
 
     /**

@@ -121,6 +121,7 @@ public open class Time(
         propertyListBuilder.add(::min, ::max, ::step)
     }
 
+    @Suppress("SwallowedException")
     override fun stringToValue(text: String?): LocalTime? {
         return if (text.isNullOrEmpty()) {
             null

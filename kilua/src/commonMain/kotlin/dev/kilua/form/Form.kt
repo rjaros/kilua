@@ -107,6 +107,7 @@ public enum class FormAutocomplete {
 /**
  * HTML Form component.
  */
+@Suppress("TooManyFunctions")
 public open class Form<K : Any>(
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
     protected val serializer: KSerializer<K>? = null,
@@ -231,7 +232,7 @@ public open class Form<K : Any>(
     protected var dataSet: Boolean = false
 
     @OptIn(ExperimentalSerializationApi::class)
-    protected val JsonInstance: Json? = serializer?.let {
+    protected val jsonInstance: Json? = serializer?.let {
         Json(
             from = (Serialization.customConfiguration ?: Json.Default)
         ) {
@@ -248,12 +249,12 @@ public open class Form<K : Any>(
     /**
      * Whether the data state flow is initialized.
      */
-    protected var initializedDataStateFlow: Boolean = false
+    private var initializedDataStateFlow: Boolean = false
 
     /**
      * Internal mutable state flow instance (lazily initialized)
      */
-    protected val _mutableDataStateFlow: MutableStateFlow<K> by lazy {
+    private val _mutableDataStateFlow: MutableStateFlow<K> by lazy {
         initializedDataStateFlow = true
         MutableStateFlow(getData())
     }
@@ -273,12 +274,12 @@ public open class Form<K : Any>(
     /**
      * Whether the validation results state flow is initialized.
      */
-    protected var initializedValidationStateFlow: Boolean = false
+    private var initializedValidationStateFlow: Boolean = false
 
     /**
      * Internal mutable state flow instance for validation results (lazily initialized).
      */
-    protected val _mutableValidationStateFlow: MutableStateFlow<Validation<K>> by lazy {
+    private val _mutableValidationStateFlow: MutableStateFlow<Validation<K>> by lazy {
         initializedValidationStateFlow = true
         MutableStateFlow(Validation())
     }
@@ -345,14 +346,83 @@ public open class Form<K : Any>(
         }
         mapToClassConverter = serializer?.let {
             { map ->
-                JsonInstance!!.decodeFromString(serializer, JSON.stringify(mapToObjectConverter!!.invoke(map)))
+                jsonInstance!!.decodeFromString(serializer, JSON.stringify(mapToObjectConverter!!.invoke(map)))
             }
         }
         classToObjectConverter = serializer?.let {
             {
-                JSON.parse(JsonInstance!!.encodeToString(serializer, it))
+                JSON.parse(jsonInstance!!.encodeToString(serializer, it))
             }
         }
+    }
+
+
+    /**
+     * Sets the values of all the controls from the single json Object.
+     * @param json data model as Object
+     */
+    protected open fun setDataInternalFromSingleObject(json: Object, key: String) {
+        val jsonValue = json[key]
+        if (jsonValue != null) {
+            when (val formField = fields[key]) {
+                is StringFormControl -> formField.value = jsonValue.toString()
+                is DateFormControl -> formField.value = LocalDate.parse(jsonValue.toString())
+                is DateTimeFormControl -> formField.value = LocalDateTime.parse(jsonValue.toString())
+                is TimeFormControl -> formField.value = LocalTime.parse(jsonValue.toString())
+                is TriStateFormControl -> formField.value = jsonValue.toString().toBoolean()
+                is BoolFormControl -> formField.value = jsonValue.toString().toBoolean()
+                is IntFormControl -> formField.value = jsonValue.toString().toInt()
+                is NumberFormControl -> formField.value = jsonValue.toString().toDouble()
+                is KFilesFormControl -> {
+                    formField.value = Json.decodeFromString(
+                        ListSerializer(KFile.serializer()),
+                        JSON.stringify(jsonValue)
+                    )
+                }
+
+                else -> {
+                    if (formField != null) {
+                        error("Unsupported form field type: ${formField::class.simpleName}")
+                    } else {
+                        dataMap[key] = jsonValue
+                    }
+                }
+            }
+        } else {
+            fields[key]?.setValue(null)
+        }
+    }
+
+    /**
+     * Sets the values of all the controls from the json Object.
+     * @param json data model as Object
+     */
+    protected open fun setDataInternalFromObject(json: Object) {
+        val keys = keys(json)
+        for (key in keys) {
+            setDataInternalFromSingleObject(json, key)
+        }
+        fields.forEach { if (!keys.contains(it.key)) it.value.setValue(null) }
+    }
+
+    /**
+     * Sets the values of all the controls from the map.
+     * @param map data model as Map
+     */
+    protected open fun setDataInternalFromMap(map: Map<String, Any?>) {
+        map.forEach { (key, value) ->
+            if (value != null) {
+                val formField = fields[key]
+                if (formField != null) {
+                    formField.setValue(value)
+                } else {
+                    dataMap[key] = value
+                }
+            } else {
+                fields[key]?.setValue(null)
+            }
+        }
+        fields.forEach { if (!map.contains(it.key)) it.value.setValue(null) }
     }
 
     /**
@@ -364,54 +434,10 @@ public open class Form<K : Any>(
         dataMap.clear()
         if (classToObjectConverter != null) {
             val json = classToObjectConverter.invoke(model)
-            val keys = keys(json)
-            for (key in keys) {
-                val jsonValue = json[key]
-                if (jsonValue != null) {
-                    when (val formField = fields[key]) {
-                        is StringFormControl -> formField.value = jsonValue.toString()
-                        is DateFormControl -> formField.value = LocalDate.parse(jsonValue.toString())
-                        is DateTimeFormControl -> formField.value = LocalDateTime.parse(jsonValue.toString())
-                        is TimeFormControl -> formField.value = LocalTime.parse(jsonValue.toString())
-                        is TriStateFormControl -> formField.value = jsonValue.toString().toBoolean()
-                        is BoolFormControl -> formField.value = jsonValue.toString().toBoolean()
-                        is IntFormControl -> formField.value = jsonValue.toString().toInt()
-                        is NumberFormControl -> formField.value = jsonValue.toString().toDouble()
-                        is KFilesFormControl -> {
-                            formField.value = Json.decodeFromString(
-                                ListSerializer(KFile.serializer()),
-                                JSON.stringify(jsonValue)
-                            )
-                        }
-
-                        else -> {
-                            if (formField != null) {
-                                throw IllegalStateException("Unsupported form field type: ${formField::class.simpleName}")
-                            } else {
-                                dataMap[key] = jsonValue
-                            }
-                        }
-                    }
-                } else {
-                    fields[key]?.setValue(null)
-                }
-            }
-            fields.forEach { if (!keys.contains(it.key)) it.value.setValue(null) }
+            setDataInternalFromObject(json)
         } else {
             val map = model.cast<Map<String, Any?>>()
-            map.forEach { (key, value) ->
-                if (value != null) {
-                    val formField = fields[key]
-                    if (formField != null) {
-                        formField.setValue(value)
-                    } else {
-                        dataMap[key] = value
-                    }
-                } else {
-                    fields[key]?.setValue(null)
-                }
-            }
-            fields.forEach { if (!map.contains(it.key)) it.value.setValue(null) }
+            setDataInternalFromMap(map)
         }
         if (oldData != model) updateStateFlow(model)
     }
@@ -469,7 +495,7 @@ public open class Form<K : Any>(
     public open fun getDataJson(): Object {
         return if (serializer != null) {
             JSON.parse(
-                JsonInstance!!.encodeToString(
+                jsonInstance!!.encodeToString(
                     serializer,
                     getData()
                 )
@@ -835,6 +861,7 @@ public open class Form<K : Any>(
      * @param updateState whether to update the validation state flow
      * @return validation result
      */
+    @Suppress("ComplexMethod")
     public fun validate(updateState: Boolean = true): Boolean {
         checkValidity()
         val fieldsValidations = fields.map { (key, control) ->

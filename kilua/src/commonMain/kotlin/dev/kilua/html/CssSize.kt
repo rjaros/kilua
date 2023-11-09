@@ -25,6 +25,7 @@ package dev.kilua.html
 /**
  * Definitions of CSS units.
  */
+@Suppress("EnumNaming")
 public enum class CssUnit(public val cssUnit: String) {
     px("px"),
     pt("pt"),

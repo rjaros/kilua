@@ -25,6 +25,7 @@ package dev.kilua.utils
 /**
  * A mutable list implementation based on a native array on JS target.
  */
+@Suppress("TooManyFunctions")
 public expect class NativeList<E> : MutableList<E> {
     override val size: Int
 

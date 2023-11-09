@@ -35,16 +35,16 @@ import org.w3c.dom.Text
  * HTML text node component.
  */
 public open class TextNode(
-    text: String,
+    data: String,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-) : ComponentBase(SafeDomFactory.createTextNode(text), renderConfig) {
+) : ComponentBase(SafeDomFactory.createTextNode(data), renderConfig) {
 
     /**
      * The DOM text node.
      */
-    public open val textNode: Text by lazy {
+    public open val text: Text by lazy {
         if (renderConfig.isDom) node.unsafeCast<Text>() else {
-            throw IllegalStateException("Can't use DOM element with the current render configuration")
+            error("Can't use DOM element with the current render configuration")
         }
     }
 
@@ -56,31 +56,31 @@ public open class TextNode(
     /**
      * The text of the node.
      */
-    public open var text: String by updatingProperty(text, skipUpdate) {
-        textNode.data = it
+    public open var data: String by updatingProperty(data, skipUpdate) {
+        text.data = it
     }
 
     override var visible: Boolean by updatingProperty(true, skipUpdate) {
-        textNode.data = if (it) text else ""
+        text.data = if (it) data else ""
     }
 
     override fun renderToStringBuilder(builder: StringBuilder) {
-        builder.append(text)
+        builder.append(data)
     }
 }
 
 /**
  * Creates a [TextNode] component.
- * @param text the text of the node
+ * @param data the text of the node
  * @param setup a function for setting up the component
  * @return a [TextNode] component
  */
 @Composable
-public fun textNode(text: String, setup: TextNode.() -> Unit = {}): TextNode {
+public fun textNode(data: String, setup: TextNode.() -> Unit = {}): TextNode {
     // Always using DefaultRenderConfig because of plus operator String receiver.
-    val component = remember { TextNode(text, DefaultRenderConfig()) }
+    val component = remember { TextNode(data, DefaultRenderConfig()) }
     ComponentNode(component, {
-        set(text) { updateProperty(TextNode::text, it) }
+        set(data) { updateProperty(TextNode::data, it) }
     }) {
         setup(component)
     }

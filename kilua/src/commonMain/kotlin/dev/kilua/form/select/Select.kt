@@ -186,9 +186,7 @@ public open class Select(
             when (child) {
                 is Optgroup -> {
                     child.children.mapNotNull { subChild ->
-                        if (subChild is Option) {
-                            subChild
-                        } else null
+                        subChild as? Option
                     }
                 }
 

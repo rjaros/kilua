@@ -50,6 +50,7 @@ public inline fun <C> ComponentNode(
     }
     Updater<C>(currentComposer).update()
     SkippableUpdater<C>(currentComposer).skippableUpdate()
+    @Suppress("MagicNumber")
     currentComposer.startReplaceableGroup(0x7ab4aae9)
     content.invoke(componentInScope)
     currentComposer.endReplaceableGroup()

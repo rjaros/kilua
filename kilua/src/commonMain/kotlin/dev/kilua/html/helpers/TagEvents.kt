@@ -33,6 +33,7 @@ import org.w3c.dom.events.MouseEvent
 /**
  * Common tag events.
  */
+@Suppress("TooManyFunctions")
 public interface TagEvents<E : HTMLElement> {
     /**
      * Add click event listener (composable).

@@ -117,6 +117,7 @@ public open class Date(
         propertyListBuilder.add(::min, ::max, ::step)
     }
 
+    @Suppress("SwallowedException")
     override fun stringToValue(text: String?): LocalDate? {
         return if (text.isNullOrEmpty()) {
             null

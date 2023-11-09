@@ -87,7 +87,7 @@ public open class Tag<E : HTMLElement>(
      */
     public val element: E by lazy {
         if (renderConfig.isDom) node.unsafeCast<E>() else {
-            throw IllegalStateException("Can't use DOM element with the current render configuration")
+            error("Can't use DOM element with the current render configuration")
         }
     }
 
@@ -113,9 +113,9 @@ public open class Tag<E : HTMLElement>(
      * The text content of the current component or null if the first child is not a TextNode.
      */
     public open var textContent: String?
-        get() = children.find { it is TextNode }?.cast<TextNode>()?.text
+        get() = children.find { it is TextNode }?.cast<TextNode>()?.data
         set(value) {
-            children.find { it is TextNode }?.cast<TextNode>()?.text = value ?: ""
+            children.find { it is TextNode }?.cast<TextNode>()?.data = value ?: ""
         }
 
     init {
@@ -147,7 +147,8 @@ public open class Tag<E : HTMLElement>(
     }
 
     /**
-     * Builds a list of properties rendered as html attributes for the current component with a delegated PropertyListBuilder.
+     * Builds a list of properties rendered as html attributes for the current component with
+     * a delegated PropertyListBuilder.
      * @param propertyListBuilder a delegated builder
      */
     protected open fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {

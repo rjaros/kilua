@@ -34,6 +34,7 @@ import org.w3c.dom.HTMLOListElement
 /**
  * Numbered list types.
  */
+@Suppress("EnumNaming")
 public enum class OlType {
     a,
     A,

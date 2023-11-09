@@ -56,6 +56,7 @@ public interface TagEventsDelegate<E : HTMLElement> : TagEvents<E> {
 /**
  * Common tag events delegate implementation.
  */
+@Suppress("TooManyFunctions")
 public open class TagEventsDelegateImpl<E : HTMLElement>(
     protected val skipUpdates: Boolean,
     protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>> = nativeMapOf()

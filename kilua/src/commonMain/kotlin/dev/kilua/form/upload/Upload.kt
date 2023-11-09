@@ -214,7 +214,8 @@ public fun ComponentBase.upload(
     className: String? = null,
     setup: @Composable Upload.() -> Unit = {}
 ): Upload {
-    val component = remember { Upload(multiple, accept, capture, name, disabled, required, id, className, renderConfig) }
+    val component =
+        remember { Upload(multiple, accept, capture, name, disabled, required, id, className, renderConfig) }
     ComponentNode(component, {
         set(multiple) { updateProperty(Upload::multiple, it) }
         set(accept) { updateProperty(Upload::accept, it) }
