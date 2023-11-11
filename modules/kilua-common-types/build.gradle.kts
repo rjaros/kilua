@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.detekt)
     id("maven-publish")
     id("signing")
 }

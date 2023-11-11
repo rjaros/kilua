@@ -36,11 +36,13 @@ public data class KFile(
 /**
  *  Decode the content-type from the data uri string contained in the KFile object.
  */
+@Suppress("MagicNumber")
 public val KFile.contentType: String?
     get() = content?.split(",", limit = 2)?.get(0)?.drop(5)?.split(";")?.get(0)
 
 /**
  *  Decode the Base64 encoded content from the data uri string contained in the KFile object.
  */
+@Suppress("MagicNumber")
 public val KFile.base64Encoded: String?
     get() = content?.split(",", limit = 2)?.getOrNull(1)
