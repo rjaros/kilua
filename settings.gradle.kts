@@ -23,6 +23,7 @@ dependencyResolutionManagement {
 rootProject.name = "kilua"
 include(":kilua")
 include(":modules:kilua-common-types")
+include(":modules:kilua-trix")
 include(":modules:kilua-testutils")
 include(":kilua-assets")
 include(":examples:bootstrap-form")
