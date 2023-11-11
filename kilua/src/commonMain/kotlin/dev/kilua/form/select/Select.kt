@@ -23,7 +23,7 @@
 package dev.kilua.form.select
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
@@ -315,11 +315,8 @@ public fun ComponentBase.select(
     setup: @Composable Select.() -> Unit = {}
 ): Select {
     val component = remember { Select(value, multiple, size, name, disabled, required, id, className, renderConfig) }
-    DisposableEffect(component.componentId) {
+    LaunchedEffect(component.componentId) {
         component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
     }
     ComponentNode(component, {
         set(value) { updateProperty(Select::value, it) }
