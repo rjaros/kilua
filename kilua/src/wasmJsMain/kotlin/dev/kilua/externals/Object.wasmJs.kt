@@ -66,6 +66,16 @@ public actual fun keys(o: Object): List<String> {
     return jsKeys(o).toArray().asList().map { it.toString() }
 }
 
+@JsFun("(target, source) => ( Object.assign(target, source) )")
+private external fun jsAssign(target: JsAny, source: JsAny)
+
+/**
+ * Copies all properties from source object to the target object
+ */
+public actual fun assign(target: Object, source: Object) {
+    jsAssign(target, source)
+}
+
 /**
  * Convert String value to JS Object for JS/Wasm interop
  */

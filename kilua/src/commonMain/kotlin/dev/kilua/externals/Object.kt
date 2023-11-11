@@ -49,6 +49,11 @@ public expect operator fun Object.get(key: String): Object?
 public expect fun keys(o: Object): List<String>
 
 /**
+ * Copies all properties from source object to target object
+ */
+public expect fun assign(target: Object, source: Object)
+
+/**
  * Convert String value to JS Object for JS/Wasm interop
  */
 public expect fun String.toJsObject(): Object

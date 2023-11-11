@@ -67,6 +67,13 @@ public actual fun keys(o: Object): List<String> {
 }
 
 /**
+ * Copies all properties from source object to the target object
+ */
+public actual fun assign(target: Object, source: Object) {
+    js("Object").assign(target, source)
+}
+
+/**
  * Delete property from JavaScript object.
  */
 public external fun delete(p: dynamic): Boolean
