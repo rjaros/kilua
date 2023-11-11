@@ -22,6 +22,7 @@
 
 package dev.kilua.utils
 
+@Suppress("TooManyFunctions", "MemberNameEqualsClassName")
 public actual class NativeList<E> : MutableList<E> {
 
     private val nativeList: Array<E> = emptyArray()

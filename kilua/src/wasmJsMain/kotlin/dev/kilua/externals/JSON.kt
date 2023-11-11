@@ -25,6 +25,7 @@ package dev.kilua.externals
 /**
  * JavaScript JSON object.
  */
+@Suppress("UnusedParameter")
 internal external object JSON {
     fun stringify(o: JsAny?): String
     fun <T : JsAny> parse(text: String): T

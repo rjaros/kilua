@@ -45,6 +45,7 @@ internal external class SplitJsOptionsExt : JsAny {
 @JsModule("split.js")
 internal external fun splitJsExt(elements: JsArray<HTMLElement>, options: SplitJsOptionsExt): SplitJsInstance
 
+@Suppress("SpreadOperator")
 internal actual fun splitJs(elements: List<HTMLElement>, options: SplitJsOptions): SplitJsInstance {
     val splitJsDirection = if (options.direction == Dir.Horizontal) "vertical" else "horizontal"
     return splitJsExt(jsArrayOf<HTMLElement>(*elements.toTypedArray()), obj {

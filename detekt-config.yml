@@ -4,6 +4,8 @@ build:
 naming:
   FunctionNaming:
     functionPattern: '[a-zA-Z][a-zA-Z0-9]*'
+  MatchingDeclarationName:
+    active: false
 
 complexity:
   LongParameterList:

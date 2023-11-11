@@ -24,6 +24,7 @@
 
 package dev.kilua.test
 
+@Suppress("UnusedPrivateProperty")
 public external class HtmlDiffer(preset: String = definedExternally) {
     public fun isEqual(html1: String, html2: String): Boolean
 }

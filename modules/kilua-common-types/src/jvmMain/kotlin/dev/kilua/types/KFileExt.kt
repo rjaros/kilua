@@ -39,6 +39,7 @@ public val KFile.inputStream: InputStream?
 /**
  *  Decode the content from the data uri string contained in the KFile object.
  */
+@Suppress("MagicNumber")
 public fun KFile.decoded(): Pair<String?, ByteArray?> {
     return content?.split(",", limit = 2)?.let {
         if (it.size == 2) {
