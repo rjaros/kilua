@@ -22,14 +22,19 @@
 
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.NoLiveLiterals
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
+import dev.kilua.CoreModule
 import dev.kilua.Hot
+import dev.kilua.TrixModule
 import dev.kilua.compose.root
 import dev.kilua.form.number.range
+import dev.kilua.form.select.select
+import dev.kilua.form.text.richText
 import dev.kilua.form.text.text
 import dev.kilua.html.Background
 import dev.kilua.html.Border
@@ -40,17 +45,20 @@ import dev.kilua.html.Div
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1t
+import dev.kilua.html.hr
 import dev.kilua.html.px
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
 import dev.kilua.html.tag
 import dev.kilua.html.unaryPlus
+import dev.kilua.i18n.Locale
+import dev.kilua.i18n.SimpleLocale
 import dev.kilua.startApplication
 import dev.kilua.state.collectAsState
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.console
 import dev.kilua.utils.log
-import dev.kilua.utils.useCssModule
+import dev.kilua.utils.useModule
 import kotlinx.browser.window
 import org.w3c.dom.Text
 import org.w3c.dom.events.Event
@@ -66,12 +74,55 @@ external object css
 class App : Application() {
 
     init {
-        useCssModule(css)
+        useModule(css)
     }
 
     override fun start() {
 
         root("root") {
+
+            var disab by remember { mutableStateOf(true) }
+
+            val language by select(listOf("en" to "English", "pl" to "Polish"), "en").collectAsState()
+
+            val locale = SimpleLocale(language ?: "en")
+
+            var someText by remember { mutableStateOf<String?>("Ala ma kota") }
+
+            if (disab) {
+                val trix = richText(someText, placeholder = "wprowadź dane", locale = locale) {
+                    onChange {
+                        someText = this.value
+                    }
+                }
+                button("get trix") {
+                    onClick {
+                        console.log(trix.value)
+                    }
+                }
+                button("set trix") {
+                    onClick {
+                        trix.value = "<strong>bold text</strong>"
+                    }
+                }
+                button("clear trix") {
+                    onClick {
+                        trix.value = null
+                    }
+                }
+                button("hide trix") {
+                    onClick {
+                        trix.visible = !trix.visible
+                    }
+                }
+            }
+            button("disable trix") {
+                onClick {
+                    disab = !disab
+                }
+            }
+
+            hr()
 
             val i by range(0, 1, 255).collectAsState()
 
@@ -328,5 +379,5 @@ class App2 : Application() {
 }
 
 fun main() {
-    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>())
+    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>(), CoreModule, TrixModule)
 }

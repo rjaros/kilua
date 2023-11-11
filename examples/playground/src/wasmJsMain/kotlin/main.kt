@@ -22,13 +22,19 @@
 
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import dev.kilua.Application
+import dev.kilua.CoreModule
+import dev.kilua.TrixModule
 import dev.kilua.compose.root
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
 import dev.kilua.form.number.range
 import dev.kilua.form.select.select
+import dev.kilua.form.text.richText
 import dev.kilua.form.text.text
 import dev.kilua.html.Background
 import dev.kilua.html.Border
@@ -37,6 +43,7 @@ import dev.kilua.html.Color
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1t
+import dev.kilua.html.hr
 import dev.kilua.html.pt
 import dev.kilua.html.px
 import dev.kilua.html.span
@@ -54,6 +61,41 @@ class App : Application() {
     override fun start() {
 
         root("root") {
+
+            var disab by remember { mutableStateOf(true) }
+
+            val trix = richText("ala ma kota", disabled = disab, placeholder = "wprowadź dane") {
+                onChange {
+                    console.log(this.value)
+                }
+            }
+            button("get trix") {
+                onClick {
+                    console.log(trix.value)
+                }
+            }
+            button("set trix") {
+                onClick {
+                    trix.value = "<strong>bold text</strong>"
+                }
+            }
+            button("clear trix") {
+                onClick {
+                    trix.value = null
+                }
+            }
+            button("hide trix") {
+                onClick {
+                    trix.visible = !trix.visible
+                }
+            }
+            button("disable trix") {
+                onClick {
+                    disab = !disab
+                }
+            }
+
+            hr()
 
             val i by range(0, 1, 255).collectAsState()
 
@@ -79,7 +121,7 @@ class App : Application() {
                     }
                 }
                 margin = 20.px
-                form(true, className = "row g-3 needs-validation") {
+                form(className = "row g-3 needs-validation") {
                     val validation by validationStateFlow.collectAsState()
 
                     if (validation.isInvalid) {
@@ -180,5 +222,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App)
+    startApplication(::App, null, TrixModule, CoreModule)
 }

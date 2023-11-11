@@ -72,6 +72,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":kilua"))
+                implementation(project(":modules:kilua-trix"))
             }
         }
         if (buildTarget == "js" || !isInIdea) {
