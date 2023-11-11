@@ -26,12 +26,11 @@ import dev.kilua.externals.Intl
 import dev.kilua.utils.isDom
 import kotlinx.browser.window
 
-
 /**
  * Auto-detected default locale.
  */
-public class DefaultLocale : Locale {
+public data class DefaultLocale(
     override val language: String = if (isDom) window.navigator.language.split("-")[0] else Intl.DateTimeFormat()
-        .resolvedOptions().locale.split("-")[0]
+        .resolvedOptions().locale.split("-")[0],
     override val decimalSeparator: Char = decimalSeparator(language)
-}
+) : Locale
