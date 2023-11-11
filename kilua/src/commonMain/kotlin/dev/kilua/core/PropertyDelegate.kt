@@ -194,9 +194,9 @@ public open class PropertyDelegate(
                 } else {
                     propertyValues[property] = value
                 }
+                updateFunctions[property]?.cast<(T) -> Unit>()?.invoke(value)
+                updateFunctionsWithOldValue[property]?.cast<(T, T) -> Unit>()?.invoke(value, oldValue)
             }
-            updateFunctions[property]?.cast<(T) -> Unit>()?.invoke(value)
-            updateFunctionsWithOldValue[property]?.cast<(T, T) -> Unit>()?.invoke(value, oldValue)
         }
     }
 
