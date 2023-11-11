@@ -23,7 +23,7 @@
 package dev.kilua
 
 import dev.kilua.utils.JsNonModule
-import dev.kilua.utils.useCssModule
+import dev.kilua.utils.useModule
 
 /**
  * Kilua Module initializer.
@@ -44,6 +44,6 @@ internal external object StyleCss
  */
 public object CoreModule : ModuleInitializer {
     override fun initialize() {
-        useCssModule(StyleCss)
+        useModule(StyleCss)
     }
 }
