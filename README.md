@@ -38,7 +38,8 @@ Early in development. Main concepts have been tested, but everything is a subjec
 - [X] A component based on external NPM library (`SplitPanel`)
 - [X] Implement all standard HTML tags
 - [X] Implement all standard form input components
-- [ ] Implement advanced form input components (based on external NPM libraries - TempusDominus, TomSelect, Imask, Trix)
+- [X] Implement RichText component based on external NPM library - Trix editor
+- [ ] Implement advanced form input components (based on external NPM libraries - TempusDominus, TomSelect, Imask)
 - [X] CSS styles declarations
 - [X] Typesafe forms support with built-in validation 
 - [ ] Implement Tabulator component
