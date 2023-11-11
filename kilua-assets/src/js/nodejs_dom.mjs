@@ -15,6 +15,11 @@ if (typeof process !== 'undefined') {
     };
 
     globalThis.Node = class Node {
+        style = {}
+        setAttribute(name, value) {}
+        appendChild(node) {}
+        querySelector(selector) {}
+        insertBefore(node, referenceNode) {}
     }
     globalThis.Element = class Element extends Node {
     }
@@ -22,7 +27,24 @@ if (typeof process !== 'undefined') {
     }
     globalThis.Text = class Text extends Node {
     }
+    globalThis.document = {
+        kilua: true,
+        documentElement: new Element(),
+        head: new Element(),
+        createElement: function(name) {
+            return new Element()
+        }
+    }
+    globalThis.window = {
+        document: globalThis.document
+    }
+    globalThis.customElements = {
+        get: function (name) {},
+        define: function (name, element) {}
+    }
 }
+
+function nodeJsInit() {}
 
 function nodeJsCreateElement() {
     return new Element()
@@ -32,4 +54,4 @@ function nodeJsCreateText() {
     return new Text()
 }
 
-export { nodeJsCreateElement, nodeJsCreateText };
+export { nodeJsInit, nodeJsCreateElement, nodeJsCreateText };

@@ -42,6 +42,7 @@ kotlin {
                 api(libs.kotlinx.serialization.json)
                 api(libs.kotlinx.datetime)
                 api(project(":modules:kilua-common-types"))
+//                implementation(npm("kilua-assets", "http://localhost:8001/kilua-assets-0.0.5-SNAPSHOT.12.tgz"))
                 implementation(npm("kilua-assets", libs.versions.npm.kilua.assets.get()))
                 implementation(npm("css-loader", libs.versions.css.loader.get()))
                 implementation(npm("style-loader", libs.versions.style.loader.get()))

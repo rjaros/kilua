@@ -12,7 +12,7 @@ npmPublish {
             }
             packageJson {
                 main.set("index.js")
-                version.set("0.0.4")
+                version.set("0.0.5")
                 description.set("The assets for the Kilua framework")
                 keywords.set(listOf("kilua", "kotlin", "wasm"))
                 homepage.set("https://kilua.dev")
