@@ -23,7 +23,7 @@
 package dev.kilua.utils
 
 public actual val isDom: Boolean by lazy {
-    js("typeof document !== 'undefined'")
+    js("typeof document !== 'undefined' && typeof document.kilua == 'undefined'")
 }
 
 @Suppress("NOTHING_TO_INLINE")
