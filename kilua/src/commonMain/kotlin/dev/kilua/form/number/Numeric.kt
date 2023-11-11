@@ -48,12 +48,12 @@ public open class Numeric(
     min: Number? = null,
     max: Number? = null,
     decimals: Int = NUMERIC_DEFAULT_DECIMALS,
-    locale: Locale = DefaultLocale(),
     name: String? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
     id: String? = null,
+    locale: Locale = DefaultLocale(),
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) : Input<Number>(
@@ -138,12 +138,12 @@ public open class Numeric(
  * @param min the minimum value
  * @param max the maximum value
  * @param decimals the number of decimal digits
- * @param locale the locale for formatting the number
  * @param name the name attribute of the generated HTML input element
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
  * @param id the id attribute of the generated HTML input element
+ * @param locale the locale for formatting the number
  * @param className the CSS class name
  * @param setup a function for setting up the component
  * @return a [Numeric] component
@@ -154,12 +154,12 @@ public fun ComponentBase.numeric(
     min: Number? = null,
     max: Number? = null,
     decimals: Int = NUMERIC_DEFAULT_DECIMALS,
-    locale: Locale = DefaultLocale(),
     name: String? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
     id: String? = null,
+    locale: Locale = DefaultLocale(),
     className: String? = null,
     setup: @Composable Numeric.() -> Unit = {}
 ): Numeric {
@@ -170,12 +170,12 @@ public fun ComponentBase.numeric(
                 min,
                 max,
                 decimals,
-                locale,
                 name,
                 placeholder,
                 disabled,
                 required,
                 id,
+                locale,
                 className,
                 renderConfig
             )
@@ -185,12 +185,12 @@ public fun ComponentBase.numeric(
         set(min) { updateProperty(Numeric::min, it) }
         set(max) { updateProperty(Numeric::max, it) }
         set(decimals) { updateProperty(Numeric::decimals, it) }
-        set(locale) { updateProperty(Numeric::locale, it) }
         set(name) { updateProperty(Numeric::name, it) }
         set(placeholder) { updateProperty(Numeric::placeholder, it) }
         set(disabled) { updateProperty(Numeric::disabled, it) }
         set(required) { updateProperty(Numeric::required, it) }
         set(id) { updateProperty(Numeric::id, it) }
+        set(locale) { updateProperty(Numeric::locale, it) }
         set(className) { updateProperty(Numeric::className, it) }
     }, setup)
     return component
