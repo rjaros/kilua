@@ -45,7 +45,6 @@ import dev.kilua.initializeTrix
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.utils.console
 import kotlinx.dom.clear
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
@@ -205,7 +204,6 @@ public open class RichText(
      * Disable/enable connected toolbar.
      */
     protected fun toolbarDisable(disable: Boolean) {
-        console.log("disable: $disable")
         toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.run {
             querySelectorAll("button").asList().forEach {
                 it.unsafeCast<HTMLButtonElement>().disabled = disable
@@ -217,7 +215,6 @@ public open class RichText(
      * Localize connected toolbar.
      */
     protected fun toolbarLocalize() {
-        console.log("localize")
         toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.innerHTML =
             getToolbarContent(locale)
     }
@@ -266,7 +263,6 @@ public open class RichText(
     }
 
     override fun onInsert() {
-        console.log("on insert")
         if (renderConfig.isDom) {
             toolbarLocalize()
             if (disabled == true) {
@@ -277,7 +273,6 @@ public open class RichText(
     }
 
     override fun onRemove() {
-        console.log("on onremove")
         if (renderConfig.isDom) {
             toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.clear()
             element.clear()
