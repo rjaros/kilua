@@ -34,6 +34,7 @@ import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
 import dev.kilua.form.number.range
 import dev.kilua.form.select.select
+import dev.kilua.form.text.RichText
 import dev.kilua.form.text.richText
 import dev.kilua.form.text.text
 import dev.kilua.html.Background
@@ -64,9 +65,12 @@ class App : Application() {
 
             var disab by remember { mutableStateOf(true) }
 
-            val trix = richText("ala ma kota", disabled = disab, placeholder = "wprowadź dane") {
-                onChange {
-                    console.log(this.value)
+            lateinit var trix: RichText
+            fieldWithLabel("A rich text field", "form-label", wrapperClassName = "form-group") {
+                trix = richText("ala ma kota", id = it, placeholder = "wprowadź dane", className = "form-control") {
+                    onChange {
+                        console.log(this.value)
+                    }
                 }
             }
             button("get trix") {
@@ -135,7 +139,7 @@ class App : Application() {
                     }
 
                     fieldWithLabel("First name", "form-label", groupClassName = "col-md-4") {
-                        text("Mark", required = true, className = "form-control").bind("firstName").also {
+                        text("Mark", required = true, id = it, className = "form-control").bind("firstName").also {
                             div("valid-feedback") {
                                 +"Looks good!"
                             }
