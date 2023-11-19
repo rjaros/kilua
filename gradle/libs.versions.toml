@@ -1,7 +1,7 @@
 [versions]
-kotlin = "1.9.20"
-compose = "1.5.10-dev-wasm02"
-compose-plugin = "1.5.3"
+kotlin = "2.0.0-Beta1"
+compose = "1.5.10-dev-wasm03"
+compose-plugin = "1.5.4-dev1-kt2.0.0-Beta1"
 npm-publish = "3.4.1"
 kilua = "0.0.1"
 kotlinx-coroutines = "1.7.2-wasm3"
