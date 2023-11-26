@@ -33,12 +33,14 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.html.Div
 import dev.kilua.html.Tag
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.li
 import dev.kilua.html.ul
+import dev.kilua.utils.jsString
 import dev.kilua.utils.rem
 import org.w3c.dom.HTMLDivElement
 
@@ -180,6 +182,14 @@ public fun ComponentBase.tabPanel(
                             id = "$tabPanelId-tab-$index"
                             role = "tab"
                             setAttribute("aria-selected", (index == component.activeIndexState).toString())
+                            if (tab.closable) {
+                                button(className = "btn-close kilua-tab-close") {
+                                    onClick { e ->
+                                        component.dispatchEvent("closeTab", buildCustomEventInit(jsString("$index")))
+                                        e.stopPropagation()
+                                    }
+                                }
+                            }
                         }
                         onClick { e ->
                             component.updateProperty(TabPanel::activeIndex, index)
