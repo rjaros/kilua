@@ -1741,10 +1741,10 @@ karma@6.4.2:
     ua-parser-js "^0.7.30"
     yargs "^16.1.1"
 
-kilua-assets@0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/kilua-assets/-/kilua-assets-0.0.8.tgz#5119c19542aa3a42efdb5b4d157861ce9ab7da29"
-  integrity sha512-sc9/zR8oPQDiwPptuBReSPuWTT8Lk3zRp3y7Z546lIHFHx2pIv5LjOTGDq8L20FvrvXoN6Z5NNxP+GKBtKk39Q==
+kilua-assets@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/kilua-assets/-/kilua-assets-0.0.9.tgz#9d33c0e9cbef1eba98a4d3486ac14a40cac1c383"
+  integrity sha512-tXjJVhfnTR4uKzitUZNH4pzr/xgcdJhD7WazvSmeaoiTcluOs7LGtrWYlfIIhSZib6m/apGySIOWf5yGlTeZSA==
 
 kind-of@^6.0.2:
   version "6.0.3"

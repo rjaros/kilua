@@ -178,7 +178,9 @@ public fun ComponentBase.tabPanel(
                         role = "presentation"
                         val navLinkClassName =
                             if (index == component.activeIndexState) "nav-link active" else "nav-link"
-                        button(tab.label, tab.icon, className = navLinkClassName) {
+                        val navLinkClassNameWithIcon =
+                            if (tab.icon == null && tab.closable) "$navLinkClassName icon-link" else navLinkClassName
+                        button(tab.label, tab.icon, className = navLinkClassNameWithIcon) {
                             id = "$tabPanelId-tab-$index"
                             role = "tab"
                             setAttribute("aria-selected", (index == component.activeIndexState).toString())
