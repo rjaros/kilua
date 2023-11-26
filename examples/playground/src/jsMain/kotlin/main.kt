@@ -24,10 +24,14 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.NoLiveLiterals
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
+import dev.kilua.BootstrapCssModule
+import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
 import dev.kilua.Hot
 import dev.kilua.TrixModule
@@ -46,6 +50,7 @@ import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1t
 import dev.kilua.html.hr
+import dev.kilua.html.pt
 import dev.kilua.html.px
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
@@ -53,6 +58,8 @@ import dev.kilua.html.tag
 import dev.kilua.html.unaryPlus
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.SimpleLocale
+import dev.kilua.panel.splitPanel
+import dev.kilua.panel.tabPanel
 import dev.kilua.startApplication
 import dev.kilua.state.collectAsState
 import dev.kilua.utils.JsNonModule
@@ -80,6 +87,62 @@ class App : Application() {
     override fun start() {
 
         root("root") {
+
+            splitPanel {
+                width = 500.px
+                height = 300.px
+                margin = 30.px
+                left {
+                    pt("left")
+                }
+                right {
+                    pt("right")
+                }
+            }
+
+            hr()
+
+            tabPanel {
+                margin = 20.px
+                tab("Test1") {
+                    pt("Test1")
+                }
+                tab("Test2") {
+                    pt("Test2")
+                }
+                tab("Test3") {
+                    pt("Test3")
+                }
+            }
+
+            val tabs = remember { mutableStateListOf("First tab", "Second tab") }
+
+            tabPanel(activeIndex = 0) {
+                margin = 30.px
+                console.log("recompose tabPanel")
+                tabs.forEach { tab ->
+                    console.log("generate tab: $tab")
+                    key(tab) {
+                        tab(tab) {
+                            pt(tab)
+                        }
+                    }
+                }
+            }
+
+            button("add tab") {
+                onClick {
+                    tabs.add("New tab")
+                }
+            }
+
+            button("remove tab") {
+                onClick {
+                    tabs.removeAt(0)
+                }
+            }
+
+            hr()
 
             var disab by remember { mutableStateOf(true) }
 
@@ -379,5 +442,12 @@ class App2 : Application() {
 }
 
 fun main() {
-    startApplication(::App, js("import.meta.webpackHot").unsafeCast<Hot?>(), CoreModule, TrixModule)
+    startApplication(
+        ::App,
+        js("import.meta.webpackHot").unsafeCast<Hot?>(),
+        BootstrapModule,
+        BootstrapCssModule,
+        TrixModule,
+        CoreModule
+    )
 }

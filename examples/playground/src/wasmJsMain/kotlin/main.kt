@@ -22,10 +22,15 @@
 
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
+import dev.kilua.BootstrapCssModule
+import dev.kilua.BootstrapIconsModule
+import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
 import dev.kilua.TrixModule
 import dev.kilua.compose.root
@@ -40,16 +45,20 @@ import dev.kilua.html.Background
 import dev.kilua.html.Border
 import dev.kilua.html.BorderStyle
 import dev.kilua.html.Color
+import dev.kilua.html.br
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1t
 import dev.kilua.html.hr
+import dev.kilua.html.link
 import dev.kilua.html.pt
 import dev.kilua.html.px
 import dev.kilua.html.span
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
 import dev.kilua.html.unaryPlus
+import dev.kilua.panel.TabPosition
+import dev.kilua.panel.tabPanel
 import dev.kilua.startApplication
 import dev.kilua.state.collectAsState
 import dev.kilua.utils.console
@@ -61,6 +70,64 @@ class App : Application() {
     override fun start() {
 
         root("root") {
+
+            var draggableTabs by remember { mutableStateOf(false) }
+            var selectedTab by remember { mutableStateOf(0) }
+
+            tabPanel(activeIndex = selectedTab, tabPosition = TabPosition.Right, draggableTabs = draggableTabs) {
+                console.log("recompose tabPanel 1 (selectedTab: $selectedTab)")
+                margin = 20.px
+                tab("Test1", "bi-star") {
+                    pt("Test1")
+                }
+                tab("Test2", "bi-plus") {
+                    pt("Test2")
+                }
+                tab("Test3", "bi-dash-circle") {
+                    pt("Test3")
+                }
+            }
+
+            link("https://www.google.com", "Google", "bi-google", className = "btn btn-primary")
+
+            br()
+
+            button("toggle tabPanel", "bi-star", className = "btn btn-primary") {
+                onClick {
+                    selectedTab = (selectedTab + 1) % 3
+                }
+            }
+
+            hr()
+
+            val tabs = remember { mutableStateListOf("First tab", "Second tab") }
+
+            tabPanel(activeIndex = 0) {
+                margin = 30.px
+                console.log("recompose tabPanel")
+                tabs.forEach { tab ->
+                    console.log("generate tab: $tab")
+                    key(tab) {
+                        tab(tab) {
+                            pt(tab)
+                        }
+                    }
+                }
+            }
+
+            button("add tab") {
+                onClick {
+                    tabs.add("New tab")
+                }
+            }
+
+            button("remove tab") {
+                onClick {
+                    tabs.removeAt(1)
+                }
+            }
+
+            hr()
 
             var disab by remember { mutableStateOf(true) }
 
@@ -222,5 +289,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, null, TrixModule, CoreModule)
+    startApplication(::App, null, BootstrapModule, BootstrapCssModule, BootstrapIconsModule, TrixModule, CoreModule)
 }
