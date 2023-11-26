@@ -20,6 +20,9 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
         resolution("imports-loader", libs.versions.imports.loader.get())
         resolution("split.js", libs.versions.splitjs.get())
         resolution("html-differ", libs.versions.html.differ.get())
+        resolution("@popperjs/core", libs.versions.popperjs.core.get())
+        resolution("bootstrap", libs.versions.bootstrap.asProvider().get())
+        resolution("trix", libs.versions.trix.get())
     }
 }
 
