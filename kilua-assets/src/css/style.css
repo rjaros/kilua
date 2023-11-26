@@ -120,17 +120,8 @@ ul.tabs-top > li {
 }
 
 .kilua-tab-close {
-    margin-left: 10px;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    filter: alpha(opacity=20);
-    opacity: 0.2;
-}
-
-.kilua-tab-close:hover, .kilua-tab-close:focus {
-    cursor: pointer;
-    filter: alpha(opacity=50);
-    opacity: 0.5;
+    width: 8px;
+    height: 8px;
 }
 
 .kilua-tab-panel .nav-tabs .nav-link:focus, .kilua-tab-panel .nav-tabs .nav-link:hover {
