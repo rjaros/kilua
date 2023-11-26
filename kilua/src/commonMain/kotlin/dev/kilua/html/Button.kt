@@ -29,6 +29,7 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
+import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.events.MouseEvent
@@ -108,7 +109,6 @@ public open class Button(
 /**
  * Creates a [Button] component.
  *
- * @param label the label of the button
  * @param type the type of the button
  * @param disabled whether the button is disabled
  * @param className the CSS class name
@@ -116,8 +116,7 @@ public open class Button(
  * @return the [Button] component
  */
 @Composable
-public fun ComponentBase.button(
-    label: String? = null,
+private fun ComponentBase.button(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
@@ -128,11 +127,35 @@ public fun ComponentBase.button(
         set(type) { updateProperty(Button::type, it) }
         set(disabled) { updateProperty(Button::disabled, it) }
         set(className) { updateProperty(Button::className, it) }
-    }) {
-        if (label != null) {
-            +label
-        }
+    }, content)
+    return component
+}
+
+/**
+ * Creates a [Button] component with a given label and icon.
+ *
+ * @param label the label of the button
+ * @param icon the icon of the button
+ * @param type the type of the button
+ * @param disabled whether the button is disabled
+ * @param className the CSS class name
+ * @param content a function for setting up the component
+ * @return the [Button] component
+ */
+@Composable
+public fun ComponentBase.button(
+    label: String? = null,
+    icon: String? = null,
+    type: ButtonType = ButtonType.Button,
+    disabled: Boolean? = null,
+    className: String? = null,
+    content: @Composable Button.() -> Unit = {}
+): Button {
+    val iconClassName = if (label != null && icon != null) {
+        className % "icon-link"
+    } else className
+    return button(type, disabled, iconClassName) {
+        atom(label, icon)
         content()
     }
-    return component
 }

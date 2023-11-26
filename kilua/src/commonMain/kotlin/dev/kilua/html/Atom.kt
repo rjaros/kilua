@@ -20,51 +20,35 @@
  * SOFTWARE.
  */
 
-package dev.kilua.panel
+package dev.kilua.html
 
 import androidx.compose.runtime.Composable
-import dev.kilua.html.Div
+import dev.kilua.core.ComponentBase
 
 /**
- * Builder for SplitPanel DSL style content declaration.
+ * Creates a label with an icon.
+ *
+ * @param label the label
+ * @param icon the icon
  */
-public class SplitPanelBuilder {
-    internal var self: @Composable (SplitPanel.() -> Unit)? = null
-    internal var first: @Composable (Div.() -> Unit)? = null
-    internal var second: @Composable (Div.() -> Unit)? = null
-
-    /**
-     * Configure SplitPanel instance.
-     */
-    public fun self(content: @Composable SplitPanel.() -> Unit) {
-        self = content
-    }
-
-    /**
-     * Configure left side of the SplitPanel.
-     */
-    public fun left(content: @Composable Div.() -> Unit) {
-        first = content
-    }
-
-    /**
-     * Configure top side of the SplitPanel.
-     */
-    public fun top(content: @Composable Div.() -> Unit) {
-        first = content
-    }
-
-    /**
-     * Configure right side of the SplitPanel.
-     */
-    public fun right(content: @Composable Div.() -> Unit) {
-        second = content
-    }
-
-    /**
-     * Configure bottom side of the SplitPanel.
-     */
-    public fun bottom(content: @Composable Div.() -> Unit) {
-        second = content
+@Composable
+public fun ComponentBase.atom(
+    label: String? = null,
+    icon: String? = null,
+    separator: String? = null,
+    iconFirst: Boolean = true
+) {
+    if (label != null && icon != null) {
+        if (iconFirst) {
+            i(className = icon)
+            +"${separator ?: ""}$label"
+        } else {
+            +"$label${separator ?: ""}"
+            i(className = icon)
+        }
+    } else if (label != null) {
+        +label
+    } else if (icon != null) {
+        i(className = icon)
     }
 }

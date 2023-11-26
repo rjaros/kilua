@@ -30,6 +30,7 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
+import dev.kilua.utils.rem
 import org.w3c.dom.HTMLAnchorElement
 
 /**
@@ -98,16 +99,14 @@ public open class Link(
  * Creates a [Link] component.
  *
  * @param href the link URL
- * @param label the link label
  * @param target the link target
  * @param className the CSS class name
  * @param content the content of the component
  * @return the [Link] component
  */
 @Composable
-public fun ComponentBase.link(
+private fun ComponentBase.link(
     href: String? = null,
-    label: String? = null,
     target: String? = null,
     className: String? = null,
     content: @Composable Link.() -> Unit = {}
@@ -117,13 +116,38 @@ public fun ComponentBase.link(
         set(href) { updateProperty(Link::href, it) }
         set(target) { updateProperty(Link::target, it) }
         set(className) { updateProperty(Link::className, it) }
-    }) {
-        if (label != null) {
-            +label
-        }
+    }, content)
+    return component
+}
+
+
+/**
+ * Creates a [Link] component with a given label and icon.
+ *
+ * @param href the link URL
+ * @param label the link label
+ * @param icon the link icon
+ * @param target the link target
+ * @param className the CSS class name
+ * @param content the content of the component
+ * @return the [Link] component
+ */
+@Composable
+public fun ComponentBase.link(
+    href: String? = null,
+    label: String? = null,
+    icon: String? = null,
+    target: String? = null,
+    className: String? = null,
+    content: @Composable Link.() -> Unit = {}
+): Link {
+    val iconClassName = if (label != null && icon != null) {
+        className % "icon-link"
+    } else className
+    return link(href, target, iconClassName) {
+        atom(label, icon)
         content()
     }
-    return component
 }
 
 /**
@@ -131,6 +155,7 @@ public fun ComponentBase.link(
  *
  * @param href the link URL
  * @param label the link label
+ * @param icon the link icon
  * @param target the link target
  * @param hide hides the route from the browser history
  * @param className the CSS class name
@@ -141,12 +166,13 @@ public fun ComponentBase.link(
 public fun ComponentBase.navLink(
     href: String? = null,
     label: String? = null,
+    icon: String? = null,
     target: String? = null,
     hide: Boolean = false,
     className: String? = null,
     content: @Composable Link.() -> Unit = {}
 ): Link {
-    return link(href, label, target, className) {
+    return link(href, label, icon, target, className) {
         if (href != null) {
             val router = Router.current
             onClick {
