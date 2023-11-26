@@ -73,7 +73,7 @@ public open class TagDndDelegateImpl<E : HTMLElement>(
      * Clears D&D data for the current component. It also makes it not draggable.
      */
     public override fun clearDragDropData() {
-        tag.draggable = false
+        if (tag.draggable == true) tag.draggable = false
         dragStartId?.let { tag.removeEventListener("dragstart") }
         dragStartId = null
     }
