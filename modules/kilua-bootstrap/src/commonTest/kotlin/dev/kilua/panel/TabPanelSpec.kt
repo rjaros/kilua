@@ -43,7 +43,7 @@ class TabPanelSpec : DomSpec {
                 }
             }
         }
-        delay(10)
+        delay(100)
         assertEqualsHtml(
             """<div class="kilua-tab-panel"><ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><button type="button" class="nav-link active" id="id" role="tab" aria-selected="true">tab1</button></li><li class="nav-item" role="presentation"><button type="button" class="nav-link" id="id" role="tab" aria-selected="false">tab2</button></li></ul><div class="tab-content"><div class="tab-pane active" role="tabpanel" aria-labelledby="id" tabindex="0"><span>abc</span></div></div></div>""",
             root.element.innerHTML,
@@ -63,7 +63,7 @@ class TabPanelSpec : DomSpec {
                 }
             }
         }
-        delay(10)
+        delay(100)
         assertEqualsHtml(
             """<div class="kilua-tab-panel"><ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><button type="button" class="nav-link active" id="id" role="tab" aria-selected="true">tab1</button></li><li class="nav-item" role="presentation"><button type="button" class="nav-link" id="id" role="tab" aria-selected="false">tab2</button></li></ul><div class="tab-content"><div class="tab-pane active" role="tabpanel" aria-labelledby="id" tabindex="0"><span>abc</span></div></div></div>""",
             root.innerHTML,

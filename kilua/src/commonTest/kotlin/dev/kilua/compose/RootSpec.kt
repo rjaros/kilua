@@ -109,7 +109,7 @@ class RootSpec : DomSpec {
         }
         button.click()
         button.click()
-        delay(10)
+        delay(100)
         assertEquals(
             normalizeHtml("""<div><div>Counter: 2<button type="button">Increment</button></div></div>"""),
             normalizeHtml(root.renderToString()),
@@ -134,7 +134,7 @@ class RootSpec : DomSpec {
         }
         button.click()
         button.click()
-        delay(10)
+        delay(100)
         assertEquals(
             normalizeHtml("""<div>Counter: 2<button type="button">Increment</button></div>"""),
             normalizeHtml(root.element.innerHTML),
