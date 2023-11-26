@@ -64,6 +64,7 @@ import dev.kilua.state.collectAsState
 import dev.kilua.utils.console
 import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.rem
+import org.w3c.dom.CustomEvent
 
 class App : Application() {
 
@@ -74,17 +75,19 @@ class App : Application() {
             var draggableTabs by remember { mutableStateOf(false) }
             var selectedTab by remember { mutableStateOf(0) }
 
-            tabPanel(activeIndex = selectedTab, tabPosition = TabPosition.Right, draggableTabs = draggableTabs) {
+            tabPanel(activeIndex = selectedTab, tabPosition = TabPosition.Top, draggableTabs = draggableTabs) {
                 console.log("recompose tabPanel 1 (selectedTab: $selectedTab)")
                 margin = 20.px
-                tab("Test1", "bi-star") {
+                tab("Test1", "bi-star", closable = true) {
                     pt("Test1")
                 }
-                tab("Test2", "bi-plus") {
+                tab("Test2", "bi-plus", closable = true) {
                     pt("Test2")
                 }
-                tab("Test3", "bi-dash-circle") {
+                tab("Test3", "bi-dash-circle", closable = true) {
                     pt("Test3")
+                }
+                onEvent<CustomEvent>("closeTab") {
                 }
             }
 
@@ -108,10 +111,13 @@ class App : Application() {
                 tabs.forEach { tab ->
                     console.log("generate tab: $tab")
                     key(tab) {
-                        tab(tab) {
+                        tab(tab, closable = true) {
                             pt(tab)
                         }
                     }
+                }
+                onEvent<CustomEvent>("closeTab") {
+                    tabs.removeAt(it.detail.toString().toIntOrNull() ?: 0)
                 }
             }
 
