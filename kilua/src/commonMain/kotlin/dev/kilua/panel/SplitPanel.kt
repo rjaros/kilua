@@ -33,6 +33,7 @@ import dev.kilua.externals.SplitJsInstance
 import dev.kilua.externals.SplitJsOptions
 import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.externals.splitJs
+import dev.kilua.html.Div
 import dev.kilua.html.Tag
 import dev.kilua.html.div
 import dev.kilua.utils.cast
@@ -140,11 +141,42 @@ public open class SplitPanel(
      */
     public var splitJsInstance: SplitJsInstance? = null
 
+    internal var first: @Composable (Div.() -> Unit)? = null
+    internal var second: @Composable (Div.() -> Unit)? = null
+
     init {
         internalCssClasses.add("splitpanel-$dir")
         internalClassName = internalCssClasses.joinToString(" ")
         @Suppress("LeakingThis")
         updateElementClassList()
+    }
+
+    /**
+     * Configure left side of the SplitPanel.
+     */
+    public fun left(content: @Composable Div.() -> Unit) {
+        first = content
+    }
+
+    /**
+     * Configure top side of the SplitPanel.
+     */
+    public fun top(content: @Composable Div.() -> Unit) {
+        first = content
+    }
+
+    /**
+     * Configure right side of the SplitPanel.
+     */
+    public fun right(content: @Composable Div.() -> Unit) {
+        second = content
+    }
+
+    /**
+     * Configure bottom side of the SplitPanel.
+     */
+    public fun bottom(content: @Composable Div.() -> Unit) {
+        second = content
     }
 
     override fun onInsert() {
@@ -244,7 +276,7 @@ public open class SplitPanel(
 public fun ComponentBase.splitPanel(
     dir: Dir = Dir.Vertical,
     className: String? = null,
-    contentBuilder: @Composable SplitPanelBuilder.() -> Unit = {}
+    content: @Composable SplitPanel.() -> Unit = {}
 ): SplitPanel {
     val component = remember { SplitPanel(dir, className, renderConfig) }
     DisposableEffect(component.componentId) {
@@ -257,15 +289,13 @@ public fun ComponentBase.splitPanel(
         set(dir) { updateProperty(SplitPanel::direction, it) }
         set(className) { updateProperty(SplitPanel::className, it) }
     }) {
-        val splitPanelBuilder = SplitPanelBuilder()
-        contentBuilder(splitPanelBuilder)
-        splitPanelBuilder.self?.invoke(component)
+        content()
         div {
-            splitPanelBuilder.first?.invoke(this)
+            component.first?.invoke(this)
         }
         div()
         div {
-            splitPanelBuilder.second?.invoke(this)
+            component.second?.invoke(this)
         }
     }
     return component
