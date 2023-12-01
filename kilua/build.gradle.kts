@@ -22,6 +22,8 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
         resolution("html-differ", libs.versions.html.differ.get())
         resolution("@popperjs/core", libs.versions.popperjs.core.get())
         resolution("bootstrap", libs.versions.bootstrap.asProvider().get())
+        resolution("bootstrap-icons", libs.versions.bootstrap.icons.get())
+        resolution("@fortawesome/fontawesome-free", libs.versions.fontawesome.get())
         resolution("trix", libs.versions.trix.get())
     }
 }

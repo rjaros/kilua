@@ -18,6 +18,7 @@ html-differ = "1.4.0"
 popperjs-core = "2.11.8"
 bootstrap = "5.3.2"
 bootstrap-icons = "1.11.0"
+fontawesome = "6.4.2"
 trix = "2.0.8"
 
 [libraries]
