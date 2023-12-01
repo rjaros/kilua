@@ -87,5 +87,5 @@ rootProject.tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.Kotl
 
 compose {
     kotlinCompilerPlugin.set(libs.versions.compose.plugin)
-//    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
+    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
