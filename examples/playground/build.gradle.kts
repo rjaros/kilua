@@ -47,7 +47,7 @@ kotlin {
                 }
             }
             binaries.executable()
-            if (project.gradle.startParameter.taskNames.contains("wasmJsBrowserProductionWebpack")) {
+            if (project.gradle.startParameter.taskNames.find { it.contains("wasmJsBrowserProductionWebpack") } != null) {
                 applyBinaryen {
                     binaryenArgs = mutableListOf(
                         "--enable-nontrapping-float-to-int",
@@ -74,6 +74,7 @@ kotlin {
                 implementation(project(":kilua"))
                 implementation(project(":modules:kilua-bootstrap"))
                 implementation(project(":modules:kilua-bootstrap-icons"))
+                implementation(project(":modules:kilua-fontawesome"))
                 implementation(project(":modules:kilua-trix"))
             }
         }

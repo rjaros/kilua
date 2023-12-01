@@ -32,6 +32,7 @@ import dev.kilua.BootstrapCssModule
 import dev.kilua.BootstrapIconsModule
 import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
+import dev.kilua.FontAwesomeModule
 import dev.kilua.TrixModule
 import dev.kilua.compose.root
 import dev.kilua.form.check.checkBox
@@ -78,13 +79,13 @@ class App : Application() {
             tabPanel(activeIndex = selectedTab, tabPosition = TabPosition.Top, draggableTabs = draggableTabs) {
                 console.log("recompose tabPanel 1 (selectedTab: $selectedTab)")
                 margin = 20.px
-                tab("Test1", "bi-star", closable = true) {
+                tab("Test1", "fas fa-search", closable = true) {
                     pt("Test1")
                 }
-                tab("Test2", "bi-plus", closable = true) {
+                tab("Test2", "fas fa-times", closable = true) {
                     pt("Test2")
                 }
-                tab("Test3", "bi-dash-circle", closable = true) {
+                tab("Test3", "fab fa-chrome", closable = true) {
                     pt("Test3")
                 }
                 onEvent<CustomEvent>("closeTab") {
@@ -295,5 +296,14 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, null, BootstrapModule, BootstrapCssModule, BootstrapIconsModule, TrixModule, CoreModule)
+    startApplication(
+        ::App,
+        null,
+        BootstrapModule,
+        BootstrapCssModule,
+        BootstrapIconsModule,
+        FontAwesomeModule,
+        TrixModule,
+        CoreModule
+    )
 }
