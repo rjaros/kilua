@@ -79,7 +79,7 @@ kotlin {
 }
 
 rootProject.the<NodeJsRootExtension>().apply {
-    nodeVersion = "22.0.0-v8-canary20231027fc15c384ea"
+    nodeVersion = "22.0.0-v8-canary20231201483993aba6"
     nodeDownloadBaseUrl = "https://mirrors.dotsrc.org/nodejs/v8-canary"
 }
 
