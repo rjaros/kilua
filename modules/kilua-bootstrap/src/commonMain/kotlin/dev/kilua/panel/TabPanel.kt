@@ -25,7 +25,7 @@ package dev.kilua.panel
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -34,9 +34,11 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.buildCustomEventInit
+import dev.kilua.html.CommentNode
 import dev.kilua.html.Div
 import dev.kilua.html.Tag
 import dev.kilua.html.button
+import dev.kilua.html.commentNode
 import dev.kilua.html.div
 import dev.kilua.html.li
 import dev.kilua.html.ul
@@ -65,7 +67,7 @@ public enum class SideTabSize {
     Size6
 }
 
-internal class Tab(
+internal data class Tab(
     val label: String? = null,
     val icon: String? = null,
     val closable: Boolean = false,
@@ -84,7 +86,8 @@ public open class TabPanel(
     })
 
     internal var activeIndexState: Int by mutableStateOf(activeIndex)
-    internal val tabs = mutableStateListOf<Tab>()
+    internal val tabs = mutableStateMapOf<Int, Tab>()
+    internal var tabsOrderList: List<Int> by mutableStateOf(emptyList())
 
     @Composable
     public fun tab(
@@ -93,40 +96,31 @@ public open class TabPanel(
         closable: Boolean = false,
         content: @Composable Div.() -> Unit
     ) {
-        val tab = remember { Tab(label, icon, closable, content) }
-        DisposableEffect(tab) {
-            tabs.add(tab)
+        val tabId = remember { idCounter++ }
+        commentNode("tid=$tabId")
+        val tab = Tab(label, icon, closable, content)
+        DisposableEffect(tabId) {
+            refreshTabsOrderList()
+            if (tabs[tabId] != tab) {
+                tabs[tabId] = tab
+            }
             if (activeIndex == -1) {
                 updateProperty(::activeIndex, 0)
             }
             onDispose {
-                tabs.remove(tab)
+                refreshTabsOrderList()
+                tabs.remove(tabId)
                 if (activeIndex >= tabs.size) {
                     updateProperty(::activeIndex, tabs.size - 1)
                 }
             }
         }
+
     }
 
-    public open fun moveTab(fromIndex: Int, toIndex: Int) {
-        tabs.getOrNull(fromIndex)?.let {
-            tabs.remove(it)
-            tabs.add(toIndex, it)
-            when (activeIndex) {
-                fromIndex -> {
-                    activeIndex = toIndex
-                }
-
-                in (fromIndex + 1)..toIndex -> {
-                    activeIndex--
-                }
-
-                in toIndex until fromIndex -> {
-                    activeIndex++
-                }
-            }
-            Unit
-        }
+    private fun refreshTabsOrderList() {
+        tabsOrderList = this.children.filterIsInstance<CommentNode>().filter { it.data.startsWith("tid=") }
+            .mapNotNull { it.data.drop("tid=".length).toIntOrNull() }
     }
 
     public companion object {
@@ -173,41 +167,49 @@ public fun ComponentBase.tabPanel(
         fun ComponentBase.generateNav() {
             ul(navClasses) {
                 role = "tablist"
-                component.tabs.forEachIndexed { index, tab ->
-                    li("nav-item") {
-                        role = "presentation"
-                        val navLinkClassName =
-                            if (index == component.activeIndexState) "nav-link active" else "nav-link"
-                        val navLinkClassNameWithIcon =
-                            if (tab.icon == null && tab.closable) "$navLinkClassName icon-link" else navLinkClassName
-                        button(tab.label, tab.icon, className = navLinkClassNameWithIcon) {
-                            id = "$tabPanelId-tab-$index"
-                            role = "tab"
-                            setAttribute("aria-selected", (index == component.activeIndexState).toString())
-                            if (tab.closable) {
-                                button(className = "btn-close kilua-tab-close") {
-                                    onClick { e ->
-                                        component.dispatchEvent("closeTab", buildCustomEventInit(jsString("$index")))
-                                        e.stopPropagation()
+                tabsOrderList.forEachIndexed { index, tabId ->
+                    component.tabs[tabId]?.let { tab ->
+                        li("nav-item") {
+                            role = "presentation"
+                            val navLinkClassName =
+                                if (index == component.activeIndexState) "nav-link active" else "nav-link"
+                            val navLinkClassNameWithIcon =
+                                if (tab.icon == null && tab.closable) "$navLinkClassName icon-link" else navLinkClassName
+                            button(tab.label, tab.icon, className = navLinkClassNameWithIcon) {
+                                id = "$tabPanelId-tab-$index"
+                                role = "tab"
+                                setAttribute("aria-selected", (index == component.activeIndexState).toString())
+                                if (tab.closable) {
+                                    button(className = "btn-close kilua-tab-close") {
+                                        onClick { e ->
+                                            component.dispatchEvent(
+                                                "closeTab",
+                                                buildCustomEventInit(jsString("$index"))
+                                            )
+                                            e.stopPropagation()
+                                        }
                                     }
                                 }
                             }
-                        }
-                        onClick { e ->
-                            component.updateProperty(TabPanel::activeIndex, index)
-                            e.preventDefault()
-                        }
-                        if (draggableTabs) {
-                            setDragDropData("text/plain", "$index")
-                            setDropTargetData("text/plain") { data ->
-                                val fromIndex = data?.toInt() ?: index
-                                if (fromIndex != index) {
-                                    component.moveTab(fromIndex, index)
-                                }
+                            onClick { e ->
+                                component.updateProperty(TabPanel::activeIndex, index)
+                                e.preventDefault()
                             }
-                        } else {
-                            clearDragDropData()
-                            clearDropTarget()
+                            if (draggableTabs) {
+                                setDragDropData("text/plain", "$index")
+                                setDropTargetData("text/plain") { data ->
+                                    val fromIndex = data?.toInt() ?: index
+                                    if (fromIndex != index) {
+                                        component.dispatchEvent(
+                                            "moveTab",
+                                            buildCustomEventInit(jsString("{ \"from\": $fromIndex, \"to\": $index }"))
+                                        )
+                                    }
+                                }
+                            } else {
+                                clearDragDropData()
+                                clearDropTarget()
+                            }
                         }
                     }
                 }
@@ -217,12 +219,14 @@ public fun ComponentBase.tabPanel(
         @Composable
         fun ComponentBase.generateContent() {
             div("tab-content") {
-                component.tabs.getOrNull(component.activeIndexState)?.let {
-                    div("tab-pane active") {
-                        role = "tabpanel"
-                        ariaLabelledby = "$tabPanelId-tab-$activeIndex"
-                        tabindex = 0
-                        it.content(this)
+                tabsOrderList.getOrNull(component.activeIndexState)?.let {
+                    component.tabs[it]?.let { tab ->
+                        div("tab-pane active") {
+                            role = "tabpanel"
+                            ariaLabelledby = "$tabPanelId-tab-$activeIndex"
+                            tabindex = 0
+                            tab.content(this)
+                        }
                     }
                 }
             }
