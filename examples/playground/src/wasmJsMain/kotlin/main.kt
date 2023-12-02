@@ -42,23 +42,11 @@ import dev.kilua.form.number.range
 import dev.kilua.form.select.select
 import dev.kilua.form.text.richText
 import dev.kilua.form.text.text
-import dev.kilua.html.Background
-import dev.kilua.html.Border
-import dev.kilua.html.BorderStyle
-import dev.kilua.html.Color
-import dev.kilua.html.br
-import dev.kilua.html.button
-import dev.kilua.html.div
-import dev.kilua.html.h1t
-import dev.kilua.html.hr
-import dev.kilua.html.link
-import dev.kilua.html.pt
-import dev.kilua.html.px
-import dev.kilua.html.span
+import dev.kilua.html.*
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
-import dev.kilua.html.unaryPlus
 import dev.kilua.panel.TabPosition
+import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
 import dev.kilua.startApplication
 import dev.kilua.state.collectAsState
@@ -73,8 +61,41 @@ class App : Application() {
 
         root("root") {
 
+            var splitState by remember { mutableStateOf(0) }
+
+            splitPanel {
+                width = 500.px
+                height = 300.px
+                margin = 30.px
+                if (splitState != 1) {
+                    left {
+                        pt("left$splitState")
+                    }
+                    right {
+                        pt("right$splitState")
+                    }
+                } else {
+                    left {
+                        pt("top$splitState")
+                    }
+                    right {
+                        pt("bottom$splitState")
+                    }
+                }
+            }
+
+            button("test split") {
+                onClick {
+                    splitState += 1
+                }
+            }
+
+            hr()
+
             var draggableTabs by remember { mutableStateOf(false) }
             var selectedTab by remember { mutableStateOf(0) }
+
+            var tabName by remember { mutableStateOf("Test") }
 
             tabPanel(activeIndex = selectedTab, tabPosition = TabPosition.Top, draggableTabs = draggableTabs) {
                 console.log("recompose tabPanel 1 (selectedTab: $selectedTab)")
@@ -82,8 +103,14 @@ class App : Application() {
                 tab("Test1", "fas fa-search", closable = true) {
                     pt("Test1")
                 }
-                tab("Test2", "fas fa-times", closable = true) {
-                    pt("Test2")
+                if (tabName == "Test2") {
+                    tab(tabName, "fas fa-times", closable = true) {
+                        pt(tabName)
+                    }
+                } else {
+                    tab(tabName, "fas fa-times", closable = true) {
+                        h2t(tabName)
+                    }
                 }
                 tab("Test3", "fab fa-chrome", closable = true) {
                     pt("Test3")
@@ -98,7 +125,7 @@ class App : Application() {
 
             button("toggle tabPanel", "bi-star", className = "btn btn-primary") {
                 onClick {
-                    selectedTab = (selectedTab + 1) % 3
+                    tabName += "2"
                 }
             }
 
