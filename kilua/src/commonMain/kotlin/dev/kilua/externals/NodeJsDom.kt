@@ -22,6 +22,7 @@
 
 package dev.kilua.externals
 
+import org.w3c.dom.Comment
 import org.w3c.dom.Element
 import org.w3c.dom.Text
 
@@ -34,3 +35,8 @@ internal expect fun nodeJsCreateElement(): Element
  * Create a fake DOM TextNode on Node.js.
  */
 internal expect fun nodeJsCreateText(): Text
+
+/**
+ * Create a fake DOM Comment on Node.js.
+ */
+internal expect fun nodeJsCreateComment(): Comment

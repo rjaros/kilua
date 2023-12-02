@@ -29,27 +29,27 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
-import org.w3c.dom.Text
+import org.w3c.dom.Comment
 
 /**
- * HTML text node component.
+ * HTML comment node component.
  */
-public open class TextNode(
+public open class CommentNode(
     data: String,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-) : ComponentBase(SafeDomFactory.createTextNode(data), renderConfig) {
+) : ComponentBase(SafeDomFactory.createComment(data), renderConfig) {
 
     /**
-     * The DOM text node.
+     * The DOM comment node.
      */
-    public open val text: Text by lazy {
-        if (renderConfig.isDom) node.unsafeCast<Text>() else {
+    public open val comment: Comment by lazy {
+        if (renderConfig.isDom) node.unsafeCast<Comment>() else {
             error("Can't use DOM node with the current render configuration")
         }
     }
 
     /**
-     * Whether to skip updating the DOM text node of the current component.
+     * Whether to skip updating the DOM comment node of the current component.
      */
     protected val skipUpdate: Boolean = !renderConfig.isDom
 
@@ -57,40 +57,31 @@ public open class TextNode(
      * The text of the node.
      */
     public open var data: String by updatingProperty(data, skipUpdate) {
-        text.data = it
+        comment.data = it
     }
 
     override var visible: Boolean by updatingProperty(true, skipUpdate) {
-        text.data = if (it) data else ""
+        comment.data = if (it) data else ""
     }
 
     override fun renderToStringBuilder(builder: StringBuilder) {
-        builder.append(data)
+        builder.append("<!-- $data -->")
     }
 }
 
 /**
- * Creates a [TextNode] component.
+ * Creates a [CommentNode] component.
  * @param data the text of the node
  * @param setup a function for setting up the component
- * @return a [TextNode] component
+ * @return a [CommentNode] component
  */
 @Composable
-public fun textNode(data: String, setup: TextNode.() -> Unit = {}): TextNode {
-    // Always using DefaultRenderConfig because of plus operator String receiver.
-    val component = remember { TextNode(data, DefaultRenderConfig()) }
+public fun ComponentBase.commentNode(data: String, setup: CommentNode.() -> Unit = {}): CommentNode {
+    val component = remember { CommentNode(data, renderConfig) }
     ComponentNode(component, {
-        set(data) { updateProperty(TextNode::data, it) }
+        set(data) { updateProperty(CommentNode::data, it) }
     }) {
         setup(component)
     }
     return component
-}
-
-/**
- * Creates a [TextNode] component with unary + operator.
- */
-@Composable
-public operator fun String.unaryPlus() {
-    textNode(this)
 }

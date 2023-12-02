@@ -27,6 +27,8 @@ if (typeof process !== 'undefined') {
     }
     globalThis.Text = class Text extends Node {
     }
+    globalThis.Comment = class Comment extends Node {
+    }
     globalThis.document = {
         kilua: true,
         documentElement: new Element(),
@@ -54,4 +56,8 @@ function nodeJsCreateText() {
     return new Text()
 }
 
-export { nodeJsInit, nodeJsCreateElement, nodeJsCreateText };
+function nodeJsCreateComment() {
+    return new Comment()
+}
+
+export { nodeJsInit, nodeJsCreateElement, nodeJsCreateText, nodeJsCreateComment };

@@ -22,10 +22,12 @@
 
 package dev.kilua.core
 
+import dev.kilua.externals.nodeJsCreateComment
 import dev.kilua.externals.nodeJsCreateElement
 import dev.kilua.externals.nodeJsCreateText
 import dev.kilua.utils.isDom
 import kotlinx.browser.document
+import org.w3c.dom.Comment
 import org.w3c.dom.Element
 import org.w3c.dom.Text
 
@@ -50,6 +52,15 @@ public object SafeDomFactory {
         return if (isDom) {
             document.createTextNode(text)
         } else nodeJsCreateText()
+    }
+
+    /**
+     * Create DOM comment node.
+     */
+    public fun createComment(text: String): Comment {
+        return if (isDom) {
+            document.createComment(text)
+        } else nodeJsCreateComment()
     }
 
     /**

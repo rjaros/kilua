@@ -23,9 +23,10 @@
 
 package dev.kilua.externals
 
+import org.w3c.dom.Comment
 import org.w3c.dom.Element
 import org.w3c.dom.Text
-
 internal actual external fun nodeJsCreateElement(): Element
-
 internal actual external fun nodeJsCreateText(): Text
+
+internal actual external fun nodeJsCreateComment(): Comment
