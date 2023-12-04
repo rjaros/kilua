@@ -23,6 +23,7 @@
 package dev.kilua.html.style
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.html.helpers.TagStyle
 import dev.kilua.html.helpers.TagStyleDelegateImpl
@@ -89,13 +90,22 @@ private fun style(
             pClass,
             pElement,
             mediaQuery,
-            parentStyle = parent?.let { StyleParams.styles[it.key] })
-    StyleParams.styles[selectorKey] = styleParams
+            parentStyle = parent?.let { StyleParams.stylesMap[it.key] })
+    StyleParams.stylesStateMap[selectorKey] = styleParams
+    StyleParams.stylesMap[selectorKey] = styleParams
     val tagStyleDelegateImpl = CssStyle(selectorKey) {
-        StyleParams.styles[selectorKey] = styleParams.copy(
+        val styleParamsCopy = styleParams.copy(
             styles = it.toMap()
         )
+        StyleParams.stylesStateMap[selectorKey] = styleParamsCopy
+        StyleParams.stylesMap[selectorKey] = styleParamsCopy
     }
     content(tagStyleDelegateImpl)
+    DisposableEffect(selectorKey) {
+        onDispose {
+            StyleParams.stylesStateMap.remove(selectorKey)
+            StyleParams.stylesMap.remove(selectorKey)
+        }
+    }
     return selectorParam.split(' ').last().split('.').last()
 }

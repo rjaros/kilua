@@ -696,6 +696,13 @@ public open class Border(
 ) {
     public val value: String = listOfNotNull(width?.toString(), style?.toString(), color?.toString()).joinToString(" ")
     override fun toString(): String = value
+    override fun equals(other: Any?): Boolean {
+        return this.toString() == other.toString()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
 
 /**
@@ -711,6 +718,13 @@ public open class Outline(
     public val value: String = listOfNotNull(width?.toString(), style?.toString(), color?.toString()).joinToString(" ")
 
     override fun toString(): String = value
+    override fun equals(other: Any?): Boolean {
+        return this.toString() == other.toString()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
 
 /**
@@ -722,6 +736,13 @@ public open class Color(protected val color: String? = null) {
     public val value: String = color.orEmpty()
 
     override fun toString(): String = value
+    override fun equals(other: Any?): Boolean {
+        return this.toString() == other.toString()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 
     public companion object {
         /**
@@ -939,6 +960,13 @@ public open class Background(
     }
 
     override fun toString(): String = value
+    override fun equals(other: Any?): Boolean {
+        return this.toString() == other.toString()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
 
 /**
@@ -955,6 +983,13 @@ public open class TextDecoration(
     public val value: String = listOfNotNull(line?.toString(), style?.toString(), color?.toString()).joinToString(" ")
 
     override fun toString(): String = value
+    override fun equals(other: Any?): Boolean {
+        return this.toString() == other.toString()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
 
 /**
@@ -974,6 +1009,13 @@ public open class TextShadow(
             .joinToString(" ")
 
     override fun toString(): String = value
+    override fun equals(other: Any?): Boolean {
+        return this.toString() == other.toString()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
 
 /**
@@ -997,6 +1039,13 @@ public open class BoxShadow(
     ).joinToString(" ")
 
     override fun toString(): String = value
+    override fun equals(other: Any?): Boolean {
+        return this.toString() == other.toString()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
 
 /**
@@ -1016,6 +1065,13 @@ public open class Transition(
         .joinToString(" ")
 
     override fun toString(): String = value
+    override fun equals(other: Any?): Boolean {
+        return this.toString() == other.toString()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
 
 /**
@@ -1034,4 +1090,11 @@ public open class ListStyle(
         .joinToString(" ")
 
     override fun toString(): String = value
+    override fun equals(other: Any?): Boolean {
+        return this.toString() == other.toString()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }

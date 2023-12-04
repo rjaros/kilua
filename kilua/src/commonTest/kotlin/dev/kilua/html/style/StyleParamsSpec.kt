@@ -45,7 +45,7 @@ class StyleParamsSpec : DomSpec {
             }
             assertEquals(
                 "@media ((min-height: 680px), screen and (orientation: portrait)) { .test::first-letter:hover { color: blue; } }",
-                StyleParams.styles.values.first().renderAsCss(),
+                StyleParams.stylesStateMap.values.first().renderAsCss(),
                 "Should render the correct CSS rule"
             )
         }

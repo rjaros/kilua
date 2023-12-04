@@ -109,6 +109,11 @@ internal data class StyleParams(
          * The compose state map of CSS style parameters
          * Used by the first [dev.kilua.compose.Root] component to generate CSS stylesheets.
          */
-        internal val styles = mutableStateMapOf<String, StyleParams>()
+        internal val stylesStateMap = mutableStateMapOf<String, StyleParams>()
+
+        /**
+         * The map of CSS style parameters
+         */
+        internal val stylesMap = mutableMapOf<String, StyleParams>()
     }
 }

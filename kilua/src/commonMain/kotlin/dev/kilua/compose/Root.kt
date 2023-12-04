@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.runtime.Recomposer
+import androidx.compose.runtime.mutableStateListOf
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
@@ -101,13 +102,24 @@ public class Root(
 
         internal val roots: MutableList<Root> = mutableListOf()
 
+        internal val topLevelComposables = mutableStateListOf<@Composable ComponentBase.() -> Unit>()
+
         /**
          * Disposes all root components and associated compositions.
          */
         public fun disposeAllRoots() {
             roots.forEach { it.dispose() }
-            StyleParams.styles.clear()
+            StyleParams.stylesStateMap.clear()
             roots.clear()
+            topLevelComposables.clear()
+        }
+
+        public fun addTopLevelComposable(topLevel: @Composable ComponentBase.() -> Unit) {
+            topLevelComposables.add(topLevel)
+        }
+
+        public fun removeTopLevelComposable(topLevel: @Composable ComponentBase.() -> Unit) {
+            topLevelComposables.remove(topLevel)
         }
     }
 }
@@ -148,11 +160,19 @@ public fun root(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     content: @Composable Root.() -> Unit = {}
 ): Root {
-    if (Root.roots.isEmpty() && renderConfig.isDom) {
-        SafeDomFactory.getFirstElementByTagName("head")?.let {
-            Root(it, renderConfig) {
-                StyleParams.styles.values.forEach { styleParams ->
-                    style(styleParams.renderAsCss())
+    val isFirstRoot = Root.roots.isEmpty()
+    if (isFirstRoot && renderConfig.isDom) {
+        SafeDomFactory.getFirstElementByTagName("head")?.let { head ->
+            Root(head, renderConfig) {
+                style(StyleParams.stylesStateMap.values.map { it.renderAsCss() }.joinToString("\n"))
+            }
+        }
+        SafeDomFactory.getFirstElementByTagName("body")?.let { body ->
+            val topLevelComposablesRoot = SafeDomFactory.createElement("div")
+            body.appendChild(topLevelComposablesRoot)
+            Root(topLevelComposablesRoot, renderConfig) {
+                Root.topLevelComposables.forEach {
+                    it()
                 }
             }
         }

@@ -43,16 +43,16 @@ class CssStyleSpec : DomSpec {
                     }
                 }
             }
-            assertEquals(2, StyleParams.styles.size, "Should generate CSS style objects")
+            assertEquals(2, StyleParams.stylesStateMap.size, "Should generate CSS style objects")
             assertEquals("test", className, "Should return the correct CSS class name")
             assertEquals(
                 ".test { margin: 10px; }",
-                StyleParams.styles.values.first().renderAsCss(),
+                StyleParams.stylesStateMap.values.first().renderAsCss(),
                 "Should render the correct CSS rule"
             )
             assertEquals(
                 ".test h1 { color: red; }",
-                StyleParams.styles.values.last().renderAsCss(),
+                StyleParams.stylesStateMap.values.last().renderAsCss(),
                 "Should render the correct cascading CSS rule"
             )
         }
