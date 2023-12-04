@@ -269,7 +269,7 @@ public open class SplitPanel(
  * Create [SplitPanel] component.
  * @param dir the split panel direction
  * @param className the CSS class name
- * @param contentBuilder the content of the component declared with the help of [SplitPanelBuilder]
+ * @param content the content of the component
  * @return the [SplitPanel] component
  */
 @Composable
