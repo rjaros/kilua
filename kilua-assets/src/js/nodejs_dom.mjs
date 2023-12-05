@@ -18,8 +18,9 @@ if (typeof process !== 'undefined') {
         style = {}
         setAttribute(name, value) {}
         appendChild(node) {}
-        querySelector(selector) {}
+        querySelector(selector) { return null; }
         insertBefore(node, referenceNode) {}
+        addEventListener(name, callback) {}
     }
     globalThis.Element = class Element extends Node {
     }
@@ -35,10 +36,13 @@ if (typeof process !== 'undefined') {
         head: new Element(),
         createElement: function(name) {
             return new Element()
-        }
+        },
+        addEventListener(name, callback) {}
     }
     globalThis.window = {
-        document: globalThis.document
+        document: globalThis.document,
+        addEventListener(name, callback) {},
+        setTimeout: globalThis.setTimeout
     }
     globalThis.customElements = {
         get: function (name) {},

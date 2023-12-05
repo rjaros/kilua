@@ -22,5 +22,8 @@
 
 package dev.kilua
 
+import dev.kilua.externals.nodeJsInit
+
 internal actual fun initializeBootstrap() {
+    nodeJsInit()
 }

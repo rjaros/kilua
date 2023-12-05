@@ -12,7 +12,7 @@ fun KotlinMultiplatformExtension.compilerOptions() {
     }
 }
 
-fun KotlinMultiplatformExtension.kotlinJsTargets(buildTarget: String, isInIdea: Boolean) {
+fun KotlinMultiplatformExtension.kotlinJsTargets(buildTarget: String, isInIdea: Boolean, withNode: Boolean = true) {
     if (buildTarget == "js" || !isInIdea) {
         js(IR) {
             useEsModules()
@@ -23,9 +23,11 @@ fun KotlinMultiplatformExtension.kotlinJsTargets(buildTarget: String, isInIdea: 
                     }
                 }
             }
-            nodejs {
-                testTask {
-                    useMocha()
+            if (withNode) {
+                nodejs {
+                    testTask {
+                        useMocha()
+                    }
                 }
             }
         }
@@ -33,7 +35,7 @@ fun KotlinMultiplatformExtension.kotlinJsTargets(buildTarget: String, isInIdea: 
 }
 
 @OptIn(ExperimentalWasmDsl::class)
-fun KotlinMultiplatformExtension.kotlinWasmTargets(buildTarget: String, isInIdea: Boolean) {
+fun KotlinMultiplatformExtension.kotlinWasmTargets(buildTarget: String, isInIdea: Boolean, withNode: Boolean = true) {
     if (buildTarget == "wasm" || !isInIdea) {
         wasmJs {
             useEsModules()
@@ -44,9 +46,11 @@ fun KotlinMultiplatformExtension.kotlinWasmTargets(buildTarget: String, isInIdea
                     }
                 }
             }
-            nodejs {
-                testTask {
-                    useMocha()
+            if (withNode) {
+                nodejs {
+                    testTask {
+                        useMocha()
+                    }
                 }
             }
         }

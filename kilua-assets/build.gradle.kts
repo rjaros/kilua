@@ -6,13 +6,14 @@ npmPublish {
     dry.set(System.getenv("NPM_AUTH_TOKEN") == null)
     readme.set(file("README.md"))
     packages {
-        register("kilua-assets") {
+        register("aaa-kilua-assets") {
+            packageName.set("aaa-kilua-assets")
             files {
                 from("$projectDir/src")
             }
             packageJson {
                 main.set("index.js")
-                version.set("0.0.10")
+                version.set("0.0.1")
                 description.set("The assets for the Kilua framework")
                 keywords.set(listOf("kilua", "kotlin", "wasm"))
                 homepage.set("https://kilua.dev")

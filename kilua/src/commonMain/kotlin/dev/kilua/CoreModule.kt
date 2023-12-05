@@ -35,7 +35,7 @@ public interface ModuleInitializer {
     public fun initialize()
 }
 
-@JsModule("kilua-assets/css/style.css")
+@JsModule("aaa-kilua-assets/css/style.css")
 @JsNonModule
 internal external object StyleCss
 
