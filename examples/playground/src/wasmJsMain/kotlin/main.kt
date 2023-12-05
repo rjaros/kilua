@@ -65,6 +65,14 @@ class App : Application() {
 
         root("root") {
 
+            bsButton("Test", "fas fa-check", size = ButtonSize.BtnLg, style = ButtonStyle.BtnDanger) {
+                onClick {
+                    console.log("test")
+                }
+            }
+
+            hr()
+
             var modalCaption by remember { mutableStateOf("Test") }
 
             if (modalCaption == "Test2") {
