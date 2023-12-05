@@ -20,33 +20,37 @@
  * SOFTWARE.
  */
 
-package dev.kilua
+package dev.kilua.externals
 
-import dev.kilua.compose.Root
-import dev.kilua.modal.Modal
-import dev.kilua.utils.isDom
-import kotlinx.browser.document
+import org.w3c.dom.HTMLElement
 
 /**
- * Initializes Bootstrap module.
+ * External Bootstrap object.
  */
-internal expect fun initializeBootstrap()
+@JsModule("bootstrap")
+public external object Bootstrap {
+    /**
+     * External Bootstrap Modal class.
+     */
+    public class Modal(element: HTMLElement) {
+        /**
+         * Shows the modal.
+         */
+        public fun show()
 
-/**
- * Initializer for Kilua Bootstrap module.
- */
-public object BootstrapModule : ModuleInitializer {
+        /**
+         * Hides the modal.
+         */
+        public fun hide()
 
-    private var initialized = false
+        /**
+         * Toggles the visibility.
+         */
+        public fun toggle()
 
-    override fun initialize() {
-        if (!initialized) {
-            if (isDom) document.body?.setAttribute("data-bs-no-jquery", "true")
-            initializeBootstrap()
-            Root.addTopLevelComposable {
-                Modal.modalStateMap.values.forEach { it() }
-            }
-            initialized = true
-        }
+        /**
+         * Disposes the modal.
+         */
+        public fun dispose()
     }
 }
