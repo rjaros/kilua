@@ -45,6 +45,10 @@ import dev.kilua.form.text.text
 import dev.kilua.html.*
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
+import dev.kilua.modal.FullscreenMode
+import dev.kilua.modal.ModalSize
+import dev.kilua.modal.confirm
+import dev.kilua.modal.modal
 import dev.kilua.panel.TabPosition
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
@@ -60,6 +64,54 @@ class App : Application() {
     override fun start() {
 
         root("root") {
+
+            var modalCaption by remember { mutableStateOf("Test") }
+
+            if (modalCaption == "Test2") {
+                style(modalCaption) {
+                    margin = 20.px
+                }
+            }
+
+            val modal = modal(
+                modalCaption,
+                size = ModalSize.ModalXl,
+                fullscreenMode = FullscreenMode.ModalFullscreenMdDown,
+                centered = false,
+                scrollable = true,
+                escape = false
+            ) {
+                pt(modalCaption)
+                footer {
+                    button("OK").onClick {
+                        this@modal.hide()
+                    }
+                    button("Test").onClick {
+                        modalCaption += "2"
+                    }
+                }
+            }
+            button("show modal") {
+                onClick {
+                    modal.show()
+                }
+            }
+            button("modal class") {
+                onClick {
+                    confirm(modalCaption, "Test content", cancelVisible = true, noCallback = {
+                        console.log("no callback")
+                    }) {
+                        console.log("yes callback")
+                    }
+                }
+            }
+            button("Caption") {
+                onClick {
+                    modalCaption += "2"
+                }
+            }
+
+            hr()
 
             var splitState by remember { mutableStateOf(0) }
 
@@ -201,6 +253,7 @@ class App : Application() {
             val i by range(0, 1, 255).collectAsState()
 
             val className = style(".test") {
+                console.log("recompose 1")
                 background = Background(color = Color.rgb(i?.toInt() ?: 0, 0, 0))
                 style("h1", PClass.Hover) {
                     color = Color.Green

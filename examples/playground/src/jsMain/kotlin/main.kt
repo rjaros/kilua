@@ -58,6 +58,9 @@ import dev.kilua.html.tag
 import dev.kilua.html.unaryPlus
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.SimpleLocale
+import dev.kilua.modal.Modal
+import dev.kilua.modal.ModalSize
+import dev.kilua.modal.modal
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
 import dev.kilua.startApplication
@@ -87,6 +90,36 @@ class App : Application() {
     override fun start() {
 
         root("root") {
+            var modalCaption by remember { mutableStateOf("Test") }
+
+            if (modalCaption == "Test2") {
+                style(modalCaption) {
+                    margin = 20.px
+                }
+            }
+
+            var modal: Modal? = null
+            if (modalCaption == "Test") {
+                modal = modal(modalCaption, size = ModalSize.ModalLg, centered = true, scrollable = true) {
+                    pt(modalCaption)
+                    footer {
+                        button("OK")
+                    }
+                }
+            }
+
+            button("show modal") {
+                onClick {
+                    modalCaption += "2"
+                }
+            }
+            button("modal class") {
+                onClick {
+                    modal?.className = "xxx"
+                }
+            }
+
+            hr()
 
             splitPanel {
                 width = 500.px
