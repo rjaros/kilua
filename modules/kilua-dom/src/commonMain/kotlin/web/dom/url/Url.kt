@@ -13,8 +13,6 @@ package web.dom.url
 import web.JsAny
 import web.JsArray
 import web.JsString
-import kotlin.js.*
-import web.webgl.*
 import web.dom.mediasource.*
 import web.files.*
 

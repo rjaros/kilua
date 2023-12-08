@@ -14,7 +14,6 @@
 package web.dom.clipboard
 
 import web.JsAny
-import web.JsString
 import web.dom.DataTransfer
 import web.dom.EventInit
 import web.dom.events.Event

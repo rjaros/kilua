@@ -17,8 +17,6 @@ import web.JsAny
 import web.JsArray
 import web.JsNumber
 import web.dom.*
-import web.webgl.*
-import kotlin.js.*
 
 /**
  * Exposes the JavaScript [UIEvent](https://developer.mozilla.org/en/docs/Web/API/UIEvent) to Kotlin

@@ -15,7 +15,6 @@ package web.workers
 
 import web.JsAny
 import web.JsArray
-import web.JsBoolean
 import web.JsString
 import web.dom.AbstractWorker
 import web.dom.EventInit
@@ -28,7 +27,6 @@ import web.dom.events.EventTarget
 import web.fetch.Request
 import web.fetch.Response
 import web.notifications.GetNotificationOptions
-import web.notifications.Notification
 import web.notifications.NotificationEvent
 import web.notifications.NotificationOptions
 import web.Promise

@@ -14,7 +14,6 @@ import web.JsAny
 import web.JsArray
 import web.JsNumber
 import web.JsString
-import kotlin.js.*
 import web.webgl.*
 import web.dom.clipboard.*
 import web.dom.css.*
