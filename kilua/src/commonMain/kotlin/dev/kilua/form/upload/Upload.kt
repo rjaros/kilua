@@ -35,8 +35,9 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.types.KFile
 import dev.kilua.utils.getContent
 import dev.kilua.utils.toKebabCase
-import org.w3c.dom.asList
-import org.w3c.files.File
+import web.dom.asList
+import web.files.File
+import web.toInt
 
 /**
  * File upload input capture mode values

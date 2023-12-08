@@ -24,11 +24,11 @@ package dev.kilua.core
 
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.nativeMapOf
-import kotlinx.dom.clear
-import org.w3c.dom.CustomEvent
-import org.w3c.dom.CustomEventInit
-import org.w3c.dom.Node
-import org.w3c.dom.get
+import web.clear
+import web.dom.CustomEvent
+import web.dom.CustomEventInit
+import web.dom.Node
+import web.dom.get
 
 /**
  * Base class for all components.

@@ -28,7 +28,7 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
-import org.w3c.dom.HTMLDialogElement
+import web.dom.HTMLDialogElement
 
 /**
  * HTML Dialog component.

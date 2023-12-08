@@ -22,7 +22,7 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.Object
+import web.JsAny
 
 /**
  * Utility extension function for casting. Uses unsafeCast() on JS.
@@ -32,6 +32,15 @@ public expect inline fun <T> Any?.cast(): T
 /**
  * Helper annotation for JS/Wasm compatibility.
  */
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
+public expect annotation class JsModule(val import: String)
+
+/**
+ * Helper annotation for JS/Wasm compatibility.
+ */
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
 public expect annotation class JsNonModule()
 
 /**
@@ -45,9 +54,4 @@ public inline fun <T> useModule(@Suppress("UNUSED_PARAMETER") module: T) {
 /**
  * Helper function for JS/Wasm compatibility.
  */
-public expect fun size(array: Object): Int
-
-/**
- * Helper function for JS/Wasm compatibility.
- */
-public expect fun jsString(value: String): Object
+public expect fun size(array: JsAny): Int

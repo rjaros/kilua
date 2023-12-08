@@ -22,7 +22,7 @@
 
 package dev.kilua.externals
 
-import org.w3c.dom.Element
+import web.dom.Element
 
 internal actual fun getEditorFromElement(element: Element): Editor? {
     @Suppress("UnsafeCastFromDynamic")

@@ -37,8 +37,8 @@ import dev.kilua.html.style.style
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
-import kotlinx.dom.clear
-import org.w3c.dom.Element
+import web.clear
+import web.dom.Element
 
 internal expect val defaultMonotonicFrameClock: MonotonicFrameClock
 

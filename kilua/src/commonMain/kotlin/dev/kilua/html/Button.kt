@@ -31,8 +31,8 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import org.w3c.dom.HTMLButtonElement
-import org.w3c.dom.events.MouseEvent
+import web.dom.HTMLButtonElement
+import web.dom.events.MouseEvent
 
 /**
  * Button types.

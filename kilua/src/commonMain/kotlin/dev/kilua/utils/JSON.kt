@@ -22,7 +22,7 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.Object
+import web.JsAny
 
 /**
  * JavaScript JSON object wrapper for JS/Wasm interop.
@@ -31,10 +31,10 @@ public expect object JSON {
     /**
      * Convert a given object to a JSON string.
      */
-    public fun stringify(o: Object?): String
+    public fun stringify(o: JsAny?): String
 
     /**
      * Parse JSON string to an object.
      */
-    public fun <T : Object> parse(text: String): T
+    public fun <T : JsAny> parse(text: String): T
 }

@@ -22,8 +22,9 @@
 
 package dev.kilua.externals
 
-import org.w3c.dom.AddEventListenerOptions
-import org.w3c.dom.CustomEventInit
+import web.JsAny
+import web.dom.AddEventListenerOptions
+import web.dom.CustomEventInit
 
 public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
     return obj<AddEventListenerOptions> {
@@ -31,7 +32,7 @@ public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventLis
     }
 }
 
-public actual fun buildCustomEventInit(detail: Object?): CustomEventInit {
+public actual fun buildCustomEventInit(detail: JsAny?): CustomEventInit {
     return obj<CustomEventInit> {
         if (detail != null) this.detail = detail
     }

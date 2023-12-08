@@ -24,7 +24,7 @@
 package dev.kilua.html.helpers
 
 import dev.kilua.html.*
-import org.w3c.dom.HTMLElement
+import web.dom.HTMLElement
 
 /**
  * Common tag CSS styles.

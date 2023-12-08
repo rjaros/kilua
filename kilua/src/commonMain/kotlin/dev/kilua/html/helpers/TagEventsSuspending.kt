@@ -26,10 +26,10 @@ import androidx.compose.runtime.Composable
 import dev.kilua.KiluaScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.events.Event
-import org.w3c.dom.events.InputEvent
-import org.w3c.dom.events.MouseEvent
+import web.dom.HTMLElement
+import web.dom.events.Event
+import web.dom.events.InputEvent
+import web.dom.events.MouseEvent
 
 /**
  * An extension function for defining on click suspending event handlers (composable).

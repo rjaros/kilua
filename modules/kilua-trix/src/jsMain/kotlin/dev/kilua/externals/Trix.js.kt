@@ -23,6 +23,8 @@
 
 package dev.kilua.externals
 
+import web.JsAny
+
 /**
  * Native JS Trix toolbar object.
  */
@@ -34,7 +36,7 @@ internal external class TrixToolbar {
  * Native JS Trix config object.
  */
 internal external class TrixConfig {
-    val lang: Object
+    val lang: JsAny
     val toolbar: TrixToolbar
 }
 

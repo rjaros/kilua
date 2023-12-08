@@ -25,10 +25,8 @@ package dev.kilua.externals
 
 import dev.kilua.utils.toArray
 
-public actual open external class Object : JsAny
-
 @JsFun("() => ( {} )")
-public actual external fun obj(): Object
+public actual external fun obj(): JsAny
 
 /**
  * Helper function for creating JavaScript objects with given type.
@@ -46,14 +44,14 @@ private external fun objGet(obj: JsAny, key: String): JsAny?
 /**
  * Operator to set property on JS Object
  */
-public actual operator fun Object.set(key: String, value: Object) {
+public actual operator fun JsAny.set(key: String, value: JsAny) {
     objSet(this, key, value)
 }
 
 /**
  * Operator to get property from JS Object
  */
-public actual operator fun Object.get(key: String): Object? {
+public actual operator fun JsAny.get(key: String): JsAny? {
     return objGet(this, key)?.unsafeCast()
 }
 
@@ -63,7 +61,7 @@ private external fun jsKeys(obj: JsAny): JsArray<JsString>
 /**
  * Get the list of keys from JS Object
  */
-public actual fun keys(o: Object): List<String> {
+public actual fun keys(o: JsAny): List<String> {
     return jsKeys(o).toArray().asList().map { it.toString() }
 }
 
@@ -73,34 +71,6 @@ private external fun jsAssign(target: JsAny, source: JsAny)
 /**
  * Copies all properties from source object to the target object
  */
-public actual fun assign(target: Object, source: Object) {
+public actual fun assign(target: JsAny, source: JsAny) {
     jsAssign(target, source)
-}
-
-/**
- * Convert String value to JS Object for JS/Wasm interop
- */
-public actual fun String.toJsObject(): Object {
-    return this.toJsString().unsafeCast()
-}
-
-/**
- * Convert Boolean value to JS Object for JS/Wasm interop
- */
-public actual fun Boolean.toJsObject(): Object {
-    return this.toJsBoolean().unsafeCast()
-}
-
-/**
- * Convert Int value to JS Object for JS/Wasm interop
- */
-public actual fun Int.toJsObject(): Object {
-    return this.toJsNumber().unsafeCast()
-}
-
-/**
- * Convert Double value to JS Object for JS/Wasm interop
- */
-public actual fun Double.toJsObject(): Object {
-    return this.toJsNumber().unsafeCast()
 }

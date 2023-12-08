@@ -27,7 +27,7 @@ import dev.kilua.core.PropertyDelegate
 import dev.kilua.html.*
 import dev.kilua.utils.cast
 import dev.kilua.utils.nativeMapOf
-import org.w3c.dom.HTMLElement
+import web.dom.HTMLElement
 import kotlin.collections.Map
 
 public interface TagStyleDelegate<E : HTMLElement> : TagStyle<E> {

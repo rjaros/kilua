@@ -21,7 +21,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import kotlinx.browser.window
+import web.window
 
 /**
  * This [Router] implementation uses `/#/path` to persistent the current route in [window.location.hash].

@@ -24,7 +24,7 @@ package dev.kilua.html.helpers
 
 import dev.kilua.core.PropertyDelegate
 import dev.kilua.utils.nativeMapOf
-import org.w3c.dom.HTMLElement
+import web.dom.HTMLElement
 import kotlin.collections.set
 
 /**

@@ -71,7 +71,7 @@ import dev.kilua.utils.log
 import dev.kilua.utils.useModule
 import kotlinx.browser.window
 import org.w3c.dom.Text
-import org.w3c.dom.events.Event
+import web.dom.events.Event
 import kotlin.js.Date
 import kotlin.math.PI
 import kotlin.math.floor
@@ -110,7 +110,7 @@ class App : Application() {
 
             button("show modal") {
                 onClick {
-                    modalCaption += "2"
+                    modal?.show()
                 }
             }
             button("modal class") {

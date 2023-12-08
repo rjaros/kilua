@@ -31,7 +31,7 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
-import org.w3c.dom.HTMLAnchorElement
+import web.dom.HTMLAnchorElement
 
 /**
  * HTML A component.

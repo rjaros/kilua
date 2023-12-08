@@ -23,12 +23,12 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.events.Event
-import org.w3c.dom.events.FocusEvent
-import org.w3c.dom.events.InputEvent
-import org.w3c.dom.events.KeyboardEvent
-import org.w3c.dom.events.MouseEvent
+import web.dom.HTMLElement
+import web.dom.events.Event
+import web.dom.events.FocusEvent
+import web.dom.events.InputEvent
+import web.dom.events.KeyboardEvent
+import web.dom.events.MouseEvent
 
 /**
  * Common tag events.

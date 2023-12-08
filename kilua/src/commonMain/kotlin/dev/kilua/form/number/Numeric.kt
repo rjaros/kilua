@@ -35,7 +35,7 @@ import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
 import dev.kilua.utils.toFixedNoRound
 import dev.kilua.utils.toLocaleString
-import org.w3c.dom.events.Event
+import web.dom.events.Event
 
 internal const val NUMERIC_DEFAULT_DECIMALS = 2
 internal const val NUMERIC_MAX_LENGTH = 14

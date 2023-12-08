@@ -22,6 +22,7 @@
 
 package dev.kilua
 
+import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.useModule
 

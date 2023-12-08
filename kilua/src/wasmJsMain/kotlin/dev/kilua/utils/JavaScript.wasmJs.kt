@@ -22,15 +22,15 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.Object
+import web.JsAny
 
+public actual typealias JsModule = kotlin.js.JsModule
+
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
 public actual annotation class JsNonModule actual constructor()
 
-public actual fun size(array: Object): Int = array.cast<JsArray<*>>().length
-
-public actual fun jsString(value: String): Object {
-    return value.toJsString().unsafeCast()
-}
+public actual fun size(array: JsAny): Int = array.unsafeCast<JsArray<*>>().length
 
 /**
  * Convert JsArray to Kotlin Array.

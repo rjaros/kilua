@@ -4,8 +4,6 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
         mavenLocal()
     }
 }
@@ -13,9 +11,6 @@ pluginManagement {
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
-        maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
         mavenLocal()
     }
 }
@@ -23,6 +18,7 @@ dependencyResolutionManagement {
 rootProject.name = "kilua"
 include(":kilua")
 include(":modules:kilua-common-types")
+include(":modules:kilua-dom")
 include(":modules:kilua-bootstrap")
 include(":modules:kilua-bootstrap-icons")
 include(":modules:kilua-fontawesome")

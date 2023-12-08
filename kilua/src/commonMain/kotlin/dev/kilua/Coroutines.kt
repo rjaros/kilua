@@ -23,10 +23,18 @@
 package dev.kilua
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import web.JsAny
+import web.Promise
 
 /**
  * Kilua coroutine scope.
  */
 public val KiluaScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+
+/**
+ * Convert Deferred to a JS Promise.
+ */
+public expect fun <T> Deferred<T>.asPromise(): Promise<JsAny?>

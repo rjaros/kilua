@@ -30,8 +30,8 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.cast
-import org.w3c.dom.CanvasRenderingContext2D
-import org.w3c.dom.HTMLCanvasElement
+import web.dom.CanvasRenderingContext2D
+import web.dom.HTMLCanvasElement
 
 /**
  * HTML Canvas component.

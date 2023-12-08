@@ -22,53 +22,30 @@
 
 package dev.kilua.externals
 
-/**
- * JavaScript Object class
- */
-public expect class Object
+import web.JsAny
 
 /**
  * Return empty JS Object
  */
-public expect fun obj(): Object
+public expect fun obj(): JsAny
 
 
 /**
  * Operator to set property on JS Object
  */
-public expect operator fun Object.set(key: String, value: Object)
+public expect operator fun JsAny.set(key: String, value: JsAny)
 
 /**
  * Operator to get property from JS Object
  */
-public expect operator fun Object.get(key: String): Object?
+public expect operator fun JsAny.get(key: String): JsAny?
 
 /**
  * Get the list of keys from JS Object
  */
-public expect fun keys(o: Object): List<String>
+public expect fun keys(o: JsAny): List<String>
 
 /**
  * Copies all properties from source object to target object
  */
-public expect fun assign(target: Object, source: Object)
-
-/**
- * Convert String value to JS Object for JS/Wasm interop
- */
-public expect fun String.toJsObject(): Object
-
-/**
- * Convert Boolean value to JS Object for JS/Wasm interop
- */
-public expect fun Boolean.toJsObject(): Object
-
-/**
- * Convert Int value to JS Object for JS/Wasm interop
- */
-public expect fun Int.toJsObject(): Object
-
-/**
- * Convert Double value to JS Object for JS/Wasm interop
- */
-public expect fun Double.toJsObject(): Object
+public expect fun assign(target: JsAny, source: JsAny)

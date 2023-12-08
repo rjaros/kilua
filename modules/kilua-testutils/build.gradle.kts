@@ -5,9 +5,6 @@ plugins {
     id("signing")
 }
 
-val isInIdea = System.getProperty("idea.vendor.name") != null
-val buildTarget: String by project
-
 detekt {
     toolVersion = libs.versions.detekt.get()
     config.setFrom("../../detekt-config.yml")
@@ -17,8 +14,8 @@ detekt {
 kotlin {
     explicitApi()
     compilerOptions()
-    kotlinJsTargets(buildTarget, isInIdea)
-    kotlinWasmTargets(buildTarget, isInIdea)
+    kotlinJsTargets()
+    kotlinWasmTargets()
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -30,16 +27,12 @@ kotlin {
                 implementation(npm("html-differ", libs.versions.html.differ.get()))
             }
         }
-        if (buildTarget == "js" || !isInIdea) {
-            val jsMain by getting {
-                dependencies {
-                }
+        val jsMain by getting {
+            dependencies {
             }
         }
-        if (buildTarget == "wasm" || !isInIdea) {
-            val wasmJsMain by getting {
-                dependencies {
-                }
+        val wasmJsMain by getting {
+            dependencies {
             }
         }
     }

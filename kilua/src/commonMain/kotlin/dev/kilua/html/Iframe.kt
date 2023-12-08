@@ -30,7 +30,7 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.toKebabCase
-import org.w3c.dom.HTMLIFrameElement
+import web.dom.HTMLIFrameElement
 
 /**
  * Iframe sandbox options.

@@ -29,7 +29,7 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
-import org.w3c.dom.HTMLImageElement
+import web.dom.HTMLImageElement
 
 /**
  * HTML Img component.

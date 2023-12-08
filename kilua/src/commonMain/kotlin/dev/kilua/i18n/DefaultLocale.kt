@@ -24,7 +24,7 @@ package dev.kilua.i18n
 
 import dev.kilua.externals.Intl
 import dev.kilua.utils.isDom
-import kotlinx.browser.window
+import web.window
 
 /**
  * Auto-detected default locale.

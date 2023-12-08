@@ -6,65 +6,58 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-val isInIdea = System.getProperty("idea.vendor.name") != null
-val buildTarget: String by project
-
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
-    if (buildTarget == "js" || !isInIdea) {
-        js(IR) {
-            useEsModules()
-            browser {
-                commonWebpackConfig {
-                    outputFileName = "main.bundle.js"
-                }
-                runTask {
-                    sourceMaps = false
-                }
-                testTask {
-                    useKarma {
-                        useChromeHeadless()
-                    }
+    js(IR) {
+        useEsModules()
+        browser {
+            commonWebpackConfig {
+                outputFileName = "main.bundle.js"
+            }
+            runTask {
+                sourceMaps = false
+            }
+            testTask {
+                useKarma {
+                    useChromeHeadless()
                 }
             }
-            binaries.executable()
         }
+        binaries.executable()
     }
-    if (buildTarget == "wasm" || !isInIdea) {
-        wasmJs {
-            useEsModules()
-            browser {
-                commonWebpackConfig {
-                    outputFileName = "main.bundle.js"
-                }
-                runTask {
-                    sourceMaps = false
-                }
-                testTask {
-                    useKarma {
-                        useChromeHeadlessWasmGc()
-                    }
+    wasmJs {
+        useEsModules()
+        browser {
+            commonWebpackConfig {
+                outputFileName = "main.bundle.js"
+            }
+            runTask {
+                sourceMaps = false
+            }
+            testTask {
+                useKarma {
+                    useChromeHeadlessWasmGc()
                 }
             }
-            binaries.executable()
-            if (project.gradle.startParameter.taskNames.find { it.contains("wasmJsBrowserProductionWebpack") } != null) {
-                applyBinaryen {
-                    binaryenArgs = mutableListOf(
-                        "--enable-nontrapping-float-to-int",
-                        "--enable-gc",
-                        "--enable-reference-types",
-                        "--enable-exception-handling",
-                        "--enable-bulk-memory",
-                        "--inline-functions-with-loops",
-                        "--traps-never-happen",
-                        "--fast-math",
-                        "--closed-world",
-                        "--metrics",
-                        "-O3", "--gufa", "--metrics",
-                        "-O3", "--gufa", "--metrics",
-                        "-O3", "--gufa", "--metrics",
-                    )
-                }
+        }
+        binaries.executable()
+        if (project.gradle.startParameter.taskNames.find { it.contains("wasmJsBrowserProductionWebpack") } != null) {
+            applyBinaryen {
+                binaryenArgs = mutableListOf(
+                    "--enable-nontrapping-float-to-int",
+                    "--enable-gc",
+                    "--enable-reference-types",
+                    "--enable-exception-handling",
+                    "--enable-bulk-memory",
+                    "--inline-functions-with-loops",
+                    "--traps-never-happen",
+                    "--fast-math",
+                    "--closed-world",
+                    "--metrics",
+                    "-O3", "--gufa", "--metrics",
+                    "-O3", "--gufa", "--metrics",
+                    "-O3", "--gufa", "--metrics",
+                )
             }
         }
     }
@@ -74,16 +67,12 @@ kotlin {
                 implementation(project(":kilua"))
             }
         }
-        if (buildTarget == "js" || !isInIdea) {
-            val jsMain by getting {
-                dependencies {
-                }
+        val jsMain by getting {
+            dependencies {
             }
         }
-        if (buildTarget == "wasm" || !isInIdea) {
-            val wasmJsMain by getting {
-                dependencies {
-                }
+        val wasmJsMain by getting {
+            dependencies {
             }
         }
     }

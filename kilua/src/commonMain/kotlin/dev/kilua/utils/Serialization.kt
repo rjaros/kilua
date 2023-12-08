@@ -21,10 +21,10 @@
  */
 package dev.kilua.utils
 
-import dev.kilua.externals.Object
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import web.JsAny
 
 /**
  * JSON serialization utility functions
@@ -39,7 +39,7 @@ public object Serialization {
     /**
      * An extension function to convert Serializable object to JS object
      */
-    public inline fun <reified T : Any> T.toObj(): Object {
+    public inline fun <reified T : Any> T.toObj(): JsAny {
         return this.toObj(serializer())
     }
 
@@ -47,7 +47,7 @@ public object Serialization {
      * An extension function to convert Serializable object to JS object
      * @param serializer a serializer for T
      */
-    public fun <T> T.toObj(serializer: SerializationStrategy<T>): Object {
+    public fun <T> T.toObj(serializer: SerializationStrategy<T>): JsAny {
         return JSON.parse((customConfiguration ?: Json).encodeToString(serializer, this))
     }
 }

@@ -23,19 +23,14 @@
 package dev.kilua.modal
 
 import dev.kilua.compose.root
-import dev.kilua.externals.nodeJsInit
 import dev.kilua.html.button
 import dev.kilua.html.pt
 import dev.kilua.test.DomSpec
-import kotlinx.browser.document
 import kotlinx.coroutines.delay
+import web.document
 import kotlin.test.Test
 
 class ModalSpec : DomSpec {
-
-    init {
-        nodeJsInit()
-    }
 
     @Test
     fun render() = runWhenDomAvailableAsync {

@@ -22,17 +22,17 @@
 
 package dev.kilua.test
 
+import dev.kilua.asPromise
 import dev.kilua.compose.Root
-import dev.kilua.externals.Object
 import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
-import kotlinx.browser.document
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.promise
-import kotlinx.dom.clear
-import kotlin.js.Promise
+import kotlinx.coroutines.async
+import web.JsAny
+import web.Promise
+import web.document
 import kotlin.test.DefaultAsserter.assertTrue
 
 public val testScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
@@ -49,11 +49,11 @@ public interface TestSpec {
         afterTest()
     }
 
-    public fun runAsync(code: suspend () -> Unit): Promise<Object> {
+    public fun runAsync(code: suspend () -> Unit): Promise<JsAny> {
         beforeTest()
-        return testScope.promise {
+        return testScope.async {
             code()
-        }.finally {
+        }.asPromise().finally {
             afterTest()
         }.cast()
     }
@@ -81,11 +81,11 @@ public interface DomSpec : TestSpec {
         afterTest()
     }
 
-    public fun runWhenDomAvailableAsync(code: suspend () -> Unit): Promise<Object> {
+    public fun runWhenDomAvailableAsync(code: suspend () -> Unit): Promise<JsAny> {
         beforeTest()
-        return testScope.promise {
+        return testScope.async {
             if (isDom) code()
-        }.finally {
+        }.asPromise().finally {
             afterTest()
         }.cast()
     }
@@ -101,7 +101,11 @@ public interface DomSpec : TestSpec {
     override fun afterTest() {
         if (isDom) {
             val div = document.getElementById("pretest")
-            div?.clear()
+            div?.let {
+                while (it.hasChildNodes()) {
+                    it.removeChild(it.firstChild!!)
+                }
+            }
             val modalBackdrop = document.getElementById(".modal-backdrop")
             modalBackdrop?.remove()
         }

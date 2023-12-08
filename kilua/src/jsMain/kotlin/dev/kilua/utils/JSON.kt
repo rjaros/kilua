@@ -22,14 +22,14 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.Object
+import web.JsAny
 
 public actual object JSON {
-    public actual fun stringify(o: Object?): String {
+    public actual fun stringify(o: JsAny?): String {
         return kotlin.js.JSON.stringify(o)
     }
 
-    public actual fun <T : Object> parse(text: String): T {
+    public actual fun <T : JsAny> parse(text: String): T {
         return kotlin.js.JSON.parse(text)
     }
 }

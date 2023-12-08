@@ -31,8 +31,8 @@ import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.toKebabCase
-import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.events.Event
+import web.dom.HTMLInputElement
+import web.dom.events.Event
 
 /**
  * Type of the check input control (checkbox or radiobutton).

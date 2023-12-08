@@ -22,8 +22,9 @@
 
 package dev.kilua.externals
 
-import org.w3c.dom.AddEventListenerOptions
-import org.w3c.dom.CustomEventInit
+import web.JsAny
+import web.dom.AddEventListenerOptions
+import web.dom.CustomEventInit
 
 /**
  * JavaScript AbortSignal class
@@ -46,4 +47,4 @@ public expect fun buildAddEventListenerOptions(signal: AbortSignal): AddEventLis
 /**
  * Build CustomEventInit with a detail object.
  */
-public expect fun buildCustomEventInit(detail: Object?): CustomEventInit
+public expect fun buildCustomEventInit(detail: JsAny?): CustomEventInit

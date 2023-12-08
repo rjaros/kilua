@@ -9,9 +9,6 @@ plugins {
     id("signing")
 }
 
-val isInIdea = System.getProperty("idea.vendor.name") != null
-val buildTarget: String by project
-
 rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
     rootProject.the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().apply {
         resolution("aaa-kilua-assets", libs.versions.npm.kilua.assets.get())
@@ -37,16 +34,18 @@ detekt {
 kotlin {
     explicitApi()
     compilerOptions()
-    kotlinJsTargets(buildTarget, isInIdea)
-    kotlinWasmTargets(buildTarget, isInIdea)
+    kotlinJsTargets()
+    kotlinWasmTargets()
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)
+                api(libs.kotlinx.atomicfu)
                 api(libs.kotlinx.coroutines)
                 api(libs.kotlinx.serialization.json)
                 api(libs.kotlinx.datetime)
                 api(project(":modules:kilua-common-types"))
+                api(project(":modules:kilua-dom"))
 //                implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.1-SNAPSHOT.1.tgz"))
                 implementation(npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get()))
                 implementation(npm("css-loader", libs.versions.css.loader.get()))
@@ -63,16 +62,12 @@ kotlin {
                 implementation(project(":modules:kilua-testutils"))
             }
         }
-        if (buildTarget == "js" || !isInIdea) {
-            val jsMain by getting {
-                dependencies {
-                }
+        val jsMain by getting {
+            dependencies {
             }
         }
-        if (buildTarget == "wasm" || !isInIdea) {
-            val wasmJsMain by getting {
-                dependencies {
-                }
+        val wasmJsMain by getting {
+            dependencies {
             }
         }
     }

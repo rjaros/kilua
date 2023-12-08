@@ -22,12 +22,10 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.Object
+import web.JsAny
+
+public actual typealias JsModule = kotlin.js.JsModule
 
 public actual typealias JsNonModule = kotlin.js.JsNonModule
 
-public actual fun size(array: Object): Int = array.cast<Array<*>>().size
-
-public actual fun jsString(value: String): Object {
-    return value.unsafeCast<Object>()
-}
+public actual fun size(array: JsAny): Int = array.unsafeCast<Array<*>>().size

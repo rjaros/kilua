@@ -30,12 +30,10 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.Object
 import dev.kilua.externals.get
 import dev.kilua.externals.keys
 import dev.kilua.externals.obj
 import dev.kilua.externals.set
-import dev.kilua.externals.toJsObject
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
@@ -61,7 +59,11 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import org.w3c.dom.HTMLFormElement
+import web.JsAny
+import web.dom.HTMLFormElement
+import web.toJsBoolean
+import web.toJsNumber
+import web.toJsString
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 
@@ -212,9 +214,9 @@ public open class Form<K : Any>(
     /**
      * Helper functions to convert data between the form and the model.
      */
-    protected val mapToObjectConverter: ((Map<String, Any?>) -> Object)?
+    protected val mapToObjectConverter: ((Map<String, Any?>) -> JsAny)?
     protected val mapToClassConverter: ((Map<String, Any?>) -> K)?
-    protected val classToObjectConverter: ((K) -> Object)?
+    protected val classToObjectConverter: ((K) -> JsAny)?
 
     /**
      * Keeps all form controls.
@@ -308,23 +310,23 @@ public open class Form<K : Any>(
                 map.forEach { (key, value) ->
                     when (value) {
                         is LocalDate, is LocalDateTime, is LocalTime -> {
-                            json[key] = value.toString().toJsObject()
+                            json[key] = value.toString().toJsString()
                         }
 
                         is String -> {
-                            json[key] = value.toJsObject()
+                            json[key] = value.toJsString()
                         }
 
                         is Boolean -> {
-                            json[key] = value.toJsObject()
+                            json[key] = value.toJsBoolean()
                         }
 
                         is Int -> {
-                            json[key] = value.toJsObject()
+                            json[key] = value.toJsNumber()
                         }
 
                         is Double -> {
-                            json[key] = value.toJsObject()
+                            json[key] = value.toJsNumber()
                         }
 
                         is List<*> -> {
@@ -361,7 +363,7 @@ public open class Form<K : Any>(
      * Sets the values of all the controls from the single json Object.
      * @param json data model as Object
      */
-    protected open fun setDataInternalFromSingleObject(json: Object, key: String) {
+    protected open fun setDataInternalFromSingleObject(json: JsAny, key: String) {
         val jsonValue = json[key]
         if (jsonValue != null) {
             when (val formField = fields[key]) {
@@ -397,7 +399,7 @@ public open class Form<K : Any>(
      * Sets the values of all the controls from the json Object.
      * @param json data model as Object
      */
-    protected open fun setDataInternalFromObject(json: Object) {
+    protected open fun setDataInternalFromObject(json: JsAny) {
         val keys = keys(json)
         for (key in keys) {
             setDataInternalFromSingleObject(json, key)
@@ -492,7 +494,7 @@ public open class Form<K : Any>(
      * Returns current data model as JS object.
      * @return data model as JS object
      */
-    public open fun getDataJson(): Object {
+    public open fun getDataJson(): JsAny {
         return if (serializer != null) {
             JSON.parse(
                 jsonInstance!!.encodeToString(

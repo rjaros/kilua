@@ -28,7 +28,7 @@ import dev.kilua.html.Button
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.unaryPlus
-import org.w3c.dom.events.Event
+import web.dom.events.Event
 
 
 /**

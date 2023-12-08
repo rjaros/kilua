@@ -29,7 +29,7 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.Tag
-import org.w3c.dom.HTMLStyleElement
+import web.dom.HTMLStyleElement
 
 /**
  * Internal HTML Style component.

@@ -12,22 +12,20 @@ fun KotlinMultiplatformExtension.compilerOptions() {
     }
 }
 
-fun KotlinMultiplatformExtension.kotlinJsTargets(buildTarget: String, isInIdea: Boolean, withNode: Boolean = true) {
-    if (buildTarget == "js" || !isInIdea) {
-        js(IR) {
-            useEsModules()
-            browser {
-                testTask {
-                    useKarma {
-                        useChromeHeadless()
-                    }
+fun KotlinMultiplatformExtension.kotlinJsTargets(withNode: Boolean = true) {
+    js(IR) {
+        useEsModules()
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
                 }
             }
-            if (withNode) {
-                nodejs {
-                    testTask {
-                        useMocha()
-                    }
+        }
+        if (withNode) {
+            nodejs {
+                testTask {
+                    useMocha()
                 }
             }
         }
@@ -35,22 +33,20 @@ fun KotlinMultiplatformExtension.kotlinJsTargets(buildTarget: String, isInIdea: 
 }
 
 @OptIn(ExperimentalWasmDsl::class)
-fun KotlinMultiplatformExtension.kotlinWasmTargets(buildTarget: String, isInIdea: Boolean, withNode: Boolean = true) {
-    if (buildTarget == "wasm" || !isInIdea) {
-        wasmJs {
-            useEsModules()
-            browser {
-                testTask {
-                    useKarma {
-                        useChromeHeadlessWasmGc()
-                    }
+fun KotlinMultiplatformExtension.kotlinWasmTargets(withNode: Boolean = true) {
+    wasmJs {
+        useEsModules()
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadlessWasmGc()
                 }
             }
-            if (withNode) {
-                nodejs {
-                    testTask {
-                        useMocha()
-                    }
+        }
+        if (withNode) {
+            nodejs {
+                testTask {
+                    useMocha()
                 }
             }
         }

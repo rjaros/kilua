@@ -42,9 +42,9 @@ import dev.kilua.html.commentNode
 import dev.kilua.html.div
 import dev.kilua.html.li
 import dev.kilua.html.ul
-import dev.kilua.utils.jsString
 import dev.kilua.utils.rem
-import org.w3c.dom.HTMLDivElement
+import web.dom.HTMLDivElement
+import web.toJsString
 
 /**
  * Tab position.
@@ -99,11 +99,11 @@ public open class TabPanel(
         val tabId = remember { idCounter++ }
         commentNode("tid=$tabId")
         val tab = Tab(label, icon, closable, content)
+        if (tabs[tabId] != tab) {
+            tabs[tabId] = tab
+        }
         DisposableEffect(tabId) {
             refreshTabsOrderList()
-            if (tabs[tabId] != tab) {
-                tabs[tabId] = tab
-            }
             if (activeIndex == -1) {
                 updateProperty(::activeIndex, 0)
             }
@@ -184,7 +184,7 @@ public fun ComponentBase.tabPanel(
                                         onClick { e ->
                                             component.dispatchEvent(
                                                 "closeTab",
-                                                buildCustomEventInit(jsString("$index"))
+                                                buildCustomEventInit("$index".toJsString())
                                             )
                                             e.stopPropagation()
                                         }
@@ -202,7 +202,7 @@ public fun ComponentBase.tabPanel(
                                     if (fromIndex != index) {
                                         component.dispatchEvent(
                                             "moveTab",
-                                            buildCustomEventInit(jsString("{ \"from\": $fromIndex, \"to\": $index }"))
+                                            buildCustomEventInit("{ \"from\": $fromIndex, \"to\": $index }".toJsString())
                                         )
                                     }
                                 }

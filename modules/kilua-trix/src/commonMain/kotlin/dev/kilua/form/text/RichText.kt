@@ -45,12 +45,13 @@ import dev.kilua.initializeTrix
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import kotlinx.dom.clear
-import org.w3c.dom.HTMLButtonElement
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.asList
-import org.w3c.dom.events.Event
+import dev.kilua.utils.cast
+import web.clear
+import web.dom.HTMLButtonElement
+import web.dom.HTMLElement
+import web.dom.HTMLInputElement
+import web.dom.asList
+import web.dom.events.Event
 
 /**
  * Trix rich text editor component.
@@ -140,7 +141,7 @@ public open class RichText(
         get() = super.visible
         set(value) {
             super.visible = value
-            toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.run {
+            toolbar?.let { SafeDomFactory.getElementById(it) }?.cast<HTMLElement>()?.run {
                 if (!value) {
                     style.display = "none"
                 } else {
@@ -187,7 +188,7 @@ public open class RichText(
             @Suppress("LeakingThis")
             onEventDirect<Event>("trix-change") {
                 input?.let { SafeDomFactory.getElementById(it) }?.let {
-                    val elementValue = it.unsafeCast<HTMLInputElement>().value
+                    val elementValue = it.cast<HTMLInputElement>().value
                     setInternalValueFromString(elementValue)
                     dispatchEvent("change", buildCustomEventInit(obj()))
                 }
@@ -204,9 +205,9 @@ public open class RichText(
      * Disable/enable connected toolbar.
      */
     protected fun toolbarDisable(disable: Boolean) {
-        toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.run {
+        toolbar?.let { SafeDomFactory.getElementById(it) }?.cast<HTMLElement>()?.run {
             querySelectorAll("button").asList().forEach {
-                it.unsafeCast<HTMLButtonElement>().disabled = disable
+                it.cast<HTMLButtonElement>().disabled = disable
             }
         }
     }
@@ -215,7 +216,7 @@ public open class RichText(
      * Localize connected toolbar.
      */
     protected fun toolbarLocalize() {
-        toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.innerHTML =
+        toolbar?.let { SafeDomFactory.getElementById(it) }?.cast<HTMLElement>()?.innerHTML =
             getToolbarContent(locale)
     }
 
@@ -274,7 +275,7 @@ public open class RichText(
 
     override fun onRemove() {
         if (renderConfig.isDom) {
-            toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.clear()
+            toolbar?.let { SafeDomFactory.getElementById(it) }?.cast<HTMLElement>()?.clear()
             element.clear()
         }
     }

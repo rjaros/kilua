@@ -22,11 +22,11 @@
 
 package dev.kilua.html
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
+import dev.kilua.test.DomSpec
 import dev.kilua.test.normalizeHtml
-import dev.kilua.utils.jsString
-import org.w3c.dom.ImageData
+import web.dom.ImageData
+import web.toJsString
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -56,7 +56,7 @@ class CanvasSpec : DomSpec {
                 canvas(300, 200) {
                     context2D?.let {
                         it.beginPath()
-                        it.strokeStyle = jsString("black")
+                        it.strokeStyle = "black".toJsString()
                         it.moveTo(0.0, 0.0)
                         it.lineTo(100.0, 100.0)
                         it.stroke()

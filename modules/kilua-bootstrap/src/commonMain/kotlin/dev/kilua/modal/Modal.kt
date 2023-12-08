@@ -39,7 +39,7 @@ import dev.kilua.html.div
 import dev.kilua.html.h5t
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import org.w3c.dom.HTMLDivElement
+import web.dom.HTMLDivElement
 
 /**
  * Modal window sizes.

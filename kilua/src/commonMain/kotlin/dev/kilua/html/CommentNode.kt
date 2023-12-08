@@ -29,7 +29,8 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
-import org.w3c.dom.Comment
+import dev.kilua.utils.cast
+import web.dom.Comment
 
 /**
  * HTML comment node component.
@@ -43,7 +44,7 @@ public open class CommentNode(
      * The DOM comment node.
      */
     public open val comment: Comment by lazy {
-        if (renderConfig.isDom) node.unsafeCast<Comment>() else {
+        if (renderConfig.isDom) node.cast<Comment>() else {
             error("Can't use DOM node with the current render configuration")
         }
     }

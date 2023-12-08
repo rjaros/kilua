@@ -26,10 +26,10 @@ import dev.kilua.externals.nodeJsCreateComment
 import dev.kilua.externals.nodeJsCreateElement
 import dev.kilua.externals.nodeJsCreateText
 import dev.kilua.utils.isDom
-import kotlinx.browser.document
-import org.w3c.dom.Comment
-import org.w3c.dom.Element
-import org.w3c.dom.Text
+import web.document
+import web.dom.Comment
+import web.dom.Element
+import web.dom.Text
 
 /**
  * Helper factory to safely call methods on the document object.

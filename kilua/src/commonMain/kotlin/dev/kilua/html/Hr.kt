@@ -28,7 +28,7 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
-import org.w3c.dom.HTMLHRElement
+import web.dom.HTMLHRElement
 
 /**
  * HTML Hr component.

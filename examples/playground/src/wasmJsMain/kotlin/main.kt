@@ -56,15 +56,33 @@ import dev.kilua.startApplication
 import dev.kilua.state.collectAsState
 import dev.kilua.utils.console
 import dev.kilua.utils.listOfPairs
+import dev.kilua.utils.log
 import dev.kilua.utils.rem
-import org.w3c.dom.CustomEvent
+import web.dom.CustomEvent
+import web.toDouble
+import web.toJsBoolean
+import web.toJsNumber
 
 class App : Application() {
 
     override fun start() {
 
         root("root") {
+            val x = 5
+            val y = x.toJsNumber().toDouble()
+            console.log((y == 5.0).toJsBoolean().toBoolean().toString())
+            val text = textNode("Ala ma kota")
 
+            val comment = commentNode("Ala ma kota2")
+
+            button("test text") {
+                onClick {
+                    console.log(text.text)
+                    console.log(comment.comment)
+                }
+            }
+
+            hr()
             bsButton("Test", "fas fa-check", size = ButtonSize.BtnLg, style = ButtonStyle.BtnDanger) {
                 onClick {
                     console.log("test")

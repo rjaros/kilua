@@ -31,7 +31,7 @@ import dev.kilua.core.Component
 import dev.kilua.core.StringRenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.html.Tag
-import org.w3c.dom.HTMLElement
+import web.dom.HTMLElement
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

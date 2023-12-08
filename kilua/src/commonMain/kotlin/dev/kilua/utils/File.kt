@@ -23,8 +23,8 @@
 package dev.kilua.utils
 
 import kotlinx.coroutines.suspendCancellableCoroutine
-import org.w3c.files.File
-import org.w3c.files.FileReader
+import web.files.File
+import web.files.FileReader
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 

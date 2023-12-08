@@ -22,7 +22,8 @@
 
 package dev.kilua.externals
 
-import org.w3c.dom.HTMLElement
+import dev.kilua.utils.JsModule
+import web.dom.HTMLElement
 
 /**
  * External Bootstrap object.

@@ -22,9 +22,9 @@
 
 package dev.kilua.externals
 
-import org.w3c.dom.Comment
-import org.w3c.dom.Element
-import org.w3c.dom.Text
+import web.dom.Comment
+import web.dom.Element
+import web.dom.Text
 
 /**
  * Create a fake DOM Element on Node.js.

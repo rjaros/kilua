@@ -25,7 +25,7 @@ package dev.kilua
 import dev.kilua.compose.Root
 import dev.kilua.modal.Modal
 import dev.kilua.utils.isDom
-import kotlinx.browser.document
+import web.document
 
 /**
  * Initializes Bootstrap module.

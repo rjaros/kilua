@@ -29,8 +29,8 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.events.Event
+import web.dom.HTMLInputElement
+import web.dom.events.Event
 
 /**
  * Base abstract class for HTML input components.

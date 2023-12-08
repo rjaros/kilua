@@ -22,7 +22,7 @@
 
 package dev.kilua.externals
 
-import org.w3c.dom.Element
+import web.dom.Element
 
 /**
  * Internal Editor class.

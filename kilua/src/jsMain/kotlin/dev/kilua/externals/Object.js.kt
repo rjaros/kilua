@@ -23,10 +23,10 @@
 
 package dev.kilua.externals
 
-public actual external class Object
+import web.JsAny
 
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-public actual inline fun obj(): Object {
+public actual inline fun obj(): JsAny {
     return js("{}")
 }
 
@@ -48,7 +48,7 @@ public inline fun obj(noinline init: dynamic.() -> Unit): dynamic {
 /**
  * Operator to set property on JS Object
  */
-public actual operator fun Object.set(key: String, value: Object) {
+public actual operator fun JsAny.set(key: String, value: JsAny) {
     this.asDynamic()[key] = value
 }
 
@@ -56,21 +56,21 @@ public actual operator fun Object.set(key: String, value: Object) {
  * Operator to get property from JS Object
  */
 @Suppress("UnsafeCastFromDynamic")
-public actual operator fun Object.get(key: String): Object? {
+public actual operator fun JsAny.get(key: String): JsAny? {
     return this.asDynamic()[key]
 }
 
 /**
  * Get the list of keys from JS Object
  */
-public actual fun keys(o: Object): List<String> {
+public actual fun keys(o: JsAny): List<String> {
     return js("Object").keys(o).unsafeCast<Array<String>>().toList()
 }
 
 /**
  * Copies all properties from source object to the target object
  */
-public actual fun assign(target: Object, source: Object) {
+public actual fun assign(target: JsAny, source: JsAny) {
     js("Object").assign(target, source)
 }
 
@@ -84,32 +84,4 @@ public external fun delete(p: dynamic): Boolean
  */
 public fun delete(thing: dynamic, key: String) {
     delete(thing[key])
-}
-
-/**
- * Convert String value to JS Object for JS/Wasm interop
- */
-public actual fun String.toJsObject(): Object {
-    return this.unsafeCast<Object>()
-}
-
-/**
- * Convert Boolean value to JS Object for JS/Wasm interop
- */
-public actual fun Boolean.toJsObject(): Object {
-    return this.unsafeCast<Object>()
-}
-
-/**
- * Convert Int value to JS Object for JS/Wasm interop
- */
-public actual fun Int.toJsObject(): Object {
-    return this.unsafeCast<Object>()
-}
-
-/**
- * Convert Double value to JS Object for JS/Wasm interop
- */
-public actual fun Double.toJsObject(): Object {
-    return this.unsafeCast<Object>()
 }

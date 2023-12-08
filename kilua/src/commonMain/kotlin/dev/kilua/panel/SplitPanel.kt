@@ -24,7 +24,10 @@ package dev.kilua.panel
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
@@ -38,7 +41,7 @@ import dev.kilua.html.Tag
 import dev.kilua.html.div
 import dev.kilua.utils.cast
 import dev.kilua.utils.toKebabCase
-import org.w3c.dom.HTMLDivElement
+import web.dom.HTMLDivElement
 import kotlin.math.ceil
 
 internal const val SPLIT_PANEL_DEFAULT_GUTTER_SIZE = 10
@@ -141,8 +144,8 @@ public open class SplitPanel(
      */
     public var splitJsInstance: SplitJsInstance? = null
 
-    internal var first: @Composable (Div.() -> Unit)? = null
-    internal var second: @Composable (Div.() -> Unit)? = null
+    internal var first by mutableStateOf<@Composable (Div.() -> Unit)?>(null)
+    internal var second by mutableStateOf<@Composable (Div.() -> Unit)?>(null)
 
     init {
         internalCssClasses.add("splitpanel-$dir")
