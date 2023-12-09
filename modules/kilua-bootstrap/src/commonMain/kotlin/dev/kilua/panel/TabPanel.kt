@@ -142,6 +142,18 @@ private fun ComponentBase.tabPanel(
     return component
 }
 
+/**
+ * Creates a [TabPanel] component.
+ *
+ * @param tabPosition the tabs position
+ * @param sideTabSize the size of tabs for left or right position
+ * @param scrollableTabs determines if the tabs are scrollable
+ * @param draggableTabs determines if the tabs are draggable
+ * @param activeIndex the index of the active tab
+ * @param className the CSS class name
+ * @param content the content of the tab panel
+ * @return the [TabPanel] component
+ */
 @Composable
 public fun ComponentBase.tabPanel(
     tabPosition: TabPosition = TabPosition.Top,
