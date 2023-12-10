@@ -23,17 +23,18 @@
 package dev.kilua.externals
 
 import dev.kilua.utils.JsModule
+import web.JsAny
 import web.dom.HTMLElement
 
 /**
  * External Bootstrap object.
  */
 @JsModule("bootstrap")
-public external object Bootstrap {
+public external object Bootstrap : JsAny {
     /**
      * External Bootstrap Modal class.
      */
-    public class Modal(element: HTMLElement) {
+    public class Modal(element: HTMLElement) : JsAny {
         /**
          * Shows the modal.
          */
@@ -51,6 +52,41 @@ public external object Bootstrap {
 
         /**
          * Disposes the modal.
+         */
+        public fun dispose()
+    }
+
+    /**
+     * External Bootstrap Carousel class.
+     */
+    public class Carousel(element: HTMLElement) : JsAny {
+        /**
+         * Show next item.
+         */
+        public fun next()
+
+        /**
+         * Show previous item.
+         */
+        public fun prev()
+
+        /**
+         * Show an item identified by its index.
+         */
+        public fun to(index: Int)
+
+        /**
+         * Cycles through the carousel items from left to right.
+         */
+        public fun cycle()
+
+        /**
+         * Stops the carousel from cycling through items.
+         */
+        public fun pause()
+
+        /**
+         * Disposes the carousel.
          */
         public fun dispose()
     }
