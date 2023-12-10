@@ -51,6 +51,7 @@ import dev.kilua.modal.confirm
 import dev.kilua.modal.modal
 import dev.kilua.panel.TabPosition
 import dev.kilua.panel.accordion
+import dev.kilua.panel.carousel
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
 import dev.kilua.startApplication
@@ -71,6 +72,32 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
+
+                carousel(hideIndicators = true, autoPlay = true) {
+                    item("First slide", "First slide label") {
+                        div("d-block w-100") {
+                            height = 200.px
+                            background = Background(color = Color.Red)
+                            pt("Nulla vitae elit libero, a pharetra augue mollis interdum.")
+                        }
+                    }
+                    item("Second slide", "Second slide label") {
+                        div("d-block w-100") {
+                            height = 200.px
+                            background = Background(color = Color.Green)
+                            pt("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+                        }
+                    }
+                    item("Third slide", "Third slide label") {
+                        div("d-block w-100") {
+                            height = 200.px
+                            background = Background(color = Color.Blue)
+                            pt("Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
+                        }
+                    }
+                }
+
+                hr()
 
                 var accName by remember { mutableStateOf("Test") }
 
