@@ -120,12 +120,17 @@ public open class Modal(
     }
 
     override fun onInsert() {
-        modalInstance = Bootstrap.Modal(element)
-        if (isShown) show()
+        if (renderConfig.isDom) {
+            modalInstance = Bootstrap.Modal(element)
+            if (isShown) show()
+        }
     }
 
     override fun onRemove() {
-        modalInstance?.dispose()
+        if (renderConfig.isDom) {
+            modalInstance?.dispose()
+            modalInstance = null
+        }
     }
 
     public companion object {
