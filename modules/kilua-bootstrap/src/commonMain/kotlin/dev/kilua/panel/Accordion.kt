@@ -44,7 +44,7 @@ import dev.kilua.panel.Accordion.Companion.idCounter
 import dev.kilua.utils.rem
 import web.dom.HTMLDivElement
 
-internal data class Item(
+internal data class AccordionItem(
     val label: String? = null,
     val icon: String? = null,
     val content: @Composable Div.() -> Unit
@@ -56,9 +56,15 @@ public open class Accordion(
 ) :
     Tag<HTMLDivElement>("div", className, renderConfig) {
 
-    internal val items = mutableStateMapOf<Int, Item>()
+    internal val items = mutableStateMapOf<Int, AccordionItem>()
     internal var itemsOrderList: List<Int> by mutableStateOf(emptyList())
 
+    /**
+     * Adds an accordion item.
+     * @param label the label of the item
+     * @param icon the icon of the item
+     * @param content the content of the item
+     */
     @Composable
     public fun item(
         label: String? = null,
@@ -67,7 +73,7 @@ public open class Accordion(
     ) {
         val itemId = remember { idCounter++ }
         commentNode("sid=$itemId")
-        val item = Item(label, icon, content)
+        val item = AccordionItem(label, icon, content)
         if (items[itemId] != item) {
             items[itemId] = item
         }
@@ -122,8 +128,8 @@ public fun ComponentBase.accordion(
 ): Accordion {
     val accordionId = remember { "kilua_accordion_${idCounter++}" }
     return accordion("accordion" % if (flush) "accordion-flush" else null % className) {
-        content()
         id = accordionId
+        content()
         itemsOrderList.forEachIndexed { index, itemId ->
             this.items[itemId]?.let { item ->
                 div("accordion-item") {
