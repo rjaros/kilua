@@ -20,19 +20,17 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.externals
+
+import web.JsAny
 
 /**
  * JavaScript console class
  */
-public external class Console {
+public external class Console : JsAny {
     public fun log(message: String?)
+    public fun log(message: JsAny?)
 }
-
-/**
- * Log to JavaScript console
- */
-public expect fun Console.log(ob: Any?)
 
 /**
  * JavaScript console object

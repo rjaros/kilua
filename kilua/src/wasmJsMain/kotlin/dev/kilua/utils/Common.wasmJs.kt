@@ -22,8 +22,7 @@
 
 package dev.kilua.utils
 
-@JsFun("ref => ( typeof document !== 'undefined' && typeof document.kilua == 'undefined' )")
-private external fun isDom(): Boolean
+private fun isDom(): Boolean = js("typeof document !== 'undefined' && typeof document.kilua == 'undefined'")
 
 public actual val isDom: Boolean by lazy { isDom() }
 

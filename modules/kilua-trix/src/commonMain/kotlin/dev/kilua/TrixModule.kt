@@ -25,10 +25,11 @@ package dev.kilua
 import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.useModule
+import web.JsAny
 
 @JsModule("trix/dist/trix.css")
 @JsNonModule
-internal external object TrixCss
+internal external object TrixCss : JsAny
 
 /**
  * Initializes Trix module.

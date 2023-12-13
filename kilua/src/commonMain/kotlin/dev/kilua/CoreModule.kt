@@ -25,6 +25,7 @@ package dev.kilua
 import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.useModule
+import web.JsAny
 
 /**
  * Kilua Module initializer.
@@ -38,7 +39,7 @@ public interface ModuleInitializer {
 
 @JsModule("aaa-kilua-assets/css/style.css")
 @JsNonModule
-internal external object StyleCss
+internal external object StyleCss : JsAny
 
 /**
  * Initializer for Kilua core module.

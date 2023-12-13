@@ -20,16 +20,21 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.externals
 
 import web.JsAny
 
-public actual object JSON {
-    public actual fun stringify(o: JsAny?): String {
-        return dev.kilua.externals.JSON.stringify(o)
-    }
+/**
+ * JavaScript JSON object.
+ */
+public external object JSON : JsAny {
+    /**
+     * Convert a given object to a JSON string.
+     */
+    public fun stringify(o: JsAny?): String
 
-    public actual fun <T : JsAny> parse(text: String): T {
-        return dev.kilua.externals.JSON.parse(text)
-    }
+    /**
+     * Parse JSON string to an object.
+     */
+    public fun <T : JsAny> parse(text: String): T
 }

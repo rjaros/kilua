@@ -29,12 +29,12 @@ import web.dom.CustomEventInit
 /**
  * JavaScript AbortSignal class
  */
-public external class AbortSignal
+public external class AbortSignal : JsAny
 
 /**
  * JavaScript AbortController class
  */
-public external class AbortController {
+public external class AbortController : JsAny {
     public val signal: AbortSignal
     public fun abort()
 }

@@ -22,10 +22,6 @@
 
 package dev.kilua.utils
 
-import web.JsAny
-
 public actual typealias JsModule = kotlin.js.JsModule
 
 public actual typealias JsNonModule = kotlin.js.JsNonModule
-
-public actual fun size(array: JsAny): Int = array.unsafeCast<Array<*>>().size

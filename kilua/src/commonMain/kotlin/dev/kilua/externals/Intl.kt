@@ -22,16 +22,18 @@
 
 package dev.kilua.externals
 
+import web.JsAny
+
 /**
  * I18n API
  */
-public external object Intl {
+public external object Intl : JsAny {
     public class DateTimeFormat {
         public fun resolvedOptions(): ResolvedOptions
     }
 }
 
-public external class ResolvedOptions {
+public external class ResolvedOptions : JsAny {
     public val locale: String
     public val calendar: String
     public val numberingSystem: String

@@ -36,7 +36,7 @@ import dev.kilua.html.px
 import dev.kilua.html.span
 import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
-import dev.kilua.utils.console
+import dev.kilua.externals.console
 import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.rem
 import kotlinx.serialization.Serializable

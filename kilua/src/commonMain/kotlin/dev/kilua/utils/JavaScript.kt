@@ -23,6 +23,8 @@
 package dev.kilua.utils
 
 import web.JsAny
+import web.JsArray
+import web.get
 
 /**
  * Utility extension function for casting. Uses unsafeCast() on JS.
@@ -52,6 +54,15 @@ public inline fun <T> useModule(@Suppress("UNUSED_PARAMETER") module: T) {
 }
 
 /**
- * Helper function for JS/Wasm compatibility.
+ * Convert JsArray to Kotlin Array.
  */
-public expect fun size(array: JsAny): Int
+public inline fun <reified T : JsAny> JsArray<T>.toArray(): Array<T> {
+    return Array(length) { get(it)!! }
+}
+
+/**
+ * Convert JsArray to Kotlin List.
+ */
+public fun <T : JsAny> JsArray<T>.toList(): List<T> {
+    return List(length) { get(it)!! }
+}

@@ -38,7 +38,7 @@ import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.types.KFile
-import dev.kilua.utils.JSON
+import dev.kilua.externals.JSON
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.Serialization.toObj
 import dev.kilua.utils.cast

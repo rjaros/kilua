@@ -30,8 +30,8 @@ public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventLis
     return buildAddEventListenerOptionsInternal(signal)
 }
 
-@JsFun("(signal) => ({ 'signal': signal })")
-internal external fun buildAddEventListenerOptionsInternal(signal: AbortSignal): AddEventListenerOptions
+internal fun buildAddEventListenerOptionsInternal(signal: AbortSignal): AddEventListenerOptions =
+    js("({ 'signal': signal })")
 
 public actual fun buildCustomEventInit(detail: JsAny?): CustomEventInit {
     return obj {

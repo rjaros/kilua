@@ -25,9 +25,10 @@
 package dev.kilua.test
 
 import dev.kilua.utils.JsModule
+import web.JsAny
 
 @Suppress("UnusedPrivateProperty")
-public external class HtmlDiffer(preset: String) {
+public external class HtmlDiffer(preset: String) : JsAny {
     public constructor()
 
     public fun isEqual(html1: String, html2: String): Boolean

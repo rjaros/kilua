@@ -24,12 +24,13 @@ package dev.kilua.externals
 
 import dev.kilua.panel.Dir
 import dev.kilua.panel.GutterAlign
+import web.JsAny
 import web.dom.HTMLElement
 
 /**
  * Split.js native instance.
  */
-public external class SplitJsInstance {
+public external class SplitJsInstance : JsAny {
     public fun destroy()
 }
 

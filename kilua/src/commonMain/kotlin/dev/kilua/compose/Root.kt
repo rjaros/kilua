@@ -164,7 +164,7 @@ public fun root(
     if (isFirstRoot && renderConfig.isDom) {
         SafeDomFactory.getFirstElementByTagName("head")?.let { head ->
             Root(head, renderConfig) {
-                style(StyleParams.stylesStateMap.values.map { it.renderAsCss() }.joinToString("\n"))
+                style(StyleParams.stylesStateMap.values.joinToString("\n") { it.renderAsCss() })
             }
         }
         SafeDomFactory.getFirstElementByTagName("body")?.let { body ->

@@ -24,11 +24,9 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.Tag
-import dev.kilua.utils.cast
-import dev.kilua.utils.size
+import dev.kilua.utils.toList
 import web.dom.DragEvent
 import web.dom.HTMLElement
-import web.get
 
 /**
  * Common drag and drop methods delegate.
@@ -118,14 +116,7 @@ public open class TagDndDelegateImpl<E : HTMLElement>(
     @Composable
     public override fun setDropTarget(formats: Set<String>?, callback: (DragEvent) -> Unit) {
         dragOverId = tag.onEvent("dragover") { e: DragEvent ->
-            val typesArray = e.dataTransfer?.types
-            val typesArraySize = typesArray?.let { size(it.cast()) } ?: 0
-            val types = mutableSetOf<String>()
-            if (typesArray != null) {
-                for (i in 0..<typesArraySize) {
-                    types.add(typesArray[i].toString())
-                }
-            }
+            val types = e.dataTransfer?.types?.toList()?.map { it.toString() }?.toSet() ?: emptySet()
             if (formats == null || formats.intersect(types).isNotEmpty()) {
                 e.preventDefault()
             }

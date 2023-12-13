@@ -25,8 +25,7 @@ package dev.kilua.externals
 
 import dev.kilua.utils.toArray
 
-@JsFun("() => ( {} )")
-public actual external fun obj(): JsAny
+public actual fun obj(): JsAny = js("({})")
 
 /**
  * Helper function for creating JavaScript objects with given type.
@@ -35,11 +34,10 @@ public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
     return (obj().unsafeCast<T>()).apply(init)
 }
 
-@JsFun("(obj, key, value) => ( obj[key] = value )")
-private external fun objSet(obj: JsAny, key: String, value: JsAny)
+private fun objSet(obj: JsAny, key: String, value: JsAny): Unit = js("{ obj[key] = value }")
 
-@JsFun("(obj, key) => ( obj[key] )")
-private external fun objGet(obj: JsAny, key: String): JsAny?
+@Suppress("RedundantNullableReturnType")
+private fun objGet(obj: JsAny, key: String): JsAny? = js("obj[key]")
 
 /**
  * Operator to set property on JS Object
@@ -52,11 +50,10 @@ public actual operator fun JsAny.set(key: String, value: JsAny) {
  * Operator to get property from JS Object
  */
 public actual operator fun JsAny.get(key: String): JsAny? {
-    return objGet(this, key)?.unsafeCast()
+    return objGet(this, key)
 }
 
-@JsFun("(obj) => ( Object.keys(obj) )")
-private external fun jsKeys(obj: JsAny): JsArray<JsString>
+private fun jsKeys(obj: JsAny): JsArray<JsString> = js("Object.keys(obj)")
 
 /**
  * Get the list of keys from JS Object
@@ -65,8 +62,7 @@ public actual fun keys(o: JsAny): List<String> {
     return jsKeys(o).toArray().asList().map { it.toString() }
 }
 
-@JsFun("(target, source) => ( Object.assign(target, source) )")
-private external fun jsAssign(target: JsAny, source: JsAny)
+private fun jsAssign(target: JsAny, source: JsAny): Unit = js("{ Object.assign(target, source) } ")
 
 /**
  * Copies all properties from source object to the target object

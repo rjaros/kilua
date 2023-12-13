@@ -21,25 +21,27 @@
  */
 package dev.kilua
 
+import web.JsAny
+
 /**
  * Helper interface for Hot Module Replacement (HMR).
  */
-public external interface Module {
+public external interface Module : JsAny {
     public val hot: Hot?
 }
 
 /**
  * Helper interface for Hot Module Replacement (HMR).
  */
-public external interface HmrState {
+public external interface HmrState : JsAny {
     public var appState: String?
 }
 
 /**
  * Helper interface for Hot Module Replacement (HMR).
  */
-public external interface Hot {
-    public val data: HmrState
+public external interface Hot : JsAny {
+    public val data: HmrState?
 
     public fun accept()
     public fun accept(dependency: String, callback: () -> Unit)

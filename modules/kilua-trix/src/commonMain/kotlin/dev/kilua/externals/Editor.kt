@@ -22,12 +22,13 @@
 
 package dev.kilua.externals
 
+import web.JsAny
 import web.dom.Element
 
 /**
  * Internal Editor class.
  */
-internal external class Editor {
+internal external class Editor : JsAny {
     fun loadHTML(html: String)
 }
 

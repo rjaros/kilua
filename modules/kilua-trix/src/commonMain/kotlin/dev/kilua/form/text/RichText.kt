@@ -198,6 +198,7 @@ public open class RichText(
         }
         @Suppress("LeakingThis")
         if (id != null) this.id = id
+        @Suppress("LeakingThis")
         role = "textbox"
     }
 

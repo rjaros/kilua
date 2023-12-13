@@ -22,5 +22,4 @@
 
 package dev.kilua
 
-@JsFun("() => import.meta.webpackHot")
-public external fun webpackHot(): Hot?
+public fun webpackHot(): Hot = js("import.meta.webpackHot")

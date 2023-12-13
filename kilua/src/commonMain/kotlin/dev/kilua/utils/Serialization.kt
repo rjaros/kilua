@@ -21,6 +21,7 @@
  */
 package dev.kilua.utils
 
+import dev.kilua.externals.JSON
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer

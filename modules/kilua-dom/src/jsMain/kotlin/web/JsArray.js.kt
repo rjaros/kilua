@@ -34,6 +34,7 @@ public actual operator fun <T : JsAny?> JsArray<T>.set(index: Int, value: T) {
     jsArraySet(this, index, value)
 }
 
+@Suppress("UnsafeCastFromDynamic")
 private fun <T : JsAny?> jsArrayGet(array: JsArray<T>, index: Int): T? =
     js("array[index]")
 

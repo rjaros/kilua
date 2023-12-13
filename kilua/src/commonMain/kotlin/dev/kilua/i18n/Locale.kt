@@ -22,7 +22,7 @@
 
 package dev.kilua.i18n
 
-import dev.kilua.utils.console
+import dev.kilua.externals.console
 import dev.kilua.utils.toLocaleString
 
 /**

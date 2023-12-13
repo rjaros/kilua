@@ -22,11 +22,13 @@
 
 package dev.kilua.externals
 
+import web.JsAny
+
 /**
  * Trix editor locale strings.
  */
 @Suppress("PropertyName", "VariableNaming")
-public open external class TrixLocale {
+public open external class TrixLocale : JsAny {
     public var GB: String
     public var KB: String
     public var MB: String

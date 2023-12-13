@@ -25,10 +25,11 @@ package dev.kilua
 import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.useModule
+import web.JsAny
 
 @JsModule("@fortawesome/fontawesome-free/css/all.min.css")
 @JsNonModule
-internal external object FontAwesomeCss
+internal external object FontAwesomeCss : JsAny
 
 /**
  * Initializer for Kilua Font Awesome module.
