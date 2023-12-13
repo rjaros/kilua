@@ -22,7 +22,6 @@
 
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.NoLiveLiterals
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateListOf
@@ -56,7 +55,6 @@ import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
 import dev.kilua.html.tag
 import dev.kilua.html.unaryPlus
-import dev.kilua.i18n.Locale
 import dev.kilua.i18n.SimpleLocale
 import dev.kilua.modal.Modal
 import dev.kilua.modal.ModalSize
@@ -66,8 +64,6 @@ import dev.kilua.panel.tabPanel
 import dev.kilua.startApplication
 import dev.kilua.state.collectAsState
 import dev.kilua.utils.JsNonModule
-import dev.kilua.utils.console
-import dev.kilua.utils.log
 import dev.kilua.utils.useModule
 import kotlinx.browser.window
 import org.w3c.dom.Text
@@ -410,6 +406,7 @@ class App2 : Application() {
         fun sinToHex(i: Int, phase: Double): String {
             val sin = sin(PI / (size * size).toDouble() * 2 * i + phase)
             val int = floor(sin * 127) + 128
+            @Suppress("UnsafeCastFromDynamic")
             return int.asDynamic().toString(16).padStart(2, "0")
         }
 

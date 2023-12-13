@@ -56,20 +56,27 @@ import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
 import dev.kilua.startApplication
 import dev.kilua.state.collectAsState
-import dev.kilua.utils.console
+import dev.kilua.externals.console
+import dev.kilua.externals.get
+import dev.kilua.externals.obj
+import dev.kilua.externals.set
 import dev.kilua.utils.listOfPairs
-import dev.kilua.utils.log
 import dev.kilua.utils.rem
+import dev.kilua.webpackHot
 import web.dom.CustomEvent
-import web.toDouble
-import web.toJsBoolean
-import web.toJsNumber
 
 class App : Application() {
 
     override fun start() {
 
         root("root") {
+
+            val x = obj()
+            x.set("test", "test1".toJsString())
+            console.log(x)
+            console.log(x.get("test"))
+            console.log(x.get("test2"))
+
             div {
                 margin = 20.px
 
@@ -459,9 +466,12 @@ class App : Application() {
 }
 
 fun main() {
+    console.log("xxx")
+    val x = webpackHot()
+    console.log(x)
     startApplication(
         ::App,
-        null,
+        x,
         BootstrapModule,
         BootstrapCssModule,
         BootstrapIconsModule,
