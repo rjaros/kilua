@@ -82,6 +82,10 @@ public open class Modal(
     Tag<HTMLDivElement>("div", className, renderConfig) {
 
     internal var footerContent: @Composable (Div.() -> Unit)? = null
+
+    /**
+     * Whether the modal should be visible.
+     */
     protected var isShown: Boolean = false
 
     /**
@@ -116,6 +120,7 @@ public open class Modal(
      * Toggles the modal window.
      */
     public override fun toggle() {
+        isShown = !isShown
         modalInstance?.toggle()
     }
 
