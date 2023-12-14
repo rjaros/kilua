@@ -35,6 +35,7 @@ import dev.kilua.CoreModule
 import dev.kilua.FontAwesomeModule
 import dev.kilua.TrixModule
 import dev.kilua.compose.root
+import dev.kilua.externals.console
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
@@ -49,20 +50,17 @@ import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
 import dev.kilua.modal.confirm
 import dev.kilua.modal.modal
+import dev.kilua.panel.OffPlacement
 import dev.kilua.panel.TabPosition
 import dev.kilua.panel.accordion
 import dev.kilua.panel.carousel
+import dev.kilua.panel.offcanvas
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
 import dev.kilua.startApplication
 import dev.kilua.state.collectAsState
-import dev.kilua.externals.console
-import dev.kilua.externals.get
-import dev.kilua.externals.obj
-import dev.kilua.externals.set
 import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.rem
-import dev.kilua.webpackHot
 import web.dom.CustomEvent
 
 class App : Application() {
@@ -70,15 +68,45 @@ class App : Application() {
     override fun start() {
 
         root("root") {
-
-            val x = obj()
-            x.set("test", "test1".toJsString())
-            console.log(x)
-            console.log(x.get("test"))
-            console.log(x.get("test2"))
-
             div {
                 margin = 20.px
+
+                val off =
+                    offcanvas(
+                        "Test offcanvas",
+                        OffPlacement.OffcanvasEnd,
+                        closeButton = true,
+                        bodyScrolling = true,
+                        backdrop = true,
+                        escape = true
+                    ) {
+                        pt(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. " +
+                                    "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh " +
+                                    "ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo " +
+                                    "cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris " +
+                                    "condimentum nibh, ut fermentum massa justo sit amet risus. Duis mollis, est non commodo luctus, nisi erat " +
+                                    "porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur. Praesent " +
+                                    "commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non " +
+                                    "metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac " +
+                                    "facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent " +
+                                    "commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. " +
+                                    "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, " +
+                                    "vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis " +
+                                    "consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi " +
+                                    "leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque " +
+                                    "nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac " +
+                                    "facilisis in, egestas eget quam. Mor"
+                        )
+                    }
+
+                bsButton("toggle offcanvas") {
+                    onClick {
+                        off.toggle()
+                    }
+                }
+
+                hr()
 
                 carousel(hideIndicators = true, autoPlay = true) {
                     item("First slide", "First slide label") {
@@ -167,7 +195,7 @@ class App : Application() {
                     fullscreenMode = FullscreenMode.ModalFullscreenMdDown,
                     centered = false,
                     scrollable = true,
-                    escape = false
+                    escape = true
                 ) {
                     pt(modalCaption)
                     footer {
@@ -466,12 +494,9 @@ class App : Application() {
 }
 
 fun main() {
-    console.log("xxx")
-    val x = webpackHot()
-    console.log(x)
     startApplication(
         ::App,
-        x,
+        null,
         BootstrapModule,
         BootstrapCssModule,
         BootstrapIconsModule,
