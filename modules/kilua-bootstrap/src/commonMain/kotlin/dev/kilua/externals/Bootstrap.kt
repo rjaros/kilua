@@ -90,4 +90,29 @@ public external object Bootstrap : JsAny {
          */
         public fun dispose()
     }
+
+    /**
+     * External Bootstrap Offcanvas class.
+     */
+    public class Offcanvas(element: HTMLElement) : JsAny {
+        /**
+         * Shows the offcanvas.
+         */
+        public fun show()
+
+        /**
+         * Hides the offcanvas.
+         */
+        public fun hide()
+
+        /**
+         * Toggles the visibility.
+         */
+        public fun toggle()
+
+        /**
+         * Disposes the offcanvas.
+         */
+        public fun dispose()
+    }
 }
