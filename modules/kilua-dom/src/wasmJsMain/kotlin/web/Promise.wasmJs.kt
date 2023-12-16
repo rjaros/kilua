@@ -23,7 +23,7 @@
 package web
 
 public actual external class Promise<T : JsAny?> actual constructor(executor: (resolve: (T) -> Unit, reject: (JsAny) -> Unit) -> Unit) :
-    JsAny {
+    kotlin.js.JsAny {
     public actual fun <S : JsAny?> then(onFulfilled: ((T) -> S)?): Promise<S>
 
     public actual fun <S : JsAny?> then(onFulfilled: ((T) -> S)?, onRejected: ((JsAny) -> S)?): Promise<S>
