@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.0.0-Beta2"
 compose = "1.6.0-alpha01"
-compose-plugin = "1.5.4"
+compose-plugin = "1.5.4-dev1-kt2.0.0-Beta1"
 npm-publish = "3.4.1"
 kilua = "0.0.1"
 kotlinx-atomicfu = "0.23.1"
