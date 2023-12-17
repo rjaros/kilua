@@ -27,13 +27,6 @@ import dev.kilua.utils.toArray
 
 public actual fun obj(): JsAny = js("({})")
 
-/**
- * Helper function for creating JavaScript objects with given type.
- */
-public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
-    return (obj().unsafeCast<T>()).apply(init)
-}
-
 private fun objSet(obj: JsAny, key: String, value: JsAny): Unit = js("{ obj[key] = value }")
 
 @Suppress("RedundantNullableReturnType")

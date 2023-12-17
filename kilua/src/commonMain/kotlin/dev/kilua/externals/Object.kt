@@ -22,6 +22,7 @@
 
 package dev.kilua.externals
 
+import dev.kilua.utils.cast
 import web.JsAny
 
 /**
@@ -29,6 +30,12 @@ import web.JsAny
  */
 public expect fun obj(): JsAny
 
+/**
+ * Helper function for creating JavaScript objects with given type.
+ */
+public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
+    return (obj().cast<T>()).apply(init)
+}
 
 /**
  * Operator to set property on JS Object

@@ -31,14 +31,7 @@ public actual inline fun obj(): JsAny {
 }
 
 /**
- * Helper function for creating JavaScript objects with given type.
- */
-public inline fun <T : Any> obj(init: T.() -> Unit): T {
-    return (js("{}").unsafeCast<T>()).apply(init)
-}
-
-/**
- * Helper function for creating JavaScript objects.
+ * Helper function for creating dynamic JavaScript objects.
  */
 @Suppress("NOTHING_TO_INLINE")
 public inline fun obj(noinline init: dynamic.() -> Unit): dynamic {

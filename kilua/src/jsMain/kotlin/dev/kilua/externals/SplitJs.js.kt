@@ -24,9 +24,10 @@
 
 package dev.kilua.externals
 
+import web.JsAny
 import web.dom.HTMLElement
 
-internal external class SplitJsOptionsExt {
+internal external class SplitJsOptionsExt : JsAny {
     var sizes: Array<Number>
     var direction: String
     var gutterSize: Int = definedExternally
