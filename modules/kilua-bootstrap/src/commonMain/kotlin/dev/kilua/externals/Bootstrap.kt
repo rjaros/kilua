@@ -115,4 +115,132 @@ public external object Bootstrap : JsAny {
          */
         public fun dispose()
     }
+
+    /**
+     * External Bootstrap Tooltip delay configuration.
+     */
+    public class TooltipDelay : JsAny {
+        public var show: Int?
+        public var hide: Int?
+    }
+
+    /**
+     * External Bootstrap Tooltip configuration.
+     */
+    public class TooltipConfig : JsAny {
+        public var title: String?
+        public var animation: Boolean?
+        public var delay: TooltipDelay?
+        public var placement: String?
+        public var trigger: String?
+        public var html: Boolean?
+        public var sanitize: Boolean?
+    }
+
+    /**
+     * External Bootstrap Tooltip class.
+     */
+    public class Tooltip(element: HTMLElement, config: TooltipConfig) : JsAny {
+        /**
+         * Shows the tooltip.
+         */
+        public fun show()
+
+        /**
+         * Hides the tooltip.
+         */
+        public fun hide()
+
+        /**
+         * Toggles the visibility.
+         */
+        public fun toggle()
+
+        /**
+         * Disposes the tooltip.
+         */
+        public fun dispose()
+
+        /**
+         * Enables the tooltip.
+         */
+        public fun enable()
+
+        /**
+         * Disables the tooltip.
+         */
+        public fun disable()
+
+        public companion object {
+            /**
+             * Returns the tooltip instance associated with the given element or `null` if there is none.
+             */
+            public fun getInstance(element: HTMLElement): Tooltip?
+        }
+    }
+
+
+    /**
+     * External Bootstrap Popover delay configuration.
+     */
+    public class PopoverDelay : JsAny {
+        public var show: Int?
+        public var hide: Int?
+    }
+
+    /**
+     * External Bootstrap Popover configuration.
+     */
+    public class PopoverConfig : JsAny {
+        public var content: String?
+        public var title: String?
+        public var animation: Boolean?
+        public var delay: PopoverDelay?
+        public var placement: String?
+        public var trigger: String?
+        public var html: Boolean?
+        public var sanitize: Boolean?
+    }
+
+    /**
+     * External Bootstrap Popover class.
+     */
+    public class Popover(element: HTMLElement, config: PopoverConfig) : JsAny {
+        /**
+         * Shows the popover.
+         */
+        public fun show()
+
+        /**
+         * Hides the popover.
+         */
+        public fun hide()
+
+        /**
+         * Toggles the visibility.
+         */
+        public fun toggle()
+
+        /**
+         * Disposes the popover.
+         */
+        public fun dispose()
+
+        /**
+         * Enables the popover.
+         */
+        public fun enable()
+
+        /**
+         * Disables the popover.
+         */
+        public fun disable()
+
+        public companion object {
+            /**
+             * Returns the popover instance associated with the given element or `null` if there is none.
+             */
+            public fun getInstance(element: HTMLElement): Popover?
+        }
+    }
 }
