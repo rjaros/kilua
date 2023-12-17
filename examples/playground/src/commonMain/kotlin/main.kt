@@ -61,6 +61,9 @@ import dev.kilua.popup.popover
 import dev.kilua.popup.tooltip
 import dev.kilua.popup.toggleTooltip
 import dev.kilua.state.collectAsState
+import dev.kilua.theme.Theme
+import dev.kilua.theme.ThemeManager
+import dev.kilua.theme.themeSwitcher
 import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
@@ -84,9 +87,15 @@ class App : Application() {
 
     override fun start() {
 
+        ThemeManager.init()
+
         root("root") {
             div {
                 margin = 20.px
+
+                themeSwitcher(style = ButtonStyle.BtnSuccess, round = true)
+
+                hr()
 
                 val off =
                     offcanvas(
