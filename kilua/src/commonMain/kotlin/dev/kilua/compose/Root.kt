@@ -32,8 +32,6 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.core.StringRenderConfig
-import dev.kilua.html.style.StyleParams
-import dev.kilua.html.style.style
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
@@ -51,7 +49,7 @@ internal expect val defaultMonotonicFrameClock: MonotonicFrameClock
 public class Root(
     public val element: Element,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-    content: @Composable Root.() -> Unit = {}
+    content: @Composable ComponentBase.() -> Unit = {}
 ) : ComponentBase(element, renderConfig) {
 
     // Not used
@@ -109,9 +107,7 @@ public class Root(
          */
         public fun disposeAllRoots() {
             roots.forEach { it.dispose() }
-            StyleParams.stylesStateMap.clear()
             roots.clear()
-            topLevelComposables.clear()
         }
 
         public fun addTopLevelComposable(topLevel: @Composable ComponentBase.() -> Unit) {
@@ -121,6 +117,20 @@ public class Root(
         public fun removeTopLevelComposable(topLevel: @Composable ComponentBase.() -> Unit) {
             topLevelComposables.remove(topLevel)
         }
+
+        internal fun initializeTopLevelComposablesRoot() {
+            SafeDomFactory.getElementById("kilua_top_level_composables")?.remove()
+            SafeDomFactory.getFirstElementByTagName("body")?.let { body ->
+                val topLevelComposablesRoot = SafeDomFactory.createElement("div")
+                topLevelComposablesRoot.id = "kilua_top_level_composables"
+                body.appendChild(topLevelComposablesRoot)
+                NonDisposableRoot(topLevelComposablesRoot) {
+                    topLevelComposables.forEach {
+                        it()
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -128,9 +138,9 @@ public class Root(
  * Initializes the composition for the root component.
  */
 internal fun rootComposable(
-    root: Root,
+    root: ComponentBase,
     monotonicFrameClock: MonotonicFrameClock,
-    content: @Composable Root.() -> Unit
+    content: @Composable ComponentBase.() -> Unit
 ): Composition {
     GlobalSnapshotManager.ensureStarted()
 
@@ -158,26 +168,10 @@ internal fun rootComposable(
 public fun root(
     element: Element,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-    content: @Composable Root.() -> Unit = {}
+    content: @Composable ComponentBase.() -> Unit = {}
 ): Root {
-    val isFirstRoot = Root.roots.isEmpty()
-    if (isFirstRoot && renderConfig.isDom) {
-        SafeDomFactory.getFirstElementByTagName("head")?.let { head ->
-            Root(head, renderConfig) {
-                style(StyleParams.stylesStateMap.values.joinToString("\n") { it.renderAsCss() })
-            }
-        }
-        SafeDomFactory.getFirstElementByTagName("body")?.let { body ->
-            val topLevelComposablesRoot = SafeDomFactory.createElement("div")
-            body.appendChild(topLevelComposablesRoot)
-            Root(topLevelComposablesRoot, renderConfig) {
-                Root.topLevelComposables.forEach {
-                    it()
-                }
-            }
-        }
-    }
-    return Root(element, renderConfig) {
+    Root.initializeTopLevelComposablesRoot()
+    return Root(element, renderConfig = renderConfig) {
         content()
     }
 }
@@ -188,7 +182,7 @@ public fun root(
 public fun root(
     id: String,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-    content: @Composable Root.() -> Unit = {}
+    content: @Composable ComponentBase.() -> Unit = {}
 ): Root {
     val element = SafeDomFactory.getElementById(id) ?: SafeDomFactory.createElement("div")
     return root(element, renderConfig, content)
@@ -198,7 +192,7 @@ public fun root(
  * Main entry-point for building component tree with composable functions using StringRender configuration.
  */
 public fun root(
-    content: @Composable Root.() -> Unit = {}
+    content: @Composable ComponentBase.() -> Unit = {}
 ): Root {
     val renderConfig = StringRenderConfig()
     val element = SafeDomFactory.createElement("div")

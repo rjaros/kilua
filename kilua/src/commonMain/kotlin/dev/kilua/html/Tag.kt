@@ -23,7 +23,6 @@
 package dev.kilua.html
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
@@ -225,12 +224,6 @@ public fun <E : HTMLElement> ComponentBase.tag(
 ): Tag<E> {
     return key(tagName) {
         val component = remember { Tag<E>(tagName, className, renderConfig) }
-        DisposableEffect(component.componentId) {
-            component.onInsert()
-            onDispose {
-                component.onRemove()
-            }
-        }
         ComponentNode(component, {
             set(className) { updateProperty(Tag<HTMLElement>::className, it) }
         }, content)

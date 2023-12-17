@@ -22,6 +22,7 @@
 package dev.kilua
 
 import dev.kilua.compose.Root
+import dev.kilua.html.style.StyleParams
 import dev.kilua.utils.isDom
 import web.document
 
@@ -82,6 +83,7 @@ public fun startApplication(
 
         it.dispose { data ->
             Root.disposeAllRoots()
+            StyleParams.disposeAllStyleParams()
             data.appState = application?.dispose()
             application = null
         }

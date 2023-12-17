@@ -23,6 +23,8 @@
 package dev.kilua.html.style
 
 import androidx.compose.runtime.mutableStateMapOf
+import dev.kilua.compose.NonDisposableRoot
+import dev.kilua.core.SafeDomFactory
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.toKebabCase
 
@@ -115,5 +117,18 @@ internal data class StyleParams(
          * The map of CSS style parameters
          */
         internal val stylesMap = mutableMapOf<String, StyleParams>()
+
+        init {
+            SafeDomFactory.getFirstElementByTagName("head")?.let { head ->
+                NonDisposableRoot(head) {
+                    style(stylesStateMap.values.joinToString("\n") { it.renderAsCss() })
+                }
+            }
+        }
+
+        internal fun disposeAllStyleParams() {
+            stylesStateMap.clear()
+            stylesMap.clear()
+        }
     }
 }
