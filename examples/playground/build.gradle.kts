@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     kotlin("multiplatform")
@@ -16,6 +17,11 @@ kotlin {
             }
             runTask {
                 sourceMaps = false
+                devServer = KotlinWebpackConfig.DevServer(
+                    open = false,
+                    port = 3000,
+                    static = mutableListOf("${layout.buildDirectory.asFile.get()}/processedResources/js/main")
+                )
             }
             testTask {
                 useKarma {
