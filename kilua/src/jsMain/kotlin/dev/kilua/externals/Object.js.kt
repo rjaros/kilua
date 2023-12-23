@@ -35,7 +35,7 @@ public actual inline fun obj(): JsAny {
  */
 @Suppress("NOTHING_TO_INLINE")
 public inline fun obj(noinline init: dynamic.() -> Unit): dynamic {
-    return (js("{}")).apply(init)
+    return (obj()).apply(init)
 }
 
 /**
