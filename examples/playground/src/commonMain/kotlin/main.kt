@@ -58,12 +58,13 @@ import dev.kilua.popup.Trigger
 import dev.kilua.popup.disableTooltip
 import dev.kilua.popup.enableTooltip
 import dev.kilua.popup.popover
-import dev.kilua.popup.tooltip
 import dev.kilua.popup.toggleTooltip
+import dev.kilua.popup.tooltip
 import dev.kilua.state.collectAsState
-import dev.kilua.theme.Theme
 import dev.kilua.theme.ThemeManager
 import dev.kilua.theme.themeSwitcher
+import dev.kilua.toast.ToastPosition
+import dev.kilua.toast.toast
 import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
@@ -92,6 +93,22 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
+
+                var positionIndex by remember { mutableStateOf(0) }
+                val toastPosition = ToastPosition.entries[positionIndex % ToastPosition.entries.size]
+
+                button("Show toast") {
+                    onClick {
+                        toast("Test toast", position = toastPosition, color = BsColor.TextBgSuccess)
+                    }
+                }
+                button("test toast") {
+                    onClick {
+                        positionIndex++
+                    }
+                }
+
+                hr()
 
                 themeSwitcher(style = ButtonStyle.BtnSuccess, round = true)
 
