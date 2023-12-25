@@ -243,4 +243,31 @@ public external object Bootstrap : JsAny {
             public fun getInstance(element: HTMLElement): Popover?
         }
     }
+
+    /**
+     * External Bootstrap Toast class.
+     */
+    public class Toast(element: HTMLElement) : JsAny {
+        /**
+         * Shows the toast.
+         */
+        public fun show()
+
+        /**
+         * Hides the toast.
+         */
+        public fun hide()
+
+        /**
+         * Disposes the toast.
+         */
+        public fun dispose()
+
+        public companion object {
+            /**
+             * Returns the toast instance associated with the given element or `null` if there is none.
+             */
+            public fun getInstance(element: HTMLElement): Toast?
+        }
+    }
 }

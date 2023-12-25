@@ -149,6 +149,13 @@ public open class Modal(
     }
 }
 
+@Composable
+internal fun ComponentBase.modals() {
+    div {
+        Modal.modalStateMap.values.forEach { it() }
+    }
+}
+
 /**
  * Creates a [Modal] component.
  *
