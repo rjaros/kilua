@@ -64,10 +64,8 @@ public fun confirm(
     yesCallback: (() -> Unit)? = null
 ) {
     val modalId = Modal.counter++
-    val component = Modal()
     val modalComposable: @Composable ComponentBase.() -> Unit = {
         modal(
-            component,
             caption,
             cancelVisible,
             size,
@@ -78,6 +76,7 @@ public fun confirm(
             cancelVisible,
             null,
         ) {
+            val component = this
             content?.let { div("text-start") { +it } }
             lateinit var yesButton: Button
             footer {
@@ -107,8 +106,8 @@ public fun confirm(
             onEvent<Event>("shown.bs.modal") {
                 yesButton.focus()
             }
+            show()
         }
     }
     Modal.modalStateMap[modalId] = modalComposable
-    component.show()
 }

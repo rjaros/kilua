@@ -54,10 +54,8 @@ public fun alert(
     callback: (() -> Unit)? = null
 ) {
     val modalId = Modal.counter++
-    val component = Modal()
     val modalComposable: @Composable ComponentBase.() -> Unit = {
         modal(
-            component,
             caption,
             true,
             size,
@@ -68,6 +66,7 @@ public fun alert(
             true,
             null,
         ) {
+            val component = this
             content?.let { div("text-start") { +it } }
             lateinit var button: Button
             footer {
@@ -84,8 +83,8 @@ public fun alert(
             onEvent<Event>("shown.bs.modal") {
                 button.focus()
             }
+            show()
         }
     }
     Modal.modalStateMap[modalId] = modalComposable
-    component.show()
 }

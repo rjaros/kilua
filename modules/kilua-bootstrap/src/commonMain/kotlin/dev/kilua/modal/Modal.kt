@@ -40,6 +40,7 @@ import dev.kilua.html.h5t
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
 import web.dom.HTMLDivElement
+import web.dom.events.Event
 
 /**
  * Modal window sizes.
@@ -135,6 +136,7 @@ public open class Modal(
         if (renderConfig.isDom) {
             modalInstance?.dispose()
             modalInstance = null
+            isShown = false
         }
     }
 
@@ -155,6 +157,19 @@ internal fun ComponentBase.modals() {
         Modal.modalStateMap.values.forEach { it() }
     }
 }
+
+@Composable
+private fun ComponentBase.modal(
+    className: String? = null,
+    content: @Composable Modal.() -> Unit,
+): Modal {
+    val component = remember { Modal(className, renderConfig) }
+    ComponentNode(component, {
+        set(className) { updateProperty(Modal::className, it) }
+    }, content)
+    return component
+}
+
 
 /**
  * Creates a [Modal] component.
@@ -184,64 +199,12 @@ public fun ComponentBase.modal(
     className: String? = null,
     content: @Composable Modal.() -> Unit = {}
 ): Modal {
-    val modalId = remember { Modal.counter++ }
-    val component = remember { Modal(className, renderConfig) }
-    val modalComposable: @Composable ComponentBase.() -> Unit = {
-        modal(
-            component,
-            caption,
-            closeButton,
-            size,
-            fullscreenMode,
-            animation,
-            centered,
-            scrollable,
-            escape,
-            className,
-            content
-        )
-    }
-    DisposableEffect(modalId) {
-        if (Modal.modalStateMap[modalId] != modalComposable) {
-            Modal.modalStateMap[modalId] = modalComposable
-        }
-        onDispose {
-            Modal.modalStateMap.remove(modalId)
-        }
-    }
-    return component
-}
-
-/**
- * Composes a [Modal] component content.
- **/
-@Composable
-internal fun modal(
-    component: Modal,
-    caption: String? = null,
-    closeButton: Boolean = true,
-    size: ModalSize? = null,
-    fullscreenMode: FullscreenMode? = null,
-    animation: Boolean = true,
-    centered: Boolean = false,
-    scrollable: Boolean = false,
-    escape: Boolean = true,
-    className: String? = null,
-    content: @Composable Modal.() -> Unit = {}
-) {
-    DisposableEffect(component.componentId) {
-        component.onInsert()
-        onDispose {
-            component.onRemove()
-        }
-    }
-    ComponentNode(component, {
-        set("modal" % if (animation) "fade" else null % className) { updateProperty(Modal::className, it) }
-    }) {
+    return modal("modal" % if (animation) "fade" else null % className) {
         role = "dialog"
         tabindex = -1
         setAttribute("data-bs-keyboard", "$escape")
         setAttribute("data-bs-backdrop", if (escape) "true" else "static")
+        val component = this
         div("modal-dialog" % size?.value % fullscreenMode?.value % if (centered) "modal-dialog-centered" else null % if (scrollable) "modal-dialog-scrollable" else null) {
             div("modal-content") {
                 if (caption != null || closeButton) {
@@ -260,12 +223,21 @@ internal fun modal(
                     }
                 }
                 div("modal-body") {
-                    content()
+                    content() // !!! the content is called on Modal receiver (component), but dom nodes are emitted inside modal-body div
                 }
                 div("modal-footer") {
                     component.footerContent?.invoke(this)
                 }
             }
+        }
+        DisposableEffect(component.componentId) {
+            component.onInsert()
+            onDispose {
+                component.onRemove()
+            }
+        }
+        onEvent<Event>("hidden.bs.modal") {
+            component.hide()
         }
     }
 }
