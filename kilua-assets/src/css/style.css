@@ -108,6 +108,10 @@ ul.tabs-top > li {
     padding-top: 3px;
 }
 
+.dropdown-toggle.kilua-dropdown-no-arrow::after {
+    content: none;
+}
+
 /*!
  * bootstrap-vertical-tabs - v1.2.2
  * https://dbtek.github.io/bootstrap-vertical-tabs
