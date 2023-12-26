@@ -30,6 +30,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.compose.root
+import dev.kilua.dropdown.Direction
+import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
 import dev.kilua.externals.obj
 import dev.kilua.form.check.checkBox
@@ -93,6 +95,27 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
+
+                dropDown("A dropdown", "fas fa-search", style = ButtonStyle.BtnDanger, arrowVisible = false) {
+                    li {
+                        link("#", "Link 1", className = "dropdown-item")
+                    }
+                    li {
+                        link("#", "Link 2", className = "dropdown-item")
+                    }
+                    li {
+                        dropDown("An inner dropdown", innerDropDown = true) {
+                            li {
+                                link("#", "Link 3", className = "dropdown-item")
+                            }
+                            li {
+                                link("#", "Link 4", className = "dropdown-item")
+                            }
+                        }
+                    }
+                }
+
+                hr()
 
                 var positionIndex by remember { mutableStateOf(0) }
                 val toastPosition = ToastPosition.entries[positionIndex % ToastPosition.entries.size]

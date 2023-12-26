@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.22"
+kotlin = "1.9.21"
 compose = "1.6.0-alpha01"
 compose-plugin = "1.5.4"
 npm-publish = "3.4.1"
