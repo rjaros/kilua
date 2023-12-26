@@ -36,6 +36,7 @@ import dev.kilua.html.div
 import dev.kilua.html.strongt
 import dev.kilua.html.unaryPlus
 import dev.kilua.utils.rem
+import web.dom.events.Event
 
 /**
  * Bootstrap toast positions.
@@ -118,16 +119,16 @@ internal fun ComponentBase.toasts() {
                                 DisposableEffect(toastId) {
                                     val bsToast = Bootstrap.Toast(element)
                                     bsToast.show()
-                                    element.addEventListener("hidden.bs.toast") {
-                                        val newToasts = Toast.toastsMap[position]?.filterKeys { it != toastId }
-                                        if (newToasts.isNullOrEmpty()) {
-                                            Toast.toastsMap.remove(position)
-                                        } else {
-                                            Toast.toastsMap[position] = newToasts
-                                        }
-                                    }
                                     onDispose {
                                         bsToast.dispose()
+                                    }
+                                }
+                                onEvent<Event>("hidden.bs.toast") {
+                                    val newToasts = Toast.toastsMap[position]?.filterKeys { it != toastId }
+                                    if (newToasts.isNullOrEmpty()) {
+                                        Toast.toastsMap.remove(position)
+                                    } else {
+                                        Toast.toastsMap[position] = newToasts
                                     }
                                 }
                             }

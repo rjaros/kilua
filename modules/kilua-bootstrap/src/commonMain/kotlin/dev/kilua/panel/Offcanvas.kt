@@ -126,6 +126,7 @@ public open class Offcanvas(
         if (renderConfig.isDom) {
             offcanvasInstance?.dispose()
             offcanvasInstance = null
+            isShown = false
         }
     }
 
@@ -205,7 +206,7 @@ public fun ComponentBase.offcanvas(
             }
         }
         div("offcanvas-body") {
-            content()
+            content() // !!! the content is called on Offcanvas receiver (component), but dom nodes are emitted inside offcanvas-body div
         }
         DisposableEffect(component.componentId) {
             component.onInsert()
