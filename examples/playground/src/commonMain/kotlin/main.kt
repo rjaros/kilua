@@ -77,6 +77,7 @@ import web.dom.CustomEvent
 import web.dom.Text
 import web.dom.events.Event
 import web.window
+import kotlin.time.Duration.Companion.seconds
 
 @JsModule("./css/style.css")
 @JsNonModule
@@ -173,7 +174,7 @@ class App : Application() {
                         off.toggle()
                     }
                     if (tooltip == "TestX") {
-                        tooltip(tooltip, placement = Placement.Bottom)
+                        tooltip(tooltip, placement = Placement.Bottom, delay = 2.seconds)
                     } else {
                         popover(tooltip, tooltip, placement = Placement.Right, triggers = listOf(Trigger.Hover))
                     }
