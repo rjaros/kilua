@@ -27,6 +27,7 @@ import androidx.compose.runtime.DisposableEffect
 import dev.kilua.externals.Bootstrap
 import dev.kilua.externals.obj
 import dev.kilua.html.Tag
+import kotlin.time.Duration
 
 /**
  * Add a popover to this component.
@@ -34,8 +35,8 @@ import dev.kilua.html.Tag
  * @param content popover content
  * @param title popover title
  * @param animation use animation
- * @param delay delay in ms before showing the popover
- * @param hideDelay delay in ms before hiding the popover
+ * @param delay delay before showing the popover (default 500ms)
+ * @param hideDelay delay before hiding the popover (defaults to delay)
  * @param placement popover placement
  * @param triggers popover triggers
  * @param html use HTML in popover
@@ -48,8 +49,8 @@ public fun Tag<*>.popover(
     content: String,
     title: String? = null,
     animation: Boolean = true,
-    delay: Int? = null,
-    hideDelay: Int? = null,
+    delay: Duration? = null,
+    hideDelay: Duration? = null,
     placement: Placement? = null,
     triggers: List<Trigger>? = null,
     html: Boolean = false,
@@ -59,18 +60,18 @@ public fun Tag<*>.popover(
     val popoverTrigger = triggers?.joinToString(" ") { it.value }
     val popoverDelay: Bootstrap.PopoverDelay? = if (delay != null && hideDelay != null) {
         obj {
-            show = delay
-            hide = hideDelay
+            show = delay.inWholeMilliseconds.toInt()
+            hide = hideDelay.inWholeMilliseconds.toInt()
         }
     } else if (delay != null) {
         obj {
-            show = delay
-            hide = delay
+            show = delay.inWholeMilliseconds.toInt()
+            hide = delay.inWholeMilliseconds.toInt()
         }
     } else if (hideDelay != null) {
         obj {
             show = 0
-            hide = hideDelay
+            hide = hideDelay.inWholeMilliseconds.toInt()
         }
     } else null
     val popover = Bootstrap.Popover(element, obj {

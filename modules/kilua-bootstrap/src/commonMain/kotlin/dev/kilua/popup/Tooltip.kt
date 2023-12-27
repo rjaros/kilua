@@ -27,14 +27,15 @@ import androidx.compose.runtime.DisposableEffect
 import dev.kilua.externals.Bootstrap
 import dev.kilua.externals.obj
 import dev.kilua.html.Tag
+import kotlin.time.Duration
 
 /**
  * Add a tooltip to this component.
  *
  * @param title tooltip title
  * @param animation use animation
- * @param delay delay in ms before showing the tooltip
- * @param hideDelay delay in ms before hiding the tooltip
+ * @param delay delay before showing the tooltip (default 500ms)
+ * @param hideDelay delay before hiding the tooltip (defaults to delay)
  * @param placement tooltip placement
  * @param triggers tooltip triggers
  * @param html use HTML in tooltip
@@ -46,8 +47,8 @@ import dev.kilua.html.Tag
 public fun Tag<*>.tooltip(
     title: String,
     animation: Boolean = true,
-    delay: Int? = null,
-    hideDelay: Int? = null,
+    delay: Duration? = null,
+    hideDelay: Duration? = null,
     placement: Placement? = null,
     triggers: List<Trigger>? = null,
     html: Boolean = false,
@@ -57,18 +58,18 @@ public fun Tag<*>.tooltip(
     val tooltipTrigger = triggers?.joinToString(" ") { it.value }
     val tooltipDelay: Bootstrap.TooltipDelay? = if (delay != null && hideDelay != null) {
         obj {
-            show = delay
-            hide = hideDelay
+            show = delay.inWholeMilliseconds.toInt()
+            hide = hideDelay.inWholeMilliseconds.toInt()
         }
     } else if (delay != null) {
         obj {
-            show = delay
-            hide = delay
+            show = delay.inWholeMilliseconds.toInt()
+            hide = delay.inWholeMilliseconds.toInt()
         }
     } else if (hideDelay != null) {
         obj {
             show = 0
-            hide = hideDelay
+            hide = hideDelay.inWholeMilliseconds.toInt()
         }
     } else null
     val tooltip = Bootstrap.Tooltip(element, obj {

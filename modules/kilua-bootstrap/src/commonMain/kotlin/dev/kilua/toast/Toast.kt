@@ -37,6 +37,8 @@ import dev.kilua.html.strongt
 import dev.kilua.html.unaryPlus
 import dev.kilua.utils.rem
 import web.dom.events.Event
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Bootstrap toast positions.
@@ -62,7 +64,7 @@ internal data class Toast(
     val color: BsColor? = null,
     val bgColor: BsBgColor? = null,
     val autohide: Boolean = true,
-    val delay: Int = 5000,
+    val delay: Duration = 5.seconds,
     val animation: Boolean = true,
     val className: String? = null
 ) {
@@ -92,7 +94,7 @@ internal fun ComponentBase.toasts() {
                                 setAttribute("aria-live", "assertive")
                                 setAttribute("aria-atomic", "true")
                                 setAttribute("data-bs-autohide", toast.autohide.toString())
-                                setAttribute("data-bs-delay", toast.delay.toString())
+                                setAttribute("data-bs-delay", toast.delay.inWholeMilliseconds.toString())
                                 setAttribute("data-bs-animation", toast.animation.toString())
                                 if (toast.title != null) {
                                     div("toast-header") {
@@ -148,7 +150,7 @@ internal fun ComponentBase.toasts() {
  * @param color the toast foreground color
  * @param bgColor the toast background color
  * @param autohide whether the toast should be hidden automatically
- * @param delay the toast hide delay in milliseconds
+ * @param delay the toast hide delay (default 5 seconds)
  * @param animation whether the toast should be animated
  * @param className the CSS class names
  */
@@ -159,7 +161,7 @@ public fun toast(
     color: BsColor? = null,
     bgColor: BsBgColor? = null,
     autohide: Boolean = true,
-    delay: Int = 5000,
+    delay: Duration = 5.seconds,
     animation: Boolean = true,
     className: String? = null
 ) {
