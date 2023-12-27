@@ -27,8 +27,47 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.html.Ul
 import dev.kilua.html.ul
 import dev.kilua.utils.rem
+import dev.kilua.utils.toKebabCase
+
+/**
+ * Dropdown menu end alignment.
+ */
+public enum class EndAlignment {
+    DropdownMenuEnd,
+    DropdownMenuSmEnd,
+    DropdownMenuMdEnd,
+    DropdownMenuLgEnd,
+    DropdownMenuXlEnd,
+    DropdownMenuXxlEnd;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
+ * Dropdown menu start alignment.
+ */
+public enum class StartAlignment {
+    DropdownMenuSmStart,
+    DropdownMenuMdStart,
+    DropdownMenuLgStart,
+    DropdownMenuXlStart,
+    DropdownMenuXllStart;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
 
 @Composable
-public fun ComponentBase.dropDownMenu(className: String? = null, content: @Composable Ul.() -> Unit = {}): Ul {
-    return ul("dropdown-menu" % className, content)
+public fun ComponentBase.dropDownMenu(
+    endAlignment: EndAlignment? = null,
+    startAlignment: StartAlignment? = null,
+    className: String? = null,
+    content: @Composable Ul.() -> Unit = {}
+): Ul {
+    return ul("dropdown-menu" % endAlignment?.value % startAlignment?.value % className, content)
 }
