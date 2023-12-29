@@ -3445,8 +3445,8 @@ public external interface WindowOrWorkerGlobalScope : JsAny {
     fun clearInterval(handle: Int)
     fun createImageBitmap(image: ImageBitmapSource, options: ImageBitmapOptions): Promise<*>
     fun createImageBitmap(image: ImageBitmapSource, sx: Int, sy: Int, sw: Int, sh: Int, options: ImageBitmapOptions): Promise<*>
-    fun fetch(input: Request, init: RequestInit): Promise<*>
-    fun fetch(input: String, init: RequestInit): Promise<*>
+    fun fetch(input: Request, init: RequestInit): Promise<Response>
+    fun fetch(input: String, init: RequestInit): Promise<Response>
 }
 
 /**
