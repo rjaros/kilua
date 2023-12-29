@@ -25,6 +25,7 @@ package dev.kilua.utils
 import web.JsAny
 import web.JsArray
 import web.get
+import web.set
 
 /**
  * Utility extension function for casting. Uses unsafeCast() on JS.
@@ -65,4 +66,15 @@ public inline fun <reified T : JsAny> JsArray<T>.toArray(): Array<T> {
  */
 public fun <T : JsAny> JsArray<T>.toList(): List<T> {
     return List(length) { get(it)!! }
+}
+
+/**
+ * Create a JsArray object.
+ */
+public fun <T : JsAny> jsArrayOf(vararg elements: T): JsArray<T> {
+    val array = JsArray<T>()
+    for (i in elements.indices) {
+        array[i] = elements[i]
+    }
+    return array
 }

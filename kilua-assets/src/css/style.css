@@ -112,6 +112,51 @@ ul.tabs-top > li {
     content: none;
 }
 
+.toastify {
+    background-image: unset;
+    background-color: blue;
+}
+
+.kilua-toastify-primary {
+    color: #fff !important;
+    background-color: rgba(13,110,253) !important;
+}
+
+.kilua-toastify-secondary {
+    color: #fff !important;
+    background-color: rgba(108,117,125) !important;
+}
+
+.kilua-toastify-success {
+    color: #fff !important;
+    background-color: rgba(25,135,84) !important;
+}
+
+.kilua-toastify-info {
+    color: #000 !important;
+    background-color: rgba(13,202,240) !important;
+}
+
+.kilua-toastify-warning {
+    color: #000 !important;
+    background-color: rgba(255,193,7) !important;
+}
+
+.kilua-toastify-danger {
+    color: #fff !important;
+    background-color: rgba(220,53,69) !important;
+}
+
+.kilua-toastify-light {
+    color: #000 !important;
+    background-color: rgba(248,249,250) !important;
+}
+
+.kilua-toastify-dark {
+    color: #fff !important;
+    background-color: rgba(33,37,41) !important;
+}
+
 /*!
  * bootstrap-vertical-tabs - v1.2.2
  * https://dbtek.github.io/bootstrap-vertical-tabs

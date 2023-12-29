@@ -22,6 +22,11 @@
 
 package dev.kilua.utils
 
+/**
+ * CommonJS require function
+ */
+public external fun require(module: String): dynamic
+
 public actual val isDom: Boolean by lazy {
     js("typeof document !== 'undefined' && typeof document.kilua == 'undefined'")
 }

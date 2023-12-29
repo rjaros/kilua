@@ -6,7 +6,7 @@
 package web
 
 @Suppress("EXPECTED_EXTERNAL_DECLARATION")
-public expect external class JsArray<T : JsAny?> : JsAny {
+public expect external class JsArray<T : JsAny?>() : JsAny {
     public val length: Int
 }
 

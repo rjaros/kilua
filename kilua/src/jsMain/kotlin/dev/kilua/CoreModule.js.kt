@@ -1,5 +1,3 @@
-@file:JsModule("aaa-kilua-assets/js/array.mjs")
-
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -22,18 +20,10 @@
  * SOFTWARE.
  */
 
-package dev.kilua.externals
+package dev.kilua
 
-/**
- * Helper functions which allow to create JS arrays and pass them as arguments
- * to external functions from Kotlin/Wasm code.
- * They are using external JS module published on the NPM repository.
- */
+import dev.kilua.utils.require
 
-public external fun <T : JsAny> jsArrayOf(vararg obj: T): JsArray<T>
-
-public external fun jsArrayOf(vararg obj: JsAny): JsArray<JsAny>
-
-public external fun jsArrayOf(vararg obj: Int): JsArray<JsNumber>
-
-public external fun jsArrayOf(vararg obj: String): JsArray<JsString>
+public actual fun initializeCoreModule() {
+    require("zzz-kilua-assets/style.css")
+}

@@ -22,11 +22,6 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.JsNonModule
-import dev.kilua.utils.useModule
-import web.JsAny
-
 /**
  * Kilua Module initializer.
  */
@@ -37,15 +32,13 @@ public interface ModuleInitializer {
     public fun initialize()
 }
 
-@JsModule("aaa-kilua-assets/css/style.css")
-@JsNonModule
-internal external object StyleCss : JsAny
+public expect fun initializeCoreModule()
 
 /**
  * Initializer for Kilua core module.
  */
 public object CoreModule : ModuleInitializer {
     override fun initialize() {
-        useModule(StyleCss)
+        initializeCoreModule()
     }
 }

@@ -20,24 +20,15 @@
  * SOFTWARE.
  */
 
-package web
+package dev.kilua
 
-@JsName("Array")
-public actual external class JsArray<T : JsAny?> actual constructor() : JsAny {
-    public actual val length: Int
-}
+import dev.kilua.utils.JsNonModule
+import dev.kilua.utils.useModule
 
-public actual operator fun <T : JsAny?> JsArray<T>.get(index: Int): T? =
-    jsArrayGet(this, index)
+@JsModule("zzz-kilua-assets/style.css")
+@JsNonModule
+internal external object StyleCss : JsAny
 
-public actual operator fun <T : JsAny?> JsArray<T>.set(index: Int, value: T) {
-    jsArraySet(this, index, value)
-}
-
-@Suppress("UnsafeCastFromDynamic")
-private fun <T : JsAny?> jsArrayGet(array: JsArray<T>, index: Int): T? =
-    js("array[index]")
-
-private fun <T : JsAny?> jsArraySet(array: JsArray<T>, index: Int, value: T) {
-    js("array[index] = value")
+public actual fun initializeCoreModule() {
+    useModule(StyleCss)
 }

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-@file:JsModule("aaa-kilua-assets/js/nodejs_dom.js")
+@file:JsModule("aaa-kilua-assets/nodejs_dom.js")
 /*
  * Copyright (c) 2023 Robert Jaros
  *
