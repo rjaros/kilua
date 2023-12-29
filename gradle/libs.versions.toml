@@ -21,6 +21,7 @@ bootstrap = "5.3.2"
 bootstrap-icons = "1.11.2"
 fontawesome = "6.5.1"
 trix = "2.0.8"
+toastify = "1.12.0"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
