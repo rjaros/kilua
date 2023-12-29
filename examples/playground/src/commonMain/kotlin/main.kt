@@ -32,6 +32,7 @@ import dev.kilua.Application
 import dev.kilua.compose.root
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
+import dev.kilua.externals.get
 import dev.kilua.externals.obj
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
@@ -61,6 +62,9 @@ import dev.kilua.popup.enableTooltip
 import dev.kilua.popup.popover
 import dev.kilua.popup.toggleTooltip
 import dev.kilua.popup.tooltip
+import dev.kilua.promise
+import dev.kilua.rest.RestClient
+import dev.kilua.rest.callDynamic
 import dev.kilua.state.collectAsState
 import dev.kilua.theme.ThemeManager
 import dev.kilua.theme.themeSwitcher
@@ -73,6 +77,7 @@ import dev.kilua.utils.cast
 import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.rem
 import dev.kilua.utils.useModule
+import kotlinx.serialization.Serializable
 import web.dom.CustomEvent
 import web.dom.Text
 import web.dom.events.Event
@@ -82,6 +87,12 @@ import kotlin.time.Duration.Companion.seconds
 @JsModule("./css/style.css")
 @JsNonModule
 external object css
+
+@Serializable
+data class Query(val q: String?)
+
+@Serializable
+data class SearchResult(val total_count: Int, val incomplete_results: Boolean)
 
 class App : Application() {
 
@@ -100,6 +111,22 @@ class App : Application() {
                 button("Show toastify msg") {
                     onClick {
                         dev.kilua.toastify.toast("Test toastify", type = ToastType.Danger, duration = 30.seconds, close = true)
+                    }
+                }
+
+                button("Test REST Client") {
+                    onClick {
+                        promise {
+                            RestClient().callDynamic<Query>(
+                                "https://api.github.com/search/repositories",
+                                Query("kvision")
+                            ) {
+                                this.resultTransform = { it!!["total_count"] }
+                            }
+                        }.then {
+                            console.log(it)
+                            obj()
+                        }
                     }
                 }
 
