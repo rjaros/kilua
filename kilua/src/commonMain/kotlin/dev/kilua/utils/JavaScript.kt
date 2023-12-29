@@ -22,10 +22,15 @@
 
 package dev.kilua.utils
 
+import dev.kilua.externals.obj
+import dev.kilua.externals.set
 import web.JsAny
 import web.JsArray
 import web.get
 import web.set
+import web.toJsBoolean
+import web.toJsNumber
+import web.toJsString
 
 /**
  * Utility extension function for casting. Uses unsafeCast() on JS.
@@ -62,10 +67,24 @@ public inline fun <reified T : JsAny> JsArray<T>.toArray(): Array<T> {
 }
 
 /**
+ * Convert Kotlin Array to JsArray.
+ */
+public fun <T : JsAny> Array<T>.toJsArray(): JsArray<T> {
+    return jsArrayOf(*this)
+}
+
+/**
  * Convert JsArray to Kotlin List.
  */
 public fun <T : JsAny> JsArray<T>.toList(): List<T> {
     return List(length) { get(it)!! }
+}
+
+/**
+ * Convert Kotlin List to JsArray.
+ */
+public inline fun <reified T : JsAny> List<T>.toJsArray(): JsArray<T> {
+    return jsArrayOf(*this.toTypedArray())
 }
 
 /**
@@ -77,4 +96,44 @@ public fun <T : JsAny> jsArrayOf(vararg elements: T): JsArray<T> {
         array[i] = elements[i]
     }
     return array
+}
+
+/**
+ * Convert a subset of Kotlin types (String, Int, Double, Boolean, Array, List, Map) to JS object.
+ * All unsupported types are converted to null values.
+ */
+public fun <T> T.toJsAny(): JsAny? {
+    return when (this) {
+        is String -> this.toJsString()
+        is Int -> this.toJsNumber()
+        is Double -> this.toJsNumber()
+        is Boolean -> this.toJsBoolean()
+        is Array<*> -> {
+            val array = JsArray<JsAny?>()
+            for (index in this.indices) {
+                array[index] = this[index].toJsAny()
+            }
+            array
+        }
+
+        is List<*> -> {
+            val array = JsArray<JsAny?>()
+            for (index in this.indices) {
+                array[index] = this[index].toJsAny()
+            }
+            array
+        }
+
+        is Map<*, *> -> {
+            val obj = obj()
+            for (entry in this.entries) {
+                if (entry.value != null) {
+                    obj[entry.key.toString()] = entry.value.toJsAny()!!
+                }
+            }
+            obj
+        }
+
+        else -> null
+    }
 }
