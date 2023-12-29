@@ -73,8 +73,8 @@ public actual fun assign(target: JsAny, source: JsAny) {
 public external fun delete(p: dynamic): Boolean
 
 /**
- * Delete property from JavaScript object by key.
+ * Delete a property from an object
  */
-public fun delete(thing: dynamic, key: String) {
-    delete(thing[key])
+public actual fun delete(o: JsAny, key: String) {
+    delete(o[key])
 }

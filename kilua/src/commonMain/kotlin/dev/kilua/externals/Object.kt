@@ -56,3 +56,8 @@ public expect fun keys(o: JsAny): List<String>
  * Copies all properties from source object to target object
  */
 public expect fun assign(target: JsAny, source: JsAny)
+
+/**
+ * Delete a property from an object
+ */
+public expect fun delete(o: JsAny, key: String)

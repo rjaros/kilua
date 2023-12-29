@@ -24,6 +24,7 @@
 package dev.kilua.externals
 
 import dev.kilua.utils.toArray
+import web.JsAny
 
 public actual fun obj(): JsAny = js("({})")
 
@@ -63,3 +64,8 @@ private fun jsAssign(target: JsAny, source: JsAny): Unit = js("{ Object.assign(t
 public actual fun assign(target: JsAny, source: JsAny) {
     jsAssign(target, source)
 }
+
+/**
+ * Delete a property from an object
+ */
+public actual fun delete(o: JsAny, key: String): Unit = js("delete o[key]")
