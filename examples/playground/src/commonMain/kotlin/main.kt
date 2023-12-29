@@ -30,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.compose.root
-import dev.kilua.dropdown.Direction
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
 import dev.kilua.externals.obj
@@ -67,6 +66,7 @@ import dev.kilua.theme.ThemeManager
 import dev.kilua.theme.themeSwitcher
 import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
+import dev.kilua.toastify.ToastType
 import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
@@ -96,6 +96,14 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
+
+                button("Show toastify msg") {
+                    onClick {
+                        dev.kilua.toastify.toast("Test toastify", type = ToastType.Danger, duration = 30.seconds, close = true)
+                    }
+                }
+
+                hr()
 
                 dropDown("A dropdown", "fas fa-search", style = ButtonStyle.BtnDanger, arrowVisible = false) {
                     li {
@@ -336,6 +344,7 @@ class App : Application() {
                     margin = 30.px
                     if (splitState != 1) {
                         left {
+                            width = 20.perc
                             pt("left$splitState")
                         }
                         right {
@@ -343,9 +352,11 @@ class App : Application() {
                         }
                     } else {
                         left {
+                            width = 50.perc
                             pt("top$splitState")
                         }
                         right {
+                            width = 50.perc
                             pt("bottom$splitState")
                         }
                     }

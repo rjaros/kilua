@@ -74,6 +74,7 @@ kotlin {
                 implementation(project(":modules:kilua-bootstrap"))
                 implementation(project(":modules:kilua-bootstrap-icons"))
                 implementation(project(":modules:kilua-fontawesome"))
+                implementation(project(":modules:kilua-toastify"))
                 implementation(project(":modules:kilua-trix"))
             }
         }

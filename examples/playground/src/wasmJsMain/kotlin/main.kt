@@ -25,6 +25,7 @@ import dev.kilua.BootstrapIconsModule
 import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
 import dev.kilua.FontAwesomeModule
+import dev.kilua.ToastifyModule
 import dev.kilua.TrixModule
 import dev.kilua.startApplication
 
@@ -36,6 +37,7 @@ fun main() {
         BootstrapCssModule,
         BootstrapIconsModule,
         FontAwesomeModule,
+        ToastifyModule,
         TrixModule,
         CoreModule
     )
