@@ -22,10 +22,12 @@
 
 package dev.kilua
 
+import dev.kilua.utils.cast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
 import web.JsAny
 import web.Promise
 
@@ -38,3 +40,8 @@ public val KiluaScope: CoroutineScope = CoroutineScope(Dispatchers.Default + Sup
  * Convert Deferred to a JS Promise.
  */
 public expect fun <T> Deferred<T>.asPromise(): Promise<JsAny?>
+
+/**
+ * Create a JS Promise from a suspending block.
+ */
+public fun <T : JsAny?> promise(block: suspend () -> T): Promise<T> = KiluaScope.async { block() }.asPromise().cast()
