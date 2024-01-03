@@ -188,6 +188,7 @@ public open class SplitPanel(
 
     override fun onRemove() {
         splitJsInstance?.destroy()
+        splitJsInstance = null
     }
 
     /**
