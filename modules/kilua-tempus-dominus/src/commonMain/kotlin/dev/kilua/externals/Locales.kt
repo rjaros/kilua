@@ -27,7 +27,7 @@ import dev.kilua.utils.nativeMapOf
 import web.JsAny
 
 /**
- * Tempus Dominus TempusDominusLocale.
+ * Tempus Dominus Locale.
  */
 public open external class TempusDominusLocale : JsAny {
     public var name: String
@@ -91,6 +91,9 @@ internal external object TempusDominusLocaleSrLatn : TempusDominusLocale
 @JsModule("@eonasdan/tempus-dominus/dist/locales/tr.js")
 internal external object TempusDominusLocaleTr : TempusDominusLocale
 
+/**
+ * Map of Tempus Dominus locales.
+ */
 public val tempusDominusLocales: Map<String, TempusDominusLocale> = nativeMapOf(
     TempusDominusLocaleArSa.name to TempusDominusLocaleArSa,
     TempusDominusLocaleAr.name to TempusDominusLocaleAr,

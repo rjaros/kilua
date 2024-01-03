@@ -29,6 +29,9 @@ import web.JsArray
 import web.JsNumber
 import web.dom.HTMLElement
 
+/**
+ * Tempus Dominus restrictions configuration.
+ */
 public external class TempusDominusRestrictions : JsAny {
     public var minDate: Date
     public var maxDate: Date
@@ -37,18 +40,27 @@ public external class TempusDominusRestrictions : JsAny {
     public var daysOfWeekDisabled: JsArray<JsNumber>
 }
 
+/**
+ * Tempus Dominus button configuration.
+ */
 public external class TempusDominusButtons : JsAny {
     public var today: Boolean
     public var clear: Boolean
     public var close: Boolean
 }
 
+/**
+ * Tempus Dominus components configuration.
+ */
 public external class TempusDominusComponents : JsAny {
     public var calendar: Boolean
     public var clock: Boolean
     public var seconds: Boolean
 }
 
+/**
+ * Tempus Dominus display configuration.
+ */
 public external class TempusDominusDisplay : JsAny {
     public var viewMode: String
     public var toolbarPlacement: String
@@ -60,6 +72,9 @@ public external class TempusDominusDisplay : JsAny {
     public var components: TempusDominusComponents
 }
 
+/**
+ * Tempus Dominus options.
+ */
 public external class TempusDominusOptions : JsAny {
     public var useCurrent: Boolean
     public var defaultDate: Date
@@ -73,6 +88,9 @@ public external class TempusDominusOptions : JsAny {
     public var localization: JsAny
 }
 
+/**
+ * Tempus Dominus dates object.
+ */
 public external class TempusDominusDates : JsAny {
     public var lastPicked: Date?
     public fun setValue(date: Date)

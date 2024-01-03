@@ -37,32 +37,53 @@ import web.JsNumber
 import web.toDouble
 import web.toJsNumber
 
+/**
+ * JavaScript Date class.
+ */
 public external class Date() : JsAny {
     public constructor(time: JsNumber)
 
     public fun getTime(): JsNumber
 }
 
+/**
+ * Converts [LocalDateTime] to JavaScript [Date].
+ */
 public fun LocalDateTime.toDate(): Date {
     return Date(this.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble().toJsNumber())
 }
 
+/**
+ * Converts [LocalDate] to JavaScript [Date].
+ */
 public fun LocalDate.toDate(): Date {
     return Date(this.atStartOfDayIn(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble().toJsNumber())
 }
 
+/**
+ * Converts [LocalTime] to JavaScript [Date].
+ */
 public fun LocalTime.toDate(): Date {
     return this.atDate(today()).toDate()
 }
 
+/**
+ * Converts JavaScript [Date] to [LocalDateTime].
+ */
 public fun Date.toLocalDateTime(): LocalDateTime {
     return Instant.fromEpochMilliseconds(getTime().toDouble().toLong()).toLocalDateTime(TimeZone.currentSystemDefault())
 }
 
+/**
+ * Converts JavaScript [Date] to [LocalDate].
+ */
 public fun Date.toLocalDate(): LocalDate {
     return toLocalDateTime().date
 }
 
+/**
+ * Converts JavaScript [Date] to [LocalTime].
+ */
 public fun Date.toLocalTime(): LocalTime {
     return toLocalDateTime().time
 }

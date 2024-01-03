@@ -132,6 +132,9 @@ public abstract class AbstractRichDateTime(
         refresh()
     }
 
+    /**
+     * Date/time format with auto-detected hour cycle.
+     */
     internal val inputFormat: String
         get() {
             val hourCycle = guessHourCycle(locale.language)
@@ -141,7 +144,6 @@ public abstract class AbstractRichDateTime(
         }
 
     /**
-     * Show as inline.
      * Inline also modifies the layout, so it is not exposed as a public property.
      */
     internal open var inline: Boolean by updatingProperty(inline, skipUpdate = skipUpdate) {
@@ -155,6 +157,9 @@ public abstract class AbstractRichDateTime(
         refresh()
     }
 
+    /**
+     * Determines if the component is disabled.
+     */
     public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate = skipUpdate) {
         if (it == true) {
             tempusDominusInstance?.disable()
@@ -163,10 +168,19 @@ public abstract class AbstractRichDateTime(
         }
     }
 
+    /**
+     * Determines if the component is required.
+     */
     public open var required: Boolean? by updatingProperty(skipUpdate = skipUpdate)
 
+    /**
+     * The component name.
+     */
     public open var name: String? by updatingProperty(skipUpdate = skipUpdate)
 
+    /**
+     * The component custom validity message.
+     */
     public open var customValidity: String? by updatingProperty(skipUpdate = skipUpdate)
 
     /**
@@ -331,6 +345,9 @@ public abstract class AbstractRichDateTime(
         }
     }
 
+    /**
+     * Re-creates the Tempus Dominus instance.
+     */
     protected fun refresh() {
         if (tempusDominusInstance != null) {
             tempusDominusInstance?.dispose()
@@ -343,6 +360,9 @@ public abstract class AbstractRichDateTime(
      */
     protected var tempusDominusInstance: TempusDominus? = null
 
+    /**
+     * Initializes the Tempus Dominus instance.
+     */
     protected abstract fun initializeTempusDominus()
 
     public companion object {
@@ -367,6 +387,9 @@ public abstract class AbstractRichDateTime(
     }
 }
 
+/**
+ * Internal helper function.
+ */
 @Composable
 internal fun Div.commonRichDateTime(
     bindId: String,
