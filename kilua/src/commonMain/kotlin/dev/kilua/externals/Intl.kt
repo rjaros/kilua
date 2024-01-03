@@ -28,7 +28,8 @@ import web.JsAny
  * I18n API
  */
 public external object Intl : JsAny {
-    public class DateTimeFormat {
+    public class DateTimeFormat() {
+        public constructor(locale: String, options: JsAny)
         public fun resolvedOptions(): ResolvedOptions
     }
 }
@@ -38,7 +39,8 @@ public external class ResolvedOptions : JsAny {
     public val calendar: String
     public val numberingSystem: String
     public val timeZone: String
-    public val hour12: String
+    public val hour12: Boolean
+    public val hourCycle: String
     public val weekday: String
     public val era: String
     public val year: String

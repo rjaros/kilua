@@ -26,6 +26,6 @@ package dev.kilua.i18n
  * Simple locale class.
  */
 public data class SimpleLocale(
-    override val language: String = "en",
+    override val language: String = "en-US",
     override val decimalSeparator: Char = decimalSeparator(language)
 ) : Locale

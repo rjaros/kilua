@@ -34,7 +34,8 @@ import dev.kilua.utils.cast
 internal external class TrixLocaleWasm : TrixLocale, JsAny
 
 internal actual fun getToolbarContent(locale: Locale): String {
-    val trixLocale = TrixLocales.locales[locale.language] ?: TrixLocales.trixLocaleEn
+    val trixLocale =
+        TrixLocales.locales[locale.language] ?: TrixLocales.locales[locale.languageBase] ?: TrixLocales.trixLocaleEn
     assign(Trix.config.lang, trixLocale.cast())
     return Trix.config.toolbar.getDefaultHTML()
 }

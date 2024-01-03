@@ -35,6 +35,12 @@ public interface Locale {
     public val language: String
 
     /**
+     * Base language code.
+     */
+    public val languageBase: String
+        get() = language.split("-")[0]
+
+    /**
      * Decimal separator.
      */
     public val decimalSeparator: Char

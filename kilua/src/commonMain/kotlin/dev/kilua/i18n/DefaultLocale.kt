@@ -30,7 +30,7 @@ import web.window
  * Auto-detected default locale.
  */
 public data class DefaultLocale(
-    override val language: String = if (isDom) window.navigator.language.split("-")[0] else Intl.DateTimeFormat()
-        .resolvedOptions().locale.split("-")[0],
+    override val language: String = if (isDom) window.navigator.language else Intl.DateTimeFormat()
+        .resolvedOptions().locale,
     override val decimalSeparator: Char = decimalSeparator(language)
 ) : Locale
