@@ -1,0 +1,404 @@
+/*
+ * Copyright (c) 2023 Robert Jaros
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package dev.kilua.form.time
+
+import androidx.compose.runtime.Composable
+import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.RenderConfig
+import dev.kilua.externals.Intl
+import dev.kilua.externals.TempusDominus
+import dev.kilua.externals.obj
+import dev.kilua.externals.set
+import dev.kilua.form.text.text
+import dev.kilua.html.Div
+import dev.kilua.html.i
+import dev.kilua.html.span
+import dev.kilua.i18n.DefaultLocale
+import dev.kilua.i18n.Locale
+import dev.kilua.utils.isDom
+import dev.kilua.utils.toKebabCase
+import kotlinx.datetime.LocalDate
+import web.document
+import web.dom.events.Event
+import web.toJsString
+import kotlin.time.Duration
+
+/**
+ * Tempus Dominus component color themes.
+ */
+public enum class Theme {
+    Light,
+    Dark,
+    Auto;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
+ * Tempus Dominus component view modes.
+ */
+public enum class ViewMode {
+    Clock,
+    Calendar,
+    Months,
+    Years,
+    Decades;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
+ * Tempus Dominus component toolbar placements.
+ */
+public enum class ToolbarPlacement {
+    Top,
+    Bottom;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
+ * Tempus Dominus component month header format.
+ */
+public enum class MonthHeaderFormat(public val value: String) {
+    TWODIGIT("2-digit"),
+    NUMERIC("numeric"),
+    NARROW("narrow"),
+    SHORT("short"),
+    LONG("long");
+
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
+ * Tempus Dominus component year header format.
+ */
+public enum class YearHeaderFormat(public val value: String) {
+    TWODIGIT("2-digit"),
+    NUMERIC("numeric");
+
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
+ * Tempus Dominus abstract rich date time component.
+ */
+public abstract class AbstractRichDateTime(
+    disabled: Boolean? = null,
+    format: String,
+    inline: Boolean = false,
+    locale: Locale = DefaultLocale(),
+    className: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig(),
+) : Div(className, renderConfig) {
+
+    /**
+     * The date/time format.
+     */
+    public open var format: String by updatingProperty(format, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    internal val inputFormat: String
+        get() {
+            val hourCycle = guessHourCycle(locale.language)
+            return if (hourCycle == HourCycle.H11 || hourCycle == HourCycle.H12) {
+                format.replace("HH:mm:ss", "hh:mm:ss T").replace("HH:mm", "hh:mm T")
+            } else format
+        }
+
+    /**
+     * Show as inline.
+     * Inline also modifies the layout, so it is not exposed as a public property.
+     */
+    internal open var inline: Boolean by updatingProperty(inline, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The locale for i18n.
+     */
+    public open var locale: Locale by updatingProperty(locale, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate = skipUpdate) {
+        if (it == true) {
+            tempusDominusInstance?.disable()
+        } else {
+            tempusDominusInstance?.enable()
+        }
+    }
+
+    public open var required: Boolean? by updatingProperty(skipUpdate = skipUpdate)
+
+    public open var name: String? by updatingProperty(skipUpdate = skipUpdate)
+
+    public open var customValidity: String? by updatingProperty(skipUpdate = skipUpdate)
+
+    /**
+     * Days of the week that should be disabled.
+     */
+    public open var daysOfWeekDisabled: List<Int>? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Determines if *Clear* button should be visible.
+     */
+    public open var showClear: Boolean by updatingProperty(true, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Determines if *Close* button should be visible.
+     */
+    public open var showClose: Boolean by updatingProperty(true, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Determines if *Today* button should be visible.
+     */
+    public open var showToday: Boolean by updatingProperty(true, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The increment used to build the hour view.
+     */
+    public open var stepping: Int by updatingProperty(1, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Prevents date selection before this date.
+     */
+    public open var minDate: LocalDate? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Prevents date selection after this date.
+     */
+    public open var maxDate: LocalDate? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Shows date and time pickers side by side.
+     */
+    public open var sideBySide: Boolean by updatingProperty(false, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * A list of enabled dates.
+     */
+    public open var enabledDates: List<LocalDate>? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * A list of disabled dates.
+     */
+    public open var disabledDates: List<LocalDate>? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Keep the popup open after selecting a date.
+     */
+    public open var keepOpen: Boolean by updatingProperty(false, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Date/time chooser color theme.
+     */
+    public open var theme: Theme? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Automatically open the chooser popup.
+     */
+    public var allowInputToggle: Boolean by updatingProperty(true, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The view date of the date/time chooser.
+     */
+    public open var viewDate: LocalDate? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Automatically open time component after date is selected.
+     */
+    public open var promptTimeOnDateChange: Boolean by updatingProperty(false, skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The delay for the time component opening after date is selected.
+     */
+    public open var promptTimeOnDateChangeTransitionDelay: Duration? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Default view mode of the date/time chooser.
+     */
+    public open var viewMode: ViewMode? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Date/time chooser toolbar placement.
+     */
+    public open var toolbarPlacement: ToolbarPlacement? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Date/time chooser month header format.
+     */
+    public open var monthHeaderFormat: MonthHeaderFormat? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * Date/time chooser year header format.
+     */
+    public open var yearHeaderFormat: YearHeaderFormat? by updatingProperty(skipUpdate = skipUpdate) {
+        refresh()
+    }
+
+    /**
+     * The refresh callback used by the theme change event handler.
+     */
+    protected var refreshCallback: (Event) -> Unit = {
+        refresh()
+    }
+
+    override fun onInsert() {
+        initializeTempusDominus()
+        if (isDom) {
+            document.addEventListener("kilua.theme.changed", refreshCallback)
+        }
+    }
+
+    override fun onRemove() {
+        tempusDominusInstance?.dispose()
+        tempusDominusInstance = null
+        if (isDom) {
+            document.removeEventListener("kilua.theme.changed", refreshCallback)
+        }
+    }
+
+    protected fun refresh() {
+        if (tempusDominusInstance != null) {
+            tempusDominusInstance?.dispose()
+            initializeTempusDominus()
+        }
+    }
+
+    /**
+     * The Tempus Dominus instance.
+     */
+    protected var tempusDominusInstance: TempusDominus? = null
+
+    protected abstract fun initializeTempusDominus()
+
+    public companion object {
+
+        /**
+         * Time format hour cycle.
+         */
+        private enum class HourCycle {
+            H11, H12, H23, H24
+        }
+
+        /**
+         * Tries to guess the hour cycle for given language.
+         */
+        private fun guessHourCycle(language: String): HourCycle? {
+            val template = obj().apply {
+                set("hour", "numeric".toJsString())
+            }
+            val hourCycle = Intl.DateTimeFormat(language, template).resolvedOptions().hourCycle
+            return HourCycle.entries.find { it.name.lowercase() == hourCycle }
+        }
+    }
+}
+
+@Composable
+internal fun Div.commonRichDateTime(
+    bindId: String,
+    name: String?,
+    placeholder: String?,
+    disabled: Boolean?,
+    required: Boolean?,
+    id: String?,
+    inline: Boolean,
+    icon: String
+) {
+    this.id = bindId
+    setAttribute("data-td-target-input", "nearest")
+    setAttribute("data-td-target-toggle", "nearest")
+    text(
+        name = name,
+        placeholder = placeholder,
+        disabled = disabled,
+        required = required,
+        id = id,
+        className = "form-control"
+    ) {
+        visible = !inline
+        setAttribute("data-td-target", "#$bindId")
+        onChange {
+            it.stopPropagation()
+        }
+    }
+    span("input-group-text") {
+        visible = !inline
+        setAttribute("data-td-target", "#$bindId")
+        setAttribute("data-td-toggle", "datetimepicker")
+        i(icon) {}
+    }
+}
