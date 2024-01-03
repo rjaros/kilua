@@ -22,9 +22,11 @@
 
 package dev.kilua.theme
 
+import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.utils.isDom
 import dev.kilua.utils.toKebabCase
 import web.document
+import web.dom.CustomEvent
 import web.localStorage
 import web.window
 
@@ -63,6 +65,7 @@ public object ThemeManager {
                 } else {
                     document.documentElement?.setAttribute("data-bs-theme", value.value)
                 }
+                document.dispatchEvent(CustomEvent("kilua.theme.changed", buildCustomEventInit(null)))
             }
         }
 
