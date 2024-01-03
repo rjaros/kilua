@@ -26,6 +26,7 @@ import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
 import dev.kilua.FontAwesomeModule
 import dev.kilua.Hot
+import dev.kilua.TempusDominusModule
 import dev.kilua.ToastifyModule
 import dev.kilua.TrixModule
 import dev.kilua.startApplication
@@ -38,6 +39,7 @@ fun main() {
         BootstrapCssModule,
         BootstrapIconsModule,
         FontAwesomeModule,
+        TempusDominusModule,
         ToastifyModule,
         TrixModule,
         CoreModule

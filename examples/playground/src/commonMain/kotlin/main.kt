@@ -41,6 +41,9 @@ import dev.kilua.form.number.range
 import dev.kilua.form.select.select
 import dev.kilua.form.text.richText
 import dev.kilua.form.text.text
+import dev.kilua.form.time.richDate
+import dev.kilua.form.time.richDateTime
+import dev.kilua.form.time.richTime
 import dev.kilua.html.*
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
@@ -75,7 +78,9 @@ import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
 import dev.kilua.utils.listOfPairs
+import dev.kilua.utils.now
 import dev.kilua.utils.rem
+import dev.kilua.utils.today
 import dev.kilua.utils.useModule
 import kotlinx.serialization.Serializable
 import web.dom.CustomEvent
@@ -108,9 +113,66 @@ class App : Application() {
             div {
                 margin = 20.px
 
+                var dtInline by remember { mutableStateOf(false) }
+
+                val rd = richDateTime(
+                    now(),
+                    name = "data",
+                    placeholder = "Podaj datę",
+                    inline = dtInline,
+                    id = "test"
+                ) {
+                    onChange {
+                        console.log(this.getValueAsString())
+                    }
+                }
+
+                richDate(today()) {
+                    onChange {
+                        console.log(this.getValueAsString())
+                    }
+                }
+
+                richTime(now().time) {
+                    onChange {
+                        console.log(this.getValueAsString())
+                    }
+                }
+
+                button("Toggle inline") {
+                    onClick {
+                        dtInline = !dtInline
+                    }
+                }
+
+                button("Get value") {
+                    onClick {
+                        console.log(rd.value.toString())
+                    }
+                }
+
+                button("Set value") {
+                    onClick {
+                        rd.value = now()
+                    }
+                }
+
+                button("Set null") {
+                    onClick {
+                        rd.value = null
+                    }
+                }
+
+                hr()
+
                 button("Show toastify msg") {
                     onClick {
-                        dev.kilua.toastify.toast("Test toastify", type = ToastType.Danger, duration = 30.seconds, close = true)
+                        dev.kilua.toastify.toast(
+                            "Test toastify",
+                            type = ToastType.Danger,
+                            duration = 30.seconds,
+                            close = true
+                        )
                     }
                 }
 
