@@ -16,7 +16,7 @@ KVision users (component based API, allowing some imperative, direct ways to int
 - Modern web framework powered by Compose Runtime.
 - Compile the same application code for Kotlin/Wasm and Kotlin/JS targets.
 - Direct DOM manipulation without virtual DOM.
-- Rendering to String with JS/Node target (ready for SSR).
+- Rendering to String with JS/Node or WasmJS/Node target (ready for SSR).
 - Ready to use components for all typical web application use cases. 
 - Component based API (familiar to KVision users).
 - Fullstack support ported from KVision.
@@ -24,7 +24,9 @@ KVision users (component based API, allowing some imperative, direct ways to int
 
 ## Project status
 
-Early in development. Main concepts have been tested, but everything is a subject to change.
+All main concepts have been tested and the development is now focused on implementing new components. 
+The project can be built and tested with single gradle tasks. Contributions and PRs are welcomed.
+Still no artifacts are published, but we are close to the first alpha release.
 
 ## TODO
 
@@ -38,13 +40,16 @@ Early in development. Main concepts have been tested, but everything is a subjec
 - [X] A component based on external NPM library (`SplitPanel`)
 - [X] Implement all standard HTML tags
 - [X] Implement all standard form input components
-- [X] Implement RichText component based on external NPM library - Trix editor
-- [ ] Implement advanced form input components (based on external NPM libraries - TempusDominus, TomSelect, Imask)
+- [X] Bootstrap module with basic components (tabs, toasts, dropdowns, modals etc.)
+- [X] Implement RichText form component based on Trix editor NPM library
+- [X] Implement RichDateTime form components based on Tempus Dominus NPM library
+- [ ] Implement select form component based on TomSelect NPM library
+- [ ] Implement support for masked inputs based on Imask NPM library
 - [X] CSS styles declarations
 - [X] Typesafe forms support with built-in validation 
 - [ ] Implement Tabulator component
-- [X] Bootstrap module with basic components (tabs, toasts, dropdowns, modals etc.)
 - [X] Routing support
+- [X] Web client
 - [ ] I18n support
 - [ ] Gradle plugin and KSP compiler plugin
 - [ ] Fullstack support with SSR
