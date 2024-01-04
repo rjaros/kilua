@@ -41,10 +41,10 @@ import dev.kilua.html.span
 import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
 import dev.kilua.utils.isDom
+import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import kotlinx.datetime.LocalDate
-import web.JsAny
 import web.document
 import web.dom.events.Event
 import web.toJsNumber
@@ -378,14 +378,14 @@ public abstract class AbstractRichDateTime(
         if (renderConfig.isDom) {
             val secondsView = format.contains("ss")
             val language = locale.language
-            val locale = tempusDominusLocales[language]?.localization ?: obj {}
+            val locale = tempusDominusLocales[language]?.localization ?: obj()
             locale["locale"] = language.toJsString()
             locale["format"] = inputFormat.toJsString()
             if (monthHeaderFormat != null || yearHeaderFormat != null) {
-                locale["dayViewHeaderFormat"] = obj<JsAny> {}.apply {
-                    this["month"] = (if (monthHeaderFormat != null) monthHeaderFormat!!.value else "long").toJsString()
-                    this["year"] = (if (yearHeaderFormat != null) yearHeaderFormat!!.value else "2-digit").toJsString()
-                }
+                locale["dayViewHeaderFormat"] = jsObjectOf(
+                    "month" to if (monthHeaderFormat != null) monthHeaderFormat!!.value else "long",
+                    "year" to if (yearHeaderFormat != null) yearHeaderFormat!!.value else "2-digit"
+                )
             }
             val initialViewMode = viewMode ?: if (calendarView) ViewMode.Calendar else ViewMode.Clock
             val currentTheme = if (theme == null || theme == Theme.Auto) {
@@ -462,9 +462,7 @@ public abstract class AbstractRichDateTime(
          * Tries to guess the hour cycle for given language.
          */
         private fun guessHourCycle(language: String): HourCycle? {
-            val template = obj().apply {
-                set("hour", "numeric".toJsString())
-            }
+            val template = jsObjectOf("hour" to "numeric")
             val hourCycle = Intl.DateTimeFormat(language, template).resolvedOptions().hourCycle
             return HourCycle.entries.find { it.name.lowercase() == hourCycle }
         }

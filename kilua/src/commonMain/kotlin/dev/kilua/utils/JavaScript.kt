@@ -100,7 +100,7 @@ public fun <T : JsAny> jsArrayOf(vararg elements: T): JsArray<T> {
 
 /**
  * Convert a subset of Kotlin types (String, Int, Double, Boolean, Array, List, Map) to JS object.
- * All unsupported types are converted to null values.
+ * All unsupported types are converted to null values on WasmJS or left unchanged on JS.
  */
 public fun <T> T.toJsAny(): JsAny? {
     return when (this) {
@@ -134,6 +134,20 @@ public fun <T> T.toJsAny(): JsAny? {
             obj
         }
 
-        else -> null
+        else -> this.cast()
     }
 }
+
+/**
+ * Convert a map to a JS object.
+ * All unsupported types are converted to null values on WasmJS or left unchanged on JS.
+ */
+public fun Map<String, Any>.toJsAny(): JsAny = this.toJsAny<Map<String, Any>>()!!
+
+/**
+ * Creates a JS object from a list of pairs.
+ * All unsupported types are converted to null values on WasmJS or left unchanged on JS.
+ */
+public fun jsObjectOf(
+    vararg pairs: Pair<String, Any>
+): JsAny = mapOf(*pairs).toJsAny()

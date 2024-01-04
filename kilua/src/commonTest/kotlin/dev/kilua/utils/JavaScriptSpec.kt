@@ -36,13 +36,14 @@ class JavaScriptSpec : SimpleSpec {
         assertEquals("45.5", JSON.stringify(45.5.toJsAny()))
         assertEquals("true", JSON.stringify(true.toJsAny()))
         assertEquals(
-            """{"string":"value","int":5,"boolean":true,"double":14.5,"array":["string",5,true],"list":["string",5,false],"map":{"m1":"Some value","m2":{"m3":"Some value 3"}}}""",
+            """{"string":"value","int":5,"boolean":true,"double":14.5,"obj":{"a":1,"b":2},"array":["string",5,true],"list":["string",5,false],"map":{"m1":"Some value","m2":{"m3":"Some value 3"}}}""",
             JSON.stringify(
                 mapOf(
                     "string" to "value",
                     "int" to 5,
                     "boolean" to true,
                     "double" to 14.5,
+                    "obj" to jsObjectOf("a" to 1, "b" to 2),
                     "array" to arrayOf("string", 5, true),
                     "list" to listOf("string", 5, false),
                     "map" to mapOf("m1" to "Some value", "m2" to mapOf("m3" to "Some value 3"))
