@@ -583,7 +583,7 @@ class App : Application() {
                     }
                 }
 
-                div(className) {
+                div {
                     h1t("Ala ma kota") {
                         div {
                             +"test"
@@ -646,12 +646,21 @@ class App : Application() {
                             }
                         }
                         fieldWithLabel("State", "form-label", groupClassName = "col-md-3") {
-                            select(listOfPairs("Alaska"), className = "form-select", placeholder = "Choose...")
+                            richDate(
+                                placeholder = "Choose...",
+                                id = it,
+                                required = true
+                            ).bind("state")
+                            div("invalid-feedback") {
+                                +"Please select a valid state."
+                            }
+
+                            /*select(listOfPairs("Alaska"), className = "form-select", placeholder = "Choose...")
                                 .bind("state").also {
                                     div("invalid-feedback") {
                                         +"Please select a valid state."
                                     }
-                                }
+                                }*/
                         }
                         fieldWithLabel("Zip", "form-label", groupClassName = "col-md-3") {
                             text(required = true, className = "form-control").bind("zip").also {
