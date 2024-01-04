@@ -23,12 +23,17 @@
 package dev.kilua.form.time
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NoLiveLiterals
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.externals.Date
 import dev.kilua.externals.Intl
 import dev.kilua.externals.TempusDominus
+import dev.kilua.externals.TempusDominusOptions
 import dev.kilua.externals.obj
 import dev.kilua.externals.set
+import dev.kilua.externals.tempusDominusLocales
+import dev.kilua.externals.toDate
 import dev.kilua.form.text.text
 import dev.kilua.html.Div
 import dev.kilua.html.i
@@ -36,10 +41,13 @@ import dev.kilua.html.span
 import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
 import dev.kilua.utils.isDom
+import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import kotlinx.datetime.LocalDate
+import web.JsAny
 import web.document
 import web.dom.events.Event
+import web.toJsNumber
 import web.toJsString
 import kotlin.time.Duration
 
@@ -360,10 +368,86 @@ public abstract class AbstractRichDateTime(
      */
     protected var tempusDominusInstance: TempusDominus? = null
 
+    protected abstract fun initializeTempusDominus()
+
     /**
      * Initializes the Tempus Dominus instance.
      */
-    protected abstract fun initializeTempusDominus()
+    @NoLiveLiterals
+    protected fun initializeTempusDominus(defaultValue: Date?, calendarView: Boolean, clockView: Boolean) {
+        if (renderConfig.isDom) {
+            val secondsView = format.contains("ss")
+            val language = locale.language
+            val locale = tempusDominusLocales[language]?.localization ?: obj {}
+            locale["locale"] = language.toJsString()
+            locale["format"] = inputFormat.toJsString()
+            if (monthHeaderFormat != null || yearHeaderFormat != null) {
+                locale["dayViewHeaderFormat"] = obj<JsAny> {}.apply {
+                    this["month"] = (if (monthHeaderFormat != null) monthHeaderFormat!!.value else "long").toJsString()
+                    this["year"] = (if (yearHeaderFormat != null) yearHeaderFormat!!.value else "2-digit").toJsString()
+                }
+            }
+            val initialViewMode = viewMode ?: if (calendarView) ViewMode.Calendar else ViewMode.Clock
+            val currentTheme = if (theme == null || theme == Theme.Auto) {
+                document.documentElement?.getAttribute("data-bs-theme")?.let { theme ->
+                    Theme.entries.find { theme == it.value }
+                }
+            } else {
+                theme
+            }
+            val component = this
+            val tempusDominusOptions = obj<TempusDominusOptions> {
+                this.useCurrent = component.inline
+                if (defaultValue != null) {
+                    this.defaultDate = defaultValue
+                }
+                this.stepping = component.stepping
+                this.allowInputToggle = component.allowInputToggle
+                if (component.viewDate != null) {
+                    this.viewDate = component.viewDate!!.toDate()
+                } else {
+                    if (inline && defaultValue != null) this.viewDate = defaultValue
+                }
+                this.promptTimeOnDateChange = component.promptTimeOnDateChange
+                if (component.promptTimeOnDateChangeTransitionDelay != null)
+                    this.promptTimeOnDateChangeTransitionDelay =
+                        component.promptTimeOnDateChangeTransitionDelay!!.inWholeMilliseconds.toInt()
+                this.restrictions = obj {
+                    if (component.minDate != null) this.minDate = component.minDate!!.toDate()
+                    if (component.maxDate != null) this.maxDate = component.maxDate!!.toDate()
+                    if (!component.enabledDates.isNullOrEmpty()) this.enabledDates =
+                        component.enabledDates!!.map { it.toDate() }.toJsArray()
+                    if (!component.disabledDates.isNullOrEmpty()) this.disabledDates =
+                        component.disabledDates!!.map { it.toDate() }.toJsArray()
+                    if (!component.daysOfWeekDisabled.isNullOrEmpty()) this.daysOfWeekDisabled =
+                        component.daysOfWeekDisabled!!.map { it.toJsNumber() }.toJsArray()
+                }
+                this.display = obj {
+                    this.viewMode = initialViewMode.value
+                    component.toolbarPlacement?.let { this.toolbarPlacement = it.value }
+                    this.sideBySide = component.sideBySide
+                    this.buttons = obj {
+                        this.clear = component.showClear
+                        this.close = component.showClose
+                        this.today = component.showToday
+                    }
+                    this.inline = component.inline
+                    this.keepOpen = component.keepOpen
+                    currentTheme?.let { this.theme = it.value }
+                    this.components = obj {
+                        this.calendar = calendarView
+                        this.clock = clockView
+                        this.seconds = secondsView
+                    }
+                }
+                this.localization = locale
+            }
+            tempusDominusInstance = TempusDominus(element, tempusDominusOptions)
+            if (disabled == true) {
+                tempusDominusInstance?.disable()
+            }
+        }
+    }
 
     public companion object {
 
