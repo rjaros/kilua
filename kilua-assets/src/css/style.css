@@ -157,6 +157,10 @@ ul.tabs-top > li {
     background-color: rgba(33,37,41) !important;
 }
 
+.was-validated .input-group.kilua-td:has(:invalid) ~ .invalid-feedback, .was-validated .input-group.kilua-td:has(:invalid) ~ .invalid-tooltip {
+    display: block;
+}
+
 /*!
  * bootstrap-vertical-tabs - v1.2.2
  * https://dbtek.github.io/bootstrap-vertical-tabs

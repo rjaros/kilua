@@ -79,6 +79,8 @@ public open class RichDateTime(
 
     init {
         @Suppress("LeakingThis")
+        withStateFlowDelegate.formControl(this)
+        @Suppress("LeakingThis")
         onEventDirect<Event>("change.td") {
             val date = it["detail"]?.get("date")?.cast<dev.kilua.externals.Date>()
             this.value = date?.toLocalDateTime()
@@ -169,7 +171,7 @@ public fun ComponentBase.richDateTime(
     setup: @Composable RichDateTime.() -> Unit = {}
 ): RichDateTime {
     val bindId = remember { "kilua_tempus_dominus_rdt_${RichDateTime.idCounter++}" }
-    return richDateTime(value, disabled, format, inline, locale, className = className % "input-group") {
+    return richDateTime(value, disabled, format, inline, locale, className = className % "input-group kilua-td") {
         commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-calendar-alt")
         setup()
     }
