@@ -40,7 +40,7 @@ class RichTimeSpec : DomSpec {
                 )
             }
             assertEqualsHtml(
-                """<div class="input-group" id="kilua_tempus_dominus_rt_0" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                """<div class="input-group kilua-td" id="kilua_tempus_dominus_rt_0" data-td-target-input="nearest" data-td-target-toggle="nearest">
 <input class="form-control" type="text" name="date" data-td-target="#kilua_tempus_dominus_rt_0">
 <span class="input-group-text" data-td-target="#kilua_tempus_dominus_rt_0" data-td-toggle="datetimepicker">
 <i class="fas fa-clock">
@@ -65,7 +65,7 @@ class RichTimeSpec : DomSpec {
                 )
             }
             assertEqualsHtml(
-                """<div class="input-group" id="kilua_tempus_dominus_rt_0" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                """<div class="input-group kilua-td" id="kilua_tempus_dominus_rt_0" data-td-target-input="nearest" data-td-target-toggle="nearest">
 <input class="form-control" type="text" name="date" data-td-target="#kilua_tempus_dominus_rt_0">
 <span class="input-group-text" data-td-target="#kilua_tempus_dominus_rt_0" data-td-toggle="datetimepicker">
 <i class="fas fa-clock">
