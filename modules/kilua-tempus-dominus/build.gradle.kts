@@ -23,7 +23,7 @@ kotlin {
             dependencies {
                 implementation(project(":kilua"))
                 implementation(npm("@popperjs/core", libs.versions.popperjs.core.get()))
-                implementation(npm("@eonasdan/tempus-dominus", libs.versions.tempusDominus.get()))
+                implementation(npm("@eonasdan/tempus-dominus", libs.versions.tempus.dominus.get()))
             }
         }
         val commonTest by getting {

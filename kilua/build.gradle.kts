@@ -23,6 +23,7 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
         resolution("bootstrap-icons", libs.versions.bootstrap.icons.get())
         resolution("@fortawesome/fontawesome-free", libs.versions.fontawesome.get())
         resolution("trix", libs.versions.trix.get())
+        resolution("@eonasdan/tempus-dominus", libs.versions.tempus.dominus.get())
     }
 }
 

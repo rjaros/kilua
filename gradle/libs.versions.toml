@@ -22,7 +22,7 @@ bootstrap-icons = "1.11.2"
 fontawesome = "6.5.1"
 trix = "2.0.8"
 toastify = "1.12.0"
-tempusDominus = "6.9.4"
+tempus-dominus = "6.9.4"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
