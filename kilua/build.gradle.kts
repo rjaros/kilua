@@ -54,7 +54,6 @@ kotlin {
                 implementation(npm("css-loader", libs.versions.css.loader.get()))
                 implementation(npm("style-loader", libs.versions.style.loader.get()))
                 implementation(npm("imports-loader", libs.versions.imports.loader.get()))
-                implementation(npm("split.js", libs.versions.splitjs.get()))
             }
         }
         val commonTest by getting {
