@@ -74,6 +74,7 @@ kotlin {
                 implementation(project(":modules:kilua-bootstrap"))
                 implementation(project(":modules:kilua-bootstrap-icons"))
                 implementation(project(":modules:kilua-fontawesome"))
+                implementation(project(":modules:kilua-lazy-layouts"))
                 implementation(project(":modules:kilua-rest"))
                 implementation(project(":modules:kilua-splitjs"))
                 implementation(project(":modules:kilua-tempus-dominus"))

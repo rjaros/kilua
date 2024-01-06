@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.Snapshot
 import dev.kilua.Application
 import dev.kilua.compose.root
 import dev.kilua.dropdown.dropDown
@@ -55,6 +56,7 @@ import dev.kilua.panel.OffPlacement
 import dev.kilua.panel.TabPosition
 import dev.kilua.panel.accordion
 import dev.kilua.panel.carousel
+import dev.kilua.panel.lazyColumn
 import dev.kilua.panel.offcanvas
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
@@ -87,6 +89,9 @@ import web.dom.CustomEvent
 import web.dom.Text
 import web.dom.events.Event
 import web.window
+import kotlin.random.Random
+import kotlin.random.nextInt
+import kotlin.random.nextUInt
 import kotlin.time.Duration.Companion.seconds
 
 @JsModule("./css/style.css")
@@ -112,6 +117,55 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
+
+                val letterIndexes = List(26) { it }
+
+                val randomElements = remember { mutableStateListOf<UInt>() }
+
+                div {
+                    border = Border(1.px, style = BorderStyle.Solid, color = Color.Red)
+                    height = 600.px
+                    overflow = Overflow.Auto
+
+                    lazyColumn {
+                        item {
+                            textNode("First element")
+                        }
+
+                        items(200) {
+                            textNode("Element #$it")
+                        }
+
+                        item {
+                            button("Generate random elements") {
+                                onClick {
+                                    Snapshot.withMutableSnapshot {
+                                        randomElements.clear()
+                                        repeat(Random.nextInt(10..100)) {
+                                            randomElements.add(Random.nextUInt())
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        items(randomElements) {
+                            textNode("Random value: $it")
+                        }
+
+                        items(letterIndexes) {
+                            val lowerCase = it + 'a'.code
+
+                            textNode("Letter ${lowerCase.toChar()}")
+                        }
+
+                        items(letterIndexes) {
+                            val upperCase = it + 'A'.code
+
+                            textNode("Letter ${upperCase.toChar()}")
+                        }
+                    }
+                }
 
                 var dtInline by remember { mutableStateOf(false) }
 
