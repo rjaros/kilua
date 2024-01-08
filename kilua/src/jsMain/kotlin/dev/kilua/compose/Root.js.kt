@@ -23,27 +23,6 @@
 package dev.kilua.compose
 
 import androidx.compose.runtime.DefaultMonotonicFrameClock
-import androidx.compose.runtime.MonotonicFrameClock
-import dev.kilua.externals.obj
 import dev.kilua.utils.isDom
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
-import kotlin.js.Promise
-
-/**
- * A simple MonotonicFrameClock implementation without using DOM.
- * Used to run compose runtime in NodeJS environment.
- */
-private class NoDomMonotonicClockImpl : MonotonicFrameClock {
-    var counter = 0L
-    override suspend fun <R> withFrameNanos(
-        onFrame: (Long) -> R
-    ): R = suspendCoroutine { continuation ->
-        Promise.resolve(obj()).then {
-            val result = onFrame(counter++)
-            continuation.resume(result)
-        }
-    }
-}
 
 internal actual val defaultMonotonicFrameClock = if (isDom) DefaultMonotonicFrameClock else NoDomMonotonicClockImpl()

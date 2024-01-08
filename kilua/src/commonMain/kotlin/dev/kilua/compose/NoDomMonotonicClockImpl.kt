@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2024 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,20 +22,25 @@
 
 package dev.kilua.compose
 
+import androidx.compose.runtime.MonotonicFrameClock
 import dev.kilua.externals.obj
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Runnable
-import kotlin.coroutines.CoroutineContext
-import kotlin.js.Promise
+import dev.kilua.utils.cast
+import web.Promise
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 /**
- * Coroutine dispatcher based on JavaScript Promise.
+ * A simple MonotonicFrameClock implementation without using DOM.
+ * Used to run compose runtime in Node.js environment.
  */
-internal actual class PromiseDispatcher : CoroutineDispatcher() {
-    actual override fun dispatch(context: CoroutineContext, block: Runnable) {
+internal class NoDomMonotonicClockImpl : MonotonicFrameClock {
+    var counter = 0L
+    override suspend fun <R> withFrameNanos(
+        onFrame: (Long) -> R
+    ): R = suspendCoroutine { continuation ->
         Promise.resolve(obj()).then {
-            block.run()
-            obj()
+            val result = onFrame(counter++)
+            continuation.resume(result).cast()
         }
     }
 }
