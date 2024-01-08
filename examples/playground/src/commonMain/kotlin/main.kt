@@ -39,7 +39,6 @@ import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
 import dev.kilua.form.number.range
-import dev.kilua.form.select.select
 import dev.kilua.form.text.richText
 import dev.kilua.form.text.text
 import dev.kilua.form.time.richDate
@@ -79,7 +78,6 @@ import dev.kilua.toastify.ToastType
 import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
-import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.now
 import dev.kilua.utils.rem
 import dev.kilua.utils.today
