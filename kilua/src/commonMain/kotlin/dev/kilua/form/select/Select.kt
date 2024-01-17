@@ -246,6 +246,8 @@ public open class Select(
                 if (renderConfig.isDom) {
                     it.element.selected
                 } else false
+            }.filter {
+                it.value != SELECT_EMPTY_VALUE
             }.map {
                 it.value ?: it.label
             }.joinToString(",")
