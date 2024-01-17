@@ -78,6 +78,7 @@ kotlin {
                 implementation(project(":modules:kilua-rest"))
                 implementation(project(":modules:kilua-splitjs"))
                 implementation(project(":modules:kilua-tempus-dominus"))
+                implementation(project(":modules:kilua-tom-select"))
                 implementation(project(":modules:kilua-toastify"))
                 implementation(project(":modules:kilua-trix"))
             }

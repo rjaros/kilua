@@ -21,6 +21,7 @@
  */
 
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -30,6 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import dev.kilua.Application
+import dev.kilua.KiluaScope
 import dev.kilua.compose.root
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
@@ -39,6 +41,9 @@ import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
 import dev.kilua.form.number.range
+import dev.kilua.form.select.TomSelectCallbacks
+import dev.kilua.form.select.TomSelectRenders
+import dev.kilua.form.select.tomSelect
 import dev.kilua.form.text.richText
 import dev.kilua.form.text.text
 import dev.kilua.form.time.richDate
@@ -67,6 +72,7 @@ import dev.kilua.popup.popover
 import dev.kilua.popup.toggleTooltip
 import dev.kilua.popup.tooltip
 import dev.kilua.promise
+import dev.kilua.rest.RemoteRequestException
 import dev.kilua.rest.RestClient
 import dev.kilua.rest.callDynamic
 import dev.kilua.state.collectAsState
@@ -78,11 +84,20 @@ import dev.kilua.toastify.ToastType
 import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
+import dev.kilua.utils.jsArrayOf
+import dev.kilua.utils.jsObjectOf
+import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.now
 import dev.kilua.utils.rem
+import dev.kilua.utils.toJsArray
+import dev.kilua.utils.toList
 import dev.kilua.utils.today
 import dev.kilua.utils.useModule
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.Serializable
+import web.JsAny
+import web.JsArray
 import web.dom.CustomEvent
 import web.dom.Text
 import web.dom.events.Event
@@ -115,6 +130,86 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
+
+                val restClient = RestClient()
+
+                tomSelect(emptyOption = true) {
+                    emptyOption = true
+                    tsCallbacks = TomSelectCallbacks(
+                        load = { query, callback ->
+                            promise {
+                                val result = try {
+                                    restClient.callDynamic("https://api.github.com/search/repositories") {
+                                        data = jsObjectOf("q" to query)
+                                        resultTransform = { it?.get("items") }
+                                    }
+                                } catch (e: RemoteRequestException) {
+                                    console.log(e.toString())
+                                    null
+                                }
+                                result?.let { items: JsAny ->
+                                    callback(items.cast<JsArray<JsAny>>().toList().map { item ->
+                                        jsObjectOf("value" to item["id"]!!, "text" to item["name"]!!, "subtext" to item["owner"]!!["login"]!!)
+                                    }.toJsArray())
+                                } ?: callback(jsArrayOf())
+                                obj()
+                            }
+                        },
+                        shouldLoad = { it.length >= 3 }
+                    )
+                    tsRenders = TomSelectRenders(option = { item, escape ->
+                        val subtext: String? = item["subtext"]?.toString()
+                        """
+                        <div>
+                            <span class="title">${escape(item["text"].toString())}</span>
+                            <small>${subtext?.let { "(" + escape(it) + ")" } ?: ""}</small>
+                        </div>
+                    """.trimIndent()
+                    })
+                    onChange {
+                        console.log(this.value)
+                    }
+                }
+
+                hr()
+
+                var tsvalue by remember { mutableStateOf<String?>("dog") }
+                var multi by remember { mutableStateOf(true) }
+
+                val tselect = tomSelect(
+                    listOf("cat" to "Cat", "dog" to "Dog", "mouse" to "Mouse"),
+                    value = tsvalue,
+                    placeholder = "Select an option",
+                    emptyOption = true,
+                    multiple = multi,
+                    disabled = false,
+                    id = "test"
+                ) {
+                    LaunchedEffect(Unit) {
+                        stateFlow.onEach {
+                            console.log(it)
+                        }.launchIn(KiluaScope)
+                    }
+                }
+
+                button("Get value") {
+                    onClick {
+                        console.log(tselect.value)
+                        console.log(tselect.selectedLabel)
+                    }
+                }
+                button("Set value") {
+                    onClick {
+                        multi = !multi
+                    }
+                }
+                button("Set null") {
+                    onClick {
+                        tselect.value = null
+                    }
+                }
+
+                hr()
 
                 val letterIndexes = List(26) { it }
 
@@ -698,14 +793,27 @@ class App : Application() {
                             }
                         }
                         fieldWithLabel("State", "form-label", groupClassName = "col-md-3") {
-                            richDate(
+                            tomSelect(
+                                listOfPairs("Alaska", "California"),
+                                emptyOption = true,
+                                placeholder = "Choose...",
+                                id = it,
+                                multiple = true,
+                                className = "form-select",
+                                required = true
+                            ).bind("state")
+                            div("invalid-feedback") {
+                                +"Please select a valid state."
+                            }
+
+                            /*richDate(
                                 placeholder = "Choose...",
                                 id = it,
                                 required = true
                             ).bind("state")
                             div("invalid-feedback") {
                                 +"Please select a valid state."
-                            }
+                            }*/
 
                             /*select(listOfPairs("Alaska"), className = "form-select", placeholder = "Choose...")
                                 .bind("state").also {
