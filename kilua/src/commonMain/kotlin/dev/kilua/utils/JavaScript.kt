@@ -83,8 +83,12 @@ public fun <T : JsAny> JsArray<T>.toList(): List<T> {
 /**
  * Convert Kotlin List to JsArray.
  */
-public inline fun <reified T : JsAny> List<T>.toJsArray(): JsArray<T> {
-    return jsArrayOf(*this.toTypedArray())
+public fun <T : JsAny> List<T>.toJsArray(): JsArray<T> {
+    val array = JsArray<T>()
+    for (i in this.indices) {
+        array[i] = this[i]
+    }
+    return array
 }
 
 /**
@@ -142,12 +146,12 @@ public fun <T> T.toJsAny(): JsAny? {
  * Convert a map to a JS object.
  * All unsupported types are converted to null values on WasmJS or left unchanged on JS.
  */
-public fun Map<String, Any>.toJsAny(): JsAny = this.toJsAny<Map<String, Any>>()!!
+public fun Map<String, Any?>.toJsAny(): JsAny = this.toJsAny<Map<String, Any?>>()!!
 
 /**
  * Creates a JS object from a list of pairs.
  * All unsupported types are converted to null values on WasmJS or left unchanged on JS.
  */
 public fun jsObjectOf(
-    vararg pairs: Pair<String, Any>
+    vararg pairs: Pair<String, Any?>
 ): JsAny = mapOf(*pairs).toJsAny()
