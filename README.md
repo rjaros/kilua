@@ -43,7 +43,7 @@ Still no artifacts are published, but we are close to the first alpha release.
 - [X] Bootstrap module with basic components (tabs, toasts, dropdowns, modals etc.)
 - [X] Implement RichText form component based on Trix editor NPM library
 - [X] Implement RichDateTime form components based on Tempus Dominus NPM library
-- [ ] Implement select form component based on TomSelect NPM library
+- [X] Implement TomSelect form component based on TomSelect NPM library
 - [ ] Implement support for masked inputs based on Imask NPM library
 - [X] CSS styles declarations
 - [X] Typesafe forms support with built-in validation 
