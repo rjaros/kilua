@@ -23,6 +23,7 @@ fontawesome = "6.5.1"
 trix = "2.0.8"
 toastify = "1.12.0"
 tempus-dominus = "6.9.4"
+tom-select = "2.3.1"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
