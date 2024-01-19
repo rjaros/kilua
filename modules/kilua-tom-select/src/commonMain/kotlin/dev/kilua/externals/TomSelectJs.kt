@@ -111,6 +111,10 @@ public external class TomSelectOptionsJs : JsAny {
     public var sortField: String
     public var searchField: JsArray<JsString>
     public var searchConjunction: String
+    public var onOptionAdd: ((value: String, data: JsAny) -> Unit)
+    public var onOptionRemove: ((value: JsAny) -> Unit)
+    public var onFocus: (() -> Unit)
+    public var onBlur: (() -> Unit)
 }
 
 /**
@@ -123,7 +127,7 @@ public external class TomSelectJs(element: HTMLElement, options: TomSelectOption
     public fun addOptions(value: JsArray<JsAny>, userCreated: Boolean)
     public fun updateOption(value: String, data: JsAny)
     public fun removeOption(value: String)
-    public fun getOption(value: String, create: Boolean): JsAny
+    public fun getOption(value: String, create: Boolean): JsAny?
     public fun refreshOptions(triggerDropdown: Boolean)
     public fun clearOptions(clearFilter: (JsAny) -> Boolean)
 
