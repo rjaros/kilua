@@ -43,10 +43,10 @@ public open class Text(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<String>(value, type, name, maxlength, placeholder, disabled, required, id, className, renderConfig),
+) : Input<String>(value, type, name, maxlength, placeholder, disabled, required, className, id, renderConfig = renderConfig),
     StringFormControl {
 
     override fun stringToValue(text: String?): String? {
@@ -69,8 +69,8 @@ public open class Text(
  * @param placeholder the placeholder text
  * @param disabled whether the input is disabled
  * @param required whether the input is required
- * @param id the ID of the input
  * @param className the CSS class name
+ * @param id the ID of the input
  * @param setup a function for setting up the component
  * @return a [Text] component
  */
@@ -83,12 +83,12 @@ public fun ComponentBase.text(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable Text.() -> Unit = {}
 ): Text {
     val component =
-        remember { Text(value, type, name, maxlength, placeholder, disabled, required, id, className, renderConfig) }
+        remember { Text(value, type, name, maxlength, placeholder, disabled, required, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(value) { updateProperty(Text::value, it) }
         set(type) { updateProperty(Text::type, it) }
@@ -97,8 +97,8 @@ public fun ComponentBase.text(
         set(placeholder) { updateProperty(Text::placeholder, it) }
         set(disabled) { updateProperty(Text::disabled, it) }
         set(required) { updateProperty(Text::required, it) }
-        set(id) { updateProperty(Text::id, it) }
         set(className) { updateProperty(Text::className, it) }
+        set(id) { updateProperty(Text::id, it) }
     }, setup)
     return component
 }

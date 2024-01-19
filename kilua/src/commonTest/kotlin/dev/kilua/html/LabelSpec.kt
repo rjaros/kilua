@@ -38,9 +38,9 @@ class LabelSpec : DomSpec {
                     id = "test-id"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<label class="test" for="id" id="test-id"></label>"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<label class="test" for="id" id="test-id"></label>""",
+                root.element.innerHTML,
                 "Should render an HTML Label tag to DOM"
             )
         }
@@ -54,9 +54,9 @@ class LabelSpec : DomSpec {
                     id = "test-id"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><label class="test" for="id" id="test-id"></label></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<div><label class="test" for="id" id="test-id"></label></div>""",
+                root.renderToString(),
                 "Should render an HTML Label tag to a String"
             )
         }

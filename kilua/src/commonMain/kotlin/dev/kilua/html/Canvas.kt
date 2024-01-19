@@ -42,7 +42,7 @@ public open class Canvas(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLCanvasElement>("canvas", className, renderConfig) {
+    Tag<HTMLCanvasElement>("canvas", className, renderConfig = renderConfig) {
 
     /**
      * The width of the canvas.
@@ -107,7 +107,7 @@ public fun ComponentBase.canvas(
     canvasHeight: Int? = null,
     className: String? = null, content: @Composable Canvas.() -> Unit = {}
 ): Canvas {
-    val component = remember { Canvas(canvasWidth, canvasHeight, className, renderConfig) }
+    val component = remember { Canvas(canvasWidth, canvasHeight, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(canvasWidth) { updateProperty("width", it) }
         set(canvasHeight) { updateProperty("height", it) }

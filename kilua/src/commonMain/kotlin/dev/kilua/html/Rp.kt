@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Rp component.
  */
 public open class Rp(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("rp", className, renderConfig)
+    Tag<HTMLElement>("rp", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Rp] component.
@@ -45,7 +45,7 @@ public open class Rp(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.rp(className: String? = null, content: @Composable Rp.() -> Unit = {}): Rp {
-    val component = remember { Rp(className, renderConfig) }
+    val component = remember { Rp(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Rp::className, it) }
     }, content)

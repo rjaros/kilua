@@ -34,7 +34,7 @@ import web.dom.HTMLBRElement
  * HTML Br component.
  */
 public open class Br(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLBRElement>("br", className, renderConfig)
+    Tag<HTMLBRElement>("br", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Br] component.
@@ -45,7 +45,7 @@ public open class Br(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.br(className: String? = null, setup: Br.() -> Unit = {}): Br {
-    val component = remember { Br(className, renderConfig) }
+    val component = remember { Br(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Br::className, it) }
     }) {

@@ -34,7 +34,7 @@ import web.dom.HTMLTableRowElement
  * HTML Tr component.
  */
 public open class Tr(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableRowElement>("tr", className, renderConfig)
+    Tag<HTMLTableRowElement>("tr", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Tr] component.
@@ -45,7 +45,7 @@ public open class Tr(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.tr(className: String? = null, content: @Composable Tr.() -> Unit = {}): Tr {
-    val component = remember { Tr(className, renderConfig) }
+    val component = remember { Tr(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Tr::className, it) }
     }, content)

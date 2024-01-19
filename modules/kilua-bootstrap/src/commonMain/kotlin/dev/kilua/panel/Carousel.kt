@@ -58,7 +58,7 @@ public open class Carousel(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
 
     internal val items = mutableStateMapOf<Int, CarouselItem>()
     internal var itemsOrderList: List<Int> by mutableStateOf(emptyList())
@@ -158,7 +158,7 @@ private fun ComponentBase.carousel(
     className: String? = null,
     content: @Composable Carousel.() -> Unit,
 ): Carousel {
-    val component = remember { Carousel(className, renderConfig) }
+    val component = remember { Carousel(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Carousel::className, it) }
     }, content)

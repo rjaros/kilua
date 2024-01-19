@@ -34,7 +34,7 @@ import web.dom.HTMLTableSectionElement
  * HTML Tfoot component.
  */
 public open class Tfoot(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableSectionElement>("tfoot", className, renderConfig)
+    Tag<HTMLTableSectionElement>("tfoot", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Tfoot] component.
@@ -45,7 +45,7 @@ public open class Tfoot(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.tfoot(className: String? = null, content: @Composable Tfoot.() -> Unit = {}): Tfoot {
-    val component = remember { Tfoot(className, renderConfig) }
+    val component = remember { Tfoot(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Tfoot::className, it) }
     }, content)

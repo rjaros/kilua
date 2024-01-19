@@ -34,7 +34,7 @@ import web.dom.HTMLHeadingElement
  * HTML H3 component.
  */
 public open class H3(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadingElement>("h3", className, renderConfig)
+    Tag<HTMLHeadingElement>("h3", className, renderConfig = renderConfig)
 
 /**
  * Creates a [H3] component.
@@ -45,7 +45,7 @@ public open class H3(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.h3(className: String? = null, content: @Composable H3.() -> Unit = {}): H3 {
-    val component = remember { H3(className, renderConfig) }
+    val component = remember { H3(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(H3::className, it) }
     }, content)

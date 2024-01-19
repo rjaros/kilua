@@ -117,7 +117,7 @@ public open class Form<K : Any>(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLFormElement>("form", className, renderConfig), WithStateFlow<K> {
+    Tag<HTMLFormElement>("form", className, renderConfig = renderConfig), WithStateFlow<K> {
 
     /**
      * The method attribute of the generated HTML form element.
@@ -1023,7 +1023,7 @@ public open class Form<K : Any>(
             className: String? = null,
             renderConfig: RenderConfig = DefaultRenderConfig(),
         ): Form<K> {
-            return Form(method, action, enctype, serializer(), customSerializers, className, renderConfig)
+            return Form(method, action, enctype, serializer(), customSerializers, className, renderConfig = renderConfig)
         }
     }
 
@@ -1050,7 +1050,7 @@ public inline fun <reified K : Any> ComponentBase.form(
     content: @Composable Form<K>.() -> Unit = {}
 ): Form<K> {
     val component =
-        remember { Form.create<K>(method, action, enctype, customSerializers, className, renderConfig) }
+        remember { Form.create<K>(method, action, enctype, customSerializers, className, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         if (initialData != null) {

@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Small component.
  */
 public open class Small(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("small", className, renderConfig)
+    Tag<HTMLElement>("small", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Small] component.
@@ -45,7 +45,7 @@ public open class Small(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.small(className: String? = null, content: @Composable Small.() -> Unit = {}): Small {
-    val component = remember { Small(className, renderConfig) }
+    val component = remember { Small(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Small::className, it) }
     }, content)

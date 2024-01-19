@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Wbr component.
  */
 public open class Wbr(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("wbr", className, renderConfig)
+    Tag<HTMLElement>("wbr", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Wbr] component.
@@ -45,7 +45,7 @@ public open class Wbr(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.wbr(className: String? = null, setup: Wbr.() -> Unit = {}): Wbr {
-    val component = remember { Wbr(className, renderConfig) }
+    val component = remember { Wbr(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Wbr::className, it) }
     }) {

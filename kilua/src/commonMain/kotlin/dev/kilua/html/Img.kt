@@ -40,7 +40,7 @@ public open class Img(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLImageElement>("img", className, renderConfig) {
+    Tag<HTMLImageElement>("img", className, renderConfig = renderConfig) {
 
     /**
      * The source of the image.
@@ -94,7 +94,7 @@ public fun ComponentBase.img(
     src: String, alt: String? = null,
     className: String? = null, content: @Composable Img.() -> Unit = {}
 ): Img {
-    val component = remember { Img(src, alt, className, renderConfig) }
+    val component = remember { Img(src, alt, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(src) { updateProperty(Img::src, it) }
         set(alt) { updateProperty(Img::alt, it) }

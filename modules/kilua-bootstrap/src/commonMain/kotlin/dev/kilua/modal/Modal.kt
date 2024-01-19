@@ -80,7 +80,7 @@ public open class Modal(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
 
     internal var footerContent: @Composable (Div.() -> Unit)? = null
 
@@ -163,7 +163,7 @@ private fun ComponentBase.modal(
     className: String? = null,
     content: @Composable Modal.() -> Unit,
 ): Modal {
-    val component = remember { Modal(className, renderConfig) }
+    val component = remember { Modal(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Modal::className, it) }
     }, content)

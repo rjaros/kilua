@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Col component.
  */
 public open class Col(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("col", className, renderConfig)
+    Tag<HTMLElement>("col", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Col] component.
@@ -45,7 +45,7 @@ public open class Col(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.col(className: String? = null, setup: Col.() -> Unit = {}): Col {
-    val component = remember { Col(className, renderConfig) }
+    val component = remember { Col(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Col::className, it) }
     }) {

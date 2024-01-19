@@ -34,7 +34,7 @@ import web.dom.HTMLQuoteElement
  * HTML Q component.
  */
 public open class Q(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLQuoteElement>("q", className, renderConfig)
+    Tag<HTMLQuoteElement>("q", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Q] component.
@@ -45,7 +45,7 @@ public open class Q(className: String? = null, renderConfig: RenderConfig = Defa
  */
 @Composable
 public fun ComponentBase.q(className: String? = null, content: @Composable Q.() -> Unit = {}): Q {
-    val component = remember { Q(className, renderConfig) }
+    val component = remember { Q(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Q::className, it) }
     }, content)

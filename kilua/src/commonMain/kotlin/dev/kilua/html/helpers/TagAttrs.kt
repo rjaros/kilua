@@ -29,11 +29,6 @@ import web.dom.HTMLElement
  */
 public interface TagAttrs<E : HTMLElement> {
     /**
-     * The ID attribute.
-     */
-    public var id: String?
-
-    /**
      * The title attribute.
      */
     public var title: String?

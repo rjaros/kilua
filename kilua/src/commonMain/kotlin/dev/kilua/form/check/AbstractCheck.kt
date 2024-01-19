@@ -55,11 +55,11 @@ public abstract class AbstractCheck(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean> = WithStateFlowDelegateImpl()
-) : Tag<HTMLInputElement>("input", className, renderConfig), BoolFormControl,
+) : Tag<HTMLInputElement>("input", className, id, renderConfig), BoolFormControl,
     WithStateFlow<Boolean> by withStateFlowDelegate {
 
     public override var value: Boolean by updatingProperty(
@@ -163,8 +163,6 @@ public abstract class AbstractCheck(
         }
         @Suppress("LeakingThis")
         setAttribute("type", type.value)
-        @Suppress("LeakingThis")
-        if (id != null) this.id = id
     }
 
     /**

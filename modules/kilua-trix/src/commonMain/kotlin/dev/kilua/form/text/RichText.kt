@@ -62,12 +62,12 @@ public open class RichText(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     locale: Locale = DefaultLocale(),
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
-) : Tag<HTMLElement>("trix-editor", className, renderConfig),
+) : Tag<HTMLElement>("trix-editor", className, id, renderConfig),
     StringFormControl, WithStateFlow<String?> by withStateFlowDelegate {
 
     public override var value: String? by updatingProperty(
@@ -197,8 +197,6 @@ public open class RichText(
             onEventDirect<Event>("trix-file-accept") { e -> e.preventDefault() }
         }
         @Suppress("LeakingThis")
-        if (id != null) this.id = id
-        @Suppress("LeakingThis")
         role = "textbox"
     }
 
@@ -298,9 +296,9 @@ public open class RichText(
  * @param placeholder the placeholder attribute of the generated HTML textarea element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
- * @param id the ID of the component
  * @param locale the locale for i18n
  * @param className the CSS class name
+ * @param id the ID of the component
  * @param setup a function for setting up the component
  * @return A [RichText] component.
  */
@@ -311,9 +309,9 @@ public fun ComponentBase.richText(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     locale: Locale = DefaultLocale(),
     className: String? = null,
+    id: String? = null,
     setup: @Composable RichText.() -> Unit = {}
 ): RichText {
     val bindId = remember { "kilua_trix_${RichText.idCounter++}" }
@@ -324,9 +322,9 @@ public fun ComponentBase.richText(
                 placeholder,
                 disabled,
                 required,
-                id,
                 locale,
                 className,
+                id,
                 renderConfig
             ).apply {
                 input = bindId + "_input"
@@ -334,7 +332,7 @@ public fun ComponentBase.richText(
             }
         }
     text(value, type = InputType.Hidden, id = bindId + "_input")
-    tag("trix-toolbar") { this.id = bindId + "_toolbar" }
+    tag("trix-toolbar", id = bindId + "_toolbar")
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -346,9 +344,9 @@ public fun ComponentBase.richText(
         set(placeholder) { updateProperty(RichText::placeholder, it) }
         set(disabled) { updateProperty(RichText::disabled, it) }
         set(required) { updateProperty(RichText::required, it) }
-        set(id) { updateProperty(RichText::id, it) }
         set(locale) { updateProperty(RichText::locale, it) }
         set(className) { updateProperty(RichText::className, it) }
+        set(id) { updateProperty(RichText::id, it) }
     }, setup)
     return component
 }

@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Bdo component.
  */
 public open class Bdo(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("bdo", className, renderConfig)
+    Tag<HTMLElement>("bdo", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Bdo] component.
@@ -45,7 +45,7 @@ public open class Bdo(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.bdo(className: String? = null, content: @Composable Bdo.() -> Unit = {}): Bdo {
-    val component = remember { Bdo(className, renderConfig) }
+    val component = remember { Bdo(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Bdo::className, it) }
     }, content)

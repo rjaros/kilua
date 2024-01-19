@@ -34,7 +34,7 @@ import web.dom.HTMLLegendElement
  * HTML Legend component.
  */
 public open class Legend(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLLegendElement>("legend", className, renderConfig)
+    Tag<HTMLLegendElement>("legend", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Legend] component.
@@ -45,7 +45,7 @@ public open class Legend(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.legend(className: String? = null, content: @Composable Legend.() -> Unit = {}): Legend {
-    val component = remember { Legend(className, renderConfig) }
+    val component = remember { Legend(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Legend::className, it) }
     }, content)

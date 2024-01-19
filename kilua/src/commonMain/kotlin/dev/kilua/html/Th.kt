@@ -56,7 +56,7 @@ public open class Th(
     scope: ThScope? = null,
     className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLTableCellElement>("th", className, renderConfig) {
+    Tag<HTMLTableCellElement>("th", className, renderConfig = renderConfig) {
 
     /**
      * The number of columns the cell extends.
@@ -123,7 +123,7 @@ public fun ComponentBase.th(
     colspan: Int? = null, rowspan: Int? = null,
     scope: ThScope? = null, className: String? = null, content: @Composable Th.() -> Unit = {}
 ): Th {
-    val component = remember { Th(colspan, rowspan, scope, className, renderConfig) }
+    val component = remember { Th(colspan, rowspan, scope, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(colspan) { updateProperty(Th::colspan, it) }
         set(rowspan) { updateProperty(Th::rowspan, it) }

@@ -54,8 +54,8 @@ public open class Date(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) : Input<LocalDate>(
     value,
@@ -65,8 +65,8 @@ public open class Date(
     placeholder,
     disabled,
     required,
-    id,
     className,
+    id,
     renderConfig
 ),
     DateFormControl {
@@ -177,8 +177,8 @@ public open class Date(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
- * @param id the ID of the generated HTML input element
  * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
  * @return a [Date] component
  *
@@ -194,8 +194,8 @@ public fun ComponentBase.date(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable Date.() -> Unit = {}
 ): Date {
     val component =
@@ -210,8 +210,8 @@ public fun ComponentBase.date(
                 placeholder,
                 disabled,
                 required,
-                id,
                 className,
+                id,
                 renderConfig
             )
         }
@@ -225,8 +225,8 @@ public fun ComponentBase.date(
         set(placeholder) { updateProperty(Date::placeholder, it) }
         set(disabled) { updateProperty(Date::disabled, it) }
         set(required) { updateProperty(Date::required, it) }
-        set(id) { updateProperty(Date::id, it) }
         set(className) { updateProperty(Date::className, it) }
+        set(id) { updateProperty(Date::id, it) }
     }, setup)
     return component
 }

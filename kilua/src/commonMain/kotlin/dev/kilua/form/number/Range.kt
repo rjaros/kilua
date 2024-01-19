@@ -48,10 +48,10 @@ public open class Range(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<Number>(value, InputType.Range, name, null, null, disabled, required, id, className, renderConfig),
+) : Input<Number>(value, InputType.Range, name, null, null, disabled, required, className, id, renderConfig = renderConfig),
     NumberFormControl {
 
     /**
@@ -133,8 +133,8 @@ public open class Range(
  * @param name the name attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
- * @param id the ID of the component
  * @param className the CSS class name
+ * @param id the ID of the component
  * @param setup a function for setting up the component
  * @return a [Range] component
  */
@@ -147,11 +147,11 @@ public fun ComponentBase.range(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable Range.() -> Unit = {}
 ): Range {
-    val component = remember { Range(value, min, max, step, name, disabled, required, id, className, renderConfig) }
+    val component = remember { Range(value, min, max, step, name, disabled, required, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(value) { updateProperty(Range::value, it) }
         set(min) { updateProperty(Range::min, it) }
@@ -160,8 +160,8 @@ public fun ComponentBase.range(
         set(name) { updateProperty(Range::name, it) }
         set(disabled) { updateProperty(Range::disabled, it) }
         set(required) { updateProperty(Range::required, it) }
-        set(id) { updateProperty(Range::id, it) }
         set(className) { updateProperty(Range::className, it) }
+        set(id) { updateProperty(Range::id, it) }
     }, setup)
     return component
 }

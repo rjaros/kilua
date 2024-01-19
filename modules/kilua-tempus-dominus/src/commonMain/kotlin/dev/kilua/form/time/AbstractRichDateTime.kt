@@ -131,7 +131,7 @@ public abstract class AbstractRichDateTime(
     locale: Locale = DefaultLocale(),
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-) : Div(className, renderConfig) {
+) : Div(className, renderConfig = renderConfig) {
 
     /**
      * The date/time format.

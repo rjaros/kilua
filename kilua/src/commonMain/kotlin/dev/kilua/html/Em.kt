@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Em component.
  */
 public open class Em(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("em", className, renderConfig)
+    Tag<HTMLElement>("em", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Em] component.
@@ -45,7 +45,7 @@ public open class Em(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.em(className: String? = null, content: @Composable Em.() -> Unit = {}): Em {
-    val component = remember { Em(className, renderConfig) }
+    val component = remember { Em(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Em::className, it) }
     }, content)

@@ -34,7 +34,7 @@ import web.dom.HTMLHeadingElement
  * HTML H2 component.
  */
 public open class H2(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadingElement>("h2", className, renderConfig)
+    Tag<HTMLHeadingElement>("h2", className, renderConfig = renderConfig)
 
 /**
  * Creates a [H2] component.
@@ -45,7 +45,7 @@ public open class H2(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.h2(className: String? = null, content: @Composable H2.() -> Unit = {}): H2 {
-    val component = remember { H2(className, renderConfig) }
+    val component = remember { H2(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(H2::className, it) }
     }, content)

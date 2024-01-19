@@ -34,7 +34,7 @@ import web.dom.HTMLHtmlElement
  * HTML Html component.
  */
 public open class Html(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHtmlElement>("html", className, renderConfig)
+    Tag<HTMLHtmlElement>("html", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Html] component.
@@ -45,7 +45,7 @@ public open class Html(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.html(className: String? = null, content: @Composable Html.() -> Unit = {}): Html {
-    val component = remember { Html(className, renderConfig) }
+    val component = remember { Html(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Html::className, it) }
     }, content)

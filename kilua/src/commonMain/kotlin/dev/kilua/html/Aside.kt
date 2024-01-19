@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Aside component.
  */
 public open class Aside(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("aside", className, renderConfig)
+    Tag<HTMLElement>("aside", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Aside] component.
@@ -45,7 +45,7 @@ public open class Aside(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.aside(className: String? = null, content: @Composable Aside.() -> Unit = {}): Aside {
-    val component = remember { Aside(className, renderConfig) }
+    val component = remember { Aside(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Aside::className, it) }
     }, content)

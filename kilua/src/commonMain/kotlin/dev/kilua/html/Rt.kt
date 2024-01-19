@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Rt component.
  */
 public open class Rt(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("rt", className, renderConfig)
+    Tag<HTMLElement>("rt", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Rt] component.
@@ -45,7 +45,7 @@ public open class Rt(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.rt(className: String? = null, content: @Composable Rt.() -> Unit = {}): Rt {
-    val component = remember { Rt(className, renderConfig) }
+    val component = remember { Rt(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Rt::className, it) }
     }, content)

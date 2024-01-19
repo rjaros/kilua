@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Search component.
  */
 public open class Search(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("search", className, renderConfig)
+    Tag<HTMLElement>("search", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Search] component.
@@ -45,7 +45,7 @@ public open class Search(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.search(className: String? = null, content: @Composable Search.() -> Unit = {}): Search {
-    val component = remember { Search(className, renderConfig) }
+    val component = remember { Search(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Search::className, it) }
     }, content)

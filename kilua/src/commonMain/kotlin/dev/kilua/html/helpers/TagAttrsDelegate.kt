@@ -62,14 +62,6 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var id: String? by updatingProperty(skipUpdate = skipUpdates) {
-        if (it != null) {
-            element.id = it
-        } else {
-            element.removeAttribute("id")
-        }
-    }
-
     override var title: String? by updatingProperty(skipUpdate = skipUpdates) {
         if (it != null) {
             element.title = it

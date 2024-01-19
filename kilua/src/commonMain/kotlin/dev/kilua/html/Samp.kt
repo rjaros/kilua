@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Samp component.
  */
 public open class Samp(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("samp", className, renderConfig)
+    Tag<HTMLElement>("samp", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Samp] component.
@@ -45,7 +45,7 @@ public open class Samp(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.samp(className: String? = null, content: @Composable Samp.() -> Unit = {}): Samp {
-    val component = remember { Samp(className, renderConfig) }
+    val component = remember { Samp(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Samp::className, it) }
     }, content)

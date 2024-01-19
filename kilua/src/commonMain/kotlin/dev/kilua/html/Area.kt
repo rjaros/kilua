@@ -34,7 +34,7 @@ import web.dom.HTMLAreaElement
  * HTML Area component.
  */
 public open class Area(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLAreaElement>("area", className, renderConfig)
+    Tag<HTMLAreaElement>("area", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Area] component.
@@ -45,7 +45,7 @@ public open class Area(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.area(className: String? = null, setup: Area.() -> Unit = {}): Area {
-    val component = remember { Area(className, renderConfig) }
+    val component = remember { Area(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Area::className, it) }
     }) {

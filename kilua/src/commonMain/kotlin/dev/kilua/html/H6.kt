@@ -34,7 +34,7 @@ import web.dom.HTMLHeadingElement
  * HTML H6 component.
  */
 public open class H6(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadingElement>("h6", className, renderConfig)
+    Tag<HTMLHeadingElement>("h6", className, renderConfig = renderConfig)
 
 /**
  * Creates a [H6] component.
@@ -45,7 +45,7 @@ public open class H6(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.h6(className: String? = null, content: @Composable H6.() -> Unit = {}): H6 {
-    val component = remember { H6(className, renderConfig) }
+    val component = remember { H6(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(H6::className, it) }
     }, content)

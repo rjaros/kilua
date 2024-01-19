@@ -34,7 +34,7 @@ import web.dom.HTMLQuoteElement
  * HTML Blockquote component.
  */
 public open class Blockquote(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLQuoteElement>("blockquote", className, renderConfig)
+    Tag<HTMLQuoteElement>("blockquote", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Blockquote] component.
@@ -48,7 +48,7 @@ public fun ComponentBase.blockquote(
     className: String? = null,
     content: @Composable Blockquote.() -> Unit = {}
 ): Blockquote {
-    val component = remember { Blockquote(className, renderConfig) }
+    val component = remember { Blockquote(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Blockquote::className, it) }
     }, content)

@@ -37,10 +37,10 @@ public open class Radio(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : AbstractCheck(CheckInputType.Radio, value, name, disabled, required, id, className, renderConfig)
+) : AbstractCheck(CheckInputType.Radio, value, name, disabled, required, className, id, renderConfig = renderConfig)
 
 /**
  * Creates [Radio] component.
@@ -60,18 +60,18 @@ public fun ComponentBase.radio(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable Radio.() -> Unit = {}
 ): Radio {
-    val component = remember { Radio(value, name, disabled, required, id, className, renderConfig) }
+    val component = remember { Radio(value, name, disabled, required, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(value) { updateProperty(Radio::value, it) }
         set(name) { updateProperty(Radio::name, it) }
         set(disabled) { updateProperty(Radio::disabled, it) }
         set(required) { updateProperty(Radio::required, it) }
-        set(id) { updateProperty(Radio::id, it) }
         set(className) { updateProperty(Radio::className, it) }
+        set(id) { updateProperty(Radio::id, it) }
     }, setup)
     return component
 }

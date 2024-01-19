@@ -34,7 +34,7 @@ import web.dom.HTMLTitleElement
  * HTML Title component.
  */
 public open class Title(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTitleElement>("title", className, renderConfig)
+    Tag<HTMLTitleElement>("title", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Title] component.
@@ -45,7 +45,7 @@ public open class Title(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.title(className: String? = null, content: @Composable Title.() -> Unit = {}): Title {
-    val component = remember { Title(className, renderConfig) }
+    val component = remember { Title(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Title::className, it) }
     }, content)

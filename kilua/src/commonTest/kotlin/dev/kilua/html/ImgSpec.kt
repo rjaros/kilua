@@ -39,9 +39,9 @@ class ImgSpec : DomSpec {
                     title = "A title"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<img class="test" src="/image.png" alt="An image" id="test-id" title="A title">"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<img class="test" src="/image.png" alt="An image" id="test-id" title="A title">""",
+                root.element.innerHTML,
                 "Should render an HTML Img tag to DOM"
             )
         }
@@ -56,9 +56,9 @@ class ImgSpec : DomSpec {
                     title = "A title"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><img class="test" src="/image.png" alt="An image" id="test-id" title="A title"></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<div><img class="test" src="/image.png" alt="An image" id="test-id" title="A title"></div>""",
+                root.renderToString(),
                 "Should render an HTML Img tag to a String"
             )
         }

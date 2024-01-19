@@ -34,7 +34,7 @@ import web.dom.HTMLHeadingElement
  * HTML H4 component.
  */
 public open class H4(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadingElement>("h4", className, renderConfig)
+    Tag<HTMLHeadingElement>("h4", className, renderConfig = renderConfig)
 
 /**
  * Creates a [H4] component.
@@ -45,7 +45,7 @@ public open class H4(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.h4(className: String? = null, content: @Composable H4.() -> Unit = {}): H4 {
-    val component = remember { H4(className, renderConfig) }
+    val component = remember { H4(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(H4::className, it) }
     }, content)

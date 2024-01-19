@@ -34,7 +34,7 @@ import web.dom.HTMLPictureElement
  * HTML Picture component.
  */
 public open class Picture(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLPictureElement>("picture", className, renderConfig)
+    Tag<HTMLPictureElement>("picture", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Picture] component.
@@ -45,7 +45,7 @@ public open class Picture(className: String? = null, renderConfig: RenderConfig 
  */
 @Composable
 public fun ComponentBase.picture(className: String? = null, content: @Composable Picture.() -> Unit = {}): Picture {
-    val component = remember { Picture(className, renderConfig) }
+    val component = remember { Picture(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Picture::className, it) }
     }, content)

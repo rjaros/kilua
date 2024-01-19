@@ -79,7 +79,7 @@ public open class TabPanel(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
 
     public open var activeIndex: Int by updatingProperty(activeIndex, skipUpdate, notifyFunction = {
         activeIndexState = it
@@ -134,7 +134,7 @@ private fun ComponentBase.tabPanel(
     className: String? = null,
     content: @Composable TabPanel.() -> Unit,
 ): TabPanel {
-    val component = remember { TabPanel(activeIndex, className, renderConfig) }
+    val component = remember { TabPanel(activeIndex, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(activeIndex) { updateProperty(TabPanel::activeIndex, it) }
         set(className) { updateProperty(TabPanel::className, it) }

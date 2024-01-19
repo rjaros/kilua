@@ -56,7 +56,7 @@ public open class Ol(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLOListElement>("ol", className, renderConfig) {
+    Tag<HTMLOListElement>("ol", className, renderConfig = renderConfig) {
 
     /**
      * The type of the numbered list.
@@ -122,7 +122,7 @@ public open class Ol(
 public fun ComponentBase.ol(
     type: OlType? = null, start: Int? = null, className: String? = null, content: @Composable Ol.() -> Unit = {}
 ): Ol {
-    val component = remember { Ol(type, start, className, renderConfig) }
+    val component = remember { Ol(type, start, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(type) { updateProperty(Ol::type, it) }
         set(start) { updateProperty(Ol::start, it) }

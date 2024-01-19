@@ -56,8 +56,8 @@ public open class DateTime(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) : Input<LocalDateTime>(
     value,
@@ -67,8 +67,8 @@ public open class DateTime(
     placeholder,
     disabled,
     required,
-    id,
     className,
+    id,
     renderConfig
 ),
     DateTimeFormControl {
@@ -187,8 +187,8 @@ public open class DateTime(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
- * @param id the ID of the generated HTML input element
  * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
  * @return a [DateTime] component
  */
@@ -203,8 +203,8 @@ public fun ComponentBase.dateTime(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable DateTime.() -> Unit = {}
 ): DateTime {
     val component =
@@ -219,8 +219,8 @@ public fun ComponentBase.dateTime(
                 placeholder,
                 disabled,
                 required,
-                id,
                 className,
+                id,
                 renderConfig
             )
         }
@@ -234,8 +234,8 @@ public fun ComponentBase.dateTime(
         set(placeholder) { updateProperty(DateTime::placeholder, it) }
         set(disabled) { updateProperty(DateTime::disabled, it) }
         set(required) { updateProperty(DateTime::required, it) }
-        set(id) { updateProperty(DateTime::id, it) }
         set(className) { updateProperty(DateTime::className, it) }
+        set(id) { updateProperty(DateTime::id, it) }
     }, setup)
     return component
 }

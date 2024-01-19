@@ -34,7 +34,7 @@ import web.dom.HTMLBaseElement
  * HTML Base component.
  */
 public open class Base(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLBaseElement>("base", className, renderConfig)
+    Tag<HTMLBaseElement>("base", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Base] component.
@@ -45,7 +45,7 @@ public open class Base(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.base(className: String? = null, setup: Base.() -> Unit = {}): Base {
-    val component = remember { Base(className, renderConfig) }
+    val component = remember { Base(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Base::className, it) }
     }) {

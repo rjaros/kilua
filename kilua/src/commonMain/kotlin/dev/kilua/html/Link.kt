@@ -41,7 +41,7 @@ public open class Link(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLAnchorElement>("a", className, renderConfig) {
+    Tag<HTMLAnchorElement>("a", className, renderConfig = renderConfig) {
 
     /**
      * The URL of the link.
@@ -110,7 +110,7 @@ private fun ComponentBase.link(
     className: String? = null,
     content: @Composable Link.() -> Unit = {}
 ): Link {
-    val component = remember { Link(href, target, className, renderConfig) }
+    val component = remember { Link(href, target, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(href) { updateProperty(Link::href, it) }
         set(target) { updateProperty(Link::target, it) }

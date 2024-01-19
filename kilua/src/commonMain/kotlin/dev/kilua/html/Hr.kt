@@ -34,7 +34,7 @@ import web.dom.HTMLHRElement
  * HTML Hr component.
  */
 public open class Hr(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHRElement>("hr", className, renderConfig)
+    Tag<HTMLHRElement>("hr", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Hr] component.
@@ -45,7 +45,7 @@ public open class Hr(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.hr(className: String? = null, setup: Hr.() -> Unit = {}): Hr {
-    val component = remember { Hr(className, renderConfig) }
+    val component = remember { Hr(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Hr::className, it) }
     }) {

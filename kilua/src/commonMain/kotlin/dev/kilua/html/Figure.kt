@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Figure component.
  */
 public open class Figure(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("figure", className, renderConfig)
+    Tag<HTMLElement>("figure", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Figure] component.
@@ -45,7 +45,7 @@ public open class Figure(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.figure(className: String? = null, content: @Composable Figure.() -> Unit = {}): Figure {
-    val component = remember { Figure(className, renderConfig) }
+    val component = remember { Figure(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Figure::className, it) }
     }, content)

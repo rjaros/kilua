@@ -57,6 +57,7 @@ import web.dom.HTMLElement
 public open class Tag<E : HTMLElement>(
     protected val tagName: String,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val tagAttrs: TagAttrsDelegate<E> = TagAttrsDelegateImpl(!renderConfig.isDom || !isDom),
     protected val tagStyle: TagStyleDelegate<E> = TagStyleDelegateImpl(!renderConfig.isDom || !isDom),
@@ -102,6 +103,17 @@ public open class Tag<E : HTMLElement>(
         updateElementClassList()
     }
 
+    /**
+     * The ID attribute of the current component.
+     */
+    public open var id: String? by updatingProperty(id, skipUpdate) {
+        if (it != null) {
+            element.id = it
+        } else {
+            element.removeAttribute("id")
+        }
+    }
+
     override var visible: Boolean = true
         set(value) {
             field = value
@@ -126,6 +138,9 @@ public open class Tag<E : HTMLElement>(
         tagDnd.tagWithDnd(this)
         @Suppress("LeakingThis")
         updateElementClassList()
+        if (renderConfig.isDom && id != null) {
+            element.id = id
+        }
     }
 
     /**
@@ -164,6 +179,7 @@ public open class Tag<E : HTMLElement>(
             } else if (internalClassName != null) {
                 builder.append(" class=\"$internalClassName\"")
             }
+            if (id != null) builder.append(" id=\"$id\"")
             val htmlProperties = htmlPropertyList.mapNotNull { prop ->
                 propertyValues[prop]?.let { prop to it }
             }.toMap()
@@ -209,10 +225,11 @@ public open class Tag<E : HTMLElement>(
 }
 
 /**
- * Creates a [Tag] component.
+ * Creates a [Tag] component with given DOM element type.
  *
  * @param tagName the name of the HTML tag
  * @param className the CSS class name
+ * @param id the ID attribute of the HTML tag
  * @param content the content of the component
  * @return the [Tag] component
  */
@@ -220,22 +237,34 @@ public open class Tag<E : HTMLElement>(
 public fun <E : HTMLElement> ComponentBase.tag(
     tagName: String,
     className: String? = null,
+    id: String? = null,
     content: @Composable Tag<E>.() -> Unit = {}
 ): Tag<E> {
     return key(tagName) {
-        val component = remember { Tag<E>(tagName, className, renderConfig) }
+        val component = remember { Tag<E>(tagName, className, id, renderConfig = renderConfig) }
         ComponentNode(component, {
             set(className) { updateProperty(Tag<HTMLElement>::className, it) }
+            set(id) { updateProperty(Tag<HTMLElement>::id, it) }
         }, content)
         component
     }
 }
 
+/**
+ * Creates a [Tag] component with HTMLElement type.
+ *
+ * @param tagName the name of the HTML tag
+ * @param className the CSS class name
+ * @param id the ID attribute of the HTML tag
+ * @param content the content of the component
+ * @return the [Tag] component
+ */
 @Composable
 public fun ComponentBase.tag(
     tagName: String,
     className: String? = null,
+    id: String? = null,
     content: @Composable Tag<HTMLElement>.() -> Unit = {}
 ): Tag<HTMLElement> {
-    return tag<HTMLElement>(tagName, className, content)
+    return tag<HTMLElement>(tagName, className, id, content)
 }

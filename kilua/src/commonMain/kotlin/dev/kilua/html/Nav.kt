@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Nav component.
  */
 public open class Nav(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("nav", className, renderConfig)
+    Tag<HTMLElement>("nav", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Nav] component.
@@ -45,7 +45,7 @@ public open class Nav(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.nav(className: String? = null, content: @Composable Nav.() -> Unit = {}): Nav {
-    val component = remember { Nav(className, renderConfig) }
+    val component = remember { Nav(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Nav::className, it) }
     }, content)

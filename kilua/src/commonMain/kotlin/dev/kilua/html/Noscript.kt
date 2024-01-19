@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Noscript component.
  */
 public open class Noscript(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("noscript", className, renderConfig)
+    Tag<HTMLElement>("noscript", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Noscript] component.
@@ -45,7 +45,7 @@ public open class Noscript(className: String? = null, renderConfig: RenderConfig
  */
 @Composable
 public fun ComponentBase.noscript(className: String? = null, content: @Composable Noscript.() -> Unit = {}): Noscript {
-    val component = remember { Noscript(className, renderConfig) }
+    val component = remember { Noscript(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Noscript::className, it) }
     }, content)

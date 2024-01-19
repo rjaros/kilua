@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Figcaption component.
  */
 public open class Figcaption(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("figcaption", className, renderConfig)
+    Tag<HTMLElement>("figcaption", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Figcaption] component.
@@ -48,7 +48,7 @@ public fun ComponentBase.figcaption(
     className: String? = null,
     content: @Composable Figcaption.() -> Unit = {}
 ): Figcaption {
-    val component = remember { Figcaption(className, renderConfig) }
+    val component = remember { Figcaption(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Figcaption::className, it) }
     }, content)

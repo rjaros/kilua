@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Abbr component.
  */
 public open class Abbr(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("abbr", className, renderConfig)
+    Tag<HTMLElement>("abbr", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Abbr] component.
@@ -45,7 +45,7 @@ public open class Abbr(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.abbr(className: String? = null, content: @Composable Abbr.() -> Unit = {}): Abbr {
-    val component = remember { Abbr(className, renderConfig) }
+    val component = remember { Abbr(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Abbr::className, it) }
     }, content)

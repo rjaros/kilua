@@ -34,7 +34,7 @@ import web.dom.HTMLDetailsElement
  * HTML Details component.
  */
 public open class Details(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDetailsElement>("details", className, renderConfig)
+    Tag<HTMLDetailsElement>("details", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Details] component.
@@ -45,7 +45,7 @@ public open class Details(className: String? = null, renderConfig: RenderConfig 
  */
 @Composable
 public fun ComponentBase.details(className: String? = null, content: @Composable Details.() -> Unit = {}): Details {
-    val component = remember { Details(className, renderConfig) }
+    val component = remember { Details(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Details::className, it) }
     }, content)

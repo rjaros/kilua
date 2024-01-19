@@ -34,7 +34,7 @@ import web.dom.HTMLAudioElement
  * HTML Audio component.
  */
 public open class Audio(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLAudioElement>("audio", className, renderConfig)
+    Tag<HTMLAudioElement>("audio", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Audio] component.
@@ -45,7 +45,7 @@ public open class Audio(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.audio(className: String? = null, content: @Composable Audio.() -> Unit = {}): Audio {
-    val component = remember { Audio(className, renderConfig) }
+    val component = remember { Audio(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Audio::className, it) }
     }, content)

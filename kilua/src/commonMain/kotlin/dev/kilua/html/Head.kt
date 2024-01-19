@@ -34,7 +34,7 @@ import web.dom.HTMLHeadElement
  * HTML Head component.
  */
 public open class Head(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadElement>("head", className, renderConfig)
+    Tag<HTMLHeadElement>("head", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Head] component.
@@ -45,7 +45,7 @@ public open class Head(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.head(className: String? = null, content: @Composable Head.() -> Unit = {}): Head {
-    val component = remember { Head(className, renderConfig) }
+    val component = remember { Head(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Head::className, it) }
     }, content)

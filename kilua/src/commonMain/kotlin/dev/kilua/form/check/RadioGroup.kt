@@ -45,11 +45,11 @@ public open class RadioGroup(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
-) : Div(className, renderConfig), StringFormControl, WithStateFlow<String?> by withStateFlowDelegate {
+) : Div(className, id, renderConfig), StringFormControl, WithStateFlow<String?> by withStateFlowDelegate {
 
     public override var value: String? by updatingProperty(
         value,
@@ -116,8 +116,6 @@ public open class RadioGroup(
     init {
         @Suppress("LeakingThis")
         withStateFlowDelegate.formControl(this)
-        @Suppress("LeakingThis")
-        if (id != null) this.id = id
     }
 
     /**
@@ -149,8 +147,8 @@ public open class RadioGroup(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
- * @param id the ID of the input
  * @param className the CSS class name
+ * @param id the ID of the input
  * @param setup a function for setting up the component
  * @return a [RadioGroup] component
  */
@@ -162,19 +160,19 @@ public fun ComponentBase.radioGroup(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable RadioGroup.() -> Unit = {}
 ): RadioGroup {
-    val component = remember { RadioGroup(value, inline, name, disabled, required, id, className, renderConfig) }
+    val component = remember { RadioGroup(value, inline, name, disabled, required, className, id, renderConfig) }
     ComponentNode(component, {
         set(value) { updateProperty(RadioGroup::value, it) }
         set(inline) { updateProperty(RadioGroup::inline, it) }
         set(name) { updateProperty(RadioGroup::name, it) }
         set(disabled) { updateProperty(RadioGroup::disabled, it) }
         set(required) { updateProperty(RadioGroup::required, it) }
-        set(id) { updateProperty(RadioGroup::id, it) }
         set(className) { updateProperty(RadioGroup::className, it) }
+        set(id) { updateProperty(RadioGroup::id, it) }
     }) {
         setup(component)
         options?.forEachIndexed { index, option ->

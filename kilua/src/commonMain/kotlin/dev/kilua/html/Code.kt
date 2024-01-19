@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Code component.
  */
 public open class Code(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("code", className, renderConfig)
+    Tag<HTMLElement>("code", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Code] component.
@@ -45,7 +45,7 @@ public open class Code(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.code(className: String? = null, content: @Composable Code.() -> Unit = {}): Code {
-    val component = remember { Code(className, renderConfig) }
+    val component = remember { Code(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Code::className, it) }
     }, content)

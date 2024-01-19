@@ -34,7 +34,7 @@ import web.dom.HTMLTableSectionElement
  * HTML Tbody component.
  */
 public open class Tbody(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableSectionElement>("tbody", className, renderConfig)
+    Tag<HTMLTableSectionElement>("tbody", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Tbody] component.
@@ -45,7 +45,7 @@ public open class Tbody(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.tbody(className: String? = null, content: @Composable Tbody.() -> Unit = {}): Tbody {
-    val component = remember { Tbody(className, renderConfig) }
+    val component = remember { Tbody(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Tbody::className, it) }
     }, content)

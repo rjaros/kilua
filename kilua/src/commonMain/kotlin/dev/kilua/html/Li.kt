@@ -34,7 +34,7 @@ import web.dom.HTMLLIElement
  * HTML Li component.
  */
 public open class Li(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLLIElement>("li", className, renderConfig)
+    Tag<HTMLLIElement>("li", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Li] component.
@@ -45,7 +45,7 @@ public open class Li(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.li(className: String? = null, content: @Composable Li.() -> Unit = {}): Li {
-    val component = remember { Li(className, renderConfig) }
+    val component = remember { Li(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Li::className, it) }
     }, content)

@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Dfn component.
  */
 public open class Dfn(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("dfn", className, renderConfig)
+    Tag<HTMLElement>("dfn", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Dfn] component.
@@ -45,7 +45,7 @@ public open class Dfn(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.dfn(className: String? = null, content: @Composable Dfn.() -> Unit = {}): Dfn {
-    val component = remember { Dfn(className, renderConfig) }
+    val component = remember { Dfn(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Dfn::className, it) }
     }, content)

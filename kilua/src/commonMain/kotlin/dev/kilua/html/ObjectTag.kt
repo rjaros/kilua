@@ -34,7 +34,7 @@ import web.dom.HTMLObjectElement
  * Object tag component.
  */
 public open class ObjectTag(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLObjectElement>("object", className, renderConfig)
+    Tag<HTMLObjectElement>("object", className, renderConfig = renderConfig)
 
 /**
  * Creates a [ObjectTag] component.
@@ -48,7 +48,7 @@ public fun ComponentBase.objectTag(
     className: String? = null,
     content: @Composable ObjectTag.() -> Unit = {}
 ): ObjectTag {
-    val component = remember { ObjectTag(className, renderConfig) }
+    val component = remember { ObjectTag(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(ObjectTag::className, it) }
     }, content)

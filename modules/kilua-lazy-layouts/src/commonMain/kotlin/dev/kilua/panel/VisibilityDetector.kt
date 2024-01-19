@@ -63,7 +63,5 @@ internal fun ComponentBase.visibilityDetector(onVisible: () -> Unit) {
         }
     }
 
-    div {
-        this.id = id
-    }
+    div(id = id)
 }

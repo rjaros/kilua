@@ -34,7 +34,7 @@ import web.dom.HTMLDListElement
  * HTML Dl component.
  */
 public open class Dl(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDListElement>("dl", className, renderConfig)
+    Tag<HTMLDListElement>("dl", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Dl] component.
@@ -45,7 +45,7 @@ public open class Dl(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.dl(className: String? = null, content: @Composable Dl.() -> Unit = {}): Dl {
-    val component = remember { Dl(className, renderConfig) }
+    val component = remember { Dl(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Dl::className, it) }
     }, content)

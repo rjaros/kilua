@@ -34,7 +34,7 @@ import web.dom.HTMLMenuElement
  * HTML Menu component.
  */
 public open class Menu(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLMenuElement>("menu", className, renderConfig)
+    Tag<HTMLMenuElement>("menu", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Menu] component.
@@ -45,7 +45,7 @@ public open class Menu(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.menu(className: String? = null, content: @Composable Menu.() -> Unit = {}): Menu {
-    val component = remember { Menu(className, renderConfig) }
+    val component = remember { Menu(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Menu::className, it) }
     }, content)

@@ -34,7 +34,7 @@ import web.dom.HTMLBodyElement
  * HTML Body component.
  */
 public open class Body(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLBodyElement>("body", className, renderConfig)
+    Tag<HTMLBodyElement>("body", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Body] component.
@@ -45,7 +45,7 @@ public open class Body(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.body(className: String? = null, content: @Composable Body.() -> Unit = {}): Body {
-    val component = remember { Body(className, renderConfig) }
+    val component = remember { Body(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Body::className, it) }
     }, content)

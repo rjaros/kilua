@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Article component.
  */
 public open class Article(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("article", className, renderConfig)
+    Tag<HTMLElement>("article", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Article] component.
@@ -45,7 +45,7 @@ public open class Article(className: String? = null, renderConfig: RenderConfig 
  */
 @Composable
 public fun ComponentBase.article(className: String? = null, content: @Composable Article.() -> Unit = {}): Article {
-    val component = remember { Article(className, renderConfig) }
+    val component = remember { Article(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Article::className, it) }
     }, content)

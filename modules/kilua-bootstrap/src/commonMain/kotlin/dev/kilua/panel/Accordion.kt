@@ -54,7 +54,7 @@ public open class Accordion(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
 
     internal val items = mutableStateMapOf<Int, AccordionItem>()
     internal var itemsOrderList: List<Int> by mutableStateOf(emptyList())
@@ -101,7 +101,7 @@ private fun ComponentBase.accordion(
     className: String? = null,
     content: @Composable Accordion.() -> Unit,
 ): Accordion {
-    val component = remember { Accordion(className, renderConfig) }
+    val component = remember { Accordion(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Accordion::className, it) }
     }, content)

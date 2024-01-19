@@ -57,7 +57,7 @@ public open class Button(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLButtonElement>("button", className, renderConfig) {
+    Tag<HTMLButtonElement>("button", className, renderConfig = renderConfig) {
 
     /**
      * The type of the button.
@@ -122,7 +122,7 @@ private fun ComponentBase.button(
     className: String? = null,
     content: @Composable Button.() -> Unit = {}
 ): Button {
-    val component = remember { Button(type, disabled, className, renderConfig) }
+    val component = remember { Button(type, disabled, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(type) { updateProperty(Button::type, it) }
         set(disabled) { updateProperty(Button::disabled, it) }

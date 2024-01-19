@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Dt component.
  */
 public open class Dt(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("dt", className, renderConfig)
+    Tag<HTMLElement>("dt", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Dt] component.
@@ -45,7 +45,7 @@ public open class Dt(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.dt(className: String? = null, content: @Composable Dt.() -> Unit = {}): Dt {
-    val component = remember { Dt(className, renderConfig) }
+    val component = remember { Dt(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Dt::className, it) }
     }, content)

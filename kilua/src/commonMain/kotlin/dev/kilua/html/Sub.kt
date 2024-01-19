@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Sub component.
  */
 public open class Sub(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("sub", className, renderConfig)
+    Tag<HTMLElement>("sub", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Sub] component.
@@ -45,7 +45,7 @@ public open class Sub(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.sub(className: String? = null, content: @Composable Sub.() -> Unit = {}): Sub {
-    val component = remember { Sub(className, renderConfig) }
+    val component = remember { Sub(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Sub::className, it) }
     }, content)

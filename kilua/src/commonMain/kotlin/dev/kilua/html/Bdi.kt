@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Bdi component.
  */
 public open class Bdi(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("bdi", className, renderConfig)
+    Tag<HTMLElement>("bdi", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Bdi] component.
@@ -45,7 +45,7 @@ public open class Bdi(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.bdi(className: String? = null, content: @Composable Bdi.() -> Unit = {}): Bdi {
-    val component = remember { Bdi(className, renderConfig) }
+    val component = remember { Bdi(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Bdi::className, it) }
     }, content)

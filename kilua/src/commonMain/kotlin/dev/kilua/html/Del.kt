@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Del component.
  */
 public open class Del(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("del", className, renderConfig)
+    Tag<HTMLElement>("del", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Del] component.
@@ -45,7 +45,7 @@ public open class Del(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.del(className: String? = null, content: @Composable Del.() -> Unit = {}): Del {
-    val component = remember { Del(className, renderConfig) }
+    val component = remember { Del(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Del::className, it) }
     }, content)

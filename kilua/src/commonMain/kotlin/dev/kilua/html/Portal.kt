@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Portal component.
  */
 public open class Portal(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("portal", className, renderConfig)
+    Tag<HTMLElement>("portal", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Portal] component.
@@ -45,7 +45,7 @@ public open class Portal(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.portal(className: String? = null, content: @Composable Portal.() -> Unit = {}): Portal {
-    val component = remember { Portal(className, renderConfig) }
+    val component = remember { Portal(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Portal::className, it) }
     }, content)

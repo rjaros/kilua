@@ -46,11 +46,11 @@ public open class TriStateCheckBox(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean?> = WithStateFlowDelegateImpl()
-) : Tag<HTMLInputElement>("input", className, renderConfig), TriStateFormControl,
+) : Tag<HTMLInputElement>("input", className, id, renderConfig), TriStateFormControl,
     WithStateFlow<Boolean?> by withStateFlowDelegate {
 
     public override var value: Boolean? by updatingProperty(
@@ -160,8 +160,6 @@ public open class TriStateCheckBox(
         onEventDirect<Event>("click") {
             cycleValue()
         }
-        @Suppress("LeakingThis")
-        if (id != null) this.id = id
     }
 
     /**
@@ -206,8 +204,8 @@ public open class TriStateCheckBox(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
- * @param id the ID of the input
  * @param className the CSS class name
+ * @param id the ID of the input
  * @param setup a function for setting up the component
  * @return a [TriStateCheckBox] component
  */
@@ -217,18 +215,18 @@ public fun ComponentBase.triStateCheckBox(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable TriStateCheckBox.() -> Unit = {}
 ): TriStateCheckBox {
-    val component = remember { TriStateCheckBox(value, name, disabled, required, id, className, renderConfig) }
+    val component = remember { TriStateCheckBox(value, name, disabled, required, className, id, renderConfig) }
     ComponentNode(component, {
         set(value) { updateProperty(TriStateCheckBox::value, it) }
         set(name) { updateProperty(TriStateCheckBox::name, it) }
         set(disabled) { updateProperty(TriStateCheckBox::disabled, it) }
         set(required) { updateProperty(TriStateCheckBox::required, it) }
-        set(id) { updateProperty(TriStateCheckBox::id, it) }
         set(className) { updateProperty(TriStateCheckBox::className, it) }
+        set(id) { updateProperty(TriStateCheckBox::id, it) }
     }, setup)
     return component
 }

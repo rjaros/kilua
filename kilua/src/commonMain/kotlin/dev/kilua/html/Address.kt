@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Address component.
  */
 public open class Address(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("address", className, renderConfig)
+    Tag<HTMLElement>("address", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Address] component.
@@ -45,7 +45,7 @@ public open class Address(className: String? = null, renderConfig: RenderConfig 
  */
 @Composable
 public fun ComponentBase.address(className: String? = null, content: @Composable Address.() -> Unit = {}): Address {
-    val component = remember { Address(className, renderConfig) }
+    val component = remember { Address(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Address::className, it) }
     }, content)

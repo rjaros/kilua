@@ -34,7 +34,7 @@ import web.dom.HTMLTableSectionElement
  * HTML Thead component.
  */
 public open class Thead(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableSectionElement>("thead", className, renderConfig)
+    Tag<HTMLTableSectionElement>("thead", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Thead] component.
@@ -45,7 +45,7 @@ public open class Thead(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.thead(className: String? = null, content: @Composable Thead.() -> Unit = {}): Thead {
-    val component = remember { Thead(className, renderConfig) }
+    val component = remember { Thead(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Thead::className, it) }
     }, content)

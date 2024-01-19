@@ -34,7 +34,7 @@ import web.dom.HTMLEmbedElement
  * HTML Embed component.
  */
 public open class Embed(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLEmbedElement>("embed", className, renderConfig)
+    Tag<HTMLEmbedElement>("embed", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Embed] component.
@@ -45,7 +45,7 @@ public open class Embed(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.embed(className: String? = null, setup: Embed.() -> Unit = {}): Embed {
-    val component = remember { Embed(className, renderConfig) }
+    val component = remember { Embed(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Embed::className, it) }
     }) {

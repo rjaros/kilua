@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Kbd component.
  */
 public open class Kbd(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("kbd", className, renderConfig)
+    Tag<HTMLElement>("kbd", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Kbd] component.
@@ -45,7 +45,7 @@ public open class Kbd(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.kbd(className: String? = null, content: @Composable Kbd.() -> Unit = {}): Kbd {
-    val component = remember { Kbd(className, renderConfig) }
+    val component = remember { Kbd(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Kbd::className, it) }
     }, content)

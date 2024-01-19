@@ -39,7 +39,7 @@ public open class Label(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLLabelElement>("label", className, renderConfig) {
+    Tag<HTMLLabelElement>("label", className, renderConfig = renderConfig) {
 
     /**
      * The ID of the labeled element.
@@ -79,7 +79,7 @@ public fun ComponentBase.label(
     className: String? = null,
     content: @Composable Label.() -> Unit = {}
 ): Label {
-    val component = remember { Label(htmlFor, className, renderConfig) }
+    val component = remember { Label(htmlFor, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(htmlFor) { updateProperty("for", it) }
         set(className) { updateProperty(Label::className, it) }

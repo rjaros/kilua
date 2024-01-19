@@ -34,7 +34,7 @@ import web.dom.HTMLDataElement
  * HTML Data component.
  */
 public open class Data(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDataElement>("data", className, renderConfig)
+    Tag<HTMLDataElement>("data", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Data] component.
@@ -45,7 +45,7 @@ public open class Data(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.data(className: String? = null, content: @Composable Data.() -> Unit = {}): Data {
-    val component = remember { Data(className, renderConfig) }
+    val component = remember { Data(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Data::className, it) }
     }, content)

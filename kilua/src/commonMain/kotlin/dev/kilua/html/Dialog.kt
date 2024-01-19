@@ -34,7 +34,7 @@ import web.dom.HTMLDialogElement
  * HTML Dialog component.
  */
 public open class Dialog(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDialogElement>("dialog", className, renderConfig)
+    Tag<HTMLDialogElement>("dialog", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Dialog] component.
@@ -45,7 +45,7 @@ public open class Dialog(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.dialog(className: String? = null, content: @Composable Dialog.() -> Unit = {}): Dialog {
-    val component = remember { Dialog(className, renderConfig) }
+    val component = remember { Dialog(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Dialog::className, it) }
     }, content)

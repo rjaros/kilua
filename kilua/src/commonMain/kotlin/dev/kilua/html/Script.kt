@@ -34,7 +34,7 @@ import web.dom.HTMLScriptElement
  * HTML Script component.
  */
 public open class Script(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLScriptElement>("script", className, renderConfig)
+    Tag<HTMLScriptElement>("script", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Script] component.
@@ -45,7 +45,7 @@ public open class Script(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.script(className: String? = null, content: @Composable Script.() -> Unit = {}): Script {
-    val component = remember { Script(className, renderConfig) }
+    val component = remember { Script(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Script::className, it) }
     }, content)

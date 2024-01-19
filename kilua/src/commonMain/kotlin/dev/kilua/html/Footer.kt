@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Footer component.
  */
 public open class Footer(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("footer", className, renderConfig)
+    Tag<HTMLElement>("footer", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Footer] component.
@@ -45,7 +45,7 @@ public open class Footer(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.footer(className: String? = null, content: @Composable Footer.() -> Unit = {}): Footer {
-    val component = remember { Footer(className, renderConfig) }
+    val component = remember { Footer(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Footer::className, it) }
     }, content)

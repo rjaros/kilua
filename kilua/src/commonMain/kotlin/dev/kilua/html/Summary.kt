@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Summary component.
  */
 public open class Summary(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("summary", className, renderConfig)
+    Tag<HTMLElement>("summary", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Summary] component.
@@ -45,7 +45,7 @@ public open class Summary(className: String? = null, renderConfig: RenderConfig 
  */
 @Composable
 public fun ComponentBase.summary(className: String? = null, content: @Composable Summary.() -> Unit = {}): Summary {
-    val component = remember { Summary(className, renderConfig) }
+    val component = remember { Summary(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Summary::className, it) }
     }, content)

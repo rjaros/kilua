@@ -81,7 +81,7 @@ public open class SplitPanel(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
 
     /**
      * Split panel direction.
@@ -282,7 +282,7 @@ public fun ComponentBase.splitPanel(
     className: String? = null,
     content: @Composable SplitPanel.() -> Unit = {}
 ): SplitPanel {
-    val component = remember { SplitPanel(dir, className, renderConfig) }
+    val component = remember { SplitPanel(dir, className, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {

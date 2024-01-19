@@ -34,7 +34,7 @@ import web.dom.HTMLTimeElement
  * HTML Time component.
  */
 public open class Time(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTimeElement>("time", className, renderConfig)
+    Tag<HTMLTimeElement>("time", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Time] component.
@@ -45,7 +45,7 @@ public open class Time(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.time(className: String? = null, content: @Composable Time.() -> Unit = {}): Time {
-    val component = remember { Time(className, renderConfig) }
+    val component = remember { Time(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Time::className, it) }
     }, content)

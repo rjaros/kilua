@@ -40,7 +40,7 @@ public open class Td(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLTableCellElement>("td", className, renderConfig) {
+    Tag<HTMLTableCellElement>("td", className, renderConfig = renderConfig) {
 
     /**
      * The number of columns the cell extends.
@@ -94,7 +94,7 @@ public open class Td(
 public fun ComponentBase.td(
     colspan: Int? = null, rowspan: Int? = null, className: String? = null, content: @Composable Td.() -> Unit = {}
 ): Td {
-    val component = remember { Td(colspan, rowspan, className, renderConfig) }
+    val component = remember { Td(colspan, rowspan, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(colspan) { updateProperty(Td::colspan, it) }
         set(rowspan) { updateProperty(Td::rowspan, it) }

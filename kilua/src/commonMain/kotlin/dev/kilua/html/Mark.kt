@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Mark component.
  */
 public open class Mark(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("mark", className, renderConfig)
+    Tag<HTMLElement>("mark", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Mark] component.
@@ -45,7 +45,7 @@ public open class Mark(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.mark(className: String? = null, content: @Composable Mark.() -> Unit = {}): Mark {
-    val component = remember { Mark(className, renderConfig) }
+    val component = remember { Mark(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Mark::className, it) }
     }, content)

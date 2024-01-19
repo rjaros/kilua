@@ -34,7 +34,7 @@ import web.dom.HTMLDataListElement
  * HTML Datalist component.
  */
 public open class Datalist(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDataListElement>("datalist", className, renderConfig)
+    Tag<HTMLDataListElement>("datalist", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Datalist] component.
@@ -45,7 +45,7 @@ public open class Datalist(className: String? = null, renderConfig: RenderConfig
  */
 @Composable
 public fun ComponentBase.datalist(className: String? = null, content: @Composable Datalist.() -> Unit = {}): Datalist {
-    val component = remember { Datalist(className, renderConfig) }
+    val component = remember { Datalist(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Datalist::className, it) }
     }, content)

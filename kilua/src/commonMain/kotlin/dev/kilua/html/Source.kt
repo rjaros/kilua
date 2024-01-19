@@ -34,7 +34,7 @@ import web.dom.HTMLSourceElement
  * HTML Source component.
  */
 public open class Source(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLSourceElement>("source", className, renderConfig)
+    Tag<HTMLSourceElement>("source", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Source] component.
@@ -45,7 +45,7 @@ public open class Source(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.source(className: String? = null, setup: Source.() -> Unit = {}): Source {
-    val component = remember { Source(className, renderConfig) }
+    val component = remember { Source(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Source::className, it) }
     }) {

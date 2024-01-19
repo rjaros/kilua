@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Header component.
  */
 public open class Header(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("header", className, renderConfig)
+    Tag<HTMLElement>("header", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Header] component.
@@ -45,7 +45,7 @@ public open class Header(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.header(className: String? = null, content: @Composable Header.() -> Unit = {}): Header {
-    val component = remember { Header(className, renderConfig) }
+    val component = remember { Header(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Header::className, it) }
     }, content)

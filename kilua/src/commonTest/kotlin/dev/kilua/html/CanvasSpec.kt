@@ -40,9 +40,9 @@ class CanvasSpec : DomSpec {
                     id = "test-id"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<canvas class="test" width="300" height="200" id="test-id"></canvas>"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<canvas class="test" width="300" height="200" id="test-id"></canvas>""",
+                root.element.innerHTML,
                 "Should render an HTML Canvas tag to DOM"
             )
         }
@@ -77,9 +77,9 @@ class CanvasSpec : DomSpec {
                     id = "test-id"
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><canvas class="test" width="300" height="200" id="test-id"></canvas></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<div><canvas class="test" width="300" height="200" id="test-id"></canvas></div>""",
+                root.renderToString(),
                 "Should render an HTML Canvas tag to a String"
             )
         }

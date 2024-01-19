@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Section component.
  */
 public open class Section(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("section", className, renderConfig)
+    Tag<HTMLElement>("section", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Section] component.
@@ -45,7 +45,7 @@ public open class Section(className: String? = null, renderConfig: RenderConfig 
  */
 @Composable
 public fun ComponentBase.section(className: String? = null, content: @Composable Section.() -> Unit = {}): Section {
-    val component = remember { Section(className, renderConfig) }
+    val component = remember { Section(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Section::className, it) }
     }, content)

@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Dd component.
  */
 public open class Dd(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("dd", className, renderConfig)
+    Tag<HTMLElement>("dd", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Dd] component.
@@ -45,7 +45,7 @@ public open class Dd(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.dd(className: String? = null, content: @Composable Dd.() -> Unit = {}): Dd {
-    val component = remember { Dd(className, renderConfig) }
+    val component = remember { Dd(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Dd::className, it) }
     }, content)

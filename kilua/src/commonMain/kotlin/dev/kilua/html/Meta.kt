@@ -34,7 +34,7 @@ import web.dom.HTMLMetaElement
  * HTML Meta component.
  */
 public open class Meta(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLMetaElement>("meta", className, renderConfig)
+    Tag<HTMLMetaElement>("meta", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Meta] component.
@@ -45,7 +45,7 @@ public open class Meta(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.meta(className: String? = null, setup: Meta.() -> Unit = {}): Meta {
-    val component = remember { Meta(className, renderConfig) }
+    val component = remember { Meta(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Meta::className, it) }
     }) {

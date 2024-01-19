@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Main component.
  */
 public open class Main(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("main", className, renderConfig)
+    Tag<HTMLElement>("main", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Main] component.
@@ -45,7 +45,7 @@ public open class Main(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.main(className: String? = null, content: @Composable Main.() -> Unit = {}): Main {
-    val component = remember { Main(className, renderConfig) }
+    val component = remember { Main(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Main::className, it) }
     }, content)

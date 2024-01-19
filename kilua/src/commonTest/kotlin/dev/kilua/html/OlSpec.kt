@@ -41,9 +41,9 @@ class OlSpec : DomSpec {
                     li { +"Item 2" }
                 }
             }
-            assertEquals(
-                normalizeHtml("""<ol class="test" type="A" start="2" id="test-id" title="A title"><li>Item 1</li><li>Item 2</li></ol>"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<ol class="test" type="A" start="2" id="test-id" title="A title"><li>Item 1</li><li>Item 2</li></ol>""",
+                root.element.innerHTML,
                 "Should render an HTML Ol tag to DOM"
             )
         }
@@ -60,9 +60,9 @@ class OlSpec : DomSpec {
                     li { +"Item 2" }
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><ol class="test" type="A" start="2" id="test-id" title="A title"><li>Item 1</li><li>Item 2</li></ol></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<div><ol class="test" type="A" start="2" id="test-id" title="A title"><li>Item 1</li><li>Item 2</li></ol></div>""",
+                root.renderToString(),
                 "Should render an HTML Ol tag to a String"
             )
         }

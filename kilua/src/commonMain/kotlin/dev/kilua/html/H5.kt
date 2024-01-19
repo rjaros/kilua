@@ -34,7 +34,7 @@ import web.dom.HTMLHeadingElement
  * HTML H5 component.
  */
 public open class H5(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadingElement>("h5", className, renderConfig)
+    Tag<HTMLHeadingElement>("h5", className, renderConfig = renderConfig)
 
 /**
  * Creates a [H5] component.
@@ -45,7 +45,7 @@ public open class H5(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.h5(className: String? = null, content: @Composable H5.() -> Unit = {}): H5 {
-    val component = remember { H5(className, renderConfig) }
+    val component = remember { H5(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(H5::className, it) }
     }, content)

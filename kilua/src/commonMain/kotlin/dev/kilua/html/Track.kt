@@ -34,7 +34,7 @@ import web.dom.HTMLTrackElement
  * HTML Track component.
  */
 public open class Track(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTrackElement>("track", className, renderConfig)
+    Tag<HTMLTrackElement>("track", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Track] component.
@@ -45,7 +45,7 @@ public open class Track(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.track(className: String? = null, setup: Track.() -> Unit = {}): Track {
-    val component = remember { Track(className, renderConfig) }
+    val component = remember { Track(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Track::className, it) }
     }) {

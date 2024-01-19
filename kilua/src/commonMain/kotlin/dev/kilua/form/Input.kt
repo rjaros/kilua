@@ -43,11 +43,11 @@ public abstract class Input<T : Any>(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<T?> = WithStateFlowDelegateImpl()
-) : Tag<HTMLInputElement>("input", className, renderConfig), GenericFormControl<T>,
+) : Tag<HTMLInputElement>("input", className, id, renderConfig), GenericFormControl<T>,
     WithStateFlow<T?> by withStateFlowDelegate {
 
     public override var value: T? by updatingProperty(
@@ -206,8 +206,6 @@ public abstract class Input<T : Any>(
                 setInternalValueFromString(element.value)
             }
         }
-        @Suppress("LeakingThis")
-        if (id != null) this.id = id
     }
 
     /**

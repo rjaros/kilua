@@ -34,7 +34,7 @@ import web.dom.HTMLSpanElement
  * HTML Span component.
  */
 public open class Span(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLSpanElement>("span", className, renderConfig)
+    Tag<HTMLSpanElement>("span", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Span] component.
@@ -45,7 +45,7 @@ public open class Span(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.span(className: String? = null, content: @Composable Span.() -> Unit = {}): Span {
-    val component = remember { Span(className, renderConfig) }
+    val component = remember { Span(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Span::className, it) }
     }, content)

@@ -42,7 +42,7 @@ public open class Option(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLOptionElement>("option", className, renderConfig) {
+    Tag<HTMLOptionElement>("option", className, renderConfig = renderConfig) {
 
     /**
      * The value of the option.
@@ -150,7 +150,7 @@ public fun ComponentBase.option(
     className: String? = null,
     content: @Composable Option.() -> Unit = {}
 ): Option {
-    val component = remember { Option(value, label, selected, disabled, className, renderConfig) }
+    val component = remember { Option(value, label, selected, disabled, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(value) { updateProperty(Option::value, it) }
         set(label) { updateProperty(Option::label, it) }

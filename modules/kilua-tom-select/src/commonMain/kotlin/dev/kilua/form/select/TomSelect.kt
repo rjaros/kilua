@@ -68,11 +68,11 @@ public open class TomSelect(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
-) : Tag<HTMLSelectElement>("select", className, renderConfig), StringFormControl,
+) : Tag<HTMLSelectElement>("select", className, id, renderConfig), StringFormControl,
     WithStateFlow<String?> by withStateFlowDelegate {
 
     /**
@@ -158,6 +158,7 @@ public open class TomSelect(
         } else {
             element.removeAttribute("disabled")
         }
+        refresh()
     }
 
     public override var required: Boolean? by updatingProperty(required, skipUpdate) {
@@ -225,8 +226,6 @@ public open class TomSelect(
             }
             this.value = v?.ifBlank { null }
         }
-        @Suppress("LeakingThis")
-        if (id != null) this.id = id
     }
 
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
@@ -373,8 +372,8 @@ public open class TomSelect(
  * @param placeholder the placeholder for the select component
  * @param disabled whether the select is disabled
  * @param required whether the select is required
- * @param id the ID of the select component
  * @param className the CSS class name
+ * @param id the ID of the select component
  * @param setup a function for setting up the component
  * @return a [TomSelect] component
  */
@@ -392,8 +391,8 @@ public fun ComponentBase.tomSelect(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable TomSelect.() -> Unit = {}
 ): TomSelect {
     return key(multiple) {
@@ -411,8 +410,8 @@ public fun ComponentBase.tomSelect(
                 placeholder,
                 disabled,
                 required,
-                id,
                 className,
+                id,
                 renderConfig
             )
         }
@@ -434,8 +433,8 @@ public fun ComponentBase.tomSelect(
             set(placeholder) { updateProperty(TomSelect::placeholder, it) }
             set(disabled) { updateProperty(TomSelect::disabled, it) }
             set(required) { updateProperty(TomSelect::required, it) }
-            set(id) { updateProperty(TomSelect::id, it) }
             set(className) { updateProperty(TomSelect::className, it) }
+            set(id) { updateProperty(TomSelect::id, it) }
         }, setup)
         component
     }

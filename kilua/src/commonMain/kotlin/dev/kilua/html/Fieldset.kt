@@ -34,7 +34,7 @@ import web.dom.HTMLFieldSetElement
  * HTML Fieldset component.
  */
 public open class Fieldset(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLFieldSetElement>("fieldset", className, renderConfig)
+    Tag<HTMLFieldSetElement>("fieldset", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Fieldset] component.
@@ -45,7 +45,7 @@ public open class Fieldset(className: String? = null, renderConfig: RenderConfig
  */
 @Composable
 public fun ComponentBase.fieldset(className: String? = null, content: @Composable Fieldset.() -> Unit = {}): Fieldset {
-    val component = remember { Fieldset(className, renderConfig) }
+    val component = remember { Fieldset(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Fieldset::className, it) }
     }, content)

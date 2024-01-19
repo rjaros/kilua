@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Ruby component.
  */
 public open class Ruby(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("ruby", className, renderConfig)
+    Tag<HTMLElement>("ruby", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Ruby] component.
@@ -45,7 +45,7 @@ public open class Ruby(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.ruby(className: String? = null, content: @Composable Ruby.() -> Unit = {}): Ruby {
-    val component = remember { Ruby(className, renderConfig) }
+    val component = remember { Ruby(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Ruby::className, it) }
     }, content)

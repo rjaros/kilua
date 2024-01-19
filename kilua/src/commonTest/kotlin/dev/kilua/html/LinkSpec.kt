@@ -41,9 +41,9 @@ class LinkSpec : DomSpec {
                     setAttribute("data-test", "test")
                 }
             }
-            assertEquals(
-                normalizeHtml("""<a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a>"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a>""",
+                root.element.innerHTML,
                 "Should render an HTML A tag to DOM"
             )
         }
@@ -60,9 +60,9 @@ class LinkSpec : DomSpec {
                     setAttribute("data-test", "test")
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<div><a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a></div>""",
+                root.renderToString(),
                 "Should render an HTML A tag to a String"
             )
         }

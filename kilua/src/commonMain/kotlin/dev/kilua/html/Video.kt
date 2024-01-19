@@ -34,7 +34,7 @@ import web.dom.HTMLVideoElement
  * HTML Video component.
  */
 public open class Video(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLVideoElement>("video", className, renderConfig)
+    Tag<HTMLVideoElement>("video", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Video] component.
@@ -45,7 +45,7 @@ public open class Video(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.video(className: String? = null, content: @Composable Video.() -> Unit = {}): Video {
-    val component = remember { Video(className, renderConfig) }
+    val component = remember { Video(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Video::className, it) }
     }, content)

@@ -52,9 +52,9 @@ public open class Numeric(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     locale: Locale = DefaultLocale(),
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) : Input<Number>(
     value,
@@ -64,8 +64,8 @@ public open class Numeric(
     placeholder,
     disabled,
     required,
-    id,
     className,
+    id,
     renderConfig
 ),
     NumberFormControl {
@@ -142,9 +142,9 @@ public open class Numeric(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
- * @param id the id attribute of the generated HTML input element
  * @param locale the locale for formatting the number
  * @param className the CSS class name
+ * @param id the id attribute of the generated HTML input element
  * @param setup a function for setting up the component
  * @return a [Numeric] component
  */
@@ -158,9 +158,9 @@ public fun ComponentBase.numeric(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     locale: Locale = DefaultLocale(),
     className: String? = null,
+    id: String? = null,
     setup: @Composable Numeric.() -> Unit = {}
 ): Numeric {
     val component =
@@ -174,9 +174,9 @@ public fun ComponentBase.numeric(
                 placeholder,
                 disabled,
                 required,
-                id,
                 locale,
                 className,
+                id,
                 renderConfig
             )
         }
@@ -189,9 +189,9 @@ public fun ComponentBase.numeric(
         set(placeholder) { updateProperty(Numeric::placeholder, it) }
         set(disabled) { updateProperty(Numeric::disabled, it) }
         set(required) { updateProperty(Numeric::required, it) }
-        set(id) { updateProperty(Numeric::id, it) }
         set(locale) { updateProperty(Numeric::locale, it) }
         set(className) { updateProperty(Numeric::className, it) }
+        set(id) { updateProperty(Numeric::id, it) }
     }, setup)
     return component
 }

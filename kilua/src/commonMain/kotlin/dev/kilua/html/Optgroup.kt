@@ -39,7 +39,7 @@ public open class Optgroup(
     disabled: Boolean? = null,
     className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLOptGroupElement>("optgroup", className, renderConfig) {
+    Tag<HTMLOptGroupElement>("optgroup", className, renderConfig = renderConfig) {
 
     /**
      * The label of the option group.
@@ -97,7 +97,7 @@ public fun ComponentBase.optgroup(
     className: String? = null,
     content: @Composable Optgroup.() -> Unit = {}
 ): Optgroup {
-    val component = remember { Optgroup(label, disabled, className, renderConfig) }
+    val component = remember { Optgroup(label, disabled, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(label) { updateProperty(Optgroup::label, it) }
         set(disabled) { updateProperty(Optgroup::disabled, it) }

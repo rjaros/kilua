@@ -34,7 +34,7 @@ import web.dom.HTMLMapElement
  * HTML Map component.
  */
 public open class Map(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLMapElement>("map", className, renderConfig)
+    Tag<HTMLMapElement>("map", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Map] component.
@@ -45,7 +45,7 @@ public open class Map(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.map(className: String? = null, content: @Composable Map.() -> Unit = {}): Map {
-    val component = remember { Map(className, renderConfig) }
+    val component = remember { Map(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Map::className, it) }
     }, content)

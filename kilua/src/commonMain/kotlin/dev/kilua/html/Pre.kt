@@ -34,7 +34,7 @@ import web.dom.HTMLPreElement
  * HTML Pre component.
  */
 public open class Pre(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLPreElement>("pre", className, renderConfig)
+    Tag<HTMLPreElement>("pre", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Pre] component.
@@ -45,7 +45,7 @@ public open class Pre(className: String? = null, renderConfig: RenderConfig = De
  */
 @Composable
 public fun ComponentBase.pre(className: String? = null, content: @Composable Pre.() -> Unit = {}): Pre {
-    val component = remember { Pre(className, renderConfig) }
+    val component = remember { Pre(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Pre::className, it) }
     }, content)

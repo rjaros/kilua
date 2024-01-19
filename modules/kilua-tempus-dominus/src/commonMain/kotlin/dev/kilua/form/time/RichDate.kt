@@ -57,7 +57,7 @@ public open class RichDate(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalDate?> = WithStateFlowDelegateImpl()
-) : AbstractRichDateTime(disabled, format, inline, locale, className, renderConfig), DateFormControl,
+) : AbstractRichDateTime(disabled, format, inline, locale, className, renderConfig = renderConfig), DateFormControl,
     WithStateFlow<LocalDate?> by withStateFlowDelegate {
 
     public override var value: LocalDate? by updatingProperty(
@@ -120,7 +120,7 @@ private fun ComponentBase.richDate(
     className: String? = null,
     setup: @Composable RichDate.() -> Unit = {}
 ): RichDate {
-    val component = remember { RichDate(value, disabled, format, inline, locale, className, renderConfig) }
+    val component = remember { RichDate(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {

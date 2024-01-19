@@ -34,7 +34,7 @@ import web.dom.HTMLOutputElement
  * HTML Output component.
  */
 public open class Output(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLOutputElement>("output", className, renderConfig)
+    Tag<HTMLOutputElement>("output", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Output] component.
@@ -45,7 +45,7 @@ public open class Output(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.output(className: String? = null, content: @Composable Output.() -> Unit = {}): Output {
-    val component = remember { Output(className, renderConfig) }
+    val component = remember { Output(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Output::className, it) }
     }, content)

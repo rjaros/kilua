@@ -34,7 +34,7 @@ import web.dom.HTMLLinkElement
  * HTML Link component.
  */
 public open class LinkTag(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLLinkElement>("link", className, renderConfig)
+    Tag<HTMLLinkElement>("link", className, renderConfig = renderConfig)
 
 /**
  * Creates a [LinkTag] component.
@@ -45,7 +45,7 @@ public open class LinkTag(className: String? = null, renderConfig: RenderConfig 
  */
 @Composable
 public fun ComponentBase.linkTag(className: String? = null, setup: LinkTag.() -> Unit = {}): LinkTag {
-    val component = remember { LinkTag(className, renderConfig) }
+    val component = remember { LinkTag(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(LinkTag::className, it) }
     }) {

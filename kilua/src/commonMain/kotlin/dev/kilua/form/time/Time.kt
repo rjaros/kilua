@@ -59,8 +59,8 @@ public open class Time(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) : Input<LocalTime>(
     value,
@@ -70,8 +70,8 @@ public open class Time(
     placeholder,
     disabled,
     required,
-    id,
     className,
+    id,
     renderConfig
 ), TimeFormControl {
 
@@ -191,8 +191,8 @@ public open class Time(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
- * @param id the ID of the generated HTML input element
  * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
  * @return a [Time] component
  */
@@ -207,8 +207,8 @@ public fun ComponentBase.time(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable Time.() -> Unit = {}
 ): Time {
     val component =
@@ -223,8 +223,8 @@ public fun ComponentBase.time(
                 placeholder,
                 disabled,
                 required,
-                id,
                 className,
+                id,
                 renderConfig
             )
         }
@@ -238,8 +238,8 @@ public fun ComponentBase.time(
         set(placeholder) { updateProperty(Time::placeholder, it) }
         set(disabled) { updateProperty(Time::disabled, it) }
         set(required) { updateProperty(Time::required, it) }
-        set(id) { updateProperty(Time::id, it) }
         set(className) { updateProperty(Time::className, it) }
+        set(id) { updateProperty(Time::id, it) }
     }, setup)
     return component
 }

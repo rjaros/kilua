@@ -43,9 +43,9 @@ class ThSpec : DomSpec {
                     display = Display.Flex
                 }
             }
-            assertEquals(
-                normalizeHtml("""<th class="test" colspan="2" rowspan="1" scope="col" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th>"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<th class="test" colspan="2" rowspan="1" scope="col" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th>""",
+                root.element.innerHTML,
                 "Should render an HTML Th tag to DOM"
             )
         }
@@ -64,9 +64,9 @@ class ThSpec : DomSpec {
                     display = Display.Flex
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><th class="test" colspan="2" rowspan="1" scope="col" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<div><th class="test" colspan="2" rowspan="1" scope="col" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th></div>""",
+                root.renderToString(),
                 "Should render an HTML Th tag to a String"
             )
         }

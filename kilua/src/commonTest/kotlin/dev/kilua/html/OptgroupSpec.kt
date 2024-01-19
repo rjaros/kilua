@@ -43,9 +43,9 @@ class OptgroupSpec : DomSpec {
                     display = Display.Flex
                 }
             }
-            assertEquals(
-                normalizeHtml("""<optgroup class="test" label="A label" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></optgroup>"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<optgroup class="test" label="A label" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></optgroup>""",
+                root.element.innerHTML,
                 "Should render an HTML Optgroup tag to DOM"
             )
         }
@@ -64,9 +64,9 @@ class OptgroupSpec : DomSpec {
                     display = Display.Flex
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><optgroup class="test" label="A label" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></optgroup></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<div><optgroup class="test" label="A label" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></optgroup></div>""",
+                root.renderToString(),
                 "Should render an HTML Optgroup tag to a String"
             )
         }

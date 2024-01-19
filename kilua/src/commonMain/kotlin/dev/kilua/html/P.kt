@@ -34,7 +34,7 @@ import web.dom.HTMLParagraphElement
  * HTML P component.
  */
 public open class P(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLParagraphElement>("p", className, renderConfig)
+    Tag<HTMLParagraphElement>("p", className, renderConfig = renderConfig)
 
 /**
  * Creates a [P] component.
@@ -45,7 +45,7 @@ public open class P(className: String? = null, renderConfig: RenderConfig = Defa
  */
 @Composable
 public fun ComponentBase.p(className: String? = null, content: @Composable P.() -> Unit = {}): P {
-    val component = remember { P(className, renderConfig) }
+    val component = remember { P(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(P::className, it) }
     }, content)

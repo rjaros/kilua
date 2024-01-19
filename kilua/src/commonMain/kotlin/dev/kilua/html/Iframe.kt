@@ -62,7 +62,7 @@ public open class Iframe(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLIFrameElement>("iframe", className, renderConfig) {
+    Tag<HTMLIFrameElement>("iframe", className, renderConfig = renderConfig) {
 
     /**
      * The URL of the page to embed.
@@ -178,7 +178,7 @@ public fun ComponentBase.iframe(
     sandbox: Set<Sandbox>? = null,
     className: String? = null, content: @Composable Iframe.() -> Unit = {}
 ): Iframe {
-    val component = remember { Iframe(src, srcdoc, name, iframeWidth, iframeHeight, sandbox, className, renderConfig) }
+    val component = remember { Iframe(src, srcdoc, name, iframeWidth, iframeHeight, sandbox, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(src) { updateProperty(Iframe::src, it) }
         set(srcdoc) { updateProperty(Iframe::srcdoc, it) }

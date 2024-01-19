@@ -34,7 +34,7 @@ import web.dom.HTMLMeterElement
  * HTML Meter component.
  */
 public open class Meter(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLMeterElement>("meter", className, renderConfig)
+    Tag<HTMLMeterElement>("meter", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Meter] component.
@@ -45,7 +45,7 @@ public open class Meter(className: String? = null, renderConfig: RenderConfig = 
  */
 @Composable
 public fun ComponentBase.meter(className: String? = null, content: @Composable Meter.() -> Unit = {}): Meter {
-    val component = remember { Meter(className, renderConfig) }
+    val component = remember { Meter(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Meter::className, it) }
     }, content)

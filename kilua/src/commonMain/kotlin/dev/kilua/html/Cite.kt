@@ -34,7 +34,7 @@ import web.dom.HTMLQuoteElement
  * HTML Cite component.
  */
 public open class Cite(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLQuoteElement>("cite", className, renderConfig)
+    Tag<HTMLQuoteElement>("cite", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Cite] component.
@@ -45,7 +45,7 @@ public open class Cite(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.cite(className: String? = null, content: @Composable Cite.() -> Unit = {}): Cite {
-    val component = remember { Cite(className, renderConfig) }
+    val component = remember { Cite(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Cite::className, it) }
     }, content)

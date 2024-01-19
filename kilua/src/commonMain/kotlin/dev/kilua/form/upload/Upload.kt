@@ -63,10 +63,10 @@ public open class Upload(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<List<KFile>>(null, InputType.File, name, null, null, disabled, required, id, className, renderConfig),
+) : Input<List<KFile>>(null, InputType.File, name, null, null, disabled, required, className, id, renderConfig = renderConfig),
     KFilesFormControl {
 
     /**
@@ -198,8 +198,8 @@ public open class Upload(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
- * @param id the ID of the input
  * @param className the CSS class name
+ * @param id the ID of the input
  * @param setup a function for setting up the component
  * @return a [Upload] component
  */
@@ -211,12 +211,12 @@ public fun ComponentBase.upload(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable Upload.() -> Unit = {}
 ): Upload {
     val component =
-        remember { Upload(multiple, accept, capture, name, disabled, required, id, className, renderConfig) }
+        remember { Upload(multiple, accept, capture, name, disabled, required, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(multiple) { updateProperty(Upload::multiple, it) }
         set(accept) { updateProperty(Upload::accept, it) }
@@ -224,8 +224,8 @@ public fun ComponentBase.upload(
         set(name) { updateProperty(Upload::name, it) }
         set(disabled) { updateProperty(Upload::disabled, it) }
         set(required) { updateProperty(Upload::required, it) }
-        set(id) { updateProperty(Upload::id, it) }
         set(className) { updateProperty(Upload::className, it) }
+        set(id) { updateProperty(Upload::id, it) }
     }, setup)
     return component
 }

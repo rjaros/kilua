@@ -34,7 +34,7 @@ import web.dom.HTMLUListElement
  * HTML Ul component.
  */
 public open class Ul(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLUListElement>("ul", className, renderConfig)
+    Tag<HTMLUListElement>("ul", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Ul] component.
@@ -45,7 +45,7 @@ public open class Ul(className: String? = null, renderConfig: RenderConfig = Def
  */
 @Composable
 public fun ComponentBase.ul(className: String? = null, content: @Composable Ul.() -> Unit = {}): Ul {
-    val component = remember { Ul(className, renderConfig) }
+    val component = remember { Ul(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Ul::className, it) }
     }, content)

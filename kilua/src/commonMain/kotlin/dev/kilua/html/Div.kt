@@ -33,21 +33,23 @@ import web.dom.HTMLDivElement
 /**
  * HTML Div component.
  */
-public open class Div(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDivElement>("div", className, renderConfig)
+public open class Div(className: String? = null, id: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
+    Tag<HTMLDivElement>("div", className, id, renderConfig)
 
 /**
  * Creates a [Div] component.
  *
  * @param className the CSS class name
+ * @param id the ID attribute of the component
  * @param content the content of the component
  * @return the [Div] component
  */
 @Composable
-public fun ComponentBase.div(className: String? = null, content: @Composable Div.() -> Unit = {}): Div {
-    val component = remember { Div(className, renderConfig) }
+public fun ComponentBase.div(className: String? = null, id: String? = null, content: @Composable Div.() -> Unit = {}): Div {
+    val component = remember { Div(className, id, renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Div::className, it) }
+        set(id) { updateProperty(Div::id, it) }
     }, content)
     return component
 }

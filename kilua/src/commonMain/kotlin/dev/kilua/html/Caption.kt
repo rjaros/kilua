@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Caption component.
  */
 public open class Caption(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("caption", className, renderConfig)
+    Tag<HTMLElement>("caption", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Caption] component.
@@ -45,7 +45,7 @@ public open class Caption(className: String? = null, renderConfig: RenderConfig 
  */
 @Composable
 public fun ComponentBase.caption(className: String? = null, content: @Composable Caption.() -> Unit = {}): Caption {
-    val component = remember { Caption(className, renderConfig) }
+    val component = remember { Caption(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Caption::className, it) }
     }, content)

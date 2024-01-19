@@ -79,7 +79,7 @@ public open class Offcanvas(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
 
     /**
      * Whether the offcanvas should be visible.
@@ -144,7 +144,7 @@ private fun ComponentBase.offcanvas(
     className: String? = null,
     content: @Composable Offcanvas.() -> Unit,
 ): Offcanvas {
-    val component = remember { Offcanvas(className, renderConfig) }
+    val component = remember { Offcanvas(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Offcanvas::className, it) }
     }, content)

@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * HTML Strong component.
  */
 public open class Strong(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("strong", className, renderConfig)
+    Tag<HTMLElement>("strong", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Strong] component.
@@ -45,7 +45,7 @@ public open class Strong(className: String? = null, renderConfig: RenderConfig =
  */
 @Composable
 public fun ComponentBase.strong(className: String? = null, content: @Composable Strong.() -> Unit = {}): Strong {
-    val component = remember { Strong(className, renderConfig) }
+    val component = remember { Strong(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Strong::className, it) }
     }, content)

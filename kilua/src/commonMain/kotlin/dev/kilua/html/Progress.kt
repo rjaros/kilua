@@ -34,7 +34,7 @@ import web.dom.HTMLProgressElement
  * HTML Progress component.
  */
 public open class Progress(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLProgressElement>("progress", className, renderConfig)
+    Tag<HTMLProgressElement>("progress", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Progress] component.
@@ -45,7 +45,7 @@ public open class Progress(className: String? = null, renderConfig: RenderConfig
  */
 @Composable
 public fun ComponentBase.progress(className: String? = null, content: @Composable Progress.() -> Unit = {}): Progress {
-    val component = remember { Progress(className, renderConfig) }
+    val component = remember { Progress(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Progress::className, it) }
     }, content)

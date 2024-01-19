@@ -34,7 +34,7 @@ import web.dom.HTMLSlotElement
  * HTML Slot component.
  */
 public open class Slot(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLSlotElement>("slot", className, renderConfig)
+    Tag<HTMLSlotElement>("slot", className, renderConfig = renderConfig)
 
 /**
  * Creates a [Slot] component.
@@ -45,7 +45,7 @@ public open class Slot(className: String? = null, renderConfig: RenderConfig = D
  */
 @Composable
 public fun ComponentBase.slot(className: String? = null, content: @Composable Slot.() -> Unit = {}): Slot {
-    val component = remember { Slot(className, renderConfig) }
+    val component = remember { Slot(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Slot::className, it) }
     }, content)

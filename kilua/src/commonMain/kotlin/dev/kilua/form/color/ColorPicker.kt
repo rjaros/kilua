@@ -39,10 +39,10 @@ public open class ColorPicker(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Text(value, InputType.Color, name, null, null, disabled, required, id, className, renderConfig)
+) : Text(value, InputType.Color, name, null, null, disabled, required, className, id, renderConfig = renderConfig)
 
 /**
  * Creates [ColorPicker] component.
@@ -51,8 +51,8 @@ public open class ColorPicker(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
- * @param id the ID of the input
  * @param className the CSS class name
+ * @param id the ID of the input
  * @param setup a function for setting up the component
  * @return a [ColorPicker] component
  */
@@ -62,11 +62,11 @@ public fun ComponentBase.colorPicker(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     className: String? = null,
+    id: String? = null,
     setup: @Composable ColorPicker.() -> Unit = {}
 ): ColorPicker {
-    val component = remember { ColorPicker(value, name, disabled, required, id, className, renderConfig) }
+    val component = remember { ColorPicker(value, name, disabled, required, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(value) { updateProperty(ColorPicker::value, it) }
         set(name) { updateProperty(ColorPicker::name, it) }
