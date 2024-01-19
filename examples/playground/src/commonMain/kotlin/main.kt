@@ -46,6 +46,7 @@ import dev.kilua.form.select.TomSelectRenders
 import dev.kilua.form.select.tomSelect
 import dev.kilua.form.text.richText
 import dev.kilua.form.text.text
+import dev.kilua.form.text.tomTypeahead
 import dev.kilua.form.time.richDate
 import dev.kilua.form.time.richDateTime
 import dev.kilua.form.time.richTime
@@ -131,6 +132,44 @@ class App : Application() {
             div {
                 margin = 20.px
 
+                var ttdis by remember { mutableStateOf(false) }
+                var ttid by remember { mutableStateOf("a") }
+
+                val tt = tomTypeahead(
+                    listOf("Alaska", "California", "Nevada", "Oregon", "Washington"),
+                    placeholder = "enter",
+                    disabled = ttdis,
+                    id = ttid
+                )
+
+                button("get value") {
+                    onClick {
+                        console.log(tt.value)
+                    }
+                }
+                button("set value") {
+                    onClick {
+                        tt.value = "New York"
+                    }
+                }
+                button("set null") {
+                    onClick {
+                        tt.value = null
+                    }
+                }
+                button("toggle disabled") {
+                    onClick {
+                        ttdis = !ttdis
+                    }
+                }
+                button("change id") {
+                    onClick {
+                        ttid += "a"
+                    }
+                }
+
+                hr()
+
                 val restClient = RestClient()
 
                 tomSelect(emptyOption = true) {
@@ -149,7 +188,11 @@ class App : Application() {
                                 }
                                 result?.let { items: JsAny ->
                                     callback(items.cast<JsArray<JsAny>>().toList().map { item ->
-                                        jsObjectOf("value" to item["id"]!!, "text" to item["name"]!!, "subtext" to item["owner"]!!["login"]!!)
+                                        jsObjectOf(
+                                            "value" to item["id"]!!,
+                                            "text" to item["name"]!!,
+                                            "subtext" to item["owner"]!!["login"]!!
+                                        )
                                     }.toJsArray())
                                 } ?: callback(jsArrayOf())
                                 obj()
@@ -175,6 +218,7 @@ class App : Application() {
 
                 var tsvalue by remember { mutableStateOf<String?>("dog") }
                 var multi by remember { mutableStateOf(true) }
+                var tsdis by remember { mutableStateOf(false) }
 
                 val tselect = tomSelect(
                     listOf("cat" to "Cat", "dog" to "Dog", "mouse" to "Mouse"),
@@ -182,7 +226,7 @@ class App : Application() {
                     placeholder = "Select an option",
                     emptyOption = true,
                     multiple = multi,
-                    disabled = false,
+                    disabled = tsdis,
                     id = "test"
                 ) {
                     LaunchedEffect(Unit) {
@@ -200,12 +244,17 @@ class App : Application() {
                 }
                 button("Set value") {
                     onClick {
-                        multi = !multi
+                        tselect.value = "mouse"
                     }
                 }
                 button("Set null") {
                     onClick {
                         tselect.value = null
+                    }
+                }
+                button("Toggle disabled") {
+                    onClick {
+                        tsdis = !tsdis
                     }
                 }
 
@@ -793,18 +842,27 @@ class App : Application() {
                             }
                         }
                         fieldWithLabel("State", "form-label", groupClassName = "col-md-3") {
-                            tomSelect(
-                                listOfPairs("Alaska", "California"),
-                                emptyOption = true,
+                            tomTypeahead(
+                                listOf("Alaska", "California"),
                                 placeholder = "Choose...",
                                 id = it,
-                                multiple = true,
-                                className = "form-select",
                                 required = true
                             ).bind("state")
                             div("invalid-feedback") {
                                 +"Please select a valid state."
                             }
+                            /*                            tomSelect(
+                                                            listOfPairs("Alaska", "California"),
+                                                            emptyOption = true,
+                                                            placeholder = "Choose...",
+                                                            id = it,
+                                                            multiple = true,
+                                                            className = "form-select",
+                                                            required = true
+                                                        ).bind("state")
+                                                        div("invalid-feedback") {
+                                                            +"Please select a valid state."
+                                                        }*/
 
                             /*richDate(
                                 placeholder = "Choose...",
