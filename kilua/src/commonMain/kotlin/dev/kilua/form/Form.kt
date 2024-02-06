@@ -110,10 +110,10 @@ public enum class FormAutocomplete {
  * HTML Form component.
  */
 @Suppress("TooManyFunctions")
-public open class Form<K : Any>(
+public class Form<K : Any>(
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
-    protected val serializer: KSerializer<K>? = null,
-    protected val customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
+    private val serializer: KSerializer<K>? = null,
+    private val customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
@@ -122,7 +122,7 @@ public open class Form<K : Any>(
     /**
      * The method attribute of the generated HTML form element.
      */
-    public open var method: FormMethod? by updatingProperty(method, skipUpdate) {
+    public var method: FormMethod? by updatingProperty(method, skipUpdate) {
         if (it != null) {
             element.method = it.toString()
         } else {
@@ -133,7 +133,7 @@ public open class Form<K : Any>(
     /**
      * The action attribute of the generated HTML form element.
      */
-    public open var action: String? by updatingProperty(action, skipUpdate) {
+    public var action: String? by updatingProperty(action, skipUpdate) {
         if (it != null) {
             element.action = it.toString()
         } else {
@@ -144,7 +144,7 @@ public open class Form<K : Any>(
     /**
      * The enctype attribute of the generated HTML form element.
      */
-    public open var enctype: FormEnctype? by updatingProperty(enctype, skipUpdate) {
+    public var enctype: FormEnctype? by updatingProperty(enctype, skipUpdate) {
         if (it != null) {
             element.enctype = it.toString()
         } else {
@@ -155,7 +155,7 @@ public open class Form<K : Any>(
     /**
      * The name attribute of the generated HTML form element.
      */
-    public open var name: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public var name: String? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.name = it
         } else {
@@ -166,7 +166,7 @@ public open class Form<K : Any>(
     /**
      * The target attribute of the generated HTML form element.
      */
-    public open var target: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public var target: String? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.target = it
         } else {
@@ -177,7 +177,7 @@ public open class Form<K : Any>(
     /**
      * The target attribute of the generated HTML form element.
      */
-    public open var novalidate: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public var novalidate: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.noValidate = it
         } else {
@@ -188,7 +188,7 @@ public open class Form<K : Any>(
     /**
      * The target attribute of the generated HTML form element.
      */
-    public open var autocomplete: FormAutocomplete? by updatingProperty(skipUpdate = skipUpdate) {
+    public var autocomplete: FormAutocomplete? by updatingProperty(skipUpdate = skipUpdate) {
         if (it != null) {
             element.autocomplete = it.toString()
         } else {
@@ -199,42 +199,42 @@ public open class Form<K : Any>(
     /**
      * A validator function.
      */
-    public open var validator: ((Form<K>) -> Boolean)? = null
+    public var validator: ((Form<K>) -> Boolean)? = null
 
     /**
      * A validator message generator function.
      */
-    public open var validatorMessage: ((Form<K>) -> String?)? = null
+    public var validatorMessage: ((Form<K>) -> String?)? = null
 
     /**
      * Keeps values of the form not bound to any input components.
      */
-    protected val dataMap: MutableMap<String, Any?> = nativeMapOf()
+    private val dataMap: MutableMap<String, Any?> = nativeMapOf()
 
     /**
      * Helper functions to convert data between the form and the model.
      */
-    protected val mapToObjectConverter: ((Map<String, Any?>) -> JsAny)?
-    protected val mapToClassConverter: ((Map<String, Any?>) -> K)?
-    protected val classToObjectConverter: ((K) -> JsAny)?
+    private val mapToObjectConverter: ((Map<String, Any?>) -> JsAny)?
+    private val mapToClassConverter: ((Map<String, Any?>) -> K)?
+    private val classToObjectConverter: ((K) -> JsAny)?
 
     /**
      * Keeps all form controls.
      */
-    protected val fields: LinkedHashMap<String, FormControl<*>> = linkedMapOf()
+    private val fields: LinkedHashMap<String, FormControl<*>> = linkedMapOf()
 
     /**
      * Keeps all form controls parameters.
      */
-    protected val fieldsParams: MutableMap<String, Any> = mutableMapOf()
+    private val fieldsParams: MutableMap<String, Any> = mutableMapOf()
 
     /**
      * Determines if the data model was set outside compose.
      */
-    protected var dataSet: Boolean = false
+    private var dataSet: Boolean = false
 
     @OptIn(ExperimentalSerializationApi::class)
-    protected val jsonInstance: Json? = serializer?.let {
+    private val jsonInstance: Json? = serializer?.let {
         Json(
             from = (Serialization.customConfiguration ?: Json.Default)
         ) {
@@ -267,7 +267,7 @@ public open class Form<K : Any>(
     override val mutableStateFlow: MutableStateFlow<K>
         get() = _mutableDataStateFlow
 
-    protected fun updateStateFlow(value: K) {
+    private fun updateStateFlow(value: K) {
         if (initializedDataStateFlow) {
             _mutableDataStateFlow.value = value
         }
@@ -363,7 +363,7 @@ public open class Form<K : Any>(
      * Sets the values of all the controls from the single json Object.
      * @param json data model as Object
      */
-    protected open fun setDataInternalFromSingleObject(json: JsAny, key: String) {
+    private fun setDataInternalFromSingleObject(json: JsAny, key: String) {
         val jsonValue = json[key]
         if (jsonValue != null) {
             when (val formField = fields[key]) {
@@ -399,7 +399,7 @@ public open class Form<K : Any>(
      * Sets the values of all the controls from the json Object.
      * @param json data model as Object
      */
-    protected open fun setDataInternalFromObject(json: JsAny) {
+    private fun setDataInternalFromObject(json: JsAny) {
         val keys = keys(json)
         for (key in keys) {
             setDataInternalFromSingleObject(json, key)
@@ -411,7 +411,7 @@ public open class Form<K : Any>(
      * Sets the values of all the controls from the map.
      * @param map data model as Map
      */
-    protected open fun setDataInternalFromMap(map: Map<String, Any?>) {
+    private fun setDataInternalFromMap(map: Map<String, Any?>) {
         map.forEach { (key, value) ->
             if (value != null) {
                 val formField = fields[key]
@@ -431,7 +431,7 @@ public open class Form<K : Any>(
      * Sets the values of all the controls from the model.
      * @param model data model
      */
-    protected open fun setDataInternal(model: K) {
+    private fun setDataInternal(model: K) {
         val oldData = getData()
         dataMap.clear()
         if (classToObjectConverter != null) {
@@ -447,7 +447,7 @@ public open class Form<K : Any>(
     /**
      * Sets the values of all controls to null.
      */
-    protected open fun clearDataInternal() {
+    private fun clearDataInternal() {
         val oldData = getData()
         dataMap.clear()
         fields.forEach { it.value.setValue(null) }
@@ -459,7 +459,7 @@ public open class Form<K : Any>(
      * Sets the values of all the controls from the model.
      * @param model data model
      */
-    public open fun setData(model: K) {
+    public fun setData(model: K) {
         dataSet = true
         setDataInternal(model)
     }
@@ -467,7 +467,7 @@ public open class Form<K : Any>(
     /**
      * Sets the values of all controls to null.
      */
-    public open fun clearData() {
+    public fun clearData() {
         dataSet = true
         clearDataInternal()
     }
@@ -477,7 +477,7 @@ public open class Form<K : Any>(
      * @param model data model
      */
     @PublishedApi
-    internal open fun setDataFromCompose(model: K) {
+    internal fun setDataFromCompose(model: K) {
         if (!dataSet) setDataInternal(model)
     }
 
@@ -485,7 +485,7 @@ public open class Form<K : Any>(
      * Returns current data model.
      * @return data model
      */
-    public open fun getData(): K {
+    public fun getData(): K {
         val map = dataMap + fields.entries.associateBy({ it.key }, { it.value.getValue() })
         return mapToClassConverter?.invoke(map.withDefault { null }) ?: map.cast()
     }
@@ -494,7 +494,7 @@ public open class Form<K : Any>(
      * Returns current data model as JS object.
      * @return data model as JS object
      */
-    public open fun getDataJson(): JsAny {
+    public fun getDataJson(): JsAny {
         return if (serializer != null) {
             JSON.parse(
                 jsonInstance!!.encodeToString(
@@ -515,7 +515,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    protected open fun <T, C : FormControl<T>> C.bind(
+    private fun <T, C : FormControl<T>> C.bind(
         key: String,
         validator: ((C) -> Boolean)? = null,
         validatorWithMessage: ((C) -> Pair<Boolean, String?>)? = null
@@ -541,7 +541,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <T, C : FormControl<T>> C.bind(
+    public fun <T, C : FormControl<T>> C.bind(
         key: String,
         validator: ((C) -> Boolean)? = null,
     ): C {
@@ -554,7 +554,7 @@ public open class Form<K : Any>(
      * @param validator optional validation function which also returns a validation message
      */
     @Composable
-    public open fun <T, C : FormControl<T>> C.bindWithValidationMessage(
+    public fun <T, C : FormControl<T>> C.bindWithValidationMessage(
         key: String,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -568,7 +568,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : StringFormControl> C.bind(
+    public fun <C : StringFormControl> C.bind(
         key: KProperty1<K, String?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -582,7 +582,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : StringFormControl> C.bindWithValidationMessage(
+    public fun <C : StringFormControl> C.bindWithValidationMessage(
         key: KProperty1<K, String?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -596,7 +596,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : StringFormControl> C.bindCustom(
+    public fun <C : StringFormControl> C.bindCustom(
         key: KProperty1<K, Any?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -610,7 +610,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : StringFormControl> C.bindCustomWithValidationMessage(
+    public fun <C : StringFormControl> C.bindCustomWithValidationMessage(
         key: KProperty1<K, Any?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -624,7 +624,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : BoolFormControl> C.bind(
+    public fun <C : BoolFormControl> C.bind(
         key: KProperty1<K, Boolean?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -638,7 +638,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : BoolFormControl> C.bindWithValidationMessage(
+    public fun <C : BoolFormControl> C.bindWithValidationMessage(
         key: KProperty1<K, Boolean?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -652,7 +652,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : TriStateFormControl> C.bind(
+    public fun <C : TriStateFormControl> C.bind(
         key: KProperty1<K, Boolean?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -666,7 +666,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : TriStateFormControl> C.bindWithValidationMessage(
+    public fun <C : TriStateFormControl> C.bindWithValidationMessage(
         key: KProperty1<K, Boolean?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -680,7 +680,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : IntFormControl> C.bind(
+    public fun <C : IntFormControl> C.bind(
         key: KProperty1<K, Int?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -694,7 +694,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : IntFormControl> C.bindWithValidationMessage(
+    public fun <C : IntFormControl> C.bindWithValidationMessage(
         key: KProperty1<K, Int?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -708,7 +708,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : NumberFormControl> C.bind(
+    public fun <C : NumberFormControl> C.bind(
         key: KProperty1<K, Number?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -722,7 +722,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : NumberFormControl> C.bindWithValidationMessage(
+    public fun <C : NumberFormControl> C.bindWithValidationMessage(
         key: KProperty1<K, Number?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -736,7 +736,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : DateFormControl> C.bind(
+    public fun <C : DateFormControl> C.bind(
         key: KProperty1<K, LocalDate?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -750,7 +750,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : DateFormControl> C.bindWithValidationMessage(
+    public fun <C : DateFormControl> C.bindWithValidationMessage(
         key: KProperty1<K, LocalDate?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -764,7 +764,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : DateTimeFormControl> C.bind(
+    public fun <C : DateTimeFormControl> C.bind(
         key: KProperty1<K, LocalDateTime?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -778,7 +778,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : DateTimeFormControl> C.bindWithValidationMessage(
+    public fun <C : DateTimeFormControl> C.bindWithValidationMessage(
         key: KProperty1<K, LocalDateTime?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -792,7 +792,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : TimeFormControl> C.bind(
+    public fun <C : TimeFormControl> C.bind(
         key: KProperty1<K, LocalTime?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -806,7 +806,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : TimeFormControl> C.bindWithValidationMessage(
+    public fun <C : TimeFormControl> C.bindWithValidationMessage(
         key: KProperty1<K, LocalTime?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -820,7 +820,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : KFilesFormControl> C.bind(
+    public fun <C : KFilesFormControl> C.bind(
         key: KProperty1<K, List<KFile>?>,
         validator: ((C) -> Boolean)? = null
     ): C {
@@ -834,7 +834,7 @@ public open class Form<K : Any>(
      * @return the control itself
      */
     @Composable
-    public open fun <C : KFilesFormControl> C.bindWithValidationMessage(
+    public fun <C : KFilesFormControl> C.bindWithValidationMessage(
         key: KProperty1<K, List<KFile>?>,
         validator: ((C) -> Pair<Boolean, String?>)? = null,
     ): C {
@@ -845,7 +845,7 @@ public open class Form<K : Any>(
      * Unbind a control from the form.
      * @param key key identifier of the control
      */
-    public open fun unbind(key: KProperty1<K, *>) {
+    public fun unbind(key: KProperty1<K, *>) {
         unbind(key.name)
     }
 
@@ -853,7 +853,7 @@ public open class Form<K : Any>(
      * Unbind a control from the form with a dynamic key.
      * @param key key identifier of the control
      */
-    public open fun unbind(key: String) {
+    public fun unbind(key: String) {
         this.fields.remove(key)
         this.fieldsParams.remove(key)
     }
@@ -916,7 +916,7 @@ public open class Form<K : Any>(
     /**
      * Clear validation information.
      */
-    public open fun clearValidation() {
+    public fun clearValidation() {
         _mutableValidationStateFlow.value = Validation()
     }
 
@@ -925,7 +925,7 @@ public open class Form<K : Any>(
      * @param key key identifier of the control
      * @return selected control
      */
-    public open fun getControl(key: KProperty1<K, *>): FormControl<*>? {
+    public fun getControl(key: KProperty1<K, *>): FormControl<*>? {
         return getControl(key.name)
     }
 
@@ -934,7 +934,7 @@ public open class Form<K : Any>(
      * @param key key identifier of the control
      * @return selected control
      */
-    public open fun getControl(key: String): FormControl<*>? {
+    public fun getControl(key: String): FormControl<*>? {
         return fields[key]
     }
 
@@ -960,35 +960,35 @@ public open class Form<K : Any>(
      * Returns the first control added to the form.
      * @return the first control
      */
-    public open fun getFirstFormControl(): FormControl<*>? {
+    public fun getFirstFormControl(): FormControl<*>? {
         return this.fields.firstNotNullOfOrNull { it.value }
     }
 
     /**
      * Submit the html form.
      */
-    public open fun submit() {
+    public fun submit() {
         if (renderConfig.isDom) element.submit()
     }
 
     /**
      * Reset the html form.
      */
-    public open fun reset() {
+    public fun reset() {
         if (renderConfig.isDom) element.reset()
     }
 
     /**
      * Check validity of the html form.
      */
-    public open fun checkValidity(): Boolean {
+    public fun checkValidity(): Boolean {
         return if (renderConfig.isDom) element.checkValidity() else false
     }
 
     /**
      * Report validity of the html form.
      */
-    public open fun reportValidity(): Boolean {
+    public fun reportValidity(): Boolean {
         return if (renderConfig.isDom) element.reportValidity() else false
     }
 

@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.9.22"
-compose = "1.6.0-beta01"
-compose-plugin = "1.5.7.1"
+compose = "1.6.0-beta02"
+compose-plugin = "1.5.8"
 npm-publish = "3.4.2"
 kilua = "0.0.1"
 kotlinx-atomicfu = "0.23.1"
@@ -24,6 +24,7 @@ trix = "2.0.10"
 toastify = "1.12.0"
 tempus-dominus = "6.9.5"
 tom-select = "2.3.1"
+imask = "7.3.0"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
