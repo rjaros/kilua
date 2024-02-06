@@ -20,9 +20,9 @@ popperjs-core = "2.11.8"
 bootstrap = "5.3.2"
 bootstrap-icons = "1.11.3"
 fontawesome = "6.5.1"
-trix = "2.0.8"
+trix = "2.0.10"
 toastify = "1.12.0"
-tempus-dominus = "6.9.4"
+tempus-dominus = "6.9.5"
 tom-select = "2.3.1"
 
 [libraries]
