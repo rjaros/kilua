@@ -32,5 +32,6 @@ import web.window
 public data class DefaultLocale(
     override val language: String = if (isDom) window.navigator.language else Intl.DateTimeFormat()
         .resolvedOptions().locale,
-    override val decimalSeparator: Char = decimalSeparator(language)
+    override val decimalSeparator: Char = decimalSeparator(language),
+    override val thousandsSeparator: Char? = thousandsSeparator(language),
 ) : Locale

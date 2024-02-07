@@ -44,6 +44,11 @@ public interface Locale {
      * Decimal separator.
      */
     public val decimalSeparator: Char
+
+    /**
+     * Thousands separator.
+     */
+    public val thousandsSeparator: Char?
 }
 
 /**
@@ -56,5 +61,19 @@ public fun decimalSeparator(language: String): Char {
     } catch (e: Exception) {
         console.log("Cannot determine decimal separator for language: $language (${e.message})")
         '.'
+    }
+}
+
+@Suppress("TooGenericExceptionCaught", "MagicNumber")
+public fun thousandsSeparator(language: String): Char? {
+    return try {
+        val thousand = (1000).toLocaleString(language)
+        if (thousand.length == 5) {
+            thousand[1]
+        } else {
+            null
+        }
+    } catch (e: Exception) {
+        null
     }
 }
