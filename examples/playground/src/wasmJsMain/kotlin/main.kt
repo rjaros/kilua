@@ -25,6 +25,8 @@ import dev.kilua.BootstrapIconsModule
 import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
 import dev.kilua.FontAwesomeModule
+import dev.kilua.ImaskModule
+import dev.kilua.SplitjsModule
 import dev.kilua.TempusDominusModule
 import dev.kilua.ToastifyModule
 import dev.kilua.TomSelectModule
@@ -39,6 +41,8 @@ fun main() {
         BootstrapCssModule,
         BootstrapIconsModule,
         FontAwesomeModule,
+        ImaskModule,
+        SplitjsModule,
         TempusDominusModule,
         TomSelectModule,
         ToastifyModule,

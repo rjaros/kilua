@@ -37,9 +37,18 @@ import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
 import dev.kilua.externals.get
 import dev.kilua.externals.obj
+import dev.kilua.form.EnumMask
+import dev.kilua.form.ImaskOptions
+import dev.kilua.form.MaskAutofix
+import dev.kilua.form.NumberMask
+import dev.kilua.form.PatternMask
+import dev.kilua.form.RangeMask
+import web.RegExp
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
+import dev.kilua.form.number.imaskNumeric
+import dev.kilua.form.number.numeric
 import dev.kilua.form.number.range
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.TomSelectRenders
@@ -65,6 +74,7 @@ import dev.kilua.panel.lazyColumn
 import dev.kilua.panel.offcanvas
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
+import dev.kilua.panel.vPanel
 import dev.kilua.popup.Placement
 import dev.kilua.popup.Trigger
 import dev.kilua.popup.disableTooltip
@@ -87,7 +97,6 @@ import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsObjectOf
-import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.now
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
@@ -131,6 +140,67 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
+
+                vPanel {
+                    text {
+                        maskOptions = ImaskOptions(pattern = PatternMask("000-000-000"))
+                    }
+                    text {
+                        maskOptions = ImaskOptions(pattern = PatternMask("000-000-000", eager = true))
+                    }
+                    text {
+                        maskOptions = ImaskOptions(pattern = PatternMask("000-000-000", lazy = false, eager = true))
+                    }
+                    text {
+                        maskOptions = ImaskOptions(
+                            pattern = PatternMask(
+                                "{Ple\\ase fill ye\\ar 19}YY{, month }MM{ \\and v\\alue }VL",
+                                lazy = false,
+                                blocks = mapOf(
+                                    "YY" to ImaskOptions(pattern = PatternMask("00")),
+                                    "MM" to ImaskOptions(range = RangeMask(1, 12)),
+                                    "VL" to ImaskOptions(enum = EnumMask(listOf("TV", "HD", "VR")))
+                                )
+                            )
+                        )
+                        onChange {
+                            console.log(this.value)
+                        }
+                    }
+                    text {
+                        maskOptions = ImaskOptions(range = RangeMask(0, 100, maxLength = 3, autofix = MaskAutofix.Pad))
+                    }
+                    numeric(123.44, placeholder = "Enter a number") {
+                        maskOptions = ImaskOptions(
+                            number = NumberMask(
+                                scale = 2,
+                                padFractionalZeros = true,
+                                normalizeZeros = true,
+                                min = -10000,
+                                max = 10000,
+                            )
+                        )
+                        onInput {
+                            console.log(this.value?.toString())
+                        }
+                    }
+                    text {
+                        maskOptions = ImaskOptions(regExp = RegExp("^[0-9]*$"))
+                    }
+                    text {
+                        maskOptions = ImaskOptions(function = { it.startsWith("1") })
+                        onInput {
+                            console.log(this.value)
+                        }
+                    }
+                    imaskNumeric(123.45) {
+                        onInput {
+                            console.log(this.value.toString())
+                        }
+                    }
+                }
+
+                hr()
 
                 var ttdis by remember { mutableStateOf(false) }
                 var ttid by remember { mutableStateOf("a") }
