@@ -55,7 +55,17 @@ public abstract class Input<T : Any>(
         skipUpdate,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         if (type != InputType.File) {
-            element.value = valueToString(it) ?: ""
+            if (mask == null) {
+                element.value = valueToString(it) ?: ""
+            } else {
+                element.value = valueToString(it) ?: ""
+                mask!!.refresh()
+                val newValue =
+                    stringToValue(mask?.getValue()?.let { maskOptions?.maskNumericValue(it) ?: it }?.ifEmpty { null })
+                if (this.value != newValue) {
+                    this.value = newValue
+                }
+            }
         }
     }
 
@@ -178,6 +188,23 @@ public abstract class Input<T : Any>(
         element.setCustomValidity(it ?: "")
     }
 
+    /**
+     * The input mask options.
+     */
+    public open var maskOptions: MaskOptions? = null
+        set(value) {
+            if (field != null) {
+                uninstallMask()
+            }
+            field = value
+            installMask()
+        }
+
+    /**
+     * The input mask controller.
+     */
+    protected var mask: Mask? = null
+
     init {
         @Suppress("LeakingThis")
         withStateFlowDelegate.formControl(this)
@@ -203,7 +230,7 @@ public abstract class Input<T : Any>(
             }
             @Suppress("LeakingThis")
             onEventDirect<Event>("input") {
-                setInternalValueFromString(element.value)
+                if (mask == null) setInternalValueFromString(element.value)
             }
         }
     }
@@ -237,6 +264,27 @@ public abstract class Input<T : Any>(
 
     override fun getValueAsString(): String? {
         return valueToString(value)
+    }
+
+    /**
+     * Install the input mask controller.
+     */
+    public open fun installMask() {
+        if (renderConfig.isDom && maskOptions != null) {
+            if (MaskManager.factory == null) throw IllegalStateException("Input mask module has not been initialized")
+            mask = MaskManager.factory!!.createMask(element, maskOptions!!)
+            mask!!.onChange {
+                setInternalValueFromString(it?.let { maskOptions?.maskNumericValue(it) ?: it }?.ifEmpty { null })
+            }
+        }
+    }
+
+    /**
+     * Uninstall the input mask controller.
+     */
+    public open fun uninstallMask() {
+        mask?.destroy()
+        mask = null
     }
 
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {

@@ -37,7 +37,11 @@ import dev.kilua.utils.toFixedNoRound
 import dev.kilua.utils.toLocaleString
 import web.dom.events.Event
 
-internal const val NUMERIC_DEFAULT_DECIMALS = 2
+/**
+ * The default number of decimal digits.
+ */
+public const val NUMERIC_DEFAULT_DECIMALS: Int = 2
+
 internal const val NUMERIC_MAX_LENGTH = 14
 
 /**
