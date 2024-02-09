@@ -75,6 +75,21 @@ public open class CssSize(protected val cssSize: Number, protected val unit: Css
     public operator fun minus(i: Number): CssSize {
         return CssSize(this.cssSize.toDouble() - i.toDouble(), this.unit)
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is CssSize) return false
+        if (cssSize != other.cssSize) return false
+        if (unit != other.unit) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = cssSize.hashCode()
+        result = 31 * result + unit.hashCode()
+        result = 31 * result + value.hashCode()
+        return result
+    }
 }
 
 /**
