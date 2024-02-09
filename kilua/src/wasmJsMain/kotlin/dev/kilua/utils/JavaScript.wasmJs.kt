@@ -27,3 +27,8 @@ public actual typealias JsModule = kotlin.js.JsModule
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
 public actual annotation class JsNonModule actual constructor()
+
+@Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+public actual inline fun <T> Any?.cast(): T {
+    return this as T
+}

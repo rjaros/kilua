@@ -25,3 +25,8 @@ package dev.kilua.utils
 public actual typealias JsModule = kotlin.js.JsModule
 
 public actual typealias JsNonModule = kotlin.js.JsNonModule
+
+@Suppress("NOTHING_TO_INLINE")
+public actual inline fun <T> Any?.cast(): T {
+    return this.unsafeCast<T>()
+}
