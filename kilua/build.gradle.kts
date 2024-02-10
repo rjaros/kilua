@@ -24,6 +24,9 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
         resolution("@fortawesome/fontawesome-free", libs.versions.fontawesome.get())
         resolution("trix", libs.versions.trix.get())
         resolution("@eonasdan/tempus-dominus", libs.versions.tempus.dominus.get())
+        resolution("tom-select", libs.versions.tom.select.get())
+        resolution("imask", libs.versions.imask.get())
+        resolution("tabulator-tables", libs.versions.tabulator.get())
     }
 }
 
