@@ -43,7 +43,6 @@ import dev.kilua.form.MaskAutofix
 import dev.kilua.form.NumberMask
 import dev.kilua.form.PatternMask
 import dev.kilua.form.RangeMask
-import web.RegExp
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
@@ -87,6 +86,12 @@ import dev.kilua.rest.RemoteRequestException
 import dev.kilua.rest.RestClient
 import dev.kilua.rest.callDynamic
 import dev.kilua.state.collectAsState
+import dev.kilua.tabulator.ColumnDefinition
+import dev.kilua.tabulator.Layout
+import dev.kilua.tabulator.PaginationMode
+import dev.kilua.tabulator.TableType
+import dev.kilua.tabulator.TabulatorOptions
+import dev.kilua.tabulator.tabulator
 import dev.kilua.theme.ThemeManager
 import dev.kilua.theme.themeSwitcher
 import dev.kilua.toast.ToastPosition
@@ -108,6 +113,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.Serializable
 import web.JsAny
 import web.JsArray
+import web.RegExp
 import web.dom.CustomEvent
 import web.dom.Text
 import web.dom.events.Event
@@ -127,6 +133,9 @@ data class Query(val q: String?)
 @Serializable
 data class SearchResult(val total_count: Int, val incomplete_results: Boolean)
 
+@Serializable
+data class Person(val name: String, val age: Int, val city: String)
+
 class App : Application() {
 
     init {
@@ -140,6 +149,103 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
+
+                val personList = remember {
+                    mutableStateListOf(
+                        Person("John", 30, "New York"),
+                        Person("Alice", 25, "Los Angeles"),
+                        Person("John", 30, "New York"),
+                        Person("Alice", 25, "Los Angeles"),
+                        Person("Alice", 25, "Los Angeles"),
+                        Person("Alice", 25, "Los Angeles")
+                    )
+                }
+
+                var heighttab by remember { mutableStateOf(300) }
+
+                console.log("recompose before tabulator")
+
+                tabulator(
+                    personList,
+                    options = TabulatorOptions(
+                        height = "${heighttab}px",
+                        layout = Layout.FitColumns,
+                        columns = listOf(
+                            ColumnDefinition("Name", "name"),
+                            ColumnDefinition("Age", "age", formatterFunction = { cell, params, onRendered ->
+                                cell.getValue()!!
+                            }),
+                            ColumnDefinition("City", "city"),
+                        ), pagination = true, paginationMode = PaginationMode.Local, paginationSize = 10
+                    ), types = setOf(TableType.TableBordered, TableType.TableSm)
+                )
+
+                button("Add row") {
+                    onClick {
+                        personList.add(Person("Mike", 70, "Chicago"))
+
+                    }
+                }
+                button("Change height") {
+                    onClick {
+                        heighttab += 10
+                    }
+                }
+
+                hr()
+
+                val dynamicList = remember {
+                    mutableStateListOf(
+                        jsObjectOf("id" to 1, "name" to "John", "age" to 30, "city" to "New York"),
+                        jsObjectOf("id" to 2, "name" to "Alice", "age" to 25, "city" to "Los Angeles"),
+                        jsObjectOf("id" to 3, "name" to "Mike", "age" to 70, "city" to "Chicago"),
+                    )
+                }
+
+                tabulator(
+                    dynamicList, options = TabulatorOptions(
+                        height = "300px",
+                        layout = Layout.FitColumns,
+                        columns = listOf(
+                            ColumnDefinition("Name", "name"),
+                            ColumnDefinition("Age", "age", formatterFunction = { cell, params, onRendered ->
+                                cell.getValue()!!
+                            }),
+                            ColumnDefinition("City", "city"),
+                        ), pagination = true, paginationMode = PaginationMode.Local, paginationSize = 10
+                    ), types = setOf(TableType.TableBordered, TableType.TableSm)
+                )
+
+                button("Add row") {
+                    onClick {
+                        dynamicList.add(jsObjectOf("id" to 4, "name" to "Tom", "age" to 40, "city" to "Boston"))
+                    }
+                }
+
+                hr()
+
+                val nativeList = remember {
+                    jsArrayOf(
+                        jsObjectOf("id" to 1, "name" to "John", "age" to 30, "city" to "New York"),
+                        jsObjectOf("id" to 2, "name" to "Alice", "age" to 25, "city" to "Los Angeles"),
+                        jsObjectOf("id" to 3, "name" to "Mike", "age" to 70, "city" to "Chicago"),
+                    )
+                }
+
+                tabulator(
+                    options = TabulatorOptions(
+                        height = "300px",
+                        data = nativeList,
+                        layout = Layout.FitColumns,
+                        columns = listOf(
+                            ColumnDefinition("Name", "name"),
+                            ColumnDefinition("Age", "age", formatterFunction = { cell, params, onRendered ->
+                                cell.getValue()!!
+                            }),
+                            ColumnDefinition("City", "city"),
+                        ), pagination = true, paginationMode = PaginationMode.Local, paginationSize = 10
+                    ), types = setOf(TableType.TableBordered, TableType.TableSm)
+                )
 
                 vPanel {
                     text {
@@ -241,6 +347,8 @@ class App : Application() {
                 hr()
 
                 val restClient = RestClient()
+
+                console.log("recomposing before tom select")
 
                 tomSelect(emptyOption = true) {
                     emptyOption = true
