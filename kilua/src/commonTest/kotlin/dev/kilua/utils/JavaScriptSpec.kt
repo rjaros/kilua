@@ -52,4 +52,33 @@ class JavaScriptSpec : SimpleSpec {
         )
     }
 
+    @Test
+    fun deepMerge() {
+        run {
+            val target = jsObjectOf(
+                "a" to mapOf(
+                    "b" to mapOf(
+                        "c" to "c",
+                        "d" to "d"
+                    ),
+                    "array" to listOf(1, 2)
+                )
+            )
+            val source = jsObjectOf(
+                "a" to mapOf(
+                    "b" to mapOf(
+                        "e" to "e"
+                    ),
+                    "array" to listOf(3, 4)
+                )
+            )
+            val result = deepMerge(target, source)
+            assertEquals(
+                """{"a":{"b":{"c":"c","d":"d","e":"e"},"array":[1,2,3,4]}}""",
+                JSON.stringify(result),
+                "Should deeply merge two JS objects"
+            )
+        }
+    }
+
 }

@@ -22,8 +22,15 @@
 
 package dev.kilua.utils
 
+import dev.kilua.externals.assign
+import dev.kilua.externals.concat
+import dev.kilua.externals.get
+import dev.kilua.externals.isArray
+import dev.kilua.externals.jsTypeOf
+import dev.kilua.externals.keys
 import dev.kilua.externals.obj
 import dev.kilua.externals.set
+import dev.kilua.externals.undefined
 import web.JsAny
 import web.JsArray
 import web.get
@@ -155,3 +162,27 @@ public fun Map<String, Any?>.toJsAny(): JsAny = this.toJsAny<Map<String, Any?>>(
 public fun jsObjectOf(
     vararg pairs: Pair<String, Any?>
 ): JsAny = mapOf(*pairs).toJsAny()
+
+/**
+ * Helper function to deeply merge two JS objects.
+ */
+public fun deepMerge(target: JsAny, source: JsAny): JsAny {
+    fun isObject(obj: JsAny?): Boolean {
+        return obj != null && obj != undefined() && jsTypeOf(obj) == "object"
+    }
+    if (!isObject(target) || !isObject(source)) return source
+    for (key in keys(source)) {
+        val targetValue = target[key]
+        val sourceValue = source[key]
+        if (isArray(targetValue) && isArray(sourceValue)) {
+            target[key] = concat(targetValue.cast<JsArray<JsAny>>(), sourceValue.cast())
+        } else if (isObject(targetValue) && isObject(sourceValue)) {
+            val newObj = obj()
+            assign(newObj, targetValue!!)
+            target[key] = deepMerge(newObj, sourceValue!!)
+        } else if (sourceValue != null) {
+            target[key] = sourceValue
+        }
+    }
+    return target
+}

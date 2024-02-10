@@ -72,3 +72,13 @@ public actual fun assign(target: JsAny, source: JsAny) {
  */
 @Suppress("UnsafeCastFromDynamic")
 public actual fun delete(o: JsAny, key: String): Unit = js("delete o[key]")
+
+/**
+ * Returns JS type of a given value
+ */
+public actual fun jsTypeOf(o: JsAny?): String = kotlin.js.jsTypeOf(o)
+
+/**
+ * Return undefined value
+ */
+public actual fun undefined(): JsAny? = undefined.unsafeCast<JsAny?>()

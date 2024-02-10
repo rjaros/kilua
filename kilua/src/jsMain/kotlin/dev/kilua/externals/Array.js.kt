@@ -1,3 +1,4 @@
+@file:Suppress("TooManyFunctions")
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -22,52 +23,19 @@
 
 package dev.kilua.externals
 
-import dev.kilua.utils.cast
 import web.JsAny
+import web.JsArray
 
 /**
- * Return empty JS Object
+ * Returns whether the given value is an array
  */
-public expect fun obj(): JsAny
+@Suppress("UnsafeCastFromDynamic")
+public actual fun isArray(o: JsAny?): Boolean = js("Array").isArray(o)
 
 /**
- * Helper function for creating JavaScript objects with given type.
+ * Merge two arrays.
+ * Returns a new array containing the contents of both given arrays.
  */
-public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
-    return (obj().cast<T>()).apply(init)
-}
-
-/**
- * Operator to set property on JS Object
- */
-public expect operator fun JsAny.set(key: String, value: JsAny)
-
-/**
- * Operator to get property from JS Object
- */
-public expect operator fun JsAny.get(key: String): JsAny?
-
-/**
- * Get the list of keys from JS Object
- */
-public expect fun keys(o: JsAny): List<String>
-
-/**
- * Copies all properties from source object to target object
- */
-public expect fun assign(target: JsAny, source: JsAny)
-
-/**
- * Delete a property from an object
- */
-public expect fun delete(o: JsAny, key: String)
-
-/**
- * Return native JS type of a given value
- */
-public expect fun jsTypeOf(o: JsAny?): String
-
-/**
- * Return undefined value
- */
-public expect fun undefined(): JsAny?
+@Suppress("UnsafeCastFromDynamic")
+public actual fun <T : JsAny> concat(array1: JsArray<T>, array2: JsArray<T>): JsArray<T> =
+    array1.asDynamic().concat(array2)
