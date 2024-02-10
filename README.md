@@ -47,7 +47,7 @@ Still no artifacts are published, but we are close to the first alpha release.
 - [X] Implement support for masked inputs based on Imask NPM library
 - [X] CSS styles declarations
 - [X] Typesafe forms support with built-in validation 
-- [ ] Implement Tabulator component
+- [X] Implement Tabulator component
 - [X] Routing support
 - [X] Web client
 - [ ] I18n support
