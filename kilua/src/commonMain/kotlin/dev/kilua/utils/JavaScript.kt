@@ -59,6 +59,20 @@ public expect annotation class JsModule(val import: String)
 public expect annotation class JsNonModule()
 
 /**
+ * Helper annotation for JS/Wasm compatibility.
+ */
+@Retention(AnnotationRetention.BINARY)
+@Target(
+    AnnotationTarget.CLASS,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.CONSTRUCTOR,
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.PROPERTY_SETTER
+)
+public expect annotation class JsName(val name: String)
+
+/**
  * Helper function for JS/Wasm compatibility.
  */
 @Suppress("NOTHING_TO_INLINE")

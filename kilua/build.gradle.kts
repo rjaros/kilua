@@ -1,33 +1,11 @@
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.compose)
     alias(libs.plugins.detekt)
-    id("maven-publish")
+    id(libs.plugins.dokka.get().pluginId)
+    id(libs.plugins.maven.publish.get().pluginId)
     id("signing")
-}
-
-rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
-    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().apply {
-        resolution("aaa-kilua-assets", libs.versions.npm.kilua.assets.get())
-        resolution("zzz-kilua-assets", libs.versions.npm.kilua.assets.get())
-        resolution("css-loader", libs.versions.css.loader.get())
-        resolution("style-loader", libs.versions.style.loader.get())
-        resolution("imports-loader", libs.versions.imports.loader.get())
-        resolution("split.js", libs.versions.splitjs.get())
-        resolution("html-differ", libs.versions.html.differ.get())
-        resolution("@popperjs/core", libs.versions.popperjs.core.get())
-        resolution("bootstrap", libs.versions.bootstrap.asProvider().get())
-        resolution("bootstrap-icons", libs.versions.bootstrap.icons.get())
-        resolution("@fortawesome/fontawesome-free", libs.versions.fontawesome.get())
-        resolution("trix", libs.versions.trix.get())
-        resolution("@eonasdan/tempus-dominus", libs.versions.tempus.dominus.get())
-        resolution("tom-select", libs.versions.tom.select.get())
-        resolution("imask", libs.versions.imask.get())
-        resolution("tabulator-tables", libs.versions.tabulator.get())
-    }
 }
 
 detekt {
@@ -78,16 +56,18 @@ kotlin {
     }
 }
 
-rootProject.the<NodeJsRootExtension>().apply {
+compose {
+    kotlinCompilerPlugin.set(libs.versions.compose.plugin)
+    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
+}
+
+setupPublishing(libs.versions.kilua.get())
+
+rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().apply {
     nodeVersion = "22.0.0-v8-canary202401102ecfc94f85"
     nodeDownloadBaseUrl = "https://mirrors.dotsrc.org/nodejs/v8-canary"
 }
 
 rootProject.tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask>().configureEach {
     args.add("--ignore-engines")
-}
-
-compose {
-    kotlinCompilerPlugin.set(libs.versions.compose.plugin)
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }

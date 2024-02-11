@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.compose)
     alias(libs.plugins.detekt)
-    id("maven-publish")
+    id(libs.plugins.dokka.get().pluginId)
+    id(libs.plugins.maven.publish.get().pluginId)
     id("signing")
 }
 
@@ -49,3 +50,5 @@ compose {
     kotlinCompilerPlugin.set(libs.versions.compose.plugin)
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
+
+setupPublishing(libs.versions.kilua.get())

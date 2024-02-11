@@ -2,7 +2,8 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.detekt)
-    id("maven-publish")
+    id(libs.plugins.dokka.get().pluginId)
+    id(libs.plugins.maven.publish.get().pluginId)
     id("signing")
 }
 
@@ -38,3 +39,5 @@ kotlin {
         }
     }
 }
+
+setupPublishing(libs.versions.kilua.get())
