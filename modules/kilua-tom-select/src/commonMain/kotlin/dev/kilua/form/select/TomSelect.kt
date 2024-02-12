@@ -78,13 +78,12 @@ public open class TomSelect(
     /**
      * The list of options (value to label pairs).
      */
-    public open var options: List<StringPair>? by updatingProperty(options, skipUpdate) {
+    public open var options: List<StringPair>? by updatingProperty(options) {
         refresh()
     }
 
     public override var value: String? by updatingProperty(
         value,
-        skipUpdate,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         refreshValue()
     }
@@ -92,52 +91,52 @@ public open class TomSelect(
     /**
      * Determines if an empty option is allowed.
      */
-    public var emptyOption: Boolean by updatingProperty(emptyOption, skipUpdate) {
+    public var emptyOption: Boolean by updatingProperty(emptyOption) {
         refresh()
     }
 
     /**
      * Determines if multiple value selection is allowed.
      */
-    internal var multiple: Boolean by updatingProperty(multiple, skipUpdate) {
+    internal var multiple: Boolean by updatingProperty(multiple) {
     }
 
     /**
      * The maximum number of visible options.
      */
-    public var maxOptions: Int? by updatingProperty(maxOptions, skipUpdate) {
+    public var maxOptions: Int? by updatingProperty(maxOptions) {
         refresh()
     }
 
     /**
      * Tom Select options.
      */
-    public var tsOptions: TomSelectOptions? by updatingProperty(tsOptions, skipUpdate) {
+    public var tsOptions: TomSelectOptions? by updatingProperty(tsOptions) {
         refresh()
     }
 
     /**
      * Tom Select callbacks.
      */
-    public var tsCallbacks: TomSelectCallbacks? by updatingProperty(tsCallbacks, skipUpdate) {
+    public var tsCallbacks: TomSelectCallbacks? by updatingProperty(tsCallbacks) {
         refresh()
     }
 
     /**
      * Tom Select renders.
      */
-    public var tsRenders: TomSelectRenders? by updatingProperty(tsRenders, skipUpdate) {
+    public var tsRenders: TomSelectRenders? by updatingProperty(tsRenders) {
         refresh()
     }
 
     /**
      * Disable searching in options.
      */
-    public var disableSearch: Boolean by updatingProperty(false, skipUpdate) {
+    public var disableSearch: Boolean by updatingProperty(false) {
         refresh()
     }
 
-    public override var name: String? by updatingProperty(name, skipUpdate) {
+    public override var name: String? by updatingProperty(name) {
         if (it != null) {
             element.name = it
         } else {
@@ -148,11 +147,11 @@ public open class TomSelect(
     /**
      * The placeholder for the select component.
      */
-    public var placeholder: String? by updatingProperty(placeholder, skipUpdate) {
+    public var placeholder: String? by updatingProperty(placeholder) {
         refresh()
     }
 
-    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -161,7 +160,7 @@ public open class TomSelect(
         refresh()
     }
 
-    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+    public override var required: Boolean? by updatingProperty(required) {
         if (it != null) {
             element.required = it
         } else {
@@ -172,7 +171,7 @@ public open class TomSelect(
     /**
      * The autofocus attribute of the generated HTML element.
      */
-    public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var autofocus: Boolean? by updatingProperty {
         if (it != null) {
             element.autofocus = it
         } else {
@@ -180,7 +179,7 @@ public open class TomSelect(
         }
     }
 
-    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var customValidity: String? by updatingProperty {
         element.setCustomValidity(it ?: "")
     }
 

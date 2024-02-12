@@ -53,7 +53,6 @@ public open class RadioGroup(
 
     public override var value: String? by updatingProperty(
         value,
-        skipUpdate,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         findAllRadios().forEach { radio ->
             radio.value = radio.extraValue == it
@@ -63,7 +62,7 @@ public open class RadioGroup(
     /**
      * The name attribute of the generated HTML radio input elements.
      */
-    public open var inline: Boolean by updatingProperty(inline, skipUpdate) {
+    public open var inline: Boolean by updatingProperty(inline) {
         children.forEach { child ->
             if (child is Div) {
                 child.className = if (it) "kilua-radio-inline" else null
@@ -74,7 +73,7 @@ public open class RadioGroup(
     /**
      * The name attribute of the generated HTML radio input elements.
      */
-    public override var name: String? by updatingProperty(name, skipUpdate) {
+    public override var name: String? by updatingProperty(name) {
         findAllRadios().forEach { radio ->
             radio.name = it ?: "name_${componentId}"
         }
@@ -83,7 +82,7 @@ public open class RadioGroup(
     /**
      * The disabled attribute of the generated HTML radio input elements.
      */
-    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         findAllRadios().forEach { radio ->
             radio.disabled = it
         }
@@ -92,7 +91,7 @@ public open class RadioGroup(
     /**
      * The required attribute of the generated HTML radio input elements.
      */
-    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+    public override var required: Boolean? by updatingProperty(required) {
         findAllRadios().forEach { radio ->
             radio.required = it
         }
@@ -101,13 +100,13 @@ public open class RadioGroup(
     /**
      * The autofocus attribute of the generated HTML radio input elements.
      */
-    public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var autofocus: Boolean? by updatingProperty {
         findAllRadios().firstOrNull()?.let { radio ->
             radio.autofocus = it
         }
     }
 
-    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var customValidity: String? by updatingProperty {
         findAllRadios().forEach { radio ->
             radio.customValidity = it
         }

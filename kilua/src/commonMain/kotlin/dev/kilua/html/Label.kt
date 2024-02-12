@@ -44,7 +44,7 @@ public open class Label(
     /**
      * The ID of the labeled element.
      */
-    public open var htmlFor: String? by updatingProperty(htmlFor, skipUpdate, "for") {
+    public open var htmlFor: String? by updatingProperty(htmlFor, name = "for") {
         if (it != null) {
             element.htmlFor = it
         } else {

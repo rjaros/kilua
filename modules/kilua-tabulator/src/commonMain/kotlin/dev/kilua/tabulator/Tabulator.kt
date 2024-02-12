@@ -102,7 +102,7 @@ public open class Tabulator<T : Any>(
     /**
      * The tabulator data.
      */
-    public open var data: List<T>? by updatingProperty(data, skipUpdate = skipUpdate) {
+    public open var data: List<T>? by updatingProperty(data) {
         internalData = data?.let { toPlainObjList(it) }
         refreshData()
     }
@@ -110,7 +110,7 @@ public open class Tabulator<T : Any>(
     /**
      * The tabulator options.
      */
-    public open var options: TabulatorOptions by updatingProperty(options, skipUpdate = skipUpdate) {
+    public open var options: TabulatorOptions by updatingProperty(options) {
         refresh()
     }
 

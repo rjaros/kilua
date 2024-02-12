@@ -67,7 +67,7 @@ public open class Iframe(
     /**
      * The URL of the page to embed.
      */
-    public open var src: String? by updatingProperty(src, skipUpdate) {
+    public open var src: String? by updatingProperty(src) {
         if (it != null) {
             element.src = it
         } else {
@@ -78,7 +78,7 @@ public open class Iframe(
     /**
      * Inline HTML to embed.
      */
-    public open var srcdoc: String? by updatingProperty(srcdoc, skipUpdate) {
+    public open var srcdoc: String? by updatingProperty(srcdoc) {
         if (it != null) {
             element.srcdoc = it
         } else {
@@ -89,7 +89,7 @@ public open class Iframe(
     /**
      * The name of the iframe.
      */
-    public open var name: String? by updatingProperty(name, skipUpdate) {
+    public open var name: String? by updatingProperty(name) {
         if (it != null) {
             element.name = it
         } else {
@@ -100,7 +100,7 @@ public open class Iframe(
     /**
      * The width of the iframe.
      */
-    public open var iframeWidth: Int? by updatingProperty(iframeWidth, skipUpdate, "width") {
+    public open var iframeWidth: Int? by updatingProperty(iframeWidth, name = "width") {
         if (it != null) {
             element.width = it.toString()
         } else {
@@ -111,7 +111,7 @@ public open class Iframe(
     /**
      * The height of the iframe.
      */
-    public open var iframeHeight: Int? by updatingProperty(iframeHeight, skipUpdate, "height") {
+    public open var iframeHeight: Int? by updatingProperty(iframeHeight, name = "height") {
         if (it != null) {
             element.height = it.toString()
         } else {

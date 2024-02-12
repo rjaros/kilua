@@ -50,18 +50,13 @@ public open class TextNode(
     }
 
     /**
-     * Whether to skip updating the DOM text node of the current component.
-     */
-    protected val skipUpdate: Boolean = !renderConfig.isDom
-
-    /**
      * The text of the node.
      */
-    public open var data: String by updatingProperty(data, skipUpdate) {
+    public open var data: String by updatingProperty(data) {
         text.data = it
     }
 
-    override var visible: Boolean by updatingProperty(true, skipUpdate) {
+    override var visible: Boolean by updatingProperty(true) {
         text.data = if (it) data else ""
     }
 

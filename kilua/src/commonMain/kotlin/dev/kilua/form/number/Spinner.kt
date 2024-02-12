@@ -57,7 +57,7 @@ public open class Spinner(
     /**
      * The minimum value of the spinner.
      */
-    public open var min: Int? by updatingProperty(min, skipUpdate) {
+    public open var min: Int? by updatingProperty(min) {
         if (it != null) {
             element.min = it.toString()
         } else {
@@ -68,7 +68,7 @@ public open class Spinner(
     /**
      * The maximum value of the spinner.
      */
-    public open var max: Int? by updatingProperty(max, skipUpdate) {
+    public open var max: Int? by updatingProperty(max) {
         if (it != null) {
             element.max = it.toString()
         } else {
@@ -79,7 +79,7 @@ public open class Spinner(
     /**
      * The step value of the spinner.
      */
-    public open var step: Int by updatingProperty(step, skipUpdate) {
+    public open var step: Int by updatingProperty(step) {
         element.step = it.toString()
     }
 

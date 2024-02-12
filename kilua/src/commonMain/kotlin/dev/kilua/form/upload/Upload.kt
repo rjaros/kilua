@@ -94,14 +94,14 @@ public open class Upload(
     /**
      * Determines if multiple file upload is supported.
      */
-    public var multiple: Boolean by updatingProperty(multiple, skipUpdate) {
+    public var multiple: Boolean by updatingProperty(multiple) {
         element.multiple = it
     }
 
     /**
      * File types accepted by the file upload input.
      */
-    public var accept: List<String>? by updatingProperty(accept, skipUpdate) {
+    public var accept: List<String>? by updatingProperty(accept) {
         if (!it.isNullOrEmpty()) {
             element.accept = it.joinToString(",")
         } else {
@@ -112,14 +112,14 @@ public open class Upload(
     /**
      * File upload input capture mode.
      */
-    public var capture: Capture? by updatingProperty(capture, skipUpdate) {
+    public var capture: Capture? by updatingProperty(capture) {
         setAttribute("capture", it?.toString())
     }
 
     /**
      * Only allow directories for selection.
      */
-    public var webkitdirectory: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public var webkitdirectory: Boolean? by updatingProperty {
         setAttribute("webkitdirectory", it?.toString())
     }
 

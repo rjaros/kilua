@@ -63,7 +63,6 @@ public open class RichDateTime(
 
     public override var value: LocalDateTime? by updatingProperty(
         value,
-        skipUpdate,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         if (tempusDominusInstance != null) {
             val currentValue = tempusDominusInstance!!.dates.lastPicked?.toLocalDateTime()

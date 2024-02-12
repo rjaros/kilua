@@ -78,7 +78,7 @@ public open class Time(
     /**
      * The minimum value of the time.
      */
-    public open var min: LocalTime? by updatingProperty(min, skipUpdate) {
+    public open var min: LocalTime? by updatingProperty(min) {
         if (it != null) {
             element.min = it.toString()
         } else {
@@ -89,7 +89,7 @@ public open class Time(
     /**
      * The maximum value of the time.
      */
-    public open var max: LocalTime? by updatingProperty(max, skipUpdate) {
+    public open var max: LocalTime? by updatingProperty(max) {
         if (it != null) {
             element.max = it.toString()
         } else {
@@ -100,7 +100,7 @@ public open class Time(
     /**
      * The step value of the time.
      */
-    public open var step: Int by updatingProperty(step, skipUpdate) {
+    public open var step: Int by updatingProperty(step) {
         element.step = it.toString()
     }
 

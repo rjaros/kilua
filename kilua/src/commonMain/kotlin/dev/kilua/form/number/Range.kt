@@ -57,21 +57,21 @@ public open class Range(
     /**
      * The minimum value of the range.
      */
-    public open var min: Number by updatingProperty(min, skipUpdate) {
+    public open var min: Number by updatingProperty(min) {
         element.min = it.toString()
     }
 
     /**
      * The maximum value of the range.
      */
-    public open var max: Number by updatingProperty(max, skipUpdate) {
+    public open var max: Number by updatingProperty(max) {
         element.max = it.toString()
     }
 
     /**
      * The step value of the range.
      */
-    public open var step: Number by updatingProperty(step, skipUpdate) {
+    public open var step: Number by updatingProperty(step) {
         element.step = it.toString()
     }
 

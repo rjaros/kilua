@@ -64,7 +64,6 @@ public abstract class AbstractCheck(
 
     public override var value: Boolean by updatingProperty(
         value,
-        skipUpdate,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         element.checked = it
     }
@@ -72,7 +71,7 @@ public abstract class AbstractCheck(
     /**
      * The name attribute of the generated HTML input element.
      */
-    public override var name: String? by updatingProperty(name, skipUpdate) {
+    public override var name: String? by updatingProperty(name) {
         if (it != null) {
             element.name = it
         } else {
@@ -83,7 +82,7 @@ public abstract class AbstractCheck(
     /**
      * The disabled attribute of the generated HTML input element.
      */
-    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -94,7 +93,7 @@ public abstract class AbstractCheck(
     /**
      * The required attribute of the generated HTML input element.
      */
-    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+    public override var required: Boolean? by updatingProperty(required) {
         if (it != null) {
             element.required = it
         } else {
@@ -105,7 +104,7 @@ public abstract class AbstractCheck(
     /**
      * The autofocus attribute of the generated HTML input element.
      */
-    public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var autofocus: Boolean? by updatingProperty {
         if (it != null) {
             element.autofocus = it
         } else {
@@ -116,7 +115,7 @@ public abstract class AbstractCheck(
     /**
      * The checked attribute of the generated HTML input element.
      */
-    public open var defaultChecked: Boolean? by updatingProperty(skipUpdate = skipUpdate, "checked") {
+    public open var defaultChecked: Boolean? by updatingProperty(name = "checked") {
         if (it != null) {
             element.defaultChecked = it
         } else {
@@ -133,7 +132,7 @@ public abstract class AbstractCheck(
             setAttribute("value", extraValue)
         }
 
-    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var customValidity: String? by updatingProperty {
         element.setCustomValidity(it ?: "")
     }
 

@@ -81,7 +81,7 @@ public open class TabPanel(
 ) :
     Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
 
-    public open var activeIndex: Int by updatingProperty(activeIndex, skipUpdate, notifyFunction = {
+    public open var activeIndex: Int by updatingProperty(activeIndex, notifyFunction = {
         activeIndexState = it
     })
 

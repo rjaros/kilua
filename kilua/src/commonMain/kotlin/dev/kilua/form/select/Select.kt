@@ -73,14 +73,14 @@ public open class Select(
     /**
      * Determines if multiple value selection is allowed.
      */
-    public var multiple: Boolean by updatingProperty(multiple, skipUpdate) {
+    public var multiple: Boolean by updatingProperty(multiple) {
         element.multiple = it
     }
 
     /**
      * The number of visible options.
      */
-    public var size: Int? by updatingProperty(size, skipUpdate) {
+    public var size: Int? by updatingProperty(size) {
         if (it != null) {
             element.size = it
         } else {
@@ -88,7 +88,7 @@ public open class Select(
         }
     }
 
-    public override var name: String? by updatingProperty(name, skipUpdate) {
+    public override var name: String? by updatingProperty(name) {
         if (it != null) {
             element.name = it
         } else {
@@ -96,7 +96,7 @@ public open class Select(
         }
     }
 
-    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -104,7 +104,7 @@ public open class Select(
         }
     }
 
-    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+    public override var required: Boolean? by updatingProperty(required) {
         if (it != null) {
             element.required = it
         } else {
@@ -115,7 +115,7 @@ public open class Select(
     /**
      * The autofocus attribute of the generated HTML textarea element.
      */
-    public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var autofocus: Boolean? by updatingProperty {
         if (it != null) {
             element.autofocus = it
         } else {
@@ -123,7 +123,7 @@ public open class Select(
         }
     }
 
-    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var customValidity: String? by updatingProperty {
         element.setCustomValidity(it ?: "")
     }
 

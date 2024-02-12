@@ -71,8 +71,7 @@ public open class RichText(
     StringFormControl, WithStateFlow<String?> by withStateFlowDelegate {
 
     public override var value: String? by updatingProperty(
-        value,
-        skipUpdate,
+        initialValue = value,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         getEditorFromElement(element)?.loadHTML(it ?: "")
         if (disabled == true) toolbarDisable(true)
@@ -81,11 +80,11 @@ public open class RichText(
     /**
      * The locale for i18n.
      */
-    public open var locale: Locale by updatingProperty(locale, skipUpdate = skipUpdate) {
+    public open var locale: Locale by updatingProperty(locale) {
         toolbarLocalize()
     }
 
-    public override var name: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var name: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("name", it)
         } else {
@@ -96,7 +95,7 @@ public open class RichText(
     /**
      * The placeholder of the rich text editor.
      */
-    public var placeholder: String? by updatingProperty(placeholder, skipUpdate) {
+    public var placeholder: String? by updatingProperty(placeholder) {
         if (it != null) {
             element.setAttribute("placeholder", it)
         } else {
@@ -104,7 +103,7 @@ public open class RichText(
         }
     }
 
-    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it == true) {
             element.setAttribute("disabled", "")
             element.removeAttribute("contenteditable")
@@ -116,7 +115,7 @@ public open class RichText(
         }
     }
 
-    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+    public override var required: Boolean? by updatingProperty(required) {
         if (it == true) {
             element.setAttribute("required", "")
         } else {
@@ -127,7 +126,7 @@ public open class RichText(
     /**
      * The autofocus of the rich text editor.
      */
-    public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var autofocus: Boolean? by updatingProperty {
         if (it == true) {
             element.setAttribute("autofocus", "")
         } else {
@@ -135,7 +134,7 @@ public open class RichText(
         }
     }
 
-    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate)
+    public override var customValidity: String? by updatingProperty()
 
     override var visible: Boolean
         get() = super.visible
@@ -153,7 +152,7 @@ public open class RichText(
     /**
      * The ID of the connected input element
      */
-    internal var input: String? by updatingProperty(skipUpdate = skipUpdate) {
+    internal var input: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("input", it)
         } else {
@@ -164,7 +163,7 @@ public open class RichText(
     /**
      * The ID of the connected toolbar element
      */
-    internal var toolbar: String? by updatingProperty(skipUpdate = skipUpdate) {
+    internal var toolbar: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("toolbar", it)
         } else {
@@ -253,11 +252,7 @@ public open class RichText(
     protected open fun setInternalValueFromString(text: String?) {
         val newValue = stringToValue(text)
         if (value != newValue) {
-            if (newValue != null) {
-                propertyValues["value"] = newValue
-            } else {
-                propertyValues.remove("value")
-            }
+            setPropertyValue("value", newValue)
             withStateFlowDelegate.updateStateFlow(newValue)
         }
     }

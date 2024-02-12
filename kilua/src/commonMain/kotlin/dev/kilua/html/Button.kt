@@ -62,14 +62,14 @@ public open class Button(
     /**
      * The type of the button.
      */
-    public open var type: ButtonType by updatingProperty(type, skipUpdate) {
+    public open var type: ButtonType by updatingProperty(type) {
         element.type = it.value
     }
 
     /**
      * Whether the button is disabled.
      */
-    public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public open var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {

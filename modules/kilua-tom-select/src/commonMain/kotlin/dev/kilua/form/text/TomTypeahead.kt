@@ -82,18 +82,17 @@ public open class TomTypeahead(
     /**
      * The list of options.
      */
-    public open var options: List<String>? by updatingProperty(options, skipUpdate) {
+    public open var options: List<String>? by updatingProperty(options) {
         refresh()
     }
 
     public override var value: String? by updatingProperty(
         value,
-        skipUpdate,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         refreshValue()
     }
 
-    override var id: String? by updatingProperty(id, skipUpdate) {
+    override var id: String? by updatingProperty(id) {
         if (it != null) {
             element.id = it
         } else {
@@ -105,11 +104,11 @@ public open class TomTypeahead(
     /**
      * Tom Select callbacks.
      */
-    public var tsCallbacks: TomSelectCallbacks? by updatingProperty(tsCallbacks, skipUpdate) {
+    public var tsCallbacks: TomSelectCallbacks? by updatingProperty(tsCallbacks) {
         refresh()
     }
 
-    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {

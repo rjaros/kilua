@@ -47,8 +47,8 @@ public interface TagAttrsDelegate<E : HTMLElement> : TagAttrs<E> {
  * Common tag attributes delegate implementation.
  */
 public open class TagAttrsDelegateImpl<E : HTMLElement>(
-    protected val skipUpdates: Boolean,
-) : TagAttrsDelegate<E>, PropertyDelegate(nativeMapOf()) {
+    skipUpdates: Boolean,
+) : TagAttrsDelegate<E>, PropertyDelegate(nativeMapOf(), skipUpdates = skipUpdates) {
 
     public override val attributesMap: Map<String, Any> = propertyValues
 
@@ -62,7 +62,7 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var title: String? by updatingProperty(skipUpdate = skipUpdates) {
+    override var title: String? by updatingProperty {
         if (it != null) {
             element.title = it
         } else {
@@ -70,7 +70,7 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var tabindex: Int? by updatingProperty(skipUpdate = skipUpdates) {
+    override var tabindex: Int? by updatingProperty {
         if (it != null) {
             element.tabIndex = it
         } else {
@@ -78,7 +78,7 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var draggable: Boolean? by updatingProperty(skipUpdate = skipUpdates) {
+    override var draggable: Boolean? by updatingProperty {
         if (it != null) {
             element.draggable = it
         } else {
@@ -86,7 +86,7 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var role: String? by updatingProperty(skipUpdate = skipUpdates) {
+    override var role: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("role", it)
         } else {
@@ -94,7 +94,7 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var ariaLabel: String? by updatingProperty(null, skipUpdates) {
+    override var ariaLabel: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("aria-label", it)
         } else {
@@ -102,7 +102,7 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var ariaLabelledby: String? by updatingProperty(null, skipUpdates) {
+    override var ariaLabelledby: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("aria-labelledby", it)
         } else {
@@ -110,7 +110,7 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var ariaDescribedby: String? by updatingProperty(null, skipUpdates) {
+    override var ariaDescribedby: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("aria-describedby", it)
         } else {
@@ -118,7 +118,7 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var accesskey: Char? by updatingProperty(null, skipUpdates) {
+    override var accesskey: Char? by updatingProperty {
         if (it != null) {
             element.accessKey = it.toString()
         } else {
@@ -126,7 +126,7 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
-    override var autofocus: Boolean? by updatingProperty(null, skipUpdates) {
+    override var autofocus: Boolean? by updatingProperty {
         if (it != null) {
             element.setAttribute("autofocus", "")
         } else {

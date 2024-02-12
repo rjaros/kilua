@@ -71,7 +71,6 @@ public open class TextArea(
 
     public override var value: String? by updatingProperty(
         value,
-        skipUpdate,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         element.value = it ?: ""
     }
@@ -79,7 +78,7 @@ public open class TextArea(
     /**
      * The number of columns of the textarea.
      */
-    public var cols: Int? by updatingProperty(cols, skipUpdate) {
+    public var cols: Int? by updatingProperty(cols) {
         if (it != null) {
             element.cols = it
         } else {
@@ -90,7 +89,7 @@ public open class TextArea(
     /**
      * The number of rows of the textarea.
      */
-    public var rows: Int? by updatingProperty(rows, skipUpdate) {
+    public var rows: Int? by updatingProperty(rows) {
         if (it != null) {
             element.rows = it
         } else {
@@ -98,7 +97,7 @@ public open class TextArea(
         }
     }
 
-    public override var name: String? by updatingProperty(name, skipUpdate) {
+    public override var name: String? by updatingProperty(name) {
         if (it != null) {
             element.name = it
         } else {
@@ -109,7 +108,7 @@ public open class TextArea(
     /**
      * The maxlength attribute of the generated HTML textarea element.
      */
-    public var maxlength: Int? by updatingProperty(maxlength, skipUpdate) {
+    public var maxlength: Int? by updatingProperty(maxlength) {
         if (it != null) {
             element.maxLength = it
         } else {
@@ -120,7 +119,7 @@ public open class TextArea(
     /**
      * The placeholder attribute of the generated HTML textarea element.
      */
-    public var placeholder: String? by updatingProperty(placeholder, skipUpdate) {
+    public var placeholder: String? by updatingProperty(placeholder) {
         if (it != null) {
             element.placeholder = it
         } else {
@@ -128,7 +127,7 @@ public open class TextArea(
         }
     }
 
-    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -136,7 +135,7 @@ public open class TextArea(
         }
     }
 
-    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+    public override var required: Boolean? by updatingProperty(required) {
         if (it != null) {
             element.required = it
         } else {
@@ -147,7 +146,7 @@ public open class TextArea(
     /**
      * The autofocus attribute of the generated HTML textarea element.
      */
-    public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var autofocus: Boolean? by updatingProperty {
         if (it != null) {
             element.autofocus = it
         } else {
@@ -158,7 +157,7 @@ public open class TextArea(
     /**
      * The readonly attribute of the generated HTML textarea element.
      */
-    public open var readonly: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var readonly: Boolean? by updatingProperty {
         if (it != null) {
             element.readOnly = it
         } else {
@@ -169,7 +168,7 @@ public open class TextArea(
     /**
      * The wrap attribute of the generated HTML textarea element.
      */
-    public open var wrap: WrapType? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var wrap: WrapType? by updatingProperty {
         if (it != null) {
             element.wrap = it.value
         } else {
@@ -177,7 +176,7 @@ public open class TextArea(
         }
     }
 
-    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var customValidity: String? by updatingProperty {
         element.setCustomValidity(it ?: "")
     }
 

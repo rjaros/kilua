@@ -45,7 +45,7 @@ public open class Img(
     /**
      * The source of the image.
      */
-    public open var src: String? by updatingProperty(src, skipUpdate) {
+    public open var src: String? by updatingProperty(src) {
         if (it != null) {
             element.src = it
         } else {
@@ -56,7 +56,7 @@ public open class Img(
     /**
      * The alternative text of the image.
      */
-    public open var alt: String? by updatingProperty(alt, skipUpdate) {
+    public open var alt: String? by updatingProperty(alt) {
         if (it != null) {
             element.alt = it
         } else {

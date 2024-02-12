@@ -46,7 +46,7 @@ public open class Link(
     /**
      * The URL of the link.
      */
-    public open var href: String? by updatingProperty(href, skipUpdate) {
+    public open var href: String? by updatingProperty(href) {
         if (it != null) {
             element.href = it
         } else {
@@ -57,7 +57,7 @@ public open class Link(
     /**
      * The target of the link.
      */
-    public open var target: String? by updatingProperty(target, skipUpdate) {
+    public open var target: String? by updatingProperty(target) {
         if (it != null) {
             element.target = it
         } else {
@@ -68,7 +68,7 @@ public open class Link(
     /**
      * The download attribute of the link.
      */
-    public open var download: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var download: String? by updatingProperty {
         if (it != null) {
             element.download = it
         } else {

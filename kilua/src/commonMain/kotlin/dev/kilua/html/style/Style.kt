@@ -37,7 +37,7 @@ import web.dom.HTMLStyleElement
 internal class Style(cssText: String, renderConfig: RenderConfig = DefaultRenderConfig()) :
     Tag<HTMLStyleElement>("style", null, renderConfig = renderConfig) {
 
-    var cssText: String by updatingProperty(cssText, skipUpdate) {
+    var cssText: String by updatingProperty(cssText) {
         element.innerHTML = it
     }
 

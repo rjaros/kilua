@@ -44,7 +44,7 @@ public open class Optgroup(
     /**
      * The label of the option group.
      */
-    public open var label: String? by updatingProperty(label, skipUpdate) {
+    public open var label: String? by updatingProperty(label) {
         if (it != null) {
             element.label = it
         } else {
@@ -55,7 +55,7 @@ public open class Optgroup(
     /**
      * Whether the option group is disabled.
      */
-    public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public open var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {

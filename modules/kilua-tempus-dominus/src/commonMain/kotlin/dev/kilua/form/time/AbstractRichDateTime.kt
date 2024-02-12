@@ -136,7 +136,7 @@ public abstract class AbstractRichDateTime(
     /**
      * The date/time format.
      */
-    public open var format: String by updatingProperty(format, skipUpdate = skipUpdate) {
+    public open var format: String by updatingProperty(format) {
         refresh()
     }
 
@@ -154,21 +154,21 @@ public abstract class AbstractRichDateTime(
     /**
      * Inline also modifies the layout, so it is not exposed as a public property.
      */
-    internal open var inline: Boolean by updatingProperty(inline, skipUpdate = skipUpdate) {
+    internal open var inline: Boolean by updatingProperty(inline) {
         refresh()
     }
 
     /**
      * The locale for i18n.
      */
-    public open var locale: Locale by updatingProperty(locale, skipUpdate = skipUpdate) {
+    public open var locale: Locale by updatingProperty(locale) {
         refresh()
     }
 
     /**
      * Determines if the component is disabled.
      */
-    public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate = skipUpdate) {
+    public open var disabled: Boolean? by updatingProperty(disabled) {
         if (it == true) {
             tempusDominusInstance?.disable()
         } else {
@@ -179,155 +179,155 @@ public abstract class AbstractRichDateTime(
     /**
      * Determines if the component is required.
      */
-    public open var required: Boolean? by updatingProperty(skipUpdate = skipUpdate)
+    public open var required: Boolean? by updatingProperty()
 
     /**
      * The component name.
      */
-    public open var name: String? by updatingProperty(skipUpdate = skipUpdate)
+    public open var name: String? by updatingProperty()
 
     /**
      * The component custom validity message.
      */
-    public open var customValidity: String? by updatingProperty(skipUpdate = skipUpdate)
+    public open var customValidity: String? by updatingProperty()
 
     /**
      * Days of the week that should be disabled.
      */
-    public open var daysOfWeekDisabled: List<Int>? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var daysOfWeekDisabled: List<Int>? by updatingProperty {
         refresh()
     }
 
     /**
      * Determines if *Clear* button should be visible.
      */
-    public open var showClear: Boolean by updatingProperty(true, skipUpdate = skipUpdate) {
+    public open var showClear: Boolean by updatingProperty(true) {
         refresh()
     }
 
     /**
      * Determines if *Close* button should be visible.
      */
-    public open var showClose: Boolean by updatingProperty(true, skipUpdate = skipUpdate) {
+    public open var showClose: Boolean by updatingProperty(true) {
         refresh()
     }
 
     /**
      * Determines if *Today* button should be visible.
      */
-    public open var showToday: Boolean by updatingProperty(true, skipUpdate = skipUpdate) {
+    public open var showToday: Boolean by updatingProperty(true) {
         refresh()
     }
 
     /**
      * The increment used to build the hour view.
      */
-    public open var stepping: Int by updatingProperty(1, skipUpdate = skipUpdate) {
+    public open var stepping: Int by updatingProperty(1) {
         refresh()
     }
 
     /**
      * Prevents date selection before this date.
      */
-    public open var minDate: LocalDate? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var minDate: LocalDate? by updatingProperty {
         refresh()
     }
 
     /**
      * Prevents date selection after this date.
      */
-    public open var maxDate: LocalDate? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var maxDate: LocalDate? by updatingProperty {
         refresh()
     }
 
     /**
      * Shows date and time pickers side by side.
      */
-    public open var sideBySide: Boolean by updatingProperty(false, skipUpdate = skipUpdate) {
+    public open var sideBySide: Boolean by updatingProperty(false) {
         refresh()
     }
 
     /**
      * A list of enabled dates.
      */
-    public open var enabledDates: List<LocalDate>? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var enabledDates: List<LocalDate>? by updatingProperty {
         refresh()
     }
 
     /**
      * A list of disabled dates.
      */
-    public open var disabledDates: List<LocalDate>? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var disabledDates: List<LocalDate>? by updatingProperty {
         refresh()
     }
 
     /**
      * Keep the popup open after selecting a date.
      */
-    public open var keepOpen: Boolean by updatingProperty(false, skipUpdate = skipUpdate) {
+    public open var keepOpen: Boolean by updatingProperty(false) {
         refresh()
     }
 
     /**
      * Date/time chooser color theme.
      */
-    public open var theme: Theme? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var theme: Theme? by updatingProperty {
         refresh()
     }
 
     /**
      * Automatically open the chooser popup.
      */
-    public var allowInputToggle: Boolean by updatingProperty(true, skipUpdate = skipUpdate) {
+    public var allowInputToggle: Boolean by updatingProperty(true) {
         refresh()
     }
 
     /**
      * The view date of the date/time chooser.
      */
-    public open var viewDate: LocalDate? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var viewDate: LocalDate? by updatingProperty {
         refresh()
     }
 
     /**
      * Automatically open time component after date is selected.
      */
-    public open var promptTimeOnDateChange: Boolean by updatingProperty(false, skipUpdate = skipUpdate) {
+    public open var promptTimeOnDateChange: Boolean by updatingProperty(false) {
         refresh()
     }
 
     /**
      * The delay for the time component opening after date is selected.
      */
-    public open var promptTimeOnDateChangeTransitionDelay: Duration? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var promptTimeOnDateChangeTransitionDelay: Duration? by updatingProperty {
         refresh()
     }
 
     /**
      * Default view mode of the date/time chooser.
      */
-    public open var viewMode: ViewMode? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var viewMode: ViewMode? by updatingProperty {
         refresh()
     }
 
     /**
      * Date/time chooser toolbar placement.
      */
-    public open var toolbarPlacement: ToolbarPlacement? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var toolbarPlacement: ToolbarPlacement? by updatingProperty {
         refresh()
     }
 
     /**
      * Date/time chooser month header format.
      */
-    public open var monthHeaderFormat: MonthHeaderFormat? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var monthHeaderFormat: MonthHeaderFormat? by updatingProperty {
         refresh()
     }
 
     /**
      * Date/time chooser year header format.
      */
-    public open var yearHeaderFormat: YearHeaderFormat? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var yearHeaderFormat: YearHeaderFormat? by updatingProperty {
         refresh()
     }
 

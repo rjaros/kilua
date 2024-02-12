@@ -39,9 +39,6 @@ class PropertyDelegateSpec : SimpleSpec {
                 var property1: String by updatingProperty(notifyFunction = { notifyCounter++ }) {
                     updatesCounter++
                 }
-                var property2: String by updatingProperty(skipUpdate = true, notifyFunction = { notifyCounter++ }) {
-                    updatesCounter++
-                }
             }
 
             val testComponent = TestComponent()
@@ -54,15 +51,26 @@ class PropertyDelegateSpec : SimpleSpec {
             testComponent.property1 = "test2"
             assertEquals(2, notifyCounter)
             assertEquals(2, updatesCounter)
-            testComponent.property2 = "test1"
-            assertEquals(3, notifyCounter)
-            assertEquals(2, updatesCounter)
-            testComponent.property2 = "test1"
-            assertEquals(3, notifyCounter)
-            assertEquals(2, updatesCounter)
-            testComponent.property2 = "test2"
-            assertEquals(4, notifyCounter)
-            assertEquals(2, updatesCounter)
+
+            notifyCounter = 0
+            updatesCounter = 0
+
+            class TestComponent2 : PropertyDelegate(nativeMapOf(), skipUpdates = true) {
+                var property2: String by updatingProperty(notifyFunction = { notifyCounter++ }) {
+                    updatesCounter++
+                }
+            }
+
+            val testComponent2 = TestComponent2()
+            testComponent2.property2 = "test1"
+            assertEquals(1, notifyCounter)
+            assertEquals(0, updatesCounter)
+            testComponent2.property2 = "test1"
+            assertEquals(1, notifyCounter)
+            assertEquals(0, updatesCounter)
+            testComponent2.property2 = "test2"
+            assertEquals(2, notifyCounter)
+            assertEquals(0, updatesCounter)
         }
     }
 }

@@ -92,21 +92,16 @@ public open class Tag<E : HTMLElement>(
     }
 
     /**
-     * Whether to skip updating the DOM element of the current component.
-     */
-    protected val skipUpdate: Boolean = !renderConfig.isDom
-
-    /**
      * The CSS class of the current component.
      */
-    public open var className: String? by updatingProperty(className, skipUpdate) {
+    public open var className: String? by updatingProperty(className) {
         updateElementClassList()
     }
 
     /**
      * The ID attribute of the current component.
      */
-    public open var id: String? by updatingProperty(id, skipUpdate) {
+    public open var id: String? by updatingProperty(id) {
         if (it != null) {
             element.id = it
         } else {

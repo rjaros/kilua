@@ -52,7 +52,6 @@ public abstract class Input<T : Any>(
 
     public override var value: T? by updatingProperty(
         value,
-        skipUpdate,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         if (type != InputType.File) {
             if (mask == null) {
@@ -72,14 +71,14 @@ public abstract class Input<T : Any>(
     /**
      * The type attribute of the generated HTML input element.
      */
-    public open var type: InputType by updatingProperty(type, skipUpdate) {
+    public open var type: InputType by updatingProperty(type) {
         element.type = it.value
     }
 
     /**
      * The name attribute of the generated HTML input element.
      */
-    public override var name: String? by updatingProperty(name, skipUpdate) {
+    public override var name: String? by updatingProperty(name) {
         if (it != null) {
             element.name = it
         } else {
@@ -90,7 +89,7 @@ public abstract class Input<T : Any>(
     /**
      * The maxlength attribute of the generated HTML input element.
      */
-    public var maxlength: Int? by updatingProperty(maxlength, skipUpdate) {
+    public var maxlength: Int? by updatingProperty(maxlength) {
         if (it != null) {
             element.maxLength = it
         } else {
@@ -101,7 +100,7 @@ public abstract class Input<T : Any>(
     /**
      * The placeholder attribute of the generated HTML input element.
      */
-    public var placeholder: String? by updatingProperty(placeholder, skipUpdate) {
+    public var placeholder: String? by updatingProperty(placeholder) {
         if (it != null) {
             element.placeholder = it
         } else {
@@ -112,7 +111,7 @@ public abstract class Input<T : Any>(
     /**
      * The disabled attribute of the generated HTML input element.
      */
-    public override var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -120,7 +119,7 @@ public abstract class Input<T : Any>(
         }
     }
 
-    public override var required: Boolean? by updatingProperty(required, skipUpdate) {
+    public override var required: Boolean? by updatingProperty(required) {
         if (it != null) {
             element.required = it
         } else {
@@ -131,7 +130,7 @@ public abstract class Input<T : Any>(
     /**
      * The autocomplete attribute of the generated HTML input element.
      */
-    public open var autocomplete: Autocomplete? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var autocomplete: Autocomplete? by updatingProperty {
         if (it != null) {
             element.autocomplete = it.value
         } else {
@@ -142,7 +141,7 @@ public abstract class Input<T : Any>(
     /**
      * The autofocus attribute of the generated HTML input element.
      */
-    public override var autofocus: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var autofocus: Boolean? by updatingProperty {
         if (it != null) {
             element.autofocus = it
         } else {
@@ -153,7 +152,7 @@ public abstract class Input<T : Any>(
     /**
      * The readonly attribute of the generated HTML input element.
      */
-    public open var readonly: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var readonly: Boolean? by updatingProperty {
         if (it != null) {
             element.readOnly = it
         } else {
@@ -164,7 +163,7 @@ public abstract class Input<T : Any>(
     /**
      * The list attribute of the generated HTML input element.
      */
-    public open var list: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var list: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("list", it)
         } else {
@@ -184,7 +183,7 @@ public abstract class Input<T : Any>(
             setAttribute("value", valueToString(defaultValue))
         }
 
-    public override var customValidity: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public override var customValidity: String? by updatingProperty {
         element.setCustomValidity(it ?: "")
     }
 

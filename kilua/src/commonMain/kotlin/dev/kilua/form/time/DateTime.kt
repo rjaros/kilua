@@ -76,7 +76,7 @@ public open class DateTime(
     /**
      * The minimum value of the date and time.
      */
-    public open var min: LocalDateTime? by updatingProperty(min, skipUpdate) {
+    public open var min: LocalDateTime? by updatingProperty(min) {
         if (it != null) {
             element.min = it.toString()
         } else {
@@ -87,7 +87,7 @@ public open class DateTime(
     /**
      * The maximum value of the date and time.
      */
-    public open var max: LocalDateTime? by updatingProperty(max, skipUpdate) {
+    public open var max: LocalDateTime? by updatingProperty(max) {
         if (it != null) {
             element.max = it.toString()
         } else {
@@ -98,7 +98,7 @@ public open class DateTime(
     /**
      * The step value of the date and time.
      */
-    public open var step: Int by updatingProperty(step, skipUpdate) {
+    public open var step: Int by updatingProperty(step) {
         element.step = it.toString()
     }
 

@@ -47,7 +47,7 @@ public open class Option(
     /**
      * The value of the option.
      */
-    public open var value: String? by updatingProperty(value, skipUpdate) {
+    public open var value: String? by updatingProperty(value) {
         if (it != null) {
             element.value = it
         } else {
@@ -58,7 +58,7 @@ public open class Option(
     /**
      * The label of the option.
      */
-    public open var label: String? by updatingProperty(label, skipUpdate) {
+    public open var label: String? by updatingProperty(label) {
         if (it != null) {
             element.label = it
         } else {
@@ -69,7 +69,7 @@ public open class Option(
     /**
      * The selected attribute of the generated HTML option element.
      */
-    public open var selected: Boolean? by updatingProperty(selected, skipUpdate) {
+    public open var selected: Boolean? by updatingProperty(selected) {
         if (it != null) {
             element.defaultSelected = it
         } else {
@@ -80,7 +80,7 @@ public open class Option(
     /**
      * Whether the option is disabled.
      */
-    public open var disabled: Boolean? by updatingProperty(disabled, skipUpdate) {
+    public open var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -91,7 +91,7 @@ public open class Option(
     /**
      * Whether the option is hidden.
      */
-    public open var hidden: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var hidden: Boolean? by updatingProperty {
         if (it != null) {
             element.hidden = it
         } else {
@@ -102,7 +102,7 @@ public open class Option(
     /**
      * Whether the option is currently selected.
      */
-    public open var currentlySelected: Boolean by updatingProperty(selected ?: false, skipUpdate) {
+    public open var currentlySelected: Boolean by updatingProperty(selected ?: false) {
         element.selected = it
     }
 

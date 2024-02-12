@@ -45,7 +45,7 @@ public open class Td(
     /**
      * The number of columns the cell extends.
      */
-    public open var colspan: Int? by updatingProperty(colspan, skipUpdate) {
+    public open var colspan: Int? by updatingProperty(colspan) {
         if (it != null) {
             element.colSpan = it
         } else {
@@ -56,7 +56,7 @@ public open class Td(
     /**
      * The number of rows the cell extends.
      */
-    public open var rowspan: Int? by updatingProperty(rowspan, skipUpdate) {
+    public open var rowspan: Int? by updatingProperty(rowspan) {
         if (it != null) {
             element.rowSpan = it
         } else {

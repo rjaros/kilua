@@ -47,7 +47,7 @@ public open class Canvas(
     /**
      * The width of the canvas.
      */
-    public open var canvasWidth: Int? by updatingProperty(canvasWidth, skipUpdate, "width") {
+    public open var canvasWidth: Int? by updatingProperty(canvasWidth, name = "width") {
         if (it != null) {
             element.width = it
         } else {
@@ -58,7 +58,7 @@ public open class Canvas(
     /**
      * The height of the canvas.
      */
-    public open var canvasHeight: Int? by updatingProperty(canvasHeight, skipUpdate, "height") {
+    public open var canvasHeight: Int? by updatingProperty(canvasHeight, name = "height") {
         if (it != null) {
             element.height = it
         } else {

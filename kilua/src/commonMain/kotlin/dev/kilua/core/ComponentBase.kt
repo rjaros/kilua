@@ -22,6 +22,7 @@
 
 package dev.kilua.core
 
+import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.nativeMapOf
 import web.clear
@@ -36,7 +37,7 @@ import web.dom.get
 public abstract class ComponentBase(
     protected val node: Node,
     public val renderConfig: RenderConfig,
-) : Component, PropertyDelegate(nativeMapOf()) {
+) : Component, PropertyDelegate(nativeMapOf(), skipUpdates = !renderConfig.isDom || !isDom) {
 
     public override val componentId: Int = counter++
 

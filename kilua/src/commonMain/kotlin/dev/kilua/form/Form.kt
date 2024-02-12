@@ -122,7 +122,7 @@ public class Form<K : Any>(
     /**
      * The method attribute of the generated HTML form element.
      */
-    public var method: FormMethod? by updatingProperty(method, skipUpdate) {
+    public var method: FormMethod? by updatingProperty(method) {
         if (it != null) {
             element.method = it.toString()
         } else {
@@ -133,7 +133,7 @@ public class Form<K : Any>(
     /**
      * The action attribute of the generated HTML form element.
      */
-    public var action: String? by updatingProperty(action, skipUpdate) {
+    public var action: String? by updatingProperty(action) {
         if (it != null) {
             element.action = it.toString()
         } else {
@@ -144,7 +144,7 @@ public class Form<K : Any>(
     /**
      * The enctype attribute of the generated HTML form element.
      */
-    public var enctype: FormEnctype? by updatingProperty(enctype, skipUpdate) {
+    public var enctype: FormEnctype? by updatingProperty(enctype) {
         if (it != null) {
             element.enctype = it.toString()
         } else {
@@ -155,7 +155,7 @@ public class Form<K : Any>(
     /**
      * The name attribute of the generated HTML form element.
      */
-    public var name: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public var name: String? by updatingProperty {
         if (it != null) {
             element.name = it
         } else {
@@ -166,7 +166,7 @@ public class Form<K : Any>(
     /**
      * The target attribute of the generated HTML form element.
      */
-    public var target: String? by updatingProperty(skipUpdate = skipUpdate) {
+    public var target: String? by updatingProperty {
         if (it != null) {
             element.target = it
         } else {
@@ -177,7 +177,7 @@ public class Form<K : Any>(
     /**
      * The target attribute of the generated HTML form element.
      */
-    public var novalidate: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public var novalidate: Boolean? by updatingProperty {
         if (it != null) {
             element.noValidate = it
         } else {
@@ -188,7 +188,7 @@ public class Form<K : Any>(
     /**
      * The target attribute of the generated HTML form element.
      */
-    public var autocomplete: FormAutocomplete? by updatingProperty(skipUpdate = skipUpdate) {
+    public var autocomplete: FormAutocomplete? by updatingProperty {
         if (it != null) {
             element.autocomplete = it.toString()
         } else {

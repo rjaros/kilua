@@ -61,7 +61,7 @@ public open class Ol(
     /**
      * The type of the numbered list.
      */
-    public open var type: OlType? by updatingProperty(type, skipUpdate) {
+    public open var type: OlType? by updatingProperty(type) {
         if (it != null) {
             element.type = it.value
         } else {
@@ -72,7 +72,7 @@ public open class Ol(
     /**
      * A starting number.
      */
-    public open var start: Int? by updatingProperty(start, skipUpdate) {
+    public open var start: Int? by updatingProperty(start) {
         if (it != null) {
             element.start = it
         } else {
@@ -83,7 +83,7 @@ public open class Ol(
     /**
      * Number items from high to low.
      */
-    public open var reversed: Boolean? by updatingProperty(skipUpdate = skipUpdate) {
+    public open var reversed: Boolean? by updatingProperty {
         if (it != null) {
             element.reversed = it
         } else {

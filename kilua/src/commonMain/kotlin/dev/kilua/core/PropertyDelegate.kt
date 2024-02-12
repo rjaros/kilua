@@ -31,34 +31,53 @@ import kotlin.reflect.KProperty
  * Helper delegate used to define properties with custom update and notify functions.
  */
 public open class PropertyDelegate(
-    protected val propertyValues: MutableMap<String, Any>,
-    protected val onSetCallback: ((values: Map<String, Any>) -> Unit)? = null
+    internal val propertyValues: MutableMap<String, Any>,
+    internal val onSetCallback: ((values: Map<String, Any>) -> Unit)? = null,
+    internal val skipUpdates: Boolean = false,
 ) {
     protected val notifyFunctions: MutableMap<String, Any> = nativeMapOf()
     protected val updateFunctions: MutableMap<String, Any> = nativeMapOf()
     protected val updateFunctionsWithOldValue: MutableMap<String, Any> = nativeMapOf()
-    protected val propertiesSet: MutableSet<String> = mutableSetOf()
+    internal val propertiesSet: MutableSet<String> = mutableSetOf()
+
+    /**
+     * Allows direct access to set the value in the propertyValues map.
+     */
+    protected fun setPropertyValue(name: String, value: Any?) {
+        if (value != null) {
+            propertyValues[name] = value
+        } else {
+            propertyValues.remove(name)
+        }
+    }
+
+    /**
+     * Create a property with a custom update function.
+     * @param updateFunction the update function
+     */
+    @Suppress("NOTHING_TO_INLINE")
+    protected inline fun <T> updatingProperty(
+        noinline updateFunction: ((T) -> Unit)? = null,
+    ): SimpleUpdatingPropertyDelegate<T> =
+        SimpleUpdatingPropertyDelegate(updateFunction)
 
     /**
      * Create a property with a custom update and notify functions.
-     * @param skipUpdate if true, the update function will not be called when the property is set
      * @param name the name of the property
      * @param notifyFunction the notify function
      * @param updateFunction the update function
      */
     @Suppress("NOTHING_TO_INLINE")
     protected inline fun <T> updatingProperty(
-        skipUpdate: Boolean = false,
-        name: String? = null,
         noinline notifyFunction: ((T) -> Unit)? = null,
+        name: String? = null,
         noinline updateFunction: ((T) -> Unit)? = null,
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(null, skipUpdate, name, notifyFunction, updateFunction, null)
+        ManagedPropertyDelegateProvider(null, name, notifyFunction, updateFunction, null)
 
     /**
      * Create a property with a custom update and notify functions.
      * @param initialValue initial value of the property
-     * @param skipUpdate if true, the update function will not be called when the property is set
      * @param name the name of the property
      * @param notifyFunction the notify function
      * @param updateFunction the update function
@@ -66,53 +85,47 @@ public open class PropertyDelegate(
     @Suppress("NOTHING_TO_INLINE")
     protected inline fun <T> updatingProperty(
         initialValue: T,
-        skipUpdate: Boolean = false,
-        name: String? = null,
         noinline notifyFunction: ((T) -> Unit)? = null,
+        name: String? = null,
         noinline updateFunction: ((T) -> Unit)? = null
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(initialValue, skipUpdate, name, notifyFunction, updateFunction, null)
+        ManagedPropertyDelegateProvider(initialValue, name, notifyFunction, updateFunction, null)
 
     /**
      * Create a property with a custom update and notify functions.
-     * @param skipUpdate if true, the update function will not be called when the property is set
      * @param name the name of the property
      * @param notifyFunction the notify function
      * @param updateFunction the update function
      */
     @Suppress("NOTHING_TO_INLINE")
     protected inline fun <T> updatingPropertyWithOldValue(
-        skipUpdate: Boolean = false,
-        name: String? = null,
         noinline notifyFunction: ((T) -> Unit)? = null,
+        name: String? = null,
         noinline updateFunction: ((T, T) -> Unit)? = null
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(null, skipUpdate, name, notifyFunction, null, updateFunction)
+        ManagedPropertyDelegateProvider(null, name, notifyFunction, null, updateFunction)
 
     @Suppress("NOTHING_TO_INLINE")
     /**
      * Create a property with a custom update and notify functions.
      * @param initialValue initial value of the property
-     * @param skipUpdate if true, the update function will not be called when the property is set
      * @param name the name of the property
      * @param notifyFunction the notify function
      * @param updateFunction the update function
      */
     protected inline fun <T> updatingPropertyWithOldValue(
         initialValue: T,
-        skipUpdate: Boolean = false,
-        name: String? = null,
         noinline notifyFunction: ((T) -> Unit)? = null,
+        name: String? = null,
         noinline updateFunction: ((T, T) -> Unit)? = null
     ): ManagedPropertyDelegateProvider<T> =
-        ManagedPropertyDelegateProvider(initialValue, skipUpdate, name, notifyFunction, null, updateFunction)
+        ManagedPropertyDelegateProvider(initialValue, name, notifyFunction, null, updateFunction)
 
     /**
      * A delegate provider.
      */
     protected inner class ManagedPropertyDelegateProvider<T>(
         private val initialValue: T?,
-        private val skipUpdate: Boolean,
         private val name: String?,
         private val notifyFunction: ((T) -> Unit)?,
         private val updateFunction: ((T) -> Unit)?,
@@ -122,14 +135,13 @@ public open class PropertyDelegate(
             val propName = name ?: prop.name
             if (initialValue != null) propertyValues[propName] = initialValue
             notifyFunction?.let { notifyFunctions[propName] = notifyFunction }
-            if (!skipUpdate) {
+            if (!skipUpdates) {
                 updateFunction?.let { updateFunctions[propName] = updateFunction }
                 updateFunctionWithOldValue?.let {
                     updateFunctionsWithOldValue[propName] = updateFunctionWithOldValue
                 }
             }
             return UpdatingPropertyDelegate(
-                skipUpdate,
                 propName,
                 notifyFunction,
                 updateFunction,
@@ -142,7 +154,6 @@ public open class PropertyDelegate(
      * A delegate for a property with custom update and notify functions.
      */
     protected inner class UpdatingPropertyDelegate<T>(
-        private val skipUpdate: Boolean,
         private val propName: String,
         private val notifyFunction: ((T) -> Unit)?,
         private val updateFunction: ((T) -> Unit)?,
@@ -173,7 +184,7 @@ public open class PropertyDelegate(
                     propertyValues[propName] = value
                 }
                 notifyFunction?.invoke(value)
-                if (!skipUpdate) {
+                if (!skipUpdates) {
                     updateFunction?.invoke(value)
                     updateFunctionWithOldValue?.invoke(value, oldValue)
                 }
@@ -206,5 +217,44 @@ public open class PropertyDelegate(
      */
     public fun <T> updateProperty(property: KProperty<*>, value: T) {
         updateProperty(property.name, value)
+    }
+}
+
+/**
+ * A simplified delegate for a property with a custom update function
+ * implemented as a value class for optimization.
+ */
+public value class SimpleUpdatingPropertyDelegate<T>(
+    private val updateFunction: ((T) -> Unit)?,
+) {
+    /**
+     * Get the value of the property.
+     */
+    public operator fun getValue(thisRef: PropertyDelegate, property: KProperty<*>): T {
+        val value = thisRef.propertyValues[property.name]
+        return if (value != null) {
+            value.cast()
+        } else {
+            null.cast()
+        }
+    }
+
+    /**
+     * Set the value of the property.
+     */
+    public operator fun setValue(thisRef: PropertyDelegate, property: KProperty<*>, value: T) {
+        thisRef.propertiesSet.add(property.name)
+        val oldValue = thisRef.propertyValues[property.name].cast<T>()
+        if (oldValue != value) {
+            if (value == null) {
+                thisRef.propertyValues.remove(property.name)
+            } else {
+                thisRef.propertyValues[property.name] = value
+            }
+            if (!thisRef.skipUpdates) {
+                updateFunction?.invoke(value)
+            }
+            thisRef.onSetCallback?.invoke(thisRef.propertyValues)
+        }
     }
 }
