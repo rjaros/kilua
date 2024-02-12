@@ -2,8 +2,8 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.detekt)
-    id(libs.plugins.dokka.get().pluginId)
-    id(libs.plugins.maven.publish.get().pluginId)
+    alias(libs.plugins.dokka)
+    id("maven-publish")
     id("signing")
 }
 
@@ -40,4 +40,10 @@ kotlin {
     }
 }
 
-setupPublishing(libs.versions.kilua.get())
+tasks.register<Jar>("javadocJar") {
+    dependsOn(tasks.dokkaHtml)
+    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
+    archiveClassifier.set("javadoc")
+}
+
+setupPublishing()

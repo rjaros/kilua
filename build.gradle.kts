@@ -5,15 +5,19 @@ plugins {
     alias(libs.plugins.compose) apply false
     alias(libs.plugins.npm.publish) apply false
     alias(libs.plugins.detekt) apply false
-    id(libs.plugins.dokka.get().pluginId)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.nmcp)
+    id("maven-publish")
 }
 
-group = "dev.kilua"
-version = libs.versions.kilua.get()
+val versionVal = libs.versions.kilua.get()
 
 allprojects {
+    group = "dev.kilua"
     if (hasProperty("SNAPSHOT")) {
-        version = "$version-SNAPSHOT"
+        version = "$versionVal-SNAPSHOT"
+    } else {
+        version = versionVal
     }
 }
 
@@ -35,5 +39,14 @@ project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin>
         resolution("tom-select", libs.versions.tom.select.get())
         resolution("imask", libs.versions.imask.get())
         resolution("tabulator-tables", libs.versions.tabulator.get())
+    }
+}
+
+nmcp {
+    publishAggregation {
+        project(":kilua")
+        username = "a"//findProperty("mavenCentralUsername")?.toString()
+        password = "b"//findProperty("mavenCentralPassword")?.toString()
+        publicationType = "USER_MANAGED"
     }
 }

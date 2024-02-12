@@ -1,9 +1,13 @@
-import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.KotlinMultiplatform
-import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.Project
+import org.gradle.api.publish.PublishingExtension
+import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.withType
+import org.gradle.plugins.signing.Sign
+import org.gradle.plugins.signing.SigningExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
@@ -71,42 +75,46 @@ fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = "17") {
     }
 }
 
-@Suppress("UnstableApiUsage")
-fun Project.setupPublishing(version: String) {
-    extensions.getByType<MavenPublishBaseExtension>().run {
-        if (!this@setupPublishing.hasProperty("SNAPSHOT")) {
-            coordinates("dev.kilua", this@setupPublishing.name, version)
-            signAllPublications()
-        } else {
-            coordinates("dev.kilua", this@setupPublishing.name, "$version-SNAPSHOT")
-            configure(KotlinMultiplatform(
-                javadocJar = JavadocJar.None()
-            ))
-        }
-        pom {
-            name.set("Kilua")
-            description.set("Experimental web framework for Kotlin/Wasm and Kotlin/JS.")
-            inceptionYear.set("2024")
-            url.set("https://github.com/rjaros/kilua")
-            licenses {
-                license {
-                    name.set("MIT")
-                    url.set("https://opensource.org/licenses/MIT")
-                    distribution.set("https://opensource.org/licenses/MIT")
-                }
-            }
-            developers {
-                developer {
-                    id.set("rjaros")
-                    name.set("Robert Jaros")
-                    url.set("https://github.com/rjaros/")
-                }
-            }
-            scm {
+fun Project.setupPublishing() {
+    val isSnapshot = hasProperty("SNAPSHOT")
+    extensions.getByType<PublishingExtension>().run {
+        publications.withType<MavenPublication>().all {
+            if (!isSnapshot) artifact(tasks["javadocJar"])
+            pom {
+                name.set("Kilua")
+                description.set("Experimental web framework for Kotlin/Wasm and Kotlin/JS.")
+                inceptionYear.set("2024")
                 url.set("https://github.com/rjaros/kilua")
-                connection.set("scm:git:git://github.com/rjaros/kilua.git")
-                developerConnection.set("scm:git:ssh://git@github.com/rjaros/kilua.git")
+                licenses {
+                    license {
+                        name.set("MIT")
+                        url.set("https://opensource.org/licenses/MIT")
+                        distribution.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("rjaros")
+                        name.set("Robert Jaros")
+                        url.set("https://github.com/rjaros/")
+                    }
+                }
+                scm {
+                    url.set("https://github.com/rjaros/kilua")
+                    connection.set("scm:git:git://github.com/rjaros/kilua.git")
+                    developerConnection.set("scm:git:ssh://git@github.com/rjaros/kilua.git")
+                }
             }
         }
+    }
+    extensions.getByType<SigningExtension>().run {
+        if (!isSnapshot) {
+            sign(extensions.getByType<PublishingExtension>().publications)
+        }
+    }
+    // Workaround https://github.com/gradle/gradle/issues/26091
+    tasks.withType<AbstractPublishToMaven>().configureEach {
+        val signingTasks = tasks.withType<Sign>()
+        mustRunAfter(signingTasks)
     }
 }

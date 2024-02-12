@@ -3,8 +3,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.compose)
     alias(libs.plugins.detekt)
-    id(libs.plugins.dokka.get().pluginId)
-    id(libs.plugins.maven.publish.get().pluginId)
+    alias(libs.plugins.dokka)
+    id("maven-publish")
     id("signing")
 }
 
@@ -61,7 +61,13 @@ compose {
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
 
-setupPublishing(libs.versions.kilua.get())
+tasks.register<Jar>("javadocJar") {
+    dependsOn(tasks.dokkaHtml)
+    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
+    archiveClassifier.set("javadoc")
+}
+
+setupPublishing()
 
 rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().apply {
     nodeVersion = "22.0.0-v8-canary202401102ecfc94f85"

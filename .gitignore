@@ -6,3 +6,5 @@ refreshW.sh
 
 /bsrefresh.sh
 /bsrefreshW.sh
+/upload.sh
+/build-mvnlocal.sh

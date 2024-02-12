@@ -3,6 +3,7 @@ kotlin = "1.9.22"
 compose = "1.6.0-beta02"
 compose-plugin = "1.5.8"
 dokka = "1.9.20-dev-308"
+nmcp = "0.0.2"
 npm-publish = "3.4.2"
 kilua = "0.0.1"
 kotlinx-atomicfu = "0.23.1"
@@ -10,7 +11,6 @@ kotlinx-coroutines = "1.8.0-RC2"
 kotlinx-serialization = "1.6.2"
 kotlinx-datetime = "0.5.0"
 detekt = "1.23.4"
-vannik-maven-publish = "0.27.0"
 npm-kilua-assets = "0.0.5"
 css-loader = "6.8.1"
 style-loader = "3.3.3"
@@ -41,5 +41,5 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 npm-publish = { id = "dev.petuska.npm.publish", version.ref = "npm-publish" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "vannik-maven-publish" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+nmcp = { id = "com.gradleup.nmcp", version.ref = "nmcp" }
