@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
-    alias(libs.plugins.nmcp)
     id("maven-publish")
     id("signing")
 }
@@ -70,9 +69,6 @@ tasks.register<Jar>("javadocJar") {
 
 setupPublishing()
 
-nmcp {
-    publishAllPublications {}
-}
 
 rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().apply {
     nodeVersion = "22.0.0-v8-canary202401102ecfc94f85"
