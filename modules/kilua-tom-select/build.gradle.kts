@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.nmcp)
     id("maven-publish")
     id("signing")
 }
@@ -57,3 +58,7 @@ tasks.register<Jar>("javadocJar") {
 }
 
 setupPublishing()
+
+nmcp {
+    publishAllPublications {}
+}

@@ -45,8 +45,24 @@ project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin>
 nmcp {
     publishAggregation {
         project(":kilua")
-        username = "a"//findProperty("mavenCentralUsername")?.toString()
-        password = "b"//findProperty("mavenCentralPassword")?.toString()
+        project(":modules:kilua-common-types")
+        project(":modules:kilua-dom")
+        project(":modules:kilua-bootstrap")
+        project(":modules:kilua-bootstrap-icons")
+        project(":modules:kilua-fontawesome")
+        project(":modules:kilua-imask")
+        project(":modules:kilua-lazy-layouts")
+        project(":modules:kilua-rest")
+        project(":modules:kilua-routing")
+        project(":modules:kilua-splitjs")
+        project(":modules:kilua-tabulator")
+        project(":modules:kilua-tempus-dominus")
+        project(":modules:kilua-toastify")
+        project(":modules:kilua-tom-select")
+        project(":modules:kilua-trix")
+        project(":modules:kilua-testutils")
+        username = "test"//findProperty("mavenCentralUsername")?.toString()
+        password = "test"//findProperty("mavenCentralPassword")?.toString()
         publicationType = "USER_MANAGED"
     }
 }
