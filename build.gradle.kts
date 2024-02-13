@@ -61,8 +61,8 @@ nmcp {
         project(":modules:kilua-tom-select")
         project(":modules:kilua-trix")
         project(":modules:kilua-testutils")
-        username = "test"//findProperty("mavenCentralUsername")?.toString()
-        password = "test"//findProperty("mavenCentralPassword")?.toString()
+        username = findProperty("mavenCentralUsername")?.toString()
+        password = findProperty("mavenCentralPassword")?.toString()
         publicationType = "USER_MANAGED"
     }
 }

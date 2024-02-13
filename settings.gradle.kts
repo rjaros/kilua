@@ -21,7 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "kilua"
+rootProject.name = "kilua-project"
 include(":kilua")
 include(":modules:kilua-common-types")
 include(":modules:kilua-dom")
