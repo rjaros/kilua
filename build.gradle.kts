@@ -39,6 +39,7 @@ project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin>
         resolution("tom-select", libs.versions.tom.select.get())
         resolution("imask", libs.versions.imask.get())
         resolution("tabulator-tables", libs.versions.tabulator.get())
+        resolution("rsup-progress", libs.versions.rsup.progress.get())
     }
 }
 
@@ -54,6 +55,7 @@ nmcp {
         project(":modules:kilua-lazy-layouts")
         project(":modules:kilua-rest")
         project(":modules:kilua-routing")
+        project(":modules:kilua-rsup-progress")
         project(":modules:kilua-splitjs")
         project(":modules:kilua-tabulator")
         project(":modules:kilua-tempus-dominus")

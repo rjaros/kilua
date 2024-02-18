@@ -27,6 +27,7 @@ tempus-dominus = "6.9.5"
 tom-select = "2.3.1"
 imask = "7.4.0"
 tabulator = "5.6.0"
+rsup-progress = "3.2.0"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
