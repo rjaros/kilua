@@ -83,6 +83,7 @@ kotlin {
                 implementation(project(":modules:kilua-tom-select"))
                 implementation(project(":modules:kilua-toastify"))
                 implementation(project(":modules:kilua-trix"))
+                implementation(project(":modules:kilua-rsup-progress"))
             }
         }
         val jsMain by getting {

@@ -81,6 +81,8 @@ import dev.kilua.popup.enableTooltip
 import dev.kilua.popup.popover
 import dev.kilua.popup.toggleTooltip
 import dev.kilua.popup.tooltip
+import dev.kilua.progress.Progress
+import dev.kilua.progress.ProgressOptions
 import dev.kilua.promise
 import dev.kilua.rest.RemoteRequestException
 import dev.kilua.rest.RestClient
@@ -113,6 +115,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.Serializable
 import web.JsAny
 import web.JsArray
+import web.Promise
 import web.RegExp
 import web.dom.CustomEvent
 import web.dom.Text
@@ -149,6 +152,26 @@ class App : Application() {
         root("root") {
             div {
                 margin = 20.px
+
+                val progress = Progress(ProgressOptions(height = 10, color = Color.Lightgreen))
+
+                button("Progress start") {
+                    onClick {
+                        progress.promise(Promise { resolve, reject ->
+                            window.setTimeout({
+                                resolve(obj()).cast()
+                            }, 3000)
+                        })
+                    }
+                }
+
+                button("Progress end") {
+                    onClick {
+                        progress.end()
+                    }
+                }
+
+                hr()
 
                 val personList = remember {
                     mutableStateListOf(
