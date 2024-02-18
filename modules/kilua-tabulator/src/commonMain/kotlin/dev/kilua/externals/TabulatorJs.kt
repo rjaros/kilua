@@ -263,8 +263,10 @@ public external class TabulatorJs(element: HTMLElement, options: JsAny?) : JsAny
     public fun off(event: String, callback: (JsAny, JsAny, JsAny, JsAny) -> Unit)
     public fun alert(message: String, style: String)
     public fun clearAlert()
+    public fun addRange(topLeft: JsAny, bottomRight: JsAny): JsAny
+    public fun getRanges(): JsAny
+    public fun getRangesData(): JsAny
 }
-
 /**
  * JavaScript Tabulator row component.
  */

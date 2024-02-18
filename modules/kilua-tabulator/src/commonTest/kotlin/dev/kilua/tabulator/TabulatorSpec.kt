@@ -63,8 +63,8 @@ class TabulatorSpec : DomSpec {
 <div class="table-bordered table-sm tabulator" role="grid" tabulator-layout="fitColumns" style="height: 300px;">
 <div class="tabulator-header" role="rowgroup">
 <div class="tabulator-header-contents" role="rowgroup">
-<div class="tabulator-headers" role="row">
-<div class="tabulator-col tabulator-sortable tabulator-col-sorter-element" role="columnheader" aria-sort="none" tabulator-field="name" style="min-width: 40px; width: 40px;">
+<div class="tabulator-headers" role="row" style="height: 0px;">
+<div class="tabulator-col tabulator-sortable tabulator-col-sorter-element" role="columnheader" aria-sort="none" tabulator-field="name" style="min-width: 40px; width: 40px; height: 0px;">
 <div class="tabulator-col-content">
 <div class="tabulator-col-title-holder">
 <div class="tabulator-col-title">
@@ -77,9 +77,9 @@ Name
 </div>
 </div>
 </div>
-<span class="tabulator-col-resize-handle">
+<span class="tabulator-col-resize-handle" style="height: 0px;">
 </span>
-<div class="tabulator-col tabulator-sortable tabulator-col-sorter-element" role="columnheader" aria-sort="none" tabulator-field="age" style="min-width: 40px; width: 40px;">
+<div class="tabulator-col tabulator-sortable tabulator-col-sorter-element" role="columnheader" aria-sort="none" tabulator-field="age" style="min-width: 40px; width: 40px; height: 0px;">
 <div class="tabulator-col-content">
 <div class="tabulator-col-title-holder">
 <div class="tabulator-col-title">
@@ -92,9 +92,9 @@ Age
 </div>
 </div>
 </div>
-<span class="tabulator-col-resize-handle">
+<span class="tabulator-col-resize-handle" style="height: 0px;">
 </span>
-<div class="tabulator-col tabulator-sortable tabulator-col-sorter-element" role="columnheader" aria-sort="none" tabulator-field="city" style="min-width: 40px; width: 40px;">
+<div class="tabulator-col tabulator-sortable tabulator-col-sorter-element" role="columnheader" aria-sort="none" tabulator-field="city" style="min-width: 40px; width: 40px; height: 0px;">
 <div class="tabulator-col-content">
 <div class="tabulator-col-title-holder">
 <div class="tabulator-col-title">
@@ -107,9 +107,10 @@ City
 </div>
 </div>
 </div>
-<span class="tabulator-col-resize-handle">
+<span class="tabulator-col-resize-handle" style="height: 0px;">
 </span>
 </div>
+<br>
 <div class="tabulator-frozen-rows-holder" style="min-width: 0px;">
 </div>
 </div>
@@ -118,8 +119,7 @@ City
 <div class="tabulator-table" role="rowgroup">
 </div>
 </div>
-</div>                
-            """.trimIndent(),
+</div>            """.trimIndent(),
             root.element.innerHTML,
             "Should render a Tabulator component to DOM"
         )

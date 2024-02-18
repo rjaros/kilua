@@ -28,6 +28,7 @@ import dev.kilua.html.div
 import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.html.px
 import dev.kilua.resources.generated.resources.Res
+import dev.kilua.resources.generated.resources.*
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.getString
 
