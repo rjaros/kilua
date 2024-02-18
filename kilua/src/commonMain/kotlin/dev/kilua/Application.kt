@@ -23,6 +23,7 @@ package dev.kilua
 
 import dev.kilua.compose.Root
 import dev.kilua.html.style.StyleParams
+import dev.kilua.i18n.DefaultLocale
 import dev.kilua.utils.isDom
 import web.document
 
@@ -65,6 +66,7 @@ public fun startApplication(
     hot: Hot? = null,
     vararg moduleInitializers: ModuleInitializer
 ) {
+    DefaultLocale() // Workaround for compiler bug
 
     moduleInitializers.forEach {
         it.initialize()
