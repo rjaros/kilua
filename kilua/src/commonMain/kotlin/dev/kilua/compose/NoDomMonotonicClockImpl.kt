@@ -23,11 +23,6 @@
 package dev.kilua.compose
 
 import androidx.compose.runtime.MonotonicFrameClock
-import dev.kilua.externals.obj
-import dev.kilua.utils.cast
-import web.Promise
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 /**
  * A simple MonotonicFrameClock implementation without using DOM.
@@ -37,10 +32,5 @@ internal class NoDomMonotonicClockImpl : MonotonicFrameClock {
     var counter = 0L
     override suspend fun <R> withFrameNanos(
         onFrame: (Long) -> R
-    ): R = suspendCoroutine { continuation ->
-        Promise.resolve(obj()).then {
-            val result = onFrame(counter++)
-            continuation.resume(result).cast()
-        }
-    }
+    ): R = onFrame(counter)
 }
