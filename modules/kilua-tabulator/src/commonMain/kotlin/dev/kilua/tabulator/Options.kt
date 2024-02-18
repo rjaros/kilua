@@ -151,7 +151,8 @@ public enum class Validator(internal val validator: kotlin.String? = null) {
     MinLength("minLength"),
     MaxLength("maxLength"),
     In,
-    Regex;
+    Regex,
+    Alphanumeric;
 
     public val value: kotlin.String = validator ?: name.toKebabCase()
     override fun toString(): kotlin.String {
@@ -426,6 +427,21 @@ public enum class HeaderSortClickElement {
         return value
     }
 }
+
+/**
+ * Possible edit trigger events.
+ */
+public enum class EditTriggerEvent {
+    Focus,
+    Click,
+    Dblclick;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
 
 /**
  * Download config options.
@@ -735,11 +751,11 @@ public data class TabulatorOptions(
     val scrollToColumnIfVisible: Boolean? = null,
     val rowFormatter: ((row: RowComponent) -> Unit)? = null,
     val addRowPos: RowPos? = null,
-    val selectable: JsAny? = null,
-    val selectableRangeMode: RangeMode? = null,
-    val selectableRollingSelection: Boolean? = null,
-    val selectablePersistence: Boolean? = null,
-    val selectableCheck: ((row: RowComponent) -> Boolean)? = null,
+    val selectableRows: JsAny? = null,
+    val selectableRowsRangeMode: RangeMode? = null,
+    val selectableRowsRollingSelection: Boolean? = null,
+    val selectableRowsPersistence: Boolean? = null,
+    val selectableRowsCheck: ((row: RowComponent) -> Boolean)? = null,
     val movableRows: Boolean? = null,
     val movableRowsConnectedTables: JsAny? = null,
     val movableRowsSender: JsAny? = null,
@@ -842,6 +858,12 @@ public data class TabulatorOptions(
     val rowDblClickPopup: JsAny? = null,
     val rowDblClickMenu: JsAny? = null,
     val responsiveLayoutCollapseFormatter: ((data: Array<JsAny>) -> Element)? = null,
+    val selectableRange: JsAny? = null,
+    val selectableRangeColumns: Boolean? = null,
+    val selectableRangeRows: Boolean? = null,
+    val selectableRangeClearCells: Boolean? = null,
+    val selectableRangeClearCellsValue: String? = null,
+    val editTriggerEvent: EditTriggerEvent? = null,
 )
 
 /**
@@ -871,11 +893,11 @@ internal fun TabulatorOptions.toJs(): JsAny {
         "scrollToColumnIfVisible" to scrollToColumnIfVisible,
         "rowFormatter" to rowFormatter?.let { toJsAny(it) },
         "addRowPos" to addRowPos?.value,
-        "selectable" to selectable,
-        "selectableRangeMode" to selectableRangeMode?.value,
-        "selectableRollingSelection" to selectableRollingSelection,
-        "selectablePersistence" to selectablePersistence,
-        "selectableCheck" to selectableCheck?.let { toJsAny(it) },
+        "selectableRows" to selectableRows,
+        "selectableRowsRangeMode" to selectableRowsRangeMode?.value,
+        "selectableRowsRollingSelection" to selectableRowsRollingSelection,
+        "selectableRowsPersistence" to selectableRowsPersistence,
+        "selectableRowsCheck" to selectableRowsCheck?.let { toJsAny(it) },
         "movableRows" to movableRows,
         "movableRowsConnectedTables" to movableRowsConnectedTables,
         "movableRowsSender" to movableRowsSender,
@@ -977,6 +999,12 @@ internal fun TabulatorOptions.toJs(): JsAny {
         "headerSortClickElement" to headerSortClickElement?.value,
         "rowDblClickPopup" to rowDblClickPopup,
         "rowDblClickMenu" to rowDblClickMenu,
-        "responsiveLayoutCollapseFormatter" to responsiveLayoutCollapseFormatter?.let { toJsAny(it) }
+        "responsiveLayoutCollapseFormatter" to responsiveLayoutCollapseFormatter?.let { toJsAny(it) },
+        "selectableRange" to selectableRange,
+        "selectableRangeColumns" to selectableRangeColumns,
+        "selectableRangeRows" to selectableRangeRows,
+        "selectableRangeClearCells" to selectableRangeClearCells,
+        "selectableRangeClearCellsValue" to selectableRangeClearCellsValue,
+        "editTriggerEvent" to editTriggerEvent?.value,
     )
 }
