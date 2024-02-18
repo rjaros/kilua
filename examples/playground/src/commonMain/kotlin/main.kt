@@ -177,7 +177,7 @@ class App : Application() {
                             }),
                             ColumnDefinition("City", "city"),
                         ), pagination = true, paginationMode = PaginationMode.Local, paginationSize = 10
-                    ), types = setOf(TableType.TableBordered, TableType.TableSm)
+                    ), types = setOf(TableType.TableBordered, TableType.TableStriped, TableType.TableSm)
                 )
 
                 button("Add row") {
@@ -213,7 +213,7 @@ class App : Application() {
                             }),
                             ColumnDefinition("City", "city"),
                         ), pagination = true, paginationMode = PaginationMode.Local, paginationSize = 10
-                    ), types = setOf(TableType.TableBordered, TableType.TableSm)
+                    ), types = setOf(TableType.TableBorderless, TableType.TableSm)
                 )
 
                 button("Add row") {
@@ -244,7 +244,7 @@ class App : Application() {
                             }),
                             ColumnDefinition("City", "city"),
                         ), pagination = true, paginationMode = PaginationMode.Local, paginationSize = 10
-                    ), types = setOf(TableType.TableBordered, TableType.TableSm)
+                    ), types = setOf(TableType.TableHover, TableType.TableSm)
                 )
 
                 vPanel {
