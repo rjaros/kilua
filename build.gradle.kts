@@ -46,6 +46,7 @@ project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin>
 nmcp {
     publishAggregation {
         project(":kilua")
+        project(":modules:kilua-common-annotations")
         project(":modules:kilua-common-types")
         project(":modules:kilua-dom")
         project(":modules:kilua-bootstrap")
