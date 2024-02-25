@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.fetch
 
@@ -19,7 +19,7 @@ import web.Promise
 /**
  * Exposes the JavaScript [Headers](https://developer.mozilla.org/en/docs/Web/API/Headers) to Kotlin
  */
-public external open class Headers(init: JsAny? /* Headers|JsArray<JsArray<JsString>>|OpenEndedDictionary<JsString> */) :
+public open external class Headers(init: JsAny? /* Headers|JsArray<JsArray<JsString>>|OpenEndedDictionary<JsString> */) :
     JsAny {
     fun append(name: String, value: String)
     fun delete(name: String)
@@ -43,7 +43,7 @@ public external interface Body : JsAny {
 /**
  * Exposes the JavaScript [Request](https://developer.mozilla.org/en/docs/Web/API/Request) to Kotlin
  */
-public external open class Request(input: JsAny? /* Request|String */, init: RequestInit) : Body,
+public open external class Request(input: JsAny? /* Request|String */, init: RequestInit) : Body,
     JsAny {
     open val method: String
     open val url: String
@@ -97,7 +97,7 @@ public external interface RequestInit : JsAny {
 /**
  * Exposes the JavaScript [Response](https://developer.mozilla.org/en/docs/Web/API/Response) to Kotlin
  */
-public external open class Response(
+public open external class Response(
     body: JsAny? /* JsAny?|ReadableStream */,
     init: ResponseInit
 ) : Body, JsAny {

@@ -31,6 +31,7 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.JSON
 import dev.kilua.externals.TabulatorJs
+import dev.kilua.externals.TabulatorTablesJs.TabulatorFull
 import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.externals.obj
 import dev.kilua.html.Tag
@@ -216,7 +217,7 @@ public open class Tabulator<T : Any>(
             val newOptions = if (options.data == null) {
                 options.copy(data = internalData, langs = langs)
             } else options.copy(langs = langs)
-            tabulatorJs = TabulatorJs(element, newOptions.toJs())
+            tabulatorJs = TabulatorFull(element, newOptions.toJs())
             tabulatorJs?.on("tableBuilt") { ->
                 if (currentPage != null) {
                     tabulatorJs?.setPageSize(pageSize ?: 0)

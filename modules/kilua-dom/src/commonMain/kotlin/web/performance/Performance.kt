@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.performance
 
@@ -20,7 +20,7 @@ import web.dom.events.EventTarget
 /**
  * Exposes the JavaScript [Performance](https://developer.mozilla.org/en/docs/Web/API/Performance) to Kotlin
  */
-public external abstract class Performance : EventTarget, JsAny {
+public abstract external class Performance : EventTarget, JsAny {
     open val timing: PerformanceTiming
     open val navigation: PerformanceNavigation
     fun now(): Double
@@ -33,7 +33,7 @@ public external interface GlobalPerformance : JsAny {
 /**
  * Exposes the JavaScript [PerformanceTiming](https://developer.mozilla.org/en/docs/Web/API/PerformanceTiming) to Kotlin
  */
-public external abstract class PerformanceTiming : JsAny {
+public abstract external class PerformanceTiming : JsAny {
     open val navigationStart: JsNumber
     open val unloadEventStart: JsNumber
     open val unloadEventEnd: JsNumber
@@ -60,7 +60,7 @@ public external abstract class PerformanceTiming : JsAny {
 /**
  * Exposes the JavaScript [PerformanceNavigation](https://developer.mozilla.org/en/docs/Web/API/PerformanceNavigation) to Kotlin
  */
-public external abstract class PerformanceNavigation : JsAny {
+public abstract external class PerformanceNavigation : JsAny {
     open val type: Short
     open val redirectCount: Short
 

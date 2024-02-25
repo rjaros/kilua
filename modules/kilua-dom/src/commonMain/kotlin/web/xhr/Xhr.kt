@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.xhr
 
@@ -27,7 +27,7 @@ import web.files.Blob
 /**
  * Exposes the JavaScript [XMLHttpRequestEventTarget](https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequestEventTarget) to Kotlin
  */
-public external abstract class XMLHttpRequestEventTarget : EventTarget, JsAny {
+public abstract external class XMLHttpRequestEventTarget : EventTarget, JsAny {
     open var onloadstart: ((ProgressEvent) -> Unit)?
     open var onprogress: ((ProgressEvent) -> Unit)?
     open var onabort: ((Event) -> Unit)?
@@ -37,12 +37,12 @@ public external abstract class XMLHttpRequestEventTarget : EventTarget, JsAny {
     open var onloadend: ((Event) -> Unit)?
 }
 
-public external abstract class XMLHttpRequestUpload : XMLHttpRequestEventTarget, JsAny
+public abstract external class XMLHttpRequestUpload : XMLHttpRequestEventTarget, JsAny
 
 /**
  * Exposes the JavaScript [XMLHttpRequest](https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest) to Kotlin
  */
-public external open class XMLHttpRequest : XMLHttpRequestEventTarget, JsAny {
+public open external class XMLHttpRequest : XMLHttpRequestEventTarget, JsAny {
     var onreadystatechange: ((Event) -> Unit)?
     open val readyState: Short
     var timeout: Int
@@ -88,7 +88,7 @@ public external open class XMLHttpRequest : XMLHttpRequestEventTarget, JsAny {
 /**
  * Exposes the JavaScript [FormData](https://developer.mozilla.org/en/docs/Web/API/FormData) to Kotlin
  */
-public external open class FormData(form: HTMLFormElement) : JsAny {
+public open external class FormData(form: HTMLFormElement) : JsAny {
     fun append(name: String, value: String)
     fun append(name: String, value: Blob, filename: String)
     fun delete(name: String)
@@ -102,7 +102,7 @@ public external open class FormData(form: HTMLFormElement) : JsAny {
 /**
  * Exposes the JavaScript [ProgressEvent](https://developer.mozilla.org/en/docs/Web/API/ProgressEvent) to Kotlin
  */
-public external open class ProgressEvent(type: String, eventInitDict: ProgressEventInit) : Event,
+public open external class ProgressEvent(type: String, eventInitDict: ProgressEventInit) : Event,
     JsAny {
     open val lengthComputable: Boolean
     open val loaded: JsNumber

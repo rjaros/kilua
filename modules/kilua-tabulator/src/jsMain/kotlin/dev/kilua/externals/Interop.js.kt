@@ -23,10 +23,12 @@
 package dev.kilua.externals
 
 import web.JsAny
+import web.JsArray
+import web.JsNumber
 import web.Promise
 import web.dom.Element
 
-internal actual fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> Number): JsAny =
+internal actual fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> JsNumber): JsAny =
     f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: (CellComponent, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny = f.unsafeCast<JsAny>()
@@ -39,7 +41,7 @@ internal actual fun toJsAny(f: (JsAny, JsAny, JsAny, JsAny) -> Boolean): JsAny =
 
 internal actual fun toJsAny(f: (JsAny, CellComponent) -> Unit): JsAny = f.unsafeCast<JsAny>()
 internal actual fun toJsAny(f: (CellComponent) -> Unit): JsAny = f.unsafeCast<JsAny>()
-internal actual fun toJsAny(f: (JsAny, JsAny, String, JsAny, CellComponent) -> Any): JsAny = f.unsafeCast<JsAny>()
+internal actual fun toJsAny(f: (JsAny, JsAny, String, JsAny, CellComponent) -> JsAny): JsAny = f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: () -> String?): JsAny = f.unsafeCast<JsAny>()
 
@@ -55,12 +57,12 @@ internal actual fun toJsAny(f: (String, JsAny) -> Unit): JsAny = f.unsafeCast<Js
 
 internal actual fun toJsAny(f: (JsAny, JsAny) -> Unit): JsAny = f.unsafeCast<JsAny>()
 
-internal actual fun toJsAny(f: (RowComponent, Number) -> Boolean): JsAny = f.unsafeCast<JsAny>()
+internal actual fun toJsAny(f: (RowComponent, JsNumber) -> Boolean): JsAny = f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: (String, JsAny) -> Boolean): JsAny = f.unsafeCast<JsAny>()
 
-internal actual fun toJsAny(f: (String, JsAny, JsAny) -> Any): JsAny = f.unsafeCast<JsAny>()
+internal actual fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny = f.unsafeCast<JsAny>()
 
-internal actual fun toJsAny(f: (Array<JsAny>) -> Element): JsAny = f.unsafeCast<JsAny>()
+internal actual fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny = f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: (JsAny) -> Boolean): JsAny = f.unsafeCast<JsAny>()

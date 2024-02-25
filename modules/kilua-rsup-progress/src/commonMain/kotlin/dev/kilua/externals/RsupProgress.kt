@@ -1,3 +1,4 @@
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 @file:JsModule("rsup-progress")
 /*
  * Copyright (c) 2024 Robert Jaros

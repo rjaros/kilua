@@ -48,7 +48,7 @@ fun KotlinMultiplatformExtension.kotlinWasmTargets(withNode: Boolean = true) {
         browser {
             testTask {
                 useKarma {
-                    useChromeHeadlessWasmGc()
+                    useChromeHeadless()
                 }
             }
         }

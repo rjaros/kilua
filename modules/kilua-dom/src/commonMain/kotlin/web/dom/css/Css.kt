@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -6,18 +11,13 @@
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
 
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
-
 package web.dom.css
 
 import web.JsAny
 import web.JsString
 import web.dom.ItemArrayLike
 
-public external abstract class MediaList : ItemArrayLike<JsString>, JsAny {
+public abstract external class MediaList : ItemArrayLike<JsString>, JsAny {
     open var mediaText: String
     fun appendMedium(medium: String)
     fun deleteMedium(medium: String)
@@ -27,7 +27,7 @@ public external abstract class MediaList : ItemArrayLike<JsString>, JsAny {
 /**
  * Exposes the JavaScript [StyleSheet](https://developer.mozilla.org/en/docs/Web/API/StyleSheet) to Kotlin
  */
-public external abstract class StyleSheet : JsAny {
+public abstract external class StyleSheet : JsAny {
     open val type: String
     open val href: String?
     open val ownerNode: UnionElementOrProcessingInstruction?
@@ -40,7 +40,7 @@ public external abstract class StyleSheet : JsAny {
 /**
  * Exposes the JavaScript [CSSStyleSheet](https://developer.mozilla.org/en/docs/Web/API/CSSStyleSheet) to Kotlin
  */
-public external abstract class CSSStyleSheet : StyleSheet, JsAny {
+public abstract external class CSSStyleSheet : StyleSheet, JsAny {
     open val ownerRule: CSSRule?
     open val cssRules: CSSRuleList
     fun insertRule(rule: String, index: Int): Int
@@ -50,7 +50,7 @@ public external abstract class CSSStyleSheet : StyleSheet, JsAny {
 /**
  * Exposes the JavaScript [StyleSheetList](https://developer.mozilla.org/en/docs/Web/API/StyleSheetList) to Kotlin
  */
-public external abstract class StyleSheetList : ItemArrayLike<StyleSheet>, JsAny {
+public abstract external class StyleSheetList : ItemArrayLike<StyleSheet>, JsAny {
     override fun item(index: Int): StyleSheet?
 }
 
@@ -64,14 +64,14 @@ public external interface LinkStyle : JsAny {
 /**
  * Exposes the JavaScript [CSSRuleList](https://developer.mozilla.org/en/docs/Web/API/CSSRuleList) to Kotlin
  */
-public external abstract class CSSRuleList : ItemArrayLike<CSSRule>, JsAny {
+public abstract external class CSSRuleList : ItemArrayLike<CSSRule>, JsAny {
     override fun item(index: Int): CSSRule?
 }
 
 /**
  * Exposes the JavaScript [CSSRule](https://developer.mozilla.org/en/docs/Web/API/CSSRule) to Kotlin
  */
-public external abstract class CSSRule : JsAny {
+public abstract external class CSSRule : JsAny {
     open val type: Short
     open var cssText: String
     open val parentRule: CSSRule?
@@ -92,7 +92,7 @@ public external abstract class CSSRule : JsAny {
 /**
  * Exposes the JavaScript [CSSStyleRule](https://developer.mozilla.org/en/docs/Web/API/CSSStyleRule) to Kotlin
  */
-public external abstract class CSSStyleRule : CSSRule, JsAny {
+public abstract external class CSSStyleRule : CSSRule, JsAny {
     open var selectorText: String
     open val style: CSSStyleDeclaration
 
@@ -108,7 +108,7 @@ public external abstract class CSSStyleRule : CSSRule, JsAny {
     }
 }
 
-public external abstract class CSSImportRule : CSSRule, JsAny {
+public abstract external class CSSImportRule : CSSRule, JsAny {
     open val href: String
     open val media: MediaList
     open val styleSheet: CSSStyleSheet
@@ -128,7 +128,7 @@ public external abstract class CSSImportRule : CSSRule, JsAny {
 /**
  * Exposes the JavaScript [CSSGroupingRule](https://developer.mozilla.org/en/docs/Web/API/CSSGroupingRule) to Kotlin
  */
-public external abstract class CSSGroupingRule : CSSRule, JsAny {
+public abstract external class CSSGroupingRule : CSSRule, JsAny {
     open val cssRules: CSSRuleList
     fun insertRule(rule: String, index: Int): Int
     fun deleteRule(index: Int)
@@ -148,7 +148,7 @@ public external abstract class CSSGroupingRule : CSSRule, JsAny {
 /**
  * Exposes the JavaScript [CSSMediaRule](https://developer.mozilla.org/en/docs/Web/API/CSSMediaRule) to Kotlin
  */
-public external abstract class CSSMediaRule : CSSGroupingRule, JsAny {
+public abstract external class CSSMediaRule : CSSGroupingRule, JsAny {
     open val media: MediaList
 
     companion object {
@@ -166,7 +166,7 @@ public external abstract class CSSMediaRule : CSSGroupingRule, JsAny {
 /**
  * Exposes the JavaScript [CSSPageRule](https://developer.mozilla.org/en/docs/Web/API/CSSPageRule) to Kotlin
  */
-public external abstract class CSSPageRule : CSSGroupingRule, JsAny {
+public abstract external class CSSPageRule : CSSGroupingRule, JsAny {
     open var selectorText: String
     open val style: CSSStyleDeclaration
 
@@ -182,7 +182,7 @@ public external abstract class CSSPageRule : CSSGroupingRule, JsAny {
     }
 }
 
-public external abstract class CSSMarginRule : CSSRule, JsAny {
+public abstract external class CSSMarginRule : CSSRule, JsAny {
     open val name: String
     open val style: CSSStyleDeclaration
 
@@ -201,7 +201,7 @@ public external abstract class CSSMarginRule : CSSRule, JsAny {
 /**
  * Exposes the JavaScript [CSSNamespaceRule](https://developer.mozilla.org/en/docs/Web/API/CSSNamespaceRule) to Kotlin
  */
-public external abstract class CSSNamespaceRule : CSSRule, JsAny {
+public abstract external class CSSNamespaceRule : CSSRule, JsAny {
     open val namespaceURI: String
     open val prefix: String
 
@@ -220,7 +220,7 @@ public external abstract class CSSNamespaceRule : CSSRule, JsAny {
 /**
  * Exposes the JavaScript [CSSStyleDeclaration](https://developer.mozilla.org/en/docs/Web/API/CSSStyleDeclaration) to Kotlin
  */
-public external abstract class CSSStyleDeclaration : ItemArrayLike<JsString>, JsAny {
+public abstract external class CSSStyleDeclaration : ItemArrayLike<JsString>, JsAny {
     open var cssText: String
     open val parentRule: CSSRule?
     open var cssFloat: String
@@ -467,7 +467,7 @@ public external interface ElementCSSInlineStyle : JsAny {
 /**
  * Exposes the JavaScript [CSS](https://developer.mozilla.org/en/docs/Web/API/CSS) to Kotlin
  */
-public external abstract class CSS : JsAny {
+public abstract external class CSS : JsAny {
     companion object {
         fun escape(ident: String): String
     }

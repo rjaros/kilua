@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.workers
 
@@ -34,7 +34,7 @@ import web.Promise
 /**
  * Exposes the JavaScript [ServiceWorker](https://developer.mozilla.org/en/docs/Web/API/ServiceWorker) to Kotlin
  */
-public external abstract class ServiceWorker : EventTarget, AbstractWorker, UnionMessagePortOrServiceWorker,
+public abstract external class ServiceWorker : EventTarget, AbstractWorker, UnionMessagePortOrServiceWorker,
     UnionClientOrMessagePortOrServiceWorker, JsAny {
     open val scriptURL: String
     open val state: ServiceWorkerState
@@ -45,7 +45,7 @@ public external abstract class ServiceWorker : EventTarget, AbstractWorker, Unio
 /**
  * Exposes the JavaScript [ServiceWorkerRegistration](https://developer.mozilla.org/en/docs/Web/API/ServiceWorkerRegistration) to Kotlin
  */
-public external abstract class ServiceWorkerRegistration : EventTarget, JsAny {
+public abstract external class ServiceWorkerRegistration : EventTarget, JsAny {
     open val installing: ServiceWorker?
     open val waiting: ServiceWorker?
     open val active: ServiceWorker?
@@ -62,7 +62,7 @@ public external abstract class ServiceWorkerRegistration : EventTarget, JsAny {
 /**
  * Exposes the JavaScript [ServiceWorkerContainer](https://developer.mozilla.org/en/docs/Web/API/ServiceWorkerContainer) to Kotlin
  */
-public external abstract class ServiceWorkerContainer : EventTarget, JsAny {
+public abstract external class ServiceWorkerContainer : EventTarget, JsAny {
     open val controller: ServiceWorker?
     open val ready: Promise<*>
     open var oncontrollerchange: ((Event) -> Unit)?
@@ -87,7 +87,7 @@ public external interface RegistrationOptions : JsAny {
 /**
  * Exposes the JavaScript [ServiceWorkerMessageEvent](https://developer.mozilla.org/en/docs/Web/API/ServiceWorkerMessageEvent) to Kotlin
  */
-public external open class ServiceWorkerMessageEvent(
+public open external class ServiceWorkerMessageEvent(
     type: String,
     eventInitDict: ServiceWorkerMessageEventInit
 ) : Event, JsAny {
@@ -121,7 +121,7 @@ public external interface ServiceWorkerMessageEventInit : EventInit, JsAny {
 /**
  * Exposes the JavaScript [ServiceWorkerGlobalScope](https://developer.mozilla.org/en/docs/Web/API/ServiceWorkerGlobalScope) to Kotlin
  */
-public external abstract class ServiceWorkerGlobalScope : WorkerGlobalScope, JsAny {
+public abstract external class ServiceWorkerGlobalScope : WorkerGlobalScope, JsAny {
     open val clients: Clients
     open val registration: ServiceWorkerRegistration
     open var oninstall: ((Event) -> Unit)?
@@ -138,7 +138,7 @@ public external abstract class ServiceWorkerGlobalScope : WorkerGlobalScope, JsA
 /**
  * Exposes the JavaScript [Client](https://developer.mozilla.org/en/docs/Web/API/Client) to Kotlin
  */
-public external abstract class Client : UnionClientOrMessagePortOrServiceWorker, JsAny {
+public abstract external class Client : UnionClientOrMessagePortOrServiceWorker, JsAny {
     open val url: String
     open val frameType: FrameType
     open val id: String
@@ -148,7 +148,7 @@ public external abstract class Client : UnionClientOrMessagePortOrServiceWorker,
 /**
  * Exposes the JavaScript [WindowClient](https://developer.mozilla.org/en/docs/Web/API/WindowClient) to Kotlin
  */
-public external abstract class WindowClient : Client, JsAny {
+public abstract external class WindowClient : Client, JsAny {
     open val visibilityState: JsAny?
     open val focused: Boolean
     fun focus(): Promise<*>
@@ -158,7 +158,7 @@ public external abstract class WindowClient : Client, JsAny {
 /**
  * Exposes the JavaScript [Clients](https://developer.mozilla.org/en/docs/Web/API/Clients) to Kotlin
  */
-public external abstract class Clients : JsAny {
+public abstract external class Clients : JsAny {
     fun get(id: String): Promise<*>
     fun matchAll(options: ClientQueryOptions): Promise<*>
     fun openWindow(url: String): Promise<*>
@@ -175,7 +175,7 @@ public external interface ClientQueryOptions : JsAny {
 /**
  * Exposes the JavaScript [ExtendableEvent](https://developer.mozilla.org/en/docs/Web/API/ExtendableEvent) to Kotlin
  */
-public external open class ExtendableEvent(type: String, eventInitDict: ExtendableEventInit) :
+public open external class ExtendableEvent(type: String, eventInitDict: ExtendableEventInit) :
     Event, JsAny {
     fun waitUntil(f: Promise<*>)
 
@@ -192,7 +192,7 @@ public external interface ExtendableEventInit : EventInit, JsAny
 /**
  * Exposes the JavaScript [InstallEvent](https://developer.mozilla.org/en/docs/Web/API/InstallEvent) to Kotlin
  */
-public external open class InstallEvent(type: String, eventInitDict: ExtendableEventInit) :
+public open external class InstallEvent(type: String, eventInitDict: ExtendableEventInit) :
     ExtendableEvent, JsAny {
     fun registerForeignFetch(options: ForeignFetchOptions)
 
@@ -212,7 +212,7 @@ public external interface ForeignFetchOptions : JsAny {
 /**
  * Exposes the JavaScript [FetchEvent](https://developer.mozilla.org/en/docs/Web/API/FetchEvent) to Kotlin
  */
-public external open class FetchEvent(type: String, eventInitDict: FetchEventInit) : ExtendableEvent, JsAny {
+public open external class FetchEvent(type: String, eventInitDict: FetchEventInit) : ExtendableEvent, JsAny {
     open val request: Request
     open val clientId: String?
     open val isReload: Boolean
@@ -234,7 +234,7 @@ public external interface FetchEventInit : ExtendableEventInit, JsAny {
 
 }
 
-public external open class ForeignFetchEvent(type: String, eventInitDict: ForeignFetchEventInit) : ExtendableEvent,
+public open external class ForeignFetchEvent(type: String, eventInitDict: ForeignFetchEventInit) : ExtendableEvent,
     JsAny {
     open val request: Request
     open val origin: String
@@ -265,7 +265,7 @@ public external interface ForeignFetchResponse : JsAny {
 /**
  * Exposes the JavaScript [ExtendableMessageEvent](https://developer.mozilla.org/en/docs/Web/API/ExtendableMessageEvent) to Kotlin
  */
-public external open class ExtendableMessageEvent(
+public open external class ExtendableMessageEvent(
     type: String,
     eventInitDict: ExtendableMessageEventInit
 ) : ExtendableEvent, JsAny {
@@ -299,7 +299,7 @@ public external interface ExtendableMessageEventInit : ExtendableEventInit, JsAn
 /**
  * Exposes the JavaScript [Cache](https://developer.mozilla.org/en/docs/Web/API/Cache) to Kotlin
  */
-public external abstract class Cache : JsAny {
+public abstract external class Cache : JsAny {
     fun match(request: Request, options: CacheQueryOptions): Promise<*>
     fun match(request: String, options: CacheQueryOptions): Promise<*>
     fun matchAll(request: Request, options: CacheQueryOptions): Promise<*>
@@ -342,7 +342,7 @@ public external interface CacheBatchOperation : JsAny {
 /**
  * Exposes the JavaScript [CacheStorage](https://developer.mozilla.org/en/docs/Web/API/CacheStorage) to Kotlin
  */
-public external abstract class CacheStorage : JsAny {
+public abstract external class CacheStorage : JsAny {
     fun match(request: Request, options: CacheQueryOptions): Promise<*>
     fun match(request: String, options: CacheQueryOptions): Promise<*>
     fun has(cacheName: String): Promise<*>
@@ -351,7 +351,7 @@ public external abstract class CacheStorage : JsAny {
     fun keys(): Promise<*>
 }
 
-public external open class FunctionalEvent : ExtendableEvent, JsAny {
+public open external class FunctionalEvent : ExtendableEvent, JsAny {
     companion object {
         val NONE: Short
         val CAPTURING_PHASE: Short

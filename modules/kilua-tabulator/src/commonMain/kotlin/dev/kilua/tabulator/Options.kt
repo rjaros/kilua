@@ -31,6 +31,7 @@ import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import web.JsAny
 import web.JsArray
+import web.JsNumber
 import web.Promise
 import web.dom.Element
 import web.toJsString
@@ -487,7 +488,7 @@ public data class ColumnDefinition(
     val sorterFunction: ((
         a: JsAny, b: JsAny, aRow: RowComponent, bRow: RowComponent,
         column: ColumnComponent, dir: String, sorterParams: JsAny?
-    ) -> Number)? = null,
+    ) -> JsNumber)? = null,
     val sorterParams: JsAny? = null,
     val formatter: Formatter? = null,
     val formatterFunction: ((
@@ -580,13 +581,13 @@ public data class ColumnDefinition(
     val accessor: JsAny? = null,
     val accessorParams: JsAny? = null,
     val maxWidth: Int? = null,
-    val mutatorData: ((value: JsAny, data: JsAny, type: String, params: JsAny, cell: CellComponent) -> Any)? = null,
+    val mutatorData: ((value: JsAny, data: JsAny, type: String, params: JsAny, cell: CellComponent) -> JsAny)? = null,
     val mutatorDataParams: JsAny? = null,
-    val mutatorEdit: ((value: JsAny, data: JsAny, type: String, params: JsAny, cell: CellComponent) -> Any)? = null,
+    val mutatorEdit: ((value: JsAny, data: JsAny, type: String, params: JsAny, cell: CellComponent) -> JsAny)? = null,
     val mutatorEditParams: JsAny? = null,
-    val mutatorClipboard: ((value: JsAny, data: JsAny, type: String, params: JsAny, cell: CellComponent) -> Any)? = null,
+    val mutatorClipboard: ((value: JsAny, data: JsAny, type: String, params: JsAny, cell: CellComponent) -> JsAny)? = null,
     val mutatorClipboardParams: JsAny? = null,
-    val mutator: ((value: JsAny, data: JsAny, type: String, params: JsAny, cell: CellComponent) -> Any)? = null,
+    val mutator: ((value: JsAny, data: JsAny, type: String, params: JsAny, cell: CellComponent) -> JsAny)? = null,
     val mutatorParams: JsAny? = null,
     val maxInitialWidth: Int? = null,
     val cellPopup: JsAny? = null,
@@ -816,9 +817,9 @@ public data class TabulatorOptions(
     val dataTreeElementColumn: String? = null,
     val dataTreeBranchElement: JsAny? = null,
     val dataTreeChildIndent: Number? = null,
-    val dataTreeStartExpanded: ((row: RowComponent, level: Number) -> Boolean)? = null,
+    val dataTreeStartExpanded: ((row: RowComponent, level: JsNumber) -> Boolean)? = null,
     val ajaxRequesting: ((url: String, params: JsAny) -> Boolean)? = null,
-    val ajaxResponse: ((url: String, params: JsAny, response: JsAny) -> Any)? = null,
+    val ajaxResponse: ((url: String, params: JsAny, response: JsAny) -> JsAny)? = null,
     val persistence: JsAny? = null,
     val persistenceReaderFunc: JsAny? = null,
     val persistenceWriterFunc: JsAny? = null,
@@ -857,7 +858,7 @@ public data class TabulatorOptions(
     val headerSortClickElement: HeaderSortClickElement? = null,
     val rowDblClickPopup: JsAny? = null,
     val rowDblClickMenu: JsAny? = null,
-    val responsiveLayoutCollapseFormatter: ((data: Array<JsAny>) -> Element)? = null,
+    val responsiveLayoutCollapseFormatter: ((data: JsArray<JsAny>) -> Element)? = null,
     val selectableRange: JsAny? = null,
     val selectableRangeColumns: Boolean? = null,
     val selectableRangeRows: Boolean? = null,

@@ -1,3 +1,5 @@
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
+@file:JsModule("tabulator-tables")
 /*
  * Copyright (c) 2024 Robert Jaros
  *
@@ -19,12 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:JsModule("tabulator-tables")
 
 package dev.kilua.externals
 
 import dev.kilua.utils.JsModule
-import dev.kilua.utils.JsName
 import web.JsAny
 import web.JsArray
 import web.Promise
@@ -34,7 +34,7 @@ import web.dom.HTMLElement
  * JavaScript Tabulator component.
  */
 @JsName("TabulatorFull")
-public external class TabulatorJs(element: HTMLElement, options: JsAny?) : JsAny {
+public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : JsAny {
     public val columnManager: JsAny
     public val rowManager: JsAny
     public val footerManager: JsAny
@@ -267,6 +267,7 @@ public external class TabulatorJs(element: HTMLElement, options: JsAny?) : JsAny
     public fun getRanges(): JsAny
     public fun getRangesData(): JsAny
 }
+
 /**
  * JavaScript Tabulator row component.
  */

@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.dom.mediacapture
 
@@ -26,7 +26,7 @@ import web.Promise
 /**
  * Exposes the JavaScript [MediaStream](https://developer.mozilla.org/en/docs/Web/API/MediaStream) to Kotlin
  */
-public external open class MediaStream() : EventTarget, MediaProvider, JsAny {
+public open external class MediaStream() : EventTarget, MediaProvider, JsAny {
     constructor(stream: MediaStream)
     constructor(tracks: JsArray<MediaStreamTrack>)
 
@@ -46,7 +46,7 @@ public external open class MediaStream() : EventTarget, MediaProvider, JsAny {
 /**
  * Exposes the JavaScript [MediaStreamTrack](https://developer.mozilla.org/en/docs/Web/API/MediaStreamTrack) to Kotlin
  */
-public external abstract class MediaStreamTrack : EventTarget, JsAny {
+public abstract external class MediaStreamTrack : EventTarget, JsAny {
     open val kind: String
     open val id: String
     open val label: String
@@ -222,7 +222,7 @@ public external interface MediaTrackSettings : JsAny {
 /**
  * Exposes the JavaScript [MediaStreamTrackEvent](https://developer.mozilla.org/en/docs/Web/API/MediaStreamTrackEvent) to Kotlin
  */
-public external open class MediaStreamTrackEvent(type: String, eventInitDict: MediaStreamTrackEventInit) : Event,
+public open external class MediaStreamTrackEvent(type: String, eventInitDict: MediaStreamTrackEventInit) : Event,
     JsAny {
     open val track: MediaStreamTrack
 
@@ -238,7 +238,7 @@ public external interface MediaStreamTrackEventInit : EventInit, JsAny {
     var track: MediaStreamTrack?
 }
 
-public external open class OverconstrainedErrorEvent(type: String, eventInitDict: OverconstrainedErrorEventInit) :
+public open external class OverconstrainedErrorEvent(type: String, eventInitDict: OverconstrainedErrorEventInit) :
     Event, JsAny {
     open val error: JsAny?
 
@@ -258,7 +258,7 @@ public external interface OverconstrainedErrorEventInit : EventInit, JsAny {
 /**
  * Exposes the JavaScript [MediaDevices](https://developer.mozilla.org/en/docs/Web/API/MediaDevices) to Kotlin
  */
-public external abstract class MediaDevices : EventTarget, JsAny {
+public abstract external class MediaDevices : EventTarget, JsAny {
     open var ondevicechange: ((Event) -> Unit)?
     fun enumerateDevices(): Promise<*>
     fun getSupportedConstraints(): MediaTrackSupportedConstraints
@@ -268,7 +268,7 @@ public external abstract class MediaDevices : EventTarget, JsAny {
 /**
  * Exposes the JavaScript [MediaDeviceInfo](https://developer.mozilla.org/en/docs/Web/API/MediaDeviceInfo) to Kotlin
  */
-public external abstract class MediaDeviceInfo : JsAny {
+public abstract external class MediaDeviceInfo : JsAny {
     open val deviceId: String
     open val kind: MediaDeviceKind
     open val label: String
@@ -276,7 +276,7 @@ public external abstract class MediaDeviceInfo : JsAny {
     fun toJSON(): JsAny
 }
 
-public external abstract class InputDeviceInfo : MediaDeviceInfo, JsAny {
+public abstract external class InputDeviceInfo : MediaDeviceInfo, JsAny {
     fun getCapabilities(): MediaTrackCapabilities
 }
 

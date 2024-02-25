@@ -23,6 +23,8 @@
 package dev.kilua.externals
 
 import web.JsAny
+import web.JsArray
+import web.JsNumber
 import web.Promise
 import web.dom.Element
 
@@ -30,7 +32,7 @@ import web.dom.Element
  * A set of hrlper functions to convert different Kotlin functions to JavaScript functions (JsAny).
  */
 
-internal expect fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> Number): JsAny
+internal expect fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> JsNumber): JsAny
 
 internal expect fun toJsAny(f: (CellComponent, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny
 
@@ -46,7 +48,7 @@ internal expect fun toJsAny(f: (JsAny, CellComponent) -> Unit): JsAny
 
 internal expect fun toJsAny(f: (CellComponent) -> Unit): JsAny
 
-internal expect fun toJsAny(f: (JsAny, JsAny, String, JsAny, CellComponent) -> Any): JsAny
+internal expect fun toJsAny(f: (JsAny, JsAny, String, JsAny, CellComponent) -> JsAny): JsAny
 
 internal expect fun toJsAny(f: () -> String?): JsAny
 
@@ -62,12 +64,12 @@ internal expect fun toJsAny(f: (String, JsAny) -> Unit): JsAny
 
 internal expect fun toJsAny(f: (JsAny, JsAny) -> Unit): JsAny
 
-internal expect fun toJsAny(f: (RowComponent, Number) -> Boolean): JsAny
+internal expect fun toJsAny(f: (RowComponent, JsNumber) -> Boolean): JsAny
 
 internal expect fun toJsAny(f: (String, JsAny) -> Boolean): JsAny
 
-internal expect fun toJsAny(f: (String, JsAny, JsAny) -> Any): JsAny
+internal expect fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny
 
-internal expect fun toJsAny(f: (Array<JsAny>) -> Element): JsAny
+internal expect fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny
 
 internal expect fun toJsAny(f: (JsAny) -> Boolean): JsAny

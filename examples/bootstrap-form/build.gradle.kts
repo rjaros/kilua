@@ -9,7 +9,7 @@ plugins {
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
     js(IR) {
-        useEsModules()
+        // useEsModules() workaround modules order (https://youtrack.jetbrains.com/issue/KT-64616)
         browser {
             commonWebpackConfig {
                 outputFileName = "main.bundle.js"
@@ -36,7 +36,7 @@ kotlin {
             }
             testTask {
                 useKarma {
-                    useChromeHeadlessWasmGc()
+                    useChromeHeadless()
                 }
             }
         }

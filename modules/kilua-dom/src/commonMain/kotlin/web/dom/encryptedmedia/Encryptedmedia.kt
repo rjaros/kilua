@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.dom.encryptedmedia
 
@@ -53,7 +53,7 @@ public external interface MediaKeySystemMediaCapability : JsAny {
 /**
  * Exposes the JavaScript [MediaKeySystemAccess](https://developer.mozilla.org/en/docs/Web/API/MediaKeySystemAccess) to Kotlin
  */
-public external abstract class MediaKeySystemAccess : JsAny {
+public abstract external class MediaKeySystemAccess : JsAny {
     open val keySystem: String
     fun getConfiguration(): MediaKeySystemConfiguration
     fun createMediaKeys(): Promise<*>
@@ -62,7 +62,7 @@ public external abstract class MediaKeySystemAccess : JsAny {
 /**
  * Exposes the JavaScript [MediaKeys](https://developer.mozilla.org/en/docs/Web/API/MediaKeys) to Kotlin
  */
-public external abstract class MediaKeys : JsAny {
+public abstract external class MediaKeys : JsAny {
     fun createSession(sessionType: MediaKeySessionType): MediaKeySession
     fun setServerCertificate(serverCertificate: JsAny?): Promise<*>
 }
@@ -70,7 +70,7 @@ public external abstract class MediaKeys : JsAny {
 /**
  * Exposes the JavaScript [MediaKeySession](https://developer.mozilla.org/en/docs/Web/API/MediaKeySession) to Kotlin
  */
-public external abstract class MediaKeySession : EventTarget, JsAny {
+public abstract external class MediaKeySession : EventTarget, JsAny {
     open val sessionId: String
     open val expiration: Double
     open val closed: Promise<Nothing?>
@@ -87,7 +87,7 @@ public external abstract class MediaKeySession : EventTarget, JsAny {
 /**
  * Exposes the JavaScript [MediaKeyStatusMap](https://developer.mozilla.org/en/docs/Web/API/MediaKeyStatusMap) to Kotlin
  */
-public external abstract class MediaKeyStatusMap : JsAny {
+public abstract external class MediaKeyStatusMap : JsAny {
     open val size: Int
     fun has(keyId: JsAny?): Boolean
     fun get(keyId: JsAny?): JsAny?
@@ -96,7 +96,7 @@ public external abstract class MediaKeyStatusMap : JsAny {
 /**
  * Exposes the JavaScript [MediaKeyMessageEvent](https://developer.mozilla.org/en/docs/Web/API/MediaKeyMessageEvent) to Kotlin
  */
-public external open class MediaKeyMessageEvent(type: String, eventInitDict: MediaKeyMessageEventInit) : Event, JsAny {
+public open external class MediaKeyMessageEvent(type: String, eventInitDict: MediaKeyMessageEventInit) : Event, JsAny {
     open val messageType: MediaKeyMessageType
     open val message: ArrayBuffer
 
@@ -113,7 +113,7 @@ public external interface MediaKeyMessageEventInit : EventInit, JsAny {
     var message: ArrayBuffer?
 }
 
-public external open class MediaEncryptedEvent(
+public open external class MediaEncryptedEvent(
     type: String,
     eventInitDict: MediaEncryptedEventInit
 ) : Event, JsAny {

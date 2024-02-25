@@ -1,5 +1,5 @@
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 @file:JsModule("html-differ")
-
 /*
  * Copyright (c) 2023 Robert Jaros
  *

@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.css.masking
 
@@ -23,7 +23,7 @@ import web.dom.svg.SVGUnitTypes
 /**
  * Exposes the JavaScript [SVGClipPathElement](https://developer.mozilla.org/en/docs/Web/API/SVGClipPathElement) to Kotlin
  */
-public external abstract class SVGClipPathElement : SVGElement, SVGUnitTypes, JsAny {
+public abstract external class SVGClipPathElement : SVGElement, SVGUnitTypes, JsAny {
     open val clipPathUnits: SVGAnimatedEnumeration
     open val transform: SVGAnimatedTransformList
 
@@ -55,7 +55,7 @@ public external abstract class SVGClipPathElement : SVGElement, SVGUnitTypes, Js
 /**
  * Exposes the JavaScript [SVGMaskElement](https://developer.mozilla.org/en/docs/Web/API/SVGMaskElement) to Kotlin
  */
-public external abstract class SVGMaskElement : SVGElement, SVGUnitTypes, JsAny {
+public abstract external class SVGMaskElement : SVGElement, SVGUnitTypes, JsAny {
     open val maskUnits: SVGAnimatedEnumeration
     open val maskContentUnits: SVGAnimatedEnumeration
     open val x: SVGAnimatedLength

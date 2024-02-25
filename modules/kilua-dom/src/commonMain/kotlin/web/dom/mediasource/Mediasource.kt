@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.dom.mediasource
 
@@ -25,7 +25,7 @@ import web.dom.events.EventTarget
 /**
  * Exposes the JavaScript [MediaSource](https://developer.mozilla.org/en/docs/Web/API/MediaSource) to Kotlin
  */
-public external open class MediaSource : EventTarget, MediaProvider, JsAny {
+public open external class MediaSource : EventTarget, MediaProvider, JsAny {
     open val sourceBuffers: SourceBufferList
     open val activeSourceBuffers: SourceBufferList
     open val readyState: ReadyState
@@ -47,7 +47,7 @@ public external open class MediaSource : EventTarget, MediaProvider, JsAny {
 /**
  * Exposes the JavaScript [SourceBuffer](https://developer.mozilla.org/en/docs/Web/API/SourceBuffer) to Kotlin
  */
-public external abstract class SourceBuffer : EventTarget, JsAny {
+public abstract external class SourceBuffer : EventTarget, JsAny {
     open var mode: AppendMode
     open val updating: Boolean
     open val buffered: TimeRanges
@@ -70,7 +70,7 @@ public external abstract class SourceBuffer : EventTarget, JsAny {
 /**
  * Exposes the JavaScript [SourceBufferList](https://developer.mozilla.org/en/docs/Web/API/SourceBufferList) to Kotlin
  */
-public external abstract class SourceBufferList : EventTarget, JsAny {
+public abstract external class SourceBufferList : EventTarget, JsAny {
     open val length: Int
     open var onaddsourcebuffer: ((Event) -> Unit)?
     open var onremovesourcebuffer: ((Event) -> Unit)?

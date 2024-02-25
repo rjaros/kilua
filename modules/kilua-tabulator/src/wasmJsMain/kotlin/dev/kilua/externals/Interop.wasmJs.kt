@@ -26,7 +26,7 @@ import web.JsAny
 import web.Promise
 import web.dom.Element
 
-internal actual fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> Number): JsAny =
+internal actual fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> JsNumber): JsAny =
     js("f")
 
 internal actual fun toJsAny(f: (CellComponent, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny = js("f")
@@ -39,7 +39,7 @@ internal actual fun toJsAny(f: (JsAny, JsAny, JsAny, JsAny) -> Boolean): JsAny =
 
 internal actual fun toJsAny(f: (JsAny, CellComponent) -> Unit): JsAny = js("f")
 internal actual fun toJsAny(f: (CellComponent) -> Unit): JsAny = js("f")
-internal actual fun toJsAny(f: (JsAny, JsAny, String, JsAny, CellComponent) -> Any): JsAny = js("f")
+internal actual fun toJsAny(f: (JsAny, JsAny, String, JsAny, CellComponent) -> JsAny): JsAny = js("f")
 
 internal actual fun toJsAny(f: () -> String?): JsAny = js("f")
 
@@ -55,12 +55,12 @@ internal actual fun toJsAny(f: (String, JsAny) -> Unit): JsAny = js("f")
 
 internal actual fun toJsAny(f: (JsAny, JsAny) -> Unit): JsAny = js("f")
 
-internal actual fun toJsAny(f: (RowComponent, Number) -> Boolean): JsAny = js("f")
+internal actual fun toJsAny(f: (RowComponent, JsNumber) -> Boolean): JsAny = js("f")
 
 internal actual fun toJsAny(f: (String, JsAny) -> Boolean): JsAny = js("f")
 
-internal actual fun toJsAny(f: (String, JsAny, JsAny) -> Any): JsAny = js("f")
+internal actual fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny = js("f")
 
-internal actual fun toJsAny(f: (Array<JsAny>) -> Element): JsAny = js("f")
+internal actual fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny = js("f")
 
 internal actual fun toJsAny(f: (JsAny) -> Boolean): JsAny = js("f")

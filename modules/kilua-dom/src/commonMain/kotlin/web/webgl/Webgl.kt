@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.webgl
 
@@ -41,47 +41,47 @@ public external interface WebGLContextAttributes : JsAny {
 
 }
 
-public external abstract class WebGLObject : JsAny
+public abstract external class WebGLObject : JsAny
 
 /**
  * Exposes the JavaScript [WebGLBuffer](https://developer.mozilla.org/en/docs/Web/API/WebGLBuffer) to Kotlin
  */
-public external abstract class WebGLBuffer : WebGLObject, JsAny
+public abstract external class WebGLBuffer : WebGLObject, JsAny
 
 /**
  * Exposes the JavaScript [WebGLFramebuffer](https://developer.mozilla.org/en/docs/Web/API/WebGLFramebuffer) to Kotlin
  */
-public external abstract class WebGLFramebuffer : WebGLObject, JsAny
+public abstract external class WebGLFramebuffer : WebGLObject, JsAny
 
 /**
  * Exposes the JavaScript [WebGLProgram](https://developer.mozilla.org/en/docs/Web/API/WebGLProgram) to Kotlin
  */
-public external abstract class WebGLProgram : WebGLObject, JsAny
+public abstract external class WebGLProgram : WebGLObject, JsAny
 
 /**
  * Exposes the JavaScript [WebGLRenderbuffer](https://developer.mozilla.org/en/docs/Web/API/WebGLRenderbuffer) to Kotlin
  */
-public external abstract class WebGLRenderbuffer : WebGLObject, JsAny
+public abstract external class WebGLRenderbuffer : WebGLObject, JsAny
 
 /**
  * Exposes the JavaScript [WebGLShader](https://developer.mozilla.org/en/docs/Web/API/WebGLShader) to Kotlin
  */
-public external abstract class WebGLShader : WebGLObject, JsAny
+public abstract external class WebGLShader : WebGLObject, JsAny
 
 /**
  * Exposes the JavaScript [WebGLTexture](https://developer.mozilla.org/en/docs/Web/API/WebGLTexture) to Kotlin
  */
-public external abstract class WebGLTexture : WebGLObject, JsAny
+public abstract external class WebGLTexture : WebGLObject, JsAny
 
 /**
  * Exposes the JavaScript [WebGLUniformLocation](https://developer.mozilla.org/en/docs/Web/API/WebGLUniformLocation) to Kotlin
  */
-public external abstract class WebGLUniformLocation : JsAny
+public abstract external class WebGLUniformLocation : JsAny
 
 /**
  * Exposes the JavaScript [WebGLActiveInfo](https://developer.mozilla.org/en/docs/Web/API/WebGLActiveInfo) to Kotlin
  */
-public external abstract class WebGLActiveInfo : JsAny {
+public abstract external class WebGLActiveInfo : JsAny {
     open val size: Int
     open val type: Int
     open val name: String
@@ -90,7 +90,7 @@ public external abstract class WebGLActiveInfo : JsAny {
 /**
  * Exposes the JavaScript [WebGLShaderPrecisionFormat](https://developer.mozilla.org/en/docs/Web/API/WebGLShaderPrecisionFormat) to Kotlin
  */
-public external abstract class WebGLShaderPrecisionFormat : JsAny {
+public abstract external class WebGLShaderPrecisionFormat : JsAny {
     open val rangeMin: Int
     open val rangeMax: Int
     open val precision: Int
@@ -620,7 +620,7 @@ public external interface WebGLRenderingContextBase : JsAny {
 /**
  * Exposes the JavaScript [WebGLRenderingContext](https://developer.mozilla.org/en/docs/Web/API/WebGLRenderingContext) to Kotlin
  */
-public external abstract class WebGLRenderingContext : WebGLRenderingContextBase, RenderingContext, JsAny {
+public abstract external class WebGLRenderingContext : WebGLRenderingContextBase, RenderingContext, JsAny {
     companion object {
         val DEPTH_BUFFER_BIT: Int
         val STENCIL_BUFFER_BIT: Int
@@ -925,7 +925,7 @@ public external abstract class WebGLRenderingContext : WebGLRenderingContextBase
 /**
  * Exposes the JavaScript [WebGLContextEvent](https://developer.mozilla.org/en/docs/Web/API/WebGLContextEvent) to Kotlin
  */
-public external open class WebGLContextEvent(type: String, eventInit: WebGLContextEventInit) :
+public open external class WebGLContextEvent(type: String, eventInit: WebGLContextEventInit) :
     Event, JsAny {
     open val statusMessage: String
 
@@ -945,7 +945,7 @@ public external interface WebGLContextEventInit : EventInit, JsAny {
 /**
  * Exposes the JavaScript [ArrayBuffer](https://developer.mozilla.org/en/docs/Web/API/ArrayBuffer) to Kotlin
  */
-public external open class ArrayBuffer(length: Int) : BufferDataSource, JsAny {
+public open external class ArrayBuffer(length: Int) : BufferDataSource, JsAny {
     open val byteLength: Int
     fun slice(begin: Int, end: Int): ArrayBuffer
 
@@ -966,7 +966,7 @@ public external interface ArrayBufferView : BufferDataSource, JsAny {
 /**
  * Exposes the JavaScript [Int8Array](https://developer.mozilla.org/en/docs/Web/API/Int8Array) to Kotlin
  */
-public external open class Int8Array : ArrayBufferView, JsAny {
+public open external class Int8Array : ArrayBufferView, JsAny {
     constructor(length: Int)
     constructor(array: Int8Array)
     constructor(array: JsArray<JsNumber>)
@@ -988,7 +988,7 @@ public external open class Int8Array : ArrayBufferView, JsAny {
 /**
  * Exposes the JavaScript [Uint8Array](https://developer.mozilla.org/en/docs/Web/API/Uint8Array) to Kotlin
  */
-public external open class Uint8Array : ArrayBufferView, JsAny {
+public open external class Uint8Array : ArrayBufferView, JsAny {
     constructor(length: Int)
     constructor(array: Uint8Array)
     constructor(array: JsArray<JsNumber>)
@@ -1010,7 +1010,7 @@ public external open class Uint8Array : ArrayBufferView, JsAny {
 /**
  * Exposes the JavaScript [Uint8ClampedArray](https://developer.mozilla.org/en/docs/Web/API/Uint8ClampedArray) to Kotlin
  */
-public external open class Uint8ClampedArray : ArrayBufferView, JsAny {
+public open external class Uint8ClampedArray : ArrayBufferView, JsAny {
     constructor(length: Int)
     constructor(array: Uint8ClampedArray)
     constructor(array: JsArray<JsNumber>)
@@ -1032,7 +1032,7 @@ public external open class Uint8ClampedArray : ArrayBufferView, JsAny {
 /**
  * Exposes the JavaScript [Int16Array](https://developer.mozilla.org/en/docs/Web/API/Int16Array) to Kotlin
  */
-public external open class Int16Array : ArrayBufferView, JsAny {
+public open external class Int16Array : ArrayBufferView, JsAny {
     constructor(length: Int)
     constructor(array: Int16Array)
     constructor(array: JsArray<JsNumber>)
@@ -1054,7 +1054,7 @@ public external open class Int16Array : ArrayBufferView, JsAny {
 /**
  * Exposes the JavaScript [Uint16Array](https://developer.mozilla.org/en/docs/Web/API/Uint16Array) to Kotlin
  */
-public external open class Uint16Array : ArrayBufferView, JsAny {
+public open external class Uint16Array : ArrayBufferView, JsAny {
     constructor(length: Int)
     constructor(array: Uint16Array)
     constructor(array: JsArray<JsNumber>)
@@ -1076,7 +1076,7 @@ public external open class Uint16Array : ArrayBufferView, JsAny {
 /**
  * Exposes the JavaScript [Int32Array](https://developer.mozilla.org/en/docs/Web/API/Int32Array) to Kotlin
  */
-public external open class Int32Array : ArrayBufferView, JsAny {
+public open external class Int32Array : ArrayBufferView, JsAny {
     constructor(length: Int)
     constructor(array: Int32Array)
     constructor(array: JsArray<JsNumber>)
@@ -1098,7 +1098,7 @@ public external open class Int32Array : ArrayBufferView, JsAny {
 /**
  * Exposes the JavaScript [Uint32Array](https://developer.mozilla.org/en/docs/Web/API/Uint32Array) to Kotlin
  */
-public external open class Uint32Array : ArrayBufferView, JsAny {
+public open external class Uint32Array : ArrayBufferView, JsAny {
     constructor(length: Int)
     constructor(array: Uint32Array)
     constructor(array: JsArray<JsNumber>)
@@ -1120,7 +1120,7 @@ public external open class Uint32Array : ArrayBufferView, JsAny {
 /**
  * Exposes the JavaScript [Float32Array](https://developer.mozilla.org/en/docs/Web/API/Float32Array) to Kotlin
  */
-public external open class Float32Array : ArrayBufferView, JsAny {
+public open external class Float32Array : ArrayBufferView, JsAny {
     constructor(length: Int)
     constructor(array: Float32Array)
     constructor(array: JsArray<JsNumber>)
@@ -1142,7 +1142,7 @@ public external open class Float32Array : ArrayBufferView, JsAny {
 /**
  * Exposes the JavaScript [Float64Array](https://developer.mozilla.org/en/docs/Web/API/Float64Array) to Kotlin
  */
-public external open class Float64Array : ArrayBufferView, JsAny {
+public open external class Float64Array : ArrayBufferView, JsAny {
     constructor(length: Int)
     constructor(array: Float64Array)
     constructor(array: JsArray<JsNumber>)
@@ -1164,7 +1164,7 @@ public external open class Float64Array : ArrayBufferView, JsAny {
 /**
  * Exposes the JavaScript [DataView](https://developer.mozilla.org/en/docs/Web/API/DataView) to Kotlin
  */
-public external open class DataView(
+public open external class DataView(
     buffer: ArrayBuffer,
     byteOffset: Int,
     byteLength: Int

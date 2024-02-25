@@ -1,8 +1,8 @@
 @file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2024 Robert Jaros
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * Permission is hereby granted, free of charge, to JsAny person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -12,32 +12,28 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF JsAny KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR JsAny CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
 
-package dev.kilua
+package dev.kilua.externals
 
 import dev.kilua.utils.JsModule
-import dev.kilua.utils.JsNonModule
-import dev.kilua.utils.useModule
 import web.JsAny
-
-@JsModule("bootstrap-icons/font/bootstrap-icons.css")
-@JsNonModule
-internal external object BootstrapIconsCss : JsAny
+import web.dom.HTMLElement
 
 /**
- * Initializer for Kilua Bootstrap Icons module.
+ * Workaround for tabulator-tables TabulatorFull imports problem.
  */
-public object BootstrapIconsModule : ModuleInitializer {
+@JsModule("tabulator-tables")
+internal external object TabulatorTablesJs : JsAny {
 
-    override fun initialize() {
-        useModule(BootstrapIconsCss)
-    }
+    @JsName("TabulatorFull")
+    class TabulatorFull(element: HTMLElement, options: JsAny?) : TabulatorJs
+
 }

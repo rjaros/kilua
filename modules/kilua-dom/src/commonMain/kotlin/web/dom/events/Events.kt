@@ -1,3 +1,8 @@
+@file:Suppress(
+    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
+    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE",
+    "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
+)
 /*
  * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
@@ -5,11 +10,6 @@
 
 // NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!
 // See github.com/kotlin/dukat for details
-
-@file:Suppress(
-    "NO_EXPLICIT_VISIBILITY_IN_API_MODE",
-    "NO_EXPLICIT_RETURN_TYPE_IN_API_MODE"
-) // TODO: Fix in dukat: https://github.com/Kotlin/dukat/issues/124
 
 package web.dom.events
 
@@ -21,7 +21,7 @@ import web.dom.*
 /**
  * Exposes the JavaScript [UIEvent](https://developer.mozilla.org/en/docs/Web/API/UIEvent) to Kotlin
  */
-public external open class UIEvent(type: String, eventInitDict: UIEventInit) : Event, JsAny {
+public open external class UIEvent(type: String, eventInitDict: UIEventInit) : Event, JsAny {
     open val view: Window?
     open val detail: Int
 
@@ -43,7 +43,7 @@ public external interface UIEventInit : EventInit, JsAny {
 /**
  * Exposes the JavaScript [FocusEvent](https://developer.mozilla.org/en/docs/Web/API/FocusEvent) to Kotlin
  */
-public external open class FocusEvent(type: String, eventInitDict: FocusEventInit) : UIEvent,
+public open external class FocusEvent(type: String, eventInitDict: FocusEventInit) : UIEvent,
     JsAny {
     open val relatedTarget: EventTarget?
 
@@ -63,7 +63,7 @@ public external interface FocusEventInit : UIEventInit, JsAny {
 /**
  * Exposes the JavaScript [MouseEvent](https://developer.mozilla.org/en/docs/Web/API/MouseEvent) to Kotlin
  */
-public external open class MouseEvent(type: String, eventInitDict: MouseEventInit) : UIEvent,
+public open external class MouseEvent(type: String, eventInitDict: MouseEventInit) : UIEvent,
     UnionElementOrMouseEvent, JsAny {
     constructor(type: String)
 
@@ -148,7 +148,7 @@ public external interface EventModifierInit : UIEventInit, JsAny {
 /**
  * Exposes the JavaScript [WheelEvent](https://developer.mozilla.org/en/docs/Web/API/WheelEvent) to Kotlin
  */
-public external open class WheelEvent(type: String, eventInitDict: WheelEventInit) : MouseEvent,
+public open external class WheelEvent(type: String, eventInitDict: WheelEventInit) : MouseEvent,
     JsAny {
     open val deltaX: Double
     open val deltaY: Double
@@ -180,7 +180,7 @@ public external interface WheelEventInit : MouseEventInit, JsAny {
 /**
  * Exposes the JavaScript [InputEvent](https://developer.mozilla.org/en/docs/Web/API/InputEvent) to Kotlin
  */
-public external open class InputEvent(type: String, eventInitDict: InputEventInit) : UIEvent,
+public open external class InputEvent(type: String, eventInitDict: InputEventInit) : UIEvent,
     JsAny {
     open val data: String
     open val isComposing: Boolean
@@ -203,7 +203,7 @@ public external interface InputEventInit : UIEventInit, JsAny {
 /**
  * Exposes the JavaScript [KeyboardEvent](https://developer.mozilla.org/en/docs/Web/API/KeyboardEvent) to Kotlin
  */
-public external open class KeyboardEvent(type: String, eventInitDict: KeyboardEventInit) : UIEvent,
+public open external class KeyboardEvent(type: String, eventInitDict: KeyboardEventInit) : UIEvent,
     JsAny {
     open val key: String
     open val code: String
@@ -247,7 +247,7 @@ public external interface KeyboardEventInit : EventModifierInit, JsAny {
 /**
  * Exposes the JavaScript [CompositionEvent](https://developer.mozilla.org/en/docs/Web/API/CompositionEvent) to Kotlin
  */
-public external open class CompositionEvent(type: String, eventInitDict: CompositionEventInit) :
+public open external class CompositionEvent(type: String, eventInitDict: CompositionEventInit) :
     UIEvent, JsAny {
     open val data: String
 
@@ -267,7 +267,7 @@ public external interface CompositionEventInit : UIEventInit, JsAny {
 /**
  * Exposes the JavaScript [Event](https://developer.mozilla.org/en/docs/Web/API/Event) to Kotlin
  */
-public external open class Event(type: String, eventInitDict: EventInit) : JsAny {
+public open external class Event(type: String, eventInitDict: EventInit) : JsAny {
     open val type: String
     open val target: EventTarget?
     open val currentTarget: EventTarget?
@@ -295,7 +295,7 @@ public external open class Event(type: String, eventInitDict: EventInit) : JsAny
 /**
  * Exposes the JavaScript [EventTarget](https://developer.mozilla.org/en/docs/Web/API/EventTarget) to Kotlin
  */
-public external abstract class EventTarget : JsAny {
+public abstract external class EventTarget : JsAny {
     fun addEventListener(type: String, callback: EventListener?, options: AddEventListenerOptions)
     fun addEventListener(type: String, callback: ((Event) -> Unit)?, options: AddEventListenerOptions)
     fun addEventListener(type: String, callback: EventListener?, options: Boolean)
