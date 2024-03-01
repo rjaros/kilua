@@ -127,7 +127,7 @@ public open class Time(
             null
         } else {
             val date = try {
-                text.toLocalTime()
+                LocalTime.parse(text)
             } catch (e: IllegalArgumentException) {
                 null
             }

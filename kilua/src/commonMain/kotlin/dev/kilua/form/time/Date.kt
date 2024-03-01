@@ -123,7 +123,7 @@ public open class Date(
             null
         } else {
             val date = try {
-                text.toLocalDate()
+                LocalDate.parse(text)
             } catch (e: IllegalArgumentException) {
                 null
             }
