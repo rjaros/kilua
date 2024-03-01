@@ -59,7 +59,7 @@ kotlin {
 
 compose {
     kotlinCompilerPlugin.set(libs.versions.compose.plugin)
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
+//    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
 
 tasks.register<Jar>("javadocJar") {
@@ -75,8 +75,8 @@ nmcp {
 }
 
 rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().apply {
-    nodeVersion = "22.0.0-v8-canary202401102ecfc94f85"
-    nodeDownloadBaseUrl = "https://mirrors.dotsrc.org/nodejs/v8-canary"
+    version = "22.0.0-v8-canary202401102ecfc94f85"
+    downloadBaseUrl = "https://nodejs.org/download/v8-canary"
 }
 
 rootProject.tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask>().configureEach {

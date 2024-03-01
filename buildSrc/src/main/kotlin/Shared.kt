@@ -16,6 +16,7 @@ fun KotlinMultiplatformExtension.compilerOptions() {
         compilations.configureEach {
             compilerOptions.configure {
                 freeCompilerArgs.add("-Xexpect-actual-classes")
+                freeCompilerArgs.add("-Xdont-warn-on-error-suppression")
             }
         }
     }
