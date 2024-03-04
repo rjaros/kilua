@@ -19,12 +19,13 @@ KVision users (component based API, allowing some imperative, direct ways to int
 - Rendering to String with JS/Node or WasmJS/Node target (ready for SSR).
 - Ready to use components for all typical web application use cases. 
 - Component based API (familiar to KVision users).
-- Fullstack support ported from KVision.
+- ~~Fullstack support ported from KVision.~~ (RPC will be available as a separate project)
 - Modular architecture.
 
 ## Project status
 
-All main concepts have been tested and the development is now focused on implementing new components. 
+All main concepts have been tested and all planned components are ready. 
+I've decided to implement fullstack interfaces (RPC) as a new, separate project. 
 The project can be built and tested with single gradle tasks. Contributions and PRs are welcomed.
 Still no artifacts are published, but we are close to the first alpha release.
 
@@ -50,11 +51,11 @@ Still no artifacts are published, but we are close to the first alpha release.
 - [X] Implement Tabulator component
 - [X] Routing support
 - [X] Web client
-- [ ] I18n support
-- [ ] Gradle plugin and KSP compiler plugin
-- [ ] Fullstack support with SSR
-- [ ] Code documentation
-- [ ] Unit tests
+- [ ] I18n support (currently blocked by https://github.com/JetBrains/compose-multiplatform/issues/4171)
+- [ ] Gradle plugin ~~and KSP compiler plugin~~
+- [ ] SSR support
+- [X] Code documentation
+- [X] Unit tests
 
 ## Code sample
 
