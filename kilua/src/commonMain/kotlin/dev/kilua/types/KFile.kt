@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2024 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,28 @@
  */
 package dev.kilua.types
 
+import kotlinx.serialization.Serializable
+
 /**
- * A decimal number type.
+ * A serializable class for a fullstack File type.
  */
-public expect class InternalDecimal
+@Serializable
+public data class KFile(
+    val name: String,
+    val size: Int,
+    val content: String? = null
+)
+
+/**
+ *  Decode the content-type from the data uri string contained in the KFile object.
+ */
+@Suppress("MagicNumber")
+public val KFile.contentType: String?
+    get() = content?.split(",", limit = 2)?.get(0)?.drop(5)?.split(";")?.get(0)
+
+/**
+ *  Decode the Base64 encoded content from the data uri string contained in the KFile object.
+ */
+@Suppress("MagicNumber")
+public val KFile.base64Encoded: String?
+    get() = content?.split(",", limit = 2)?.getOrNull(1)
