@@ -28,6 +28,7 @@ kotlin {
                 api(libs.kotlinx.coroutines)
                 api(libs.kotlinx.serialization.json)
                 api(libs.kotlinx.datetime)
+                api(project(":modules:kilua-common-types"))
                 api(project(":modules:kilua-dom"))
 //                implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.1-SNAPSHOT.1.tgz"))
                 implementation(npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get()))
