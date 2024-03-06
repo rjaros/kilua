@@ -1,7 +1,7 @@
 [versions]
-kotlin = "2.0.0-Beta4"
+kotlin = "1.9.22"
 compose = "1.6.0"
-compose-plugin = "1.5.9-kt-2.0.0-Beta4"
+compose-plugin = "1.5.8.1"
 dokka = "2.0.0-dev-318"
 nmcp = "0.0.4"
 npm-publish = "3.4.2"
