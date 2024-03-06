@@ -23,7 +23,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "kilua-project"
 include(":kilua")
-include(":modules:kilua-common-annotations")
 include(":modules:kilua-common-types")
 include(":modules:kilua-dom")
 include(":modules:kilua-bootstrap")
@@ -47,3 +46,4 @@ include(":examples:hello-world")
 include(":examples:js-framework-benchmark")
 include(":examples:playground")
 include(":examples:resources")
+include(":examples:fullstack-ktor-koin")

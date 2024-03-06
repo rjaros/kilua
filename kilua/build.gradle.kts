@@ -27,7 +27,6 @@ kotlin {
                 api(libs.kotlinx.atomicfu)
                 api(libs.kotlinx.coroutines)
                 api(libs.kotlinx.serialization.json)
-                api(libs.kotlinx.datetime)
                 api(project(":modules:kilua-common-types"))
                 api(project(":modules:kilua-dom"))
 //                implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.1-SNAPSHOT.1.tgz"))
@@ -75,8 +74,8 @@ nmcp {
 }
 
 rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().apply {
-    version = "22.0.0-v8-canary202401102ecfc94f85"
-    downloadBaseUrl = "https://nodejs.org/download/v8-canary"
+    nodeVersion = "22.0.0-v8-canary202401102ecfc94f85"
+    nodeDownloadBaseUrl = "https://nodejs.org/download/v8-canary"
 }
 
 rootProject.tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask>().configureEach {
