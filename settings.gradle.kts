@@ -4,9 +4,6 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.jetbrains.space/kotlin/p/dokka/dev")
-        }
         mavenLocal()
     }
 }
@@ -14,9 +11,6 @@ pluginManagement {
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.jetbrains.space/kotlin/p/dokka/dev")
-        }
         mavenLocal()
     }
 }
