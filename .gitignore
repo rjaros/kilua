@@ -9,3 +9,4 @@ refreshW.sh
 /bsrefreshW.sh
 /upload.sh
 /build-mvnlocal.sh
+/examples/fullstack-ktor-koin/logs
