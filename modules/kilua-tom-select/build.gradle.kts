@@ -48,7 +48,7 @@ kotlin {
 
 compose {
     kotlinCompilerPlugin.set(libs.versions.compose.plugin)
-//    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
+    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
 
 tasks.register<Jar>("javadocJar") {

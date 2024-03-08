@@ -114,7 +114,7 @@ kotlin {
 compose {
     platformTypes.set(platformTypes.get() - KotlinPlatformType.jvm)
     kotlinCompilerPlugin.set(libs.versions.compose.plugin)
-//    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
+    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
 
 dependencies {
