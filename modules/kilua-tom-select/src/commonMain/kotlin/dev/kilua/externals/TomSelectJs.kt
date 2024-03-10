@@ -145,6 +145,8 @@ public external class TomSelectJs(element: HTMLElement, options: TomSelectOption
     public fun clearOptionGroups()
 
     public fun on(event: String, handler: JsAny)
+    public fun on(event: String, handler: () -> Unit)
+    public fun on(event: String, handler: (JsAny) -> Unit)
     public fun off(event: String, handler: JsAny)
     public fun off(event: String)
     public fun trigger(event: String)
@@ -168,4 +170,6 @@ public external class TomSelectJs(element: HTMLElement, options: TomSelectOption
     public fun setTextboxValue(value: String)
     public fun sync()
     public fun destroy()
+
+    public val options: JsAny
 }
