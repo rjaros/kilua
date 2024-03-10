@@ -67,7 +67,7 @@ actual class PingService : IPingService {
     actual override suspend fun sseConnection(output: SendChannel<String>) {
         var i = 0
         while (true) {
-            output.send("Hello world (${i++}!")
+            output.send("Hello world (${i++})!")
             delay(3.seconds)
         }
     }
