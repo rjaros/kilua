@@ -62,6 +62,7 @@ nmcp {
         project(":modules:kilua-tempus-dominus")
         project(":modules:kilua-toastify")
         project(":modules:kilua-tom-select")
+        project(":modules:kilua-tom-select-remote")
         project(":modules:kilua-trix")
         project(":modules:kilua-testutils")
         username = findProperty("mavenCentralUsername")?.toString()
