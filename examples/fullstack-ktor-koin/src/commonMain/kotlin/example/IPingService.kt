@@ -31,6 +31,7 @@ import kotlinx.serialization.Serializable
 import dev.kilua.rpc.RemoteData
 import dev.kilua.rpc.RemoteFilter
 import dev.kilua.rpc.RemoteSorter
+import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.rpc.types.Decimal
 import dev.kilua.types.KFile
 import kotlinx.datetime.LocalDate
@@ -73,4 +74,6 @@ interface IPingService {
         sorter: List<RemoteSorter>?,
         state: String?
     ): RemoteData<MyData>
+
+    suspend fun dictionary(state: String?): List<SimpleRemoteOption>
 }

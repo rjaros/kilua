@@ -30,9 +30,12 @@ import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.compose.root
 import dev.kilua.externals.console
+import dev.kilua.externals.set
+import dev.kilua.form.select.selectRemote
 import dev.kilua.html.div
 import dev.kilua.html.unaryPlus
 import dev.kilua.rpc.getService
+import dev.kilua.rpc.getServiceManager
 import dev.kilua.rpc.types.toDecimal
 import dev.kilua.startApplication
 import dev.kilua.types.KFile
@@ -41,6 +44,7 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
+import web.toJsString
 
 class App : Application() {
 
@@ -114,6 +118,11 @@ class App : Application() {
                     }
                 }
             }
+            selectRemote(getServiceManager(), IPingService::dictionary, stateFunction = {
+                "Some state"
+            }, requestFilter = {
+                headers["X-My-Header"] = "My value".toJsString()
+            }, value = "2", placeholder = "Select value")
         }
     }
 }

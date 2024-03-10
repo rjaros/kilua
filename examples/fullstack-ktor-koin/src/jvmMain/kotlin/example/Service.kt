@@ -4,8 +4,10 @@ import dev.kilua.rpc.AbstractServiceException
 import dev.kilua.rpc.RemoteData
 import dev.kilua.rpc.RemoteFilter
 import dev.kilua.rpc.RemoteSorter
+import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.rpc.types.Decimal
 import dev.kilua.types.KFile
+import io.ktor.server.application.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.delay
@@ -13,12 +15,11 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import org.koin.core.annotation.Factory
-import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
 @Suppress("ACTUAL_WITHOUT_EXPECT")
 @Factory
-actual class PingService : IPingService {
+actual class PingService(private val call: ApplicationCall) : IPingService {
 
     actual override suspend fun ping(message: String?): String {
         println(message)
@@ -80,5 +81,11 @@ actual class PingService : IPingService {
         state: String?
     ): RemoteData<MyData> {
         return RemoteData()
+    }
+
+    actual override suspend fun dictionary(state: String?): List<SimpleRemoteOption> {
+        println(state)
+        println(call.request.headers.get("X-My-Header"))
+        return listOf(SimpleRemoteOption("1", "One"), SimpleRemoteOption("2", "Two"))
     }
 }

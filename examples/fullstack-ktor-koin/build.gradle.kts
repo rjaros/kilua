@@ -91,6 +91,7 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation(project(":kilua"))
+                implementation(project(":modules:kilua-select-remote"))
             }
         }
         val jsMain by getting {
