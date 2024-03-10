@@ -70,7 +70,7 @@ public open external class Request(input: JsAny? /* Request|String */, init: Req
 public external interface RequestInit : JsAny {
     var method: String?
 
-    var headers: JsAny? /* Headers|JsArray<JsArray<JsString>>|OpenEndedDictionary<JsString> */
+    var headers: JsAny /* Headers|JsArray<JsArray<JsString>>|OpenEndedDictionary<JsString> */
 
     var body: JsAny? /* Blob|BufferSource|FormData|URLSearchParams|String */
 

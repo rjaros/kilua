@@ -31,6 +31,8 @@ import web.JsAny
 public external class Console : JsAny {
     public fun log(message: String?)
     public fun log(message: JsAny?)
+    public fun error(message: String?)
+    public fun error(message: JsAny?)
 }
 
 /**
