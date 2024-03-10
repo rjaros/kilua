@@ -44,6 +44,7 @@ import web.fetch.RequestInit
  * @param stateFunction a function to generate the state object passed with the remote request
  * @param requestFilter a request filtering function
  * @param refreshOnFocus determines if the options should be refreshed when the component gets focus
+ * @param options an initial list of options (value to label pairs)
  * @param value initial value
  * @param multiple determines if multiple value selection is allowed
  * @param size the number of visible options
