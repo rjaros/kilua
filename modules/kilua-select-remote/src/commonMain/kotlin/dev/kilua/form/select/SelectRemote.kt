@@ -77,8 +77,8 @@ public fun <T : Any> ComponentBase.selectRemote(
     id: String? = null,
     setup: @Composable Select.() -> Unit = {}
 ): Select {
-    var optionsState: List<StringPair> by remember {
-        mutableStateOf(options ?: emptyList())
+    var optionsState: List<StringPair>? by remember {
+        mutableStateOf(options)
     }
     val select = select(
         options = optionsState,

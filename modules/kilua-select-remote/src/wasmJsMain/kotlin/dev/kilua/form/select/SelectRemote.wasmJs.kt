@@ -26,7 +26,6 @@ import dev.kilua.externals.JSON
 import dev.kilua.externals.console
 import dev.kilua.externals.get
 import dev.kilua.rpc.CallAgent
-import dev.kilua.rpc.HttpMethod
 import dev.kilua.rpc.JsonRpcRequest
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
@@ -43,14 +42,14 @@ internal actual suspend fun <T : Any> getOptionsForSelectRemote(
     stateFunction: (() -> String)?,
     requestFilter: (suspend RequestInit.() -> Unit)?,
 ): List<StringPair> {
-    val (url, _) = serviceManager.requireCall(function)
+    val (url, method) = serviceManager.requireCall(function)
     val callAgent = CallAgent()
     val state = stateFunction?.invoke()?.let { JSON.stringify(it.toJsString()) }
     return try {
         val values = callAgent.remoteCall(
             url,
             stringData = RpcSerialization.plain.encodeToString(JsonRpcRequest(0, url, listOf(state))),
-            method = HttpMethod.POST, requestFilter = requestFilter?.let { requestFilterParam ->
+            method = method, requestFilter = requestFilter?.let { requestFilterParam ->
                 {
                     val self = this.unsafeCast<RequestInit>()
                     self.requestFilterParam()
