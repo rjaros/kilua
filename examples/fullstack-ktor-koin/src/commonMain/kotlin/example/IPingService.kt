@@ -30,6 +30,7 @@ import kotlinx.coroutines.channels.SendChannel
 import kotlinx.serialization.Serializable
 import dev.kilua.rpc.RemoteData
 import dev.kilua.rpc.RemoteFilter
+import dev.kilua.rpc.RemoteOption
 import dev.kilua.rpc.RemoteSorter
 import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.rpc.types.Decimal
@@ -76,4 +77,5 @@ interface IPingService {
     ): RemoteData<MyData>
 
     suspend fun dictionary(state: String?): List<SimpleRemoteOption>
+    suspend fun dictionaryTs(search: String?, initial: String?, state: String?): List<RemoteOption>
 }

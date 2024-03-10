@@ -3,6 +3,7 @@ package example
 import dev.kilua.rpc.AbstractServiceException
 import dev.kilua.rpc.RemoteData
 import dev.kilua.rpc.RemoteFilter
+import dev.kilua.rpc.RemoteOption
 import dev.kilua.rpc.RemoteSorter
 import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.rpc.types.Decimal
@@ -87,5 +88,21 @@ actual class PingService(private val call: ApplicationCall) : IPingService {
         println(state)
         println(call.request.headers.get("X-My-Header"))
         return listOf(SimpleRemoteOption("1", "One"), SimpleRemoteOption("2", "Two"))
+    }
+
+    actual override suspend fun dictionaryTs(search: String?, initial: String?, state: String?): List<RemoteOption> {
+        println(state)
+        println(call.request.headers.get("X-My-Header"))
+        return listOf("pl" to "Poland", "uk" to "United Kingdom", "us" to "United States of America")
+            .filter { (code, name) ->
+                val searchCondition = search?.let { name.startsWith(it, ignoreCase = true) }
+                if (initial != null) {
+                    code == initial || searchCondition ?: false
+                } else {
+                    searchCondition ?: true
+                }
+            }.map { (code, name) ->
+                RemoteOption(code, name)
+            }
     }
 }
