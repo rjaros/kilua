@@ -59,6 +59,7 @@ nmcp {
         project(":modules:kilua-select-remote")
         project(":modules:kilua-splitjs")
         project(":modules:kilua-tabulator")
+        project(":modules:kilua-tabulator-remote")
         project(":modules:kilua-tempus-dominus")
         project(":modules:kilua-toastify")
         project(":modules:kilua-tom-select")

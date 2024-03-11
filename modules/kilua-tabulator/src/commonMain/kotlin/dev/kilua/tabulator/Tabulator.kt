@@ -375,9 +375,9 @@ public fun ComponentBase.tabulator(
 }
 
 /*
+ * Get class reference for a reified type.
  * Workaround https://github.com/JetBrains/compose-multiplatform/issues/3147
  */
-@PublishedApi
-internal inline fun <reified T : Any> getClass(): KClass<T> {
+public inline fun <reified T : Any> getClass(): KClass<T> {
     return T::class
 }
