@@ -268,36 +268,36 @@ public fun <T : Any> ComponentBase.tomSelectRemote(
 
     lateinit var tomSelectRemote: TomSelectRemote<T>
 
-    val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
-        { query, callback ->
-            tomSelectRemote.tomSelectInstance?.clearOptions { true }
-            KiluaScope.launch {
-                val result = getOptionsForTomSelectRemote(
-                    serviceManager,
-                    function,
-                    stateFunction,
-                    requestFilter,
-                    query,
-                    tomSelectRemote.value
-                )
-                callback(result.toJsArray())
+    val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks, preload, openOnFocus) {
+        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
+            { query, callback ->
+                tomSelectRemote.tomSelectInstance?.clearOptions { true }
+                KiluaScope.launch {
+                    val result = getOptionsForTomSelectRemote(
+                        serviceManager,
+                        function,
+                        stateFunction,
+                        requestFilter,
+                        query,
+                        tomSelectRemote.value
+                    )
+                    callback(result.toJsArray())
+                }
             }
-        }
-    } else null
-    val shouldLoadCallback = if (openOnFocus) {
-        { _: String -> true }
-    } else null
-    val tsCallbacksState: TomSelectCallbacks = remember {
+        } else null
+        val shouldLoadCallback = if (openOnFocus) {
+            { _: String -> true }
+        } else null
         tsCallbacks?.copy(load = loadCallback, shouldLoad = shouldLoadCallback)
             ?: TomSelectCallbacks(load = loadCallback, shouldLoad = shouldLoadCallback)
     }
-    val tsRendersState: TomSelectRenders = remember {
+    val tsRendersState: TomSelectRenders = remember(tsRenders) {
         tsRenders?.copy(option = ::renderOption, item = ::renderItem) ?: TomSelectRenders(
             option = ::renderOption,
             item = ::renderItem
         )
     }
-    var tsOptionsState: TomSelectOptions? by remember {
+    var tsOptionsState: TomSelectOptions? by remember(tsOptions, preload, openOnFocus) {
         mutableStateOf(
             tsOptions?.copy(preload = preload, openOnFocus = openOnFocus, searchField = emptyList())
                 ?: TomSelectOptions(
