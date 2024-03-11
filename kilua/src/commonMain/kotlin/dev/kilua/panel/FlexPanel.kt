@@ -58,7 +58,7 @@ public fun ComponentBase.flexPanel(
     rowGap: CssSize? = null,
     columnGap: CssSize? = null,
     className: String? = null,
-    content: @Composable ComponentBase.() -> Unit,
+    content: @Composable Div.() -> Unit,
 ): Div {
     return div(className) {
         this.display = Display.Flex

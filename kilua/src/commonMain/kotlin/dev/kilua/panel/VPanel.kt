@@ -51,7 +51,7 @@ public fun ComponentBase.vPanel(
     gap: CssSize? = null,
     columnGap: CssSize? = null,
     className: String? = null,
-    content: @Composable ComponentBase.() -> Unit,
+    content: @Composable Div.() -> Unit,
 ): Div {
     return flexPanel(
         FlexDirection.Column,

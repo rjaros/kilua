@@ -50,7 +50,7 @@ public fun ComponentBase.hPanel(
     gap: CssSize? = null,
     rowGap: CssSize? = null,
     className: String? = null,
-    content: @Composable ComponentBase.() -> Unit,
+    content: @Composable Div.() -> Unit,
 ): Div {
     return flexPanel(
         null,
