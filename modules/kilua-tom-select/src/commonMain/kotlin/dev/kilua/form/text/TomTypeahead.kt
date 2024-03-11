@@ -249,12 +249,12 @@ public open class TomTypeahead(
 /**
  * Creates [TomTypeahead] component.
  *
- * @param options a list of options (value to label pairs)
+ * @param options a list of options
  * @param value initial value
  * @param type the type of the input
  * @param tsCallbacks Tom Select callbacks
  * @param name the name of the select
- * @param placeholder the placeholder for the select component
+ * @param placeholder the placeholder for the input component
  * @param disabled whether the select is disabled
  * @param required whether the select is required
  * @param className the CSS class name
