@@ -23,21 +23,21 @@
 package example
 
 import dev.kilua.rpc.AbstractServiceException
-import dev.kilua.rpc.annotations.RpcService
-import dev.kilua.rpc.annotations.RpcServiceException
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.channels.SendChannel
-import kotlinx.serialization.Serializable
 import dev.kilua.rpc.RemoteData
 import dev.kilua.rpc.RemoteFilter
 import dev.kilua.rpc.RemoteOption
 import dev.kilua.rpc.RemoteSorter
 import dev.kilua.rpc.SimpleRemoteOption
+import dev.kilua.rpc.annotations.RpcService
+import dev.kilua.rpc.annotations.RpcServiceException
 import dev.kilua.rpc.types.Decimal
 import dev.kilua.types.KFile
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.SendChannel
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
+import kotlinx.serialization.Serializable
 
 @RpcServiceException
 class MyFirstException(override val message: String) : AbstractServiceException()
@@ -78,4 +78,5 @@ interface IPingService {
 
     suspend fun dictionary(state: String?): List<SimpleRemoteOption>
     suspend fun dictionaryTs(search: String?, initial: String?, state: String?): List<RemoteOption>
+    suspend fun suggestionList(search: String?, state: String?): List<String>
 }

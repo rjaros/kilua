@@ -28,15 +28,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
+import dev.kilua.BootstrapCssModule
+import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
-import dev.kilua.TomSelectDefaultModule
+import dev.kilua.TomSelectModule
 import dev.kilua.compose.root
 import dev.kilua.externals.console
 import dev.kilua.externals.set
 import dev.kilua.form.select.selectRemote
 import dev.kilua.form.select.tomSelectRemote
-import dev.kilua.html.div
+import dev.kilua.form.text.tomTypeaheadRemote
+import dev.kilua.html.px
 import dev.kilua.html.unaryPlus
+import dev.kilua.panel.vPanel
 import dev.kilua.rpc.getService
 import dev.kilua.rpc.getServiceManager
 import dev.kilua.rpc.types.toDecimal
@@ -57,9 +61,26 @@ class App : Application() {
 
         root("root") {
             var value by remember { mutableStateOf("Hello World!") }
-
-            div {
+            vPanel(gap = 10.px) {
                 +value
+                margin = 10.px
+                selectRemote(getServiceManager(), IPingService::dictionary, stateFunction = {
+                    "Some state"
+                }, requestFilter = {
+                    headers["X-My-Header"] = "My value".toJsString()
+                }, value = "2", placeholder = "Select value", className = "form-select")
+
+                tomSelectRemote(getServiceManager(), IPingService::dictionaryTs, stateFunction = {
+                    "Some state"
+                }, requestFilter = {
+                    headers["X-My-Header"] = "My value".toJsString()
+                }, value = "uk", placeholder = "Select value", openOnFocus = true, preload = true, emptyOption = true)
+
+                tomTypeaheadRemote(getServiceManager(), IPingService::suggestionList, stateFunction = {
+                    "Some state"
+                }, requestFilter = {
+                    headers["X-My-Header"] = "My value".toJsString()
+                }, placeholder = "Country")
             }
             LaunchedEffect(Unit) {
                 value = pingService.ping("Hello world from client!")
@@ -121,21 +142,10 @@ class App : Application() {
                     }
                 }
             }
-            selectRemote(getServiceManager(), IPingService::dictionary, stateFunction = {
-                "Some state"
-            }, requestFilter = {
-                headers["X-My-Header"] = "My value".toJsString()
-            }, value = "2", placeholder = "Select value")
-
-            tomSelectRemote(getServiceManager(), IPingService::dictionaryTs, stateFunction = {
-                "Some state"
-            }, requestFilter = {
-                headers["X-My-Header"] = "My value".toJsString()
-            }, value = "uk", placeholder = "Select value", openOnFocus = true, preload = true, emptyOption = true)
         }
     }
 }
 
 fun main() {
-    startApplication(::App, null, CoreModule, TomSelectDefaultModule)
+    startApplication(::App, null, BootstrapModule, BootstrapCssModule, TomSelectModule, CoreModule)
 }

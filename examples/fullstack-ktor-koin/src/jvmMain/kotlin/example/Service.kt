@@ -105,4 +105,11 @@ actual class PingService(private val call: ApplicationCall) : IPingService {
                 RemoteOption(code, name)
             }
     }
+
+    actual override suspend fun suggestionList(search: String?, state: String?): List<String> {
+        println(state)
+        println(call.request.headers.get("X-My-Header"))
+        return listOf("Poland", "United Kingdom", "United States of America")
+            .filter { it.startsWith(search ?: "", ignoreCase = true) }
+    }
 }
