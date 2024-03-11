@@ -55,7 +55,9 @@ Still no artifacts are published, but we are close to the first alpha release.
 - [ ] I18n support (currently blocked by https://github.com/JetBrains/compose-multiplatform/issues/4171)
 - [ ] Gradle plugin ~~and KSP compiler plugin~~
 - [X] Fullstack `Select`
-- [ ] Fullstack components (`TomSelect`, `TomTypeahead`, `Tabulator`)
+- [X] Fullstack `TomSelect`
+- [X] Fullstack `TomTypeahead`
+- [ ] Fullstack `Tabulator`
 - [ ] SSR support
 - [X] Code documentation
 - [X] Unit tests
