@@ -31,6 +31,8 @@ import dev.kilua.Application
 import dev.kilua.BootstrapCssModule
 import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
+import dev.kilua.FontAwesomeModule
+import dev.kilua.TabulatorModule
 import dev.kilua.TomSelectModule
 import dev.kilua.compose.root
 import dev.kilua.externals.console
@@ -45,12 +47,18 @@ import dev.kilua.rpc.getService
 import dev.kilua.rpc.getServiceManager
 import dev.kilua.rpc.types.toDecimal
 import dev.kilua.startApplication
+import dev.kilua.tabulator.ColumnDefinition
+import dev.kilua.tabulator.Layout
+import dev.kilua.tabulator.PaginationMode
+import dev.kilua.tabulator.TabulatorOptions
+import dev.kilua.tabulator.tabulatorRemote
 import dev.kilua.types.KFile
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
+import kotlinx.serialization.serializer
 import web.toJsString
 
 class App : Application() {
@@ -81,6 +89,21 @@ class App : Application() {
                 }, requestFilter = {
                     headers["X-My-Header"] = "My value".toJsString()
                 }, placeholder = "Country")
+
+                tabulatorRemote(
+                    getServiceManager(),
+                    IPingService::rowData,
+                    options = TabulatorOptions(
+                        layout = Layout.FitColumns,
+                        pagination = true,
+                        paginationMode = PaginationMode.Remote,
+                        paginationSize = 5,
+                        columns = listOf(
+                            ColumnDefinition("Id", MyData::id.name),
+                            ColumnDefinition("Name", MyData::name.name),
+                        )
+                    ), serializer = serializer()
+                )
             }
             LaunchedEffect(Unit) {
                 value = pingService.ping("Hello world from client!")
@@ -105,8 +128,6 @@ class App : Application() {
                         }
                     }
                 )
-                val row = pingService.rowData(null, null, null, null, null)
-                console.log("Row: $row")
                 val kiluaTypes = pingService.kiluaTypes(
                     listOf(KFile("name", 1, "content")),
                     LocalDate(2023, 1, 1),
@@ -147,5 +168,14 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, null, BootstrapModule, BootstrapCssModule, TomSelectModule, CoreModule)
+    startApplication(
+        ::App,
+        null,
+        BootstrapModule,
+        BootstrapCssModule,
+        FontAwesomeModule,
+        TomSelectModule,
+        TabulatorModule,
+        CoreModule
+    )
 }

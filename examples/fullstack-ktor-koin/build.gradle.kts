@@ -92,8 +92,10 @@ kotlin {
             dependencies {
                 implementation(project(":kilua"))
                 implementation(project(":modules:kilua-bootstrap"))
+                implementation(project(":modules:kilua-fontawesome"))
                 implementation(project(":modules:kilua-select-remote"))
                 implementation(project(":modules:kilua-tom-select-remote"))
+                implementation(project(":modules:kilua-tabulator-remote"))
             }
         }
         val jsMain by getting {

@@ -81,7 +81,25 @@ actual class PingService(private val call: ApplicationCall) : IPingService {
         sorter: List<RemoteSorter>?,
         state: String?
     ): RemoteData<MyData> {
-        return RemoteData()
+        val requestedPage = (page ?: 1) - 1
+        val requestedSize = size ?: 10
+        val allData = listOf(
+            MyData(1, "One"),
+            MyData(2, "Two"),
+            MyData(3, "Three"),
+            MyData(4, "Four"),
+            MyData(5, "Five"),
+            MyData(6, "Six"),
+            MyData(7, "Seven"),
+            MyData(8, "Eight"),
+            MyData(9, "Nine"),
+            MyData(10, "Ten"),
+            MyData(11, "Eleven"),
+            MyData(12, "Twelve"),
+        )
+        val requestedData = allData.drop(requestedPage * requestedSize).take(requestedSize)
+        val count = allData.size
+        return RemoteData(requestedData, ((count - 1) / requestedSize) + 1, count)
     }
 
     actual override suspend fun dictionary(state: String?): List<SimpleRemoteOption> {
