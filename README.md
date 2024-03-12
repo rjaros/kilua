@@ -24,8 +24,8 @@ KVision users (component based API, allowing some imperative, direct ways to int
 
 ## Project status
 
-All main concepts have been tested and all planned frontend components are ready. 
-I'm currently working on the fullstack components.
+All main concepts have been tested and all planned frontend and fullstack components are ready. 
+I'm investigating possible solutions for SSR (server-side rendering) and I18n (internationalization).
 
 The project can be built and tested with single gradle tasks. Contributions and PRs are welcomed.
 Still no artifacts are published, but we are close to the first alpha release.
@@ -57,10 +57,11 @@ Still no artifacts are published, but we are close to the first alpha release.
 - [X] Fullstack `Select`
 - [X] Fullstack `TomSelect`
 - [X] Fullstack `TomTypeahead`
-- [ ] Fullstack `Tabulator`
+- [X] Fullstack `Tabulator`
 - [ ] SSR support
 - [X] Code documentation
 - [X] Unit tests
+- [ ] More examples of typical applications (crud, chat, todo, etc.) 
 
 ## Code sample
 
