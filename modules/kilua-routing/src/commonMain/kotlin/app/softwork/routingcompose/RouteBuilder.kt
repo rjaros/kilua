@@ -23,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import dev.kilua.utils.nativeMapOf
 
 /**
  * Use the DSL functions to build the expected route handled by a [Router].
@@ -108,7 +109,9 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
         val currentRouter = Router.current
         val delegatingRouter = remember(newPath) { DelegateRouter(basePath, currentRouter) }
         CompositionLocalProvider(RouterCompositionLocal provides delegatingRouter) {
-            val newState = RouteBuilder(basePath, newPath)
+            val newState = routeBuilderCache.getOrPut("$basePath $newPath") {
+                RouteBuilder(basePath, newPath)
+            }
             newState.nestedRoute()
         }
     }
@@ -165,5 +168,13 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
                 router.navigate(target, hide)
             }
         }
+    }
+
+    public companion object {
+        /**
+         * Cache for [RouteBuilder] to prevent memory leaks and
+         * performance degradation after great number of recompositions.
+         */
+        internal var routeBuilderCache = nativeMapOf<RouteBuilder>()
     }
 }

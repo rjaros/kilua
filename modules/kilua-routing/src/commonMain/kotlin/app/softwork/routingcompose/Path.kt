@@ -36,8 +36,8 @@ public data class Path(val path: String, val parameters: Parameters?) {
         )
     }
 
-    internal companion object {
-        fun from(rawPath: String): Path {
+    public companion object {
+        public fun from(rawPath: String): Path {
             val pathAndQuery = rawPath.split("?")
             val (path, rawParameters) = when (pathAndQuery.size) {
                 1 -> {
