@@ -77,18 +77,6 @@ public class Root(
     }
 
     /**
-     * Render children components to a string.
-     */
-    public val innerHTML: String
-        get() {
-            val builder = StringBuilder()
-            children.forEach {
-                it.renderToStringBuilder(builder)
-            }
-            return builder.toString()
-        }
-
-    /**
      * Disposes the root component and associated composition.
      */
     public fun dispose() {

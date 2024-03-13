@@ -80,4 +80,16 @@ public interface Component {
         renderToStringBuilder(builder)
         return builder.toString()
     }
+
+    /**
+     * Render children components to a string.
+     */
+    public val innerHTML: String
+        get() {
+            val builder = StringBuilder()
+            children.forEach {
+                it.renderToStringBuilder(builder)
+            }
+            return builder.toString()
+        }
 }
