@@ -58,6 +58,7 @@ nmcp {
         project(":modules:kilua-rsup-progress")
         project(":modules:kilua-select-remote")
         project(":modules:kilua-splitjs")
+        project(":modules:kilua-ssr")
         project(":modules:kilua-tabulator")
         project(":modules:kilua-tabulator-remote")
         project(":modules:kilua-tempus-dominus")
