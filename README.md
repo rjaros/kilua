@@ -16,7 +16,7 @@ KVision users (component based API, allowing some imperative, direct ways to int
 - Modern web framework powered by Compose Runtime.
 - Compile the same application code for Kotlin/Wasm and Kotlin/JS targets.
 - Direct DOM manipulation without virtual DOM.
-- Rendering to String with JS/Node or WasmJS/Node target (ready for SSR).
+- Rendering to String with JS/Node or WasmJS/Node target (for use with SSR).
 - Ready to use components for all typical web application use cases. 
 - Component based API (familiar to KVision users).
 - Integration with [Kilua RPC](https://github.com/rjaros/kilua-rpc) library (fullstack support ported from KVision)
@@ -24,8 +24,11 @@ KVision users (component based API, allowing some imperative, direct ways to int
 
 ## Project status
 
-All main concepts have been tested and all planned frontend and fullstack components are ready. 
-I'm investigating possible solutions for SSR (server-side rendering) and I18n (internationalization).
+All main concepts have been tested and all planned frontend and fullstack components are ready.
+Base SSR (server-side-rendering) is implemented for Ktor server, support for other servers will follow.
+A Gradle plugin has also been implemented to automate SSR configuration and tasks.
+
+I'm investigating possible solutions for I18n (internationalization).
 
 The project can be built and tested with single gradle tasks. Contributions and PRs are welcomed.
 Still no artifacts are published, but we are close to the first alpha release.
@@ -53,12 +56,12 @@ Still no artifacts are published, but we are close to the first alpha release.
 - [X] Routing support
 - [X] Web client
 - [ ] I18n support (currently blocked by https://github.com/JetBrains/compose-multiplatform/issues/4171)
-- [ ] Gradle plugin ~~and KSP compiler plugin~~
+- [X] Gradle plugin ~~and KSP compiler plugin~~
 - [X] Fullstack `Select`
 - [X] Fullstack `TomSelect`
 - [X] Fullstack `TomTypeahead`
 - [X] Fullstack `Tabulator`
-- [ ] SSR support
+- [X] SSR support
 - [X] Code documentation
 - [X] Unit tests
 - [ ] More examples of typical applications (crud, chat, todo, etc.) 
@@ -102,6 +105,23 @@ fun main() {
     startApplication(::App, CoreModule)
 }
 ```
+## SSR (Server-Side Rendering)
+
+Kilua is the first Kotlin/JS web framework supporting true Server-Side Rendering. 
+SSR is a crucial concept in modern web development that enhances user experience 
+and boosts SEO performance. Kilua SSR support is based on the possibility to run exactly the same 
+application code both in the browser and in NodeJs environment. What's more, you can easily use 
+WASM compilation target for much better performance.  
+
+### Current limitations:
+- Only Ktor server is supported out of the box.
+- The URL address needs to be the only source of application state.
+- Using browser APIs directly is not recommended.
+- Advanced JS components (like RichText, Tabulator etc.) are rendered on the server
+as simple HTML placeholders.
+- Running fullstack RPC services on the server is possible, but needs further testing. 
+- Rendering authenticated content is not supported at the moment.
+- The "hydration" is implemented in a very primitive way (by replacing the rendered content).
 
 ## Leave a star
 
