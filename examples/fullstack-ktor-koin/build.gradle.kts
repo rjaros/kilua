@@ -7,6 +7,7 @@ plugins {
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
     alias(libs.plugins.kilua.rpc)
+    alias(libs.plugins.kilua)
 }
 
 val mainClassName = "io.ktor.server.netty.EngineMain"
@@ -59,8 +60,8 @@ kotlin {
         }
         binaries.executable()
         if (project.gradle.startParameter.taskNames.find {
-            it.contains("wasmJsBrowserProductionWebpack") || it.contains("wasmJsArchive") || it.contains("jarWithWasmJs")
-        } != null) {
+                it.contains("wasmJsBrowserProductionWebpack") || it.contains("wasmJsArchive") || it.contains("jarWithWasmJs")
+            } != null) {
             applyBinaryen {
                 binaryenArgs = mutableListOf(
                     "--enable-nontrapping-float-to-int",
@@ -83,7 +84,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.kilua.rpc.ktor.koin)
+                implementation(libs.kilua.rpc.ktor.koin)
                 implementation(project(":modules:kilua-common-types"))
             }
         }

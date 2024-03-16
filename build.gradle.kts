@@ -67,6 +67,7 @@ nmcp {
         project(":modules:kilua-tom-select-remote")
         project(":modules:kilua-trix")
         project(":modules:kilua-testutils")
+        project(":plugins:kilua-gradle-plugin")
         username = findProperty("mavenCentralUsername")?.toString()
         password = findProperty("mavenCentralPassword")?.toString()
         publicationType = "USER_MANAGED"

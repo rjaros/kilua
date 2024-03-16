@@ -4,6 +4,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
+    alias(libs.plugins.kilua)
 }
 
 @OptIn(ExperimentalWasmDsl::class)
