@@ -107,7 +107,7 @@ fun main() {
 ```
 ## SSR (Server-Side Rendering)
 
-Kilua is the first Kotlin/JS web framework supporting true Server-Side Rendering. 
+Kilua is the first Kotlin/Wasm and Kotlin/JS web framework supporting true Server-Side Rendering. 
 SSR is a crucial concept in modern web development that enhances user experience 
 and boosts SEO performance. Kilua SSR support is based on the possibility to run exactly the same 
 application code both in the browser and in NodeJs environment. What's more, you can easily use 
