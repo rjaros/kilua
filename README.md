@@ -1,6 +1,6 @@
 # Kilua
 
-Experimental web framework for Kotlin/Wasm and Kotlin/JS.
+Composable web framework for Kotlin/Wasm and Kotlin/JS.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
