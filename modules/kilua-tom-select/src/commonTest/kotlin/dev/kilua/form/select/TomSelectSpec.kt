@@ -42,12 +42,12 @@ class TomSelectSpec : DomSpec {
                 )
             }
             assertEqualsHtml(
-                """<select multiple="multiple" name="select" placeholder="A placeholder" id="tomselect-1" tabindex="-1" class="tomselected ts-hidden-accessible">
+                """<select multiple="multiple" name="select" placeholder="A placeholder" id="tomselect-1" tabindex="-1" class="form-select tomselected ts-hidden-accessible">
 <option value="A">
 A
 </option>
 </select>
-<div class="ts-wrapper multi plugin-change_listener has-items">
+<div class="ts-wrapper form-select multi plugin-change_listener has-items">
 <div class="ts-control">
 <div data-value="A" class="item" data-ts-item="">
 A
@@ -81,7 +81,7 @@ B
                 )
             }
             assertEqualsHtml(
-                """<select name="select" multiple></select>""",
+                """<select name="select" class="form-select" multiple></select>""",
                 root.innerHTML,
                 "Should render Tom Select component to a String"
             )

@@ -32,16 +32,16 @@ import app.softwork.routingcompose.Path
 import app.softwork.routingcompose.RouteBuilder
 import app.softwork.routingcompose.Router
 import app.softwork.routingcompose.route
+import dev.kilua.CssRegister
 import dev.kilua.KiluaScope
 import dev.kilua.core.ComponentBase
-import dev.kilua.externals.get
+import dev.kilua.externals.globalThis
+import dev.kilua.externals.set
 import dev.kilua.utils.cast
-import dev.kilua.utils.toList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import web.JsAny
-import web.JsArray
-import web.JsString
+import web.toJsString
 
 /**
  * A router supporting Server-Side Rendering (SSR).
@@ -72,7 +72,7 @@ public fun ComponentBase.SsrRouter(
 /**
  * A Server-Side Rendering (SSR) router. It spins off a Node.js http server
  * listening to server-side URL requests on a default port 7788
- * (or chosen with a --ssr-port parameter).
+ * (or chosen with a --port parameter).
  *
  * Every http request is passed as a routing command to the Kilua application and triggers
  * an appropriate recomposition. The result of the recomposition (rendered to String) is returned
@@ -84,7 +84,11 @@ internal class SsrRouter(initPath: String, val root: ComponentBase) : Router {
 
     init {
         if (!root.renderConfig.isDom) {
-            val port = getCommandLineParameter("--ssr-port")?.toIntOrNull()
+            val rpcUrlPrefix = getCommandLineParameter("--rpc-url-prefix")
+            if (rpcUrlPrefix != null) {
+                globalThis["rpc_url_prefix"] = rpcUrlPrefix.toJsString()
+            }
+            val port = getCommandLineParameter("--port")?.toIntOrNull()
             startSsr(port ?: 7788)
         }
     }
@@ -125,6 +129,10 @@ internal class SsrRouter(initPath: String, val root: ComponentBase) : Router {
                         lock = false
                     }
                 }
+            } else if (req.method == "POST") {
+                res.statusCode = 200
+                res.setHeader("Content-Type", "text/plain")
+                res.end(CssRegister.cssFiles.joinToString("\n") { it })
             } else {
                 res.statusCode = 404
                 res.end("Not Found")

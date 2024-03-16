@@ -40,5 +40,6 @@ public expect fun initializeCoreModule()
 public object CoreModule : ModuleInitializer {
     override fun initialize() {
         initializeCoreModule()
+        CssRegister.register("zzz-kilua-assets/style.css")
     }
 }

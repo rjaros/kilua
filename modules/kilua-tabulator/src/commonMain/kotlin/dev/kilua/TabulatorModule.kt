@@ -39,5 +39,6 @@ public object TabulatorModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TabulatorCss)
+        CssRegister.register("tabulator-tables/dist/css/tabulator_bootstrap5.min.css")
     }
 }

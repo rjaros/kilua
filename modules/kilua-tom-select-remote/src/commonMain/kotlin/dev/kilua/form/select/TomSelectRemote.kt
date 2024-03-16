@@ -40,6 +40,7 @@ import dev.kilua.rpc.RemoteOption
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.cast
+import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
 import kotlinx.coroutines.launch
 import web.JsAny
@@ -184,7 +185,7 @@ internal fun <T : Any> ComponentBase.tomSelectRemote(
                 placeholder,
                 disabled,
                 required,
-                className,
+                className % "form-select",
                 id,
                 renderConfig
             )
@@ -208,7 +209,7 @@ internal fun <T : Any> ComponentBase.tomSelectRemote(
             set(placeholder) { updateProperty(TomSelectRemote<T>::placeholder, it) }
             set(disabled) { updateProperty(TomSelectRemote<T>::disabled, it) }
             set(required) { updateProperty(TomSelectRemote<T>::required, it) }
-            set(className) { updateProperty(TomSelectRemote<T>::className, it) }
+            set(className) { updateProperty(TomSelectRemote<T>::className, it % "form-select") }
             set(id) { updateProperty(TomSelectRemote<T>::id, it) }
         }, setup)
         component

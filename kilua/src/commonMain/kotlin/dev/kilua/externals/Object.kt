@@ -71,3 +71,8 @@ public expect fun jsTypeOf(o: JsAny?): String
  * Return undefined value
  */
 public expect fun undefined(): JsAny?
+
+/**
+ * JavaScript global object
+ */
+public external val globalThis: JsAny

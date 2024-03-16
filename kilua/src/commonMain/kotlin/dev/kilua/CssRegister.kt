@@ -1,4 +1,3 @@
-@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 /*
  * Copyright (c) 2024 Robert Jaros
  *
@@ -23,22 +22,19 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.JsNonModule
-import dev.kilua.utils.useModule
-import web.JsAny
-
-@JsModule("tabulator-tables/dist/css/tabulator_bulma.min.css")
-@JsNonModule
-internal external object TabulatorBulmaCss : JsAny
+import dev.kilua.utils.nativeListOf
 
 /**
- * Initializer for Kilua Tabulator module with Bulma CSS styling.
+ * Kilua CSS register.
  */
-public object TabulatorBulmaModule : ModuleInitializer {
+public object CssRegister {
 
-    override fun initialize() {
-        useModule(TabulatorBulmaCss)
-        CssRegister.register("tabulator-tables/dist/css/tabulator_bulma.min.css")
+    public val cssFiles: MutableList<String> = nativeListOf()
+
+    /**
+     * Register CSS file used by the Kilua Modules.
+     */
+    public fun register(cssFile: String) {
+        cssFiles.add(cssFile)
     }
 }

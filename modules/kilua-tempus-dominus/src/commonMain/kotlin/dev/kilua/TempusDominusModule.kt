@@ -39,5 +39,6 @@ public object TempusDominusModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TempusDominusCss)
+        CssRegister.register("@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css")
     }
 }

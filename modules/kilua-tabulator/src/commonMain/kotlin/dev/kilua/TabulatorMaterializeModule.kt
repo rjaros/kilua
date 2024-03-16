@@ -39,5 +39,6 @@ public object TabulatorMaterializeModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TabulatorMaterializeCss)
+        CssRegister.register("tabulator-tables/dist/css/tabulator_materialize.min.css")
     }
 }

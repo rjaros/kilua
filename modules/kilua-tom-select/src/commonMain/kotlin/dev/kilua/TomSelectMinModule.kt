@@ -39,5 +39,6 @@ public object TomSelectMinModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TomSelectMinCss)
+        CssRegister.register("tom-select/dist/css/tom-select.min.css")
     }
 }

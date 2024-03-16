@@ -144,6 +144,10 @@ internal fun rootComposable(
         parent = recomposer
     )
 
+    if (root.renderConfig.isDom) {
+        // Clear SSR data before rendering
+        root.node.clear()
+    }
     composition.setContent @Composable {
         content(root)
     }

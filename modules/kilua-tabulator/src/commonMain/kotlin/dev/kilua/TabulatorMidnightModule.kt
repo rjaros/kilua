@@ -39,5 +39,6 @@ public object TabulatorMidnightModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TabulatorMidnightCss)
+        CssRegister.register("tabulator-tables/dist/css/tabulator_midnight.min.css")
     }
 }

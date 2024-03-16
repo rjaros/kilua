@@ -39,5 +39,6 @@ public object BootstrapCssModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(BootstrapCss)
+        CssRegister.register("bootstrap/dist/css/bootstrap.min.css")
     }
 }

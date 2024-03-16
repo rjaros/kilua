@@ -39,5 +39,6 @@ public object TabulatorSemanticUIModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TabulatorSemanticUICss)
+        CssRegister.register("tabulator-tables/dist/css/tabulator_semanticui.min.css")
     }
 }

@@ -35,7 +35,7 @@ import web.dom.get
  * Base class for all components.
  */
 public abstract class ComponentBase(
-    protected val node: Node,
+    public val node: Node,
     public val renderConfig: RenderConfig,
 ) : Component, PropertyDelegate(nativeMapOf(), skipUpdates = !renderConfig.isDom || !isDom) {
 

@@ -31,6 +31,7 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.JSON
 import dev.kilua.externals.get
+import dev.kilua.externals.globalThis
 import dev.kilua.externals.undefined
 import dev.kilua.promise
 import dev.kilua.rpc.RemoteData
@@ -142,7 +143,7 @@ public inline fun <reified T : Any, E : Any> ComponentBase.tabulatorRemote(
 
     val optionsState = remember {
         val (url, _) = serviceManager.requireCall(function)
-        val rpcUrlPrefix = window["rpc_url_prefix"]
+        val rpcUrlPrefix = globalThis["rpc_url_prefix"]
         val urlPrefix: String = if (rpcUrlPrefix != undefined()) "$rpcUrlPrefix/" else ""
         options.copy(
             ajaxURL = urlPrefix + url.drop(1),

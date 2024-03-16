@@ -1,0 +1,1 @@
+delete config.webpack.optimization;

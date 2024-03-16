@@ -44,6 +44,7 @@ public object TrixModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TrixCss)
+        CssRegister.register("trix/dist/trix.css")
         initializeTrix()
     }
 }

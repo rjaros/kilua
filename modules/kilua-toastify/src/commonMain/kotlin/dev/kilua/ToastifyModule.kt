@@ -39,5 +39,6 @@ public object ToastifyModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(ToastifyCss)
+        CssRegister.register("toastify-js/src/toastify.css")
     }
 }

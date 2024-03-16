@@ -42,6 +42,7 @@ import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.cast
+import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toList
 import web.JsAny
@@ -409,7 +410,7 @@ public fun ComponentBase.tomSelect(
                 placeholder,
                 disabled,
                 required,
-                className,
+                className % "form-select",
                 id,
                 renderConfig
             )
@@ -432,7 +433,7 @@ public fun ComponentBase.tomSelect(
             set(placeholder) { updateProperty(TomSelect::placeholder, it) }
             set(disabled) { updateProperty(TomSelect::disabled, it) }
             set(required) { updateProperty(TomSelect::required, it) }
-            set(className) { updateProperty(TomSelect::className, it) }
+            set(className) { updateProperty(TomSelect::className, it % "form-select") }
             set(id) { updateProperty(TomSelect::id, it) }
         }, setup)
         component
