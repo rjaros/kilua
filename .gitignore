@@ -10,3 +10,4 @@ refreshW.sh
 /upload.sh
 /build-mvnlocal.sh
 /examples/fullstack-ktor-koin/logs
+/examples/ssr-ktor/logs/
