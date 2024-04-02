@@ -1,0 +1,12 @@
+server:
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/wasm
+    min-response-size: 1024
+
+ssr:
+  nodeExecutable: "/home/rjaros/Programs/node/bin/node"
+#  port: 7788
+#  externalSsrService: "http://localhost:7788"
+#  rpcUrlPrefix: "http://localhost:8080"
+#  rootId: "root"
