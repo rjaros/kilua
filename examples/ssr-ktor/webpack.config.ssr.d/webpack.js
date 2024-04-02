@@ -14,6 +14,7 @@ config.resolve.alias = {
     "tabulator-tables/dist/css/tabulator_modern.min.css": false,
     "tabulator-tables/dist/css/tabulator_simple.min.css": false,
     "tabulator-tables/dist/css/tabulator_semanticui.min.css": false,
+    "tabulator-tables/dist/css/tabulator_site_dark.min.css": false,
     "toastify-js/src/toastify.css": false,
     "tom-select/dist/css/tom-select.bootstrap5.min.css": false,
     "tom-select/dist/css/tom-select.default.min.css": false,

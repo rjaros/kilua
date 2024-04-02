@@ -108,7 +108,8 @@ public enum class Formatter(internal val formatter: String? = null) {
     Handle,
     RowSelection("rowSelection"),
     ResponsiveCollapse("responsiveCollapse"),
-    ResponsiveCollapseAuto("responsiveCollapseAuto");
+    ResponsiveCollapseAuto("responsiveCollapseAuto"),
+    Toggle;
 
     public val value: String = formatter ?: name.toKebabCase()
     override fun toString(): String {
@@ -450,7 +451,8 @@ public enum class EditTriggerEvent {
 public data class DownloadConfig(
     val columnGroups: Boolean? = null,
     val rowGroups: Boolean? = null,
-    val columnCalcs: Boolean? = null
+    val columnCalcs: Boolean? = null,
+    val rowHeaders: Boolean? = null
 )
 
 /**
@@ -460,7 +462,8 @@ internal fun DownloadConfig.toJs(): JsAny {
     return jsObjectOf(
         "columnGroups" to columnGroups,
         "rowGroups" to rowGroups,
-        "columnCalcs" to columnCalcs
+        "columnCalcs" to columnCalcs,
+        "rowHeaders" to rowHeaders
     )
 }
 
@@ -742,6 +745,7 @@ public data class TabulatorOptions(
     val autoResize: Boolean? = null,
     val columns: List<ColumnDefinition>? = null,
     val autoColumns: Boolean? = null,
+    val autoColumnsFull: Boolean? = null,
     val layout: Layout? = null,
     val layoutColumnsOnNewData: Boolean? = null,
     val responsiveLayout: ResponsiveLayout? = null,
@@ -865,6 +869,19 @@ public data class TabulatorOptions(
     val selectableRangeClearCells: Boolean? = null,
     val selectableRangeClearCellsValue: String? = null,
     val editTriggerEvent: EditTriggerEvent? = null,
+    val rowHeader: JsAny? = null,
+    val spreadsheet: Boolean? = null,
+    val spreadsheetColumns: Int? = null,
+    val spreadsheetRows: Int? = null,
+    val spreadsheetData: JsAny? = null,
+    val spreadsheetColumnDefinition: JsAny? = null,
+    val spreadsheetOutputFull: Boolean? = null,
+    val spreadsheetSheets: JsAny? = null,
+    val spreadsheetSheetTabs: Boolean? = null,
+    val resizableColumnGuide: Boolean? = null,
+    val resizableRowGuide: Boolean? = null,
+    val editorEmptyValue: JsAny? = null,
+    val editorEmptyValueFunc: ((JsAny) -> Boolean)? = null,
 )
 
 /**
@@ -883,7 +900,11 @@ internal fun TabulatorOptions.toJs(): JsAny {
         "reactiveData" to reactiveData,
         "autoResize" to autoResize,
         "columns" to columns?.map { it.toJs() }?.toJsArray(),
-        "autoColumns" to (autoColumns ?: (columns == null)),
+        "autoColumns" to (if (autoColumnsFull == true) {
+            "full"
+        } else {
+            autoColumns ?: (columns == null)
+        }),
         "layout" to layout?.value,
         "layoutColumnsOnNewData" to layoutColumnsOnNewData,
         "responsiveLayout" to responsiveLayout?.value,
@@ -1007,5 +1028,18 @@ internal fun TabulatorOptions.toJs(): JsAny {
         "selectableRangeClearCells" to selectableRangeClearCells,
         "selectableRangeClearCellsValue" to selectableRangeClearCellsValue,
         "editTriggerEvent" to editTriggerEvent?.value,
+        "rowHeader" to rowHeader,
+        "spreadsheet" to spreadsheet,
+        "spreadsheetColumns" to spreadsheetColumns,
+        "spreadsheetRows" to spreadsheetRows,
+        "spreadsheetData" to spreadsheetData,
+        "spreadsheetColumnDefinition" to spreadsheetColumnDefinition,
+        "spreadsheetOutputFull" to spreadsheetOutputFull,
+        "spreadsheetSheets" to spreadsheetSheets,
+        "spreadsheetSheetTabs" to spreadsheetSheetTabs,
+        "resizableColumnGuide" to resizableColumnGuide,
+        "resizableRowGuide" to resizableRowGuide,
+        "editorEmptyValue" to editorEmptyValue,
+        "editorEmptyValueFunc" to editorEmptyValueFunc?.let { toJsAny(it) }
     )
 }

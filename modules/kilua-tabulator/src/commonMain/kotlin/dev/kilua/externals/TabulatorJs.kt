@@ -68,6 +68,7 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
     public fun clearCellEdited(clear: JsAny)
     public fun destroy()
     public fun import(importer: JsAny, extensions: String)
+    public fun import(importer: JsAny, extensions: String, type: String)
     public fun setData(data: JsAny?, params: JsAny?, config: JsAny?): Promise<JsAny>
     public fun clearData()
     public fun getData(activeOnly: String?): JsArray<JsAny>
@@ -267,6 +268,17 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
     public fun addRange(topLeft: JsAny, bottomRight: JsAny): JsAny
     public fun getRanges(): JsAny
     public fun getRangesData(): JsAny
+    public fun setSheetData(data: JsAny)
+    public fun getSheetData(sheet: JsAny): JsAny
+    public fun clearSheet(sheet: JsAny)
+    public fun setSheets(sheets: JsAny)
+    public fun addSheet(sheetDef: JsAny): JsAny
+    public fun getSheetDefinitions(): JsAny
+    public fun getSheets(): JsAny
+    public fun getSheet(sheet: JsAny): JsAny
+    public fun setSheetData(sheet: JsAny, data: JsAny)
+    public fun activeSheet(sheet: JsAny)
+    public fun removeSheet(sheet: JsAny)
 }
 
 /**
