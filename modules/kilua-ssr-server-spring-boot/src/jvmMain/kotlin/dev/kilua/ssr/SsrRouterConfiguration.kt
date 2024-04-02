@@ -45,7 +45,7 @@ public open class SsrRouterConfiguration {
     @Order(10)
     public open fun ssrRoutes(ssrHandler: SsrHandler): RouterFunction<ServerResponse> = coRouter {
         GET("/", ssrHandler::handleRoot)
-        GET("/index.html", ssrHandler::handleRoot)
+        GET("/index.html", ssrHandler::handleIndex)
     }
 }
 
@@ -58,5 +58,10 @@ public open class SsrHandler(
 ) {
     public open suspend fun handleRoot(request: ServerRequest): ServerResponse {
         return ServerResponse.ok().contentType(MediaType.TEXT_HTML).bodyValueAndAwait(ssrEngine.getSsrContent("/"))
+    }
+
+    public open suspend fun handleIndex(request: ServerRequest): ServerResponse {
+        return ServerResponse.ok().contentType(MediaType.TEXT_HTML)
+            .bodyValueAndAwait(ssrEngine.getSsrContent("/index.html"))
     }
 }

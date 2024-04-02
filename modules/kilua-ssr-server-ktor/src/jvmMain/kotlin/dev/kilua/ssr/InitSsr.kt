@@ -47,7 +47,7 @@ public fun Application.initSsr() {
     attributes.put(ssrEngineKey, ssrEngine)
     routing {
         get("/index.html") {
-            respondSsr()
+            respondSsr("/index.html")
         }
         singlePageApplication {
             defaultPage = UUID.randomUUID().toString() // Non-existing resource
