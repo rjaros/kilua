@@ -25,7 +25,8 @@ KVision users (component based API, allowing some imperative, direct ways to int
 ## Project status
 
 All main concepts have been tested and all planned frontend and fullstack components are ready.
-Base SSR (server-side-rendering) is implemented for Ktor server, support for other servers will follow.
+Base SSR (server-side-rendering) is implemented for Ktor and Spring Boot servers, support for other 
+servers will follow.
 A Gradle plugin has also been implemented to automate SSR configuration and tasks.
 
 I'm investigating possible solutions for I18n (internationalization).
@@ -114,7 +115,7 @@ application code both in the browser and in NodeJs environment. What's more, you
 WASM compilation target for much better performance.  
 
 ### Current limitations:
-- Only Ktor server is supported out of the box.
+- Only Ktor and Spring Boot servers are supported out of the box.
 - The URL address needs to be the only source of application state.
 - Using browser APIs directly is not recommended.
 - Advanced JS components (like RichText, Tabulator etc.) are rendered on the server
