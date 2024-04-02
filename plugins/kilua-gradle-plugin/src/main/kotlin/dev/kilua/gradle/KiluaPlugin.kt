@@ -92,6 +92,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 "tabulator-tables/dist/css/tabulator_modern.min.css",
                 "tabulator-tables/dist/css/tabulator_simple.min.css",
                 "tabulator-tables/dist/css/tabulator_semanticui.min.css",
+                "tabulator-tables/dist/css/tabulator_site_dark.min.css",
                 "toastify-js/src/toastify.css",
                 "tom-select/dist/css/tom-select.bootstrap5.min.css",
                 "tom-select/dist/css/tom-select.default.min.css",
