@@ -16,6 +16,8 @@ kotlinx-serialization = "1.6.3"
 kotlinx-datetime = "0.6.0-RC.2"
 ktor = "2.3.9"
 koin-annotations = "1.3.1"
+spring-boot = "3.2.4"
+spring-dependency-management = "1.1.4"
 logback = "1.5.3"
 tomlj = "1.1.1"
 npm-kilua-assets = "0.0.7"
@@ -39,6 +41,7 @@ rsup-progress = "3.2.0"
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
@@ -51,6 +54,9 @@ koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+kilua-rpc-spring-boot = { module = "dev.kilua:kilua-rpc-spring-boot", version.ref = "kilua-rpc" }
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "spring-boot" }
+spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux", version.ref = "spring-boot" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
 
@@ -65,3 +71,5 @@ nmcp = { id = "com.gradleup.nmcp", version.ref = "nmcp" }
 kilua-rpc = { id = "dev.kilua.rpc", version.ref = "kilua-rpc" }
 gradle-plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "gradle-plugin-publish" }
 kilua = { id = "dev.kilua", version.ref = "kilua-published" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }

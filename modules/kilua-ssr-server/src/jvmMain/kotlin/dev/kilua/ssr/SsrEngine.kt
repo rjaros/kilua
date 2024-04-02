@@ -59,6 +59,7 @@ public class SsrEngine(
     private val httpClient = HttpClient(Apache)
 
     private val ssrService: String = externalSsrService ?: "http://localhost:${port ?: 7788}"
+    private val root: String = rootId ?: "root"
 
     private var cssProcessed: Boolean = false
     private var indexTemplate: String = ""
@@ -74,8 +75,8 @@ public class SsrEngine(
                 FileUtils.unzip(ssrZip, workingDir.toFile())
                 indexTemplate = workingDir.resolve("index.html").readText()
                     .replace(
-                        """<div id="$rootId"></div>""",
-                        """<div id="$rootId">$uniqueText</div>"""
+                        """<div id="$root"></div>""",
+                        """<div id="$root">$uniqueText</div>"""
                     )
                 if (externalSsrService == null) {
                     val processBuilderParams = mutableListOf(nodeExecutable ?: "node", "main.bundle.js")

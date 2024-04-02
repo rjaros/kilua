@@ -42,7 +42,7 @@ public fun Application.initSsr() {
     val port = environment.config.propertyOrNull("ssr.port")?.getString()?.toIntOrNull()
     val externalSsrService = environment.config.propertyOrNull("ssr.externalSsrService")?.getString()
     val rpcUrlPrefix = environment.config.propertyOrNull("ssr.rpcUrlPrefix")?.getString()
-    val rootId = environment.config.propertyOrNull("ssr.rootId")?.getString() ?: "root"
+    val rootId = environment.config.propertyOrNull("ssr.rootId")?.getString()
     val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId)
     attributes.put(ssrEngineKey, ssrEngine)
     routing {
