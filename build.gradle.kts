@@ -60,6 +60,7 @@ nmcp {
         project(":modules:kilua-splitjs")
         project(":modules:kilua-ssr")
         project(":modules:kilua-ssr-server")
+        project(":modules:kilua-ssr-server-javalin")
         project(":modules:kilua-ssr-server-ktor")
         project(":modules:kilua-ssr-server-spring-boot")
         project(":modules:kilua-tabulator")

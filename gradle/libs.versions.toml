@@ -14,6 +14,7 @@ kotlinx-atomicfu = "0.23.2"
 kotlinx-coroutines = "1.8.1-Beta"
 kotlinx-serialization = "1.6.3"
 kotlinx-datetime = "0.6.0-RC.2"
+javalin = "6.1.3"
 ktor = "2.3.9"
 koin-annotations = "1.3.1"
 spring-boot = "3.2.4"
@@ -45,6 +46,7 @@ kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+javalin = { module = "io.javalin:javalin", version.ref = "javalin" }
 kilua-rpc-core = { module = "dev.kilua:kilua-rpc-core", version.ref = "kilua-rpc" }
 kilua-rpc-ktor-koin = { module = "dev.kilua:kilua-rpc-ktor-koin", version.ref = "kilua-rpc" }
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
