@@ -233,16 +233,18 @@ public abstract class KiluaPlugin : Plugin<Project> {
             }
             plugins.withId("dev.kilua.rpc") {
                 afterEvaluate {
-                    tasks.findByName("jarWithJs")?.let {
-                        tasks.getByName("jarWithJs", Jar::class) {
-                            dependsOn("jsArchiveSSR")
-                            from(project.tasks["jsArchiveSSR"].outputs.files)
+                    afterEvaluate {
+                        tasks.findByName("jarWithJs")?.let {
+                            tasks.getByName("jarWithJs", Jar::class) {
+                                dependsOn("jsArchiveSSR")
+                                from(project.tasks["jsArchiveSSR"].outputs.files)
+                            }
                         }
-                    }
-                    tasks.findByName("jarWithWasmJs")?.let {
-                        tasks.getByName("jarWithWasmJs", Jar::class) {
-                            dependsOn("wasmJsArchiveSSR")
-                            from(project.tasks["wasmJsArchiveSSR"].outputs.files)
+                        tasks.findByName("jarWithWasmJs")?.let {
+                            tasks.getByName("jarWithWasmJs", Jar::class) {
+                                dependsOn("wasmJsArchiveSSR")
+                                from(project.tasks["wasmJsArchiveSSR"].outputs.files)
+                            }
                         }
                     }
                 }

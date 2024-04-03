@@ -64,6 +64,7 @@ nmcp {
         project(":modules:kilua-ssr-server-jooby")
         project(":modules:kilua-ssr-server-ktor")
         project(":modules:kilua-ssr-server-spring-boot")
+        project(":modules:kilua-ssr-server-vertx")
         project(":modules:kilua-tabulator")
         project(":modules:kilua-tabulator-remote")
         project(":modules:kilua-tempus-dominus")
