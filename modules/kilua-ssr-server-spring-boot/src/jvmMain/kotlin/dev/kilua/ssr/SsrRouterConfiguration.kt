@@ -45,7 +45,7 @@ public open class SsrRouterConfiguration {
     @Order(10)
     public open fun ssrRoutes(ssrHandler: SsrHandler): RouterFunction<ServerResponse> = coRouter {
         GET("/", ssrHandler::handleRoot)
-        GET("/index.html", ssrHandler::handleIndex)
+        GET("/index.html", ssrHandler::handleRoot)
     }
 }
 
@@ -57,11 +57,7 @@ public open class SsrHandler(
     private val ssrEngine: SsrEngine
 ) {
     public open suspend fun handleRoot(request: ServerRequest): ServerResponse {
-        return ServerResponse.ok().contentType(MediaType.TEXT_HTML).bodyValueAndAwait(ssrEngine.getSsrContent("/"))
-    }
-
-    public open suspend fun handleIndex(request: ServerRequest): ServerResponse {
-        return ServerResponse.ok().contentType(MediaType.TEXT_HTML)
-            .bodyValueAndAwait(ssrEngine.getSsrContent("/index.html"))
+        val uri = request.uriBuilder().scheme(null).host(null).port(null).build().toString()
+        return ServerResponse.ok().contentType(MediaType.TEXT_HTML).bodyValueAndAwait(ssrEngine.getSsrContent(uri))
     }
 }

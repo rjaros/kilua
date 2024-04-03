@@ -54,20 +54,20 @@ public fun Javalin.initSsr() {
             it.respondSsr()
         }
         get("/index.html") {
-            it.respondSsr("/index.html")
+            it.respondSsr()
         }
         staticFiles.add("/assets", Location.CLASSPATH)
         spaRoot.addHandler("/") { ctx ->
-            val uri = ctx.path() + (ctx.queryString()?.let { "?$it" } ?: "")
-            ctx.respondSsr(uri)
+            ctx.respondSsr()
         }
     }
 }
 
-private fun Context.respondSsr(uri: String = "/") {
-    if (uri == "/favicon.ico") {
+private fun Context.respondSsr() {
+    if (path() == "/favicon.ico") {
         status(HttpStatus.NOT_FOUND)
     } else {
+        val uri = path() + (queryString()?.let { "?$it" } ?: "")
         val ssrEngine = appData(ssrEngineKey)
         val future = applicationScope.future {
             ssrEngine.getSsrContent(uri)

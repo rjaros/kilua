@@ -47,7 +47,7 @@ public fun Application.initSsr() {
     attributes.put(ssrEngineKey, ssrEngine)
     routing {
         get("/index.html") {
-            respondSsr("/index.html")
+            respondSsr()
         }
         singlePageApplication {
             defaultPage = UUID.randomUUID().toString() // Non-existing resource
@@ -57,20 +57,20 @@ public fun Application.initSsr() {
         route("/") {
             route("{static-content-path-parameter...}") {// Important name from Ktor sources!
                 get {
-                    respondSsr(call.request.uri)
+                    respondSsr()
                 }
             }
         }
     }
 }
 
-private suspend fun PipelineContext<Unit, ApplicationCall>.respondSsr(uri: String = "/") {
-    if (uri == "/favicon.ico") {
+private suspend fun PipelineContext<Unit, ApplicationCall>.respondSsr() {
+    if (call.request.path() == "/favicon.ico") {
         call.respond(HttpStatusCode.NotFound)
     } else {
         val ssrEngine = call.application.attributes[ssrEngineKey]
         call.respondText(ContentType.Text.Html, HttpStatusCode.OK) {
-            ssrEngine.getSsrContent(uri)
+            ssrEngine.getSsrContent(call.request.uri)
         }
     }
 }
