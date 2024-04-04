@@ -63,6 +63,7 @@ nmcp {
         project(":modules:kilua-ssr-server-javalin")
         project(":modules:kilua-ssr-server-jooby")
         project(":modules:kilua-ssr-server-ktor")
+        project(":modules:kilua-ssr-server-micronaut")
         project(":modules:kilua-ssr-server-spring-boot")
         project(":modules:kilua-ssr-server-vertx")
         project(":modules:kilua-tabulator")

@@ -4,6 +4,7 @@ compose = "1.6.1"
 compose-plugin = "1.5.10.1"
 dokka = "1.9.20"
 nmcp = "0.0.4"
+ksp = "1.9.23-1.0.19"
 detekt = "1.23.6"
 npm-publish = "3.4.2"
 gradle-plugin-publish = "1.2.1"
@@ -18,6 +19,8 @@ javalin = "6.1.3"
 jooby = "3.0.8"
 ktor = "2.3.9"
 koin-annotations = "1.3.1"
+micronaut = "4.3.7"
+micronaut-plugins = "4.3.5"
 spring-boot = "3.2.4"
 spring-dependency-management = "1.1.4"
 vertx = "4.5.7"
@@ -62,7 +65,7 @@ koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
-kilua-rpc-spring-boot = { module = "dev.kilua:kilua-rpc-spring-boot", version.ref = "kilua-rpc" }
+micronaut-platform = { module = "io.micronaut.platform:micronaut-platform", version.ref = "micronaut" }
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "spring-boot" }
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux", version.ref = "spring-boot" }
 vertx-web = { module = "io.vertx:vertx-web", version.ref = "vertx" }
@@ -87,3 +90,6 @@ spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 jooby = { id = "io.jooby.run", version.ref = "jooby" }
 vertx = { id = "io.vertx.vertx-plugin", version.ref = "vertx-plugin" }
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+micronaut-application = { id = "io.micronaut.application", version.ref = "micronaut-plugins" }
+micronaut-aot = { id = "io.micronaut.aot", version.ref = "micronaut-plugins" }
