@@ -29,13 +29,9 @@ import io.jooby.exception.NotFoundException
 import io.jooby.handler.AssetHandler
 import io.jooby.handler.AssetSource
 import io.jooby.kt.Kooby
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.runBlocking
 
 private const val SSR_ENGINE_KEY = "dev.kilua.ssr.engine.key"
-private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
 /**
  * Initialization function for Kilua Server-Side Rendering.

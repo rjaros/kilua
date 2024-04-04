@@ -84,7 +84,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.kilua.rpc.spring.boot)
             }
         }
         val webMain by creating {
