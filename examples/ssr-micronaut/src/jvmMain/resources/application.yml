@@ -1,0 +1,17 @@
+micronaut:
+  application:
+    name: fullstack-micronaut
+  router:
+    static-resources:
+      default:
+        enabled: true
+        mapping: "/**"
+        paths:
+          - classpath:public
+
+ssr:
+  nodeExecutable: "/home/rjaros/Programs/node/bin/node"
+#  port: 7788
+#  externalSsrService: "http://localhost:7788"
+#  rpcUrlPrefix: "http://localhost:8080"
+#  rootId: "root"
