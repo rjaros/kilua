@@ -89,8 +89,10 @@ import dev.kilua.rest.RestClient
 import dev.kilua.rest.callDynamic
 import dev.kilua.state.collectAsState
 import dev.kilua.tabulator.ColumnDefinition
+import dev.kilua.tabulator.Formatter
 import dev.kilua.tabulator.Layout
 import dev.kilua.tabulator.PaginationMode
+import dev.kilua.tabulator.ResponsiveLayout
 import dev.kilua.tabulator.TableType
 import dev.kilua.tabulator.TabulatorOptions
 import dev.kilua.tabulator.tabulator
@@ -109,6 +111,7 @@ import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.today
+import dev.kilua.utils.unsafeCast
 import dev.kilua.utils.useModule
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -120,6 +123,8 @@ import web.RegExp
 import web.dom.CustomEvent
 import web.dom.Text
 import web.dom.events.Event
+import web.toJsNumber
+import web.toJsString
 import web.window
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -193,12 +198,47 @@ class App : Application() {
                     options = TabulatorOptions(
                         height = "${heighttab}px",
                         layout = Layout.FitColumns,
+                        responsiveLayout = ResponsiveLayout.Collapse,
+                        responsiveLayoutCollapseStartOpen = false,
                         columns = listOf(
-                            ColumnDefinition("Name", "name"),
+                            ColumnDefinition(
+                                "",
+                                "collapse",
+                                formatter = Formatter.ResponsiveCollapseAuto
+                            ),
+                            ColumnDefinition("Name", "name", titleFormatterComponentFunction = { _, _ ->
+                                span {
+                                    +"Kilua Name"
+                                }
+                            }, minWidth = 300),
                             ColumnDefinition("Age", "age", formatterFunction = { cell, params, onRendered ->
                                 cell.getValue()!!
-                            }),
-                            ColumnDefinition("City", "city"),
+                            }, editorComponentFunction = { cell, onRendered, success, cancel, data ->
+                                text(data.age.toString()) {
+                                    onChange {
+                                        success(this.value?.toIntOrNull()?.toJsNumber())
+                                    }
+                                    onBlur {
+                                        cancel(null)
+                                    }
+                                    LaunchedEffect(Unit) {
+                                        focus()
+                                    }
+                                }
+                            }, minWidth = 300),
+                            ColumnDefinition(
+                                "City", "city",
+                                formatterComponentFunction = { _, _, data ->
+                                    var x by remember { mutableStateOf(0) }
+                                    div {
+                                        +(data.city + " " + x)
+                                        onClick {
+                                            x++
+                                        }
+                                    }
+                                }, minWidth = 300
+                            ),
+                            ColumnDefinition("", "actions", responsive = 0, headerColumnsMenu = true)
                         ), pagination = true, paginationMode = PaginationMode.Local, paginationSize = 10
                     ), types = setOf(TableType.TableBordered, TableType.TableStriped, TableType.TableSm)
                 )
@@ -234,7 +274,23 @@ class App : Application() {
                             ColumnDefinition("Age", "age", formatterFunction = { cell, params, onRendered ->
                                 cell.getValue()!!
                             }),
-                            ColumnDefinition("City", "city"),
+                            ColumnDefinition("City", "city", formatterComponentFunction = { cell, params, data ->
+                                div {
+                                    +data["city"].toString()
+                                }
+                            }, editorComponentFunction = { cell, onRendered, success, cancel, data ->
+                                text(data["city"].toString()) {
+                                    onChange {
+                                        success(this.value?.toJsString())
+                                    }
+                                    onBlur {
+                                        cancel(null)
+                                    }
+                                    LaunchedEffect(Unit) {
+                                        focus()
+                                    }
+                                }
+                            })
                         ), pagination = true, paginationMode = PaginationMode.Local, paginationSize = 10
                     ), types = setOf(TableType.TableBorderless, TableType.TableSm)
                 )
@@ -265,7 +321,23 @@ class App : Application() {
                             ColumnDefinition("Age", "age", formatterFunction = { cell, params, onRendered ->
                                 cell.getValue()!!
                             }),
-                            ColumnDefinition("City", "city"),
+                            ColumnDefinition("City", "city", formatterComponentFunction = { cell, params, data ->
+                                div {
+                                    +data["city"].toString()
+                                }
+                            }, editorComponentFunction = { cell, onRendered, success, cancel, data ->
+                                text(data["city"].toString()) {
+                                    onChange {
+                                        success(this.value?.toJsString())
+                                    }
+                                    onBlur {
+                                        cancel(null)
+                                    }
+                                    LaunchedEffect(Unit) {
+                                        focus()
+                                    }
+                                }
+                            }),
                         ), pagination = true, paginationMode = PaginationMode.Local, paginationSize = 10
                     ), types = setOf(TableType.TableHover, TableType.TableSm)
                 )
@@ -388,7 +460,7 @@ class App : Application() {
                                     null
                                 }
                                 result?.let { items: JsAny ->
-                                    callback(items.cast<JsArray<JsAny>>().toList().map { item ->
+                                    callback(items.unsafeCast<JsArray<JsAny>>().toList().map { item ->
                                         jsObjectOf(
                                             "value" to item["id"]!!,
                                             "text" to item["name"]!!,
@@ -1246,7 +1318,7 @@ class App : Application() {
                     }
                 }
                 DisposableEffect("code") {
-                    element.firstChild?.cast<Text>()?.data = "ala ma kota"
+                    element.firstChild?.unsafeCast<Text>()?.data = "ala ma kota"
                     onDispose { }
                 }
             }
