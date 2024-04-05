@@ -32,6 +32,7 @@ import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.core.StringRenderConfig
+import dev.kilua.utils.nativeListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
@@ -86,7 +87,7 @@ public class Root(
 
     public companion object {
 
-        internal val roots: MutableList<Root> = mutableListOf()
+        internal val roots: MutableList<Root> = nativeListOf()
 
         internal val topLevelComposables = mutableStateListOf<@Composable ComponentBase.() -> Unit>()
 
@@ -143,11 +144,6 @@ internal fun rootComposable(
         applier = ComponentApplier(root),
         parent = recomposer
     )
-
-    if (root.renderConfig.isDom) {
-        // Clear SSR data before rendering
-        root.node.clear()
-    }
     composition.setContent @Composable {
         content(root)
     }
@@ -159,10 +155,15 @@ internal fun rootComposable(
  */
 public fun root(
     element: Element,
+    clearSsrContent: Boolean = true,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     content: @Composable ComponentBase.() -> Unit = {}
 ): Root {
     Root.initializeTopLevelComposablesRoot()
+    if (renderConfig.isDom && clearSsrContent) {
+        // Clear SSR content before rendering
+        element.clear()
+    }
     return Root(element, renderConfig = renderConfig) {
         content()
     }
@@ -177,7 +178,7 @@ public fun root(
     content: @Composable ComponentBase.() -> Unit = {}
 ): Root {
     val element = SafeDomFactory.getElementById(id) ?: SafeDomFactory.createElement("div")
-    return root(element, renderConfig, content)
+    return root(element, true, renderConfig, content)
 }
 
 /**
@@ -188,5 +189,5 @@ public fun root(
 ): Root {
     val renderConfig = StringRenderConfig()
     val element = SafeDomFactory.createElement("div")
-    return root(element, renderConfig, content)
+    return root(element, false, renderConfig, content)
 }
