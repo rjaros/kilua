@@ -29,7 +29,7 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
-import dev.kilua.utils.cast
+import dev.kilua.utils.unsafeCast
 import web.dom.Text
 
 /**
@@ -44,7 +44,7 @@ public open class TextNode(
      * The DOM text node.
      */
     public open val text: Text by lazy {
-        if (renderConfig.isDom) node.cast<Text>() else {
+        if (renderConfig.isDom) node.unsafeCast<Text>() else {
             error("Can't use DOM node with the current render configuration")
         }
     }

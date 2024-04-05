@@ -40,8 +40,8 @@ import dev.kilua.i18n.Locale
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.utils.cast
 import dev.kilua.utils.rem
+import dev.kilua.utils.unsafeCast
 import kotlinx.datetime.LocalTime
 import web.dom.events.Event
 
@@ -80,7 +80,7 @@ public open class RichTime(
         withStateFlowDelegate.formControl(this)
         @Suppress("LeakingThis")
         onEventDirect<Event>("change.td") {
-            val date = it["detail"]?.get("date")?.cast<dev.kilua.externals.Date>()
+            val date = it["detail"]?.get("date")?.unsafeCast<dev.kilua.externals.Date>()
             this.value = date?.toLocalTime()
             dispatchEvent("change", buildCustomEventInit(obj()))
         }
@@ -119,7 +119,8 @@ private fun ComponentBase.richTime(
     className: String? = null,
     setup: @Composable RichTime.() -> Unit = {}
 ): RichTime {
-    val component = remember { RichTime(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
+    val component =
+        remember { RichTime(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {

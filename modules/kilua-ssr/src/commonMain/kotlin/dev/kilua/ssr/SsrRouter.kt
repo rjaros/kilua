@@ -37,7 +37,7 @@ import dev.kilua.KiluaScope
 import dev.kilua.core.ComponentBase
 import dev.kilua.externals.globalThis
 import dev.kilua.externals.set
-import dev.kilua.utils.cast
+import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import web.JsAny
@@ -109,8 +109,8 @@ internal class SsrRouter(initPath: String, val root: ComponentBase) : Router {
 
     private fun startSsr(port: Int) {
         http.createServer { rq: JsAny, rs: JsAny ->
-            val req = rq.cast<IncomingMessage>()
-            val res = rs.cast<ServerResponse>()
+            val req = rq.unsafeCast<IncomingMessage>()
+            val res = rs.unsafeCast<ServerResponse>()
             if (req.method == "GET") {
                 KiluaScope.launch {
                     res.statusCode = 200

@@ -45,6 +45,11 @@ import web.toJsString
 public expect inline fun <T> Any?.cast(): T
 
 /**
+ * Utility extension function for unsafe casting. Uses unsafeCast() on JS and WasmJs.
+ */
+public expect inline fun <T : JsAny> JsAny.unsafeCast(): T
+
+/**
  * Helper annotation for JS/Wasm compatibility.
  */
 @Retention(AnnotationRetention.BINARY)
@@ -189,7 +194,7 @@ public fun deepMerge(target: JsAny, source: JsAny): JsAny {
         val targetValue = target[key]
         val sourceValue = source[key]
         if (isArray(targetValue) && isArray(sourceValue)) {
-            target[key] = concat(targetValue.cast<JsArray<JsAny>>(), sourceValue.cast())
+            target[key] = concat(targetValue!!.unsafeCast<JsArray<JsAny>>(), sourceValue.cast())
         } else if (isObject(targetValue) && isObject(sourceValue)) {
             val newObj = obj()
             assign(newObj, targetValue!!)

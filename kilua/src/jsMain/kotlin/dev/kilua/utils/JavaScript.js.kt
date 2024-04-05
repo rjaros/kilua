@@ -22,6 +22,9 @@
 
 package dev.kilua.utils
 
+import web.JsAny
+import kotlin.js.unsafeCast as unsafeCastJs
+
 public actual typealias JsModule = kotlin.js.JsModule
 
 public actual typealias JsNonModule = kotlin.js.JsNonModule
@@ -30,5 +33,9 @@ public actual typealias JsName = kotlin.js.JsName
 
 @Suppress("NOTHING_TO_INLINE")
 public actual inline fun <T> Any?.cast(): T {
-    return this.unsafeCast<T>()
+    return this.unsafeCastJs<T>()
+}
+
+public actual inline fun <T : JsAny> JsAny.unsafeCast(): T {
+    return this.unsafeCastJs<T>()
 }

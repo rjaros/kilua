@@ -24,7 +24,6 @@ package dev.kilua.form.time
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.NoLiveLiterals
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
@@ -41,8 +40,8 @@ import dev.kilua.i18n.Locale
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.utils.cast
 import dev.kilua.utils.rem
+import dev.kilua.utils.unsafeCast
 import kotlinx.datetime.LocalDateTime
 import web.dom.events.Event
 
@@ -81,7 +80,7 @@ public open class RichDateTime(
         withStateFlowDelegate.formControl(this)
         @Suppress("LeakingThis")
         onEventDirect<Event>("change.td") {
-            val date = it["detail"]?.get("date")?.cast<dev.kilua.externals.Date>()
+            val date = it["detail"]?.get("date")?.unsafeCast<dev.kilua.externals.Date>()
             this.value = date?.toLocalDateTime()
             dispatchEvent("change", buildCustomEventInit(obj()))
         }
@@ -122,7 +121,8 @@ private fun ComponentBase.richDateTime(
     className: String? = null,
     setup: @Composable RichDateTime.() -> Unit = {}
 ): RichDateTime {
-    val component = remember { RichDateTime(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
+    val component =
+        remember { RichDateTime(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {

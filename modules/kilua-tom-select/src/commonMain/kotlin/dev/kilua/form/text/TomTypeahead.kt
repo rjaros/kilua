@@ -44,6 +44,7 @@ import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toList
+import dev.kilua.utils.unsafeCast
 import web.JsAny
 import web.JsArray
 import web.JsBoolean
@@ -145,8 +146,8 @@ public open class TomTypeahead(
                 val existingOption = tomSelectInstance?.getOption(value!!, false)
                 if (existingOption == null) {
                     tomSelectInstance?.clearOptions { option ->
-                        option["created"]?.cast<JsBoolean>()?.toBoolean() != true ||
-                                option["value"]?.cast<JsString>()?.toString() == value
+                        option["created"]?.unsafeCast<JsBoolean>()?.toBoolean() != true ||
+                                option["value"]?.unsafeCast<JsString>()?.toString() == value
                     }
                     tomSelectInstance?.addOption(
                         jsObjectOf(
@@ -182,7 +183,8 @@ public open class TomTypeahead(
             val tomSelectOptions = obj<TomSelectOptionsJs> {
                 this.maxItems = 1
                 this.create = { input: JsString ->
-                    val oldValue = tomSelectInstance?.getValue()?.cast<String>()?.ifBlank { null }?.let { "$it " } ?: ""
+                    val oldValue = tomSelectInstance?.getValue()?.unsafeCast<JsString>()?.toString()?.ifBlank { null }
+                        ?.let { "$it " } ?: ""
                     jsObjectOf(
                         "value" to "$oldValue$input",
                         "text" to "$oldValue$input",
@@ -228,8 +230,8 @@ public open class TomTypeahead(
                 }
                 this.onOptionAdd = { value: String, _: JsAny ->
                     tomSelectInstance?.clearOptions { option: JsAny ->
-                        option["created"]?.cast<JsBoolean>()?.toBoolean() != true ||
-                                option["value"]?.cast<JsString>()?.toString() == value
+                        option["created"]?.unsafeCast<JsBoolean>()?.toBoolean() != true ||
+                                option["value"]?.unsafeCast<JsString>()?.toString() == value
                     }
                 }
                 this.onFocus = {

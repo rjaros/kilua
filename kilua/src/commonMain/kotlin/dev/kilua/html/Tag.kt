@@ -49,6 +49,7 @@ import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.renderAsHtmlAttributes
+import dev.kilua.utils.unsafeCast
 import web.dom.HTMLElement
 
 /**
@@ -86,7 +87,7 @@ public open class Tag<E : HTMLElement>(
      * The DOM element of the current component.
      */
     public val element: E by lazy {
-        if (renderConfig.isDom) node.cast<E>() else {
+        if (renderConfig.isDom) node.unsafeCast<E>() else {
             error("Can't use DOM element with the current render configuration")
         }
     }

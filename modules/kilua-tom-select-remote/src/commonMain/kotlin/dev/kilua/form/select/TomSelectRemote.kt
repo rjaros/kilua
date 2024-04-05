@@ -39,9 +39,9 @@ import dev.kilua.externals.get
 import dev.kilua.rpc.RemoteOption
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.utils.StringPair
-import dev.kilua.utils.cast
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
+import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.launch
 import web.JsAny
 import web.JsArray
@@ -115,7 +115,7 @@ public open class TomSelectRemote<out T : Any>(
                     null,
                     value
                 ).map {
-                    it.cast<JsAny>()
+                    it.unsafeCast<JsAny>()
                 }.toJsArray()
                 tomSelectInstance?.addOptions(result, false)
                 super.refreshValue()
@@ -341,7 +341,7 @@ public fun <T : Any> ComponentBase.tomSelectRemote(
 }
 
 internal fun renderOption(data: JsAny, escape: (String) -> String): String {
-    val remoteOptionExt = data.cast<RemoteOptionExt>()
+    val remoteOptionExt = data.unsafeCast<RemoteOptionExt>()
     val text = remoteOptionExt.text?.let { escape(it) }
     val className = if (remoteOptionExt.className != null) " class=\"${escape(remoteOptionExt.className!!)}\"" else ""
     return if (remoteOptionExt.divider) {

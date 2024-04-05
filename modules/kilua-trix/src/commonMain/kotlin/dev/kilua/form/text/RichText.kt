@@ -45,7 +45,7 @@ import dev.kilua.initializeTrix
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.utils.cast
+import dev.kilua.utils.unsafeCast
 import web.clear
 import web.dom.HTMLButtonElement
 import web.dom.HTMLElement
@@ -140,7 +140,7 @@ public open class RichText(
         get() = super.visible
         set(value) {
             super.visible = value
-            toolbar?.let { SafeDomFactory.getElementById(it) }?.cast<HTMLElement>()?.run {
+            toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.run {
                 if (!value) {
                     style.display = "none"
                 } else {
@@ -187,7 +187,7 @@ public open class RichText(
             @Suppress("LeakingThis")
             onEventDirect<Event>("trix-change") {
                 input?.let { SafeDomFactory.getElementById(it) }?.let {
-                    val elementValue = it.cast<HTMLInputElement>().value
+                    val elementValue = it.unsafeCast<HTMLInputElement>().value
                     setInternalValueFromString(elementValue)
                     dispatchEvent("change", buildCustomEventInit(obj()))
                 }
@@ -203,9 +203,9 @@ public open class RichText(
      * Disable/enable connected toolbar.
      */
     protected fun toolbarDisable(disable: Boolean) {
-        toolbar?.let { SafeDomFactory.getElementById(it) }?.cast<HTMLElement>()?.run {
+        toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.run {
             querySelectorAll("button").asList().forEach {
-                it.cast<HTMLButtonElement>().disabled = disable
+                it.unsafeCast<HTMLButtonElement>().disabled = disable
             }
         }
     }
@@ -214,7 +214,7 @@ public open class RichText(
      * Localize connected toolbar.
      */
     protected fun toolbarLocalize() {
-        toolbar?.let { SafeDomFactory.getElementById(it) }?.cast<HTMLElement>()?.innerHTML =
+        toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.innerHTML =
             getToolbarContent(locale)
     }
 
@@ -269,7 +269,7 @@ public open class RichText(
 
     override fun onRemove() {
         if (renderConfig.isDom) {
-            toolbar?.let { SafeDomFactory.getElementById(it) }?.cast<HTMLElement>()?.clear()
+            toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.clear()
             element.clear()
         }
     }

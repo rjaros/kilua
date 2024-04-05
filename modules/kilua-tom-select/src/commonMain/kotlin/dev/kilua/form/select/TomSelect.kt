@@ -45,6 +45,7 @@ import dev.kilua.utils.cast
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toList
+import dev.kilua.utils.unsafeCast
 import web.JsAny
 import web.JsArray
 import web.JsString
@@ -194,7 +195,7 @@ public open class TomSelect(
      */
     public val selectedLabel: String?
         get() = element.options.asList().find {
-            it.cast<HTMLOptionElement>().value == this.value
+            it.unsafeCast<HTMLOptionElement>().value == this.value
         }?.textContent
 
     init {
@@ -220,9 +221,9 @@ public open class TomSelect(
         @Suppress("LeakingThis")
         onChangeDirect {
             val v = if (this.multiple) {
-                tomSelectInstance?.getValue()?.cast<JsArray<JsString>>()?.toList()?.joinToString(",")
+                tomSelectInstance?.getValue()?.unsafeCast<JsArray<JsString>>()?.toList()?.joinToString(",")
             } else {
-                tomSelectInstance?.getValue()?.cast<JsString>().toString()
+                tomSelectInstance?.getValue()?.unsafeCast<JsString>().toString()
             }
             this.value = v?.ifBlank { null }
         }

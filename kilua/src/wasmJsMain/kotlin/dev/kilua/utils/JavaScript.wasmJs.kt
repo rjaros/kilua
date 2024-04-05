@@ -22,6 +22,8 @@
 
 package dev.kilua.utils
 
+import kotlin.js.unsafeCast as unsafeCastJs
+
 public actual typealias JsModule = kotlin.js.JsModule
 
 @Retention(AnnotationRetention.BINARY)
@@ -33,4 +35,8 @@ public actual typealias JsName = kotlin.js.JsName
 @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 public actual inline fun <T> Any?.cast(): T {
     return this as T
+}
+
+public actual inline fun <T : JsAny> JsAny.unsafeCast(): T {
+    return this.unsafeCastJs()
 }

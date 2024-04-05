@@ -22,7 +22,7 @@
 
 package dev.kilua.externals
 
-import dev.kilua.utils.cast
+import dev.kilua.utils.unsafeCast
 import web.JsAny
 
 /**
@@ -34,7 +34,7 @@ public expect fun obj(): JsAny
  * Helper function for creating JavaScript objects with given type.
  */
 public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
-    return (obj().cast<T>()).apply(init)
+    return (obj().unsafeCast<T>()).apply(init)
 }
 
 /**
