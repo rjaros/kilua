@@ -23,14 +23,18 @@
 package dev.kilua.externals
 
 import web.JsAny
+import web.JsArray
 import web.Promise
 import web.dom.Element
+import web.dom.events.Event
 
 internal actual fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> JsNumber): JsAny =
     js("f")
 
-internal actual fun toJsAny(f: (CellComponent, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny = js("f")
-internal actual fun toJsAny(f: (CellComponent, (() -> Unit) -> Unit, (JsAny) -> Unit, (JsAny) -> Unit, JsAny?) -> JsAny): JsAny =
+internal actual fun toJsAny(f: (CellComponentBase, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny = js("f")
+
+internal actual fun toJsAny(f: (JsAny, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny = js("f")
+internal actual fun toJsAny(f: (CellComponent, (() -> Unit) -> Unit, (JsAny?) -> Unit, (JsAny?) -> Unit, JsAny?) -> JsAny): JsAny =
     js("f")
 
 internal actual fun toJsAny(f: (JsAny, ColumnComponent) -> Unit): JsAny = js("f")
@@ -46,6 +50,8 @@ internal actual fun toJsAny(f: () -> String?): JsAny = js("f")
 internal actual fun toJsAny(f: (RowComponent) -> Unit): JsAny = js("f")
 
 internal actual fun toJsAny(f: (RowComponent) -> Boolean): JsAny = js("f")
+
+internal actual fun toJsAny(f: (ColumnComponent) -> Boolean): JsAny = js("f")
 
 internal actual fun toJsAny(f: (String, JsAny, JsAny) -> String): JsAny = js("f")
 
@@ -64,3 +70,5 @@ internal actual fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny = js("f")
 internal actual fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny = js("f")
 
 internal actual fun toJsAny(f: (JsAny) -> Boolean): JsAny = js("f")
+
+internal actual fun toJsAny(f: (Event) -> JsArray<JsAny>): JsAny = js("f")

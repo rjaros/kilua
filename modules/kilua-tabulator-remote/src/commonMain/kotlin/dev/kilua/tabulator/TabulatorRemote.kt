@@ -54,7 +54,7 @@ import kotlin.reflect.KClass
 
 public open class TabulatorRemote<T : Any>(
     data: List<T>? = null,
-    options: TabulatorOptions = TabulatorOptions(),
+    options: TabulatorOptions<T> = TabulatorOptions(),
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     kClass: KClass<T>? = null,
@@ -80,7 +80,7 @@ public open class TabulatorRemote<T : Any>(
 @Composable
 internal fun <T : Any> ComponentBase.tabulatorRemoteInt(
     data: List<T>?,
-    options: TabulatorOptions,
+    options: TabulatorOptions<T>,
     kClass: KClass<T>?,
     serializer: KSerializer<T>?,
     serializersModule: SerializersModule?,
@@ -133,7 +133,7 @@ public inline fun <reified T : Any, E : Any> ComponentBase.tabulatorRemote(
     noinline function: suspend E.(Int?, Int?, List<RemoteFilter>?, List<RemoteSorter>?, String?) -> RemoteData<T>,
     noinline stateFunction: (() -> String)? = null,
     noinline requestFilter: (suspend RequestInit.() -> Unit)? = null,
-    options: TabulatorOptions = TabulatorOptions(),
+    options: TabulatorOptions<T> = TabulatorOptions(),
     types: Set<TableType> = setOf(),
     serializer: KSerializer<T> = serializer(),
     serializersModule: SerializersModule? = null,

@@ -27,12 +27,15 @@ import web.JsArray
 import web.JsNumber
 import web.Promise
 import web.dom.Element
+import web.dom.events.Event
 
 internal actual fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> JsNumber): JsAny =
     f.unsafeCast<JsAny>()
 
-internal actual fun toJsAny(f: (CellComponent, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny = f.unsafeCast<JsAny>()
-internal actual fun toJsAny(f: (CellComponent, (() -> Unit) -> Unit, (JsAny) -> Unit, (JsAny) -> Unit, JsAny?) -> JsAny): JsAny =
+internal actual fun toJsAny(f: (CellComponentBase, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny = f.unsafeCast<JsAny>()
+
+internal actual fun toJsAny(f: (JsAny, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny = f.unsafeCast<JsAny>()
+internal actual fun toJsAny(f: (CellComponent, (() -> Unit) -> Unit, (JsAny?) -> Unit, (JsAny?) -> Unit, JsAny?) -> JsAny): JsAny =
     f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: (JsAny, ColumnComponent) -> Unit): JsAny = f.unsafeCast<JsAny>()
@@ -48,6 +51,8 @@ internal actual fun toJsAny(f: () -> String?): JsAny = f.unsafeCast<JsAny>()
 internal actual fun toJsAny(f: (RowComponent) -> Unit): JsAny = f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: (RowComponent) -> Boolean): JsAny = f.unsafeCast<JsAny>()
+
+internal actual fun toJsAny(f: (ColumnComponent) -> Boolean): JsAny = f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: (String, JsAny, JsAny) -> String): JsAny = f.unsafeCast<JsAny>()
 
@@ -66,3 +71,5 @@ internal actual fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny = f.unsaf
 internal actual fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny = f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: (JsAny) -> Boolean): JsAny = f.unsafeCast<JsAny>()
+
+internal actual fun toJsAny(f: (Event) -> JsArray<JsAny>): JsAny = f.unsafeCast<JsAny>()

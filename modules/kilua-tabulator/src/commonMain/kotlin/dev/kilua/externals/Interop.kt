@@ -27,6 +27,7 @@ import web.JsArray
 import web.JsNumber
 import web.Promise
 import web.dom.Element
+import web.dom.events.Event
 
 /**
  * A set of hrlper functions to convert different Kotlin functions to JavaScript functions (JsAny).
@@ -34,9 +35,11 @@ import web.dom.Element
 
 internal expect fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> JsNumber): JsAny
 
-internal expect fun toJsAny(f: (CellComponent, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny
+internal expect fun toJsAny(f: (CellComponentBase, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny
 
-internal expect fun toJsAny(f: (CellComponent, (() -> Unit) -> Unit, (JsAny) -> Unit, (JsAny) -> Unit, JsAny?) -> JsAny): JsAny
+internal expect fun toJsAny(f: (JsAny, JsAny?, (() -> Unit) -> Unit) -> JsAny): JsAny
+
+internal expect fun toJsAny(f: (CellComponent, (() -> Unit) -> Unit, (JsAny?) -> Unit, (JsAny?) -> Unit, JsAny?) -> JsAny): JsAny
 
 internal expect fun toJsAny(f: (JsAny, ColumnComponent) -> Unit): JsAny
 
@@ -56,6 +59,8 @@ internal expect fun toJsAny(f: (RowComponent) -> Unit): JsAny
 
 internal expect fun toJsAny(f: (RowComponent) -> Boolean): JsAny
 
+internal expect fun toJsAny(f: (ColumnComponent) -> Boolean): JsAny
+
 internal expect fun toJsAny(f: (String, JsAny, JsAny) -> String): JsAny
 
 internal expect fun toJsAny(f: (String, JsAny, JsAny) -> Promise<JsAny>): JsAny
@@ -73,3 +78,5 @@ internal expect fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny
 internal expect fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny
 
 internal expect fun toJsAny(f: (JsAny) -> Boolean): JsAny
+
+internal expect fun toJsAny(f: (Event) -> JsArray<JsAny>): JsAny

@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
+import dev.kilua.compose.Root
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
@@ -39,9 +40,11 @@ import dev.kilua.utils.Serialization
 import dev.kilua.utils.cast
 import dev.kilua.utils.deepMerge
 import dev.kilua.utils.jsObjectOf
+import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
+import dev.kilua.utils.unsafeCast
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -54,6 +57,7 @@ import web.dom.HTMLDivElement
 import web.toInt
 import web.toJsBoolean
 import web.toJsNumber
+import web.window
 import kotlin.reflect.KClass
 
 /**
@@ -78,7 +82,7 @@ public enum class TableType {
  */
 public open class Tabulator<T : Any>(
     data: List<T>? = null,
-    options: TabulatorOptions = TabulatorOptions(),
+    options: TabulatorOptions<T> = TabulatorOptions(),
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val kClass: KClass<T>? = null,
@@ -111,7 +115,7 @@ public open class Tabulator<T : Any>(
     /**
      * The tabulator options.
      */
-    public open var options: TabulatorOptions by updatingProperty(options) {
+    public open var options: TabulatorOptions<T> by updatingProperty(options) {
         refresh()
     }
 
@@ -119,6 +123,8 @@ public open class Tabulator<T : Any>(
      * The native Tabulator component instance.
      */
     public var tabulatorJs: TabulatorJs? = null
+
+    protected var initialized: Boolean = false
 
     /**
      * The internal data model.
@@ -134,6 +140,8 @@ public open class Tabulator<T : Any>(
      * The current page.
      */
     protected var currentPage: Int? = null
+
+    private var customRoots: MutableList<Root> = nativeListOf()
 
     init {
         internalData = data?.let { toPlainObjList(it) }
@@ -154,12 +162,22 @@ public open class Tabulator<T : Any>(
      */
     protected open fun refreshData() {
         if (tabulatorJs != null) {
+            if (element.querySelectorAll(".tabulator-editing").length > 0) {
+                removeCustomEditors()
+            }
             if (internalData != null) {
                 tabulatorJs!!.replaceData(internalData!!, null, null)
             } else {
                 tabulatorJs!!.clearData()
             }
         }
+    }
+
+    private fun removeCustomEditors() {
+        EditorRoot.cancel?.invoke(null)
+        EditorRoot.disposeTimer?.let { window.clearTimeout(it) }
+        EditorRoot.root?.dispose()
+        EditorRoot.root = null
     }
 
     override fun onInsert() {
@@ -217,8 +235,9 @@ public open class Tabulator<T : Any>(
             val newOptions = if (options.data == null) {
                 options.copy(data = internalData, langs = langs)
             } else options.copy(langs = langs)
-            tabulatorJs = TabulatorFull(element, newOptions.toJs())
+            tabulatorJs = TabulatorFull(element, newOptions.toJs(this, kClass))
             tabulatorJs?.on("tableBuilt") { ->
+                initialized = true
                 if (currentPage != null) {
                     tabulatorJs?.setPageSize(pageSize ?: 0)
                     tabulatorJs?.setPage(currentPage!!.toJsNumber())
@@ -239,14 +258,36 @@ public open class Tabulator<T : Any>(
      */
     protected fun destroyTabulator() {
         if (renderConfig.isDom) {
-            val page = tabulatorJs?.getPage()
-            if (page != null && page != false.toJsBoolean()) {
-                pageSize = tabulatorJs?.getPageSize()
-                currentPage = page.cast<JsNumber>().toInt()
+            if (initialized) {
+                val page = tabulatorJs?.getPage()
+                if (page != null && page != false.toJsBoolean()) {
+                    pageSize = tabulatorJs?.getPageSize()
+                    currentPage = page.unsafeCast<JsNumber>().toInt()
+                }
             }
             tabulatorJs?.destroy()
             tabulatorJs = null
+            initialized = false
+            customRoots.forEach { it.dispose() }
+            customRoots.clear()
         }
+    }
+
+    internal fun addCustomRoot(root: Root) {
+        customRoots.add(root)
+    }
+
+    /**
+     * Converts an internal (dynamic) data model to Kotlin data model
+     */
+    public fun toKotlinObj(data: JsAny): T {
+        return if (kClass != null) {
+            if (jsonHelper == null || serializer == null) {
+                throw IllegalStateException("The data class can't be deserialized. Please provide a serializer when creating the Tabulator instance.")
+            } else {
+                jsonHelper!!.decodeFromString(serializer, JSON.stringify(data))
+            }
+        } else data.cast()
     }
 
     /**
@@ -279,7 +320,7 @@ public open class Tabulator<T : Any>(
 @Composable
 internal fun <T : Any> ComponentBase.tabulatorInt(
     data: List<T>?,
-    options: TabulatorOptions,
+    options: TabulatorOptions<T>,
     kClass: KClass<T>?,
     serializer: KSerializer<T>?,
     serializersModule: SerializersModule?,
@@ -326,7 +367,7 @@ internal fun <T : Any> ComponentBase.tabulatorInt(
 @Composable
 public inline fun <reified T : Any> ComponentBase.tabulator(
     data: List<T>,
-    options: TabulatorOptions = TabulatorOptions(),
+    options: TabulatorOptions<T> = TabulatorOptions(),
     types: Set<TableType> = setOf(),
     serializer: KSerializer<T> = serializer(),
     serializersModule: SerializersModule? = null,
@@ -357,7 +398,7 @@ public inline fun <reified T : Any> ComponentBase.tabulator(
 @Composable
 public fun ComponentBase.tabulator(
     data: List<JsAny>? = null,
-    options: TabulatorOptions = TabulatorOptions(),
+    options: TabulatorOptions<JsAny> = TabulatorOptions(),
     types: Set<TableType> = setOf(),
     className: String? = null,
     content: @Composable Tabulator<JsAny>.() -> Unit = {}

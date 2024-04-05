@@ -22,19 +22,42 @@
 
 package dev.kilua.tabulator
 
+import androidx.compose.runtime.Composable
+import dev.kilua.compose.Root
+import dev.kilua.compose.root
+import dev.kilua.core.Component
+import dev.kilua.core.ComponentBase
 import dev.kilua.externals.CellComponent
+import dev.kilua.externals.CellComponentBase
 import dev.kilua.externals.ColumnComponent
 import dev.kilua.externals.RowComponent
+import dev.kilua.externals.TabulatorMenuItem
+import dev.kilua.externals.get
+import dev.kilua.externals.obj
+import dev.kilua.externals.set
 import dev.kilua.externals.toJsAny
+import dev.kilua.externals.undefined
+import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
+import dev.kilua.utils.toList
+import dev.kilua.utils.unsafeCast
 import web.JsAny
 import web.JsArray
 import web.JsNumber
 import web.Promise
+import web.document
 import web.dom.Element
+import web.dom.HTMLElement
+import web.dom.asList
+import web.dom.events.Event
+import web.localStorage
+import web.toJsBoolean
+import web.toJsNumber
 import web.toJsString
+import web.window
+import kotlin.reflect.KClass
 
 /**
  * Column align.
@@ -87,7 +110,7 @@ public enum class Sorter {
 /**
  * Built-in formatters.
  */
-public enum class Formatter(internal val formatter: String? = null) {
+public enum class Formatter(public val formatter: String? = null) {
     Plaintext,
     Textarea,
     Html,
@@ -141,7 +164,7 @@ public enum class Editor {
 /**
  * Built-in validators.
  */
-public enum class Validator(internal val validator: kotlin.String? = null) {
+public enum class Validator(public val validator: kotlin.String? = null) {
     Required,
     Unique,
     Integer,
@@ -196,7 +219,7 @@ public enum class SortingDir {
 /**
  * Filters.
  */
-public enum class Filter(internal val filter: String) {
+public enum class Filter(public val filter: String) {
     Equal("="),
     NotEqual("!="),
     Like("like"),
@@ -216,7 +239,7 @@ public enum class Filter(internal val filter: String) {
 /**
  * Table layouts.
  */
-public enum class Layout(internal val layout: String) {
+public enum class Layout(public val layout: String) {
     FitData("fitData"),
     FitDataFill("fitDataFill"),
     FitColumns("fitColumns"),
@@ -470,10 +493,10 @@ internal fun DownloadConfig.toJs(): JsAny {
 /**
  * Column definition options.
  */
-public data class ColumnDefinition(
+public data class ColumnDefinition<T : Any>(
     val title: String,
     val field: String? = null,
-    val columns: List<ColumnDefinition>? = null,
+    val columns: List<ColumnDefinition<T>>? = null,
     val visible: Boolean? = null,
     val align: Align? = null,
     val width: String? = null,
@@ -481,9 +504,11 @@ public data class ColumnDefinition(
     val widthGrow: Int? = null,
     val widthShrink: Int? = null,
     val resizable: JsAny? = null,
+    val resizableBool: Boolean? = null,
     val frozen: Boolean? = null,
     val responsive: Int? = null,
     val tooltip: JsAny? = null,
+    val tooltipString: String? = null,
     val cssClass: String? = null,
     val rowHandle: Boolean? = null,
     val hideInHtml: Boolean? = null,
@@ -491,13 +516,20 @@ public data class ColumnDefinition(
     val sorterFunction: ((
         a: JsAny, b: JsAny, aRow: RowComponent, bRow: RowComponent,
         column: ColumnComponent, dir: String, sorterParams: JsAny?
-    ) -> JsNumber)? = null,
+    ) -> Double)? = null,
     val sorterParams: JsAny? = null,
     val formatter: Formatter? = null,
     val formatterFunction: ((
-        cell: CellComponent, formatterParams: JsAny?,
+        cell: CellComponentBase, formatterParams: JsAny?,
         onRendered: (callback: () -> Unit) -> Unit
     ) -> JsAny)? = null,
+    val formatterStringFunction: ((
+        cell: CellComponentBase, formatterParams: JsAny?,
+        onRendered: (callback: () -> Unit) -> Unit
+    ) -> String)? = null,
+    val formatterComponentFunction: (@Composable ComponentBase.(
+        cell: CellComponentBase, onRendered: (callback: () -> Unit) -> Unit, data: T
+    ) -> Unit)? = null,
     val formatterParams: JsAny? = null,
     val variableHeight: Boolean? = null,
     val editable: ((cell: CellComponent) -> Boolean)? = null,
@@ -505,14 +537,19 @@ public data class ColumnDefinition(
     val editorFunction: ((
         cell: CellComponent,
         onRendered: (callback: () -> Unit) -> Unit,
-        success: (value: JsAny) -> Unit, cancel: (value: JsAny) -> Unit, editorParams: JsAny?
+        success: (value: JsAny?) -> Unit, cancel: (value: JsAny?) -> Unit, editorParams: JsAny?
     ) -> JsAny)? = null,
+    val editorComponentFunction: (@Composable ComponentBase.(
+        cell: CellComponent,
+        onRendered: (callback: () -> Unit) -> Unit,
+        success: (value: JsAny?) -> Unit, cancel: (value: JsAny?) -> Unit, data: T
+    ) -> Component)? = null,
     val editorParams: JsAny? = null,
     val validator: Validator? = null,
     val validatorFunction: JsAny? = null,
     val validatorParams: String? = null,
-    val download: JsAny? = null,
-    val downloadTitle: String? = null,
+    val download: ((column: ColumnComponent) -> Boolean)? = null,
+    val titleDownload: String? = null,
     val topCalc: Calc? = null,
     val topCalcParams: JsAny? = null,
     val topCalcFormatter: Formatter? = null,
@@ -531,13 +568,21 @@ public data class ColumnDefinition(
     val headerDblTap: ((e: JsAny, column: ColumnComponent) -> Unit)? = null,
     val headerTapHold: ((e: JsAny, column: ColumnComponent) -> Unit)? = null,
     val headerTooltip: JsAny? = null,
+    val headerTooltipString: String? = null,
     val headerVertical: Boolean? = null,
     val editableTitle: Boolean? = null,
     val titleFormatter: Formatter? = null,
     val titleFormatterFunction: ((
-        cell: CellComponent, formatterParams: JsAny?,
+        cell: CellComponentBase, formatterParams: JsAny?,
         onRendered: (callback: () -> Unit) -> Unit
     ) -> JsAny)? = null,
+    val titleFormatterStringFunction: ((
+        cell: CellComponentBase, formatterParams: JsAny?,
+        onRendered: (callback: () -> Unit) -> Unit
+    ) -> String)? = null,
+    val titleFormatterComponentFunction: (@Composable ComponentBase.(
+        cell: CellComponentBase, onRendered: (callback: () -> Unit) -> Unit
+    ) -> Unit)? = null,
     val titleFormatterParams: JsAny? = null,
     val headerFilter: Editor? = null,
     val headerFilterParams: JsAny? = null,
@@ -553,9 +598,11 @@ public data class ColumnDefinition(
     val headerFilterFuncParams: JsAny? = null,
     val headerFilterLiveFilter: Boolean? = null,
     val htmlOutput: JsAny? = null,
+    val htmlOutputBool: Boolean? = null,
     val print: JsAny? = null,
+    val printBool: Boolean? = null,
     val formatterPrint: ((
-        cell: CellComponent,
+        cell: CellComponentBase,
         formatterParams: JsAny?,
         onRendered: (callback: () -> Unit) -> Unit
     ) -> JsAny)? = null,
@@ -615,36 +662,267 @@ public data class ColumnDefinition(
 /**
  * An extension function to convert column definition class to JS object.
  */
-internal fun ColumnDefinition.toJs(): JsAny {
+internal fun <T : Any> ColumnDefinition<T>.toJs(
+    tabulator: Tabulator<T>,
+    kClass: KClass<T>?
+): JsAny {
+    val tmpFormatterFunction = if (formatterComponentFunction != null) {
+        { cell: CellComponentBase, _: JsAny?, onRendered: (callback: () -> Unit) -> Unit ->
+            var onRenderedCallback: (() -> Unit)? = null
+            val data: T = if (kClass != null) {
+                tabulator.toKotlinObj(cell.getData())
+            } else {
+                cell.getData().cast()
+            }
+            val rootElement = document.createElement("div").unsafeCast<HTMLElement>()
+            if (onRendered != undefined()) {
+                onRendered {
+                    val root = root(rootElement, false, tabulator.renderConfig) {
+                        formatterComponentFunction.invoke(this, cell, { callback ->
+                            onRenderedCallback = callback
+                        }, data)
+                    }
+                    tabulator.addCustomRoot(root)
+                    if (cell["checkHeight"] != undefined()) cell.unsafeCast<CellComponent>().checkHeight()
+                    (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX = "visible"
+                    (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY = "visible"
+                    onRenderedCallback?.invoke()
+                }
+            }
+            rootElement
+        }
+    } else if (formatterStringFunction != null) {
+        { cell: CellComponentBase, formatterParams: JsAny?, onRendered: (callback: () -> Unit) -> Unit ->
+            formatterStringFunction.invoke(cell, formatterParams, onRendered).toJsString()
+        }
+    } else formatterFunction
+
+    val tmpTitleFormatterFunction = if (titleFormatterComponentFunction != null) {
+        { cell: CellComponentBase, _: JsAny?, onRendered: (callback: () -> Unit) -> Unit ->
+            var onRenderedCallback: (() -> Unit)? = null
+            val rootElement = document.createElement("div").unsafeCast<HTMLElement>()
+            if (onRendered != undefined()) {
+                onRendered {
+                    val root = root(rootElement, false, tabulator.renderConfig) {
+                        titleFormatterComponentFunction.invoke(this, cell) { callback ->
+                            onRenderedCallback = callback
+                        }
+                    }
+                    tabulator.addCustomRoot(root)
+                    (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX = "visible"
+                    (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY = "visible"
+                    (rootElement.parentElement?.parentElement?.parentElement?.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX =
+                        "visible"
+                    (rootElement.parentElement?.parentElement?.parentElement?.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY =
+                        "visible"
+                    (rootElement.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX =
+                        "visible"
+                    (rootElement.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY =
+                        "visible"
+                    (rootElement.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX =
+                        "visible"
+                    (rootElement.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY =
+                        "visible"
+                    onRenderedCallback?.invoke()
+                }
+            }
+            rootElement
+        }
+    } else if (titleFormatterStringFunction != null) {
+        { cell: CellComponentBase, formatterParams: JsAny?, onRendered: (callback: () -> Unit) -> Unit ->
+            titleFormatterStringFunction.invoke(cell, formatterParams, onRendered).toJsString()
+        }
+    } else titleFormatterFunction
+
+    val tmpEditorFunction = if (editorComponentFunction != null) {
+        { cell: CellComponent,
+          onRendered: (callback: () -> Unit) -> Unit,
+          success: (value: JsAny?) -> Unit, cancel: (value: JsAny?) -> Unit, _: JsAny? ->
+            if (cell.getElement()["style"] != null) cell.getElement().unsafeCast<HTMLElement>().style["overflow"] =
+                "visible".toJsString()
+            var onRenderedCallback: (() -> Unit)? = null
+            val data: T = if (kClass != null) {
+                tabulator.toKotlinObj(cell.getData())
+            } else {
+                cell.getData().cast()
+            }
+            val rootElement = document.createElement("div").unsafeCast<HTMLElement>()
+            if (onRendered != undefined()) {
+                onRendered {
+                    if (EditorRoot.root != null) {
+                        EditorRoot.disposeTimer?.let { window.clearTimeout(it) }
+                        EditorRoot.root?.dispose()
+                    }
+                    EditorRoot.root = root(rootElement, false, tabulator.renderConfig) {
+                        editorComponentFunction.invoke(this, cell, { callback ->
+                            onRenderedCallback = callback
+                        }, { value ->
+                            success(value)
+                            EditorRoot.disposeTimer = window.setTimeout({
+                                EditorRoot.root?.dispose()
+                                EditorRoot.disposeTimer = null
+                                EditorRoot.root = null
+                                EditorRoot.cancel = null
+                                null
+                            }, 500)
+                        }, cancel, data)
+                    }
+                    EditorRoot.cancel = cancel
+                    if (cell["checkHeight"] != undefined()) cell.checkHeight()
+                    (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX = "visible"
+                    (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY = "visible"
+                    onRenderedCallback?.invoke()
+                }
+            }
+            rootElement
+        }
+    } else editorFunction
+
+    val tmpHeaderColumnsMenu: ((Event) -> JsArray<JsAny>)? = if (this.headerColumnsMenu == true) {
+        { _ ->
+            val resetTitle = this.headerColumnsMenuResetTitle ?: "Default columns"
+            fun resetColumns() {
+                val persistenceID =
+                    tabulator.tabulatorJs?.options?.get("persistenceID")?.let { "tabulator-$it" } ?: "tabulator"
+                localStorage.removeItem("$persistenceID-columns")
+                window.location.reload()
+            }
+
+            val columns = tabulator.tabulatorJs?.getColumns(false)?.toList()?.filter {
+                !it.getDefinition()["title"]?.toString().isNullOrEmpty()
+            }?.map {
+                val responsiveHiddenColumns =
+                    (tabulator.tabulatorJs?.modules?.get("responsiveLayout")?.get("hiddenColumns")
+                        ?.unsafeCast<JsArray<ColumnComponent>>())?.toList()?.map {
+                            it.getField()
+                        } ?: emptyList()
+                val icon = document.createElement("i")
+                icon.classList.add("far")
+                icon.classList.add(if (!it.isVisible() && !responsiveHiddenColumns.contains(it.getField())) "fa-square" else "fa-check-square")
+                val label = document.createElement("span")
+                val title = document.createElement("span")
+                title.textContent = " " + it.getDefinition()["title"]
+                label.appendChild(icon)
+                label.appendChild(title)
+                obj<TabulatorMenuItem> {
+                    this.label = label
+                    this.action = { e: Event ->
+                        e.stopPropagation()
+                        if (it.isVisible()) {
+                            it.hide()
+                            icon.classList.remove("fa-check-square")
+                            icon.classList.add("fa-square")
+                        } else if (responsiveHiddenColumns.contains(it.getField())) {
+                            it.show()
+                            it.hide()
+                            icon.classList.remove("fa-check-square")
+                            icon.classList.add("fa-square")
+                        } else {
+                            it.show()
+                            icon.classList.remove("fa-square")
+                            icon.classList.add("fa-check-square")
+                        }
+                        tabulator.tabulatorJs?.redraw(true)
+                    }
+                }
+            } ?: emptyList()
+            (columns + listOf(obj {
+                separator = true
+            }, obj {
+                val icon = document.createElement("i")
+                icon.classList.add("fas")
+                icon.classList.add("fa-rotate")
+                val label = document.createElement("span")
+                val title = document.createElement("span")
+                title.textContent = " $resetTitle"
+                label.appendChild(icon)
+                label.appendChild(title)
+                this.label = label
+                this.action = { e: Event ->
+                    e.stopPropagation()
+                    resetColumns()
+                }
+            })).toJsArray()
+        }
+    } else null
+    val headerColumnsMenuTitle = this.headerColumnsMenuTitle ?: "Customize"
+    val responsiveCollapseAuto = this.formatter == Formatter.ResponsiveCollapseAuto
+
+    val responsiveCollapseOptions = if (responsiveCollapseAuto) {
+        val headerClick: (JsAny) -> Boolean = {
+            val columnsOpened = document.querySelectorAll("div.tabulator-responsive-collapse-toggle")
+                .asList().firstOrNull()?.let {
+                    (it.unsafeCast<HTMLElement>()).classList.contains("open")
+                } ?: false
+            if (columnsOpened) {
+                document.querySelectorAll("div.tabulator-responsive-collapse-toggle.open").asList()
+                    .forEach {
+                        (it.unsafeCast<HTMLElement>()).click()
+                    }
+            } else {
+                document.querySelectorAll("div.tabulator-responsive-collapse-toggle:not(.open)").asList()
+                    .forEach {
+                        (it.unsafeCast<HTMLElement>()).click()
+                    }
+            }
+            true
+        }
+        listOf(
+            "formatter" to "responsiveCollapse",
+            "titleFormatter" to "tickCross",
+            "titleFormatterParams" to jsObjectOf(
+                "crossElement" to "<i class='fas fa-arrows-up-down'></i>"
+            ),
+            "width" to "40",
+            "headerSort" to false,
+            "responsive" to 0,
+            "headerHozAlign" to "center",
+            "headerClick" to toJsAny(headerClick)
+        )
+    } else listOf(
+        "formatter" to (tmpFormatterFunction?.let { toJsAny(it) } ?: formatter?.value),
+        "formatterParams" to formatterParams,
+    )
+
+    val headerMenuOptions = if (tmpHeaderColumnsMenu != null) {
+        listOf(
+            "headerHozAlign" to "center",
+            "headerMenu" to toJsAny(tmpHeaderColumnsMenu),
+            "headerMenuIcon" to "<i class='far fa-square-caret-down'></i> $headerColumnsMenuTitle"
+        )
+    } else emptyList()
+
     return jsObjectOf(
         "title" to title,
         "field" to field,
-        "columns" to columns?.map { it.toJs() }?.toJsArray(),
+        "columns" to columns?.map { it.toJs(tabulator, kClass) }?.toJsArray(),
         "visible" to visible,
         "align" to align?.value,
         "width" to width,
         "minWidth" to minWidth,
         "widthGrow" to widthGrow,
         "widthShrink" to widthShrink,
-        "resizable" to resizable,
+        "resizable" to (resizableBool?.toJsBoolean() ?: resizable),
         "frozen" to frozen,
         "responsive" to responsive,
-        "tooltip" to tooltip,
+        "tooltip" to (tooltipString?.toJsString() ?: tooltip),
         "cssClass" to cssClass,
         "rowHandle" to rowHandle,
         "hideInHtml" to hideInHtml,
-        "sorter" to (sorterFunction?.let { toJsAny(it) } ?: sorter?.value),
+        "sorter" to (sorterFunction?.let { f ->
+            toJsAny { a: JsAny, b: JsAny, aRow: RowComponent, bRow: RowComponent, column: ColumnComponent, dir: String, sorterParams: JsAny? ->
+                f(a, b, aRow, bRow, column, dir, sorterParams).toJsNumber()
+            }
+        } ?: sorter?.value),
         "sorterParams" to sorterParams,
-        "formatter" to (formatterFunction?.let { toJsAny(it) } ?: formatter?.value),
-        "formatterParams" to formatterParams,
         "variableHeight" to variableHeight,
         "editable" to editable?.let { toJsAny(it) },
-        "editor" to (editorFunction?.let { toJsAny(it) } ?: editor?.value),
+        "editor" to (tmpEditorFunction?.let { toJsAny(it) } ?: editor?.value),
         "editorParams" to editorParams,
         "validator" to (validatorFunction ?: validator?.value),
         "validatorParams" to validatorParams,
-        "download" to download,
-        "downloadTitle" to downloadTitle,
+        "download" to download?.let { toJsAny(it) },
+        "titleDownload" to titleDownload,
         "topCalc" to topCalc?.value,
         "topCalcParams" to topCalcParams,
         "topCalcFormatter" to topCalcFormatter?.value,
@@ -662,10 +940,10 @@ internal fun ColumnDefinition.toJs(): JsAny {
         "headerTap" to headerTap?.let { toJsAny(it) },
         "headerDblTap" to headerDblTap?.let { toJsAny(it) },
         "headerTapHold" to headerTapHold?.let { toJsAny(it) },
-        "headerTooltip" to headerTooltip,
+        "headerTooltip" to (headerTooltipString?.toJsString() ?: headerTooltip),
         "headerVertical" to headerVertical,
         "editableTitle" to editableTitle,
-        "titleFormatter" to (titleFormatterFunction?.let { toJsAny(it) } ?: titleFormatter?.value),
+        "titleFormatter" to (tmpTitleFormatterFunction?.let { toJsAny(it) } ?: titleFormatter?.value),
         "titleFormatterParams" to titleFormatterParams,
         "headerFilter" to (headerFilterCustom?.let { toJsAny(it) } ?: headerFilter?.value),
         "headerFilterParams" to headerFilterParams,
@@ -674,8 +952,8 @@ internal fun ColumnDefinition.toJs(): JsAny {
         "headerFilterFunc" to (headerFilterFuncCustom?.let { toJsAny(it) } ?: headerFilterFunc?.value),
         "headerFilterFuncParams" to headerFilterFuncParams,
         "headerFilterLiveFilter" to headerFilterLiveFilter,
-        "htmlOutput" to htmlOutput,
-        "print" to print,
+        "htmlOutput" to (htmlOutputBool?.toJsBoolean() ?: htmlOutput),
+        "print" to (printBool?.toJsBoolean() ?: print),
         "formatterPrint" to formatterPrint?.let { toJsAny(it) },
         "formatterPrintParams" to formatterPrintParams,
         "cellClick" to cellClick?.let { toJsAny(it) },
@@ -724,14 +1002,21 @@ internal fun ColumnDefinition.toJs(): JsAny {
         "headerDblClickPopup" to headerDblClickPopup,
         "headerClickMenu" to headerClickMenu,
         "headerDblClickMenu" to headerDblClickMenu,
-        "dblClickMenu" to dblClickMenu
+        "dblClickMenu" to dblClickMenu,
+        *(responsiveCollapseOptions + headerMenuOptions).toTypedArray(),
     )
+}
+
+internal object EditorRoot {
+    internal var root: Root? = null
+    internal var cancel: ((value: JsAny?) -> Unit)? = null
+    internal var disposeTimer: Int? = null
 }
 
 /**
  * Tabulator options.
  */
-public data class TabulatorOptions(
+public data class TabulatorOptions<T : Any>(
     val height: String? = null,
     val placeholder: String? = null,
     val placeholderFunc: (() -> String?)? = null,
@@ -743,7 +1028,7 @@ public data class TabulatorOptions(
     val downloadConfig: DownloadConfig? = null,
     val reactiveData: Boolean? = null,
     val autoResize: Boolean? = null,
-    val columns: List<ColumnDefinition>? = null,
+    val columns: List<ColumnDefinition<T>>? = null,
     val autoColumns: Boolean? = null,
     val autoColumnsFull: Boolean? = null,
     val layout: Layout? = null,
@@ -757,6 +1042,7 @@ public data class TabulatorOptions(
     val rowFormatter: ((row: RowComponent) -> Unit)? = null,
     val addRowPos: RowPos? = null,
     val selectableRows: JsAny? = null,
+    val selectableRowsBool: Boolean? = null,
     val selectableRowsRangeMode: RangeMode? = null,
     val selectableRowsRollingSelection: Boolean? = null,
     val selectableRowsPersistence: Boolean? = null,
@@ -825,6 +1111,7 @@ public data class TabulatorOptions(
     val ajaxRequesting: ((url: String, params: JsAny) -> Boolean)? = null,
     val ajaxResponse: ((url: String, params: JsAny, response: JsAny) -> JsAny)? = null,
     val persistence: JsAny? = null,
+    val persistenceBool: Boolean? = null,
     val persistenceReaderFunc: JsAny? = null,
     val persistenceWriterFunc: JsAny? = null,
     val paginationInitialPage: Int? = null,
@@ -844,7 +1131,7 @@ public data class TabulatorOptions(
     val renderVertical: RenderType? = null,
     val renderVerticalBuffer: Int? = null,
     val renderHorizontal: RenderType? = null,
-    val columnDefaults: ColumnDefinition? = null,
+    val columnDefaults: ColumnDefinition<T>? = null,
     val sortMode: SortMode? = null,
     val filterMode: FilterMode? = null,
     val importFormat: ImportFormat? = null,
@@ -887,7 +1174,10 @@ public data class TabulatorOptions(
 /**
  * An extension function to convert column definition class to JS object.
  */
-internal fun TabulatorOptions.toJs(): JsAny {
+internal fun <T : Any> TabulatorOptions<T>.toJs(
+    tabulator: Tabulator<T>,
+    kClass: KClass<T>?
+): JsAny {
     return jsObjectOf(
         "height" to height,
         "placeholder" to (placeholderFunc?.let { toJsAny(it) } ?: placeholder),
@@ -899,7 +1189,7 @@ internal fun TabulatorOptions.toJs(): JsAny {
         "downloadConfig" to downloadConfig?.toJs(),
         "reactiveData" to reactiveData,
         "autoResize" to autoResize,
-        "columns" to columns?.map { it.toJs() }?.toJsArray(),
+        "columns" to columns?.map { it.toJs(tabulator, kClass) }?.toJsArray(),
         "autoColumns" to (if (autoColumnsFull == true) {
             "full"
         } else {
@@ -915,7 +1205,7 @@ internal fun TabulatorOptions.toJs(): JsAny {
         "scrollToColumnIfVisible" to scrollToColumnIfVisible,
         "rowFormatter" to rowFormatter?.let { toJsAny(it) },
         "addRowPos" to addRowPos?.value,
-        "selectableRows" to selectableRows,
+        "selectableRows" to (selectableRowsBool?.toJsBoolean() ?: selectableRows),
         "selectableRowsRangeMode" to selectableRowsRangeMode?.value,
         "selectableRowsRollingSelection" to selectableRowsRollingSelection,
         "selectableRowsPersistence" to selectableRowsPersistence,
@@ -983,7 +1273,7 @@ internal fun TabulatorOptions.toJs(): JsAny {
         "dataTreeStartExpanded" to dataTreeStartExpanded?.let { toJsAny(it) },
         "ajaxRequesting" to ajaxRequesting?.let { toJsAny(it) },
         "ajaxResponse" to ajaxResponse?.let { toJsAny(it) },
-        "persistence" to persistence,
+        "persistence" to (persistenceBool?.toJsBoolean() ?: persistence),
         "persistenceReaderFunc" to persistenceReaderFunc,
         "persistenceWriterFunc" to persistenceWriterFunc,
         "paginationInitialPage" to paginationInitialPage,
@@ -1003,7 +1293,7 @@ internal fun TabulatorOptions.toJs(): JsAny {
         "renderVertical" to renderVertical?.value,
         "renderVerticalBuffer" to renderVerticalBuffer,
         "renderHorizontal" to renderHorizontal?.value,
-        "columnDefaults" to columnDefaults?.toJs(),
+        "columnDefaults" to columnDefaults?.toJs(tabulator, kClass),
         "sortMode" to sortMode?.value,
         "filterMode" to filterMode?.value,
         "importFormat" to importFormat?.value,
