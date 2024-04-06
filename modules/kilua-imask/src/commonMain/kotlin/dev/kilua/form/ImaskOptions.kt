@@ -32,8 +32,8 @@ import dev.kilua.externals.RangeMaskOptionsJs
 import dev.kilua.externals.assign
 import dev.kilua.externals.obj
 import dev.kilua.externals.set
-import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
+import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import web.JsAny
@@ -174,7 +174,7 @@ public data class NumberMask(
     val mapToRadix: List<Char> = listOf('.'),
     val min: Number? = null,
     val max: Number? = null,
-    val locale: Locale = DefaultLocale(),
+    val locale: Locale = LocaleManager.currentLocale,
 )
 
 /**

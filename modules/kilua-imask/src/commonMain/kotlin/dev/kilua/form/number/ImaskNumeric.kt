@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import dev.kilua.core.ComponentBase
 import dev.kilua.form.ImaskOptions
 import dev.kilua.form.NumberMask
-import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
+import dev.kilua.i18n.LocaleManager
 
 /**
  * Creates a [Numeric] component with masked input.
@@ -57,7 +57,7 @@ public fun ComponentBase.imaskNumeric(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     padFractionalZeros: Boolean? = null,
     normalizeZeros: Boolean? = null,
     className: String? = null,

@@ -35,8 +35,8 @@ import dev.kilua.externals.obj
 import dev.kilua.externals.toDate
 import dev.kilua.externals.toLocalTime
 import dev.kilua.form.TimeFormControl
-import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
+import dev.kilua.i18n.LocaleManager
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
@@ -53,7 +53,7 @@ public open class RichTime(
     disabled: Boolean? = null,
     format: String = "HH:mm",
     inline: Boolean = false,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalTime?> = WithStateFlowDelegateImpl()
@@ -115,7 +115,7 @@ private fun ComponentBase.richTime(
     disabled: Boolean? = null,
     format: String = "HH:mm",
     inline: Boolean = false,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     setup: @Composable RichTime.() -> Unit = {}
 ): RichTime {
@@ -163,7 +163,7 @@ public fun ComponentBase.richTime(
     id: String? = null,
     inline: Boolean = false,
     format: String = "HH:mm",
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     setup: @Composable RichTime.() -> Unit = {}
 ): RichTime {

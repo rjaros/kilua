@@ -38,8 +38,8 @@ import dev.kilua.form.text.text
 import dev.kilua.html.Div
 import dev.kilua.html.i
 import dev.kilua.html.span
-import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
+import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.isDom
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.toJsArray
@@ -128,7 +128,7 @@ public abstract class AbstractRichDateTime(
     disabled: Boolean? = null,
     format: String,
     inline: Boolean = false,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
 ) : Div(className, renderConfig = renderConfig) {

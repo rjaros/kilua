@@ -39,8 +39,8 @@ import dev.kilua.form.text.i18n.getToolbarContent
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.html.tag
-import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
+import dev.kilua.i18n.LocaleManager
 import dev.kilua.initializeTrix
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
@@ -62,7 +62,7 @@ public open class RichText(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
@@ -304,7 +304,7 @@ public fun ComponentBase.richText(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     id: String? = null,
     setup: @Composable RichText.() -> Unit = {}

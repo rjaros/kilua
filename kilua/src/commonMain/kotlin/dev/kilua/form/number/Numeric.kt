@@ -31,8 +31,8 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.form.NumberFormControl
-import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
+import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.toFixedNoRound
 import dev.kilua.utils.toLocaleString
 import web.dom.events.Event
@@ -56,7 +56,7 @@ public open class Numeric(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
@@ -162,7 +162,7 @@ public fun ComponentBase.numeric(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     id: String? = null,
     setup: @Composable Numeric.() -> Unit = {}

@@ -35,8 +35,8 @@ import dev.kilua.externals.obj
 import dev.kilua.externals.toDate
 import dev.kilua.externals.toLocalDate
 import dev.kilua.form.DateFormControl
-import dev.kilua.i18n.DefaultLocale
 import dev.kilua.i18n.Locale
+import dev.kilua.i18n.LocaleManager
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
@@ -53,7 +53,7 @@ public open class RichDate(
     disabled: Boolean? = null,
     format: String = "yyyy-MM-dd",
     inline: Boolean = false,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalDate?> = WithStateFlowDelegateImpl()
@@ -115,7 +115,7 @@ private fun ComponentBase.richDate(
     disabled: Boolean? = null,
     format: String = "yyyy-MM-dd",
     inline: Boolean = false,
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     setup: @Composable RichDate.() -> Unit = {}
 ): RichDate {
@@ -162,7 +162,7 @@ public fun ComponentBase.richDate(
     id: String? = null,
     inline: Boolean = false,
     format: String = "yyyy-MM-dd",
-    locale: Locale = DefaultLocale(),
+    locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     setup: @Composable RichDate.() -> Unit = {}
 ): RichDate {
