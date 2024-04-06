@@ -21,6 +21,7 @@
  */
 
 import dev.kilua.Application
+import dev.kilua.CoreModule
 import dev.kilua.compose.root
 import dev.kilua.externals.console
 import dev.kilua.html.button
@@ -28,7 +29,8 @@ import dev.kilua.html.div
 import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.html.px
 import dev.kilua.resources.generated.resources.Res
-import dev.kilua.resources.generated.resources.*
+import dev.kilua.resources.generated.resources.app_name
+import dev.kilua.startApplication
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.getString
 
@@ -50,4 +52,12 @@ class App : Application() {
             }
         }
     }
+}
+
+fun main() {
+    startApplication(
+        ::App,
+        null,
+        CoreModule
+    )
 }
