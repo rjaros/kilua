@@ -5,12 +5,12 @@ kotlin = "1.9.23"
 compose = "1.6.1"
 compose-plugin = "1.5.10.1"
 dokka = "1.9.20"
-nmcp = "0.0.4"
-ksp = "1.9.23-1.0.19"
+nmcp = "0.0.7"
+ksp = "1.9.23-1.0.20"
 detekt = "1.23.6"
 npm-publish = "3.4.2"
 gradle-plugin-publish = "1.2.1"
-kilua-rpc = "0.0.5"
+kilua-rpc = "0.0.6"
 kilua-gettext = "0.0.1"
 kotlinx-atomicfu = "0.23.2"
 kotlinx-coroutines = "1.8.1-Beta"
@@ -74,6 +74,8 @@ vertx-lang-kotlin = { module = "io.vertx:vertx-lang-kotlin", version.ref = "vert
 vertx-lang-kotlin-coroutines = { module = "io.vertx:vertx-lang-kotlin-coroutines", version.ref = "vertx" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
+wro4j = { module = "ro.isdc.wro4j:wro4j-core", version.ref = "wro4j" }
+kilua-gettext = { module = "dev.kilua:kilua-gettext", version.ref = "kilua-gettext" }
 
 [plugins]
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
