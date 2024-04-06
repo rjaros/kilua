@@ -23,6 +23,7 @@ kotlin {
             dependencies {
                 api(libs.ktor.client.core)
                 api(libs.ktor.client.apache)
+                api(libs.wro4j)
                 api(libs.logback.classic)
             }
         }
