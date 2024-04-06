@@ -27,7 +27,11 @@ import io.ktor.client.engine.apache.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.slf4j.LoggerFactory
+import ro.isdc.wro.model.resource.processor.support.CssCompressor
+import java.io.StringWriter
 import java.nio.file.Path
 import java.util.*
 import kotlin.io.path.ExperimentalPathApi
@@ -102,10 +106,15 @@ public class SsrEngine(
     private suspend fun processCss() {
         val response = httpClient.post(ssrService)
         if (response.status == HttpStatusCode.OK) {
-            val cssTemplate = response.bodyAsText().split("\n").joinToString("\n") {
-                workingDir.resolve(it).readText()
+            withContext(Dispatchers.IO) {
+                val cssTemplate = response.bodyAsText().split("\n").joinToString("\n") {
+                    workingDir.resolve(it).readText()
+                }
+                val cssCompressor = CssCompressor(cssTemplate.reader())
+                val writer = StringWriter()
+                cssCompressor.compress(writer, -1)
+                indexTemplate = indexTemplate.replace("</head>", "<style>\n$writer\n</style>\n</head>")
             }
-            indexTemplate = indexTemplate.replace("</head>", "<style>\n$cssTemplate\n</style>\n</head>")
         } else {
             logger.error("Failed to initialize CSS for SSR")
         }
