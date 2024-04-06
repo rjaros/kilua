@@ -51,6 +51,7 @@ nmcp {
         project(":modules:kilua-bootstrap")
         project(":modules:kilua-bootstrap-icons")
         project(":modules:kilua-fontawesome")
+        project(":modules:kilua-i18n")
         project(":modules:kilua-imask")
         project(":modules:kilua-lazy-layouts")
         project(":modules:kilua-rest")
