@@ -61,6 +61,9 @@ import dev.kilua.form.time.richTime
 import dev.kilua.html.*
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
+import dev.kilua.i18n.I18n
+import dev.kilua.i18n.LocaleManager
+import dev.kilua.i18n.SimpleLocale
 import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
 import dev.kilua.modal.confirm
@@ -131,6 +134,38 @@ import kotlin.random.nextInt
 import kotlin.random.nextUInt
 import kotlin.time.Duration.Companion.seconds
 
+@JsModule("./i18n/messages-de.po")
+@JsNonModule
+external object messagesDe : JsAny
+
+@JsModule("./i18n/messages-en.po")
+@JsNonModule
+external object messagesEn : JsAny
+
+@JsModule("./i18n/messages-es.po")
+@JsNonModule
+external object messagesEs : JsAny
+
+@JsModule("./i18n/messages-fr.po")
+@JsNonModule
+external object messagesFr : JsAny
+
+@JsModule("./i18n/messages-ja.po")
+@JsNonModule
+external object messagesJa : JsAny
+
+@JsModule("./i18n/messages-ko.po")
+@JsNonModule
+external object messagesKo : JsAny
+
+@JsModule("./i18n/messages-pl.po")
+@JsNonModule
+external object messagesPl : JsAny
+
+@JsModule("./i18n/messages-ru.po")
+@JsNonModule
+external object messagesRu : JsAny
+
 @JsModule("./css/style.css")
 @JsNonModule
 external object css
@@ -144,6 +179,17 @@ data class SearchResult(val total_count: Int, val incomplete_results: Boolean)
 @Serializable
 data class Person(val name: String, val age: Int, val city: String)
 
+val i18n = I18n(
+    "de" to messagesDe,
+    "en" to messagesEn,
+    "es" to messagesEs,
+    "fr" to messagesFr,
+    "ja" to messagesJa,
+    "ko" to messagesKo,
+    "pl" to messagesPl,
+    "ru" to messagesRu
+)
+
 class App : Application() {
 
     init {
@@ -155,8 +201,19 @@ class App : Application() {
         ThemeManager.init()
 
         root("root") {
+
             div {
                 margin = 20.px
+
+                h1 {
+                    +i18n.tr("Hello world!")
+                }
+
+                button("Change language") {
+                    onClick {
+                        LocaleManager.currentLocale = SimpleLocale("es")
+                    }
+                }
 
                 val progress = Progress(ProgressOptions(height = 10, color = Color.Lightgreen))
 
@@ -369,7 +426,8 @@ class App : Application() {
                         }
                     }
                     text {
-                        maskOptions = ImaskOptions(range = RangeMask(0, 100, maxLength = 3, autofix = MaskAutofix.Pad))
+                        maskOptions =
+                            ImaskOptions(range = RangeMask(0, 100, maxLength = 3, autofix = MaskAutofix.Pad))
                     }
                     numeric(123.44, placeholder = "Enter a number") {
                         maskOptions = ImaskOptions(
@@ -1162,7 +1220,11 @@ class App : Application() {
                         }
                         div("col-12") {
                             div("form-check") {
-                                fieldWithLabel("Agree to terms and conditions", "form-check-label", labelAfter = true) {
+                                fieldWithLabel(
+                                    "Agree to terms and conditions",
+                                    "form-check-label",
+                                    labelAfter = true
+                                ) {
                                     checkBox(className = "form-check-input", required = true).bind("agree")
                                 }
                                 div("invalid-feedback") {
