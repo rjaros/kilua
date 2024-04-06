@@ -75,7 +75,8 @@ private suspend fun RoutingContext.respondSsr() {
         response().setStatusCode(404).end()
     } else {
         val uri = request().path() + (request().query()?.let { "?$it" } ?: "")
+        val language = request().getHeader("Accept-Language")?.split(",")?.firstOrNull()?.split(";")?.firstOrNull()
         val ssrEngine = get<SsrEngine>(SSR_ENGINE_KEY)
-        response().putHeader("Content-Type", "text/html").end(ssrEngine.getSsrContent(uri))
+        response().putHeader("Content-Type", "text/html").end(ssrEngine.getSsrContent(uri, language))
     }
 }

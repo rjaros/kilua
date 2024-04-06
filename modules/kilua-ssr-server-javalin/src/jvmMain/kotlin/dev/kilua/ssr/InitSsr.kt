@@ -68,9 +68,10 @@ private fun Context.respondSsr() {
         status(HttpStatus.NOT_FOUND)
     } else {
         val uri = path() + (queryString()?.let { "?$it" } ?: "")
+        val language = header("Accept-Language")?.split(",")?.firstOrNull()?.split(";")?.firstOrNull()
         val ssrEngine = appData(ssrEngineKey)
         val future = applicationScope.future {
-            ssrEngine.getSsrContent(uri)
+            ssrEngine.getSsrContent(uri, language)
         }
         future { future.thenAccept { html(it) } }
     }

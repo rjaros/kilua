@@ -29,7 +29,7 @@ import web.JsAny
  * Node.js HTTP server.
  */
 public external class Server : JsAny {
-    public fun listen(port: Int, callback: () -> Unit)
+    public fun listen(port: Int)
 }
 
 /**
@@ -38,6 +38,7 @@ public external class Server : JsAny {
 public external class IncomingMessage : JsAny {
     public val method: String
     public val url: String
+    public val headers: JsAny
 }
 
 /**

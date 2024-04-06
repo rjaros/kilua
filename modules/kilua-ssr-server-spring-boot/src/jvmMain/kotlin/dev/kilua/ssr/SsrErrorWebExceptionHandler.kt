@@ -67,7 +67,8 @@ public open class SsrErrorWebExceptionHandler(
         return if (errorStatus == HttpStatus.NOT_FOUND.value()) {
             mono {
                 val uri = request.uriBuilder().scheme(null).host(null).port(null).build().toString()
-                ssrEngine.getSsrContent(uri)
+                val language = request.headers().acceptLanguage().firstOrNull()?.range
+                ssrEngine.getSsrContent(uri, language)
             }.flatMap { content ->
                 ServerResponse.ok().contentType(MediaType.TEXT_HTML).bodyValue(content)
             }

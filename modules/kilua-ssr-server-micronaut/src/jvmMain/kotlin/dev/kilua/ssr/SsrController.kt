@@ -43,12 +43,12 @@ public open class SsrController {
     @Produces(MediaType.TEXT_HTML)
     @Get("/")
     public suspend fun root(request: HttpRequest<*>): HttpResponse<String> =
-        HttpResponse.ok(ssrEngine.getSsrContent(request.uri.toString()))
+        HttpResponse.ok(ssrEngine.getSsrContent(request.uri.toString(), request.headers.acceptLanguage()?.language))
 
     @Produces(MediaType.TEXT_HTML)
     @Get("/index.html")
     public suspend fun index(request: HttpRequest<*>): HttpResponse<String> =
-        HttpResponse.ok(ssrEngine.getSsrContent(request.uri.toString()))
+        HttpResponse.ok(ssrEngine.getSsrContent(request.uri.toString(), request.headers.acceptLanguage()?.language))
 
 }
 
@@ -71,7 +71,7 @@ public open class SsrFallbackController {
                     mediaType.name.contains(MediaType.TEXT_HTML)
                 }
         ) {
-            HttpResponse.ok(ssrEngine.getSsrContent(request.uri.toString()))
+            HttpResponse.ok(ssrEngine.getSsrContent(request.uri.toString(), request.headers.acceptLanguage()?.language))
         } else {
             HttpResponse.notFound<String>()
         }

@@ -70,7 +70,8 @@ private suspend fun PipelineContext<Unit, ApplicationCall>.respondSsr() {
     } else {
         val ssrEngine = call.application.attributes[ssrEngineKey]
         call.respondText(ContentType.Text.Html, HttpStatusCode.OK) {
-            ssrEngine.getSsrContent(call.request.uri)
+            val language = call.request.acceptLanguageItems().firstOrNull()?.value
+            ssrEngine.getSsrContent(call.request.uri, language)
         }
     }
 }

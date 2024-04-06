@@ -58,6 +58,8 @@ public open class SsrHandler(
 ) {
     public open suspend fun handleRoot(request: ServerRequest): ServerResponse {
         val uri = request.uriBuilder().scheme(null).host(null).port(null).build().toString()
-        return ServerResponse.ok().contentType(MediaType.TEXT_HTML).bodyValueAndAwait(ssrEngine.getSsrContent(uri))
+        val language = request.headers().acceptLanguage().firstOrNull()?.range
+        return ServerResponse.ok().contentType(MediaType.TEXT_HTML)
+            .bodyValueAndAwait(ssrEngine.getSsrContent(uri, language))
     }
 }

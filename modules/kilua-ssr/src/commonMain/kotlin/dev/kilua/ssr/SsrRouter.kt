@@ -35,8 +35,13 @@ import app.softwork.routingcompose.route
 import dev.kilua.CssRegister
 import dev.kilua.KiluaScope
 import dev.kilua.core.ComponentBase
+import dev.kilua.externals.get
 import dev.kilua.externals.globalThis
 import dev.kilua.externals.set
+import dev.kilua.i18n.Locale
+import dev.kilua.i18n.LocaleManager
+import dev.kilua.i18n.SimpleLocale
+import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -58,6 +63,7 @@ public fun ComponentBase.SsrRouter(
         val router = SsrRouter(initPath, this)
         router.route(initPath) {
             routeBuilder()
+            LocaleManager.currentLocale // trigger recomposition on locale change
             SideEffect {
                 router.sendRender?.let {
                     it(this@SsrRouter.innerHTML)
@@ -81,6 +87,8 @@ public fun ComponentBase.SsrRouter(
 internal class SsrRouter(initPath: String, val root: ComponentBase) : Router {
     internal var lock: Boolean = false
     internal var sendRender: ((String) -> Unit)? = null
+
+    private var ssrLocaleCache = nativeMapOf<Locale>()
 
     init {
         if (!root.renderConfig.isDom) {
@@ -119,11 +127,27 @@ internal class SsrRouter(initPath: String, val root: ComponentBase) : Router {
                         delay(1)
                     }
                     lock = true
-                    if (currentPath.toString() != req.url) {
+                    val clientLanguage =
+                        req.headers["x-kilua-locale"]?.toString() ?: LocaleManager.defaultLocale.language
+                    val localeChanged = LocaleManager.currentLocale.language != clientLanguage
+                    val pathChanged = currentPath.toString() != req.url
+                    if (localeChanged || pathChanged) {
                         sendRender = {
                             res.end(it)
                         }
-                        navigate(req.url)
+                        if (localeChanged) {
+                            val newLocale = ssrLocaleCache.getOrPut(clientLanguage) {
+                                if (clientLanguage == LocaleManager.defaultLocale.language) {
+                                    LocaleManager.defaultLocale
+                                } else {
+                                    SimpleLocale(clientLanguage)
+                                }
+                            }
+                            LocaleManager.setCurrentLocale(newLocale)
+                        }
+                        if (pathChanged) {
+                            navigate(req.url)
+                        }
                     } else {
                         res.end(root.innerHTML)
                         lock = false
@@ -137,6 +161,6 @@ internal class SsrRouter(initPath: String, val root: ComponentBase) : Router {
                 res.statusCode = 404
                 res.end("Not Found")
             }
-        }.listen(port) {}
+        }.listen(port)
     }
 }

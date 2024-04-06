@@ -123,13 +123,17 @@ public class SsrEngine(
     /**
      * Get SSR content for the given URI.
      */
-    public suspend fun getSsrContent(uri: String): String {
+    public suspend fun getSsrContent(uri: String, locale: String? = null): String {
         return try {
             if (!cssProcessed) {
                 processCss()
                 cssProcessed = true
             }
-            val response = httpClient.get("$ssrService$uri")
+            val response = httpClient.get("$ssrService$uri") {
+                if (locale != null) {
+                    header("x-kilua-locale", locale)
+                }
+            }
             if (response.status == HttpStatusCode.OK) {
                 val content = response.bodyAsText()
                 indexTemplate.replace(uniqueText, content)

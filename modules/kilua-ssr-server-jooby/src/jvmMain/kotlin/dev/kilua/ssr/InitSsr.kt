@@ -79,9 +79,10 @@ private suspend fun Context.respondSsr() {
         send(StatusCode.NOT_FOUND)
     } else {
         val uri = requestPath + queryString()
+        val language = header("Accept-Language").valueOrNull()?.split(",")?.firstOrNull()?.split(";")?.firstOrNull()
         val ssrEngine = getAttribute<SsrEngine>(SSR_ENGINE_KEY)!!
         responseType = MediaType.html
         responseCode = StatusCode.OK
-        send(ssrEngine.getSsrContent(uri))
+        send(ssrEngine.getSsrContent(uri, language))
     }
 }
