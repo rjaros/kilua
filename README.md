@@ -29,10 +29,9 @@ Base SSR (server-side-rendering) is implemented for all servers supported by Kil
 (Ktor, Spring Boot, Javalin, Jooby, Vert.x and Micronaut).
 A Gradle plugin has also been implemented to automate SSR configuration and tasks.
 
-I'm investigating possible solutions for I18n (internationalization).
-
 The project can be built and tested with single gradle tasks. Contributions and PRs are welcomed.
-Still no artifacts are published, but we are close to the first alpha release.
+
+The TODO list is almost complete. I'm working on releasing version 0.0.1 to Maven Central.
 
 ## TODO
 
@@ -56,7 +55,7 @@ Still no artifacts are published, but we are close to the first alpha release.
 - [X] Implement Tabulator component
 - [X] Routing support
 - [X] Web client
-- [ ] I18n support (currently blocked by https://github.com/JetBrains/compose-multiplatform/issues/4171)
+- [X] I18n support (based on [Kilua Gettext](https://github.com/rjaros/kilua-gettext) library)
 - [X] Gradle plugin ~~and KSP compiler plugin~~
 - [X] Fullstack `Select`
 - [X] Fullstack `TomSelect`
@@ -65,6 +64,7 @@ Still no artifacts are published, but we are close to the first alpha release.
 - [X] SSR support
 - [X] Code documentation
 - [X] Unit tests
+- [ ] Maven central publication
 - [ ] More examples of typical applications (crud, chat, todo, etc.) 
 
 ## Code sample
@@ -115,7 +115,7 @@ application code both in the browser and in NodeJs environment. What's more, you
 WASM compilation target for much better performance.  
 
 ### Current limitations:
-- The URL address needs to be the only source of application state.
+- The URL address and the browser preferred locale need to be the only source of application state.
 - Using browser APIs directly is not recommended.
 - Advanced JS components (like RichText, Tabulator etc.) are rendered on the server
 as simple HTML placeholders.
