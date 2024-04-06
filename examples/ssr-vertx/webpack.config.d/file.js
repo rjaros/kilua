@@ -4,3 +4,9 @@ config.module.rules.push(
         type: 'asset/resource'
     }
 );
+config.module.rules.push(
+    {
+        test: /\.(po)$/i,
+        type: 'asset/source'
+    }
+);
