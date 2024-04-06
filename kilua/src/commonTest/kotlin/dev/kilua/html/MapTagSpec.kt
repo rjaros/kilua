@@ -28,13 +28,13 @@ import dev.kilua.test.normalizeHtml
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class MapSpec : DomSpec {
+class MapTagSpec : DomSpec {
 
     @Test
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                map("test") {
+                mapTag("test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"
@@ -55,7 +55,7 @@ class MapSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                map("test") {
+                mapTag("test") {
                     id = "test-id"
                     title = "A title"
                     ariaLabel = "A title"

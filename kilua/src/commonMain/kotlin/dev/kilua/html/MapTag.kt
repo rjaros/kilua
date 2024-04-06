@@ -33,21 +33,21 @@ import web.dom.HTMLMapElement
 /**
  * HTML Map component.
  */
-public open class Map(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
+public open class MapTag(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
     Tag<HTMLMapElement>("map", className, renderConfig = renderConfig)
 
 /**
- * Creates a [Map] component.
+ * Creates a [MapTag] component.
  *
  * @param className the CSS class name
  * @param content the content of the component
- * @return the [Map] component
+ * @return the [MapTag] component
  */
 @Composable
-public fun ComponentBase.map(className: String? = null, content: @Composable Map.() -> Unit = {}): Map {
-    val component = remember { Map(className, renderConfig = renderConfig) }
+public fun ComponentBase.mapTag(className: String? = null, content: @Composable MapTag.() -> Unit = {}): MapTag {
+    val component = remember { MapTag(className, renderConfig = renderConfig) }
     ComponentNode(component, {
-        set(className) { updateProperty(Map::className, it) }
+        set(className) { updateProperty(MapTag::className, it) }
     }, content)
     return component
 }
