@@ -10,7 +10,7 @@ plugins {
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
     js(IR) {
-        // useEsModules() workaround modules order (https://youtrack.jetbrains.com/issue/KT-64616)
+        useEsModules()
         browser {
             commonWebpackConfig {
                 outputFileName = "main.bundle.js"
