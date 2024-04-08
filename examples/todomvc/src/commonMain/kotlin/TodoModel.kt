@@ -23,10 +23,10 @@
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class MODE {
-    ALL,
-    ACTIVE,
-    COMPLETED
+enum class Mode {
+    All,
+    Active,
+    Completed
 }
 
 @Serializable

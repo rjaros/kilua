@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2024 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,11 @@
  * SOFTWARE.
  */
 
-package dev.kilua
-
-import dev.kilua.utils.require
-
-public actual fun initializeCoreModule() {
-    require("zzz-kilua-assets/style.css")
+data class State(val todos: List<Todo>) {
+    fun areAllCompleted() = todos.find { !it.completed } == null
+    fun activeList() = todos.filter { !it.completed }
+    fun completedList() = todos.filter { it.completed }
+    fun allListIndexed() = todos.mapIndexed { index, todo -> index to todo }
+    fun activeListIndexed() = allListIndexed().filter { !it.second.completed }
+    fun completedListIndexed() = allListIndexed().filter { it.second.completed }
 }

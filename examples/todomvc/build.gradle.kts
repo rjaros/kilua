@@ -10,7 +10,7 @@ plugins {
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
     js(IR) {
-        // useEsModules() workaround modules order (https://youtrack.jetbrains.com/issue/KT-64616)
+        useEsModules()
         browser {
             commonWebpackConfig {
                 outputFileName = "main.bundle.js"
@@ -66,6 +66,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":kilua"))
+                implementation(project(":modules:kilua-core-css"))
                 implementation(project(":modules:kilua-routing"))
             }
         }
