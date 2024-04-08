@@ -31,7 +31,6 @@ kotlin {
                 api(project(":modules:kilua-dom"))
 //                implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.1-SNAPSHOT.1.tgz"))
                 implementation(npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get()))
-                implementation(npm("zzz-kilua-assets", libs.versions.npm.kilua.assets.get()))
                 implementation(npm("css-loader", libs.versions.css.loader.get()))
                 implementation(npm("style-loader", libs.versions.style.loader.get()))
                 implementation(npm("imports-loader", libs.versions.imports.loader.get()))

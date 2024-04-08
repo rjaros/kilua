@@ -31,15 +31,3 @@ public interface ModuleInitializer {
      */
     public fun initialize()
 }
-
-public expect fun initializeCoreModule()
-
-/**
- * Initializer for Kilua core module.
- */
-public object CoreModule : ModuleInitializer {
-    override fun initialize() {
-        initializeCoreModule()
-        CssRegister.register("zzz-kilua-assets/style.css")
-    }
-}

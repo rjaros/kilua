@@ -1,3 +1,4 @@
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -22,13 +23,22 @@
 
 package dev.kilua
 
+import dev.kilua.utils.JsModule
 import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.useModule
+import web.JsAny
 
 @JsModule("zzz-kilua-assets/style.css")
 @JsNonModule
-internal external object StyleCss : JsAny
+internal external object CoreCss : JsAny
 
-public actual fun initializeCoreModule() {
-    useModule(StyleCss)
+/**
+ * Initializer for Kilua core module.
+ */
+public object CoreModule : ModuleInitializer {
+
+    override fun initialize() {
+        useModule(CoreCss)
+        CssRegister.register("zzz-kilua-assets/style.css")
+    }
 }
