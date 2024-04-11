@@ -317,7 +317,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
         restClientConfig.requestFilter?.invoke(requestInit)
         restRequestConfig.requestFilter?.invoke(requestInit)
         return suspendCancellableCoroutine { continuation ->
-            window.fetch(fetchUrl, requestInit).then { response ->
+            fetch(fetchUrl, requestInit).then { response ->
                 if (response.ok) {
                     val statusText = response.statusText
                     if (response.status != HTTP_NO_CONTENT) {
