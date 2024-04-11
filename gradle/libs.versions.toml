@@ -47,6 +47,7 @@ tom-select = "2.3.1"
 imask = "7.5.0"
 tabulator = "6.2.0"
 rsup-progress = "3.2.0"
+lz-string = "1.5.0"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }

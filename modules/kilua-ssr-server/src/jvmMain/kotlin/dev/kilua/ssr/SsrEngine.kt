@@ -107,13 +107,16 @@ public class SsrEngine(
         val response = httpClient.post(ssrService)
         if (response.status == HttpStatusCode.OK) {
             withContext(Dispatchers.IO) {
-                val cssTemplate = response.bodyAsText().split("\n").joinToString("\n") {
-                    workingDir.resolve(it).readText()
+                val textResponse = response.bodyAsText()
+                if (textResponse.isNotEmpty()) {
+                    val cssTemplate = response.bodyAsText().split("\n").joinToString("\n") {
+                        workingDir.resolve(it).readText()
+                    }
+                    val cssCompressor = CssCompressor(cssTemplate.reader())
+                    val writer = StringWriter()
+                    cssCompressor.compress(writer, -1)
+                    indexTemplate = indexTemplate.replace("</head>", "<style>\n$writer\n</style>\n</head>")
                 }
-                val cssCompressor = CssCompressor(cssTemplate.reader())
-                val writer = StringWriter()
-                cssCompressor.compress(writer, -1)
-                indexTemplate = indexTemplate.replace("</head>", "<style>\n$writer\n</style>\n</head>")
             }
         } else {
             logger.error("Failed to initialize CSS for SSR")

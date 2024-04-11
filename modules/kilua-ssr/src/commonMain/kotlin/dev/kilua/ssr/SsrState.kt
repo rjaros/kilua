@@ -20,11 +20,17 @@
  * SOFTWARE.
  */
 
-package dev.kilua.i18n
+package dev.kilua.ssr
 
-/**
- * A listener for global locale changes.
- */
-public fun interface LocaleChangeListener {
-    public fun setLocale(locale: Locale)
+import dev.kilua.externals.get
+import dev.kilua.utils.isDom
+import kotlinx.serialization.json.Json
+import web.window
+
+public inline fun <reified T> getSsrState(json: Json = Json.Default): T? {
+    return if (isDom) {
+        window["KILUA_SSR_STATE"]?.toString()?.let {
+            json.decodeFromString(decompressFromEncodedURIComponent(it))
+        }
+    } else null
 }

@@ -33,18 +33,25 @@ import dev.kilua.utils.nativeListOf
  */
 public object LocaleManager {
     private val listeners = nativeListOf<LocaleChangeListener>()
+    private val ssrListeners = nativeListOf<LocaleChangeListener>()
 
     public val defaultLocale: Locale = DefaultLocale()
 
     public var currentLocale: Locale by mutableStateOf(defaultLocale)
 
-    public fun setCurrentLocale(locale: Locale) {
+    public fun setCurrentLocale(locale: Locale, skipSsr: Boolean = false) {
         currentLocale = locale
         listeners.forEach { it.setLocale(locale) }
+        if (!skipSsr) ssrListeners.forEach { it.setLocale(locale) }
     }
 
     public fun registerLocaleListener(localeChangeListener: LocaleChangeListener) {
         localeChangeListener.setLocale(currentLocale)
         listeners += localeChangeListener
+    }
+
+    public fun registerSsrLocaleListener(ssrLocaleChangeListener: LocaleChangeListener) {
+        ssrLocaleChangeListener.setLocale(currentLocale)
+        ssrListeners += ssrLocaleChangeListener
     }
 }

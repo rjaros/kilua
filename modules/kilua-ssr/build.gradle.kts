@@ -24,6 +24,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":kilua"))
+                implementation(npm("lz-string", libs.versions.lz.string.get()))
                 api(project(":modules:kilua-routing"))
             }
         }

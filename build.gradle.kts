@@ -40,6 +40,7 @@ project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin>
         resolution("imask", libs.versions.imask.get())
         resolution("tabulator-tables", libs.versions.tabulator.get())
         resolution("rsup-progress", libs.versions.rsup.progress.get())
+        resolution("lz-string", libs.versions.lz.string.get())
     }
 }
 

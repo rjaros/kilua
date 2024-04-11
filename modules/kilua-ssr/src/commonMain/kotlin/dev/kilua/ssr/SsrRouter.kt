@@ -26,7 +26,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import app.softwork.routingcompose.BrowserRouter
 import app.softwork.routingcompose.Path
 import app.softwork.routingcompose.RouteBuilder
@@ -55,20 +58,69 @@ import web.toJsString
 @Composable
 public fun ComponentBase.SsrRouter(
     initPath: String,
+    ssrCondition: Boolean = true,
+    stateSerializer: (() -> String)? = null,
     routeBuilder: @Composable RouteBuilder.() -> Unit
 ) {
     if (renderConfig.isDom) {
         BrowserRouter(initPath, routeBuilder)
     } else {
-        val router = SsrRouter(initPath, this)
+        val router = remember {
+            SsrRouter(initPath, this, stateSerializer).also { Router.internalGlobalRouter = it }
+        }
         router.route(initPath) {
             routeBuilder()
-            LocaleManager.currentLocale // trigger recomposition on locale change
-            SideEffect {
-                router.sendRender?.let {
-                    it(this@SsrRouter.innerHTML)
-                    router.sendRender = null
-                    router.lock = false
+            if (ssrCondition) {
+                SideEffect {
+                    router.sendRender?.let {
+                        it(router.getRenderingResult())
+                        router.sendRender = null
+                        router.lock = false
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * A router supporting Server-Side Rendering (SSR) with manual "done" callback.
+ * Uses a [BrowserRouter] when running in the browser and a custom router when running on the server.
+ */
+@Composable
+public fun ComponentBase.SsrRouter(
+    initPath: String,
+    ssrCondition: Boolean = true,
+    stateSerializer: (() -> String)? = null,
+    routeBuilder: @Composable RouteBuilder.(done: () -> Unit) -> Unit
+) {
+    if (renderConfig.isDom) {
+        BrowserRouter(initPath) { routeBuilder {} }
+    } else {
+        val router = remember {
+            SsrRouter(initPath, this, stateSerializer).also { Router.internalGlobalRouter = it }
+        }
+
+        var externalCondition by remember {
+            val state = mutableStateOf(false)
+            LocaleManager.registerSsrLocaleListener {
+                state.value = true
+            }
+            state
+        }
+
+        router.route(initPath) {
+            routeBuilder {
+                externalCondition = true
+            }
+            if (ssrCondition && externalCondition) {
+                SideEffect {
+                    router.sendRender?.let {
+                        it(router.getRenderingResult())
+                        router.sendRender = null
+                        router.lock = false
+                    }
+                    externalCondition = false
                 }
             }
         }
@@ -84,7 +136,11 @@ public fun ComponentBase.SsrRouter(
  * an appropriate recomposition. The result of the recomposition (rendered to String) is returned
  * as a http response.
  */
-internal class SsrRouter(initPath: String, val root: ComponentBase) : Router {
+internal class SsrRouter(
+    initPath: String,
+    val root: ComponentBase,
+    val stateSerializer: (() -> String)? = null
+) : Router {
     internal var lock: Boolean = false
     internal var sendRender: ((String) -> Unit)? = null
 
@@ -115,6 +171,21 @@ internal class SsrRouter(initPath: String, val root: ComponentBase) : Router {
         currentLocation.value = to
     }
 
+    fun getRenderingResult(): String {
+        val html = root.innerHTML
+        val state = stateSerializer?.invoke()
+        return if (state != null) {
+            """
+            <script>
+            window.KILUA_SSR_STATE = "${compressToEncodedURIComponent(state)}";
+            </script>
+            $html
+            """.trimIndent()
+        } else {
+            html
+        }
+    }
+
     private fun startSsr(port: Int) {
         http.createServer { rq: JsAny, rs: JsAny ->
             val req = rq.unsafeCast<IncomingMessage>()
@@ -143,13 +214,13 @@ internal class SsrRouter(initPath: String, val root: ComponentBase) : Router {
                                     SimpleLocale(clientLanguage)
                                 }
                             }
-                            LocaleManager.setCurrentLocale(newLocale)
+                            LocaleManager.setCurrentLocale(newLocale, skipSsr = pathChanged)
                         }
                         if (pathChanged) {
                             navigate(req.url)
                         }
                     } else {
-                        res.end(root.innerHTML)
+                        res.end(getRenderingResult())
                         lock = false
                     }
                 }

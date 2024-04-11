@@ -1,3 +1,4 @@
+@file:JsModule("lz-string")
 /*
  * Copyright (c) 2024 Robert Jaros
  *
@@ -20,11 +21,16 @@
  * SOFTWARE.
  */
 
-package dev.kilua.i18n
+package dev.kilua.ssr
+
+import dev.kilua.utils.JsModule
 
 /**
- * A listener for global locale changes.
+ * Compress String to encoded URI component.
  */
-public fun interface LocaleChangeListener {
-    public fun setLocale(locale: Locale)
-}
+public external fun compressToEncodedURIComponent(input: String): String
+
+/**
+ * Decompress encoded URI component to String.
+ */
+public external fun decompressFromEncodedURIComponent(input: String): String
