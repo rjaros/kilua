@@ -35,7 +35,7 @@ import web.dom.HTMLImageElement
  * HTML Img component.
  */
 public open class Img(
-    src: String,
+    src: String? = null,
     alt: String? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
@@ -66,7 +66,9 @@ public open class Img(
 
     init {
         if (renderConfig.isDom) {
-            element.src = src
+            if (src != null) {
+                element.src = src
+            }
             if (alt != null) {
                 element.alt = alt
             }
@@ -91,7 +93,7 @@ public open class Img(
  */
 @Composable
 public fun ComponentBase.img(
-    src: String, alt: String? = null,
+    src: String? = null, alt: String? = null,
     className: String? = null, content: @Composable Img.() -> Unit = {}
 ): Img {
     val component = remember { Img(src, alt, className, renderConfig = renderConfig) }
