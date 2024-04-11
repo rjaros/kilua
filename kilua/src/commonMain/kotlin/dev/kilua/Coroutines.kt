@@ -42,6 +42,11 @@ public val KiluaScope: CoroutineScope = CoroutineScope(Dispatchers.Default + Sup
 public expect fun <T> Deferred<T>.asPromise(): Promise<JsAny?>
 
 /**
+ * Convert JS Promise to a Deferred.
+ */
+public expect fun <T : JsAny?> Promise<T>.asDeferred(): Deferred<T>
+
+/**
  * Create a JS Promise from a suspending block.
  */
 public fun <T : JsAny?> promise(block: suspend () -> T): Promise<T> = KiluaScope.async { block() }.asPromise().cast()
