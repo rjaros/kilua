@@ -27,6 +27,7 @@ import dev.kilua.externals.RsupProgressOptions
 import dev.kilua.externals.RsupProgressPromiseOptions
 import dev.kilua.externals.obj
 import dev.kilua.html.Color
+import dev.kilua.utils.isDom
 import dev.kilua.utils.toKebabCase
 import web.JsAny
 import web.Promise
@@ -101,33 +102,33 @@ internal fun ProgressPromiseOptions.toJs(): RsupProgressPromiseOptions {
  * The progress indicator.
  */
 public open class Progress(options: ProgressOptions = ProgressOptions()) {
-    private val rsupProgress = RsupProgress(options.toJs())
+    private val rsupProgress = if (isDom) RsupProgress(options.toJs()) else null
 
     /**
      * Whether the indicator is in progress.
      */
     public val isInProgress: Boolean
-        get() = rsupProgress.isInProgress
+        get() = rsupProgress?.isInProgress ?: false
 
     /**
      * Change the options for the progress indicator.
      */
     public fun setOptions(options: ProgressOptions) {
-        rsupProgress.setOptions(options.toJs())
+        rsupProgress?.setOptions(options.toJs())
     }
 
     /**
      * Start the progress indicator.
      */
     public fun start() {
-        rsupProgress.start()
+        rsupProgress?.start()
     }
 
     /**
      * Stop the progress indicator.
      */
     public fun end(immediately: Boolean = false) {
-        rsupProgress.end(immediately)
+        rsupProgress?.end(immediately)
     }
 
     /**
@@ -137,10 +138,14 @@ public open class Progress(options: ProgressOptions = ProgressOptions()) {
         promise: Promise<T>,
         options: ProgressPromiseOptions? = null
     ): Promise<T> {
-        return if (options != null) {
-            rsupProgress.promise(promise, options.toJs())
+        return if (rsupProgress != null) {
+            if (options != null) {
+                rsupProgress.promise(promise, options.toJs())
+            } else {
+                rsupProgress.promise(promise)
+            }
         } else {
-            rsupProgress.promise(promise)
+            promise
         }
     }
 }
