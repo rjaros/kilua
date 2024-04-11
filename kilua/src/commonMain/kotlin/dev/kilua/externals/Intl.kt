@@ -32,6 +32,7 @@ public external object Intl : JsAny {
     public class DateTimeFormat() {
         public constructor(locale: String, options: JsAny)
         public fun resolvedOptions(): ResolvedOptions
+        public fun format(date: JsAny): String
     }
 }
 
