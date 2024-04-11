@@ -46,7 +46,7 @@ public fun BrowserRouter(
     initPath: String,
     routeBuilder: @Composable RouteBuilder.() -> Unit
 ) {
-    BrowserRouter().route(initPath, routeBuilder)
+    Router.internalGlobalRouter = BrowserRouter().apply { route(initPath, routeBuilder) }
 }
 
 internal class BrowserRouter : Router {

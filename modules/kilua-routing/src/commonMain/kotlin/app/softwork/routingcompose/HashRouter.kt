@@ -34,7 +34,7 @@ public fun HashRouter(
     initPath: String,
     routeBuilder: @Composable RouteBuilder.() -> Unit
 ) {
-    HashRouter().route(initPath, routeBuilder)
+    Router.internalGlobalRouter = HashRouter().apply { route(initPath, routeBuilder) }
 }
 
 internal class HashRouter : Router {

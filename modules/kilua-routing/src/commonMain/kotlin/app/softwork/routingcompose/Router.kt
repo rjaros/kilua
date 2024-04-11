@@ -48,6 +48,18 @@ public interface Router {
         public val current: Router
             @Composable
             get() = RouterCompositionLocal.current
+
+        /**
+         * Internal global router instance for use outside of composition.
+         * Do not use directly, use [global] instead.
+         */
+        public var internalGlobalRouter: Router? = null
+
+        /**
+         * Provide the global router instance for use outside of composition.
+         */
+        public val global: Router
+            get() = internalGlobalRouter ?: error("Router not defined.")
     }
 }
 
