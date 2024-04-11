@@ -40,6 +40,16 @@ import web.toJsNumber
 import web.toJsString
 
 /**
+ * JavaScript encodeURIComponent function
+ */
+public external fun encodeURIComponent(value: String): String
+
+/**
+ * JavaScript decodeURIComponent function
+ */
+public external fun decodeURIComponent(value: String): String
+
+/**
  * Utility extension function for casting. Uses unsafeCast() on JS.
  */
 public expect inline fun <T> Any?.cast(): T
