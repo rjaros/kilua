@@ -22,11 +22,9 @@
 
 package dev.kilua.html
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.test.normalizeHtml
+import dev.kilua.test.DomSpec
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class TextNodeSpec : DomSpec {
 
@@ -34,11 +32,11 @@ class TextNodeSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                textNode("test")
+                textNode("test &nbsp; <b>not so bold</b>")
             }
-            assertEquals(
-                normalizeHtml("""test"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """test &amp;nbsp; &lt;b&gt;not so bold&lt;/b&gt;""",
+                root.element.innerHTML,
                 "Should render an HTML text node to DOM"
             )
         }
@@ -48,15 +46,14 @@ class TextNodeSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                textNode("test")
+                textNode("test &nbsp; <b>not so bold</b>")
             }
-            assertEquals(
-                normalizeHtml("""<div>test</div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """test &amp;nbsp; &lt;b&gt;not so bold&lt;/b&gt;""",
+                root.innerHTML,
                 "Should render an HTML text node to a String"
             )
         }
     }
 
 }
-

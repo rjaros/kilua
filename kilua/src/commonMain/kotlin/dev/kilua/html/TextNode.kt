@@ -61,7 +61,13 @@ public open class TextNode(
     }
 
     override fun renderToStringBuilder(builder: StringBuilder) {
-        builder.append(data)
+        builder.append(
+            data.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#039;")
+        )
     }
 }
 
