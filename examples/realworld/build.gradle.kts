@@ -108,6 +108,7 @@ kotlin {
                 implementation(project(":modules:kilua-ssr-server-ktor"))
                 implementation(libs.ktor.server.netty)
                 implementation(libs.ktor.server.compression)
+                implementation(libs.ktor.server.caching.headers)
                 implementation(libs.logback.classic)
             }
         }
