@@ -24,6 +24,7 @@ kotlin {
                 api(libs.ktor.client.core)
                 api(libs.ktor.client.apache)
                 api(libs.wro4j)
+                api(libs.expiring.map)
                 api(libs.logback.classic)
             }
         }

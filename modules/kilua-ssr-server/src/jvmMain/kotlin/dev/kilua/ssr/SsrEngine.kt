@@ -29,11 +29,14 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import net.jodah.expiringmap.ExpirationPolicy
+import net.jodah.expiringmap.ExpiringMap
 import org.slf4j.LoggerFactory
 import ro.isdc.wro.model.resource.processor.support.CssCompressor
 import java.io.StringWriter
 import java.nio.file.Path
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.createTempDirectory
 import kotlin.io.path.deleteRecursively
@@ -67,6 +70,11 @@ public class SsrEngine(
 
     private var cssProcessed: Boolean = false
     private var indexTemplate: String = ""
+
+    private val cache: MutableMap<CacheKey, String> = ExpiringMap.builder()
+        .expiration(10, TimeUnit.MINUTES)
+        .expirationPolicy(ExpirationPolicy.CREATED)
+        .build()
 
     init {
         Runtime.getRuntime().addShutdownHook(Thread {
@@ -132,17 +140,21 @@ public class SsrEngine(
                 processCss()
                 cssProcessed = true
             }
-            val response = httpClient.get("$ssrService$uri") {
-                if (locale != null) {
-                    header("x-kilua-locale", locale)
+            cache.getOrPut(CacheKey(uri, locale)) {
+                if (uri.count { it == '?' } > 1) {
+                    throw Exception("Invalid URI: $uri")
                 }
-            }
-            if (response.status == HttpStatusCode.OK) {
-                val content = response.bodyAsText()
-                indexTemplate.replace(uniqueText, content)
-            } else {
-                logger.error("Connection to the SSR service failed with status ${response.status}")
-                indexTemplate.replace(uniqueText, "")
+                val response = httpClient.get("$ssrService$uri") {
+                    if (locale != null) {
+                        header("x-kilua-locale", locale)
+                    }
+                }
+                if (response.status == HttpStatusCode.OK) {
+                    val content = response.bodyAsText()
+                    indexTemplate.replace(uniqueText, content)
+                } else {
+                    throw Exception("Connection to the SSR service failed with status ${response.status}")
+                }
             }
         } catch (e: Exception) {
             logger.error("Connection to the SSR service failed", e)

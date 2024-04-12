@@ -30,6 +30,7 @@ shadow = "8.1.1"
 logback = "1.5.3"
 tomlj = "1.1.1"
 wro4j = "2.1.1"
+expiring-map = "0.5.11"
 npm-kilua-assets = "0.0.7"
 css-loader = "6.11.0"
 style-loader = "3.3.4"
@@ -77,6 +78,7 @@ vertx-lang-kotlin-coroutines = { module = "io.vertx:vertx-lang-kotlin-coroutines
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
 wro4j = { module = "ro.isdc.wro4j:wro4j-core", version.ref = "wro4j" }
+expiring-map = { module = "net.jodah:expiringmap", version.ref = "expiring-map" }
 kilua-gettext = { module = "dev.kilua:kilua-gettext", version.ref = "kilua-gettext" }
 
 [plugins]
