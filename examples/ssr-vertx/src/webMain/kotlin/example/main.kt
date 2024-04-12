@@ -41,7 +41,7 @@ class App : Application() {
     override fun start() {
 
         root("root") {
-            SsrRouter(initPath = "/") {
+            SsrRouter(initPath = "/") { ->
                 div {
                     margin = 20.px
                     route("/") {
