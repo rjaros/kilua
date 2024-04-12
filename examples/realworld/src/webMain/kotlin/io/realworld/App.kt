@@ -22,7 +22,6 @@
 
 package io.realworld
 
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import dev.kilua.Application
@@ -30,6 +29,7 @@ import dev.kilua.RsupProgressModule
 import dev.kilua.compose.root
 import dev.kilua.html.header
 import dev.kilua.html.main
+import dev.kilua.ssr.SsrRouteEffect
 import dev.kilua.ssr.SsrRouter
 import dev.kilua.startApplication
 import dev.kilua.utils.decodeURIComponent
@@ -66,7 +66,7 @@ class App : Application() {
                     route(View.HOME.url) {
                         homePage(state, conduitManager)
                         if (!state.appLoading) {
-                            LaunchedEffect(parameters?.raw) {
+                            SsrRouteEffect {
                                 conduitManager.homePage(done)
                             }
                         }
@@ -74,8 +74,13 @@ class App : Application() {
                     route(View.ARTICLE.url) {
                         string { slug ->
                             if (slug == state.article?.slug) article(state, conduitManager)
-                            LaunchedEffect(slug + parameters?.raw?.let { "?$it" }) {
+                            SsrRouteEffect(slug) {
                                 conduitManager.showArticle(slug, done)
+                            }
+                        }
+                        noMatch {
+                            SsrRouteEffect {
+                                done()
                             }
                         }
                     }
@@ -84,28 +89,33 @@ class App : Application() {
                             val username = decodeURIComponent(it)
                             route("/favorites") {
                                 if (state.profile?.username == username) profilePage(state, conduitManager)
-                                LaunchedEffect(username + parameters?.raw?.let { "?$it" }) {
+                                SsrRouteEffect(username) {
                                     conduitManager.showProfile(username, true, done)
                                 }
                             }
                             noMatch {
                                 if (state.profile?.username == username) profilePage(state, conduitManager)
-                                LaunchedEffect(username + parameters?.raw?.let { "?$it" }) {
+                                SsrRouteEffect(username) {
                                     conduitManager.showProfile(username, false, done)
                                 }
+                            }
+                        }
+                        noMatch {
+                            SsrRouteEffect {
+                                done()
                             }
                         }
                     }
                     route(View.LOGIN.url) {
                         loginPage(state, conduitManager)
-                        LaunchedEffect(parameters?.raw) {
+                        SsrRouteEffect {
                             conduitManager.loginPage()
                             done()
                         }
                     }
                     route(View.REGISTER.url) {
                         registerPage(state, conduitManager)
-                        LaunchedEffect(parameters?.raw) {
+                        SsrRouteEffect {
                             conduitManager.registerPage()
                             done()
                         }
@@ -113,14 +123,14 @@ class App : Application() {
                     route(View.EDITOR.url) {
                         string { slug ->
                             if (slug == state.editedArticle?.slug) editorPage(state, conduitManager)
-                            LaunchedEffect(slug + parameters?.raw?.let { "?$it" }) {
+                            SsrRouteEffect(slug) {
                                 conduitManager.editorPage(slug)
                                 done()
                             }
                         }
                         noMatch {
                             editorPage(state, conduitManager)
-                            LaunchedEffect(parameters?.raw) {
+                            SsrRouteEffect {
                                 conduitManager.editorPage()
                                 done()
                             }
@@ -128,8 +138,13 @@ class App : Application() {
                     }
                     route(View.SETTINGS.url) {
                         settingsPage(state, conduitManager)
-                        LaunchedEffect(parameters?.raw) {
+                        SsrRouteEffect {
                             conduitManager.settingsPage()
+                            done()
+                        }
+                    }
+                    noMatch {
+                        SsrRouteEffect {
                             done()
                         }
                     }
