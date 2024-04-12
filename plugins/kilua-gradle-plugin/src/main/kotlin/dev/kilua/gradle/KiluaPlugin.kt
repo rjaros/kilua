@@ -227,6 +227,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     eachFile {
                         if (this.name.endsWith(".css")) {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
+                        } else if (this.name.equals("main.bundle.js")) {
+                            this.filter {
+                                it.replace(Regex("""=[^\(]*\(\"url\"\)\.fileURLToPath\(\"file://([^\"]*/)*([^\"]*)\"\)"""), "=\"./$2\"")
+                            }
                         }
                     }
                 }
