@@ -23,6 +23,7 @@
 package dev.kilua.ssr
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
@@ -38,6 +39,7 @@ import app.softwork.routingcompose.route
 import dev.kilua.CssRegister
 import dev.kilua.KiluaScope
 import dev.kilua.core.ComponentBase
+import dev.kilua.externals.console
 import dev.kilua.externals.get
 import dev.kilua.externals.globalThis
 import dev.kilua.externals.set
@@ -46,6 +48,7 @@ import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
 import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.unsafeCast
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import web.JsAny
@@ -233,5 +236,33 @@ internal class SsrRouter(
                 res.end("Not Found")
             }
         }.listen(port)
+    }
+}
+
+private val RouteBuilder.pathKey: String
+    get() = path + (parameters?.raw?.let { "?$it" } ?: "")
+
+private val RouteBuilder.NoMatch.pathKey: String
+    get() = remainingPath + (parameters?.raw?.let { "?$it" } ?: "")
+
+/**
+ * LaunchedEffect wrapper prepared to catch and execute effect for all not matched routes.
+ * Use to make sure all routes are processed with SSR engine.
+ */
+@Composable
+public fun RouteBuilder.SsrRouteEffect(key: String? = null, block: suspend CoroutineScope.() -> Unit) {
+    LaunchedEffect(key?.let { "$it$pathKey" } ?: pathKey) {
+        block()
+    }
+}
+
+/**
+ * LaunchedEffect wrapper prepared to catch and execute effect for all not matched routes.
+ * Use to make sure all routes are processed with SSR engine.
+ */
+@Composable
+public fun RouteBuilder.NoMatch.SsrRouteEffect(key: String? = null, block: suspend CoroutineScope.() -> Unit) {
+    LaunchedEffect(key?.let { "$it$pathKey" } ?: pathKey) {
+        block()
     }
 }
