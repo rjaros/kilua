@@ -15,3 +15,4 @@ ssr:
 #  externalSsrService: "http://localhost:7788"
 #  rpcUrlPrefix: "http://localhost:8080"
 #  rootId: "root"
+#  noCache: false
