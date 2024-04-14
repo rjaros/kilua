@@ -7,15 +7,17 @@ if (config.devServer) {
     config.devServer.port = 3000;
     config.devServer.historyApiFallback = true;
     config.devtool = 'eval-cheap-source-map';
-    config.devServer.proxy = {
-        "/rpc/*": {
-            target: 'http://localhost:8080',
+    config.devServer.proxy = [
+        {
+            context: ["/rpc/*", "/rpcsse/*"],
+            target: 'http://localhost:8080'
         },
-        "/rpcws/*": {
+        {
+            context: ["/rpcws/*"],
             target: 'http://localhost:8080',
-            ws: true,
-        },
-    }
+            ws: true
+        }
+    ]
 } else {
     config.devtool = undefined;
 }

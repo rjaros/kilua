@@ -16,9 +16,11 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 fun KotlinMultiplatformExtension.compilerOptions() {
     targets.configureEach {
         compilations.configureEach {
-            compilerOptions.configure {
-                freeCompilerArgs.add("-Xexpect-actual-classes")
-//                freeCompilerArgs.add("-Xdont-warn-on-error-suppression")
+            compileTaskProvider.configure {
+                compilerOptions {
+                    freeCompilerArgs.add("-Xexpect-actual-classes")
+                    freeCompilerArgs.add("-Xdont-warn-on-error-suppression")
+                }
             }
         }
     }
@@ -71,8 +73,10 @@ fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = "17") {
     }
     jvm {
         compilations.configureEach {
-            compilerOptions.configure {
-                freeCompilerArgs.add("-Xjsr305=strict")
+            compileTaskProvider.configure {
+                compilerOptions {
+                    freeCompilerArgs.add("-Xjsr305=strict")
+                }
             }
         }
     }

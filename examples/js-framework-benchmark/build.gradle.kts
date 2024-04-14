@@ -42,25 +42,6 @@ kotlin {
             }
         }
         binaries.executable()
-        applyBinaryen {
-            if (project.gradle.startParameter.taskNames.find { it.contains("wasmJsBrowserProductionWebpack") } != null) {
-                binaryenArgs = mutableListOf(
-                    "--enable-nontrapping-float-to-int",
-                    "--enable-gc",
-                    "--enable-reference-types",
-                    "--enable-exception-handling",
-                    "--enable-bulk-memory",
-                    "--inline-functions-with-loops",
-                    "--traps-never-happen",
-                    "--fast-math",
-                    "--closed-world",
-                    "--metrics",
-                    "-O3", "--gufa", "--metrics",
-                    "-O3", "--gufa", "--metrics",
-                    "-O3", "--gufa", "--metrics",
-                )
-            }
-        }
     }
     sourceSets {
         val commonMain by getting {
