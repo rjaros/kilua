@@ -63,84 +63,29 @@ class App : Application() {
                     headerNav(state)
                 }
                 main {
-                    route(View.HOME.url) {
-                        homePage(state, conduitManager)
-                        if (!state.appLoading) {
-                            SsrRouteEffect {
-                                conduitManager.homePage(done)
-                            }
-                        }
+                    when (state.view) {
+                        View.HOME -> homePage(state, conduitManager)
+                        View.ARTICLE -> article(state, conduitManager)
+                        View.PROFILE -> profilePage(state, conduitManager)
+                        View.LOGIN -> loginPage(state, conduitManager)
+                        View.REGISTER -> registerPage(state, conduitManager)
+                        View.EDITOR -> editorPage(state, conduitManager)
+                        View.SETTINGS -> settingsPage(state, conduitManager)
                     }
-                    route(View.ARTICLE.url) {
-                        string { slug ->
-                            if (slug == state.article?.slug) article(state, conduitManager)
-                            SsrRouteEffect(slug) {
-                                conduitManager.showArticle(slug, done)
-                            }
-                        }
-                        noMatch {
-                            SsrRouteEffect {
-                                done()
-                            }
-                        }
-                    }
-                    route(View.PROFILE.url) {
-                        string {
-                            val username = decodeURIComponent(it)
-                            route("/favorites") {
-                                if (state.profile?.username == username) profilePage(state, conduitManager)
-                                SsrRouteEffect(username) {
-                                    conduitManager.showProfile(username, true, done)
-                                }
-                            }
-                            noMatch {
-                                if (state.profile?.username == username) profilePage(state, conduitManager)
-                                SsrRouteEffect(username) {
-                                    conduitManager.showProfile(username, false, done)
-                                }
-                            }
-                        }
-                        noMatch {
-                            SsrRouteEffect {
-                                done()
-                            }
-                        }
-                    }
-                    route(View.LOGIN.url) {
-                        loginPage(state, conduitManager)
+                }
+                footer()
+
+                route(View.HOME.url) {
+                    if (!state.appLoading) {
                         SsrRouteEffect {
-                            conduitManager.loginPage()
-                            done()
+                            conduitManager.homePage(done)
                         }
                     }
-                    route(View.REGISTER.url) {
-                        registerPage(state, conduitManager)
-                        SsrRouteEffect {
-                            conduitManager.registerPage()
-                            done()
-                        }
-                    }
-                    route(View.EDITOR.url) {
-                        string { slug ->
-                            if (slug == state.editedArticle?.slug) editorPage(state, conduitManager)
-                            SsrRouteEffect(slug) {
-                                conduitManager.editorPage(slug)
-                                done()
-                            }
-                        }
-                        noMatch {
-                            editorPage(state, conduitManager)
-                            SsrRouteEffect {
-                                conduitManager.editorPage()
-                                done()
-                            }
-                        }
-                    }
-                    route(View.SETTINGS.url) {
-                        settingsPage(state, conduitManager)
-                        SsrRouteEffect {
-                            conduitManager.settingsPage()
-                            done()
+                }
+                route(View.ARTICLE.url) {
+                    string { slug ->
+                        SsrRouteEffect(slug) {
+                            conduitManager.showArticle(slug, done)
                         }
                     }
                     noMatch {
@@ -149,7 +94,63 @@ class App : Application() {
                         }
                     }
                 }
-                footer()
+                route(View.PROFILE.url) {
+                    string {
+                        val username = decodeURIComponent(it)
+                        route("/favorites") {
+                            SsrRouteEffect(username) {
+                                conduitManager.showProfile(username, true, done)
+                            }
+                        }
+                        noMatch {
+                            SsrRouteEffect(username) {
+                                conduitManager.showProfile(username, false, done)
+                            }
+                        }
+                    }
+                    noMatch {
+                        SsrRouteEffect {
+                            done()
+                        }
+                    }
+                }
+                route(View.LOGIN.url) {
+                    SsrRouteEffect {
+                        conduitManager.loginPage()
+                        done()
+                    }
+                }
+                route(View.REGISTER.url) {
+                    SsrRouteEffect {
+                        conduitManager.registerPage()
+                        done()
+                    }
+                }
+                route(View.EDITOR.url) {
+                    string { slug ->
+                        SsrRouteEffect(slug) {
+                            conduitManager.editorPage(slug)
+                            done()
+                        }
+                    }
+                    noMatch {
+                        SsrRouteEffect {
+                            conduitManager.editorPage()
+                            done()
+                        }
+                    }
+                }
+                route(View.SETTINGS.url) {
+                    SsrRouteEffect {
+                        conduitManager.settingsPage()
+                        done()
+                    }
+                }
+                noMatch {
+                    SsrRouteEffect {
+                        done()
+                    }
+                }
             }
         }
     }

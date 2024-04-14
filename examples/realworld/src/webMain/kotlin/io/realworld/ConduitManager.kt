@@ -212,7 +212,6 @@ class ConduitManager : TokenProvider {
     }
 
     fun showArticle(slug: String, done: () -> Unit) {
-        processAction(ConduitAction.ArticlePage)
         if (state.value.article?.slug != slug) {
             processAction(ConduitAction.ClearArticle)
         } else {
@@ -224,8 +223,9 @@ class ConduitManager : TokenProvider {
                 val articleComments = appScope.async { api.articleComments(slug) }
                 processAction(ConduitAction.ShowArticle(article.await()))
                 processAction(ConduitAction.ShowArticleCommets(articleComments.await()))
+                processAction(ConduitAction.ArticlePage)
                 done()
-            } catch (e: RemoteRequestException) {
+            } catch (e: Exception) {
                 console.log(e.message)
                 done()
             }
@@ -271,7 +271,6 @@ class ConduitManager : TokenProvider {
 
     fun showProfile(username: String, favorites: Boolean, done: () -> Unit) {
         val feedType = if (favorites) FeedType.PROFILE_FAVORITED else FeedType.PROFILE
-        processAction(ConduitAction.ProfilePage(feedType))
         if (state.value.profile?.username != username) {
             processAction(ConduitAction.SelectFeed(feedType, null, null))
         }
@@ -279,7 +278,8 @@ class ConduitManager : TokenProvider {
             try {
                 val user = api.profile(username)
                 selectFeed(feedType, null, user, done)
-            } catch (e: RemoteRequestException) {
+                processAction(ConduitAction.ProfilePage(feedType))
+            } catch (e: Exception) {
                 console.log(e.message)
                 done()
             }
@@ -302,10 +302,8 @@ class ConduitManager : TokenProvider {
     }
 
     private fun loadArticles(done: () -> Unit = {}) {
-        if (!state.value.fromSsr || state.value.articles == null) {
+        if (state.value.articles == null) {
             processAction(ConduitAction.ArticlesLoading)
-        } else {
-            done()
         }
         appScope.withProgress {
             try {
@@ -321,7 +319,7 @@ class ConduitManager : TokenProvider {
                 }
                 processAction(ConduitAction.ArticlesLoaded(articleDto.articles, articleDto.articlesCount))
                 done()
-            } catch (e: RemoteRequestException) {
+            } catch (e: Exception) {
                 console.log(e.message)
                 done()
             }
@@ -329,7 +327,7 @@ class ConduitManager : TokenProvider {
     }
 
     private fun loadTags() {
-        if (!state.value.fromSsr || state.value.tags == null) processAction(ConduitAction.TagsLoading)
+        if (state.value.tags == null) processAction(ConduitAction.TagsLoading)
         appScope.withProgress {
             try {
                 val tags = api.tags()
