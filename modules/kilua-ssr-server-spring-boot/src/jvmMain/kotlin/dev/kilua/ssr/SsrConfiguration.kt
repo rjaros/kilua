@@ -43,6 +43,7 @@ public open class SsrConfiguration {
         ssrConfig.port,
         ssrConfig.externalSsrService,
         ssrConfig.rpcUrlPrefix,
-        ssrConfig.rootId
+        ssrConfig.rootId,
+        ssrConfig.noCache
     )
 }

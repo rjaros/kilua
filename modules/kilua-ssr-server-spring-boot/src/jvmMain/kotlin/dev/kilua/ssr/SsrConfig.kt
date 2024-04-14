@@ -34,4 +34,5 @@ public open class SsrConfig(
     public val externalSsrService: String? = null,
     public val rpcUrlPrefix: String? = null,
     public val rootId: String? = null,
+    public val noCache: Boolean = false
 )

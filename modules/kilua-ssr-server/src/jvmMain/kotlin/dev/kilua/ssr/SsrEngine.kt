@@ -50,13 +50,15 @@ import kotlin.io.path.readText
  * @param externalSsrService an external SSR service URL. If provided, the local SSR service will not be started.
  * @param rpcUrlPrefix a prefix for the Kilua RPC fullstack services.
  * @param rootId an ID of the root element in the HTML template.
+ * @param noCache a flag to disable caching of SSR content.
  */
 public class SsrEngine(
     nodeExecutable: String? = null,
     port: Int? = null,
     externalSsrService: String? = null,
     rpcUrlPrefix: String? = null,
-    rootId: String? = null
+    rootId: String? = null,
+    private val noCache: Boolean = false
 ) {
 
     private val logger = LoggerFactory.getLogger(SsrEngine::class.java)
@@ -140,20 +142,11 @@ public class SsrEngine(
                 processCss()
                 cssProcessed = true
             }
-            cache.getOrPut(CacheKey(uri, locale)) {
-                if (uri.count { it == '?' } > 1) {
-                    throw Exception("Invalid URI: $uri")
-                }
-                val response = httpClient.get("$ssrService$uri") {
-                    if (locale != null) {
-                        header("x-kilua-locale", locale)
-                    }
-                }
-                if (response.status == HttpStatusCode.OK) {
-                    val content = response.bodyAsText()
-                    indexTemplate.replace(uniqueText, content)
-                } else {
-                    throw Exception("Connection to the SSR service failed with status ${response.status}")
+            if (noCache) {
+                getInternalSsrContent(uri, locale)
+            } else {
+                cache.getOrPut(CacheKey(uri, locale)) {
+                    getInternalSsrContent(uri, locale)
                 }
             }
         } catch (e: Exception) {
@@ -161,4 +154,22 @@ public class SsrEngine(
             indexTemplate.replace(uniqueText, "")
         }
     }
+
+    private suspend fun getInternalSsrContent(uri: String, locale: String?): String {
+        if (uri.count { it == '?' } > 1) {
+            throw Exception("Invalid URI: $uri")
+        }
+        val response = httpClient.get("$ssrService$uri") {
+            if (locale != null) {
+                header("x-kilua-locale", locale)
+            }
+        }
+        return if (response.status == HttpStatusCode.OK) {
+            val content = response.bodyAsText()
+            indexTemplate.replace(uniqueText, content)
+        } else {
+            throw Exception("Connection to the SSR service failed with status ${response.status}")
+        }
+    }
+
 }

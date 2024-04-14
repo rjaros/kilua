@@ -44,8 +44,11 @@ public open class SsrEngineBean {
     @field:Property(name = "ssr.rootId")
     private var rootId: String? = null
 
+    @field:Property(name = "ssr.noCache")
+    private var noCache: Boolean? = null
+
     @Context
     public open fun ssrEngine(): SsrEngine {
-        return SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId)
+        return SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, noCache ?: false)
     }
 }
