@@ -27,21 +27,21 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.form.form
 import dev.kilua.form.text.TextArea
 import dev.kilua.form.text.textArea
+import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1t
 import dev.kilua.html.hr
 import dev.kilua.html.img
-import dev.kilua.html.button
 import dev.kilua.html.li
 import dev.kilua.html.p
 import dev.kilua.html.rawHtml
 import dev.kilua.html.ul
 import dev.kilua.html.unaryPlus
-import dev.kilua.utils.jsObjectOf
+import dev.kilua.marked.parseMarkdown
+import dev.kilua.sanitize.sanitizeHtml
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
-import io.realworld.externals.parse
 
 @Composable
 fun ComponentBase.article(state: ConduitState, conduitManager: ConduitManager) {
@@ -58,7 +58,7 @@ fun ComponentBase.article(state: ConduitState, conduitManager: ConduitManager) {
                 div("row article-content") {
                     div("col-md-12") {
                         div {
-                            rawHtml(parse(article.body!!, jsObjectOf("sanitize" to true)))
+                            rawHtml(sanitizeHtml(parseMarkdown(article.body!!)))
                         }
                         if (article.tagList.isNotEmpty()) {
                             ul("tag-list") {

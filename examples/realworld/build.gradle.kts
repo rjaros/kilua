@@ -67,12 +67,13 @@ kotlin {
         val webMain by creating {
             dependsOn(commonMain)
             dependencies {
-                implementation(npm("marked", "^12.0.1"))
                 implementation(project(":kilua"))
                 implementation(project(":modules:kilua-routing"))
                 implementation(project(":modules:kilua-rest"))
                 implementation(project(":modules:kilua-rsup-progress"))
                 implementation(project(":modules:kilua-ssr"))
+                implementation(project(":modules:kilua-marked"))
+                implementation(project(":modules:kilua-sanitize-html"))
             }
         }
         val jsMain by getting {
