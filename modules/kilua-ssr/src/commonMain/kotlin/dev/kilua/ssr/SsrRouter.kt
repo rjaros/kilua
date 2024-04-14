@@ -39,7 +39,6 @@ import app.softwork.routingcompose.route
 import dev.kilua.CssRegister
 import dev.kilua.KiluaScope
 import dev.kilua.core.ComponentBase
-import dev.kilua.externals.console
 import dev.kilua.externals.get
 import dev.kilua.externals.globalThis
 import dev.kilua.externals.set
@@ -65,25 +64,7 @@ public fun ComponentBase.SsrRouter(
     stateSerializer: (() -> String)? = null,
     routeBuilder: @Composable RouteBuilder.() -> Unit
 ) {
-    if (renderConfig.isDom) {
-        BrowserRouter(initPath, routeBuilder)
-    } else {
-        val router = remember {
-            SsrRouter(initPath, this, stateSerializer).also { Router.internalGlobalRouter = it }
-        }
-        router.route(initPath) {
-            routeBuilder()
-            if (ssrCondition) {
-                SideEffect {
-                    router.sendRender?.let {
-                        it(router.getRenderingResult())
-                        router.sendRender = null
-                        router.lock = false
-                    }
-                }
-            }
-        }
-    }
+    SsrRouter(initPath, ssrCondition, stateSerializer, routeBuilder, null)
 }
 
 /**
@@ -97,8 +78,23 @@ public fun ComponentBase.SsrRouter(
     stateSerializer: (() -> String)? = null,
     routeBuilder: @Composable RouteBuilder.(done: () -> Unit) -> Unit
 ) {
+    SsrRouter(initPath, ssrCondition, stateSerializer, null, routeBuilder)
+}
+
+@Composable
+private fun ComponentBase.SsrRouter(
+    initPath: String,
+    ssrCondition: Boolean = true,
+    stateSerializer: (() -> String)? = null,
+    routeBuilder: @Composable (RouteBuilder.() -> Unit)?,
+    routeBuilderWithCallback: @Composable (RouteBuilder.(done: () -> Unit) -> Unit)?
+) {
     if (renderConfig.isDom) {
-        BrowserRouter(initPath) { routeBuilder {} }
+        if (routeBuilder != null) {
+            BrowserRouter(initPath, routeBuilder)
+        } else if (routeBuilderWithCallback != null) {
+            BrowserRouter(initPath) { routeBuilderWithCallback {} }
+        }
     } else {
         val router = remember {
             SsrRouter(initPath, this, stateSerializer).also { Router.internalGlobalRouter = it }
@@ -113,10 +109,16 @@ public fun ComponentBase.SsrRouter(
         }
 
         router.route(initPath) {
-            routeBuilder {
-                externalCondition = true
+            if (routeBuilder != null) {
+                routeBuilder()
+            } else if (routeBuilderWithCallback != null) {
+                routeBuilderWithCallback {
+                    externalCondition = true
+                }
             }
-            if (ssrCondition && externalCondition) {
+            @Suppress("UNUSED_EXPRESSION")
+            externalCondition // access value to trigger recomposition on locale change
+            if (ssrCondition && (routeBuilderWithCallback == null || externalCondition)) {
                 SideEffect {
                     router.sendRender?.let {
                         it(router.getRenderingResult())
