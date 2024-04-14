@@ -1,0 +1,690 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>dev.kilua.utils</title>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+<a class="library-name--link" href="../../index.html">
+                            kilua-project
+                    </a>            </div>
+            <div class="library-version">0.0.1
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua:dokkaHtmlPartial/commonMain">common</button>
+                <button class="platform-tag platform-selector js-like" data-active="" data-filter=":kilua:dokkaHtmlPartial/jsMain">js</button>
+                <button class="platform-tag platform-selector wasm-like" data-active="" data-filter=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="package" id="content" pageids="kilua::dev.kilua.utils////PointingToDeclaration//372193618">
+  <div class="breadcrumbs"><a href="../index.html">kilua</a><span class="delimiter">/</span><span class="current">dev.kilua.utils</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-1549116783%2FClasslikes%2F372193618" anchor-label="JsModule" id="-1549116783%2FClasslikes%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-js-module/index.html"><span>Js</span><wbr><span><span>Module</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1549116783%2FClasslikes%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html"><span class="token annotation builtin">Target</span></a><span class="token punctuation">(</span><span>allowedTargets<span class="token operator"> = </span><span class="token punctuation">[</span><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-l-a-s-s/index.html">AnnotationTarget.CLASS</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-p-r-o-p-e-r-t-y/index.html">AnnotationTarget.PROPERTY</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-f-u-n-c-t-i-o-n/index.html">AnnotationTarget.FUNCTION</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-f-i-l-e/index.html">AnnotationTarget.FILE</a></span><wbr><span class="token punctuation">]</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">expect </span><span class="token keyword">annotation class </span><a href="-js-module/index.html">JsModule</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>import<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Helper annotation for JS/Wasm compatibility.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">typealias </span><a href="-js-module/index.html">JsModule</a><span class="token operator"> = </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/-js-module/index.html">kotlin.js.JsModule</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">typealias </span><a href="-js-module/index.html">JsModule</a><span class="token operator"> = </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/-js-module/index.html">kotlin.js.JsModule</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1379403182%2FClasslikes%2F372193618" anchor-label="JsName" id="-1379403182%2FClasslikes%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-js-name/index.html"><span>Js</span><wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1379403182%2FClasslikes%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html"><span class="token annotation builtin">Target</span></a><span class="token punctuation">(</span><span>allowedTargets<span class="token operator"> = </span><span class="token punctuation">[</span><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-l-a-s-s/index.html">AnnotationTarget.CLASS</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-f-u-n-c-t-i-o-n/index.html">AnnotationTarget.FUNCTION</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-p-r-o-p-e-r-t-y/index.html">AnnotationTarget.PROPERTY</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-o-n-s-t-r-u-c-t-o-r/index.html">AnnotationTarget.CONSTRUCTOR</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-p-r-o-p-e-r-t-y_-g-e-t-t-e-r/index.html">AnnotationTarget.PROPERTY_GETTER</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-p-r-o-p-e-r-t-y_-s-e-t-t-e-r/index.html">AnnotationTarget.PROPERTY_SETTER</a></span><wbr><span class="token punctuation">]</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">expect </span><span class="token keyword">annotation class </span><a href="-js-name/index.html">JsName</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Helper annotation for JS/Wasm compatibility.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">typealias </span><a href="-js-name/index.html">JsName</a><span class="token operator"> = </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/-js-name/index.html">kotlin.js.JsName</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">typealias </span><a href="-js-name/index.html">JsName</a><span class="token operator"> = </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/-js-name/index.html">kotlin.js.JsName</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2047227924%2FClasslikes%2F372193618" anchor-label="JsNonModule" id="-2047227924%2FClasslikes%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/wasmJsMain,:kilua:dokkaHtmlPartial/jsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/wasmJsMain,:kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/wasmJsMain,:kilua:dokkaHtmlPartial/jsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-js-non-module/index.html"><span>Js</span><wbr><span>Non</span><wbr><span><span>Module</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2047227924%2FClasslikes%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html"><span class="token annotation builtin">Target</span></a><span class="token punctuation">(</span><span>allowedTargets<span class="token operator"> = </span><span class="token punctuation">[</span><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-l-a-s-s/index.html">AnnotationTarget.CLASS</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-p-r-o-p-e-r-t-y/index.html">AnnotationTarget.PROPERTY</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-f-u-n-c-t-i-o-n/index.html">AnnotationTarget.FUNCTION</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-f-i-l-e/index.html">AnnotationTarget.FILE</a></span><wbr><span class="token punctuation">]</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">expect </span><span class="token keyword">annotation class </span><a href="-js-non-module/index.html">JsNonModule</a></div><div class="brief "><p class="paragraph">Helper annotation for JS/Wasm compatibility.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">typealias </span><a href="-js-non-module/index.html">JsNonModule</a><span class="token operator"> = </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/-js-non-module/index.html">kotlin.js.JsNonModule</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html"><span class="token annotation builtin">Target</span></a><span class="token punctuation">(</span><span>allowedTargets<span class="token operator"> = </span><span class="token punctuation">[</span><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-l-a-s-s/index.html">AnnotationTarget.CLASS</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-p-r-o-p-e-r-t-y/index.html">AnnotationTarget.PROPERTY</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-f-u-n-c-t-i-o-n/index.html">AnnotationTarget.FUNCTION</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-f-i-l-e/index.html">AnnotationTarget.FILE</a></span><wbr><span class="token punctuation">]</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">actual </span><span class="token keyword">annotation class </span><a href="-js-non-module/index.html">JsNonModule</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="442316049%2FClasslikes%2F372193618" anchor-label="NativeList" id="442316049%2FClasslikes%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-native-list/index.html"><span>Native</span><wbr><span><span>List</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="442316049%2FClasslikes%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">class </span><a href="-native-list/index.html">NativeList</a><span class="token operator">&lt;</span><a href="-native-list/index.html">E</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="-native-list/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">A mutable list implementation based on a native array on JS target.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="-native-list/index.html">NativeList</a><span class="token operator">&lt;</span><a href="-native-list/index.html">E</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="-native-list/index.html">E</a><span class="token operator">&gt; </span></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">open </span><span class="token keyword">class </span><a href="-native-list/index.html">NativeList</a><span class="token operator">&lt;</span><a href="-native-list/index.html">E</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="-native-list/index.html">E</a><span class="token operator">&gt; </span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1928741161%2FClasslikes%2F372193618" anchor-label="NativeMap" id="-1928741161%2FClasslikes%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-native-map/index.html"><span>Native</span><wbr><span><span>Map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1928741161%2FClasslikes%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">class </span><a href="-native-map/index.html">NativeMap</a><span class="token operator">&lt;</span><a href="-native-map/index.html">V</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="-native-map/index.html">V</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">A mutable map implementation based on a native JS object on JS target.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="-native-map/index.html">NativeMap</a><span class="token operator">&lt;</span><a href="-native-map/index.html">V</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="-native-map/index.html">V</a><span class="token operator">&gt; </span></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="-native-map/index.html">NativeMap</a><span class="token operator">&lt;</span><a href="-native-map/index.html">V</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="-native-map/index.html">V</a><span class="token operator">&gt; </span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1805516172%2FClasslikes%2F-1322303221" anchor-label="Serialization" id="1805516172%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-serialization/index.html"><span><span>Serialization</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1805516172%2FClasslikes%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-serialization/index.html">Serialization</a></div><div class="brief "><p class="paragraph">JSON serialization utility functions</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-500029285%2FClasslikes%2F-1322303221" anchor-label="StringPair" id="-500029285%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-string-pair/index.html"><span>String</span><wbr><span><span>Pair</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-500029285%2FClasslikes%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">typealias </span><a href="-string-pair/index.html">StringPair</a><span class="token operator"> = </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Helper type used to define CSS style attributes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-726376407%2FProperties%2F372193618" anchor-label="isDom" id="-726376407%2FProperties%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-dom.html"><span>is</span><wbr><span><span>Dom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-726376407%2FProperties%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">val </span><a href="is-dom.html">isDom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether the DOM is available</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">val </span><a href="is-dom.html">isDom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">val </span><a href="is-dom.html">isDom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-872912222%2FFunctions%2F372193618" anchor-label="cast" id="-872912222%2FFunctions%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cast.html"><span><span>cast</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-872912222%2FFunctions%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="cast.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="cast.html"><span class="token function">cast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="cast.html">T</a></div><div class="brief "><p class="paragraph">Utility extension function for casting. Uses unsafeCast() on JS.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="cast.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="cast.html"><span class="token function">cast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="cast.html">T</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="cast.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="cast.html"><span class="token function">cast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="cast.html">T</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2008635574%2FFunctions%2F-1322303221" anchor-label="decodeURIComponent" id="-2008635574%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="decode-u-r-i-component.html"><span>decode</span><wbr><span><span>URIComponent</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2008635574%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">external </span><span class="token keyword">fun </span><a href="decode-u-r-i-component.html"><span class="token function">decodeURIComponent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JavaScript decodeURIComponent function</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1515457090%2FFunctions%2F-1322303221" anchor-label="deepMerge" id="-1515457090%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deep-merge.html"><span>deep</span><wbr><span><span>Merge</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1515457090%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="deep-merge.html"><span class="token function">deepMerge</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">target<span class="token operator">: </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token punctuation">, </span></span><span class="parameter ">source<span class="token operator">: </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Helper function to deeply merge two JS objects.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-42731150%2FFunctions%2F-1322303221" anchor-label="encodeURIComponent" id="-42731150%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="encode-u-r-i-component.html"><span>encode</span><wbr><span><span>URIComponent</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-42731150%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">external </span><span class="token keyword">fun </span><a href="encode-u-r-i-component.html"><span class="token function">encodeURIComponent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">JavaScript encodeURIComponent function</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1873504963%2FFunctions%2F-1322303221" anchor-label="getContent" id="1873504963%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-content.html"><span>get</span><wbr><span><span>Content</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1873504963%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="../../modules/kilua-dom/web.files/-file/index.html">File</a><span class="token punctuation">.</span><a href="get-content.html"><span class="token function">getContent</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Extension function to get file content as a data: URL.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-328790859%2FFunctions%2F-1322303221" anchor-label="hour" id="-328790859%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hour.html"><span><span>hour</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-328790859%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="hour.html"><span class="token function">hour</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalTime///PointingToDeclaration/">LocalTime</span></div><div class="brief "><p class="paragraph">Return current time trimmed to hours and minutes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="14179401%2FFunctions%2F-1322303221" anchor-label="jsArrayOf" id="14179401%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="js-array-of.html"><span>js</span><wbr><span>Array</span><wbr><span><span>Of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="14179401%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="js-array-of.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="js-array-of.html"><span class="token function">jsArrayOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>elements<span class="token operator">: </span><a href="js-array-of.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="js-array-of.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Create a JsArray object.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1867397269%2FFunctions%2F-1322303221" anchor-label="jsObjectOf" id="-1867397269%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="js-object-of.html"><span>js</span><wbr><span>Object</span><wbr><span><span>Of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1867397269%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="js-object-of.html"><span class="token function">jsObjectOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>pairs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Creates a JS object from a list of pairs. All unsupported types are converted to null values on WasmJS or left unchanged on JS.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1970666921%2FFunctions%2F-1322303221" anchor-label="listOfPairs" id="-1970666921%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="list-of-pairs.html"><span>list</span><wbr><span>Of</span><wbr><span><span>Pairs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1970666921%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="list-of-pairs.html"><span class="token function">listOfPairs</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>params<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="-string-pair/index.html">StringPair</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds List<stringpair> out of given Strings.</stringpair></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1801205549%2FFunctions%2F372193618" anchor-label="nativeListOf" id="1801205549%2FFunctions%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="native-list-of.html"><span>native</span><wbr><span>List</span><wbr><span><span>Of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1801205549%2FFunctions%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="native-list-of.html">E</a><span class="token operator">&gt; </span><a href="native-list-of.html"><span class="token function">nativeListOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>elements<span class="token operator">: </span><a href="native-list-of.html">E</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="native-list-of.html">E</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Create a native list instance.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="native-list-of.html">E</a><span class="token operator">&gt; </span><a href="native-list-of.html"><span class="token function">nativeListOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>elements<span class="token operator">: </span><a href="native-list-of.html">E</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="native-list-of.html">E</a><span class="token operator">&gt;</span></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="native-list-of.html">E</a><span class="token operator">&gt; </span><a href="native-list-of.html"><span class="token function">nativeListOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>elements<span class="token operator">: </span><a href="native-list-of.html">E</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="native-list-of.html">E</a><span class="token operator">&gt;</span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1607315534%2FFunctions%2F372193618" anchor-label="nativeMapOf" id="-1607315534%2FFunctions%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="native-map-of.html"><span>native</span><wbr><span>Map</span><wbr><span><span>Of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1607315534%2FFunctions%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="native-map-of.html">V</a><span class="token operator">&gt; </span><a href="native-map-of.html"><span class="token function">nativeMapOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>pairs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="native-map-of.html">V</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="native-map-of.html">V</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Create a new native map instance.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="native-map-of.html">V</a><span class="token operator">&gt; </span><a href="native-map-of.html"><span class="token function">nativeMapOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>pairs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="native-map-of.html">V</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="native-map-of.html">V</a><span class="token operator">&gt;</span></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="native-map-of.html">V</a><span class="token operator">&gt; </span><a href="native-map-of.html"><span class="token function">nativeMapOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>pairs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="native-map-of.html">V</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="native-map-of.html">V</a><span class="token operator">&gt;</span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-556678197%2FFunctions%2F-1322303221" anchor-label="now" id="-556678197%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="now.html"><span><span>now</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-556678197%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="now.html"><span class="token function">now</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDateTime///PointingToDeclaration/">LocalDateTime</span></div><div class="brief "><p class="paragraph">Return current date and time trimmed to hours and minutes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="942370014%2FFunctions%2F-1322303221" anchor-label="pairs" id="942370014%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pairs.html"><span><span>pairs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="942370014%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="pairs.html"><span class="token function">pairs</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="-string-pair/index.html">StringPair</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Utility extension function to convert List<string> into List<stringpair>.</stringpair></string></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2029852057%2FFunctions%2F-1322303221" anchor-label="rem" id="-2029852057%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="rem.html"><span><span>rem</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2029852057%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="rem.html"><span class="token function">rem</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">str<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Useful operator to concatenate two strings with a space (for CSS class names)</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="605834446%2FFunctions%2F-1322303221" anchor-label="renderAsCssStyle" id="605834446%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="render-as-css-style.html"><span>render</span><wbr><span>As</span><wbr><span>Css</span><wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="605834446%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="render-as-css-style.html"><span class="token function">renderAsCssStyle</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Render map of properties to an CSS style string.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1429975642%2FFunctions%2F-1322303221" anchor-label="renderAsHtmlAttributes" id="1429975642%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="render-as-html-attributes.html"><span>render</span><wbr><span>As</span><wbr><span>Html</span><wbr><span><span>Attributes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1429975642%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="render-as-html-attributes.html"><span class="token function">renderAsHtmlAttributes</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Render map of properties to an CSS style string.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1968212888%2FFunctions%2F574161197" anchor-label="require" id="-1968212888%2FFunctions%2F574161197" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="require.html"><span><span>require</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1968212888%2FFunctions%2F574161197"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">external </span><span class="token keyword">fun </span><a href="require.html"><span class="token function">require</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">module<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span>dynamic</div><div class="brief "><p class="paragraph">CommonJS require function</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="786573288%2FFunctions%2F-1322303221" anchor-label="syncWithList" id="786573288%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sync-with-list.html"><span>sync</span><wbr><span>With</span><wbr><span><span>List</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="786573288%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="sync-with-list.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="sync-with-list.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="sync-with-list.html"><span class="token function">syncWithList</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">list<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="sync-with-list.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Utility extension function to synchronise elements of the MutableList.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1542367448%2FFunctions%2F-1322303221" anchor-label="toArray" id="1542367448%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-array.html"><span>to</span><wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1542367448%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-array.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="../../modules/kilua-dom/web/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="to-array.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-array.html"><span class="token function">toArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="to-array.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Convert JsArray to Kotlin Array.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1705439844%2FFunctions%2F-1322303221" anchor-label="toCamelCase" id="1705439844%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-camel-case.html"><span>to</span><wbr><span>Camel</span><wbr><span><span>Case</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1705439844%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="to-camel-case.html"><span class="token function">toCamelCase</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Utility extension function to convert string from kebab-case to camelCase.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1153569984%2FFunctions%2F-1322303221" anchor-label="today" id="1153569984%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="today.html"><span><span>today</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1153569984%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="today.html"><span class="token function">today</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span></div><div class="brief "><p class="paragraph">Return current date.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1895055952%2FFunctions%2F372193618" anchor-label="toFixed" id="-1895055952%2FFunctions%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-fixed.html"><span>to</span><wbr><span><span>Fixed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1895055952%2FFunctions%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">.</span><a href="to-fixed.html"><span class="token function">toFixed</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">2</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Utility extension function to format a Double with a given number of digits after the decimal point.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">.</span><a href="to-fixed.html"><span class="token function">toFixed</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">.</span><a href="to-fixed.html"><span class="token function">toFixed</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="658625931%2FFunctions%2F-1322303221" anchor-label="toFixedNoRound" id="658625931%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-fixed-no-round.html"><span>to</span><wbr><span>Fixed</span><wbr><span>No</span><wbr><span><span>Round</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="658625931%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html">Number</a><span class="token punctuation">.</span><a href="to-fixed-no-round.html"><span class="token function">toFixedNoRound</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">precision<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Formats a number to fixed decimal digits without rounding.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="335787182%2FFunctions%2F-1322303221" anchor-label="toJsAny" id="335787182%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-js-any.html"><span>to</span><wbr><span>Js</span><wbr><span><span>Any</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="335787182%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-js-any.html">T</a><span class="token operator">&gt; </span><a href="to-js-any.html">T</a><span class="token punctuation">.</span><a href="to-js-any.html"><span class="token function">toJsAny</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Convert a subset of Kotlin types (String, Int, Double, Boolean, Array, List, Map) to JS object. All unsupported types are converted to null values on WasmJS or left unchanged on JS.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-js-any.html"><span class="token function">toJsAny</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Convert a map to a JS object. All unsupported types are converted to null values on WasmJS or left unchanged on JS.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-532693008%2FFunctions%2F-1322303221" anchor-label="toJsArray" id="-532693008%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-js-array.html"><span>to</span><wbr><span>Js</span><wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-532693008%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-js-array.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="to-js-array.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-js-array.html"><span class="token function">toJsArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="to-js-array.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Convert Kotlin Array to JsArray.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-js-array.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="to-js-array.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-js-array.html"><span class="token function">toJsArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="to-js-array.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Convert Kotlin List to JsArray.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1378747991%2FFunctions%2F-1322303221" anchor-label="toKebabCase" id="1378747991%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-kebab-case.html"><span>to</span><wbr><span>Kebab</span><wbr><span><span>Case</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1378747991%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="to-kebab-case.html"><span class="token function">toKebabCase</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Utility extension function to convert string from camelCase to kebab-case.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1506516757%2FFunctions%2F-1322303221" anchor-label="toList" id="1506516757%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-list.html"><span>to</span><wbr><span><span>List</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1506516757%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-list.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="../../modules/kilua-dom/web/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="to-list.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-list.html"><span class="token function">toList</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="to-list.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Convert JsArray to Kotlin List.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1415071074%2FFunctions%2F372193618" anchor-label="toLocaleString" id="-1415071074%2FFunctions%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-locale-string.html"><span>to</span><wbr><span>Locale</span><wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1415071074%2FFunctions%2F372193618"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">.</span><a href="to-locale-string.html"><span class="token function">toLocaleString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">locale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Utility extension function to format a Double according to the given locale.</p></div><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">.</span><a href="to-locale-string.html"><span class="token function">toLocaleString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">locale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Utility extension function to format an Int according to the given locale.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">.</span><a href="to-locale-string.html"><span class="token function">toLocaleString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">locale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">.</span><a href="to-locale-string.html"><span class="token function">toLocaleString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">locale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">.</span><a href="to-locale-string.html"><span class="token function">toLocaleString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">locale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">.</span><a href="to-locale-string.html"><span class="token function">toLocaleString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">locale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-326803759%2FFunctions%2F-2136234132" anchor-label="unsafeCast" id="-326803759%2FFunctions%2F-2136234132" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="unsafe-cast.html"><span>unsafe</span><wbr><span><span>Cast</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-326803759%2FFunctions%2F-2136234132"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="unsafe-cast.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token punctuation">.</span><a href="unsafe-cast.html"><span class="token function">unsafeCast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="unsafe-cast.html">T</a></div><div class="brief "><p class="paragraph">Utility extension function for unsafe casting. Uses unsafeCast() on JS and WasmJs.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="unsafe-cast.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token punctuation">.</span><a href="unsafe-cast.html"><span class="token function">unsafeCast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="unsafe-cast.html">T</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1175241520%2FFunctions%2F-1322303221" anchor-label="useModule" id="-1175241520%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="use-module.html"><span>use</span><wbr><span><span>Module</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1175241520%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="use-module.html">T</a><span class="token operator">&gt; </span><a href="use-module.html"><span class="token function">useModule</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">module<span class="token operator">: </span><a href="use-module.html">T</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Helper function for JS/Wasm compatibility.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

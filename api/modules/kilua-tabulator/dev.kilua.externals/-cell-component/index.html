@@ -1,0 +1,509 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>CellComponent</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+<a class="library-name--link" href="../../../../index.html">
+                            kilua-project
+                    </a>            </div>
+            <div class="library-version">0.0.1
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">common</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="kilua-tabulator::dev.kilua.externals/CellComponent///PointingToDeclaration//1517456329">
+  <div class="breadcrumbs"><a href="../../index.html">kilua-tabulator</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.externals</a><span class="delimiter">/</span><span class="current">CellComponent</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Cell</span><wbr><span><span>Component</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">CellComponent</a> : <a href="../../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><p class="paragraph">JavaScript Tabulator cell component.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="1479423978%2FConstructors%2F1517456329" anchor-label="CellComponent" id="1479423978%2FConstructors%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-cell-component.html"><span>Cell</span><wbr><span><span>Component</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1479423978%2FConstructors%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-2142943183%2FFunctions%2F1517456329" anchor-label="cancelEdit" id="-2142943183%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cancel-edit.html"><span>cancel</span><wbr><span><span>Edit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2142943183%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="cancel-edit.html"><span class="token function">cancelEdit</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="612563382%2FFunctions%2F1517456329" anchor-label="checkHeight" id="612563382%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="check-height.html"><span>check</span><wbr><span><span>Height</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="612563382%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="check-height.html"><span class="token function">checkHeight</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1355401457%2FFunctions%2F1517456329" anchor-label="clearEdited" id="-1355401457%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="clear-edited.html"><span>clear</span><wbr><span><span>Edited</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1355401457%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="clear-edited.html"><span class="token function">clearEdited</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1254431937%2FFunctions%2F1517456329" anchor-label="clearValidation" id="-1254431937%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="clear-validation.html"><span>clear</span><wbr><span><span>Validation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1254431937%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="clear-validation.html"><span class="token function">clearValidation</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-322099568%2FFunctions%2F1517456329" anchor-label="edit" id="-322099568%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="edit.html"><span><span>edit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-322099568%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="edit.html"><span class="token function">edit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ignoreEditable<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1833598887%2FFunctions%2F1517456329" anchor-label="getColumn" id="-1833598887%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-column.html"><span>get</span><wbr><span><span>Column</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1833598887%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-column.html"><span class="token function">getColumn</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-column-component/index.html">ColumnComponent</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1018121989%2FFunctions%2F1517456329" anchor-label="getData" id="1018121989%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-data.html"><span>get</span><wbr><span><span>Data</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1018121989%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-data.html"><span class="token function">getData</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="521476943%2FFunctions%2F1517456329" anchor-label="getElement" id="521476943%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-element.html"><span>get</span><wbr><span><span>Element</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="521476943%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-element.html"><span class="token function">getElement</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1089379985%2FFunctions%2F1517456329" anchor-label="getField" id="1089379985%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-field.html"><span>get</span><wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1089379985%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-field.html"><span class="token function">getField</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1227526782%2FFunctions%2F1517456329" anchor-label="getInitialValue" id="-1227526782%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-initial-value.html"><span>get</span><wbr><span>Initial</span><wbr><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1227526782%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-initial-value.html"><span class="token function">getInitialValue</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2138537509%2FFunctions%2F1517456329" anchor-label="getOldValue" id="2138537509%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-old-value.html"><span>get</span><wbr><span>Old</span><wbr><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2138537509%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-old-value.html"><span class="token function">getOldValue</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-262828751%2FFunctions%2F1517456329" anchor-label="getRow" id="-262828751%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-row.html"><span>get</span><wbr><span><span>Row</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-262828751%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-row.html"><span class="token function">getRow</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-row-component/index.html">RowComponent</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="793188925%2FFunctions%2F1517456329" anchor-label="getTable" id="793188925%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-table.html"><span>get</span><wbr><span><span>Table</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="793188925%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-table.html"><span class="token function">getTable</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tabulator-js/index.html">TabulatorJs</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2023272075%2FFunctions%2F1517456329" anchor-label="getType" id="-2023272075%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-type.html"><span>get</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2023272075%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-type.html"><span class="token function">getType</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1666952710%2FFunctions%2F1517456329" anchor-label="getValue" id="-1666952710%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-value.html"><span>get</span><wbr><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1666952710%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-value.html"><span class="token function">getValue</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2009654978%2FFunctions%2F1517456329" anchor-label="isEdited" id="2009654978%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-edited.html"><span>is</span><wbr><span><span>Edited</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2009654978%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="is-edited.html"><span class="token function">isEdited</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-207152525%2FFunctions%2F1517456329" anchor-label="isValid" id="-207152525%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-valid.html"><span>is</span><wbr><span><span>Valid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-207152525%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="is-valid.html"><span class="token function">isValid</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-711055614%2FFunctions%2F1517456329" anchor-label="navigateDown" id="-711055614%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="navigate-down.html"><span>navigate</span><wbr><span><span>Down</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-711055614%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="navigate-down.html"><span class="token function">navigateDown</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-190261443%2FFunctions%2F1517456329" anchor-label="navigateLeft" id="-190261443%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="navigate-left.html"><span>navigate</span><wbr><span><span>Left</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-190261443%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="navigate-left.html"><span class="token function">navigateLeft</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1325125073%2FFunctions%2F1517456329" anchor-label="navigateNext" id="1325125073%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="navigate-next.html"><span>navigate</span><wbr><span><span>Next</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1325125073%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="navigate-next.html"><span class="token function">navigateNext</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1629004143%2FFunctions%2F1517456329" anchor-label="navigatePrev" id="-1629004143%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="navigate-prev.html"><span>navigate</span><wbr><span><span>Prev</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1629004143%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="navigate-prev.html"><span class="token function">navigatePrev</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-369729446%2FFunctions%2F1517456329" anchor-label="navigateRight" id="-369729446%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="navigate-right.html"><span>navigate</span><wbr><span><span>Right</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-369729446%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="navigate-right.html"><span class="token function">navigateRight</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="849114345%2FFunctions%2F1517456329" anchor-label="navigateUp" id="849114345%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="navigate-up.html"><span>navigate</span><wbr><span><span>Up</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="849114345%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="navigate-up.html"><span class="token function">navigateUp</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1717413558%2FFunctions%2F1517456329" anchor-label="restoreInitialValue" id="-1717413558%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="restore-initial-value.html"><span>restore</span><wbr><span>Initial</span><wbr><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1717413558%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="restore-initial-value.html"><span class="token function">restoreInitialValue</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1222741485%2FFunctions%2F1517456329" anchor-label="restoreOldValue" id="1222741485%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="restore-old-value.html"><span>restore</span><wbr><span>Old</span><wbr><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1222741485%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="restore-old-value.html"><span class="token function">restoreOldValue</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-522360783%2FFunctions%2F1517456329" anchor-label="setValue" id="-522360783%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-value.html"><span>set</span><wbr><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-522360783%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-value.html"><span class="token function">setValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="../../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token punctuation">, </span></span><span class="parameter ">mutate<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="716512511%2FFunctions%2F1517456329" anchor-label="validate" id="716512511%2FFunctions%2F1517456329" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="validate.html"><span><span>validate</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="716512511%2FFunctions%2F1517456329"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tabulator:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="validate.html"><span class="token function">validate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

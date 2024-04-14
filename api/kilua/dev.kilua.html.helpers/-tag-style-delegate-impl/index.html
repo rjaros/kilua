@@ -1,0 +1,1578 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>TagStyleDelegateImpl</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+<a class="library-name--link" href="../../../index.html">
+                            kilua-project
+                    </a>            </div>
+            <div class="library-version">0.0.1
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua:dokkaHtmlPartial/commonMain">common</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="kilua::dev.kilua.html.helpers/TagStyleDelegateImpl///PointingToDeclaration//-1322303221">
+  <div class="breadcrumbs"><a href="../../index.html">kilua</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.html.helpers</a><span class="delimiter">/</span><span class="current">TagStyleDelegateImpl</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Tag</span><wbr><span>Style</span><wbr><span>Delegate</span><wbr><span><span>Impl</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">TagStyleDelegateImpl</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator"> : </span><a href="../../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">onSetCallback<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="../../dev.kilua.core/-property-delegate/index.html">PropertyDelegate</a>, <a href="../-tag-style-delegate/index.html">TagStyleDelegate</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt; </span></div><p class="paragraph">Common tag CSS styles delegate implementation.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="600848629%2FConstructors%2F-1322303221" anchor-label="TagStyleDelegateImpl" id="600848629%2FConstructors%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-tag-style-delegate-impl.html"><span>Tag</span><wbr><span>Style</span><wbr><span>Delegate</span><wbr><span><span>Impl</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="600848629%2FConstructors%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">onSetCallback<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-791473482%2FProperties%2F-1322303221" anchor-label="alignContent" id="-791473482%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="align-content.html"><span>align</span><wbr><span><span>Content</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-791473482%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="align-content.html">alignContent</a><span class="token operator">: </span><a href="../../dev.kilua.html/-align-content/index.html">AlignContent</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox/grid content alignment.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="924580303%2FProperties%2F-1322303221" anchor-label="alignItems" id="924580303%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="align-items.html"><span>align</span><wbr><span><span>Items</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="924580303%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="align-items.html">alignItems</a><span class="token operator">: </span><a href="../../dev.kilua.html/-align-items/index.html">AlignItems</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox/grid items alignment.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1174034911%2FProperties%2F-1322303221" anchor-label="alignSelf" id="1174034911%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="align-self.html"><span>align</span><wbr><span><span>Self</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1174034911%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="align-self.html">alignSelf</a><span class="token operator">: </span><a href="../../dev.kilua.html/-align-items/index.html">AlignItems</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox items self-alignment.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="279582652%2FProperties%2F-1322303221" anchor-label="background" id="279582652%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="background.html"><span><span>background</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="279582652%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="background.html">background</a><span class="token operator">: </span><a href="../../dev.kilua.html/-background/index.html">Background</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Background of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1285820162%2FProperties%2F-1322303221" anchor-label="border" id="-1285820162%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="border.html"><span><span>border</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1285820162%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="border.html">border</a><span class="token operator">: </span><a href="../../dev.kilua.html/-border/index.html">Border</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Border of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1478414419%2FProperties%2F-1322303221" anchor-label="borderBottom" id="1478414419%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="border-bottom.html"><span>border</span><wbr><span><span>Bottom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1478414419%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="border-bottom.html">borderBottom</a><span class="token operator">: </span><a href="../../dev.kilua.html/-border/index.html">Border</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Bottom border of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2064155081%2FProperties%2F-1322303221" anchor-label="borderLeft" id="-2064155081%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="border-left.html"><span>border</span><wbr><span><span>Left</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2064155081%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="border-left.html">borderLeft</a><span class="token operator">: </span><a href="../../dev.kilua.html/-border/index.html">Border</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Left border of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="306098124%2FProperties%2F-1322303221" anchor-label="borderRadius" id="306098124%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="border-radius.html"><span>border</span><wbr><span><span>Radius</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="306098124%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="border-radius.html">borderRadius</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS border radius.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-805036722%2FProperties%2F-1322303221" anchor-label="borderRadiusList" id="-805036722%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="border-radius-list.html"><span>border</span><wbr><span>Radius</span><wbr><span><span>List</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-805036722%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="border-radius-list.html">borderRadiusList</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">&gt;</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">List of CSS border radius values.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1669109920%2FProperties%2F-1322303221" anchor-label="borderRight" id="1669109920%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="border-right.html"><span>border</span><wbr><span><span>Right</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1669109920%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="border-right.html">borderRight</a><span class="token operator">: </span><a href="../../dev.kilua.html/-border/index.html">Border</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Right border of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1120063303%2FProperties%2F-1322303221" anchor-label="borderTop" id="1120063303%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="border-top.html"><span>border</span><wbr><span><span>Top</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1120063303%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="border-top.html">borderTop</a><span class="token operator">: </span><a href="../../dev.kilua.html/-border/index.html">Border</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Top border of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1190672351%2FProperties%2F-1322303221" anchor-label="bottom" id="1190672351%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bottom.html"><span><span>bottom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1190672351%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="bottom.html">bottom</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Bottom edge of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1848153157%2FProperties%2F-1322303221" anchor-label="boxShadow" id="1848153157%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="box-shadow.html"><span>box</span><wbr><span><span>Shadow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1848153157%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="box-shadow.html">boxShadow</a><span class="token operator">: </span><a href="../../dev.kilua.html/-box-shadow/index.html">BoxShadow</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Box shadow of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1559945913%2FProperties%2F-1322303221" anchor-label="boxShadowList" id="-1559945913%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="box-shadow-list.html"><span>box</span><wbr><span>Shadow</span><wbr><span><span>List</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1559945913%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="box-shadow-list.html">boxShadowList</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../dev.kilua.html/-box-shadow/index.html">BoxShadow</a><span class="token operator">&gt;</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">List of box shadows of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-359168893%2FProperties%2F-1322303221" anchor-label="clear" id="-359168893%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="clear.html"><span><span>clear</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-359168893%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="clear.html">clear</a><span class="token operator">: </span><a href="../../dev.kilua.html/-clear/index.html">Clear</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS clear float of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="514674733%2FProperties%2F-1322303221" anchor-label="color" id="514674733%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="color.html"><span><span>color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="514674733%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="color.html">color</a><span class="token operator">: </span><a href="../../dev.kilua.html/-color/index.html">Color</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Text color for the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1253056240%2FProperties%2F-1322303221" anchor-label="columnGap" id="-1253056240%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="column-gap.html"><span>column</span><wbr><span><span>Gap</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1253056240%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="column-gap.html">columnGap</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid/flex column gap.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="633001236%2FProperties%2F-1322303221" anchor-label="cursor" id="633001236%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cursor.html"><span><span>cursor</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="633001236%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="cursor.html">cursor</a><span class="token operator">: </span><a href="../../dev.kilua.html/-cursor/index.html">Cursor</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS cursor shape over the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-308929007%2FProperties%2F-1322303221" anchor-label="direction" id="-308929007%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="direction.html"><span><span>direction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-308929007%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="direction.html">direction</a><span class="token operator">: </span><a href="../../dev.kilua.html/-direction/index.html">Direction</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text direction of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1799458542%2FProperties%2F-1322303221" anchor-label="display" id="1799458542%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="display.html"><span><span>display</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1799458542%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="display.html">display</a><span class="token operator">: </span><a href="../../dev.kilua.html/-display/index.html">Display</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS display of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1988290699%2FProperties%2F-1322303221" anchor-label="flexBasis" id="1988290699%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="flex-basis.html"><span>flex</span><wbr><span><span>Basis</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1988290699%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="flex-basis.html">flexBasis</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox item basis.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1737577878%2FProperties%2F-1322303221" anchor-label="flexDirection" id="-1737577878%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="flex-direction.html"><span>flex</span><wbr><span><span>Direction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1737577878%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="flex-direction.html">flexDirection</a><span class="token operator">: </span><a href="../../dev.kilua.html/-flex-direction/index.html">FlexDirection</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox direction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1631178178%2FProperties%2F-1322303221" anchor-label="flexGrow" id="-1631178178%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="flex-grow.html"><span>flex</span><wbr><span><span>Grow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1631178178%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="flex-grow.html">flexGrow</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox item grow.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-927761400%2FProperties%2F-1322303221" anchor-label="flexShrink" id="-927761400%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="flex-shrink.html"><span>flex</span><wbr><span><span>Shrink</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-927761400%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="flex-shrink.html">flexShrink</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox item shrink.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="73681383%2FProperties%2F-1322303221" anchor-label="flexWrap" id="73681383%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="flex-wrap.html"><span>flex</span><wbr><span><span>Wrap</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="73681383%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="flex-wrap.html">flexWrap</a><span class="token operator">: </span><a href="../../dev.kilua.html/-flex-wrap/index.html">FlexWrap</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox wrap mode.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1484420948%2FProperties%2F-1322303221" anchor-label="float" id="1484420948%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="float.html"><span><span>float</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1484420948%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="float.html">float</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-float/index.html">CssFloat</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS position float of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1878164489%2FProperties%2F-1322303221" anchor-label="fontFamily" id="-1878164489%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="font-family.html"><span>font</span><wbr><span><span>Family</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1878164489%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="font-family.html">fontFamily</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS font family of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1100177030%2FProperties%2F-1322303221" anchor-label="fontSize" id="-1100177030%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="font-size.html"><span>font</span><wbr><span><span>Size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1100177030%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="font-size.html">fontSize</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS font size of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1183487922%2FProperties%2F-1322303221" anchor-label="fontStyle" id="-1183487922%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="font-style.html"><span>font</span><wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1183487922%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="font-style.html">fontStyle</a><span class="token operator">: </span><a href="../../dev.kilua.html/-font-style/index.html">FontStyle</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS font style of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2017277062%2FProperties%2F-1322303221" anchor-label="fontVariant" id="-2017277062%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="font-variant.html"><span>font</span><wbr><span><span>Variant</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2017277062%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="font-variant.html">fontVariant</a><span class="token operator">: </span><a href="../../dev.kilua.html/-font-variant/index.html">FontVariant</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS font public variant of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2133789853%2FProperties%2F-1322303221" anchor-label="fontWeight" id="-2133789853%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="font-weight.html"><span>font</span><wbr><span><span>Weight</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2133789853%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="font-weight.html">fontWeight</a><span class="token operator">: </span><a href="../../dev.kilua.html/-font-weight/index.html">FontWeight</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS font weight of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="908984023%2FProperties%2F-1322303221" anchor-label="gridArea" id="908984023%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-area.html"><span>grid</span><wbr><span><span>Area</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="908984023%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-area.html">gridArea</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid area.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1109887848%2FProperties%2F-1322303221" anchor-label="gridAutoColumns" id="1109887848%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-auto-columns.html"><span>grid</span><wbr><span>Auto</span><wbr><span><span>Columns</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1109887848%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-auto-columns.html">gridAutoColumns</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid auto columns.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1798291865%2FProperties%2F-1322303221" anchor-label="gridAutoFlow" id="-1798291865%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-auto-flow.html"><span>grid</span><wbr><span>Auto</span><wbr><span><span>Flow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1798291865%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-auto-flow.html">gridAutoFlow</a><span class="token operator">: </span><a href="../../dev.kilua.html/-grid-auto-flow/index.html">GridAutoFlow</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid auto flow.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="438649884%2FProperties%2F-1322303221" anchor-label="gridAutoRows" id="438649884%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-auto-rows.html"><span>grid</span><wbr><span>Auto</span><wbr><span><span>Rows</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="438649884%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-auto-rows.html">gridAutoRows</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid auto rows.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-255603951%2FProperties%2F-1322303221" anchor-label="gridColumnEnd" id="-255603951%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-column-end.html"><span>grid</span><wbr><span>Column</span><wbr><span><span>End</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-255603951%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-column-end.html">gridColumnEnd</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid column end.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1908936106%2FProperties%2F-1322303221" anchor-label="gridColumnStart" id="1908936106%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-column-start.html"><span>grid</span><wbr><span>Column</span><wbr><span><span>Start</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1908936106%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-column-start.html">gridColumnStart</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid column start.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-974268541%2FProperties%2F-1322303221" anchor-label="gridRowEnd" id="-974268541%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-row-end.html"><span>grid</span><wbr><span>Row</span><wbr><span><span>End</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-974268541%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-row-end.html">gridRowEnd</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid row end.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1532967524%2FProperties%2F-1322303221" anchor-label="gridRowStart" id="-1532967524%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-row-start.html"><span>grid</span><wbr><span>Row</span><wbr><span><span>Start</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1532967524%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-row-start.html">gridRowStart</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid row start.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1766449386%2FProperties%2F-1322303221" anchor-label="gridTemplateAreas" id="1766449386%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-template-areas.html"><span>grid</span><wbr><span>Template</span><wbr><span><span>Areas</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1766449386%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-template-areas.html">gridTemplateAreas</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid areas template.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="920345011%2FProperties%2F-1322303221" anchor-label="gridTemplateColumns" id="920345011%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-template-columns.html"><span>grid</span><wbr><span>Template</span><wbr><span><span>Columns</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="920345011%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-template-columns.html">gridTemplateColumns</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid columns template.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-890891855%2FProperties%2F-1322303221" anchor-label="gridTemplateRows" id="-890891855%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="grid-template-rows.html"><span>grid</span><wbr><span>Template</span><wbr><span><span>Rows</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-890891855%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="grid-template-rows.html">gridTemplateRows</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid rows template.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="945542243%2FProperties%2F-1322303221" anchor-label="height" id="945542243%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="height.html"><span><span>height</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="945542243%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="height.html">height</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Height of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2085298945%2FProperties%2F-1322303221" anchor-label="justifyContent" id="2085298945%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="justify-content.html"><span>justify</span><wbr><span><span>Content</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2085298945%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="justify-content.html">justifyContent</a><span class="token operator">: </span><a href="../../dev.kilua.html/-justify-content/index.html">JustifyContent</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox/grid content justification.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1566679258%2FProperties%2F-1322303221" anchor-label="justifyItems" id="1566679258%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="justify-items.html"><span>justify</span><wbr><span><span>Items</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1566679258%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="justify-items.html">justifyItems</a><span class="token operator">: </span><a href="../../dev.kilua.html/-justify-items/index.html">JustifyItems</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid items justification.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="640558452%2FProperties%2F-1322303221" anchor-label="justifySelf" id="640558452%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="justify-self.html"><span>justify</span><wbr><span><span>Self</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="640558452%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="justify-self.html">justifySelf</a><span class="token operator">: </span><a href="../../dev.kilua.html/-justify-items/index.html">JustifyItems</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid items self-justification.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="366827715%2FProperties%2F-1322303221" anchor-label="left" id="366827715%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="left.html"><span><span>left</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="366827715%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="left.html">left</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Left edge of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="990233747%2FProperties%2F-1322303221" anchor-label="letterSpacing" id="990233747%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="letter-spacing.html"><span>letter</span><wbr><span><span>Spacing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="990233747%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="letter-spacing.html">letterSpacing</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text letter spacing of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1639077285%2FProperties%2F-1322303221" anchor-label="lineBreak" id="1639077285%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="line-break.html"><span>line</span><wbr><span><span>Break</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1639077285%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="line-break.html">lineBreak</a><span class="token operator">: </span><a href="../../dev.kilua.html/-line-break/index.html">LineBreak</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS line break of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1185898319%2FProperties%2F-1322303221" anchor-label="lineHeight" id="1185898319%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="line-height.html"><span>line</span><wbr><span><span>Height</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1185898319%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="line-height.html">lineHeight</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text line height of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-568928163%2FProperties%2F-1322303221" anchor-label="listStyle" id="-568928163%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="list-style.html"><span>list</span><wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-568928163%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="list-style.html">listStyle</a><span class="token operator">: </span><a href="../../dev.kilua.html/-list-style/index.html">ListStyle</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">List style of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1077753276%2FProperties%2F-1322303221" anchor-label="margin" id="1077753276%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="margin.html"><span><span>margin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1077753276%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="margin.html">margin</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Margin of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1658654353%2FProperties%2F-1322303221" anchor-label="marginBottom" id="1658654353%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="margin-bottom.html"><span>margin</span><wbr><span><span>Bottom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1658654353%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="margin-bottom.html">marginBottom</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Bottom margin of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2113129483%2FProperties%2F-1322303221" anchor-label="marginLeft" id="-2113129483%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="margin-left.html"><span>margin</span><wbr><span><span>Left</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2113129483%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="margin-left.html">marginLeft</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Left margin of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="150903458%2FProperties%2F-1322303221" anchor-label="marginRight" id="150903458%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="margin-right.html"><span>margin</span><wbr><span><span>Right</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="150903458%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="margin-right.html">marginRight</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Right margin of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1652463159%2FProperties%2F-1322303221" anchor-label="marginTop" id="-1652463159%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="margin-top.html"><span>margin</span><wbr><span><span>Top</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1652463159%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="margin-top.html">marginTop</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Top margin of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-891164827%2FProperties%2F-1322303221" anchor-label="maxHeight" id="-891164827%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-height.html"><span>max</span><wbr><span><span>Height</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-891164827%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="max-height.html">maxHeight</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Maximal height of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="10861544%2FProperties%2F-1322303221" anchor-label="maxWidth" id="10861544%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-width.html"><span>max</span><wbr><span><span>Width</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="10861544%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="max-width.html">maxWidth</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Maximal width of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1740458167%2FProperties%2F-1322303221" anchor-label="minHeight" id="1740458167%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="min-height.html"><span>min</span><wbr><span><span>Height</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1740458167%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="min-height.html">minHeight</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Minimal height of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1896867926%2FProperties%2F-1322303221" anchor-label="minWidth" id="1896867926%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="min-width.html"><span>min</span><wbr><span><span>Width</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1896867926%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="min-width.html">minWidth</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Minimal width of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="554714053%2FProperties%2F-1322303221" anchor-label="opacity" id="554714053%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="opacity.html"><span><span>opacity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="554714053%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="opacity.html">opacity</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Opacity of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-553507166%2FProperties%2F-1322303221" anchor-label="order" id="-553507166%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="order.html"><span><span>order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-553507166%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="order.html">order</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS flexbox item order.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1923412114%2FProperties%2F-1322303221" anchor-label="outline" id="-1923412114%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="outline.html"><span><span>outline</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1923412114%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="outline.html">outline</a><span class="token operator">: </span><a href="../../dev.kilua.html/-outline/index.html">Outline</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Outline of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1258764632%2FProperties%2F-1322303221" anchor-label="overflow" id="-1258764632%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="overflow.html"><span><span>overflow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1258764632%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="overflow.html">overflow</a><span class="token operator">: </span><a href="../../dev.kilua.html/-overflow/index.html">Overflow</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS overflow of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-158400514%2FProperties%2F-1322303221" anchor-label="overflowWrap" id="-158400514%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="overflow-wrap.html"><span>overflow</span><wbr><span><span>Wrap</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-158400514%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="overflow-wrap.html">overflowWrap</a><span class="token operator">: </span><a href="../../dev.kilua.html/-overflow-wrap/index.html">OverflowWrap</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS overflow-wrap of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="361722074%2FProperties%2F-1322303221" anchor-label="overflowX" id="361722074%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="overflow-x.html"><span>overflow</span><wbr><span><span>X</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="361722074%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="overflow-x.html">overflowX</a><span class="token operator">: </span><a href="../../dev.kilua.html/-overflow/index.html">Overflow</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS overflow-x of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="392741881%2FProperties%2F-1322303221" anchor-label="overflowY" id="392741881%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="overflow-y.html"><span>overflow</span><wbr><span><span>Y</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="392741881%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="overflow-y.html">overflowY</a><span class="token operator">: </span><a href="../../dev.kilua.html/-overflow/index.html">Overflow</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS overflow-y of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="566522495%2FProperties%2F-1322303221" anchor-label="padding" id="566522495%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="padding.html"><span><span>padding</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="566522495%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="padding.html">padding</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Padding of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="73821460%2FProperties%2F-1322303221" anchor-label="paddingBottom" id="73821460%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="padding-bottom.html"><span>padding</span><wbr><span><span>Bottom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="73821460%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="padding-bottom.html">paddingBottom</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Bottom padding of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1605281992%2FProperties%2F-1322303221" anchor-label="paddingLeft" id="-1605281992%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="padding-left.html"><span>padding</span><wbr><span><span>Left</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1605281992%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="padding-left.html">paddingLeft</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Left padding of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1285693505%2FProperties%2F-1322303221" anchor-label="paddingRight" id="-1285693505%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="padding-right.html"><span>padding</span><wbr><span><span>Right</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1285693505%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="padding-right.html">paddingRight</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Right padding of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1774628314%2FProperties%2F-1322303221" anchor-label="paddingTop" id="-1774628314%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="padding-top.html"><span>padding</span><wbr><span><span>Top</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1774628314%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="padding-top.html">paddingTop</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Top padding of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-143709343%2FProperties%2F-1322303221" anchor-label="position" id="-143709343%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="position.html"><span><span>position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-143709343%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="position.html">position</a><span class="token operator">: </span><a href="../../dev.kilua.html/-position/index.html">Position</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS position of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1949036918%2FProperties%2F-1322303221" anchor-label="resize" id="1949036918%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="resize.html"><span><span>resize</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1949036918%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="resize.html">resize</a><span class="token operator">: </span><a href="../../dev.kilua.html/-resize/index.html">Resize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS resize of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-279834732%2FProperties%2F-1322303221" anchor-label="right" id="-279834732%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="right.html"><span><span>right</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-279834732%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="right.html">right</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Right edge of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1613550450%2FProperties%2F-1322303221" anchor-label="rowGap" id="-1613550450%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="row-gap.html"><span>row</span><wbr><span><span>Gap</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1613550450%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="row-gap.html">rowGap</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS grid/flex row gap.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1730721578%2FProperties%2F-1322303221" anchor-label="stylesMap" id="-1730721578%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="styles-map.html"><span>styles</span><wbr><span><span>Map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1730721578%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="styles-map.html">stylesMap</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The map of CSS styles.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="117585368%2FProperties%2F-1322303221" anchor-label="textAlign" id="117585368%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="text-align.html"><span>text</span><wbr><span><span>Align</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="117585368%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="text-align.html">textAlign</a><span class="token operator">: </span><a href="../../dev.kilua.html/-text-align/index.html">TextAlign</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text align of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1211258765%2FProperties%2F-1322303221" anchor-label="textDecoration" id="1211258765%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="text-decoration.html"><span>text</span><wbr><span><span>Decoration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1211258765%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="text-decoration.html">textDecoration</a><span class="token operator">: </span><a href="../../dev.kilua.html/-text-decoration/index.html">TextDecoration</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text decoration of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="820450065%2FProperties%2F-1322303221" anchor-label="textIndent" id="820450065%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="text-indent.html"><span>text</span><wbr><span><span>Indent</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="820450065%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="text-indent.html">textIndent</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text indent of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-500499333%2FProperties%2F-1322303221" anchor-label="textOverflow" id="-500499333%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="text-overflow.html"><span>text</span><wbr><span><span>Overflow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-500499333%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="text-overflow.html">textOverflow</a><span class="token operator">: </span><a href="../../dev.kilua.html/-text-overflow/index.html">TextOverflow</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text overflow of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-804309731%2FProperties%2F-1322303221" anchor-label="textShadow" id="-804309731%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="text-shadow.html"><span>text</span><wbr><span><span>Shadow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-804309731%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="text-shadow.html">textShadow</a><span class="token operator">: </span><a href="../../dev.kilua.html/-text-shadow/index.html">TextShadow</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text shadow of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1839436625%2FProperties%2F-1322303221" anchor-label="textTransform" id="1839436625%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="text-transform.html"><span>text</span><wbr><span><span>Transform</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1839436625%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="text-transform.html">textTransform</a><span class="token operator">: </span><a href="../../dev.kilua.html/-text-transform/index.html">TextTransform</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text transform of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1337029435%2FProperties%2F-1322303221" anchor-label="top" id="1337029435%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="top.html"><span><span>top</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1337029435%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="top.html">top</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Top edge of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1118983819%2FProperties%2F-1322303221" anchor-label="transition" id="-1118983819%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="transition.html"><span><span>transition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1118983819%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="transition.html">transition</a><span class="token operator">: </span><a href="../../dev.kilua.html/-transition/index.html">Transition</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS transition effect for the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="37493367%2FProperties%2F-1322303221" anchor-label="transitionList" id="37493367%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="transition-list.html"><span>transition</span><wbr><span><span>List</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="37493367%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="transition-list.html">transitionList</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../dev.kilua.html/-transition/index.html">Transition</a><span class="token operator">&gt;</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">List of CSS transition effects for the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-801957753%2FProperties%2F-1322303221" anchor-label="unicodeBidi" id="-801957753%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="unicode-bidi.html"><span>unicode</span><wbr><span><span>Bidi</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-801957753%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="unicode-bidi.html">unicodeBidi</a><span class="token operator">: </span><a href="../../dev.kilua.html/-unicode-bidi/index.html">UnicodeBidi</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text unicode-bidi of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1383055135%2FProperties%2F-1322303221" anchor-label="verticalAlign" id="-1383055135%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="vertical-align.html"><span>vertical</span><wbr><span><span>Align</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1383055135%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="vertical-align.html">verticalAlign</a><span class="token operator">: </span><a href="../../dev.kilua.html/-vertical-align/index.html">VerticalAlign</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text vertical align of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1901106835%2FProperties%2F-1322303221" anchor-label="whiteSpace" id="-1901106835%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="white-space.html"><span>white</span><wbr><span><span>Space</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1901106835%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="white-space.html">whiteSpace</a><span class="token operator">: </span><a href="../../dev.kilua.html/-white-space/index.html">WhiteSpace</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text white space of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1176815830%2FProperties%2F-1322303221" anchor-label="width" id="-1176815830%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="width.html"><span><span>width</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1176815830%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="width.html">width</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Width of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="16147003%2FProperties%2F-1322303221" anchor-label="wordBreak" id="16147003%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="word-break.html"><span>word</span><wbr><span><span>Break</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="16147003%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="word-break.html">wordBreak</a><span class="token operator">: </span><a href="../../dev.kilua.html/-word-break/index.html">WordBreak</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS word break of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1664358455%2FProperties%2F-1322303221" anchor-label="wordSpacing" id="1664358455%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="word-spacing.html"><span>word</span><wbr><span><span>Spacing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1664358455%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="word-spacing.html">wordSpacing</a><span class="token operator">: </span><a href="../../dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">CSS Text word spacing of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-177889742%2FProperties%2F-1322303221" anchor-label="zIndex" id="-177889742%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="z-index.html"><span>z</span><wbr><span><span>Index</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-177889742%2FProperties%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="z-index.html">zIndex</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Z-index of the current component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-2067297525%2FFunctions%2F-1322303221" anchor-label="elementWithStyle" id="-2067297525%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="element-with-style.html"><span>element</span><wbr><span>With</span><wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2067297525%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="element-with-style.html"><span class="token function">elementWithStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">element<span class="token operator">: </span><a href="index.html">E</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Connects the delegate with the given element.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1969596565%2FFunctions%2F-1322303221" anchor-label="getStyle" id="1969596565%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-style.html"><span>get</span><wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1969596565%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="get-style.html"><span class="token function">getStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Get value of the given CSS style.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="148288737%2FFunctions%2F-1322303221" anchor-label="removeStyle" id="148288737%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="remove-style.html"><span>remove</span><wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="148288737%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="remove-style.html"><span class="token function">removeStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Remove CSS style with the given name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-60894347%2FFunctions%2F-1322303221" anchor-label="setStyle" id="-60894347%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-style.html"><span>set</span><wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-60894347%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="set-style.html"><span class="token function">setStyle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Set value for a given CSS style name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-208489678%2FFunctions%2F-1322303221" anchor-label="updateProperty" id="-208489678%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.kilua.core/-property-delegate/update-property.html"><span>update</span><wbr><span><span>Property</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-208489678%2FFunctions%2F-1322303221"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../dev.kilua.core/-property-delegate/update-property.html">T</a><span class="token operator">&gt; </span><a href="../../dev.kilua.core/-property-delegate/update-property.html"><span class="token function">updateProperty</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">property<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="../../dev.kilua.core/-property-delegate/update-property.html">T</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../dev.kilua.core/-property-delegate/update-property.html">T</a><span class="token operator">&gt; </span><a href="../../dev.kilua.core/-property-delegate/update-property.html"><span class="token function">updateProperty</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">property<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="../../dev.kilua.core/-property-delegate/update-property.html">T</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Update the value of the property with lower priority (called by the compose runtime).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
