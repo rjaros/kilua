@@ -214,8 +214,6 @@ class ConduitManager : TokenProvider {
     fun showArticle(slug: String, done: () -> Unit) {
         if (state.value.article?.slug != slug) {
             processAction(ConduitAction.ClearArticle)
-        } else {
-            done()
         }
         appScope.withProgress {
             try {
