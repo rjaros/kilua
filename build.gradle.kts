@@ -41,6 +41,8 @@ project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin>
         resolution("tabulator-tables", libs.versions.tabulator.get())
         resolution("rsup-progress", libs.versions.rsup.progress.get())
         resolution("lz-string", libs.versions.lz.string.get())
+        resolution("marked", libs.versions.marked.get())
+        resolution("sanitize-html", libs.versions.sanitize.html.get())
     }
 }
 
@@ -56,9 +58,11 @@ nmcp {
         project(":modules:kilua-i18n")
         project(":modules:kilua-imask")
         project(":modules:kilua-lazy-layouts")
+        project(":modules:kilua-marked")
         project(":modules:kilua-rest")
         project(":modules:kilua-routing")
         project(":modules:kilua-rsup-progress")
+        project(":modules:kilua-sanitize-html")
         project(":modules:kilua-select-remote")
         project(":modules:kilua-splitjs")
         project(":modules:kilua-ssr")

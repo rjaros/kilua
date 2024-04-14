@@ -49,6 +49,8 @@ imask = "7.6.0"
 tabulator = "6.2.0"
 rsup-progress = "3.2.0"
 lz-string = "1.5.0"
+marked = "12.0.1"
+sanitize-html = "2.13.0"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
