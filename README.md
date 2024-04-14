@@ -2,70 +2,44 @@
 
 Composable web framework for Kotlin/Wasm and Kotlin/JS.
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/dev.kilua/kilua/badge.svg)](https://maven-badges.herokuapp.com/maven-central/dev.kilua/kilua)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Kilua allows you to build web applications with the [Kotlin](https://kotlinlang.org) language. 
+Kilua allows you to build modern web applications with the [Kotlin](https://kotlinlang.org) language. 
 
-You can think Kilua re-implements the [compose-html](https://github.com/JetBrains/compose-multiplatform#compose-html) 
-library with a different API based on my [KVision](https://kvision.io) experiences and some new, ambitious goals in mind. 
-Writing Kilua applications should be familiar to both Compose users (`@Composable` functions, state management) and 
+It is powered by the Compose Runtime and is similar to the [compose-html](https://github.com/JetBrains/compose-multiplatform#compose-html)
+library. It gives you clean, modular API to create declarative UI components and manage their state. 
+Unlike compose-html, Kilua supports both Kotlin/Wasm and Kotlin/JS targets. It also provides a lot
+of ready to use components for many typical web application use cases.
+
+Kilua is a kind of successor to my [KVision](https://kvision.io) framework. Writing Kilua applications should be 
+familiar to both Compose users (`@Composable` functions, state management, coroutines/flow integration) and 
 KVision users (component based API, allowing some imperative, direct ways to interact with the UI components).
 
-## Goals
+## Features
 
-- Modern web framework powered by Compose Runtime.
+- Use powerful Compose programming model and state management to develop web applications.
+- Choose from the wide range of ready to use components and form inputs.
 - Compile the same application code for Kotlin/Wasm and Kotlin/JS targets.
-- Direct DOM manipulation without virtual DOM.
-- Rendering to String with JS/Node or WasmJS/Node target (for use with SSR).
-- Ready to use components for all typical web application use cases. 
-- Component based API (familiar to KVision users).
-- Integration with [Kilua RPC](https://github.com/rjaros/kilua-rpc) library (fullstack support ported from KVision)
-- Modular architecture.
+- Create fullstack applications with [Kilua RPC](https://github.com/rjaros/kilua-rpc) library.
+- Translate your application to other languages with [Gettext](https://github.com/rjaros/kilua-gettext) - 
+one of the most widely used tool for i18n.
+- Deploy your application with full SSR (Server Side Rendering) for better 
+SEO performance and user experience.
 
 ## Project status
 
-All main concepts have been tested and all planned frontend and fullstack components are ready.
-Base SSR (server-side-rendering) is implemented for all servers supported by Kilua RPC 
-(Ktor, Spring Boot, Javalin, Jooby, Vert.x and Micronaut).
-A Gradle plugin has also been implemented to automate SSR configuration and tasks.
+Kilua is being actively developed. Please create an issue for any bugs or feature requests. 
+Contributions and PRs are welcomed. All artifacts are published to Maven Central.
 
-The project can be built and tested with single gradle tasks. Contributions and PRs are welcomed.
+## Documentation and examples
 
-The TODO list is almost complete. I'm working on releasing version 0.0.1 to Maven Central.
+Current API documentation is published at [https://rjaros.github.io/kilua/api/](https://rjaros.github.io/kilua/api/).
 
-## TODO
+Different example applications can be found in the [examples directory](https://github.com/rjaros/kilua/tree/main/examples), 
+including fully compatible TodoMVC and Realworld.io (with SSR) implementations.
 
-- [X] Compose runtime integration
-- [X] Basic project architecture
-- [X] HMR support (JS target only)
-- [X] Testing environment
-- [X] Typesafe CSS style properties
-- [X] A few basic HTML tags
-- [X] A few basic form input components with `StateFlow` integration
-- [X] A component based on external NPM library (`SplitPanel`)
-- [X] Implement all standard HTML tags
-- [X] Implement all standard form input components
-- [X] Bootstrap module with basic components (tabs, toasts, dropdowns, modals etc.)
-- [X] Implement RichText form component based on Trix editor NPM library
-- [X] Implement RichDateTime form components based on Tempus Dominus NPM library
-- [X] Implement TomSelect and TomTypeahead form components based on TomSelect NPM library
-- [X] Implement support for masked inputs based on Imask NPM library
-- [X] CSS styles declarations
-- [X] Typesafe forms support with built-in validation 
-- [X] Implement Tabulator component
-- [X] Routing support
-- [X] Web client
-- [X] I18n support (based on [Kilua Gettext](https://github.com/rjaros/kilua-gettext) library)
-- [X] Gradle plugin ~~and KSP compiler plugin~~
-- [X] Fullstack `Select`
-- [X] Fullstack `TomSelect`
-- [X] Fullstack `TomTypeahead`
-- [X] Fullstack `Tabulator`
-- [X] SSR support
-- [X] Code documentation
-- [X] Unit tests
-- [ ] Maven central publication
-- [ ] More examples of typical applications (crud, chat, todo, etc.) 
+More documentation, including tutorials and guides, is planned for the future.
 
 ## Code sample
 
@@ -114,12 +88,19 @@ and boosts SEO performance. Kilua SSR support is based on the possibility to run
 application code both in the browser and in NodeJs environment. What's more, you can easily use 
 WASM compilation target for much better performance.  
 
-### Current limitations:
-- The URL address and the browser preferred locale need to be the only source of application state.
+### SSR Features
+
+- Preparing application for SSR is as easy as changing the router class.
+- Ability to use external API calls and fullstack RPC services.
+- Automatically extracting CSS styles from JS bundle and injecting them into the HTML document before sending to the browser.
+- Serialization of the application state from the server to the client side.
+
+### Current limitations
+
+- The URL address and the browser preferred locale need to be the only source of the application state.
 - Using browser APIs directly is not recommended.
 - Advanced JS components (like RichText, Tabulator etc.) are rendered on the server
 as simple HTML placeholders.
-- Running fullstack RPC services on the server is possible, but needs further testing. 
 - Rendering authenticated content is not supported at the moment.
 - The "hydration" is implemented in a very primitive way (by replacing the rendered content).
 
