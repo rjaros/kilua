@@ -1,6 +1,6 @@
 [versions]
 kilua = "0.0.1"
-kilua-published = "0.0.1-kt-2.0.0-RC1-SNAPSHOT"
+kilua-published = "0.0.1"
 kotlin = "2.0.0-RC1"
 compose = "1.6.2"
 compose-plugin = "1.5.11-kt-2.0.0-RC1"
