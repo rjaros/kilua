@@ -58,6 +58,8 @@ For fullstack and SSR examples additional tasks are available:
 - `./gradlew :examples:[exampleName]:jarWithJs` - build and package the production application with JS frontend to `examples/[exampleName]/build/libs` directory
 - `./gradlew :examples:[exampleName]:jarWithWasmJs` - build and package the production application with Wasm frontend to `examples/[exampleName]/build/libs` directory
 
+To run packaged fullstack or SSR example just use `java -jar [exampleName]-[version].jar` command.
+
 Note: use `gradlew.bat` instead of `./gradlew` on Windows operating system.
 
 ## Code sample
