@@ -91,7 +91,6 @@ kotlin {
                 implementation(libs.koin.annotations)
                 implementation(libs.logback.classic)
             }
-            kotlin.srcDir("build/generated/ksp/jvm/jvmMain/kotlin")
         }
     }
 }
@@ -104,12 +103,4 @@ compose {
 
 dependencies {
     add("kspJvm", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin.annotations.get()}")
-}
-
-afterEvaluate {
-    tasks {
-        getByName("kspKotlinJvm").apply {
-            dependsOn("kspCommonMainKotlinMetadata")
-        }
-    }
 }
