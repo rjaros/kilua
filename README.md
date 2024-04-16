@@ -41,6 +41,23 @@ including fully compatible TodoMVC and Realworld.io (with SSR) implementations.
 
 More documentation, including tutorials and guides, is planned for the future.
 
+## Building and running the examples
+
+To build the examples, you need to have JDK 17 or later installed.
+
+The following tasks are available from the root project level:
+
+- `./gradlew -t :examples:[exampleName]:jsRun` - run the webpack dev server in continuous build mode for JS target on `http://localhost:3000`
+- `./gradlew -t :examples:[exampleName]:wasmJsRun` - run the webpack dev server in continuous build mode for Wasm target on `http://localhost:3000`
+- `./gradlew :examples:[exampleName]:jsBrowserDistribution` - build production application for JS target to `examples/[exampleName]/build/dist/js/productionExecutable` directory
+- `./gradlew :examples:[exampleName]:wasmJsBrowserDistribution` - build production application for Wasm target to `examples/[exampleName]/build/dist/js/productionExecutable` directory
+
+For fullstack and SSR examples additional tasks are available:
+
+- `./gradlew :examples:[exampleName]:jvmRun` - run the backend application for development on `http://localhost:8080` 
+- `./gradlew :examples:[exampleName]:jarWithJs` - build and package the production application with JS frontend to `examples/[exampleName]/build/libs` directory
+- `./gradlew :examples:[exampleName]:jarWithWasmJs` - build and package the production application with Wasm frontend to `examples/[exampleName]/build/libs` directory
+
 ## Code sample
 
 This is a simple "Hello, world!" application written in Kilua:
