@@ -62,6 +62,8 @@ To run packaged fullstack or SSR example just use `java -jar [exampleName]-[vers
 
 Note: use `gradlew.bat` instead of `./gradlew` on Windows operating system.
 
+If you want to start your own project, just copy the [Kilua template](https://github.com/rjaros/kilua/tree/main/templates/template) project.
+
 ## Code sample
 
 This is a simple "Hello, world!" application written in Kilua:
