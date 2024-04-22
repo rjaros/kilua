@@ -58,6 +58,19 @@ public abstract class Application {
  * Main function for creating Kilua applications.
  * Initialize Kilua modules.
  * @param builder application builder function
+ * @param moduleInitializers optional module initializers
+ */
+public fun startApplication(
+    builder: () -> Application,
+    vararg moduleInitializers: ModuleInitializer
+) {
+    startApplication(builder, null, *moduleInitializers)
+}
+
+/**
+ * Main function for creating Kilua applications with HMR support.
+ * Initialize Kilua modules.
+ * @param builder application builder function
  * @param hot HMR module
  * @param moduleInitializers optional module initializers
  */
