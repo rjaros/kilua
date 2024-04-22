@@ -205,7 +205,7 @@ class App : Application() {
             div {
                 margin = 20.px
 
-                h1 {
+                h1("text-blue-500") {
                     +i18n.tr("Hello world!")
                 }
 

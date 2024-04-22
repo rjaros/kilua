@@ -20,20 +20,7 @@
  * SOFTWARE.
  */
 
-import dev.kilua.BootstrapCssModule
-import dev.kilua.BootstrapIconsModule
-import dev.kilua.BootstrapModule
-import dev.kilua.CoreModule
-import dev.kilua.FontAwesomeModule
-import dev.kilua.Hot
-import dev.kilua.ImaskModule
-import dev.kilua.SplitjsModule
-import dev.kilua.TabulatorModule
-import dev.kilua.TempusDominusModule
-import dev.kilua.ToastifyModule
-import dev.kilua.TomSelectModule
-import dev.kilua.TrixModule
-import dev.kilua.startApplication
+import dev.kilua.*
 
 fun main() {
     startApplication(
@@ -50,6 +37,7 @@ fun main() {
         TomSelectModule,
         ToastifyModule,
         TrixModule,
+        TailwindcssModule,
         CoreModule
     )
 }
