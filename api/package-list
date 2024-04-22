@@ -111,6 +111,8 @@ dev.kilua.externals
 dev.kilua.tabulator
 module:kilua-tabulator-remote
 dev.kilua.tabulator
+module:kilua-tailwindcss
+dev.kilua
 module:kilua-tempus-dominus
 dev.kilua
 dev.kilua.externals
