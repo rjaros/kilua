@@ -80,6 +80,24 @@ public abstract class KiluaPlugin : Plugin<Project> {
         val wasmJsMainExists = layout.projectDirectory.dir("src/wasmJsMain").asFile.exists()
         val webMainExists = jsMainExists || wasmJsMainExists
 
+        tasks.withType<Copy>().matching {
+            it.name == "jsProcessResources" || it.name == "wasmJsProcessResources"
+        }.configureEach {
+            eachFile {
+                if (this.name == "tailwind.config.js") {
+                    this.filter {
+                        it.replace( "SOURCES", project.layout.projectDirectory.dir("src").asFile.absolutePath + "/**/*.kt")
+                    }
+                }
+            }
+        }
+
+        tasks.withType<Copy>().matching {
+            it.name == "jsBrowserDistribution" || it.name == "wasmJsBrowserDistribution"
+        }.configureEach {
+            exclude("/tailwind/**", "/img/**", "/css/**", "/i18n/**")
+        }
+
         if (webMainExists && webpackSsrExists && kiluaExtension.enableGradleTasks.get()) {
 
             val cssFiles = listOf(
@@ -165,7 +183,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (this.name.endsWith(".css")) {
+                        if (this.name.endsWith(".css") && this.name != "tailwindcss.css") {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         }
                     }
@@ -235,7 +253,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (this.name.endsWith(".css")) {
+                        if (this.name.endsWith(".css") && this.name != "tailwindcss.css") {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         } else if (this.name.equals("main.bundle.js")) {
                             this.filter {
@@ -308,6 +326,15 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 resolution("imask", kiluaVersions["imask"]!!)
                 resolution("tabulator-tables", kiluaVersions["tabulator"]!!)
                 resolution("rsup-progress", kiluaVersions["rsup-progress"]!!)
+                resolution("lz-string", kiluaVersions["lz-string"]!!)
+                resolution("marked", kiluaVersions["marked"]!!)
+                resolution("sanitize-html", kiluaVersions["sanitize-html"]!!)
+                resolution("postcss", kiluaVersions["postcss"]!!)
+                resolution("postcss-loader", kiluaVersions["postcss-loader"]!!)
+                resolution("autoprefixer", kiluaVersions["autoprefixer"]!!)
+                resolution("tailwindcss", kiluaVersions["tailwindcss"]!!)
+                resolution("cssnano", kiluaVersions["cssnano"]!!)
+                resolution("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
             }
         }
     }

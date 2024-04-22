@@ -43,6 +43,12 @@ project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin>
         resolution("lz-string", libs.versions.lz.string.get())
         resolution("marked", libs.versions.marked.get())
         resolution("sanitize-html", libs.versions.sanitize.html.get())
+        resolution("postcss", libs.versions.postcss.asProvider().get())
+        resolution("postcss-loader", libs.versions.postcss.loader.get())
+        resolution("autoprefixer", libs.versions.autoprefixer.get())
+        resolution("tailwindcss", libs.versions.tailwindcss.get())
+        resolution("cssnano", libs.versions.cssnano.get())
+        resolution("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get())
     }
 }
 
@@ -75,6 +81,7 @@ nmcp {
         project(":modules:kilua-ssr-server-vertx")
         project(":modules:kilua-tabulator")
         project(":modules:kilua-tabulator-remote")
+        project(":modules:kilua-tailwindcss")
         project(":modules:kilua-tempus-dominus")
         project(":modules:kilua-testutils")
         project(":modules:kilua-toastify")
