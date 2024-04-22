@@ -6,7 +6,7 @@ plugins {
 
 val packageJsonFun: PackageJson.() -> Unit = {
     main.set("index.js")
-    version.set("0.0.7")
+    version.set("0.0.9")
     description.set("The assets for the Kilua framework")
     keywords.set(listOf("kilua", "kotlin", "wasm"))
     homepage.set("https://kilua.dev")
