@@ -1,5 +1,3 @@
-config.resolve.modules.push("../../processedResources/js/main");
-config.resolve.modules.push("../../processedResources/wasmJs/main");
 config.resolve.fallback = {
     "http": false,
 }
@@ -39,7 +37,8 @@ if (config.devServer) {
         "tom-select/dist/css/tom-select.bootstrap5.min.css": false,
         "tom-select/dist/css/tom-select.default.min.css": false,
         "tom-select/dist/css/tom-select.min.css": false,
-        "trix/dist/trix.css": false
+        "trix/dist/trix.css": false,
+        "./tailwind/tailwind.twcss": false,
     }
 }
 

@@ -1,5 +1,3 @@
-config.resolve.modules.push("../../processedResources/js/main");
-config.resolve.modules.push("../../processedResources/wasmJs/main");
 config.resolve.alias = {
     "zzz-kilua-assets/style.css": false,
     "@fortawesome/fontawesome-free/css/all.min.css": false,
@@ -19,7 +17,8 @@ config.resolve.alias = {
     "tom-select/dist/css/tom-select.bootstrap5.min.css": false,
     "tom-select/dist/css/tom-select.default.min.css": false,
     "tom-select/dist/css/tom-select.min.css": false,
-    "trix/dist/trix.css": false
+    "trix/dist/trix.css": false,
+    "./tailwind/tailwind.twcss": false,
 }
 if (config.devServer) {
     config.devServer.hot = true;

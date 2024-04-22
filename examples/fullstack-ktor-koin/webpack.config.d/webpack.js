@@ -1,6 +1,3 @@
-config.resolve.modules.push("../../processedResources/js/main");
-config.resolve.modules.push("../../processedResources/wasmJs/main");
-
 if (config.devServer) {
     config.devServer.hot = true;
     config.devServer.open = false;
