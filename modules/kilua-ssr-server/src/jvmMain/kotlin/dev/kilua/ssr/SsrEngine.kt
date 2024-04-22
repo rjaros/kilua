@@ -41,6 +41,7 @@ import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.createTempDirectory
 import kotlin.io.path.deleteRecursively
 import kotlin.io.path.readText
+import kotlin.io.path.reader
 
 /**
  * Server-Side Rendering engine for Kilua.
@@ -120,12 +121,14 @@ public class SsrEngine(
                 val textResponse = response.bodyAsText()
                 if (textResponse.isNotEmpty()) {
                     val cssTemplate = response.bodyAsText().split("\n").joinToString("\n") {
-                        workingDir.resolve(it).readText()
+                        if (it == "zzz-kilua-assets/style.css") {
+                            val cssCompressor = CssCompressor(workingDir.resolve(it).reader())
+                            val writer = StringWriter()
+                            cssCompressor.compress(writer, -1)
+                            writer.toString()
+                        } else workingDir.resolve(it).readText()
                     }
-                    val cssCompressor = CssCompressor(cssTemplate.reader())
-                    val writer = StringWriter()
-                    cssCompressor.compress(writer, -1)
-                    indexTemplate = indexTemplate.replace("</head>", "<style>\n$writer\n</style>\n</head>")
+                    indexTemplate = indexTemplate.replace("</head>", "<style>\n$cssTemplate\n</style>\n</head>")
                 }
             }
         } else {
