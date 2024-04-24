@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLTableSectionElement
@@ -33,8 +33,13 @@ import web.dom.HTMLTableSectionElement
 /**
  * HTML Thead component.
  */
+public interface IThead : ITag<HTMLTableSectionElement>
+
+/**
+ * HTML Thead component.
+ */
 public open class Thead(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableSectionElement>("thead", className, renderConfig = renderConfig)
+    Tag<HTMLTableSectionElement>("thead", className, renderConfig = renderConfig), IThead
 
 /**
  * Creates a [Thead] component.
@@ -44,7 +49,7 @@ public open class Thead(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Thead] component
  */
 @Composable
-public fun ComponentBase.thead(className: String? = null, content: @Composable Thead.() -> Unit = {}): Thead {
+public fun IComponent.thead(className: String? = null, content: @Composable IThead.() -> Unit = {}): Thead {
     val component = remember { Thead(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Thead::className, it) }

@@ -23,7 +23,7 @@
 package io.realworld.layout.articles
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.form.form
 import dev.kilua.form.text.TextArea
 import dev.kilua.form.text.textArea
@@ -36,7 +36,6 @@ import dev.kilua.html.li
 import dev.kilua.html.p
 import dev.kilua.html.rawHtml
 import dev.kilua.html.ul
-import dev.kilua.html.unaryPlus
 import dev.kilua.marked.parseMarkdown
 import dev.kilua.sanitize.sanitizeHtml
 import io.realworld.ConduitManager
@@ -44,7 +43,7 @@ import io.realworld.ConduitState
 import io.realworld.View
 
 @Composable
-fun ComponentBase.article(state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.article(state: ConduitState, conduitManager: ConduitManager) {
     if (state.article != null) {
         val article = state.article
         div("article-page") {
@@ -82,7 +81,7 @@ fun ComponentBase.article(state: ConduitState, conduitManager: ConduitManager) {
                                 lateinit var commentInput: TextArea
                                 div("card-block") {
                                     commentInput = textArea(rows = 3, className = "form-control") {
-                                        placeholder = "Write a comment..."
+                                        placeholder("Write a comment...")
                                     }
                                 }
                                 div("card-footer") {

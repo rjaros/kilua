@@ -23,7 +23,7 @@
 package dev.kilua.form.number
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.form.ImaskOptions
 import dev.kilua.form.NumberMask
 import dev.kilua.i18n.Locale
@@ -48,7 +48,7 @@ import dev.kilua.i18n.LocaleManager
  * @return a [Numeric] component
  */
 @Composable
-public fun ComponentBase.imaskNumeric(
+public fun IComponent.imaskNumeric(
     value: Number? = null,
     min: Number? = null,
     max: Number? = null,
@@ -62,7 +62,7 @@ public fun ComponentBase.imaskNumeric(
     normalizeZeros: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable Numeric.() -> Unit = {}
+    setup: @Composable INumeric.() -> Unit = {}
 ): Numeric {
     return numeric(value, min, max, decimals, name, placeholder, disabled, required, locale, className, id) {
         maskOptions = ImaskOptions(

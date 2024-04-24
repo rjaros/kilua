@@ -22,6 +22,9 @@
 
 package dev.kilua.core
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.remember
 import dev.kilua.utils.cast
 import dev.kilua.utils.nativeMapOf
 import kotlin.collections.set
@@ -35,6 +38,9 @@ public open class PropertyDelegate(
     internal val onSetCallback: ((values: Map<String, Any>) -> Unit)? = null,
     internal val skipUpdates: Boolean = false,
 ) {
+    protected var composablePropertyCounter: Int = 0
+    protected val composablePropertyMap: MutableMap<String, Int> = nativeMapOf()
+
     protected val notifyFunctions: MutableMap<String, Any> = nativeMapOf()
     protected val updateFunctions: MutableMap<String, Any> = nativeMapOf()
     protected val updateFunctionsWithOldValue: MutableMap<String, Any> = nativeMapOf()
@@ -217,6 +223,21 @@ public open class PropertyDelegate(
      */
     public fun <T> updateProperty(property: KProperty<*>, value: T) {
         updateProperty(property.name, value)
+    }
+
+    @Composable
+    protected fun composableProperty(property: String, remover: (() -> Unit)? = null, updater: () -> Unit) {
+        val id = remember { composablePropertyCounter++ }
+        updater()
+        composablePropertyMap[property] = id
+        DisposableEffect(id) {
+            onDispose {
+                if (composablePropertyMap[property] == id) {
+                    remover?.invoke()
+                    composablePropertyMap.remove(property)
+                }
+            }
+        }
     }
 }
 

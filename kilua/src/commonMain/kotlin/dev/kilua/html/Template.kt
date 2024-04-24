@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLTemplateElement
@@ -33,8 +33,13 @@ import web.dom.HTMLTemplateElement
 /**
  * HTML Template component.
  */
+public interface ITemplate : ITag<HTMLTemplateElement>
+
+/**
+ * HTML Template component.
+ */
 public open class Template(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTemplateElement>("template", className, renderConfig = renderConfig)
+    Tag<HTMLTemplateElement>("template", className, renderConfig = renderConfig), ITemplate
 
 /**
  * Creates a [Template] component.
@@ -44,7 +49,7 @@ public open class Template(className: String? = null, renderConfig: RenderConfig
  * @return the [Template] component
  */
 @Composable
-public fun ComponentBase.template(className: String? = null, content: @Composable Template.() -> Unit = {}): Template {
+public fun IComponent.template(className: String? = null, content: @Composable ITemplate.() -> Unit = {}): Template {
     val component = remember { Template(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Template::className, it) }

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLTrackElement
@@ -33,8 +33,13 @@ import web.dom.HTMLTrackElement
 /**
  * HTML Track component.
  */
+public interface ITrack : ITag<HTMLTrackElement>
+
+/**
+ * HTML Track component.
+ */
 public open class Track(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTrackElement>("track", className, renderConfig = renderConfig)
+    Tag<HTMLTrackElement>("track", className, renderConfig = renderConfig), ITrack
 
 /**
  * Creates a [Track] component.
@@ -44,7 +49,7 @@ public open class Track(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Track] component
  */
 @Composable
-public fun ComponentBase.track(className: String? = null, setup: Track.() -> Unit = {}): Track {
+public fun IComponent.track(className: String? = null, setup: @Composable ITrack.() -> Unit = {}): Track {
     val component = remember { Track(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Track::className, it) }

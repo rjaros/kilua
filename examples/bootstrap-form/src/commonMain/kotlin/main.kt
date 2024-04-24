@@ -35,7 +35,6 @@ import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.px
 import dev.kilua.html.span
-import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
 import dev.kilua.externals.console
 import dev.kilua.utils.listOfPairs
@@ -59,19 +58,19 @@ class App : Application() {
 
         root("root") {
             div {
-                margin = 20.px
+                margin(20.px)
                 form<UserForm>(className = "row g-3 needs-validation") {
                     val validation by validationStateFlow.collectAsState()
 
                     if (validation.wasValidated) {
                         if (validation.isInvalid) {
                             div("alert alert-danger") {
-                                role = "alert"
+                                role("alert")
                                 +"Form is invalid."
                             }
                         } else {
                             div("alert alert-success") {
-                                role = "alert"
+                                role("alert")
                                 +"Form is valid."
                             }
                         }
@@ -94,12 +93,12 @@ class App : Application() {
                         wrapperClassName = "input-group has-validation"
                     ) {
                         span("input-group-text") {
-                            id = "inputGroupPrepend"
+                            id("inputGroupPrepend")
                             +"@"
                         }
                         val invalidClass = if (validation[UserForm::username]?.isInvalid == true) "is-invalid" else null
                         text(required = true, id = it, className = "form-control" % invalidClass) {
-                            ariaDescribedby = "inputGroupPrepend"
+                            ariaDescribedby("inputGroupPrepend")
                         }.bindWithValidationMessage(UserForm::username) { text ->
                             val result = text.value == null || text.value!!.length >= 10
                             val message = if (!result) "Username must be at least 10 characters long." else null

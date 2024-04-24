@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.buildCustomEventInit
@@ -48,6 +48,11 @@ import web.dom.events.Event
 /**
  * Tempus Dominus rich date component.
  */
+public interface IRichDate : IAbstractRichDateTime, DateFormControl, WithStateFlow<LocalDate?>
+
+/**
+ * Tempus Dominus rich date component.
+ */
 public open class RichDate(
     value: LocalDate? = null,
     disabled: Boolean? = null,
@@ -58,7 +63,7 @@ public open class RichDate(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalDate?> = WithStateFlowDelegateImpl()
 ) : AbstractRichDateTime(disabled, format, inline, locale, className, renderConfig = renderConfig), DateFormControl,
-    WithStateFlow<LocalDate?> by withStateFlowDelegate {
+    WithStateFlow<LocalDate?> by withStateFlowDelegate, IRichDate {
 
     public override var value: LocalDate? by updatingProperty(
         value,
@@ -110,14 +115,14 @@ public open class RichDate(
 }
 
 @Composable
-private fun ComponentBase.richDate(
+private fun IComponent.richDate(
     value: LocalDate? = null,
     disabled: Boolean? = null,
     format: String = "yyyy-MM-dd",
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
-    setup: @Composable RichDate.() -> Unit = {}
+    setup: @Composable IRichDate.() -> Unit = {}
 ): RichDate {
     val component = remember { RichDate(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
@@ -153,7 +158,7 @@ private fun ComponentBase.richDate(
  * @return a [RichDate] component
  */
 @Composable
-public fun ComponentBase.richDate(
+public fun IComponent.richDate(
     value: LocalDate? = null,
     name: String? = null,
     placeholder: String? = null,
@@ -164,7 +169,7 @@ public fun ComponentBase.richDate(
     format: String = "yyyy-MM-dd",
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
-    setup: @Composable RichDate.() -> Unit = {}
+    setup: @Composable IRichDate.() -> Unit = {}
 ): RichDate {
     val bindId = remember { "kilua_tempus_dominus_rd_${RichDate.idCounter++}" }
     return richDate(value, disabled, format, inline, locale, className = className % "input-group kilua-td") {

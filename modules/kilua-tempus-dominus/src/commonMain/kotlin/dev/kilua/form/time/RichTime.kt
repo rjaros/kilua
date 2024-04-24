@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.externals.get
@@ -46,7 +46,12 @@ import kotlinx.datetime.LocalTime
 import web.dom.events.Event
 
 /**
- * Tempus Dominus rich date time component.
+ * Tempus Dominus rich time component.
+ */
+public interface IRichTime : IAbstractRichDateTime, TimeFormControl, WithStateFlow<LocalTime?>
+
+/**
+ * Tempus Dominus rich time component.
  */
 public open class RichTime(
     value: LocalTime? = null,
@@ -58,7 +63,7 @@ public open class RichTime(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalTime?> = WithStateFlowDelegateImpl()
 ) : AbstractRichDateTime(disabled, format, inline, locale, className, renderConfig = renderConfig), TimeFormControl,
-    WithStateFlow<LocalTime?> by withStateFlowDelegate {
+    WithStateFlow<LocalTime?> by withStateFlowDelegate, IRichTime {
 
     public override var value: LocalTime? by updatingProperty(
         value,
@@ -110,14 +115,14 @@ public open class RichTime(
 }
 
 @Composable
-private fun ComponentBase.richTime(
+private fun IComponent.richTime(
     value: LocalTime? = null,
     disabled: Boolean? = null,
     format: String = "HH:mm",
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
-    setup: @Composable RichTime.() -> Unit = {}
+    setup: @Composable IRichTime.() -> Unit = {}
 ): RichTime {
     val component =
         remember { RichTime(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
@@ -154,7 +159,7 @@ private fun ComponentBase.richTime(
  * @return a [RichTime] component
  */
 @Composable
-public fun ComponentBase.richTime(
+public fun IComponent.richTime(
     value: LocalTime? = null,
     name: String? = null,
     placeholder: String? = null,
@@ -165,7 +170,7 @@ public fun ComponentBase.richTime(
     format: String = "HH:mm",
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
-    setup: @Composable RichTime.() -> Unit = {}
+    setup: @Composable IRichTime.() -> Unit = {}
 ): RichTime {
     val bindId = remember { "kilua_tempus_dominus_rt_${RichTime.idCounter++}" }
     return richTime(value, disabled, format, inline, locale, className = className % "input-group kilua-td") {

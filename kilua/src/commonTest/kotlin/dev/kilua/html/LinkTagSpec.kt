@@ -35,12 +35,12 @@ class LinkTagSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 linkTag("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
                 }
             }
             assertEquals(
@@ -56,12 +56,12 @@ class LinkTagSpec : DomSpec {
         run {
             val root = root {
                 linkTag("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
                 }
             }
             assertEquals(

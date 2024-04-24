@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLEmbedElement
@@ -33,8 +33,13 @@ import web.dom.HTMLEmbedElement
 /**
  * HTML Embed component.
  */
+public interface IEmbed : ITag<HTMLEmbedElement>
+
+/**
+ * HTML Embed component.
+ */
 public open class Embed(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLEmbedElement>("embed", className, renderConfig = renderConfig)
+    Tag<HTMLEmbedElement>("embed", className, renderConfig = renderConfig), IEmbed
 
 /**
  * Creates a [Embed] component.
@@ -44,7 +49,7 @@ public open class Embed(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Embed] component
  */
 @Composable
-public fun ComponentBase.embed(className: String? = null, setup: Embed.() -> Unit = {}): Embed {
+public fun IComponent.embed(className: String? = null, setup: @Composable IEmbed.() -> Unit = {}): Embed {
     val component = remember { Embed(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Embed::className, it) }

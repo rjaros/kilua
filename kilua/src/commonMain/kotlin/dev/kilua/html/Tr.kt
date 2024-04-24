@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLTableRowElement
@@ -33,8 +33,13 @@ import web.dom.HTMLTableRowElement
 /**
  * HTML Tr component.
  */
+public interface ITr : ITag<HTMLTableRowElement>
+
+/**
+ * HTML Tr component.
+ */
 public open class Tr(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableRowElement>("tr", className, renderConfig = renderConfig)
+    Tag<HTMLTableRowElement>("tr", className, renderConfig = renderConfig), ITr
 
 /**
  * Creates a [Tr] component.
@@ -44,7 +49,7 @@ public open class Tr(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [Tr] component
  */
 @Composable
-public fun ComponentBase.tr(className: String? = null, content: @Composable Tr.() -> Unit = {}): Tr {
+public fun IComponent.tr(className: String? = null, content: @Composable ITr.() -> Unit = {}): Tr {
     val component = remember { Tr(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Tr::className, it) }

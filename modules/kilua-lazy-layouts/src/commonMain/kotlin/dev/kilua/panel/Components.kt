@@ -18,10 +18,11 @@
 package dev.kilua.panel
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.Display
 import dev.kilua.html.Div
 import dev.kilua.html.FlexDirection
+import dev.kilua.html.IDiv
 import dev.kilua.html.div
 
 /**
@@ -54,13 +55,13 @@ import dev.kilua.html.div
  * ```
  */
 @Composable
-public fun ComponentBase.lazyColumn(
-    setup: Div.() -> Unit = {},
+public fun IComponent.lazyColumn(
+    setup: IDiv.() -> Unit = {},
     block: LazyDsl.() -> Unit,
 ): Div {
     return div {
-        display = Display.Flex
-        flexDirection = FlexDirection.Column
+        display(Display.Flex)
+        flexDirection(FlexDirection.Column)
         setup()
         lazyLinearLayout(block)
     }
@@ -75,13 +76,13 @@ public fun ComponentBase.lazyColumn(
  * Elements are loaded from side to side, respecting the user's reading direction, in the same order as they are declared in [block].
  */
 @Composable
-public fun ComponentBase.lazyRow(
-    setup: Div.() -> Unit = {},
+public fun IComponent.lazyRow(
+    setup: IDiv.() -> Unit = {},
     block: LazyDsl.() -> Unit,
 ): Div {
     return div {
-        display = Display.Flex
-        flexDirection = FlexDirection.Row
+        display(Display.Flex)
+        flexDirection(FlexDirection.Row)
         setup()
         lazyLinearLayout(block)
     }

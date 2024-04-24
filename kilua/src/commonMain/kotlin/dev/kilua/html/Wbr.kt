@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Wbr component.
  */
+public interface IWbr : ITag<HTMLElement>
+
+/**
+ * HTML Wbr component.
+ */
 public open class Wbr(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("wbr", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("wbr", className, renderConfig = renderConfig), IWbr
 
 /**
  * Creates a [Wbr] component.
@@ -44,7 +49,7 @@ public open class Wbr(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Wbr] component
  */
 @Composable
-public fun ComponentBase.wbr(className: String? = null, setup: Wbr.() -> Unit = {}): Wbr {
+public fun IComponent.wbr(className: String? = null, setup: @Composable IWbr.() -> Unit = {}): Wbr {
     val component = remember { Wbr(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Wbr::className, it) }

@@ -29,14 +29,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.SplitJsInstance
 import dev.kilua.externals.SplitJsOptions
 import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.externals.splitJs
-import dev.kilua.html.Div
+import dev.kilua.html.IDiv
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.div
 import dev.kilua.utils.cast
@@ -76,76 +77,275 @@ public enum class GutterAlign {
 /**
  * Split panel component.
  */
+public interface ISplitPanel : ITag<HTMLDivElement> {
+    /**
+     * Split panel direction.
+     */
+    public val dir: Dir
+
+    /**
+     * Set the split panel direction.
+     */
+    @Composable
+    public fun dir(dir: Dir)
+
+    /**
+     * The gutter size.
+     */
+    public val gutterSize: Int
+
+    /**
+     * Set the gutter size.
+     */
+    @Composable
+    public fun gutterSize(gutterSize: Int)
+
+    /**
+     * The gutter align.
+     */
+    public val gutterAlign: GutterAlign?
+
+    /**
+     * Set the gutter align.
+     */
+    @Composable
+    public fun gutterAlign(gutterAlign: GutterAlign?)
+
+    /**
+     * The minimum size.
+     */
+    public val minSize: Int
+
+    /**
+     * Set the minimum size.
+     */
+    @Composable
+    public fun minSize(minSize: Int)
+
+    /**
+     * The maximum size.
+     */
+    public val maxSize: Int?
+
+    /**
+     * Set the maximum size.
+     */
+    @Composable
+    public fun maxSize(maxSize: Int?)
+
+    /**
+     * Expand to minimum size.
+     */
+    public val expandToMin: Boolean?
+
+    /**
+     * Set expand to minimum size.
+     */
+    @Composable
+    public fun expandToMin(expandToMin: Boolean?)
+
+    /**
+     * The snap offset.
+     */
+    public val snapOffset: Int
+
+    /**
+     * Set the snap offset.
+     */
+    @Composable
+    public fun snapOffset(snapOffset: Int)
+
+    /**
+     * The drag interval.
+     */
+    public val dragInterval: Int?
+
+    /**
+     * Set the drag interval.
+     */
+    @Composable
+    public fun dragInterval(dragInterval: Int?)
+
+    /**
+     * The native Split.js instance.
+     */
+    public val splitJsInstance: SplitJsInstance?
+
+    /**
+     * Configure left side of the SplitPanel.
+     */
+    public fun left(content: @Composable IDiv.() -> Unit)
+
+    /**
+     * Configure top side of the SplitPanel.
+     */
+    public fun top(content: @Composable IDiv.() -> Unit)
+
+    /**
+     * Configure right side of the SplitPanel.
+     */
+    public fun right(content: @Composable IDiv.() -> Unit)
+
+    /**
+     * Configure bottom side of the SplitPanel.
+     */
+    public fun bottom(content: @Composable IDiv.() -> Unit)
+}
+
+
+/**
+ * Split panel component.
+ */
 public open class SplitPanel(
     dir: Dir = Dir.Vertical,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), ISplitPanel {
 
     /**
      * Split panel direction.
      */
-    public open var dir: Dir by updatingProperty(dir) {
+    public override var dir: Dir by updatingProperty(dir) {
         refresh()
+    }
+
+    /**
+     * Set the split panel direction.
+     */
+    @Composable
+    public override fun dir(dir: Dir): Unit = composableProperty("dir", {
+        this.dir = Dir.Vertical
+    }) {
+        this.dir = dir
     }
 
     /**
      * The gutter size.
      */
-    public open var gutterSize: Int by updatingProperty(SPLIT_PANEL_DEFAULT_GUTTER_SIZE) {
+    public override var gutterSize: Int by updatingProperty(SPLIT_PANEL_DEFAULT_GUTTER_SIZE) {
         refresh()
+    }
+
+    /**
+     * Set the gutter size.
+     */
+    @Composable
+    public override fun gutterSize(gutterSize: Int): Unit = composableProperty("gutterSize", {
+        this.gutterSize = SPLIT_PANEL_DEFAULT_GUTTER_SIZE
+    }) {
+        this.gutterSize = gutterSize
     }
 
     /**
      * The gutter align.
      */
-    public open var gutterAlign: GutterAlign? by updatingProperty {
+    public override var gutterAlign: GutterAlign? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the gutter align.
+     */
+    @Composable
+    public override fun gutterAlign(gutterAlign: GutterAlign?): Unit = composableProperty("gutterAlign", {
+        this.gutterAlign = null
+    }) {
+        this.gutterAlign = gutterAlign
     }
 
     /**
      * The minimum size.
      */
-    public open var minSize: Int by updatingProperty(0) {
+    public override var minSize: Int by updatingProperty(0) {
         refresh()
+    }
+
+    /**
+     * Set the minimum size.
+     */
+    @Composable
+    public override fun minSize(minSize: Int): Unit = composableProperty("minSize", {
+        this.minSize = 0
+    }) {
+        this.minSize = minSize
     }
 
     /**
      * The maximum size.
      */
-    public open var maxSize: Int? by updatingProperty {
+    public override var maxSize: Int? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the maximum size.
+     */
+    @Composable
+    public override fun maxSize(maxSize: Int?): Unit = composableProperty("maxSize", {
+        this.maxSize = null
+    }) {
+        this.maxSize = maxSize
     }
 
     /**
      * Expand to minimum size.
      */
-    public open var expandToMin: Boolean? by updatingProperty {
+    public override var expandToMin: Boolean? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set expand to minimum size.
+     */
+    @Composable
+    public override fun expandToMin(expandToMin: Boolean?): Unit = composableProperty("expandToMin", {
+        this.expandToMin = null
+    }) {
+        this.expandToMin = expandToMin
     }
 
     /**
      * The snap offset.
      */
-    public open var snapOffset: Int by updatingProperty(0) {
+    public override var snapOffset: Int by updatingProperty(0) {
         refresh()
+    }
+
+    /**
+     * Set the snap offset.
+     */
+    @Composable
+    public override fun snapOffset(snapOffset: Int): Unit = composableProperty("snapOffset", {
+        this.snapOffset = 0
+    }) {
+        this.snapOffset = snapOffset
     }
 
     /**
      * The drag interval.
      */
-    public open var dragInterval: Int? by updatingProperty {
+    public override var dragInterval: Int? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the drag interval.
+     */
+    @Composable
+    public override fun dragInterval(dragInterval: Int?): Unit = composableProperty("dragInterval", {
+        this.dragInterval = null
+    }) {
+        this.dragInterval = dragInterval
     }
 
     /**
      * The native Split.js instance.
      */
-    public var splitJsInstance: SplitJsInstance? = null
+    public override var splitJsInstance: SplitJsInstance? = null
 
-    internal var first by mutableStateOf<@Composable (Div.() -> Unit)?>(null)
-    internal var second by mutableStateOf<@Composable (Div.() -> Unit)?>(null)
+    internal var first by mutableStateOf<@Composable (IDiv.() -> Unit)?>(null)
+    internal var second by mutableStateOf<@Composable (IDiv.() -> Unit)?>(null)
 
     init {
         internalCssClasses.add("splitpanel-$dir")
@@ -157,28 +357,28 @@ public open class SplitPanel(
     /**
      * Configure left side of the SplitPanel.
      */
-    public fun left(content: @Composable Div.() -> Unit) {
+    public override fun left(content: @Composable IDiv.() -> Unit) {
         first = content
     }
 
     /**
      * Configure top side of the SplitPanel.
      */
-    public fun top(content: @Composable Div.() -> Unit) {
+    public override fun top(content: @Composable IDiv.() -> Unit) {
         first = content
     }
 
     /**
      * Configure right side of the SplitPanel.
      */
-    public fun right(content: @Composable Div.() -> Unit) {
+    public override fun right(content: @Composable IDiv.() -> Unit) {
         second = content
     }
 
     /**
      * Configure bottom side of the SplitPanel.
      */
-    public fun bottom(content: @Composable Div.() -> Unit) {
+    public override fun bottom(content: @Composable IDiv.() -> Unit) {
         second = content
     }
 
@@ -277,10 +477,10 @@ public open class SplitPanel(
  * @return the [SplitPanel] component
  */
 @Composable
-public fun ComponentBase.splitPanel(
+public fun IComponent.splitPanel(
     dir: Dir = Dir.Vertical,
     className: String? = null,
-    content: @Composable SplitPanel.() -> Unit = {}
+    content: @Composable ISplitPanel.() -> Unit = {}
 ): SplitPanel {
     val component = remember { SplitPanel(dir, className, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {

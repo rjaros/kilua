@@ -23,10 +23,11 @@
 package dev.kilua.dropdown
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.ButtonSize
 import dev.kilua.html.ButtonStyle
 import dev.kilua.html.Div
+import dev.kilua.html.IUl
 import dev.kilua.html.Ul
 import dev.kilua.html.div
 import dev.kilua.utils.rem
@@ -44,7 +45,7 @@ public enum class Direction(public val className: String) {
 }
 
 @Composable
-public fun ComponentBase.dropDown(
+public fun IComponent.dropDown(
     label: String? = null,
     icon: String? = null,
     style: ButtonStyle = ButtonStyle.BtnPrimary,
@@ -55,7 +56,7 @@ public fun ComponentBase.dropDown(
     innerDropDown: Boolean = false,
     className: String? = null,
     direction: Direction = Direction.Dropdown,
-    content: @Composable Ul.() -> Unit = {}
+    content: @Composable IUl.() -> Unit = {}
 ): Div {
     return div(direction.className % className) {
         dropDownButton(label, icon, style, size, disabled, autoClose, arrowVisible, innerDropDown)

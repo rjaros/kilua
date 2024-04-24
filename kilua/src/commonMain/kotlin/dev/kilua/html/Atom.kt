@@ -23,7 +23,7 @@
 package dev.kilua.html
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 
 /**
  * Creates a label with an icon.
@@ -32,7 +32,7 @@ import dev.kilua.core.ComponentBase
  * @param icon the icon
  */
 @Composable
-public fun ComponentBase.atom(
+public fun IComponent.atom(
     label: String? = null,
     icon: String? = null,
     separator: String? = null,

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Col component.
  */
+public interface ICol : ITag<HTMLElement>
+
+/**
+ * HTML Col component.
+ */
 public open class Col(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("col", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("col", className, renderConfig = renderConfig), ICol
 
 /**
  * Creates a [Col] component.
@@ -44,7 +49,7 @@ public open class Col(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Col] component
  */
 @Composable
-public fun ComponentBase.col(className: String? = null, setup: Col.() -> Unit = {}): Col {
+public fun IComponent.col(className: String? = null, setup: @Composable ICol.() -> Unit = {}): Col {
     val component = remember { Col(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Col::className, it) }

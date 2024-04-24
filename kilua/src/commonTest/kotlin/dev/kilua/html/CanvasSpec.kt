@@ -37,7 +37,7 @@ class CanvasSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 canvas(300, 200, "test") {
-                    id = "test-id"
+                    id("test-id")
                 }
             }
             assertEqualsHtml(
@@ -74,7 +74,7 @@ class CanvasSpec : DomSpec {
         run {
             val root = root {
                 canvas(300, 200, "test") {
-                    id = "test-id"
+                    id("test-id")
                 }
             }
             assertEqualsHtml(

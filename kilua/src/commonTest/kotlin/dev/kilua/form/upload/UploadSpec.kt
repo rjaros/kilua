@@ -33,7 +33,7 @@ class UploadSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 upload(multiple = true, accept = listOf("text/plain", "image/*"), name = "test") {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
             assertEqualsHtml(
@@ -49,7 +49,7 @@ class UploadSpec : DomSpec {
         run {
             val root = root {
                 upload(multiple = true, accept = listOf("text/plain", "image/*"), name = "test") {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
             assertEqualsHtml(

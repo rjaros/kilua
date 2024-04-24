@@ -25,12 +25,18 @@ package dev.kilua.form.text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.form.IInput
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.form.StringFormControl
+
+/**
+ * Text input component.
+ */
+public interface IText : IInput<String>, StringFormControl
 
 /**
  * Text input component.
@@ -46,8 +52,18 @@ public open class Text(
     className: String? = null,
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<String>(value, type, name, maxlength, placeholder, disabled, required, className, id, renderConfig = renderConfig),
-    StringFormControl {
+) : Input<String>(
+    value,
+    type,
+    name,
+    maxlength,
+    placeholder,
+    disabled,
+    required,
+    className,
+    id,
+    renderConfig = renderConfig
+), StringFormControl, IText {
 
     override fun stringToValue(text: String?): String? {
         return if (text.isNullOrEmpty()) {
@@ -75,7 +91,7 @@ public open class Text(
  * @return a [Text] component
  */
 @Composable
-public fun ComponentBase.text(
+public fun IComponent.text(
     value: String? = null,
     type: InputType = InputType.Text,
     name: String? = null,
@@ -85,10 +101,23 @@ public fun ComponentBase.text(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable Text.() -> Unit = {}
+    setup: @Composable IText.() -> Unit = {}
 ): Text {
     val component =
-        remember { Text(value, type, name, maxlength, placeholder, disabled, required, className, id, renderConfig = renderConfig) }
+        remember {
+            Text(
+                value,
+                type,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                id,
+                renderConfig = renderConfig
+            )
+        }
     ComponentNode(component, {
         set(value) { updateProperty(Text::value, it) }
         set(type) { updateProperty(Text::type, it) }

@@ -23,6 +23,7 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.externals.AbortController
 import dev.kilua.externals.buildAddEventListenerOptions
@@ -170,6 +171,11 @@ public open class TagEventsDelegateImpl<E : HTMLElement>(
     override fun <E : Event> onEvent(name: String, listener: (E) -> Unit): Int {
         val id = remember { counter++ }
         onEventInternal(id, name, listener)
+        DisposableEffect(id) {
+            onDispose {
+                removeEventListener(name, id)
+            }
+        }
         return id
     }
 

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLQuoteElement
@@ -33,8 +33,13 @@ import web.dom.HTMLQuoteElement
 /**
  * HTML Q component.
  */
+public interface IQ : ITag<HTMLQuoteElement>
+
+/**
+ * HTML Q component.
+ */
 public open class Q(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLQuoteElement>("q", className, renderConfig = renderConfig)
+    Tag<HTMLQuoteElement>("q", className, renderConfig = renderConfig), IQ
 
 /**
  * Creates a [Q] component.
@@ -44,7 +49,7 @@ public open class Q(className: String? = null, renderConfig: RenderConfig = Defa
  * @return the [Q] component
  */
 @Composable
-public fun ComponentBase.q(className: String? = null, content: @Composable Q.() -> Unit = {}): Q {
+public fun IComponent.q(className: String? = null, content: @Composable IQ.() -> Unit = {}): Q {
     val component = remember { Q(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Q::className, it) }

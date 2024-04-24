@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLDataListElement
@@ -33,8 +33,13 @@ import web.dom.HTMLDataListElement
 /**
  * HTML Datalist component.
  */
+public interface IDatalist : ITag<HTMLDataListElement>
+
+/**
+ * HTML Datalist component.
+ */
 public open class Datalist(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDataListElement>("datalist", className, renderConfig = renderConfig)
+    Tag<HTMLDataListElement>("datalist", className, renderConfig = renderConfig), IDatalist
 
 /**
  * Creates a [Datalist] component.
@@ -44,7 +49,7 @@ public open class Datalist(className: String? = null, renderConfig: RenderConfig
  * @return the [Datalist] component
  */
 @Composable
-public fun ComponentBase.datalist(className: String? = null, content: @Composable Datalist.() -> Unit = {}): Datalist {
+public fun IComponent.datalist(className: String? = null, content: @Composable IDatalist.() -> Unit = {}): Datalist {
     val component = remember { Datalist(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Datalist::className, it) }

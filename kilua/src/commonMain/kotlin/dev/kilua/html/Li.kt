@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLLIElement
@@ -33,8 +33,13 @@ import web.dom.HTMLLIElement
 /**
  * HTML Li component.
  */
+public interface ILi : ITag<HTMLLIElement>
+
+/**
+ * HTML Li component.
+ */
 public open class Li(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLLIElement>("li", className, renderConfig = renderConfig)
+    Tag<HTMLLIElement>("li", className, renderConfig = renderConfig), ILi
 
 /**
  * Creates a [Li] component.
@@ -44,7 +49,7 @@ public open class Li(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [Li] component
  */
 @Composable
-public fun ComponentBase.li(className: String? = null, content: @Composable Li.() -> Unit = {}): Li {
+public fun IComponent.li(className: String? = null, content: @Composable ILi.() -> Unit = {}): Li {
     val component = remember { Li(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Li::className, it) }

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLBRElement
@@ -33,8 +33,13 @@ import web.dom.HTMLBRElement
 /**
  * HTML Br component.
  */
+public interface IBr : ITag<HTMLBRElement>
+
+/**
+ * HTML Br component.
+ */
 public open class Br(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLBRElement>("br", className, renderConfig = renderConfig)
+    Tag<HTMLBRElement>("br", className, renderConfig = renderConfig), IBr
 
 /**
  * Creates a [Br] component.
@@ -44,7 +49,7 @@ public open class Br(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [Br] component
  */
 @Composable
-public fun ComponentBase.br(className: String? = null, setup: Br.() -> Unit = {}): Br {
+public fun IComponent.br(className: String? = null, setup: @Composable IBr.() -> Unit = {}): Br {
     val component = remember { Br(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Br::className, it) }

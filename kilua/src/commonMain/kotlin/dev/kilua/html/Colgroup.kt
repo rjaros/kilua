@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Colgroup component.
  */
+public interface IColgroup : ITag<HTMLElement>
+
+/**
+ * HTML Colgroup component.
+ */
 public open class Colgroup(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("colgroup", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("colgroup", className, renderConfig = renderConfig), IColgroup
 
 /**
  * Creates a [Colgroup] component.
@@ -44,7 +49,7 @@ public open class Colgroup(className: String? = null, renderConfig: RenderConfig
  * @return the [Colgroup] component
  */
 @Composable
-public fun ComponentBase.colgroup(className: String? = null, content: @Composable Colgroup.() -> Unit = {}): Colgroup {
+public fun IComponent.colgroup(className: String? = null, content: @Composable IColgroup.() -> Unit = {}): Colgroup {
     val component = remember { Colgroup(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Colgroup::className, it) }

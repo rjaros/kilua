@@ -18,7 +18,7 @@
 package dev.kilua.panel
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import androidx.compose.runtime.key as composeKey
 
 private val ident: (Any) -> Any = { it }
@@ -39,7 +39,7 @@ public class LazyDsl internal constructor() {
      */
     public fun item(
         key: Any? = null,
-        block: @Composable ComponentBase.() -> Unit,
+        block: @Composable IComponent.() -> Unit,
     ) {
         sections.add(Section(Pair(key, block)) {
             if (it == 0)
@@ -60,7 +60,7 @@ public class LazyDsl internal constructor() {
     public fun items(
         count: Int,
         key: (index: Int) -> Any = ident,
-        block: @Composable ComponentBase.(index: Int) -> Unit,
+        block: @Composable IComponent.(index: Int) -> Unit,
     ) {
         sections.add(Section(Triple(count, key, block)) {
             if (it in 0..<count)
@@ -82,7 +82,7 @@ public class LazyDsl internal constructor() {
     public fun <K : Any> items(
         items: Iterable<K>,
         key: (item: K) -> Any = ident,
-        block: @Composable ComponentBase.(item: K) -> Unit,
+        block: @Composable IComponent.(item: K) -> Unit,
     ) {
         val data = items.toList()
         sections.add(Section(Triple(data, key, block)) {

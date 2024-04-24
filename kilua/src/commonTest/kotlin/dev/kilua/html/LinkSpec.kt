@@ -35,10 +35,10 @@ class LinkSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 link(href = "https://google.com", label = "A link", target = "_blank", className = "test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
                 }
             }
             assertEqualsHtml(
@@ -54,10 +54,10 @@ class LinkSpec : DomSpec {
         run {
             val root = root {
                 link(href = "https://google.com", label = "A link", target = "_blank", className = "test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
                 }
             }
             assertEqualsHtml(

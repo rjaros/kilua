@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLBodyElement
@@ -33,8 +33,13 @@ import web.dom.HTMLBodyElement
 /**
  * HTML Body component.
  */
+public interface IBody : ITag<HTMLBodyElement>
+
+/**
+ * HTML Body component.
+ */
 public open class Body(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLBodyElement>("body", className, renderConfig = renderConfig)
+    Tag<HTMLBodyElement>("body", className, renderConfig = renderConfig), IBody
 
 /**
  * Creates a [Body] component.
@@ -44,7 +49,7 @@ public open class Body(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Body] component
  */
 @Composable
-public fun ComponentBase.body(className: String? = null, content: @Composable Body.() -> Unit = {}): Body {
+public fun IComponent.body(className: String? = null, content: @Composable IBody.() -> Unit = {}): Body {
     val component = remember { Body(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Body::className, it) }

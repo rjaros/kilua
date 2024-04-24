@@ -25,11 +25,38 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLTableCellElement
+
+/**
+ * HTML Td component.
+ */
+public interface ITd : ITag<HTMLTableCellElement> {
+    /**
+     * The number of columns the cell extends.
+     */
+    public val colspan: Int?
+
+    /**
+     * Set the number of columns the cell extends.
+     */
+    @Composable
+    public fun colspan(colspan: Int?)
+
+    /**
+     * The number of rows the cell extends.
+     */
+    public val rowspan: Int?
+
+    /**
+     * Set the number of rows the cell extends.
+     */
+    @Composable
+    public fun rowspan(rowspan: Int?)
+}
 
 /**
  * HTML Td component.
@@ -40,12 +67,12 @@ public open class Td(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLTableCellElement>("td", className, renderConfig = renderConfig) {
+    Tag<HTMLTableCellElement>("td", className, renderConfig = renderConfig), ITd {
 
     /**
      * The number of columns the cell extends.
      */
-    public open var colspan: Int? by updatingProperty(colspan) {
+    public override var colspan: Int? by updatingProperty(colspan) {
         if (it != null) {
             element.colSpan = it
         } else {
@@ -54,9 +81,19 @@ public open class Td(
     }
 
     /**
+     * Set the number of columns the cell extends.
+     */
+    @Composable
+    public override fun colspan(colspan: Int?): Unit = composableProperty("colspan", {
+        this.colspan = null
+    }) {
+        this.colspan = colspan
+    }
+
+    /**
      * The number of rows the cell extends.
      */
-    public open var rowspan: Int? by updatingProperty(rowspan) {
+    public override var rowspan: Int? by updatingProperty(rowspan) {
         if (it != null) {
             element.rowSpan = it
         } else {
@@ -64,12 +101,24 @@ public open class Td(
         }
     }
 
+    /**
+     * Set the number of rows the cell extends.
+     */
+    @Composable
+    public override fun rowspan(rowspan: Int?): Unit = composableProperty("rowspan", {
+        this.rowspan = null
+    }) {
+        this.rowspan = rowspan
+    }
+
     init {
         if (renderConfig.isDom) {
             if (colspan != null) {
+                @Suppress("LeakingThis")
                 element.colSpan = colspan
             }
             if (rowspan != null) {
+                @Suppress("LeakingThis")
                 element.rowSpan = rowspan
             }
         }
@@ -91,8 +140,8 @@ public open class Td(
  * @return the [Td] component
  */
 @Composable
-public fun ComponentBase.td(
-    colspan: Int? = null, rowspan: Int? = null, className: String? = null, content: @Composable Td.() -> Unit = {}
+public fun IComponent.td(
+    colspan: Int? = null, rowspan: Int? = null, className: String? = null, content: @Composable ITd.() -> Unit = {}
 ): Td {
     val component = remember { Td(colspan, rowspan, className, renderConfig = renderConfig) }
     ComponentNode(component, {

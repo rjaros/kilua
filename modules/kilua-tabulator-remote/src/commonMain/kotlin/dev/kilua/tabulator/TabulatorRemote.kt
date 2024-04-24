@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.JSON
 import dev.kilua.externals.get
@@ -49,7 +49,6 @@ import kotlinx.serialization.serializer
 import web.JsAny
 import web.JsArray
 import web.fetch.RequestInit
-import web.window
 import kotlin.reflect.KClass
 
 public open class TabulatorRemote<T : Any>(
@@ -78,14 +77,14 @@ public open class TabulatorRemote<T : Any>(
 
 @PublishedApi
 @Composable
-internal fun <T : Any> ComponentBase.tabulatorRemoteInt(
+internal fun <T : Any> IComponent.tabulatorRemoteInt(
     data: List<T>?,
     options: TabulatorOptions<T>,
     kClass: KClass<T>?,
     serializer: KSerializer<T>?,
     serializersModule: SerializersModule?,
     className: String?,
-    content: @Composable TabulatorRemote<T>.() -> Unit
+    content: @Composable ITabulator<T>.() -> Unit
 ): TabulatorRemote<T> {
     val component = remember {
         TabulatorRemote(
@@ -128,7 +127,7 @@ internal fun <T : Any> ComponentBase.tabulatorRemoteInt(
  * @return the [TabulatorRemote] component
  */
 @Composable
-public inline fun <reified T : Any, E : Any> ComponentBase.tabulatorRemote(
+public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
     serviceManager: RpcServiceMgr<E>,
     noinline function: suspend E.(Int?, Int?, List<RemoteFilter>?, List<RemoteSorter>?, String?) -> RemoteData<T>,
     noinline stateFunction: (() -> String)? = null,
@@ -138,7 +137,7 @@ public inline fun <reified T : Any, E : Any> ComponentBase.tabulatorRemote(
     serializer: KSerializer<T> = serializer(),
     serializersModule: SerializersModule? = null,
     className: String? = null,
-    noinline content: @Composable TabulatorRemote<T>.() -> Unit = {}
+    noinline content: @Composable ITabulator<T>.() -> Unit = {}
 ): TabulatorRemote<T> {
 
     val optionsState = remember {

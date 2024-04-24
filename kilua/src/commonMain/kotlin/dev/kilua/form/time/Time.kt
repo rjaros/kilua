@@ -25,9 +25,10 @@ package dev.kilua.form.time
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.form.IInput
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.form.TimeFormControl
@@ -42,9 +43,57 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import kotlinx.datetime.toLocalTime
 
 internal const val TIME_DEFAULT_STEP = 60
+
+/**
+ * Time input component.
+ */
+public interface ITime : IInput<LocalTime>, TimeFormControl {
+    /**
+     * The minimum value of the time.
+     */
+    public val min: LocalTime?
+
+    /**
+     * Set the minimum value of the time.
+     */
+    @Composable
+    public fun min(min: LocalTime?)
+
+    /**
+     * The maximum value of the time.
+     */
+    public val max: LocalTime?
+
+    /**
+     * Set the maximum value of the time.
+     */
+    @Composable
+    public fun max(max: LocalTime?)
+
+    /**
+     * The step value of the time.
+     */
+    public val step: Int
+
+    /**
+     * Set the step value of the time.
+     */
+    @Composable
+    public fun step(step: Int)
+
+    /**
+     * Increments the value by the step value.
+     */
+    public fun stepUp()
+
+    /**
+     * Decrements the value by the step value.
+     */
+    public fun stepDown()
+}
+
 
 /**
  * Time input component.
@@ -73,12 +122,12 @@ public open class Time(
     className,
     id,
     renderConfig
-), TimeFormControl {
+), TimeFormControl, ITime {
 
     /**
      * The minimum value of the time.
      */
-    public open var min: LocalTime? by updatingProperty(min) {
+    public override var min: LocalTime? by updatingProperty(min) {
         if (it != null) {
             element.min = it.toString()
         } else {
@@ -87,9 +136,19 @@ public open class Time(
     }
 
     /**
+     * Set the minimum value of the time.
+     */
+    @Composable
+    public override fun min(min: LocalTime?): Unit = composableProperty("min", {
+        this.min = null
+    }) {
+        this.min = min
+    }
+
+    /**
      * The maximum value of the time.
      */
-    public open var max: LocalTime? by updatingProperty(max) {
+    public override var max: LocalTime? by updatingProperty(max) {
         if (it != null) {
             element.max = it.toString()
         } else {
@@ -98,20 +157,43 @@ public open class Time(
     }
 
     /**
+     * Set the maximum value of the time.
+     */
+    @Composable
+    public override fun max(max: LocalTime?): Unit = composableProperty("max", {
+        this.max = null
+    }) {
+        this.max = max
+    }
+
+    /**
      * The step value of the time.
      */
-    public open var step: Int by updatingProperty(step) {
+    public override var step: Int by updatingProperty(step) {
         element.step = it.toString()
+    }
+
+    /**
+     * Set the step value of the time.
+     */
+    @Composable
+    public override fun step(step: Int): Unit = composableProperty("step", {
+        this.step = TIME_DEFAULT_STEP
+    }) {
+        this.step = step
     }
 
     init {
         if (renderConfig.isDom) {
             if (min != null) {
+                @Suppress("LeakingThis")
                 element.min = min.toString()
             }
             if (max != null) {
+                @Suppress("LeakingThis")
                 element.max = max.toString()
             }
+            @Suppress("LeakingThis")
             element.step = step.toString()
         }
     }
@@ -144,7 +226,7 @@ public open class Time(
     /**
      * Increments the value by the step value.
      */
-    public open fun stepUp() {
+    public override fun stepUp() {
         if (renderConfig.isDom) {
             element.stepUp()
             setInternalValueFromString(element.value)
@@ -162,7 +244,7 @@ public open class Time(
     /**
      * Decrements the value by the step value.
      */
-    public open fun stepDown() {
+    public override fun stepDown() {
         if (renderConfig.isDom) {
             element.stepDown()
             setInternalValueFromString(element.value)
@@ -197,7 +279,7 @@ public open class Time(
  * @return a [Time] component
  */
 @Composable
-public fun ComponentBase.time(
+public fun IComponent.time(
     value: LocalTime? = null,
     min: LocalTime? = null,
     max: LocalTime? = null,
@@ -209,7 +291,7 @@ public fun ComponentBase.time(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable Time.() -> Unit = {}
+    setup: @Composable ITime.() -> Unit = {}
 ): Time {
     val component =
         remember {

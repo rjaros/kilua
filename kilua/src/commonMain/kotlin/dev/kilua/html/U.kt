@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML U component.
  */
+public interface IU : ITag<HTMLElement>
+
+/**
+ * HTML U component.
+ */
 public open class U(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("u", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("u", className, renderConfig = renderConfig), IU
 
 /**
  * Creates a [U] component.
@@ -44,7 +49,7 @@ public open class U(className: String? = null, renderConfig: RenderConfig = Defa
  * @return the [U] component
  */
 @Composable
-public fun ComponentBase.u(className: String? = null, content: @Composable U.() -> Unit = {}): U {
+public fun IComponent.u(className: String? = null, content: @Composable IU.() -> Unit = {}): U {
     val component = remember { U(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(U::className, it) }
@@ -61,7 +66,7 @@ public fun ComponentBase.u(className: String? = null, content: @Composable U.() 
  * @return the [U] component
  */
 @Composable
-public fun ComponentBase.ut(text: String, className: String? = null, content: @Composable U.() -> Unit = {}): U {
+public fun IComponent.ut(text: String, className: String? = null, content: @Composable IU.() -> Unit = {}): U {
     return u(className) {
         +text
         content()

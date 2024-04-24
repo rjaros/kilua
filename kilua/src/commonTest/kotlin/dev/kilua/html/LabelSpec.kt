@@ -35,7 +35,7 @@ class LabelSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 label("id", "test") {
-                    id = "test-id"
+                    id("test-id")
                 }
             }
             assertEqualsHtml(
@@ -51,7 +51,7 @@ class LabelSpec : DomSpec {
         run {
             val root = root {
                 label("id", "test") {
-                    id = "test-id"
+                    id("test-id")
                 }
             }
             assertEqualsHtml(

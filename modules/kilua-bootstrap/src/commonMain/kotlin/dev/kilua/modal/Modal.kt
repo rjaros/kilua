@@ -28,15 +28,18 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import dev.kilua.BootstrapModule
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.Bootstrap
 import dev.kilua.html.Div
+import dev.kilua.html.IDiv
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h5t
+import dev.kilua.utils.cast
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
 import web.dom.HTMLDivElement
@@ -76,13 +79,39 @@ public enum class FullscreenMode {
 /**
  * Bootstrap modal component.
  */
+public interface IModal: ITag<HTMLDivElement> {
+    /**
+     * Shows the modal window.
+     */
+    public fun show()
+
+    /**
+     * Hides the modal window.
+     */
+    public fun hide()
+
+    /**
+     * Toggles the modal window.
+     */
+    public fun toggle()
+
+    /**
+     * Configure footer of this Modal.
+     */
+    public fun footer(content: @Composable IDiv.() -> Unit)
+
+}
+
+/**
+ * Bootstrap modal component.
+ */
 public open class Modal(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), IModal {
 
-    internal var footerContent: @Composable (Div.() -> Unit)? = null
+    internal var footerContent: @Composable (IDiv.() -> Unit)? = null
 
     /**
      * Whether the modal should be visible.
@@ -97,7 +126,7 @@ public open class Modal(
     /**
      * Configure footer of this Modal.
      */
-    public fun footer(content: @Composable Div.() -> Unit) {
+    public override fun footer(content: @Composable IDiv.() -> Unit) {
         footerContent = content
     }
 
@@ -147,21 +176,21 @@ public open class Modal(
 
         internal var counter = 0
 
-        internal val modalStateMap = mutableStateMapOf<Int, @Composable ComponentBase.() -> Unit>()
+        internal val modalStateMap = mutableStateMapOf<Int, @Composable IComponent.() -> Unit>()
     }
 }
 
 @Composable
-internal fun ComponentBase.modals() {
+internal fun IComponent.modals() {
     div {
         Modal.modalStateMap.values.forEach { it() }
     }
 }
 
 @Composable
-private fun ComponentBase.modal(
+private fun IComponent.modal(
     className: String? = null,
-    content: @Composable Modal.() -> Unit,
+    content: @Composable IModal.() -> Unit,
 ): Modal {
     val component = remember { Modal(className, renderConfig = renderConfig) }
     ComponentNode(component, {
@@ -187,7 +216,7 @@ private fun ComponentBase.modal(
  * @return the [Modal] component
  */
 @Composable
-public fun ComponentBase.modal(
+public fun IComponent.modal(
     caption: String? = null,
     closeButton: Boolean = true,
     size: ModalSize? = null,
@@ -197,14 +226,14 @@ public fun ComponentBase.modal(
     scrollable: Boolean = false,
     escape: Boolean = true,
     className: String? = null,
-    content: @Composable Modal.() -> Unit = {}
+    content: @Composable IModal.() -> Unit = {}
 ): Modal {
     return modal("modal" % if (animation) "fade" else null % className) {
-        role = "dialog"
-        tabindex = -1
-        setAttribute("data-bs-keyboard", "$escape")
-        setAttribute("data-bs-backdrop", if (escape) "true" else "static")
-        val component = this
+        role("dialog")
+        tabindex(-1)
+        attribute("data-bs-keyboard", "$escape")
+        attribute("data-bs-backdrop", if (escape) "true" else "static")
+        val component = this.cast<Modal>()
         div("modal-dialog" % size?.value % fullscreenMode?.value % if (centered) "modal-dialog-centered" else null % if (scrollable) "modal-dialog-scrollable" else null) {
             div("modal-content") {
                 if (caption != null || closeButton) {
@@ -214,7 +243,7 @@ public fun ComponentBase.modal(
                         }
                         if (closeButton) {
                             button(className = "btn-close") {
-                                ariaLabel = "Close"
+                                ariaLabel("Close")
                                 onClick {
                                     component.hide()
                                 }

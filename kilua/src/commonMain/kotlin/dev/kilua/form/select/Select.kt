@@ -26,10 +26,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
+import dev.kilua.html.ITag
 import dev.kilua.html.Optgroup
 import dev.kilua.html.Option
 import dev.kilua.html.Tag
@@ -50,6 +51,72 @@ public const val SELECT_EMPTY_VALUE: String = "kilua_select_empty_value"
 /**
  * Select component.
  */
+public interface ISelect : ITag<HTMLSelectElement>, StringFormControl, WithStateFlow<String?> {
+    /**
+     * Determines if multiple value selection is allowed.
+     */
+    public val multiple: Boolean
+
+    /**
+     * Set the multiple value selection.
+     */
+    @Composable
+    public fun multiple(multiple: Boolean)
+
+    /**
+     * The number of visible options.
+     */
+    public val size: Int?
+
+    /**
+     * Set the number of visible options.
+     */
+    @Composable
+    public fun size(size: Int?)
+
+    /**
+     * The name attribute of the generated HTML input element.
+     */
+    public val name: String?
+
+    /**
+     * Set the name attribute of the generated HTML select element.
+     */
+    @Composable
+    public fun name(name: String?)
+
+    /**
+     * The disabled attribute of the generated HTML select element.
+     */
+    public val disabled: Boolean?
+
+    /**
+     * Set the disabled attribute of the generated HTML select element.
+     */
+    @Composable
+    public fun disabled(disabled: Boolean?)
+
+    /**
+     * Set the required attribute of the generated HTML select element.
+     */
+    @Composable
+    public fun required(required: Boolean?)
+
+    /**
+     * The index of the currently selected option.
+     */
+    public var selectedIndex: Int
+
+    /**
+     * The label of the currently selected option.
+     */
+    public val selectedLabel: String?
+
+}
+
+/**
+ * Select component.
+ */
 public open class Select(
     value: String? = null,
     multiple: Boolean = false,
@@ -62,7 +129,7 @@ public open class Select(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLSelectElement>("select", className, id, renderConfig), StringFormControl,
-    WithStateFlow<String?> by withStateFlowDelegate {
+    WithStateFlow<String?> by withStateFlowDelegate, ISelect {
 
     public override var value: String? by updatingProperty(
         value,
@@ -73,14 +140,24 @@ public open class Select(
     /**
      * Determines if multiple value selection is allowed.
      */
-    public var multiple: Boolean by updatingProperty(multiple) {
+    public override var multiple: Boolean by updatingProperty(multiple) {
         element.multiple = it
+    }
+
+    /**
+     * Set the multiple value selection.
+     */
+    @Composable
+    public override fun multiple(multiple: Boolean): Unit = composableProperty("multiple", {
+        this.multiple = false
+    }) {
+        this.multiple = multiple
     }
 
     /**
      * The number of visible options.
      */
-    public var size: Int? by updatingProperty(size) {
+    public override var size: Int? by updatingProperty(size) {
         if (it != null) {
             element.size = it
         } else {
@@ -88,6 +165,19 @@ public open class Select(
         }
     }
 
+    /**
+     * Set the number of visible options.
+     */
+    @Composable
+    public override fun size(size: Int?): Unit = composableProperty("size", {
+        this.size = null
+    }) {
+        this.size = size
+    }
+
+    /**
+     * The name attribute of the generated HTML input element.
+     */
     public override var name: String? by updatingProperty(name) {
         if (it != null) {
             element.name = it
@@ -96,6 +186,19 @@ public open class Select(
         }
     }
 
+    /**
+     * Set the name attribute of the generated HTML select element.
+     */
+    @Composable
+    public override fun name(name: String?): Unit = composableProperty("name", {
+        this.name = null
+    }) {
+        this.name = name
+    }
+
+    /**
+     * The disabled attribute of the generated HTML select element.
+     */
     public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
@@ -104,6 +207,19 @@ public open class Select(
         }
     }
 
+    /**
+     * Set the disabled attribute of the generated HTML select element.
+     */
+    @Composable
+    public override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
+    }
+
+    /**
+     * The required attribute of the generated HTML select element.
+     */
     public override var required: Boolean? by updatingProperty(required) {
         if (it != null) {
             element.required = it
@@ -113,14 +229,13 @@ public open class Select(
     }
 
     /**
-     * The autofocus attribute of the generated HTML textarea element.
+     * Set the required attribute of the generated HTML select element.
      */
-    public override var autofocus: Boolean? by updatingProperty {
-        if (it != null) {
-            element.autofocus = it
-        } else {
-            element.removeAttribute("autofocus")
-        }
+    @Composable
+    public override fun required(required: Boolean?): Unit = composableProperty("required", {
+        this.required = null
+    }) {
+        this.required = required
     }
 
     public override var customValidity: String? by updatingProperty {
@@ -130,7 +245,7 @@ public open class Select(
     /**
      * The index of the currently selected option.
      */
-    public open var selectedIndex: Int
+    public override var selectedIndex: Int
         get() = value?.let {
             val values = if (multiple) it.split(",") else nativeListOf(it)
             findAllNotEmptyOptions().indexOfFirst { values.contains(it.value ?: it.label) }
@@ -149,24 +264,29 @@ public open class Select(
     /**
      * The label of the currently selected option.
      */
-    public open val selectedLabel: String?
+    public override val selectedLabel: String?
         get() = findAllNotEmptyOptions().getOrNull(selectedIndex)?.label
 
     init {
         @Suppress("LeakingThis")
         withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
+            @Suppress("LeakingThis")
             element.multiple = multiple
             if (size != null) {
+                @Suppress("LeakingThis")
                 element.size = size
             }
             if (name != null) {
+                @Suppress("LeakingThis")
                 element.name = name
             }
             if (disabled != null) {
+                @Suppress("LeakingThis")
                 element.disabled = disabled
             }
             if (required != null) {
+                @Suppress("LeakingThis")
                 element.required = required
             }
         }
@@ -300,7 +420,7 @@ public open class Select(
  * @return a [Select] component
  */
 @Composable
-public fun ComponentBase.select(
+public fun IComponent.select(
     options: List<StringPair>? = null,
     value: String? = null,
     emptyOption: Boolean = false,
@@ -312,7 +432,7 @@ public fun ComponentBase.select(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable Select.() -> Unit = {}
+    setup: @Composable ISelect.() -> Unit = {}
 ): Select {
     val component = remember { Select(value, multiple, size, name, disabled, required, className, id, renderConfig) }
     LaunchedEffect(component.componentId) {
@@ -332,7 +452,7 @@ public fun ComponentBase.select(
         if (placeholder != null) {
             this.required = true
             option(value = "", label = placeholder, disabled = true, selected = true) {
-                hidden = true
+                hidden(true)
             }
         }
         if (emptyOption) {
@@ -343,7 +463,7 @@ public fun ComponentBase.select(
                 value = option.first,
                 label = option.second,
             ) {
-                currentlySelected = component.isValueSelected(option.first)
+                currentlySelected(component.isValueSelected(option.first))
             }
         }
     }

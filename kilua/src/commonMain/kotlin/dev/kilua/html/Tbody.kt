@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLTableSectionElement
@@ -33,8 +33,13 @@ import web.dom.HTMLTableSectionElement
 /**
  * HTML Tbody component.
  */
+public interface ITbody : ITag<HTMLTableSectionElement>
+
+/**
+ * HTML Tbody component.
+ */
 public open class Tbody(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableSectionElement>("tbody", className, renderConfig = renderConfig)
+    Tag<HTMLTableSectionElement>("tbody", className, renderConfig = renderConfig), ITbody
 
 /**
  * Creates a [Tbody] component.
@@ -44,7 +49,7 @@ public open class Tbody(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Tbody] component
  */
 @Composable
-public fun ComponentBase.tbody(className: String? = null, content: @Composable Tbody.() -> Unit = {}): Tbody {
+public fun IComponent.tbody(className: String? = null, content: @Composable ITbody.() -> Unit = {}): Tbody {
     val component = remember { Tbody(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Tbody::className, it) }

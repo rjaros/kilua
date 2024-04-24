@@ -25,9 +25,14 @@ package dev.kilua.form.check
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+
+/**
+ * Check input component.
+ */
+public interface ICheckBox : IAbstractCheck
 
 /**
  * CheckBox input component.
@@ -40,7 +45,8 @@ public open class CheckBox(
     className: String? = null,
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : AbstractCheck(CheckInputType.Checkbox, value, name, disabled, required, className, id, renderConfig = renderConfig)
+) : AbstractCheck(CheckInputType.Checkbox, value, name, disabled, required, className, id, renderConfig = renderConfig),
+    ICheckBox
 
 /**
  * Creates [CheckBox] component.
@@ -55,14 +61,14 @@ public open class CheckBox(
  * @return a [CheckBox] component
  */
 @Composable
-public fun ComponentBase.checkBox(
+public fun IComponent.checkBox(
     value: Boolean = false,
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable CheckBox.() -> Unit = {}
+    setup: @Composable ICheckBox.() -> Unit = {}
 ): CheckBox {
     val component = remember { CheckBox(value, name, disabled, required, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {

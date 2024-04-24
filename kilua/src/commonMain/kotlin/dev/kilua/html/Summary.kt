@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Summary component.
  */
+public interface ISummary : ITag<HTMLElement>
+
+/**
+ * HTML Summary component.
+ */
 public open class Summary(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("summary", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("summary", className, renderConfig = renderConfig), ISummary
 
 /**
  * Creates a [Summary] component.
@@ -44,7 +49,7 @@ public open class Summary(className: String? = null, renderConfig: RenderConfig 
  * @return the [Summary] component
  */
 @Composable
-public fun ComponentBase.summary(className: String? = null, content: @Composable Summary.() -> Unit = {}): Summary {
+public fun IComponent.summary(className: String? = null, content: @Composable ISummary.() -> Unit = {}): Summary {
     val component = remember { Summary(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Summary::className, it) }

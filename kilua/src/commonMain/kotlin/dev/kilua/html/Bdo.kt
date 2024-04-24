@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Bdo component.
  */
+public interface IBdo : ITag<HTMLElement>
+
+/**
+ * HTML Bdo component.
+ */
 public open class Bdo(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("bdo", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("bdo", className, renderConfig = renderConfig), IBdo
 
 /**
  * Creates a [Bdo] component.
@@ -44,7 +49,7 @@ public open class Bdo(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Bdo] component
  */
 @Composable
-public fun ComponentBase.bdo(className: String? = null, content: @Composable Bdo.() -> Unit = {}): Bdo {
+public fun IComponent.bdo(className: String? = null, content: @Composable IBdo.() -> Unit = {}): Bdo {
     val component = remember { Bdo(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Bdo::className, it) }

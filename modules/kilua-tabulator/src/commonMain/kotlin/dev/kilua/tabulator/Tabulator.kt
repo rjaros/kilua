@@ -27,14 +27,15 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.compose.Root
-import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.JSON
 import dev.kilua.externals.TabulatorJs
 import dev.kilua.externals.TabulatorTablesJs.TabulatorFull
 import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.externals.obj
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.cast
@@ -76,6 +77,35 @@ public enum class TableType {
     }
 }
 
+/**
+ * Tabulator component.
+ */
+public interface ITabulator<T : Any> : ITag<HTMLDivElement> {
+    /**
+     * The tabulator data.
+     */
+    public val data: List<T>?
+
+    /**
+     * The tabulator options.
+     */
+    public val options: TabulatorOptions<T>
+
+    /**
+     * The native Tabulator component instance.
+     */
+    public val tabulatorJs: TabulatorJs?
+
+    /**
+     * Converts an internal (dynamic) data model to Kotlin data model
+     */
+    public fun toKotlinObj(data: JsAny): T
+
+    /**
+     * Converts a Kotlin data model to an internal (dynamic) data model
+     */
+    public fun toPlainObj(data: T): JsAny
+}
 
 /**
  * Tabulator component.
@@ -89,7 +119,7 @@ public open class Tabulator<T : Any>(
     protected val serializer: KSerializer<T>? = null,
     protected val module: SerializersModule? = null
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), ITabulator<T> {
 
     /**
      * The kotlinx.serialization configuration object.
@@ -107,7 +137,7 @@ public open class Tabulator<T : Any>(
     /**
      * The tabulator data.
      */
-    public open var data: List<T>? by updatingProperty(data) {
+    public override var data: List<T>? by updatingProperty(data) {
         internalData = data?.let { toPlainObjList(it) }
         refreshData()
     }
@@ -115,14 +145,14 @@ public open class Tabulator<T : Any>(
     /**
      * The tabulator options.
      */
-    public open var options: TabulatorOptions<T> by updatingProperty(options) {
+    public override var options: TabulatorOptions<T> by updatingProperty(options) {
         refresh()
     }
 
     /**
      * The native Tabulator component instance.
      */
-    public var tabulatorJs: TabulatorJs? = null
+    public override var tabulatorJs: TabulatorJs? = null
 
     protected var initialized: Boolean = false
 
@@ -280,7 +310,7 @@ public open class Tabulator<T : Any>(
     /**
      * Converts an internal (dynamic) data model to Kotlin data model
      */
-    public fun toKotlinObj(data: JsAny): T {
+    public override fun toKotlinObj(data: JsAny): T {
         return if (kClass != null) {
             if (jsonHelper == null || serializer == null) {
                 throw IllegalStateException("The data class can't be deserialized. Please provide a serializer when creating the Tabulator instance.")
@@ -306,7 +336,7 @@ public open class Tabulator<T : Any>(
     /**
      * Converts a Kotlin data model to an internal (dynamic) data model
      */
-    public fun toPlainObj(data: T): JsAny {
+    public override fun toPlainObj(data: T): JsAny {
         return if (jsonHelper == null || serializer == null) {
             throw IllegalStateException("The data class can't be serialized. Please provide a serializer when creating the Tabulator instance.")
         } else {
@@ -318,14 +348,14 @@ public open class Tabulator<T : Any>(
 
 @PublishedApi
 @Composable
-internal fun <T : Any> ComponentBase.tabulatorInt(
+internal fun <T : Any> IComponent.tabulatorInt(
     data: List<T>?,
     options: TabulatorOptions<T>,
     kClass: KClass<T>?,
     serializer: KSerializer<T>?,
     serializersModule: SerializersModule?,
     className: String?,
-    content: @Composable Tabulator<T>.() -> Unit
+    content: @Composable ITabulator<T>.() -> Unit
 ): Tabulator<T> {
     val component = remember {
         Tabulator(
@@ -365,14 +395,14 @@ internal fun <T : Any> ComponentBase.tabulatorInt(
  * @return the [Tabulator] component
  */
 @Composable
-public inline fun <reified T : Any> ComponentBase.tabulator(
+public inline fun <reified T : Any> IComponent.tabulator(
     data: List<T>,
     options: TabulatorOptions<T> = TabulatorOptions(),
     types: Set<TableType> = setOf(),
     serializer: KSerializer<T> = serializer(),
     serializersModule: SerializersModule? = null,
     className: String? = null,
-    noinline content: @Composable Tabulator<T>.() -> Unit = {}
+    noinline content: @Composable ITabulator<T>.() -> Unit = {}
 ): Tabulator<T> {
     val classes = types.joinToString(" ") { it.value }
     return tabulatorInt(
@@ -396,12 +426,12 @@ public inline fun <reified T : Any> ComponentBase.tabulator(
  * @return the [Tabulator] component
  */
 @Composable
-public fun ComponentBase.tabulator(
+public fun IComponent.tabulator(
     data: List<JsAny>? = null,
     options: TabulatorOptions<JsAny> = TabulatorOptions(),
     types: Set<TableType> = setOf(),
     className: String? = null,
-    content: @Composable Tabulator<JsAny>.() -> Unit = {}
+    content: @Composable ITabulator<JsAny>.() -> Unit = {}
 ): Tabulator<JsAny> {
     val classes = types.joinToString(" ") { it.value }
     return tabulatorInt(

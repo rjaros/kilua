@@ -29,6 +29,7 @@ import androidx.compose.runtime.Recomposer
 import androidx.compose.runtime.mutableStateListOf
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.core.StringRenderConfig
@@ -50,11 +51,18 @@ internal expect val defaultMonotonicFrameClock: MonotonicFrameClock
 public class Root(
     public val element: Element,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-    content: @Composable ComponentBase.() -> Unit = {}
+    content: @Composable IComponent.() -> Unit = {}
 ) : ComponentBase(element, renderConfig) {
 
     // Not used
     override var visible: Boolean = true
+
+    @Composable
+    public override fun visible(visible: Boolean): Unit = composableProperty("visible", {
+        this.visible = true
+    }) {
+        this.visible = visible
+    }
 
     private val composition: Composition
 
@@ -89,7 +97,7 @@ public class Root(
 
         internal val roots: MutableList<Root> = nativeListOf()
 
-        internal val topLevelComposables = mutableStateListOf<@Composable ComponentBase.() -> Unit>()
+        internal val topLevelComposables = mutableStateListOf<@Composable IComponent.() -> Unit>()
 
         /**
          * Disposes all root components and associated compositions.
@@ -99,11 +107,11 @@ public class Root(
             roots.clear()
         }
 
-        public fun addTopLevelComposable(topLevel: @Composable ComponentBase.() -> Unit) {
+        public fun addTopLevelComposable(topLevel: @Composable IComponent.() -> Unit) {
             topLevelComposables.add(topLevel)
         }
 
-        public fun removeTopLevelComposable(topLevel: @Composable ComponentBase.() -> Unit) {
+        public fun removeTopLevelComposable(topLevel: @Composable IComponent.() -> Unit) {
             topLevelComposables.remove(topLevel)
         }
 
@@ -129,7 +137,7 @@ public class Root(
 internal fun rootComposable(
     root: ComponentBase,
     monotonicFrameClock: MonotonicFrameClock,
-    content: @Composable ComponentBase.() -> Unit
+    content: @Composable IComponent.() -> Unit
 ): Composition {
     GlobalSnapshotManager.ensureStarted()
 
@@ -157,7 +165,7 @@ public fun root(
     element: Element,
     clearSsrContent: Boolean = true,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-    content: @Composable ComponentBase.() -> Unit = {}
+    content: @Composable IComponent.() -> Unit = {}
 ): Root {
     Root.initializeTopLevelComposablesRoot()
     if (renderConfig.isDom && clearSsrContent) {
@@ -175,7 +183,7 @@ public fun root(
 public fun root(
     id: String,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-    content: @Composable ComponentBase.() -> Unit = {}
+    content: @Composable IComponent.() -> Unit = {}
 ): Root {
     val element = SafeDomFactory.getElementById(id) ?: SafeDomFactory.createElement("div")
     return root(element, true, renderConfig, content)
@@ -185,7 +193,7 @@ public fun root(
  * Main entry-point for building component tree with composable functions using StringRender configuration.
  */
 public fun root(
-    content: @Composable ComponentBase.() -> Unit = {}
+    content: @Composable IComponent.() -> Unit = {}
 ): Root {
     val renderConfig = StringRenderConfig()
     val element = SafeDomFactory.createElement("div")

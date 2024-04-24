@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
@@ -50,18 +50,56 @@ public enum class OlType {
 /**
  * HTML Ol component.
  */
+public interface IOl : ITag<HTMLOListElement> {
+    /**
+     * The type of the numbered list.
+     */
+    public val type: OlType?
+
+    /**
+     * Set the type of the numbered list.
+     */
+    @Composable
+    public fun type(type: OlType?)
+
+    /**
+     * A starting number.
+     */
+    public val start: Int?
+
+    /**
+     * Set a starting number.
+     */
+    @Composable
+    public fun start(start: Int?)
+
+    /**
+     * Number items from high to low.
+     */
+    public val reversed: Boolean?
+
+    /**
+     * Set number items from high to low.
+     */
+    @Composable
+    public fun reversed(reversed: Boolean?)
+}
+
+/**
+ * HTML Ol component.
+ */
 public open class Ol(
     type: OlType? = null,
     start: Int? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLOListElement>("ol", className, renderConfig = renderConfig) {
+    Tag<HTMLOListElement>("ol", className, renderConfig = renderConfig), IOl {
 
     /**
      * The type of the numbered list.
      */
-    public open var type: OlType? by updatingProperty(type) {
+    public override var type: OlType? by updatingProperty(type) {
         if (it != null) {
             element.type = it.value
         } else {
@@ -70,9 +108,19 @@ public open class Ol(
     }
 
     /**
+     * Set the type of the numbered list.
+     */
+    @Composable
+    public override fun type(type: OlType?): Unit = composableProperty("type", {
+        this.type = null
+    }) {
+        this.type = type
+    }
+
+    /**
      * A starting number.
      */
-    public open var start: Int? by updatingProperty(start) {
+    public override var start: Int? by updatingProperty(start) {
         if (it != null) {
             element.start = it
         } else {
@@ -81,9 +129,19 @@ public open class Ol(
     }
 
     /**
+     * Set a starting number.
+     */
+    @Composable
+    public override fun start(start: Int?): Unit = composableProperty("start", {
+        this.start = null
+    }) {
+        this.start = start
+    }
+
+    /**
      * Number items from high to low.
      */
-    public open var reversed: Boolean? by updatingProperty {
+    public override var reversed: Boolean? by updatingProperty {
         if (it != null) {
             element.reversed = it
         } else {
@@ -91,12 +149,24 @@ public open class Ol(
         }
     }
 
+    /**
+     * Set number items from high to low.
+     */
+    @Composable
+    public override fun reversed(reversed: Boolean?): Unit = composableProperty("reversed", {
+        this.reversed = null
+    }) {
+        this.reversed = reversed
+    }
+
     init {
         if (renderConfig.isDom) {
             if (type != null) {
+                @Suppress("LeakingThis")
                 element.type = type.value
             }
             if (start != null) {
+                @Suppress("LeakingThis")
                 element.start = start
             }
         }
@@ -119,8 +189,8 @@ public open class Ol(
  * @return the [Ol] component
  */
 @Composable
-public fun ComponentBase.ol(
-    type: OlType? = null, start: Int? = null, className: String? = null, content: @Composable Ol.() -> Unit = {}
+public fun IComponent.ol(
+    type: OlType? = null, start: Int? = null, className: String? = null, content: @Composable IOl.() -> Unit = {}
 ): Ol {
     val component = remember { Ol(type, start, className, renderConfig = renderConfig) }
     ComponentNode(component, {

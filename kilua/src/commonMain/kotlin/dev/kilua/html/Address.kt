@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Address component.
  */
+public interface IAddress : ITag<HTMLElement>
+
+/**
+ * HTML Address component.
+ */
 public open class Address(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("address", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("address", className, renderConfig = renderConfig), IAddress
 
 /**
  * Creates a [Address] component.
@@ -44,7 +49,7 @@ public open class Address(className: String? = null, renderConfig: RenderConfig 
  * @return the [Address] component
  */
 @Composable
-public fun ComponentBase.address(className: String? = null, content: @Composable Address.() -> Unit = {}): Address {
+public fun IComponent.address(className: String? = null, content: @Composable IAddress.() -> Unit = {}): Address {
     val component = remember { Address(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Address::className, it) }

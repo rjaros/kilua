@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLDataElement
@@ -33,8 +33,13 @@ import web.dom.HTMLDataElement
 /**
  * HTML Data component.
  */
+public interface IData : ITag<HTMLDataElement>
+
+/**
+ * HTML Data component.
+ */
 public open class Data(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDataElement>("data", className, renderConfig = renderConfig)
+    Tag<HTMLDataElement>("data", className, renderConfig = renderConfig), IData
 
 /**
  * Creates a [Data] component.
@@ -44,7 +49,7 @@ public open class Data(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Data] component
  */
 @Composable
-public fun ComponentBase.data(className: String? = null, content: @Composable Data.() -> Unit = {}): Data {
+public fun IComponent.data(className: String? = null, content: @Composable IData.() -> Unit = {}): Data {
     val component = remember { Data(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Data::className, it) }

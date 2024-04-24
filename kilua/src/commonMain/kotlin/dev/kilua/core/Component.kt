@@ -26,6 +26,7 @@ package dev.kilua.core
  * Base component interface.
  */
 public interface Component {
+
     /**
      * Unique component id.
      */

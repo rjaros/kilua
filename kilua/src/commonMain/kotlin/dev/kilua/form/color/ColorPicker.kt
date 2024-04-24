@@ -23,29 +23,14 @@
 package dev.kilua.form.color
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
-import dev.kilua.core.DefaultRenderConfig
-import dev.kilua.core.RenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.form.InputType
+import dev.kilua.form.text.IText
 import dev.kilua.form.text.Text
+import dev.kilua.form.text.text
 
 /**
- * Color picker input component.
- */
-public open class ColorPicker(
-    value: String? = null,
-    name: String? = null,
-    disabled: Boolean? = null,
-    required: Boolean? = null,
-    className: String? = null,
-    id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
-) : Text(value, InputType.Color, name, null, null, disabled, required, className, id, renderConfig = renderConfig)
-
-/**
- * Creates [ColorPicker] component.
+ * Creates [Text] component with color input type.
  *
  * @param value initial value
  * @param name the name of the input
@@ -54,26 +39,26 @@ public open class ColorPicker(
  * @param className the CSS class name
  * @param id the ID of the input
  * @param setup a function for setting up the component
- * @return a [ColorPicker] component
+ * @return a [Text] component
  */
 @Composable
-public fun ComponentBase.colorPicker(
+public fun IComponent.colorPicker(
     value: String? = null,
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable ColorPicker.() -> Unit = {}
-): ColorPicker {
-    val component = remember { ColorPicker(value, name, disabled, required, className, id, renderConfig = renderConfig) }
-    ComponentNode(component, {
-        set(value) { updateProperty(ColorPicker::value, it) }
-        set(name) { updateProperty(ColorPicker::name, it) }
-        set(disabled) { updateProperty(ColorPicker::disabled, it) }
-        set(required) { updateProperty(ColorPicker::required, it) }
-        set(id) { updateProperty(ColorPicker::id, it) }
-        set(className) { updateProperty(ColorPicker::className, it) }
-    }, setup)
-    return component
+    setup: @Composable IText.() -> Unit = {}
+): Text {
+    return text(
+        value = value,
+        type = InputType.Color,
+        name = name,
+        disabled = disabled,
+        required = required,
+        className = className,
+        id = id,
+        setup = setup
+    )
 }

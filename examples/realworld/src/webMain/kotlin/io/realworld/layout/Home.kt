@@ -23,18 +23,17 @@
 package io.realworld.layout
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.div
 import dev.kilua.html.h1t
 import dev.kilua.html.pt
-import dev.kilua.html.unaryPlus
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.layout.shared.pagination
 import io.realworld.layout.shared.tags
 
 @Composable
-fun ComponentBase.homePage(state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.homePage(state: ConduitState, conduitManager: ConduitManager) {
     div("home-page") {
         if (!state.appLoading && state.user == null) {
             div("banner") {

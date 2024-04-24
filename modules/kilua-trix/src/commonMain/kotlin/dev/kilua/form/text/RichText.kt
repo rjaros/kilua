@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.externals.buildCustomEventInit
@@ -36,6 +36,7 @@ import dev.kilua.externals.obj
 import dev.kilua.form.InputType
 import dev.kilua.form.StringFormControl
 import dev.kilua.form.text.i18n.getToolbarContent
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.html.tag
@@ -56,6 +57,61 @@ import web.dom.events.Event
 /**
  * Trix rich text editor component.
  */
+public interface IRichText : ITag<HTMLElement>, StringFormControl, WithStateFlow<String?> {
+    /**
+     * The locale for i18n.
+     */
+    public val locale: Locale
+
+    /**
+     * Set the locale for i18n.
+     */
+    @Composable
+    public fun locale(locale: Locale)
+
+    /**
+     * The name of the rich text editor.
+     */
+    public val name: String?
+
+    /**
+     * Set the name of the rich text editor.
+     */
+    @Composable
+    public fun name(name: String?)
+
+    /**
+     * The placeholder of the rich text editor.
+     */
+    public val placeholder: String?
+
+    /**
+     * Set the placeholder of the rich text editor.
+     */
+    @Composable
+    public fun placeholder(placeholder: String?)
+
+    /**
+     * Whether the rich text editor is disabled.
+     */
+    public val disabled: Boolean?
+
+    /**
+     * Set whether the rich text editor is disabled.
+     */
+    @Composable
+    public fun disabled(disabled: Boolean?)
+
+    /**
+     * Set whether the rich text editor is required.
+     */
+    @Composable
+    public fun required(required: Boolean?)
+}
+
+/**
+ * Trix rich text editor component.
+ */
 @Suppress("LongParameterList")
 public open class RichText(
     value: String? = null,
@@ -68,7 +124,7 @@ public open class RichText(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLElement>("trix-editor", className, id, renderConfig),
-    StringFormControl, WithStateFlow<String?> by withStateFlowDelegate {
+    StringFormControl, WithStateFlow<String?> by withStateFlowDelegate, IRichText {
 
     public override var value: String? by updatingProperty(
         initialValue = value,
@@ -80,10 +136,23 @@ public open class RichText(
     /**
      * The locale for i18n.
      */
-    public open var locale: Locale by updatingProperty(locale) {
+    public override var locale: Locale by updatingProperty(locale) {
         toolbarLocalize()
     }
 
+    /**
+     * Set the locale for i18n.
+     */
+    @Composable
+    override fun locale(locale: Locale): Unit = composableProperty("locale", {
+        this.locale = LocaleManager.currentLocale
+    }) {
+        this.locale = locale
+    }
+
+    /**
+     * The name of the rich text editor.
+     */
     public override var name: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("name", it)
@@ -93,9 +162,19 @@ public open class RichText(
     }
 
     /**
+     * Set the name of the rich text editor.
+     */
+    @Composable
+    override fun name(name: String?): Unit = composableProperty("name", {
+        this.name = null
+    }) {
+        this.name = name
+    }
+
+    /**
      * The placeholder of the rich text editor.
      */
-    public var placeholder: String? by updatingProperty(placeholder) {
+    public override var placeholder: String? by updatingProperty(placeholder) {
         if (it != null) {
             element.setAttribute("placeholder", it)
         } else {
@@ -103,6 +182,19 @@ public open class RichText(
         }
     }
 
+    /**
+     * Set the placeholder of the rich text editor.
+     */
+    @Composable
+    override fun placeholder(placeholder: String?): Unit = composableProperty("placeholder", {
+        this.placeholder = null
+    }) {
+        this.placeholder = placeholder
+    }
+
+    /**
+     * Whether the rich text editor is disabled.
+     */
     public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it == true) {
             element.setAttribute("disabled", "")
@@ -115,6 +207,19 @@ public open class RichText(
         }
     }
 
+    /**
+     * Set whether the rich text editor is disabled.
+     */
+    @Composable
+    override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
+    }
+
+    /**
+     * Set whether the rich text editor is required.
+     */
     public override var required: Boolean? by updatingProperty(required) {
         if (it == true) {
             element.setAttribute("required", "")
@@ -124,14 +229,13 @@ public open class RichText(
     }
 
     /**
-     * The autofocus of the rich text editor.
+     * Set whether the rich text editor is required.
      */
-    public override var autofocus: Boolean? by updatingProperty {
-        if (it == true) {
-            element.setAttribute("autofocus", "")
-        } else {
-            element.removeAttribute("autofocus")
-        }
+    @Composable
+    override fun required(required: Boolean?): Unit = composableProperty("required", {
+        this.required = null
+    }) {
+        this.required = required
     }
 
     public override var customValidity: String? by updatingProperty()
@@ -176,12 +280,15 @@ public open class RichText(
         withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             if (placeholder != null) {
+                @Suppress("LeakingThis")
                 element.setAttribute("placeholder", placeholder)
             }
             if (disabled == true) {
+                @Suppress("LeakingThis")
                 element.setAttribute("disabled", "")
             }
             if (required == true) {
+                @Suppress("LeakingThis")
                 element.setAttribute("required", "")
             }
             @Suppress("LeakingThis")
@@ -299,7 +406,7 @@ public open class RichText(
  */
 @Suppress("LongParameterList")
 @Composable
-public fun ComponentBase.richText(
+public fun IComponent.richText(
     value: String? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
@@ -307,7 +414,7 @@ public fun ComponentBase.richText(
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     id: String? = null,
-    setup: @Composable RichText.() -> Unit = {}
+    setup: @Composable IRichText.() -> Unit = {}
 ): RichText {
     val bindId = remember { "kilua_trix_${RichText.idCounter++}" }
     val component =

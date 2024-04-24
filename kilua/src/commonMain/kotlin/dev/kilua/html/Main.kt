@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Main component.
  */
+public interface IMain : ITag<HTMLElement>
+
+/**
+ * HTML Main component.
+ */
 public open class Main(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("main", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("main", className, renderConfig = renderConfig), IMain
 
 /**
  * Creates a [Main] component.
@@ -44,7 +49,7 @@ public open class Main(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Main] component
  */
 @Composable
-public fun ComponentBase.main(className: String? = null, content: @Composable Main.() -> Unit = {}): Main {
+public fun IComponent.main(className: String? = null, content: @Composable IMain.() -> Unit = {}): Main {
     val component = remember { Main(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Main::className, it) }

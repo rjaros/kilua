@@ -29,467 +29,467 @@ import web.dom.HTMLElement
 /**
  * Common tag CSS styles.
  */
-public interface TagStyle<E : HTMLElement> {
+public interface TagStyle<E : HTMLElement>: TagStyleFun<E> {
 
     /**
      * Width of the current component.
      */
-    public var width: CssSize?
+    public override var width: CssSize?
 
     /**
      * Minimal width of the current component.
      */
-    public var minWidth: CssSize?
+    public override var minWidth: CssSize?
 
     /**
      * Maximal width of the current component.
      */
-    public var maxWidth: CssSize?
+    public override var maxWidth: CssSize?
 
     /**
      * Height of the current component.
      */
-    public var height: CssSize?
+    public override var height: CssSize?
 
     /**
      * Minimal height of the current component.
      */
-    public var minHeight: CssSize?
+    public override var minHeight: CssSize?
 
     /**
      * Maximal height of the current component.
      */
-    public var maxHeight: CssSize?
+    public override var maxHeight: CssSize?
 
     /**
      * CSS display of the current component.
      */
-    public var display: Display?
+    public override var display: Display?
 
     /**
      * CSS position of the current component.
      */
-    public var position: Position?
+    public override var position: Position?
 
     /**
      * Top edge of the current component.
      */
-    public var top: CssSize?
+    public override var top: CssSize?
 
     /**
      * Left edge of the current component.
      */
-    public var left: CssSize?
+    public override var left: CssSize?
 
     /**
      * Right edge of the current component.
      */
-    public var right: CssSize?
+    public override var right: CssSize?
 
     /**
      * Bottom edge of the current component.
      */
-    public var bottom: CssSize?
+    public override var bottom: CssSize?
 
     /**
      * Z-index of the current component.
      */
-    public var zIndex: Int?
+    public override var zIndex: Int?
 
     /**
      * CSS overflow of the current component.
      */
-    public var overflow: Overflow?
+    public override var overflow: Overflow?
 
     /**
      * CSS overflow-x of the current component.
      */
-    public var overflowX: Overflow?
+    public override var overflowX: Overflow?
 
     /**
      * CSS overflow-y of the current component.
      */
-    public var overflowY: Overflow?
+    public override var overflowY: Overflow?
 
     /**
      * CSS overflow-wrap of the current component.
      */
-    public var overflowWrap: OverflowWrap?
+    public override var overflowWrap: OverflowWrap?
 
     /**
      * CSS resize of the current component.
      */
-    public var resize: Resize?
+    public override var resize: Resize?
 
     /**
      * Border of the current component.
      */
-    public var border: Border?
+    public override var border: Border?
 
     /**
      * Top border of the current component.
      */
-    public var borderTop: Border?
+    public override var borderTop: Border?
 
     /**
      * Right border of the current component.
      */
-    public var borderRight: Border?
+    public override var borderRight: Border?
 
     /**
      * Bottom border of the current component.
      */
-    public var borderBottom: Border?
+    public override var borderBottom: Border?
 
     /**
      * Left border of the current component.
      */
-    public var borderLeft: Border?
+    public override var borderLeft: Border?
 
     /**
      * Margin of the current component.
      */
-    public var margin: CssSize?
+    public override var margin: CssSize?
 
     /**
      * Top margin of the current component.
      */
-    public var marginTop: CssSize?
+    public override var marginTop: CssSize?
 
     /**
      * Right margin of the current component.
      */
-    public var marginRight: CssSize?
+    public override var marginRight: CssSize?
 
     /**
      * Bottom margin of the current component.
      */
-    public var marginBottom: CssSize?
+    public override var marginBottom: CssSize?
 
     /**
      * Left margin of the current component.
      */
-    public var marginLeft: CssSize?
+    public override var marginLeft: CssSize?
 
     /**
      * Padding of the current component.
      */
-    public var padding: CssSize?
+    public override var padding: CssSize?
 
     /**
      * Top padding of the current component.
      */
-    public var paddingTop: CssSize?
+    public override var paddingTop: CssSize?
 
     /**
      * Right padding of the current component.
      */
-    public var paddingRight: CssSize?
+    public override var paddingRight: CssSize?
 
     /**
      * Bottom padding of the current component.
      */
-    public var paddingBottom: CssSize?
+    public override var paddingBottom: CssSize?
 
     /**
      * Left padding of the current component.
      */
-    public var paddingLeft: CssSize?
+    public override var paddingLeft: CssSize?
 
     /**
      * Text color for the current component.
      */
-    public var color: Color?
+    public override var color: Color?
 
     /**
      * Opacity of the current component.
      */
-    public var opacity: Double?
+    public override var opacity: Double?
 
     /**
      * Background of the current component.
      */
-    public var background: Background?
+    public override var background: Background?
 
     /**
      * CSS Text direction of the current component.
      */
-    public var direction: Direction?
+    public override var direction: Direction?
 
     /**
      * CSS Text letter spacing of the current component.
      */
-    public var letterSpacing: CssSize?
+    public override var letterSpacing: CssSize?
 
     /**
      * CSS Text line height of the current component.
      */
-    public var lineHeight: CssSize?
+    public override var lineHeight: CssSize?
 
     /**
      * CSS Text align of the current component.
      */
-    public var textAlign: TextAlign?
+    public override var textAlign: TextAlign?
 
     /**
      * CSS Text decoration of the current component.
      */
-    public var textDecoration: TextDecoration?
+    public override var textDecoration: TextDecoration?
 
     /**
      * CSS Text indent of the current component.
      */
-    public var textIndent: CssSize?
+    public override var textIndent: CssSize?
 
     /**
      * CSS Text shadow of the current component.
      */
-    public var textShadow: TextShadow?
+    public override var textShadow: TextShadow?
 
     /**
      * CSS Text transform of the current component.
      */
-    public var textTransform: TextTransform?
+    public override var textTransform: TextTransform?
 
     /**
      * CSS Text overflow of the current component.
      */
-    public var textOverflow: TextOverflow?
+    public override var textOverflow: TextOverflow?
 
     /**
      * CSS Text unicode-bidi of the current component.
      */
-    public var unicodeBidi: UnicodeBidi?
+    public override var unicodeBidi: UnicodeBidi?
 
     /**
      * CSS Text vertical align of the current component.
      */
-    public var verticalAlign: VerticalAlign?
+    public override var verticalAlign: VerticalAlign?
 
     /**
      * CSS Text white space of the current component.
      */
-    public var whiteSpace: WhiteSpace?
+    public override var whiteSpace: WhiteSpace?
 
     /**
      * CSS Text word spacing of the current component.
      */
-    public var wordSpacing: CssSize?
+    public override var wordSpacing: CssSize?
 
     /**
      * CSS font family of the current component.
      */
-    public var fontFamily: String?
+    public override var fontFamily: String?
 
     /**
      * CSS font size of the current component.
      */
-    public var fontSize: CssSize?
+    public override var fontSize: CssSize?
 
     /**
      * CSS font style of the current component.
      */
-    public var fontStyle: FontStyle?
+    public override var fontStyle: FontStyle?
 
     /**
      * CSS font weight of the current component.
      */
-    public var fontWeight: FontWeight?
+    public override var fontWeight: FontWeight?
 
     /**
-     * CSS font public variant of the current component.
+     * CSS font public override variant of the current component.
      */
-    public var fontVariant: FontVariant?
+    public override var fontVariant: FontVariant?
 
     /**
      * CSS position float of the current component.
      */
-    public var float: CssFloat?
+    public override var float: CssFloat?
 
     /**
      * CSS clear float of the current component.
      */
-    public var clear: Clear?
+    public override var clear: Clear?
 
     /**
      * CSS word break of the current component.
      */
-    public var wordBreak: WordBreak?
+    public override var wordBreak: WordBreak?
 
     /**
      * CSS line break of the current component.
      */
-    public var lineBreak: LineBreak?
+    public override var lineBreak: LineBreak?
 
     /**
      * CSS cursor shape over the current component.
      */
-    public var cursor: Cursor?
+    public override var cursor: Cursor?
 
     /**
      * CSS flexbox direction.
      */
-    public var flexDirection: FlexDirection?
+    public override var flexDirection: FlexDirection?
 
     /**
      * CSS flexbox wrap mode.
      */
-    public var flexWrap: FlexWrap?
+    public override var flexWrap: FlexWrap?
 
     /**
      * CSS grid items justification.
      */
-    public var justifyItems: JustifyItems?
+    public override var justifyItems: JustifyItems?
 
     /**
      * CSS flexbox/grid content justification.
      */
-    public var justifyContent: JustifyContent?
+    public override var justifyContent: JustifyContent?
 
     /**
      * CSS flexbox/grid items alignment.
      */
-    public var alignItems: AlignItems?
+    public override var alignItems: AlignItems?
 
     /**
      * CSS flexbox/grid content alignment.
      */
-    public var alignContent: AlignContent?
+    public override var alignContent: AlignContent?
 
     /**
      * CSS flexbox item order.
      */
-    public var order: Int?
+    public override var order: Int?
 
     /**
      * CSS flexbox item grow.
      */
-    public var flexGrow: Int?
+    public override var flexGrow: Int?
 
     /**
      * CSS flexbox item shrink.
      */
-    public var flexShrink: Int?
+    public override var flexShrink: Int?
 
     /**
      * CSS flexbox item basis.
      */
-    public var flexBasis: CssSize?
+    public override var flexBasis: CssSize?
 
     /**
      * CSS flexbox items self-alignment.
      */
-    public var alignSelf: AlignItems?
+    public override var alignSelf: AlignItems?
 
     /**
      * CSS grid items self-justification.
      */
-    public var justifySelf: JustifyItems?
+    public override var justifySelf: JustifyItems?
 
     /**
      * CSS grid auto columns.
      */
-    public var gridAutoColumns: String?
+    public override var gridAutoColumns: String?
 
     /**
      * CSS grid auto rows.
      */
-    public var gridAutoRows: String?
+    public override var gridAutoRows: String?
 
     /**
      * CSS grid auto flow.
      */
-    public var gridAutoFlow: GridAutoFlow?
+    public override var gridAutoFlow: GridAutoFlow?
 
     /**
      * CSS grid columns template.
      */
-    public var gridTemplateColumns: String?
+    public override var gridTemplateColumns: String?
 
     /**
      * CSS grid rows template.
      */
-    public var gridTemplateRows: String?
+    public override var gridTemplateRows: String?
 
     /**
      * CSS grid areas template.
      */
-    public var gridTemplateAreas: List<String>?
+    public override var gridTemplateAreas: List<String>?
 
     /**
      * CSS grid/flex column gap.
      */
-    public var columnGap: CssSize?
+    public override var columnGap: CssSize?
 
     /**
      * CSS grid/flex row gap.
      */
-    public var rowGap: CssSize?
+    public override var rowGap: CssSize?
 
     /**
      * CSS grid column start.
      */
-    public var gridColumnStart: Int?
+    public override var gridColumnStart: Int?
 
     /**
      * CSS grid row start.
      */
-    public var gridRowStart: Int?
+    public override var gridRowStart: Int?
 
     /**
      * CSS grid column end.
      */
-    public var gridColumnEnd: String?
+    public override var gridColumnEnd: String?
 
     /**
      * CSS grid row end.
      */
-    public var gridRowEnd: String?
+    public override var gridRowEnd: String?
 
     /**
      * CSS grid area.
      */
-    public var gridArea: String?
+    public override var gridArea: String?
 
     /**
      * Outline of the current component.
      */
-    public var outline: Outline?
+    public override var outline: Outline?
 
     /**
      * Box shadow of the current component.
      */
-    public var boxShadow: BoxShadow?
+    public override var boxShadow: BoxShadow?
 
     /**
      * List of box shadows of the current component.
      */
-    public var boxShadowList: List<BoxShadow>?
+    public override var boxShadowList: List<BoxShadow>?
 
     /**
      * CSS transition effect for the current component.
      */
-    public var transition: Transition?
+    public override var transition: Transition?
 
     /**
      * List of CSS transition effects for the current component.
      */
-    public var transitionList: List<Transition>?
+    public override var transitionList: List<Transition>?
 
     /**
      * CSS border radius.
      */
-    public var borderRadius: CssSize?
+    public override var borderRadius: CssSize?
 
     /**
      * List of CSS border radius values.
      */
-    public var borderRadiusList: List<CssSize>?
+    public override var borderRadiusList: List<CssSize>?
 
     /**
      * List style of the current component.
      */
-    public var listStyle: ListStyle?
+    public override var listStyle: ListStyle?
 
     /**
      * Set value for a given CSS style name.
@@ -499,7 +499,7 @@ public interface TagStyle<E : HTMLElement> {
     /**
      * Get value of the given CSS style.
      */
-    public fun getStyle(name: String): String?
+    public override fun getStyle(name: String): String?
 
     /**
      * Remove CSS style with the given name.

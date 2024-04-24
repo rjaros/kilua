@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLHeadingElement
@@ -33,8 +33,13 @@ import web.dom.HTMLHeadingElement
 /**
  * HTML H3 component.
  */
+public interface IH3 : ITag<HTMLHeadingElement>
+
+/**
+ * HTML H3 component.
+ */
 public open class H3(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadingElement>("h3", className, renderConfig = renderConfig)
+    Tag<HTMLHeadingElement>("h3", className, renderConfig = renderConfig), IH3
 
 /**
  * Creates a [H3] component.
@@ -44,7 +49,7 @@ public open class H3(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [H3] component
  */
 @Composable
-public fun ComponentBase.h3(className: String? = null, content: @Composable H3.() -> Unit = {}): H3 {
+public fun IComponent.h3(className: String? = null, content: @Composable IH3.() -> Unit = {}): H3 {
     val component = remember { H3(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(H3::className, it) }
@@ -61,7 +66,7 @@ public fun ComponentBase.h3(className: String? = null, content: @Composable H3.(
  * @return the [H3] component
  */
 @Composable
-public fun ComponentBase.h3t(text: String, className: String? = null, content: @Composable H3.() -> Unit = {}): H3 {
+public fun IComponent.h3t(text: String, className: String? = null, content: @Composable IH3.() -> Unit = {}): H3 {
     return h3(className) {
         +text
         content()

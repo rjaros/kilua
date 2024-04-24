@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLProgressElement
@@ -33,8 +33,13 @@ import web.dom.HTMLProgressElement
 /**
  * HTML Progress component.
  */
+public interface IProgress : ITag<HTMLProgressElement>
+
+/**
+ * HTML Progress component.
+ */
 public open class Progress(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLProgressElement>("progress", className, renderConfig = renderConfig)
+    Tag<HTMLProgressElement>("progress", className, renderConfig = renderConfig), IProgress
 
 /**
  * Creates a [Progress] component.
@@ -44,7 +49,7 @@ public open class Progress(className: String? = null, renderConfig: RenderConfig
  * @return the [Progress] component
  */
 @Composable
-public fun ComponentBase.progress(className: String? = null, content: @Composable Progress.() -> Unit = {}): Progress {
+public fun IComponent.progress(className: String? = null, content: @Composable IProgress.() -> Unit = {}): Progress {
     val component = remember { Progress(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Progress::className, it) }

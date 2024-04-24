@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLDialogElement
@@ -33,8 +33,13 @@ import web.dom.HTMLDialogElement
 /**
  * HTML Dialog component.
  */
+public interface IDialog : ITag<HTMLDialogElement>
+
+/**
+ * HTML Dialog component.
+ */
 public open class Dialog(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDialogElement>("dialog", className, renderConfig = renderConfig)
+    Tag<HTMLDialogElement>("dialog", className, renderConfig = renderConfig), IDialog
 
 /**
  * Creates a [Dialog] component.
@@ -44,7 +49,7 @@ public open class Dialog(className: String? = null, renderConfig: RenderConfig =
  * @return the [Dialog] component
  */
 @Composable
-public fun ComponentBase.dialog(className: String? = null, content: @Composable Dialog.() -> Unit = {}): Dialog {
+public fun IComponent.dialog(className: String? = null, content: @Composable IDialog.() -> Unit = {}): Dialog {
     val component = remember { Dialog(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Dialog::className, it) }

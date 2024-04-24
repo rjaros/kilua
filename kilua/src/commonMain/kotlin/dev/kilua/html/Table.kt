@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLTableElement
@@ -33,8 +33,13 @@ import web.dom.HTMLTableElement
 /**
  * HTML Table component.
  */
+public interface ITable : ITag<HTMLTableElement>
+
+/**
+ * HTML Table component.
+ */
 public open class Table(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableElement>("table", className, renderConfig = renderConfig)
+    Tag<HTMLTableElement>("table", className, renderConfig = renderConfig), ITable
 
 /**
  * Creates a [Table] component.
@@ -44,7 +49,7 @@ public open class Table(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Table] component
  */
 @Composable
-public fun ComponentBase.table(className: String? = null, content: @Composable Table.() -> Unit = {}): Table {
+public fun IComponent.table(className: String? = null, content: @Composable ITable.() -> Unit = {}): Table {
     val component = remember { Table(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Table::className, it) }

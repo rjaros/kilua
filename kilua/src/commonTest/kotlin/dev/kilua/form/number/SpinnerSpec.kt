@@ -35,12 +35,12 @@ class SpinnerSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 spinner(15, 10, 20, name = "test") {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<input type="number" name="test" min="10" max="20" step="1" autofocus="">"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<input type="number" name="test" min="10" max="20" step="1" autofocus="">""",
+                root.element.innerHTML,
                 "Should render spinner input element to DOM"
             )
         }
@@ -51,12 +51,12 @@ class SpinnerSpec : DomSpec {
         run {
             val root = root {
                 spinner(15, 10, 20, name = "test") {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><input type="number" name="test" autofocus min="10" max="20" step="1"></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<input type="number" name="test" min="10" max="20" step="1" autofocus="">""",
+                root.innerHTML,
                 "Should render number input element to a String"
             )
         }
@@ -68,7 +68,7 @@ class SpinnerSpec : DomSpec {
             lateinit var spinner: Spinner
             root("test") {
                 spinner = spinner(19, 10, 20, step = 1) {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
             repeat(2) {

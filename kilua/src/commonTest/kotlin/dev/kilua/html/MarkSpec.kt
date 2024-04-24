@@ -35,12 +35,12 @@ class MarkSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 mark("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
                 }
             }
             assertEquals(
@@ -56,12 +56,12 @@ class MarkSpec : DomSpec {
         run {
             val root = root {
                 mark("test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
                 }
             }
             assertEquals(

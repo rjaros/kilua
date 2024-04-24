@@ -25,7 +25,7 @@ package dev.kilua.form.text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.KiluaScope
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.form.InputType
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.rpc.RpcServiceMgr
@@ -57,7 +57,7 @@ import web.toJsString
  * @return a [TomTypeahead] component
  */
 @Composable
-public fun <T : Any> ComponentBase.tomTypeaheadRemote(
+public fun <T : Any> IComponent.tomTypeaheadRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?) -> List<String>,
     stateFunction: (() -> String)? = null,
@@ -72,7 +72,7 @@ public fun <T : Any> ComponentBase.tomTypeaheadRemote(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable TomTypeahead.() -> Unit = {}
+    setup: @Composable ITomTypeahead.() -> Unit = {}
 ): TomTypeahead {
 
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks) {

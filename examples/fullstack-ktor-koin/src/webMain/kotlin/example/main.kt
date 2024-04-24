@@ -41,7 +41,6 @@ import dev.kilua.form.select.selectRemote
 import dev.kilua.form.select.tomSelectRemote
 import dev.kilua.form.text.tomTypeaheadRemote
 import dev.kilua.html.px
-import dev.kilua.html.unaryPlus
 import dev.kilua.panel.vPanel
 import dev.kilua.rpc.getService
 import dev.kilua.rpc.getServiceManager
@@ -71,7 +70,7 @@ class App : Application() {
             var value by remember { mutableStateOf("Hello World!") }
             vPanel(gap = 10.px) {
                 +value
-                margin = 10.px
+                margin(10.px)
                 selectRemote(getServiceManager(), IPingService::dictionary, stateFunction = {
                     "Some state"
                 }, requestFilter = {

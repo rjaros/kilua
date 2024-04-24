@@ -35,12 +35,12 @@ class ThSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 th(colspan = 2, rowspan = 1, scope = ThScope.Col, "test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
                 }
             }
             assertEqualsHtml(
@@ -56,12 +56,12 @@ class ThSpec : DomSpec {
         run {
             val root = root {
                 th(colspan = 2, rowspan = 1, scope = ThScope.Col, "test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
                 }
             }
             assertEqualsHtml(

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLLegendElement
@@ -33,8 +33,13 @@ import web.dom.HTMLLegendElement
 /**
  * HTML Legend component.
  */
+public interface ILegend : ITag<HTMLLegendElement>
+
+/**
+ * HTML Legend component.
+ */
 public open class Legend(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLLegendElement>("legend", className, renderConfig = renderConfig)
+    Tag<HTMLLegendElement>("legend", className, renderConfig = renderConfig), ILegend
 
 /**
  * Creates a [Legend] component.
@@ -44,7 +49,7 @@ public open class Legend(className: String? = null, renderConfig: RenderConfig =
  * @return the [Legend] component
  */
 @Composable
-public fun ComponentBase.legend(className: String? = null, content: @Composable Legend.() -> Unit = {}): Legend {
+public fun IComponent.legend(className: String? = null, content: @Composable ILegend.() -> Unit = {}): Legend {
     val component = remember { Legend(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Legend::className, it) }

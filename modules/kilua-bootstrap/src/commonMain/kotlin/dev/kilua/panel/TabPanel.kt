@@ -30,18 +30,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.html.CommentNode
-import dev.kilua.html.Div
+import dev.kilua.html.IDiv
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.button
 import dev.kilua.html.commentNode
 import dev.kilua.html.div
 import dev.kilua.html.li
 import dev.kilua.html.ul
+import dev.kilua.utils.cast
 import dev.kilua.utils.rem
 import web.dom.HTMLDivElement
 import web.toJsString
@@ -71,17 +73,72 @@ internal data class Tab(
     val label: String? = null,
     val icon: String? = null,
     val closable: Boolean = false,
-    val content: @Composable Div.() -> Unit
+    val content: @Composable IDiv.() -> Unit
 )
 
+/**
+ * Tab panel component.
+ */
+public interface ITabPanel : ITag<HTMLDivElement> {
+    //
+    // Additional functions are required because @Composable functions
+    // can't have default parameters.
+    //
+
+    public var activeIndex: Int
+
+    /**
+     * Adds a tab.
+     * @param label the label of the tab
+     * @param content the content of the tab
+     */
+    @Composable
+    public fun tab(
+        label: String,
+        content: @Composable IDiv.() -> Unit
+    )
+
+    /**
+     * Adds a tab.
+     * @param label the label of the tab
+     * @param icon the icon of the tab
+     * @param content the content of the tab
+     */
+    @Composable
+    public fun tab(
+        label: String,
+        icon: String,
+        content: @Composable IDiv.() -> Unit
+    )
+
+    /**
+     * Adds a tab.
+     * @param label the label of the tab
+     * @param icon the icon of the tab
+     * @param closable determines if the tab is closable
+     * @param content the content of the tab
+     */
+    @Composable
+    public fun tab(
+        label: String?,
+        icon: String?,
+        closable: Boolean,
+        content: @Composable IDiv.() -> Unit
+    )
+}
+
+
+/**
+ * Tab panel component.
+ */
 public open class TabPanel(
     activeIndex: Int = -1,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), ITabPanel {
 
-    public open var activeIndex: Int by updatingProperty(activeIndex, notifyFunction = {
+    public override var activeIndex: Int by updatingProperty(activeIndex, notifyFunction = {
         activeIndexState = it
     })
 
@@ -89,12 +146,47 @@ public open class TabPanel(
     internal val tabs = mutableStateMapOf<Int, Tab>()
     internal var tabsOrderList: List<Int> by mutableStateOf(emptyList())
 
+    /**
+     * Adds a tab.
+     * @param label the label of the tab
+     * @param content the content of the tab
+     */
     @Composable
-    public fun tab(
-        label: String? = null,
-        icon: String? = null,
-        closable: Boolean = false,
-        content: @Composable Div.() -> Unit
+    public override fun tab(
+        label: String,
+        content: @Composable IDiv.() -> Unit
+    ) {
+        tab(label, null, false, content)
+    }
+
+    /**
+     * Adds a tab.
+     * @param label the label of the tab
+     * @param icon the icon of the tab
+     * @param content the content of the tab
+     */
+    @Composable
+    public override fun tab(
+        label: String,
+        icon: String,
+        content: @Composable IDiv.() -> Unit
+    ) {
+        tab(label, icon, false, content)
+    }
+
+    /**
+     * Adds a tab.
+     * @param label the label of the tab
+     * @param icon the icon of the tab
+     * @param closable determines if the tab is closable
+     * @param content the content of the tab
+     */
+    @Composable
+    public override fun tab(
+        label: String?,
+        icon: String?,
+        closable: Boolean,
+        content: @Composable IDiv.() -> Unit
     ) {
         val tabId = remember { idCounter++ }
         commentNode("tid=$tabId")
@@ -129,10 +221,10 @@ public open class TabPanel(
 }
 
 @Composable
-private fun ComponentBase.tabPanel(
+private fun IComponent.tabPanel(
     activeIndex: Int = -1,
     className: String? = null,
-    content: @Composable TabPanel.() -> Unit,
+    content: @Composable ITabPanel.() -> Unit,
 ): TabPanel {
     val component = remember { TabPanel(activeIndex, className, renderConfig = renderConfig) }
     ComponentNode(component, {
@@ -155,14 +247,14 @@ private fun ComponentBase.tabPanel(
  * @return the [TabPanel] component
  */
 @Composable
-public fun ComponentBase.tabPanel(
+public fun IComponent.tabPanel(
     tabPosition: TabPosition = TabPosition.Top,
     sideTabSize: SideTabSize = SideTabSize.Size3,
     scrollableTabs: Boolean = false,
     draggableTabs: Boolean = false,
     activeIndex: Int = -1,
     className: String? = null,
-    content: @Composable TabPanel.() -> Unit,
+    content: @Composable ITabPanel.() -> Unit,
 ): TabPanel {
     val tabPanelId = remember { "kilua_tab_panel_${TabPanel.idCounter++}" }
     val tabPanelClassName = className % "kilua-tab-panel"
@@ -173,24 +265,24 @@ public fun ComponentBase.tabPanel(
             TabPosition.Left -> "nav nav-tabs tabs-left flex-column"
             TabPosition.Right -> "nav nav-tabs tabs-right flex-column"
         }
-        val component = this
+        val component = this.cast<TabPanel>()
 
         @Composable
-        fun ComponentBase.generateNav() {
+        fun IComponent.generateNav() {
             ul(navClasses) {
-                role = "tablist"
-                tabsOrderList.forEachIndexed { index, tabId ->
+                role("tablist")
+                component.tabsOrderList.forEachIndexed { index, tabId ->
                     component.tabs[tabId]?.let { tab ->
                         li("nav-item") {
-                            role = "presentation"
+                            role("presentation")
                             val navLinkClassName =
                                 if (index == component.activeIndexState) "nav-link active" else "nav-link"
                             val navLinkClassNameWithIcon =
                                 if (tab.icon == null && tab.closable) "$navLinkClassName icon-link" else navLinkClassName
                             button(tab.label, tab.icon, className = navLinkClassNameWithIcon) {
-                                id = "$tabPanelId-tab-$index"
-                                role = "tab"
-                                setAttribute("aria-selected", (index == component.activeIndexState).toString())
+                                id("$tabPanelId-tab-$index")
+                                role("tab")
+                                attribute("aria-selected", (index == component.activeIndexState).toString())
                                 if (tab.closable) {
                                     button(className = "btn-close kilua-tab-close") {
                                         onClick { e ->
@@ -229,14 +321,14 @@ public fun ComponentBase.tabPanel(
         }
 
         @Composable
-        fun ComponentBase.generateContent() {
+        fun IComponent.generateContent() {
             div("tab-content") {
-                tabsOrderList.getOrNull(component.activeIndexState)?.let {
+                component.tabsOrderList.getOrNull(component.activeIndexState)?.let {
                     component.tabs[it]?.let { tab ->
                         div("tab-pane active") {
-                            role = "tabpanel"
-                            ariaLabelledby = "$tabPanelId-tab-$activeIndex"
-                            tabindex = 0
+                            role("tabpanel")
+                            ariaLabelledby("$tabPanelId-tab-$activeIndex")
+                            tabindex(0)
                             tab.content(this)
                         }
                     }

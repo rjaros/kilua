@@ -22,9 +22,11 @@
 
 package dev.kilua.form.check
 
+import androidx.compose.runtime.Composable
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.BoolFormControl
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
@@ -47,6 +49,63 @@ public enum class CheckInputType {
 }
 
 /**
+ * Base interface for check input control (checkbox or radiobutton).
+ */
+public interface IAbstractCheck : ITag<HTMLInputElement>, BoolFormControl, WithStateFlow<Boolean> {
+
+    /**
+     * The name attribute of the generated HTML input element.
+     */
+    public val name: String?
+
+    /**
+     * Set the name attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun name(name: String?)
+
+
+    /**
+     * The disabled attribute of the generated HTML input element.
+     */
+    public val disabled: Boolean?
+
+    /**
+     * Set the disabled attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun disabled(disabled: Boolean?)
+
+    /**
+     * Set the required attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun required(required: Boolean?)
+
+    /**
+     * The checked attribute of the generated HTML input element.
+     */
+    public val defaultChecked: Boolean?
+
+    /**
+     * Set the checked attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun defaultChecked(defaultChecked: Boolean?)
+
+    /**
+     * The additional value attribute of the generated HTML input element.
+     */
+    public val extraValue: String?
+
+    /**
+     * Set the additional value attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun extraValue(extraValue: String?)
+}
+
+/**
  * Abstract class for check input control (checkbox or radiobutton).
  */
 public abstract class AbstractCheck(
@@ -60,7 +119,7 @@ public abstract class AbstractCheck(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLInputElement>("input", className, id, renderConfig), BoolFormControl,
-    WithStateFlow<Boolean> by withStateFlowDelegate {
+    WithStateFlow<Boolean> by withStateFlowDelegate, IAbstractCheck {
 
     public override var value: Boolean by updatingProperty(
         value,
@@ -80,6 +139,16 @@ public abstract class AbstractCheck(
     }
 
     /**
+     * Set the name attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun name(name: String?): Unit = composableProperty("name", {
+        this.name = null
+    }) {
+        this.name = name
+    }
+
+    /**
      * The disabled attribute of the generated HTML input element.
      */
     public override var disabled: Boolean? by updatingProperty(disabled) {
@@ -88,6 +157,16 @@ public abstract class AbstractCheck(
         } else {
             element.removeAttribute("disabled")
         }
+    }
+
+    /**
+     * Set the disabled attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
     }
 
     /**
@@ -102,20 +181,19 @@ public abstract class AbstractCheck(
     }
 
     /**
-     * The autofocus attribute of the generated HTML input element.
+     * Set the required attribute of the generated HTML input element.
      */
-    public override var autofocus: Boolean? by updatingProperty {
-        if (it != null) {
-            element.autofocus = it
-        } else {
-            element.removeAttribute("autofocus")
-        }
+    @Composable
+    public override fun required(required: Boolean?): Unit = composableProperty("required", {
+        this.required = null
+    }) {
+        this.required = required
     }
 
     /**
      * The checked attribute of the generated HTML input element.
      */
-    public open var defaultChecked: Boolean? by updatingProperty(name = "checked") {
+    public override var defaultChecked: Boolean? by updatingProperty(name = "checked") {
         if (it != null) {
             element.defaultChecked = it
         } else {
@@ -124,13 +202,33 @@ public abstract class AbstractCheck(
     }
 
     /**
+     * Set the checked attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun defaultChecked(defaultChecked: Boolean?): Unit = composableProperty("defaultChecked", {
+        this.defaultChecked = null
+    }) {
+        this.defaultChecked = defaultChecked
+    }
+
+    /**
      * The additional value attribute of the generated HTML input element.
      */
-    public open var extraValue: String? = null
+    public override var extraValue: String? = null
         set(value) {
             field = value
             setAttribute("value", extraValue)
         }
+
+    /**
+     * Set the additional value attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun extraValue(extraValue: String?): Unit = composableProperty("extraValue", {
+        this.extraValue = null
+    }) {
+        this.extraValue = extraValue
+    }
 
     public override var customValidity: String? by updatingProperty {
         element.setCustomValidity(it ?: "")
@@ -140,15 +238,20 @@ public abstract class AbstractCheck(
         @Suppress("LeakingThis")
         withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
+            @Suppress("LeakingThis")
             element.checked = value
+            @Suppress("LeakingThis")
             element.type = type.value
             if (name != null) {
+                @Suppress("LeakingThis")
                 element.name = name
             }
             if (disabled != null) {
+                @Suppress("LeakingThis")
                 element.disabled = disabled
             }
             if (required != null) {
+                @Suppress("LeakingThis")
                 element.required = required
             }
             @Suppress("LeakingThis")

@@ -25,7 +25,7 @@ package dev.kilua.html.style
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.Tag
@@ -58,7 +58,7 @@ internal class Style(cssText: String, renderConfig: RenderConfig = DefaultRender
  * Internal function to emit HTML style element.
  */
 @Composable
-internal fun ComponentBase.style(cssText: String) {
+internal fun IComponent.style(cssText: String) {
     val component = remember { Style(cssText, renderConfig) }
     ComponentNode(component, {
         set(cssText) { updateProperty(Style::cssText, it) }

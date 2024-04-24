@@ -23,17 +23,16 @@
 package io.realworld.layout.shared
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.div
 import dev.kilua.html.link
 import dev.kilua.html.pt
-import dev.kilua.html.unaryPlus
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.FeedType
 
 @Composable
-fun ComponentBase.tags(state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.tags(state: ConduitState, conduitManager: ConduitManager) {
     div("sidebar") {
         pt("Popular Tags")
         if (state.tagsLoading) {

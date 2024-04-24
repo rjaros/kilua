@@ -25,15 +25,64 @@ package dev.kilua.form.number
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.form.IInput
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.form.IntFormControl
 import dev.kilua.html.helpers.PropertyListBuilder
 
 internal const val SPINNER_DEFAULT_STEP = 1
+
+/**
+ * Range input component.
+ */
+public interface ISpinner : IInput<Int>, IntFormControl {
+    /**
+     * The minimum value.
+     */
+    public val min: Int?
+
+    /**
+     * Set the minimum value.
+     */
+    @Composable
+    public fun min(min: Int?)
+
+    /**
+     * The maximum value.
+     */
+    public val max: Int?
+
+    /**
+     * Set the maximum value.
+     */
+    @Composable
+    public fun max(max: Int?)
+
+    /**
+     * The step value.
+     */
+    public val step: Int
+
+    /**
+     * Set the step value.
+     */
+    @Composable
+    public fun step(step: Int)
+
+    /**
+     * Increments the value by the step value.
+     */
+    public fun stepUp()
+
+    /**
+     * Decrements the value by the step value.
+     */
+    public fun stepDown()
+}
 
 /**
  * Spinner input component.
@@ -51,13 +100,24 @@ public open class Spinner(
     className: String? = null,
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<Int>(value, InputType.Number, name, maxlength, placeholder, disabled, required, className, id, renderConfig = renderConfig),
-    IntFormControl {
+) : Input<Int>(
+    value,
+    InputType.Number,
+    name,
+    maxlength,
+    placeholder,
+    disabled,
+    required,
+    className,
+    id,
+    renderConfig = renderConfig
+),
+    IntFormControl, ISpinner {
 
     /**
      * The minimum value of the spinner.
      */
-    public open var min: Int? by updatingProperty(min) {
+    public override var min: Int? by updatingProperty(min) {
         if (it != null) {
             element.min = it.toString()
         } else {
@@ -66,9 +126,19 @@ public open class Spinner(
     }
 
     /**
+     * Set the minimum value.
+     */
+    @Composable
+    public override fun min(min: Int?): Unit = composableProperty("min", {
+        this.min = null
+    }) {
+        this.min = min
+    }
+
+    /**
      * The maximum value of the spinner.
      */
-    public open var max: Int? by updatingProperty(max) {
+    public override var max: Int? by updatingProperty(max) {
         if (it != null) {
             element.max = it.toString()
         } else {
@@ -77,20 +147,43 @@ public open class Spinner(
     }
 
     /**
+     * Set the maximum value.
+     */
+    @Composable
+    public override fun max(max: Int?): Unit = composableProperty("max", {
+        this.max = null
+    }) {
+        this.max = max
+    }
+
+    /**
      * The step value of the spinner.
      */
-    public open var step: Int by updatingProperty(step) {
+    public override var step: Int by updatingProperty(step) {
         element.step = it.toString()
+    }
+
+    /**
+     * Set the step value.
+     */
+    @Composable
+    public override fun step(step: Int): Unit = composableProperty("step", {
+        this.step = SPINNER_DEFAULT_STEP
+    }) {
+        this.step = step
     }
 
     init {
         if (renderConfig.isDom) {
             if (min != null) {
+                @Suppress("LeakingThis")
                 element.min = min.toString()
             }
             if (max != null) {
+                @Suppress("LeakingThis")
                 element.max = max.toString()
             }
+            @Suppress("LeakingThis")
             element.step = step.toString()
         }
     }
@@ -117,7 +210,7 @@ public open class Spinner(
     /**
      * Increments the value by the step value.
      */
-    public open fun stepUp() {
+    public override fun stepUp() {
         if (renderConfig.isDom) {
             element.stepUp()
             setInternalValueFromString(element.value)
@@ -130,7 +223,7 @@ public open class Spinner(
     /**
      * Decrements the value by the step value.
      */
-    public open fun stepDown() {
+    public override fun stepDown() {
         if (renderConfig.isDom) {
             element.stepDown()
             setInternalValueFromString(element.value)
@@ -159,7 +252,7 @@ public open class Spinner(
  * @return a [Spinner] component
  */
 @Composable
-public fun ComponentBase.spinner(
+public fun IComponent.spinner(
     value: Int? = null,
     min: Int? = null,
     max: Int? = null,
@@ -171,7 +264,7 @@ public fun ComponentBase.spinner(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable Spinner.() -> Unit = {}
+    setup: @Composable ISpinner.() -> Unit = {}
 ): Spinner {
     val component =
         remember {

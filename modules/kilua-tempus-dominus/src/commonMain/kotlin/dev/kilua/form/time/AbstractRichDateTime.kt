@@ -36,6 +36,7 @@ import dev.kilua.externals.tempusDominusLocales
 import dev.kilua.externals.toDate
 import dev.kilua.form.text.text
 import dev.kilua.html.Div
+import dev.kilua.html.IDiv
 import dev.kilua.html.i
 import dev.kilua.html.span
 import dev.kilua.i18n.Locale
@@ -131,13 +132,25 @@ public abstract class AbstractRichDateTime(
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-) : Div(className, renderConfig = renderConfig) {
+) : Div(className, renderConfig = renderConfig), IAbstractRichDateTime {
+
+    private val initialFormat: String = format
 
     /**
      * The date/time format.
      */
-    public open var format: String by updatingProperty(format) {
+    public override var format: String by updatingProperty(format) {
         refresh()
+    }
+
+    /**
+     * Set the date/time format.
+     */
+    @Composable
+    public override fun format(format: String): Unit = composableProperty("format", {
+        this.format = initialFormat
+    }) {
+        this.format = format
     }
 
     /**
@@ -161,14 +174,24 @@ public abstract class AbstractRichDateTime(
     /**
      * The locale for i18n.
      */
-    public open var locale: Locale by updatingProperty(locale) {
+    public override var locale: Locale by updatingProperty(locale) {
         refresh()
+    }
+
+    /**
+     * Set the locale for i18n.
+     */
+    @Composable
+    public override fun locale(locale: Locale): Unit = composableProperty("locale", {
+        this.locale = LocaleManager.currentLocale
+    }) {
+        this.locale = locale
     }
 
     /**
      * Determines if the component is disabled.
      */
-    public open var disabled: Boolean? by updatingProperty(disabled) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it == true) {
             tempusDominusInstance?.disable()
         } else {
@@ -177,14 +200,44 @@ public abstract class AbstractRichDateTime(
     }
 
     /**
+     * Set the component disabled state.
+     */
+    @Composable
+    public override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
+    }
+
+    /**
      * Determines if the component is required.
      */
-    public open var required: Boolean? by updatingProperty()
+    public override var required: Boolean? by updatingProperty()
+
+    /**
+     * Set the component required state.
+     */
+    @Composable
+    public override fun required(required: Boolean?): Unit = composableProperty("required", {
+        this.required = null
+    }) {
+        this.required = required
+    }
 
     /**
      * The component name.
      */
-    public open var name: String? by updatingProperty()
+    public override var name: String? by updatingProperty()
+
+    /**
+     * Set the component name.
+     */
+    @Composable
+    public override fun name(name: String?): Unit = composableProperty("name", {
+        this.name = null
+    }) {
+        this.name = name
+    }
 
     /**
      * The component custom validity message.
@@ -194,142 +247,348 @@ public abstract class AbstractRichDateTime(
     /**
      * Days of the week that should be disabled.
      */
-    public open var daysOfWeekDisabled: List<Int>? by updatingProperty {
+    public override var daysOfWeekDisabled: List<Int>? by updatingProperty {
         refresh()
     }
 
     /**
+     * Set the days of the week that should be disabled.
+     */
+    @Composable
+    public override fun daysOfWeekDisabled(daysOfWeekDisabled: List<Int>?): Unit =
+        composableProperty("daysOfWeekDisabled", {
+            this.daysOfWeekDisabled = null
+        }) {
+            this.daysOfWeekDisabled = daysOfWeekDisabled
+        }
+
+    /**
      * Determines if *Clear* button should be visible.
      */
-    public open var showClear: Boolean by updatingProperty(true) {
+    public override var showClear: Boolean by updatingProperty(true) {
         refresh()
+    }
+
+    /**
+     * Set if *Clear* button should be visible.
+     */
+    @Composable
+    public override fun showClear(showClear: Boolean): Unit = composableProperty("showClear", {
+        this.showClear = true
+    }) {
+        this.showClear = showClear
     }
 
     /**
      * Determines if *Close* button should be visible.
      */
-    public open var showClose: Boolean by updatingProperty(true) {
+    public override var showClose: Boolean by updatingProperty(true) {
         refresh()
+    }
+
+    /**
+     * Set if *Close* button should be visible.
+     */
+    @Composable
+    public override fun showClose(showClose: Boolean): Unit = composableProperty("showClose", {
+        this.showClose = true
+    }) {
+        this.showClose = showClose
     }
 
     /**
      * Determines if *Today* button should be visible.
      */
-    public open var showToday: Boolean by updatingProperty(true) {
+    public override var showToday: Boolean by updatingProperty(true) {
         refresh()
+    }
+
+    /**
+     * Set if *Today* button should be visible.
+     */
+    @Composable
+    public override fun showToday(showToday: Boolean): Unit = composableProperty("showToday", {
+        this.showToday = true
+    }) {
+        this.showToday = showToday
     }
 
     /**
      * The increment used to build the hour view.
      */
-    public open var stepping: Int by updatingProperty(1) {
+    public override var stepping: Int by updatingProperty(1) {
         refresh()
+    }
+
+    /**
+     * Set the increment used to build the hour view.
+     */
+    @Composable
+    public override fun stepping(stepping: Int): Unit = composableProperty("stepping", {
+        this.stepping = 1
+    }) {
+        this.stepping = stepping
     }
 
     /**
      * Prevents date selection before this date.
      */
-    public open var minDate: LocalDate? by updatingProperty {
+    public override var minDate: LocalDate? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the minimum date.
+     */
+    @Composable
+    public override fun minDate(minDate: LocalDate?): Unit = composableProperty("minDate", {
+        this.minDate = null
+    }) {
+        this.minDate = minDate
     }
 
     /**
      * Prevents date selection after this date.
      */
-    public open var maxDate: LocalDate? by updatingProperty {
+    public override var maxDate: LocalDate? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the maximum date.
+     */
+    @Composable
+    public override fun maxDate(maxDate: LocalDate?): Unit = composableProperty("maxDate", {
+        this.maxDate = null
+    }) {
+        this.maxDate = maxDate
     }
 
     /**
      * Shows date and time pickers side by side.
      */
-    public open var sideBySide: Boolean by updatingProperty(false) {
+    public override var sideBySide: Boolean by updatingProperty(false) {
         refresh()
+    }
+
+    /**
+     * Set if date and time pickers should be shown side by side.
+     */
+    @Composable
+    public override fun sideBySide(sideBySide: Boolean): Unit = composableProperty("sideBySide", {
+        this.sideBySide = false
+    }) {
+        this.sideBySide = sideBySide
     }
 
     /**
      * A list of enabled dates.
      */
-    public open var enabledDates: List<LocalDate>? by updatingProperty {
+    public override var enabledDates: List<LocalDate>? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the list of enabled dates.
+     */
+    @Composable
+    public override fun enabledDates(enabledDates: List<LocalDate>?): Unit = composableProperty("enabledDates", {
+        this.enabledDates = null
+    }) {
+        this.enabledDates = enabledDates
     }
 
     /**
      * A list of disabled dates.
      */
-    public open var disabledDates: List<LocalDate>? by updatingProperty {
+    public override var disabledDates: List<LocalDate>? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the list of disabled dates.
+     */
+    @Composable
+    public override fun disabledDates(disabledDates: List<LocalDate>?): Unit = composableProperty("disabledDates", {
+        this.disabledDates = null
+    }) {
+        this.disabledDates = disabledDates
     }
 
     /**
      * Keep the popup open after selecting a date.
      */
-    public open var keepOpen: Boolean by updatingProperty(false) {
+    public override var keepOpen: Boolean by updatingProperty(false) {
         refresh()
+    }
+
+    /**
+     * Set if the popup should be kept open after selecting a date.
+     */
+    @Composable
+    public override fun keepOpen(keepOpen: Boolean): Unit = composableProperty("keepOpen", {
+        this.keepOpen = false
+    }) {
+        this.keepOpen = keepOpen
     }
 
     /**
      * Date/time chooser color theme.
      */
-    public open var theme: Theme? by updatingProperty {
+    public override var theme: Theme? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the date/time chooser color theme.
+     */
+    @Composable
+    public override fun theme(theme: Theme?): Unit = composableProperty("theme", {
+        this.theme = null
+    }) {
+        this.theme = theme
     }
 
     /**
      * Automatically open the chooser popup.
      */
-    public var allowInputToggle: Boolean by updatingProperty(true) {
+    public override var allowInputToggle: Boolean by updatingProperty(true) {
         refresh()
+    }
+
+    /**
+     * Set if the chooser popup should be automatically opened.
+     */
+    @Composable
+    public override fun allowInputToggle(allowInputToggle: Boolean): Unit = composableProperty("allowInputToggle", {
+        this.allowInputToggle = true
+    }) {
+        this.allowInputToggle = allowInputToggle
     }
 
     /**
      * The view date of the date/time chooser.
      */
-    public open var viewDate: LocalDate? by updatingProperty {
+    public override var viewDate: LocalDate? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the view date of the date/time chooser.
+     */
+    @Composable
+    public override fun viewDate(viewDate: LocalDate?): Unit = composableProperty("viewDate", {
+        this.viewDate = null
+    }) {
+        this.viewDate = viewDate
     }
 
     /**
      * Automatically open time component after date is selected.
      */
-    public open var promptTimeOnDateChange: Boolean by updatingProperty(false) {
+    public override var promptTimeOnDateChange: Boolean by updatingProperty(false) {
         refresh()
     }
+
+    /**
+     * Set if time component should be automatically opened after date is selected.
+     */
+    @Composable
+    public override fun promptTimeOnDateChange(promptTimeOnDateChange: Boolean): Unit =
+        composableProperty("promptTimeOnDateChange", {
+            this.promptTimeOnDateChange = false
+        }) {
+            this.promptTimeOnDateChange = promptTimeOnDateChange
+        }
 
     /**
      * The delay for the time component opening after date is selected.
      */
-    public open var promptTimeOnDateChangeTransitionDelay: Duration? by updatingProperty {
+    public override var promptTimeOnDateChangeTransitionDelay: Duration? by updatingProperty {
         refresh()
     }
 
     /**
+     * Set the delay for the time component opening after date is selected.
+     */
+    @Composable
+    public override fun promptTimeOnDateChangeTransitionDelay(promptTimeOnDateChangeTransitionDelay: Duration?): Unit =
+        composableProperty("promptTimeOnDateChangeTransitionDelay", {
+            this.promptTimeOnDateChangeTransitionDelay = null
+        }) {
+            this.promptTimeOnDateChangeTransitionDelay = promptTimeOnDateChangeTransitionDelay
+        }
+
+    /**
      * Default view mode of the date/time chooser.
      */
-    public open var viewMode: ViewMode? by updatingProperty {
+    public override var viewMode: ViewMode? by updatingProperty {
         refresh()
+    }
+
+    /**
+     * Set the default view mode of the date/time chooser.
+     */
+    @Composable
+    public override fun viewMode(viewMode: ViewMode?): Unit = composableProperty("viewMode", {
+        this.viewMode = null
+    }) {
+        this.viewMode = viewMode
     }
 
     /**
      * Date/time chooser toolbar placement.
      */
-    public open var toolbarPlacement: ToolbarPlacement? by updatingProperty {
+    public override var toolbarPlacement: ToolbarPlacement? by updatingProperty {
         refresh()
     }
+
+    /**
+     * Set the date/time chooser toolbar placement.
+     */
+    @Composable
+    public override fun toolbarPlacement(toolbarPlacement: ToolbarPlacement?): Unit =
+        composableProperty("toolbarPlacement", {
+            this.toolbarPlacement = null
+        }) {
+            this.toolbarPlacement = toolbarPlacement
+        }
 
     /**
      * Date/time chooser month header format.
      */
-    public open var monthHeaderFormat: MonthHeaderFormat? by updatingProperty {
+    public override var monthHeaderFormat: MonthHeaderFormat? by updatingProperty {
         refresh()
     }
 
     /**
+     * Set the date/time chooser month header format.
+     */
+    @Composable
+    public override fun monthHeaderFormat(monthHeaderFormat: MonthHeaderFormat?): Unit =
+        composableProperty("monthHeaderFormat", {
+            this.monthHeaderFormat = null
+        }) {
+            this.monthHeaderFormat = monthHeaderFormat
+        }
+
+    /**
      * Date/time chooser year header format.
      */
-    public open var yearHeaderFormat: YearHeaderFormat? by updatingProperty {
+    public override var yearHeaderFormat: YearHeaderFormat? by updatingProperty {
         refresh()
     }
+
+    /**
+     * Set the date/time chooser year header format.
+     */
+    @Composable
+    public override fun yearHeaderFormat(yearHeaderFormat: YearHeaderFormat?): Unit =
+        composableProperty("yearHeaderFormat", {
+            this.yearHeaderFormat = null
+        }) {
+            this.yearHeaderFormat = yearHeaderFormat
+        }
 
     /**
      * The refresh callback used by the theme change event handler.
@@ -366,7 +625,7 @@ public abstract class AbstractRichDateTime(
     /**
      * The Tempus Dominus instance.
      */
-    protected var tempusDominusInstance: TempusDominus? = null
+    public override var tempusDominusInstance: TempusDominus? = null
 
     protected abstract fun initializeTempusDominus()
 
@@ -473,7 +732,7 @@ public abstract class AbstractRichDateTime(
  * Internal helper function.
  */
 @Composable
-internal fun Div.commonRichDateTime(
+internal fun IDiv.commonRichDateTime(
     bindId: String,
     name: String?,
     placeholder: String?,
@@ -483,9 +742,9 @@ internal fun Div.commonRichDateTime(
     inline: Boolean,
     icon: String
 ) {
-    this.id = bindId
-    setAttribute("data-td-target-input", "nearest")
-    setAttribute("data-td-target-toggle", "nearest")
+    id(bindId)
+    attribute("data-td-target-input", "nearest")
+    attribute("data-td-target-toggle", "nearest")
     text(
         name = name,
         placeholder = placeholder,
@@ -494,16 +753,16 @@ internal fun Div.commonRichDateTime(
         id = id,
         className = "form-control"
     ) {
-        visible = !inline
-        setAttribute("data-td-target", "#$bindId")
+        visible(!inline)
+        attribute("data-td-target", "#$bindId")
         onChange {
             it.stopPropagation()
         }
     }
     span("input-group-text") {
-        visible = !inline
-        setAttribute("data-td-target", "#$bindId")
-        setAttribute("data-td-toggle", "datetimepicker")
+        visible(!inline)
+        attribute("data-td-target", "#$bindId")
+        attribute("data-td-toggle", "datetimepicker")
         i(icon) {}
     }
 }

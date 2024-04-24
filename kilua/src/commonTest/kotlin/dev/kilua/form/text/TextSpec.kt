@@ -35,13 +35,13 @@ class TextSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 text("Some text", name = "test", maxlength = 200, placeholder = "A placeholder") {
-                    autofocus = true
-                    readonly = true
+                    autofocus(true)
+                    readonly(true)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<input type="text" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="">"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<input type="text" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="">""",
+                root.element.innerHTML,
                 "Should render text element to DOM"
             )
         }
@@ -52,13 +52,13 @@ class TextSpec : DomSpec {
         run {
             val root = root {
                 text("Some text", name = "test", maxlength = 200, placeholder = "A placeholder") {
-                    autofocus = true
-                    readonly = true
+                    autofocus(true)
+                    readonly(true)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><input type="text" name="test" maxlength="200" placeholder="A placeholder" autofocus readonly></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<input type="text" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="">""",
+                root.innerHTML,
                 "Should render text element to a String"
             )
         }

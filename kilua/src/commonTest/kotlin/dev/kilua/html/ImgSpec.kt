@@ -35,8 +35,8 @@ class ImgSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 img("/image.png", "An image", "test") {
-                    id = "test-id"
-                    title = "A title"
+                    id("test-id")
+                    title("A title")
                 }
             }
             assertEqualsHtml(
@@ -52,8 +52,8 @@ class ImgSpec : DomSpec {
         run {
             val root = root {
                 img("/image.png", "An image", "test") {
-                    id = "test-id"
-                    title = "A title"
+                    id("test-id")
+                    title("A title")
                 }
             }
             assertEqualsHtml(

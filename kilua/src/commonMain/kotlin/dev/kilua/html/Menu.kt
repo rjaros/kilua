@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLMenuElement
@@ -33,8 +33,13 @@ import web.dom.HTMLMenuElement
 /**
  * HTML Menu component.
  */
+public interface IMenu : ITag<HTMLMenuElement>
+
+/**
+ * HTML Menu component.
+ */
 public open class Menu(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLMenuElement>("menu", className, renderConfig = renderConfig)
+    Tag<HTMLMenuElement>("menu", className, renderConfig = renderConfig), IMenu
 
 /**
  * Creates a [Menu] component.
@@ -44,7 +49,7 @@ public open class Menu(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Menu] component
  */
 @Composable
-public fun ComponentBase.menu(className: String? = null, content: @Composable Menu.() -> Unit = {}): Menu {
+public fun IComponent.menu(className: String? = null, content: @Composable IMenu.() -> Unit = {}): Menu {
     val component = remember { Menu(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Menu::className, it) }

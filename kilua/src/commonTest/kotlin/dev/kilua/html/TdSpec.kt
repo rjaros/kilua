@@ -35,12 +35,12 @@ class TdSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 td(colspan = 2, rowspan = 1, className = "test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
                 }
             }
             assertEqualsHtml(
@@ -56,12 +56,12 @@ class TdSpec : DomSpec {
         run {
             val root = root {
                 td(colspan = 2, rowspan = 1, "test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
                 }
             }
             assertEqualsHtml(

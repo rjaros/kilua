@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Dfn component.
  */
+public interface IDfn : ITag<HTMLElement>
+
+/**
+ * HTML Dfn component.
+ */
 public open class Dfn(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("dfn", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("dfn", className, renderConfig = renderConfig), IDfn
 
 /**
  * Creates a [Dfn] component.
@@ -44,7 +49,7 @@ public open class Dfn(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Dfn] component
  */
 @Composable
-public fun ComponentBase.dfn(className: String? = null, content: @Composable Dfn.() -> Unit = {}): Dfn {
+public fun IComponent.dfn(className: String? = null, content: @Composable IDfn.() -> Unit = {}): Dfn {
     val component = remember { Dfn(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Dfn::className, it) }

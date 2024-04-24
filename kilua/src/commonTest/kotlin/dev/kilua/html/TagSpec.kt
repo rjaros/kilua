@@ -22,8 +22,8 @@
 
 package dev.kilua.html
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
+import dev.kilua.test.DomSpec
 import kotlin.test.Test
 
 class TagSpec : DomSpec {
@@ -33,17 +33,22 @@ class TagSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 tag("ol", "test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
-                    autofocus = true
-                    gridTemplateAreas = listOf("a a a", "b c c", "b c c")
-                    boxShadowList = listOf(BoxShadow(hOffset = 10.px, vOffset = 20.px, color = Color.hex(0x00ffff)), BoxShadow(hOffset = 30.px, vOffset = 40.px, color = Color.hex(0x00eeee)))
-                    transitionList = listOf(Transition("width", 0.5), Transition("height", 0.6))
-                    borderRadiusList = listOf(10.px, 20.px)
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
+                    autofocus(true)
+                    gridTemplateAreas(listOf("a a a", "b c c", "b c c"))
+                    boxShadowList(
+                        listOf(
+                            BoxShadow(hOffset = 10.px, vOffset = 20.px, color = Color.hex(0x00ffff)),
+                            BoxShadow(hOffset = 30.px, vOffset = 40.px, color = Color.hex(0x00eeee))
+                        )
+                    )
+                    transitionList(listOf(Transition("width", 0.5), Transition("height", 0.6)))
+                    borderRadiusList(listOf(10.px, 20.px))
                 }
             }
             assertEqualsHtml(
@@ -59,17 +64,22 @@ class TagSpec : DomSpec {
         run {
             val root = root {
                 tag("ol", "test") {
-                    id = "test-id"
-                    title = "A title"
-                    ariaLabel = "A title"
-                    setAttribute("data-test", "test")
-                    margin = 10.px
-                    display = Display.Flex
-                    autofocus = true
-                    gridTemplateAreas = listOf("a a a", "b c c", "b c c")
-                    boxShadowList = listOf(BoxShadow(hOffset = 10.px, vOffset = 20.px, color = Color.hex(0x00ffff)), BoxShadow(hOffset = 30.px, vOffset = 40.px, color = Color.hex(0x00eeee)))
-                    transitionList = listOf(Transition("width", 0.5), Transition("height", 0.6))
-                    borderRadiusList = listOf(10.px, 20.px)
+                    id("test-id")
+                    title("A title")
+                    ariaLabel("A title")
+                    attribute("data-test", "test")
+                    margin(10.px)
+                    display(Display.Flex)
+                    autofocus(true)
+                    gridTemplateAreas(listOf("a a a", "b c c", "b c c"))
+                    boxShadowList(
+                        listOf(
+                            BoxShadow(hOffset = 10.px, vOffset = 20.px, color = Color.hex(0x00ffff)),
+                            BoxShadow(hOffset = 30.px, vOffset = 40.px, color = Color.hex(0x00eeee))
+                        )
+                    )
+                    transitionList(listOf(Transition("width", 0.5), Transition("height", 0.6)))
+                    borderRadiusList(listOf(10.px, 20.px))
                 }
             }
             assertEqualsHtml(

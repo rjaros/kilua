@@ -32,8 +32,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.KiluaScope
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.get
 import dev.kilua.rpc.RemoteOption
@@ -58,6 +58,25 @@ internal external class RemoteOptionExt : JsAny {
     var divider: Boolean
 }
 
+/**
+ * Tom Select component with a remote data source.
+ */
+public interface ITomSelectRemote : ITomSelect {
+    /**
+     * Determines if the options should be opened when the component gets focus
+     */
+    public val openOnFocus: Boolean
+
+    /**
+     * Set whether the options should be opened when the component gets focus
+     */
+    @Composable
+    public fun openOnFocus(openOnFocus: Boolean)
+}
+
+/**
+ * Tom Select component with a remote data source.
+ */
 public open class TomSelectRemote<out T : Any>(
     private val serviceManager: RpcServiceMgr<T>,
     private val function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
@@ -95,13 +114,25 @@ public open class TomSelectRemote<out T : Any>(
     className,
     id,
     renderConfig
-) {
+), ITomSelectRemote {
+
+    private val initialOpenOnFocus: Boolean = openOnFocus
 
     /**
      * Determines if the options should be opened when the component gets focus
      */
-    public var openOnFocus: Boolean by updatingProperty(openOnFocus) {
+    public override var openOnFocus: Boolean by updatingProperty(openOnFocus) {
         refresh()
+    }
+
+    /**
+     * Set whether the options should be opened when the component gets focus
+     */
+    @Composable
+    public override fun openOnFocus(openOnFocus: Boolean): Unit = composableProperty("openOnFocus", {
+        this.openOnFocus = initialOpenOnFocus
+    }) {
+        this.openOnFocus = openOnFocus
     }
 
     override fun refreshValue() {
@@ -143,7 +174,7 @@ public open class TomSelectRemote<out T : Any>(
 }
 
 @Composable
-internal fun <T : Any> ComponentBase.tomSelectRemote(
+internal fun <T : Any> IComponent.tomSelectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     stateFunction: (() -> String)? = null,
@@ -163,7 +194,7 @@ internal fun <T : Any> ComponentBase.tomSelectRemote(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable TomSelectRemote<T>.() -> Unit = {}
+    setup: @Composable ITomSelectRemote.() -> Unit = {}
 ): TomSelectRemote<T> {
     return key(multiple) {
         val component = remember {
@@ -243,7 +274,7 @@ internal fun <T : Any> ComponentBase.tomSelectRemote(
  * @return a [TomSelectRemote] component
  */
 @Composable
-public fun <T : Any> ComponentBase.tomSelectRemote(
+public fun <T : Any> IComponent.tomSelectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     stateFunction: (() -> String)? = null,
@@ -264,7 +295,7 @@ public fun <T : Any> ComponentBase.tomSelectRemote(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable TomSelectRemote<T>.() -> Unit = {}
+    setup: @Composable ITomSelectRemote.() -> Unit = {}
 ): TomSelectRemote<T> {
 
     lateinit var tomSelectRemote: TomSelectRemote<T>

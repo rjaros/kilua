@@ -42,7 +42,7 @@ class TimeSpec : DomSpec {
                     LocalTime(12, 50, 0),
                     name = "time"
                 ) {
-                    defaultValue = localTime
+                    defaultValue(localTime)
                 }
             }
             assertEquals(
@@ -64,7 +64,7 @@ class TimeSpec : DomSpec {
                     LocalTime(12, 50, 0),
                     name = "time"
                 ) {
-                    defaultValue = localTime
+                    defaultValue(localTime)
                 }
             }
             assertEquals(

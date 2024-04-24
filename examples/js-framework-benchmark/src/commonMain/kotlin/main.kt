@@ -34,7 +34,6 @@ import dev.kilua.html.table
 import dev.kilua.html.tbody
 import dev.kilua.html.td
 import dev.kilua.html.tr
-import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
 
 var idCounter = 1
@@ -101,7 +100,7 @@ class App : Application() {
     override fun start() {
         root("root") {
             div {
-                id = "main"
+                id("main")
                 div("container") {
                     div("jumbotron") {
                         div("row") {
@@ -114,7 +113,7 @@ class App : Application() {
                                 div("row") {
                                     div("col-sm-6 smallpad") {
                                         button("Create 1,000 rows", className = "btn btn-primary btn-block") {
-                                            id = "run"
+                                            id("run")
                                             onClick {
                                                 data = buildData(1000)
                                             }
@@ -122,7 +121,7 @@ class App : Application() {
                                     }
                                     div("col-sm-6 smallpad") {
                                         button("Create 10,000 rows", className = "btn btn-primary btn-block") {
-                                            id = "runlots"
+                                            id("runlots")
                                             onClick {
                                                 data = buildData(10_000)
                                             }
@@ -130,7 +129,7 @@ class App : Application() {
                                     }
                                     div("col-sm-6 smallpad") {
                                         button("Append 1,000 rows", className = "btn btn-primary btn-block") {
-                                            id = "add"
+                                            id("add")
                                             onClick {
                                                 data += buildData(1000)
                                             }
@@ -138,7 +137,7 @@ class App : Application() {
                                     }
                                     div("col-sm-6 smallpad") {
                                         button("Update every 10th row", className = "btn btn-primary btn-block") {
-                                            id = "update"
+                                            id("update")
                                             onClick {
                                                 data = data.mapIndexed { index, row ->
                                                     if (index % 10 == 0) {
@@ -152,7 +151,7 @@ class App : Application() {
                                     }
                                     div("col-sm-6 smallpad") {
                                         button("Clear", className = "btn btn-primary btn-block") {
-                                            id = "clear"
+                                            id("clear")
                                             onClick {
                                                 data = emptyList()
                                             }
@@ -160,7 +159,7 @@ class App : Application() {
                                     }
                                     div("col-sm-6 smallpad") {
                                         button("Swap Rows", className = "btn btn-primary btn-block") {
-                                            id = "swaprows"
+                                            id("swaprows")
                                             onClick {
                                                 if (data.size > 998) {
                                                     val newData = data.toTypedArray()
@@ -193,7 +192,7 @@ class App : Application() {
                                     td(className = "col-md-1") {
                                         link {
                                             span("glyphicon glyphicon-remove") {
-                                                setAttribute("aria-hidden", "true")
+                                                attribute("aria-hidden", "true")
                                             }
                                             onClick {
                                                 val newData = data.toMutableList()
@@ -208,7 +207,7 @@ class App : Application() {
                         }
                     }
                     span("preloadicon glyphicon glyphicon-remove") {
-                        setAttribute("aria-hidden", "true")
+                        attribute("aria-hidden", "true")
                     }
                 }
             }

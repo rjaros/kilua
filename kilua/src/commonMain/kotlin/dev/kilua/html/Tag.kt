@@ -28,22 +28,10 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
-import dev.kilua.html.helpers.PropertyListBuilder
-import dev.kilua.html.helpers.TagAttrs
-import dev.kilua.html.helpers.TagAttrsDelegate
-import dev.kilua.html.helpers.TagAttrsDelegateImpl
-import dev.kilua.html.helpers.TagDnd
-import dev.kilua.html.helpers.TagDndDelegate
-import dev.kilua.html.helpers.TagDndDelegateImpl
-import dev.kilua.html.helpers.TagEvents
-import dev.kilua.html.helpers.TagEventsDelegate
-import dev.kilua.html.helpers.TagEventsDelegateImpl
-import dev.kilua.html.helpers.TagStyle
-import dev.kilua.html.helpers.TagStyleDelegate
-import dev.kilua.html.helpers.TagStyleDelegateImpl
-import dev.kilua.html.helpers.buildPropertyList
+import dev.kilua.html.helpers.*
 import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
@@ -51,6 +39,53 @@ import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.renderAsHtmlAttributes
 import dev.kilua.utils.unsafeCast
 import web.dom.HTMLElement
+
+/**
+ * Base interface for all HTML tags components.
+ */
+public interface ITag<E : HTMLElement> : IComponent, TagAttrsFun<E>, TagStyleFun<E>, TagEvents<E>, TagDnd<E> {
+    /**
+     * The render configuration of the current component.
+     */
+    public override val renderConfig: RenderConfig
+
+    /**
+     * The DOM element of the current component.
+     */
+    public val element: E
+
+    /**
+     * The CSS class of the current component.
+     */
+    public val className: String?
+
+    /**
+     * The CSS class of the current component.
+     */
+    @Composable
+    public fun className(className: String?)
+
+    /**
+     * The ID attribute of the current component.
+     */
+    public val id: String?
+
+    /**
+     * The ID attribute of the current component.
+     */
+    @Composable
+    public fun id(id: String?)
+
+    /**
+     * Makes the element focused.
+     */
+    public fun focus()
+
+    /**
+     * Makes the element blur.
+     */
+    public fun blur()
+}
 
 /**
  * Base class for all HTML tags components.
@@ -66,7 +101,7 @@ public open class Tag<E : HTMLElement>(
     protected val tagDnd: TagDndDelegate<E> = TagDndDelegateImpl(!renderConfig.isDom || !isDom)
 ) :
     ComponentBase(SafeDomFactory.createElement(tagName), renderConfig),
-    TagAttrs<E> by tagAttrs, TagStyle<E> by tagStyle, TagEvents<E> by tagEvents, TagDnd<E> by tagDnd {
+    TagAttrs<E> by tagAttrs, TagStyle<E> by tagStyle, TagEvents<E> by tagEvents, TagDnd<E> by tagDnd, ITag<E> {
 
     /**
      * A list of properties rendered as html attributes for the current component.
@@ -86,7 +121,7 @@ public open class Tag<E : HTMLElement>(
     /**
      * The DOM element of the current component.
      */
-    public val element: E by lazy {
+    public override val element: E by lazy {
         if (renderConfig.isDom) node.unsafeCast<E>() else {
             error("Can't use DOM element with the current render configuration")
         }
@@ -95,14 +130,24 @@ public open class Tag<E : HTMLElement>(
     /**
      * The CSS class of the current component.
      */
-    public open var className: String? by updatingProperty(className) {
+    public override var className: String? by updatingProperty(className) {
         updateElementClassList()
+    }
+
+    /**
+     * Sets the CSS class of the current component.
+     */
+    @Composable
+    public override fun className(className: String?): Unit = composableProperty("className", {
+        this.className = null
+    }) {
+        this.className = className
     }
 
     /**
      * The ID attribute of the current component.
      */
-    public open var id: String? by updatingProperty(id) {
+    public override var id: String? by updatingProperty(id) {
         if (it != null) {
             element.id = it
         } else {
@@ -110,11 +155,31 @@ public open class Tag<E : HTMLElement>(
         }
     }
 
+    /**
+     * Sets the ID attribute of the current component.
+     */
+    @Composable
+    public override fun id(id: String?): Unit = composableProperty("id", {
+        this.id = null
+    }) {
+        this.id = id
+    }
+
     override var visible: Boolean = true
         set(value) {
             field = value
             display = if (visible) null else Display.None
         }
+
+    /**
+     * Sets the visibility of the current component.
+     */
+    @Composable
+    public override fun visible(visible: Boolean): Unit = composableProperty("visible", {
+        this.visible = true
+    }) {
+        this.visible = visible
+    }
 
     /**
      * The text content of the current component or null if the first child is not a TextNode.
@@ -126,6 +191,7 @@ public open class Tag<E : HTMLElement>(
         }
 
     init {
+        @Suppress("LeakingThis")
         val elementNullable = if (renderConfig.isDom) element else null
         tagAttrs.elementWithAttrs(elementNullable)
         tagStyle.elementWithStyle(elementNullable)
@@ -135,6 +201,7 @@ public open class Tag<E : HTMLElement>(
         @Suppress("LeakingThis")
         updateElementClassList()
         if (renderConfig.isDom && id != null) {
+            @Suppress("LeakingThis")
             element.id = id
         }
     }
@@ -201,18 +268,19 @@ public open class Tag<E : HTMLElement>(
     /**
      * Makes the element focused.
      */
-    public open fun focus() {
+    public override fun focus() {
         if (renderConfig.isDom) element.focus()
     }
 
     /**
      * Makes the element blur.
      */
-    public open fun blur() {
+    public override fun blur() {
         if (renderConfig.isDom) element.blur()
     }
 
     public companion object {
+
         protected val voidTags: Set<String> = setOf(
             "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param",
             "source", "track", "wbr"
@@ -230,11 +298,11 @@ public open class Tag<E : HTMLElement>(
  * @return the [Tag] component
  */
 @Composable
-public fun <E : HTMLElement> ComponentBase.tag(
+public fun <E : HTMLElement> IComponent.tag(
     tagName: String,
     className: String? = null,
     id: String? = null,
-    content: @Composable Tag<E>.() -> Unit = {}
+    content: @Composable ITag<E>.() -> Unit = {}
 ): Tag<E> {
     return key(tagName) {
         val component = remember { Tag<E>(tagName, className, id, renderConfig = renderConfig) }
@@ -256,11 +324,11 @@ public fun <E : HTMLElement> ComponentBase.tag(
  * @return the [Tag] component
  */
 @Composable
-public fun ComponentBase.tag(
+public fun IComponent.tag(
     tagName: String,
     className: String? = null,
     id: String? = null,
-    content: @Composable Tag<HTMLElement>.() -> Unit = {}
+    content: @Composable ITag<HTMLElement>.() -> Unit = {}
 ): Tag<HTMLElement> {
     return tag<HTMLElement>(tagName, className, id, content)
 }

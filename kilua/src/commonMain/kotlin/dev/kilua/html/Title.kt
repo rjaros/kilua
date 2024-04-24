@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLTitleElement
@@ -33,8 +33,13 @@ import web.dom.HTMLTitleElement
 /**
  * HTML Title component.
  */
+public interface ITitle : ITag<HTMLTitleElement>
+
+/**
+ * HTML Title component.
+ */
 public open class Title(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTitleElement>("title", className, renderConfig = renderConfig)
+    Tag<HTMLTitleElement>("title", className, renderConfig = renderConfig), ITitle
 
 /**
  * Creates a [Title] component.
@@ -44,7 +49,7 @@ public open class Title(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Title] component
  */
 @Composable
-public fun ComponentBase.title(className: String? = null, content: @Composable Title.() -> Unit = {}): Title {
+public fun IComponent.title(className: String? = null, content: @Composable ITitle.() -> Unit = {}): Title {
     val component = remember { Title(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Title::className, it) }

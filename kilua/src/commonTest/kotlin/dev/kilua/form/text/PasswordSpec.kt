@@ -35,13 +35,13 @@ class PasswordSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 password("Some text", name = "test", maxlength = 200, placeholder = "A placeholder") {
-                    autofocus = true
-                    readonly = true
+                    autofocus(true)
+                    readonly(true)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<input type="password" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="">"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<input type="password" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="">""",
+                root.element.innerHTML,
                 "Should render password element to DOM"
             )
         }
@@ -52,13 +52,13 @@ class PasswordSpec : DomSpec {
         run {
             val root = root {
                 password("Some text", name = "test", maxlength = 200, placeholder = "A placeholder") {
-                    autofocus = true
-                    readonly = true
+                    autofocus(true)
+                    readonly(true)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><input type="password" name="test" maxlength="200" placeholder="A placeholder" autofocus readonly></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<input type="password" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="">""",
+                root.innerHTML,
                 "Should render password element to a String"
             )
         }

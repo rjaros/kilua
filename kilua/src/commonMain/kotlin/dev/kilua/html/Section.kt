@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Section component.
  */
+public interface ISection : ITag<HTMLElement>
+
+/**
+ * HTML Section component.
+ */
 public open class Section(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("section", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("section", className, renderConfig = renderConfig), ISection
 
 /**
  * Creates a [Section] component.
@@ -44,7 +49,7 @@ public open class Section(className: String? = null, renderConfig: RenderConfig 
  * @return the [Section] component
  */
 @Composable
-public fun ComponentBase.section(className: String? = null, content: @Composable Section.() -> Unit = {}): Section {
+public fun IComponent.section(className: String? = null, content: @Composable ISection.() -> Unit = {}): Section {
     val component = remember { Section(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Section::className, it) }

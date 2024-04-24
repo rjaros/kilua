@@ -33,8 +33,8 @@ class TriStateCheckBoxSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 triStateCheckBox(true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
+                    defaultChecked(true)
+                    extraValue("extra")
                 }
             }
             assertEqualsHtml(
@@ -50,8 +50,8 @@ class TriStateCheckBoxSpec : DomSpec {
         run {
             val root = root {
                 triStateCheckBox(true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
+                    defaultChecked(true)
+                    extraValue("extra")
                 }
             }
             assertEqualsHtml(

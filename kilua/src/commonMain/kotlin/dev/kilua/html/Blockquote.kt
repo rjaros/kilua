@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLQuoteElement
@@ -33,8 +33,13 @@ import web.dom.HTMLQuoteElement
 /**
  * HTML Blockquote component.
  */
+public interface IBlockquote : ITag<HTMLQuoteElement>
+
+/**
+ * HTML Blockquote component.
+ */
 public open class Blockquote(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLQuoteElement>("blockquote", className, renderConfig = renderConfig)
+    Tag<HTMLQuoteElement>("blockquote", className, renderConfig = renderConfig), IBlockquote
 
 /**
  * Creates a [Blockquote] component.
@@ -44,9 +49,9 @@ public open class Blockquote(className: String? = null, renderConfig: RenderConf
  * @return the [Blockquote] component
  */
 @Composable
-public fun ComponentBase.blockquote(
+public fun IComponent.blockquote(
     className: String? = null,
-    content: @Composable Blockquote.() -> Unit = {}
+    content: @Composable IBlockquote.() -> Unit = {}
 ): Blockquote {
     val component = remember { Blockquote(className, renderConfig = renderConfig) }
     ComponentNode(component, {

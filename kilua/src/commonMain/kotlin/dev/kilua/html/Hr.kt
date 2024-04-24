@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLHRElement
@@ -33,8 +33,13 @@ import web.dom.HTMLHRElement
 /**
  * HTML Hr component.
  */
+public interface IHr : ITag<HTMLHRElement>
+
+/**
+ * HTML Hr component.
+ */
 public open class Hr(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHRElement>("hr", className, renderConfig = renderConfig)
+    Tag<HTMLHRElement>("hr", className, renderConfig = renderConfig), IHr
 
 /**
  * Creates a [Hr] component.
@@ -44,7 +49,7 @@ public open class Hr(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [Hr] component
  */
 @Composable
-public fun ComponentBase.hr(className: String? = null, setup: Hr.() -> Unit = {}): Hr {
+public fun IComponent.hr(className: String? = null, setup: @Composable IHr.() -> Unit = {}): Hr {
     val component = remember { Hr(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Hr::className, it) }

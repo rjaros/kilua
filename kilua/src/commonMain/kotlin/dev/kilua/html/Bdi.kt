@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Bdi component.
  */
+public interface IBdi : ITag<HTMLElement>
+
+/**
+ * HTML Bdi component.
+ */
 public open class Bdi(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("bdi", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("bdi", className, renderConfig = renderConfig), IBdi
 
 /**
  * Creates a [Bdi] component.
@@ -44,7 +49,7 @@ public open class Bdi(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Bdi] component
  */
 @Composable
-public fun ComponentBase.bdi(className: String? = null, content: @Composable Bdi.() -> Unit = {}): Bdi {
+public fun IComponent.bdi(className: String? = null, content: @Composable IBdi.() -> Unit = {}): Bdi {
     val component = remember { Bdi(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Bdi::className, it) }

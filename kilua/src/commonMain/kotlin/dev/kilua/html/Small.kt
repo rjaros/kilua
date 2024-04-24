@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Small component.
  */
+public interface ISmall : ITag<HTMLElement>
+
+/**
+ * HTML Small component.
+ */
 public open class Small(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("small", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("small", className, renderConfig = renderConfig), ISmall
 
 /**
  * Creates a [Small] component.
@@ -44,7 +49,7 @@ public open class Small(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Small] component
  */
 @Composable
-public fun ComponentBase.small(className: String? = null, content: @Composable Small.() -> Unit = {}): Small {
+public fun IComponent.small(className: String? = null, content: @Composable ISmall.() -> Unit = {}): Small {
     val component = remember { Small(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Small::className, it) }
@@ -61,10 +66,10 @@ public fun ComponentBase.small(className: String? = null, content: @Composable S
  * @return the [Small] component
  */
 @Composable
-public fun ComponentBase.smallt(
+public fun IComponent.smallt(
     text: String,
     className: String? = null,
-    content: @Composable Small.() -> Unit = {}
+    content: @Composable ISmall.() -> Unit = {}
 ): Small {
     return small(className) {
         +text

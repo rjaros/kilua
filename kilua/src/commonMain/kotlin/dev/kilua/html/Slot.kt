@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLSlotElement
@@ -33,8 +33,13 @@ import web.dom.HTMLSlotElement
 /**
  * HTML Slot component.
  */
+public interface ISlot : ITag<HTMLSlotElement>
+
+/**
+ * HTML Slot component.
+ */
 public open class Slot(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLSlotElement>("slot", className, renderConfig = renderConfig)
+    Tag<HTMLSlotElement>("slot", className, renderConfig = renderConfig), ISlot
 
 /**
  * Creates a [Slot] component.
@@ -44,7 +49,7 @@ public open class Slot(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Slot] component
  */
 @Composable
-public fun ComponentBase.slot(className: String? = null, content: @Composable Slot.() -> Unit = {}): Slot {
+public fun IComponent.slot(className: String? = null, content: @Composable ISlot.() -> Unit = {}): Slot {
     val component = remember { Slot(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Slot::className, it) }

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Hgroup component.
  */
+public interface IHgroup : ITag<HTMLElement>
+
+/**
+ * HTML Hgroup component.
+ */
 public open class Hgroup(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("hgroup", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("hgroup", className, renderConfig = renderConfig), IHgroup
 
 /**
  * Creates a [Hgroup] component.
@@ -44,7 +49,7 @@ public open class Hgroup(className: String? = null, renderConfig: RenderConfig =
  * @return the [Hgroup] component
  */
 @Composable
-public fun ComponentBase.hgroup(className: String? = null, content: @Composable Hgroup.() -> Unit = {}): Hgroup {
+public fun IComponent.hgroup(className: String? = null, content: @Composable IHgroup.() -> Unit = {}): Hgroup {
     val component = remember { Hgroup(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Hgroup::className, it) }

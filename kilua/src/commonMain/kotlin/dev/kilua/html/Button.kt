@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
@@ -51,25 +51,63 @@ public enum class ButtonType {
 /**
  * HTML Button component.
  */
+public interface IButton : ITag<HTMLButtonElement> {
+    /**
+     * The type of the button.
+     */
+    public val type: ButtonType
+
+    /**
+     * Sets the type of the button.
+     */
+    @Composable
+    public fun type(type: ButtonType)
+
+    /**
+     * Whether the button is disabled.
+     */
+    public val disabled: Boolean?
+
+    /**
+     * Sets whether the button is disabled.
+     */
+    @Composable
+    public fun disabled(disabled: Boolean?)
+
+}
+
+/**
+ * HTML Button component.
+ */
 public open class Button(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLButtonElement>("button", className, renderConfig = renderConfig) {
+    Tag<HTMLButtonElement>("button", className, renderConfig = renderConfig), IButton {
 
     /**
      * The type of the button.
      */
-    public open var type: ButtonType by updatingProperty(type) {
+    public override var type: ButtonType by updatingProperty(type) {
         element.type = it.value
+    }
+
+    /**
+     * Set the type of the button.
+     */
+    @Composable
+    public override fun type(type: ButtonType): Unit = composableProperty("type", {
+        this.type = ButtonType.Button
+    }) {
+        this.type = type
     }
 
     /**
      * Whether the button is disabled.
      */
-    public open var disabled: Boolean? by updatingProperty(disabled) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -77,10 +115,22 @@ public open class Button(
         }
     }
 
+    /**
+     * Sets whether the button is disabled.
+     */
+    @Composable
+    public override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
+    }
+
     init {
         if (renderConfig.isDom) {
+            @Suppress("LeakingThis")
             element.type = type.value
             if (disabled != null) {
+                @Suppress("LeakingThis")
                 element.disabled = disabled
             }
         }
@@ -116,11 +166,11 @@ public open class Button(
  * @return the [Button] component
  */
 @Composable
-private fun ComponentBase.button(
+private fun IComponent.button(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Button.() -> Unit = {}
+    content: @Composable IButton.() -> Unit = {}
 ): Button {
     val component = remember { Button(type, disabled, className, renderConfig = renderConfig) }
     ComponentNode(component, {
@@ -143,13 +193,13 @@ private fun ComponentBase.button(
  * @return the [Button] component
  */
 @Composable
-public fun ComponentBase.button(
+public fun IComponent.button(
     label: String? = null,
     icon: String? = null,
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Button.() -> Unit = {}
+    content: @Composable IButton.() -> Unit = {}
 ): Button {
     val iconClassName = if (label != null && icon != null) {
         className % "icon-link"

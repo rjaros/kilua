@@ -27,20 +27,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.Button
 import dev.kilua.html.ButtonStyle
+import dev.kilua.html.IButton
 import dev.kilua.html.bsButton
 import dev.kilua.utils.rem
 
 @Composable
-public fun ComponentBase.themeSwitcher(
+public fun IComponent.themeSwitcher(
     title: String? = "Switch color theme",
     style: ButtonStyle = ButtonStyle.BtnSecondary,
     round: Boolean = false,
     disabled: Boolean = false,
     className: String? = null,
-    content: @Composable Button.() -> Unit = {}
+    content: @Composable IButton.() -> Unit = {}
 ): Button {
     var icon by remember {
         mutableStateOf(
@@ -58,7 +59,7 @@ public fun ComponentBase.themeSwitcher(
         disabled = disabled,
         className = className % if (round) "rounded-circle" else null
     ) {
-        this.title = title
+        this.title(title)
         content()
         onClick {
             if (ThemeManager.theme == Theme.Dark) {

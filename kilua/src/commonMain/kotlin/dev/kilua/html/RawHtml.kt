@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 
@@ -41,6 +41,7 @@ public open class RawHtml(
         @Suppress("LeakingThis")
         display = Display.Contents
         if (renderConfig.isDom) {
+            @Suppress("LeakingThis")
             element.innerHTML = rawHtml
         }
     }
@@ -63,7 +64,7 @@ public open class RawHtml(
  * @return the [RawHtml] component
  */
 @Composable
-public fun ComponentBase.rawHtml(rawHtml: String) {
+public fun IComponent.rawHtml(rawHtml: String) {
     val component = remember { RawHtml(rawHtml, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(rawHtml) { updateProperty(RawHtml::rawHtml, it) }

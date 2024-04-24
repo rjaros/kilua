@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Sub component.
  */
+public interface ISub : ITag<HTMLElement>
+
+/**
+ * HTML Sub component.
+ */
 public open class Sub(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("sub", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("sub", className, renderConfig = renderConfig), ISub
 
 /**
  * Creates a [Sub] component.
@@ -44,7 +49,7 @@ public open class Sub(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Sub] component
  */
 @Composable
-public fun ComponentBase.sub(className: String? = null, content: @Composable Sub.() -> Unit = {}): Sub {
+public fun IComponent.sub(className: String? = null, content: @Composable ISub.() -> Unit = {}): Sub {
     val component = remember { Sub(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Sub::className, it) }
@@ -61,7 +66,7 @@ public fun ComponentBase.sub(className: String? = null, content: @Composable Sub
  * @return the [Sub] component
  */
 @Composable
-public fun ComponentBase.subt(text: String, className: String? = null, content: @Composable Sub.() -> Unit = {}): Sub {
+public fun IComponent.subt(text: String, className: String? = null, content: @Composable ISub.() -> Unit = {}): Sub {
     return sub(className) {
         +text
         content()

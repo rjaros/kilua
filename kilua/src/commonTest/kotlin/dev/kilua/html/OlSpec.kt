@@ -35,8 +35,8 @@ class OlSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 ol(OlType.A, 2, "test") {
-                    id = "test-id"
-                    title = "A title"
+                    id("test-id")
+                    title("A title")
                     li { +"Item 1" }
                     li { +"Item 2" }
                 }
@@ -54,8 +54,8 @@ class OlSpec : DomSpec {
         run {
             val root = root {
                 ol(OlType.A, 2, "test") {
-                    id = "test-id"
-                    title = "A title"
+                    id("test-id")
+                    title("A title")
                     li { +"Item 1" }
                     li { +"Item 2" }
                 }

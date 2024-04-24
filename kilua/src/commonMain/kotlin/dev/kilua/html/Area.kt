@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLAreaElement
@@ -33,8 +33,13 @@ import web.dom.HTMLAreaElement
 /**
  * HTML Area component.
  */
+public interface IArea : ITag<HTMLAreaElement>
+
+/**
+ * HTML Area component.
+ */
 public open class Area(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLAreaElement>("area", className, renderConfig = renderConfig)
+    Tag<HTMLAreaElement>("area", className, renderConfig = renderConfig), IArea
 
 /**
  * Creates a [Area] component.
@@ -44,7 +49,7 @@ public open class Area(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Area] component
  */
 @Composable
-public fun ComponentBase.area(className: String? = null, setup: Area.() -> Unit = {}): Area {
+public fun IComponent.area(className: String? = null, setup: @Composable IArea.() -> Unit = {}): Area {
     val component = remember { Area(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Area::className, it) }

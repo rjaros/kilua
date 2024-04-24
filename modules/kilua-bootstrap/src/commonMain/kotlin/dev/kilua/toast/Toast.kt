@@ -27,14 +27,13 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateMapOf
 import dev.kilua.BootstrapModule
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.externals.Bootstrap
 import dev.kilua.html.BsBgColor
 import dev.kilua.html.BsColor
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.strongt
-import dev.kilua.html.unaryPlus
 import dev.kilua.utils.rem
 import web.dom.events.Event
 import kotlin.time.Duration
@@ -80,28 +79,28 @@ internal data class Toast(
 }
 
 @Composable
-internal fun ComponentBase.toasts() {
+internal fun IComponent.toasts() {
     if (Toast.toastsMap.isNotEmpty()) {
         div("position-relative") {
-            setAttribute("aria-live", "polite")
-            setAttribute("aria-atomic", "true")
+            attribute("aria-live", "polite")
+            attribute("aria-atomic", "true")
             Toast.toastsMap.map { (position, toasts) ->
                 div("toast-container position-fixed p-3" % position.classes) {
                     toasts.forEach { (toastId, toast) ->
                         key(toastId) {
                             div("toast" % toast.color?.value % toast.bgColor?.value % toast.className) {
-                                role = "alert"
-                                setAttribute("aria-live", "assertive")
-                                setAttribute("aria-atomic", "true")
-                                setAttribute("data-bs-autohide", toast.autohide.toString())
-                                setAttribute("data-bs-delay", toast.delay.inWholeMilliseconds.toString())
-                                setAttribute("data-bs-animation", toast.animation.toString())
+                                role("alert")
+                                attribute("aria-live", "assertive")
+                                attribute("aria-atomic", "true")
+                                attribute("data-bs-autohide", toast.autohide.toString())
+                                attribute("data-bs-delay", toast.delay.inWholeMilliseconds.toString())
+                                attribute("data-bs-animation", toast.animation.toString())
                                 if (toast.title != null) {
                                     div("toast-header") {
                                         strongt(toast.title, "me-auto")
                                         button(className = "btn-close") {
-                                            ariaLabel = "Close"
-                                            setAttribute("data-bs-dismiss", "toast")
+                                            ariaLabel("Close")
+                                            attribute("data-bs-dismiss", "toast")
                                         }
                                     }
                                     div("toast-body") {
@@ -113,8 +112,8 @@ internal fun ComponentBase.toasts() {
                                             +toast.message
                                         }
                                         button(className = "btn-close me-2 m-auto") {
-                                            ariaLabel = "Close"
-                                            setAttribute("data-bs-dismiss", "toast")
+                                            ariaLabel("Close")
+                                            attribute("data-bs-dismiss", "toast")
                                         }
                                     }
                                 }

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLPictureElement
@@ -33,8 +33,13 @@ import web.dom.HTMLPictureElement
 /**
  * HTML Picture component.
  */
+public interface IPicture : ITag<HTMLPictureElement>
+
+/**
+ * HTML Picture component.
+ */
 public open class Picture(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLPictureElement>("picture", className, renderConfig = renderConfig)
+    Tag<HTMLPictureElement>("picture", className, renderConfig = renderConfig), IPicture
 
 /**
  * Creates a [Picture] component.
@@ -44,7 +49,7 @@ public open class Picture(className: String? = null, renderConfig: RenderConfig 
  * @return the [Picture] component
  */
 @Composable
-public fun ComponentBase.picture(className: String? = null, content: @Composable Picture.() -> Unit = {}): Picture {
+public fun IComponent.picture(className: String? = null, content: @Composable IPicture.() -> Unit = {}): Picture {
     val component = remember { Picture(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Picture::className, it) }

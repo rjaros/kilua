@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLOutputElement
@@ -33,8 +33,13 @@ import web.dom.HTMLOutputElement
 /**
  * HTML Output component.
  */
+public interface IOutput : ITag<HTMLOutputElement>
+
+/**
+ * HTML Output component.
+ */
 public open class Output(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLOutputElement>("output", className, renderConfig = renderConfig)
+    Tag<HTMLOutputElement>("output", className, renderConfig = renderConfig), IOutput
 
 /**
  * Creates a [Output] component.
@@ -44,7 +49,7 @@ public open class Output(className: String? = null, renderConfig: RenderConfig =
  * @return the [Output] component
  */
 @Composable
-public fun ComponentBase.output(className: String? = null, content: @Composable Output.() -> Unit = {}): Output {
+public fun IComponent.output(className: String? = null, content: @Composable IOutput.() -> Unit = {}): Output {
     val component = remember { Output(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Output::className, it) }

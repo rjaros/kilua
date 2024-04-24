@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Abbr component.
  */
+public interface IAbbr : ITag<HTMLElement>
+
+/**
+ * HTML Abbr component.
+ */
 public open class Abbr(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("abbr", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("abbr", className, renderConfig = renderConfig), IAbbr
 
 /**
  * Creates a [Abbr] component.
@@ -44,7 +49,7 @@ public open class Abbr(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Abbr] component
  */
 @Composable
-public fun ComponentBase.abbr(className: String? = null, content: @Composable Abbr.() -> Unit = {}): Abbr {
+public fun IComponent.abbr(className: String? = null, content: @Composable IAbbr.() -> Unit = {}): Abbr {
     val component = remember { Abbr(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Abbr::className, it) }

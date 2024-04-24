@@ -25,11 +25,39 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLImageElement
+
+/**
+ * HTML Img component.
+ */
+public interface IImg : ITag<HTMLImageElement> {
+    /**
+     * The source of the image.
+     */
+    public val src: String?
+
+    /**
+     * Set the source of the image.
+     */
+    @Composable
+    public fun src(src: String?)
+
+
+    /**
+     * The alternative text of the image.
+     */
+    public val alt: String?
+
+    /**
+     * Set the alternative text of the image.
+     */
+    @Composable
+    public fun alt(alt: String?)
+}
 
 /**
  * HTML Img component.
@@ -40,12 +68,12 @@ public open class Img(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLImageElement>("img", className, renderConfig = renderConfig) {
+    Tag<HTMLImageElement>("img", className, renderConfig = renderConfig), IImg {
 
     /**
      * The source of the image.
      */
-    public open var src: String? by updatingProperty(src) {
+    public override var src: String? by updatingProperty(src) {
         if (it != null) {
             element.src = it
         } else {
@@ -54,9 +82,19 @@ public open class Img(
     }
 
     /**
+     * Set the source of the image.
+     */
+    @Composable
+    public override fun src(src: String?): Unit = composableProperty("src", {
+        this.src = null
+    }) {
+        this.src = src
+    }
+
+    /**
      * The alternative text of the image.
      */
-    public open var alt: String? by updatingProperty(alt) {
+    public override var alt: String? by updatingProperty(alt) {
         if (it != null) {
             element.alt = it
         } else {
@@ -64,12 +102,24 @@ public open class Img(
         }
     }
 
+    /**
+     * Set the alternative text of the image.
+     */
+    @Composable
+    public override fun alt(alt: String?): Unit = composableProperty("alt", {
+        this.alt = null
+    }) {
+        this.alt = alt
+    }
+
     init {
         if (renderConfig.isDom) {
             if (src != null) {
+                @Suppress("LeakingThis")
                 element.src = src
             }
             if (alt != null) {
+                @Suppress("LeakingThis")
                 element.alt = alt
             }
         }
@@ -92,9 +142,9 @@ public open class Img(
  * @return the [Img] component
  */
 @Composable
-public fun ComponentBase.img(
+public fun IComponent.img(
     src: String? = null, alt: String? = null,
-    className: String? = null, content: @Composable Img.() -> Unit = {}
+    className: String? = null, content: @Composable IImg.() -> Unit = {}
 ): Img {
     val component = remember { Img(src, alt, className, renderConfig = renderConfig) }
     ComponentNode(component, {

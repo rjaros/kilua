@@ -23,11 +23,10 @@
 package dev.kilua.modal
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.Button
 import dev.kilua.html.button
 import dev.kilua.html.div
-import dev.kilua.html.unaryPlus
 import web.dom.events.Event
 
 
@@ -64,7 +63,7 @@ public fun confirm(
     yesCallback: (() -> Unit)? = null
 ) {
     val modalId = Modal.counter++
-    val modalComposable: @Composable ComponentBase.() -> Unit = {
+    val modalComposable: @Composable IComponent.() -> Unit = {
         modal(
             caption,
             cancelVisible,

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLScriptElement
@@ -33,8 +33,13 @@ import web.dom.HTMLScriptElement
 /**
  * HTML Script component.
  */
+public interface IScript : ITag<HTMLScriptElement>
+
+/**
+ * HTML Script component.
+ */
 public open class Script(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLScriptElement>("script", className, renderConfig = renderConfig)
+    Tag<HTMLScriptElement>("script", className, renderConfig = renderConfig), IScript
 
 /**
  * Creates a [Script] component.
@@ -44,7 +49,7 @@ public open class Script(className: String? = null, renderConfig: RenderConfig =
  * @return the [Script] component
  */
 @Composable
-public fun ComponentBase.script(className: String? = null, content: @Composable Script.() -> Unit = {}): Script {
+public fun IComponent.script(className: String? = null, content: @Composable IScript.() -> Unit = {}): Script {
     val component = remember { Script(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Script::className, it) }

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Samp component.
  */
+public interface ISamp : ITag<HTMLElement>
+
+/**
+ * HTML Samp component.
+ */
 public open class Samp(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("samp", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("samp", className, renderConfig = renderConfig), ISamp
 
 /**
  * Creates a [Samp] component.
@@ -44,7 +49,7 @@ public open class Samp(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Samp] component
  */
 @Composable
-public fun ComponentBase.samp(className: String? = null, content: @Composable Samp.() -> Unit = {}): Samp {
+public fun IComponent.samp(className: String? = null, content: @Composable ISamp.() -> Unit = {}): Samp {
     val component = remember { Samp(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Samp::className, it) }

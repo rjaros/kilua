@@ -23,7 +23,7 @@
 package io.realworld.layout
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1t
@@ -34,7 +34,6 @@ import dev.kilua.html.pt
 import dev.kilua.html.span
 import dev.kilua.html.spant
 import dev.kilua.html.ul
-import dev.kilua.html.unaryPlus
 import dev.kilua.utils.rem
 import io.realworld.ConduitManager
 import io.realworld.View
@@ -43,7 +42,7 @@ import io.realworld.externals.format
 import io.realworld.model.Article
 
 @Composable
-fun ComponentBase.articlePreview(article: Article, conduitManager: ConduitManager) {
+fun IComponent.articlePreview(article: Article, conduitManager: ConduitManager) {
     div("article-preview") {
         div("article-meta") {
             val image =

@@ -24,7 +24,6 @@ package dev.kilua.panel
 
 import dev.kilua.compose.root
 import dev.kilua.html.tag
-import dev.kilua.html.unaryPlus
 import dev.kilua.test.DomSpec
 import kotlinx.coroutines.delay
 import kotlin.test.Test

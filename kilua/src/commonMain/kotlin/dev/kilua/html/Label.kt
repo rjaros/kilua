@@ -25,11 +25,27 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLLabelElement
+
+/**
+ * HTML Label component.
+ */
+public interface ILabel : ITag<HTMLLabelElement> {
+    /**
+     * The ID of the labeled element.
+     */
+    public val htmlFor: String?
+
+    /**
+     * Set the ID of the labeled element.
+     */
+    @Composable
+    public fun htmlFor(htmlFor: String?)
+}
 
 /**
  * HTML Label component.
@@ -39,12 +55,12 @@ public open class Label(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLLabelElement>("label", className, renderConfig = renderConfig) {
+    Tag<HTMLLabelElement>("label", className, renderConfig = renderConfig), ILabel {
 
     /**
      * The ID of the labeled element.
      */
-    public open var htmlFor: String? by updatingProperty(htmlFor, name = "for") {
+    public override var htmlFor: String? by updatingProperty(htmlFor, name = "for") {
         if (it != null) {
             element.htmlFor = it
         } else {
@@ -52,9 +68,20 @@ public open class Label(
         }
     }
 
+    /**
+     * Set the ID of the labeled element.
+     */
+    @Composable
+    public override fun htmlFor(htmlFor: String?): Unit = composableProperty("htmlFor", {
+        this.htmlFor = null
+    }) {
+        this.htmlFor = htmlFor
+    }
+
     init {
         if (renderConfig.isDom) {
             if (htmlFor != null) {
+                @Suppress("LeakingThis")
                 element.htmlFor = htmlFor
             }
         }
@@ -74,10 +101,10 @@ public open class Label(
  * @return the [Label] component
  */
 @Composable
-public fun ComponentBase.label(
+public fun IComponent.label(
     htmlFor: String? = null,
     className: String? = null,
-    content: @Composable Label.() -> Unit = {}
+    content: @Composable ILabel.() -> Unit = {}
 ): Label {
     val component = remember { Label(htmlFor, className, renderConfig = renderConfig) }
     ComponentNode(component, {

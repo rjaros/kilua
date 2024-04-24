@@ -27,14 +27,16 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.BootstrapModule
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.Bootstrap
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h5t
+import dev.kilua.utils.cast
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
 import web.dom.HTMLDivElement
@@ -75,11 +77,31 @@ public enum class OffResponsiveType {
 /**
  * Bootstrap offcanvas component.
  */
+public interface IOffcanvas : ITag<HTMLDivElement> {
+    /**
+     * Shows the offcanvas.
+     */
+    public fun show()
+
+    /**
+     * Hides the offcanvas.
+     */
+    public fun hide()
+
+    /**
+     * Toggles the offcanvas.
+     */
+    public fun toggle()
+}
+
+/**
+ * Bootstrap offcanvas component.
+ */
 public open class Offcanvas(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), IOffcanvas {
 
     /**
      * Whether the offcanvas should be visible.
@@ -140,9 +162,9 @@ public open class Offcanvas(
 }
 
 @Composable
-private fun ComponentBase.offcanvas(
+private fun IComponent.offcanvas(
     className: String? = null,
-    content: @Composable Offcanvas.() -> Unit,
+    content: @Composable IOffcanvas.() -> Unit,
 ): Offcanvas {
     val component = remember { Offcanvas(className, renderConfig = renderConfig) }
     ComponentNode(component, {
@@ -166,7 +188,7 @@ private fun ComponentBase.offcanvas(
  * @return the [Offcanvas] component
  */
 @Composable
-public fun ComponentBase.offcanvas(
+public fun IComponent.offcanvas(
     caption: String? = null,
     placement: OffPlacement = OffPlacement.OffcanvasStart,
     responsiveType: OffResponsiveType? = null,
@@ -175,29 +197,29 @@ public fun ComponentBase.offcanvas(
     backdrop: Boolean = true,
     escape: Boolean = true,
     className: String? = null,
-    content: @Composable Offcanvas.() -> Unit = {}
+    content: @Composable IOffcanvas.() -> Unit = {}
 ): Offcanvas {
     val offcanvasId = remember { "kilua_offcanvas_${Offcanvas.idCounter++}" }
     return offcanvas((responsiveType?.value ?: "offcanvas") % placement.value % className) {
-        id = offcanvasId
-        tabindex = -1
-        ariaLabelledby = "$offcanvasId-label"
+        id(offcanvasId)
+        tabindex(-1)
+        ariaLabelledby("$offcanvasId-label")
         if (bodyScrolling) {
-            setAttribute("data-bs-scroll", "true")
+            attribute("data-bs-scroll", "true")
         }
-        setAttribute("data-bs-keyboard", "$escape")
-        setAttribute("data-bs-backdrop", if (backdrop && !escape) "static" else backdrop.toString())
-        val component = this
+        attribute("data-bs-keyboard", "$escape")
+        attribute("data-bs-backdrop", if (backdrop && !escape) "static" else backdrop.toString())
+        val component = this.cast<Offcanvas>()
         if (caption != null || closeButton) {
             div("offcanvas-header") {
                 if (caption != null) {
                     h5t(caption, "offcanvas-title") {
-                        id = "$offcanvasId-label"
+                        id("$offcanvasId-label")
                     }
                 }
                 if (closeButton) {
                     button(className = "btn-close") {
-                        ariaLabel = "Close"
+                        ariaLabel("Close")
                         onClick {
                             component.hide()
                         }

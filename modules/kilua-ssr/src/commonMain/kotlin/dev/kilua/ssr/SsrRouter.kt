@@ -39,12 +39,14 @@ import app.softwork.routingcompose.route
 import dev.kilua.CssRegister
 import dev.kilua.KiluaScope
 import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.externals.get
 import dev.kilua.externals.globalThis
 import dev.kilua.externals.set
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
+import dev.kilua.utils.cast
 import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.CoroutineScope
@@ -58,7 +60,7 @@ import web.toJsString
  * Uses a [BrowserRouter] when running in the browser and a custom router when running on the server.
  */
 @Composable
-public fun ComponentBase.SsrRouter(
+public fun IComponent.SsrRouter(
     initPath: String,
     ssrCondition: Boolean = true,
     stateSerializer: (() -> String)? = null,
@@ -72,7 +74,7 @@ public fun ComponentBase.SsrRouter(
  * Uses a [BrowserRouter] when running in the browser and a custom router when running on the server.
  */
 @Composable
-public fun ComponentBase.SsrRouter(
+public fun IComponent.SsrRouter(
     initPath: String,
     ssrCondition: Boolean = true,
     stateSerializer: (() -> String)? = null,
@@ -82,7 +84,7 @@ public fun ComponentBase.SsrRouter(
 }
 
 @Composable
-private fun ComponentBase.SsrRouter(
+private fun IComponent.SsrRouter(
     initPath: String,
     ssrCondition: Boolean = true,
     stateSerializer: (() -> String)? = null,
@@ -97,7 +99,7 @@ private fun ComponentBase.SsrRouter(
         }
     } else {
         val router = remember {
-            SsrRouter(initPath, this, stateSerializer).also { Router.internalGlobalRouter = it }
+            SsrRouter(initPath, this.cast(), stateSerializer).also { Router.internalGlobalRouter = it }
         }
 
         var externalCondition by remember {

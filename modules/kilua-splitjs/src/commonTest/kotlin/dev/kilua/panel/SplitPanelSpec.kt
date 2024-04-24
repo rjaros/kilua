@@ -22,10 +22,9 @@
 
 package dev.kilua.panel
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.html.tag
-import dev.kilua.html.unaryPlus
+import dev.kilua.test.DomSpec
 import dev.kilua.test.normalizeHtml
 import kotlin.test.Test
 import kotlin.test.assertEquals

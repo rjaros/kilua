@@ -30,7 +30,6 @@ import dev.kilua.compose.root
 import dev.kilua.html.div
 import dev.kilua.html.navLink
 import dev.kilua.html.px
-import dev.kilua.html.unaryPlus
 import dev.kilua.panel.vPanel
 import dev.kilua.ssr.SsrRouter
 import dev.kilua.startApplication
@@ -43,7 +42,7 @@ class App : Application() {
         root("root") {
             SsrRouter(initPath = "/") { ->
                 div {
-                    margin = 20.px
+                    margin(20.px)
                     route("/") {
                         vPanel(gap = 10.px) {
                             div {

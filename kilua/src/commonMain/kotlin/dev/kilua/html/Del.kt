@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Del component.
  */
+public interface IDel : ITag<HTMLElement>
+
+/**
+ * HTML Del component.
+ */
 public open class Del(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("del", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("del", className, renderConfig = renderConfig), IDel
 
 /**
  * Creates a [Del] component.
@@ -44,7 +49,7 @@ public open class Del(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Del] component
  */
 @Composable
-public fun ComponentBase.del(className: String? = null, content: @Composable Del.() -> Unit = {}): Del {
+public fun IComponent.del(className: String? = null, content: @Composable IDel.() -> Unit = {}): Del {
     val component = remember { Del(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Del::className, it) }

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Kbd component.
  */
+public interface IKbd : ITag<HTMLElement>
+
+/**
+ * HTML Kbd component.
+ */
 public open class Kbd(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("kbd", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("kbd", className, renderConfig = renderConfig), IKbd
 
 /**
  * Creates a [Kbd] component.
@@ -44,7 +49,7 @@ public open class Kbd(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Kbd] component
  */
 @Composable
-public fun ComponentBase.kbd(className: String? = null, content: @Composable Kbd.() -> Unit = {}): Kbd {
+public fun IComponent.kbd(className: String? = null, content: @Composable IKbd.() -> Unit = {}): Kbd {
     val component = remember { Kbd(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Kbd::className, it) }

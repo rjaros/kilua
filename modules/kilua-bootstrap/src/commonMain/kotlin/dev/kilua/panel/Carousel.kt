@@ -30,12 +30,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.Bootstrap
 import dev.kilua.html.CommentNode
-import dev.kilua.html.Div
+import dev.kilua.html.IDiv
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.button
 import dev.kilua.html.commentNode
@@ -43,22 +44,93 @@ import dev.kilua.html.div
 import dev.kilua.html.h5t
 import dev.kilua.html.pt
 import dev.kilua.html.span
-import dev.kilua.html.unaryPlus
 import dev.kilua.panel.Carousel.Companion.idCounter
+import dev.kilua.utils.cast
 import dev.kilua.utils.rem
 import web.dom.HTMLDivElement
 
 internal data class CarouselItem(
     val caption: String? = null,
     val description: String? = null,
-    val content: @Composable Div.() -> Unit
+    val content: @Composable IDiv.() -> Unit
 )
 
+/**
+ * Carousel component.
+ */
+public interface ICarousel : ITag<HTMLDivElement> {
+    //
+    // Additional functions are required because @Composable functions
+    // can't have default parameters.
+    //
+
+    /**
+     * Adds a carousel item.
+     * @param content the content of the item
+     */
+    @Composable
+    public fun item(
+        content: @Composable IDiv.() -> Unit
+    )
+
+    /**
+     * Adds a carousel item.
+     * @param caption the caption of the item
+     * @param content the content of the item
+     */
+    @Composable
+    public fun item(
+        caption: String,
+        content: @Composable IDiv.() -> Unit
+    )
+
+    /**
+     * Adds a carousel item.
+     * @param caption the caption of the item
+     * @param description the description of the item
+     * @param content the content of the item
+     */
+    @Composable
+    public fun item(
+        caption: String?,
+        description: String?,
+        content: @Composable IDiv.() -> Unit
+    )
+
+    /**
+     * Shows next carousel item.
+     */
+    public fun next()
+
+    /**
+     * Shows previous carousel item.
+     */
+    public fun prev()
+
+    /**
+     * Shows carousel item identified by its index.
+     */
+    public fun to(index: Int)
+
+    /**
+     * Cycles through the carousel items from left to right.
+     */
+    public fun cycle()
+
+    /**
+     * Stops the carousel from cycling through items.
+     */
+    public fun pause()
+}
+
+/**
+ * Carousel component.
+ */
 public open class Carousel(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig) {
+    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), ICarousel {
 
     internal val items = mutableStateMapOf<Int, CarouselItem>()
     internal var itemsOrderList: List<Int> by mutableStateOf(emptyList())
@@ -70,15 +142,39 @@ public open class Carousel(
 
     /**
      * Adds a carousel item.
+     * @param content the content of the item
+     */
+    @Composable
+    public override fun item(
+        content: @Composable IDiv.() -> Unit
+    ) {
+        item(null, null, content)
+    }
+
+    /**
+     * Adds a carousel item.
+     * @param caption the caption of the item
+     * @param content the content of the item
+     */
+    @Composable
+    public override fun item(
+        caption: String,
+        content: @Composable IDiv.() -> Unit
+    ) {
+        item(caption, null, content)
+    }
+
+    /**
+     * Adds a carousel item.
      * @param caption the caption of the item
      * @param description the description of the item
      * @param content the content of the item
      */
     @Composable
-    public fun item(
-        caption: String? = null,
-        description: String? = null,
-        content: @Composable Div.() -> Unit
+    public override fun item(
+        caption: String?,
+        description: String?,
+        content: @Composable IDiv.() -> Unit
     ) {
         val itemId = remember { idCounter++ }
         commentNode("sid=$itemId")
@@ -103,35 +199,35 @@ public open class Carousel(
     /**
      * Shows next carousel item.
      */
-    public open fun next() {
+    public override fun next() {
         carouselInstance?.next()
     }
 
     /**
      * Shows previous carousel item.
      */
-    public open fun prev() {
+    public override fun prev() {
         carouselInstance?.prev()
     }
 
     /**
      * Shows carousel item identified by its index.
      */
-    public open fun to(index: Int) {
+    public override fun to(index: Int) {
         carouselInstance?.to(index)
     }
 
     /**
      * Cycles through the carousel items from left to right.
      */
-    public open fun cycle() {
+    public override fun cycle() {
         carouselInstance?.cycle()
     }
 
     /**
      * Stops the carousel from cycling through items.
      */
-    public open fun pause() {
+    public override fun pause() {
         carouselInstance?.pause()
     }
 
@@ -154,9 +250,9 @@ public open class Carousel(
 }
 
 @Composable
-private fun ComponentBase.carousel(
+private fun IComponent.carousel(
     className: String? = null,
-    content: @Composable Carousel.() -> Unit,
+    content: @Composable ICarousel.() -> Unit,
 ): Carousel {
     val component = remember { Carousel(className, renderConfig = renderConfig) }
     ComponentNode(component, {
@@ -182,7 +278,7 @@ private fun ComponentBase.carousel(
  * @return the [Carousel] component
  */
 @Composable
-public fun ComponentBase.carousel(
+public fun IComponent.carousel(
     fade: Boolean = false,
     hideControls: Boolean = false,
     hideIndicators: Boolean = false,
@@ -193,34 +289,34 @@ public fun ComponentBase.carousel(
     prevButtonTitle: String = "Previous",
     nextButtonTitle: String = "Next",
     className: String? = null,
-    content: @Composable Carousel.() -> Unit,
+    content: @Composable ICarousel.() -> Unit,
 ): Carousel {
     val carouselId = remember { "kilua_carousel_${idCounter++}" }
     return carousel("carousel slide" % if (fade) "carousel-fade" else null % className) {
-        id = carouselId
+        id(carouselId)
         if (autoPlay) {
-            setAttribute("data-bs-ride", "carousel")
+            attribute("data-bs-ride", "carousel")
         }
         if (disableTouch) {
-            setAttribute("data-bs-touch", "false")
+            attribute("data-bs-touch", "false")
         }
         if (interval != 5000) {
-            setAttribute("data-bs-interval", interval.toString())
+            attribute("data-bs-interval", interval.toString())
         }
         content()
-        val component = this
+        val component = this.cast<Carousel>()
         if (!hideIndicators) {
             div("carousel-indicators") {
-                itemsOrderList.forEachIndexed { index, itemId ->
+                component.itemsOrderList.forEachIndexed { index, itemId ->
                     component.items[itemId]?.let { item ->
                         button(className = if (index == activeIndex) "active" else null) {
-                            setAttribute("data-bs-target", "#$carouselId")
-                            setAttribute("data-bs-slide-to", index.toString())
+                            attribute("data-bs-target", "#$carouselId")
+                            attribute("data-bs-slide-to", index.toString())
                             if (item.caption != null) {
-                                setAttribute("aria-label", item.caption)
+                                attribute("aria-label", item.caption)
                             }
                             if (index == activeIndex) {
-                                setAttribute("aria-current", "true")
+                                attribute("aria-current", "true")
                             }
                         }
                     }
@@ -228,7 +324,7 @@ public fun ComponentBase.carousel(
             }
         }
         div("carousel-inner") {
-            itemsOrderList.forEachIndexed { index, itemId ->
+            component.itemsOrderList.forEachIndexed { index, itemId ->
                 component.items[itemId]?.let { item ->
                     div("carousel-item" % if (index == activeIndex) "active" else null) {
                         item.content(this)
@@ -244,18 +340,18 @@ public fun ComponentBase.carousel(
         }
         if (!hideControls) {
             button(className = "carousel-control-prev") {
-                setAttribute("data-bs-target", "#$carouselId")
-                setAttribute("data-bs-slide", "prev")
+                attribute("data-bs-target", "#$carouselId")
+                attribute("data-bs-slide", "prev")
                 span("carousel-control-prev-icon") {
-                    setAttribute("aria-hidden", "true")
+                    attribute("aria-hidden", "true")
                 }
                 span("visually-hidden") { +prevButtonTitle }
             }
             button(className = "carousel-control-next") {
-                setAttribute("data-bs-target", "#$carouselId")
-                setAttribute("data-bs-slide", "next")
+                attribute("data-bs-target", "#$carouselId")
+                attribute("data-bs-slide", "next")
                 span("carousel-control-next-icon") {
-                    setAttribute("aria-hidden", "true")
+                    attribute("aria-hidden", "true")
                 }
                 span("visually-hidden") { +nextButtonTitle }
             }

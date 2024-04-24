@@ -23,7 +23,7 @@
 package io.realworld.layout.articles
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.i
@@ -33,7 +33,6 @@ import dev.kilua.html.px
 import dev.kilua.html.rawHtml
 import dev.kilua.html.span
 import dev.kilua.html.spant
-import dev.kilua.html.unaryPlus
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
@@ -42,7 +41,7 @@ import io.realworld.externals.format
 import io.realworld.model.Article
 
 @Composable
-fun ComponentBase.articleMeta(article: Article, state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.articleMeta(article: Article, state: ConduitState, conduitManager: ConduitManager) {
     div("article-meta") {
         val image =
             article.author?.image?.ifBlank { null } ?: "https://static.productionready.io/images/smiley-cyrus.jpg"
@@ -84,7 +83,7 @@ fun ComponentBase.articleMeta(article: Article, state: ConduitState, conduitMana
                     i("ion-heart")
                     rawHtml("&nbsp;")
                     +" Unfavorite post "
-                    marginLeft = 5.px
+                    marginLeft(5.px)
                     spant("(${article.favoritesCount})", className = "counter")
                     onClick {
                         conduitManager.toggleFavoriteArticle(article)
@@ -95,7 +94,7 @@ fun ComponentBase.articleMeta(article: Article, state: ConduitState, conduitMana
                     i("ion-heart")
                     rawHtml("&nbsp;")
                     +" Favorite post "
-                    marginLeft = 5.px
+                    marginLeft(5.px)
                     spant("(${article.favoritesCount})", className = "counter")
                     onClick {
                         conduitManager.toggleFavoriteArticle(article)
@@ -109,7 +108,7 @@ fun ComponentBase.articleMeta(article: Article, state: ConduitState, conduitMana
                 +" Edit Article"
             }
             button(className = "btn btn-outline-danger btn-sm") {
-                marginLeft = 5.px
+                marginLeft(5.px)
                 i("ion-trash-a")
                 rawHtml("&nbsp;")
                 +" Delete Article"

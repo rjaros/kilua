@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
@@ -52,6 +52,77 @@ public enum class Sandbox {
 /**
  * HTML Iframe component.
  */
+public interface IIframe : ITag<HTMLIFrameElement> {
+    /**
+     * The URL of the page to embed.
+     */
+    public val src: String?
+
+    /**
+     * Set the URL of the page to embed.
+     */
+    @Composable
+    public fun src(value: String?)
+
+    /**
+     * Inline HTML to embed.
+     */
+    public val srcdoc: String?
+
+    /**
+     * Set the inline HTML to embed.
+     */
+    @Composable
+    public fun srcdoc(value: String?)
+
+    /**
+     * The name of the iframe.
+     */
+    public val name: String?
+
+    /**
+     * Set the name of the iframe.
+     */
+    @Composable
+    public fun name(value: String?)
+
+    /**
+     * The width of the iframe.
+     */
+    public val iframeWidth: Int?
+
+    /**
+     * Set the width of the iframe.
+     */
+    @Composable
+    public fun iframeWidth(value: Int?)
+
+    /**
+     * The height of the iframe.
+     */
+    public val iframeHeight: Int?
+
+    /**
+     * Set the height of the iframe.
+     */
+    @Composable
+    public fun iframeHeight(value: Int?)
+
+    /**
+     * The sandbox options of the iframe.
+     */
+    public val sandbox: Set<Sandbox>?
+
+    /**
+     * Set the sandbox options of the iframe.
+     */
+    @Composable
+    public fun sandbox(value: Set<Sandbox>?)
+}
+
+/**
+ * HTML Iframe component.
+ */
 public open class Iframe(
     src: String? = null,
     srcdoc: String? = null,
@@ -62,12 +133,12 @@ public open class Iframe(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLIFrameElement>("iframe", className, renderConfig = renderConfig) {
+    Tag<HTMLIFrameElement>("iframe", className, renderConfig = renderConfig), IIframe {
 
     /**
      * The URL of the page to embed.
      */
-    public open var src: String? by updatingProperty(src) {
+    public override var src: String? by updatingProperty(src) {
         if (it != null) {
             element.src = it
         } else {
@@ -76,9 +147,19 @@ public open class Iframe(
     }
 
     /**
+     * Set the URL of the page to embed.
+     */
+    @Composable
+    public override fun src(value: String?): Unit = composableProperty("src", {
+        this.src = null
+    }) {
+        this.src = value
+    }
+
+    /**
      * Inline HTML to embed.
      */
-    public open var srcdoc: String? by updatingProperty(srcdoc) {
+    public override var srcdoc: String? by updatingProperty(srcdoc) {
         if (it != null) {
             element.srcdoc = it
         } else {
@@ -87,9 +168,19 @@ public open class Iframe(
     }
 
     /**
+     * Set the inline HTML to embed.
+     */
+    @Composable
+    public override fun srcdoc(value: String?): Unit = composableProperty("srcdoc", {
+        this.srcdoc = null
+    }) {
+        this.srcdoc = value
+    }
+
+    /**
      * The name of the iframe.
      */
-    public open var name: String? by updatingProperty(name) {
+    public override var name: String? by updatingProperty(name) {
         if (it != null) {
             element.name = it
         } else {
@@ -98,9 +189,19 @@ public open class Iframe(
     }
 
     /**
+     * Set the name of the iframe.
+     */
+    @Composable
+    public override fun name(value: String?): Unit = composableProperty("name", {
+        this.name = null
+    }) {
+        this.name = value
+    }
+
+    /**
      * The width of the iframe.
      */
-    public open var iframeWidth: Int? by updatingProperty(iframeWidth, name = "width") {
+    public override var iframeWidth: Int? by updatingProperty(iframeWidth, name = "width") {
         if (it != null) {
             element.width = it.toString()
         } else {
@@ -109,9 +210,19 @@ public open class Iframe(
     }
 
     /**
+     * Set the width of the iframe.
+     */
+    @Composable
+    public override fun iframeWidth(value: Int?): Unit = composableProperty("width", {
+        this.iframeWidth = null
+    }) {
+        this.iframeWidth = value
+    }
+
+    /**
      * The height of the iframe.
      */
-    public open var iframeHeight: Int? by updatingProperty(iframeHeight, name = "height") {
+    public override var iframeHeight: Int? by updatingProperty(iframeHeight, name = "height") {
         if (it != null) {
             element.height = it.toString()
         } else {
@@ -120,27 +231,50 @@ public open class Iframe(
     }
 
     /**
+     * Set the height of the iframe.
+     */
+    @Composable
+    public override fun iframeHeight(value: Int?): Unit = composableProperty("height", {
+        this.iframeHeight = null
+    }) {
+        this.iframeHeight = value
+    }
+
+    /**
      * The sandbox options of the iframe.
      */
-    public open var sandbox: Set<Sandbox>? by updatingProperty {
+    public override var sandbox: Set<Sandbox>? by updatingProperty {
         setAttribute("sandbox", it?.joinToString(" ") { it.value })
+    }
+
+    /**
+     * Set the sandbox options of the iframe.
+     */
+    @Composable
+    public override fun sandbox(value: Set<Sandbox>?): Unit = composableProperty("sandbox") {
+        this.sandbox = value
     }
 
     init {
         if (renderConfig.isDom) {
             if (src != null) {
+                @Suppress("LeakingThis")
                 element.src = src
             }
             if (srcdoc != null) {
+                @Suppress("LeakingThis")
                 element.srcdoc = srcdoc
             }
             if (name != null) {
+                @Suppress("LeakingThis")
                 element.name = name
             }
             if (iframeWidth != null) {
+                @Suppress("LeakingThis")
                 element.width = iframeWidth.toString()
             }
             if (iframeHeight != null) {
+                @Suppress("LeakingThis")
                 element.height = iframeHeight.toString()
             }
         }
@@ -169,14 +303,14 @@ public open class Iframe(
  * @return the [Iframe] component
  */
 @Composable
-public fun ComponentBase.iframe(
+public fun IComponent.iframe(
     src: String? = null,
     srcdoc: String? = null,
     name: String? = null,
     iframeWidth: Int? = null,
     iframeHeight: Int? = null,
     sandbox: Set<Sandbox>? = null,
-    className: String? = null, content: @Composable Iframe.() -> Unit = {}
+    className: String? = null, content: @Composable IIframe.() -> Unit = {}
 ): Iframe {
     val component = remember { Iframe(src, srcdoc, name, iframeWidth, iframeHeight, sandbox, className, renderConfig = renderConfig) }
     ComponentNode(component, {

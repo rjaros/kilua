@@ -26,7 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import dev.kilua.externals.Bootstrap
 import dev.kilua.externals.obj
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
+import dev.kilua.utils.cast
 import kotlin.time.Duration
 
 /**
@@ -44,7 +46,7 @@ import kotlin.time.Duration
  * @return Bootstrap tooltip instance
  */
 @Composable
-public fun Tag<*>.tooltip(
+public fun ITag<*>.tooltip(
     title: String,
     animation: Boolean = true,
     delay: Duration? = null,
@@ -81,7 +83,7 @@ public fun Tag<*>.tooltip(
         this.html = html
         this.sanitize = sanitize
     })
-    DisposableEffect("kilua_tooltip_${this.componentId}") {
+    DisposableEffect("kilua_tooltip_${this.cast<Tag<*>>().componentId}") {
         tooltip.enable()
         onDispose {
             tooltip.disable()
@@ -93,41 +95,41 @@ public fun Tag<*>.tooltip(
 /**
  * Show tooltip.
  */
-public fun Tag<*>.showTooltip() {
+public fun ITag<*>.showTooltip() {
     Bootstrap.Tooltip.getInstance(element)?.show()
 }
 
 /**
  * Hide tooltip.
  */
-public fun Tag<*>.hideTooltip() {
+public fun ITag<*>.hideTooltip() {
     Bootstrap.Tooltip.getInstance(element)?.hide()
 }
 
 /**
  * Toggle tooltip.
  */
-public fun Tag<*>.toggleTooltip() {
+public fun ITag<*>.toggleTooltip() {
     Bootstrap.Tooltip.getInstance(element)?.toggle()
 }
 
 /**
  * Enable tooltip.
  */
-public fun Tag<*>.enableTooltip() {
+public fun ITag<*>.enableTooltip() {
     Bootstrap.Tooltip.getInstance(element)?.enable()
 }
 
 /**
  * Disable tooltip.
  */
-public fun Tag<*>.disableTooltip() {
+public fun ITag<*>.disableTooltip() {
     Bootstrap.Tooltip.getInstance(element)?.disable()
 }
 
 /**
  * Dispose tooltip.
  */
-public fun Tag<*>.disposeTooltip() {
+public fun ITag<*>.disposeTooltip() {
     Bootstrap.Tooltip.getInstance(element)?.dispose()
 }

@@ -29,6 +29,7 @@ import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
+import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.register
@@ -306,7 +307,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
     private fun KiluaPluginContext.configureNodeEcosystem() {
         logger.info("configuring Node")
 
-        rootProject.extensions.configure<YarnRootExtension> {
+        rootProject.extensions.findByType(YarnRootExtension::class)?.apply {
             logger.info("configuring Yarn")
             if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
                 resolution("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)

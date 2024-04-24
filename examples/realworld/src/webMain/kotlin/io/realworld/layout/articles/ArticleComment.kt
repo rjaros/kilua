@@ -23,7 +23,7 @@
 package io.realworld.layout.articles
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.div
 import dev.kilua.html.i
 import dev.kilua.html.img
@@ -31,7 +31,6 @@ import dev.kilua.html.navLink
 import dev.kilua.html.pt
 import dev.kilua.html.rawHtml
 import dev.kilua.html.span
-import dev.kilua.html.unaryPlus
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
@@ -41,7 +40,7 @@ import io.realworld.model.Article
 import io.realworld.model.Comment
 
 @Composable
-fun ComponentBase.articleComment(
+fun IComponent.articleComment(
     state: ConduitState,
     comment: Comment,
     article: Article,

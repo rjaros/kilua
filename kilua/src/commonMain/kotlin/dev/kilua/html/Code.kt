@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Code component.
  */
+public interface ICode : ITag<HTMLElement>
+
+/**
+ * HTML Code component.
+ */
 public open class Code(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("code", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("code", className, renderConfig = renderConfig), ICode
 
 /**
  * Creates a [Code] component.
@@ -44,7 +49,7 @@ public open class Code(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Code] component
  */
 @Composable
-public fun ComponentBase.code(className: String? = null, content: @Composable Code.() -> Unit = {}): Code {
+public fun IComponent.code(className: String? = null, content: @Composable ICode.() -> Unit = {}): Code {
     val component = remember { Code(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Code::className, it) }

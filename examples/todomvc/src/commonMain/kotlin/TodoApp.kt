@@ -26,7 +26,7 @@ import androidx.compose.runtime.getValue
 import app.softwork.routingcompose.HashRouter
 import dev.kilua.Application
 import dev.kilua.compose.root
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.text.Text
 import dev.kilua.form.text.text
@@ -42,7 +42,6 @@ import dev.kilua.html.section
 import dev.kilua.html.span
 import dev.kilua.html.strong
 import dev.kilua.html.ul
-import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
 import web.dom.events.FocusEvent
 import web.dom.events.KeyboardEvent
@@ -72,13 +71,13 @@ class App : Application() {
     }
 
     @Composable
-    private fun ComponentBase.todoView(mode: Mode) {
+    private fun IComponent.todoView(mode: Mode) {
         val state by viewModel.state.collectAsState()
         section("todoapp") {
             header("header") {
                 h1 { +"todos" }
                 text(placeholder = "What needs to be done?", className = "new-todo") {
-                    autofocus = true
+                    autofocus(true)
                     onEvent<KeyboardEvent>("keydown") { e ->
                         if (e.keyCode == ENTER_KEY) {
                             viewModel.addTodo(this.value)
@@ -90,7 +89,7 @@ class App : Application() {
             if (state.todos.isNotEmpty()) {
                 section("main") {
                     checkBox(state.areAllCompleted(), className = "toggle-all") {
-                        id = "toggle-all"
+                        id("toggle-all")
                         onClick {
                             viewModel.processInput(Input.ToggleAll)
                         }

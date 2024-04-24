@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLHeadElement
@@ -33,8 +33,13 @@ import web.dom.HTMLHeadElement
 /**
  * HTML Head component.
  */
+public interface IHead : ITag<HTMLHeadElement>
+
+/**
+ * HTML Head component.
+ */
 public open class Head(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadElement>("head", className, renderConfig = renderConfig)
+    Tag<HTMLHeadElement>("head", className, renderConfig = renderConfig), IHead
 
 /**
  * Creates a [Head] component.
@@ -44,7 +49,7 @@ public open class Head(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Head] component
  */
 @Composable
-public fun ComponentBase.head(className: String? = null, content: @Composable Head.() -> Unit = {}): Head {
+public fun IComponent.head(className: String? = null, content: @Composable IHead.() -> Unit = {}): Head {
     val component = remember { Head(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Head::className, it) }

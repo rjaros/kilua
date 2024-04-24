@@ -25,9 +25,10 @@ package dev.kilua.form.upload
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.form.IInput
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.form.KFilesFormControl
@@ -56,6 +57,56 @@ public enum class Capture {
 /**
  * File upload input component.
  */
+public interface IUpload : IInput<List<KFile>>, KFilesFormControl {
+
+    /**
+     * Determines if multiple file upload is supported.
+     */
+    public val multiple: Boolean
+
+    /**
+     * Set to allow multiple file upload.
+     */
+    @Composable
+    public fun multiple(multiple: Boolean)
+
+    /**
+     * File types accepted by the file upload input.
+     */
+    public val accept: List<String>?
+
+    /**
+     * Set file types accepted by the file upload input.
+     */
+    @Composable
+    public fun accept(accept: List<String>?)
+
+    /**
+     * File upload input capture mode.
+     */
+    public val capture: Capture?
+
+    /**
+     * Set file upload input capture mode.
+     */
+    @Composable
+    public fun capture(capture: Capture?)
+
+    /**
+     * Only allow directories for selection.
+     */
+    public val webkitdirectory: Boolean?
+
+    /**
+     * Set to only allow directories for selection.
+     */
+    @Composable
+    public fun webkitdirectory(webkitdirectory: Boolean?)
+}
+
+/**
+ * File upload input component.
+ */
 public open class Upload(
     multiple: Boolean = false,
     accept: List<String>? = null,
@@ -66,8 +117,19 @@ public open class Upload(
     className: String? = null,
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
-) : Input<List<KFile>>(null, InputType.File, name, null, null, disabled, required, className, id, renderConfig = renderConfig),
-    KFilesFormControl {
+) : Input<List<KFile>>(
+    null,
+    InputType.File,
+    name,
+    null,
+    null,
+    disabled,
+    required,
+    className,
+    id,
+    renderConfig = renderConfig
+),
+    KFilesFormControl, IUpload {
 
     /**
      * Temporary external value (used in tests)
@@ -94,14 +156,24 @@ public open class Upload(
     /**
      * Determines if multiple file upload is supported.
      */
-    public var multiple: Boolean by updatingProperty(multiple) {
+    public override var multiple: Boolean by updatingProperty(multiple) {
         element.multiple = it
+    }
+
+    /**
+     * Set to allow multiple file upload.
+     */
+    @Composable
+    public override fun multiple(multiple: Boolean): Unit = composableProperty("multiple", {
+        this.multiple = false
+    }) {
+        this.multiple = multiple
     }
 
     /**
      * File types accepted by the file upload input.
      */
-    public var accept: List<String>? by updatingProperty(accept) {
+    public override var accept: List<String>? by updatingProperty(accept) {
         if (!it.isNullOrEmpty()) {
             element.accept = it.joinToString(",")
         } else {
@@ -110,17 +182,47 @@ public open class Upload(
     }
 
     /**
+     * Set file types accepted by the file upload input.
+     */
+    @Composable
+    public override fun accept(accept: List<String>?): Unit = composableProperty("accept", {
+        this.accept = null
+    }) {
+        this.accept = accept
+    }
+
+    /**
      * File upload input capture mode.
      */
-    public var capture: Capture? by updatingProperty(capture) {
+    public override var capture: Capture? by updatingProperty(capture) {
         setAttribute("capture", it?.toString())
+    }
+
+    /**
+     * Set file upload input capture mode.
+     */
+    @Composable
+    public override fun capture(capture: Capture?): Unit = composableProperty("capture", {
+        this.capture = null
+    }) {
+        this.capture = capture
     }
 
     /**
      * Only allow directories for selection.
      */
-    public var webkitdirectory: Boolean? by updatingProperty {
+    public override var webkitdirectory: Boolean? by updatingProperty {
         setAttribute("webkitdirectory", it?.toString())
+    }
+
+    /**
+     * Set to only allow directories for selection.
+     */
+    @Composable
+    public override fun webkitdirectory(webkitdirectory: Boolean?): Unit = composableProperty("webkitdirectory", {
+        this.webkitdirectory = null
+    }) {
+        this.webkitdirectory = webkitdirectory
     }
 
     init {
@@ -128,12 +230,15 @@ public open class Upload(
         withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             if (multiple) {
+                @Suppress("LeakingThis")
                 element.multiple = multiple
             }
             if (!accept.isNullOrEmpty()) {
+                @Suppress("LeakingThis")
                 element.accept = accept.joinToString(",")
             }
             if (capture != null) {
+                @Suppress("LeakingThis")
                 element.setAttribute("capture", capture.toString())
             }
         }
@@ -204,7 +309,7 @@ public open class Upload(
  * @return a [Upload] component
  */
 @Composable
-public fun ComponentBase.upload(
+public fun IComponent.upload(
     multiple: Boolean = false,
     accept: List<String>? = null,
     capture: Capture? = null,
@@ -213,10 +318,22 @@ public fun ComponentBase.upload(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable Upload.() -> Unit = {}
+    setup: @Composable IUpload.() -> Unit = {}
 ): Upload {
     val component =
-        remember { Upload(multiple, accept, capture, name, disabled, required, className, id, renderConfig = renderConfig) }
+        remember {
+            Upload(
+                multiple,
+                accept,
+                capture,
+                name,
+                disabled,
+                required,
+                className,
+                id,
+                renderConfig = renderConfig
+            )
+        }
     ComponentNode(component, {
         set(multiple) { updateProperty(Upload::multiple, it) }
         set(accept) { updateProperty(Upload::accept, it) }

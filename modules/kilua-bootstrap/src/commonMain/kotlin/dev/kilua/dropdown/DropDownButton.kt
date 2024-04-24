@@ -23,11 +23,12 @@
 package dev.kilua.dropdown
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.Button
 import dev.kilua.html.ButtonSize
 import dev.kilua.html.ButtonStyle
 import dev.kilua.html.ButtonType
+import dev.kilua.html.IButton
 import dev.kilua.html.bsButton
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
@@ -48,7 +49,7 @@ public enum class AutoClose {
 }
 
 @Composable
-public fun ComponentBase.dropDownButton(
+public fun IComponent.dropDownButton(
     label: String? = null,
     icon: String? = null,
     style: ButtonStyle = ButtonStyle.BtnPrimary,
@@ -58,7 +59,7 @@ public fun ComponentBase.dropDownButton(
     arrowVisible: Boolean = true,
     innerDropDown: Boolean = false,
     className: String? = null,
-    content: @Composable Button.() -> Unit = {}
+    content: @Composable IButton.() -> Unit = {}
 ): Button {
     return bsButton(
         label,
@@ -71,9 +72,9 @@ public fun ComponentBase.dropDownButton(
                 % if (!arrowVisible) "kilua-dropdown-no-arrow" else null
                 % if (innerDropDown) "dropdown-item" else null,
     ) {
-        setAttribute("data-bs-toggle", "dropdown")
-        setAttribute("data-bs-auto-close", autoClose.value)
-        setAttribute("aria-expanded", "false")
+        attribute("data-bs-toggle", "dropdown")
+        attribute("data-bs-auto-close", autoClose.value)
+        attribute("aria-expanded", "false")
         content()
         if (innerDropDown) {
             onClick {

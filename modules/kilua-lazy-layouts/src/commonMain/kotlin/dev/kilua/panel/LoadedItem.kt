@@ -18,9 +18,9 @@
 package dev.kilua.panel
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 
 internal class LoadedItem(
 	val key: Any?,
-	val block: @Composable ComponentBase.() -> Unit,
+	val block: @Composable IComponent.() -> Unit,
 )

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Sup component.
  */
+public interface ISup : ITag<HTMLElement>
+
+/**
+ * HTML Sup component.
+ */
 public open class Sup(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("sup", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("sup", className, renderConfig = renderConfig), ISup
 
 /**
  * Creates a [Sup] component.
@@ -44,7 +49,7 @@ public open class Sup(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Sup] component
  */
 @Composable
-public fun ComponentBase.sup(className: String? = null, content: @Composable Sup.() -> Unit = {}): Sup {
+public fun IComponent.sup(className: String? = null, content: @Composable ISup.() -> Unit = {}): Sup {
     val component = remember { Sup(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Sup::className, it) }
@@ -61,7 +66,7 @@ public fun ComponentBase.sup(className: String? = null, content: @Composable Sup
  * @return the [Sup] component
  */
 @Composable
-public fun ComponentBase.supt(text: String, className: String? = null, content: @Composable Sup.() -> Unit = {}): Sup {
+public fun IComponent.supt(text: String, className: String? = null, content: @Composable ISup.() -> Unit = {}): Sup {
     return sup(className) {
         +text
         content()

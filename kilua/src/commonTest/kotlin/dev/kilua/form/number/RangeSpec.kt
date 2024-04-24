@@ -35,12 +35,12 @@ class RangeSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 range(15, 10, 20, name = "test") {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<input type="range" name="test" min="10" max="20" step="1" autofocus="">"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<input type="range" name="test" min="10" max="20" step="1" autofocus="">""",
+                root.element.innerHTML,
                 "Should render range input element to DOM"
             )
         }
@@ -51,12 +51,12 @@ class RangeSpec : DomSpec {
         run {
             val root = root {
                 range(15, 10, 20, name = "test") {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><input type="range" name="test" autofocus min="10" max="20" step="1"></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<input type="range" name="test" min="10" max="20" step="1" autofocus="">""",
+                root.innerHTML,
                 "Should render range input element to a String"
             )
         }
@@ -68,7 +68,7 @@ class RangeSpec : DomSpec {
             lateinit var range: Range
             root("test") {
                 range = range(19, 10, 20, step = 0.5) {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
             repeat(4) {

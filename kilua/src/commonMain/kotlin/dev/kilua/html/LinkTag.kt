@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLLinkElement
@@ -33,8 +33,13 @@ import web.dom.HTMLLinkElement
 /**
  * HTML Link component.
  */
+public interface ILinkTag : ITag<HTMLLinkElement>
+
+/**
+ * HTML Link component.
+ */
 public open class LinkTag(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLLinkElement>("link", className, renderConfig = renderConfig)
+    Tag<HTMLLinkElement>("link", className, renderConfig = renderConfig), ILinkTag
 
 /**
  * Creates a [LinkTag] component.
@@ -44,7 +49,7 @@ public open class LinkTag(className: String? = null, renderConfig: RenderConfig 
  * @return the [LinkTag] component
  */
 @Composable
-public fun ComponentBase.linkTag(className: String? = null, setup: LinkTag.() -> Unit = {}): LinkTag {
+public fun IComponent.linkTag(className: String? = null, setup: @Composable ILinkTag.() -> Unit = {}): LinkTag {
     val component = remember { LinkTag(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(LinkTag::className, it) }

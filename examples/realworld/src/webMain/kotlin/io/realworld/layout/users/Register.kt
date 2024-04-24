@@ -23,7 +23,7 @@
 package io.realworld.layout.users
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.form.InputType
 import dev.kilua.form.form
 import dev.kilua.form.text.Text
@@ -37,14 +37,13 @@ import dev.kilua.html.li
 import dev.kilua.html.navLink
 import dev.kilua.html.p
 import dev.kilua.html.ul
-import dev.kilua.html.unaryPlus
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
 import web.dom.events.Event
 
 @Composable
-fun ComponentBase.registerPage(state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.registerPage(state: ConduitState, conduitManager: ConduitManager) {
     div("auth-page") {
         div("container page") {
             div("row") {
@@ -69,7 +68,7 @@ fun ComponentBase.registerPage(state: ConduitState, conduitManager: ConduitManag
                         fieldset(className = "form-group") {
                             usernameInput =
                                 text(value = state.registerUserName, className = "form-control form-control-lg") {
-                                    placeholder = "Your Name"
+                                    placeholder("Your Name")
                                 }
                         }
                         fieldset(className = "form-group") {
@@ -79,13 +78,13 @@ fun ComponentBase.registerPage(state: ConduitState, conduitManager: ConduitManag
                                     type = InputType.Email,
                                     className = "form-control form-control-lg"
                                 ) {
-                                    placeholder = "Email"
+                                    placeholder("Email")
                                 }
                         }
                         fieldset(className = "form-group") {
                             passwordInput =
                                 text(type = InputType.Password, className = "form-control form-control-lg") {
-                                    placeholder = "Password"
+                                    placeholder("Password")
                                 }
                         }
                         button(

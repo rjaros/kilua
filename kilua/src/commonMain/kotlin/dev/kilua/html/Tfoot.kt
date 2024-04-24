@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLTableSectionElement
@@ -33,8 +33,13 @@ import web.dom.HTMLTableSectionElement
 /**
  * HTML Tfoot component.
  */
+public interface ITfoot : ITag<HTMLTableSectionElement>
+
+/**
+ * HTML Tfoot component.
+ */
 public open class Tfoot(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTableSectionElement>("tfoot", className, renderConfig = renderConfig)
+    Tag<HTMLTableSectionElement>("tfoot", className, renderConfig = renderConfig), ITfoot
 
 /**
  * Creates a [Tfoot] component.
@@ -44,7 +49,7 @@ public open class Tfoot(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Tfoot] component
  */
 @Composable
-public fun ComponentBase.tfoot(className: String? = null, content: @Composable Tfoot.() -> Unit = {}): Tfoot {
+public fun IComponent.tfoot(className: String? = null, content: @Composable ITfoot.() -> Unit = {}): Tfoot {
     val component = remember { Tfoot(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Tfoot::className, it) }

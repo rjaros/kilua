@@ -25,16 +25,21 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
 
 /**
+ * HTML Var tag component.
+ */
+public interface IVarTag : ITag<HTMLElement>
+
+/**
  * Var tag component.
  */
 public open class VarTag(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("var", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("var", className, renderConfig = renderConfig), IVarTag
 
 /**
  * Creates a [VarTag] component.
@@ -44,7 +49,7 @@ public open class VarTag(className: String? = null, renderConfig: RenderConfig =
  * @return the [VarTag] component
  */
 @Composable
-public fun ComponentBase.varTag(className: String? = null, content: @Composable VarTag.() -> Unit = {}): VarTag {
+public fun IComponent.varTag(className: String? = null, content: @Composable IVarTag.() -> Unit = {}): VarTag {
     val component = remember { VarTag(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(VarTag::className, it) }

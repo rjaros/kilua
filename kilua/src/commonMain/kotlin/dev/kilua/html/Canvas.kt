@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
@@ -36,18 +36,50 @@ import web.dom.HTMLCanvasElement
 /**
  * HTML Canvas component.
  */
+public interface ICanvas : ITag<HTMLCanvasElement> {
+    /**
+     * The width of the canvas.
+     */
+    public val canvasWidth: Int?
+
+    /**
+     * Sets the width of the canvas.
+     */
+    @Composable
+    public fun canvasWidth(canvasWidth: Int?)
+
+    /**
+     * The height of the canvas.
+     */
+    public val canvasHeight: Int?
+
+    /**
+     * Sets the height of the canvas.
+     */
+    @Composable
+    public fun canvasHeight(canvasHeight: Int?)
+
+    /**
+     * The canvas rendering context.
+     */
+    public val context2D: CanvasRenderingContext2D?
+}
+
+/**
+ * HTML Canvas component.
+ */
 public open class Canvas(
     canvasWidth: Int? = null,
     canvasHeight: Int? = null,
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLCanvasElement>("canvas", className, renderConfig = renderConfig) {
+    Tag<HTMLCanvasElement>("canvas", className, renderConfig = renderConfig), ICanvas {
 
     /**
      * The width of the canvas.
      */
-    public open var canvasWidth: Int? by updatingProperty(canvasWidth, name = "width") {
+    public override var canvasWidth: Int? by updatingProperty(canvasWidth, name = "width") {
         if (it != null) {
             element.width = it
         } else {
@@ -55,10 +87,17 @@ public open class Canvas(
         }
     }
 
+    @Composable
+    public override fun canvasWidth(canvasWidth: Int?): Unit = composableProperty("canvasWidth", {
+        this.canvasWidth = null
+    }) {
+        this.canvasWidth = canvasWidth
+    }
+
     /**
      * The height of the canvas.
      */
-    public open var canvasHeight: Int? by updatingProperty(canvasHeight, name = "height") {
+    public override var canvasHeight: Int? by updatingProperty(canvasHeight, name = "height") {
         if (it != null) {
             element.height = it
         } else {
@@ -66,22 +105,30 @@ public open class Canvas(
         }
     }
 
+    @Composable
+    public override fun canvasHeight(canvasHeight: Int?): Unit = composableProperty("canvasHeight", {
+        this.canvasHeight = null
+    }) {
+        this.canvasHeight = canvasHeight
+    }
+
     /**
      * The canvas rendering context.
      */
-    public val context2D: CanvasRenderingContext2D?
+    public override val context2D: CanvasRenderingContext2D? =
+        @Suppress("LeakingThis")
+        if (renderConfig.isDom) element.getContext("2d").cast() else null
 
     init {
         if (renderConfig.isDom) {
             if (canvasWidth != null) {
+                @Suppress("LeakingThis")
                 element.width = canvasWidth
             }
             if (canvasHeight != null) {
+                @Suppress("LeakingThis")
                 element.height = canvasHeight
             }
-            context2D = element.getContext("2d").cast()
-        } else {
-            context2D = null
         }
     }
 
@@ -102,10 +149,10 @@ public open class Canvas(
  * @return the [Canvas] component
  */
 @Composable
-public fun ComponentBase.canvas(
+public fun IComponent.canvas(
     canvasWidth: Int? = null,
     canvasHeight: Int? = null,
-    className: String? = null, content: @Composable Canvas.() -> Unit = {}
+    className: String? = null, content: @Composable ICanvas.() -> Unit = {}
 ): Canvas {
     val component = remember { Canvas(canvasWidth, canvasHeight, className, renderConfig = renderConfig) }
     ComponentNode(component, {

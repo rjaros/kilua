@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLAudioElement
@@ -33,8 +33,13 @@ import web.dom.HTMLAudioElement
 /**
  * HTML Audio component.
  */
+public interface IAudio : ITag<HTMLAudioElement>
+
+/**
+ * HTML Audio component.
+ */
 public open class Audio(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLAudioElement>("audio", className, renderConfig = renderConfig)
+    Tag<HTMLAudioElement>("audio", className, renderConfig = renderConfig), IAudio
 
 /**
  * Creates a [Audio] component.
@@ -44,7 +49,7 @@ public open class Audio(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Audio] component
  */
 @Composable
-public fun ComponentBase.audio(className: String? = null, content: @Composable Audio.() -> Unit = {}): Audio {
+public fun IComponent.audio(className: String? = null, content: @Composable IAudio.() -> Unit = {}): Audio {
     val component = remember { Audio(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Audio::className, it) }

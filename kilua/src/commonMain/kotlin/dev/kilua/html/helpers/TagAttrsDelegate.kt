@@ -22,6 +22,7 @@
 
 package dev.kilua.html.helpers
 
+import androidx.compose.runtime.Composable
 import dev.kilua.core.PropertyDelegate
 import dev.kilua.utils.nativeMapOf
 import web.dom.HTMLElement
@@ -70,12 +71,26 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
+    @Composable
+    override fun title(title: String?): Unit = composableProperty("title", {
+        this.title = null
+    }) {
+        this.title = title
+    }
+
     override var tabindex: Int? by updatingProperty {
         if (it != null) {
             element.tabIndex = it
         } else {
             element.removeAttribute("tabindex")
         }
+    }
+
+    @Composable
+    override fun tabindex(tabindex: Int?): Unit = composableProperty("tabindex", {
+        this.tabindex = null
+    }) {
+        this.tabindex = tabindex
     }
 
     override var draggable: Boolean? by updatingProperty {
@@ -86,12 +101,26 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
+    @Composable
+    override fun draggable(draggable: Boolean?): Unit = composableProperty("draggable", {
+        this.draggable = null
+    }) {
+        this.draggable = draggable
+    }
+
     override var role: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("role", it)
         } else {
             element.removeAttribute("role")
         }
+    }
+
+    @Composable
+    override fun role(role: String?): Unit = composableProperty("role", {
+        this.role = null
+    }) {
+        this.role = role
     }
 
     override var ariaLabel: String? by updatingProperty {
@@ -102,12 +131,26 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
+    @Composable
+    override fun ariaLabel(ariaLabel: String?): Unit = composableProperty("ariaLabel", {
+        this.ariaLabel = null
+    }) {
+        this.ariaLabel = ariaLabel
+    }
+
     override var ariaLabelledby: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("aria-labelledby", it)
         } else {
             element.removeAttribute("aria-labelledby")
         }
+    }
+
+    @Composable
+    override fun ariaLabelledby(ariaLabelledby: String?): Unit = composableProperty("ariaLabelledby", {
+        this.ariaLabelledby = null
+    }) {
+        this.ariaLabelledby = ariaLabelledby
     }
 
     override var ariaDescribedby: String? by updatingProperty {
@@ -118,6 +161,13 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
+    @Composable
+    override fun ariaDescribedby(ariaDescribedby: String?): Unit = composableProperty("ariaDescribedby", {
+        this.ariaDescribedby = null
+    }) {
+        this.ariaDescribedby = ariaDescribedby
+    }
+
     override var accesskey: Char? by updatingProperty {
         if (it != null) {
             element.accessKey = it.toString()
@@ -126,12 +176,26 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
         }
     }
 
+    @Composable
+    override fun accesskey(accesskey: Char?): Unit = composableProperty("accesskey", {
+        this.accesskey = null
+    }) {
+        this.accesskey = accesskey
+    }
+
     override var autofocus: Boolean? by updatingProperty {
         if (it != null) {
             element.setAttribute("autofocus", "")
         } else {
             element.removeAttribute("autofocus")
         }
+    }
+
+    @Composable
+    override fun autofocus(autofocus: Boolean?): Unit = composableProperty("autofocus", {
+        this.autofocus = null
+    }) {
+        this.autofocus = autofocus
     }
 
     override fun setAttribute(name: String, value: String?) {
@@ -155,5 +219,12 @@ public open class TagAttrsDelegateImpl<E : HTMLElement>(
             propertyValues.remove(name)
             elementNullable?.removeAttribute(name)
         }
+    }
+
+    @Composable
+    override fun attribute(name: String, value: String?): Unit = composableProperty(name, {
+        removeAttribute(name)
+    }) {
+        setAttribute(name, value)
     }
 }

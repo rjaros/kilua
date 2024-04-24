@@ -35,7 +35,6 @@ import dev.kilua.html.TextAlign
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.px
-import dev.kilua.html.unaryPlus
 import dev.kilua.test.DomSpec
 import dev.kilua.test.normalizeHtml
 import kotlinx.coroutines.delay
@@ -49,11 +48,11 @@ class RootSpec : DomSpec {
         run {
             val root = root {
                 div("a_class") {
-                    id = "main"
-                    textAlign = TextAlign.Center
-                    border = Border(1.px, BorderStyle.Dotted, Color.Red)
-                    setAttribute("custom", "value")
-                    setStyle("padding-top", "2px")
+                    id("main")
+                    textAlign(TextAlign.Center)
+                    border(Border(1.px, BorderStyle.Dotted, Color.Red))
+                    attribute("custom", "value")
+                    style("padding-top", "2px")
                     div {
                         +"Some content"
                     }
@@ -73,11 +72,11 @@ class RootSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 div("a_class") {
-                    id = "main"
-                    textAlign = TextAlign.Center
-                    border = Border(1.px, BorderStyle.Dotted, Color.Red)
-                    setAttribute("custom", "value")
-                    setStyle("padding-top", "2px")
+                    id("main")
+                    textAlign(TextAlign.Center)
+                    border(Border(1.px, BorderStyle.Dotted, Color.Red))
+                    attribute("custom", "value")
+                    style("padding-top", "2px")
                     div {
                         +"Some content"
                     }

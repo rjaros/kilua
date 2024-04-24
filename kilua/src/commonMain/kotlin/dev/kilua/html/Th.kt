@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
@@ -47,6 +47,44 @@ public enum class ThScope {
     }
 }
 
+/*
+ * HTML Th component.
+ */
+public interface ITh : ITag<HTMLTableCellElement> {
+    /**
+     * The number of columns the cell extends.
+     */
+    public val colspan: Int?
+
+    /**
+     * Set the number of columns the cell extends.
+     */
+    @Composable
+    public fun colspan(colspan: Int?)
+
+    /**
+     * The number of rows the cell extends.
+     */
+    public val rowspan: Int?
+
+    /**
+     * Set the number of rows the cell extends.
+     */
+    @Composable
+    public fun rowspan(rowspan: Int?)
+
+    /**
+     * The cells that the header element relates to.
+     */
+    public val scope: ThScope?
+
+    /**
+     * Set the cells that the header element relates to.
+     */
+    @Composable
+    public fun scope(scope: ThScope?)
+}
+
 /**
  * HTML Th component.
  */
@@ -56,12 +94,12 @@ public open class Th(
     scope: ThScope? = null,
     className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLTableCellElement>("th", className, renderConfig = renderConfig) {
+    Tag<HTMLTableCellElement>("th", className, renderConfig = renderConfig), ITh {
 
     /**
      * The number of columns the cell extends.
      */
-    public open var colspan: Int? by updatingProperty(colspan) {
+    public override var colspan: Int? by updatingProperty(colspan) {
         if (it != null) {
             element.colSpan = it
         } else {
@@ -70,9 +108,19 @@ public open class Th(
     }
 
     /**
+     * Set the number of columns the cell extends.
+     */
+    @Composable
+    public override fun colspan(colspan: Int?): Unit = composableProperty("colspan", {
+        this.colspan = null
+    }) {
+        this.colspan = colspan
+    }
+
+    /**
      * The number of rows the cell extends.
      */
-    public open var rowspan: Int? by updatingProperty(rowspan) {
+    public override var rowspan: Int? by updatingProperty(rowspan) {
         if (it != null) {
             element.rowSpan = it
         } else {
@@ -81,9 +129,19 @@ public open class Th(
     }
 
     /**
+     * Set the number of rows the cell extends.
+     */
+    @Composable
+    public override fun rowspan(rowspan: Int?): Unit = composableProperty("rowspan", {
+        this.rowspan = null
+    }) {
+        this.rowspan = rowspan
+    }
+
+    /**
      * The cells that the header element relates to.
      */
-    public open var scope: ThScope? by updatingProperty(scope) {
+    public override var scope: ThScope? by updatingProperty(scope) {
         if (it != null) {
             element.scope = it.value
         } else {
@@ -91,15 +149,28 @@ public open class Th(
         }
     }
 
+    /**
+     * Set the cells that the header element relates to.
+     */
+    @Composable
+    public override fun scope(scope: ThScope?): Unit = composableProperty("scope", {
+        this.scope = null
+    }) {
+        this.scope = scope
+    }
+
     init {
         if (renderConfig.isDom) {
             if (colspan != null) {
+                @Suppress("LeakingThis")
                 element.colSpan = colspan
             }
             if (rowspan != null) {
+                @Suppress("LeakingThis")
                 element.rowSpan = rowspan
             }
             if (scope != null) {
+                @Suppress("LeakingThis")
                 element.scope = scope.value
             }
         }
@@ -119,9 +190,9 @@ public open class Th(
  * @return the [Th] component
  */
 @Composable
-public fun ComponentBase.th(
+public fun IComponent.th(
     colspan: Int? = null, rowspan: Int? = null,
-    scope: ThScope? = null, className: String? = null, content: @Composable Th.() -> Unit = {}
+    scope: ThScope? = null, className: String? = null, content: @Composable ITh.() -> Unit = {}
 ): Th {
     val component = remember { Th(colspan, rowspan, scope, className, renderConfig = renderConfig) }
     ComponentNode(component, {

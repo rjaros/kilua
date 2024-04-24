@@ -23,7 +23,7 @@
 package io.realworld.layout.users
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.form.InputType
 import dev.kilua.form.form
 import dev.kilua.form.text.Text
@@ -38,13 +38,12 @@ import dev.kilua.html.h1t
 import dev.kilua.html.hr
 import dev.kilua.html.li
 import dev.kilua.html.ul
-import dev.kilua.html.unaryPlus
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import web.dom.events.Event
 
 @Composable
-fun ComponentBase.settingsPage(state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.settingsPage(state: ConduitState, conduitManager: ConduitManager) {
     div("settings-page") {
         div("container page") {
             div("row") {
@@ -68,7 +67,7 @@ fun ComponentBase.settingsPage(state: ConduitState, conduitManager: ConduitManag
                         fieldset {
                             fieldset(className = "form-group") {
                                 imageInput = text(value = state.user?.image, className = "form-control") {
-                                    placeholder = "URL of profile picture"
+                                    placeholder("URL of profile picture")
                                 }
                             }
                             fieldset(className = "form-group") {
@@ -76,7 +75,7 @@ fun ComponentBase.settingsPage(state: ConduitState, conduitManager: ConduitManag
                                     value = state.user?.username,
                                     className = "form-control form-control-lg"
                                 ) {
-                                    placeholder = "Your Name"
+                                    placeholder("Your Name")
                                 }
                             }
                             fieldset(className = "form-group") {
@@ -85,7 +84,7 @@ fun ComponentBase.settingsPage(state: ConduitState, conduitManager: ConduitManag
                                     rows = 8,
                                     className = "form-control form-control-lg"
                                 ) {
-                                    placeholder = "Short bio about you"
+                                    placeholder("Short bio about you")
                                 }
                             }
                             fieldset(className = "form-group") {
@@ -95,13 +94,13 @@ fun ComponentBase.settingsPage(state: ConduitState, conduitManager: ConduitManag
                                         type = InputType.Email,
                                         className = "form-control form-control-lg"
                                     ) {
-                                        placeholder = "Email"
+                                        placeholder("Email")
                                     }
                             }
                             fieldset(className = "form-group") {
                                 passwordInput =
                                     text(type = InputType.Password, className = "form-control form-control-lg") {
-                                        placeholder = "Password"
+                                        placeholder("Password")
                                     }
                             }
                             button(

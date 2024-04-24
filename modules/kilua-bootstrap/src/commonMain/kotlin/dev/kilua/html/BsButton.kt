@@ -23,7 +23,7 @@
 package dev.kilua.html
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
 
@@ -84,7 +84,7 @@ public enum class ButtonSize {
  * @return the [Button] component
  */
 @Composable
-public fun ComponentBase.bsButton(
+public fun IComponent.bsButton(
     label: String? = null,
     icon: String? = null,
     style: ButtonStyle = ButtonStyle.BtnPrimary,
@@ -92,7 +92,7 @@ public fun ComponentBase.bsButton(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Button.() -> Unit = {}
+    content: @Composable IButton.() -> Unit = {}
 ): Button {
     return button(label, icon, type, disabled, "btn" % style.value % size?.value % className, content)
 }

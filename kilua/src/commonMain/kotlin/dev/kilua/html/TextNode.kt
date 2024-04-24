@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
@@ -60,6 +61,13 @@ public open class TextNode(
         text.data = if (it) data else ""
     }
 
+    @Composable
+    public override fun visible(visible: Boolean): Unit = composableProperty("visible", {
+        this.visible = true
+    }) {
+        this.visible = visible
+    }
+
     override fun renderToStringBuilder(builder: StringBuilder) {
         builder.append(
             data.replace("&", "&amp;")
@@ -74,25 +82,13 @@ public open class TextNode(
 /**
  * Creates a [TextNode] component.
  * @param data the text of the node
- * @param setup a function for setting up the component
  * @return a [TextNode] component
  */
 @Composable
-public fun textNode(data: String, setup: TextNode.() -> Unit = {}): TextNode {
-    // Always using DefaultRenderConfig because of plus operator String receiver.
-    val component = remember { TextNode(data, DefaultRenderConfig()) }
+public fun IComponent.textNode(data: String): TextNode {
+    val component = remember { TextNode(data, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(data) { updateProperty(TextNode::data, it) }
-    }) {
-        setup(component)
-    }
+    }) { }
     return component
-}
-
-/**
- * Creates a [TextNode] component with unary + operator.
- */
-@Composable
-public operator fun String.unaryPlus() {
-    textNode(this)
 }

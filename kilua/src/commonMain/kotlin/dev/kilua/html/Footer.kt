@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Footer component.
  */
+public interface IFooter : ITag<HTMLElement>
+
+/**
+ * HTML Footer component.
+ */
 public open class Footer(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("footer", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("footer", className, renderConfig = renderConfig), IFooter
 
 /**
  * Creates a [Footer] component.
@@ -44,7 +49,7 @@ public open class Footer(className: String? = null, renderConfig: RenderConfig =
  * @return the [Footer] component
  */
 @Composable
-public fun ComponentBase.footer(className: String? = null, content: @Composable Footer.() -> Unit = {}): Footer {
+public fun IComponent.footer(className: String? = null, content: @Composable IFooter.() -> Unit = {}): Footer {
     val component = remember { Footer(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Footer::className, it) }

@@ -41,7 +41,7 @@ class App : Application() {
     override fun start() {
         root("root") {
             div {
-                margin = 20.px
+                margin(20.px)
 
                 button("Test compose resources") {
                     onClickLaunch {

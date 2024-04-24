@@ -23,7 +23,7 @@
 package io.realworld.layout
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h4t
@@ -34,7 +34,6 @@ import dev.kilua.html.navLink
 import dev.kilua.html.pt
 import dev.kilua.html.rawHtml
 import dev.kilua.html.ul
-import dev.kilua.html.unaryPlus
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.FeedType
@@ -42,7 +41,7 @@ import io.realworld.View
 import io.realworld.layout.shared.pagination
 
 @Composable
-fun ComponentBase.profilePage(state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.profilePage(state: ConduitState, conduitManager: ConduitManager) {
     val profile = state.profile
     if (profile != null) {
         div("profile-page") {

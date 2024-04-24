@@ -23,7 +23,7 @@
 package io.realworld.layout.shared
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.div
 import dev.kilua.html.i
 import dev.kilua.html.img
@@ -32,12 +32,11 @@ import dev.kilua.html.nav
 import dev.kilua.html.navLink
 import dev.kilua.html.rawHtml
 import dev.kilua.html.ul
-import dev.kilua.html.unaryPlus
 import io.realworld.ConduitState
 import io.realworld.View
 
 @Composable
-fun ComponentBase.headerNav(state: ConduitState) {
+fun IComponent.headerNav(state: ConduitState) {
     nav("navbar navbar-light") {
         div("container") {
             navLink(View.HOME.url, "conduit", className = "navbar-brand")

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLDivElement
@@ -33,8 +33,13 @@ import web.dom.HTMLDivElement
 /**
  * HTML Div component.
  */
+public interface IDiv : ITag<HTMLDivElement>
+
+/**
+ * HTML Div component.
+ */
 public open class Div(className: String? = null, id: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDivElement>("div", className, id, renderConfig)
+    Tag<HTMLDivElement>("div", className, id, renderConfig), IDiv
 
 /**
  * Creates a [Div] component.
@@ -45,7 +50,7 @@ public open class Div(className: String? = null, id: String? = null, renderConfi
  * @return the [Div] component
  */
 @Composable
-public fun ComponentBase.div(className: String? = null, id: String? = null, content: @Composable Div.() -> Unit = {}): Div {
+public fun IComponent.div(className: String? = null, id: String? = null, content: @Composable IDiv.() -> Unit = {}): Div {
     val component = remember { Div(className, id, renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Div::className, it) }

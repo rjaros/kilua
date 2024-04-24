@@ -41,7 +41,7 @@ class IframeSpec : DomSpec {
                     name = "test",
                     sandbox = setOf(Sandbox.AllowPopups, Sandbox.AllowForms)
                 ) {
-                    margin = 10.px
+                    margin(10.px)
                 }
             }
             assertEquals(
@@ -63,7 +63,7 @@ class IframeSpec : DomSpec {
                     name = "test",
                     sandbox = setOf(Sandbox.AllowPopups, Sandbox.AllowForms)
                 ) {
-                    margin = 10.px
+                    margin(10.px)
                 }
             }
             assertEquals(

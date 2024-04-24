@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Search component.
  */
+public interface ISearch : ITag<HTMLElement>
+
+/**
+ * HTML Search component.
+ */
 public open class Search(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("search", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("search", className, renderConfig = renderConfig), ISearch
 
 /**
  * Creates a [Search] component.
@@ -44,7 +49,7 @@ public open class Search(className: String? = null, renderConfig: RenderConfig =
  * @return the [Search] component
  */
 @Composable
-public fun ComponentBase.search(className: String? = null, content: @Composable Search.() -> Unit = {}): Search {
+public fun IComponent.search(className: String? = null, content: @Composable ISearch.() -> Unit = {}): Search {
     val component = remember { Search(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Search::className, it) }

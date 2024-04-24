@@ -25,10 +25,11 @@ package dev.kilua.form.time
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.DateTimeFormControl
+import dev.kilua.form.IInput
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.html.helpers.PropertyListBuilder
@@ -42,6 +43,54 @@ import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
 internal const val DATETIME_DEFAULT_STEP = 60
+
+/**
+ * Date and time input component.
+ */
+public interface IDateTime : IInput<LocalDateTime>, DateTimeFormControl {
+    /**
+     * The minimum value of the date and time.
+     */
+    public val min: LocalDateTime?
+
+    /**
+     * Set the minimum value of the date and time.
+     */
+    @Composable
+    public fun min(min: LocalDateTime?)
+
+    /**
+     * The maximum value of the date and time.
+     */
+    public val max: LocalDateTime?
+
+    /**
+     * Set the maximum value of the date and time.
+     */
+    @Composable
+    public fun max(max: LocalDateTime?)
+
+    /**
+     * The step value of the date and time.
+     */
+    public val step: Int
+
+    /**
+     * Set the step value of the date and time.
+     */
+    @Composable
+    public fun step(step: Int)
+
+    /**
+     * Increments the value by the step value.
+     */
+    public fun stepUp()
+
+    /**
+     * Decrements the value by the step value.
+     */
+    public fun stepDown()
+}
 
 /**
  * Date and time input component.
@@ -70,13 +119,12 @@ public open class DateTime(
     className,
     id,
     renderConfig
-),
-    DateTimeFormControl {
+), DateTimeFormControl, IDateTime {
 
     /**
      * The minimum value of the date and time.
      */
-    public open var min: LocalDateTime? by updatingProperty(min) {
+    public override var min: LocalDateTime? by updatingProperty(min) {
         if (it != null) {
             element.min = it.toString()
         } else {
@@ -85,9 +133,19 @@ public open class DateTime(
     }
 
     /**
+     * Set the minimum value of the date and time.
+     */
+    @Composable
+    public override fun min(min: LocalDateTime?): Unit = composableProperty("min", {
+        this.min = null
+    }) {
+        this.min = min
+    }
+
+    /**
      * The maximum value of the date and time.
      */
-    public open var max: LocalDateTime? by updatingProperty(max) {
+    public override var max: LocalDateTime? by updatingProperty(max) {
         if (it != null) {
             element.max = it.toString()
         } else {
@@ -96,20 +154,43 @@ public open class DateTime(
     }
 
     /**
+     * Set the maximum value of the date and time.
+     */
+    @Composable
+    public override fun max(max: LocalDateTime?): Unit = composableProperty("max", {
+        this.max = null
+    }) {
+        this.max = max
+    }
+
+    /**
      * The step value of the date and time.
      */
-    public open var step: Int by updatingProperty(step) {
+    public override var step: Int by updatingProperty(step) {
         element.step = it.toString()
+    }
+
+    /**
+     * Set the step value of the date and time.
+     */
+    @Composable
+    public override fun step(step: Int): Unit = composableProperty("step", {
+        this.step = DATETIME_DEFAULT_STEP
+    }) {
+        this.step = step
     }
 
     init {
         if (renderConfig.isDom) {
             if (min != null) {
+                @Suppress("LeakingThis")
                 element.min = min.toString()
             }
             if (max != null) {
+                @Suppress("LeakingThis")
                 element.max = max.toString()
             }
+            @Suppress("LeakingThis")
             element.step = step.toString()
         }
     }
@@ -142,7 +223,7 @@ public open class DateTime(
     /**
      * Increments the value by the step value.
      */
-    public open fun stepUp() {
+    public override fun stepUp() {
         if (renderConfig.isDom) {
             element.stepUp()
             setInternalValueFromString(element.value)
@@ -159,7 +240,7 @@ public open class DateTime(
     /**
      * Decrements the value by the step value.
      */
-    public open fun stepDown() {
+    public override fun stepDown() {
         if (renderConfig.isDom) {
             element.stepDown()
             setInternalValueFromString(element.value)
@@ -193,7 +274,7 @@ public open class DateTime(
  * @return a [DateTime] component
  */
 @Composable
-public fun ComponentBase.dateTime(
+public fun IComponent.dateTime(
     value: LocalDateTime? = null,
     min: LocalDateTime? = null,
     max: LocalDateTime? = null,
@@ -205,7 +286,7 @@ public fun ComponentBase.dateTime(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable DateTime.() -> Unit = {}
+    setup: @Composable IDateTime.() -> Unit = {}
 ): DateTime {
     val component =
         remember {

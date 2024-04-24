@@ -124,6 +124,7 @@ import web.JsArray
 import web.Promise
 import web.RegExp
 import web.dom.CustomEvent
+import web.dom.HTMLElement
 import web.dom.Text
 import web.dom.events.Event
 import web.toJsNumber
@@ -203,7 +204,54 @@ class App : Application() {
         root("root") {
 
             div {
-                margin = 20.px
+
+                margin(20.px)
+
+                var count by remember { mutableStateOf(0) }
+                tag("h1") {
+                    println("recomposing div xx")
+                    +"Hello World! $count"
+                    if (count == 1) {
+                        background(Background(color = Color.Blue))
+                        attribute("x-test", "test 1")
+                        title("ala")
+                        className("ala")
+                    }
+                    if (count == 2) {
+                        background(Background(color = Color.Aqua))
+                        attribute("x-test", "test 2")
+                        title("ala2")
+                        className("ma")
+                    }
+                    if (count == 4) {
+                        background(Background(color = Color.Green))
+                    }
+                    onClick {
+                        cast<Tag<HTMLElement>>().title = "test"
+                    }
+                    // for count > 1 background color should be undefined again!
+                }
+                tag("h1") {
+                    +"Hello World 2! $count"
+                    if (count == 1) {
+                        background(Background(color = Color.Yellow))
+                        attribute("x-test", "test 1")
+                        title("ala")
+                        className("ala")
+                    }
+                    if (count == 2) {
+                        background(Background(color = Color.Orange))
+                        attribute("x-test", "test 2")
+                        title("ala2")
+                        className("ma")
+                    }
+                    if (count == 3) {
+                        background(Background(color = Color.Fuchsia))
+                    }
+                }
+                button("Button") {
+                    onClick { count++ }
+                }
 
                 h1("text-blue-500") {
                     +i18n.tr("Hello world!")
@@ -504,8 +552,8 @@ class App : Application() {
                 console.log("recomposing before tom select")
 
                 tomSelect(emptyOption = true) {
-                    emptyOption = true
-                    tsCallbacks = TomSelectCallbacks(
+                    emptyOption(true)
+                    tsCallbacks(TomSelectCallbacks(
                         load = { query, callback ->
                             promise {
                                 val result = try {
@@ -530,8 +578,8 @@ class App : Application() {
                             }
                         },
                         shouldLoad = { it.length >= 3 }
-                    )
-                    tsRenders = TomSelectRenders(option = { item, escape ->
+                    ))
+                    tsRenders(TomSelectRenders(option = { item, escape ->
                         val subtext: String? = item["subtext"]?.toString()
                         """
                         <div>
@@ -539,7 +587,7 @@ class App : Application() {
                             <small>${subtext?.let { "(" + escape(it) + ")" } ?: ""}</small>
                         </div>
                     """.trimIndent()
-                    })
+                    }))
                     onChange {
                         console.log(this.value)
                     }
@@ -596,9 +644,9 @@ class App : Application() {
                 val randomElements = remember { mutableStateListOf<UInt>() }
 
                 div {
-                    border = Border(1.px, style = BorderStyle.Solid, color = Color.Red)
-                    height = 600.px
-                    overflow = Overflow.Auto
+                    border(Border(1.px, style = BorderStyle.Solid, color = Color.Red))
+                    height(600.px)
+                    overflow(Overflow.Auto)
 
                     lazyColumn {
                         item {
@@ -834,22 +882,22 @@ class App : Application() {
                 carousel(hideIndicators = true, autoPlay = true) {
                     item("First slide", "First slide label") {
                         div("d-block w-100") {
-                            height = 200.px
-                            background = Background(color = Color.Red)
+                            height(200.px)
+                            background(Background(color = Color.Red))
                             pt("Nulla vitae elit libero, a pharetra augue mollis interdum.")
                         }
                     }
                     item("Second slide", "Second slide label") {
                         div("d-block w-100") {
-                            height = 200.px
-                            background = Background(color = Color.Green)
+                            height(200.px)
+                            background(Background(color = Color.Green))
                             pt("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
                         }
                     }
                     item("Third slide", "Third slide label") {
                         div("d-block w-100") {
-                            height = 200.px
-                            background = Background(color = Color.Blue)
+                            height(200.px)
+                            background(Background(color = Color.Blue))
                             pt("Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
                         }
                     }
@@ -891,7 +939,7 @@ class App : Application() {
 
                 fieldWithLabel("A switch", "form-check-label", true, groupClassName = "form-check form-switch") {
                     checkBox(true, className = "form-check-input", id = it) {
-                        role = "switch"
+                        role("switch")
                     }
                 }
 
@@ -955,12 +1003,12 @@ class App : Application() {
                 var splitState by remember { mutableStateOf(0) }
 
                 splitPanel {
-                    width = 500.px
-                    height = 300.px
-                    margin = 30.px
+                    width(500.px)
+                    height(300.px)
+                    margin(30.px)
                     if (splitState != 1) {
                         left {
-                            width = 20.perc
+                            width(20.perc)
                             pt("left$splitState")
                         }
                         right {
@@ -968,11 +1016,11 @@ class App : Application() {
                         }
                     } else {
                         left {
-                            width = 50.perc
+                            width(50.perc)
                             pt("top$splitState")
                         }
                         right {
-                            width = 50.perc
+                            width(50.perc)
                             pt("bottom$splitState")
                         }
                     }
@@ -993,7 +1041,7 @@ class App : Application() {
 
                 tabPanel(activeIndex = selectedTab, tabPosition = TabPosition.Top, draggableTabs = draggableTabs) {
                     console.log("recompose tabPanel 1 (selectedTab: $selectedTab)")
-                    margin = 20.px
+                    margin(20.px)
                     tab("Test1", "fas fa-search", closable = true) {
                         pt("Test1")
                     }
@@ -1028,12 +1076,12 @@ class App : Application() {
                 val tabs = remember { mutableStateListOf("First tab", "Second tab") }
 
                 tabPanel(activeIndex = 0) {
-                    margin = 30.px
+                    margin(30.px)
                     console.log("recompose tabPanel")
                     tabs.forEach { tab ->
                         console.log("generate tab: $tab")
                         key(tab) {
-                            tab(tab, closable = true) {
+                            tab(tab, null, closable = true) {
                                 pt(tab)
                             }
                         }
@@ -1116,7 +1164,7 @@ class App : Application() {
                             +"test"
                         }
                     }
-                    margin = 20.px
+                    margin(20.px)
                     form(className = "row g-3 needs-validation") {
                         val validation by validationStateFlow.collectAsState()
 
@@ -1149,12 +1197,12 @@ class App : Application() {
                             wrapperClassName = "input-group has-validation"
                         ) {
                             span("input-group-text") {
-                                id = "inputGroupPrepend"
+                                id("inputGroupPrepend")
                                 +"@"
                             }
                             val invalidClass = if (validation["username"]?.isInvalid == true) "is-invalid" else null
                             text(required = true, className = "form-control" % invalidClass) {
-                                ariaDescribedby = "inputGroupPrepend"
+                                ariaDescribedby("inputGroupPrepend")
                             }.bindWithValidationMessage("username") { text ->
                                 val result = text.value == null || text.value!!.length >= 10
                                 val message = if (!result) "Username must be at least 10 characters long." else null
@@ -1254,7 +1302,7 @@ class App : Application() {
             console.log("recomposing")
             val x = tag("address", "address3") {
                 +"address23"
-                setStyle("color", "red")
+//                setStyle("color", "red")
             }
 
             var size by remember { mutableStateOf(1) }
@@ -1300,20 +1348,20 @@ class App : Application() {
 
             tag(tn) {
                 +"address2 $size"
-                id = "test"
-                title = "Some title"
-                role = "button"
-                tabindex = 5
-                draggable = true
-                setAttribute("aria-label", "Ala ma kota")
+                //    id = "test"
+                //    title = "Some title"
+                //role = "button"
+                //   tabindex = 5
+                //    draggable = true
+                //   setAttribute("aria-label", "Ala ma kota")
             }
             val x2 = text("Ala ma kota")
             button(type = type) {
                 +"test span"
                 onClick {
-                    disabled = !(disabled ?: false)
+                    cast<Button>().disabled = !(disabled ?: false)
                     window.setTimeout({
-                        disabled = !(disabled ?: false)
+                        cast<Button>().disabled = !(disabled ?: false)
                         obj()
                     }, 1000)
                 }

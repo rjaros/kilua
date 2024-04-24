@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Dd component.
  */
+public interface IDd : ITag<HTMLElement>
+
+/**
+ * HTML Dd component.
+ */
 public open class Dd(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("dd", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("dd", className, renderConfig = renderConfig), IDd
 
 /**
  * Creates a [Dd] component.
@@ -44,7 +49,7 @@ public open class Dd(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [Dd] component
  */
 @Composable
-public fun ComponentBase.dd(className: String? = null, content: @Composable Dd.() -> Unit = {}): Dd {
+public fun IComponent.dd(className: String? = null, content: @Composable IDd.() -> Unit = {}): Dd {
     val component = remember { Dd(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Dd::className, it) }

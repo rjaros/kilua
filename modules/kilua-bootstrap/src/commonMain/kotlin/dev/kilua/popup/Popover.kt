@@ -26,7 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import dev.kilua.externals.Bootstrap
 import dev.kilua.externals.obj
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
+import dev.kilua.utils.cast
 import kotlin.time.Duration
 
 /**
@@ -45,7 +47,7 @@ import kotlin.time.Duration
  * @return Bootstrap popover instance
  */
 @Composable
-public fun Tag<*>.popover(
+public fun ITag<*>.popover(
     content: String,
     title: String? = null,
     animation: Boolean = true,
@@ -85,7 +87,7 @@ public fun Tag<*>.popover(
         this.sanitize = sanitize
     })
 
-    DisposableEffect("kilua_popover_${this.componentId}") {
+    DisposableEffect("kilua_popover_${this.cast<Tag<*>>().componentId}") {
         popover.enable()
         onDispose {
             popover.disable()
@@ -97,41 +99,41 @@ public fun Tag<*>.popover(
 /**
  * Show popover.
  */
-public fun Tag<*>.showPopover() {
+public fun ITag<*>.showPopover() {
     Bootstrap.Popover.getInstance(element)?.show()
 }
 
 /**
  * Hide popover.
  */
-public fun Tag<*>.hidePopover() {
+public fun ITag<*>.hidePopover() {
     Bootstrap.Popover.getInstance(element)?.hide()
 }
 
 /**
  * Toggle popover.
  */
-public fun Tag<*>.togglePopover() {
+public fun ITag<*>.togglePopover() {
     Bootstrap.Popover.getInstance(element)?.toggle()
 }
 
 /**
  * Enable popover.
  */
-public fun Tag<*>.enablePopover() {
+public fun ITag<*>.enablePopover() {
     Bootstrap.Popover.getInstance(element)?.enable()
 }
 
 /**
  * Disable popover.
  */
-public fun Tag<*>.disablePopover() {
+public fun ITag<*>.disablePopover() {
     Bootstrap.Popover.getInstance(element)?.disable()
 }
 
 /**
  * Dispose popover.
  */
-public fun Tag<*>.disposePopover() {
+public fun ITag<*>.disposePopover() {
     Bootstrap.Popover.getInstance(element)?.dispose()
 }

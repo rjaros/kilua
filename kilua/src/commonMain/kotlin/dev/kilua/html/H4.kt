@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLHeadingElement
@@ -33,8 +33,13 @@ import web.dom.HTMLHeadingElement
 /**
  * HTML H4 component.
  */
+public interface IH4 : ITag<HTMLHeadingElement>
+
+/**
+ * HTML H4 component.
+ */
 public open class H4(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadingElement>("h4", className, renderConfig = renderConfig)
+    Tag<HTMLHeadingElement>("h4", className, renderConfig = renderConfig), IH4
 
 /**
  * Creates a [H4] component.
@@ -44,7 +49,7 @@ public open class H4(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [H4] component
  */
 @Composable
-public fun ComponentBase.h4(className: String? = null, content: @Composable H4.() -> Unit = {}): H4 {
+public fun IComponent.h4(className: String? = null, content: @Composable IH4.() -> Unit = {}): H4 {
     val component = remember { H4(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(H4::className, it) }
@@ -61,7 +66,7 @@ public fun ComponentBase.h4(className: String? = null, content: @Composable H4.(
  * @return the [H4] component
  */
 @Composable
-public fun ComponentBase.h4t(text: String, className: String? = null, content: @Composable H4.() -> Unit = {}): H4 {
+public fun IComponent.h4t(text: String, className: String? = null, content: @Composable IH4.() -> Unit = {}): H4 {
     return h4(className) {
         +text
         content()

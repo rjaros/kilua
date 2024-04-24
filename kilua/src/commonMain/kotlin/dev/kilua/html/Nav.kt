@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Nav component.
  */
+public interface INav : ITag<HTMLElement>
+
+/**
+ * HTML Nav component.
+ */
 public open class Nav(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("nav", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("nav", className, renderConfig = renderConfig), INav
 
 /**
  * Creates a [Nav] component.
@@ -44,7 +49,7 @@ public open class Nav(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Nav] component
  */
 @Composable
-public fun ComponentBase.nav(className: String? = null, content: @Composable Nav.() -> Unit = {}): Nav {
+public fun IComponent.nav(className: String? = null, content: @Composable INav.() -> Unit = {}): Nav {
     val component = remember { Nav(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Nav::className, it) }

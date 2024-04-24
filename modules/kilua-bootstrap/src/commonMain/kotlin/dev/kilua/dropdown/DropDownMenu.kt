@@ -23,7 +23,8 @@
 package dev.kilua.dropdown
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
+import dev.kilua.html.IUl
 import dev.kilua.html.Ul
 import dev.kilua.html.ul
 import dev.kilua.utils.rem
@@ -63,11 +64,11 @@ public enum class StartAlignment {
 }
 
 @Composable
-public fun ComponentBase.dropDownMenu(
+public fun IComponent.dropDownMenu(
     endAlignment: EndAlignment? = null,
     startAlignment: StartAlignment? = null,
     className: String? = null,
-    content: @Composable Ul.() -> Unit = {}
+    content: @Composable IUl.() -> Unit = {}
 ): Ul {
     return ul("dropdown-menu" % endAlignment?.value % startAlignment?.value % className, content)
 }

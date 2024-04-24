@@ -45,27 +45,12 @@ public interface FormControl<T> : WithStateFlow<T> {
     /**
      * Determines if the field is visible.
      */
-    public var visible: Boolean
-
-    /**
-     * Determines if the field is disabled.
-     */
-    public var disabled: Boolean?
+    public val visible: Boolean
 
     /**
      * Determines if the field is required.
      */
-    public var required: Boolean?
-
-    /**
-     * The ID attribute of the generated HTML element.
-     */
-    public var id: String?
-
-    /**
-     * The name attribute of the generated HTML element.
-     */
-    public var name: String?
+    public val required: Boolean?
 
     /**
      * The custom validity of the HTML element.

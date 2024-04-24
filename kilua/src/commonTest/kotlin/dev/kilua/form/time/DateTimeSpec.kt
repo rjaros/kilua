@@ -47,7 +47,7 @@ class DateTimeSpec : DomSpec {
                     date.date.plus(1, DateTimeUnit.DAY).atTime(0, 0, 0),
                     name = "date"
                 ) {
-                    defaultValue = date
+                    defaultValue(date)
                 }
             }
             assertEquals(
@@ -69,7 +69,7 @@ class DateTimeSpec : DomSpec {
                     date.date.plus(1, DateTimeUnit.DAY).atTime(0, 0, 0),
                     name = "date"
                 ) {
-                    defaultValue = date
+                    defaultValue(date)
                 }
             }
             assertEquals(

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Rt component.
  */
+public interface IRt : ITag<HTMLElement>
+
+/**
+ * HTML Rt component.
+ */
 public open class Rt(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("rt", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("rt", className, renderConfig = renderConfig), IRt
 
 /**
  * Creates a [Rt] component.
@@ -44,7 +49,7 @@ public open class Rt(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [Rt] component
  */
 @Composable
-public fun ComponentBase.rt(className: String? = null, content: @Composable Rt.() -> Unit = {}): Rt {
+public fun IComponent.rt(className: String? = null, content: @Composable IRt.() -> Unit = {}): Rt {
     val component = remember { Rt(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Rt::className, it) }

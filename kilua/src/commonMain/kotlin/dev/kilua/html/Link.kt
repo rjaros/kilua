@@ -25,12 +25,50 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
 import web.dom.HTMLAnchorElement
+
+/**
+ * HTML A component.
+ */
+public interface ILink : ITag<HTMLAnchorElement> {
+    /**
+     * The URL of the link.
+     */
+    public val href: String?
+
+    /**
+     * Set the URL of the link.
+     */
+    @Composable
+    public fun href(href: String?)
+
+    /**
+     * The target of the link.
+     */
+    public val target: String?
+
+    /**
+     * Set the target of the link.
+     */
+    @Composable
+    public fun target(target: String?)
+
+    /**
+     * The download attribute of the link.
+     */
+    public val download: String?
+
+    /**
+     * Set the download attribute of the link.
+     */
+    @Composable
+    public fun download(download: String?)
+}
 
 /**
  * HTML A component.
@@ -41,12 +79,12 @@ public open class Link(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLAnchorElement>("a", className, renderConfig = renderConfig) {
+    Tag<HTMLAnchorElement>("a", className, renderConfig = renderConfig), ILink {
 
     /**
      * The URL of the link.
      */
-    public open var href: String? by updatingProperty(href) {
+    public override var href: String? by updatingProperty(href) {
         if (it != null) {
             element.href = it
         } else {
@@ -55,9 +93,19 @@ public open class Link(
     }
 
     /**
+     * Set the URL of the link.
+     */
+    @Composable
+    public override fun href(href: String?): Unit = composableProperty("href", {
+        this.href = null
+    }) {
+        this.href = href
+    }
+
+    /**
      * The target of the link.
      */
-    public open var target: String? by updatingProperty(target) {
+    public override var target: String? by updatingProperty(target) {
         if (it != null) {
             element.target = it
         } else {
@@ -66,9 +114,19 @@ public open class Link(
     }
 
     /**
+     * Set the target of the link.
+     */
+    @Composable
+    public override fun target(target: String?): Unit = composableProperty("target", {
+        this.target = null
+    }) {
+        this.target = target
+    }
+
+    /**
      * The download attribute of the link.
      */
-    public open var download: String? by updatingProperty {
+    public override var download: String? by updatingProperty {
         if (it != null) {
             element.download = it
         } else {
@@ -76,12 +134,24 @@ public open class Link(
         }
     }
 
+    /**
+     * Set the download attribute of the link.
+     */
+    @Composable
+    public override fun download(download: String?): Unit = composableProperty("download", {
+        this.download = null
+    }) {
+        this.download = download
+    }
+
     init {
         if (renderConfig.isDom) {
             if (href != null) {
+                @Suppress("LeakingThis")
                 element.href = href
             }
             if (target != null) {
+                @Suppress("LeakingThis")
                 element.target = target
             }
         }
@@ -104,11 +174,11 @@ public open class Link(
  * @return the [Link] component
  */
 @Composable
-private fun ComponentBase.link(
+private fun IComponent.link(
     href: String? = null,
     target: String? = null,
     className: String? = null,
-    content: @Composable Link.() -> Unit = {}
+    content: @Composable ILink.() -> Unit = {}
 ): Link {
     val component = remember { Link(href, target, className, renderConfig = renderConfig) }
     ComponentNode(component, {
@@ -132,13 +202,13 @@ private fun ComponentBase.link(
  * @return the [Link] component
  */
 @Composable
-public fun ComponentBase.link(
+public fun IComponent.link(
     href: String? = null,
     label: String? = null,
     icon: String? = null,
     target: String? = null,
     className: String? = null,
-    content: @Composable Link.() -> Unit = {}
+    content: @Composable ILink.() -> Unit = {}
 ): Link {
     val iconClassName = if (label != null && icon != null) {
         className % "icon-link"

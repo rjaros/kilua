@@ -24,10 +24,9 @@ package dev.kilua.form
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.div
 import dev.kilua.html.label
-import dev.kilua.html.unaryPlus
 
 /**
  * Creates a block with an associated label.
@@ -38,16 +37,16 @@ import dev.kilua.html.unaryPlus
  * @param wrapperClassName the optional CSS class name for the direct wrapper of the field
  */
 @Composable
-public fun ComponentBase.fieldWithLabel(
+public fun IComponent.fieldWithLabel(
     label: String,
     className: String? = null,
     labelAfter: Boolean = false,
     groupClassName: String? = null,
     wrapperClassName: String? = null,
-    content: @Composable ComponentBase.(id: String) -> Unit,
+    content: @Composable IComponent.(id: String) -> Unit,
 ) {
     @Composable
-    fun ComponentBase.generateContent(id: String) {
+    fun IComponent.generateContent(id: String) {
         if (wrapperClassName != null) {
             div(wrapperClassName) {
                 content(id)
@@ -58,7 +57,7 @@ public fun ComponentBase.fieldWithLabel(
     }
 
     @Composable
-    fun ComponentBase.generateLabelWithContent(id: String) {
+    fun IComponent.generateLabelWithContent(id: String) {
         if (labelAfter) {
             generateContent(id)
             label(id, className) { +label }

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Aside component.
  */
+public interface IAside : ITag<HTMLElement>
+
+/**
+ * HTML Aside component.
+ */
 public open class Aside(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("aside", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("aside", className, renderConfig = renderConfig), IAside
 
 /**
  * Creates a [Aside] component.
@@ -44,7 +49,7 @@ public open class Aside(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Aside] component
  */
 @Composable
-public fun ComponentBase.aside(className: String? = null, content: @Composable Aside.() -> Unit = {}): Aside {
+public fun IComponent.aside(className: String? = null, content: @Composable IAside.() -> Unit = {}): Aside {
     val component = remember { Aside(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Aside::className, it) }

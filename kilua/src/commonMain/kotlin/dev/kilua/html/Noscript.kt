@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Noscript component.
  */
+public interface INoscript : ITag<HTMLElement>
+
+/**
+ * HTML Noscript component.
+ */
 public open class Noscript(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("noscript", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("noscript", className, renderConfig = renderConfig), INoscript
 
 /**
  * Creates a [Noscript] component.
@@ -44,7 +49,7 @@ public open class Noscript(className: String? = null, renderConfig: RenderConfig
  * @return the [Noscript] component
  */
 @Composable
-public fun ComponentBase.noscript(className: String? = null, content: @Composable Noscript.() -> Unit = {}): Noscript {
+public fun IComponent.noscript(className: String? = null, content: @Composable INoscript.() -> Unit = {}): Noscript {
     val component = remember { Noscript(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Noscript::className, it) }

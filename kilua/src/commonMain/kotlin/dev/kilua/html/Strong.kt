@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Strong component.
  */
+public interface IStrong : ITag<HTMLElement>
+
+/**
+ * HTML Strong component.
+ */
 public open class Strong(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("strong", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("strong", className, renderConfig = renderConfig), IStrong
 
 /**
  * Creates a [Strong] component.
@@ -44,7 +49,7 @@ public open class Strong(className: String? = null, renderConfig: RenderConfig =
  * @return the [Strong] component
  */
 @Composable
-public fun ComponentBase.strong(className: String? = null, content: @Composable Strong.() -> Unit = {}): Strong {
+public fun IComponent.strong(className: String? = null, content: @Composable IStrong.() -> Unit = {}): Strong {
     val component = remember { Strong(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Strong::className, it) }
@@ -61,10 +66,10 @@ public fun ComponentBase.strong(className: String? = null, content: @Composable 
  * @return the [Strong] component
  */
 @Composable
-public fun ComponentBase.strongt(
+public fun IComponent.strongt(
     text: String,
     className: String? = null,
-    content: @Composable Strong.() -> Unit = {}
+    content: @Composable IStrong.() -> Unit = {}
 ): Strong {
     return strong(className) {
         +text

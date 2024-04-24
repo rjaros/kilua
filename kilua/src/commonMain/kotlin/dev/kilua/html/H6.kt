@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLHeadingElement
@@ -33,8 +33,13 @@ import web.dom.HTMLHeadingElement
 /**
  * HTML H6 component.
  */
+public interface IH6 : ITag<HTMLHeadingElement>
+
+/**
+ * HTML H6 component.
+ */
 public open class H6(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadingElement>("h6", className, renderConfig = renderConfig)
+    Tag<HTMLHeadingElement>("h6", className, renderConfig = renderConfig), IH6
 
 /**
  * Creates a [H6] component.
@@ -44,7 +49,7 @@ public open class H6(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [H6] component
  */
 @Composable
-public fun ComponentBase.h6(className: String? = null, content: @Composable H6.() -> Unit = {}): H6 {
+public fun IComponent.h6(className: String? = null, content: @Composable IH6.() -> Unit = {}): H6 {
     val component = remember { H6(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(H6::className, it) }
@@ -61,7 +66,7 @@ public fun ComponentBase.h6(className: String? = null, content: @Composable H6.(
  * @return the [H6] component
  */
 @Composable
-public fun ComponentBase.h6t(text: String, className: String? = null, content: @Composable H6.() -> Unit = {}): H6 {
+public fun IComponent.h6t(text: String, className: String? = null, content: @Composable IH6.() -> Unit = {}): H6 {
     return h6(className) {
         +text
         content()

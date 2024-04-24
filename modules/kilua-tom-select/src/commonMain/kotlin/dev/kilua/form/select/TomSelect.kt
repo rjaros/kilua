@@ -27,14 +27,15 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
 import dev.kilua.externals.assign
 import dev.kilua.externals.obj
 import dev.kilua.form.StringFormControl
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
@@ -57,6 +58,154 @@ import web.toJsString
 /**
  * Tom Select component.
  */
+public interface ITomSelect : ITag<HTMLSelectElement>, StringFormControl, WithStateFlow<String?> {
+    /**
+     * The list of options (value to label pairs).
+     */
+    public val options: List<StringPair>?
+
+    /**
+     * Set the list of options (value to label pairs).
+     */
+    @Composable
+    public fun options(options: List<StringPair>?)
+
+    /**
+     * Determines if an empty option is allowed.
+     */
+    public val emptyOption: Boolean
+
+    /**
+     * Set whether an empty option is allowed.
+     */
+    @Composable
+    public fun emptyOption(emptyOption: Boolean)
+
+    /**
+     * Determines if multiple value selection is allowed.
+     */
+    public val multiple: Boolean
+
+    /**
+     * Set whether multiple value selection is allowed.
+     */
+    @Composable
+    public fun multiple(multiple: Boolean)
+
+    /**
+     * The maximum number of visible options.
+     */
+    public val maxOptions: Int?
+
+    /**
+     * Set the maximum number of visible options.
+     */
+    @Composable
+    public fun maxOptions(maxOptions: Int?)
+
+    /**
+     * Tom Select options.
+     */
+    public val tsOptions: TomSelectOptions?
+
+    /**
+     * Set Tom Select options.
+     */
+    @Composable
+    public fun tsOptions(tsOptions: TomSelectOptions?)
+
+    /**
+     * Tom Select callbacks.
+     */
+    public val tsCallbacks: TomSelectCallbacks?
+
+    /**
+     * Set Tom Select callbacks.
+     */
+    @Composable
+    public fun tsCallbacks(tsCallbacks: TomSelectCallbacks?)
+
+    /**
+     * Tom Select renders.
+     */
+    public val tsRenders: TomSelectRenders?
+
+    /**
+     * Set Tom Select renders.
+     */
+    @Composable
+    public fun tsRenders(tsRenders: TomSelectRenders?)
+
+    /**
+     * Disable searching in options.
+     */
+    public val disableSearch: Boolean
+
+    /**
+     * Set whether searching in options is disabled.
+     */
+    @Composable
+    public fun disableSearch(disableSearch: Boolean)
+
+    /**
+     * The name of the select.
+     */
+    public val name: String?
+
+    /**
+     * Set the name of the select.
+     */
+    @Composable
+    public fun name(name: String?)
+
+    /**
+     * The placeholder for the select component.
+     */
+    public val placeholder: String?
+
+    /**
+     * Set the placeholder for the select component.
+     */
+    @Composable
+    public fun placeholder(placeholder: String?)
+
+    /**
+     * Whether the select is disabled.
+     */
+    public val disabled: Boolean?
+
+    /**
+     * Set whether the select is disabled.
+     */
+    @Composable
+    public fun disabled(disabled: Boolean?)
+
+    /**
+     * Set whether the select is required.
+     */
+    @Composable
+    public fun required(required: Boolean?)
+
+    /**
+     * Tom Select native component instance.
+     */
+    public val tomSelectInstance: TomSelectJs?
+
+    /**
+     * The label of the currently selected option.
+     */
+    public val selectedLabel: String?
+
+    /**
+     * Removes all unselected options from the control.
+     */
+    public fun clearOptions()
+
+}
+
+/**
+ * Tom Select component.
+ */
 public open class TomSelect(
     options: List<StringPair>? = null,
     value: String? = null,
@@ -75,13 +224,23 @@ public open class TomSelect(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLSelectElement>("select", className, id, renderConfig), StringFormControl,
-    WithStateFlow<String?> by withStateFlowDelegate {
+    WithStateFlow<String?> by withStateFlowDelegate, ITomSelect {
 
     /**
      * The list of options (value to label pairs).
      */
-    public open var options: List<StringPair>? by updatingProperty(options) {
+    public override var options: List<StringPair>? by updatingProperty(options) {
         refresh()
+    }
+
+    /**
+     * Set the list of options (value to label pairs).
+     */
+    @Composable
+    public override fun options(options: List<StringPair>?): Unit = composableProperty("options", {
+        this.options = null
+    }) {
+        this.options = options
     }
 
     public override var value: String? by updatingProperty(
@@ -93,49 +252,119 @@ public open class TomSelect(
     /**
      * Determines if an empty option is allowed.
      */
-    public var emptyOption: Boolean by updatingProperty(emptyOption) {
+    public override var emptyOption: Boolean by updatingProperty(emptyOption) {
         refresh()
+    }
+
+    /**
+     * Set whether an empty option is allowed.
+     */
+    @Composable
+    public override fun emptyOption(emptyOption: Boolean): Unit = composableProperty("emptyOption", {
+        this.emptyOption = false
+    }) {
+        this.emptyOption = emptyOption
     }
 
     /**
      * Determines if multiple value selection is allowed.
      */
-    internal var multiple: Boolean by updatingProperty(multiple) {
+    override var multiple: Boolean by updatingProperty(multiple) {
+    }
+
+    /**
+     * Set whether multiple value selection is allowed.
+     */
+    @Composable
+    public override fun multiple(multiple: Boolean): Unit = composableProperty("multiple", {
+        this.multiple = false
+    }) {
+        this.multiple = multiple
     }
 
     /**
      * The maximum number of visible options.
      */
-    public var maxOptions: Int? by updatingProperty(maxOptions) {
+    public override var maxOptions: Int? by updatingProperty(maxOptions) {
         refresh()
+    }
+
+    /**
+     * Set the maximum number of visible options.
+     */
+    @Composable
+    public override fun maxOptions(maxOptions: Int?): Unit = composableProperty("maxOptions", {
+        this.maxOptions = null
+    }) {
+        this.maxOptions = maxOptions
     }
 
     /**
      * Tom Select options.
      */
-    public var tsOptions: TomSelectOptions? by updatingProperty(tsOptions) {
+    public override var tsOptions: TomSelectOptions? by updatingProperty(tsOptions) {
         refresh()
+    }
+
+    /**
+     * Set Tom Select options.
+     */
+    @Composable
+    public override fun tsOptions(tsOptions: TomSelectOptions?): Unit = composableProperty("tsOptions", {
+        this.tsOptions = null
+    }) {
+        this.tsOptions = tsOptions
     }
 
     /**
      * Tom Select callbacks.
      */
-    public var tsCallbacks: TomSelectCallbacks? by updatingProperty(tsCallbacks) {
+    public override var tsCallbacks: TomSelectCallbacks? by updatingProperty(tsCallbacks) {
         refresh()
+    }
+
+    /**
+     * Set Tom Select callbacks.
+     */
+    @Composable
+    public override fun tsCallbacks(tsCallbacks: TomSelectCallbacks?): Unit = composableProperty("tsCallbacks", {
+        this.tsCallbacks = null
+    }) {
+        this.tsCallbacks = tsCallbacks
     }
 
     /**
      * Tom Select renders.
      */
-    public var tsRenders: TomSelectRenders? by updatingProperty(tsRenders) {
+    public override var tsRenders: TomSelectRenders? by updatingProperty(tsRenders) {
         refresh()
+    }
+
+    /**
+     * Set Tom Select renders.
+     */
+    @Composable
+    public override fun tsRenders(tsRenders: TomSelectRenders?): Unit = composableProperty("tsRenders", {
+        this.tsRenders = null
+    }) {
+        this.tsRenders = tsRenders
     }
 
     /**
      * Disable searching in options.
      */
-    public var disableSearch: Boolean by updatingProperty(false) {
+    public override var disableSearch: Boolean by updatingProperty(false) {
         refresh()
+    }
+
+    /**
+     * Set whether searching in options is disabled.
+     */
+    @Composable
+    public override fun disableSearch(disableSearch: Boolean): Unit = composableProperty("disableSearch", {
+        this.disableSearch = false
+    }) {
+        this.disableSearch = disableSearch
     }
 
     public override var name: String? by updatingProperty(name) {
@@ -147,10 +376,30 @@ public open class TomSelect(
     }
 
     /**
+     * Set the name of the select.
+     */
+    @Composable
+    public override fun name(name: String?): Unit = composableProperty("name", {
+        this.name = null
+    }) {
+        this.name = name
+    }
+
+    /**
      * The placeholder for the select component.
      */
-    public var placeholder: String? by updatingProperty(placeholder) {
+    public override var placeholder: String? by updatingProperty(placeholder) {
         refresh()
+    }
+
+    /**
+     * Set the placeholder for the select component.
+     */
+    @Composable
+    public override fun placeholder(placeholder: String?): Unit = composableProperty("placeholder", {
+        this.placeholder = null
+    }) {
+        this.placeholder = placeholder
     }
 
     public override var disabled: Boolean? by updatingProperty(disabled) {
@@ -162,6 +411,16 @@ public open class TomSelect(
         refresh()
     }
 
+    /**
+     * Set whether the select is disabled.
+     */
+    @Composable
+    public override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
+    }
+
     public override var required: Boolean? by updatingProperty(required) {
         if (it != null) {
             element.required = it
@@ -171,14 +430,13 @@ public open class TomSelect(
     }
 
     /**
-     * The autofocus attribute of the generated HTML element.
+     * Set whether the select is required.
      */
-    public override var autofocus: Boolean? by updatingProperty {
-        if (it != null) {
-            element.autofocus = it
-        } else {
-            element.removeAttribute("autofocus")
-        }
+    @Composable
+    public override fun required(required: Boolean?): Unit = composableProperty("required", {
+        this.required = null
+    }) {
+        this.required = required
     }
 
     public override var customValidity: String? by updatingProperty {
@@ -188,12 +446,12 @@ public open class TomSelect(
     /**
      * Tom Select native component instance.
      */
-    public var tomSelectInstance: TomSelectJs? = null
+    public override var tomSelectInstance: TomSelectJs? = null
 
     /**
      * The label of the currently selected option.
      */
-    public val selectedLabel: String?
+    public override val selectedLabel: String?
         get() = element.options.asList().find {
             it.unsafeCast<HTMLOptionElement>().value == this.value
         }?.textContent
@@ -203,18 +461,23 @@ public open class TomSelect(
         withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             if (multiple) {
+                @Suppress("LeakingThis")
                 element.multiple = true
             }
             if (name != null) {
+                @Suppress("LeakingThis")
                 element.name = name
             }
             if (placeholder != null) {
+                @Suppress("LeakingThis")
                 element.setAttribute("placeholder", placeholder)
             }
             if (disabled != null) {
+                @Suppress("LeakingThis")
                 element.disabled = disabled
             }
             if (required != null) {
+                @Suppress("LeakingThis")
                 element.required = required
             }
         }
@@ -352,7 +615,7 @@ public open class TomSelect(
     /**
      * Removes all unselected options from the control.
      */
-    public open fun clearOptions() {
+    public override fun clearOptions() {
         tomSelectInstance?.clearOptions { true }
     }
 
@@ -379,7 +642,7 @@ public open class TomSelect(
  * @return a [TomSelect] component
  */
 @Composable
-public fun ComponentBase.tomSelect(
+public fun IComponent.tomSelect(
     options: List<StringPair>? = null,
     value: String? = null,
     emptyOption: Boolean = false,
@@ -394,7 +657,7 @@ public fun ComponentBase.tomSelect(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable TomSelect.() -> Unit = {}
+    setup: @Composable ITomSelect.() -> Unit = {}
 ): TomSelect {
     return key(multiple) {
         val component = remember {

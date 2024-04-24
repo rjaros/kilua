@@ -23,7 +23,7 @@
 package io.realworld.layout.shared
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.li
 import dev.kilua.html.link
 import dev.kilua.html.nav
@@ -32,7 +32,7 @@ import io.realworld.ConduitManager
 import io.realworld.ConduitState
 
 @Composable
-fun ComponentBase.pagination(state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.pagination(state: ConduitState, conduitManager: ConduitManager) {
     val limit = state.pageSize
     if (state.articlesCount > limit) {
         nav {

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLDListElement
@@ -33,8 +33,13 @@ import web.dom.HTMLDListElement
 /**
  * HTML Dl component.
  */
+public interface IDl : ITag<HTMLDListElement>
+
+/**
+ * HTML Dl component.
+ */
 public open class Dl(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDListElement>("dl", className, renderConfig = renderConfig)
+    Tag<HTMLDListElement>("dl", className, renderConfig = renderConfig), IDl
 
 /**
  * Creates a [Dl] component.
@@ -44,7 +49,7 @@ public open class Dl(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [Dl] component
  */
 @Composable
-public fun ComponentBase.dl(className: String? = null, content: @Composable Dl.() -> Unit = {}): Dl {
+public fun IComponent.dl(className: String? = null, content: @Composable IDl.() -> Unit = {}): Dl {
     val component = remember { Dl(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Dl::className, it) }

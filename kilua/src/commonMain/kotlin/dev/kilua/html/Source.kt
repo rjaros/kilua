@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLSourceElement
@@ -33,8 +33,13 @@ import web.dom.HTMLSourceElement
 /**
  * HTML Source component.
  */
+public interface ISource : ITag<HTMLSourceElement>
+
+/**
+ * HTML Source component.
+ */
 public open class Source(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLSourceElement>("source", className, renderConfig = renderConfig)
+    Tag<HTMLSourceElement>("source", className, renderConfig = renderConfig), ISource
 
 /**
  * Creates a [Source] component.
@@ -44,7 +49,7 @@ public open class Source(className: String? = null, renderConfig: RenderConfig =
  * @return the [Source] component
  */
 @Composable
-public fun ComponentBase.source(className: String? = null, setup: Source.() -> Unit = {}): Source {
+public fun IComponent.source(className: String? = null, setup: @Composable ISource.() -> Unit = {}): Source {
     val component = remember { Source(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Source::className, it) }

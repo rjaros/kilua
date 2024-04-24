@@ -23,7 +23,7 @@
 package dev.kilua.panel
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.AlignContent
 import dev.kilua.html.AlignItems
 import dev.kilua.html.CssSize
@@ -31,6 +31,7 @@ import dev.kilua.html.Display
 import dev.kilua.html.Div
 import dev.kilua.html.FlexDirection
 import dev.kilua.html.FlexWrap
+import dev.kilua.html.IDiv
 import dev.kilua.html.JustifyContent
 import dev.kilua.html.div
 
@@ -49,7 +50,7 @@ import dev.kilua.html.div
  * @return the created [dev.kilua.html.Div] component
  */
 @Composable
-public fun ComponentBase.flexPanel(
+public fun IComponent.flexPanel(
     flexDirection: FlexDirection? = null,
     flexWrap: FlexWrap? = null,
     justifyContent: JustifyContent? = null,
@@ -58,17 +59,17 @@ public fun ComponentBase.flexPanel(
     rowGap: CssSize? = null,
     columnGap: CssSize? = null,
     className: String? = null,
-    content: @Composable Div.() -> Unit,
+    content: @Composable IDiv.() -> Unit,
 ): Div {
     return div(className) {
-        this.display = Display.Flex
-        this.flexDirection = flexDirection
-        this.flexWrap = flexWrap
-        this.justifyContent = justifyContent
-        this.alignItems = alignItems
-        this.alignContent = alignContent
-        this.rowGap = rowGap
-        this.columnGap = columnGap
+        display(Display.Flex)
+        flexDirection(flexDirection)
+        flexWrap(flexWrap)
+        justifyContent(justifyContent)
+        alignItems(alignItems)
+        alignContent(alignContent)
+        rowGap(rowGap)
+        columnGap(columnGap)
         content()
     }
 }

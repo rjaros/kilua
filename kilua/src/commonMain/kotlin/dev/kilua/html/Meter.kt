@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLMeterElement
@@ -33,8 +33,13 @@ import web.dom.HTMLMeterElement
 /**
  * HTML Meter component.
  */
+public interface IMeter : ITag<HTMLMeterElement>
+
+/**
+ * HTML Meter component.
+ */
 public open class Meter(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLMeterElement>("meter", className, renderConfig = renderConfig)
+    Tag<HTMLMeterElement>("meter", className, renderConfig = renderConfig), IMeter
 
 /**
  * Creates a [Meter] component.
@@ -44,7 +49,7 @@ public open class Meter(className: String? = null, renderConfig: RenderConfig = 
  * @return the [Meter] component
  */
 @Composable
-public fun ComponentBase.meter(className: String? = null, content: @Composable Meter.() -> Unit = {}): Meter {
+public fun IComponent.meter(className: String? = null, content: @Composable IMeter.() -> Unit = {}): Meter {
     val component = remember { Meter(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Meter::className, it) }

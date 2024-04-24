@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Figcaption component.
  */
+public interface IFigcaption : ITag<HTMLElement>
+
+/**
+ * HTML Figcaption component.
+ */
 public open class Figcaption(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("figcaption", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("figcaption", className, renderConfig = renderConfig), IFigcaption
 
 /**
  * Creates a [Figcaption] component.
@@ -44,9 +49,9 @@ public open class Figcaption(className: String? = null, renderConfig: RenderConf
  * @return the [Figcaption] component
  */
 @Composable
-public fun ComponentBase.figcaption(
+public fun IComponent.figcaption(
     className: String? = null,
-    content: @Composable Figcaption.() -> Unit = {}
+    content: @Composable IFigcaption.() -> Unit = {}
 ): Figcaption {
     val component = remember { Figcaption(className, renderConfig = renderConfig) }
     ComponentNode(component, {

@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLHeadingElement
@@ -33,8 +33,13 @@ import web.dom.HTMLHeadingElement
 /**
  * HTML H5 component.
  */
+public interface IH5 : ITag<HTMLHeadingElement>
+
+/**
+ * HTML H5 component.
+ */
 public open class H5(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHeadingElement>("h5", className, renderConfig = renderConfig)
+    Tag<HTMLHeadingElement>("h5", className, renderConfig = renderConfig), IH5
 
 /**
  * Creates a [H5] component.
@@ -44,7 +49,7 @@ public open class H5(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [H5] component
  */
 @Composable
-public fun ComponentBase.h5(className: String? = null, content: @Composable H5.() -> Unit = {}): H5 {
+public fun IComponent.h5(className: String? = null, content: @Composable IH5.() -> Unit = {}): H5 {
     val component = remember { H5(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(H5::className, it) }
@@ -61,7 +66,7 @@ public fun ComponentBase.h5(className: String? = null, content: @Composable H5.(
  * @return the [H5] component
  */
 @Composable
-public fun ComponentBase.h5t(text: String, className: String? = null, content: @Composable H5.() -> Unit = {}): H5 {
+public fun IComponent.h5t(text: String, className: String? = null, content: @Composable IH5.() -> Unit = {}): H5 {
     return h5(className) {
         +text
         content()

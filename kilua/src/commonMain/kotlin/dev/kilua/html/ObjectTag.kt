@@ -25,16 +25,21 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLObjectElement
 
 /**
- * Object tag component.
+ * HTML Object tag component.
+ */
+public interface IObjectTag : ITag<HTMLObjectElement>
+
+/**
+ * HTML Object tag component.
  */
 public open class ObjectTag(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLObjectElement>("object", className, renderConfig = renderConfig)
+    Tag<HTMLObjectElement>("object", className, renderConfig = renderConfig), IObjectTag
 
 /**
  * Creates a [ObjectTag] component.
@@ -44,9 +49,9 @@ public open class ObjectTag(className: String? = null, renderConfig: RenderConfi
  * @return the [ObjectTag] component
  */
 @Composable
-public fun ComponentBase.objectTag(
+public fun IComponent.objectTag(
     className: String? = null,
-    content: @Composable ObjectTag.() -> Unit = {}
+    content: @Composable IObjectTag.() -> Unit = {}
 ): ObjectTag {
     val component = remember { ObjectTag(className, renderConfig = renderConfig) }
     ComponentNode(component, {

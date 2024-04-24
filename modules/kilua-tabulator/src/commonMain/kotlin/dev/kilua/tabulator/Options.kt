@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import dev.kilua.compose.Root
 import dev.kilua.compose.root
 import dev.kilua.core.Component
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.externals.CellComponent
 import dev.kilua.externals.CellComponentBase
 import dev.kilua.externals.ColumnComponent
@@ -527,7 +527,7 @@ public data class ColumnDefinition<T : Any>(
         cell: CellComponentBase, formatterParams: JsAny?,
         onRendered: (callback: () -> Unit) -> Unit
     ) -> String)? = null,
-    val formatterComponentFunction: (@Composable ComponentBase.(
+    val formatterComponentFunction: (@Composable IComponent.(
         cell: CellComponentBase, onRendered: (callback: () -> Unit) -> Unit, data: T
     ) -> Unit)? = null,
     val formatterParams: JsAny? = null,
@@ -539,7 +539,7 @@ public data class ColumnDefinition<T : Any>(
         onRendered: (callback: () -> Unit) -> Unit,
         success: (value: JsAny?) -> Unit, cancel: (value: JsAny?) -> Unit, editorParams: JsAny?
     ) -> JsAny)? = null,
-    val editorComponentFunction: (@Composable ComponentBase.(
+    val editorComponentFunction: (@Composable IComponent.(
         cell: CellComponent,
         onRendered: (callback: () -> Unit) -> Unit,
         success: (value: JsAny?) -> Unit, cancel: (value: JsAny?) -> Unit, data: T
@@ -580,7 +580,7 @@ public data class ColumnDefinition<T : Any>(
         cell: CellComponentBase, formatterParams: JsAny?,
         onRendered: (callback: () -> Unit) -> Unit
     ) -> String)? = null,
-    val titleFormatterComponentFunction: (@Composable ComponentBase.(
+    val titleFormatterComponentFunction: (@Composable IComponent.(
         cell: CellComponentBase, onRendered: (callback: () -> Unit) -> Unit
     ) -> Unit)? = null,
     val titleFormatterParams: JsAny? = null,

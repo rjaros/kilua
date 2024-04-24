@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLDetailsElement
@@ -33,8 +33,13 @@ import web.dom.HTMLDetailsElement
 /**
  * HTML Details component.
  */
+public interface IDetails : ITag<HTMLDetailsElement>
+
+/**
+ * HTML Details component.
+ */
 public open class Details(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDetailsElement>("details", className, renderConfig = renderConfig)
+    Tag<HTMLDetailsElement>("details", className, renderConfig = renderConfig), IDetails
 
 /**
  * Creates a [Details] component.
@@ -44,7 +49,7 @@ public open class Details(className: String? = null, renderConfig: RenderConfig 
  * @return the [Details] component
  */
 @Composable
-public fun ComponentBase.details(className: String? = null, content: @Composable Details.() -> Unit = {}): Details {
+public fun IComponent.details(className: String? = null, content: @Composable IDetails.() -> Unit = {}): Details {
     val component = remember { Details(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Details::className, it) }

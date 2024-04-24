@@ -33,8 +33,8 @@ class CheckBoxSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 checkBox(true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
+                    defaultChecked(true)
+                    extraValue("extra")
                 }
             }
             assertEqualsHtml(
@@ -50,8 +50,8 @@ class CheckBoxSpec : DomSpec {
         run {
             val root = root {
                 checkBox(true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
+                    defaultChecked(true)
+                    extraValue("extra")
                 }
             }
             assertEqualsHtml(

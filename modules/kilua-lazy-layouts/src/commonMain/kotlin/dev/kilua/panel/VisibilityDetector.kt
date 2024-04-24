@@ -23,7 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.externals.console
 import dev.kilua.externals.obj
 import dev.kilua.html.div
@@ -37,7 +37,7 @@ import kotlin.random.nextUInt
  * Invisible component that calls [onVisible] when it appears on screen.
  */
 @Composable
-internal fun ComponentBase.visibilityDetector(onVisible: () -> Unit) {
+internal fun IComponent.visibilityDetector(onVisible: () -> Unit) {
     val id = remember { "visibility-observer-" + Random.nextUInt() }
     var hit by remember { mutableStateOf(0) }
 

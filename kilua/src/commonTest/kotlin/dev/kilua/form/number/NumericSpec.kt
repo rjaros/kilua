@@ -36,7 +36,7 @@ class NumericSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 numeric(1235.321, locale = SimpleLocale("en")) {
-                    defaultValue = 1235.321
+                    defaultValue(1235.321)
                 }
             }
             assertEquals(
@@ -52,7 +52,7 @@ class NumericSpec : DomSpec {
         run {
             val root = root {
                 numeric(1235.321, locale = SimpleLocale("en")) {
-                    defaultValue = 1235.321
+                    defaultValue(1235.321)
                 }
             }
             assertEquals(
@@ -69,7 +69,7 @@ class NumericSpec : DomSpec {
             lateinit var numeric: Numeric
             root("test") {
                 numeric = numeric(1235.321, locale = SimpleLocale("en")) {
-                    defaultValue = 1235.321
+                    defaultValue(1235.321)
                 }
             }
             assertEquals(1235.321, numeric.value)

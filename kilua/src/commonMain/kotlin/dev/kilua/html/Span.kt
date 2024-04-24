@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLSpanElement
@@ -33,8 +33,13 @@ import web.dom.HTMLSpanElement
 /**
  * HTML Span component.
  */
+public interface ISpan : ITag<HTMLSpanElement>
+
+/**
+ * HTML Span component.
+ */
 public open class Span(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLSpanElement>("span", className, renderConfig = renderConfig)
+    Tag<HTMLSpanElement>("span", className, renderConfig = renderConfig), ISpan
 
 /**
  * Creates a [Span] component.
@@ -44,7 +49,7 @@ public open class Span(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Span] component
  */
 @Composable
-public fun ComponentBase.span(className: String? = null, content: @Composable Span.() -> Unit = {}): Span {
+public fun IComponent.span(className: String? = null, content: @Composable ISpan.() -> Unit = {}): Span {
     val component = remember { Span(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Span::className, it) }
@@ -61,10 +66,10 @@ public fun ComponentBase.span(className: String? = null, content: @Composable Sp
  * @return the [Span] component
  */
 @Composable
-public fun ComponentBase.spant(
+public fun IComponent.spant(
     text: String,
     className: String? = null,
-    content: @Composable Span.() -> Unit = {}
+    content: @Composable ISpan.() -> Unit = {}
 ): Span {
     return span(className) {
         +text

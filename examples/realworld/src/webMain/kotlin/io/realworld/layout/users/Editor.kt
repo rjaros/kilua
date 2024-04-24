@@ -23,7 +23,7 @@
 package io.realworld.layout.users
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.form.form
 import dev.kilua.form.text.Text
 import dev.kilua.form.text.TextArea
@@ -35,14 +35,13 @@ import dev.kilua.html.div
 import dev.kilua.html.fieldset
 import dev.kilua.html.li
 import dev.kilua.html.ul
-import dev.kilua.html.unaryPlus
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
 import web.dom.events.Event
 
 @Composable
-fun ComponentBase.editorPage(state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.editorPage(state: ConduitState, conduitManager: ConduitManager) {
     val isNewArticle = state.editedArticle?.slug == null
     val isMyArticle =
         state.editedArticle?.author?.username == null || state.editedArticle.author.username == state.user?.username
@@ -71,7 +70,7 @@ fun ComponentBase.editorPage(state: ConduitState, conduitManager: ConduitManager
                                         value = state.editedArticle?.title,
                                         className = "form-control form-control-lg"
                                     ) {
-                                        placeholder = "Article Title"
+                                        placeholder("Article Title")
                                     }
                                 }
                                 fieldset(className = "form-group") {
@@ -79,7 +78,7 @@ fun ComponentBase.editorPage(state: ConduitState, conduitManager: ConduitManager
                                         value = state.editedArticle?.description,
                                         className = "form-control"
                                     ) {
-                                        placeholder = "What's this article about?"
+                                        placeholder("What's this article about?")
                                     }
                                 }
                                 fieldset(className = "form-group") {
@@ -88,7 +87,7 @@ fun ComponentBase.editorPage(state: ConduitState, conduitManager: ConduitManager
                                         rows = 8,
                                         className = "form-control"
                                     ) {
-                                        placeholder = "Write your article (in markdown)"
+                                        placeholder("Write your article (in markdown)")
                                     }
                                 }
                                 fieldset(className = "form-group") {
@@ -96,7 +95,7 @@ fun ComponentBase.editorPage(state: ConduitState, conduitManager: ConduitManager
                                         value = state.editedArticle?.tagList?.joinToString(" "),
                                         className = "form-control"
                                     ) {
-                                        placeholder = "Enter tags"
+                                        placeholder("Enter tags")
                                     }
                                 }
                                 button(

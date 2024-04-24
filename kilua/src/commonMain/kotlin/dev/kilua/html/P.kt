@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLParagraphElement
@@ -33,8 +33,13 @@ import web.dom.HTMLParagraphElement
 /**
  * HTML P component.
  */
+public interface IP : ITag<HTMLParagraphElement>
+
+/**
+ * HTML P component.
+ */
 public open class P(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLParagraphElement>("p", className, renderConfig = renderConfig)
+    Tag<HTMLParagraphElement>("p", className, renderConfig = renderConfig), IP
 
 /**
  * Creates a [P] component.
@@ -44,7 +49,7 @@ public open class P(className: String? = null, renderConfig: RenderConfig = Defa
  * @return the [P] component
  */
 @Composable
-public fun ComponentBase.p(className: String? = null, content: @Composable P.() -> Unit = {}): P {
+public fun IComponent.p(className: String? = null, content: @Composable IP.() -> Unit = {}): P {
     val component = remember { P(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(P::className, it) }
@@ -61,7 +66,7 @@ public fun ComponentBase.p(className: String? = null, content: @Composable P.() 
  * @return the [P] component
  */
 @Composable
-public fun ComponentBase.pt(text: String, className: String? = null, content: @Composable P.() -> Unit = {}): P {
+public fun IComponent.pt(text: String, className: String? = null, content: @Composable IP.() -> Unit = {}): P {
     return p(className) {
         +text
         content()

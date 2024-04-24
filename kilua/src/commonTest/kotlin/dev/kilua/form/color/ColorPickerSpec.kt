@@ -35,7 +35,7 @@ class ColorPickerSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 colorPicker("#ffffff", name = "test") {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
             assertEquals(
@@ -51,7 +51,7 @@ class ColorPickerSpec : DomSpec {
         run {
             val root = root {
                 colorPicker("#ffffff", name = "test") {
-                    autofocus = true
+                    autofocus(true)
                 }
             }
             assertEquals(

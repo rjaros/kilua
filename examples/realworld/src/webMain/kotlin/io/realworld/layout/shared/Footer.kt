@@ -23,7 +23,7 @@
 package io.realworld.layout.shared
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.div
 import dev.kilua.html.footer
 import dev.kilua.html.navLink
@@ -32,7 +32,7 @@ import dev.kilua.html.span
 import io.realworld.View
 
 @Composable
-fun ComponentBase.footer() {
+fun IComponent.footer() {
     footer {
         div("container") {
             navLink(View.HOME.url, "conduit", className = "logo-font")

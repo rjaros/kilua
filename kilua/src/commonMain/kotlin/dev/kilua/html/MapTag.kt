@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLMapElement
@@ -33,8 +33,13 @@ import web.dom.HTMLMapElement
 /**
  * HTML Map component.
  */
+public interface IMapTag : ITag<HTMLMapElement>
+
+/**
+ * HTML Map component.
+ */
 public open class MapTag(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLMapElement>("map", className, renderConfig = renderConfig)
+    Tag<HTMLMapElement>("map", className, renderConfig = renderConfig), IMapTag
 
 /**
  * Creates a [MapTag] component.
@@ -44,7 +49,7 @@ public open class MapTag(className: String? = null, renderConfig: RenderConfig =
  * @return the [MapTag] component
  */
 @Composable
-public fun ComponentBase.mapTag(className: String? = null, content: @Composable MapTag.() -> Unit = {}): MapTag {
+public fun IComponent.mapTag(className: String? = null, content: @Composable IMapTag.() -> Unit = {}): MapTag {
     val component = remember { MapTag(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(MapTag::className, it) }

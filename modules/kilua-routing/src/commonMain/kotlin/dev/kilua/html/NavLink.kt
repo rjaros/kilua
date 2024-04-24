@@ -24,7 +24,7 @@ package dev.kilua.html
 
 import androidx.compose.runtime.Composable
 import app.softwork.routingcompose.Router
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 
 /**
  * Creates a [Link] component with router support.
@@ -39,14 +39,14 @@ import dev.kilua.core.ComponentBase
  * @return the [Link] component
  */
 @Composable
-public fun ComponentBase.navLink(
+public fun IComponent.navLink(
     href: String? = null,
     label: String? = null,
     icon: String? = null,
     target: String? = null,
     hide: Boolean = false,
     className: String? = null,
-    content: @Composable Link.() -> Unit = {}
+    content: @Composable ILink.() -> Unit = {}
 ): Link {
     return link(href, label, icon, target, className) {
         if (href != null) {

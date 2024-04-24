@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLUListElement
@@ -33,8 +33,13 @@ import web.dom.HTMLUListElement
 /**
  * HTML Ul component.
  */
+public interface IUl : ITag<HTMLUListElement>
+
+/**
+ * HTML Ul component.
+ */
 public open class Ul(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLUListElement>("ul", className, renderConfig = renderConfig)
+    Tag<HTMLUListElement>("ul", className, renderConfig = renderConfig), IUl
 
 /**
  * Creates a [Ul] component.
@@ -44,7 +49,7 @@ public open class Ul(className: String? = null, renderConfig: RenderConfig = Def
  * @return the [Ul] component
  */
 @Composable
-public fun ComponentBase.ul(className: String? = null, content: @Composable Ul.() -> Unit = {}): Ul {
+public fun IComponent.ul(className: String? = null, content: @Composable IUl.() -> Unit = {}): Ul {
     val component = remember { Ul(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Ul::className, it) }

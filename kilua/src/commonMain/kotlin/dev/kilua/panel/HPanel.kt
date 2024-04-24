@@ -23,11 +23,12 @@
 package dev.kilua.panel
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.AlignItems
 import dev.kilua.html.CssSize
 import dev.kilua.html.Div
 import dev.kilua.html.FlexWrap
+import dev.kilua.html.IDiv
 import dev.kilua.html.JustifyContent
 
 /**
@@ -43,14 +44,14 @@ import dev.kilua.html.JustifyContent
  * @return the created [dev.kilua.html.Div] component
  */
 @Composable
-public fun ComponentBase.hPanel(
+public fun IComponent.hPanel(
     flexWrap: FlexWrap? = null,
     justifyContent: JustifyContent? = null,
     alignItems: AlignItems? = null,
     gap: CssSize? = null,
     rowGap: CssSize? = null,
     className: String? = null,
-    content: @Composable Div.() -> Unit,
+    content: @Composable IDiv.() -> Unit,
 ): Div {
     return flexPanel(
         null,

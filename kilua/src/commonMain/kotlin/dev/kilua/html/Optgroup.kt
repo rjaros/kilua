@@ -25,11 +25,38 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLOptGroupElement
+
+/**
+ * HTML Optgroup component.
+ */
+public interface IOptgroup : ITag<HTMLOptGroupElement> {
+    /**
+     * The label of the option group.
+     */
+    public val label: String?
+
+    /**
+     * Set the label of the option group.
+     */
+    @Composable
+    public fun label(label: String?)
+
+    /**
+     * The disabled state of the option group.
+     */
+    public val disabled: Boolean?
+
+    /**
+     * Set the disabled state of the option group.
+     */
+    @Composable
+    public fun disabled(disabled: Boolean?)
+}
 
 /**
  * HTML Optgroup component.
@@ -39,12 +66,12 @@ public open class Optgroup(
     disabled: Boolean? = null,
     className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLOptGroupElement>("optgroup", className, renderConfig = renderConfig) {
+    Tag<HTMLOptGroupElement>("optgroup", className, renderConfig = renderConfig), IOptgroup {
 
     /**
      * The label of the option group.
      */
-    public open var label: String? by updatingProperty(label) {
+    public override var label: String? by updatingProperty(label) {
         if (it != null) {
             element.label = it
         } else {
@@ -53,9 +80,19 @@ public open class Optgroup(
     }
 
     /**
+     * Set the label of the option group.
+     */
+    @Composable
+    public override fun label(label: String?): Unit = composableProperty("label", {
+        this.label = null
+    }) {
+        this.label = label
+    }
+
+    /**
      * Whether the option group is disabled.
      */
-    public open var disabled: Boolean? by updatingProperty(disabled) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -63,12 +100,24 @@ public open class Optgroup(
         }
     }
 
+    /**
+     * Set the disabled state of the option group.
+     */
+    @Composable
+    public override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
+    }
+
     init {
         if (renderConfig.isDom) {
             if (label != null) {
+                @Suppress("LeakingThis")
                 element.label = label
             }
             if (disabled != null) {
+                @Suppress("LeakingThis")
                 element.disabled = disabled
             }
         }
@@ -91,11 +140,11 @@ public open class Optgroup(
  * @return the [Optgroup] component
  */
 @Composable
-public fun ComponentBase.optgroup(
+public fun IComponent.optgroup(
     label: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Optgroup.() -> Unit = {}
+    content: @Composable IOptgroup.() -> Unit = {}
 ): Optgroup {
     val component = remember { Optgroup(label, disabled, className, renderConfig = renderConfig) }
     ComponentNode(component, {

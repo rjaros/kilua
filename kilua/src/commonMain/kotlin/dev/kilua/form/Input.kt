@@ -22,8 +22,10 @@
 
 package dev.kilua.form
 
+import androidx.compose.runtime.Composable
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
@@ -31,6 +33,132 @@ import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import web.dom.HTMLInputElement
 import web.dom.events.Event
+
+/**
+ * Base interface form HTML input components.
+ */
+public interface IInput<T : Any> : ITag<HTMLInputElement>, GenericFormControl<T>, WithStateFlow<T?> {
+
+    /**
+     * The type attribute of the generated HTML input element.
+     */
+    public val type: InputType
+
+    /**
+     * Set the type attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun type(type: InputType)
+
+    /**
+     * The name attribute of the generated HTML input element.
+     */
+    public val name: String?
+
+    /**
+     * Set the name attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun name(name: String?)
+
+    /**
+     * The maxlength attribute of the generated HTML input element.
+     */
+    public val maxlength: Int?
+
+    /**
+     * Set the maxlength attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun maxlength(maxlength: Int?)
+
+    /**
+     * The placeholder attribute of the generated HTML input element.
+     */
+    public val placeholder: String?
+
+    /**
+     * Set the placeholder attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun placeholder(placeholder: String?)
+
+    /**
+     * The disabled attribute of the generated HTML input element.
+     */
+    public val disabled: Boolean?
+
+    /**
+     * Set the disabled attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun disabled(disabled: Boolean?)
+
+    /**
+     * Set the required attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun required(required: Boolean?)
+
+    /**
+     * The autocomplete attribute of the generated HTML input element.
+     */
+    public val autocomplete: Autocomplete?
+
+    /**
+     * Set the autocomplete attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun autocomplete(autocomplete: Autocomplete?)
+
+    /**
+     * The readonly attribute of the generated HTML input element.
+     */
+    public val readonly: Boolean?
+
+    /**
+     * Set the readonly attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun readonly(readonly: Boolean?)
+
+    /**
+     * The list attribute of the generated HTML input element.
+     */
+    public val list: String?
+
+    /**
+     * Set the list attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun list(list: String?)
+
+    /**
+     * The value attribute of the generated HTML input element.
+     */
+    public val defaultValue: T?
+
+    /**
+     * Set the value attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun defaultValue(defaultValue: T?)
+
+    /**
+     * The input mask options.
+     */
+    public var maskOptions: MaskOptions?
+
+    /**
+     * Install the input mask controller.
+     */
+    public fun installMask()
+
+    /**
+     * Uninstall the input mask controller.
+     */
+    public fun uninstallMask()
+}
 
 /**
  * Base abstract class for HTML input components.
@@ -48,7 +176,7 @@ public abstract class Input<T : Any>(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<T?> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLInputElement>("input", className, id, renderConfig), GenericFormControl<T>,
-    WithStateFlow<T?> by withStateFlowDelegate {
+    WithStateFlow<T?> by withStateFlowDelegate, IInput<T> {
 
     public override var value: T? by updatingProperty(
         value,
@@ -71,8 +199,18 @@ public abstract class Input<T : Any>(
     /**
      * The type attribute of the generated HTML input element.
      */
-    public open var type: InputType by updatingProperty(type) {
+    public override var type: InputType by updatingProperty(type) {
         element.type = it.value
+    }
+
+    /**
+     * Set the type attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun type(type: InputType): Unit = composableProperty("type", {
+        this.type = InputType.Text
+    }) {
+        this.type = type
     }
 
     /**
@@ -87,9 +225,19 @@ public abstract class Input<T : Any>(
     }
 
     /**
+     * Set the name attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun name(name: String?): Unit = composableProperty("name", {
+        this.name = null
+    }) {
+        this.name = name
+    }
+
+    /**
      * The maxlength attribute of the generated HTML input element.
      */
-    public var maxlength: Int? by updatingProperty(maxlength) {
+    public override var maxlength: Int? by updatingProperty(maxlength) {
         if (it != null) {
             element.maxLength = it
         } else {
@@ -98,14 +246,34 @@ public abstract class Input<T : Any>(
     }
 
     /**
+     * Set the maxlength attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun maxlength(maxlength: Int?): Unit = composableProperty("maxlength", {
+        this.maxlength = null
+    }) {
+        this.maxlength = maxlength
+    }
+
+    /**
      * The placeholder attribute of the generated HTML input element.
      */
-    public var placeholder: String? by updatingProperty(placeholder) {
+    public override var placeholder: String? by updatingProperty(placeholder) {
         if (it != null) {
             element.placeholder = it
         } else {
             element.removeAttribute("placeholder")
         }
+    }
+
+    /**
+     * Set the placeholder attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun placeholder(placeholder: String?): Unit = composableProperty("placeholder", {
+        this.placeholder = null
+    }) {
+        this.placeholder = placeholder
     }
 
     /**
@@ -119,6 +287,16 @@ public abstract class Input<T : Any>(
         }
     }
 
+    /**
+     * Set the disabled attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
+    }
+
     public override var required: Boolean? by updatingProperty(required) {
         if (it != null) {
             element.required = it
@@ -128,9 +306,19 @@ public abstract class Input<T : Any>(
     }
 
     /**
+     * Set the required attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun required(required: Boolean?): Unit = composableProperty("required", {
+        this.required = null
+    }) {
+        this.required = required
+    }
+
+    /**
      * The autocomplete attribute of the generated HTML input element.
      */
-    public open var autocomplete: Autocomplete? by updatingProperty {
+    public override var autocomplete: Autocomplete? by updatingProperty {
         if (it != null) {
             element.autocomplete = it.value
         } else {
@@ -139,20 +327,19 @@ public abstract class Input<T : Any>(
     }
 
     /**
-     * The autofocus attribute of the generated HTML input element.
+     * Set the autocomplete attribute of the generated HTML input element.
      */
-    public override var autofocus: Boolean? by updatingProperty {
-        if (it != null) {
-            element.autofocus = it
-        } else {
-            element.removeAttribute("autofocus")
-        }
+    @Composable
+    public override fun autocomplete(autocomplete: Autocomplete?): Unit = composableProperty("autocomplete", {
+        this.autocomplete = null
+    }) {
+        this.autocomplete = autocomplete
     }
 
     /**
      * The readonly attribute of the generated HTML input element.
      */
-    public open var readonly: Boolean? by updatingProperty {
+    public override var readonly: Boolean? by updatingProperty {
         if (it != null) {
             element.readOnly = it
         } else {
@@ -161,9 +348,19 @@ public abstract class Input<T : Any>(
     }
 
     /**
+     * Set the readonly attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun readonly(readonly: Boolean?): Unit = composableProperty("readonly", {
+        this.readonly = null
+    }) {
+        this.readonly = readonly
+    }
+
+    /**
      * The list attribute of the generated HTML input element.
      */
-    public open var list: String? by updatingProperty {
+    public override var list: String? by updatingProperty {
         if (it != null) {
             element.setAttribute("list", it)
         } else {
@@ -172,9 +369,19 @@ public abstract class Input<T : Any>(
     }
 
     /**
+     * Set the list attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun list(list: String?): Unit = composableProperty("list", {
+        this.list = null
+    }) {
+        this.list = list
+    }
+
+    /**
      * The value attribute of the generated HTML input element.
      */
-    public open var defaultValue: T? = null
+    public override var defaultValue: T? = null
         set(value) {
             field = value
             if (this.value == null) {
@@ -183,6 +390,16 @@ public abstract class Input<T : Any>(
             setAttribute("value", valueToString(defaultValue))
         }
 
+    /**
+     * Set the value attribute of the generated HTML input element.
+     */
+    @Composable
+    public override fun defaultValue(defaultValue: T?): Unit = composableProperty("defaultValue", {
+        this.defaultValue = null
+    }) {
+        this.defaultValue = defaultValue
+    }
+
     public override var customValidity: String? by updatingProperty {
         element.setCustomValidity(it ?: "")
     }
@@ -190,7 +407,7 @@ public abstract class Input<T : Any>(
     /**
      * The input mask options.
      */
-    public open var maskOptions: MaskOptions? = null
+    public override var maskOptions: MaskOptions? = null
         set(value) {
             if (field != null) {
                 uninstallMask()
@@ -209,22 +426,29 @@ public abstract class Input<T : Any>(
         withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             if (value != null) {
+                @Suppress("LeakingThis")
                 element.value = value.toString()
             }
+            @Suppress("LeakingThis")
             element.type = type.value
             if (name != null) {
+                @Suppress("LeakingThis")
                 element.name = name
             }
             if (maxlength != null) {
+                @Suppress("LeakingThis")
                 element.maxLength = maxlength
             }
             if (placeholder != null) {
+                @Suppress("LeakingThis")
                 element.placeholder = placeholder
             }
             if (disabled != null) {
+                @Suppress("LeakingThis")
                 element.disabled = disabled
             }
             if (required != null) {
+                @Suppress("LeakingThis")
                 element.required = required
             }
             @Suppress("LeakingThis")
@@ -268,7 +492,7 @@ public abstract class Input<T : Any>(
     /**
      * Install the input mask controller.
      */
-    public open fun installMask() {
+    public override fun installMask() {
         if (renderConfig.isDom && maskOptions != null) {
             if (MaskManager.factory == null) throw IllegalStateException("Input mask module has not been initialized")
             mask = MaskManager.factory!!.createMask(element, maskOptions!!)
@@ -281,7 +505,7 @@ public abstract class Input<T : Any>(
     /**
      * Uninstall the input mask controller.
      */
-    public open fun uninstallMask() {
+    public override fun uninstallMask() {
         mask?.destroy()
         mask = null
     }

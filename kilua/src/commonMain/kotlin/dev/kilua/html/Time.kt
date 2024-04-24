@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLTimeElement
@@ -33,8 +33,13 @@ import web.dom.HTMLTimeElement
 /**
  * HTML Time component.
  */
+public interface ITime : ITag<HTMLTimeElement>
+
+/**
+ * HTML Time component.
+ */
 public open class Time(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLTimeElement>("time", className, renderConfig = renderConfig)
+    Tag<HTMLTimeElement>("time", className, renderConfig = renderConfig), ITime
 
 /**
  * Creates a [Time] component.
@@ -44,7 +49,7 @@ public open class Time(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Time] component
  */
 @Composable
-public fun ComponentBase.time(className: String? = null, content: @Composable Time.() -> Unit = {}): Time {
+public fun IComponent.time(className: String? = null, content: @Composable ITime.() -> Unit = {}): Time {
     val component = remember { Time(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Time::className, it) }

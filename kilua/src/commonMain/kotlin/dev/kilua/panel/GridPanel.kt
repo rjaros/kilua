@@ -23,13 +23,14 @@
 package dev.kilua.panel
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.AlignContent
 import dev.kilua.html.AlignItems
 import dev.kilua.html.CssSize
 import dev.kilua.html.Display
 import dev.kilua.html.Div
 import dev.kilua.html.GridAutoFlow
+import dev.kilua.html.IDiv
 import dev.kilua.html.JustifyContent
 import dev.kilua.html.JustifyItems
 import dev.kilua.html.div
@@ -54,7 +55,7 @@ import dev.kilua.html.div
  * @return the created [dev.kilua.html.Div] component
  */
 @Composable
-public fun ComponentBase.gridPanel(
+public fun IComponent.gridPanel(
     gridAutoColumns: String? = null,
     gridAutoRows: String? = null,
     gridAutoFlow: GridAutoFlow? = null,
@@ -68,22 +69,22 @@ public fun ComponentBase.gridPanel(
     rowGap: CssSize? = null,
     columnGap: CssSize? = null,
     className: String? = null,
-    content: @Composable Div.() -> Unit,
+    content: @Composable IDiv.() -> Unit,
 ): Div {
     return div(className) {
-        this.display = Display.Grid
-        this.gridAutoColumns = gridAutoColumns
-        this.gridAutoRows = gridAutoRows
-        this.gridAutoFlow = gridAutoFlow
-        this.gridTemplateColumns = gridTemplateColumns
-        this.gridTemplateRows = gridTemplateRows
-        this.gridTemplateAreas = gridTemplateAreas
-        this.justifyItems = justifyItems
-        this.justifyContent = justifyContent
-        this.alignItems = alignItems
-        this.alignContent = alignContent
-        this.rowGap = rowGap
-        this.columnGap = columnGap
+        display(Display.Grid)
+        gridAutoColumns(gridAutoColumns)
+        gridAutoRows(gridAutoRows)
+        gridAutoFlow(gridAutoFlow)
+        gridTemplateColumns(gridTemplateColumns)
+        gridTemplateRows(gridTemplateRows)
+        gridTemplateAreas(gridTemplateAreas)
+        justifyItems(justifyItems)
+        justifyContent(justifyContent)
+        alignItems(alignItems)
+        alignContent(alignContent)
+        rowGap(rowGap)
+        columnGap(columnGap)
         content()
     }
 }

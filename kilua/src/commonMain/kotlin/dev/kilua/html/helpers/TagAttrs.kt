@@ -27,51 +27,51 @@ import web.dom.HTMLElement
 /**
  * Common tag attributes.
  */
-public interface TagAttrs<E : HTMLElement> {
+public interface TagAttrs<E : HTMLElement>: TagAttrsFun<E> {
     /**
      * The title attribute.
      */
-    public var title: String?
+    public override var title: String?
 
     /**
      * The tabindex attribute.
      */
-    public var tabindex: Int?
+    public override var tabindex: Int?
 
     /**
      * The draggable attribute.
      */
-    public var draggable: Boolean?
+    public override var draggable: Boolean?
 
     /**
      * The role attribute.
      */
-    public var role: String?
+    public override var role: String?
 
     /**
      * The aria-label attribute.
      */
-    public var ariaLabel: String?
+    public override var ariaLabel: String?
 
     /**
      * The aria-labelledby attribute.
      */
-    public var ariaLabelledby: String?
+    public override var ariaLabelledby: String?
 
     /**
      * The aria-describedby attribute.
      */
-    public var ariaDescribedby: String?
+    public override var ariaDescribedby: String?
 
     /**
      * The accesskey attribute.
      */
-    public var accesskey: Char?
+    public override var accesskey: Char?
 
     /**
      * The autofocus attribute.
      */
-    public var autofocus: Boolean?
+    public override var autofocus: Boolean?
 
     /**
      * Set value for a given attribute name.
@@ -81,7 +81,7 @@ public interface TagAttrs<E : HTMLElement> {
     /**
      * Get value of the given attribute.
      */
-    public fun getAttribute(name: String): String?
+    public override fun getAttribute(name: String): String?
 
     /**
      * Remove attribute with the given name.

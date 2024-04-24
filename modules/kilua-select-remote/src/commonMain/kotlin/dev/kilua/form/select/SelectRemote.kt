@@ -29,7 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.KiluaScope
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.utils.StringPair
@@ -58,7 +58,7 @@ import web.fetch.RequestInit
  * @return a [Select] component
  */
 @Composable
-public fun <T : Any> ComponentBase.selectRemote(
+public fun <T : Any> IComponent.selectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?) -> List<SimpleRemoteOption>,
     stateFunction: (() -> String)? = null,
@@ -75,7 +75,7 @@ public fun <T : Any> ComponentBase.selectRemote(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable Select.() -> Unit = {}
+    setup: @Composable ISelect.() -> Unit = {}
 ): Select {
     var optionsState: List<StringPair>? by remember {
         mutableStateOf(options)

@@ -38,7 +38,7 @@ class ImaskNumericSpec : DomSpec {
             ImaskModule.initialize()
             val root = root("test") {
                 imaskNumeric(1235.321, locale = SimpleLocale("en")) {
-                    defaultValue = 1235.321
+                    defaultValue(1235.321)
                 }
             }
             assertEquals(
@@ -55,7 +55,7 @@ class ImaskNumericSpec : DomSpec {
             ImaskModule.initialize()
             val root = root {
                 imaskNumeric(1235.321, locale = SimpleLocale("en")) {
-                    defaultValue = 1235.321
+                    defaultValue(1235.321)
                 }
             }
             assertEquals(
@@ -73,7 +73,7 @@ class ImaskNumericSpec : DomSpec {
             lateinit var numeric: Numeric
             root("test") {
                 numeric = imaskNumeric(1235.321, locale = SimpleLocale("en")) {
-                    defaultValue = 1235.321
+                    defaultValue(1235.321)
                 }
             }
             assertEquals(1235.321, numeric.value)

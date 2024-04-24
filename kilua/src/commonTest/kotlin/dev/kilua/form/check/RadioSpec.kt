@@ -33,8 +33,8 @@ class RadioSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 radio(true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
+                    defaultChecked(true)
+                    extraValue("extra")
                 }
             }
             assertEqualsHtml(
@@ -50,8 +50,8 @@ class RadioSpec : DomSpec {
         run {
             val root = root {
                 radio(true, name = "test") {
-                    defaultChecked = true
-                    extraValue = "extra"
+                    defaultChecked(true)
+                    extraValue("extra")
                 }
             }
             assertEqualsHtml(

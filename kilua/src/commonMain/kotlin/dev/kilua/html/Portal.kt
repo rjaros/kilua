@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,12 @@ import web.dom.HTMLElement
 /**
  * HTML Portal component.
  */
+public interface IPortal : ITag<HTMLElement>
+/**
+ * HTML Portal component.
+ */
 public open class Portal(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("portal", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("portal", className, renderConfig = renderConfig), IPortal
 
 /**
  * Creates a [Portal] component.
@@ -44,7 +48,7 @@ public open class Portal(className: String? = null, renderConfig: RenderConfig =
  * @return the [Portal] component
  */
 @Composable
-public fun ComponentBase.portal(className: String? = null, content: @Composable Portal.() -> Unit = {}): Portal {
+public fun IComponent.portal(className: String? = null, content: @Composable IPortal.() -> Unit = {}): Portal {
     val component = remember { Portal(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Portal::className, it) }

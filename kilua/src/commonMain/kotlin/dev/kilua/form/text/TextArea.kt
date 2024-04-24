@@ -25,10 +25,11 @@ package dev.kilua.form.text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
+import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
@@ -53,6 +54,105 @@ public enum class WrapType {
 /**
  * Textarea component.
  */
+public interface ITextArea : ITag<HTMLTextAreaElement>, StringFormControl, WithStateFlow<String?> {
+    /**
+     * The number of columns of the textarea.
+     */
+    public val cols: Int?
+
+    /**
+     * Set the number of columns of the textarea.
+     */
+    @Composable
+    public fun cols(cols: Int?)
+
+    /**
+     * The number of rows of the textarea.
+     */
+    public val rows: Int?
+
+    /**
+     * Set the number of rows of the textarea.
+     */
+    @Composable
+    public fun rows(rows: Int?)
+
+    /**
+     * The name attribute of the generated HTML textarea element.
+     */
+    public val name: String?
+
+    /**
+     * Set the name attribute of the generated HTML textarea element.
+     */
+    @Composable
+    public fun name(name: String?)
+
+    /**
+     * The maxlength attribute of the generated HTML textarea element.
+     */
+    public val maxlength: Int?
+
+    /**
+     * Set the maxlength attribute of the generated HTML textarea element.
+     */
+    @Composable
+    public fun maxlength(maxlength: Int?)
+
+    /**
+     * The placeholder attribute of the generated HTML textarea element.
+     */
+    public val placeholder: String?
+
+    /**
+     * Set the placeholder attribute of the generated HTML textarea element.
+     */
+    @Composable
+    public fun placeholder(placeholder: String?)
+
+    /**
+     * The disabled attribute of the generated HTML textarea element.
+     */
+    public val disabled: Boolean?
+
+    /**
+     * Set the disabled attribute of the generated HTML textarea element.
+     */
+    @Composable
+    public fun disabled(disabled: Boolean?)
+
+    /**
+     * Set the required attribute of the generated HTML textarea element.
+     */
+    @Composable
+    public fun required(required: Boolean?)
+
+    /**
+     * The readonly attribute of the generated HTML textarea element.
+     */
+    public val readonly: Boolean?
+
+    /**
+     * Set the readonly attribute of the generated HTML textarea element.
+     */
+    @Composable
+    public fun readonly(readonly: Boolean?)
+
+    /**
+     * The wrap attribute of the generated HTML textarea element.
+     */
+    public val wrap: WrapType?
+
+    /**
+     * Set the wrap attribute of the generated HTML textarea element.
+     */
+    @Composable
+    public fun wrap(wrap: WrapType?)
+}
+
+/**
+ * Textarea component.
+ */
 public open class TextArea(
     value: String? = null,
     cols: Int? = null,
@@ -67,7 +167,7 @@ public open class TextArea(
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLTextAreaElement>("textarea", className, id, renderConfig),
-    StringFormControl, WithStateFlow<String?> by withStateFlowDelegate {
+    StringFormControl, WithStateFlow<String?> by withStateFlowDelegate, ITextArea {
 
     public override var value: String? by updatingProperty(
         value,
@@ -78,7 +178,7 @@ public open class TextArea(
     /**
      * The number of columns of the textarea.
      */
-    public var cols: Int? by updatingProperty(cols) {
+    public override var cols: Int? by updatingProperty(cols) {
         if (it != null) {
             element.cols = it
         } else {
@@ -87,9 +187,19 @@ public open class TextArea(
     }
 
     /**
+     * Set the number of columns of the textarea.
+     */
+    @Composable
+    override fun cols(cols: Int?): Unit = composableProperty("cols", {
+        this.cols = null
+    }) {
+        this.cols = cols
+    }
+
+    /**
      * The number of rows of the textarea.
      */
-    public var rows: Int? by updatingProperty(rows) {
+    public override var rows: Int? by updatingProperty(rows) {
         if (it != null) {
             element.rows = it
         } else {
@@ -97,6 +207,19 @@ public open class TextArea(
         }
     }
 
+    /**
+     * Set the number of rows of the textarea.
+     */
+    @Composable
+    override fun rows(rows: Int?): Unit = composableProperty("rows", {
+        this.rows = null
+    }) {
+        this.rows = rows
+    }
+
+    /**
+     * The name attribute of the generated HTML textarea element.
+     */
     public override var name: String? by updatingProperty(name) {
         if (it != null) {
             element.name = it
@@ -106,9 +229,19 @@ public open class TextArea(
     }
 
     /**
+     * Set the name attribute of the generated HTML textarea element.
+     */
+    @Composable
+    override fun name(name: String?): Unit = composableProperty("name", {
+        this.name = null
+    }) {
+        this.name = name
+    }
+
+    /**
      * The maxlength attribute of the generated HTML textarea element.
      */
-    public var maxlength: Int? by updatingProperty(maxlength) {
+    public override var maxlength: Int? by updatingProperty(maxlength) {
         if (it != null) {
             element.maxLength = it
         } else {
@@ -117,9 +250,19 @@ public open class TextArea(
     }
 
     /**
+     * Set the maxlength attribute of the generated HTML textarea element.
+     */
+    @Composable
+    override fun maxlength(maxlength: Int?): Unit = composableProperty("maxlength", {
+        this.maxlength = null
+    }) {
+        this.maxlength = maxlength
+    }
+
+    /**
      * The placeholder attribute of the generated HTML textarea element.
      */
-    public var placeholder: String? by updatingProperty(placeholder) {
+    public override var placeholder: String? by updatingProperty(placeholder) {
         if (it != null) {
             element.placeholder = it
         } else {
@@ -127,6 +270,19 @@ public open class TextArea(
         }
     }
 
+    /**
+     * Set the placeholder attribute of the generated HTML textarea element.
+     */
+    @Composable
+    override fun placeholder(placeholder: String?): Unit = composableProperty("placeholder", {
+        this.placeholder = null
+    }) {
+        this.placeholder = placeholder
+    }
+
+    /**
+     * The disabled attribute of the generated HTML textarea element.
+     */
     public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
@@ -135,6 +291,19 @@ public open class TextArea(
         }
     }
 
+    /**
+     * Set the disabled attribute of the generated HTML textarea element.
+     */
+    @Composable
+    override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
+    }
+
+    /**
+     * The required attribute of the generated HTML textarea element.
+     */
     public override var required: Boolean? by updatingProperty(required) {
         if (it != null) {
             element.required = it
@@ -144,20 +313,19 @@ public open class TextArea(
     }
 
     /**
-     * The autofocus attribute of the generated HTML textarea element.
+     * Set the required attribute of the generated HTML textarea element.
      */
-    public override var autofocus: Boolean? by updatingProperty {
-        if (it != null) {
-            element.autofocus = it
-        } else {
-            element.removeAttribute("autofocus")
-        }
+    @Composable
+    public override fun required(required: Boolean?): Unit = composableProperty("required", {
+        this.required = null
+    }) {
+        this.required = required
     }
 
     /**
      * The readonly attribute of the generated HTML textarea element.
      */
-    public open var readonly: Boolean? by updatingProperty {
+    public override var readonly: Boolean? by updatingProperty {
         if (it != null) {
             element.readOnly = it
         } else {
@@ -166,14 +334,34 @@ public open class TextArea(
     }
 
     /**
+     * Set the readonly attribute of the generated HTML textarea element.
+     */
+    @Composable
+    override fun readonly(readonly: Boolean?): Unit = composableProperty("readonly", {
+        this.readonly = null
+    }) {
+        this.readonly = readonly
+    }
+
+    /**
      * The wrap attribute of the generated HTML textarea element.
      */
-    public open var wrap: WrapType? by updatingProperty {
+    public override var wrap: WrapType? by updatingProperty {
         if (it != null) {
             element.wrap = it.value
         } else {
             element.removeAttribute("wrap")
         }
+    }
+
+    /**
+     * Set the wrap attribute of the generated HTML textarea element.
+     */
+    @Composable
+    override fun wrap(wrap: WrapType?): Unit = composableProperty("wrap", {
+        this.wrap = null
+    }) {
+        this.wrap = wrap
     }
 
     public override var customValidity: String? by updatingProperty {
@@ -185,27 +373,35 @@ public open class TextArea(
         withStateFlowDelegate.formControl(this)
         if (renderConfig.isDom) {
             if (value != null) {
+                @Suppress("LeakingThis")
                 element.value = value
             }
             if (cols != null) {
+                @Suppress("LeakingThis")
                 element.cols = cols
             }
             if (rows != null) {
+                @Suppress("LeakingThis")
                 element.rows = rows
             }
             if (name != null) {
+                @Suppress("LeakingThis")
                 element.name = name
             }
             if (maxlength != null) {
+                @Suppress("LeakingThis")
                 element.maxLength = maxlength
             }
             if (placeholder != null) {
+                @Suppress("LeakingThis")
                 element.placeholder = placeholder
             }
             if (disabled != null) {
+                @Suppress("LeakingThis")
                 element.disabled = disabled
             }
             if (required != null) {
+                @Suppress("LeakingThis")
                 element.required = required
             }
             @Suppress("LeakingThis")
@@ -276,7 +472,7 @@ public open class TextArea(
  * @return A [TextArea] component.
  */
 @Composable
-public fun ComponentBase.textArea(
+public fun IComponent.textArea(
     value: String? = null,
     cols: Int? = null,
     rows: Int? = null,
@@ -287,7 +483,7 @@ public fun ComponentBase.textArea(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable TextArea.() -> Unit = {}
+    setup: @Composable ITextArea.() -> Unit = {}
 ): TextArea {
     val component =
         remember {

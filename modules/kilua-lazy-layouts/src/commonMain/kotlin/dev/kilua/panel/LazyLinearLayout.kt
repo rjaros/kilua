@@ -23,11 +23,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.Snapshot
+import dev.kilua.core.IComponent
 import dev.kilua.html.Div
+import dev.kilua.html.IDiv
 import dev.kilua.html.div
 
 @Composable
-internal fun Div.lazyLinearLayout(
+internal fun IComponent.lazyLinearLayout(
     dsl: LazyDsl.() -> Unit,
 ) {
     val sections by remember(dsl) {

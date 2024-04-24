@@ -25,9 +25,10 @@ package dev.kilua.form.number
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.form.IInput
 import dev.kilua.form.Input
 import dev.kilua.form.InputType
 import dev.kilua.form.NumberFormControl
@@ -43,6 +44,56 @@ import web.dom.events.Event
 public const val NUMERIC_DEFAULT_DECIMALS: Int = 2
 
 internal const val NUMERIC_MAX_LENGTH = 14
+
+/**
+ * Number input component.
+ */
+public interface INumeric : IInput<Number>, NumberFormControl {
+    /**
+     * The minimum value.
+     */
+    public val min: Number?
+
+    /**
+     * Set the minimum value.
+     */
+    @Composable
+    public fun min(min: Number)
+
+    /**
+     * The maximum value.
+     */
+    public val max: Number?
+
+    /**
+     * Set the maximum value.
+     */
+    @Composable
+    public fun max(max: Number)
+
+    /**
+     * The number of decimal digits.
+     */
+    public val decimals: Int
+
+    /**
+     * Set the number of decimal digits.
+     */
+    @Composable
+    public fun decimals(decimals: Int)
+
+    /**
+     * The locale for formatting the number.
+     */
+    public val locale: Locale
+
+    /**
+     * Set the locale for formatting the number.
+     */
+    @Composable
+    public fun locale(locale: Locale)
+
+}
 
 /**
  * Numeric input component.
@@ -72,27 +123,67 @@ public open class Numeric(
     id,
     renderConfig
 ),
-    NumberFormControl {
+    NumberFormControl, INumeric {
 
     /**
      * The minimum value.
      */
-    public open var min: Number? by updatingProperty(min)
+    public override var min: Number? by updatingProperty(min)
+
+    /**
+     * Set the minimum value.
+     */
+    @Composable
+    public override fun min(min: Number): Unit = composableProperty("min", {
+        this.min = null
+    }) {
+        this.min = min
+    }
 
     /**
      * The maximum value.
      */
-    public open var max: Number? by updatingProperty(max)
+    public override var max: Number? by updatingProperty(max)
+
+    /**
+     * Set the maximum value.
+     */
+    @Composable
+    public override fun max(max: Number): Unit = composableProperty("max", {
+        this.max = null
+    }) {
+        this.max = max
+    }
 
     /**
      * The number of decimal digits.
      */
-    public open var decimals: Int by updatingProperty(decimals)
+    public override var decimals: Int by updatingProperty(decimals)
+
+    /**
+     * Set the number of decimal digits.
+     */
+    @Composable
+    public override fun decimals(decimals: Int): Unit = composableProperty("decimals", {
+        this.decimals = NUMERIC_DEFAULT_DECIMALS
+    }) {
+        this.decimals = decimals
+    }
 
     /**
      * The locale for formatting the number.
      */
-    public open var locale: Locale by updatingProperty(locale)
+    public override var locale: Locale by updatingProperty(locale)
+
+    /**
+     * Set the locale for formatting the number.
+     */
+    @Composable
+    public override fun locale(locale: Locale): Unit = composableProperty("locale", {
+        this.locale = LocaleManager.currentLocale
+    }) {
+        this.locale = locale
+    }
 
     init {
         if (renderConfig.isDom) {
@@ -153,7 +244,7 @@ public open class Numeric(
  * @return a [Numeric] component
  */
 @Composable
-public fun ComponentBase.numeric(
+public fun IComponent.numeric(
     value: Number? = null,
     min: Number? = null,
     max: Number? = null,
@@ -165,7 +256,7 @@ public fun ComponentBase.numeric(
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     id: String? = null,
-    setup: @Composable Numeric.() -> Unit = {}
+    setup: @Composable INumeric.() -> Unit = {}
 ): Numeric {
     val component =
         remember {

@@ -25,11 +25,82 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLOptionElement
+
+/**
+ * HTML Option component.
+ */
+public interface IOption : ITag<HTMLOptionElement> {
+    /**
+     * The value of the option.
+     */
+    public val value: String?
+
+    /**
+     * Set the value of the option.
+     */
+    @Composable
+    public fun value(value: String?)
+
+    /**
+     * The label of the option.
+     */
+    public val label: String?
+
+    /**
+     * Set the label of the option.
+     */
+    @Composable
+    public fun label(label: String?)
+
+    /**
+     * The selected state of the option.
+     */
+    public val selected: Boolean?
+
+    /**
+     * Set the selected state of the option.
+     */
+    @Composable
+    public fun selected(selected: Boolean?)
+
+    /**
+     * The disabled state of the option.
+     */
+    public val disabled: Boolean?
+
+    /**
+     * Set the disabled state of the option.
+     */
+    @Composable
+    public fun disabled(disabled: Boolean?)
+
+    /**
+     * The hidden state of the option.
+     */
+    public val hidden: Boolean?
+
+    /**
+     * Set the hidden state of the option.
+     */
+    @Composable
+    public fun hidden(hidden: Boolean?)
+
+    /**
+     * The currently selected state of the option.
+     */
+    public val currentlySelected: Boolean
+
+    /**
+     * Set the currently selected state of the option.
+     */
+    @Composable
+    public fun currentlySelected(currentlySelected: Boolean)
+}
 
 /**
  * HTML Option component.
@@ -42,12 +113,12 @@ public open class Option(
     className: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLOptionElement>("option", className, renderConfig = renderConfig) {
+    Tag<HTMLOptionElement>("option", className, renderConfig = renderConfig), IOption {
 
     /**
      * The value of the option.
      */
-    public open var value: String? by updatingProperty(value) {
+    public override var value: String? by updatingProperty(value) {
         if (it != null) {
             element.value = it
         } else {
@@ -56,9 +127,19 @@ public open class Option(
     }
 
     /**
+     * Set the value of the option.
+     */
+    @Composable
+    public override fun value(value: String?): Unit = composableProperty("value", {
+        this.value = null
+    }) {
+        this.value = value
+    }
+
+    /**
      * The label of the option.
      */
-    public open var label: String? by updatingProperty(label) {
+    public override var label: String? by updatingProperty(label) {
         if (it != null) {
             element.label = it
         } else {
@@ -67,9 +148,19 @@ public open class Option(
     }
 
     /**
+     * Set the label of the option.
+     */
+    @Composable
+    public override fun label(label: String?): Unit = composableProperty("label", {
+        this.label = null
+    }) {
+        this.label = label
+    }
+
+    /**
      * The selected attribute of the generated HTML option element.
      */
-    public open var selected: Boolean? by updatingProperty(selected) {
+    public override var selected: Boolean? by updatingProperty(selected) {
         if (it != null) {
             element.defaultSelected = it
         } else {
@@ -78,9 +169,19 @@ public open class Option(
     }
 
     /**
+     * Set the selected state of the option.
+     */
+    @Composable
+    public override fun selected(selected: Boolean?): Unit = composableProperty("selected", {
+        this.selected = null
+    }) {
+        this.selected = selected
+    }
+
+    /**
      * Whether the option is disabled.
      */
-    public open var disabled: Boolean? by updatingProperty(disabled) {
+    public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it != null) {
             element.disabled = it
         } else {
@@ -89,9 +190,19 @@ public open class Option(
     }
 
     /**
+     * Set the disabled state of the option.
+     */
+    @Composable
+    public override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
+        this.disabled = null
+    }) {
+        this.disabled = disabled
+    }
+
+    /**
      * Whether the option is hidden.
      */
-    public open var hidden: Boolean? by updatingProperty {
+    public override var hidden: Boolean? by updatingProperty {
         if (it != null) {
             element.hidden = it
         } else {
@@ -100,24 +211,48 @@ public open class Option(
     }
 
     /**
+     * Set the hidden state of the option.
+     */
+    @Composable
+    public override fun hidden(hidden: Boolean?): Unit = composableProperty("hidden", {
+        this.hidden = null
+    }) {
+        this.hidden = hidden
+    }
+
+    /**
      * Whether the option is currently selected.
      */
-    public open var currentlySelected: Boolean by updatingProperty(selected ?: false) {
+    public override var currentlySelected: Boolean by updatingProperty(selected ?: false) {
         element.selected = it
+    }
+
+    /**
+     * Set the currently selected state of the option.
+     */
+    @Composable
+    public override fun currentlySelected(currentlySelected: Boolean): Unit = composableProperty("currentlySelected", {
+        this.currentlySelected = false
+    }) {
+        this.currentlySelected = currentlySelected
     }
 
     init {
         if (renderConfig.isDom) {
             if (value != null) {
+                @Suppress("LeakingThis")
                 element.value = value
             }
             if (label != null) {
+                @Suppress("LeakingThis")
                 element.label = label
             }
             if (selected != null) {
+                @Suppress("LeakingThis")
                 element.defaultSelected = selected
             }
             if (disabled != null) {
+                @Suppress("LeakingThis")
                 element.disabled = disabled
             }
         }
@@ -142,13 +277,13 @@ public open class Option(
  * @return the [Option] component
  */
 @Composable
-public fun ComponentBase.option(
+public fun IComponent.option(
     value: String? = null,
     label: String? = null,
     selected: Boolean? = null,
     disabled: Boolean? = null,
     className: String? = null,
-    content: @Composable Option.() -> Unit = {}
+    content: @Composable IOption.() -> Unit = {}
 ): Option {
     val component = remember { Option(value, label, selected, disabled, className, renderConfig = renderConfig) }
     ComponentNode(component, {

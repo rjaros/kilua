@@ -25,6 +25,7 @@ package dev.kilua.compose
 import androidx.compose.runtime.Composable
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import web.dom.Element
 
@@ -37,11 +38,18 @@ import web.dom.Element
 internal class NonDisposableRoot(
     val element: Element,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-    content: @Composable ComponentBase.() -> Unit = {}
+    content: @Composable IComponent.() -> Unit = {}
 ) : ComponentBase(element, renderConfig) {
 
     // Not used
     override var visible: Boolean = true
+
+    @Composable
+    override fun visible(visible: Boolean): Unit = composableProperty("visible", {
+        this.visible = true
+    }) {
+        this.visible = visible
+    }
 
     init {
         rootComposable(this, defaultMonotonicFrameClock, content)

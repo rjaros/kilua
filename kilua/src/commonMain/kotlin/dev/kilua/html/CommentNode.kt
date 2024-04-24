@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.utils.unsafeCast
@@ -60,6 +61,13 @@ public open class CommentNode(
         comment.data = if (it) data else ""
     }
 
+    @Composable
+    public override fun visible(visible: Boolean): Unit = composableProperty("visible", {
+        this.visible = true
+    }) {
+        this.visible = visible
+    }
+
     override fun renderToStringBuilder(builder: StringBuilder) {
         builder.append("<!-- $data -->")
     }
@@ -72,7 +80,7 @@ public open class CommentNode(
  * @return a [CommentNode] component
  */
 @Composable
-public fun ComponentBase.commentNode(data: String, setup: CommentNode.() -> Unit = {}): CommentNode {
+public fun IComponent.commentNode(data: String, setup: CommentNode.() -> Unit = {}): CommentNode {
     val component = remember { CommentNode(data, renderConfig) }
     ComponentNode(component, {
         set(data) { updateProperty(CommentNode::data, it) }

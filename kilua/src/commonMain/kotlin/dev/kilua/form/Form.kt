@@ -27,9 +27,10 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.KiluaScope
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
+import dev.kilua.externals.JSON
 import dev.kilua.externals.get
 import dev.kilua.externals.keys
 import dev.kilua.externals.obj
@@ -38,7 +39,6 @@ import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.types.KFile
-import dev.kilua.externals.JSON
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.Serialization.toObj
 import dev.kilua.utils.cast
@@ -131,6 +131,16 @@ public class Form<K : Any>(
     }
 
     /**
+     * Sets the method attribute of the generated HTML form element.
+     */
+    @Composable
+    public fun method(value: FormMethod?): Unit = composableProperty("method", {
+        method = null
+    }) {
+        method = value
+    }
+
+    /**
      * The action attribute of the generated HTML form element.
      */
     public var action: String? by updatingProperty(action) {
@@ -139,6 +149,16 @@ public class Form<K : Any>(
         } else {
             element.removeAttribute("action")
         }
+    }
+
+    /**
+     * Sets the action attribute of the generated HTML form element.
+     */
+    @Composable
+    public fun action(value: String?): Unit = composableProperty("action", {
+        action = null
+    }) {
+        action = value
     }
 
     /**
@@ -153,6 +173,16 @@ public class Form<K : Any>(
     }
 
     /**
+     * Sets the enctype attribute of the generated HTML form element.
+     */
+    @Composable
+    public fun enctype(value: FormEnctype?): Unit = composableProperty("enctype", {
+        enctype = null
+    }) {
+        enctype = value
+    }
+
+    /**
      * The name attribute of the generated HTML form element.
      */
     public var name: String? by updatingProperty {
@@ -161,6 +191,16 @@ public class Form<K : Any>(
         } else {
             element.removeAttribute("name")
         }
+    }
+
+    /**
+     * Sets the name attribute of the generated HTML form element.
+     */
+    @Composable
+    public fun name(value: String?): Unit = composableProperty("name", {
+        name = null
+    }) {
+        name = value
     }
 
     /**
@@ -175,6 +215,16 @@ public class Form<K : Any>(
     }
 
     /**
+     * Sets the target attribute of the generated HTML form element.
+     */
+    @Composable
+    public fun target(value: String?): Unit = composableProperty("target", {
+        target = null
+    }) {
+        target = value
+    }
+
+    /**
      * The target attribute of the generated HTML form element.
      */
     public var novalidate: Boolean? by updatingProperty {
@@ -186,6 +236,16 @@ public class Form<K : Any>(
     }
 
     /**
+     * Sets the target attribute of the generated HTML form element.
+     */
+    @Composable
+    public fun novalidate(value: Boolean?): Unit = composableProperty("novalidate", {
+        novalidate = null
+    }) {
+        novalidate = value
+    }
+
+    /**
      * The target attribute of the generated HTML form element.
      */
     public var autocomplete: FormAutocomplete? by updatingProperty {
@@ -194,6 +254,16 @@ public class Form<K : Any>(
         } else {
             element.removeAttribute("autocomplete")
         }
+    }
+
+    /**
+     * Sets the target attribute of the generated HTML form element.
+     */
+    @Composable
+    public fun autocomplete(value: FormAutocomplete?): Unit = composableProperty("autocomplete", {
+        autocomplete = null
+    }) {
+        autocomplete = value
     }
 
     /**
@@ -1023,7 +1093,15 @@ public class Form<K : Any>(
             className: String? = null,
             renderConfig: RenderConfig = DefaultRenderConfig(),
         ): Form<K> {
-            return Form(method, action, enctype, serializer(), customSerializers, className, renderConfig = renderConfig)
+            return Form(
+                method,
+                action,
+                enctype,
+                serializer(),
+                customSerializers,
+                className,
+                renderConfig = renderConfig
+            )
         }
     }
 
@@ -1042,7 +1120,7 @@ public class Form<K : Any>(
  * @return the [Form] component
  */
 @Composable
-public inline fun <reified K : Any> ComponentBase.form(
+public inline fun <reified K : Any> IComponent.form(
     initialData: K? = null,
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
@@ -1083,7 +1161,7 @@ public inline fun <reified K : Any> ComponentBase.form(
  * @return the [Form] component
  */
 @Composable
-public fun ComponentBase.form(
+public fun IComponent.form(
     initialData: Map<String, Any?>? = null,
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,

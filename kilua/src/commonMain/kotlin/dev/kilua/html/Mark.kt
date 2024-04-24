@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Mark component.
  */
+public interface IMark : ITag<HTMLElement>
+
+/**
+ * HTML Mark component.
+ */
 public open class Mark(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("mark", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("mark", className, renderConfig = renderConfig), IMark
 
 /**
  * Creates a [Mark] component.
@@ -44,7 +49,7 @@ public open class Mark(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Mark] component
  */
 @Composable
-public fun ComponentBase.mark(className: String? = null, content: @Composable Mark.() -> Unit = {}): Mark {
+public fun IComponent.mark(className: String? = null, content: @Composable IMark.() -> Unit = {}): Mark {
     val component = remember { Mark(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Mark::className, it) }

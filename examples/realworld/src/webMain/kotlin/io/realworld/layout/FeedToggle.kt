@@ -23,7 +23,7 @@
 package io.realworld.layout
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.html.div
 import dev.kilua.html.li
 import dev.kilua.html.link
@@ -33,7 +33,7 @@ import io.realworld.ConduitState
 import io.realworld.FeedType
 
 @Composable
-fun ComponentBase.feedToggle(state: ConduitState, conduitManager: ConduitManager) {
+fun IComponent.feedToggle(state: ConduitState, conduitManager: ConduitManager) {
     div("feed-toggle") {
         ul("nav nav-pills outline-active") {
             if (state.user != null) {

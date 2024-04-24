@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLHtmlElement
@@ -33,8 +33,13 @@ import web.dom.HTMLHtmlElement
 /**
  * HTML Html component.
  */
+public interface IHtml : ITag<HTMLHtmlElement>
+
+/**
+ * HTML Html component.
+ */
 public open class Html(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLHtmlElement>("html", className, renderConfig = renderConfig)
+    Tag<HTMLHtmlElement>("html", className, renderConfig = renderConfig), IHtml
 
 /**
  * Creates a [Html] component.
@@ -44,7 +49,7 @@ public open class Html(className: String? = null, renderConfig: RenderConfig = D
  * @return the [Html] component
  */
 @Composable
-public fun ComponentBase.html(className: String? = null, content: @Composable Html.() -> Unit = {}): Html {
+public fun IComponent.html(className: String? = null, content: @Composable IHtml.() -> Unit = {}): Html {
     val component = remember { Html(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Html::className, it) }

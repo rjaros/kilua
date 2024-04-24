@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Ins component.
  */
+public interface IIns : ITag<HTMLElement>
+
+/**
+ * HTML Ins component.
+ */
 public open class Ins(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("ins", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("ins", className, renderConfig = renderConfig), IIns
 
 /**
  * Creates a [Ins] component.
@@ -44,7 +49,7 @@ public open class Ins(className: String? = null, renderConfig: RenderConfig = De
  * @return the [Ins] component
  */
 @Composable
-public fun ComponentBase.ins(className: String? = null, content: @Composable Ins.() -> Unit = {}): Ins {
+public fun IComponent.ins(className: String? = null, content: @Composable IIns.() -> Unit = {}): Ins {
     val component = remember { Ins(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Ins::className, it) }

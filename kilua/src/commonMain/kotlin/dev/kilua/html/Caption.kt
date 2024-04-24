@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLElement
@@ -33,8 +33,13 @@ import web.dom.HTMLElement
 /**
  * HTML Caption component.
  */
+public interface ICaption : ITag<HTMLElement>
+
+/**
+ * HTML Caption component.
+ */
 public open class Caption(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("caption", className, renderConfig = renderConfig)
+    Tag<HTMLElement>("caption", className, renderConfig = renderConfig), ICaption
 
 /**
  * Creates a [Caption] component.
@@ -44,7 +49,7 @@ public open class Caption(className: String? = null, renderConfig: RenderConfig 
  * @return the [Caption] component
  */
 @Composable
-public fun ComponentBase.caption(className: String? = null, content: @Composable Caption.() -> Unit = {}): Caption {
+public fun IComponent.caption(className: String? = null, content: @Composable ICaption.() -> Unit = {}): Caption {
     val component = remember { Caption(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Caption::className, it) }

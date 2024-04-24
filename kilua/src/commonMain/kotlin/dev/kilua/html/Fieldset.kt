@@ -25,7 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
+import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import web.dom.HTMLFieldSetElement
@@ -33,8 +33,13 @@ import web.dom.HTMLFieldSetElement
 /**
  * HTML Fieldset component.
  */
+public interface IFieldset : ITag<HTMLFieldSetElement>
+
+/**
+ * HTML Fieldset component.
+ */
 public open class Fieldset(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLFieldSetElement>("fieldset", className, renderConfig = renderConfig)
+    Tag<HTMLFieldSetElement>("fieldset", className, renderConfig = renderConfig), IFieldset
 
 /**
  * Creates a [Fieldset] component.
@@ -44,7 +49,7 @@ public open class Fieldset(className: String? = null, renderConfig: RenderConfig
  * @return the [Fieldset] component
  */
 @Composable
-public fun ComponentBase.fieldset(className: String? = null, content: @Composable Fieldset.() -> Unit = {}): Fieldset {
+public fun IComponent.fieldset(className: String? = null, content: @Composable IFieldset.() -> Unit = {}): Fieldset {
     val component = remember { Fieldset(className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Fieldset::className, it) }

@@ -35,14 +35,14 @@ class TextAreaSpec : DomSpec {
         runWhenDomAvailable {
             val root = root("test") {
                 textArea("Some text", 12, 13, "test", 200, "A placeholder") {
-                    autofocus = true
-                    readonly = true
-                    wrap = WrapType.Hard
+                    autofocus(true)
+                    readonly(true)
+                    wrap(WrapType.Hard)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<textarea cols="12" rows="13" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="" wrap="hard"></textarea>"""),
-                normalizeHtml(root.element.innerHTML),
+            assertEqualsHtml(
+                """<textarea cols="12" rows="13" name="test" maxlength="200" placeholder="A placeholder" autofocus readonly wrap="hard"></textarea>""",
+                root.element.innerHTML,
                 "Should render html area element to DOM"
             )
         }
@@ -53,14 +53,14 @@ class TextAreaSpec : DomSpec {
         run {
             val root = root {
                 textArea("Some text", 12, 13, "test", 200, "A placeholder") {
-                    autofocus = true
-                    readonly = true
-                    wrap = WrapType.Hard
+                    autofocus(true)
+                    readonly(true)
+                    wrap(WrapType.Hard)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><textarea cols="12" rows="13" name="test" maxlength="200" placeholder="A placeholder" autofocus readonly wrap="hard"></textarea></div>"""),
-                normalizeHtml(root.renderToString()),
+            assertEqualsHtml(
+                """<textarea cols="12" rows="13" name="test" maxlength="200" placeholder="A placeholder" autofocus readonly wrap="hard"></textarea>""",
+                root.innerHTML,
                 "Should render html area element to a String"
             )
         }

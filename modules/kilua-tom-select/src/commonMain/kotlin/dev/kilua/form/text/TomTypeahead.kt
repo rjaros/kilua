@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.ComponentBase
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
@@ -51,6 +51,39 @@ import web.JsBoolean
 import web.JsString
 import web.toBoolean
 import web.toJsString
+
+/**
+ * Tom Typeahead input component
+ */
+public interface ITomTypeahead : IText {
+    /**
+     * The list of options.
+     */
+    public val options: List<String>?
+
+    /**
+     * Set the list of options.
+     */
+    @Composable
+    public fun options(options: List<String>?)
+
+    /**
+     * Tom Select callbacks.
+     */
+    public val tsCallbacks: TomSelectCallbacks?
+
+    /**
+     * Set Tom Select callbacks.
+     */
+    @Composable
+    public fun tsCallbacks(tsCallbacks: TomSelectCallbacks?)
+
+    /**
+     * Tom Select native component instance.
+     */
+    public val tomSelectInstance: TomSelectJs?
+
+}
 
 /**
  * Tom Typeahead input component.
@@ -78,13 +111,23 @@ public open class TomTypeahead(
     className,
     id,
     renderConfig
-) {
+), ITomTypeahead {
 
     /**
      * The list of options.
      */
-    public open var options: List<String>? by updatingProperty(options) {
+    public override var options: List<String>? by updatingProperty(options) {
         refresh()
+    }
+
+    /**
+     * Set the list of options.
+     */
+    @Composable
+    public override fun options(options: List<String>?): Unit = composableProperty("options", {
+        this.options = null
+    }) {
+        this.options = options
     }
 
     public override var value: String? by updatingProperty(
@@ -105,8 +148,18 @@ public open class TomTypeahead(
     /**
      * Tom Select callbacks.
      */
-    public var tsCallbacks: TomSelectCallbacks? by updatingProperty(tsCallbacks) {
+    public override var tsCallbacks: TomSelectCallbacks? by updatingProperty(tsCallbacks) {
         refresh()
+    }
+
+    /**
+     * Set Tom Select callbacks.
+     */
+    @Composable
+    public override fun tsCallbacks(tsCallbacks: TomSelectCallbacks?): Unit = composableProperty("tsCallbacks", {
+        this.tsCallbacks = null
+    }) {
+        this.tsCallbacks = tsCallbacks
     }
 
     public override var disabled: Boolean? by updatingProperty(disabled) {
@@ -121,7 +174,7 @@ public open class TomTypeahead(
     /**
      * Tom Select native component instance.
      */
-    public var tomSelectInstance: TomSelectJs? = null
+    public override var tomSelectInstance: TomSelectJs? = null
 
     init {
         @Suppress("LeakingThis")
@@ -265,7 +318,7 @@ public open class TomTypeahead(
  * @return a [TomTypeahead] component
  */
 @Composable
-public fun ComponentBase.tomTypeahead(
+public fun IComponent.tomTypeahead(
     options: List<String>? = null,
     value: String? = null,
     type: InputType = InputType.Text,
@@ -276,7 +329,7 @@ public fun ComponentBase.tomTypeahead(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    setup: @Composable TomTypeahead.() -> Unit = {}
+    setup: @Composable ITomTypeahead.() -> Unit = {}
 ): TomTypeahead {
     val component = remember {
         TomTypeahead(
