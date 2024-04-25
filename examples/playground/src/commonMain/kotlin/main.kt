@@ -259,7 +259,7 @@ class App : Application() {
 
                 button("Change language") {
                     onClick {
-                        LocaleManager.currentLocale = SimpleLocale("es")
+                        LocaleManager.setCurrentLocale(SimpleLocale("es"))
                     }
                 }
 
