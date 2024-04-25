@@ -97,6 +97,8 @@ public class Root(
 
         internal val roots: MutableList<Root> = nativeListOf()
 
+        internal var topLevelComposablesInitialized = false
+
         internal val topLevelComposables = mutableStateListOf<@Composable IComponent.() -> Unit>()
 
         /**
@@ -116,16 +118,19 @@ public class Root(
         }
 
         internal fun initializeTopLevelComposablesRoot() {
-            SafeDomFactory.getElementById("kilua_top_level_composables")?.remove()
-            SafeDomFactory.getFirstElementByTagName("body")?.let { body ->
-                val topLevelComposablesRoot = SafeDomFactory.createElement("div")
-                topLevelComposablesRoot.id = "kilua_top_level_composables"
-                body.appendChild(topLevelComposablesRoot)
-                NonDisposableRoot(topLevelComposablesRoot) {
-                    topLevelComposables.forEach {
-                        it()
+            if (!topLevelComposablesInitialized) {
+                SafeDomFactory.getElementById("kilua_top_level_composables")?.remove()
+                SafeDomFactory.getFirstElementByTagName("body")?.let { body ->
+                    val topLevelComposablesRoot = SafeDomFactory.createElement("div")
+                    topLevelComposablesRoot.id = "kilua_top_level_composables"
+                    body.appendChild(topLevelComposablesRoot)
+                    NonDisposableRoot(topLevelComposablesRoot) {
+                        topLevelComposables.forEach {
+                            it()
+                        }
                     }
                 }
+                topLevelComposablesInitialized = true
             }
         }
     }
