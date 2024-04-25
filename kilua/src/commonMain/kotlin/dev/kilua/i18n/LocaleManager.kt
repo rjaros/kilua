@@ -22,9 +22,7 @@
 
 package dev.kilua.i18n
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import dev.kilua.utils.nativeListOf
 
 /**
@@ -35,21 +33,42 @@ public object LocaleManager {
     private val listeners = nativeListOf<LocaleChangeListener>()
     private val ssrListeners = nativeListOf<LocaleChangeListener>()
 
+    /**
+     * Auto-detected default system locale.
+     */
     public val defaultLocale: Locale = DefaultLocale()
 
-    public var currentLocale: Locale by mutableStateOf(defaultLocale)
+    private val localeState = mutableStateOf(defaultLocale)
 
+    /**
+     * Get current locale.
+     */
+    public var currentLocale: Locale
+        get() = localeState.value
+        private set(value) {
+            localeState.value = value
+        }
+
+    /**
+     * Set current locale.
+     */
     public fun setCurrentLocale(locale: Locale, skipSsr: Boolean = false) {
-        currentLocale = locale
+        localeState.value = locale
         listeners.forEach { it.setLocale(locale) }
         if (!skipSsr) ssrListeners.forEach { it.setLocale(locale) }
     }
 
+    /**
+     * Register new global locale change listener.
+     */
     public fun registerLocaleListener(localeChangeListener: LocaleChangeListener) {
         localeChangeListener.setLocale(currentLocale)
         listeners += localeChangeListener
     }
 
+    /**
+     * Register new global locale change listener for SSR.
+     */
     public fun registerSsrLocaleListener(ssrLocaleChangeListener: LocaleChangeListener) {
         ssrLocaleChangeListener.setLocale(currentLocale)
         ssrListeners += ssrLocaleChangeListener

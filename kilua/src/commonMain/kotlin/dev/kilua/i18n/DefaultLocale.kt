@@ -27,7 +27,7 @@ import dev.kilua.utils.isDom
 import web.window
 
 /**
- * Auto-detected default locale.
+ * Auto-detected default system locale.
  */
 public data class DefaultLocale(
     override val language: String = if (isDom) window.navigator.language else Intl.DateTimeFormat()
