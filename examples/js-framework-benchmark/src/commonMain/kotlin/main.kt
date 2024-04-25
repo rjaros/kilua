@@ -21,10 +21,12 @@
  */
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.compose.root
+import dev.kilua.html.Span
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1
@@ -35,6 +37,7 @@ import dev.kilua.html.tbody
 import dev.kilua.html.td
 import dev.kilua.html.tr
 import dev.kilua.startApplication
+import dev.kilua.utils.cast
 
 var idCounter = 1
 
@@ -177,31 +180,35 @@ class App : Application() {
                     }
                     table("table table-hover table-striped test-data") {
                         tbody {
-                            data.forEach { item ->
-                                tr(if (selected?.id == item.id) "danger" else null) {
-                                    td(className = "col-md-1") {
-                                        +item.id.toString()
-                                    }
-                                    td(className = "col-md-4") {
-                                        link(label = item.label) {
-                                            onClick {
-                                                selected = item
+                            for (chunk in data.chunked(100)) {
+                                for (item in chunk) {
+                                    key(item.id) {
+                                        tr(if (selected?.id == item.id) "danger" else null) {
+                                            td(className = "col-md-1") {
+                                                +item.id.toString()
                                             }
+                                            td(className = "col-md-4") {
+                                                link(label = item.label) {
+                                                    element.addEventListener("click") {
+                                                        selected = item
+                                                    }
+                                                }
+                                            }
+                                            td(className = "col-md-1") {
+                                                link {
+                                                    span("glyphicon glyphicon-remove") {
+                                                        cast<Span>().setAttribute("aria-hidden", "true")
+                                                    }
+                                                    element.addEventListener("click") {
+                                                        val newData = data.toMutableList()
+                                                        newData.remove(item)
+                                                        data = newData
+                                                    }
+                                                }
+                                            }
+                                            td(className = "col-md-6")
                                         }
                                     }
-                                    td(className = "col-md-1") {
-                                        link {
-                                            span("glyphicon glyphicon-remove") {
-                                                attribute("aria-hidden", "true")
-                                            }
-                                            onClick {
-                                                val newData = data.toMutableList()
-                                                newData.remove(item)
-                                                data = newData
-                                            }
-                                        }
-                                    }
-                                    td(className = "col-md-6")
                                 }
                             }
                         }

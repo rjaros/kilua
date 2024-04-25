@@ -50,7 +50,7 @@ fun main() {
         TomSelectModule,
         ToastifyModule,
         TrixModule,
-        TailwindcssModule,
+//        TailwindcssModule,
         CoreModule
     )
 }
