@@ -23,7 +23,6 @@
 import dev.kilua.Application
 import dev.kilua.compose.root
 import dev.kilua.html.div
-import dev.kilua.html.unaryPlus
 import dev.kilua.startApplication
 
 class App : Application() {
