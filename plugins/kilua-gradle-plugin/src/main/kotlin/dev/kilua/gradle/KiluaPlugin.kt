@@ -33,6 +33,7 @@ import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.register
+import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenExec
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
@@ -87,7 +88,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
             eachFile {
                 if (this.name == "tailwind.config.js") {
                     this.filter {
-                        it.replace( "SOURCES", project.layout.projectDirectory.dir("src").asFile.absolutePath + "/**/*.kt")
+                        it.replace(
+                            "SOURCES",
+                            project.layout.projectDirectory.dir("src").asFile.absolutePath + "/**/*.kt"
+                        )
                     }
                 }
             }
@@ -306,6 +310,38 @@ public abstract class KiluaPlugin : Plugin<Project> {
 
     private fun KiluaPluginContext.configureNodeEcosystem() {
         logger.info("configuring Node")
+
+        rootProject.extensions.findByType(org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension::class)?.apply {
+            logger.info("configuring Npm")
+            if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
+                override("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
+                override("zzz-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
+                override("css-loader", kiluaVersions["css-loader"]!!)
+                override("style-loader", kiluaVersions["style-loader"]!!)
+                override("imports-loader", kiluaVersions["imports-loader"]!!)
+                override("split.js", kiluaVersions["splitjs"]!!)
+                override("html-differ", kiluaVersions["html-differ"]!!)
+                override("@popperjs/core", kiluaVersions["popperjs-core"]!!)
+                override("bootstrap", kiluaVersions["bootstrap"]!!)
+                override("bootstrap-icons", kiluaVersions["bootstrap-icons"]!!)
+                override("@fortawesome/fontawesome-free", kiluaVersions["fontawesome"]!!)
+                override("trix", kiluaVersions["trix"]!!)
+                override("@eonasdan/tempus-dominus", kiluaVersions["tempus-dominus"]!!)
+                override("tom-select", kiluaVersions["tom-select"]!!)
+                override("imask", kiluaVersions["imask"]!!)
+                override("tabulator-tables", kiluaVersions["tabulator"]!!)
+                override("rsup-progress", kiluaVersions["rsup-progress"]!!)
+                override("lz-string", kiluaVersions["lz-string"]!!)
+                override("marked", kiluaVersions["marked"]!!)
+                override("sanitize-html", kiluaVersions["sanitize-html"]!!)
+                override("postcss", kiluaVersions["postcss"]!!)
+                override("postcss-loader", kiluaVersions["postcss-loader"]!!)
+                override("autoprefixer", kiluaVersions["autoprefixer"]!!)
+                override("tailwindcss", kiluaVersions["tailwindcss"]!!)
+                override("cssnano", kiluaVersions["cssnano"]!!)
+                override("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
+            }
+        }
 
         rootProject.extensions.findByType(YarnRootExtension::class)?.apply {
             logger.info("configuring Yarn")
