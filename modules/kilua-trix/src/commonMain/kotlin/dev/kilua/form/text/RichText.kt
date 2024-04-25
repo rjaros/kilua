@@ -292,6 +292,13 @@ public open class RichText(
                 element.setAttribute("required", "")
             }
             @Suppress("LeakingThis")
+            onEventDirect<Event>("trix-initialize") {
+                if (disabled == true) {
+                    element.removeAttribute("contenteditable")
+                    toolbarDisable(true)
+                }
+            }
+            @Suppress("LeakingThis")
             onEventDirect<Event>("trix-change") {
                 input?.let { SafeDomFactory.getElementById(it) }?.let {
                     val elementValue = it.unsafeCast<HTMLInputElement>().value
@@ -367,10 +374,6 @@ public open class RichText(
     override fun onInsert() {
         if (renderConfig.isDom) {
             toolbarLocalize()
-            if (disabled == true) {
-                element.removeAttribute("contenteditable")
-                toolbarDisable(true)
-            }
         }
     }
 
