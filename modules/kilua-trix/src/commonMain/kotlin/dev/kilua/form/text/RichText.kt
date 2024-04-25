@@ -92,6 +92,17 @@ public interface IRichText : ITag<HTMLElement>, StringFormControl, WithStateFlow
     public fun placeholder(placeholder: String?)
 
     /**
+     * Allow file uploads.
+     */
+    public val allowFileUploads: Boolean
+
+    /**
+     * Set to allow file uploads.
+     */
+    @Composable
+    public fun allowFileUploads(allowFileUploads: Boolean)
+
+    /**
      * Whether the rich text editor is disabled.
      */
     public val disabled: Boolean?
@@ -190,6 +201,21 @@ public open class RichText(
         this.placeholder = null
     }) {
         this.placeholder = placeholder
+    }
+
+    /**
+     * Allow file uploads.
+     */
+    public override var allowFileUploads: Boolean by updatingProperty(false)
+
+    /**
+     * Set to allow file uploads.
+     */
+    @Composable
+    override fun allowFileUploads(allowFileUploads: Boolean): Unit = composableProperty("allowFileUploads", {
+        this.allowFileUploads = false
+    }) {
+        this.allowFileUploads = allowFileUploads
     }
 
     /**
@@ -307,7 +333,7 @@ public open class RichText(
                 }
             }
             @Suppress("LeakingThis")
-            onEventDirect<Event>("trix-file-accept") { e -> e.preventDefault() }
+            onEventDirect<Event>("trix-file-accept") { e -> if (!allowFileUploads) e.preventDefault() }
         }
         @Suppress("LeakingThis")
         role = "textbox"
