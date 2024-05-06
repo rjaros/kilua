@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kilua)
 }
 
@@ -58,9 +59,4 @@ kotlin {
             }
         }
     }
-}
-
-compose {
-    kotlinCompilerPlugin.set(libs.versions.compose.plugin)
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }

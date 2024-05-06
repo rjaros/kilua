@@ -6,6 +6,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
+    kotlin("plugin.compose")
     alias(libs.plugins.jooby)
     alias(libs.plugins.kilua.rpc)
     alias(libs.plugins.kilua)
@@ -91,10 +92,12 @@ kotlin {
     }
 }
 
-compose {
-    platformTypes.set(platformTypes.get() - KotlinPlatformType.jvm)
-    kotlinCompilerPlugin.set(libs.versions.compose.plugin)
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
+composeCompiler {
+    targetKotlinPlatforms.set(
+        KotlinPlatformType.values()
+            .filterNot { it == KotlinPlatformType.jvm }
+            .asIterable()
+    )
 }
 
 tasks {

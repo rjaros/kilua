@@ -7,6 +7,7 @@ plugins {
     kotlin("plugin.serialization")
     kotlin("plugin.spring") version libs.versions.kotlin.get()
     id("org.jetbrains.compose")
+    kotlin("plugin.compose")
     alias(libs.plugins.spring.dependency.management)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.kilua.rpc)
@@ -92,8 +93,10 @@ kotlin {
     }
 }
 
-compose {
-    platformTypes.set(platformTypes.get() - KotlinPlatformType.jvm)
-    kotlinCompilerPlugin.set(libs.versions.compose.plugin)
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
+composeCompiler {
+    targetKotlinPlatforms.set(
+        KotlinPlatformType.values()
+            .filterNot { it == KotlinPlatformType.jvm }
+            .asIterable()
+    )
 }

@@ -6,6 +6,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
+    kotlin("plugin.compose")
     kotlin("plugin.allopen") version libs.versions.kotlin.get()
     kotlin("kapt")
     alias(libs.plugins.shadow)
@@ -161,8 +162,18 @@ dependencies {
     "kapt"("io.micronaut.validation:micronaut-validation")
 }
 
-compose {
-    platformTypes.set(platformTypes.get() - KotlinPlatformType.jvm)
-    kotlinCompilerPlugin.set(libs.versions.compose.plugin)
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
+composeCompiler {
+    targetKotlinPlatforms.set(
+        KotlinPlatformType.values()
+            .filterNot { it == KotlinPlatformType.jvm }
+            .asIterable()
+    )
+}
+
+tasks.getByName("inspectRuntimeClasspath") {
+    dependsOn(
+        "prepareComposeResourcesTaskForJvmMain",
+        "copyNonXmlValueResourcesForJvmMain",
+        "convertXmlValueResourcesForJvmMain"
+    )
 }
