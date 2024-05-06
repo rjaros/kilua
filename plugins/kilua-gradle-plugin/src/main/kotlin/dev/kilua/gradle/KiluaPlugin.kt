@@ -265,8 +265,8 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         } else if (this.name.equals("main.bundle.js")) {
                             this.filter {
                                 it.replace(
-                                    Regex("""=[^\(]*\(\"url\"\)\.fileURLToPath\(\"file://([^\"]*/)*([^\"]*)\"\)"""),
-                                    "=\"./$2\""
+                                    Regex("""([a-zA-Z]+)=([a-zA-Z]+)\.default\.createRequire\([^\)]+\)(.*)(\{\})\.resolve\(([a-zA-Z]+)\),(.*)\.readFileSync\([a-zA-Z]+\.fileURLToPath\(([a-zA-Z]+)\)\)"""),
+                                    """$1=$2.default.createRequire("file:///foo")$3$1("path").resolve($5),$6.readFileSync($7)"""
                                 )
                             }
                         }
