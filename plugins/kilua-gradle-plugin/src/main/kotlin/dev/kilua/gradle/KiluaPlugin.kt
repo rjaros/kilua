@@ -172,6 +172,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         ).outputs
                     from(distribution) {
                         include("*.*")
+                        include("css/*.*")
                     }
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -188,7 +189,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (this.name.endsWith(".css") && this.name != "tailwindcss.css") {
+                        if (this.name.endsWith(".css") && !this.path.startsWith("css/") && this.name != "tailwindcss.css") {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         }
                     }
@@ -242,6 +243,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         ).outputs
                     from(distribution) {
                         include("*.*")
+                        include("css/*.*")
                     }
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -258,7 +260,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (this.name.endsWith(".css") && this.name != "tailwindcss.css") {
+                        if (this.name.endsWith(".css") && !this.path.startsWith("css/") && this.name != "tailwindcss.css") {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         } else if (this.name.equals("main.bundle.js")) {
                             this.filter {
