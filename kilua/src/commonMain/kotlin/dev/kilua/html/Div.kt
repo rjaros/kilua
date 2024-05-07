@@ -39,7 +39,7 @@ public interface IDiv : ITag<HTMLDivElement>
  * HTML Div component.
  */
 public open class Div(className: String? = null, id: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLDivElement>("div", className, id, renderConfig), IDiv
+    Tag<HTMLDivElement>("div", className, id, null, renderConfig), IDiv
 
 /**
  * Creates a [Div] component.

@@ -27,6 +27,7 @@ import dev.kilua.compose.Root
 import dev.kilua.compose.root
 import dev.kilua.core.Component
 import dev.kilua.core.IComponent
+import dev.kilua.core.SafeDomFactory
 import dev.kilua.externals.CellComponent
 import dev.kilua.externals.CellComponentBase
 import dev.kilua.externals.ColumnComponent
@@ -674,7 +675,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             } else {
                 cell.getData().cast()
             }
-            val rootElement = document.createElement("div").unsafeCast<HTMLElement>()
+            val rootElement = SafeDomFactory.createElement("div").unsafeCast<HTMLElement>()
             if (onRendered != undefined()) {
                 onRendered {
                     val root = root(rootElement, false, tabulator.renderConfig) {
@@ -700,7 +701,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
     val tmpTitleFormatterFunction = if (titleFormatterComponentFunction != null) {
         { cell: CellComponentBase, _: JsAny?, onRendered: (callback: () -> Unit) -> Unit ->
             var onRenderedCallback: (() -> Unit)? = null
-            val rootElement = document.createElement("div").unsafeCast<HTMLElement>()
+            val rootElement = SafeDomFactory.createElement("div").unsafeCast<HTMLElement>()
             if (onRendered != undefined()) {
                 onRendered {
                     val root = root(rootElement, false, tabulator.renderConfig) {
@@ -746,7 +747,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             } else {
                 cell.getData().cast()
             }
-            val rootElement = document.createElement("div").unsafeCast<HTMLElement>()
+            val rootElement = SafeDomFactory.createElement("div").unsafeCast<HTMLElement>()
             if (onRendered != undefined()) {
                 onRendered {
                     if (EditorRoot.root != null) {
@@ -796,11 +797,11 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                         ?.unsafeCast<JsArray<ColumnComponent>>())?.toList()?.map {
                             it.getField()
                         } ?: emptyList()
-                val icon = document.createElement("i")
+                val icon = SafeDomFactory.createElement("i")
                 icon.classList.add("far")
                 icon.classList.add(if (!it.isVisible() && !responsiveHiddenColumns.contains(it.getField())) "fa-square" else "fa-check-square")
-                val label = document.createElement("span")
-                val title = document.createElement("span")
+                val label = SafeDomFactory.createElement("span")
+                val title = SafeDomFactory.createElement("span")
                 title.textContent = " " + it.getDefinition()["title"]
                 label.appendChild(icon)
                 label.appendChild(title)
@@ -829,11 +830,11 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             (columns + listOf(obj {
                 separator = true
             }, obj {
-                val icon = document.createElement("i")
+                val icon = SafeDomFactory.createElement("i")
                 icon.classList.add("fas")
                 icon.classList.add("fa-rotate")
-                val label = document.createElement("span")
-                val title = document.createElement("span")
+                val label = SafeDomFactory.createElement("span")
+                val title = SafeDomFactory.createElement("span")
                 title.textContent = " $resetTitle"
                 label.appendChild(icon)
                 label.appendChild(title)

@@ -599,7 +599,7 @@ public abstract class AbstractRichDateTime(
 
     override fun onInsert() {
         initializeTempusDominus()
-        if (isDom) {
+        if (renderConfig.isDom) {
             document.addEventListener("kilua.theme.changed", refreshCallback)
         }
     }
@@ -607,7 +607,7 @@ public abstract class AbstractRichDateTime(
     override fun onRemove() {
         tempusDominusInstance?.dispose()
         tempusDominusInstance = null
-        if (isDom) {
+        if (renderConfig.isDom) {
             document.removeEventListener("kilua.theme.changed", refreshCallback)
         }
     }

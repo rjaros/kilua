@@ -4514,6 +4514,7 @@ public open external class Document : Node, GlobalEventHandlers, DocumentAndElem
     fun getElementsByClassName(classNames: String): HTMLCollection
     fun createElement(localName: String): Element
     fun createElement(localName: String, options: ElementCreationOptions): Element
+    fun createElementNS(namespace: String?, qualifiedName: String): Element
     fun createElementNS(namespace: String?, qualifiedName: String, options: ElementCreationOptions): Element
     fun createDocumentFragment(): DocumentFragment
     fun createTextNode(data: String): Text

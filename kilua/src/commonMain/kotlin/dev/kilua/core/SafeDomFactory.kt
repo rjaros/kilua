@@ -37,11 +37,14 @@ import web.dom.Text
 public object SafeDomFactory {
 
     /**
-     * Create DOM element.
+     * Create DOM element with optional namespace.
      */
-    public fun createElement(name: String): Element {
+    public fun createElement(name: String, namespace: String? = null): Element {
         return if (isDom) {
-            document.createElement(name)
+            if (namespace != null)
+                document.createElementNS(namespace, name)
+            else
+                document.createElement(name)
         } else nodeJsCreateElement()
     }
 

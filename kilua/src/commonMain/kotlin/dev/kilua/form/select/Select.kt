@@ -128,7 +128,7 @@ public open class Select(
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
-) : Tag<HTMLSelectElement>("select", className, id, renderConfig), StringFormControl,
+) : Tag<HTMLSelectElement>("select", className, id, null, renderConfig), StringFormControl,
     WithStateFlow<String?> by withStateFlowDelegate, ISelect {
 
     public override var value: String? by updatingProperty(

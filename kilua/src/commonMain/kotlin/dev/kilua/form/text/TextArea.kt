@@ -166,7 +166,7 @@ public open class TextArea(
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
-) : Tag<HTMLTextAreaElement>("textarea", className, id, renderConfig),
+) : Tag<HTMLTextAreaElement>("textarea", className, id, null, renderConfig),
     StringFormControl, WithStateFlow<String?> by withStateFlowDelegate, ITextArea {
 
     public override var value: String? by updatingProperty(

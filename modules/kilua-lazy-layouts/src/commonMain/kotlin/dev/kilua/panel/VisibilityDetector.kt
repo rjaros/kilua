@@ -24,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.core.IComponent
+import dev.kilua.core.SafeDomFactory
 import dev.kilua.externals.console
 import dev.kilua.externals.obj
 import dev.kilua.html.div
@@ -42,7 +43,7 @@ internal fun IComponent.visibilityDetector(onVisible: () -> Unit) {
     var hit by remember { mutableStateOf(0) }
 
     DisposableEffect(onVisible, hit) {
-        val div = document.getElementById(id) ?: run {
+        val div = SafeDomFactory.getElementById(id) ?: run {
             console.log("Lazy Compose: could not find the div with identifier $id, the lazy elements are broken")
             return@DisposableEffect onDispose { /* Nothing to do */ }
         }

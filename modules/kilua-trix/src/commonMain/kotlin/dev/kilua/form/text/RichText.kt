@@ -134,7 +134,7 @@ public open class RichText(
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
-) : Tag<HTMLElement>("trix-editor", className, id, renderConfig),
+) : Tag<HTMLElement>("trix-editor", className, id, null, renderConfig),
     StringFormControl, WithStateFlow<String?> by withStateFlowDelegate, IRichText {
 
     public override var value: String? by updatingProperty(

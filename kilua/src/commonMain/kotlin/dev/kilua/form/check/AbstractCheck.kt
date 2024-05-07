@@ -118,7 +118,7 @@ public abstract class AbstractCheck(
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean> = WithStateFlowDelegateImpl()
-) : Tag<HTMLInputElement>("input", className, id, renderConfig), BoolFormControl,
+) : Tag<HTMLInputElement>("input", className, id, null, renderConfig), BoolFormControl,
     WithStateFlow<Boolean> by withStateFlowDelegate, IAbstractCheck {
 
     public override var value: Boolean by updatingProperty(

@@ -94,13 +94,14 @@ public open class Tag<E : HTMLElement>(
     protected val tagName: String,
     className: String? = null,
     id: String? = null,
+    protected val namespace: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val tagAttrs: TagAttrsDelegate<E> = TagAttrsDelegateImpl(!renderConfig.isDom || !isDom),
     protected val tagStyle: TagStyleDelegate<E> = TagStyleDelegateImpl(!renderConfig.isDom || !isDom),
     protected val tagEvents: TagEventsDelegate<E> = TagEventsDelegateImpl(!renderConfig.isDom || !isDom),
     protected val tagDnd: TagDndDelegate<E> = TagDndDelegateImpl(!renderConfig.isDom || !isDom)
 ) :
-    ComponentBase(SafeDomFactory.createElement(tagName), renderConfig),
+    ComponentBase(SafeDomFactory.createElement(tagName, namespace), renderConfig),
     TagAttrs<E> by tagAttrs, TagStyle<E> by tagStyle, TagEvents<E> by tagEvents, TagDnd<E> by tagDnd, ITag<E> {
 
     /**
@@ -235,6 +236,7 @@ public open class Tag<E : HTMLElement>(
     override fun renderToStringBuilder(builder: StringBuilder) {
         if (visible) {
             builder.append("<$tagName")
+            if (namespace != null) builder.append(" xmlns=\"$namespace\"")
             if (internalClassName != null && className != null) {
                 builder.append(" class=\"$internalCssClasses $className\"")
             } else if (className != null) {
@@ -294,6 +296,7 @@ public open class Tag<E : HTMLElement>(
  * @param tagName the name of the HTML tag
  * @param className the CSS class name
  * @param id the ID attribute of the HTML tag
+ * @param namespace the namespace of the HTML tag
  * @param content the content of the component
  * @return the [Tag] component
  */
@@ -302,10 +305,11 @@ public fun <E : HTMLElement> IComponent.tag(
     tagName: String,
     className: String? = null,
     id: String? = null,
+    namespace: String? = null,
     content: @Composable ITag<E>.() -> Unit = {}
 ): Tag<E> {
-    return key(tagName) {
-        val component = remember { Tag<E>(tagName, className, id, renderConfig = renderConfig) }
+    return key(tagName, namespace) {
+        val component = remember { Tag<E>(tagName, className, id, namespace, renderConfig = renderConfig) }
         ComponentNode(component, {
             set(className) { updateProperty(Tag<HTMLElement>::className, it) }
             set(id) { updateProperty(Tag<HTMLElement>::id, it) }
@@ -320,6 +324,7 @@ public fun <E : HTMLElement> IComponent.tag(
  * @param tagName the name of the HTML tag
  * @param className the CSS class name
  * @param id the ID attribute of the HTML tag
+ * @param namespace the namespace of the HTML tag
  * @param content the content of the component
  * @return the [Tag] component
  */
@@ -328,7 +333,8 @@ public fun IComponent.tag(
     tagName: String,
     className: String? = null,
     id: String? = null,
+    namespace: String? = null,
     content: @Composable ITag<HTMLElement>.() -> Unit = {}
 ): Tag<HTMLElement> {
-    return tag<HTMLElement>(tagName, className, id, content)
+    return tag<HTMLElement>(tagName, className, id, namespace, content)
 }
