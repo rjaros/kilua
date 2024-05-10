@@ -74,6 +74,9 @@ internal external object TempusDominusLocaleNl : TempusDominusLocale
 @JsModule("@eonasdan/tempus-dominus/dist/locales/pl.js")
 internal external object TempusDominusLocalePl : TempusDominusLocale
 
+@JsModule("@eonasdan/tempus-dominus/dist/locales/pt-PT.js")
+internal external object TempusDominusLocalePtPt : TempusDominusLocale
+
 @JsModule("@eonasdan/tempus-dominus/dist/locales/ro.js")
 internal external object TempusDominusLocaleRo : TempusDominusLocale
 
@@ -92,6 +95,18 @@ internal external object TempusDominusLocaleSrLatn : TempusDominusLocale
 @JsModule("@eonasdan/tempus-dominus/dist/locales/tr.js")
 internal external object TempusDominusLocaleTr : TempusDominusLocale
 
+@JsModule("@eonasdan/tempus-dominus/dist/locales/zh-CN.js")
+internal external object TempusDominusLocaleZhCn : TempusDominusLocale
+
+@JsModule("@eonasdan/tempus-dominus/dist/locales/zh-HK.js")
+internal external object TempusDominusLocaleZhHk : TempusDominusLocale
+
+@JsModule("@eonasdan/tempus-dominus/dist/locales/zh-MO.js")
+internal external object TempusDominusLocaleZhMo : TempusDominusLocale
+
+@JsModule("@eonasdan/tempus-dominus/dist/locales/zh-TW.js")
+internal external object TempusDominusLocaleZhTw : TempusDominusLocale
+
 /**
  * Map of Tempus Dominus locales.
  */
@@ -109,10 +124,15 @@ public val tempusDominusLocales: Map<String, TempusDominusLocale> = nativeMapOf(
     TempusDominusLocaleIt.name to TempusDominusLocaleIt,
     TempusDominusLocaleNl.name to TempusDominusLocaleNl,
     TempusDominusLocalePl.name to TempusDominusLocalePl,
+    TempusDominusLocalePtPt.name to TempusDominusLocalePtPt,
     TempusDominusLocaleRo.name to TempusDominusLocaleRo,
     TempusDominusLocaleRu.name to TempusDominusLocaleRu,
     TempusDominusLocaleSl.name to TempusDominusLocaleSl,
     TempusDominusLocaleSrLatn.name to TempusDominusLocaleSrLatn,
     TempusDominusLocaleSr.name to TempusDominusLocaleSr,
-    TempusDominusLocaleTr.name to TempusDominusLocaleTr
+    TempusDominusLocaleTr.name to TempusDominusLocaleTr,
+    TempusDominusLocaleZhCn.name to TempusDominusLocaleZhCn,
+    TempusDominusLocaleZhHk.name to TempusDominusLocaleZhHk,
+    TempusDominusLocaleZhMo.name to TempusDominusLocaleZhMo,
+    TempusDominusLocaleZhTw.name to TempusDominusLocaleZhTw,
 )
