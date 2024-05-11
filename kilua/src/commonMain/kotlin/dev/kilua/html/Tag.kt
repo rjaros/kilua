@@ -95,6 +95,7 @@ public open class Tag<E : HTMLElement>(
     className: String? = null,
     id: String? = null,
     protected val namespace: String? = null,
+    protected val renderNamespaceToString: Boolean = false,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val tagAttrs: TagAttrsDelegate<E> = TagAttrsDelegateImpl(!renderConfig.isDom || !isDom),
     protected val tagStyle: TagStyleDelegate<E> = TagStyleDelegateImpl(!renderConfig.isDom || !isDom),
@@ -236,7 +237,7 @@ public open class Tag<E : HTMLElement>(
     override fun renderToStringBuilder(builder: StringBuilder) {
         if (visible) {
             builder.append("<$tagName")
-            if (namespace != null) builder.append(" xmlns=\"$namespace\"")
+            if (namespace != null && renderNamespaceToString) builder.append(" xmlns=\"$namespace\"")
             if (internalClassName != null && className != null) {
                 builder.append(" class=\"$internalCssClasses $className\"")
             } else if (className != null) {

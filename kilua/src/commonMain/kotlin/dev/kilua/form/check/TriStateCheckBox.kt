@@ -108,7 +108,7 @@ public open class TriStateCheckBox(
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean?> = WithStateFlowDelegateImpl()
-) : Tag<HTMLInputElement>("input", className, id, null, renderConfig), TriStateFormControl,
+) : Tag<HTMLInputElement>("input", className, id, renderConfig = renderConfig), TriStateFormControl,
     WithStateFlow<Boolean?> by withStateFlowDelegate, ITriStateCheckBox {
 
     public override var value: Boolean? by updatingProperty(

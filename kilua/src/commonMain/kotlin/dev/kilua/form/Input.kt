@@ -175,7 +175,7 @@ public abstract class Input<T : Any>(
     id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<T?> = WithStateFlowDelegateImpl()
-) : Tag<HTMLInputElement>("input", className, id, null, renderConfig), GenericFormControl<T>,
+) : Tag<HTMLInputElement>("input", className, id, null, renderConfig = renderConfig), GenericFormControl<T>,
     WithStateFlow<T?> by withStateFlowDelegate, IInput<T> {
 
     public override var value: T? by updatingProperty(

@@ -80,6 +80,7 @@ nmcp {
         project(":modules:kilua-ssr-server-micronaut")
         project(":modules:kilua-ssr-server-spring-boot")
         project(":modules:kilua-ssr-server-vertx")
+        project(":modules:kilua-svg")
         project(":modules:kilua-tabulator")
         project(":modules:kilua-tabulator-remote")
         project(":modules:kilua-tailwindcss")

@@ -39,6 +39,8 @@ public fun Map<String, Any>.renderAsHtmlAttributes(): String {
         @Suppress("UNCHECKED_CAST")
         when (it.key) {
             "accept" -> "accept=\"" + (it.value as List<String>).joinToString(",") + "\""
+            "attributeName" -> "attributeName=\"${it.value}\""
+            "viewBox" -> "viewBox=\"${it.value}\""
             else -> when (it.value) {
                 true -> it.key.toKebabCase()
                 false -> null

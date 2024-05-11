@@ -41,6 +41,7 @@ public enum class CssUnit(public val cssUnit: String) {
     vmin("vmin"),
     vmax("vmax"),
     perc("%"),
+    units(""),
     auto("auto"),
     normal("normal"),
     initial("initial"),
@@ -203,6 +204,14 @@ public val Number.vmin: CssSize
 public val Number.vmax: CssSize
     get() {
         return CssSize(this, CssUnit.vmax)
+    }
+
+/**
+ * Extension property to convert Number to empty units.
+ */
+public val Number.units: CssSize
+    get() {
+        return CssSize(this, CssUnit.units)
     }
 
 /**
