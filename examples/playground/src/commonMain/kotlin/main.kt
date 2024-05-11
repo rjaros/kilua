@@ -91,6 +91,8 @@ import dev.kilua.rest.RemoteRequestException
 import dev.kilua.rest.RestClient
 import dev.kilua.rest.callDynamic
 import dev.kilua.state.collectAsState
+import dev.kilua.svg.path
+import dev.kilua.svg.svg
 import dev.kilua.tabulator.ColumnDefinition
 import dev.kilua.tabulator.Formatter
 import dev.kilua.tabulator.Layout
@@ -206,6 +208,20 @@ class App : Application() {
             div {
 
                 margin(20.px)
+
+                val size by range(200, min = 0, max = 200).collectAsState()
+
+                br()
+
+                svg(viewBox = "0 0 20 20") {
+                    width(size?.toInt()?.px)
+                    height(size?.toInt()?.px)
+                    fill("currentColor")
+                    className("mr-2")
+                    path("M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z")
+                }
+
+                hr()
 
                 var count by remember { mutableStateOf(0) }
                 tag("h1") {
