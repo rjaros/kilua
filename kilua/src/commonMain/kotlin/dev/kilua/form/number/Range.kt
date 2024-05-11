@@ -174,6 +174,10 @@ public open class Range(
             element.max = max.toString()
             @Suppress("LeakingThis")
             element.step = step.toString()
+            if (value != null) {
+                @Suppress("LeakingThis")
+                element.value = value.toString()
+            }
         }
     }
 
