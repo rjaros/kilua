@@ -278,8 +278,13 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     afterEvaluate {
                         tasks.findByName("jarWithJs")?.let {
                             tasks.getByName("jarWithJs", Jar::class) {
-                                dependsOn("jsArchiveSSR")
-                                from(project.tasks["jsArchiveSSR"].outputs.files)
+                                if (wasmJsMainExists) {
+                                    dependsOn("wasmJsArchiveSSR")
+                                    from(project.tasks["wasmJsArchiveSSR"].outputs.files)
+                                } else {
+                                    dependsOn("jsArchiveSSR")
+                                    from(project.tasks["jsArchiveSSR"].outputs.files)
+                                }
                             }
                         }
                         tasks.findByName("jarWithWasmJs")?.let {
