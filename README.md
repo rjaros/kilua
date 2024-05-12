@@ -2,7 +2,7 @@
 
 Composable web framework for Kotlin/Wasm and Kotlin/JS.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/dev.kilua/kilua/badge.svg)](https://maven-badges.herokuapp.com/maven-central/dev.kilua/kilua)
+[![Maven Central](https://img.shields.io/maven-central/v/dev.kilua/kilua.svg?label=Maven%20Central)](https://central.sonatype.com/search?namespace=dev.kilua&name=kilua)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Kilua allows you to build modern web applications with the [Kotlin](https://kotlinlang.org) language. 
