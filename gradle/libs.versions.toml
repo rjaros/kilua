@@ -9,12 +9,12 @@ ksp = "2.0.0-RC3-1.0.20"
 detekt = "1.23.6"
 npm-publish = "3.4.2"
 gradle-plugin-publish = "1.2.1"
-kilua-rpc = "0.0.9"
+kilua-rpc = "0.0.10"
 kilua-gettext = "0.0.2"
 kotlinx-atomicfu = "0.23.2"
 kotlinx-coroutines = "1.8.1"
 kotlinx-serialization = "1.6.3"
-kotlinx-datetime = "0.6.0-RC.2"
+kotlinx-datetime = "0.6.0"
 javalin = "6.1.4"
 jooby = "3.1.0"
 ktor = "2.3.11"
@@ -88,6 +88,7 @@ tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
 wro4j = { module = "ro.isdc.wro4j:wro4j-core", version.ref = "wro4j" }
 expiring-map = { module = "net.jodah:expiringmap", version.ref = "expiring-map" }
 kilua-gettext = { module = "dev.kilua:kilua-gettext", version.ref = "kilua-gettext" }
+compose-gradle-plugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
