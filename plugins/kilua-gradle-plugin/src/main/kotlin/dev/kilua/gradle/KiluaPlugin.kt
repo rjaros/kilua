@@ -173,6 +173,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     from(distribution) {
                         include("*.*")
                         include("css/*.*")
+                        include("composeResources/**")
                     }
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -244,6 +245,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     from(distribution) {
                         include("*.*")
                         include("css/*.*")
+                        include("composeResources/**")
                     }
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
