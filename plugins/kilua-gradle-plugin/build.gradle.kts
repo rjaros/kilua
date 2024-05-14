@@ -54,6 +54,7 @@ kotlin {
 
 dependencies {
     implementation(kotlin("gradle-plugin"))
+    implementation(libs.compose.gradle.plugin)
     implementation(libs.tomlj)
 }
 

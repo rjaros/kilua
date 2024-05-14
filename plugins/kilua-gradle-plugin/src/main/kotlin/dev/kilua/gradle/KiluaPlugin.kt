@@ -313,6 +313,12 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 "-O3", "--gufa",
             )
         }
+        val dontDisableSkikoProjectProperty = project.findProperty("dev.kilua.plugin.disableSkiko") == "false"
+        if (!dontDisableSkikoProjectProperty && kiluaExtension.disableSkiko.get()) {
+            tasks.withType<org.jetbrains.compose.web.tasks.UnpackSkikoWasmRuntimeTask> {
+                enabled = false
+            }
+        }
     }
 
     private fun KiluaPluginContext.configureNodeEcosystem() {
