@@ -30,7 +30,6 @@ class TodoSavedStateAdapter(private val json: Json, private val storage: Storage
             TodoContract.Inputs,
             TodoContract.Events,
             TodoContract.State>.restore(): TodoContract.State {
-        postEvent(TodoContract.Events.StateRestored)
         return TodoContract.State(
             todos = storage["todos-kilua"]?.let {
                 json.decodeFromString(
