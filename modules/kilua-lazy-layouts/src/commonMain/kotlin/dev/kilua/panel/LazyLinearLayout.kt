@@ -49,8 +49,8 @@ internal fun IComponent.lazyLinearLayout(
     var visibleEndIndex: Int? = null
     for ((i, loader) in loaders.withIndex()) {
         for (item in loader.items) {
-            div {
-                key(item.key) {
+            key(item.key) {
+                div {
                     item.block(this)
                 }
             }
