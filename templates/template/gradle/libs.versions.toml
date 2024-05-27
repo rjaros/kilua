@@ -1,7 +1,7 @@
 [versions]
-kilua = "0.0.4"
-kotlin = "2.0.0-RC3"
-compose = "1.6.10-rc02"
+kilua = "0.0.5"
+kotlin = "2.0.0"
+compose = "1.6.10"
 
 [libraries]
 kilua = { module = "dev.kilua:kilua", version.ref = "kilua" }
