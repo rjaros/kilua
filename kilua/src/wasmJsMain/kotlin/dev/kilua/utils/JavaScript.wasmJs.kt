@@ -26,10 +26,6 @@ import kotlin.js.unsafeCast as unsafeCastJs
 
 public actual typealias JsModule = kotlin.js.JsModule
 
-@Retention(AnnotationRetention.BINARY)
-@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
-public actual annotation class JsNonModule actual constructor()
-
 public actual typealias JsName = kotlin.js.JsName
 
 @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")

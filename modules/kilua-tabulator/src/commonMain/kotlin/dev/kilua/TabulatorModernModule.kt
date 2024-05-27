@@ -24,12 +24,10 @@
 package dev.kilua
 
 import dev.kilua.utils.JsModule
-import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("tabulator-tables/dist/css/tabulator_modern.min.css")
-@JsNonModule
 internal external object TabulatorModernCss : JsAny
 
 /**

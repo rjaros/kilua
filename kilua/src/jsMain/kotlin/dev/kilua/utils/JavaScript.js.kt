@@ -27,8 +27,6 @@ import kotlin.js.unsafeCast as unsafeCastJs
 
 public actual typealias JsModule = kotlin.js.JsModule
 
-public actual typealias JsNonModule = kotlin.js.JsNonModule
-
 public actual typealias JsName = kotlin.js.JsName
 
 @Suppress("NOTHING_TO_INLINE")

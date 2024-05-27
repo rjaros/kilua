@@ -24,12 +24,10 @@
 package dev.kilua
 
 import dev.kilua.utils.JsModule
-import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("tom-select/dist/css/tom-select.min.css")
-@JsNonModule
 internal external object TomSelectMinCss : JsAny
 
 /**
