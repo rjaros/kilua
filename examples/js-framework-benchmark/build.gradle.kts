@@ -60,3 +60,7 @@ kotlin {
         }
     }
 }
+
+composeCompiler {
+   enableStrongSkippingMode = true
+}

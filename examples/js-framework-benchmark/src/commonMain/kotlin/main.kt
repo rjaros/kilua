@@ -102,8 +102,7 @@ class App : Application() {
 
     override fun start() {
         root("root") {
-            div {
-                id("main")
+            div(id = "main") {
                 div("container") {
                     div("jumbotron") {
                         div("row") {
@@ -115,32 +114,44 @@ class App : Application() {
                             div("col-md-6") {
                                 div("row") {
                                     div("col-sm-6 smallpad") {
-                                        button("Create 1,000 rows", className = "btn btn-primary btn-block") {
-                                            id("run")
+                                        button(
+                                            "Create 1,000 rows",
+                                            id = "run",
+                                            className = "btn btn-primary btn-block"
+                                        ) {
                                             onClick {
                                                 data = buildData(1000)
                                             }
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Create 10,000 rows", className = "btn btn-primary btn-block") {
-                                            id("runlots")
+                                        button(
+                                            "Create 10,000 rows",
+                                            id = "runlots",
+                                            className = "btn btn-primary btn-block"
+                                        ) {
                                             onClick {
                                                 data = buildData(10_000)
                                             }
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Append 1,000 rows", className = "btn btn-primary btn-block") {
-                                            id("add")
+                                        button(
+                                            "Append 1,000 rows",
+                                            id = "add",
+                                            className = "btn btn-primary btn-block"
+                                        ) {
                                             onClick {
                                                 data += buildData(1000)
                                             }
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Update every 10th row", className = "btn btn-primary btn-block") {
-                                            id("update")
+                                        button(
+                                            "Update every 10th row",
+                                            id = "update",
+                                            className = "btn btn-primary btn-block"
+                                        ) {
                                             onClick {
                                                 data = data.mapIndexed { index, row ->
                                                     if (index % 10 == 0) {
@@ -153,16 +164,14 @@ class App : Application() {
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Clear", className = "btn btn-primary btn-block") {
-                                            id("clear")
+                                        button("Clear", id = "clear", className = "btn btn-primary btn-block") {
                                             onClick {
                                                 data = emptyList()
                                             }
                                         }
                                     }
                                     div("col-sm-6 smallpad") {
-                                        button("Swap Rows", className = "btn btn-primary btn-block") {
-                                            id("swaprows")
+                                        button("Swap Rows", id = "swaprows", className = "btn btn-primary btn-block") {
                                             onClick {
                                                 if (data.size > 998) {
                                                     val newData = data.toTypedArray()
@@ -181,8 +190,8 @@ class App : Application() {
                     table("table table-hover table-striped test-data") {
                         tbody {
                             for (chunk in data.chunked(100)) {
-                                for (item in chunk) {
-                                    key(item.id) {
+                                key("${chunk.first().id}#${chunk.last().id}#${chunk.size}") {
+                                    for (item in chunk) {
                                         tr(if (selected?.id == item.id) "danger" else null) {
                                             td(className = "col-md-1") {
                                                 +item.id.toString()
