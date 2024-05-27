@@ -21,6 +21,8 @@ dev.kilua.i18n
 dev.kilua.panel
 dev.kilua.state
 dev.kilua.utils
+module:kilua-annotations
+dev.kilua.annotations
 module:kilua-bootstrap
 dev.kilua
 dev.kilua.dropdown
@@ -105,6 +107,8 @@ module:kilua-ssr-server-spring-boot
 dev.kilua.ssr
 module:kilua-ssr-server-vertx
 dev.kilua.ssr
+module:kilua-svg
+dev.kilua.svg
 module:kilua-tabulator
 dev.kilua
 dev.kilua.externals
@@ -113,6 +117,7 @@ module:kilua-tabulator-remote
 dev.kilua.tabulator
 module:kilua-tailwindcss
 dev.kilua
+dev.kilua.theme
 module:kilua-tempus-dominus
 dev.kilua
 dev.kilua.externals
@@ -138,3 +143,5 @@ dev.kilua.form.text
 dev.kilua.form.text.i18n
 module:kilua-gradle-plugin
 dev.kilua.gradle
+module:kilua-ksp-processor
+dev.kilua.ksp
