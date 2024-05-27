@@ -105,6 +105,10 @@ fun Project.setupKsp() {
         dependsOn("kspCommonMainKotlinMetadata")
     }
 
+    tasks.getByName("dokkaHtmlPartial") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+
     tasks.getByName("sourcesJar") {
         dependsOn("kspCommonMainKotlinMetadata")
     }
