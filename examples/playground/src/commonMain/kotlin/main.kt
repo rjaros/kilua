@@ -44,19 +44,26 @@ import dev.kilua.form.NumberMask
 import dev.kilua.form.PatternMask
 import dev.kilua.form.RangeMask
 import dev.kilua.form.check.checkBox
+import dev.kilua.form.check.checkBoxRef
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
 import dev.kilua.form.number.imaskNumeric
 import dev.kilua.form.number.numeric
 import dev.kilua.form.number.range
+import dev.kilua.form.number.rangeRef
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.TomSelectRenders
 import dev.kilua.form.select.tomSelect
+import dev.kilua.form.select.tomSelectRef
 import dev.kilua.form.text.richText
+import dev.kilua.form.text.richTextRef
 import dev.kilua.form.text.text
+import dev.kilua.form.text.textRef
 import dev.kilua.form.text.tomTypeahead
+import dev.kilua.form.text.tomTypeaheadRef
 import dev.kilua.form.time.richDate
 import dev.kilua.form.time.richDateTime
+import dev.kilua.form.time.richDateTimeRef
 import dev.kilua.form.time.richTime
 import dev.kilua.html.*
 import dev.kilua.html.style.PClass
@@ -68,12 +75,14 @@ import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
 import dev.kilua.modal.confirm
 import dev.kilua.modal.modal
+import dev.kilua.modal.modalRef
 import dev.kilua.panel.OffPlacement
 import dev.kilua.panel.TabPosition
 import dev.kilua.panel.accordion
 import dev.kilua.panel.carousel
 import dev.kilua.panel.lazyColumn
 import dev.kilua.panel.offcanvas
+import dev.kilua.panel.offcanvasRef
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
 import dev.kilua.panel.vPanel
@@ -107,7 +116,6 @@ import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.utils.JsModule
-import dev.kilua.utils.JsNonModule
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsObjectOf
@@ -137,40 +145,31 @@ import kotlin.random.nextInt
 import kotlin.random.nextUInt
 import kotlin.time.Duration.Companion.seconds
 
-@JsModule("./i18n/messages-de.po")
-@JsNonModule
+@JsModule("./modules/i18n/messages-de.po")
 external object messagesDe : JsAny
 
-@JsModule("./i18n/messages-en.po")
-@JsNonModule
+@JsModule("./modules/i18n/messages-en.po")
 external object messagesEn : JsAny
 
-@JsModule("./i18n/messages-es.po")
-@JsNonModule
+@JsModule("./modules/i18n/messages-es.po")
 external object messagesEs : JsAny
 
-@JsModule("./i18n/messages-fr.po")
-@JsNonModule
+@JsModule("./modules/i18n/messages-fr.po")
 external object messagesFr : JsAny
 
-@JsModule("./i18n/messages-ja.po")
-@JsNonModule
+@JsModule("./modules/i18n/messages-ja.po")
 external object messagesJa : JsAny
 
-@JsModule("./i18n/messages-ko.po")
-@JsNonModule
+@JsModule("./modules/i18n/messages-ko.po")
 external object messagesKo : JsAny
 
-@JsModule("./i18n/messages-pl.po")
-@JsNonModule
+@JsModule("./modules/i18n/messages-pl.po")
 external object messagesPl : JsAny
 
-@JsModule("./i18n/messages-ru.po")
-@JsNonModule
+@JsModule("./modules/i18n/messages-ru.po")
 external object messagesRu : JsAny
 
-@JsModule("./css/style.css")
-@JsNonModule
+@JsModule("./modules/css/style.css")
 external object css
 
 @Serializable
@@ -209,7 +208,7 @@ class App : Application() {
 
                 margin(20.px)
 
-                val size by range(200, min = 0, max = 200).collectAsState()
+                val size by rangeRef(200, min = 0, max = 200).collectAsState()
 
                 br()
 
@@ -528,7 +527,7 @@ class App : Application() {
                 var ttdis by remember { mutableStateOf(false) }
                 var ttid by remember { mutableStateOf("a") }
 
-                val tt = tomTypeahead(
+                val tt = tomTypeaheadRef(
                     listOf("Alaska", "California", "Nevada", "Oregon", "Washington"),
                     placeholder = "enter",
                     disabled = ttdis,
@@ -615,7 +614,7 @@ class App : Application() {
                 var multi by remember { mutableStateOf(true) }
                 var tsdis by remember { mutableStateOf(false) }
 
-                val tselect = tomSelect(
+                val tselect = tomSelectRef(
                     listOf("cat" to "Cat", "dog" to "Dog", "mouse" to "Mouse"),
                     value = tsvalue,
                     placeholder = "Select an option",
@@ -706,7 +705,7 @@ class App : Application() {
 
                 var dtInline by remember { mutableStateOf(false) }
 
-                val rd = richDateTime(
+                val rd = richDateTimeRef(
                     now(),
                     name = "data",
                     placeholder = "Podaj datę",
@@ -827,7 +826,7 @@ class App : Application() {
                 hr()
 
                 val off =
-                    offcanvas(
+                    offcanvasRef(
                         "Test offcanvas",
                         OffPlacement.OffcanvasEnd,
                         closeButton = true,
@@ -857,7 +856,7 @@ class App : Application() {
 
                 var tooltip by remember { mutableStateOf("Test") }
 
-                val bsButton = bsButton("toggle offcanvas") {
+                val bsButton = bsButtonRef("toggle offcanvas") {
                     onClick {
                         off.toggle()
                     }
@@ -976,7 +975,7 @@ class App : Application() {
                     }
                 }
 
-                val modal = modal(
+                val modal = modalRef(
                     modalCaption,
                     size = ModalSize.ModalXl,
                     fullscreenMode = FullscreenMode.ModalFullscreenMdDown,
@@ -986,10 +985,10 @@ class App : Application() {
                 ) {
                     pt(modalCaption)
                     footer {
-                        button("OK").onClick {
-                            this@modal.hide()
+                        buttonRef("OK").onClick {
+                            this@modalRef.hide()
                         }
-                        button("Test").onClick {
+                        buttonRef("Test").onClick {
                             modalCaption += "2"
                         }
                     }
@@ -1123,7 +1122,7 @@ class App : Application() {
 
                 var disab by remember { mutableStateOf(true) }
 
-                val trix = richText("ala ma kota", disabled = disab, placeholder = "wprowadź dane") {
+                val trix = richTextRef("ala ma kota", disabled = disab, placeholder = "wprowadź dane") {
                     onChange {
                         console.log(this.value)
                     }
@@ -1156,7 +1155,7 @@ class App : Application() {
 
                 hr()
 
-                val i by range(0, 1, 255).collectAsState()
+                val i by rangeRef(0, 1, 255).collectAsState()
 
                 val className = style(".test") {
                     console.log("recompose 1")
@@ -1195,14 +1194,14 @@ class App : Application() {
                         }
 
                         fieldWithLabel("First name", "form-label", groupClassName = "col-md-4") {
-                            text("Mark", required = true, className = "form-control").bind("firstName").also {
+                            textRef("Mark", required = true, className = "form-control").bind("firstName").also {
                                 div("valid-feedback") {
                                     +"Looks good!"
                                 }
                             }
                         }
                         fieldWithLabel("Last name", "form-label", groupClassName = "col-md-4") {
-                            text("Otto", required = true, className = "form-control").bind("lastName").also {
+                            textRef("Otto", required = true, className = "form-control").bind("lastName").also {
                                 div("valid-feedback") {
                                     +"Looks good!"
                                 }
@@ -1217,7 +1216,7 @@ class App : Application() {
                                 +"@"
                             }
                             val invalidClass = if (validation["username"]?.isInvalid == true) "is-invalid" else null
-                            text(required = true, className = "form-control" % invalidClass) {
+                            textRef(required = true, className = "form-control" % invalidClass) {
                                 ariaDescribedby("inputGroupPrepend")
                             }.bindWithValidationMessage("username") { text ->
                                 val result = text.value == null || text.value!!.length >= 10
@@ -1230,14 +1229,14 @@ class App : Application() {
                             }
                         }
                         fieldWithLabel("City", "form-label", groupClassName = "col-md-6") {
-                            text(required = true, className = "form-control").bind("city").also {
+                            textRef(required = true, className = "form-control").bind("city").also {
                                 div("invalid-feedback") {
                                     +"Please provide a valid city."
                                 }
                             }
                         }
                         fieldWithLabel("State", "form-label", groupClassName = "col-md-3") {
-                            tomTypeahead(
+                            tomTypeaheadRef(
                                 listOf("Alaska", "California"),
                                 placeholder = "Choose...",
                                 id = it,
@@ -1276,7 +1275,7 @@ class App : Application() {
                                 }*/
                         }
                         fieldWithLabel("Zip", "form-label", groupClassName = "col-md-3") {
-                            text(required = true, className = "form-control").bind("zip").also {
+                            textRef(required = true, className = "form-control").bind("zip").also {
                                 div("invalid-feedback") {
                                     +"Please provide a valid zip."
                                 }
@@ -1289,7 +1288,7 @@ class App : Application() {
                                     "form-check-label",
                                     labelAfter = true
                                 ) {
-                                    checkBox(className = "form-check-input", required = true).bind("agree")
+                                    checkBoxRef(className = "form-check-input", required = true).bind("agree")
                                 }
                                 div("invalid-feedback") {
                                     +"You must agree before submitting."
@@ -1349,7 +1348,7 @@ class App : Application() {
                     }
                 }
             }
-            val xb = button("add $size") {
+            val xb = buttonRef("add $size") {
                 onClick {
                     list = list + "test"
                 }
@@ -1408,7 +1407,7 @@ class App : Application() {
             lateinit var divB: Div
             div {
                 +"$size"
-                divB = div {
+                divB = divRef {
                     +"b"
                     div {
                         +"c"

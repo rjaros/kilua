@@ -63,7 +63,6 @@ kotlin {
                 implementation(project(":modules:kilua-trix"))
                 implementation(project(":modules:kilua-rsup-progress"))
                 implementation(project(":modules:kilua-i18n"))
-                implementation(project(":modules:kilua-tailwindcss"))
                 implementation(project(":modules:kilua-svg"))
             }
         }
