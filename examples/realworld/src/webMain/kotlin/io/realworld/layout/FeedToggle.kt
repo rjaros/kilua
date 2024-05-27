@@ -27,6 +27,7 @@ import dev.kilua.core.IComponent
 import dev.kilua.html.div
 import dev.kilua.html.li
 import dev.kilua.html.link
+import dev.kilua.html.linkRef
 import dev.kilua.html.ul
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
@@ -39,7 +40,7 @@ fun IComponent.feedToggle(state: ConduitState, conduitManager: ConduitManager) {
             if (state.user != null) {
                 li("nav-item") {
                     val className = if (state.feedType == FeedType.USER) "nav-link active" else "nav-link"
-                    link("", "Your Feed", className = className).onClick { e ->
+                    linkRef("", "Your Feed", className = className).onClick { e ->
                         e.preventDefault()
                         conduitManager.selectFeed(FeedType.USER)
                     }
@@ -47,15 +48,17 @@ fun IComponent.feedToggle(state: ConduitState, conduitManager: ConduitManager) {
             }
             li("nav-item") {
                 val className = if (state.feedType == FeedType.GLOBAL) "nav-link active" else "nav-link"
-                link("", "Global Feed", className = className).onClick { e ->
+                linkRef("", "Global Feed", className = className).onClick { e ->
                     e.preventDefault()
                     conduitManager.selectFeed(FeedType.GLOBAL)
                 }
             }
             if (state.selectedTag != null) {
                 li("nav-item") {
-                    link("", "#${state.selectedTag}", className = "nav-link active").onClick { e ->
-                        e.preventDefault()
+                    link("", "#${state.selectedTag}", className = "nav-link active"){
+                        onClick { e ->
+                            e.preventDefault()
+                        }
                     }
                 }
             }

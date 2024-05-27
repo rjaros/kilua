@@ -27,7 +27,7 @@ import dev.kilua.core.IComponent
 import dev.kilua.form.InputType
 import dev.kilua.form.form
 import dev.kilua.form.text.Text
-import dev.kilua.form.text.text
+import dev.kilua.form.text.textRef
 import dev.kilua.html.ButtonType
 import dev.kilua.html.button
 import dev.kilua.html.div
@@ -66,13 +66,13 @@ fun IComponent.loginPage(state: ConduitState, conduitManager: ConduitManager) {
                     form {
                         fieldset(className = "form-group") {
                             emailInput =
-                                text(type = InputType.Email, className = "form-control form-control-lg") {
+                                textRef(type = InputType.Email, className = "form-control form-control-lg") {
                                     placeholder("Email")
                                 }
                         }
                         fieldset(className = "form-group") {
                             passwordInput =
-                                text(type = InputType.Password, className = "form-control form-control-lg") {
+                                textRef(type = InputType.Password, className = "form-control form-control-lg") {
                                     placeholder("Password")
                                 }
                         }

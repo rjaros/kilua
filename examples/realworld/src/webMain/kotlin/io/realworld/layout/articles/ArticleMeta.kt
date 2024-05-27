@@ -112,8 +112,9 @@ fun IComponent.articleMeta(article: Article, state: ConduitState, conduitManager
                 i("ion-trash-a")
                 rawHtml("&nbsp;")
                 +" Delete Article"
-            }.onClick {
-                conduitManager.deleteArticle(article.slug!!)
+                onClick {
+                    conduitManager.deleteArticle(article.slug!!)
+                }
             }
         }
     }

@@ -26,6 +26,7 @@ import dev.kilua.Application
 import dev.kilua.BootstrapCssModule
 import dev.kilua.CoreModule
 import dev.kilua.compose.root
+import dev.kilua.externals.console
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
@@ -36,7 +37,6 @@ import dev.kilua.html.div
 import dev.kilua.html.px
 import dev.kilua.html.span
 import dev.kilua.startApplication
-import dev.kilua.externals.console
 import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.rem
 import kotlinx.serialization.Serializable
@@ -77,13 +77,17 @@ class App : Application() {
                     }
 
                     fieldWithLabel("First name", "form-label", groupClassName = "col-md-4") {
-                        text("Mark", required = true, id = it, className = "form-control").bind(UserForm::firstName)
+                        text("Mark", required = true, id = it, className = "form-control") {
+                            bind(UserForm::firstName)
+                        }
                         div("valid-feedback") {
                             +"Looks good!"
                         }
                     }
                     fieldWithLabel("Last name", "form-label", groupClassName = "col-md-4") {
-                        text("Otto", required = true, id = it, className = "form-control").bind(UserForm::lastName)
+                        text("Otto", required = true, id = it, className = "form-control") {
+                            bind(UserForm::lastName)
+                        }
                         div("valid-feedback") {
                             +"Looks good!"
                         }
@@ -99,30 +103,36 @@ class App : Application() {
                         val invalidClass = if (validation[UserForm::username]?.isInvalid == true) "is-invalid" else null
                         text(required = true, id = it, className = "form-control" % invalidClass) {
                             ariaDescribedby("inputGroupPrepend")
-                        }.bindWithValidationMessage(UserForm::username) { text ->
-                            val result = text.value == null || text.value!!.length >= 10
-                            val message = if (!result) "Username must be at least 10 characters long." else null
-                            result to message
+                            bindWithValidationMessage(UserForm::username) { text ->
+                                val result = text.value == null || text.value!!.length >= 10
+                                val message = if (!result) "Username must be at least 10 characters long." else null
+                                result to message
+                            }
                         }
                         div("invalid-feedback") {
                             +(validation[UserForm::username]?.invalidMessage ?: "Please choose a username.")
                         }
                     }
                     fieldWithLabel("City", "form-label", groupClassName = "col-md-6") {
-                        text(required = true, id = it, className = "form-control").bind(UserForm::city)
+                        text(required = true, id = it, className = "form-control") {
+                            bind(UserForm::city)
+                        }
                         div("invalid-feedback") {
                             +"Please provide a valid city."
                         }
                     }
                     fieldWithLabel("State", "form-label", groupClassName = "col-md-3") {
-                        select(listOfPairs("Alaska"), id = it, className = "form-select", placeholder = "Choose...")
-                            .bind(UserForm::state)
+                        select(listOfPairs("Alaska"), id = it, className = "form-select", placeholder = "Choose...") {
+                            bind(UserForm::state)
+                        }
                         div("invalid-feedback") {
                             +"Please select a valid state."
                         }
                     }
                     fieldWithLabel("Zip", "form-label", groupClassName = "col-md-3") {
-                        text(required = true, id = it, className = "form-control").bind(UserForm::zip)
+                        text(required = true, id = it, className = "form-control") {
+                            bind(UserForm::zip)
+                        }
                         div("invalid-feedback") {
                             +"Please provide a valid zip."
                         }
@@ -130,7 +140,9 @@ class App : Application() {
                     div("col-12") {
                         div("form-check") {
                             fieldWithLabel("Agree to terms and conditions", "form-check-label", labelAfter = true) {
-                                checkBox(className = "form-check-input", required = true, id = it).bind(UserForm::agree)
+                                checkBox(className = "form-check-input", required = true, id = it) {
+                                    bind(UserForm::agree)
+                                }
                             }
                             div("invalid-feedback") {
                                 +"You must agree before submitting."

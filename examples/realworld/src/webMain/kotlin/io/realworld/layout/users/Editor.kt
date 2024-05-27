@@ -27,8 +27,8 @@ import dev.kilua.core.IComponent
 import dev.kilua.form.form
 import dev.kilua.form.text.Text
 import dev.kilua.form.text.TextArea
-import dev.kilua.form.text.text
-import dev.kilua.form.text.textArea
+import dev.kilua.form.text.textAreaRef
+import dev.kilua.form.text.textRef
 import dev.kilua.html.ButtonType
 import dev.kilua.html.button
 import dev.kilua.html.div
@@ -66,7 +66,7 @@ fun IComponent.editorPage(state: ConduitState, conduitManager: ConduitManager) {
                         form {
                             fieldset {
                                 fieldset(className = "form-group") {
-                                    titleInput = text(
+                                    titleInput = textRef(
                                         value = state.editedArticle?.title,
                                         className = "form-control form-control-lg"
                                     ) {
@@ -74,7 +74,7 @@ fun IComponent.editorPage(state: ConduitState, conduitManager: ConduitManager) {
                                     }
                                 }
                                 fieldset(className = "form-group") {
-                                    descriptionInput = text(
+                                    descriptionInput = textRef(
                                         value = state.editedArticle?.description,
                                         className = "form-control"
                                     ) {
@@ -82,7 +82,7 @@ fun IComponent.editorPage(state: ConduitState, conduitManager: ConduitManager) {
                                     }
                                 }
                                 fieldset(className = "form-group") {
-                                    bodyInput = textArea(
+                                    bodyInput = textAreaRef(
                                         value = state.editedArticle?.body,
                                         rows = 8,
                                         className = "form-control"
@@ -91,7 +91,7 @@ fun IComponent.editorPage(state: ConduitState, conduitManager: ConduitManager) {
                                     }
                                 }
                                 fieldset(className = "form-group") {
-                                    tagsInput = text(
+                                    tagsInput = textRef(
                                         value = state.editedArticle?.tagList?.joinToString(" "),
                                         className = "form-control"
                                     ) {

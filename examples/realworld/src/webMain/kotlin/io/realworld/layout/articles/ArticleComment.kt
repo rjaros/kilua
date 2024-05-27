@@ -67,8 +67,10 @@ fun IComponent.articleComment(
             }
             if (state.user != null && state.user.username == comment.author?.username) {
                 span("mod-options") {
-                    i("ion-trash-a").onClick {
-                        conduitManager.articleCommentDelete(article.slug!!, comment.id!!)
+                    i("ion-trash-a") {
+                        onClick {
+                            conduitManager.articleCommentDelete(article.slug!!, comment.id!!)
+                        }
                     }
                 }
             }

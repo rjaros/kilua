@@ -28,8 +28,8 @@ import dev.kilua.form.InputType
 import dev.kilua.form.form
 import dev.kilua.form.text.Text
 import dev.kilua.form.text.TextArea
-import dev.kilua.form.text.text
-import dev.kilua.form.text.textArea
+import dev.kilua.form.text.textAreaRef
+import dev.kilua.form.text.textRef
 import dev.kilua.html.ButtonType
 import dev.kilua.html.button
 import dev.kilua.html.div
@@ -66,12 +66,12 @@ fun IComponent.settingsPage(state: ConduitState, conduitManager: ConduitManager)
                     form {
                         fieldset {
                             fieldset(className = "form-group") {
-                                imageInput = text(value = state.user?.image, className = "form-control") {
+                                imageInput = textRef(value = state.user?.image, className = "form-control") {
                                     placeholder("URL of profile picture")
                                 }
                             }
                             fieldset(className = "form-group") {
-                                usernameInput = text(
+                                usernameInput = textRef(
                                     value = state.user?.username,
                                     className = "form-control form-control-lg"
                                 ) {
@@ -79,7 +79,7 @@ fun IComponent.settingsPage(state: ConduitState, conduitManager: ConduitManager)
                                 }
                             }
                             fieldset(className = "form-group") {
-                                bioInput = textArea(
+                                bioInput = textAreaRef(
                                     value = state.user?.bio,
                                     rows = 8,
                                     className = "form-control form-control-lg"
@@ -89,7 +89,7 @@ fun IComponent.settingsPage(state: ConduitState, conduitManager: ConduitManager)
                             }
                             fieldset(className = "form-group") {
                                 emailInput =
-                                    text(
+                                    textRef(
                                         state.user?.email,
                                         type = InputType.Email,
                                         className = "form-control form-control-lg"
@@ -99,7 +99,7 @@ fun IComponent.settingsPage(state: ConduitState, conduitManager: ConduitManager)
                             }
                             fieldset(className = "form-group") {
                                 passwordInput =
-                                    text(type = InputType.Password, className = "form-control form-control-lg") {
+                                    textRef(type = InputType.Password, className = "form-control form-control-lg") {
                                         placeholder("Password")
                                     }
                             }
@@ -120,8 +120,10 @@ fun IComponent.settingsPage(state: ConduitState, conduitManager: ConduitManager)
                         }
                     }
                     hr()
-                    button("Or click here to logout.", className = "btn btn-outline-danger").onClick {
-                        conduitManager.logout()
+                    button("Or click here to logout.", className = "btn btn-outline-danger") {
+                        onClick {
+                            conduitManager.logout()
+                        }
                     }
                 }
             }

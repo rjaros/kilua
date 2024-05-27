@@ -30,6 +30,7 @@ import dev.kilua.core.IComponent
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.text.Text
 import dev.kilua.form.text.text
+import dev.kilua.form.text.textRef
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.footer
@@ -129,7 +130,7 @@ class App : Application(), KoinComponent {
                                         }
                                     }
                                 }
-                                edit = text(className = "edit") {
+                                edit = textRef(className = "edit") {
                                     onEvent<FocusEvent>("blur") {
                                         if (this@li.element.classList.contains("editing")) {
                                             this@li.element.classList.remove("editing")

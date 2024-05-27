@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import dev.kilua.core.IComponent
 import dev.kilua.form.form
 import dev.kilua.form.text.TextArea
-import dev.kilua.form.text.textArea
+import dev.kilua.form.text.textAreaRef
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1t
@@ -80,7 +80,7 @@ fun IComponent.article(state: ConduitState, conduitManager: ConduitManager) {
                             form(className = "card comment-form") {
                                 lateinit var commentInput: TextArea
                                 div("card-block") {
-                                    commentInput = textArea(rows = 3, className = "form-control") {
+                                    commentInput = textAreaRef(rows = 3, className = "form-control") {
                                         placeholder("Write a comment...")
                                     }
                                 }
