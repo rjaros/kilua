@@ -121,7 +121,7 @@ public class SsrEngine(
                 val textResponse = response.bodyAsText()
                 if (textResponse.isNotEmpty()) {
                     val cssTemplate = response.bodyAsText().split("\n").joinToString("\n") {
-                        if (it == "zzz-kilua-assets/style.css" || it.startsWith("css/")) {
+                        if (it == "zzz-kilua-assets/style.css" || it.startsWith("css/") || it.startsWith("modules/css/")) {
                             val cssCompressor = CssCompressor(workingDir.resolve(it).reader())
                             val writer = StringWriter()
                             cssCompressor.compress(writer, -1)

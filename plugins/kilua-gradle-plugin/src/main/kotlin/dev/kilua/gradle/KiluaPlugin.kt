@@ -100,12 +100,11 @@ public abstract class KiluaPlugin : Plugin<Project> {
         tasks.withType<Copy>().matching {
             it.name == "jsBrowserDistribution" || it.name == "wasmJsBrowserDistribution"
         }.configureEach {
-            exclude("/tailwind/**", "/img/**", "/css/**", "/i18n/**")
+            exclude("/tailwind/**", "/modules/**")
         }
 
         if (webMainExists && webpackSsrExists && kiluaExtension.enableGradleTasks.get()) {
-
-            val cssFiles = listOf(
+            val cssNames = listOf(
                 "zzz-kilua-assets/style.css",
                 "bootstrap/dist/css/bootstrap.min.css",
                 "@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css",
@@ -123,7 +122,8 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 "tom-select/dist/css/tom-select.default.min.css",
                 "tom-select/dist/css/tom-select.min.css",
                 "trix/dist/trix.css"
-            ).map {
+            )
+            val cssFiles = cssNames.map {
                 rootProject.file("build/js/node_modules/$it")
             }
 
@@ -157,6 +157,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     description = "Assembles js distribution files for server-side rendering."
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
                     from(jsProcessResources)
+                    exclude("/tailwind/**")
                     from("build/kotlin-webpack/js.ssr/productionExecutable")
                     into("build/dist/js.ssr/productionExecutable")
                 }
@@ -170,11 +171,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                             "jsBrowserDistributionSSR",
                             Copy::class
                         ).outputs
-                    from(distribution) {
-                        include("*.*")
-                        include("css/*.*")
-                        include("composeResources/**")
-                    }
+                    from(distribution)
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
                     inputs.files(distribution, cssFiles)
@@ -190,7 +187,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (this.name.endsWith(".css") && !this.path.startsWith("css/") && this.name != "tailwindcss.css") {
+                        if (cssNames.contains(this.name)) {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         }
                     }
@@ -226,6 +223,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     description = "Assembles wasmJs distribution files for server-side rendering."
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
                     from(wasmJsProcessResources)
+                    exclude("/tailwind/**")
                     from("build/kotlin-webpack/wasmJs.ssr/productionExecutable")
                     from("build/compileSync/wasmJs/main/productionExecutable/optimized") {
                         include { it.name.endsWith(".wasm") }
@@ -242,11 +240,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                             "wasmJsBrowserDistributionSSR",
                             Copy::class
                         ).outputs
-                    from(distribution) {
-                        include("*.*")
-                        include("css/*.*")
-                        include("composeResources/**")
-                    }
+                    from(distribution)
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
                     inputs.files(distribution, cssFiles)
@@ -262,7 +256,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (this.name.endsWith(".css") && !this.path.startsWith("css/") && this.name != "tailwindcss.css") {
+                        if (cssNames.contains(this.name)) {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         } else if (this.name.equals("main.bundle.js")) {
                             this.filter {
