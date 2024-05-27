@@ -4,14 +4,18 @@ import org.gradle.api.publish.maven.MavenPom
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 fun KotlinMultiplatformExtension.compilerOptions() {
     targets.configureEach {
@@ -85,6 +89,37 @@ fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = "17") {
 fun KotlinJvmProjectExtension.kotlinJvmTargets(target: String = "17") {
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(target))
+    }
+}
+
+fun Project.setupKsp() {
+    dependencies {
+        add("kspCommonMainMetadata", project(":plugins:kilua-ksp-processor"))
+    }
+
+    kotlinExtension.sourceSets.getByName("commonMain") {
+        kotlin.srcDir("${layout.buildDirectory.asFile.get()}/generated/ksp/metadata/commonMain/kotlin")
+    }
+
+    tasks.getByName("dokkaHtml") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+
+    tasks.getByName("sourcesJar") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+
+    tasks.getByName("jsSourcesJar") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+
+    tasks.getByName("wasmJsSourcesJar") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+
+    tasks.withType<KotlinCompilationTask<*>>()
+        .matching { it.name == "compileKotlinJs" || it.name == "compileKotlinWasmJs" }.configureEach {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }
 

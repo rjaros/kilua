@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "kilua-project"
 include(":kilua")
+include(":modules:kilua-annotations")
 include(":modules:kilua-bootstrap")
 include(":modules:kilua-bootstrap-icons")
 include(":modules:kilua-common-types")
@@ -52,6 +53,7 @@ include(":modules:kilua-tom-select")
 include(":modules:kilua-tom-select-remote")
 include(":modules:kilua-trix")
 include(":plugins:kilua-gradle-plugin")
+include(":plugins:kilua-ksp-processor")
 include(":kilua-assets")
 include(":examples:bootstrap-form")
 include(":examples:hello-world")

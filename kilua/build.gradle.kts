@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
     alias(libs.plugins.nmcp)
@@ -28,6 +29,7 @@ kotlin {
                 api(libs.kotlinx.atomicfu)
                 api(libs.kotlinx.coroutines)
                 api(libs.kotlinx.serialization.json)
+                api(project(":modules:kilua-annotations"))
                 api(project(":modules:kilua-common-types"))
                 api(project(":modules:kilua-dom"))
 //                implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.9-SNAPSHOT.tgz"))
@@ -56,6 +58,8 @@ kotlin {
     }
 }
 
+setupKsp()
+
 tasks.register<Jar>("javadocJar") {
     dependsOn(tasks.dokkaHtml)
     from(tasks.dokkaHtml.flatMap { it.outputDirectory })
@@ -66,13 +70,4 @@ setupPublishing()
 
 nmcp {
     publishAllPublications {}
-}
-
-rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().apply {
-    version = "22.0.0-v8-canary202401102ecfc94f85"
-    downloadBaseUrl = "https://nodejs.org/download/v8-canary"
-}
-
-rootProject.tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask>().configureEach {
-    args.add("--ignore-engines")
 }

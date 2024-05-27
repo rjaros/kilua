@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2024 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,39 +20,14 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html
+package dev.kilua.ksp
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
-import dev.kilua.core.DefaultRenderConfig
-import dev.kilua.core.RenderConfig
-import web.dom.HTMLElement
+import com.google.devtools.ksp.processing.SymbolProcessor
+import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
+import com.google.devtools.ksp.processing.SymbolProcessorProvider
 
-/**
- * HTML Dd component.
- */
-public interface IDd : ITag<HTMLElement>
-
-/**
- * HTML Dd component.
- */
-public open class Dd(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("dd", className, renderConfig = renderConfig), IDd
-
-/**
- * Creates a [Dd] component.
- *
- * @param className the CSS class name
- * @param content the content of the component
- * @return the [Dd] component
- */
-@Composable
-public fun IComponent.dd(className: String? = null, content: @Composable IDd.() -> Unit = {}): Dd {
-    val component = remember { Dd(className, renderConfig = renderConfig) }
-    ComponentNode(component, {
-        set(className) { updateProperty(Dd::className, it) }
-    }, content)
-    return component
+public class KiluaProcessorProvider : SymbolProcessorProvider {
+    override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor {
+        return KiluaProcessor(environment.codeGenerator, environment.logger)
+    }
 }

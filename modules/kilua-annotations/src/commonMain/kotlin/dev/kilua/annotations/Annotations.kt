@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2024 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,39 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.html
+package dev.kilua.annotations
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
-import dev.kilua.core.DefaultRenderConfig
-import dev.kilua.core.RenderConfig
-import web.dom.HTMLElement
-
-/**
- * HTML Dt component.
- */
-public interface IDt : ITag<HTMLElement>
-
-/**
- * HTML Dt component.
- */
-public open class Dt(className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()) :
-    Tag<HTMLElement>("dt", className, renderConfig = renderConfig), IDt
-
-/**
- * Creates a [Dt] component.
- *
- * @param className the CSS class name
- * @param content the content of the component
- * @return the [Dt] component
- */
-@Composable
-public fun IComponent.dt(className: String? = null, content: @Composable IDt.() -> Unit = {}): Dt {
-    val component = remember { Dt(className, renderConfig = renderConfig) }
-    ComponentNode(component, {
-        set(className) { updateProperty(Dt::className, it) }
-    }, content)
-    return component
-}
+@Target(AnnotationTarget.CLASS)
+public annotation class SimpleHtmlComponent(val tagName: String, val withText: Boolean = false)

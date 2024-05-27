@@ -56,6 +56,7 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJ
 nmcp {
     publishAggregation {
         project(":kilua")
+        project(":modules:kilua-annotations")
         project(":modules:kilua-bootstrap")
         project(":modules:kilua-bootstrap-icons")
         project(":modules:kilua-common-types")
@@ -91,6 +92,7 @@ nmcp {
         project(":modules:kilua-tom-select-remote")
         project(":modules:kilua-trix")
         project(":plugins:kilua-gradle-plugin")
+        project(":plugins:kilua-ksp-processor")
         username = findProperty("mavenCentralUsername")?.toString()
         password = findProperty("mavenCentralPassword")?.toString()
         publicationType = "USER_MANAGED"
