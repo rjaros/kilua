@@ -35,7 +35,7 @@ class ModalSpec : DomSpec {
     @Test
     fun render() = runWhenDomAvailableAsync {
         root("test") {
-            val modal = modal("Caption") {
+            val modal = modalRef("Caption") {
                 pt("Body")
                 footer {
                     button("OK")

@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import dev.kilua.core.IComponent
 import dev.kilua.html.Button
 import dev.kilua.html.button
+import dev.kilua.html.buttonRef
 import dev.kilua.html.div
 import web.dom.events.Event
 
@@ -92,7 +93,7 @@ public fun confirm(
                         noCallback?.invoke()
                     }
                 }
-                yesButton = button(yesTitle, "fas fa-check", className = "btn btn-primary") {
+                yesButton = buttonRef(yesTitle, "fas fa-check", className = "btn btn-primary") {
                     onClick {
                         component.hide()
                         yesCallback?.invoke()

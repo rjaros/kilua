@@ -37,7 +37,7 @@ import web.fetch.RequestInit
 import web.toJsString
 
 /**
- * Creates [TomTypeahead] component with a remote data source.
+ * Creates [TomTypeahead] component with a remote data source, returning a reference.
  *
  * @param serviceManager RPC service manager
  * @param function RPC service method returning the list of options
@@ -57,7 +57,7 @@ import web.toJsString
  * @return a [TomTypeahead] component
  */
 @Composable
-public fun <T : Any> IComponent.tomTypeaheadRemote(
+public fun <T : Any> IComponent.tomTypeaheadRemoteRef(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?) -> List<String>,
     stateFunction: (() -> String)? = null,
@@ -91,7 +91,76 @@ public fun <T : Any> IComponent.tomTypeaheadRemote(
             }
         tsCallbacks?.copy(load = loadCallback) ?: TomSelectCallbacks(load = loadCallback)
     }
-    return tomTypeahead(
+    return tomTypeaheadRef(
+        options = options,
+        value = value,
+        type = type,
+        tsCallbacks = tsCallbacksState,
+        name = name,
+        placeholder = placeholder,
+        disabled = disabled,
+        required = required,
+        className = className,
+        id = id,
+        setup = setup
+    )
+}
+
+/**
+ * Creates [TomTypeahead] component with a remote data source.
+ *
+ * @param serviceManager RPC service manager
+ * @param function RPC service method returning the list of options
+ * @param stateFunction a function to generate the state object passed with the remote request
+ * @param requestFilter a request filtering function
+ * @param options a list of options
+ * @param value initial value
+ * @param type the type of the input
+ * @param tsCallbacks Tom Select callbacks
+ * @param name the name of the select
+ * @param placeholder the placeholder for the input component
+ * @param disabled whether the select is disabled
+ * @param required whether the select is required
+ * @param className the CSS class name
+ * @param id the ID of the select component
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun <T : Any> IComponent.tomTypeaheadRemote(
+    serviceManager: RpcServiceMgr<T>,
+    function: suspend T.(String?, String?) -> List<String>,
+    stateFunction: (() -> String)? = null,
+    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    options: List<String>? = null,
+    value: String? = null,
+    type: InputType = InputType.Text,
+    tsCallbacks: TomSelectCallbacks? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ITomTypeahead.() -> Unit = {}
+) {
+
+    val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks) {
+        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit) =
+            { query, callback ->
+                KiluaScope.launch {
+                    val result = getOptionsForTomTypeaheadRemote(
+                        serviceManager,
+                        function,
+                        stateFunction,
+                        requestFilter,
+                        query
+                    )
+                    callback(result.map { it.toJsString() }.toJsArray())
+                }
+            }
+        tsCallbacks?.copy(load = loadCallback) ?: TomSelectCallbacks(load = loadCallback)
+    }
+    tomTypeahead(
         options = options,
         value = value,
         type = type,

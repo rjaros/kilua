@@ -27,8 +27,8 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.BootstrapModule
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.Bootstrap
 import dev.kilua.html.ITag
@@ -99,9 +99,10 @@ public interface IOffcanvas : ITag<HTMLDivElement> {
  */
 public open class Offcanvas(
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), IOffcanvas {
+    Tag<HTMLDivElement>("div", className, id, renderConfig = renderConfig), IOffcanvas {
 
     /**
      * Whether the offcanvas should be visible.
@@ -162,15 +163,64 @@ public open class Offcanvas(
 }
 
 @Composable
-private fun IComponent.offcanvas(
+private fun IComponent.offcanvasRef(
     className: String? = null,
+    id: String? = null,
     content: @Composable IOffcanvas.() -> Unit,
 ): Offcanvas {
-    val component = remember { Offcanvas(className, renderConfig = renderConfig) }
+    val component = remember { Offcanvas(className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Offcanvas::className, it) }
+        set(id) { updateProperty(Offcanvas::id, it) }
     }, content)
     return component
+}
+
+@Composable
+private fun IComponent.offcanvas(
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IOffcanvas.() -> Unit,
+) {
+    val component = remember { Offcanvas(className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(className) { updateProperty(Offcanvas::className, it) }
+        set(id) { updateProperty(Offcanvas::id, it) }
+    }, content)
+}
+
+/**
+ * Creates an [Offcanvas] component, returning a reference.
+ *
+ * @param caption the caption of the offcanvas
+ * @param placement the placement of the offcanvas
+ * @param responsiveType the responsive type of the offcanvas
+ * @param closeButton determines if the close button is visible
+ * @param bodyScrolling determines if the body is scrolling
+ * @param backdrop determines if the backdrop is visible
+ * @param escape determines if the offcanvas can be closed with Esc key
+ * @param className the CSS class name
+ * @param id the ID attribute of the offcanvas
+ * @param content the content of the offcanvas
+ * @return the [Offcanvas] component
+ */
+@Composable
+public fun IComponent.offcanvasRef(
+    caption: String? = null,
+    placement: OffPlacement = OffPlacement.OffcanvasStart,
+    responsiveType: OffResponsiveType? = null,
+    closeButton: Boolean = true,
+    bodyScrolling: Boolean = false,
+    backdrop: Boolean = true,
+    escape: Boolean = true,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IOffcanvas.() -> Unit = {}
+): Offcanvas {
+    val offcanvasId = id ?: remember { "kilua_offcanvas_${Offcanvas.idCounter++}" }
+    return offcanvasRef((responsiveType?.value ?: "offcanvas") % placement.value % className, offcanvasId) {
+        setupOffcanvas(offcanvasId, bodyScrolling, escape, backdrop, caption, closeButton, content)
+    }
 }
 
 /**
@@ -184,6 +234,7 @@ private fun IComponent.offcanvas(
  * @param backdrop determines if the backdrop is visible
  * @param escape determines if the offcanvas can be closed with Esc key
  * @param className the CSS class name
+ * @param id the ID attribute of the offcanvas
  * @param content the content of the offcanvas
  * @return the [Offcanvas] component
  */
@@ -197,47 +248,60 @@ public fun IComponent.offcanvas(
     backdrop: Boolean = true,
     escape: Boolean = true,
     className: String? = null,
+    id: String? = null,
     content: @Composable IOffcanvas.() -> Unit = {}
-): Offcanvas {
-    val offcanvasId = remember { "kilua_offcanvas_${Offcanvas.idCounter++}" }
-    return offcanvas((responsiveType?.value ?: "offcanvas") % placement.value % className) {
-        id(offcanvasId)
-        tabindex(-1)
-        ariaLabelledby("$offcanvasId-label")
-        if (bodyScrolling) {
-            attribute("data-bs-scroll", "true")
-        }
-        attribute("data-bs-keyboard", "$escape")
-        attribute("data-bs-backdrop", if (backdrop && !escape) "static" else backdrop.toString())
-        val component = this.cast<Offcanvas>()
-        if (caption != null || closeButton) {
-            div("offcanvas-header") {
-                if (caption != null) {
-                    h5t(caption, "offcanvas-title") {
-                        id("$offcanvasId-label")
-                    }
+) {
+    val offcanvasId = id ?: remember { "kilua_offcanvas_${Offcanvas.idCounter++}" }
+    offcanvas((responsiveType?.value ?: "offcanvas") % placement.value % className, offcanvasId) {
+        setupOffcanvas(offcanvasId, bodyScrolling, escape, backdrop, caption, closeButton, content)
+    }
+}
+
+@Composable
+private fun IOffcanvas.setupOffcanvas(
+    offcanvasId: String,
+    bodyScrolling: Boolean,
+    escape: Boolean,
+    backdrop: Boolean,
+    caption: String?,
+    closeButton: Boolean,
+    content: @Composable (IOffcanvas.() -> Unit)
+) {
+    tabindex(-1)
+    ariaLabelledby("$offcanvasId-label")
+    if (bodyScrolling) {
+        attribute("data-bs-scroll", "true")
+    }
+    attribute("data-bs-keyboard", "$escape")
+    attribute("data-bs-backdrop", if (backdrop && !escape) "static" else backdrop.toString())
+    val component = this.cast<Offcanvas>()
+    if (caption != null || closeButton) {
+        div("offcanvas-header") {
+            if (caption != null) {
+                h5t(caption, "offcanvas-title") {
+                    id("$offcanvasId-label")
                 }
-                if (closeButton) {
-                    button(className = "btn-close") {
-                        ariaLabel("Close")
-                        onClick {
-                            component.hide()
-                        }
+            }
+            if (closeButton) {
+                button(className = "btn-close") {
+                    ariaLabel("Close")
+                    onClick {
+                        component.hide()
                     }
                 }
             }
         }
-        div("offcanvas-body") {
-            content() // !!! the content is called on Offcanvas receiver (component), but dom nodes are emitted inside offcanvas-body div
+    }
+    div("offcanvas-body") {
+        content() // !!! the content is called on Offcanvas receiver (component), but dom nodes are emitted inside offcanvas-body div
+    }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
         }
-        DisposableEffect(component.componentId) {
-            component.onInsert()
-            onDispose {
-                component.onRemove()
-            }
-        }
-        onEvent<Event>("hidden.bs.offcanvas") {
-            component.hide()
-        }
+    }
+    onEvent<Event>("hidden.bs.offcanvas") {
+        component.hide()
     }
 }

@@ -34,7 +34,7 @@ class OffcanvasSpec : DomSpec {
     fun render() = runWhenDomAvailableAsync {
         lateinit var offcanvas: Offcanvas
         val root = root("test") {
-            offcanvas = offcanvas("Caption", OffPlacement.OffcanvasStart, OffResponsiveType.OffcanvasLg) {
+            offcanvas = offcanvasRef("Caption", OffPlacement.OffcanvasStart, OffResponsiveType.OffcanvasLg) {
                 pt("Offcanvas content")
             }
         }

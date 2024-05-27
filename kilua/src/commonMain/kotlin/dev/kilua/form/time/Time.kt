@@ -262,7 +262,7 @@ public open class Time(
 }
 
 /**
- * Creates a [Time] component.
+ * Creates a [Time] component, returning a reference.
  *
  * @param value the initial value
  * @param min the minimum value
@@ -279,7 +279,7 @@ public open class Time(
  * @return a [Time] component
  */
 @Composable
-public fun IComponent.time(
+public fun IComponent.timeRef(
     value: LocalTime? = null,
     min: LocalTime? = null,
     max: LocalTime? = null,
@@ -324,4 +324,68 @@ public fun IComponent.time(
         set(id) { updateProperty(Time::id, it) }
     }, setup)
     return component
+}
+
+
+/**
+ * Creates a [Time] component.
+ *
+ * @param value the initial value
+ * @param min the minimum value
+ * @param max the maximum value
+ * @param step the step value
+ * @param name the name attribute of the generated HTML input element
+ * @param maxlength the maxlength attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.time(
+    value: LocalTime? = null,
+    min: LocalTime? = null,
+    max: LocalTime? = null,
+    step: Int = TIME_DEFAULT_STEP,
+    name: String? = null,
+    maxlength: Int? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ITime.() -> Unit = {}
+) {
+    val component =
+        remember {
+            Time(
+                value,
+                min,
+                max,
+                step,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                id,
+                renderConfig
+            )
+        }
+    ComponentNode(component, {
+        set(value) { updateProperty(Time::value, it) }
+        set(min) { updateProperty(Time::min, it) }
+        set(max) { updateProperty(Time::max, it) }
+        set(step) { updateProperty(Time::step, it) }
+        set(name) { updateProperty(Time::name, it) }
+        set(maxlength) { updateProperty(Time::maxlength, it) }
+        set(placeholder) { updateProperty(Time::placeholder, it) }
+        set(disabled) { updateProperty(Time::disabled, it) }
+        set(required) { updateProperty(Time::required, it) }
+        set(className) { updateProperty(Time::className, it) }
+        set(id) { updateProperty(Time::id, it) }
+    }, setup)
 }

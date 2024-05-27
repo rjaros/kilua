@@ -60,9 +60,11 @@ public open class RichDateTime(
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalDateTime?> = WithStateFlowDelegateImpl()
-) : AbstractRichDateTime(disabled, format, inline, locale, className, renderConfig = renderConfig), DateTimeFormControl,
+) : AbstractRichDateTime(disabled, format, inline, locale, className, id, renderConfig = renderConfig),
+    DateTimeFormControl,
     WithStateFlow<LocalDateTime?> by withStateFlowDelegate, IRichDateTime {
 
     public override var value: LocalDateTime? by updatingProperty(
@@ -117,17 +119,18 @@ public open class RichDateTime(
 }
 
 @Composable
-private fun IComponent.richDateTime(
+private fun IComponent.richDateTimeRef(
     value: LocalDateTime? = null,
     disabled: Boolean? = null,
     format: String = "yyyy-MM-dd HH:mm",
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     setup: @Composable IRichDateTime.() -> Unit = {}
 ): RichDateTime {
     val component =
-        remember { RichDateTime(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
+        remember { RichDateTime(value, disabled, format, inline, locale, className, id, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -141,10 +144,83 @@ private fun IComponent.richDateTime(
         set(inline) { updateProperty(RichDateTime::inline, it) }
         set(locale) { updateProperty(RichDateTime::locale, it) }
         set(className) { updateProperty(RichDateTime::className, it) }
+        set(id) { updateProperty(RichDateTime::id, it) }
     }, setup)
     return component
 }
 
+@Composable
+private fun IComponent.richDateTime(
+    value: LocalDateTime? = null,
+    disabled: Boolean? = null,
+    format: String = "yyyy-MM-dd HH:mm",
+    inline: Boolean = false,
+    locale: Locale = LocaleManager.currentLocale,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRichDateTime.() -> Unit = {}
+) {
+    val component =
+        remember { RichDateTime(value, disabled, format, inline, locale, className, id, renderConfig = renderConfig) }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(value) { updateProperty(RichDateTime::value, it) }
+        set(disabled) { updateProperty(RichDateTime::disabled, it) }
+        set(format) { updateProperty(RichDateTime::format, it) }
+        set(inline) { updateProperty(RichDateTime::inline, it) }
+        set(locale) { updateProperty(RichDateTime::locale, it) }
+        set(className) { updateProperty(RichDateTime::className, it) }
+        set(id) { updateProperty(RichDateTime::id, it) }
+    }, setup)
+}
+
+/**
+ * Creates a [RichDateTime] component, returning a reference.
+ *
+ * @param value the initial value
+ * @param name the name attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param locale the locale for i18n
+ * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
+ * @param setup a function for setting up the component
+ * @return a [RichDateTime] component
+ */
+@Composable
+public fun IComponent.richDateTimeRef(
+    value: LocalDateTime? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    inline: Boolean = false,
+    format: String = "yyyy-MM-dd HH:mm",
+    locale: Locale = LocaleManager.currentLocale,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRichDateTime.() -> Unit = {}
+): RichDateTime {
+    val bindId = remember { "kilua_tempus_dominus_rdt_${RichDateTime.idCounter++}" }
+    return richDateTimeRef(
+        value,
+        disabled,
+        format,
+        inline,
+        locale,
+        className = className % "input-group kilua-td",
+        bindId
+    ) {
+        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-calendar-alt")
+        setup()
+    }
+}
 
 /**
  * Creates a [RichDateTime] component.
@@ -154,11 +230,10 @@ private fun IComponent.richDateTime(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
- * @param id the ID of the generated HTML input element
  * @param locale the locale for i18n
  * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
- * @return a [RichDateTime] component
  */
 @Composable
 public fun IComponent.richDateTime(
@@ -167,15 +242,15 @@ public fun IComponent.richDateTime(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     inline: Boolean = false,
     format: String = "yyyy-MM-dd HH:mm",
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     setup: @Composable IRichDateTime.() -> Unit = {}
-): RichDateTime {
+) {
     val bindId = remember { "kilua_tempus_dominus_rdt_${RichDateTime.idCounter++}" }
-    return richDateTime(value, disabled, format, inline, locale, className = className % "input-group kilua-td") {
+    richDateTime(value, disabled, format, inline, locale, className = className % "input-group kilua-td", bindId) {
         commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-calendar-alt")
         setup()
     }

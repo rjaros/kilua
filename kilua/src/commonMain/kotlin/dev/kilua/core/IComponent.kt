@@ -43,7 +43,7 @@ public interface IComponent {
      * Creates a [TextNode] component with unary + operator.
      */
     @Composable
-    public operator fun String.unaryPlus(): TextNode {
-        return this@IComponent.textNode(this)
+    public operator fun String.unaryPlus() {
+        this@IComponent.textNode(this)
     }
 }

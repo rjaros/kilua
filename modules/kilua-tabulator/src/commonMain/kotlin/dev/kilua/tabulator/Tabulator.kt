@@ -114,12 +114,13 @@ public open class Tabulator<T : Any>(
     data: List<T>? = null,
     options: TabulatorOptions<T> = TabulatorOptions(),
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val kClass: KClass<T>? = null,
     protected val serializer: KSerializer<T>? = null,
     protected val module: SerializersModule? = null
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), ITabulator<T> {
+    Tag<HTMLDivElement>("div", className, id, renderConfig = renderConfig), ITabulator<T> {
 
     /**
      * The kotlinx.serialization configuration object.
@@ -348,13 +349,14 @@ public open class Tabulator<T : Any>(
 
 @PublishedApi
 @Composable
-internal fun <T : Any> IComponent.tabulatorInt(
+internal fun <T : Any> IComponent.tabulatorIntRef(
     data: List<T>?,
     options: TabulatorOptions<T>,
     kClass: KClass<T>?,
     serializer: KSerializer<T>?,
     serializersModule: SerializersModule?,
     className: String?,
+    id: String?,
     content: @Composable ITabulator<T>.() -> Unit
 ): Tabulator<T> {
     val component = remember {
@@ -362,6 +364,7 @@ internal fun <T : Any> IComponent.tabulatorInt(
             data,
             options,
             className,
+            id,
             renderConfig,
             kClass,
             serializer,
@@ -379,20 +382,131 @@ internal fun <T : Any> IComponent.tabulatorInt(
         set(data?.toList()) { updateProperty(Tabulator<T>::data, it) }
         set(options) { updateProperty(Tabulator<T>::options, it) }
         set(className) { updateProperty(Tabulator<T>::className, it) }
+        set(id) { updateProperty(Tabulator<T>::id, it) }
     }, content)
     return component
 }
 
+@PublishedApi
+@Composable
+internal fun <T : Any> IComponent.tabulatorInt(
+    data: List<T>?,
+    options: TabulatorOptions<T>,
+    kClass: KClass<T>?,
+    serializer: KSerializer<T>?,
+    serializersModule: SerializersModule?,
+    className: String?,
+    id: String?,
+    content: @Composable ITabulator<T>.() -> Unit
+) {
+    val component = remember {
+        Tabulator(
+            data,
+            options,
+            className,
+            id,
+            renderConfig,
+            kClass,
+            serializer,
+            serializersModule
+        )
+    }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        // Workaround https://issuetracker.google.com/issues/232271525
+        set(data?.toList()) { updateProperty(Tabulator<T>::data, it) }
+        set(options) { updateProperty(Tabulator<T>::options, it) }
+        set(className) { updateProperty(Tabulator<T>::className, it) }
+        set(id) { updateProperty(Tabulator<T>::id, it) }
+    }, content)
+}
+
 /**
- * Create [Tabulator] component with a Kotlin data model.
+ * Create [Tabulator] component with a Kotlin data model, returning a reference.
+ *
  * @param data the tabulator data
  * @param options the tabulator options
  * @param types the set of table types
  * @param serializer the serializer for the data
  * @param serializersModule the serializers module
  * @param className the CSS class name
+ * @param id the ID attribute of the component
  * @param content the content of the component
  * @return the [Tabulator] component
+ */
+@Composable
+public inline fun <reified T : Any> IComponent.tabulatorRef(
+    data: List<T>,
+    options: TabulatorOptions<T> = TabulatorOptions(),
+    types: Set<TableType> = setOf(),
+    serializer: KSerializer<T> = serializer(),
+    serializersModule: SerializersModule? = null,
+    className: String? = null,
+    id: String? = null,
+    noinline content: @Composable ITabulator<T>.() -> Unit = {}
+): Tabulator<T> {
+    val classes = types.joinToString(" ") { it.value }
+    return tabulatorIntRef(
+        data,
+        options,
+        getClass<T>(),
+        serializer,
+        serializersModule,
+        className % classes,
+        id,
+        content
+    )
+}
+
+/**
+ * Create [Tabulator] component with a dynamic data model.
+ *
+ * @param data the tabulator data
+ * @param options the tabulator options
+ * @param types the set of table types
+ * @param className the CSS class name
+ * @param id the ID attribute of the component
+ * @param content the content of the component
+ * @return the [Tabulator] component
+ */
+@Composable
+public fun IComponent.tabulatorRef(
+    data: List<JsAny>? = null,
+    options: TabulatorOptions<JsAny> = TabulatorOptions(),
+    types: Set<TableType> = setOf(),
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ITabulator<JsAny>.() -> Unit = {}
+): Tabulator<JsAny> {
+    val classes = types.joinToString(" ") { it.value }
+    return tabulatorIntRef(
+        data,
+        options,
+        null,
+        null,
+        null,
+        className % classes,
+        id,
+        content
+    )
+}
+
+/**
+ * Create [Tabulator] component with a Kotlin data model.
+ *
+ * @param data the tabulator data
+ * @param options the tabulator options
+ * @param types the set of table types
+ * @param serializer the serializer for the data
+ * @param serializersModule the serializers module
+ * @param className the CSS class name
+ * @param id the ID attribute of the component
+ * @param content the content of the component
  */
 @Composable
 public inline fun <reified T : Any> IComponent.tabulator(
@@ -402,16 +516,18 @@ public inline fun <reified T : Any> IComponent.tabulator(
     serializer: KSerializer<T> = serializer(),
     serializersModule: SerializersModule? = null,
     className: String? = null,
+    id: String? = null,
     noinline content: @Composable ITabulator<T>.() -> Unit = {}
-): Tabulator<T> {
+) {
     val classes = types.joinToString(" ") { it.value }
-    return tabulatorInt(
+    tabulatorInt(
         data,
         options,
         getClass<T>(),
         serializer,
         serializersModule,
         className % classes,
+        id,
         content
     )
 }
@@ -422,8 +538,8 @@ public inline fun <reified T : Any> IComponent.tabulator(
  * @param options the tabulator options
  * @param types the set of table types
  * @param className the CSS class name
+ * @param id the ID attribute of the component
  * @param content the content of the component
- * @return the [Tabulator] component
  */
 @Composable
 public fun IComponent.tabulator(
@@ -431,16 +547,18 @@ public fun IComponent.tabulator(
     options: TabulatorOptions<JsAny> = TabulatorOptions(),
     types: Set<TableType> = setOf(),
     className: String? = null,
+    id: String? = null,
     content: @Composable ITabulator<JsAny>.() -> Unit = {}
-): Tabulator<JsAny> {
+) {
     val classes = types.joinToString(" ") { it.value }
-    return tabulatorInt(
+    tabulatorInt(
         data,
         options,
         null,
         null,
         null,
         className % classes,
+        id,
         content
     )
 }

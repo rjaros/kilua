@@ -115,9 +115,10 @@ public class Form<K : Any>(
     private val serializer: KSerializer<K>? = null,
     private val customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLFormElement>("form", className, renderConfig = renderConfig), WithStateFlow<K> {
+    Tag<HTMLFormElement>("form", className, id, renderConfig = renderConfig), WithStateFlow<K> {
 
     /**
      * The method attribute of the generated HTML form element.
@@ -1090,7 +1091,7 @@ public class Form<K : Any>(
         public inline fun <reified K : Any> create(
             method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
             customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
-            className: String? = null,
+            className: String? = null, id: String? = null,
             renderConfig: RenderConfig = DefaultRenderConfig(),
         ): Form<K> {
             return Form(
@@ -1100,6 +1101,7 @@ public class Form<K : Any>(
                 serializer(),
                 customSerializers,
                 className,
+                id,
                 renderConfig = renderConfig
             )
         }
@@ -1108,7 +1110,7 @@ public class Form<K : Any>(
 }
 
 /**
- * Creates a [Form] component with a data class model.
+ * Creates a [Form] component with a data class model, returning a reference.
  *
  * @param initialData the initial data model
  * @param method the method attribute of the generated HTML form element
@@ -1116,19 +1118,21 @@ public class Form<K : Any>(
  * @param enctype the enctype attribute of the generated HTML form element
  * @param customSerializers custom serializers for the data model
  * @param className the CSS class name
+ * @param id the ID attribute of the form element
  * @param content the content of the component
  * @return the [Form] component
  */
 @Composable
-public inline fun <reified K : Any> IComponent.form(
+public inline fun <reified K : Any> IComponent.formRef(
     initialData: K? = null,
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable Form<K>.() -> Unit = {}
 ): Form<K> {
     val component =
-        remember { Form.create<K>(method, action, enctype, customSerializers, className, renderConfig = renderConfig) }
+        remember { Form.create<K>(method, action, enctype, customSerializers, className, id, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         if (initialData != null) {
@@ -1144,12 +1148,13 @@ public inline fun <reified K : Any> IComponent.form(
         set(action) { updateProperty(Form<K>::action, it) }
         set(enctype) { updateProperty(Form<K>::enctype, it) }
         set(className) { updateProperty(Form<K>::className, it) }
+        set(id) { updateProperty(Form<K>::id, it) }
     }, content)
     return component
 }
 
 /**
- * Creates a [Form] component with map model.
+ * Creates a [Form] component with map model, returning a reference.
  *
  * @param initialData the initial data model
  * @param method the method attribute of the generated HTML form element
@@ -1157,15 +1162,17 @@ public inline fun <reified K : Any> IComponent.form(
  * @param enctype the enctype attribute of the generated HTML form element
  * @param customSerializers custom serializers for the data model
  * @param className the CSS class name
+ * @param id the ID attribute of the form element
  * @param content the content of the component
  * @return the [Form] component
  */
 @Composable
-public fun IComponent.form(
+public fun IComponent.formRef(
     initialData: Map<String, Any?>? = null,
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable Form<Map<String, Any?>>.() -> Unit = {}
 ): Form<Map<String, Any?>> {
     val component =
@@ -1177,6 +1184,7 @@ public fun IComponent.form(
                 null,
                 customSerializers,
                 className,
+                id,
                 renderConfig
             )
         }
@@ -1195,6 +1203,102 @@ public fun IComponent.form(
         set(action) { updateProperty(Form<Map<String, Any?>>::action, it) }
         set(enctype) { updateProperty(Form<Map<String, Any?>>::enctype, it) }
         set(className) { updateProperty(Form<Map<String, Any?>>::className, it) }
+        set(id) { updateProperty(Form<Map<String, Any?>>::id, it) }
     }, content)
     return component
+}
+
+/**
+ * Creates a [Form] component with a data class model.
+ *
+ * @param initialData the initial data model
+ * @param method the method attribute of the generated HTML form element
+ * @param action the action attribute of the generated HTML form element
+ * @param enctype the enctype attribute of the generated HTML form element
+ * @param customSerializers custom serializers for the data model
+ * @param className the CSS class name
+ * @param id the ID attribute of the form element
+ * @param content the content of the component
+ */
+@Composable
+public inline fun <reified K : Any> IComponent.form(
+    initialData: K? = null,
+    method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
+    customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable Form<K>.() -> Unit = {}
+) {
+    val component =
+        remember { Form.create<K>(method, action, enctype, customSerializers, className, id, renderConfig = renderConfig) }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        if (initialData != null) {
+            component.setDataFromCompose(initialData)
+        }
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(initialData) { if (it != null) setDataFromCompose(it) }
+        set(method) { updateProperty(Form<K>::method, it) }
+        set(action) { updateProperty(Form<K>::action, it) }
+        set(enctype) { updateProperty(Form<K>::enctype, it) }
+        set(className) { updateProperty(Form<K>::className, it) }
+        set(id) { updateProperty(Form<K>::id, it) }
+    }, content)
+}
+
+/**
+ * Creates a [Form] component with map model.
+ *
+ * @param initialData the initial data model
+ * @param method the method attribute of the generated HTML form element
+ * @param action the action attribute of the generated HTML form element
+ * @param enctype the enctype attribute of the generated HTML form element
+ * @param customSerializers custom serializers for the data model
+ * @param className the CSS class name
+ * @param id the ID attribute of the form element
+ * @param content the content of the component
+ */
+@Composable
+public fun IComponent.form(
+    initialData: Map<String, Any?>? = null,
+    method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
+    customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable Form<Map<String, Any?>>.() -> Unit = {}
+) {
+    val component =
+        remember {
+            Form<Map<String, Any?>>(
+                method,
+                action,
+                enctype,
+                null,
+                customSerializers,
+                className,
+                id,
+                renderConfig
+            )
+        }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        if (initialData != null) {
+            component.setDataFromCompose(initialData)
+        }
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(initialData) { if (it != null) setDataFromCompose(it) }
+        set(method) { updateProperty(Form<Map<String, Any?>>::method, it) }
+        set(action) { updateProperty(Form<Map<String, Any?>>::action, it) }
+        set(enctype) { updateProperty(Form<Map<String, Any?>>::enctype, it) }
+        set(className) { updateProperty(Form<Map<String, Any?>>::className, it) }
+        set(id) { updateProperty(Form<Map<String, Any?>>::id, it) }
+    }, content)
 }

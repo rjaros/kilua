@@ -25,8 +25,8 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
@@ -77,9 +77,10 @@ public open class Link(
     href: String? = null,
     target: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLAnchorElement>("a", className, renderConfig = renderConfig), ILink {
+    Tag<HTMLAnchorElement>("a", className, id, renderConfig = renderConfig), ILink {
 
     /**
      * The URL of the link.
@@ -165,28 +166,89 @@ public open class Link(
 }
 
 /**
+ * Creates a [Link] component, returning a reference.
+ *
+ * @param href the link URL
+ * @param target the link target
+ * @param className the CSS class name
+ * @param id the ID attribute of the link
+ * @param content the content of the component
+ * @return the [Link] component
+ */
+@Composable
+private fun IComponent.linkRef(
+    href: String? = null,
+    target: String? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ILink.() -> Unit = {}
+): Link {
+    val component = remember { Link(href, target, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(href) { updateProperty(Link::href, it) }
+        set(target) { updateProperty(Link::target, it) }
+        set(className) { updateProperty(Link::className, it) }
+        set(id) { updateProperty(Link::id, it) }
+    }, content)
+    return component
+}
+
+
+/**
+ * Creates a [Link] component with a given label and icon, returning a reference.
+ *
+ * @param href the link URL
+ * @param label the link label
+ * @param icon the link icon
+ * @param target the link target
+ * @param className the CSS class name
+ * @param id the ID attribute of the link
+ * @param content the content of the component
+ * @return the [Link] component
+ */
+@Composable
+public fun IComponent.linkRef(
+    href: String? = null,
+    label: String? = null,
+    icon: String? = null,
+    target: String? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ILink.() -> Unit = {}
+): Link {
+    val iconClassName = if (label != null && icon != null) {
+        className % "icon-link"
+    } else className
+    return linkRef(href, target, iconClassName, id) {
+        atom(label, icon)
+        content()
+    }
+}
+
+/**
  * Creates a [Link] component.
  *
  * @param href the link URL
  * @param target the link target
  * @param className the CSS class name
+ * @param id the ID attribute of the link
  * @param content the content of the component
- * @return the [Link] component
  */
 @Composable
 private fun IComponent.link(
     href: String? = null,
     target: String? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable ILink.() -> Unit = {}
-): Link {
-    val component = remember { Link(href, target, className, renderConfig = renderConfig) }
+) {
+    val component = remember { Link(href, target, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(href) { updateProperty(Link::href, it) }
         set(target) { updateProperty(Link::target, it) }
         set(className) { updateProperty(Link::className, it) }
+        set(id) { updateProperty(Link::id, it) }
     }, content)
-    return component
 }
 
 
@@ -198,8 +260,8 @@ private fun IComponent.link(
  * @param icon the link icon
  * @param target the link target
  * @param className the CSS class name
+ * @param id the ID attribute of the link
  * @param content the content of the component
- * @return the [Link] component
  */
 @Composable
 public fun IComponent.link(
@@ -208,12 +270,13 @@ public fun IComponent.link(
     icon: String? = null,
     target: String? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable ILink.() -> Unit = {}
-): Link {
+) {
     val iconClassName = if (label != null && icon != null) {
         className % "icon-link"
     } else className
-    return link(href, target, iconClassName) {
+    link(href, target, iconClassName, id) {
         atom(label, icon)
         content()
     }

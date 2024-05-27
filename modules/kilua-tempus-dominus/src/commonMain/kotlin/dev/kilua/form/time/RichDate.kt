@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.externals.get
@@ -60,9 +60,10 @@ public open class RichDate(
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalDate?> = WithStateFlowDelegateImpl()
-) : AbstractRichDateTime(disabled, format, inline, locale, className, renderConfig = renderConfig), DateFormControl,
+) : AbstractRichDateTime(disabled, format, inline, locale, className, id, renderConfig = renderConfig), DateFormControl,
     WithStateFlow<LocalDate?> by withStateFlowDelegate, IRichDate {
 
     public override var value: LocalDate? by updatingProperty(
@@ -115,16 +116,18 @@ public open class RichDate(
 }
 
 @Composable
-private fun IComponent.richDate(
+private fun IComponent.richDateRef(
     value: LocalDate? = null,
     disabled: Boolean? = null,
     format: String = "yyyy-MM-dd",
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     setup: @Composable IRichDate.() -> Unit = {}
 ): RichDate {
-    val component = remember { RichDate(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
+    val component =
+        remember { RichDate(value, disabled, format, inline, locale, className, id, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -138,10 +141,83 @@ private fun IComponent.richDate(
         set(inline) { updateProperty(RichDate::inline, it) }
         set(locale) { updateProperty(RichDate::locale, it) }
         set(className) { updateProperty(RichDate::className, it) }
+        set(id) { updateProperty(RichDate::id, it) }
     }, setup)
     return component
 }
 
+@Composable
+private fun IComponent.richDate(
+    value: LocalDate? = null,
+    disabled: Boolean? = null,
+    format: String = "yyyy-MM-dd",
+    inline: Boolean = false,
+    locale: Locale = LocaleManager.currentLocale,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRichDate.() -> Unit = {}
+) {
+    val component =
+        remember { RichDate(value, disabled, format, inline, locale, className, id, renderConfig = renderConfig) }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(value) { updateProperty(RichDate::value, it) }
+        set(disabled) { updateProperty(RichDate::disabled, it) }
+        set(format) { updateProperty(RichDate::format, it) }
+        set(inline) { updateProperty(RichDate::inline, it) }
+        set(locale) { updateProperty(RichDate::locale, it) }
+        set(className) { updateProperty(RichDate::className, it) }
+        set(id) { updateProperty(RichDate::id, it) }
+    }, setup)
+}
+
+/**
+ * Creates a [RichDate] component, returning a reference.
+ *
+ * @param value the initial value
+ * @param name the name attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param locale the locale for i18n
+ * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
+ * @param setup a function for setting up the component
+ * @return a [RichDate] component
+ */
+@Composable
+public fun IComponent.richDateRef(
+    value: LocalDate? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    inline: Boolean = false,
+    format: String = "yyyy-MM-dd",
+    locale: Locale = LocaleManager.currentLocale,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRichDate.() -> Unit = {}
+): RichDate {
+    val bindId = remember { "kilua_tempus_dominus_rd_${RichDate.idCounter++}" }
+    return richDateRef(
+        value,
+        disabled,
+        format,
+        inline,
+        locale,
+        className = className % "input-group kilua-td",
+        bindId
+    ) {
+        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-calendar-alt")
+        setup()
+    }
+}
 
 /**
  * Creates a [RichDate] component.
@@ -151,9 +227,9 @@ private fun IComponent.richDate(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
- * @param id the ID of the generated HTML input element
  * @param locale the locale for i18n
  * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
  * @return a [RichDate] component
  */
@@ -164,15 +240,15 @@ public fun IComponent.richDate(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     inline: Boolean = false,
     format: String = "yyyy-MM-dd",
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     setup: @Composable IRichDate.() -> Unit = {}
-): RichDate {
+) {
     val bindId = remember { "kilua_tempus_dominus_rd_${RichDate.idCounter++}" }
-    return richDate(value, disabled, format, inline, locale, className = className % "input-group kilua-td") {
+    richDate(value, disabled, format, inline, locale, className = className % "input-group kilua-td", bindId) {
         commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-calendar-alt")
         setup()
     }

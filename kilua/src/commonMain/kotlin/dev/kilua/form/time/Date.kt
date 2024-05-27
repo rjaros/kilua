@@ -242,11 +242,10 @@ public open class Date(
             value = if (min != null && newValue < min!!) min else newValue
         }
     }
-
 }
 
 /**
- * Creates a [Date] component.
+ * Creates a [Date] component, returning a reference.
  *
  * @param value the initial value
  * @param min the minimum value
@@ -264,7 +263,7 @@ public open class Date(
  *
  */
 @Composable
-public fun IComponent.date(
+public fun IComponent.dateRef(
     value: LocalDate? = null,
     min: LocalDate? = null,
     max: LocalDate? = null,
@@ -309,4 +308,67 @@ public fun IComponent.date(
         set(id) { updateProperty(Date::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates a [Date] component.
+ *
+ * @param value the initial value
+ * @param min the minimum value
+ * @param max the maximum value
+ * @param step the step value
+ * @param name the name attribute of the generated HTML input element
+ * @param maxlength the maxlength attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.date(
+    value: LocalDate? = null,
+    min: LocalDate? = null,
+    max: LocalDate? = null,
+    step: Int = DATE_DEFAULT_STEP,
+    name: String? = null,
+    maxlength: Int? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IDate.() -> Unit = {}
+) {
+    val component =
+        remember {
+            Date(
+                value,
+                min,
+                max,
+                step,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                id,
+                renderConfig
+            )
+        }
+    ComponentNode(component, {
+        set(value) { updateProperty(Date::value, it) }
+        set(min) { updateProperty(Date::min, it) }
+        set(max) { updateProperty(Date::max, it) }
+        set(step) { updateProperty(Date::step, it) }
+        set(name) { updateProperty(Date::name, it) }
+        set(maxlength) { updateProperty(Date::maxlength, it) }
+        set(placeholder) { updateProperty(Date::placeholder, it) }
+        set(disabled) { updateProperty(Date::disabled, it) }
+        set(required) { updateProperty(Date::required, it) }
+        set(className) { updateProperty(Date::className, it) }
+        set(id) { updateProperty(Date::id, it) }
+    }, setup)
 }

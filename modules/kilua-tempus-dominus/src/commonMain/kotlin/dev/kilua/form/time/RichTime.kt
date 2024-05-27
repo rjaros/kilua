@@ -60,9 +60,10 @@ public open class RichTime(
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalTime?> = WithStateFlowDelegateImpl()
-) : AbstractRichDateTime(disabled, format, inline, locale, className, renderConfig = renderConfig), TimeFormControl,
+) : AbstractRichDateTime(disabled, format, inline, locale, className, id, renderConfig = renderConfig), TimeFormControl,
     WithStateFlow<LocalTime?> by withStateFlowDelegate, IRichTime {
 
     public override var value: LocalTime? by updatingProperty(
@@ -115,17 +116,18 @@ public open class RichTime(
 }
 
 @Composable
-private fun IComponent.richTime(
+private fun IComponent.richTimeRef(
     value: LocalTime? = null,
     disabled: Boolean? = null,
     format: String = "HH:mm",
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     setup: @Composable IRichTime.() -> Unit = {}
 ): RichTime {
     val component =
-        remember { RichTime(value, disabled, format, inline, locale, className, renderConfig = renderConfig) }
+        remember { RichTime(value, disabled, format, inline, locale, className, id, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -143,6 +145,78 @@ private fun IComponent.richTime(
     return component
 }
 
+@Composable
+private fun IComponent.richTime(
+    value: LocalTime? = null,
+    disabled: Boolean? = null,
+    format: String = "HH:mm",
+    inline: Boolean = false,
+    locale: Locale = LocaleManager.currentLocale,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRichTime.() -> Unit = {}
+) {
+    val component =
+        remember { RichTime(value, disabled, format, inline, locale, className, id, renderConfig = renderConfig) }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(value) { updateProperty(RichTime::value, it) }
+        set(disabled) { updateProperty(RichTime::disabled, it) }
+        set(format) { updateProperty(RichTime::format, it) }
+        set(inline) { updateProperty(RichTime::inline, it) }
+        set(locale) { updateProperty(RichTime::locale, it) }
+        set(className) { updateProperty(RichTime::className, it) }
+    }, setup)
+}
+
+
+/**
+ * Creates a [RichTime] component, returning a reference.
+ *
+ * @param value the initial value
+ * @param name the name attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param locale the locale for i18n
+ * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
+ * @param setup a function for setting up the component
+ * @return a [RichTime] component
+ */
+@Composable
+public fun IComponent.richTimeRef(
+    value: LocalTime? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    inline: Boolean = false,
+    format: String = "HH:mm",
+    locale: Locale = LocaleManager.currentLocale,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRichTime.() -> Unit = {}
+): RichTime {
+    val bindId = remember { "kilua_tempus_dominus_rt_${RichTime.idCounter++}" }
+    return richTimeRef(
+        value,
+        disabled,
+        format,
+        inline,
+        locale,
+        className = className % "input-group kilua-td",
+        bindId
+    ) {
+        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-clock")
+        setup()
+    }
+}
 
 /**
  * Creates a [RichTime] component.
@@ -152,11 +226,10 @@ private fun IComponent.richTime(
  * @param placeholder the placeholder attribute of the generated HTML input element
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
- * @param id the ID of the generated HTML input element
  * @param locale the locale for i18n
  * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
- * @return a [RichTime] component
  */
 @Composable
 public fun IComponent.richTime(
@@ -165,15 +238,15 @@ public fun IComponent.richTime(
     placeholder: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
-    id: String? = null,
     inline: Boolean = false,
     format: String = "HH:mm",
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     setup: @Composable IRichTime.() -> Unit = {}
-): RichTime {
+) {
     val bindId = remember { "kilua_tempus_dominus_rt_${RichTime.idCounter++}" }
-    return richTime(value, disabled, format, inline, locale, className = className % "input-group kilua-td") {
+    richTime(value, disabled, format, inline, locale, className = className % "input-group kilua-td", bindId) {
         commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-clock")
         setup()
     }

@@ -67,7 +67,7 @@ class SpinnerSpec : DomSpec {
         run {
             lateinit var spinner: Spinner
             root("test") {
-                spinner = spinner(19, 10, 20, step = 1) {
+                spinner = spinnerRef(19, 10, 20, step = 1) {
                     autofocus(true)
                 }
             }

@@ -25,8 +25,8 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLLabelElement
@@ -53,9 +53,10 @@ public interface ILabel : ITag<HTMLLabelElement> {
 public open class Label(
     htmlFor: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLLabelElement>("label", className, renderConfig = renderConfig), ILabel {
+    Tag<HTMLLabelElement>("label", className, id, renderConfig = renderConfig), ILabel {
 
     /**
      * The ID of the labeled element.
@@ -94,22 +95,47 @@ public open class Label(
 }
 
 /**
+ * Creates a [Label] component, returning a reference.
+ *
+ * @param className the CSS class name
+ * @param id the ID of the label
+ * @param content the content of the component
+ * @return the [Label] component
+ */
+@Composable
+public fun IComponent.labelRef(
+    htmlFor: String? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ILabel.() -> Unit = {}
+): Label {
+    val component = remember { Label(htmlFor, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(htmlFor) { updateProperty("for", it) }
+        set(className) { updateProperty(Label::className, it) }
+        set(id) { updateProperty(Label::id, it) }
+    }, content)
+    return component
+}
+
+/**
  * Creates a [Label] component.
  *
  * @param className the CSS class name
+ * @param id the ID of the label
  * @param content the content of the component
- * @return the [Label] component
  */
 @Composable
 public fun IComponent.label(
     htmlFor: String? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable ILabel.() -> Unit = {}
-): Label {
-    val component = remember { Label(htmlFor, className, renderConfig = renderConfig) }
+) {
+    val component = remember { Label(htmlFor, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(htmlFor) { updateProperty("for", it) }
         set(className) { updateProperty(Label::className, it) }
+        set(id) { updateProperty(Label::id, it) }
     }, content)
-    return component
 }

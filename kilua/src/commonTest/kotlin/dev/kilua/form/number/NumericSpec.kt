@@ -68,7 +68,7 @@ class NumericSpec : DomSpec {
         run {
             lateinit var numeric: Numeric
             root("test") {
-                numeric = numeric(1235.321, locale = SimpleLocale("en")) {
+                numeric = numericRef(1235.321, locale = SimpleLocale("en")) {
                     defaultValue(1235.321)
                 }
             }

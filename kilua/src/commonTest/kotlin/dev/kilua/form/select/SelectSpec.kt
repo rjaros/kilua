@@ -50,7 +50,7 @@ class SelectSpec : DomSpec {
         run {
             lateinit var select: Select
             root("test") {
-                select = select(listOfPairs("A", "B"), value = "B", name = "test", emptyOption = true, placeholder = "A placeholder")
+                select = selectRef(listOfPairs("A", "B"), value = "B", name = "test", emptyOption = true, placeholder = "A placeholder")
             }
             assertEquals(1, select.selectedIndex, "Should initialize with correct selected index")
             assertEquals("B", select.selectedLabel, "Should initialize with correct selected label")

@@ -28,11 +28,10 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import dev.kilua.BootstrapModule
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.Bootstrap
-import dev.kilua.html.Div
 import dev.kilua.html.IDiv
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
@@ -79,7 +78,7 @@ public enum class FullscreenMode {
 /**
  * Bootstrap modal component.
  */
-public interface IModal: ITag<HTMLDivElement> {
+public interface IModal : ITag<HTMLDivElement> {
     /**
      * Shows the modal window.
      */
@@ -107,9 +106,10 @@ public interface IModal: ITag<HTMLDivElement> {
  */
 public open class Modal(
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), IModal {
+    Tag<HTMLDivElement>("div", className, id, renderConfig = renderConfig), IModal {
 
     internal var footerContent: @Composable (IDiv.() -> Unit)? = null
 
@@ -188,17 +188,66 @@ internal fun IComponent.modals() {
 }
 
 @Composable
-private fun IComponent.modal(
+private fun IComponent.modalRef(
     className: String? = null,
+    id: String? = null,
     content: @Composable IModal.() -> Unit,
 ): Modal {
-    val component = remember { Modal(className, renderConfig = renderConfig) }
+    val component = remember { Modal(className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Modal::className, it) }
+        set(id) { updateProperty(Modal::id, it) }
     }, content)
     return component
 }
 
+@Composable
+private fun IComponent.modal(
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IModal.() -> Unit,
+) {
+    val component = remember { Modal(className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(className) { updateProperty(Modal::className, it) }
+        set(id) { updateProperty(Modal::id, it) }
+    }, content)
+}
+
+/**
+ * Creates a [Modal] component, returning a reference.
+ *
+ * @param caption the caption of the modal window
+ * @param closeButton determines if the close button is visible
+ * @param size the size of the modal window
+ * @param fullscreenMode the fullscreen mode of the modal window
+ * @param animation determines if the modal window is animated
+ * @param centered determines if the modal window is vertically centered
+ * @param scrollable determines if the modal window content is scrollable
+ * @param escape determines if the modal window can be closed by pressing the escape key
+ * @param className the CSS class name
+ * @param id the ID attribute of the modal window
+ * @param content the content of the modal window
+ * @return the [Modal] component
+ */
+@Composable
+public fun IComponent.modalRef(
+    caption: String? = null,
+    closeButton: Boolean = true,
+    size: ModalSize? = null,
+    fullscreenMode: FullscreenMode? = null,
+    animation: Boolean = true,
+    centered: Boolean = false,
+    scrollable: Boolean = false,
+    escape: Boolean = true,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IModal.() -> Unit = {}
+): Modal {
+    return modalRef("modal" % if (animation) "fade" else null % className, id) {
+        setupModal(escape, size, fullscreenMode, centered, scrollable, caption, closeButton, content)
+    }
+}
 
 /**
  * Creates a [Modal] component.
@@ -212,8 +261,8 @@ private fun IComponent.modal(
  * @param scrollable determines if the modal window content is scrollable
  * @param escape determines if the modal window can be closed by pressing the escape key
  * @param className the CSS class name
- * @param content the content of the modal dialog
- * @return the [Modal] component
+ * @param id the ID attribute of the modal window
+ * @param content the content of the modal window
  */
 @Composable
 public fun IComponent.modal(
@@ -226,47 +275,62 @@ public fun IComponent.modal(
     scrollable: Boolean = false,
     escape: Boolean = true,
     className: String? = null,
+    id: String? = null,
     content: @Composable IModal.() -> Unit = {}
-): Modal {
-    return modal("modal" % if (animation) "fade" else null % className) {
-        role("dialog")
-        tabindex(-1)
-        attribute("data-bs-keyboard", "$escape")
-        attribute("data-bs-backdrop", if (escape) "true" else "static")
-        val component = this.cast<Modal>()
-        div("modal-dialog" % size?.value % fullscreenMode?.value % if (centered) "modal-dialog-centered" else null % if (scrollable) "modal-dialog-scrollable" else null) {
-            div("modal-content") {
-                if (caption != null || closeButton) {
-                    div("modal-header") {
-                        if (caption != null) {
-                            h5t(caption, "modal-title")
-                        }
-                        if (closeButton) {
-                            button(className = "btn-close") {
-                                ariaLabel("Close")
-                                onClick {
-                                    component.hide()
-                                }
+) {
+    modal("modal" % if (animation) "fade" else null % className, id) {
+        setupModal(escape, size, fullscreenMode, centered, scrollable, caption, closeButton, content)
+    }
+}
+
+@Composable
+private fun IModal.setupModal(
+    escape: Boolean,
+    size: ModalSize?,
+    fullscreenMode: FullscreenMode?,
+    centered: Boolean,
+    scrollable: Boolean,
+    caption: String?,
+    closeButton: Boolean,
+    content: @Composable (IModal.() -> Unit)
+) {
+    role("dialog")
+    tabindex(-1)
+    attribute("data-bs-keyboard", "$escape")
+    attribute("data-bs-backdrop", if (escape) "true" else "static")
+    val component = this.cast<Modal>()
+    div("modal-dialog" % size?.value % fullscreenMode?.value % if (centered) "modal-dialog-centered" else null % if (scrollable) "modal-dialog-scrollable" else null) {
+        div("modal-content") {
+            if (caption != null || closeButton) {
+                div("modal-header") {
+                    if (caption != null) {
+                        h5t(caption, "modal-title")
+                    }
+                    if (closeButton) {
+                        button(className = "btn-close") {
+                            ariaLabel("Close")
+                            onClick {
+                                component.hide()
                             }
                         }
                     }
                 }
-                div("modal-body") {
-                    content() // !!! the content is called on Modal receiver (component), but dom nodes are emitted inside modal-body div
-                }
-                div("modal-footer") {
-                    component.footerContent?.invoke(this)
-                }
+            }
+            div("modal-body") {
+                content() // !!! the content is called on Modal receiver (component), but dom nodes are emitted inside modal-body div
+            }
+            div("modal-footer") {
+                component.footerContent?.invoke(this)
             }
         }
-        DisposableEffect(component.componentId) {
-            component.onInsert()
-            onDispose {
-                component.onRemove()
-            }
+    }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
         }
-        onEvent<Event>("hidden.bs.modal") {
-            component.hide()
-        }
+    }
+    onEvent<Event>("hidden.bs.modal") {
+        component.hide()
     }
 }

@@ -64,7 +64,7 @@ class ButtonSpec : DomSpec {
             var counter = 0
             lateinit var button: Button
             root {
-                button = button("test", type = ButtonType.Submit) {
+                button = buttonRef("test", type = ButtonType.Submit) {
                     onClick { counter++ }
                 }
             }

@@ -72,7 +72,7 @@ class ImaskNumericSpec : DomSpec {
             ImaskModule.initialize()
             lateinit var numeric: Numeric
             root("test") {
-                numeric = imaskNumeric(1235.321, locale = SimpleLocale("en")) {
+                numeric = imaskNumericRef(1235.321, locale = SimpleLocale("en")) {
                     defaultValue(1235.321)
                 }
             }

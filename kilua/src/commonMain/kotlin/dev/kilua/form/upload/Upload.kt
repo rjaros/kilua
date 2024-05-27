@@ -295,7 +295,7 @@ public open class Upload(
 }
 
 /**
- * Creates [Upload] component.
+ * Creates [Upload] component, returning a reference.
  *
  * @param multiple whether multiple files can be selected
  * @param accept file types accepted by the file upload input
@@ -309,7 +309,7 @@ public open class Upload(
  * @return a [Upload] component
  */
 @Composable
-public fun IComponent.upload(
+public fun IComponent.uploadRef(
     multiple: Boolean = false,
     accept: List<String>? = null,
     capture: Capture? = null,
@@ -345,4 +345,56 @@ public fun IComponent.upload(
         set(id) { updateProperty(Upload::id, it) }
     }, setup)
     return component
+}
+
+
+/**
+ * Creates [Upload] component.
+ *
+ * @param multiple whether multiple files can be selected
+ * @param accept file types accepted by the file upload input
+ * @param capture file upload input capture mode
+ * @param name the name of the input
+ * @param disabled whether the input is disabled
+ * @param required whether the input is required
+ * @param className the CSS class name
+ * @param id the ID of the input
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.upload(
+    multiple: Boolean = false,
+    accept: List<String>? = null,
+    capture: Capture? = null,
+    name: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IUpload.() -> Unit = {}
+) {
+    val component =
+        remember {
+            Upload(
+                multiple,
+                accept,
+                capture,
+                name,
+                disabled,
+                required,
+                className,
+                id,
+                renderConfig = renderConfig
+            )
+        }
+    ComponentNode(component, {
+        set(multiple) { updateProperty(Upload::multiple, it) }
+        set(accept) { updateProperty(Upload::accept, it) }
+        set(capture) { updateProperty(Upload::capture, it) }
+        set(name) { updateProperty(Upload::name, it) }
+        set(disabled) { updateProperty(Upload::disabled, it) }
+        set(required) { updateProperty(Upload::required, it) }
+        set(className) { updateProperty(Upload::className, it) }
+        set(id) { updateProperty(Upload::id, it) }
+    }, setup)
 }

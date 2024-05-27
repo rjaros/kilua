@@ -544,7 +544,7 @@ public data class ColumnDefinition<T : Any>(
         cell: CellComponent,
         onRendered: (callback: () -> Unit) -> Unit,
         success: (value: JsAny?) -> Unit, cancel: (value: JsAny?) -> Unit, data: T
-    ) -> Component)? = null,
+    ) -> Unit)? = null,
     val editorParams: JsAny? = null,
     val validator: Validator? = null,
     val validatorFunction: JsAny? = null,

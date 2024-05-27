@@ -30,6 +30,7 @@ import dev.kilua.html.ButtonStyle
 import dev.kilua.html.ButtonType
 import dev.kilua.html.IButton
 import dev.kilua.html.bsButton
+import dev.kilua.html.bsButtonRef
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
 
@@ -48,6 +49,65 @@ public enum class AutoClose {
     }
 }
 
+/**
+ * Creates a dropdown button component, returning a reference.
+ *
+ * @param label the label of the dropdown button
+ * @param icon the icon of the dropdown button
+ * @param style the style of the dropdown button
+ * @param size the size of the dropdown button
+ * @param disabled the disabled state of the dropdown button
+ * @param autoClose the auto close state of the dropdown
+ * @param arrowVisible the arrow visibility state of the dropdown button
+ * @param innerDropDown the inner dropdown state of the dropdown button
+ * @param className the CSS class name
+ * @param content the content of the dropdown button
+ * @return the dropdown button component
+ */
+@Composable
+public fun IComponent.dropDownButtonRef(
+    label: String? = null,
+    icon: String? = null,
+    style: ButtonStyle = ButtonStyle.BtnPrimary,
+    size: ButtonSize? = null,
+    disabled: Boolean? = null,
+    autoClose: AutoClose = AutoClose.True,
+    arrowVisible: Boolean = true,
+    innerDropDown: Boolean = false,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IButton.() -> Unit = {}
+): Button {
+    return bsButtonRef(
+        label,
+        icon,
+        style,
+        size,
+        ButtonType.Button,
+        disabled,
+        className % "dropdown-toggle"
+                % if (!arrowVisible) "kilua-dropdown-no-arrow" else null
+                % if (innerDropDown) "dropdown-item" else null,
+        id
+    ) {
+        setupDropDownButton(autoClose, content, innerDropDown)
+    }
+}
+
+/**
+ * Creates a dropdown button component.
+ *
+ * @param label the label of the dropdown button
+ * @param icon the icon of the dropdown button
+ * @param style the style of the dropdown button
+ * @param size the size of the dropdown button
+ * @param disabled the disabled state of the dropdown button
+ * @param autoClose the auto close state of the dropdown
+ * @param arrowVisible the arrow visibility state of the dropdown button
+ * @param innerDropDown the inner dropdown state of the dropdown button
+ * @param className the CSS class name
+ * @param content the content of the dropdown button
+ */
 @Composable
 public fun IComponent.dropDownButton(
     label: String? = null,
@@ -59,9 +119,10 @@ public fun IComponent.dropDownButton(
     arrowVisible: Boolean = true,
     innerDropDown: Boolean = false,
     className: String? = null,
+    id: String? = null,
     content: @Composable IButton.() -> Unit = {}
-): Button {
-    return bsButton(
+) {
+    bsButton(
         label,
         icon,
         style,
@@ -71,15 +132,25 @@ public fun IComponent.dropDownButton(
         className % "dropdown-toggle"
                 % if (!arrowVisible) "kilua-dropdown-no-arrow" else null
                 % if (innerDropDown) "dropdown-item" else null,
+        id
     ) {
-        attribute("data-bs-toggle", "dropdown")
-        attribute("data-bs-auto-close", autoClose.value)
-        attribute("aria-expanded", "false")
-        content()
-        if (innerDropDown) {
-            onClick {
-                it.stopPropagation()
-            }
+        setupDropDownButton(autoClose, content, innerDropDown)
+    }
+}
+
+@Composable
+private fun IButton.setupDropDownButton(
+    autoClose: AutoClose,
+    content: @Composable (IButton.() -> Unit),
+    innerDropDown: Boolean
+) {
+    attribute("data-bs-toggle", "dropdown")
+    attribute("data-bs-auto-close", autoClose.value)
+    attribute("aria-expanded", "false")
+    content()
+    if (innerDropDown) {
+        onClick {
+            it.stopPropagation()
         }
     }
 }

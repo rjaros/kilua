@@ -69,6 +69,34 @@ public enum class ButtonSize {
     }
 }
 
+/**
+ * Creates a Bootstrap [Button] component with a given label and icon, returning a reference.
+ *
+ * @param label the label of the button
+ * @param icon the icon of the button
+ * @param style the style of the button
+ * @param size the size of the button
+ * @param type the type of the button
+ * @param disabled whether the button is disabled
+ * @param className the CSS class name
+ * @param id the ID attribute of the button
+ * @param content a function for setting up the component
+ * @return the [Button] component
+ */
+@Composable
+public fun IComponent.bsButtonRef(
+    label: String? = null,
+    icon: String? = null,
+    style: ButtonStyle = ButtonStyle.BtnPrimary,
+    size: ButtonSize? = null,
+    type: ButtonType = ButtonType.Button,
+    disabled: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IButton.() -> Unit = {}
+): Button {
+    return buttonRef(label, icon, type, disabled, "btn" % style.value % size?.value % className, id, content)
+}
 
 /**
  * Creates a Bootstrap [Button] component with a given label and icon.
@@ -80,8 +108,8 @@ public enum class ButtonSize {
  * @param type the type of the button
  * @param disabled whether the button is disabled
  * @param className the CSS class name
+ * @param id the ID attribute of the button
  * @param content a function for setting up the component
- * @return the [Button] component
  */
 @Composable
 public fun IComponent.bsButton(
@@ -92,7 +120,8 @@ public fun IComponent.bsButton(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable IButton.() -> Unit = {}
-): Button {
-    return button(label, icon, type, disabled, "btn" % style.value % size?.value % className, content)
+) {
+    button(label, icon, type, disabled, "btn" % style.value % size?.value % className, id, content)
 }

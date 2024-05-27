@@ -32,6 +32,44 @@ import dev.kilua.html.IDiv
 import dev.kilua.html.JustifyContent
 
 /**
+ * Creates a container with a horizontal layout, returning a reference.
+ *
+ * @param flexWrap the optional flex wrap
+ * @param justifyContent the optional flexbox content justification
+ * @param alignItems the optional flexbox items alignment
+ * @param gap the optional gap between columns
+ * @param rowGap the optional gap between rows
+ * @param className the optional CSS class name
+ * @param id the ID attribute of the container
+ * @param content the content of the component
+ * @return the created [dev.kilua.html.Div] component
+ */
+@Composable
+public fun IComponent.hPanelRef(
+    flexWrap: FlexWrap? = null,
+    justifyContent: JustifyContent? = null,
+    alignItems: AlignItems? = null,
+    gap: CssSize? = null,
+    rowGap: CssSize? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IDiv.() -> Unit,
+): Div {
+    return flexPanelRef(
+        null,
+        flexWrap,
+        justifyContent,
+        alignItems,
+        null,
+        rowGap,
+        gap,
+        className,
+        id,
+        content
+    )
+}
+
+/**
  * Creates a container with a horizontal layout.
  *
  * @param flexWrap the optional flex wrap
@@ -40,8 +78,8 @@ import dev.kilua.html.JustifyContent
  * @param gap the optional gap between columns
  * @param rowGap the optional gap between rows
  * @param className the optional CSS class name
+ * @param id the ID attribute of the container
  * @param content the content of the component
- * @return the created [dev.kilua.html.Div] component
  */
 @Composable
 public fun IComponent.hPanel(
@@ -51,9 +89,10 @@ public fun IComponent.hPanel(
     gap: CssSize? = null,
     rowGap: CssSize? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable IDiv.() -> Unit,
-): Div {
-    return flexPanel(
+) {
+    flexPanel(
         null,
         flexWrap,
         justifyContent,
@@ -62,6 +101,7 @@ public fun IComponent.hPanel(
         rowGap,
         gap,
         className,
+        id,
         content
     )
 }

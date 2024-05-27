@@ -33,6 +33,44 @@ import dev.kilua.html.IDiv
 import dev.kilua.html.JustifyContent
 
 /**
+ * Creates a container with a vertical layout, returning a reference.
+ *
+ * @param flexWrap the optional flex wrap
+ * @param justifyContent the optional flexbox content justification
+ * @param alignItems the optional flexbox items alignment
+ * @param gap the optional gap between rows
+ * @param columnGap the optional gap between columns
+ * @param className the optional CSS class name
+ * @param id the ID attribute of the container
+ * @param content the content of the component
+ * @return the created [dev.kilua.html.Div] component
+ */
+@Composable
+public fun IComponent.vPanelRef(
+    flexWrap: FlexWrap? = null,
+    justifyContent: JustifyContent? = null,
+    alignItems: AlignItems? = null,
+    gap: CssSize? = null,
+    columnGap: CssSize? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IDiv.() -> Unit,
+): Div {
+    return flexPanelRef(
+        FlexDirection.Column,
+        flexWrap,
+        justifyContent,
+        alignItems,
+        null,
+        gap,
+        columnGap,
+        className,
+        id,
+        content
+    )
+}
+
+/**
  * Creates a container with a vertical layout.
  *
  * @param flexWrap the optional flex wrap
@@ -41,8 +79,8 @@ import dev.kilua.html.JustifyContent
  * @param gap the optional gap between rows
  * @param columnGap the optional gap between columns
  * @param className the optional CSS class name
+ * @param id the ID attribute of the container
  * @param content the content of the component
- * @return the created [dev.kilua.html.Div] component
  */
 @Composable
 public fun IComponent.vPanel(
@@ -52,9 +90,10 @@ public fun IComponent.vPanel(
     gap: CssSize? = null,
     columnGap: CssSize? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable IDiv.() -> Unit,
-): Div {
-    return flexPanel(
+) {
+    flexPanel(
         FlexDirection.Column,
         flexWrap,
         justifyContent,
@@ -63,6 +102,7 @@ public fun IComponent.vPanel(
         gap,
         columnGap,
         className,
+        id,
         content
     )
 }

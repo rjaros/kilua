@@ -25,8 +25,8 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
@@ -83,9 +83,10 @@ public open class Button(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLButtonElement>("button", className, renderConfig = renderConfig), IButton {
+    Tag<HTMLButtonElement>("button", className, id, renderConfig = renderConfig), IButton {
 
     /**
      * The type of the button.
@@ -157,28 +158,88 @@ public open class Button(
 }
 
 /**
+ * Creates a [Button] component, returning a reference.
+ *
+ * @param type the type of the button
+ * @param disabled whether the button is disabled
+ * @param className the CSS class name
+ * @param id the ID attribute of the button
+ * @param content a function for setting up the component
+ * @return the [Button] component
+ */
+@Composable
+private fun IComponent.buttonRef(
+    type: ButtonType = ButtonType.Button,
+    disabled: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IButton.() -> Unit = {}
+): Button {
+    val component = remember { Button(type, disabled, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(type) { updateProperty(Button::type, it) }
+        set(disabled) { updateProperty(Button::disabled, it) }
+        set(className) { updateProperty(Button::className, it) }
+        set(id) { updateProperty(Button::id, it) }
+    }, content)
+    return component
+}
+
+/**
+ * Creates a [Button] component with a given label and icon, returning a reference.
+ *
+ * @param label the label of the button
+ * @param icon the icon of the button
+ * @param type the type of the button
+ * @param disabled whether the button is disabled
+ * @param className the CSS class name
+ * @param id the ID attribute of the button
+ * @param content a function for setting up the component
+ * @return the [Button] component
+ */
+@Composable
+public fun IComponent.buttonRef(
+    label: String? = null,
+    icon: String? = null,
+    type: ButtonType = ButtonType.Button,
+    disabled: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IButton.() -> Unit = {}
+): Button {
+    val iconClassName = if (label != null && icon != null) {
+        className % "icon-link"
+    } else className
+    return buttonRef(type, disabled, iconClassName, id) {
+        atom(label, icon)
+        content()
+    }
+}
+
+/**
  * Creates a [Button] component.
  *
  * @param type the type of the button
  * @param disabled whether the button is disabled
  * @param className the CSS class name
+ * @param id the ID attribute of the button
  * @param content a function for setting up the component
- * @return the [Button] component
  */
 @Composable
 private fun IComponent.button(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable IButton.() -> Unit = {}
-): Button {
-    val component = remember { Button(type, disabled, className, renderConfig = renderConfig) }
+) {
+    val component = remember { Button(type, disabled, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(type) { updateProperty(Button::type, it) }
         set(disabled) { updateProperty(Button::disabled, it) }
         set(className) { updateProperty(Button::className, it) }
+        set(id) { updateProperty(Button::id, it) }
     }, content)
-    return component
 }
 
 /**
@@ -189,8 +250,8 @@ private fun IComponent.button(
  * @param type the type of the button
  * @param disabled whether the button is disabled
  * @param className the CSS class name
+ * @param id the ID attribute of the button
  * @param content a function for setting up the component
- * @return the [Button] component
  */
 @Composable
 public fun IComponent.button(
@@ -199,12 +260,13 @@ public fun IComponent.button(
     type: ButtonType = ButtonType.Button,
     disabled: Boolean? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable IButton.() -> Unit = {}
-): Button {
+) {
     val iconClassName = if (label != null && icon != null) {
         className % "icon-link"
     } else className
-    return button(type, disabled, iconClassName) {
+    button(type, disabled, iconClassName, id) {
         atom(label, icon)
         content()
     }

@@ -49,7 +49,7 @@ public open class Radio(
     IRadio
 
 /**
- * Creates [Radio] component.
+ * Creates [Radio] component, returning a reference.
  *
  * @param value initial value
  * @param name the name of the input
@@ -61,7 +61,7 @@ public open class Radio(
  * @return a [Radio] component
  */
 @Composable
-public fun IComponent.radio(
+public fun IComponent.radioRef(
     value: Boolean = false,
     name: String? = null,
     disabled: Boolean? = null,
@@ -80,4 +80,36 @@ public fun IComponent.radio(
         set(id) { updateProperty(Radio::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates [Radio] component.
+ *
+ * @param value initial value
+ * @param name the name of the input
+ * @param disabled whether the input is disabled
+ * @param required whether the input is required
+ * @param id the ID of the input
+ * @param className the CSS class name
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.radio(
+    value: Boolean = false,
+    name: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRadio.() -> Unit = {}
+) {
+    val component = remember { Radio(value, name, disabled, required, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(value) { updateProperty(Radio::value, it) }
+        set(name) { updateProperty(Radio::name, it) }
+        set(disabled) { updateProperty(Radio::disabled, it) }
+        set(required) { updateProperty(Radio::required, it) }
+        set(className) { updateProperty(Radio::className, it) }
+        set(id) { updateProperty(Radio::id, it) }
+    }, setup)
 }

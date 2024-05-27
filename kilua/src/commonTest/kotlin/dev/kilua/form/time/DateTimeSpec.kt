@@ -86,7 +86,7 @@ class DateTimeSpec : DomSpec {
             lateinit var dateTime: DateTime
             val date = LocalDateTime(2023, 10, 15, 12, 30)
             root("test") {
-                dateTime = dateTime(
+                dateTime = dateTimeRef(
                     date,
                     LocalDateTime(2023, 10, 15, 12, 0),
                     LocalDateTime(2023, 10, 15, 12, 31),

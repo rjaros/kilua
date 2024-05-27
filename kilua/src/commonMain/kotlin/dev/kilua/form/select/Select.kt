@@ -404,7 +404,7 @@ public open class Select(
 }
 
 /**
- * Creates [Select] component.
+ * Creates [Select] component, returning a reference.
  *
  * @param options a list of options (value to label pairs)
  * @param value initial value
@@ -420,7 +420,7 @@ public open class Select(
  * @return a [Select] component
  */
 @Composable
-public fun IComponent.select(
+public fun IComponent.selectRef(
     options: List<StringPair>? = null,
     value: String? = null,
     emptyOption: Boolean = false,
@@ -449,23 +449,82 @@ public fun IComponent.select(
         set(id) { updateProperty(Select::id, it) }
     }) {
         setup(component)
-        if (placeholder != null) {
-            this.required = true
-            option(value = "", label = placeholder, disabled = true, selected = true) {
-                hidden(true)
-            }
-        }
-        if (emptyOption) {
-            option(value = SELECT_EMPTY_VALUE, label = "")
-        }
-        options?.forEach { option ->
-            option(
-                value = option.first,
-                label = option.second,
-            ) {
-                currentlySelected(component.isValueSelected(option.first))
-            }
-        }
+        setupSelect(placeholder, emptyOption, options, component)
     }
     return component
+}
+
+/**
+ * Creates [Select] component.
+ *
+ * @param options a list of options (value to label pairs)
+ * @param value initial value
+ * @param multiple determines if multiple value selection is allowed
+ * @param size the number of visible options
+ * @param name the name of the select
+ * @param placeholder the placeholder for the select component
+ * @param disabled whether the select is disabled
+ * @param required whether the select is required
+ * @param className the CSS class name
+ * @param id the ID of the select component
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.select(
+    options: List<StringPair>? = null,
+    value: String? = null,
+    emptyOption: Boolean = false,
+    multiple: Boolean = false,
+    size: Int? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ISelect.() -> Unit = {}
+) {
+    val component = remember { Select(value, multiple, size, name, disabled, required, className, id, renderConfig) }
+    LaunchedEffect(component.componentId) {
+        component.onInsert()
+    }
+    ComponentNode(component, {
+        set(value) { updateProperty(Select::value, it) }
+        set(multiple) { updateProperty(Select::multiple, it) }
+        set(size) { updateProperty(Select::size, it) }
+        set(name) { updateProperty(Select::name, it) }
+        set(disabled) { updateProperty(Select::disabled, it) }
+        set(required) { updateProperty(Select::required, it) }
+        set(className) { updateProperty(Select::className, it) }
+        set(id) { updateProperty(Select::id, it) }
+    }) {
+        setup(component)
+        setupSelect(placeholder, emptyOption, options, component)
+    }
+}
+
+@Composable
+private fun Select.setupSelect(
+    placeholder: String?,
+    emptyOption: Boolean,
+    options: List<StringPair>?,
+    component: Select
+) {
+    if (placeholder != null) {
+        this.required = true
+        option(value = "", label = placeholder, disabled = true, selected = true) {
+            hidden(true)
+        }
+    }
+    if (emptyOption) {
+        option(value = SELECT_EMPTY_VALUE, label = "")
+    }
+    options?.forEach { option ->
+        option(
+            value = option.first,
+            label = option.second,
+        ) {
+            currentlySelected(component.isValueSelected(option.first))
+        }
+    }
 }

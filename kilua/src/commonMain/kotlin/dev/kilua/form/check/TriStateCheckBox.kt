@@ -25,8 +25,8 @@ package dev.kilua.form.check
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.InputType
 import dev.kilua.form.TriStateFormControl
@@ -300,7 +300,7 @@ public open class TriStateCheckBox(
 }
 
 /**
- * Creates [TriStateCheckBox] component.
+ * Creates [TriStateCheckBox] component, returning a reference.
  *
  * @param value initial value
  * @param name the name of the input
@@ -312,7 +312,7 @@ public open class TriStateCheckBox(
  * @return a [TriStateCheckBox] component
  */
 @Composable
-public fun IComponent.triStateCheckBox(
+public fun IComponent.triStateCheckBoxRef(
     value: Boolean? = null,
     name: String? = null,
     disabled: Boolean? = null,
@@ -331,4 +331,36 @@ public fun IComponent.triStateCheckBox(
         set(id) { updateProperty(TriStateCheckBox::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates [TriStateCheckBox] component.
+ *
+ * @param value initial value
+ * @param name the name of the input
+ * @param disabled whether the input is disabled
+ * @param required whether the input is required
+ * @param className the CSS class name
+ * @param id the ID of the input
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.triStateCheckBox(
+    value: Boolean? = null,
+    name: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ITriStateCheckBox.() -> Unit = {}
+) {
+    val component = remember { TriStateCheckBox(value, name, disabled, required, className, id, renderConfig) }
+    ComponentNode(component, {
+        set(value) { updateProperty(TriStateCheckBox::value, it) }
+        set(name) { updateProperty(TriStateCheckBox::name, it) }
+        set(disabled) { updateProperty(TriStateCheckBox::disabled, it) }
+        set(required) { updateProperty(TriStateCheckBox::required, it) }
+        set(className) { updateProperty(TriStateCheckBox::className, it) }
+        set(id) { updateProperty(TriStateCheckBox::id, it) }
+    }, setup)
 }

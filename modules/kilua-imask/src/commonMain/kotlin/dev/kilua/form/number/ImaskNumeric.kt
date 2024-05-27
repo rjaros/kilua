@@ -30,7 +30,7 @@ import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 
 /**
- * Creates a [Numeric] component with masked input.
+ * Creates a [Numeric] component with masked input, returning a reference.
  * @param value the initial value
  * @param min the minimum value
  * @param max the maximum value
@@ -48,7 +48,7 @@ import dev.kilua.i18n.LocaleManager
  * @return a [Numeric] component
  */
 @Composable
-public fun IComponent.imaskNumeric(
+public fun IComponent.imaskNumericRef(
     value: Number? = null,
     min: Number? = null,
     max: Number? = null,
@@ -64,7 +64,56 @@ public fun IComponent.imaskNumeric(
     id: String? = null,
     setup: @Composable INumeric.() -> Unit = {}
 ): Numeric {
-    return numeric(value, min, max, decimals, name, placeholder, disabled, required, locale, className, id) {
+    return numericRef(value, min, max, decimals, name, placeholder, disabled, required, locale, className, id) {
+        maskOptions = ImaskOptions(
+            number = NumberMask(
+                scale = decimals,
+                padFractionalZeros = padFractionalZeros,
+                normalizeZeros = normalizeZeros,
+                min = min,
+                max = max,
+                locale = locale
+            )
+        )
+        setup()
+    }
+}
+
+/**
+ * Creates a [Numeric] component with masked input.
+ * @param value the initial value
+ * @param min the minimum value
+ * @param max the maximum value
+ * @param decimals the number of decimal digits
+ * @param name the name attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param locale the locale for formatting the number
+ * @param padFractionalZeros determines if the fractional part should be padded with zeros
+ * @param normalizeZeros determines if the fractional part should be normalized
+ * @param className the CSS class name
+ * @param id the id attribute of the generated HTML input element
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.imaskNumeric(
+    value: Number? = null,
+    min: Number? = null,
+    max: Number? = null,
+    decimals: Int = NUMERIC_DEFAULT_DECIMALS,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    locale: Locale = LocaleManager.currentLocale,
+    padFractionalZeros: Boolean? = null,
+    normalizeZeros: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable INumeric.() -> Unit = {}
+) {
+    numeric(value, min, max, decimals, name, placeholder, disabled, required, locale, className, id) {
         maskOptions = ImaskOptions(
             number = NumberMask(
                 scale = decimals,

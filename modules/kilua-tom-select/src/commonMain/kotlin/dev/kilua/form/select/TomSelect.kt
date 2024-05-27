@@ -622,7 +622,7 @@ public open class TomSelect(
 }
 
 /**
- * Creates [TomSelect] component.
+ * Creates [TomSelect] component, returning a reference.
  *
  * @param options a list of options (value to label pairs)
  * @param value initial value
@@ -642,7 +642,7 @@ public open class TomSelect(
  * @return a [TomSelect] component
  */
 @Composable
-public fun IComponent.tomSelect(
+public fun IComponent.tomSelectRef(
     options: List<StringPair>? = null,
     value: String? = null,
     emptyOption: Boolean = false,
@@ -701,5 +701,86 @@ public fun IComponent.tomSelect(
             set(id) { updateProperty(TomSelect::id, it) }
         }, setup)
         component
+    }
+}
+
+/**
+ * Creates [TomSelect] component.
+ *
+ * @param options a list of options (value to label pairs)
+ * @param value initial value
+ * @param emptyOption determines if an empty option is allowed
+ * @param multiple determines if multiple value selection is allowed
+ * @param maxOptions the maximum number of visible options
+ * @param tsOptions Tom Select options
+ * @param tsCallbacks Tom Select callbacks
+ * @param tsRenders Tom Select renders
+ * @param name the name of the select
+ * @param placeholder the placeholder for the select component
+ * @param disabled whether the select is disabled
+ * @param required whether the select is required
+ * @param className the CSS class name
+ * @param id the ID of the select component
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.tomSelect(
+    options: List<StringPair>? = null,
+    value: String? = null,
+    emptyOption: Boolean = false,
+    multiple: Boolean = false,
+    maxOptions: Int? = null,
+    tsOptions: TomSelectOptions? = null,
+    tsCallbacks: TomSelectCallbacks? = null,
+    tsRenders: TomSelectRenders? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ITomSelect.() -> Unit = {}
+) {
+    key(multiple) {
+        val component = remember {
+            TomSelect(
+                options,
+                value,
+                emptyOption,
+                multiple,
+                maxOptions,
+                tsOptions,
+                tsCallbacks,
+                tsRenders,
+                name,
+                placeholder,
+                disabled,
+                required,
+                className % "form-select",
+                id,
+                renderConfig
+            )
+        }
+        DisposableEffect(component.componentId) {
+            component.onInsert()
+            onDispose {
+                component.onRemove()
+            }
+        }
+        ComponentNode(component, {
+            set(options) { updateProperty(TomSelect::options, it) }
+            set(value) { updateProperty(TomSelect::value, it) }
+            set(emptyOption) { updateProperty(TomSelect::emptyOption, it) }
+            set(maxOptions) { updateProperty(TomSelect::maxOptions, it) }
+            set(tsOptions) { updateProperty(TomSelect::tsOptions, it) }
+            set(tsCallbacks) { updateProperty(TomSelect::tsCallbacks, it) }
+            set(tsRenders) { updateProperty(TomSelect::tsRenders, it) }
+            set(name) { updateProperty(TomSelect::name, it) }
+            set(placeholder) { updateProperty(TomSelect::placeholder, it) }
+            set(disabled) { updateProperty(TomSelect::disabled, it) }
+            set(required) { updateProperty(TomSelect::required, it) }
+            set(className) { updateProperty(TomSelect::className, it % "form-select") }
+            set(id) { updateProperty(TomSelect::id, it) }
+        }, setup)
     }
 }

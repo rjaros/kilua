@@ -223,7 +223,7 @@ public open class RadioGroup(
 }
 
 /**
- * Creates [RadioGroup] component.
+ * Creates [RadioGroup] component, returning a reference.
  *
  * @param options a list of options (value to label pairs)
  * @param value initial value
@@ -237,7 +237,7 @@ public open class RadioGroup(
  * @return a [RadioGroup] component
  */
 @Composable
-public fun IComponent.radioGroup(
+public fun IComponent.radioGroupRef(
     options: List<StringPair>? = null,
     value: String? = null,
     inline: Boolean = false,
@@ -259,29 +259,77 @@ public fun IComponent.radioGroup(
         set(id) { updateProperty(RadioGroup::id, it) }
     }) {
         setup(component)
-        options?.forEachIndexed { index, option ->
-            fieldWithLabel(
-                option.second,
-                labelAfter = true,
-                groupClassName = if (component.inline) "kilua-radio-inline" else null
+        setupOptions(options, component)
+    }
+    return component
+}
+
+/**
+ * Creates [RadioGroup] component.
+ *
+ * @param options a list of options (value to label pairs)
+ * @param value initial value
+ * @param inline determines if the options are rendered inline
+ * @param name the name of the input
+ * @param disabled whether the input is disabled
+ * @param required whether the input is required
+ * @param className the CSS class name
+ * @param id the ID of the input
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.radioGroup(
+    options: List<StringPair>? = null,
+    value: String? = null,
+    inline: Boolean = false,
+    name: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRadioGroup.() -> Unit = {}
+) {
+    val component = remember { RadioGroup(value, inline, name, disabled, required, className, id, renderConfig) }
+    ComponentNode(component, {
+        set(value) { updateProperty(RadioGroup::value, it) }
+        set(inline) { updateProperty(RadioGroup::inline, it) }
+        set(name) { updateProperty(RadioGroup::name, it) }
+        set(disabled) { updateProperty(RadioGroup::disabled, it) }
+        set(required) { updateProperty(RadioGroup::required, it) }
+        set(className) { updateProperty(RadioGroup::className, it) }
+        set(id) { updateProperty(RadioGroup::id, it) }
+    }) {
+        setup(component)
+        setupOptions(options, component)
+    }
+}
+
+@Composable
+private fun RadioGroup.setupOptions(
+    options: List<StringPair>?,
+    component: RadioGroup
+) {
+    options?.forEachIndexed { index, option ->
+        fieldWithLabel(
+            option.second,
+            labelAfter = true,
+            groupClassName = if (component.inline) "kilua-radio-inline" else null
+        ) {
+            radio(
+                value = option.first == component.value,
+                name = component.name ?: "name_${component.componentId}",
+                disabled = component.disabled,
+                required = component.required,
+                id = it
             ) {
-                radio(
-                    value = option.first == component.value,
-                    name = component.name ?: "name_${component.componentId}",
-                    disabled = component.disabled,
-                    required = component.required,
-                    id = it
-                ) {
-                    if (index == 0 && component.autofocus == true) {
-                        this.autofocus(true)
-                    }
-                    this.extraValue(option.first)
-                    onChange {
-                        component.value = this.extraValue
-                    }
+                if (index == 0 && component.autofocus == true) {
+                    this.autofocus(true)
+                }
+                this.extraValue(option.first)
+                onChange {
+                    component.value = this.extraValue
                 }
             }
         }
     }
-    return component
 }

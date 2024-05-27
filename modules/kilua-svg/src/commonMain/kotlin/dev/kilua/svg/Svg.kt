@@ -38,14 +38,13 @@ private fun IComponent.svgTag(
     id: String? = null,
     renderNamespaceToString: Boolean = false,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag {
-    return key(tagName, renderNamespaceToString) {
+) {
+    key(tagName, renderNamespaceToString) {
         val component = remember { SvgTag(tagName, className, id, renderNamespaceToString, renderConfig) }
         ComponentNode(component, {
             set(className) { updateProperty(SvgTag::className, it) }
             set(id) { updateProperty(SvgTag::id, it) }
         }, content)
-        component
     }
 }
 
@@ -58,7 +57,7 @@ public fun IComponent.svg(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("svg", className, id, true) {
+): Unit = svgTag("svg", className, id, true) {
     viewBox(viewBox)
     content()
 }
@@ -72,7 +71,7 @@ public fun ISvgTag.a(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("a", className, id) {
+): Unit = svgTag("a", className, id) {
     href(href)
     content()
 }
@@ -88,7 +87,7 @@ public fun ISvgTag.circle(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("circle", className, id) {
+): Unit = svgTag("circle", className, id) {
     cx(cx)
     cy(cy)
     r(r)
@@ -106,7 +105,7 @@ public fun ISvgTag.circle(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = circle(cx.units, cy.units, r.units, className, id, content)
+): Unit = circle(cx.units, cy.units, r.units, className, id, content)
 
 /**
  * SVG "text" tag.
@@ -119,7 +118,7 @@ public fun ISvgTag.text(
     className: String? = null,
     id: String? = null,
     setup: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("text", className, id) {
+): Unit = svgTag("text", className, id) {
     textNode(text)
     x(x.units)
     y(y.units)
@@ -134,7 +133,7 @@ public fun ISvgTag.view(
     id: String,
     viewBox: String,
     setup: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("view", null, id) {
+): Unit = svgTag("view", null, id) {
     viewBox(viewBox)
     setup()
 }
@@ -151,7 +150,7 @@ public fun ISvgTag.rect(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("rect", className, id) {
+): Unit = svgTag("rect", className, id) {
     x(x)
     y(y)
     width(width)
@@ -171,7 +170,7 @@ public fun ISvgTag.rect(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = rect(x.units, y.units, width.units, height.units, className, id, content)
+): Unit = rect(x.units, y.units, width.units, height.units, className, id, content)
 
 /**
  * SVG "ellipse" tag.
@@ -185,7 +184,7 @@ public fun ISvgTag.ellipse(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("ellipse", className, id) {
+): Unit = svgTag("ellipse", className, id) {
     cx(cx)
     cy(cy)
     rx(rx)
@@ -205,7 +204,7 @@ public fun ISvgTag.ellipse(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = ellipse(cx.units, cy.units, rx.units, ry.units, className, id, content)
+): Unit = ellipse(cx.units, cy.units, rx.units, ry.units, className, id, content)
 
 /**
  * SVG "symbol" tag.
@@ -215,7 +214,7 @@ public fun ISvgTag.symbol(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("symbol", className, id, false, content)
+): Unit = svgTag("symbol", className, id, false, content)
 
 /**
  * SVG "use" tag.
@@ -226,7 +225,7 @@ public fun ISvgTag.use(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("use", className, id) {
+): Unit = svgTag("use", className, id) {
     href(href)
     content()
 }
@@ -243,7 +242,7 @@ public fun ISvgTag.line(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("line", className, id) {
+): Unit = svgTag("line", className, id) {
     x1(x1)
     y1(y1)
     x2(x2)
@@ -263,7 +262,7 @@ public fun ISvgTag.line(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = line(x1.units, y1.units, x2.units, y2.units, className, id, content)
+): Unit = line(x1.units, y1.units, x2.units, y2.units, className, id, content)
 
 /**
  * SVG "clipPath" tag.
@@ -273,7 +272,7 @@ public fun ISvgTag.clipPath(
     id: String,
     className: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("clipPath", className, id, false, content)
+): Unit = svgTag("clipPath", className, id, false, content)
 
 /**
  * SVG "path" tag.
@@ -284,7 +283,7 @@ public fun ISvgTag.path(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("path", className, id) {
+): Unit = svgTag("path", className, id) {
     d(d)
     content()
 }
@@ -297,7 +296,7 @@ public fun ISvgTag.g(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("g", className, id, false, content)
+): Unit = svgTag("g", className, id, false, content)
 
 /**
  * SVG "image" tag.
@@ -308,7 +307,7 @@ public fun ISvgTag.image(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("image", className, id) {
+): Unit = svgTag("image", className, id) {
     href(href)
     content()
 }
@@ -321,7 +320,7 @@ public fun ISvgTag.mask(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("mask", className, id, false, content)
+): Unit = svgTag("mask", className, id, false, content)
 
 /**
  * SVG "defs" tag.
@@ -331,7 +330,7 @@ public fun ISvgTag.defs(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("defs", className, id, false, content)
+): Unit = svgTag("defs", className, id, false, content)
 
 /**
  * SVG "pattern" tag.
@@ -341,7 +340,7 @@ public fun ISvgTag.pattern(
     id: String,
     className: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("pattern", className, id, false, content)
+): Unit = svgTag("pattern", className, id, false, content)
 
 /**
  * SVG "polygon" tag.
@@ -352,7 +351,7 @@ public fun ISvgTag.polygon(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("polygon", className, id) {
+): Unit = svgTag("polygon", className, id) {
     points(points.toList().chunked(2).joinToString(" ") { it.joinToString(",") })
     content()
 }
@@ -366,7 +365,7 @@ public fun ISvgTag.polyline(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("polyline", className, id) {
+): Unit = svgTag("polyline", className, id) {
     points(points.toList().chunked(2).joinToString(" ") { it.joinToString(",") })
     content()
 }
@@ -381,7 +380,7 @@ public fun ISvgTag.textPath(
     className: String? = null,
     id: String? = null,
     setup: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("textPath", className, id) {
+): Unit = svgTag("textPath", className, id) {
     href(href)
     textNode(text)
     setup()
@@ -394,7 +393,7 @@ public fun ISvgTag.textPath(
 public fun ISvgTag.animate(
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("animate", null, id, false, content)
+): Unit = svgTag("animate", null, id, false, content)
 
 /**
  * SVG "animateMotion" tag.
@@ -403,7 +402,7 @@ public fun ISvgTag.animate(
 public fun ISvgTag.animateMotion(
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("animateMotion", null, id, false, content)
+): Unit = svgTag("animateMotion", null, id, false, content)
 
 /**
  * SVG "animateTransform" tag.
@@ -412,7 +411,7 @@ public fun ISvgTag.animateMotion(
 public fun ISvgTag.animateTransform(
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("animateTransform", null, id, false, content)
+): Unit = svgTag("animateTransform", null, id, false, content)
 
 /**
  * SVG "linearGradient" tag.
@@ -422,7 +421,7 @@ public fun ISvgTag.linearGradient(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("linearGradient", className, id, false, content)
+): Unit = svgTag("linearGradient", className, id, false, content)
 
 /**
  * SVG "radialGradient" tag.
@@ -432,7 +431,7 @@ public fun ISvgTag.radialGradient(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("radialGradient", className, id, false, content)
+): Unit = svgTag("radialGradient", className, id, false, content)
 
 /**
  * SVG "stop" tag.
@@ -442,7 +441,7 @@ public fun ISvgTag.stop(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("stop", className, id, false, content)
+): Unit = svgTag("stop", className, id, false, content)
 
 /**
  * SVG "switch" tag.
@@ -452,7 +451,7 @@ public fun ISvgTag.switch(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("switch", className, id, false, content)
+): Unit = svgTag("switch", className, id, false, content)
 
 /**
  * SVG "title" tag.
@@ -463,7 +462,7 @@ public fun ISvgTag.svgTitle(
     className: String? = null,
     id: String? = null,
     setup: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("title", className, id) {
+): Unit = svgTag("title", className, id) {
     textNode(text)
     setup()
 }
@@ -476,7 +475,7 @@ public fun ISvgTag.tspan(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("tspan", className, id, false, content)
+): Unit = svgTag("tspan", className, id, false, content)
 
 /**
  * SVG "desc" tag.
@@ -487,7 +486,7 @@ public fun ISvgTag.desc(
     className: String? = null,
     id: String? = null,
     setup: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("desc", className, id) {
+): Unit = svgTag("desc", className, id) {
     textNode(text)
     setup()
 }
@@ -500,7 +499,7 @@ public fun ISvgTag.marker(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("marker", className, id, false, content)
+): Unit = svgTag("marker", className, id, false, content)
 
 /**
  * SVG "mpath" tag.
@@ -509,7 +508,7 @@ public fun ISvgTag.marker(
 public fun ISvgTag.mpath(
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("mpath", null, id, false, content)
+): Unit = svgTag("mpath", null, id, false, content)
 
 /**
  * SVG "filter" tag.
@@ -519,7 +518,7 @@ public fun ISvgTag.filter(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("filter", className, id, false, content)
+): Unit = svgTag("filter", className, id, false, content)
 
 /**
  * SVG "set" tag.
@@ -530,7 +529,7 @@ public fun ISvgTag.set(
     to: String,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag("set", null, id) {
+): Unit = svgTag("set", null, id) {
     attributeName(attributeName)
     to(to)
     content()
@@ -545,4 +544,4 @@ public fun ISvgTag.svgElement(
     className: String? = null,
     id: String? = null,
     content: @Composable ISvgTag.() -> Unit = {}
-): SvgTag = svgTag(name, className, id, false, content)
+): Unit = svgTag(name, className, id, false, content)

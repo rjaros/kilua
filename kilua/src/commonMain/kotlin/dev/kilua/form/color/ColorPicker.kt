@@ -28,9 +28,10 @@ import dev.kilua.form.InputType
 import dev.kilua.form.text.IText
 import dev.kilua.form.text.Text
 import dev.kilua.form.text.text
+import dev.kilua.form.text.textRef
 
 /**
- * Creates [Text] component with color input type.
+ * Creates [Text] component with color input type, returning a reference.
  *
  * @param value initial value
  * @param name the name of the input
@@ -42,7 +43,7 @@ import dev.kilua.form.text.text
  * @return a [Text] component
  */
 @Composable
-public fun IComponent.colorPicker(
+public fun IComponent.colorPickerRef(
     value: String? = null,
     name: String? = null,
     disabled: Boolean? = null,
@@ -51,7 +52,40 @@ public fun IComponent.colorPicker(
     id: String? = null,
     setup: @Composable IText.() -> Unit = {}
 ): Text {
-    return text(
+    return textRef(
+        value = value,
+        type = InputType.Color,
+        name = name,
+        disabled = disabled,
+        required = required,
+        className = className,
+        id = id,
+        setup = setup
+    )
+}
+
+/**
+ * Creates [Text] component with color input type.
+ *
+ * @param value initial value
+ * @param name the name of the input
+ * @param disabled whether the input is disabled
+ * @param required whether the input is required
+ * @param className the CSS class name
+ * @param id the ID of the input
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.colorPicker(
+    value: String? = null,
+    name: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IText.() -> Unit = {}
+) {
+    text(
         value = value,
         type = InputType.Color,
         name = name,

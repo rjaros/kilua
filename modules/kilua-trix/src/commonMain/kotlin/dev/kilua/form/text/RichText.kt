@@ -421,7 +421,7 @@ public open class RichText(
 }
 
 /**
- * Creates a [RichText] component.
+ * Creates a [RichText] component, returning a reference.
  *
  * @param value the initial value
  * @param placeholder the placeholder attribute of the generated HTML textarea element
@@ -435,7 +435,7 @@ public open class RichText(
  */
 @Suppress("LongParameterList")
 @Composable
-public fun IComponent.richText(
+public fun IComponent.richTextRef(
     value: String? = null,
     placeholder: String? = null,
     disabled: Boolean? = null,
@@ -480,4 +480,65 @@ public fun IComponent.richText(
         set(id) { updateProperty(RichText::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates a [RichText] component.
+ *
+ * @param value the initial value
+ * @param placeholder the placeholder attribute of the generated HTML textarea element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param locale the locale for i18n
+ * @param className the CSS class name
+ * @param id the ID of the component
+ * @param setup a function for setting up the component
+ * @return A [RichText] component.
+ */
+@Suppress("LongParameterList")
+@Composable
+public fun IComponent.richText(
+    value: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    locale: Locale = LocaleManager.currentLocale,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRichText.() -> Unit = {}
+) {
+    val bindId = remember { "kilua_trix_${RichText.idCounter++}" }
+    val component =
+        remember {
+            RichText(
+                value,
+                placeholder,
+                disabled,
+                required,
+                locale,
+                className,
+                id,
+                renderConfig
+            ).apply {
+                input = bindId + "_input"
+                toolbar = bindId + "_toolbar"
+            }
+        }
+    text(value, type = InputType.Hidden, id = bindId + "_input")
+    tag("trix-toolbar", id = bindId + "_toolbar")
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(value) { updateProperty(RichText::value, it) }
+        set(placeholder) { updateProperty(RichText::placeholder, it) }
+        set(disabled) { updateProperty(RichText::disabled, it) }
+        set(required) { updateProperty(RichText::required, it) }
+        set(locale) { updateProperty(RichText::locale, it) }
+        set(className) { updateProperty(RichText::className, it) }
+        set(id) { updateProperty(RichText::id, it) }
+    }, setup)
 }

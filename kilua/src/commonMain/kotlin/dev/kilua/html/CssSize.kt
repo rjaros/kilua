@@ -22,6 +22,8 @@
 
 package dev.kilua.html
 
+import androidx.compose.runtime.Stable
+
 /**
  * Definitions of CSS units.
  */
@@ -51,6 +53,7 @@ public enum class CssUnit(public val cssUnit: String) {
 /**
  * A type used for defining CSS dimensions (width, heights, margins, paddings, etc.).
  */
+@Stable
 public open class CssSize(protected val cssSize: Number, protected val unit: CssUnit) {
 
     public val value: String = when (this.unit) {

@@ -25,8 +25,8 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.toKebabCase
@@ -131,9 +131,10 @@ public open class Iframe(
     iframeHeight: Int? = null,
     sandbox: Set<Sandbox>? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLIFrameElement>("iframe", className, renderConfig = renderConfig), IIframe {
+    Tag<HTMLIFrameElement>("iframe", className, id, renderConfig = renderConfig), IIframe {
 
     /**
      * The URL of the page to embed.
@@ -290,6 +291,58 @@ public open class Iframe(
 }
 
 /**
+ * Creates a [Iframe] component, returning a reference.
+ *
+ * @param src the URL of the page to embed
+ * @param srcdoc the inline HTML to embed
+ * @param name the name of the iframe
+ * @param iframeWidth the width of the iframe
+ * @param iframeHeight the height of the iframe
+ * @param sandbox a set of sandbox options
+ * @param className the CSS class name
+ * @param id the ID of the iframe
+ * @param content the content of the component
+ * @return the [Iframe] component
+ */
+@Composable
+public fun IComponent.iframeRef(
+    src: String? = null,
+    srcdoc: String? = null,
+    name: String? = null,
+    iframeWidth: Int? = null,
+    iframeHeight: Int? = null,
+    sandbox: Set<Sandbox>? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IIframe.() -> Unit = {}
+): Iframe {
+    val component = remember {
+        Iframe(
+            src,
+            srcdoc,
+            name,
+            iframeWidth,
+            iframeHeight,
+            sandbox,
+            className,
+            id,
+            renderConfig = renderConfig
+        )
+    }
+    ComponentNode(component, {
+        set(src) { updateProperty(Iframe::src, it) }
+        set(srcdoc) { updateProperty(Iframe::srcdoc, it) }
+        set(name) { updateProperty(Iframe::name, it) }
+        set(iframeWidth) { updateProperty("width", it) }
+        set(iframeHeight) { updateProperty("height", it) }
+        set(sandbox) { updateProperty(Iframe::sandbox, it) }
+        set(className) { updateProperty(Iframe::className, it) }
+        set(id) { updateProperty(Iframe::id, it) }
+    }, content)
+    return component
+}
+
+/**
  * Creates a [Iframe] component.
  *
  * @param src the URL of the page to embed
@@ -299,8 +352,8 @@ public open class Iframe(
  * @param iframeHeight the height of the iframe
  * @param sandbox a set of sandbox options
  * @param className the CSS class name
+ * @param id the ID of the iframe
  * @param content the content of the component
- * @return the [Iframe] component
  */
 @Composable
 public fun IComponent.iframe(
@@ -310,9 +363,23 @@ public fun IComponent.iframe(
     iframeWidth: Int? = null,
     iframeHeight: Int? = null,
     sandbox: Set<Sandbox>? = null,
-    className: String? = null, content: @Composable IIframe.() -> Unit = {}
-): Iframe {
-    val component = remember { Iframe(src, srcdoc, name, iframeWidth, iframeHeight, sandbox, className, renderConfig = renderConfig) }
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IIframe.() -> Unit = {}
+) {
+    val component = remember {
+        Iframe(
+            src,
+            srcdoc,
+            name,
+            iframeWidth,
+            iframeHeight,
+            sandbox,
+            className,
+            id,
+            renderConfig = renderConfig
+        )
+    }
     ComponentNode(component, {
         set(src) { updateProperty(Iframe::src, it) }
         set(srcdoc) { updateProperty(Iframe::srcdoc, it) }
@@ -321,6 +388,6 @@ public fun IComponent.iframe(
         set(iframeHeight) { updateProperty("height", it) }
         set(sandbox) { updateProperty(Iframe::sandbox, it) }
         set(className) { updateProperty(Iframe::className, it) }
+        set(id) { updateProperty(Iframe::id, it) }
     }, content)
-    return component
 }

@@ -174,7 +174,7 @@ public open class TomSelectRemote<out T : Any>(
 }
 
 @Composable
-internal fun <T : Any> IComponent.tomSelectRemote(
+internal fun <T : Any> IComponent.tomSelectRemoteRef(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     stateFunction: (() -> String)? = null,
@@ -247,8 +247,81 @@ internal fun <T : Any> IComponent.tomSelectRemote(
     }
 }
 
+@Composable
+internal fun <T : Any> IComponent.tomSelectRemote(
+    serviceManager: RpcServiceMgr<T>,
+    function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
+    stateFunction: (() -> String)? = null,
+    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    openOnFocus: Boolean = false,
+    options: List<StringPair>? = null,
+    value: String? = null,
+    emptyOption: Boolean = false,
+    multiple: Boolean = false,
+    maxOptions: Int? = null,
+    tsOptions: TomSelectOptions? = null,
+    tsCallbacks: TomSelectCallbacks? = null,
+    tsRenders: TomSelectRenders? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ITomSelectRemote.() -> Unit = {}
+) {
+    key(multiple) {
+        val component = remember {
+            TomSelectRemote(
+                serviceManager,
+                function,
+                stateFunction,
+                requestFilter,
+                openOnFocus,
+                options,
+                value,
+                emptyOption,
+                multiple,
+                maxOptions,
+                tsOptions,
+                tsCallbacks,
+                tsRenders,
+                name,
+                placeholder,
+                disabled,
+                required,
+                className % "form-select",
+                id,
+                renderConfig
+            )
+        }
+        DisposableEffect(component.componentId) {
+            component.onInsert()
+            onDispose {
+                component.onRemove()
+            }
+        }
+        ComponentNode(component, {
+            set(openOnFocus) { updateProperty(TomSelectRemote<T>::openOnFocus, it) }
+            set(options) { updateProperty(TomSelectRemote<T>::options, it) }
+            set(value) { updateProperty(TomSelectRemote<T>::value, it) }
+            set(emptyOption) { updateProperty(TomSelectRemote<T>::emptyOption, it) }
+            set(maxOptions) { updateProperty(TomSelectRemote<T>::maxOptions, it) }
+            set(tsOptions) { updateProperty(TomSelectRemote<T>::tsOptions, it) }
+            set(tsCallbacks) { updateProperty(TomSelectRemote<T>::tsCallbacks, it) }
+            set(tsRenders) { updateProperty(TomSelectRemote<T>::tsRenders, it) }
+            set(name) { updateProperty(TomSelectRemote<T>::name, it) }
+            set(placeholder) { updateProperty(TomSelectRemote<T>::placeholder, it) }
+            set(disabled) { updateProperty(TomSelectRemote<T>::disabled, it) }
+            set(required) { updateProperty(TomSelectRemote<T>::required, it) }
+            set(className) { updateProperty(TomSelectRemote<T>::className, it % "form-select") }
+            set(id) { updateProperty(TomSelectRemote<T>::id, it) }
+        }, setup)
+    }
+}
+
 /**
- * Creates [TomSelectRemote] component with a remote data source.
+ * Creates [TomSelectRemote] component with a remote data source, returning a reference.
  *
  * @param serviceManager RPC service manager
  * @param function RPC service method returning the list of options
@@ -274,7 +347,7 @@ internal fun <T : Any> IComponent.tomSelectRemote(
  * @return a [TomSelectRemote] component
  */
 @Composable
-public fun <T : Any> IComponent.tomSelectRemote(
+public fun <T : Any> IComponent.tomSelectRemoteRef(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     stateFunction: (() -> String)? = null,
@@ -339,7 +412,7 @@ public fun <T : Any> IComponent.tomSelectRemote(
                 )
         )
     }
-    tomSelectRemote = tomSelectRemote(
+    tomSelectRemote = tomSelectRemoteRef(
         serviceManager = serviceManager,
         function = function,
         stateFunction = stateFunction,
@@ -369,6 +442,128 @@ public fun <T : Any> IComponent.tomSelectRemote(
         }
     }
     return tomSelectRemote
+}
+
+/**
+ * Creates [TomSelectRemote] component with a remote data source.
+ *
+ * @param serviceManager RPC service manager
+ * @param function RPC service method returning the list of options
+ * @param stateFunction a function to generate the state object passed with the remote request
+ * @param requestFilter a request filtering function
+ * @param openOnFocus determines if the options should be opened when the component gets focus
+ * @param preload preload all options from remote data source
+ * @param options a list of options (value to label pairs)
+ * @param value initial value
+ * @param emptyOption determines if an empty option is allowed
+ * @param multiple determines if multiple value selection is allowed
+ * @param maxOptions the maximum number of visible options
+ * @param tsOptions Tom Select options
+ * @param tsCallbacks Tom Select callbacks
+ * @param tsRenders Tom Select renders
+ * @param name the name of the select
+ * @param placeholder the placeholder for the select component
+ * @param disabled whether the select is disabled
+ * @param required whether the select is required
+ * @param className the CSS class name
+ * @param id the ID of the select component
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun <T : Any> IComponent.tomSelectRemote(
+    serviceManager: RpcServiceMgr<T>,
+    function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
+    stateFunction: (() -> String)? = null,
+    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    openOnFocus: Boolean = false,
+    preload: Boolean = false,
+    options: List<StringPair>? = null,
+    value: String? = null,
+    emptyOption: Boolean = false,
+    multiple: Boolean = false,
+    maxOptions: Int? = null,
+    tsOptions: TomSelectOptions? = null,
+    tsCallbacks: TomSelectCallbacks? = null,
+    tsRenders: TomSelectRenders? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ITomSelectRemote.() -> Unit = {}
+) {
+
+    lateinit var tomSelectRemote: TomSelectRemote<T>
+
+    val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks, preload, openOnFocus) {
+        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
+            { query, callback ->
+                tomSelectRemote.tomSelectInstance?.clearOptions { true }
+                KiluaScope.launch {
+                    val result = getOptionsForTomSelectRemote(
+                        serviceManager,
+                        function,
+                        stateFunction,
+                        requestFilter,
+                        query,
+                        tomSelectRemote.value
+                    )
+                    callback(result.toJsArray())
+                }
+            }
+        } else null
+        val shouldLoadCallback = if (openOnFocus) {
+            { _: String -> true }
+        } else null
+        tsCallbacks?.copy(load = loadCallback, shouldLoad = shouldLoadCallback)
+            ?: TomSelectCallbacks(load = loadCallback, shouldLoad = shouldLoadCallback)
+    }
+    val tsRendersState: TomSelectRenders = remember(tsRenders) {
+        tsRenders?.copy(option = ::renderOption, item = ::renderItem) ?: TomSelectRenders(
+            option = ::renderOption,
+            item = ::renderItem
+        )
+    }
+    var tsOptionsState: TomSelectOptions? by remember(tsOptions, preload, openOnFocus) {
+        mutableStateOf(
+            tsOptions?.copy(preload = preload, openOnFocus = openOnFocus, searchField = emptyList())
+                ?: TomSelectOptions(
+                    preload = preload,
+                    openOnFocus = openOnFocus,
+                    searchField = emptyList()
+                )
+        )
+    }
+    tomSelectRemote = tomSelectRemoteRef(
+        serviceManager = serviceManager,
+        function = function,
+        stateFunction = stateFunction,
+        requestFilter = requestFilter,
+        openOnFocus = openOnFocus,
+        options = options,
+        value = value,
+        emptyOption = emptyOption,
+        multiple = multiple,
+        maxOptions = maxOptions,
+        tsOptions = tsOptionsState,
+        tsCallbacks = tsCallbacksState,
+        tsRenders = tsRendersState,
+        name = name,
+        placeholder = placeholder,
+        disabled = disabled,
+        required = required,
+        className = className,
+        id = id,
+        setup = setup
+    )
+    if (preload) {
+        LaunchedEffect(tomSelectRemote.componentId) {
+            val result =
+                getOptionsForTomSelectRemote(serviceManager, function, stateFunction, requestFilter, null, null)
+            tsOptionsState = tsOptionsState?.copy(options = result)
+        }
+    }
 }
 
 internal fun renderOption(data: JsAny, escape: (String) -> String): String {

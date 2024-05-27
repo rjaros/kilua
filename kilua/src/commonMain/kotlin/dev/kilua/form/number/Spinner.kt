@@ -232,11 +232,11 @@ public open class Spinner(
             value = if (min != null && newValue < min!!) min else newValue
         }
     }
-
 }
 
 /**
- * Creates a [Spinner] component.
+ * Creates a [Spinner] component, returning a reference.
+ *
  * @param value the initial value
  * @param min the minimum value
  * @param max the maximum value
@@ -252,7 +252,7 @@ public open class Spinner(
  * @return a [Spinner] component
  */
 @Composable
-public fun IComponent.spinner(
+public fun IComponent.spinnerRef(
     value: Int? = null,
     min: Int? = null,
     max: Int? = null,
@@ -297,4 +297,66 @@ public fun IComponent.spinner(
         set(id) { updateProperty(Spinner::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates a [Spinner] component.
+ * @param value the initial value
+ * @param min the minimum value
+ * @param max the maximum value
+ * @param step the step value
+ * @param name the name attribute of the generated HTML input element
+ * @param maxlength the maxlength attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param className the CSS class name
+ * @param id the ID of the component
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.spinner(
+    value: Int? = null,
+    min: Int? = null,
+    max: Int? = null,
+    step: Int = SPINNER_DEFAULT_STEP,
+    name: String? = null,
+    maxlength: Int? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ISpinner.() -> Unit = {}
+) {
+    val component =
+        remember {
+            Spinner(
+                value,
+                min,
+                max,
+                step,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                id,
+                renderConfig
+            )
+        }
+    ComponentNode(component, {
+        set(value) { updateProperty(Spinner::value, it) }
+        set(min) { updateProperty(Spinner::min, it) }
+        set(max) { updateProperty(Spinner::max, it) }
+        set(step) { updateProperty(Spinner::step, it) }
+        set(name) { updateProperty(Spinner::name, it) }
+        set(maxlength) { updateProperty(Spinner::maxlength, it) }
+        set(placeholder) { updateProperty(Spinner::placeholder, it) }
+        set(disabled) { updateProperty(Spinner::disabled, it) }
+        set(required) { updateProperty(Spinner::required, it) }
+        set(className) { updateProperty(Spinner::className, it) }
+        set(id) { updateProperty(Spinner::id, it) }
+    }, setup)
 }

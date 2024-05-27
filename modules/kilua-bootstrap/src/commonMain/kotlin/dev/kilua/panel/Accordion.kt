@@ -30,8 +30,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.CommentNode
 import dev.kilua.html.IDiv
@@ -98,9 +98,10 @@ public interface IAccordion : ITag<HTMLDivElement> {
  */
 public open class Accordion(
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), IAccordion {
+    Tag<HTMLDivElement>("div", className, id, renderConfig = renderConfig), IAccordion {
 
     internal val items = mutableStateMapOf<Int, AccordionItem>()
     internal var itemsOrderList: List<Int> by mutableStateOf(emptyList())
@@ -167,15 +168,57 @@ public open class Accordion(
 }
 
 @Composable
-private fun IComponent.accordion(
+private fun IComponent.accordionRef(
     className: String? = null,
+    id: String? = null,
     content: @Composable IAccordion.() -> Unit,
 ): Accordion {
-    val component = remember { Accordion(className, renderConfig = renderConfig) }
+    val component = remember { Accordion(className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Accordion::className, it) }
+        set(id) { updateProperty(Accordion::id, it) }
     }, content)
     return component
+}
+
+
+@Composable
+private fun IComponent.accordion(
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IAccordion.() -> Unit,
+) {
+    val component = remember { Accordion(className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(className) { updateProperty(Accordion::className, it) }
+        set(id) { updateProperty(Accordion::id, it) }
+    }, content)
+}
+
+/**
+ * Creates an [Accordion] component, returning a reference.
+ *
+ * @param flush determines if the accordion has no rounded corners
+ * @param alwaysOpen determines if the accordion items are automatically closing
+ * @param openedIndex the index of the initially opened item
+ * @param className the CSS class name
+ * @param id the ID attribute of the accordion
+ * @param content the content of the accordion
+ * @return the [Accordion] component
+ */
+@Composable
+public fun IComponent.accordionRef(
+    flush: Boolean = false,
+    alwaysOpen: Boolean = false,
+    openedIndex: Int = 0,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IAccordion.() -> Unit,
+): Accordion {
+    val accordionId = id ?: remember { "kilua_accordion_${idCounter++}" }
+    return accordionRef("accordion" % if (flush) "accordion-flush" else null % className, accordionId) {
+        setupAccordion(accordionId, content, openedIndex, alwaysOpen)
+    }
 }
 
 /**
@@ -185,8 +228,8 @@ private fun IComponent.accordion(
  * @param alwaysOpen determines if the accordion items are automatically closing
  * @param openedIndex the index of the initially opened item
  * @param className the CSS class name
+ * @param id the ID attribute of the accordion
  * @param content the content of the accordion
- * @return the [Accordion] component
  */
 @Composable
 public fun IComponent.accordion(
@@ -194,36 +237,46 @@ public fun IComponent.accordion(
     alwaysOpen: Boolean = false,
     openedIndex: Int = 0,
     className: String? = null,
+    id: String? = null,
     content: @Composable IAccordion.() -> Unit,
-): Accordion {
-    val accordionId = remember { "kilua_accordion_${idCounter++}" }
-    return accordion("accordion" % if (flush) "accordion-flush" else null % className) {
-        id(accordionId)
-        content()
-        val accordion = this.cast<Accordion>()
-        accordion.itemsOrderList.forEachIndexed { index, itemId ->
-            accordion.items[itemId]?.let { item ->
-                div("accordion-item") {
-                    h2("accordion-header") {
-                        button(
-                            item.label,
-                            item.icon,
-                            className = "accordion-button" % if (index != openedIndex) "collapsed" else null
-                        ) {
-                            attribute("data-bs-toggle", "collapse")
-                            attribute("data-bs-target", "#$accordionId-item-$index")
-                            attribute("aria-expanded", (index == openedIndex).toString())
-                            attribute("aria-controls", "$accordionId-item-$index")
-                        }
+) {
+    val accordionId = id ?: remember { "kilua_accordion_${idCounter++}" }
+    accordion("accordion" % if (flush) "accordion-flush" else null % className, accordionId) {
+        setupAccordion(accordionId, content, openedIndex, alwaysOpen)
+    }
+}
+
+@Composable
+private fun IAccordion.setupAccordion(
+    accordionId: String,
+    content: @Composable (IAccordion.() -> Unit),
+    openedIndex: Int,
+    alwaysOpen: Boolean,
+) {
+    content()
+    val accordion = this.cast<Accordion>()
+    accordion.itemsOrderList.forEachIndexed { index, itemId ->
+        accordion.items[itemId]?.let { item ->
+            div("accordion-item") {
+                h2("accordion-header") {
+                    button(
+                        item.label,
+                        item.icon,
+                        className = "accordion-button" % if (index != openedIndex) "collapsed" else null
+                    ) {
+                        attribute("data-bs-toggle", "collapse")
+                        attribute("data-bs-target", "#$accordionId-item-$index")
+                        attribute("aria-expanded", (index == openedIndex).toString())
+                        attribute("aria-controls", "$accordionId-item-$index")
                     }
-                    div("accordion-collapse collapse" % if (index == openedIndex) "show" else null) {
-                        id("$accordionId-item-$index")
-                        if (!alwaysOpen) {
-                            attribute("data-bs-parent", "#$accordionId")
-                        }
-                        div("accordion-body") {
-                            item.content(this)
-                        }
+                }
+                div("accordion-collapse collapse" % if (index == openedIndex) "show" else null) {
+                    id("$accordionId-item-$index")
+                    if (!alwaysOpen) {
+                        attribute("data-bs-parent", "#$accordionId")
+                    }
+                    div("accordion-body") {
+                        item.content(this)
                     }
                 }
             }

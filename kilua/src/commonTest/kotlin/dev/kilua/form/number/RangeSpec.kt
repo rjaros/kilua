@@ -67,7 +67,7 @@ class RangeSpec : DomSpec {
         run {
             lateinit var range: Range
             root("test") {
-                range = range(19, 10, 20, step = 0.5) {
+                range = rangeRef(19, 10, 20, step = 0.5) {
                     autofocus(true)
                 }
             }

@@ -66,9 +66,10 @@ public open class Img(
     src: String? = null,
     alt: String? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLImageElement>("img", className, renderConfig = renderConfig), IImg {
+    Tag<HTMLImageElement>("img", className, id, renderConfig = renderConfig), IImg {
 
     /**
      * The source of the image.
@@ -133,24 +134,53 @@ public open class Img(
 }
 
 /**
- * Creates a [Img] component.
+ * Creates a [Img] component, returning a reference.
  *
  * @param src the source of the image
  * @param alt the alternative text of the image
  * @param className the CSS class name
+ * @param id the ID of the image
  * @param content the content of the component
  * @return the [Img] component
  */
 @Composable
-public fun IComponent.img(
+public fun IComponent.imgRef(
     src: String? = null, alt: String? = null,
-    className: String? = null, content: @Composable IImg.() -> Unit = {}
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IImg.() -> Unit = {}
 ): Img {
     val component = remember { Img(src, alt, className, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(src) { updateProperty(Img::src, it) }
         set(alt) { updateProperty(Img::alt, it) }
         set(className) { updateProperty(Img::className, it) }
+        set(id) { updateProperty(Img::id, it) }
     }, content)
     return component
+}
+
+/**
+ * Creates a [Img] component.
+ *
+ * @param src the source of the image
+ * @param alt the alternative text of the image
+ * @param className the CSS class name
+ * @param id the ID of the image
+ * @param content the content of the component
+ */
+@Composable
+public fun IComponent.img(
+    src: String? = null, alt: String? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IImg.() -> Unit = {}
+) {
+    val component = remember { Img(src, alt, className, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(src) { updateProperty(Img::src, it) }
+        set(alt) { updateProperty(Img::alt, it) }
+        set(className) { updateProperty(Img::className, it) }
+        set(id) { updateProperty(Img::id, it) }
+    }, content)
 }

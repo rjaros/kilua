@@ -55,11 +55,12 @@ public open class TabulatorRemote<T : Any>(
     data: List<T>? = null,
     options: TabulatorOptions<T> = TabulatorOptions(),
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
     kClass: KClass<T>? = null,
     serializer: KSerializer<T>? = null,
     module: SerializersModule? = null
-) : Tabulator<T>(data, options, className, renderConfig, kClass, serializer, module) {
+) : Tabulator<T>(data, options, className, id, renderConfig, kClass, serializer, module) {
 
     override val jsonHelper: Json? = if (serializer != null) Json(
         from = (RpcSerialization.getCustomJson() ?: Serialization.customConfiguration ?: Json {
@@ -77,13 +78,14 @@ public open class TabulatorRemote<T : Any>(
 
 @PublishedApi
 @Composable
-internal fun <T : Any> IComponent.tabulatorRemoteInt(
+internal fun <T : Any> IComponent.tabulatorRemoteIntRef(
     data: List<T>?,
     options: TabulatorOptions<T>,
     kClass: KClass<T>?,
     serializer: KSerializer<T>?,
     serializersModule: SerializersModule?,
     className: String?,
+    id: String?,
     content: @Composable ITabulator<T>.() -> Unit
 ): TabulatorRemote<T> {
     val component = remember {
@@ -91,6 +93,7 @@ internal fun <T : Any> IComponent.tabulatorRemoteInt(
             data,
             options,
             className,
+            id,
             renderConfig,
             kClass,
             serializer,
@@ -108,12 +111,53 @@ internal fun <T : Any> IComponent.tabulatorRemoteInt(
         set(data?.toList()) { updateProperty(TabulatorRemote<T>::data, it) }
         set(options) { updateProperty(TabulatorRemote<T>::options, it) }
         set(className) { updateProperty(TabulatorRemote<T>::className, it) }
+        set(id) { updateProperty(TabulatorRemote<T>::id, it) }
     }, content)
     return component
 }
 
+@PublishedApi
+@Composable
+internal fun <T : Any> IComponent.tabulatorRemoteInt(
+    data: List<T>?,
+    options: TabulatorOptions<T>,
+    kClass: KClass<T>?,
+    serializer: KSerializer<T>?,
+    serializersModule: SerializersModule?,
+    className: String?,
+    id: String?,
+    content: @Composable ITabulator<T>.() -> Unit
+) {
+    val component = remember {
+        TabulatorRemote(
+            data,
+            options,
+            className,
+            id,
+            renderConfig,
+            kClass,
+            serializer,
+            serializersModule
+        )
+    }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        // Workaround https://issuetracker.google.com/issues/232271525
+        set(data?.toList()) { updateProperty(TabulatorRemote<T>::data, it) }
+        set(options) { updateProperty(TabulatorRemote<T>::options, it) }
+        set(className) { updateProperty(TabulatorRemote<T>::className, it) }
+        set(id) { updateProperty(TabulatorRemote<T>::id, it) }
+    }, content)
+}
+
 /**
- * Create [TabulatorRemote] component with a Kotlin data model.
+ * Create [TabulatorRemote] component with a Kotlin data model, returning a reference.
+ *
  * @param serviceManager RPC service manager
  * @param function RPC service method returning the tabulator data
  * @param stateFunction a function to generate the state object passed with the remote request
@@ -123,11 +167,12 @@ internal fun <T : Any> IComponent.tabulatorRemoteInt(
  * @param serializer the serializer for the data
  * @param serializersModule the serializers module
  * @param className the CSS class name
+ * @param id the ID attribute of the component
  * @param content the content of the component
  * @return the [TabulatorRemote] component
  */
 @Composable
-public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
+public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemoteRef(
     serviceManager: RpcServiceMgr<E>,
     noinline function: suspend E.(Int?, Int?, List<RemoteFilter>?, List<RemoteSorter>?, String?) -> RemoteData<T>,
     noinline stateFunction: (() -> String)? = null,
@@ -137,9 +182,9 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
     serializer: KSerializer<T> = serializer(),
     serializersModule: SerializersModule? = null,
     className: String? = null,
+    id: String? = null,
     noinline content: @Composable ITabulator<T>.() -> Unit = {}
 ): TabulatorRemote<T> {
-
     val optionsState = remember {
         val (url, _) = serviceManager.requireCall(function)
         val rpcUrlPrefix = globalThis["rpc_url_prefix"]
@@ -169,13 +214,84 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
     val classNameState = remember {
         className % types.joinToString(" ") { it.value }
     }
-    return tabulatorRemoteInt(
+    return tabulatorRemoteIntRef(
         null,
         optionsState,
         getClass<T>(),
         serializer,
         serializersModule,
         classNameState,
+        id,
+        content
+    )
+}
+
+/**
+ * Create [TabulatorRemote] component with a Kotlin data model.
+ *
+ * @param serviceManager RPC service manager
+ * @param function RPC service method returning the tabulator data
+ * @param stateFunction a function to generate the state object passed with the remote request
+ * @param requestFilter a request filtering function
+ * @param options the tabulator options
+ * @param types the set of table types
+ * @param serializer the serializer for the data
+ * @param serializersModule the serializers module
+ * @param className the CSS class name
+ * @param id the ID attribute of the component
+ * @param content the content of the component
+ */
+@Composable
+public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
+    serviceManager: RpcServiceMgr<E>,
+    noinline function: suspend E.(Int?, Int?, List<RemoteFilter>?, List<RemoteSorter>?, String?) -> RemoteData<T>,
+    noinline stateFunction: (() -> String)? = null,
+    noinline requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    options: TabulatorOptions<T> = TabulatorOptions(),
+    types: Set<TableType> = setOf(),
+    serializer: KSerializer<T> = serializer(),
+    serializersModule: SerializersModule? = null,
+    className: String? = null,
+    id: String? = null,
+    noinline content: @Composable ITabulator<T>.() -> Unit = {}
+) {
+    val optionsState = remember {
+        val (url, _) = serviceManager.requireCall(function)
+        val rpcUrlPrefix = globalThis["rpc_url_prefix"]
+        val urlPrefix: String = if (rpcUrlPrefix != undefined()) "$rpcUrlPrefix/" else ""
+        options.copy(
+            ajaxURL = urlPrefix + url.drop(1),
+            ajaxRequestFunc = { _, _, params ->
+                val page = params["page"]?.toString()
+                val size = params["size"]?.toString()
+                val filters = params["filter"]?.let { JSON.stringify(it) }
+                val sorters = params["sort"]?.let { JSON.stringify(it) }
+                promise {
+                    getDataForTabulatorRemote(
+                        serviceManager,
+                        function,
+                        stateFunction,
+                        requestFilter,
+                        page,
+                        size,
+                        filters,
+                        sorters
+                    )
+                }
+            }
+        )
+    }
+    val classNameState = remember {
+        className % types.joinToString(" ") { it.value }
+    }
+    tabulatorRemoteInt(
+        null,
+        optionsState,
+        getClass<T>(),
+        serializer,
+        serializersModule,
+        classNameState,
+        id,
         content
     )
 }

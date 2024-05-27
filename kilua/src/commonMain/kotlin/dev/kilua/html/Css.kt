@@ -22,6 +22,7 @@
 
 package dev.kilua.html
 
+import androidx.compose.runtime.Stable
 import dev.kilua.utils.toKebabCase
 
 /**
@@ -690,6 +691,7 @@ public enum class ListStylePosition {
  * @param style style of the border
  * @param color color of the border
  */
+@Stable
 public open class Border(
     protected val width: CssSize? = null, protected val style: BorderStyle? = null,
     protected val color: Color? = null
@@ -711,6 +713,7 @@ public open class Border(
  * @param style style of the outline
  * @param color color of the outline
  */
+@Stable
 public open class Outline(
     protected val width: CssSize? = null, protected val style: OutlineStyle? = null,
     protected val color: Color? = null
@@ -731,6 +734,7 @@ public open class Outline(
  * Type-safe definition of CSS color.
  * @param color CSS color string
  */
+@Stable
 public open class Color(protected val color: String? = null) {
 
     public val value: String = color.orEmpty()
@@ -929,6 +933,7 @@ public open class Color(protected val color: String? = null) {
  * @param clip clipping option of the background image
  * @param attachment attachment option of the background image
  */
+@Stable
 public open class Background(
     protected val color: Color? = null, protected val image: String? = null,
     protected val positionX: CssSize? = null, protected val positionY: CssSize? = null,
@@ -975,6 +980,7 @@ public open class Background(
  * @param style text decoration style
  * @param color text decoration color
  */
+@Stable
 public open class TextDecoration(
     protected val line: TextDecorationLine? = null, protected val style: TextDecorationStyle? = null,
     protected val color: Color? = null
@@ -999,6 +1005,7 @@ public open class TextDecoration(
  * @param blurRadius the blur radius
  * @param color color of the shadow
  */
+@Stable
 public open class TextShadow(
     protected val hShadow: CssSize? = null, protected val vShadow: CssSize? = null,
     protected val blurRadius: CssSize? = null, protected val color: Color? = null
@@ -1027,6 +1034,7 @@ public open class TextShadow(
  * @param color color of the shadow
  * @param inset changes the shadow from an outer shadow (outset) to an inner shadow
  */
+@Stable
 public open class BoxShadow(
     protected val hOffset: CssSize? = null, protected val vOffset: CssSize? = null,
     protected val blurRadius: CssSize? = null, protected val spreadRadius: CssSize? = null,
@@ -1055,6 +1063,7 @@ public open class BoxShadow(
  * @param timingFunction the timing function of the transition effect
  * @param delay the delay of the transition effect (in seconds)
  */
+@Stable
 public open class Transition(
     protected val property: String,
     protected val duration: Double,
@@ -1080,6 +1089,7 @@ public open class Transition(
  * @param position list-item marker position
  * @param image list-item marker image
  */
+@Stable
 public open class ListStyle(
     protected val type: ListStyleType? = null,
     protected val position: ListStylePosition? = null,

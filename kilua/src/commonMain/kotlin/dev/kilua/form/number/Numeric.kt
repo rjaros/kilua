@@ -228,7 +228,7 @@ public open class Numeric(
 }
 
 /**
- * Creates a [Numeric] component.
+ * Creates a [Numeric] component, returning a reference.
  * @param value the initial value
  * @param min the minimum value
  * @param max the maximum value
@@ -244,7 +244,7 @@ public open class Numeric(
  * @return a [Numeric] component
  */
 @Composable
-public fun IComponent.numeric(
+public fun IComponent.numericRef(
     value: Number? = null,
     min: Number? = null,
     max: Number? = null,
@@ -289,4 +289,66 @@ public fun IComponent.numeric(
         set(id) { updateProperty(Numeric::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates a [Numeric] component.
+ * @param value the initial value
+ * @param min the minimum value
+ * @param max the maximum value
+ * @param decimals the number of decimal digits
+ * @param name the name attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param locale the locale for formatting the number
+ * @param className the CSS class name
+ * @param id the id attribute of the generated HTML input element
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.numeric(
+    value: Number? = null,
+    min: Number? = null,
+    max: Number? = null,
+    decimals: Int = NUMERIC_DEFAULT_DECIMALS,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    locale: Locale = LocaleManager.currentLocale,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable INumeric.() -> Unit = {}
+) {
+    val component =
+        remember {
+            Numeric(
+                value,
+                min,
+                max,
+                decimals,
+                name,
+                placeholder,
+                disabled,
+                required,
+                locale,
+                className,
+                id,
+                renderConfig
+            )
+        }
+    ComponentNode(component, {
+        set(value) { updateProperty(Numeric::value, it) }
+        set(min) { updateProperty(Numeric::min, it) }
+        set(max) { updateProperty(Numeric::max, it) }
+        set(decimals) { updateProperty(Numeric::decimals, it) }
+        set(name) { updateProperty(Numeric::name, it) }
+        set(placeholder) { updateProperty(Numeric::placeholder, it) }
+        set(disabled) { updateProperty(Numeric::disabled, it) }
+        set(required) { updateProperty(Numeric::required, it) }
+        set(locale) { updateProperty(Numeric::locale, it) }
+        set(className) { updateProperty(Numeric::className, it) }
+        set(id) { updateProperty(Numeric::id, it) }
+    }, setup)
 }

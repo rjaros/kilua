@@ -28,8 +28,8 @@ import dev.kilua.html.ButtonSize
 import dev.kilua.html.ButtonStyle
 import dev.kilua.html.Div
 import dev.kilua.html.IUl
-import dev.kilua.html.Ul
 import dev.kilua.html.div
+import dev.kilua.html.divRef
 import dev.kilua.utils.rem
 
 /**
@@ -44,6 +44,57 @@ public enum class Direction(public val className: String) {
     DropEnd("btn-group dropend")
 }
 
+/**
+ * Creates a dropdown component, returning a reference.
+ *
+ * @param label the label of the dropdown button
+ * @param icon the icon of the dropdown button
+ * @param style the style of the dropdown button
+ * @param size the size of the dropdown button
+ * @param disabled the disabled state of the dropdown button
+ * @param autoClose the auto close state of the dropdown
+ * @param arrowVisible the arrow visibility state of the dropdown button
+ * @param innerDropDown the inner dropdown state of the dropdown button
+ * @param className the CSS class name
+ * @param direction the direction of the dropdown
+ * @param content the content of the dropdown
+ * @return the dropdown component
+ */
+@Composable
+public fun IComponent.dropDownRef(
+    label: String? = null,
+    icon: String? = null,
+    style: ButtonStyle = ButtonStyle.BtnPrimary,
+    size: ButtonSize? = null,
+    disabled: Boolean? = null,
+    autoClose: AutoClose = AutoClose.True,
+    arrowVisible: Boolean = true,
+    innerDropDown: Boolean = false,
+    className: String? = null,
+    direction: Direction = Direction.Dropdown,
+    content: @Composable IUl.() -> Unit = {}
+): Div {
+    return divRef(direction.className % className) {
+        dropDownButton(label, icon, style, size, disabled, autoClose, arrowVisible, innerDropDown)
+        dropDownMenu(content = content)
+    }
+}
+
+/**
+ * Creates a dropdown component.
+ *
+ * @param label the label of the dropdown button
+ * @param icon the icon of the dropdown button
+ * @param style the style of the dropdown button
+ * @param size the size of the dropdown button
+ * @param disabled the disabled state of the dropdown button
+ * @param autoClose the auto close state of the dropdown
+ * @param arrowVisible the arrow visibility state of the dropdown button
+ * @param innerDropDown the inner dropdown state of the dropdown button
+ * @param className the CSS class name
+ * @param direction the direction of the dropdown
+ * @param content the content of the dropdown
+ */
 @Composable
 public fun IComponent.dropDown(
     label: String? = null,
@@ -57,8 +108,8 @@ public fun IComponent.dropDown(
     className: String? = null,
     direction: Direction = Direction.Dropdown,
     content: @Composable IUl.() -> Unit = {}
-): Div {
-    return div(direction.className % className) {
+) {
+    div(direction.className % className) {
         dropDownButton(label, icon, style, size, disabled, autoClose, arrowVisible, innerDropDown)
         dropDownMenu(content = content)
     }

@@ -76,16 +76,11 @@ public open class CommentNode(
 /**
  * Creates a [CommentNode] component.
  * @param data the text of the node
- * @param setup a function for setting up the component
- * @return a [CommentNode] component
  */
 @Composable
-public fun IComponent.commentNode(data: String, setup: CommentNode.() -> Unit = {}): CommentNode {
+public fun IComponent.commentNode(data: String) {
     val component = remember { CommentNode(data, renderConfig) }
     ComponentNode(component, {
         set(data) { updateProperty(CommentNode::data, it) }
-    }) {
-        setup(component)
-    }
-    return component
+    }) {}
 }

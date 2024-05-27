@@ -34,6 +34,48 @@ import dev.kilua.html.FlexWrap
 import dev.kilua.html.IDiv
 import dev.kilua.html.JustifyContent
 import dev.kilua.html.div
+import dev.kilua.html.divRef
+
+/**
+ * Creates a CSS flexbox container, returning a reference.
+ *
+ * @param flexDirection the optional flexbox direction
+ * @param flexWrap the optional flexbox wrap
+ * @param justifyContent the optional flexbox content justification
+ * @param alignItems the optional flexbox items alignment
+ * @param alignContent the optional flexbox content alignment
+ * @param rowGap the optional gap between rows
+ * @param columnGap the optional gap between columns
+ * @param className the optional CSS class name
+ * @param id the ID attribute of the container
+ * @param content the content of the component
+ * @return the created [dev.kilua.html.Div] component
+ */
+@Composable
+public fun IComponent.flexPanelRef(
+    flexDirection: FlexDirection? = null,
+    flexWrap: FlexWrap? = null,
+    justifyContent: JustifyContent? = null,
+    alignItems: AlignItems? = null,
+    alignContent: AlignContent? = null,
+    rowGap: CssSize? = null,
+    columnGap: CssSize? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IDiv.() -> Unit,
+): Div {
+    return divRef(className, id) {
+        display(Display.Flex)
+        flexDirection(flexDirection)
+        flexWrap(flexWrap)
+        justifyContent(justifyContent)
+        alignItems(alignItems)
+        alignContent(alignContent)
+        rowGap(rowGap)
+        columnGap(columnGap)
+        content()
+    }
+}
 
 /**
  * Creates a CSS flexbox container.
@@ -46,8 +88,8 @@ import dev.kilua.html.div
  * @param rowGap the optional gap between rows
  * @param columnGap the optional gap between columns
  * @param className the optional CSS class name
+ * @param id the ID attribute of the container
  * @param content the content of the component
- * @return the created [dev.kilua.html.Div] component
  */
 @Composable
 public fun IComponent.flexPanel(
@@ -59,9 +101,10 @@ public fun IComponent.flexPanel(
     rowGap: CssSize? = null,
     columnGap: CssSize? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable IDiv.() -> Unit,
-): Div {
-    return div(className) {
+) {
+    div(className, id) {
         display(Display.Flex)
         flexDirection(flexDirection)
         flexWrap(flexWrap)

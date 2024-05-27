@@ -302,7 +302,7 @@ public open class TomTypeahead(
 }
 
 /**
- * Creates [TomTypeahead] component.
+ * Creates [TomTypeahead] component, returning a reference.
  *
  * @param options a list of options
  * @param value initial value
@@ -318,7 +318,7 @@ public open class TomTypeahead(
  * @return a [TomTypeahead] component
  */
 @Composable
-public fun IComponent.tomTypeahead(
+public fun IComponent.tomTypeaheadRef(
     options: List<String>? = null,
     value: String? = null,
     type: InputType = InputType.Text,
@@ -365,4 +365,68 @@ public fun IComponent.tomTypeahead(
         set(id) { updateProperty(TomTypeahead::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates [TomTypeahead] component.
+ *
+ * @param options a list of options
+ * @param value initial value
+ * @param type the type of the input
+ * @param tsCallbacks Tom Select callbacks
+ * @param name the name of the select
+ * @param placeholder the placeholder for the input component
+ * @param disabled whether the select is disabled
+ * @param required whether the select is required
+ * @param className the CSS class name
+ * @param id the ID of the select component
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.tomTypeahead(
+    options: List<String>? = null,
+    value: String? = null,
+    type: InputType = InputType.Text,
+    tsCallbacks: TomSelectCallbacks? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ITomTypeahead.() -> Unit = {}
+) {
+    val component = remember {
+        TomTypeahead(
+            options,
+            value,
+            type,
+            tsCallbacks,
+            name,
+            placeholder,
+            disabled,
+            required,
+            className % "form-control kilua-typeahead",
+            id,
+            renderConfig
+        )
+    }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(options) { updateProperty(TomTypeahead::options, it) }
+        set(value) { updateProperty(TomTypeahead::value, it) }
+        set(type) { updateProperty(TomTypeahead::type, it) }
+        set(tsCallbacks) { updateProperty(TomTypeahead::tsCallbacks, it) }
+        set(name) { updateProperty(TomTypeahead::name, it) }
+        set(placeholder) { updateProperty(TomTypeahead::placeholder, it) }
+        set(disabled) { updateProperty(TomTypeahead::disabled, it) }
+        set(required) { updateProperty(TomTypeahead::required, it) }
+        set(className) { updateProperty(TomTypeahead::className, it % "form-control kilua-typeahead") }
+        set(id) { updateProperty(TomTypeahead::id, it) }
+    }, setup)
 }

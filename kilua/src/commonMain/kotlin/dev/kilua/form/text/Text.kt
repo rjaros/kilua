@@ -25,8 +25,8 @@ package dev.kilua.form.text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.IInput
 import dev.kilua.form.Input
@@ -76,7 +76,7 @@ public open class Text(
 }
 
 /**
- * Creates [Text] component.
+ * Creates [Text] component, returning a reference.
  *
  * @param value initial value
  * @param type the type of the input
@@ -91,7 +91,7 @@ public open class Text(
  * @return a [Text] component
  */
 @Composable
-public fun IComponent.text(
+public fun IComponent.textRef(
     value: String? = null,
     type: InputType = InputType.Text,
     name: String? = null,
@@ -130,4 +130,59 @@ public fun IComponent.text(
         set(id) { updateProperty(Text::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates [Text] component.
+ *
+ * @param value initial value
+ * @param type the type of the input
+ * @param name the name of the input
+ * @param maxlength the maximum length of the input
+ * @param placeholder the placeholder text
+ * @param disabled whether the input is disabled
+ * @param required whether the input is required
+ * @param className the CSS class name
+ * @param id the ID of the input
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.text(
+    value: String? = null,
+    type: InputType = InputType.Text,
+    name: String? = null,
+    maxlength: Int? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IText.() -> Unit = {}
+) {
+    val component =
+        remember {
+            Text(
+                value,
+                type,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                id,
+                renderConfig = renderConfig
+            )
+        }
+    ComponentNode(component, {
+        set(value) { updateProperty(Text::value, it) }
+        set(type) { updateProperty(Text::type, it) }
+        set(name) { updateProperty(Text::name, it) }
+        set(maxlength) { updateProperty(Text::maxlength, it) }
+        set(placeholder) { updateProperty(Text::placeholder, it) }
+        set(disabled) { updateProperty(Text::disabled, it) }
+        set(required) { updateProperty(Text::required, it) }
+        set(className) { updateProperty(Text::className, it) }
+        set(id) { updateProperty(Text::id, it) }
+    }, setup)
 }

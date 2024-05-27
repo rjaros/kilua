@@ -111,9 +111,10 @@ public open class Option(
     selected: Boolean? = null,
     disabled: Boolean? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLOptionElement>("option", className, renderConfig = renderConfig), IOption {
+    Tag<HTMLOptionElement>("option", className, id, renderConfig = renderConfig), IOption {
 
     /**
      * The value of the option.
@@ -266,15 +267,49 @@ public open class Option(
 }
 
 /**
- * Creates a [Option] component.
+ * Creates an [Option] component, returning a reference.
  *
  * @param value the value of the option
  * @param label the label of the option
  * @param selected the selected state of the option
  * @param disabled whether the option is disabled
  * @param className the CSS class name
+ * @param id the ID attribute of the option
  * @param content the content of the component
  * @return the [Option] component
+ */
+@Composable
+public fun IComponent.optionRef(
+    value: String? = null,
+    label: String? = null,
+    selected: Boolean? = null,
+    disabled: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IOption.() -> Unit = {}
+): Option {
+    val component = remember { Option(value, label, selected, disabled, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(value) { updateProperty(Option::value, it) }
+        set(label) { updateProperty(Option::label, it) }
+        set(selected) { updateProperty(Option::selected, it) }
+        set(disabled) { updateProperty(Option::disabled, it) }
+        set(className) { updateProperty(Option::className, it) }
+        set(id) { updateProperty(Option::id, it) }
+    }, content)
+    return component
+}
+
+/**
+ * Creates an [Option] component.
+ *
+ * @param value the value of the option
+ * @param label the label of the option
+ * @param selected the selected state of the option
+ * @param disabled whether the option is disabled
+ * @param className the CSS class name
+ * @param id the ID attribute of the option
+ * @param content the content of the component
  */
 @Composable
 public fun IComponent.option(
@@ -283,15 +318,16 @@ public fun IComponent.option(
     selected: Boolean? = null,
     disabled: Boolean? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable IOption.() -> Unit = {}
-): Option {
-    val component = remember { Option(value, label, selected, disabled, className, renderConfig = renderConfig) }
+) {
+    val component = remember { Option(value, label, selected, disabled, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(value) { updateProperty(Option::value, it) }
         set(label) { updateProperty(Option::label, it) }
         set(selected) { updateProperty(Option::selected, it) }
         set(disabled) { updateProperty(Option::disabled, it) }
         set(className) { updateProperty(Option::className, it) }
+        set(id) { updateProperty(Option::id, it) }
     }, content)
-    return component
 }

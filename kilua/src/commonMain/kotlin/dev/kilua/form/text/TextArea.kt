@@ -25,8 +25,8 @@ package dev.kilua.form.text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
 import dev.kilua.html.ITag
@@ -456,7 +456,7 @@ public open class TextArea(
 }
 
 /**
- * Creates a [TextArea] component.
+ * Creates a [TextArea] component, returnig a reference.
  *
  * @param value the initial value
  * @param cols the number of columns of the textarea
@@ -472,7 +472,7 @@ public open class TextArea(
  * @return A [TextArea] component.
  */
 @Composable
-public fun IComponent.textArea(
+public fun IComponent.textAreaRef(
     value: String? = null,
     cols: Int? = null,
     rows: Int? = null,
@@ -514,4 +514,63 @@ public fun IComponent.textArea(
         set(id) { updateProperty(TextArea::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates a [TextArea] component.
+ *
+ * @param value the initial value
+ * @param cols the number of columns of the textarea
+ * @param rows the number of rows of the textarea
+ * @param name the name attribute of the generated HTML textarea element
+ * @param maxlength the maxlength attribute of the generated HTML textarea element
+ * @param placeholder the placeholder attribute of the generated HTML textarea element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param className the CSS class name
+ * @param id the ID of the component
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.textArea(
+    value: String? = null,
+    cols: Int? = null,
+    rows: Int? = null,
+    name: String? = null,
+    maxlength: Int? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ITextArea.() -> Unit = {}
+) {
+    val component =
+        remember {
+            TextArea(
+                value,
+                cols,
+                rows,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                id,
+                renderConfig
+            )
+        }
+    ComponentNode(component, {
+        set(value) { updateProperty(TextArea::value, it) }
+        set(cols) { updateProperty(TextArea::cols, it) }
+        set(rows) { updateProperty(TextArea::rows, it) }
+        set(name) { updateProperty(TextArea::name, it) }
+        set(maxlength) { updateProperty(TextArea::maxlength, it) }
+        set(placeholder) { updateProperty(TextArea::placeholder, it) }
+        set(disabled) { updateProperty(TextArea::disabled, it) }
+        set(required) { updateProperty(TextArea::required, it) }
+        set(className) { updateProperty(TextArea::className, it) }
+        set(id) { updateProperty(TextArea::id, it) }
+    }, setup)
 }

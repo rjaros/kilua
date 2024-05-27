@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.utils.unsafeCast
@@ -82,13 +82,11 @@ public open class TextNode(
 /**
  * Creates a [TextNode] component.
  * @param data the text of the node
- * @return a [TextNode] component
  */
 @Composable
-public fun IComponent.textNode(data: String): TextNode {
+public fun IComponent.textNode(data: String) {
     val component = remember { TextNode(data, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(data) { updateProperty(TextNode::data, it) }
     }) { }
-    return component
 }

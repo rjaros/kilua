@@ -25,8 +25,8 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLOptGroupElement
@@ -64,9 +64,11 @@ public interface IOptgroup : ITag<HTMLOptGroupElement> {
 public open class Optgroup(
     label: String? = null,
     disabled: Boolean? = null,
-    className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()
+    className: String? = null,
+    id: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLOptGroupElement>("optgroup", className, renderConfig = renderConfig), IOptgroup {
+    Tag<HTMLOptGroupElement>("optgroup", className, id, renderConfig = renderConfig), IOptgroup {
 
     /**
      * The label of the option group.
@@ -131,26 +133,55 @@ public open class Optgroup(
 }
 
 /**
+ * Creates a [Optgroup] component, returning a reference.
+ *
+ * @param label the label of the option group
+ * @param disabled whether the option group is disabled
+ * @param className the CSS class name
+ * @param id the ID attribute of the option group
+ * @param content the content of the component
+ * @return the [Optgroup] component
+ */
+@Composable
+public fun IComponent.optgroupRef(
+    label: String? = null,
+    disabled: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IOptgroup.() -> Unit = {}
+): Optgroup {
+    val component = remember { Optgroup(label, disabled, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(label) { updateProperty(Optgroup::label, it) }
+        set(disabled) { updateProperty(Optgroup::disabled, it) }
+        set(className) { updateProperty(Optgroup::className, it) }
+        set(id) { updateProperty(Optgroup::id, it) }
+    }, content)
+    return component
+}
+
+/**
  * Creates a [Optgroup] component.
  *
  * @param label the label of the option group
  * @param disabled whether the option group is disabled
  * @param className the CSS class name
+ * @param id the ID attribute of the option group
  * @param content the content of the component
- * @return the [Optgroup] component
  */
 @Composable
 public fun IComponent.optgroup(
     label: String? = null,
     disabled: Boolean? = null,
     className: String? = null,
+    id: String? = null,
     content: @Composable IOptgroup.() -> Unit = {}
-): Optgroup {
-    val component = remember { Optgroup(label, disabled, className, renderConfig = renderConfig) }
+) {
+    val component = remember { Optgroup(label, disabled, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(label) { updateProperty(Optgroup::label, it) }
         set(disabled) { updateProperty(Optgroup::disabled, it) }
         set(className) { updateProperty(Optgroup::className, it) }
+        set(id) { updateProperty(Optgroup::id, it) }
     }, content)
-    return component
 }

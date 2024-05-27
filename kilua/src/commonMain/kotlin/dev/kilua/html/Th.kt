@@ -25,8 +25,8 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.toKebabCase
@@ -92,9 +92,11 @@ public open class Th(
     colspan: Int? = null,
     rowspan: Int? = null,
     scope: ThScope? = null,
-    className: String? = null, renderConfig: RenderConfig = DefaultRenderConfig()
+    className: String? = null,
+    id: String? = null,
+    renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLTableCellElement>("th", className, renderConfig = renderConfig), ITh {
+    Tag<HTMLTableCellElement>("th", className, id, renderConfig = renderConfig), ITh {
 
     /**
      * The number of columns the cell extends.
@@ -183,18 +185,23 @@ public open class Th(
 }
 
 /**
- * Creates a [Th] component.
+ * Creates a [Th] component, returning a reference.
  *
+ * @param colspan the number of columns the cell extends
+ * @param rowspan the number of rows the cell extends
  * @param className the CSS class name
+ * @param id the ID attribute of the cell component
  * @param content the content of the component
  * @return the [Th] component
  */
 @Composable
-public fun IComponent.th(
+public fun IComponent.thRef(
     colspan: Int? = null, rowspan: Int? = null,
-    scope: ThScope? = null, className: String? = null, content: @Composable ITh.() -> Unit = {}
+    scope: ThScope? = null, className: String? = null,
+    id: String? = null,
+    content: @Composable ITh.() -> Unit = {}
 ): Th {
-    val component = remember { Th(colspan, rowspan, scope, className, renderConfig = renderConfig) }
+    val component = remember { Th(colspan, rowspan, scope, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(colspan) { updateProperty(Th::colspan, it) }
         set(rowspan) { updateProperty(Th::rowspan, it) }
@@ -202,4 +209,29 @@ public fun IComponent.th(
         set(className) { updateProperty(Th::className, it) }
     }, content)
     return component
+}
+
+/**
+ * Creates a [Th] component.
+ *
+ * @param colspan the number of columns the cell extends
+ * @param rowspan the number of rows the cell extends
+ * @param className the CSS class name
+ * @param id the ID attribute of the cell component
+ * @param content the content of the component
+ */
+@Composable
+public fun IComponent.th(
+    colspan: Int? = null, rowspan: Int? = null,
+    scope: ThScope? = null, className: String? = null,
+    id: String? = null,
+    content: @Composable ITh.() -> Unit = {}
+) {
+    val component = remember { Th(colspan, rowspan, scope, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(colspan) { updateProperty(Th::colspan, it) }
+        set(rowspan) { updateProperty(Th::rowspan, it) }
+        set(scope) { updateProperty(Th::scope, it) }
+        set(className) { updateProperty(Th::className, it) }
+    }, content)
 }

@@ -25,8 +25,8 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.cast
@@ -72,9 +72,10 @@ public open class Canvas(
     canvasWidth: Int? = null,
     canvasHeight: Int? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLCanvasElement>("canvas", className, renderConfig = renderConfig), ICanvas {
+    Tag<HTMLCanvasElement>("canvas", className, id, renderConfig = renderConfig), ICanvas {
 
     /**
      * The width of the canvas.
@@ -140,25 +141,55 @@ public open class Canvas(
 }
 
 /**
+ * Creates a [Canvas] component, returning a reference.
+ *
+ * @param canvasWidth the width of the canvas
+ * @param canvasHeight the height of the canvas
+ * @param className the CSS class name
+ * @param id the ID attribute of the canvas
+ * @param content the content of the component
+ * @return the [Canvas] component
+ */
+@Composable
+public fun IComponent.canvasRef(
+    canvasWidth: Int? = null,
+    canvasHeight: Int? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ICanvas.() -> Unit = {}
+): Canvas {
+    val component = remember { Canvas(canvasWidth, canvasHeight, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(canvasWidth) { updateProperty("width", it) }
+        set(canvasHeight) { updateProperty("height", it) }
+        set(className) { updateProperty(Canvas::className, it) }
+        set(id) { updateProperty(Canvas::id, it) }
+    }, content)
+    return component
+}
+
+/**
  * Creates a [Canvas] component.
  *
  * @param canvasWidth the width of the canvas
  * @param canvasHeight the height of the canvas
  * @param className the CSS class name
+ * @param id the ID attribute of the canvas
  * @param content the content of the component
- * @return the [Canvas] component
  */
 @Composable
 public fun IComponent.canvas(
     canvasWidth: Int? = null,
     canvasHeight: Int? = null,
-    className: String? = null, content: @Composable ICanvas.() -> Unit = {}
-): Canvas {
-    val component = remember { Canvas(canvasWidth, canvasHeight, className, renderConfig = renderConfig) }
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ICanvas.() -> Unit = {}
+) {
+    val component = remember { Canvas(canvasWidth, canvasHeight, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(canvasWidth) { updateProperty("width", it) }
         set(canvasHeight) { updateProperty("height", it) }
         set(className) { updateProperty(Canvas::className, it) }
+        set(id) { updateProperty(Canvas::id, it) }
     }, content)
-    return component
 }

@@ -57,7 +57,7 @@ public fun ITag<*>.popover(
     triggers: List<Trigger>? = null,
     html: Boolean = false,
     sanitize: Boolean = true
-): Bootstrap.Popover {
+) {
     disposeTooltip()
     val popoverTrigger = triggers?.joinToString(" ") { it.value }
     val popoverDelay: Bootstrap.PopoverDelay? = if (delay != null && hideDelay != null) {
@@ -93,7 +93,6 @@ public fun ITag<*>.popover(
             popover.disable()
         }
     }
-    return popover
 }
 
 /**

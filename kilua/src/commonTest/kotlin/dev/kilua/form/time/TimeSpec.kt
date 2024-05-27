@@ -81,7 +81,7 @@ class TimeSpec : DomSpec {
             lateinit var time: Time
             val localTime = LocalTime(12, 30)
             root("test") {
-                time = time(
+                time = timeRef(
                     localTime,
                     LocalTime(12, 0),
                     LocalTime(12, 31),

@@ -32,15 +32,29 @@ import dev.kilua.html.Button
 import dev.kilua.html.ButtonStyle
 import dev.kilua.html.IButton
 import dev.kilua.html.bsButton
+import dev.kilua.html.bsButtonRef
 import dev.kilua.utils.rem
 
+/**
+ * The theme switcher component for Bootstrap, returning a reference.
+ *
+ * @param title the title of the theme switcher
+ * @param style the style of the theme switcher
+ * @param round the round state of the theme switcher
+ * @param disabled the disabled state of the theme switcher
+ * @param className the CSS class name
+ * @param id the ID of the theme switcher
+ * @param content the content of the theme switcher
+ * @return the theme switcher component
+ */
 @Composable
-public fun IComponent.themeSwitcher(
+public fun IComponent.themeSwitcherRef(
     title: String? = "Switch color theme",
     style: ButtonStyle = ButtonStyle.BtnSecondary,
     round: Boolean = false,
     disabled: Boolean = false,
     className: String? = null,
+    id: String? = null,
     content: @Composable IButton.() -> Unit = {}
 ): Button {
     var icon by remember {
@@ -52,12 +66,65 @@ public fun IComponent.themeSwitcher(
             }
         )
     }
-    return bsButton(
+    return bsButtonRef(
         null,
         icon,
         style,
         disabled = disabled,
-        className = className % if (round) "rounded-circle" else null
+        className = className % if (round) "rounded-circle" else null,
+        id = id
+    ) {
+        this.title(title)
+        content()
+        onClick {
+            if (ThemeManager.theme == Theme.Dark) {
+                ThemeManager.theme = Theme.Light
+                icon = "fas fa-moon"
+            } else {
+                ThemeManager.theme = Theme.Dark
+                icon = "fas fa-sun"
+            }
+        }
+    }
+}
+
+/**
+ * The theme switcher component for Bootstrap.
+ *
+ * @param title the title of the theme switcher
+ * @param style the style of the theme switcher
+ * @param round the round state of the theme switcher
+ * @param disabled the disabled state of the theme switcher
+ * @param className the CSS class name
+ * @param id the ID of the theme switcher
+ * @param content the content of the theme switcher
+ */
+@Composable
+public fun IComponent.themeSwitcher(
+    title: String? = "Switch color theme",
+    style: ButtonStyle = ButtonStyle.BtnSecondary,
+    round: Boolean = false,
+    disabled: Boolean = false,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable IButton.() -> Unit = {}
+) {
+    var icon by remember {
+        mutableStateOf(
+            when (ThemeManager.theme) {
+                Theme.Auto -> "fas fa-circle-half-stroke"
+                Theme.Light -> "fas fa-moon"
+                Theme.Dark -> "fas fa-sun"
+            }
+        )
+    }
+    bsButton(
+        null,
+        icon,
+        style,
+        disabled = disabled,
+        className = className % if (round) "rounded-circle" else null,
+        id = id
     ) {
         this.title(title)
         content()

@@ -26,8 +26,10 @@ import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.form.check.CheckBox
 import dev.kilua.form.check.checkBox
+import dev.kilua.form.check.checkBoxRef
 import dev.kilua.form.text.Text
 import dev.kilua.form.text.text
+import dev.kilua.form.text.textRef
 import dev.kilua.types.KFile
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -63,8 +65,12 @@ class FormSpec : DomSpec {
                     action = "/action",
                     enctype = FormEnctype.Multipart,
                 ) {
-                    text().bind(DataForm::string) { it.value != null }
-                    checkBox().bind(DataForm::boolean)
+                    text {
+                        bind(DataForm::string) { it.value != null }
+                    }
+                    checkBox {
+                        bind(DataForm::boolean)
+                    }
                 }
             }
             assertEqualsHtml(
@@ -84,8 +90,12 @@ class FormSpec : DomSpec {
                     action = "/action",
                     enctype = FormEnctype.Multipart,
                 ) {
-                    text().bind(DataForm::string)
-                    checkBox().bind(DataForm::boolean) { it.value }
+                    text {
+                        bind(DataForm::string)
+                    }
+                    checkBox {
+                        bind(DataForm::boolean) { it.value }
+                    }
                 }
             }
             assertEqualsHtml(
@@ -116,8 +126,10 @@ class FormSpec : DomSpec {
         run {
             lateinit var form: Form<DataForm>
             root {
-                form = form<DataForm> {
-                    text().bind(DataForm::string)
+                form = formRef<DataForm> {
+                    text {
+                        bind(DataForm::string)
+                    }
                 }
             }
             val control = form.getControl(DataForm::double)
@@ -132,8 +144,10 @@ class FormSpec : DomSpec {
         run {
             lateinit var form: Form<DataForm>
             root {
-                form = form<DataForm> {
-                    text().bind(DataForm::string)
+                form = formRef<DataForm> {
+                    text {
+                        bind(DataForm::string)
+                    }
                 }
             }
             val data = DataForm(string = "Test value")
@@ -152,11 +166,15 @@ class FormSpec : DomSpec {
         run {
             lateinit var form: Form<DataForm>
             root {
-                form = form<DataForm> {
-                    text().bind(DataForm::string) {
-                        (it.value?.length ?: 0) > 4
+                form = formRef<DataForm> {
+                    text {
+                        bind(DataForm::string) {
+                            (it.value?.length ?: 0) > 4
+                        }
                     }
-                    text(required = true).bind(DataForm::string2)
+                    text(required = true) {
+                        bind(DataForm::string2)
+                    }
                 }
             }
             form.setData(DataForm(string = "123"))
@@ -176,7 +194,7 @@ class FormSpec : DomSpec {
         run {
             lateinit var form: Form<Map<String, Any?>>
             root {
-                form = form {
+                form = formRef {
                 }
             }
             val data = mapOf("a" to "Test value", "b" to true, "c" to 5)
@@ -193,9 +211,13 @@ class FormSpec : DomSpec {
             lateinit var textField: Text
             lateinit var check: CheckBox
             root {
-                form = form {
-                    textField = text().bind("a")
-                    check = checkBox().bind("b")
+                form = formRef {
+                    textField = textRef {
+                        bind("a")
+                    }
+                    check = checkBoxRef {
+                        bind("b")
+                    }
                 }
             }
             val data = mapOf("a" to "Test value", "b" to true, "c" to 5)

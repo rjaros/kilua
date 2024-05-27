@@ -199,9 +199,10 @@ public interface ISplitPanel : ITag<HTMLDivElement> {
 public open class SplitPanel(
     dir: Dir = Dir.Vertical,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), ISplitPanel {
+    Tag<HTMLDivElement>("div", className, id, renderConfig = renderConfig), ISplitPanel {
 
     /**
      * Split panel direction.
@@ -470,19 +471,21 @@ public open class SplitPanel(
 }
 
 /**
- * Create [SplitPanel] component.
+ * Create [SplitPanel] component, returning a reference.
  * @param dir the split panel direction
  * @param className the CSS class name
+ * @param id the ID attribute of the component
  * @param content the content of the component
  * @return the [SplitPanel] component
  */
 @Composable
-public fun IComponent.splitPanel(
+public fun IComponent.splitPanelRef(
     dir: Dir = Dir.Vertical,
     className: String? = null,
+    id: String? = null,
     content: @Composable ISplitPanel.() -> Unit = {}
 ): SplitPanel {
-    val component = remember { SplitPanel(dir, className, renderConfig = renderConfig) }
+    val component = remember { SplitPanel(dir, className, id, renderConfig = renderConfig) }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -492,6 +495,7 @@ public fun IComponent.splitPanel(
     ComponentNode(component, {
         set(dir) { updateProperty(SplitPanel::direction, it) }
         set(className) { updateProperty(SplitPanel::className, it) }
+        set(id) { updateProperty(SplitPanel::id, it) }
     }) {
         content()
         div {
@@ -503,4 +507,42 @@ public fun IComponent.splitPanel(
         }
     }
     return component
+}
+
+/**
+ * Create [SplitPanel] component.
+ * @param dir the split panel direction
+ * @param className the CSS class name
+ * @param id the ID attribute of the component
+ * @param content the content of the component
+ * @return the [SplitPanel] component
+ */
+@Composable
+public fun IComponent.splitPanel(
+    dir: Dir = Dir.Vertical,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ISplitPanel.() -> Unit = {}
+) {
+    val component = remember { SplitPanel(dir, className, id, renderConfig = renderConfig) }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
+        }
+    }
+    ComponentNode(component, {
+        set(dir) { updateProperty(SplitPanel::direction, it) }
+        set(className) { updateProperty(SplitPanel::className, it) }
+        set(id) { updateProperty(SplitPanel::id, it) }
+    }) {
+        content()
+        div {
+            component.first?.invoke(this)
+        }
+        div()
+        div {
+            component.second?.invoke(this)
+        }
+    }
 }

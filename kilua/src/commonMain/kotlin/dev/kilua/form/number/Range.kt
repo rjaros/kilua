@@ -223,7 +223,7 @@ public open class Range(
 }
 
 /**
- * Creates a [Range] component.
+ * Creates a [Range] component, returning a reference.
  * @param value the initial value
  * @param min the minimum value of the range
  * @param max the maximum value of the range
@@ -237,7 +237,7 @@ public open class Range(
  * @return a [Range] component
  */
 @Composable
-public fun IComponent.range(
+public fun IComponent.rangeRef(
     value: Number? = null,
     min: Number = RANGE_DEFAULT_MIN,
     max: Number = RANGE_DEFAULT_MAX,
@@ -263,4 +263,46 @@ public fun IComponent.range(
         set(id) { updateProperty(Range::id, it) }
     }, setup)
     return component
+}
+
+
+/**
+ * Creates a [Range] component.
+ * @param value the initial value
+ * @param min the minimum value of the range
+ * @param max the maximum value of the range
+ * @param step the step value of the range
+ * @param name the name attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param className the CSS class name
+ * @param id the ID of the component
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.range(
+    value: Number? = null,
+    min: Number = RANGE_DEFAULT_MIN,
+    max: Number = RANGE_DEFAULT_MAX,
+    step: Number = RANGE_DEFAULT_STEP,
+    name: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IRange.() -> Unit = {}
+) {
+    val component =
+        remember { Range(value, min, max, step, name, disabled, required, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(value) { updateProperty(Range::value, it) }
+        set(min) { updateProperty(Range::min, it) }
+        set(max) { updateProperty(Range::max, it) }
+        set(step) { updateProperty(Range::step, it) }
+        set(name) { updateProperty(Range::name, it) }
+        set(disabled) { updateProperty(Range::disabled, it) }
+        set(required) { updateProperty(Range::required, it) }
+        set(className) { updateProperty(Range::className, it) }
+        set(id) { updateProperty(Range::id, it) }
+    }, setup)
 }

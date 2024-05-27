@@ -58,8 +58,8 @@ import dev.kilua.html.div
 public fun IComponent.lazyColumn(
     setup: IDiv.() -> Unit = {},
     block: LazyDsl.() -> Unit,
-): Div {
-    return div {
+) {
+    div {
         display(Display.Flex)
         flexDirection(FlexDirection.Column)
         setup()
@@ -79,8 +79,8 @@ public fun IComponent.lazyColumn(
 public fun IComponent.lazyRow(
     setup: IDiv.() -> Unit = {},
     block: LazyDsl.() -> Unit,
-): Div {
-    return div {
+) {
+    div {
         display(Display.Flex)
         flexDirection(FlexDirection.Row)
         setup()

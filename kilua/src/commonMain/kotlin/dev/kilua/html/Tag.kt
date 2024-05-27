@@ -292,7 +292,7 @@ public open class Tag<E : HTMLElement>(
 }
 
 /**
- * Creates a [Tag] component with given DOM element type.
+ * Creates a [Tag] component with given DOM element type, returning a reference.
  *
  * @param tagName the name of the HTML tag
  * @param className the CSS class name
@@ -302,7 +302,7 @@ public open class Tag<E : HTMLElement>(
  * @return the [Tag] component
  */
 @Composable
-public fun <E : HTMLElement> IComponent.tag(
+public fun <E : HTMLElement> IComponent.tagRef(
     tagName: String,
     className: String? = null,
     id: String? = null,
@@ -320,7 +320,7 @@ public fun <E : HTMLElement> IComponent.tag(
 }
 
 /**
- * Creates a [Tag] component with HTMLElement type.
+ * Creates a [Tag] component with HTMLElement type, returning a reference.
  *
  * @param tagName the name of the HTML tag
  * @param className the CSS class name
@@ -330,12 +330,59 @@ public fun <E : HTMLElement> IComponent.tag(
  * @return the [Tag] component
  */
 @Composable
-public fun IComponent.tag(
+public fun IComponent.tagRef(
     tagName: String,
     className: String? = null,
     id: String? = null,
     namespace: String? = null,
     content: @Composable ITag<HTMLElement>.() -> Unit = {}
 ): Tag<HTMLElement> {
-    return tag<HTMLElement>(tagName, className, id, namespace, content)
+    return tagRef<HTMLElement>(tagName, className, id, namespace, content)
+}
+
+
+/**
+ * Creates a [Tag] component with given DOM element type.
+ *
+ * @param tagName the name of the HTML tag
+ * @param className the CSS class name
+ * @param id the ID attribute of the HTML tag
+ * @param namespace the namespace of the HTML tag
+ * @param content the content of the component
+ */
+@Composable
+public fun <E : HTMLElement> IComponent.tag(
+    tagName: String,
+    className: String? = null,
+    id: String? = null,
+    namespace: String? = null,
+    content: @Composable ITag<E>.() -> Unit = {}
+) {
+    key(tagName, namespace) {
+        val component = remember { Tag<E>(tagName, className, id, namespace, renderConfig = renderConfig) }
+        ComponentNode(component, {
+            set(className) { updateProperty(Tag<HTMLElement>::className, it) }
+            set(id) { updateProperty(Tag<HTMLElement>::id, it) }
+        }, content)
+    }
+}
+
+/**
+ * Creates a [Tag] component with HTMLElement type.
+ *
+ * @param tagName the name of the HTML tag
+ * @param className the CSS class name
+ * @param id the ID attribute of the HTML tag
+ * @param namespace the namespace of the HTML tag
+ * @param content the content of the component
+ */
+@Composable
+public fun IComponent.tag(
+    tagName: String,
+    className: String? = null,
+    id: String? = null,
+    namespace: String? = null,
+    content: @Composable ITag<HTMLElement>.() -> Unit = {}
+) {
+    tag<HTMLElement>(tagName, className, id, namespace, content)
 }

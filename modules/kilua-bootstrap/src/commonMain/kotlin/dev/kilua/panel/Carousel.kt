@@ -30,8 +30,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.Bootstrap
 import dev.kilua.html.CommentNode
@@ -128,9 +128,10 @@ public interface ICarousel : ITag<HTMLDivElement> {
  */
 public open class Carousel(
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLDivElement>("div", className, renderConfig = renderConfig), ICarousel {
+    Tag<HTMLDivElement>("div", className, id, renderConfig = renderConfig), ICarousel {
 
     internal val items = mutableStateMapOf<Int, CarouselItem>()
     internal var itemsOrderList: List<Int> by mutableStateOf(emptyList())
@@ -250,15 +251,80 @@ public open class Carousel(
 }
 
 @Composable
-private fun IComponent.carousel(
+private fun IComponent.carouselRef(
     className: String? = null,
+    id: String? = null,
     content: @Composable ICarousel.() -> Unit,
 ): Carousel {
-    val component = remember { Carousel(className, renderConfig = renderConfig) }
+    val component = remember { Carousel(className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(className) { updateProperty(Carousel::className, it) }
+        set(id) { updateProperty(Carousel::id, it) }
     }, content)
     return component
+}
+
+
+@Composable
+private fun IComponent.carousel(
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ICarousel.() -> Unit,
+) {
+    val component = remember { Carousel(className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(className) { updateProperty(Carousel::className, it) }
+        set(id) { updateProperty(Carousel::id, it) }
+    }, content)
+}
+
+/**
+ * Creates an [Carousel] component, returning a reference.
+ *
+ * @param fade determines if the Carousel items are fading
+ * @param hideControls determines if the Carousel controls are hidden
+ * @param hideIndicators determines if the Carousel indicators are hidden
+ * @param autoPlay determines if the Carousel items are automatically playing
+ * @param interval the interval between changing Carousel items
+ * @param disableTouch determines if the Carousel items are touch disabled
+ * @param activeIndex the index of the initially active item
+ * @param prevButtonTitle the title of the previous button
+ * @param nextButtonTitle the title of the next button
+ * @param className the CSS class name
+ * @param id the ID attribute of the Carousel
+ * @param content the content of the Carousel
+ * @return the [Carousel] component
+ */
+@Composable
+public fun IComponent.carouselRef(
+    fade: Boolean = false,
+    hideControls: Boolean = false,
+    hideIndicators: Boolean = false,
+    autoPlay: Boolean = false,
+    interval: Int = 5000,
+    disableTouch: Boolean = false,
+    activeIndex: Int = 0,
+    prevButtonTitle: String = "Previous",
+    nextButtonTitle: String = "Next",
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ICarousel.() -> Unit,
+): Carousel {
+    val carouselId = id ?: remember { "kilua_carousel_${idCounter++}" }
+    return carouselRef("carousel slide" % if (fade) "carousel-fade" else null % className, carouselId) {
+        setupCarousel(
+            carouselId,
+            autoPlay,
+            disableTouch,
+            interval,
+            content,
+            hideIndicators,
+            activeIndex,
+            hideControls,
+            prevButtonTitle,
+            nextButtonTitle
+        )
+    }
 }
 
 /**
@@ -274,6 +340,7 @@ private fun IComponent.carousel(
  * @param prevButtonTitle the title of the previous button
  * @param nextButtonTitle the title of the next button
  * @param className the CSS class name
+ * @param id the ID attribute of the Carousel
  * @param content the content of the Carousel
  * @return the [Carousel] component
  */
@@ -289,78 +356,105 @@ public fun IComponent.carousel(
     prevButtonTitle: String = "Previous",
     nextButtonTitle: String = "Next",
     className: String? = null,
+    id: String? = null,
     content: @Composable ICarousel.() -> Unit,
-): Carousel {
-    val carouselId = remember { "kilua_carousel_${idCounter++}" }
-    return carousel("carousel slide" % if (fade) "carousel-fade" else null % className) {
-        id(carouselId)
-        if (autoPlay) {
-            attribute("data-bs-ride", "carousel")
-        }
-        if (disableTouch) {
-            attribute("data-bs-touch", "false")
-        }
-        if (interval != 5000) {
-            attribute("data-bs-interval", interval.toString())
-        }
-        content()
-        val component = this.cast<Carousel>()
-        if (!hideIndicators) {
-            div("carousel-indicators") {
-                component.itemsOrderList.forEachIndexed { index, itemId ->
-                    component.items[itemId]?.let { item ->
-                        button(className = if (index == activeIndex) "active" else null) {
-                            attribute("data-bs-target", "#$carouselId")
-                            attribute("data-bs-slide-to", index.toString())
-                            if (item.caption != null) {
-                                attribute("aria-label", item.caption)
-                            }
-                            if (index == activeIndex) {
-                                attribute("aria-current", "true")
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        div("carousel-inner") {
+) {
+    val carouselId = id ?: remember { "kilua_carousel_${idCounter++}" }
+    carousel("carousel slide" % if (fade) "carousel-fade" else null % className, carouselId) {
+        setupCarousel(
+            carouselId,
+            autoPlay,
+            disableTouch,
+            interval,
+            content,
+            hideIndicators,
+            activeIndex,
+            hideControls,
+            prevButtonTitle,
+            nextButtonTitle
+        )
+    }
+}
+
+@Composable
+private fun ICarousel.setupCarousel(
+    carouselId: String,
+    autoPlay: Boolean,
+    disableTouch: Boolean,
+    interval: Int,
+    content: @Composable (ICarousel.() -> Unit),
+    hideIndicators: Boolean,
+    activeIndex: Int,
+    hideControls: Boolean,
+    prevButtonTitle: String,
+    nextButtonTitle: String
+) {
+    if (autoPlay) {
+        attribute("data-bs-ride", "carousel")
+    }
+    if (disableTouch) {
+        attribute("data-bs-touch", "false")
+    }
+    if (interval != 5000) {
+        attribute("data-bs-interval", interval.toString())
+    }
+    content()
+    val component = this.cast<Carousel>()
+    if (!hideIndicators) {
+        div("carousel-indicators") {
             component.itemsOrderList.forEachIndexed { index, itemId ->
                 component.items[itemId]?.let { item ->
-                    div("carousel-item" % if (index == activeIndex) "active" else null) {
-                        item.content(this)
-                        if (item.caption != null || item.description != null) {
-                            div("carousel-caption d-none d-md-block") {
-                                if (item.caption != null) h5t(item.caption)
-                                if (item.description != null) pt(item.description)
-                            }
+                    button(className = if (index == activeIndex) "active" else null) {
+                        attribute("data-bs-target", "#$carouselId")
+                        attribute("data-bs-slide-to", index.toString())
+                        if (item.caption != null) {
+                            attribute("aria-label", item.caption)
+                        }
+                        if (index == activeIndex) {
+                            attribute("aria-current", "true")
                         }
                     }
                 }
             }
         }
-        if (!hideControls) {
-            button(className = "carousel-control-prev") {
-                attribute("data-bs-target", "#$carouselId")
-                attribute("data-bs-slide", "prev")
-                span("carousel-control-prev-icon") {
-                    attribute("aria-hidden", "true")
+    }
+    div("carousel-inner") {
+        component.itemsOrderList.forEachIndexed { index, itemId ->
+            component.items[itemId]?.let { item ->
+                div("carousel-item" % if (index == activeIndex) "active" else null) {
+                    item.content(this)
+                    if (item.caption != null || item.description != null) {
+                        div("carousel-caption d-none d-md-block") {
+                            if (item.caption != null) h5t(item.caption)
+                            if (item.description != null) pt(item.description)
+                        }
+                    }
                 }
-                span("visually-hidden") { +prevButtonTitle }
-            }
-            button(className = "carousel-control-next") {
-                attribute("data-bs-target", "#$carouselId")
-                attribute("data-bs-slide", "next")
-                span("carousel-control-next-icon") {
-                    attribute("aria-hidden", "true")
-                }
-                span("visually-hidden") { +nextButtonTitle }
             }
         }
-        DisposableEffect(component.componentId) {
-            component.onInsert()
-            onDispose {
-                component.onRemove()
+    }
+    if (!hideControls) {
+        button(className = "carousel-control-prev") {
+            attribute("data-bs-target", "#$carouselId")
+            attribute("data-bs-slide", "prev")
+            span("carousel-control-prev-icon") {
+                attribute("aria-hidden", "true")
             }
+            span("visually-hidden") { +prevButtonTitle }
+        }
+        button(className = "carousel-control-next") {
+            attribute("data-bs-target", "#$carouselId")
+            attribute("data-bs-slide", "next")
+            span("carousel-control-next-icon") {
+                attribute("aria-hidden", "true")
+            }
+            span("visually-hidden") { +nextButtonTitle }
+        }
+    }
+    DisposableEffect(component.componentId) {
+        component.onInsert()
+        onDispose {
+            component.onRemove()
         }
     }
 }

@@ -71,7 +71,7 @@ class DateSpec : DomSpec {
             lateinit var date: Date
             val day = LocalDate(2023, 10, 15)
             root("test") {
-                date = date(day, day.minus(5, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
+                date = dateRef(day, day.minus(5, DateTimeUnit.DAY), day.plus(1, DateTimeUnit.DAY), name = "date")
             }
             repeat(2) {
                 date.stepUp()

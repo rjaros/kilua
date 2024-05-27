@@ -25,8 +25,8 @@ package dev.kilua.form.time
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.DateTimeFormControl
 import dev.kilua.form.IInput
@@ -257,7 +257,7 @@ public open class DateTime(
 }
 
 /**
- * Creates a [DateTime] component.
+ * Creates a [DateTime] component, returning a reference.
  *
  * @param value the initial value
  * @param min the minimum value
@@ -274,7 +274,7 @@ public open class DateTime(
  * @return a [DateTime] component
  */
 @Composable
-public fun IComponent.dateTime(
+public fun IComponent.dateTimeRef(
     value: LocalDateTime? = null,
     min: LocalDateTime? = null,
     max: LocalDateTime? = null,
@@ -319,4 +319,67 @@ public fun IComponent.dateTime(
         set(id) { updateProperty(DateTime::id, it) }
     }, setup)
     return component
+}
+
+/**
+ * Creates a [DateTime] component.
+ *
+ * @param value the initial value
+ * @param min the minimum value
+ * @param max the maximum value
+ * @param step the step value
+ * @param name the name attribute of the generated HTML input element
+ * @param maxlength the maxlength attribute of the generated HTML input element
+ * @param placeholder the placeholder attribute of the generated HTML input element
+ * @param disabled determines if the field is disabled
+ * @param required determines if the field is required
+ * @param className the CSS class name
+ * @param id the ID of the generated HTML input element
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun IComponent.dateTime(
+    value: LocalDateTime? = null,
+    min: LocalDateTime? = null,
+    max: LocalDateTime? = null,
+    step: Int = DATETIME_DEFAULT_STEP,
+    name: String? = null,
+    maxlength: Int? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable IDateTime.() -> Unit = {}
+) {
+    val component =
+        remember {
+            DateTime(
+                value,
+                min,
+                max,
+                step,
+                name,
+                maxlength,
+                placeholder,
+                disabled,
+                required,
+                className,
+                id,
+                renderConfig
+            )
+        }
+    ComponentNode(component, {
+        set(value) { updateProperty(DateTime::value, it) }
+        set(min) { updateProperty(DateTime::min, it) }
+        set(max) { updateProperty(DateTime::max, it) }
+        set(step) { updateProperty(DateTime::step, it) }
+        set(name) { updateProperty(DateTime::name, it) }
+        set(maxlength) { updateProperty(DateTime::maxlength, it) }
+        set(placeholder) { updateProperty(DateTime::placeholder, it) }
+        set(disabled) { updateProperty(DateTime::disabled, it) }
+        set(required) { updateProperty(DateTime::required, it) }
+        set(className) { updateProperty(DateTime::className, it) }
+        set(id) { updateProperty(DateTime::id, it) }
+    }, setup)
 }

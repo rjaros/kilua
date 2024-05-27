@@ -25,8 +25,8 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLOListElement
@@ -92,9 +92,10 @@ public open class Ol(
     type: OlType? = null,
     start: Int? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLOListElement>("ol", className, renderConfig = renderConfig), IOl {
+    Tag<HTMLOListElement>("ol", className, id, renderConfig = renderConfig), IOl {
 
     /**
      * The type of the numbered list.
@@ -180,23 +181,51 @@ public open class Ol(
 }
 
 /**
+ * Creates a [Ol] component, returninig a reference.
+ *
+ * @param type the type of the numbered list
+ * @param start a starting number
+ * @param className the CSS class name
+ * @param id the ID attribute of the component
+ * @param content the content of the component
+ * @return the [Ol] component
+ */
+@Composable
+public fun IComponent.olRef(
+    type: OlType? = null, start: Int? = null,
+    className: String? = null, id: String? = null,
+    content: @Composable IOl.() -> Unit = {}
+): Ol {
+    val component = remember { Ol(type, start, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(type) { updateProperty(Ol::type, it) }
+        set(start) { updateProperty(Ol::start, it) }
+        set(className) { updateProperty(Ol::className, it) }
+        set(id) { updateProperty(Ol::id, it) }
+    }, content)
+    return component
+}
+
+/**
  * Creates a [Ol] component.
  *
  * @param type the type of the numbered list
  * @param start a starting number
  * @param className the CSS class name
+ * @param id the ID attribute of the component
  * @param content the content of the component
- * @return the [Ol] component
  */
 @Composable
 public fun IComponent.ol(
-    type: OlType? = null, start: Int? = null, className: String? = null, content: @Composable IOl.() -> Unit = {}
-): Ol {
-    val component = remember { Ol(type, start, className, renderConfig = renderConfig) }
+    type: OlType? = null, start: Int? = null,
+    className: String? = null, id: String? = null,
+    content: @Composable IOl.() -> Unit = {}
+) {
+    val component = remember { Ol(type, start, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(type) { updateProperty(Ol::type, it) }
         set(start) { updateProperty(Ol::start, it) }
         set(className) { updateProperty(Ol::className, it) }
+        set(id) { updateProperty(Ol::id, it) }
     }, content)
-    return component
 }

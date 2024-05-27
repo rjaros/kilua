@@ -33,6 +33,7 @@ import dev.kilua.html.ButtonType
 import dev.kilua.html.Color
 import dev.kilua.html.TextAlign
 import dev.kilua.html.button
+import dev.kilua.html.buttonRef
 import dev.kilua.html.div
 import dev.kilua.html.px
 import dev.kilua.test.DomSpec
@@ -98,7 +99,7 @@ class RootSpec : DomSpec {
             var counter by remember { mutableStateOf(0) }
             div {
                 +"Counter: $counter"
-                button = button {
+                button = buttonRef {
                     +"Increment"
                     onClick {
                         counter++
@@ -123,7 +124,7 @@ class RootSpec : DomSpec {
             var counter by remember { mutableStateOf(0) }
             div {
                 +"Counter: $counter"
-                button = button {
+                button = buttonRef {
                     +"Increment"
                     onClick {
                         counter++

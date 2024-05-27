@@ -25,8 +25,8 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.IComponent
 import dev.kilua.core.DefaultRenderConfig
+import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLTableCellElement
@@ -65,9 +65,10 @@ public open class Td(
     colspan: Int? = null,
     rowspan: Int? = null,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig()
 ) :
-    Tag<HTMLTableCellElement>("td", className, renderConfig = renderConfig), ITd {
+    Tag<HTMLTableCellElement>("td", className, id, renderConfig = renderConfig), ITd {
 
     /**
      * The number of columns the cell extends.
@@ -131,23 +132,56 @@ public open class Td(
 }
 
 /**
+ * Creates a [Td] component, returning a reference.
+ *
+ * @param colspan the number of columns the cell extends
+ * @param rowspan the number of rows the cell extends
+ * @param className the CSS class name
+ * @param id the ID attribute of the cell component
+ * @param content the content of the component
+ * @return the [Td] component
+ */
+@Composable
+public fun IComponent.tdRef(
+    colspan: Int? = null,
+    rowspan: Int? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ITd.() -> Unit = {}
+): Td {
+    val component = remember { Td(colspan, rowspan, className, id, renderConfig = renderConfig) }
+    ComponentNode(component, {
+        set(colspan) { updateProperty(Td::colspan, it) }
+        set(rowspan) { updateProperty(Td::rowspan, it) }
+        set(className) { updateProperty(Td::className, it) }
+        set(id) { updateProperty(Td::id, it) }
+    }, content)
+    return component
+}
+
+/**
  * Creates a [Td] component.
  *
  * @param colspan the number of columns the cell extends
  * @param rowspan the number of rows the cell extends
  * @param className the CSS class name
+ * @param id the ID attribute of the cell component
  * @param content the content of the component
  * @return the [Td] component
  */
 @Composable
 public fun IComponent.td(
-    colspan: Int? = null, rowspan: Int? = null, className: String? = null, content: @Composable ITd.() -> Unit = {}
-): Td {
-    val component = remember { Td(colspan, rowspan, className, renderConfig = renderConfig) }
+    colspan: Int? = null,
+    rowspan: Int? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ITd.() -> Unit = {}
+) {
+    val component = remember { Td(colspan, rowspan, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(colspan) { updateProperty(Td::colspan, it) }
         set(rowspan) { updateProperty(Td::rowspan, it) }
         set(className) { updateProperty(Td::className, it) }
+        set(id) { updateProperty(Td::id, it) }
     }, content)
-    return component
 }

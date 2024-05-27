@@ -131,8 +131,9 @@ public abstract class AbstractRichDateTime(
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
+    id: String? = null,
     renderConfig: RenderConfig = DefaultRenderConfig(),
-) : Div(className, renderConfig = renderConfig), IAbstractRichDateTime {
+) : Div(className, id, renderConfig = renderConfig), IAbstractRichDateTime {
 
     private val initialFormat: String = format
 
@@ -742,7 +743,6 @@ internal fun IDiv.commonRichDateTime(
     inline: Boolean,
     icon: String
 ) {
-    id(bindId)
     attribute("data-td-target-input", "nearest")
     attribute("data-td-target-toggle", "nearest")
     text(

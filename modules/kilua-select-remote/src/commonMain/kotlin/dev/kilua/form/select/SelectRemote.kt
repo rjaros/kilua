@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 import web.fetch.RequestInit
 
 /**
- * Creates [Select] component with a remote data source.
+ * Creates [Select] component with a remote data source, returning a reference.
  *
  * @param serviceManager RPC service manager
  * @param function RPC service method returning the list of options
@@ -58,7 +58,7 @@ import web.fetch.RequestInit
  * @return a [Select] component
  */
 @Composable
-public fun <T : Any> IComponent.selectRemote(
+public fun <T : Any> IComponent.selectRemoteRef(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?) -> List<SimpleRemoteOption>,
     stateFunction: (() -> String)? = null,
@@ -80,7 +80,7 @@ public fun <T : Any> IComponent.selectRemote(
     var optionsState: List<StringPair>? by remember {
         mutableStateOf(options)
     }
-    val select = select(
+    val select = selectRef(
         options = optionsState,
         value = value,
         emptyOption = emptyOption,
@@ -106,6 +106,76 @@ public fun <T : Any> IComponent.selectRemote(
         optionsState = getOptionsForSelectRemote(serviceManager, function, stateFunction, requestFilter)
     }
     return select
+}
+
+/**
+ * Creates [Select] component with a remote data source.
+ *
+ * @param serviceManager RPC service manager
+ * @param function RPC service method returning the list of options
+ * @param stateFunction a function to generate the state object passed with the remote request
+ * @param requestFilter a request filtering function
+ * @param refreshOnFocus determines if the options should be refreshed when the component gets focus
+ * @param options an initial list of options (value to label pairs)
+ * @param value initial value
+ * @param multiple determines if multiple value selection is allowed
+ * @param size the number of visible options
+ * @param name the name of the select
+ * @param placeholder the placeholder for the select component
+ * @param disabled whether the select is disabled
+ * @param required whether the select is required
+ * @param className the CSS class name
+ * @param id the ID of the select component
+ * @param setup a function for setting up the component
+ */
+@Composable
+public fun <T : Any> IComponent.selectRemote(
+    serviceManager: RpcServiceMgr<T>,
+    function: suspend T.(String?) -> List<SimpleRemoteOption>,
+    stateFunction: (() -> String)? = null,
+    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    refreshOnFocus: Boolean = false,
+    options: List<StringPair>? = null,
+    value: String? = null,
+    emptyOption: Boolean = false,
+    multiple: Boolean = false,
+    size: Int? = null,
+    name: String? = null,
+    placeholder: String? = null,
+    disabled: Boolean? = null,
+    required: Boolean? = null,
+    className: String? = null,
+    id: String? = null,
+    setup: @Composable ISelect.() -> Unit = {}
+) {
+    var optionsState: List<StringPair>? by remember {
+        mutableStateOf(options)
+    }
+    val select = selectRef(
+        options = optionsState,
+        value = value,
+        emptyOption = emptyOption,
+        multiple = multiple,
+        size = size,
+        name = name,
+        placeholder = placeholder,
+        disabled = disabled,
+        required = required,
+        className = className,
+        id = id
+    ) {
+        if (refreshOnFocus) {
+            onFocus {
+                KiluaScope.launch {
+                    optionsState = getOptionsForSelectRemote(serviceManager, function, stateFunction, requestFilter)
+                }
+            }
+        }
+        setup()
+    }
+    LaunchedEffect(select.componentId) {
+        optionsState = getOptionsForSelectRemote(serviceManager, function, stateFunction, requestFilter)
+    }
 }
 
 internal expect suspend fun <T : Any> getOptionsForSelectRemote(
