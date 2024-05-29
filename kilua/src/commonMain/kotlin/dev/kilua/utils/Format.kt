@@ -22,9 +22,6 @@
 
 package dev.kilua.utils
 
-import kotlin.math.floor
-import kotlin.math.pow
-
 /**
  * Utility extension function to format a Double with a given number of digits after the decimal point.
  */
@@ -60,6 +57,6 @@ public fun String.toKebabCase(): String {
  * Formats a number to fixed decimal digits without rounding.
  */
 public fun Number.toFixedNoRound(precision: Int): String {
-    val factor = 10.0.pow(precision)
-    return (floor(this.toDouble() * factor) / factor).toString()
+    val r = Regex("^-?\\d+(?:\\.\\d{0,$precision})?")
+    return r.find(this.toString())?.value ?: "0"
 }

@@ -46,4 +46,13 @@ class FormatSpec : SimpleSpec {
         assertEquals("margin-top", marginTop, "Should convert a camelCase string to kebab-case")
     }
 
+    @Test
+    fun toFixedNoRound() {
+        val formatted = 10433.38.toFixedNoRound(2)
+        assertEquals("10433.38", formatted)
+        val formatted2 = 10433.3.toFixedNoRound(2)
+        assertEquals("10433.3", formatted2)
+        val formatted3 = (-10433.389).toFixedNoRound(2)
+        assertEquals("-10433.38", formatted3)
+    }
 }
