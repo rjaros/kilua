@@ -41,7 +41,7 @@ import dev.kilua.utils.cast
 
 var idCounter = 1
 
-data class Row(val id: Int, val label: String, val selected: Boolean = false)
+data class Row(val id: Int, val label: String)
 
 fun buildData(count: Int): List<Row> {
     return List(count, init = {
