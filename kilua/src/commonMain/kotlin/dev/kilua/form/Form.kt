@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import dev.kilua.KiluaScope
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.JSON
 import dev.kilua.externals.get
@@ -116,7 +115,7 @@ public class Form<K : Any>(
     private val customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
+    renderConfig: RenderConfig = RenderConfig.Default
 ) :
     Tag<HTMLFormElement>("form", className, id, renderConfig = renderConfig), WithStateFlow<K> {
 
@@ -297,7 +296,7 @@ public class Form<K : Any>(
     /**
      * Keeps all form controls parameters.
      */
-    private val fieldsParams: MutableMap<String, Any> = mutableMapOf()
+    private val fieldsParams: MutableMap<String, Any> = nativeMapOf()
 
     /**
      * Determines if the data model was set outside compose.
@@ -1092,7 +1091,7 @@ public class Form<K : Any>(
             method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
             customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
             className: String? = null, id: String? = null,
-            renderConfig: RenderConfig = DefaultRenderConfig(),
+            renderConfig: RenderConfig = RenderConfig.Default,
         ): Form<K> {
             return Form(
                 method,

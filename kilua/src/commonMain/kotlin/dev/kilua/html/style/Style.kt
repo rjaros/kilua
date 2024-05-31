@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.Tag
 import web.dom.HTMLStyleElement
@@ -34,7 +33,7 @@ import web.dom.HTMLStyleElement
 /**
  * Internal HTML Style component.
  */
-internal class Style(cssText: String, renderConfig: RenderConfig = DefaultRenderConfig()) :
+internal class Style(cssText: String, renderConfig: RenderConfig = RenderConfig.Default) :
     Tag<HTMLStyleElement>("style", null, renderConfig = renderConfig) {
 
     var cssText: String by updatingProperty(cssText) {

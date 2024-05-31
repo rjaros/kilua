@@ -24,7 +24,6 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.core.PropertyDelegate
-import dev.kilua.utils.nativeMapOf
 import web.dom.HTMLElement
 import kotlin.collections.set
 
@@ -49,9 +48,9 @@ public interface TagAttrsDelegate<E : HTMLElement> : TagAttrs<E> {
  */
 public open class TagAttrsDelegateImpl<E : HTMLElement>(
     skipUpdates: Boolean,
-) : TagAttrsDelegate<E>, PropertyDelegate(nativeMapOf(), skipUpdates = skipUpdates) {
+) : TagAttrsDelegate<E>, PropertyDelegate(skipUpdates = skipUpdates) {
 
-    public override val attributesMap: Map<String, Any> = propertyValues
+    public override val attributesMap: Map<String, Any> by lazy { propertyValues }
 
     protected lateinit var element: E
     protected var elementNullable: E? = null

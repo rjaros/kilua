@@ -23,7 +23,6 @@
 package dev.kilua.form
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
@@ -173,7 +172,7 @@ public abstract class Input<T : Any>(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     protected val withStateFlowDelegate: WithStateFlowDelegate<T?> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLInputElement>("input", className, id, null, renderConfig = renderConfig), GenericFormControl<T>,
     WithStateFlow<T?> by withStateFlowDelegate, IInput<T> {

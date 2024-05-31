@@ -28,6 +28,10 @@ package dev.kilua.core
  */
 public interface RenderConfig {
     public val isDom: Boolean
+
+    public companion object {
+        public val Default: RenderConfig = DefaultRenderConfig()
+    }
 }
 
 /**

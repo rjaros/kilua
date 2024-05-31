@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
 import dev.kilua.form.fieldWithLabel
@@ -92,7 +91,7 @@ public open class RadioGroup(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
 ) : Div(className, id, renderConfig), StringFormControl, WithStateFlow<String?> by withStateFlowDelegate, IRadioGroup {
 

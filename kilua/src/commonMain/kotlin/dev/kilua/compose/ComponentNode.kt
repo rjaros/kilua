@@ -25,7 +25,6 @@ package dev.kilua.compose
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisallowComposableCalls
 import androidx.compose.runtime.ExplicitGroupsComposable
-import androidx.compose.runtime.SkippableUpdater
 import androidx.compose.runtime.Updater
 import androidx.compose.runtime.currentComposer
 
@@ -36,37 +35,20 @@ import androidx.compose.runtime.currentComposer
 @Composable
 @ExplicitGroupsComposable
 public inline fun <C> ComponentNode(
-    noinline factory: () -> C,
     componentInScope: C,
     update: @DisallowComposableCalls Updater<C>.() -> Unit,
-    noinline skippableUpdate: @Composable SkippableUpdater<C>.() -> Unit,
     content: @Composable C.() -> Unit
 ) {
     currentComposer.startNode()
     if (currentComposer.inserting) {
-        currentComposer.createNode(factory)
+        currentComposer.createNode { componentInScope }
     } else {
         currentComposer.useNode()
     }
     Updater<C>(currentComposer).update()
-    SkippableUpdater<C>(currentComposer).skippableUpdate()
     @Suppress("MagicNumber")
     currentComposer.startReplaceableGroup(0x7ab4aae9)
     content.invoke(componentInScope)
     currentComposer.endReplaceableGroup()
     currentComposer.endNode()
-}
-
-/**
- * A simplified composable function that emits Kilua components to the compose tree.
- * Makes the given component available as the receiver in the content block.
- */
-@Composable
-@ExplicitGroupsComposable
-public inline fun <C> ComponentNode(
-    componentInScope: C,
-    update: @DisallowComposableCalls Updater<C>.() -> Unit,
-    content: @Composable C.() -> Unit
-) {
-    ComponentNode({ componentInScope }, componentInScope, update, {}, content)
 }

@@ -25,7 +25,6 @@ package dev.kilua.form.text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.IInput
@@ -51,7 +50,7 @@ public open class Text(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
+    renderConfig: RenderConfig = RenderConfig.Default
 ) : Input<String>(
     value,
     type,

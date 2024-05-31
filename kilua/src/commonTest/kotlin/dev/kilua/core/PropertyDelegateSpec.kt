@@ -23,7 +23,6 @@
 package dev.kilua.core
 
 import dev.kilua.test.SimpleSpec
-import dev.kilua.utils.nativeMapOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -35,7 +34,7 @@ class PropertyDelegateSpec : SimpleSpec {
             var notifyCounter = 0
             var updatesCounter = 0
 
-            class TestComponent : PropertyDelegate(nativeMapOf()) {
+            class TestComponent : PropertyDelegate() {
                 var property1: String by updatingProperty(notifyFunction = { notifyCounter++ }) {
                     updatesCounter++
                 }
@@ -55,7 +54,7 @@ class PropertyDelegateSpec : SimpleSpec {
             notifyCounter = 0
             updatesCounter = 0
 
-            class TestComponent2 : PropertyDelegate(nativeMapOf(), skipUpdates = true) {
+            class TestComponent2 : PropertyDelegate(skipUpdates = true) {
                 var property2: String by updatingProperty(notifyFunction = { notifyCounter++ }) {
                     updatesCounter++
                 }

@@ -28,7 +28,6 @@ import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.runtime.Recomposer
 import androidx.compose.runtime.mutableStateListOf
 import dev.kilua.core.ComponentBase
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
@@ -50,7 +49,7 @@ internal expect val defaultMonotonicFrameClock: MonotonicFrameClock
  */
 public class Root(
     public val element: Element,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     content: @Composable IComponent.() -> Unit = {}
 ) : ComponentBase(element, renderConfig) {
 
@@ -169,7 +168,7 @@ internal fun rootComposable(
 public fun root(
     element: Element,
     clearSsrContent: Boolean = true,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     content: @Composable IComponent.() -> Unit = {}
 ): Root {
     Root.initializeTopLevelComposablesRoot()
@@ -187,7 +186,7 @@ public fun root(
  */
 public fun root(
     id: String,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     content: @Composable IComponent.() -> Unit = {}
 ): Root {
     val element = SafeDomFactory.getElementById(id) ?: SafeDomFactory.createElement("div")

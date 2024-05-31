@@ -27,7 +27,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
 import dev.kilua.html.ITag
@@ -126,7 +125,7 @@ public open class Select(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     protected val withStateFlowDelegate: WithStateFlowDelegate<String?> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLSelectElement>("select", className, id, renderConfig = renderConfig), StringFormControl,
     WithStateFlow<String?> by withStateFlowDelegate, ISelect {

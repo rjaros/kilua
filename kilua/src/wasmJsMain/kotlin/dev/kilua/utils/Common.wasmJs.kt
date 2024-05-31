@@ -24,4 +24,4 @@ package dev.kilua.utils
 
 private fun isDom(): Boolean = js("typeof document !== 'undefined' && typeof document.kilua == 'undefined'")
 
-public actual val isDom: Boolean by lazy { isDom() }
+public actual val isDom: Boolean = isDom()

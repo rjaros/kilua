@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.dom.HTMLImageElement
@@ -67,7 +66,7 @@ public open class Img(
     alt: String? = null,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig()
+    renderConfig: RenderConfig = RenderConfig.Default
 ) :
     Tag<HTMLImageElement>("img", className, id, renderConfig = renderConfig), IImg {
 

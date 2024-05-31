@@ -34,17 +34,17 @@ import kotlin.reflect.KProperty
  * Helper delegate used to define properties with custom update and notify functions.
  */
 public open class PropertyDelegate(
-    internal val propertyValues: MutableMap<String, Any>,
     internal val onSetCallback: ((values: Map<String, Any>) -> Unit)? = null,
     internal val skipUpdates: Boolean = false,
 ) {
+    internal val propertyValues: MutableMap<String, Any> by lazy { nativeMapOf() }
     protected var composablePropertyCounter: Int = 0
-    protected val composablePropertyMap: MutableMap<String, Int> = nativeMapOf()
+    protected val composablePropertyMap: MutableMap<String, Int> by lazy { nativeMapOf() }
 
-    protected val notifyFunctions: MutableMap<String, Any> = nativeMapOf()
-    protected val updateFunctions: MutableMap<String, Any> = nativeMapOf()
-    protected val updateFunctionsWithOldValue: MutableMap<String, Any> = nativeMapOf()
-    internal val propertiesSet: MutableSet<String> = mutableSetOf()
+    protected val notifyFunctions: MutableMap<String, Any> by lazy { nativeMapOf() }
+    protected val updateFunctions: MutableMap<String, Any> by lazy { nativeMapOf() }
+    protected val updateFunctionsWithOldValue: MutableMap<String, Any> by lazy { nativeMapOf() }
+    internal val propertiesSet: MutableSet<String> by lazy { mutableSetOf() }
 
     /**
      * Allows direct access to set the value in the propertyValues map.

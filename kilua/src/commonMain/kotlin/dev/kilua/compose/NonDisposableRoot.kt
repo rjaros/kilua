@@ -24,7 +24,6 @@ package dev.kilua.compose
 
 import androidx.compose.runtime.Composable
 import dev.kilua.core.ComponentBase
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import web.dom.Element
@@ -37,7 +36,7 @@ import web.dom.Element
  */
 internal class NonDisposableRoot(
     val element: Element,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     content: @Composable IComponent.() -> Unit = {}
 ) : ComponentBase(element, renderConfig) {
 

@@ -60,12 +60,13 @@ public interface TagEventsDelegate<E : HTMLElement> : TagEvents<E> {
 @Suppress("TooManyFunctions")
 public open class TagEventsDelegateImpl<E : HTMLElement>(
     protected val skipUpdates: Boolean,
-    protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>> = nativeMapOf()
 ) : TagEventsDelegate<E> {
 
-    public override val eventsMap: Map<String, Map<String, (Event) -> Unit>> = events
+    protected val events: MutableMap<String, MutableMap<String, (Event) -> Unit>> by lazy { nativeMapOf() }
 
-    protected val eventsAbortControllers: MutableMap<String, AbortController> = nativeMapOf()
+    public override val eventsMap: Map<String, Map<String, (Event) -> Unit>> by lazy { events }
+
+    protected val eventsAbortControllers: MutableMap<String, AbortController> by lazy { nativeMapOf() }
 
     protected lateinit var element: E
     protected var elementNullable: E? = null

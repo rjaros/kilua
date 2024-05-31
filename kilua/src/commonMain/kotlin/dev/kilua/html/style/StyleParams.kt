@@ -25,6 +25,7 @@ package dev.kilua.html.style
 import androidx.compose.runtime.mutableStateMapOf
 import dev.kilua.compose.NonDisposableRoot
 import dev.kilua.core.SafeDomFactory
+import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.toKebabCase
 
@@ -116,7 +117,7 @@ internal data class StyleParams(
         /**
          * The map of CSS style parameters
          */
-        internal val stylesMap = mutableMapOf<String, StyleParams>()
+        internal val stylesMap = nativeMapOf<StyleParams>()
 
         init {
             SafeDomFactory.getFirstElementByTagName("head")?.let { head ->

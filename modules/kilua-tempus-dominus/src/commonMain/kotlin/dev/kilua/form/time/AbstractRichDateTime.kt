@@ -24,7 +24,6 @@ package dev.kilua.form.time
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NoLiveLiterals
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.Date
 import dev.kilua.externals.Intl
@@ -132,7 +131,7 @@ public abstract class AbstractRichDateTime(
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
 ) : Div(className, id, renderConfig = renderConfig), IAbstractRichDateTime {
 
     private val initialFormat: String = format

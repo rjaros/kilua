@@ -23,7 +23,6 @@
 package dev.kilua.form.check
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.BoolFormControl
 import dev.kilua.html.ITag
@@ -116,7 +115,7 @@ public abstract class AbstractCheck(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLInputElement>("input", className, id, renderConfig = renderConfig), BoolFormControl,
     WithStateFlow<Boolean> by withStateFlowDelegate, IAbstractCheck {

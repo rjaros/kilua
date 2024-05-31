@@ -25,7 +25,6 @@ package dev.kilua.form.check
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.InputType
@@ -106,7 +105,7 @@ public open class TriStateCheckBox(
     required: Boolean? = null,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     protected val withStateFlowDelegate: WithStateFlowDelegate<Boolean?> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLInputElement>("input", className, id, renderConfig = renderConfig), TriStateFormControl,
     WithStateFlow<Boolean?> by withStateFlowDelegate, ITriStateCheckBox {

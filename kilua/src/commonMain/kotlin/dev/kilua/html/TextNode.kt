@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
@@ -38,7 +37,7 @@ import web.dom.Text
  */
 public open class TextNode(
     data: String,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
 ) : ComponentBase(SafeDomFactory.createTextNode(data), renderConfig) {
 
     /**

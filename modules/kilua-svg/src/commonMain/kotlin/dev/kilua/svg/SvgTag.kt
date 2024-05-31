@@ -23,7 +23,6 @@
 package dev.kilua.svg
 
 import androidx.compose.runtime.Composable
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.CssSize
 import dev.kilua.html.Tag
@@ -43,17 +42,33 @@ public open class SvgTag(
     className: String? = null,
     id: String? = null,
     renderNamespaceToString: Boolean = false,
-    renderConfig: RenderConfig = DefaultRenderConfig()
+    renderConfig: RenderConfig = RenderConfig.Default
 ) : Tag<HTMLElement>(tagName, className, id, SVG_NS, renderNamespaceToString, renderConfig), ISvgTag {
+
+    override fun initElementClassList() {
+        if (renderConfig.isDom) {
+            val internalClassNameLoc = internalClassName
+            val classNameLoc = className
+            if (internalClassNameLoc != null && classNameLoc != null) {
+                element.setAttribute("class", "$internalClassNameLoc $classNameLoc")
+            } else if (classNameLoc != null) {
+                element.setAttribute("class", classNameLoc)
+            } else if (internalClassNameLoc != null) {
+                element.setAttribute("class", internalClassNameLoc)
+            }
+        }
+    }
 
     override fun updateElementClassList() {
         if (renderConfig.isDom) {
-            if (internalClassName != null && className != null) {
-                element.setAttribute("class", "$internalClassName $className")
-            } else if (className != null) {
-                element.setAttribute("class", className!!)
-            } else if (internalClassName != null) {
-                element.setAttribute("class", internalClassName!!)
+            val internalClassNameLoc = internalClassName
+            val classNameLoc = className
+            if (internalClassNameLoc != null && classNameLoc != null) {
+                element.setAttribute("class", "$internalClassNameLoc $classNameLoc")
+            } else if (classNameLoc != null) {
+                element.setAttribute("class", classNameLoc)
+            } else if (internalClassNameLoc != null) {
+                element.setAttribute("class", internalClassNameLoc)
             } else {
                 element.removeAttribute("class")
             }

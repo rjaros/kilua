@@ -27,7 +27,6 @@ import androidx.compose.runtime.Composable
 import dev.kilua.core.PropertyDelegate
 import dev.kilua.html.*
 import dev.kilua.utils.cast
-import dev.kilua.utils.nativeMapOf
 import web.dom.HTMLElement
 
 public interface TagStyleDelegate<E : HTMLElement> : TagStyle<E> {
@@ -49,9 +48,9 @@ public interface TagStyleDelegate<E : HTMLElement> : TagStyle<E> {
 public open class TagStyleDelegateImpl<E : HTMLElement>(
     skipUpdates: Boolean,
     onSetCallback: ((Map<String, Any>) -> Unit)? = null
-) : TagStyleDelegate<E>, PropertyDelegate(nativeMapOf(), onSetCallback, skipUpdates) {
+) : TagStyleDelegate<E>, PropertyDelegate(onSetCallback, skipUpdates) {
 
-    public override val stylesMap: Map<String, Any> = propertyValues
+    public override val stylesMap: Map<String, Any> by lazy { propertyValues }
 
     protected lateinit var element: E
     protected var elementNullable: E? = null

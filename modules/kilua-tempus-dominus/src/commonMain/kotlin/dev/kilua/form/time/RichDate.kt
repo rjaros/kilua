@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.buildCustomEventInit
@@ -61,7 +60,7 @@ public open class RichDate(
     locale: Locale = LocaleManager.currentLocale,
     className: String? = null,
     id: String? = null,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalDate?> = WithStateFlowDelegateImpl()
 ) : AbstractRichDateTime(disabled, format, inline, locale, className, id, renderConfig = renderConfig), DateFormControl,
     WithStateFlow<LocalDate?> by withStateFlowDelegate, IRichDate {

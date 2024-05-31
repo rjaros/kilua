@@ -27,7 +27,6 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.ComponentBase
-import dev.kilua.core.DefaultRenderConfig
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
@@ -96,7 +95,7 @@ public open class Tag<E : HTMLElement>(
     id: String? = null,
     protected val namespace: String? = null,
     protected val renderNamespaceToString: Boolean = false,
-    renderConfig: RenderConfig = DefaultRenderConfig(),
+    renderConfig: RenderConfig = RenderConfig.Default,
     protected val tagAttrs: TagAttrsDelegate<E> = TagAttrsDelegateImpl(!renderConfig.isDom || !isDom),
     protected val tagStyle: TagStyleDelegate<E> = TagStyleDelegateImpl(!renderConfig.isDom || !isDom),
     protected val tagEvents: TagEventsDelegate<E> = TagEventsDelegateImpl(!renderConfig.isDom || !isDom),
@@ -113,7 +112,7 @@ public open class Tag<E : HTMLElement>(
     /**
      * An internal list of CSS classes for the current component.
      */
-    protected val internalCssClasses: MutableList<String> = nativeListOf()
+    protected val internalCssClasses: MutableList<String> by lazy { nativeListOf() }
 
     /**
      * An internal CSS class for the current component.
@@ -201,10 +200,27 @@ public open class Tag<E : HTMLElement>(
         @Suppress("LeakingThis")
         tagDnd.tagWithDnd(this)
         @Suppress("LeakingThis")
-        updateElementClassList()
+        initElementClassList()
         if (renderConfig.isDom && id != null) {
             @Suppress("LeakingThis")
             element.id = id
+        }
+    }
+
+    /**
+     * Initializes the CSS class of the DOM element of the current component.
+     */
+    protected open fun initElementClassList() {
+        if (renderConfig.isDom) {
+            val internalClassNameLoc = internalClassName
+            val classNameLoc = className
+            if (internalClassNameLoc != null && classNameLoc != null) {
+                element.className = "$internalClassNameLoc $classNameLoc"
+            } else if (classNameLoc != null) {
+                element.className = classNameLoc
+            } else if (internalClassNameLoc != null) {
+                element.className = internalClassNameLoc
+            }
         }
     }
 
@@ -213,12 +229,14 @@ public open class Tag<E : HTMLElement>(
      */
     protected open fun updateElementClassList() {
         if (renderConfig.isDom) {
-            if (internalClassName != null && className != null) {
-                element.className = "$internalClassName $className"
-            } else if (className != null) {
-                element.className = className!!
-            } else if (internalClassName != null) {
-                element.className = internalClassName!!
+            val internalClassNameLoc = internalClassName
+            val classNameLoc = className
+            if (internalClassNameLoc != null && classNameLoc != null) {
+                element.className = "$internalClassNameLoc $classNameLoc"
+            } else if (classNameLoc != null) {
+                element.className = classNameLoc
+            } else if (internalClassNameLoc != null) {
+                element.className = internalClassNameLoc
             } else {
                 element.removeAttribute("class")
             }

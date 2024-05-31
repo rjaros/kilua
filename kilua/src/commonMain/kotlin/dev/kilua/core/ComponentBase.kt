@@ -24,7 +24,6 @@ package dev.kilua.core
 
 import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
-import dev.kilua.utils.nativeMapOf
 import web.clear
 import web.dom.CustomEvent
 import web.dom.CustomEventInit
@@ -37,12 +36,12 @@ import web.dom.get
 public abstract class ComponentBase(
     public val node: Node,
     public override val renderConfig: RenderConfig,
-) : Component, IComponent, PropertyDelegate(nativeMapOf(), skipUpdates = !renderConfig.isDom || !isDom) {
+) : Component, IComponent, PropertyDelegate(skipUpdates = !renderConfig.isDom || !isDom) {
 
     public override val componentId: Int = counter++
 
     override var parent: Component? = null
-    override val children: MutableList<ComponentBase> = nativeListOf()
+    override val children: MutableList<ComponentBase> by lazy { nativeListOf() }
 
     /**
      * Insert child component at the given position.
