@@ -34,8 +34,6 @@ kotlin {
         browser {
             commonWebpackConfig {
                 outputFileName = "main.bundle.js"
-            }
-            runTask {
                 sourceMaps = false
             }
             testTask {
@@ -51,8 +49,6 @@ kotlin {
         browser {
             commonWebpackConfig {
                 outputFileName = "main.bundle.js"
-            }
-            runTask {
                 sourceMaps = false
             }
             testTask {

@@ -7,19 +7,7 @@ if (config.devServer) {
     config.devServer.port = 3000;
     config.devServer.historyApiFallback = true;
     config.devtool = 'eval-cheap-source-map';
-    config.devServer.proxy = [
-        {
-            context: ["/rpc/*", "/rpcsse/*"],
-            target: 'http://localhost:8080'
-        },
-        {
-            context: ["/rpcws/*"],
-            target: 'http://localhost:8080',
-            ws: true
-        }
-    ]
 } else {
-    config.devtool = undefined;
     config.resolve.alias = {
         "zzz-kilua-assets/style.css": false,
         "bootstrap/dist/css/bootstrap.min.css": false,
