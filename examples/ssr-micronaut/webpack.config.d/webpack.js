@@ -8,6 +8,7 @@ if (config.devServer) {
     config.devServer.historyApiFallback = true;
     config.devtool = 'eval-cheap-source-map';
 } else {
+    config.devtool = undefined;
     config.resolve.alias = {
         "zzz-kilua-assets/style.css": false,
         "bootstrap/dist/css/bootstrap.min.css": false,

@@ -26,6 +26,7 @@ if (config.devServer) {
     config.devServer.historyApiFallback = true;
     config.devtool = 'eval-cheap-source-map';
 } else {
+    config.devtool = undefined;
     config.target = 'node';
 }
 
