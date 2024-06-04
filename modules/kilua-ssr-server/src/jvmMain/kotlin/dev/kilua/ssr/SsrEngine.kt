@@ -23,7 +23,7 @@
 package dev.kilua.ssr
 
 import io.ktor.client.*
-import io.ktor.client.engine.apache.*
+import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -66,7 +66,7 @@ public class SsrEngine(
 
     private val workingDir: Path = createTempDirectory("ssr")
     private val uniqueText: String = UUID.randomUUID().toString()
-    private val httpClient = HttpClient(Apache)
+    private val httpClient = HttpClient(CIO)
 
     private val ssrService: String = externalSsrService ?: "http://localhost:${port ?: 7788}"
     private val root: String = rootId ?: "root"
