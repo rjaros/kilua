@@ -68,7 +68,6 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation(project(":kilua"))
-                implementation(project(":modules:kilua-core-css"))
                 implementation(project(":modules:kilua-bootstrap"))
                 implementation(project(":modules:kilua-ssr"))
             }

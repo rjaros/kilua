@@ -10,7 +10,14 @@ if (config.devServer) {
 } else {
     config.devtool = undefined;
     config.resolve.alias = {
-        "zzz-kilua-assets/style.css": false,
+        "zzz-kilua-assets/k-style.css": false,
+        "zzz-kilua-assets/k-bootstrap.css": false,
+        "zzz-kilua-assets/k-splitjs.css": false,
+        "zzz-kilua-assets/k-tabulator.css": false,
+        "zzz-kilua-assets/k-tempus-dominus.css": false,
+        "zzz-kilua-assets/k-toastify.css": false,
+        "zzz-kilua-assets/k-tom-select.css": false,
+        "zzz-kilua-assets/k-trix.css": false,
         "bootstrap/dist/css/bootstrap.min.css": false,
         "@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css": false,
         "tabulator-tables/dist/css/tabulator.min.css": false,

@@ -44,7 +44,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(project(":modules:kilua-core-css"))
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
             }

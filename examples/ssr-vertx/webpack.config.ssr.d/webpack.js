@@ -1,5 +1,12 @@
 config.resolve.alias = {
-    "zzz-kilua-assets/style.css": false,
+    "zzz-kilua-assets/k-style.css": false,
+    "zzz-kilua-assets/k-bootstrap.css": false,
+    "zzz-kilua-assets/k-splitjs.css": false,
+    "zzz-kilua-assets/k-tabulator.css": false,
+    "zzz-kilua-assets/k-tempus-dominus.css": false,
+    "zzz-kilua-assets/k-toastify.css": false,
+    "zzz-kilua-assets/k-tom-select.css": false,
+    "zzz-kilua-assets/k-trix.css": false,
     "@fortawesome/fontawesome-free/css/all.min.css": false,
     "bootstrap/dist/css/bootstrap.min.css": false,
     "bootstrap-icons/font/bootstrap-icons.css": false,
