@@ -115,7 +115,7 @@ import dev.kilua.theme.themeSwitcher
 import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
-import dev.kilua.utils.JsModule
+import dev.kilua.JsModule
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsObjectOf
@@ -125,7 +125,7 @@ import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.today
 import dev.kilua.utils.unsafeCast
-import dev.kilua.utils.useModule
+import dev.kilua.useModule
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.Serializable
