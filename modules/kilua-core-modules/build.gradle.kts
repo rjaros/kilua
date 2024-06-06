@@ -21,7 +21,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":kilua"))
+                api(project(":modules:kilua-dom"))
 //                implementation(npm("zzz-kilua-assets", "http://localhost:8001/zzz-kilua-assets-0.0.9-SNAPSHOT.tgz"))
                 implementation(npm("zzz-kilua-assets", libs.versions.npm.kilua.assets.get()))
             }

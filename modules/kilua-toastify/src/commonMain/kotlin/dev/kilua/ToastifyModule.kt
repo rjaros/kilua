@@ -23,12 +23,13 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("toastify-js/src/toastify.css")
 internal external object ToastifyCss : JsAny
+
+@JsModule("zzz-kilua-assets/k-toastify.css")
+internal external object CoreToastifyCss : JsAny
 
 /**
  * Initializer for Kilua Toastify module.
@@ -37,6 +38,8 @@ public object ToastifyModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(ToastifyCss)
+        useModule(CoreToastifyCss)
         CssRegister.register("toastify-js/src/toastify.css")
+        CssRegister.register("zzz-kilua-assets/k-toastify.css")
     }
 }

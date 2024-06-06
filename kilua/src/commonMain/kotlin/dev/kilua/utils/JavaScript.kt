@@ -60,35 +60,6 @@ public expect inline fun <T> Any?.cast(): T
 public expect inline fun <T : JsAny> JsAny.unsafeCast(): T
 
 /**
- * Helper annotation for JS/Wasm compatibility.
- */
-@Retention(AnnotationRetention.BINARY)
-@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
-public expect annotation class JsModule(val import: String)
-
-/**
- * Helper annotation for JS/Wasm compatibility.
- */
-@Retention(AnnotationRetention.BINARY)
-@Target(
-    AnnotationTarget.CLASS,
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY,
-    AnnotationTarget.CONSTRUCTOR,
-    AnnotationTarget.PROPERTY_GETTER,
-    AnnotationTarget.PROPERTY_SETTER
-)
-public expect annotation class JsName(val name: String)
-
-/**
- * Helper function for JS/Wasm compatibility.
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun <T> useModule(@Suppress("UNUSED_PARAMETER") module: T) {
-    // empty body
-}
-
-/**
  * Convert JsArray to Kotlin Array.
  */
 public inline fun <reified T : JsAny> JsArray<T>.toArray(): Array<T> {

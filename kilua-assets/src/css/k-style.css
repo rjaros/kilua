@@ -1,0 +1,11 @@
+.kilua-radio-inline {
+    display: inline-block;
+}
+
+select:required:invalid {
+    color: rgb(128, 128, 128);
+}
+
+select:required option {
+    color: black;
+}

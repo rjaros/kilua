@@ -105,7 +105,14 @@ public abstract class KiluaPlugin : Plugin<Project> {
 
         if (webMainExists && webpackSsrExists && kiluaExtension.enableGradleTasks.get()) {
             val cssNames = listOf(
-                "zzz-kilua-assets/style.css",
+                "zzz-kilua-assets/k-style.css",
+                "zzz-kilua-assets/k-bootstrap.css",
+                "zzz-kilua-assets/k-splitjs.css",
+                "zzz-kilua-assets/k-tabulator.css",
+                "zzz-kilua-assets/k-tempus-dominus.css",
+                "zzz-kilua-assets/k-toastify.css",
+                "zzz-kilua-assets/k-tom-select.css",
+                "zzz-kilua-assets/k-trix.css",
                 "bootstrap/dist/css/bootstrap.min.css",
                 "@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css",
                 "tabulator-tables/dist/css/tabulator.min.css",
@@ -187,7 +194,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (cssNames.contains(this.name)) {
+                        if (cssNames.any { this.file.toString().endsWith(it) }) {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         }
                     }
@@ -256,12 +263,12 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (cssNames.contains(this.name)) {
+                        if (cssNames.any { this.file.toString().endsWith(it) }) {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         } else if (this.name.equals("main.bundle.js")) {
                             this.filter {
                                 it.replace(
-                                    Regex("""([a-zA-Z]+)=([a-zA-Z]+)\.default\.createRequire\([^\)]+\)(.*)(\{\})\.resolve\(([a-zA-Z]+)\),(.*)\.readFileSync\([a-zA-Z]+\.fileURLToPath\(([a-zA-Z]+)\)\)"""),
+                                    Regex("""([a-zA-Z_]+)=([a-zA-Z_]+)\.default\.createRequire\([^\)]+\)(.*)(\{\})\.resolve\(([a-zA-Z_]+)\),(.*)\.readFileSync\([a-zA-Z_]+\.fileURLToPath\(([a-zA-Z_]+)\)\)"""),
                                     """$1=$2.default.createRequire("file:///foo")$3$1("path").resolve($5),$6.readFileSync($7)"""
                                 )
                             }

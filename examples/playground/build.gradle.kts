@@ -44,7 +44,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(project(":modules:kilua-core-css"))
                 implementation(project(":modules:kilua-bootstrap"))
                 implementation(project(":modules:kilua-bootstrap-icons"))
                 implementation(project(":modules:kilua-fontawesome"))

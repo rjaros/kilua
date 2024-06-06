@@ -60,7 +60,7 @@ nmcp {
         project(":modules:kilua-bootstrap")
         project(":modules:kilua-bootstrap-icons")
         project(":modules:kilua-common-types")
-        project(":modules:kilua-core-css")
+        project(":modules:kilua-core-modules")
         project(":modules:kilua-dom")
         project(":modules:kilua-fontawesome")
         project(":modules:kilua-i18n")

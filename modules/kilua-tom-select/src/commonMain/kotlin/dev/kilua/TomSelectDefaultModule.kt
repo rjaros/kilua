@@ -23,8 +23,6 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("tom-select/dist/css/tom-select.default.min.css")
@@ -37,6 +35,8 @@ public object TomSelectDefaultModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TomSelectDefaultCss)
+        useModule(CoreTomSelectCss)
         CssRegister.register("tom-select/dist/css/tom-select.default.min.css")
+        CssRegister.register("zzz-kilua-assets/k-tom-select.css")
     }
 }

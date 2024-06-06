@@ -23,7 +23,7 @@
 
 package dev.kilua.externals
 
-import dev.kilua.utils.JsModule
+import dev.kilua.JsModule
 import dev.kilua.utils.nativeMapOf
 import web.JsAny
 

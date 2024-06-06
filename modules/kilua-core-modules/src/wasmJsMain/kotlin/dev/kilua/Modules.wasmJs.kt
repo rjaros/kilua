@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Robert Jaros
+ * Copyright (c) 2023 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,6 @@
 
 package dev.kilua
 
-import dev.kilua.utils.nativeListOf
+public actual typealias JsModule = kotlin.js.JsModule
 
-/**
- * Kilua CSS register.
- */
-public object CssRegister {
-
-    public val cssFiles: MutableList<String> = nativeListOf()
-
-    /**
-     * Register CSS file used by the Kilua Modules.
-     */
-    public fun register(cssFile: String) {
-        cssFiles.add(cssFile)
-    }
-}
+public actual typealias JsName = kotlin.js.JsName

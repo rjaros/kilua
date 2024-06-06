@@ -1,0 +1,3 @@
+.was-validated .input-group.kilua-td:has(:invalid) ~ .invalid-feedback, .was-validated .input-group.kilua-td:has(:invalid) ~ .invalid-tooltip {
+    display: block;
+}

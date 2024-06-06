@@ -1,0 +1,96 @@
+.nav.tabs-top {
+    flex-wrap: nowrap;
+}
+
+ul.tabs-top {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+}
+
+ul.tabs-top > li {
+    float: none;
+    flex-shrink: 0;
+}
+
+.kilua-tab-close {
+    width: 8px;
+    height: 8px;
+}
+
+.kilua-tab-panel .nav-tabs .nav-link:focus, .kilua-tab-panel .nav-tabs .nav-link:hover {
+    isolation: inherit;
+}
+
+.btn-group-xsm > .btn, .btn-xsm {
+    --bs-btn-padding-y: 0.1rem;
+    --bs-btn-padding-x: 0.4rem;
+    --bs-btn-font-size: 0.8rem;
+    --bs-btn-border-radius: 0.25rem;
+    padding-top: 3px;
+}
+
+.dropdown-toggle.kilua-dropdown-no-arrow::after {
+    content: none;
+}
+
+/*!
+ * bootstrap-vertical-tabs - v1.2.2
+ * https://dbtek.github.io/bootstrap-vertical-tabs
+ * 2016-12-02
+ * Copyright (c) 2016 İsmail Demirbilek
+ * License: MIT
+ */
+.nav-tabs.tabs-left, .nav-tabs.tabs-right {
+    border-bottom: none;
+    padding-top: 2px;
+}
+
+.nav-tabs.tabs-left {
+    border-right: 1px solid #dee2e6;
+}
+
+.nav-tabs.tabs-right {
+    border-left: 1px solid #dee2e6;
+}
+
+.nav-tabs.tabs-left > li.nav-item, .nav-tabs.tabs-right > li.nav-item {
+    float: none;
+    margin-bottom: 2px;
+}
+
+.nav-tabs.tabs-left > li.nav-item {
+    margin-right: -1px;
+}
+
+.nav-tabs.tabs-right > li.nav-item {
+    margin-left: -1px;
+}
+
+.nav-tabs.tabs-left > li.nav-item > button.nav-link.active,
+.nav-tabs.tabs-left > li.nav-item > button.nav-link.active:hover,
+.nav-tabs.tabs-left > li.nav-item > button.nav-link.active:focus {
+    border-bottom-color: #dee2e6;
+    border-right-color: transparent;
+}
+
+.nav-tabs.tabs-right > li.nav-item > button.nav-link.active,
+.nav-tabs.tabs-right > li.nav-item > button.nav-link.active:hover,
+.nav-tabs.tabs-right > li.nav-item > button.nav-link.active:focus {
+    border-bottom: 1px solid #dee2e6;
+    border-left-color: transparent;
+}
+
+.nav-tabs.tabs-left > li.nav-item > button.nav-link {
+    border-radius: 4px 0 0 4px;
+    margin-right: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.nav-tabs.tabs-right > li.nav-item > button.nav-link {
+    border-radius: 0 4px 4px 0;
+    margin-right: 0;
+    width: 100%;
+    text-align: left;
+}

@@ -23,8 +23,6 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("./tailwind/tailwind.twcss")

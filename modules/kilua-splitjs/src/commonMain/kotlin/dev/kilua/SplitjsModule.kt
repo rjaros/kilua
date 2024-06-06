@@ -22,11 +22,18 @@
 
 package dev.kilua
 
+import web.JsAny
+
+@JsModule("zzz-kilua-assets/k-splitjs.css")
+internal external object CoreSplitjsCss : JsAny
+
 /**
  * Initializer for Kilua split.js module.
  */
 public object SplitjsModule : ModuleInitializer {
 
     override fun initialize() {
+        useModule(CoreSplitjsCss)
+        CssRegister.register("zzz-kilua-assets/k-splitjs.css")
     }
 }

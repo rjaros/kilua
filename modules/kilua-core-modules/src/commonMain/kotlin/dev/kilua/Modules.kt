@@ -1,4 +1,3 @@
-@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -23,20 +22,31 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.useModule
-import web.JsAny
-
-@JsModule("zzz-kilua-assets/style.css")
-internal external object CoreCss : JsAny
+/**
+ * Helper annotation for JS/Wasm compatibility.
+ */
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
+public expect annotation class JsModule(val import: String)
 
 /**
- * Initializer for Kilua core module.
+ * Helper annotation for JS/Wasm compatibility.
  */
-public object CoreModule : ModuleInitializer {
+@Retention(AnnotationRetention.BINARY)
+@Target(
+    AnnotationTarget.CLASS,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.CONSTRUCTOR,
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.PROPERTY_SETTER
+)
+public expect annotation class JsName(val name: String)
 
-    override fun initialize() {
-        useModule(CoreCss)
-        CssRegister.register("zzz-kilua-assets/style.css")
-    }
+/**
+ * Helper function for JS/Wasm compatibility.
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun <T> useModule(@Suppress("UNUSED_PARAMETER") module: T) {
+    // empty body
 }

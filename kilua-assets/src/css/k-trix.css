@@ -1,0 +1,11 @@
+trix-editor {
+    overflow-y: auto;
+}
+
+trix-toolbar .trix-button-group {
+    margin-bottom: 3px !important;
+}
+
+[data-bs-theme="dark"] trix-toolbar .trix-button {
+    background: #fff !important;
+}

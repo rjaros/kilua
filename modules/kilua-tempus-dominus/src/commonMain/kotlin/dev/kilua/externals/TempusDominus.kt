@@ -24,7 +24,7 @@
 
 package dev.kilua.externals
 
-import dev.kilua.utils.JsModule
+import dev.kilua.JsModule
 import web.JsAny
 import web.JsArray
 import web.JsNumber

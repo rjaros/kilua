@@ -23,7 +23,7 @@
 
 package dev.kilua.ssr
 
-import dev.kilua.utils.JsModule
+import dev.kilua.JsModule
 
 /**
  * Compress String to encoded URI component.

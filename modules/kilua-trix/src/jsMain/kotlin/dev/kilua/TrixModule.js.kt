@@ -24,7 +24,6 @@ package dev.kilua
 
 import dev.kilua.externals.Trix
 import dev.kilua.externals.nodeJsInit
-import dev.kilua.utils.useModule
 
 internal actual fun initializeTrix() {
     nodeJsInit()

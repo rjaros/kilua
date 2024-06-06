@@ -23,12 +23,13 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("trix/dist/trix.css")
 internal external object TrixCss : JsAny
+
+@JsModule("zzz-kilua-assets/k-trix.css")
+internal external object CoreTrixCss : JsAny
 
 /**
  * Initializes Trix module.
@@ -42,7 +43,9 @@ public object TrixModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TrixCss)
+        useModule(CoreTrixCss)
         CssRegister.register("trix/dist/trix.css")
+        CssRegister.register("zzz-kilua-assets/k-trix.css")
         initializeTrix()
     }
 }

@@ -74,6 +74,17 @@ public class SsrEngine(
     private var cssProcessed: Boolean = false
     private var indexTemplate: String = ""
 
+    private val cssAssetsNames = setOf(
+        "zzz-kilua-assets/k-style.css",
+        "zzz-kilua-assets/k-bootstrap.css",
+        "zzz-kilua-assets/k-splitjs.css",
+        "zzz-kilua-assets/k-tabulator.css",
+        "zzz-kilua-assets/k-tempus-dominus.css",
+        "zzz-kilua-assets/k-toastify.css",
+        "zzz-kilua-assets/k-tom-select.css",
+        "zzz-kilua-assets/k-trix.css"
+    )
+
     private val cache: MutableMap<CacheKey, String> = ExpiringMap.builder()
         .expiration(10, TimeUnit.MINUTES)
         .expirationPolicy(ExpirationPolicy.CREATED)
@@ -121,7 +132,7 @@ public class SsrEngine(
                 val textResponse = response.bodyAsText()
                 if (textResponse.isNotEmpty()) {
                     val cssTemplate = response.bodyAsText().split("\n").joinToString("\n") {
-                        if (it == "zzz-kilua-assets/style.css" || it.startsWith("css/") || it.startsWith("modules/css/")) {
+                        if (cssAssetsNames.contains(it) || it.startsWith("css/") || it.startsWith("modules/css/")) {
                             val cssCompressor = CssCompressor(workingDir.resolve(it).reader())
                             val writer = StringWriter()
                             cssCompressor.compress(writer, -1)

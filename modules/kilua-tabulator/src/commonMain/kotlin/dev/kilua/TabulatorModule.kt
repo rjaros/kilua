@@ -23,12 +23,13 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("tabulator-tables/dist/css/tabulator_bootstrap5.min.css")
 internal external object TabulatorCss : JsAny
+
+@JsModule("zzz-kilua-assets/k-tabulator.css")
+internal external object CoreTabulatorCss : JsAny
 
 /**
  * Initializer for Kilua Tabulator module with Bootstrap CSS styling.
@@ -37,6 +38,8 @@ public object TabulatorModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TabulatorCss)
+        useModule(CoreTabulatorCss)
         CssRegister.register("tabulator-tables/dist/css/tabulator_bootstrap5.min.css")
+        CssRegister.register("zzz-kilua-assets/k-tabulator.css")
     }
 }

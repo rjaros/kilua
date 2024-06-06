@@ -23,12 +23,13 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css")
 internal external object TempusDominusCss : JsAny
+
+@JsModule("zzz-kilua-assets/k-tempus-dominus.css")
+internal external object CoreTempusDominusCss : JsAny
 
 /**
  * Initializer for Kilua Tempus Dominus module.
@@ -37,6 +38,8 @@ public object TempusDominusModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TempusDominusCss)
+        useModule(CoreTempusDominusCss)
         CssRegister.register("@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css")
+        CssRegister.register("zzz-kilua-assets/k-tempus-dominus.css")
     }
 }

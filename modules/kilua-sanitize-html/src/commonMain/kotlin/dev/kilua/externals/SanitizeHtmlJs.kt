@@ -23,8 +23,8 @@
 
 package dev.kilua.externals
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.JsName
+import dev.kilua.JsModule
+import dev.kilua.JsName
 import web.JsAny
 import web.JsArray
 import web.JsString

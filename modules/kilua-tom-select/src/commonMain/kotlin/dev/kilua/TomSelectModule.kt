@@ -23,12 +23,13 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("tom-select/dist/css/tom-select.bootstrap5.min.css")
 internal external object TomSelectCss : JsAny
+
+@JsModule("zzz-kilua-assets/k-tom-select.css")
+internal external object CoreTomSelectCss : JsAny
 
 /**
  * Initializer for Kilua Tom Select module with Bootstrap CSS styling.
@@ -37,6 +38,8 @@ public object TomSelectModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(TomSelectCss)
+        useModule(CoreTomSelectCss)
         CssRegister.register("tom-select/dist/css/tom-select.bootstrap5.min.css")
+        CssRegister.register("zzz-kilua-assets/k-tom-select.css")
     }
 }

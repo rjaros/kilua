@@ -23,12 +23,13 @@
 
 package dev.kilua
 
-import dev.kilua.utils.JsModule
-import dev.kilua.utils.useModule
 import web.JsAny
 
 @JsModule("bootstrap/dist/css/bootstrap.min.css")
 internal external object BootstrapCss : JsAny
+
+@JsModule("zzz-kilua-assets/k-bootstrap.css")
+internal external object CoreBootstrapCss : JsAny
 
 /**
  * Initializer for Kilua Bootstrap CSS module.
@@ -37,6 +38,8 @@ public object BootstrapCssModule : ModuleInitializer {
 
     override fun initialize() {
         useModule(BootstrapCss)
+        useModule(CoreBootstrapCss)
         CssRegister.register("bootstrap/dist/css/bootstrap.min.css")
+        CssRegister.register("zzz-kilua-assets/k-bootstrap.css")
     }
 }
