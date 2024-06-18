@@ -37,7 +37,7 @@ module:kilua-bootstrap-icons
 dev.kilua
 module:kilua-common-types
 dev.kilua.types
-module:kilua-core-css
+module:kilua-core-modules
 dev.kilua
 module:kilua-dom
 web
