@@ -66,7 +66,6 @@ public class SsrEngine(
     private val logger = LoggerFactory.getLogger(SsrEngine::class.java)
 
     private val workingDir: Path = createTempDirectory("ssr")
-    private val uniqueText: String = UUID.randomUUID().toString()
     private val httpClient = HttpClient(CIO)
 
     private val ssrService: String = externalSsrService ?: "http://localhost:${port ?: 7788}"
@@ -101,10 +100,6 @@ public class SsrEngine(
             if (ssrZip != null) {
                 FileUtils.unzip(ssrZip, workingDir.toFile())
                 indexTemplate = workingDir.resolve("index.html").readText()
-                    .replace(
-                        """<div id="$root"></div>""",
-                        """<div id="$root">$uniqueText</div>"""
-                    )
                 if (externalSsrService == null) {
                     val processBuilderParams = mutableListOf(nodeExecutable ?: "node", "main.bundle.js")
                     if (port != null) processBuilderParams.addAll(listOf("--port", port.toString()))
@@ -125,15 +120,15 @@ public class SsrEngine(
     }
 
     /**
-     * Initialize global CSS stylesheet for SSR.
+     * Get CSS stylesheet content for SSR.
      */
-    private suspend fun processCss() {
+    public suspend fun getCssContent(): String {
         val response = httpClient.post(ssrService)
-        if (response.status == HttpStatusCode.OK) {
-            withContext(Dispatchers.IO) {
-                val textResponse = response.bodyAsText()
-                if (textResponse.isNotEmpty()) {
-                    val cssTemplate = response.bodyAsText().split("\n").joinToString("\n") {
+        return if (response.status == HttpStatusCode.OK) {
+            val textResponse = response.bodyAsText()
+            if (textResponse.isNotEmpty()) {
+                withContext(Dispatchers.IO) {
+                    textResponse.split("\n").joinToString("\n") {
                         if (cssAssetsNames.contains(it) || it.startsWith("css/") || it.startsWith("modules/css/")) {
                             val cssCompressor = CssCompressor(workingDir.resolve(it).reader())
                             val writer = StringWriter()
@@ -141,37 +136,19 @@ public class SsrEngine(
                             writer.toString()
                         } else workingDir.resolve(it).readText()
                     }
-                    indexTemplate = indexTemplate.replace("</head>", "<style>\n$cssTemplate\n</style>\n</head>")
                 }
+            } else {
+                ""
             }
         } else {
-            logger.error("Failed to initialize CSS for SSR")
+            throw Exception("Connection to the SSR service failed with status ${response.status}")
         }
     }
 
     /**
-     * Get SSR content for the given URI.
+     * Get root content for SSR.
      */
-    public suspend fun getSsrContent(uri: String, locale: String? = null): String {
-        return try {
-            if (!cssProcessed) {
-                processCss()
-                cssProcessed = true
-            }
-            if (noCache) {
-                getInternalSsrContent(uri, locale)
-            } else {
-                cache.getOrPut(CacheKey(uri, locale)) {
-                    getInternalSsrContent(uri, locale)
-                }
-            }
-        } catch (e: Exception) {
-            logger.error("Connection to the SSR service failed", e)
-            indexTemplate.replace(uniqueText, "")
-        }
-    }
-
-    private suspend fun getInternalSsrContent(uri: String, locale: String?): String {
+    public suspend fun getRootContent(uri: String, locale: String? = null): String {
         if (uri.count { it == '?' } > 1) {
             throw Exception("Invalid URI: $uri")
         }
@@ -181,11 +158,47 @@ public class SsrEngine(
             }
         }
         return if (response.status == HttpStatusCode.OK) {
-            val content = response.bodyAsText()
-            indexTemplate.replace(uniqueText, content)
+            response.bodyAsText()
         } else {
             throw Exception("Connection to the SSR service failed with status ${response.status}")
         }
+    }
+
+    /**
+     * Initialize global CSS stylesheet for SSR.
+     */
+    private suspend fun processCss() {
+        if (!cssProcessed) {
+            val cssTemplate = getCssContent()
+            if (cssTemplate.isNotEmpty()) {
+                indexTemplate = indexTemplate.replace("</head>", "<style>\n$cssTemplate\n</style>\n</head>")
+            }
+            cssProcessed = true
+        }
+    }
+
+    /**
+     * Get SSR content for the given URI and locale.
+     */
+    public suspend fun getSsrContent(uri: String, locale: String? = null): String {
+        return try {
+            processCss()
+            if (noCache) {
+                getInternalSsrContent(uri, locale)
+            } else {
+                cache.getOrPut(CacheKey(uri, locale)) {
+                    getInternalSsrContent(uri, locale)
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Connection to the SSR service failed", e)
+            indexTemplate
+        }
+    }
+
+    private suspend fun getInternalSsrContent(uri: String, locale: String?): String {
+        val content = getRootContent(uri, locale)
+        return indexTemplate.replace("<div id=\"$root\"></div>", "<div id=\"$root\">$content</div>")
     }
 
 }
