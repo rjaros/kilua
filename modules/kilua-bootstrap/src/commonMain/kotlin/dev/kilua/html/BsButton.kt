@@ -123,5 +123,8 @@ public fun IComponent.bsButton(
     id: String? = null,
     content: @Composable IButton.() -> Unit = {}
 ) {
-    button(label, icon, type, disabled, "btn" % style.value % size?.value % className, id, content)
+    val iconClassName = if (label != null && icon != null) {
+        className % "icon-link"
+    } else className
+    button(label, icon, type, disabled, "btn" % style.value % size?.value % iconClassName, id, content)
 }
