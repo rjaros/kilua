@@ -44,6 +44,7 @@ public open class SsrConfiguration {
         ssrConfig.externalSsrService,
         ssrConfig.rpcUrlPrefix,
         ssrConfig.rootId,
+        ssrConfig.contextPath,
         ssrConfig.noCache
     )
 }

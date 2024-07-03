@@ -44,9 +44,10 @@ public fun Kooby.initSsr() {
         if (config.hasPath("ssr.externalSsrService")) config.getString("ssr.externalSsrService") else null
     val rpcUrlPrefix = if (config.hasPath("ssr.rpcUrlPrefix")) config.getString("ssr.rpcUrlPrefix") else null
     val rootId = if (config.hasPath("ssr.rootId")) config.getString("ssr.rootId") else null
+    val contextPath = if (config.hasPath("ssr.contextPath")) config.getString("ssr.contextPath") else null
     val noCache = if (config.hasPath("ssr.noCache"))
         (config.getString("ssr.noCache")?.toBooleanStrictOrNull() ?: false) else false
-    val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, noCache)
+    val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, noCache)
     before { ctx ->
         ctx.setAttribute(SSR_ENGINE_KEY, ssrEngine)
     }

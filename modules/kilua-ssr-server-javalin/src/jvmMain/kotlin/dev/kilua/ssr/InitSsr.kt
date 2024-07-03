@@ -47,8 +47,9 @@ public fun Javalin.initSsr() {
     val externalSsrService = prop.getProperty("ssr.externalSsrService")
     val rpcUrlPrefix = prop.getProperty("ssr.rpcUrlPrefix")
     val rootId = prop.getProperty("ssr.rootId")
+    val contextPath = prop.getProperty("ssr.contextPath")
     val noCache = prop.getProperty("ssr.noCache")?.toBooleanStrictOrNull() ?: false
-    val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, noCache)
+    val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, noCache)
     with(unsafeConfig()) {
         appData(ssrEngineKey, ssrEngine)
         get("/") {

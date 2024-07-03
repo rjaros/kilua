@@ -47,6 +47,7 @@ import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
 import dev.kilua.utils.cast
+import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.CoroutineScope
@@ -159,6 +160,10 @@ internal class SsrRouter(
             if (rpcUrlPrefix != null) {
                 globalThis["rpc_url_prefix"] = rpcUrlPrefix.toJsString()
             }
+            val contextPath = getCommandLineParameter("--context-path")
+            if (contextPath != null) {
+                globalThis["ssr_context_path"] = contextPath.toJsString()
+            }
             val port = getCommandLineParameter("--port")?.toIntOrNull()
             startSsr(port ?: 7788)
         }
@@ -269,4 +274,11 @@ public fun RouteBuilder.NoMatch.SsrRouteEffect(key: String? = null, block: suspe
     LaunchedEffect(key?.let { "$it$pathKey" } ?: pathKey) {
         block()
     }
+}
+
+/**
+ * Get the context path configured for the SSR engine.
+ */
+public fun getContextPath(): String {
+    return (if (isDom) globalThis["ssr_context_path"]?.toString() else getCommandLineParameter("--context-path")) ?: ""
 }

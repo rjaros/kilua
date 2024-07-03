@@ -50,6 +50,7 @@ import kotlin.io.path.reader
  * @param externalSsrService an external SSR service URL. If provided, the local SSR service will not be started.
  * @param rpcUrlPrefix a prefix for the Kilua RPC fullstack services.
  * @param rootId an ID of the root element in the HTML template.
+ * @param contextPath a context path for the application.
  * @param noCache a flag to disable caching of SSR content.
  */
 public class SsrEngine(
@@ -58,6 +59,7 @@ public class SsrEngine(
     externalSsrService: String? = null,
     rpcUrlPrefix: String? = null,
     rootId: String? = null,
+    contextPath: String? = null,
     private val noCache: Boolean = false
 ) {
 
@@ -107,6 +109,7 @@ public class SsrEngine(
                     val processBuilderParams = mutableListOf(nodeExecutable ?: "node", "main.bundle.js")
                     if (port != null) processBuilderParams.addAll(listOf("--port", port.toString()))
                     if (rpcUrlPrefix != null) processBuilderParams.addAll(listOf("--rpc-url-prefix", rpcUrlPrefix))
+                    if (contextPath != null) processBuilderParams.addAll(listOf("--context-path", contextPath))
                     val process = ProcessBuilder(*processBuilderParams.toTypedArray())
                     process.redirectErrorStream(true)
                     process.redirectOutput(ProcessBuilder.Redirect.INHERIT)

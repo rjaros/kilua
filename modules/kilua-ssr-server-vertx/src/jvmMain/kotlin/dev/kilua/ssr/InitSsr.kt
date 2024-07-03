@@ -47,8 +47,9 @@ public fun Vertx.initSsr(router: Router) {
     val externalSsrService = prop.getProperty("ssr.externalSsrService")
     val rpcUrlPrefix = prop.getProperty("ssr.rpcUrlPrefix")
     val rootId = prop.getProperty("ssr.rootId")
+    val contextPath = prop.getProperty("ssr.contextPath")
     val noCache = prop.getProperty("ssr.noCache")?.toBooleanStrictOrNull() ?: false
-    val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId)
+    val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, noCache)
 
     router.get("/").handler { ctx ->
         ctx.put(SSR_ENGINE_KEY, ssrEngine)
