@@ -29,12 +29,12 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 
 /**
- * HTML Span component with raw HTML content.
+ * HTML Div component with raw HTML content.
  */
-public open class RawHtml(
+public open class RawHtmlBlock(
     rawHtml: String,
     renderConfig: RenderConfig = RenderConfig.Default
-) : Span(renderConfig = renderConfig) {
+) : Div(renderConfig = renderConfig) {
 
     init {
         @Suppress("LeakingThis")
@@ -50,21 +50,21 @@ public open class RawHtml(
     }
 
     override fun renderToStringBuilder(builder: StringBuilder) {
-        builder.append("<span style=\"display: contents;\">")
+        builder.append("<div style=\"display: contents;\">")
         builder.append(rawHtml)
-        builder.append("</span>")
+        builder.append("</div>")
     }
 }
 
 /**
- * Creates a [RawHtml] component.
+ * Creates a [RawHtmlBlock] component.
  *
  * @param rawHtml the raw HTML content
  */
 @Composable
-public fun IComponent.rawHtml(rawHtml: String) {
-    val component = remember { RawHtml(rawHtml, renderConfig = renderConfig) }
+public fun IComponent.rawHtmlBlock(rawHtml: String) {
+    val component = remember { RawHtmlBlock(rawHtml, renderConfig = renderConfig) }
     ComponentNode(component, {
-        set(rawHtml) { updateProperty(RawHtml::rawHtml, it) }
+        set(rawHtml) { updateProperty(RawHtmlBlock::rawHtml, it) }
     }) {}
 }
