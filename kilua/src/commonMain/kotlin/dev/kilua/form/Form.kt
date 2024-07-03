@@ -67,6 +67,16 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 
 /**
+ * Default error message for an empty required form field.
+ */
+public const val REQUIRED_FIELD_MESSAGE: String = "Value is required"
+
+/**
+ * Default error message for an invalid form field.
+ */
+public const val INVALID_FIELD_MESSAGE: String = "Invalid value"
+
+/**
  * Form methods.
  */
 public enum class FormMethod {
@@ -111,6 +121,8 @@ public enum class FormAutocomplete {
 @Suppress("TooManyFunctions")
 public class Form<K : Any>(
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
+    private val requiredMessage: String = REQUIRED_FIELD_MESSAGE,
+    private val invalidMessage: String = INVALID_FIELD_MESSAGE,
     private val serializer: KSerializer<K>? = null,
     private val customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
@@ -267,14 +279,9 @@ public class Form<K : Any>(
     }
 
     /**
-     * A validator function.
+     * A custom validator function.
      */
-    public var validator: ((Form<K>) -> Boolean)? = null
-
-    /**
-     * A validator message generator function.
-     */
-    public var validatorMessage: ((Form<K>) -> String?)? = null
+    public var validator: ((Validation<K>) -> Validation<K>)? = null
 
     /**
      * Keeps values of the form not bound to any input components.
@@ -599,6 +606,7 @@ public class Form<K : Any>(
             }.launchIn(KiluaScope)
             onDispose {
                 job.cancel()
+                unbind(key)
             }
         }
         return this
@@ -942,45 +950,40 @@ public class Form<K : Any>(
             val required = control.required ?: false
             val isEmptyWhenRequired = (control.getValue() == null || control.value == false)
                     && control.visible && required
-            val requiredMessage = if (isEmptyWhenRequired) "Value is required" else null
+            val requiredMessage = if (isEmptyWhenRequired) requiredMessage else null
             val (isInvalid, validMessage, invalidMessage) = if (fieldsParams.validator != null) {
                 val isInvalid = control.visible && !fieldsParams.validator.invoke(control)
-                val invalidMessage = if (isInvalid) "Invalid value" else null
+                val invalidMessage = if (isInvalid) invalidMessage else null
                 Triple(isInvalid, null, invalidMessage)
             } else if (fieldsParams.validatorWithMessage != null) {
                 val (result, message) = fieldsParams.validatorWithMessage.invoke(control)
                 val isInvalid = control.visible && !result
-                val invalidMessage = if (isInvalid) (message ?: "Invalid value") else null
+                val invalidMessage = if (isInvalid) (message ?: invalidMessage) else null
                 val validMessage = if (!isInvalid) message else null
                 Triple(isInvalid, validMessage, invalidMessage)
             } else {
                 Triple(false, null, null)
             }
-            getControl(key)?.customValidity = invalidMessage ?: requiredMessage
             val fieldValidation = FieldValidation(
                 isEmptyWhenRequired,
                 isInvalid,
                 validMessage,
-                invalidMessage
+                invalidMessage ?: requiredMessage
             )
             key to fieldValidation
         }.toMap()
-        val isInvalid = !(validator?.invoke(this) ?: true)
-        val invalidMessage = if (isInvalid) {
-            validatorMessage?.invoke(this) ?: "Invalid form data"
-        } else {
-            null
-        }
-        val validMessage = if (!isInvalid) {
-            validatorMessage?.invoke(this)
-        } else {
-            null
-        }
         val hasInvalidField = fieldsValidations.map { it.value }.find { it.isInvalid || it.isEmptyWhenRequired } != null
-        val validation =
-            Validation<K>(true, isInvalid || hasInvalidField, validMessage, invalidMessage, fieldsValidations)
-        if (updateState) _mutableValidationStateFlow.value = validation
-        return !validation.isInvalid
+        val validation = Validation<K>(true, hasInvalidField, null, null, fieldsValidations)
+        val validationWithValidator = if (validator != null) {
+            validator!!.invoke(validation)
+        } else {
+            validation
+        }
+        validation.fieldsValidations.forEach { (key, fieldValidation) ->
+            getControl(key)?.customValidity = fieldValidation.invalidMessage
+        }
+        if (updateState) _mutableValidationStateFlow.value = validationWithValidator
+        return !validationWithValidator.isInvalid
     }
 
     /**
@@ -1089,6 +1092,8 @@ public class Form<K : Any>(
          */
         public inline fun <reified K : Any> create(
             method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
+            requiredMessage: String = REQUIRED_FIELD_MESSAGE,
+            invalidMessage: String = INVALID_FIELD_MESSAGE,
             customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
             className: String? = null, id: String? = null,
             renderConfig: RenderConfig = RenderConfig.Default,
@@ -1097,6 +1102,8 @@ public class Form<K : Any>(
                 method,
                 action,
                 enctype,
+                requiredMessage,
+                invalidMessage,
                 serializer(),
                 customSerializers,
                 className,
@@ -1115,6 +1122,8 @@ public class Form<K : Any>(
  * @param method the method attribute of the generated HTML form element
  * @param action the action attribute of the generated HTML form element
  * @param enctype the enctype attribute of the generated HTML form element
+ * @param requiredMessage the default error message for an empty required form field
+ * @param invalidMessage the default error message for an invalid form field
  * @param customSerializers custom serializers for the data model
  * @param className the CSS class name
  * @param id the ID attribute of the form element
@@ -1125,13 +1134,27 @@ public class Form<K : Any>(
 public inline fun <reified K : Any> IComponent.formRef(
     initialData: K? = null,
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
+    requiredMessage: String = REQUIRED_FIELD_MESSAGE,
+    invalidMessage: String = INVALID_FIELD_MESSAGE,
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
     id: String? = null,
     content: @Composable Form<K>.() -> Unit = {}
 ): Form<K> {
     val component =
-        remember { Form.create<K>(method, action, enctype, customSerializers, className, id, renderConfig = renderConfig) }
+        remember {
+            Form.create<K>(
+                method,
+                action,
+                enctype,
+                requiredMessage,
+                invalidMessage,
+                customSerializers,
+                className,
+                id,
+                renderConfig = renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         if (initialData != null) {
@@ -1159,6 +1182,8 @@ public inline fun <reified K : Any> IComponent.formRef(
  * @param method the method attribute of the generated HTML form element
  * @param action the action attribute of the generated HTML form element
  * @param enctype the enctype attribute of the generated HTML form element
+ * @param requiredMessage the default error message for an empty required form field
+ * @param invalidMessage the default error message for an invalid form field
  * @param customSerializers custom serializers for the data model
  * @param className the CSS class name
  * @param id the ID attribute of the form element
@@ -1169,6 +1194,8 @@ public inline fun <reified K : Any> IComponent.formRef(
 public fun IComponent.formRef(
     initialData: Map<String, Any?>? = null,
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
+    requiredMessage: String = REQUIRED_FIELD_MESSAGE,
+    invalidMessage: String = INVALID_FIELD_MESSAGE,
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
     id: String? = null,
@@ -1180,6 +1207,8 @@ public fun IComponent.formRef(
                 method,
                 action,
                 enctype,
+                requiredMessage,
+                invalidMessage,
                 null,
                 customSerializers,
                 className,
@@ -1214,6 +1243,8 @@ public fun IComponent.formRef(
  * @param method the method attribute of the generated HTML form element
  * @param action the action attribute of the generated HTML form element
  * @param enctype the enctype attribute of the generated HTML form element
+ * @param requiredMessage the default error message for an empty required form field
+ * @param invalidMessage the default error message for an invalid form field
  * @param customSerializers custom serializers for the data model
  * @param className the CSS class name
  * @param id the ID attribute of the form element
@@ -1223,13 +1254,27 @@ public fun IComponent.formRef(
 public inline fun <reified K : Any> IComponent.form(
     initialData: K? = null,
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
+    requiredMessage: String = REQUIRED_FIELD_MESSAGE,
+    invalidMessage: String = INVALID_FIELD_MESSAGE,
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
     id: String? = null,
     content: @Composable Form<K>.() -> Unit = {}
 ) {
     val component =
-        remember { Form.create<K>(method, action, enctype, customSerializers, className, id, renderConfig = renderConfig) }
+        remember {
+            Form.create<K>(
+                method,
+                action,
+                enctype,
+                requiredMessage,
+                invalidMessage,
+                customSerializers,
+                className,
+                id,
+                renderConfig = renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         if (initialData != null) {
@@ -1256,6 +1301,8 @@ public inline fun <reified K : Any> IComponent.form(
  * @param method the method attribute of the generated HTML form element
  * @param action the action attribute of the generated HTML form element
  * @param enctype the enctype attribute of the generated HTML form element
+ * @param requiredMessage the default error message for an empty required form field
+ * @param invalidMessage the default error message for an invalid form field
  * @param customSerializers custom serializers for the data model
  * @param className the CSS class name
  * @param id the ID attribute of the form element
@@ -1265,6 +1312,8 @@ public inline fun <reified K : Any> IComponent.form(
 public fun IComponent.form(
     initialData: Map<String, Any?>? = null,
     method: FormMethod? = null, action: String? = null, enctype: FormEnctype? = null,
+    requiredMessage: String = REQUIRED_FIELD_MESSAGE,
+    invalidMessage: String = INVALID_FIELD_MESSAGE,
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
     id: String? = null,
@@ -1276,6 +1325,8 @@ public fun IComponent.form(
                 method,
                 action,
                 enctype,
+                requiredMessage,
+                invalidMessage,
                 null,
                 customSerializers,
                 className,

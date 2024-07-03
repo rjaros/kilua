@@ -46,4 +46,16 @@ public data class Validation<K : Any>(
 ) {
     public operator fun get(key: String): FieldValidation? = fieldsValidations[key]
     public operator fun get(key: KProperty1<K, *>): FieldValidation? = fieldsValidations[key.name]
+
+    /**
+     * Create a copy of this validation result with the new value of a given field validation.
+     */
+    public fun setFieldValidation(key: String, fieldValidation: FieldValidation): Validation<K> =
+        copy(fieldsValidations = fieldsValidations + (key to fieldValidation))
+
+    /**
+     * Create a copy of this validation result with the new value of a given field validation.
+     */
+    public fun setFieldValidation(key: KProperty1<K, *>, fieldValidation: FieldValidation): Validation<K> =
+        setFieldValidation(key.name, fieldValidation)
 }
