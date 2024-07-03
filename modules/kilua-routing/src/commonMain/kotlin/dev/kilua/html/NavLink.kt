@@ -25,6 +25,7 @@ package dev.kilua.html
 import androidx.compose.runtime.Composable
 import app.softwork.routingcompose.Router
 import dev.kilua.core.IComponent
+import dev.kilua.utils.isDom
 
 /**
  * Creates a [Link] component with router support, returning a reference.
@@ -34,6 +35,7 @@ import dev.kilua.core.IComponent
  * @param icon the link icon
  * @param target the link target
  * @param hide hides the route from the browser history
+ * @param replace replaces the current entry in the browser history
  * @param className the CSS class name
  * @param id the ID attribute of the component
  * @param content the content of the component
@@ -46,12 +48,13 @@ public fun IComponent.navLinkRef(
     icon: String? = null,
     target: String? = null,
     hide: Boolean = false,
+    replace: Boolean = false,
     className: String? = null,
     id: String? = null,
     content: @Composable ILink.() -> Unit = {}
 ): Link {
     return linkRef(href, label, icon, target, className, id) {
-        setupNavLink(href, hide)
+        setupNavLink(href, hide, replace)
         content()
     }
 }
@@ -64,6 +67,7 @@ public fun IComponent.navLinkRef(
  * @param icon the link icon
  * @param target the link target
  * @param hide hides the route from the browser history
+ * @param replace replaces the current entry in the browser history
  * @param className the CSS class name
  * @param id the ID attribute of the component
  * @param content the content of the component
@@ -75,22 +79,23 @@ public fun IComponent.navLink(
     icon: String? = null,
     target: String? = null,
     hide: Boolean = false,
+    replace: Boolean = false,
     className: String? = null,
     id: String? = null,
     content: @Composable ILink.() -> Unit = {}
 ) {
     link(href, label, icon, target, className, id) {
-        setupNavLink(href, hide)
+        setupNavLink(href, hide, replace)
         content()
     }
 }
 
 @Composable
-private fun ILink.setupNavLink(href: String?, hide: Boolean) {
-    if (href != null) {
+private fun ILink.setupNavLink(href: String?, hide: Boolean, replace: Boolean) {
+    if (href != null && isDom) {
         val router = Router.current
         onClick {
-            router.navigate(href, hide)
+            router.navigate(href, hide, replace)
             it.preventDefault()
         }
     }

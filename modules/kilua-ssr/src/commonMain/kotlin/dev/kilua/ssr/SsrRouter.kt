@@ -179,7 +179,7 @@ internal class SsrRouter(
         return currentLocation
     }
 
-    override fun navigate(to: String, hide: Boolean) {
+    override fun navigate(to: String, hide: Boolean, replace: Boolean) {
         currentLocation.value = to
     }
 

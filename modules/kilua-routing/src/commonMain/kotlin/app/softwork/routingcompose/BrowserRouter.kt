@@ -69,11 +69,15 @@ internal class BrowserRouter : Router {
 
     private fun Location.newPath() = "$pathname$search"
 
-    override fun navigate(to: String, hide: Boolean) {
+    override fun navigate(to: String, hide: Boolean, replace: Boolean) {
         if (hide) {
             currentLocation.value = to
         } else {
-            window.history.pushState(null, "", to)
+            if (replace) {
+                window.history.replaceState(null, "", to)
+            } else {
+                window.history.pushState(null, "", to)
+            }
             /*
              The history API unfortunately provides no callback to listen to
              [window.history.pushState], so we need to notify subscribers when pushing a new path.
