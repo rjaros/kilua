@@ -30,7 +30,7 @@ ballast = "4.2.1"
 shadow = "8.1.1"
 logback = "1.5.6"
 tomlj = "1.1.1"
-wro4j = "2.1.1"
+resources-optimizer = "2.6.4"
 expiring-map = "0.5.11"
 npm-kilua-assets = "0.0.11"
 css-loader = "7.1.2"
@@ -95,7 +95,7 @@ ballast-sync = { module = "io.github.copper-leaf:ballast-sync", version.ref = "b
 ballast-undo = { module = "io.github.copper-leaf:ballast-undo", version.ref = "ballast" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
-wro4j = { module = "ro.isdc.wro4j:wro4j-core", version.ref = "wro4j" }
+resources-optimizer = { module = "org.primefaces.extensions:resources-optimizer-maven-plugin", version.ref = "resources-optimizer" }
 expiring-map = { module = "net.jodah:expiringmap", version.ref = "expiring-map" }
 kilua-gettext = { module = "dev.kilua:kilua-gettext", version.ref = "kilua-gettext" }
 compose-gradle-plugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }

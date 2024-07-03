@@ -23,7 +23,7 @@ kotlin {
             dependencies {
                 api(libs.ktor.client.core)
                 api(libs.ktor.client.cio)
-                api(libs.wro4j)
+                api(libs.resources.optimizer)
                 api(libs.expiring.map)
                 api(libs.logback.classic)
             }

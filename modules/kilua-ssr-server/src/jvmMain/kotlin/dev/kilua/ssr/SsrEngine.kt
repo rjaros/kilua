@@ -31,11 +31,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.jodah.expiringmap.ExpirationPolicy
 import net.jodah.expiringmap.ExpiringMap
+import org.primefaces.extensions.optimizerplugin.optimizer.CssCompressor
 import org.slf4j.LoggerFactory
-import ro.isdc.wro.model.resource.processor.support.CssCompressor
 import java.io.StringWriter
 import java.nio.file.Path
-import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.createTempDirectory
