@@ -35,7 +35,7 @@ internal external class ImaskJs : JsAny {
     var unmaskedValue: String?
     fun on(event: String, callback: () -> Unit)
     fun updateValue()
-    fun updateControl()
+    fun updateControl(cursorPos: String)
     fun destroy()
 }
 

@@ -45,6 +45,6 @@ internal class Imask(private val imask: ImaskJs) : Mask {
 
     override fun refresh() {
         imask.updateValue()
-        imask.updateControl()
+        imask.updateControl("auto")
     }
 }
