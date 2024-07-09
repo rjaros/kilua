@@ -520,6 +520,9 @@ class App : Application() {
                             console.log(this.value.toString())
                         }
                     }
+                    text {
+                        maskOptions = ImaskOptions(pattern = PatternMask("00{-}000", lazy = false, eager = true))
+                    }
                 }
 
                 hr()
