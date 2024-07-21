@@ -23,12 +23,7 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import web.dom.HTMLElement
-import web.dom.events.Event
-import web.dom.events.FocusEvent
-import web.dom.events.InputEvent
-import web.dom.events.KeyboardEvent
-import web.dom.events.MouseEvent
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * Common tag events.
@@ -39,122 +34,122 @@ public interface TagEvents<E : HTMLElement> {
      * Add click event listener (composable).
      */
     @Composable
-    public fun onClick(listener: (MouseEvent) -> Unit): Int
+    public fun onClick(listener: (dev.kilua.dom.api.events.MouseEvent) -> Unit): Int
 
     /**
      * Add click event listener (not composable).
      */
-    public fun onClickDirect(listener: (MouseEvent) -> Unit): Int
+    public fun onClickDirect(listener: (dev.kilua.dom.api.events.MouseEvent) -> Unit): Int
 
     /**
      * Add context menu event listener (composable).
      */
     @Composable
-    public fun onContextmenu(listener: (MouseEvent) -> Unit): Int
+    public fun onContextmenu(listener: (dev.kilua.dom.api.events.MouseEvent) -> Unit): Int
 
     /**
      * Add context menu event listener (not composable).
      */
-    public fun onContextmenuDirect(listener: (MouseEvent) -> Unit): Int
+    public fun onContextmenuDirect(listener: (dev.kilua.dom.api.events.MouseEvent) -> Unit): Int
 
     /**
      * Add double click event listener (composable).
      */
     @Composable
-    public fun onDblclick(listener: (MouseEvent) -> Unit): Int
+    public fun onDblclick(listener: (dev.kilua.dom.api.events.MouseEvent) -> Unit): Int
 
     /**
      * Add double click event listener (not composable).
      */
-    public fun onDblclickDirect(listener: (MouseEvent) -> Unit): Int
+    public fun onDblclickDirect(listener: (dev.kilua.dom.api.events.MouseEvent) -> Unit): Int
 
     /**
      * Add change event listener (composable).
      */
     @Composable
-    public fun onChange(listener: (Event) -> Unit): Int
+    public fun onChange(listener: (dev.kilua.dom.api.events.Event) -> Unit): Int
 
     /**
      * Add change event listener (not composable).
      */
-    public fun onChangeDirect(listener: (Event) -> Unit): Int
+    public fun onChangeDirect(listener: (dev.kilua.dom.api.events.Event) -> Unit): Int
 
     /**
      * Add input event listener (composable).
      */
     @Composable
-    public fun onInput(listener: (InputEvent) -> Unit): Int
+    public fun onInput(listener: (dev.kilua.dom.api.events.InputEvent) -> Unit): Int
 
     /**
      * Add input event listener (not composable).
      */
-    public fun onInputDirect(listener: (InputEvent) -> Unit): Int
+    public fun onInputDirect(listener: (dev.kilua.dom.api.events.InputEvent) -> Unit): Int
 
     /**
      * Add focus event listener (composable).
      */
     @Composable
-    public fun onFocus(listener: (FocusEvent) -> Unit): Int
+    public fun onFocus(listener: (dev.kilua.dom.api.events.FocusEvent) -> Unit): Int
 
     /**
      * Add focus event listener (not composable).
      */
-    public fun onFocusDirect(listener: (FocusEvent) -> Unit): Int
+    public fun onFocusDirect(listener: (dev.kilua.dom.api.events.FocusEvent) -> Unit): Int
 
     /**
      * Add blur event listener (composable).
      */
     @Composable
-    public fun onBlur(listener: (FocusEvent) -> Unit): Int
+    public fun onBlur(listener: (dev.kilua.dom.api.events.FocusEvent) -> Unit): Int
 
     /**
      * Add blur event listener (not composable).
      */
-    public fun onBlurDirect(listener: (FocusEvent) -> Unit): Int
+    public fun onBlurDirect(listener: (dev.kilua.dom.api.events.FocusEvent) -> Unit): Int
 
     /**
      * Add key down event listener (composable).
      */
     @Composable
-    public fun onKeydown(listener: (KeyboardEvent) -> Unit): Int
+    public fun onKeydown(listener: (dev.kilua.dom.api.events.KeyboardEvent) -> Unit): Int
 
     /**
      * Add key down event listener (not composable).
      */
-    public fun onKeydownDirect(listener: (KeyboardEvent) -> Unit): Int
+    public fun onKeydownDirect(listener: (dev.kilua.dom.api.events.KeyboardEvent) -> Unit): Int
 
     /**
      * Add key up event listener (composable).
      */
     @Composable
-    public fun onKeyup(listener: (KeyboardEvent) -> Unit): Int
+    public fun onKeyup(listener: (dev.kilua.dom.api.events.KeyboardEvent) -> Unit): Int
 
     /**
      * Add key up event listener (not composable).
      */
-    public fun onKeyupDirect(listener: (KeyboardEvent) -> Unit): Int
+    public fun onKeyupDirect(listener: (dev.kilua.dom.api.events.KeyboardEvent) -> Unit): Int
 
     /**
      * Add key press event listener (composable).
      */
     @Composable
-    public fun onKeypress(listener: (KeyboardEvent) -> Unit): Int
+    public fun onKeypress(listener: (dev.kilua.dom.api.events.KeyboardEvent) -> Unit): Int
 
     /**
      * Add key press event listener (not composable).
      */
-    public fun onKeypressDirect(listener: (KeyboardEvent) -> Unit): Int
+    public fun onKeypressDirect(listener: (dev.kilua.dom.api.events.KeyboardEvent) -> Unit): Int
 
     /**
      * Add event listener by event name (composable).
      */
     @Composable
-    public fun <EV : Event> onEvent(name: String, listener: (EV) -> Unit): Int
+    public fun <EV : dev.kilua.dom.api.events.Event> onEvent(name: String, listener: (EV) -> Unit): Int
 
     /**
      * Add event listener by event name (not composable).
      */
-    public fun <EV : Event> onEventDirect(name: String, listener: (EV) -> Unit): Int
+    public fun <EV : dev.kilua.dom.api.events.Event> onEventDirect(name: String, listener: (EV) -> Unit): Int
 
     /**
      * Remove event listener by event name and ID.

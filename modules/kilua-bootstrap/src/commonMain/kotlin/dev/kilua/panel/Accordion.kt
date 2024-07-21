@@ -43,7 +43,7 @@ import dev.kilua.html.h2
 import dev.kilua.panel.Accordion.Companion.idCounter
 import dev.kilua.utils.cast
 import dev.kilua.utils.rem
-import web.dom.HTMLDivElement
+import dev.kilua.dom.api.HTMLDivElement
 
 internal data class AccordionItem(
     val label: String? = null,

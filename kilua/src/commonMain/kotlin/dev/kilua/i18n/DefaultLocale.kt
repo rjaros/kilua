@@ -24,7 +24,7 @@ package dev.kilua.i18n
 
 import dev.kilua.externals.Intl
 import dev.kilua.utils.isDom
-import web.window
+import dev.kilua.dom.window
 
 /**
  * Auto-detected default system locale.

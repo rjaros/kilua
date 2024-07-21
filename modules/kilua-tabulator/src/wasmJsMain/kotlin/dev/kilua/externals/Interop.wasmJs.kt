@@ -22,11 +22,10 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.JsArray
-import web.Promise
-import web.dom.Element
-import web.dom.events.Event
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsArray
+import dev.kilua.dom.Promise
+import dev.kilua.dom.api.Element
 
 internal actual fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> JsNumber): JsAny =
     js("f")
@@ -71,4 +70,4 @@ internal actual fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny = js("f")
 
 internal actual fun toJsAny(f: (JsAny) -> Boolean): JsAny = js("f")
 
-internal actual fun toJsAny(f: (Event) -> JsArray<JsAny>): JsAny = js("f")
+internal actual fun toJsAny(f: (dev.kilua.dom.api.events.Event) -> JsArray<JsAny>): JsAny = js("f")

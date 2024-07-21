@@ -25,7 +25,7 @@ package dev.kilua.ssr
 import dev.kilua.externals.get
 import dev.kilua.utils.isDom
 import kotlinx.serialization.json.Json
-import web.window
+import dev.kilua.dom.window
 
 public inline fun <reified T> getSsrState(json: Json = Json.Default): T? {
     return if (isDom) {

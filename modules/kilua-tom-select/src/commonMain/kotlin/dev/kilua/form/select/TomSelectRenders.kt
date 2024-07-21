@@ -24,7 +24,7 @@ package dev.kilua.form.select
 
 import dev.kilua.externals.TomSelectRendersJs
 import dev.kilua.externals.obj
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 /**
  * Tom Select rendering options.

@@ -6,8 +6,8 @@ import dev.kilua.externals.get
 import dev.kilua.externals.set
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
-import web.dom.Storage
-import web.toJsString
+import dev.kilua.dom.api.Storage
+import dev.kilua.dom.core.toJsString
 
 class TodoSavedStateAdapter(private val json: Json, private val storage: Storage) :
     SavedStateAdapter<

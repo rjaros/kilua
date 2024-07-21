@@ -30,8 +30,7 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import web.dom.HTMLInputElement
-import web.dom.events.Event
+import dev.kilua.dom.api.HTMLInputElement
 
 /**
  * Base interface form HTML input components.
@@ -451,7 +450,7 @@ public abstract class Input<T : Any>(
                 element.required = required
             }
             @Suppress("LeakingThis")
-            onEventDirect<Event>("input") {
+            onEventDirect<dev.kilua.dom.api.events.Event>("input") {
                 if (mask == null) setInternalValueFromString(element.value)
             }
         }

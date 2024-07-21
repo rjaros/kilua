@@ -58,11 +58,11 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import web.JsAny
-import web.dom.HTMLFormElement
-import web.toJsBoolean
-import web.toJsNumber
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.api.HTMLFormElement
+import dev.kilua.dom.toJsBoolean
+import dev.kilua.dom.toJsNumber
+import dev.kilua.dom.toJsString
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 

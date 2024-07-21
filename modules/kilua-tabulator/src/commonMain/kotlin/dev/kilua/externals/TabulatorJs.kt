@@ -26,10 +26,10 @@ package dev.kilua.externals
 
 import dev.kilua.JsModule
 import dev.kilua.JsName
-import web.JsAny
-import web.JsArray
-import web.Promise
-import web.dom.HTMLElement
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsArray
+import dev.kilua.dom.Promise
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * JavaScript Tabulator component.
@@ -64,26 +64,26 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
     public fun getHistoryUndoSize(): JsAny
     public fun redo(): Boolean
     public fun getHistoryRedoSize(): JsAny
-    public fun getEditedCells(): JsArray<CellComponent>
+    public fun getEditedCells(): dev.kilua.dom.JsArray<CellComponent>
     public fun clearCellEdited(clear: JsAny)
     public fun destroy()
     public fun import(importer: JsAny, extensions: String)
     public fun import(importer: JsAny, extensions: String, type: String)
     public fun setData(data: JsAny?, params: JsAny?, config: JsAny?): Promise<JsAny>
     public fun clearData()
-    public fun getData(activeOnly: String?): JsArray<JsAny>
+    public fun getData(activeOnly: String?): dev.kilua.dom.JsArray<JsAny>
     public fun getDataCount(activeOnly: String? /* 'active' | 'visible' */): Int
     public fun searchRows(
         field: String,
         type: String /* '=' | '!=' | 'like' | '<' | '>' | '<=' | '>=' | 'in' | 'regex' | 'starts' | 'ends' */,
         value: JsAny
-    ): JsArray<RowComponent>
+    ): dev.kilua.dom.JsArray<RowComponent>
 
     public fun searchData(
         field: String,
         type: String /* '=' | '!=' | 'like' | '<' | '>' | '<=' | '>=' | 'in' | 'regex' | 'starts' | 'ends' */,
         value: JsAny
-    ): JsArray<JsAny>
+    ): dev.kilua.dom.JsArray<JsAny>
 
     public fun getHtml(
         rowRangeLookup: String /* 'visible' | 'active' | 'selected' | 'all' */,
@@ -100,14 +100,14 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
     public fun getAjaxUrl(): String
     public fun replaceData(data: JsAny /* JsArray<JsAny> | String */, params: JsAny?, config: JsAny?): Promise<JsAny>
 
-    public fun updateData(data: JsArray<JsAny>): Promise<JsAny>
+    public fun updateData(data: dev.kilua.dom.JsArray<JsAny>): Promise<JsAny>
     public fun addData(
-        data: JsArray<JsAny>,
+        data: dev.kilua.dom.JsArray<JsAny>,
         addToTop: Boolean,
         positionTarget: JsAny /* RowComponent | HTMLElement | String | JsNumber | JsArray<JsNumber> | JsArray<String> */
     ): Promise<RowComponent>
 
-    public fun updateOrAddData(data: JsArray<JsAny>): Promise<JsArray<RowComponent>>
+    public fun updateOrAddData(data: dev.kilua.dom.JsArray<JsAny>): Promise<JsArray<RowComponent>>
     public fun getRow(row: JsAny /* RowComponent | HTMLElement | String | JsNumber | JsArray<JsNumber> | JsArray<String> */): RowComponent
 
     public fun getRowFromPosition(position: Int): RowComponent
@@ -140,17 +140,17 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
         placeAboveTarget: Boolean
     )
 
-    public fun getRows(activeOnly: String /* 'active' | 'visible' */): JsArray<RowComponent>
+    public fun getRows(activeOnly: String /* 'active' | 'visible' */): dev.kilua.dom.JsArray<RowComponent>
     public fun getRowPosition(
         row: JsAny /* RowComponent | HTMLElement | String | JsNumber | JsArray<JsNumber> | JsArray<String> */
     ): JsAny
 
-    public fun setColumns(definitions: JsArray<JsAny>)
-    public fun getColumns(includeColumnGroups: Boolean): JsArray<ColumnComponent>
+    public fun setColumns(definitions: dev.kilua.dom.JsArray<JsAny>)
+    public fun getColumns(includeColumnGroups: Boolean): dev.kilua.dom.JsArray<ColumnComponent>
     public fun getColumn(column: JsAny /* ColumnComponent | ColumnDefinition | HTMLElement | String */): ColumnComponent
 
-    public fun getColumnDefinitions(): JsArray<JsAny>
-    public fun getColumnLayout(): JsArray<JsAny>
+    public fun getColumnDefinitions(): dev.kilua.dom.JsArray<JsAny>
+    public fun getColumnLayout(): dev.kilua.dom.JsArray<JsAny>
     public fun setColumnLayout(layout: JsAny)
     public fun showColumn(column: JsAny /* ColumnComponent | ColumnDefinition | HTMLElement | String */)
 
@@ -195,7 +195,7 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
         dir: String /* 'asc' | 'desc' */
     )
 
-    public fun getSorters(): JsArray<JsAny>
+    public fun getSorters(): dev.kilua.dom.JsArray<JsAny>
     public fun clearSort()
     public fun setFilter(
         p1: JsAny /* String | JsArray<Tabulator.Filter> | JsArray<JsAny> | (data: JsAny, filterParams: JsAny):Boolean */,
@@ -205,7 +205,7 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
     )
 
     public fun addFilter(): JsAny
-    public fun getFilters(includeHeaderFilters: Boolean): JsArray<JsAny>
+    public fun getFilters(includeHeaderFilters: Boolean): dev.kilua.dom.JsArray<JsAny>
     public fun setHeaderFilterValue(
         column: JsAny /* ColumnComponent | ColumnDefinition | HTMLElement | String */,
         value: String
@@ -213,7 +213,7 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
 
     public fun setHeaderFilterFocus(column: JsAny /* ColumnComponent | ColumnDefinition | HTMLElement | String */)
 
-    public fun getHeaderFilters(): JsArray<JsAny>
+    public fun getHeaderFilters(): dev.kilua.dom.JsArray<JsAny>
     public fun getHeaderFilterValue(column: JsAny /* ColumnComponent | ColumnDefinition | HTMLElement | String */): String
 
     public fun removeFilter(): JsAny
@@ -222,8 +222,8 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
     public fun selectRow(lookup: JsAny /* JsArray<JsAny /* RowComponent | HTMLElement | String | JsNumber | JsArray<JsNumber> | JsArray<String> */> | 'all' | 'active' | 'visible' | Boolean */)
     public fun deselectRow(row: JsAny /* RowComponent | HTMLElement | String | JsNumber | JsArray<JsNumber> | JsArray<String> */)
     public fun toggleSelectRow(row: JsAny /* RowComponent | HTMLElement | String | JsNumber | JsArray<JsNumber> | JsArray<String> */)
-    public fun getSelectedRows(): JsArray<RowComponent>
-    public fun getSelectedData(): JsArray<JsAny>
+    public fun getSelectedRows(): dev.kilua.dom.JsArray<RowComponent>
+    public fun getSelectedData(): dev.kilua.dom.JsArray<JsAny>
     public fun setMaxPage(max: Int)
     public fun setPage(page: JsAny /* JsNumber | 'first' | 'prev' | 'next' | 'last' */): Promise<JsAny>
     public fun setPageToRow(row: JsAny /* RowComponent | HTMLElement | String | JsNumber | JsArray<JsNumber> | JsArray<String> */): Promise<JsAny>
@@ -236,7 +236,7 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
     public fun setGroupBy(groups: JsAny /* String | (data: JsAny):JsAny */)
     public fun setGroupStartOpen(values: JsAny /* Boolean | (value: JsAny, count: JsNumber, data: JsAny, group: Tabulator.GroupComponent):Boolean */)
     public fun setGroupHeader(values: JsAny /* (value: JsAny, count: JsNumber, data: JsAny, group: Tabulator.GroupComponent):String | JsArray<(value: JsAny, count: JsNumber, data: JsAny):String> */)
-    public fun getGroups(): JsArray<GroupComponent>
+    public fun getGroups(): dev.kilua.dom.JsArray<GroupComponent>
     public fun getGroupedData(activeOnly: Boolean): JsAny
     public fun getCalcResults(): JsAny
     public fun recalc()
@@ -246,7 +246,7 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
     public fun navigateRight()
     public fun navigateUp()
     public fun navigateDown()
-    public fun getInvalidCells(): JsArray<CellComponent>
+    public fun getInvalidCells(): dev.kilua.dom.JsArray<CellComponent>
     public fun clearCellValidation(clearType: JsAny /* Tabulator.CellComponent | JsArray<Tabulator.CellComponent> */)
     public fun validate(): JsAny
     public fun refreshFilters(): JsAny
@@ -288,7 +288,7 @@ public external class RowComponent : JsAny {
     public fun getData(): JsAny
     public fun getElement(): HTMLElement
     public fun getTable(): TabulatorJs
-    public fun getCells(): JsArray<CellComponent>
+    public fun getCells(): dev.kilua.dom.JsArray<CellComponent>
     public fun getCell(column: JsAny): CellComponent
     public fun getNextRow(): JsAny
     public fun getPrevRow(): JsAny
@@ -312,7 +312,7 @@ public external class RowComponent : JsAny {
     public fun treeCollapse()
     public fun treeToggle()
     public fun getTreeParent(): JsAny
-    public fun getTreeChildren(): JsArray<RowComponent>
+    public fun getTreeChildren(): dev.kilua.dom.JsArray<RowComponent>
     public fun addTreeChild(rowData: JsAny, position: Boolean, existingRow: RowComponent)
     public fun validate(): JsAny
     public fun isFrozen(): Boolean
@@ -327,8 +327,8 @@ public external class GroupComponent : JsAny {
     public fun getTable(): TabulatorJs
     public fun getKey(): JsAny
     public fun getField(): String
-    public fun getRows(): JsArray<RowComponent>
-    public fun getSubGroups(): JsArray<GroupComponent>
+    public fun getRows(): dev.kilua.dom.JsArray<RowComponent>
+    public fun getSubGroups(): dev.kilua.dom.JsArray<GroupComponent>
     public fun getParentGroup(): JsAny
     public fun isVisible(): Boolean
     public fun show()
@@ -344,7 +344,7 @@ public external class ColumnComponent : JsAny {
     public fun getTable(): TabulatorJs
     public fun getDefinition(): JsAny
     public fun getField(): String
-    public fun getCells(): JsArray<CellComponent>
+    public fun getCells(): dev.kilua.dom.JsArray<CellComponent>
     public fun getNextColumn(): JsAny
     public fun getPrevColumn(): JsAny
     public fun move(toColumn: JsAny, after: Boolean)
@@ -354,7 +354,7 @@ public external class ColumnComponent : JsAny {
     public fun toggle()
     public fun delete(): Promise<JsAny>
     public fun scrollTo(): Promise<JsAny>
-    public fun getSubColumns(): JsArray<ColumnComponent>
+    public fun getSubColumns(): dev.kilua.dom.JsArray<ColumnComponent>
     public fun getParentColumn(): JsAny
     public fun headerFilterFocus()
     public fun setHeaderFilterValue(value: JsAny)

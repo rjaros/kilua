@@ -41,7 +41,7 @@ import dev.kilua.html.Tag
 import dev.kilua.html.div
 import dev.kilua.utils.cast
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLDivElement
+import dev.kilua.dom.api.HTMLDivElement
 import kotlin.math.ceil
 
 internal const val SPLIT_PANEL_DEFAULT_GUTTER_SIZE = 10

@@ -24,7 +24,7 @@ package io.realworld.externals
 
 import dev.kilua.externals.Intl
 import dev.kilua.utils.jsObjectOf
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 external class Date() : JsAny {
     constructor(value: String?)

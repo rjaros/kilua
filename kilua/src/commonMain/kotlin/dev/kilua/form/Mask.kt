@@ -22,7 +22,7 @@
 
 package dev.kilua.form
 
-import web.dom.HTMLElement
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * Generic input mask controller.

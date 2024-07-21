@@ -40,7 +40,6 @@ import dev.kilua.html.li
 import dev.kilua.html.ul
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
-import web.dom.events.Event
 
 @Composable
 fun IComponent.settingsPage(state: ConduitState, conduitManager: ConduitManager) {
@@ -108,7 +107,7 @@ fun IComponent.settingsPage(state: ConduitState, conduitManager: ConduitManager)
                                 className = "btn btn-primary btn-lg pull-xs-right"
                             )
                         }
-                        onEvent<Event>("submit") { ev ->
+                        onEvent<dev.kilua.dom.api.events.Event>("submit") { ev ->
                             ev.preventDefault()
                             conduitManager.settings(
                                 imageInput.value,

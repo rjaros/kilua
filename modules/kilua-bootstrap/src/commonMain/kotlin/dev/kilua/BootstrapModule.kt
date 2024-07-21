@@ -26,7 +26,7 @@ import dev.kilua.compose.Root
 import dev.kilua.modal.modals
 import dev.kilua.toast.toasts
 import dev.kilua.utils.isDom
-import web.document
+import dev.kilua.dom.document
 
 /**
  * Initializes Bootstrap module.

@@ -28,7 +28,7 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.Tag
-import web.dom.HTMLStyleElement
+import dev.kilua.dom.api.HTMLStyleElement
 
 /**
  * Internal HTML Style component.

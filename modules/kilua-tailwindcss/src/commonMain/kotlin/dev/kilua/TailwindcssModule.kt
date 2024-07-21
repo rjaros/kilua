@@ -23,7 +23,7 @@
 
 package dev.kilua
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 @JsModule("./tailwind/tailwind.twcss")
 internal external object TailwindcssCss : JsAny

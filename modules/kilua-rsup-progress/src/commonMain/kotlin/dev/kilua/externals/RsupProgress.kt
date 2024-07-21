@@ -26,8 +26,8 @@ package dev.kilua.externals
 
 import dev.kilua.JsModule
 import dev.kilua.JsName
-import web.JsAny
-import web.Promise
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.Promise
 
 internal external class RsupProgressOptions : JsAny {
     var height: Int?

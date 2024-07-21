@@ -31,13 +31,12 @@ import dev.kilua.externals.keys
 import dev.kilua.externals.obj
 import dev.kilua.externals.set
 import dev.kilua.externals.undefined
-import web.JsAny
-import web.JsArray
-import web.get
-import web.set
-import web.toJsBoolean
-import web.toJsNumber
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.get
+import dev.kilua.dom.set
+import dev.kilua.dom.toJsBoolean
+import dev.kilua.dom.toJsNumber
+import dev.kilua.dom.toJsString
 
 /**
  * JavaScript encodeURIComponent function
@@ -62,29 +61,29 @@ public expect inline fun <T : JsAny> JsAny.unsafeCast(): T
 /**
  * Convert JsArray to Kotlin Array.
  */
-public inline fun <reified T : JsAny> JsArray<T>.toArray(): Array<T> {
+public inline fun <reified T : JsAny> dev.kilua.dom.JsArray<T>.toArray(): Array<T> {
     return Array(length) { get(it)!! }
 }
 
 /**
  * Convert Kotlin Array to JsArray.
  */
-public fun <T : JsAny> Array<T>.toJsArray(): JsArray<T> {
+public fun <T : JsAny> Array<T>.toJsArray(): dev.kilua.dom.JsArray<T> {
     return jsArrayOf(*this)
 }
 
 /**
  * Convert JsArray to Kotlin List.
  */
-public fun <T : JsAny> JsArray<T>.toList(): List<T> {
+public fun <T : JsAny> dev.kilua.dom.JsArray<T>.toList(): List<T> {
     return List(length) { get(it)!! }
 }
 
 /**
  * Convert Kotlin List to JsArray.
  */
-public fun <T : JsAny> List<T>.toJsArray(): JsArray<T> {
-    val array = JsArray<T>()
+public fun <T : JsAny> List<T>.toJsArray(): dev.kilua.dom.JsArray<T> {
+    val array = dev.kilua.dom.JsArray<T>()
     for (i in this.indices) {
         array[i] = this[i]
     }
@@ -94,8 +93,8 @@ public fun <T : JsAny> List<T>.toJsArray(): JsArray<T> {
 /**
  * Create a JsArray object.
  */
-public fun <T : JsAny> jsArrayOf(vararg elements: T): JsArray<T> {
-    val array = JsArray<T>()
+public fun <T : JsAny> jsArrayOf(vararg elements: T): dev.kilua.dom.JsArray<T> {
+    val array = dev.kilua.dom.JsArray<T>()
     for (i in elements.indices) {
         array[i] = elements[i]
     }
@@ -113,7 +112,7 @@ public fun <T> T.toJsAny(): JsAny? {
         is Double -> this.toJsNumber()
         is Boolean -> this.toJsBoolean()
         is Array<*> -> {
-            val array = JsArray<JsAny?>()
+            val array = dev.kilua.dom.JsArray<JsAny?>()
             for (index in this.indices) {
                 array[index] = this[index].toJsAny()
             }
@@ -121,7 +120,7 @@ public fun <T> T.toJsAny(): JsAny? {
         }
 
         is List<*> -> {
-            val array = JsArray<JsAny?>()
+            val array = dev.kilua.dom.JsArray<JsAny?>()
             for (index in this.indices) {
                 array[index] = this[index].toJsAny()
             }
@@ -168,7 +167,7 @@ public fun deepMerge(target: JsAny, source: JsAny): JsAny {
         val targetValue = target[key]
         val sourceValue = source[key]
         if (isArray(targetValue) && isArray(sourceValue)) {
-            target[key] = concat(targetValue!!.unsafeCast<JsArray<JsAny>>(), sourceValue.cast())
+            target[key] = concat(targetValue!!.unsafeCast<dev.kilua.dom.JsArray<JsAny>>(), sourceValue.cast())
         } else if (isObject(targetValue) && isObject(sourceValue)) {
             val newObj = obj()
             assign(newObj, targetValue!!)

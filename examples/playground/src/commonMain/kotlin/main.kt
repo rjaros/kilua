@@ -49,20 +49,16 @@ import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
 import dev.kilua.form.number.imaskNumeric
 import dev.kilua.form.number.numeric
-import dev.kilua.form.number.range
 import dev.kilua.form.number.rangeRef
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.TomSelectRenders
 import dev.kilua.form.select.tomSelect
 import dev.kilua.form.select.tomSelectRef
-import dev.kilua.form.text.richText
 import dev.kilua.form.text.richTextRef
 import dev.kilua.form.text.text
 import dev.kilua.form.text.textRef
-import dev.kilua.form.text.tomTypeahead
 import dev.kilua.form.text.tomTypeaheadRef
 import dev.kilua.form.time.richDate
-import dev.kilua.form.time.richDateTime
 import dev.kilua.form.time.richDateTimeRef
 import dev.kilua.form.time.richTime
 import dev.kilua.html.*
@@ -74,14 +70,12 @@ import dev.kilua.i18n.SimpleLocale
 import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
 import dev.kilua.modal.confirm
-import dev.kilua.modal.modal
 import dev.kilua.modal.modalRef
 import dev.kilua.panel.OffPlacement
 import dev.kilua.panel.TabPosition
 import dev.kilua.panel.accordion
 import dev.kilua.panel.carousel
 import dev.kilua.panel.lazyColumn
-import dev.kilua.panel.offcanvas
 import dev.kilua.panel.offcanvasRef
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
@@ -129,17 +123,15 @@ import dev.kilua.useModule
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.Serializable
-import web.JsAny
-import web.JsArray
-import web.Promise
-import web.RegExp
-import web.dom.CustomEvent
-import web.dom.HTMLElement
-import web.dom.Text
-import web.dom.events.Event
-import web.toJsNumber
-import web.toJsString
-import web.window
+import dev.kilua.dom.Promise
+import dev.kilua.dom.RegExp
+import dev.kilua.dom.api.CustomEvent
+import dev.kilua.dom.api.HTMLElement
+import dev.kilua.dom.api.Text
+import dev.kilua.dom.core.JsAny
+import dev.kilua.dom.core.toJsNumber
+import dev.kilua.dom.core.toJsString
+import dev.kilua.dom.window
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextUInt
@@ -581,7 +573,7 @@ class App : Application() {
                                     null
                                 }
                                 result?.let { items: JsAny ->
-                                    callback(items.unsafeCast<JsArray<JsAny>>().toList().map { item ->
+                                    callback(items.unsafeCast<dev.kilua.dom.JsArray<JsAny>>().toList().map { item ->
                                         jsObjectOf(
                                             "value" to item["id"]!!,
                                             "text" to item["name"]!!,
@@ -1335,7 +1327,7 @@ class App : Application() {
                         button {
                             +"click"
                             DisposableEffect("button") {
-                                val f = { _: Event ->
+                                val f = { _: dev.kilua.dom.api.events.Event ->
                                     console.log("click $name of ${list.size}")
                                 }
                                 element.addEventListener("click", f)
@@ -1425,7 +1417,7 @@ class App : Application() {
                                     size++
                                 }
                                 DisposableEffect("button2") {
-                                    val f = { _: Event ->
+                                    val f = { _: dev.kilua.dom.api.events.Event ->
                                         console.log("button2 click")
                                     }
                                     element.addEventListener("click", f)

@@ -25,7 +25,7 @@ import dev.kilua.externals.JSON
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 /**
  * JSON serialization utility functions

@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.kotlinx.serialization)
@@ -22,8 +26,10 @@ kotlin {
     compilerOptions()
     kotlinJsTargets()
     kotlinWasmTargets()
+    kotlinJvmTargets()
+    kotlinJsCommonTargets()
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             dependencies {
                 api(compose.runtime)
                 api(libs.kotlinx.atomicfu)
@@ -31,16 +37,11 @@ kotlin {
                 api(libs.kotlinx.serialization.json)
                 api(project(":modules:kilua-annotations"))
                 api(project(":modules:kilua-common-types"))
-                api(project(":modules:kilua-dom"))
+                api(project(":modules:kilua-dom-core"))
                 api(project(":modules:kilua-core-modules"))
-//                implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.9-SNAPSHOT.tgz"))
-                implementation(npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get()))
-                implementation(npm("css-loader", libs.versions.css.loader.get()))
-                implementation(npm("style-loader", libs.versions.style.loader.get()))
-                implementation(npm("imports-loader", libs.versions.imports.loader.get()))
             }
         }
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
@@ -48,11 +49,20 @@ kotlin {
                 implementation(project(":modules:kilua-testutils"))
             }
         }
-        val jsMain by getting {
+        jsCommonMain {
+            dependencies {
+                // implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.9-SNAPSHOT.tgz"))
+                implementation(npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get()))
+                implementation(npm("css-loader", libs.versions.css.loader.get()))
+                implementation(npm("style-loader", libs.versions.style.loader.get()))
+                implementation(npm("imports-loader", libs.versions.imports.loader.get()))
+            }
+        }
+        jsMain {
             dependencies {
             }
         }
-        val wasmJsMain by getting {
+        wasmJsMain {
             dependencies {
             }
         }

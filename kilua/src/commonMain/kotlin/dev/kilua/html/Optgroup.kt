@@ -28,7 +28,7 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
-import web.dom.HTMLOptGroupElement
+import dev.kilua.dom.api.HTMLOptGroupElement
 
 /**
  * HTML Optgroup component.

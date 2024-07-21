@@ -35,8 +35,7 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import web.dom.HTMLInputElement
-import web.dom.events.Event
+import dev.kilua.dom.api.HTMLInputElement
 
 /**
  * Tri-state CheckBox input component.
@@ -258,7 +257,7 @@ public open class TriStateCheckBox(
         @Suppress("LeakingThis")
         setAttribute("type", "checkbox")
         @Suppress("LeakingThis")
-        onEventDirect<Event>("click") {
+        onEventDirect<dev.kilua.dom.api.events.Event>("click") {
             cycleValue()
         }
     }

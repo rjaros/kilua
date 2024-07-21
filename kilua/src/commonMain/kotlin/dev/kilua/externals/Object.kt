@@ -23,7 +23,7 @@
 package dev.kilua.externals
 
 import dev.kilua.utils.unsafeCast
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 /**
  * Return empty JS Object

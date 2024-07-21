@@ -22,9 +22,9 @@
 
 package dev.kilua.externals
 
-import web.dom.Comment
-import web.dom.Element
-import web.dom.Text
+import dev.kilua.dom.api.Comment
+import dev.kilua.dom.api.Element
+import dev.kilua.dom.api.Text
 
 /**
  * Create a fake DOM Element on Node.js.

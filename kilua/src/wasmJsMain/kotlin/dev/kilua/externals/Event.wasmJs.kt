@@ -22,9 +22,9 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.dom.AddEventListenerOptions
-import web.dom.CustomEventInit
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.api.AddEventListenerOptions
+import dev.kilua.dom.api.CustomEventInit
 
 public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
     return buildAddEventListenerOptionsInternal(signal)

@@ -22,7 +22,7 @@
 
 package dev.kilua.utils
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 import kotlin.js.unsafeCast as unsafeCastJs
 
 @Suppress("NOTHING_TO_INLINE")

@@ -33,10 +33,10 @@ import kotlinx.datetime.atDate
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import web.JsAny
-import web.JsNumber
-import web.toDouble
-import web.toJsNumber
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsNumber
+import dev.kilua.dom.toDouble
+import dev.kilua.dom.toJsNumber
 
 /**
  * JavaScript Date class.

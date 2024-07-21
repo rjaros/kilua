@@ -35,7 +35,7 @@ import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLTextAreaElement
+import dev.kilua.dom.api.HTMLTextAreaElement
 
 /**
  * Textarea wrap types.

@@ -24,7 +24,7 @@
 package dev.kilua.externals
 
 import dev.kilua.utils.toArray
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 public actual fun obj(): JsAny = js("({})")
 

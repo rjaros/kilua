@@ -25,10 +25,9 @@
 package dev.kilua.externals
 
 import dev.kilua.JsModule
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.dom.HTMLElement
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsNumber
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * Tempus Dominus restrictions configuration.
@@ -36,9 +35,9 @@ import web.dom.HTMLElement
 public external class TempusDominusRestrictions : JsAny {
     public var minDate: Date
     public var maxDate: Date
-    public var disabledDates: JsArray<Date>
-    public var enabledDates: JsArray<Date>
-    public var daysOfWeekDisabled: JsArray<JsNumber>
+    public var disabledDates: dev.kilua.dom.JsArray<Date>
+    public var enabledDates: dev.kilua.dom.JsArray<Date>
+    public var daysOfWeekDisabled: dev.kilua.dom.JsArray<JsNumber>
 }
 
 /**

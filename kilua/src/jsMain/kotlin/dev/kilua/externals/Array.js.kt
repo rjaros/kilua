@@ -23,8 +23,7 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.JsArray
+import dev.kilua.dom.JsAny
 
 /**
  * Returns whether the given value is an array
@@ -37,5 +36,5 @@ public actual fun isArray(o: JsAny?): Boolean = js("Array").isArray(o)
  * Returns a new array containing the contents of both given arrays.
  */
 @Suppress("UnsafeCastFromDynamic")
-public actual fun <T : JsAny> concat(array1: JsArray<T>, array2: JsArray<T>): JsArray<T> =
+public actual fun <T : JsAny> concat(array1: dev.kilua.dom.JsArray<T>, array2: dev.kilua.dom.JsArray<T>): dev.kilua.dom.JsArray<T> =
     array1.asDynamic().concat(array2)

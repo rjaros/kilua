@@ -22,7 +22,7 @@
 
 package dev.kilua.externals
 
-import web.dom.Element
+import dev.kilua.dom.api.Element
 
 internal actual fun getEditorFromElement(element: Element): Editor? {
     @Suppress("UnsafeCastFromDynamic")

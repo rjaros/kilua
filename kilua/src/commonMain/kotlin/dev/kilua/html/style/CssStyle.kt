@@ -27,7 +27,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import dev.kilua.html.helpers.TagStyle
 import dev.kilua.html.helpers.TagStyleDelegateImpl
-import web.dom.HTMLStyleElement
+import dev.kilua.dom.api.HTMLStyleElement
 
 /**
  * An object with CSS properties.

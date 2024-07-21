@@ -25,10 +25,10 @@ package dev.kilua.theme
 import dev.kilua.externals.buildCustomEventInit
 import dev.kilua.utils.isDom
 import dev.kilua.utils.toKebabCase
-import web.document
-import web.dom.CustomEvent
-import web.localStorage
-import web.window
+import dev.kilua.dom.document
+import dev.kilua.dom.api.CustomEvent
+import dev.kilua.dom.localStorage
+import dev.kilua.dom.window
 
 /**
  * Tailwindcss color themes.

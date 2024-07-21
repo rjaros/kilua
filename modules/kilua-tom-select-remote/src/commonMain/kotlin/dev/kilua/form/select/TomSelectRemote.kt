@@ -42,9 +42,8 @@ import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.launch
-import web.JsAny
-import web.JsArray
-import web.fetch.RequestInit
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.fetch.RequestInit
 
 internal external class RemoteOptionExt : JsAny {
     var value: String?
@@ -373,7 +372,7 @@ public fun <T : Any> IComponent.tomSelectRemoteRef(
     lateinit var tomSelectRemote: TomSelectRemote<T>
 
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks, preload, openOnFocus) {
-        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
+        val loadCallback: ((query: String, callback: (dev.kilua.dom.JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
             { query, callback ->
                 tomSelectRemote.tomSelectInstance?.clearOptions { true }
                 KiluaScope.launch {
@@ -496,7 +495,7 @@ public fun <T : Any> IComponent.tomSelectRemote(
     lateinit var tomSelectRemote: TomSelectRemote<T>
 
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks, preload, openOnFocus) {
-        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
+        val loadCallback: ((query: String, callback: (dev.kilua.dom.JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
             { query, callback ->
                 tomSelectRemote.tomSelectInstance?.clearOptions { true }
                 KiluaScope.launch {

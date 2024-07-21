@@ -46,12 +46,11 @@ import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.unsafeCast
-import web.clear
-import web.dom.HTMLButtonElement
-import web.dom.HTMLElement
-import web.dom.HTMLInputElement
-import web.dom.asList
-import web.dom.events.Event
+import dev.kilua.dom.clear
+import dev.kilua.dom.api.HTMLButtonElement
+import dev.kilua.dom.api.HTMLElement
+import dev.kilua.dom.api.HTMLInputElement
+import dev.kilua.dom.api.asList
 
 /**
  * Trix rich text editor component.
@@ -317,14 +316,14 @@ public open class RichText(
                 element.setAttribute("required", "")
             }
             @Suppress("LeakingThis")
-            onEventDirect<Event>("trix-initialize") {
+            onEventDirect<dev.kilua.dom.api.events.Event>("trix-initialize") {
                 if (disabled == true) {
                     element.removeAttribute("contenteditable")
                     toolbarDisable(true)
                 }
             }
             @Suppress("LeakingThis")
-            onEventDirect<Event>("trix-change") {
+            onEventDirect<dev.kilua.dom.api.events.Event>("trix-change") {
                 input?.let { SafeDomFactory.getElementById(it) }?.let {
                     val elementValue = it.unsafeCast<HTMLInputElement>().value
                     setInternalValueFromString(elementValue)
@@ -332,7 +331,7 @@ public open class RichText(
                 }
             }
             @Suppress("LeakingThis")
-            onEventDirect<Event>("trix-file-accept") { e -> if (!allowFileUploads) e.preventDefault() }
+            onEventDirect<dev.kilua.dom.api.events.Event>("trix-file-accept") { e -> if (!allowFileUploads) e.preventDefault() }
         }
         @Suppress("LeakingThis")
         role = "textbox"

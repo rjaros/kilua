@@ -40,15 +40,13 @@ import dev.kilua.html.i
 import dev.kilua.html.span
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
-import dev.kilua.utils.isDom
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import kotlinx.datetime.LocalDate
-import web.document
-import web.dom.events.Event
-import web.toJsNumber
-import web.toJsString
+import dev.kilua.dom.document
+import dev.kilua.dom.toJsNumber
+import dev.kilua.dom.toJsString
 import kotlin.time.Duration
 
 /**
@@ -593,7 +591,7 @@ public abstract class AbstractRichDateTime(
     /**
      * The refresh callback used by the theme change event handler.
      */
-    protected var refreshCallback: (Event) -> Unit = {
+    protected var refreshCallback: (dev.kilua.dom.api.events.Event) -> Unit = {
         refresh()
     }
 

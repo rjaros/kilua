@@ -119,7 +119,7 @@ public class KiluaProcessor(
             appendLine("import dev.kilua.core.IComponent")
             appendLine("import dev.kilua.core.RenderConfig")
             appendLine("import dev.kilua.html.Tag")
-            appendLine("import web.dom.$typeArgName")
+            appendLine("import dev.kilua.dom.api.$typeArgName")
             appendLine()
             appendLine("/**")
             appendLine(" * HTML $className component.")

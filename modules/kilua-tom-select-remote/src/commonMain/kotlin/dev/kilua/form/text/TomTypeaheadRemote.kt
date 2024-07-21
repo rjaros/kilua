@@ -31,10 +31,9 @@ import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.utils.toJsArray
 import kotlinx.coroutines.launch
-import web.JsAny
-import web.JsArray
-import web.fetch.RequestInit
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.fetch.RequestInit
+import dev.kilua.dom.toJsString
 
 /**
  * Creates [TomTypeahead] component with a remote data source, returning a reference.
@@ -76,7 +75,7 @@ public fun <T : Any> IComponent.tomTypeaheadRemoteRef(
 ): TomTypeahead {
 
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks) {
-        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit) =
+        val loadCallback: ((query: String, callback: (dev.kilua.dom.JsArray<JsAny>) -> Unit) -> Unit) =
             { query, callback ->
                 KiluaScope.launch {
                     val result = getOptionsForTomTypeaheadRemote(
@@ -145,7 +144,7 @@ public fun <T : Any> IComponent.tomTypeaheadRemote(
 ) {
 
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks) {
-        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit) =
+        val loadCallback: ((query: String, callback: (dev.kilua.dom.JsArray<JsAny>) -> Unit) -> Unit) =
             { query, callback ->
                 KiluaScope.launch {
                     val result = getOptionsForTomTypeaheadRemote(

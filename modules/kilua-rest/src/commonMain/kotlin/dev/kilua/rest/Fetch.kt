@@ -22,9 +22,9 @@
 
 package dev.kilua.rest
 
-import web.Promise
-import web.fetch.RequestInit
-import web.fetch.Response
+import dev.kilua.dom.Promise
+import dev.kilua.dom.fetch.RequestInit
+import dev.kilua.dom.fetch.Response
 
 /**
  * JavaScript fetch function

@@ -32,8 +32,8 @@ import dev.kilua.rpc.RpcServiceMgr
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.encodeToString
-import web.fetch.RequestInit
-import web.toJsString
+import dev.kilua.dom.fetch.RequestInit
+import dev.kilua.dom.toJsString
 
 internal actual suspend fun <T : Any> getOptionsForTomTypeaheadRemote(
     serviceManager: RpcServiceMgr<T>,

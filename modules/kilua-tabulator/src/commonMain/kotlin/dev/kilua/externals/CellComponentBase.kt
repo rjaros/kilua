@@ -22,8 +22,8 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.dom.HTMLElement
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * JavaScript Tabulator cell component base interface.

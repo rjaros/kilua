@@ -38,12 +38,10 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import web.JsAny
-import web.dom.url.URLSearchParams
-import web.fetch.RequestInit
-import web.fetch.Response
-import web.toJsString
-import web.window
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.fetch.RequestInit
+import dev.kilua.dom.fetch.Response
+import dev.kilua.dom.toJsString
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
@@ -281,7 +279,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
                     } else {
                         restRequestConfig.data!!.cast()
                     }
-                    URLSearchParams(removeNulls(dataSer))
+                    dev.kilua.dom.api.url.URLSearchParams(removeNulls(dataSer))
                 }
 
                 else -> {
@@ -299,7 +297,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
             } else {
                 restRequestConfig.data!!.cast()
             }
-            url + "?" + URLSearchParams(removeNulls(dataSer)).toString()
+            url + "?" + dev.kilua.dom.api.url.URLSearchParams(removeNulls(dataSer)).toString()
         } else {
             url
         }

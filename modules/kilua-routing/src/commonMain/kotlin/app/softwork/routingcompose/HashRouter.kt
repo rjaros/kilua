@@ -21,7 +21,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import web.window
+import dev.kilua.dom.window
 
 /**
  * This [Router] implementation uses `/#/path` to persistent the current route in [window.location.hash].

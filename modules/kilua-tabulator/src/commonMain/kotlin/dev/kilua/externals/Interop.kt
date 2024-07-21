@@ -22,12 +22,10 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.Promise
-import web.dom.Element
-import web.dom.events.Event
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsNumber
+import dev.kilua.dom.Promise
+import dev.kilua.dom.api.Element
 
 /**
  * A set of hrlper functions to convert different Kotlin functions to JavaScript functions (JsAny).
@@ -75,8 +73,8 @@ internal expect fun toJsAny(f: (String, JsAny) -> Boolean): JsAny
 
 internal expect fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny
 
-internal expect fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny
+internal expect fun toJsAny(f: (dev.kilua.dom.JsArray<JsAny>) -> Element): JsAny
 
 internal expect fun toJsAny(f: (JsAny) -> Boolean): JsAny
 
-internal expect fun toJsAny(f: (Event) -> JsArray<JsAny>): JsAny
+internal expect fun toJsAny(f: (dev.kilua.dom.api.events.Event) -> dev.kilua.dom.JsArray<JsAny>): JsAny

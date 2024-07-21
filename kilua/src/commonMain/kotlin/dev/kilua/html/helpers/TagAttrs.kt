@@ -22,7 +22,7 @@
 
 package dev.kilua.html.helpers
 
-import web.dom.HTMLElement
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * Common tag attributes.

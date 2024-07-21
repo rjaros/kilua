@@ -1,3 +1,5 @@
+import org.gradle.api.NamedDomainObjectContainer
+import org.gradle.api.NamedDomainObjectProvider
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPom
@@ -11,9 +13,12 @@ import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
@@ -71,7 +76,9 @@ fun KotlinMultiplatformExtension.kotlinWasmTargets(withNode: Boolean = true) {
     }
 }
 
-fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = "17") {
+private const val kotlinVersion = "21"
+
+fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = kotlinVersion) {
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(target))
     }
@@ -86,11 +93,30 @@ fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = "17") {
     }
 }
 
-fun KotlinJvmProjectExtension.kotlinJvmTargets(target: String = "17") {
+fun KotlinJvmProjectExtension.kotlinJvmTargets(target: String = kotlinVersion) {
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(target))
     }
 }
+
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
+fun KotlinMultiplatformExtension.kotlinJsCommonTargets() {
+    applyDefaultHierarchyTemplate {
+        sourceSetTrees(KotlinSourceSetTree.main, KotlinSourceSetTree.test)
+
+        common {
+            group("jsCommon") {
+                withJs()
+                withWasmJs()
+            }
+        }
+    }
+}
+
+val NamedDomainObjectContainer<KotlinSourceSet>.jsCommonMain: NamedDomainObjectProvider<KotlinSourceSet>
+    get() = named("jsCommonMain")
+val NamedDomainObjectContainer<KotlinSourceSet>.jsCommonTest: NamedDomainObjectProvider<KotlinSourceSet>
+    get() = named("jsCommonTest")
 
 fun Project.setupKsp() {
     dependencies {

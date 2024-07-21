@@ -29,8 +29,8 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.cast
-import web.dom.CanvasRenderingContext2D
-import web.dom.HTMLCanvasElement
+import dev.kilua.dom.api.CanvasRenderingContext2D
+import dev.kilua.dom.api.HTMLCanvasElement
 
 /**
  * HTML Canvas component.

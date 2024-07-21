@@ -36,8 +36,8 @@ import dev.kilua.utils.nativeListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
-import web.clear
-import web.dom.Element
+import dev.kilua.dom.clear
+import dev.kilua.dom.api.Element
 
 internal expect val defaultMonotonicFrameClock: MonotonicFrameClock
 

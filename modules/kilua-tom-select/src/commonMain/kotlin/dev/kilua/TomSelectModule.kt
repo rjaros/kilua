@@ -23,7 +23,7 @@
 
 package dev.kilua
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 @JsModule("tom-select/dist/css/tom-select.bootstrap5.min.css")
 internal external object TomSelectCss : JsAny

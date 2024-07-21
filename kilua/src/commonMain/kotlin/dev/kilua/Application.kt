@@ -25,7 +25,7 @@ import dev.kilua.compose.Root
 import dev.kilua.html.style.StyleParams
 import dev.kilua.i18n.DefaultLocale
 import dev.kilua.utils.isDom
-import web.document
+import dev.kilua.dom.document
 
 /**
  * Base class for Kilua applications.

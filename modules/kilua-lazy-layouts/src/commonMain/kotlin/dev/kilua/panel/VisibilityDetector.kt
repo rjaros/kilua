@@ -29,8 +29,7 @@ import dev.kilua.externals.console
 import dev.kilua.externals.obj
 import dev.kilua.html.div
 import dev.kilua.utils.toList
-import web.document
-import web.dom.observers.IntersectionObserver
+import dev.kilua.dom.api.observers.IntersectionObserver
 import kotlin.random.Random
 import kotlin.random.nextUInt
 

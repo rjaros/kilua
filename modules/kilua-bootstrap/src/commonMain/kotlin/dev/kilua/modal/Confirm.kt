@@ -28,7 +28,6 @@ import dev.kilua.html.Button
 import dev.kilua.html.button
 import dev.kilua.html.buttonRef
 import dev.kilua.html.div
-import web.dom.events.Event
 
 
 /**
@@ -100,10 +99,10 @@ public fun confirm(
                     }
                 }
             }
-            onEvent<Event>("hidden.bs.modal") {
+            onEvent<dev.kilua.dom.api.events.Event>("hidden.bs.modal") {
                 Modal.modalStateMap.remove(modalId)
             }
-            onEvent<Event>("shown.bs.modal") {
+            onEvent<dev.kilua.dom.api.events.Event>("shown.bs.modal") {
                 yesButton.focus()
             }
             show()

@@ -26,10 +26,7 @@ import androidx.compose.runtime.Composable
 import dev.kilua.KiluaScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import web.dom.HTMLElement
-import web.dom.events.Event
-import web.dom.events.InputEvent
-import web.dom.events.MouseEvent
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * An extension function for defining on click suspending event handlers (composable).
@@ -37,7 +34,7 @@ import web.dom.events.MouseEvent
 @Composable
 public fun <E : HTMLElement, C : TagEvents<E>> C.onClickLaunch(
     coroutineScope: CoroutineScope = KiluaScope,
-    listener: suspend (MouseEvent) -> Unit
+    listener: suspend (dev.kilua.dom.api.events.MouseEvent) -> Unit
 ): Int {
     return onClick {
         coroutineScope.launch {
@@ -51,7 +48,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onClickLaunch(
  */
 public fun <E : HTMLElement, C : TagEvents<E>> C.onClickDirectLaunch(
     coroutineScope: CoroutineScope = KiluaScope,
-    listener: suspend (MouseEvent) -> Unit
+    listener: suspend (dev.kilua.dom.api.events.MouseEvent) -> Unit
 ): Int {
     return onClickDirect {
         coroutineScope.launch {
@@ -66,7 +63,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onClickDirectLaunch(
 @Composable
 public fun <E : HTMLElement, C : TagEvents<E>> C.onInputLaunch(
     coroutineScope: CoroutineScope = KiluaScope,
-    listener: suspend (InputEvent) -> Unit
+    listener: suspend (dev.kilua.dom.api.events.InputEvent) -> Unit
 ): Int {
     return onInput {
         coroutineScope.launch {
@@ -80,7 +77,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onInputLaunch(
  */
 public fun <E : HTMLElement, C : TagEvents<E>> C.onInputDirectLaunch(
     coroutineScope: CoroutineScope = KiluaScope,
-    listener: suspend (InputEvent) -> Unit
+    listener: suspend (dev.kilua.dom.api.events.InputEvent) -> Unit
 ): Int {
     return onInputDirect {
         coroutineScope.launch {
@@ -95,7 +92,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onInputDirectLaunch(
 @Composable
 public fun <E : HTMLElement, C : TagEvents<E>> C.onChangeLaunch(
     coroutineScope: CoroutineScope = KiluaScope,
-    listener: suspend (Event) -> Unit
+    listener: suspend (dev.kilua.dom.api.events.Event) -> Unit
 ): Int {
     return onChange {
         coroutineScope.launch {
@@ -109,7 +106,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onChangeLaunch(
  */
 public fun <E : HTMLElement, C : TagEvents<E>> C.onChangeDirectLaunch(
     coroutineScope: CoroutineScope = KiluaScope,
-    listener: suspend (Event) -> Unit
+    listener: suspend (dev.kilua.dom.api.events.Event) -> Unit
 ): Int {
     return onChangeDirect {
         coroutineScope.launch {
@@ -122,7 +119,7 @@ public fun <E : HTMLElement, C : TagEvents<E>> C.onChangeDirectLaunch(
  * An extension function for defining on change suspending event handlers (composable).
  */
 @Composable
-public fun <EV : Event, E : HTMLElement, C : TagEvents<E>> C.onEventLaunch(
+public fun <EV : dev.kilua.dom.api.events.Event, E : HTMLElement, C : TagEvents<E>> C.onEventLaunch(
     name: String,
     coroutineScope: CoroutineScope = KiluaScope,
     listener: suspend (EV) -> Unit
@@ -137,7 +134,7 @@ public fun <EV : Event, E : HTMLElement, C : TagEvents<E>> C.onEventLaunch(
 /**
  * An extension function for defining on change suspending event handlers (not composable).
  */
-public fun <EV : Event, E : HTMLElement, C : TagEvents<E>> C.onEventDirectLaunch(
+public fun <EV : dev.kilua.dom.api.events.Event, E : HTMLElement, C : TagEvents<E>> C.onEventDirectLaunch(
     name: String,
     coroutineScope: CoroutineScope = KiluaScope,
     listener: suspend (EV) -> Unit

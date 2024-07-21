@@ -27,7 +27,7 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.html.CssSize
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
-import web.dom.HTMLElement
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * The SVG namespace.

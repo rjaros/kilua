@@ -40,7 +40,7 @@ import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.nativeListOf
-import web.dom.HTMLSelectElement
+import dev.kilua.dom.api.HTMLSelectElement
 
 /**
  * The special value for an empty option.

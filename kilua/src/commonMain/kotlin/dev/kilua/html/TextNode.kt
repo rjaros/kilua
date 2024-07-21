@@ -30,7 +30,7 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.utils.unsafeCast
-import web.dom.Text
+import dev.kilua.dom.api.Text
 
 /**
  * HTML text node component.

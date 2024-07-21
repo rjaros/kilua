@@ -28,7 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import dev.kilua.externals.get
 import name.kropp.kotlinx.gettext.Gettext
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 /**
  * Provides translations by the underlying gettext library.

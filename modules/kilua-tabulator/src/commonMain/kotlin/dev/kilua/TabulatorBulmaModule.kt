@@ -23,7 +23,7 @@
 
 package dev.kilua
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 @JsModule("tabulator-tables/dist/css/tabulator_bulma.min.css")
 internal external object TabulatorBulmaCss : JsAny

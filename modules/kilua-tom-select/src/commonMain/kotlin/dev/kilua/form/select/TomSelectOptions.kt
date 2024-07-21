@@ -28,10 +28,10 @@ import dev.kilua.utils.StringPair
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.toJsAny
-import web.JsAny
-import web.dom.HTMLElement
-import web.toJsBoolean
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.api.HTMLElement
+import dev.kilua.dom.toJsBoolean
+import dev.kilua.dom.toJsString
 
 /**
  * Tom Select options.

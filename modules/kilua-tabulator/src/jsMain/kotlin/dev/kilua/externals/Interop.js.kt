@@ -22,12 +22,10 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.Promise
-import web.dom.Element
-import web.dom.events.Event
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsNumber
+import dev.kilua.dom.Promise
+import dev.kilua.dom.api.Element
 
 internal actual fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> JsNumber): JsAny =
     f.unsafeCast<JsAny>()
@@ -68,8 +66,8 @@ internal actual fun toJsAny(f: (String, JsAny) -> Boolean): JsAny = f.unsafeCast
 
 internal actual fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny = f.unsafeCast<JsAny>()
 
-internal actual fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny = f.unsafeCast<JsAny>()
+internal actual fun toJsAny(f: (dev.kilua.dom.JsArray<JsAny>) -> Element): JsAny = f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: (JsAny) -> Boolean): JsAny = f.unsafeCast<JsAny>()
 
-internal actual fun toJsAny(f: (Event) -> JsArray<JsAny>): JsAny = f.unsafeCast<JsAny>()
+internal actual fun toJsAny(f: (dev.kilua.dom.api.events.Event) -> dev.kilua.dom.JsArray<JsAny>): JsAny = f.unsafeCast<JsAny>()

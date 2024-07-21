@@ -22,6 +22,6 @@
 
 package dev.kilua.form
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 internal expect fun jsNumber(): JsAny

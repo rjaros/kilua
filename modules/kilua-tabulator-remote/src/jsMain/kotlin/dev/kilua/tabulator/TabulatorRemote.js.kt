@@ -30,9 +30,8 @@ import dev.kilua.rpc.RemoteSorter
 import dev.kilua.rpc.RpcServiceMgr
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import web.JsAny
-import web.JsArray
-import web.fetch.RequestInit
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.fetch.RequestInit
 
 @Suppress("UnsafeCastFromDynamic")
 public actual suspend fun <T: Any, E : Any> getDataForTabulatorRemote(
@@ -44,7 +43,7 @@ public actual suspend fun <T: Any, E : Any> getDataForTabulatorRemote(
     size: String?,
     filters: String?,
     sorters: String?
-): JsArray<JsAny> {
+): dev.kilua.dom.JsArray<JsAny> {
     val (url, method) = serviceManager.requireCall(function)
     val callAgent = CallAgent()
     val state = stateFunction?.invoke()?.let { JSON.stringify(it) }

@@ -24,7 +24,7 @@ package dev.kilua.form
 
 import dev.kilua.externals.ImaskObjJs
 import dev.kilua.utils.cast
-import web.dom.HTMLElement
+import dev.kilua.dom.api.HTMLElement
 
 internal class ImaskFactory : MaskFactory {
 

@@ -23,7 +23,7 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import web.dom.HTMLElement
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * Common tag attributes.

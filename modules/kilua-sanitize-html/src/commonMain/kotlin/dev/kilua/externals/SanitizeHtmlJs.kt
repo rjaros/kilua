@@ -25,19 +25,18 @@ package dev.kilua.externals
 
 import dev.kilua.JsModule
 import dev.kilua.JsName
-import web.JsAny
-import web.JsArray
-import web.JsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsString
 
 internal external class SanitizeHtmlOptionsJs : JsAny {
     var allowedTags: JsAny
-    var nonBooleanAttributes: JsArray<JsString>
+    var nonBooleanAttributes: dev.kilua.dom.JsArray<JsString>
     var allowedAttributes: JsAny
     var disallowedTagsMode: String
-    var selfClosing: JsArray<JsString>
-    var allowedSchemes: JsArray<JsString>
+    var selfClosing: dev.kilua.dom.JsArray<JsString>
+    var allowedSchemes: dev.kilua.dom.JsArray<JsString>
     var allowedSchemesByTag: JsAny
-    var allowedSchemesAppliedToAttributes: JsArray<JsString>
+    var allowedSchemesAppliedToAttributes: dev.kilua.dom.JsArray<JsString>
     var allowProtocolRelative: Boolean
     var enforceHtmlBoundary: Boolean
     var parseStyleAttributes: Boolean
@@ -45,7 +44,7 @@ internal external class SanitizeHtmlOptionsJs : JsAny {
     var allowedClasses: JsAny
     var allowedStyles: JsAny
     var transformTags: JsAny
-    var nonTextTags: JsArray<JsString>
+    var nonTextTags: dev.kilua.dom.JsArray<JsString>
     var nestingLimit: Int
 }
 

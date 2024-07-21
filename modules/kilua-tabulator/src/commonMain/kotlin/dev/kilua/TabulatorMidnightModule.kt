@@ -23,7 +23,7 @@
 
 package dev.kilua
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 @JsModule("tabulator-tables/dist/css/tabulator_midnight.min.css")
 internal external object TabulatorMidnightCss : JsAny
