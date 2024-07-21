@@ -22,7 +22,7 @@
 
 package dev.kilua
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 @JsModule("zzz-kilua-assets/k-splitjs.css")
 internal external object CoreSplitjsCss : JsAny

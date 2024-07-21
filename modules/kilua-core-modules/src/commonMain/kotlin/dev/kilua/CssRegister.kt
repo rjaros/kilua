@@ -22,17 +22,4 @@
 
 package dev.kilua
 
-/**
- * Kilua CSS register.
- */
-public object CssRegister {
-
-    public val cssFiles: MutableList<String> = mutableListOf()
-
-    /**
-     * Register CSS file used by the Kilua Modules.
-     */
-    public fun register(cssFile: String) {
-        cssFiles.add(cssFile)
-    }
-}
+public expect fun registerCssModule(cssFile: String)

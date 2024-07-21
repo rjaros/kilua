@@ -29,7 +29,7 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
-import web.dom.HTMLAnchorElement
+import dev.kilua.dom.api.HTMLAnchorElement
 
 /**
  * HTML A component.

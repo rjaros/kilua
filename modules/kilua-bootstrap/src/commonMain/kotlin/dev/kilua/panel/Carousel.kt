@@ -46,7 +46,7 @@ import dev.kilua.html.span
 import dev.kilua.panel.Carousel.Companion.idCounter
 import dev.kilua.utils.cast
 import dev.kilua.utils.rem
-import web.dom.HTMLDivElement
+import dev.kilua.dom.api.HTMLDivElement
 
 internal data class CarouselItem(
     val caption: String? = null,

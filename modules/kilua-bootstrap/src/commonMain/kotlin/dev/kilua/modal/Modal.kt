@@ -40,8 +40,7 @@ import dev.kilua.html.h5t
 import dev.kilua.utils.cast
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLDivElement
-import web.dom.events.Event
+import dev.kilua.dom.api.HTMLDivElement
 
 /**
  * Modal window sizes.
@@ -329,7 +328,7 @@ private fun IModal.setupModal(
             component.onRemove()
         }
     }
-    onEvent<Event>("hidden.bs.modal") {
+    onEvent<dev.kilua.dom.api.events.Event>("hidden.bs.modal") {
         component.hide()
     }
 }

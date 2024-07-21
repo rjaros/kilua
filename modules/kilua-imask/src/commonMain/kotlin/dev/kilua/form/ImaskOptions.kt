@@ -36,11 +36,11 @@ import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
-import web.JsAny
-import web.RegExp
-import web.toJsBoolean
-import web.toJsNumber
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.RegExp
+import dev.kilua.dom.toJsBoolean
+import dev.kilua.dom.toJsNumber
+import dev.kilua.dom.toJsString
 
 /**
  * Text input mask overwrite modes.

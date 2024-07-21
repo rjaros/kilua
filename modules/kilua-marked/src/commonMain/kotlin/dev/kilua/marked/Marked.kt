@@ -25,7 +25,7 @@ package dev.kilua.marked
 import dev.kilua.externals.MarkedOptionsJs
 import dev.kilua.externals.obj
 import dev.kilua.externals.parse
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 /**
  * Marked parser options.

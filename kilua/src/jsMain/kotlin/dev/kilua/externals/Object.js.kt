@@ -23,7 +23,7 @@
 
 package dev.kilua.externals
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 public actual inline fun obj(): JsAny {

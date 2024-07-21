@@ -35,7 +35,6 @@ import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.toFixedNoRound
 import dev.kilua.utils.toLocaleString
-import web.dom.events.Event
 
 /**
  * The default number of decimal digits.
@@ -192,7 +191,7 @@ public open class Numeric(
             }
         }
         @Suppress("LeakingThis")
-        onEventDirect<Event>("change") {
+        onEventDirect<dev.kilua.dom.api.events.Event>("change") {
             formatElement()
         }
     }

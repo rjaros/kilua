@@ -23,7 +23,7 @@
 
 package dev.kilua
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 @JsModule("@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css")
 internal external object TempusDominusCss : JsAny

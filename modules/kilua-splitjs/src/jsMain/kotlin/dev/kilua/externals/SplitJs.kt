@@ -23,7 +23,7 @@
 package dev.kilua.externals
 
 import dev.kilua.panel.Dir
-import web.dom.HTMLElement
+import dev.kilua.dom.api.HTMLElement
 
 internal actual fun splitJs(elements: List<HTMLElement>, options: SplitJsOptions): SplitJsInstance {
     val splitJsDirection = if (options.direction == Dir.Horizontal) "vertical" else "horizontal"

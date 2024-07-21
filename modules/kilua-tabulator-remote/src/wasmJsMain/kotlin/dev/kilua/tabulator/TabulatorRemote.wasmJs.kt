@@ -34,10 +34,10 @@ import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.utils.jsArrayOf
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import web.JsAny
-import web.JsArray
-import web.fetch.RequestInit
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsArray
+import dev.kilua.dom.fetch.RequestInit
+import dev.kilua.dom.toJsString
 
 public actual suspend fun <T: Any, E : Any> getDataForTabulatorRemote(
     serviceManager: RpcServiceMgr<E>,

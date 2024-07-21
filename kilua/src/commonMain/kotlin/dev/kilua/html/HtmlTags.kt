@@ -23,7 +23,7 @@
 package dev.kilua.html
 
 import dev.kilua.annotations.SimpleHtmlComponent
-import web.dom.*
+import dev.kilua.dom.api.*
 
 /**
  * HTML Abbr component.

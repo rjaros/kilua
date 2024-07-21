@@ -27,7 +27,7 @@ import androidx.compose.runtime.Composable
 import dev.kilua.core.PropertyDelegate
 import dev.kilua.html.*
 import dev.kilua.utils.cast
-import web.dom.HTMLElement
+import dev.kilua.dom.api.HTMLElement
 
 public interface TagStyleDelegate<E : HTMLElement> : TagStyle<E> {
     /**

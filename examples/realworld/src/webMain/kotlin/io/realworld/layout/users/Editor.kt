@@ -38,7 +38,6 @@ import dev.kilua.html.ul
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
-import web.dom.events.Event
 
 @Composable
 fun IComponent.editorPage(state: ConduitState, conduitManager: ConduitManager) {
@@ -103,7 +102,7 @@ fun IComponent.editorPage(state: ConduitState, conduitManager: ConduitManager) {
                                     className = "btn btn-primary btn-lg pull-xs-right"
                                 )
                             }
-                            onEvent<Event>("submit") { ev ->
+                            onEvent<dev.kilua.dom.api.events.Event>("submit") { ev ->
                                 ev.preventDefault()
                                 if (isNewArticle) {
                                     conduitManager.createArticle(

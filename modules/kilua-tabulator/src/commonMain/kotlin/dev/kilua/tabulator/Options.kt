@@ -25,7 +25,6 @@ package dev.kilua.tabulator
 import androidx.compose.runtime.Composable
 import dev.kilua.compose.Root
 import dev.kilua.compose.root
-import dev.kilua.core.Component
 import dev.kilua.core.IComponent
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.externals.CellComponent
@@ -44,20 +43,18 @@ import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.Promise
-import web.document
-import web.dom.Element
-import web.dom.HTMLElement
-import web.dom.asList
-import web.dom.events.Event
-import web.localStorage
-import web.toJsBoolean
-import web.toJsNumber
-import web.toJsString
-import web.window
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsNumber
+import dev.kilua.dom.Promise
+import dev.kilua.dom.document
+import dev.kilua.dom.api.Element
+import dev.kilua.dom.api.HTMLElement
+import dev.kilua.dom.api.asList
+import dev.kilua.dom.localStorage
+import dev.kilua.dom.toJsBoolean
+import dev.kilua.dom.toJsNumber
+import dev.kilua.dom.toJsString
+import dev.kilua.dom.window
 import kotlin.reflect.KClass
 
 /**
@@ -779,7 +776,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         }
     } else editorFunction
 
-    val tmpHeaderColumnsMenu: ((Event) -> JsArray<JsAny>)? = if (this.headerColumnsMenu == true) {
+    val tmpHeaderColumnsMenu: ((dev.kilua.dom.api.events.Event) -> dev.kilua.dom.JsArray<JsAny>)? = if (this.headerColumnsMenu == true) {
         { _ ->
             val resetTitle = this.headerColumnsMenuResetTitle ?: "Default columns"
             fun resetColumns() {
@@ -794,7 +791,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             }?.map {
                 val responsiveHiddenColumns =
                     (tabulator.tabulatorJs?.modules?.get("responsiveLayout")?.get("hiddenColumns")
-                        ?.unsafeCast<JsArray<ColumnComponent>>())?.toList()?.map {
+                        ?.unsafeCast<dev.kilua.dom.JsArray<ColumnComponent>>())?.toList()?.map {
                             it.getField()
                         } ?: emptyList()
                 val icon = SafeDomFactory.createElement("i")
@@ -807,7 +804,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                 label.appendChild(title)
                 obj<TabulatorMenuItem> {
                     this.label = label
-                    this.action = { e: Event ->
+                    this.action = { e: dev.kilua.dom.api.events.Event ->
                         e.stopPropagation()
                         if (it.isVisible()) {
                             it.hide()
@@ -839,7 +836,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                 label.appendChild(icon)
                 label.appendChild(title)
                 this.label = label
-                this.action = { e: Event ->
+                this.action = { e: dev.kilua.dom.api.events.Event ->
                     e.stopPropagation()
                     resetColumns()
                 }
@@ -1056,7 +1053,7 @@ public data class TabulatorOptions<T : Any>(
     val scrollToRowPosition: RowPosition? = null,
     val scrollToRowIfVisible: Boolean? = null,
     val index: String? = null,
-    val data: JsArray<JsAny>? = null,
+    val data: dev.kilua.dom.JsArray<JsAny>? = null,
     val ajaxURL: String? = null,
     val ajaxParams: JsAny? = null,
     val ajaxConfig: JsAny? = null,
@@ -1150,7 +1147,7 @@ public data class TabulatorOptions<T : Any>(
     val headerSortClickElement: HeaderSortClickElement? = null,
     val rowDblClickPopup: JsAny? = null,
     val rowDblClickMenu: JsAny? = null,
-    val responsiveLayoutCollapseFormatter: ((data: JsArray<JsAny>) -> Element)? = null,
+    val responsiveLayoutCollapseFormatter: ((data: dev.kilua.dom.JsArray<JsAny>) -> Element)? = null,
     val selectableRange: JsAny? = null,
     val selectableRangeColumns: Boolean? = null,
     val selectableRangeRows: Boolean? = null,

@@ -25,8 +25,8 @@ package dev.kilua.html.helpers
 import androidx.compose.runtime.Composable
 import dev.kilua.html.Tag
 import dev.kilua.utils.toList
-import web.dom.DragEvent
-import web.dom.HTMLElement
+import dev.kilua.dom.api.DragEvent
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * Common drag and drop methods delegate.

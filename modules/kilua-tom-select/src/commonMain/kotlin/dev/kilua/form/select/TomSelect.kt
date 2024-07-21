@@ -46,13 +46,12 @@ import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import web.JsAny
-import web.JsArray
-import web.JsString
-import web.dom.HTMLOptionElement
-import web.dom.HTMLSelectElement
-import web.dom.asList
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsString
+import dev.kilua.dom.api.HTMLOptionElement
+import dev.kilua.dom.api.HTMLSelectElement
+import dev.kilua.dom.api.asList
+import dev.kilua.dom.toJsString
 
 /**
  * Tom Select component.
@@ -483,7 +482,7 @@ public open class TomSelect(
         @Suppress("LeakingThis")
         onChangeDirect {
             val v = if (this.multiple) {
-                tomSelectInstance?.getValue()?.unsafeCast<JsArray<JsString>>()?.toList()?.joinToString(",")
+                tomSelectInstance?.getValue()?.unsafeCast<dev.kilua.dom.JsArray<JsString>>()?.toList()?.joinToString(",")
             } else {
                 tomSelectInstance?.getValue()?.unsafeCast<JsString>().toString()
             }
@@ -580,7 +579,7 @@ public open class TomSelect(
                     val callbacksObj = self.tsCallbacks!!.toJs()
                     assign(this, callbacksObj)
                     if (self.tsCallbacks!!.load != null) {
-                        this.load = { query: String, callback: (JsArray<JsAny>) -> Unit ->
+                        this.load = { query: String, callback: (dev.kilua.dom.JsArray<JsAny>) -> Unit ->
                             tsCallbacks!!.load!!(query) { options ->
                                 if (emptyOption) {
                                     callback(

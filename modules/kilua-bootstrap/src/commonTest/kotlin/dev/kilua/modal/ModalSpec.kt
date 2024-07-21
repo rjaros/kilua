@@ -27,7 +27,7 @@ import dev.kilua.html.button
 import dev.kilua.html.pt
 import dev.kilua.test.DomSpec
 import kotlinx.coroutines.delay
-import web.document
+import dev.kilua.dom.document
 import kotlin.test.Test
 
 class ModalSpec : DomSpec {

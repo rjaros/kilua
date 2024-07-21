@@ -35,7 +35,6 @@ import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.strongt
 import dev.kilua.utils.rem
-import web.dom.events.Event
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
@@ -124,7 +123,7 @@ internal fun IComponent.toasts() {
                                         bsToast.dispose()
                                     }
                                 }
-                                onEvent<Event>("hidden.bs.toast") {
+                                onEvent<dev.kilua.dom.api.events.Event>("hidden.bs.toast") {
                                     val newToasts = Toast.toastsMap[position]?.filterKeys { it != toastId }
                                     if (newToasts.isNullOrEmpty()) {
                                         Toast.toastsMap.remove(position)

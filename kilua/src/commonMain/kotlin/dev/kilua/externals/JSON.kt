@@ -23,7 +23,7 @@
 
 package dev.kilua.externals
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 /**
  * JavaScript JSON object.

@@ -45,9 +45,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import web.JsAny
-import web.JsArray
-import web.fetch.RequestInit
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.fetch.RequestInit
 import kotlin.reflect.KClass
 
 public open class TabulatorRemote<T : Any>(
@@ -304,4 +303,4 @@ public expect suspend fun <T : Any, E : Any> getDataForTabulatorRemote(
     size: String?,
     filters: String?,
     sorters: String?
-): JsArray<JsAny>
+): dev.kilua.dom.JsArray<JsAny>

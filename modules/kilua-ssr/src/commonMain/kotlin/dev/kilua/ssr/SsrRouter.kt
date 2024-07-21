@@ -53,8 +53,8 @@ import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import web.JsAny
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.toJsString
 
 /**
  * A router supporting Server-Side Rendering (SSR).

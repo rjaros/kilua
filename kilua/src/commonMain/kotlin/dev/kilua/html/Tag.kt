@@ -37,7 +37,7 @@ import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.renderAsHtmlAttributes
 import dev.kilua.utils.unsafeCast
-import web.dom.HTMLElement
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * Base interface for all HTML tags components.

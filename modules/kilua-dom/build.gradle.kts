@@ -18,16 +18,18 @@ kotlin {
     compilerOptions()
     kotlinJsTargets()
     kotlinWasmTargets()
+    kotlinJsCommonTargets()
     sourceSets {
-        val commonMain by getting {
+        commonMain {
+            dependencies {
+                api(project(":modules:kilua-dom-core"))
+            }
+        }
+        jsMain {
             dependencies {
             }
         }
-        val jsMain by getting {
-            dependencies {
-            }
-        }
-        val wasmJsMain by getting {
+        wasmJsMain {
             dependencies {
             }
         }

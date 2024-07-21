@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import web.dom.Element
+import dev.kilua.dom.api.Element
 
 /**
  * A root component which is not disposed.
@@ -37,7 +37,7 @@ import web.dom.Element
 internal class NonDisposableRoot(
     val element: Element,
     renderConfig: RenderConfig = RenderConfig.Default,
-    content: @Composable IComponent.() -> Unit = {}
+    content: @Composable IComponent.() -> Unit = {},
 ) : ComponentBase(element, renderConfig) {
 
     // Not used
@@ -54,7 +54,5 @@ internal class NonDisposableRoot(
         rootComposable(this, defaultMonotonicFrameClock, content)
     }
 
-    override fun renderToStringBuilder(builder: StringBuilder) {
-    }
-
+    override fun renderToStringBuilder(builder: StringBuilder) {}
 }

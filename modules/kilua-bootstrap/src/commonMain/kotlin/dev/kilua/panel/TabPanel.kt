@@ -44,8 +44,8 @@ import dev.kilua.html.li
 import dev.kilua.html.ul
 import dev.kilua.utils.cast
 import dev.kilua.utils.rem
-import web.dom.HTMLDivElement
-import web.toJsString
+import dev.kilua.dom.api.HTMLDivElement
+import dev.kilua.dom.toJsString
 
 /**
  * Tab position.

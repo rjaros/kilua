@@ -24,8 +24,8 @@ package dev.kilua
 
 import dev.kilua.utils.cast
 import kotlinx.coroutines.Deferred
-import web.JsAny
-import web.Promise
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.Promise
 import kotlinx.coroutines.asDeferred as asDeferredCrt
 import kotlinx.coroutines.asPromise as asPromiseCrt
 import kotlin.js.Promise as PromiseJs

@@ -40,7 +40,6 @@ import dev.kilua.html.ul
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
-import web.dom.events.Event
 
 @Composable
 fun IComponent.loginPage(state: ConduitState, conduitManager: ConduitManager) {
@@ -81,7 +80,7 @@ fun IComponent.loginPage(state: ConduitState, conduitManager: ConduitManager) {
                             type = ButtonType.Submit,
                             className = "btn btn-primary btn-lg pull-xs-right"
                         )
-                        onEvent<Event>("submit") { ev ->
+                        onEvent<dev.kilua.dom.api.events.Event>("submit") { ev ->
                             ev.preventDefault()
                             conduitManager.login(emailInput.value, passwordInput.value)
                         }

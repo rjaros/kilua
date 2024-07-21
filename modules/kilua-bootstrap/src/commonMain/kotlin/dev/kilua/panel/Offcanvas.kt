@@ -38,8 +38,7 @@ import dev.kilua.html.h5t
 import dev.kilua.utils.cast
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLDivElement
-import web.dom.events.Event
+import dev.kilua.dom.api.HTMLDivElement
 
 /**
  * The offcanvas placement.
@@ -300,7 +299,7 @@ private fun IOffcanvas.setupOffcanvas(
             component.onRemove()
         }
     }
-    onEvent<Event>("hidden.bs.offcanvas") {
+    onEvent<dev.kilua.dom.api.events.Event>("hidden.bs.offcanvas") {
         component.hide()
     }
 }

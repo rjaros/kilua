@@ -20,6 +20,7 @@
  * SOFTWARE.
  */
 
+import dev.kilua.dom.core.toJsString
 import dev.kilua.externals.get
 import dev.kilua.externals.set
 import kotlinx.coroutines.CoroutineScope
@@ -32,8 +33,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
-import web.localStorage
-import web.toJsString
+import dev.kilua.dom.localStorage
 
 class ViewModel {
     private val appScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())

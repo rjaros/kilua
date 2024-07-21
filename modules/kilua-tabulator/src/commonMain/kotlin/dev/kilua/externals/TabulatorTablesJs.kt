@@ -25,8 +25,8 @@ package dev.kilua.externals
 
 import dev.kilua.JsModule
 import dev.kilua.JsName
-import web.JsAny
-import web.dom.HTMLElement
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * Workaround for tabulator-tables TabulatorFull imports problem.

@@ -34,7 +34,7 @@ import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.utils.StringPair
 import kotlinx.coroutines.launch
-import web.fetch.RequestInit
+import dev.kilua.dom.fetch.RequestInit
 
 /**
  * Creates [Select] component with a remote data source, returning a reference.

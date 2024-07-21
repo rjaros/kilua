@@ -24,11 +24,11 @@ package dev.kilua.core
 
 import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
-import web.clear
-import web.dom.CustomEvent
-import web.dom.CustomEventInit
-import web.dom.Node
-import web.dom.get
+import dev.kilua.dom.clear
+import dev.kilua.dom.api.CustomEvent
+import dev.kilua.dom.api.CustomEventInit
+import dev.kilua.dom.api.Node
+import dev.kilua.dom.api.get
 
 /**
  * Base class for all components.

@@ -23,18 +23,9 @@
 
 package dev.kilua
 
-import web.JsAny
-
-@JsModule("zzz-kilua-assets/k-style.css")
-internal external object CoreCss : JsAny
-
 /**
  * Initializer for Kilua core module.
  */
-public object CoreModule : ModuleInitializer {
-
-    override fun initialize() {
-        useModule(CoreCss)
-        CssRegister.register("zzz-kilua-assets/k-style.css")
-    }
+public expect object CoreModule : ModuleInitializer {
+    override fun initialize()
 }

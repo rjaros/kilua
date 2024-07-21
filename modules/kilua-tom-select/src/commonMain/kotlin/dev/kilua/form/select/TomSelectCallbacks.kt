@@ -24,14 +24,13 @@ package dev.kilua.form.select
 
 import dev.kilua.externals.TomSelectCallbacksJs
 import dev.kilua.externals.obj
-import web.JsAny
-import web.JsArray
+import dev.kilua.dom.JsAny
 
 /**
  * Tom Select callback functions.
  */
 public data class TomSelectCallbacks(
-    val load: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = null,
+    val load: ((query: String, callback: (dev.kilua.dom.JsArray<JsAny>) -> Unit) -> Unit)? = null,
     val shouldLoad: ((query: String) -> Boolean)? = null,
     val score: ((search: String) -> (JsAny) -> Int)? = null,
     val onInitialize: (() -> Unit)? = null,

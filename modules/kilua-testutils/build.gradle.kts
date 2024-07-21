@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.detekt)
@@ -18,22 +22,29 @@ kotlin {
     compilerOptions()
     kotlinJsTargets()
     kotlinWasmTargets()
+    kotlinJvmTargets()
+    kotlinJsCommonTargets()
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             dependencies {
                 implementation(libs.kotlinx.coroutines)
                 implementation(project(":kilua"))
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+            }
+        }
+        jsCommonMain {
+            dependencies {
+                implementation(project(":modules:kilua-dom"))
                 implementation(npm("html-differ", libs.versions.html.differ.get()))
             }
         }
-        val jsMain by getting {
+        jsMain {
             dependencies {
             }
         }
-        val wasmJsMain by getting {
+        wasmJsMain {
             dependencies {
             }
         }

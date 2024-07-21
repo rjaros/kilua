@@ -25,7 +25,7 @@ package dev.kilua.externals
 import dev.kilua.panel.Dir
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.toList
-import web.dom.HTMLElement
+import dev.kilua.dom.api.HTMLElement
 
 internal external class SplitJsOptionsExt : JsAny {
     var sizes: JsArray<JsNumber>

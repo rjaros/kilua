@@ -26,10 +26,10 @@ import dev.kilua.externals.nodeJsCreateComment
 import dev.kilua.externals.nodeJsCreateElement
 import dev.kilua.externals.nodeJsCreateText
 import dev.kilua.utils.isDom
-import web.document
-import web.dom.Comment
-import web.dom.Element
-import web.dom.Text
+import dev.kilua.dom.document
+import dev.kilua.dom.api.Comment
+import dev.kilua.dom.api.Element
+import dev.kilua.dom.api.Text
 
 /**
  * Helper factory to safely call methods on the document object.

@@ -30,8 +30,7 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLButtonElement
-import web.dom.events.MouseEvent
+import dev.kilua.dom.api.HTMLButtonElement
 
 /**
  * Button types.
@@ -144,7 +143,7 @@ public open class Button(
             element.click()
         } else {
             tagEvents.eventsMap["click"]?.forEach {
-                it.value(MouseEvent("click"))
+                it.value(dev.kilua.dom.api.events.MouseEvent("click"))
             }
         }
     }

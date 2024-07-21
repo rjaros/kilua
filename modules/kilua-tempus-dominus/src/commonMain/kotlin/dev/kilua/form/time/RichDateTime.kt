@@ -42,7 +42,6 @@ import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.rem
 import dev.kilua.utils.unsafeCast
 import kotlinx.datetime.LocalDateTime
-import web.dom.events.Event
 
 /**
  * Tempus Dominus rich date time component.
@@ -85,13 +84,13 @@ public open class RichDateTime(
         @Suppress("LeakingThis")
         withStateFlowDelegate.formControl(this)
         @Suppress("LeakingThis")
-        onEventDirect<Event>("change.td") {
+        onEventDirect<dev.kilua.dom.api.events.Event>("change.td") {
             val date = it["detail"]?.get("date")?.unsafeCast<dev.kilua.externals.Date>()
             this.value = date?.toLocalDateTime()
             dispatchEvent("change", buildCustomEventInit(obj()))
         }
         @Suppress("LeakingThis")
-        onEventDirect<Event>("error.td") {
+        onEventDirect<dev.kilua.dom.api.events.Event>("error.td") {
             this.value = null
             dispatchEvent("change", buildCustomEventInit(obj()))
         }

@@ -47,9 +47,6 @@ import dev.kilua.startApplication
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
-import web.dom.events.FocusEvent
-import web.dom.events.KeyboardEvent
-import web.dom.events.MouseEvent
 
 const val ENTER_KEY = 13
 const val ESC_KEY = 27
@@ -83,7 +80,7 @@ class App : Application(), KoinComponent {
                 h1 { +"todos" }
                 text(placeholder = "What needs to be done?", className = "new-todo") {
                     autofocus(true)
-                    onEvent<KeyboardEvent>("keydown") { e ->
+                    onEvent<dev.kilua.dom.api.events.KeyboardEvent>("keydown") { e ->
                         if (e.keyCode == ENTER_KEY) {
                             todoViewModel.addTodo(this.value)
                             this.value = null
@@ -118,7 +115,7 @@ class App : Application(), KoinComponent {
                                     }
                                     label {
                                         +todo.title
-                                        onEvent<MouseEvent>("dblclick") {
+                                        onEvent<dev.kilua.dom.api.events.MouseEvent>("dblclick") {
                                             this@li.element.classList.add("editing")
                                             edit.value = todo.title
                                             edit.focus()
@@ -131,13 +128,13 @@ class App : Application(), KoinComponent {
                                     }
                                 }
                                 edit = textRef(className = "edit") {
-                                    onEvent<FocusEvent>("blur") {
+                                    onEvent<dev.kilua.dom.api.events.FocusEvent>("blur") {
                                         if (this@li.element.classList.contains("editing")) {
                                             this@li.element.classList.remove("editing")
                                             todoViewModel.editTodo(index, this.value)
                                         }
                                     }
-                                    onEvent<KeyboardEvent>("keydown") { e ->
+                                    onEvent<dev.kilua.dom.api.events.KeyboardEvent>("keydown") { e ->
                                         if (e.keyCode == ENTER_KEY) {
                                             todoViewModel.editTodo(index, this.value)
                                             this@li.element.classList.remove("editing")

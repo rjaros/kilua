@@ -33,8 +33,8 @@ import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.utils.StringPair
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.encodeToString
-import web.fetch.RequestInit
-import web.toJsString
+import dev.kilua.dom.fetch.RequestInit
+import dev.kilua.dom.toJsString
 
 internal actual suspend fun <T : Any> getOptionsForSelectRemote(
     serviceManager: RpcServiceMgr<T>,

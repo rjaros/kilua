@@ -26,7 +26,7 @@ import dev.kilua.externals.obj
 import dev.kilua.utils.cast
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Runnable
-import web.Promise
+import dev.kilua.dom.Promise
 import kotlin.coroutines.CoroutineContext
 
 /**

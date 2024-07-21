@@ -22,8 +22,7 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.JsArray
+import dev.kilua.dom.JsAny
 
 /**
  * Returns whether the given value is an array
@@ -34,4 +33,7 @@ public expect fun isArray(o: JsAny?): Boolean
  * Merge two arrays.
  * Returns a new array containing the contents of both given arrays.
  */
-public expect fun <T : JsAny> concat(array1: JsArray<T>, array2: JsArray<T>): JsArray<T>
+public expect fun <T : JsAny> concat(
+    array1: dev.kilua.dom.JsArray<T>,
+    array2: dev.kilua.dom.JsArray<T>,
+): dev.kilua.dom.JsArray<T>

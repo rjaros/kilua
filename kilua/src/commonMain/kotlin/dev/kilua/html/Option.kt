@@ -28,7 +28,7 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
-import web.dom.HTMLOptionElement
+import dev.kilua.dom.api.HTMLOptionElement
 
 /**
  * HTML Option component.

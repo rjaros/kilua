@@ -25,11 +25,10 @@ package dev.kilua.externals
 
 import dev.kilua.JsModule
 import dev.kilua.JsName
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.JsString
-import web.dom.HTMLElement
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsNumber
+import dev.kilua.dom.JsString
+import dev.kilua.dom.api.HTMLElement
 
 internal external class ImaskJs : JsAny {
     var unmaskedValue: String?
@@ -74,7 +73,7 @@ internal external class RangeMaskOptionsJs : ImaskOptionsJs {
 
 internal external class EnumMaskOptionsJs : ImaskOptionsJs {
     var mask: JsAny
-    var enum: JsArray<JsString>
+    var enum: dev.kilua.dom.JsArray<JsString>
     var lazy: Boolean?
     var eager: Boolean?
     var placeholderChar: String?
@@ -88,7 +87,7 @@ internal external class NumberMaskOptionsJs : ImaskOptionsJs {
     var padFractionalZeros: Boolean?
     var normalizeZeros: Boolean?
     var radix: String?
-    var mapToRadix: JsArray<JsString>?
+    var mapToRadix: dev.kilua.dom.JsArray<JsString>?
     var min: JsNumber?
     var max: JsNumber?
 }

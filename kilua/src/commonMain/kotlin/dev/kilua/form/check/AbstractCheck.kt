@@ -32,8 +32,7 @@ import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLInputElement
-import web.dom.events.Event
+import dev.kilua.dom.api.HTMLInputElement
 
 /**
  * Type of the check input control (checkbox or radiobutton).
@@ -254,11 +253,11 @@ public abstract class AbstractCheck(
                 element.required = required
             }
             @Suppress("LeakingThis")
-            onEventDirect<Event>("click") {
+            onEventDirect<dev.kilua.dom.api.events.Event>("click") {
                 setInternalValueFromBoolean(element.checked)
             }
             @Suppress("LeakingThis")
-            onEventDirect<Event>("change") {
+            onEventDirect<dev.kilua.dom.api.events.Event>("change") {
                 setInternalValueFromBoolean(element.checked)
             }
         }

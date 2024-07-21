@@ -50,11 +50,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import web.JsAny
-import web.JsArray
-import web.JsString
-import web.localStorage
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsString
+import dev.kilua.dom.localStorage
+import dev.kilua.dom.toJsString
 
 const val JWT_TOKEN = "jwtToken"
 
@@ -423,7 +422,7 @@ class ConduitManager : TokenProvider {
                 val json = JSON.parse<JsAny>(it)
                 val errors = json["errors"]!!
                 for (key in keys(errors)) {
-                    val tab: JsArray<JsString> = errors[key]!!.unsafeCast()
+                    val tab: dev.kilua.dom.JsArray<JsString> = errors[key]!!.unsafeCast()
                     result.addAll(tab.toList().map { "$key $it" })
                 }
                 result

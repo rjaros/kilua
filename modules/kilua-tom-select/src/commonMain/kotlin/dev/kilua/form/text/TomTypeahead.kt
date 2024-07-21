@@ -44,12 +44,11 @@ import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import web.JsAny
-import web.JsArray
-import web.JsBoolean
-import web.JsString
-import web.toBoolean
-import web.toJsString
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsBoolean
+import dev.kilua.dom.JsString
+import dev.kilua.dom.toBoolean
+import dev.kilua.dom.toJsString
 
 /**
  * Tom Typeahead input component
@@ -266,7 +265,7 @@ public open class TomTypeahead(
                     val callbacksObj = self.tsCallbacks!!.toJs()
                     assign(this, callbacksObj)
                     if (self.tsCallbacks!!.load != null) {
-                        this.load = { query: String, callback: (JsArray<JsAny>) -> Unit ->
+                        this.load = { query: String, callback: (dev.kilua.dom.JsArray<JsAny>) -> Unit ->
                             tsCallbacks!!.load!!(query) { options ->
                                 callback(
                                     options.toList().map {

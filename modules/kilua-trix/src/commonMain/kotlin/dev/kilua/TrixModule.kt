@@ -23,7 +23,7 @@
 
 package dev.kilua
 
-import web.JsAny
+import dev.kilua.dom.JsAny
 
 @JsModule("trix/dist/trix.css")
 internal external object TrixCss : JsAny

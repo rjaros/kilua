@@ -25,10 +25,9 @@ package dev.kilua.externals
 
 import dev.kilua.JsModule
 import dev.kilua.JsName
-import web.JsAny
-import web.JsArray
-import web.JsString
-import web.dom.HTMLElement
+import dev.kilua.dom.JsAny
+import dev.kilua.dom.JsString
+import dev.kilua.dom.api.HTMLElement
 
 /**
  * Tom Select renders configuration.
@@ -49,7 +48,7 @@ public external class TomSelectRendersJs : JsAny {
  * Tom Select callbacks configuration.
  */
 public external class TomSelectCallbacksJs : JsAny {
-    public var load: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)
+    public var load: ((query: String, callback: (dev.kilua.dom.JsArray<JsAny>) -> Unit) -> Unit)
     public var shouldLoad: ((query: String) -> Boolean)
     public var score: ((search: String) -> (JsAny) -> Int)
     public var onInitialize: (() -> Unit)
@@ -82,10 +81,10 @@ public external class TomSelectOptionsJs : JsAny {
     public var maxItems: Int?
     public var maxOptions: Int?
     public var allowEmptyOption: Boolean
-    public var options: JsArray<JsAny>
+    public var options: dev.kilua.dom.JsArray<JsAny>
     public var controlInput: HTMLElement?
     public var plugins: JsAny
-    public var load: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)
+    public var load: ((query: String, callback: (dev.kilua.dom.JsArray<JsAny>) -> Unit) -> Unit)
     public var render: TomSelectRendersJs
     public var hideSelected: Boolean
     public var closeAfterSelect: Boolean
@@ -111,7 +110,7 @@ public external class TomSelectOptionsJs : JsAny {
     public var labelField: String
     public var disabledField: String
     public var sortField: String
-    public var searchField: JsArray<JsString>
+    public var searchField: dev.kilua.dom.JsArray<JsString>
     public var searchConjunction: String
     public var onOptionAdd: ((value: String, data: JsAny) -> Unit)
     public var onOptionRemove: ((value: JsAny) -> Unit)
@@ -126,7 +125,7 @@ public external class TomSelectOptionsJs : JsAny {
 @JsName("TomSelect")
 public external class TomSelectJs(element: HTMLElement, options: TomSelectOptionsJs) : JsAny {
     public fun addOption(value: JsAny, userCreated: Boolean)
-    public fun addOptions(value: JsArray<JsAny>, userCreated: Boolean)
+    public fun addOptions(value: dev.kilua.dom.JsArray<JsAny>, userCreated: Boolean)
     public fun updateOption(value: String, data: JsAny)
     public fun removeOption(value: String)
     public fun getOption(value: String, create: Boolean): JsAny?
