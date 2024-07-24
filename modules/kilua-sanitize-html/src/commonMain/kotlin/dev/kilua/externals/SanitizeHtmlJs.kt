@@ -48,5 +48,5 @@ internal external class SanitizeHtmlOptionsJs : JsAny {
     var nestingLimit: Int
 }
 
-@JsName("default")
+@kotlin.js.JsName("default")
 internal external fun sanitizeHtml(text: String, options: SanitizeHtmlOptionsJs): String

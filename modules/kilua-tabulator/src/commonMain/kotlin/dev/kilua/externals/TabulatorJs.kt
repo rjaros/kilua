@@ -33,7 +33,7 @@ import web.dom.HTMLElement
 /**
  * JavaScript Tabulator component.
  */
-@JsName("TabulatorFull")
+@kotlin.js.JsName("TabulatorFull")
 public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : JsAny {
     public val columnManager: JsAny
     public val rowManager: JsAny

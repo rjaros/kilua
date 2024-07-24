@@ -33,7 +33,7 @@ import web.dom.HTMLElement
 @JsModule("tabulator-tables")
 internal external object TabulatorTablesJs : JsAny {
 
-    @JsName("TabulatorFull")
+    @kotlin.js.JsName("TabulatorFull")
     class TabulatorFull(element: HTMLElement, options: JsAny?) : TabulatorJs
 
 }

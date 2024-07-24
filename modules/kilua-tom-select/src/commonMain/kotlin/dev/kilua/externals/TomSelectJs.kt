@@ -122,7 +122,7 @@ public external class TomSelectOptionsJs : JsAny {
  * Native Tom Select class.
  */
 @JsModule("tom-select")
-@JsName("TomSelect")
+@kotlin.js.JsName("TomSelect")
 public external class TomSelectJs(element: HTMLElement, options: TomSelectOptionsJs) : JsAny {
     public fun addOption(value: JsAny, userCreated: Boolean)
     public fun addOptions(value: JsArray<JsAny>, userCreated: Boolean)

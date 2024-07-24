@@ -47,7 +47,7 @@ internal external class RsupProgressPromiseOptions : JsAny {
     var waitAnimation: Boolean?
 }
 
-@JsName("Progress")
+@kotlin.js.JsName("Progress")
 internal external class RsupProgress(options: RsupProgressOptions) {
     val isInProgress: Boolean
     fun setOptions(options: RsupProgressOptions)

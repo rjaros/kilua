@@ -40,7 +40,7 @@ internal external class ImaskJs : JsAny {
 
 @JsModule("imask")
 internal external object ImaskObjJs : JsAny {
-    @JsName("default")
+    @kotlin.js.JsName("default")
     fun imask(htmlElement: HTMLElement, imaskOptionsJs: ImaskOptionsJs): ImaskJs
 
     val MaskedRange: JsAny
