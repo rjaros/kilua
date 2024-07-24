@@ -23,5 +23,3 @@
 package dev.kilua
 
 public actual typealias JsModule = kotlin.js.JsModule
-
-public actual typealias JsName = kotlin.js.JsName
