@@ -567,6 +567,23 @@ public class Form<K : Any>(
         return mapToClassConverter?.invoke(map.withDefault { null }) ?: map.cast()
     }
 
+
+    /**
+     * Returns current data model with file content read for all KFiles controls.
+     * @return data model
+     */
+    public suspend fun getDataWithFileContent(): K {
+        val map = dataMap + fields.entries.associateBy({ it.key }, {
+            val value = it.value
+            if (value is KFilesFormControl) {
+                value.getFilesWithContent()
+            } else {
+                value.getValue()
+            }
+        })
+        return mapToClassConverter?.invoke(map.withDefault { null }) ?: map.cast()
+    }
+
     /**
      * Returns current data model as JS object.
      * @return data model as JS object
