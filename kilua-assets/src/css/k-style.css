@@ -3,7 +3,7 @@
 }
 
 select:required:invalid {
-    color: rgb(128, 128, 128);
+    color: rgb(117, 117, 117);
 }
 
 select:required option {
