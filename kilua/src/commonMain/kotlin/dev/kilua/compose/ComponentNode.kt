@@ -39,9 +39,10 @@ public inline fun <C> ComponentNode(
     update: @DisallowComposableCalls Updater<C>.() -> Unit,
     content: @Composable C.() -> Unit
 ) {
+    val factory = { componentInScope }
     currentComposer.startNode()
     if (currentComposer.inserting) {
-        currentComposer.createNode { componentInScope }
+        currentComposer.createNode(factory)
     } else {
         currentComposer.useNode()
     }
