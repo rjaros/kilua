@@ -83,6 +83,9 @@ internal external object TempusDominusLocaleRo : TempusDominusLocale
 @JsModule("@eonasdan/tempus-dominus/dist/locales/ru.js")
 internal external object TempusDominusLocaleRu : TempusDominusLocale
 
+@JsModule("@eonasdan/tempus-dominus/dist/locales/sk.js")
+internal external object TempusDominusLocaleSk : TempusDominusLocale
+
 @JsModule("@eonasdan/tempus-dominus/dist/locales/sl.js")
 internal external object TempusDominusLocaleSl : TempusDominusLocale
 
@@ -130,6 +133,7 @@ public val tempusDominusLocales: Map<String, TempusDominusLocale> = nativeMapOf(
     TempusDominusLocalePtPt.name to TempusDominusLocalePtPt,
     TempusDominusLocaleRo.name to TempusDominusLocaleRo,
     TempusDominusLocaleRu.name to TempusDominusLocaleRu,
+    TempusDominusLocaleSk.name to TempusDominusLocaleSk,
     TempusDominusLocaleSl.name to TempusDominusLocaleSl,
     TempusDominusLocaleSrLatn.name to TempusDominusLocaleSrLatn,
     TempusDominusLocaleSr.name to TempusDominusLocaleSr,

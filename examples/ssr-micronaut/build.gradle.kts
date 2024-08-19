@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
     kotlin("multiplatform")
@@ -144,7 +144,7 @@ tasks {
 
 kapt {
     arguments {
-        arg("micronaut.processing.incremental", true)
+        arg("micronaut.processing.incremental", "true")
         arg("micronaut.processing.annotations", "example.*")
         arg("micronaut.processing.group", "example")
         arg("micronaut.processing.module", "ssr-micronaut")
