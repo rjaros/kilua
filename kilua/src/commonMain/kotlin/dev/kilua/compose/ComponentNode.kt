@@ -24,6 +24,7 @@ package dev.kilua.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisallowComposableCalls
+import androidx.compose.runtime.DontMemoize
 import androidx.compose.runtime.ExplicitGroupsComposable
 import androidx.compose.runtime.Updater
 import androidx.compose.runtime.currentComposer
@@ -39,7 +40,7 @@ public inline fun <C> ComponentNode(
     update: @DisallowComposableCalls Updater<C>.() -> Unit,
     content: @Composable C.() -> Unit
 ) {
-    val factory = { componentInScope }
+    val factory = @DontMemoize { componentInScope }
     currentComposer.startNode()
     if (currentComposer.inserting) {
         currentComposer.createNode(factory)
