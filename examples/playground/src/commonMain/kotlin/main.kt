@@ -116,6 +116,7 @@ import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.JsModule
+import dev.kilua.form.select.select
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsObjectOf
@@ -207,6 +208,18 @@ class App : Application() {
             div {
 
                 margin(20.px)
+
+                var option by remember { mutableStateOf("1") }
+
+                select(listOf("1" to "one", "2" to "Two"), option)
+
+                button("test select") {
+                    onClick {
+                        option = "2"
+                    }
+                }
+
+                br()
 
                 val size by rangeRef(200, min = 0, max = 200).collectAsState()
 
