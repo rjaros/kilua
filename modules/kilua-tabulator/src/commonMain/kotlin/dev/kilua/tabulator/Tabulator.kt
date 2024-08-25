@@ -107,6 +107,11 @@ public interface ITabulator<T : Any> : ITag<HTMLDivElement> {
      * Converts a Kotlin data model to an internal (dynamic) data model
      */
     public fun toPlainObj(data: T): JsAny
+
+    /**
+     * Reload table data.
+     */
+    public fun reload()
 }
 
 /**
@@ -175,6 +180,11 @@ public open class Tabulator<T : Any>(
     protected var currentPage: Int? = null
 
     private var customRoots: MutableList<Root> = nativeListOf()
+
+    /**
+     * The registered pagination state setters.
+     */
+    protected val registeredPaginationStateSetters: MutableList<(PaginationState) -> Unit> = nativeListOf()
 
     init {
         internalData = data?.let { toPlainObjList(it) }
@@ -278,6 +288,13 @@ public open class Tabulator<T : Any>(
                 dispatchEvent("tableBuilt", buildCustomEventInit(obj()))
             }
             tabulatorJs?.on("pageLoaded") { ->
+                registeredPaginationStateSetters.forEach {
+                    val currentPage = tabulatorJs?.getPage()?.unsafeCast<JsNumber>()?.toInt() ?: 1
+                    val maxPages = tabulatorJs?.getPageMax()?.unsafeCast<JsNumber>()?.toInt() ?: 1
+                    val buttonCount = tabulatorJs?.options?.get("paginationButtonCount")?.unsafeCast<JsNumber>()
+                        ?.toInt() ?: 5
+                    it(PaginationState(currentPage, maxPages, buttonCount))
+                }
                 dispatchEvent("pageLoaded", buildCustomEventInit(obj()))
             }
             tabulatorJs?.on("renderComplete") { ->
@@ -315,6 +332,24 @@ public open class Tabulator<T : Any>(
             initialized = false
             customRoots.forEach { it.dispose() }
             customRoots.clear()
+        }
+    }
+
+
+    /**
+     * Reload table data.
+     */
+    public override fun reload() {
+        tabulatorJs?.setData(null, null, null)
+    }
+
+    /**
+     * Register external pagination state setter for this Tabulator instance
+     */
+    public open fun registerPagination(paginationStateSetter: (PaginationState) -> Unit): () -> Unit {
+        registeredPaginationStateSetters.add(paginationStateSetter)
+        return {
+            registeredPaginationStateSetters.remove(paginationStateSetter)
         }
     }
 
