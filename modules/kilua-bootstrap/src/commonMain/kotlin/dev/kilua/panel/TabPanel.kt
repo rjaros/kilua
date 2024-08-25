@@ -339,8 +339,9 @@ private fun ITabPanel.setupTabPanel(
                         role("presentation")
                         val navLinkClassName =
                             if (index == component.activeIndexState) "nav-link active" else "nav-link"
-                        val navLinkClassNameWithIcon =
-                            if (tab.icon == null && tab.closable) "$navLinkClassName icon-link" else navLinkClassName
+                        val navLinkClassNameWithIcon = if (tab.label != null && tab.icon != null ||
+                            tab.icon == null && tab.closable
+                        ) "$navLinkClassName icon-link" else navLinkClassName
                         button(tab.label, tab.icon, className = navLinkClassNameWithIcon) {
                             id("$tabPanelId-tab-$index")
                             role("tab")
