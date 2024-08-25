@@ -187,6 +187,7 @@ private fun IComponent.richDateTime(
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
  * @param locale the locale for i18n
+ * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
@@ -202,6 +203,7 @@ public fun IComponent.richDateTimeRef(
     inline: Boolean = false,
     format: String = "yyyy-MM-dd HH:mm",
     locale: Locale = LocaleManager.currentLocale,
+    inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
     setup: @Composable IRichDateTime.() -> Unit = {}
@@ -216,7 +218,17 @@ public fun IComponent.richDateTimeRef(
         className = className % "input-group kilua-td",
         bindId
     ) {
-        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-calendar-alt")
+        commonRichDateTime(
+            bindId,
+            name,
+            placeholder,
+            disabled,
+            required,
+            id,
+            inline,
+            "fas fa-calendar-alt",
+            inputClassName
+        )
         setup()
     }
 }
@@ -230,6 +242,7 @@ public fun IComponent.richDateTimeRef(
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
  * @param locale the locale for i18n
+ * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
@@ -244,13 +257,24 @@ public fun IComponent.richDateTime(
     inline: Boolean = false,
     format: String = "yyyy-MM-dd HH:mm",
     locale: Locale = LocaleManager.currentLocale,
+    inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
     setup: @Composable IRichDateTime.() -> Unit = {}
 ) {
     val bindId = remember { "kilua_tempus_dominus_rdt_${RichDateTime.idCounter++}" }
     richDateTime(value, disabled, format, inline, locale, className = className % "input-group kilua-td", bindId) {
-        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-calendar-alt")
+        commonRichDateTime(
+            bindId,
+            name,
+            placeholder,
+            disabled,
+            required,
+            id,
+            inline,
+            "fas fa-calendar-alt",
+            inputClassName
+        )
         setup()
     }
 }

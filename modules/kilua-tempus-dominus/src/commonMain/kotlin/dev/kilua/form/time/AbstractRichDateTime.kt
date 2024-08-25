@@ -40,8 +40,8 @@ import dev.kilua.html.i
 import dev.kilua.html.span
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
-import dev.kilua.utils.isDom
 import dev.kilua.utils.jsObjectOf
+import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import kotlinx.datetime.LocalDate
@@ -740,7 +740,8 @@ internal fun IDiv.commonRichDateTime(
     required: Boolean?,
     id: String?,
     inline: Boolean,
-    icon: String
+    icon: String,
+    inputClassName: String?,
 ) {
     attribute("data-td-target-input", "nearest")
     attribute("data-td-target-toggle", "nearest")
@@ -750,7 +751,7 @@ internal fun IDiv.commonRichDateTime(
         disabled = disabled,
         required = required,
         id = id,
-        className = "form-control"
+        className = "form-control" % inputClassName
     ) {
         visible(!inline)
         attribute("data-td-target", "#$bindId")

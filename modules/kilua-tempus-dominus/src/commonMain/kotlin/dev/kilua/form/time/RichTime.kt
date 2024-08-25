@@ -183,6 +183,7 @@ private fun IComponent.richTime(
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
  * @param locale the locale for i18n
+ * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
@@ -198,6 +199,7 @@ public fun IComponent.richTimeRef(
     inline: Boolean = false,
     format: String = "HH:mm",
     locale: Locale = LocaleManager.currentLocale,
+    inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
     setup: @Composable IRichTime.() -> Unit = {}
@@ -212,7 +214,7 @@ public fun IComponent.richTimeRef(
         className = className % "input-group kilua-td",
         bindId
     ) {
-        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-clock")
+        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-clock", inputClassName)
         setup()
     }
 }
@@ -226,6 +228,7 @@ public fun IComponent.richTimeRef(
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
  * @param locale the locale for i18n
+ * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
@@ -240,13 +243,14 @@ public fun IComponent.richTime(
     inline: Boolean = false,
     format: String = "HH:mm",
     locale: Locale = LocaleManager.currentLocale,
+    inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
     setup: @Composable IRichTime.() -> Unit = {}
 ) {
     val bindId = remember { "kilua_tempus_dominus_rt_${RichTime.idCounter++}" }
     richTime(value, disabled, format, inline, locale, className = className % "input-group kilua-td", bindId) {
-        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-clock")
+        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-clock", inputClassName)
         setup()
     }
 }
