@@ -33,6 +33,8 @@ import dev.kilua.externals.JSON
 import dev.kilua.externals.TabulatorJs
 import dev.kilua.externals.TabulatorTablesJs.TabulatorFull
 import dev.kilua.externals.buildCustomEventInit
+import dev.kilua.externals.delete
+import dev.kilua.externals.get
 import dev.kilua.externals.obj
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
@@ -54,6 +56,7 @@ import web.JsAny
 import web.JsArray
 import web.JsNumber
 import web.dom.HTMLDivElement
+import web.dom.observers.ResizeObserver
 import web.toInt
 import web.toJsBoolean
 import web.toJsNumber
@@ -295,8 +298,20 @@ public open class Tabulator<T : Any>(
                     currentPage = page.unsafeCast<JsNumber>().toInt()
                 }
             }
-            tabulatorJs?.destroy()
-            tabulatorJs = null
+            if (tabulatorJs != null) {
+                // Workaround for Tabulator crash on disposing
+                val resizeTable = tabulatorJs!!["modules"]!!["resizeTable"]
+                if (resizeTable != null && resizeTable["table"]?.get("element")?.get("parentNode") == null) {
+                    if (resizeTable["containerObserver"] != null) {
+                        if (resizeTable["containerObserver"]!!["disconnect"] != null) {
+                            resizeTable["containerObserver"]?.unsafeCast<ResizeObserver>()?.disconnect()
+                        }
+                        delete(resizeTable, "containerObserver")
+                    }
+                }
+                tabulatorJs?.destroy()
+                tabulatorJs = null
+            }
             initialized = false
             customRoots.forEach { it.dispose() }
             customRoots.clear()
