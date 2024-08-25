@@ -25,8 +25,8 @@ package dev.kilua.modal
 import androidx.compose.runtime.Composable
 import dev.kilua.core.IComponent
 import dev.kilua.html.Button
-import dev.kilua.html.button
-import dev.kilua.html.buttonRef
+import dev.kilua.html.bsButton
+import dev.kilua.html.bsButtonRef
 import dev.kilua.html.div
 import web.dom.events.Event
 
@@ -81,19 +81,19 @@ public fun confirm(
             lateinit var yesButton: Button
             footer {
                 if (cancelVisible) {
-                    button(cancelTitle, "fas fa-times", className = "btn btn-secondary") {
+                    bsButton(cancelTitle, "fas fa-times", className = "btn btn-secondary") {
                         onClick {
                             component.hide()
                         }
                     }
                 }
-                button(noTitle, "fas fa-ban", className = "btn btn-danger") {
+                bsButton(noTitle, "fas fa-ban", className = "btn btn-danger") {
                     onClick {
                         component.hide()
                         noCallback?.invoke()
                     }
                 }
-                yesButton = buttonRef(yesTitle, "fas fa-check", className = "btn btn-primary") {
+                yesButton = bsButtonRef(yesTitle, "fas fa-check", className = "btn btn-primary") {
                     onClick {
                         component.hide()
                         yesCallback?.invoke()

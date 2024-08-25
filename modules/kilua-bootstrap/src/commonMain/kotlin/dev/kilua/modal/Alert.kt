@@ -25,7 +25,7 @@ package dev.kilua.modal
 import androidx.compose.runtime.Composable
 import dev.kilua.core.IComponent
 import dev.kilua.html.Button
-import dev.kilua.html.buttonRef
+import dev.kilua.html.bsButtonRef
 import dev.kilua.html.div
 import web.dom.events.Event
 
@@ -69,7 +69,7 @@ public fun alert(
             content?.let { div("text-start") { +it } }
             lateinit var button: Button
             footer {
-                button = buttonRef("OK", "fas fa-check", className = "btn btn-primary") {
+                button = bsButtonRef("OK", "fas fa-check", className = "btn btn-primary") {
                     onClick {
                         component.hide()
                     }
