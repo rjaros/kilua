@@ -49,20 +49,16 @@ import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
 import dev.kilua.form.number.imaskNumeric
 import dev.kilua.form.number.numeric
-import dev.kilua.form.number.range
 import dev.kilua.form.number.rangeRef
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.TomSelectRenders
 import dev.kilua.form.select.tomSelect
 import dev.kilua.form.select.tomSelectRef
-import dev.kilua.form.text.richText
 import dev.kilua.form.text.richTextRef
 import dev.kilua.form.text.text
 import dev.kilua.form.text.textRef
-import dev.kilua.form.text.tomTypeahead
 import dev.kilua.form.text.tomTypeaheadRef
 import dev.kilua.form.time.richDate
-import dev.kilua.form.time.richDateTime
 import dev.kilua.form.time.richDateTimeRef
 import dev.kilua.form.time.richTime
 import dev.kilua.html.*
@@ -74,14 +70,12 @@ import dev.kilua.i18n.SimpleLocale
 import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
 import dev.kilua.modal.confirm
-import dev.kilua.modal.modal
 import dev.kilua.modal.modalRef
 import dev.kilua.panel.OffPlacement
 import dev.kilua.panel.TabPosition
 import dev.kilua.panel.accordion
 import dev.kilua.panel.carousel
 import dev.kilua.panel.lazyColumn
-import dev.kilua.panel.offcanvas
 import dev.kilua.panel.offcanvasRef
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
@@ -117,6 +111,7 @@ import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.JsModule
 import dev.kilua.form.select.select
+import dev.kilua.modal.alert
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsObjectOf
@@ -182,6 +177,9 @@ data class SearchResult(val total_count: Int, val incomplete_results: Boolean)
 @Serializable
 data class Person(val name: String, val age: Int, val city: String)
 
+@Serializable
+data class FormData(val name: String? = null, val lname: String? = null)
+
 val i18n = I18n(
     "de" to messagesDe,
     "en" to messagesEn,
@@ -208,6 +206,42 @@ class App : Application() {
             div {
 
                 margin(20.px)
+
+
+                tabPanel {
+                    var input by remember { mutableStateOf<String?>(null) }
+                    var formData by remember { mutableStateOf<FormData?>(null) }
+
+                    tab("Tab 1") {
+                        text(input) {
+                            onChange {
+                                input = this.value
+                            }
+                        }
+                    }
+                    tab("Tab 2") {
+                        form<FormData> {
+                            text {
+                                bind(FormData::name)
+                            }
+                            text {
+                                bind(FormData::lname)
+                            }
+                            DisposableEffect(Unit) {
+                                formData?.let { setData(it) }
+                                val job = stateFlow.onEach {
+                                    formData = it
+                                }.launchIn(KiluaScope)
+                                onDispose {
+                                    job.cancel()
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                hr()
 
                 var option by remember { mutableStateOf("1") }
 
@@ -1006,6 +1040,7 @@ class App : Application() {
                         }
                         buttonRef("Test").onClick {
                             modalCaption += "2"
+                            alert("Test alert", "Test content")
                         }
                     }
                 }
