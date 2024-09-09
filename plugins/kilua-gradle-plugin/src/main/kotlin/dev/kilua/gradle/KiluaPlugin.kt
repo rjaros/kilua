@@ -27,13 +27,11 @@ import org.gradle.api.Project
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.bundling.Jar
-import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenExec
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
@@ -78,9 +76,6 @@ public abstract class KiluaPlugin : Plugin<Project> {
         logger.debug("Configuring Kotlin/MPP plugin")
 
         val webpackSsrExists = layout.projectDirectory.dir("webpack.config.ssr.d").asFile.exists()
-        val jsMainExists = layout.projectDirectory.dir("src/jsMain").asFile.exists()
-        val wasmJsMainExists = layout.projectDirectory.dir("src/wasmJsMain").asFile.exists()
-        val webMainExists = jsMainExists || wasmJsMainExists
 
         tasks.withType<Copy>().matching {
             it.name == "jsProcessResources" || it.name == "wasmJsProcessResources"
@@ -103,7 +98,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
             exclude("/tailwind/**", "/modules/**")
         }
 
-        if (webMainExists && webpackSsrExists && kiluaExtension.enableGradleTasks.get()) {
+        if (webpackSsrExists && kiluaExtension.enableGradleTasks.get()) {
             val cssNames = listOf(
                 "zzz-kilua-assets/k-style.css",
                 "zzz-kilua-assets/k-bootstrap.css",
@@ -134,7 +129,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 rootProject.file("build/js/node_modules/$it")
             }
 
-            if (jsMainExists) {
+            if (tasks.findByName("jsBrowserProductionWebpack") != null) {
                 val kotlinWebpackJs = tasks.getByName("jsBrowserProductionWebpack", KotlinWebpack::class)
                 tasks.register(
                     "jsBrowserProductionWebpackSSR",
@@ -200,7 +195,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     }
                 }
             }
-            if (wasmJsMainExists) {
+            if (tasks.findByName("wasmJsBrowserProductionWebpack") != null) {
                 val kotlinWebpackWasmJs = tasks.getByName("wasmJsBrowserProductionWebpack", KotlinWebpack::class)
                 tasks.register(
                     "wasmJsBrowserProductionWebpackSSR",
@@ -281,7 +276,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     afterEvaluate {
                         tasks.findByName("jarWithJs")?.let {
                             tasks.getByName("jarWithJs", Jar::class) {
-                                if (wasmJsMainExists) {
+                                if (tasks.findByName("wasmJsArchiveSSR") != null) {
                                     dependsOn("wasmJsArchiveSSR")
                                     from(project.tasks["wasmJsArchiveSSR"].outputs.files)
                                 } else {
@@ -325,10 +320,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
     }
 
     private fun KiluaPluginContext.configureNodeEcosystem() {
-        logger.info("configuring Node")
+        logger.debug("configuring Node")
 
         rootProject.extensions.findByType(org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension::class)?.apply {
-            logger.info("configuring Npm")
+            logger.debug("configuring Npm")
             if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
                 override("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
                 override("zzz-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
@@ -360,7 +355,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
         }
 
         rootProject.extensions.findByType(YarnRootExtension::class)?.apply {
-            logger.info("configuring Yarn")
+            logger.debug("configuring Yarn")
             if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
                 resolution("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
                 resolution("zzz-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
