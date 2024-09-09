@@ -112,6 +112,7 @@ import dev.kilua.toastify.ToastType
 import dev.kilua.JsModule
 import dev.kilua.form.select.select
 import dev.kilua.modal.alert
+import dev.kilua.modal.modal
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsObjectOf
@@ -207,6 +208,20 @@ class App : Application() {
 
                 margin(20.px)
 
+                modal(size = ModalSize.ModalSm) {
+                    vPanel {
+                        bsButton("Close") {
+                            onClick {
+                                this@modal.hide()
+                            }
+                        }
+                    }
+                    LaunchedEffect(Unit) {
+                        this@modal.show()
+                    }
+                }
+
+                hr()
 
                 tabPanel {
                     var input by remember { mutableStateOf<String?>(null) }
