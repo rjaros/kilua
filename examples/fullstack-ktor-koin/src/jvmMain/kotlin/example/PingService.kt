@@ -22,12 +22,12 @@ import kotlin.time.Duration.Companion.seconds
 @Factory
 actual class PingService(private val call: ApplicationCall) : IPingService {
 
-    override suspend fun ping(message: String?): String {
+    actual override suspend fun ping(message: String?): String {
         println(message)
         return "Hello world from server!"
     }
 
-    override suspend fun getData(id: Int, name: String): MyData {
+    actual override suspend fun getData(id: Int, name: String): MyData {
         if (id < 0) {
             throw MyFirstException("id must be positive")
         }
@@ -37,7 +37,7 @@ actual class PingService(private val call: ApplicationCall) : IPingService {
         return MyData(id, name)
     }
 
-    override suspend fun getDataResult(id: Int, name: String): Result<MyData> {
+    actual override suspend fun getDataResult(id: Int, name: String): Result<MyData> {
         try {
             return Result.success(getData(id, name))
         } catch (e: AbstractServiceException) {
@@ -45,7 +45,7 @@ actual class PingService(private val call: ApplicationCall) : IPingService {
         }
     }
 
-    override suspend fun kiluaTypes(
+    actual override suspend fun kiluaTypes(
         files: List<KFile>,
         localDate: LocalDate,
         localTime: LocalTime,
@@ -60,13 +60,13 @@ actual class PingService(private val call: ApplicationCall) : IPingService {
         return Result.success(listOf(localDate))
     }
 
-    override suspend fun wservice(input: ReceiveChannel<Int>, output: SendChannel<String>) {
+    actual override suspend fun wservice(input: ReceiveChannel<Int>, output: SendChannel<String>) {
         for (i in input) {
             output.send("I'v got: $i")
         }
     }
 
-    override suspend fun sseConnection(output: SendChannel<String>) {
+    actual override suspend fun sseConnection(output: SendChannel<String>) {
         var i = 0
         while (true) {
             output.send("Hello world (${i++})!")
@@ -74,7 +74,7 @@ actual class PingService(private val call: ApplicationCall) : IPingService {
         }
     }
 
-    override suspend fun rowData(
+    actual override suspend fun rowData(
         page: Int?,
         size: Int?,
         filter: List<RemoteFilter>?,
@@ -102,13 +102,13 @@ actual class PingService(private val call: ApplicationCall) : IPingService {
         return RemoteData(requestedData, ((count - 1) / requestedSize) + 1, count)
     }
 
-    override suspend fun dictionary(state: String?): List<SimpleRemoteOption> {
+    actual override suspend fun dictionary(state: String?): List<SimpleRemoteOption> {
         println(state)
         println(call.request.headers.get("X-My-Header"))
         return listOf(SimpleRemoteOption("1", "One"), SimpleRemoteOption("2", "Two"))
     }
 
-    override suspend fun dictionaryTs(search: String?, initial: String?, state: String?): List<RemoteOption> {
+    actual override suspend fun dictionaryTs(search: String?, initial: String?, state: String?): List<RemoteOption> {
         println(state)
         println(call.request.headers.get("X-My-Header"))
         return listOf("pl" to "Poland", "uk" to "United Kingdom", "us" to "United States of America")
@@ -124,7 +124,7 @@ actual class PingService(private val call: ApplicationCall) : IPingService {
             }
     }
 
-    override suspend fun suggestionList(search: String?, state: String?): List<String> {
+    actual override suspend fun suggestionList(search: String?, state: String?): List<String> {
         println(state)
         println(call.request.headers.get("X-My-Header"))
         return listOf("Poland", "United Kingdom", "United States of America")
