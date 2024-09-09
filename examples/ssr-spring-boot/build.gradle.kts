@@ -9,13 +9,14 @@ plugins {
     id("org.jetbrains.compose")
     kotlin("plugin.compose")
     alias(libs.plugins.spring.dependency.management)
-    alias(libs.plugins.spring.boot)
     alias(libs.plugins.kilua.rpc)
     alias(libs.plugins.kilua)
 }
 
 extra["kotlin.version"] = libs.versions.kotlin.get()
 extra["kotlin-coroutines.version"] = libs.versions.kotlinx.coroutines.get()
+
+extra["mainClassName"] = "example.MainKt"
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
@@ -81,7 +82,6 @@ kotlin {
                 implementation(kotlin("reflect"))
                 implementation(project(":modules:kilua-ssr-server-spring-boot"))
                 implementation("org.springframework.boot:spring-boot-starter")
-                implementation("org.springframework.boot:spring-boot-devtools")
                 implementation("org.springframework.boot:spring-boot-starter-webflux")
             }
         }

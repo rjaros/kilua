@@ -7,6 +7,7 @@ plugins {
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
     kotlin("plugin.compose")
+    id("com.google.devtools.ksp")
     alias(libs.plugins.kilua.rpc)
     alias(libs.plugins.kilua)
 }

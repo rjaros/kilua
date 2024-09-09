@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
     kotlin("multiplatform")
@@ -8,12 +8,11 @@ plugins {
     id("org.jetbrains.compose")
     kotlin("plugin.compose")
     alias(libs.plugins.shadow)
-    alias(libs.plugins.vertx)
     alias(libs.plugins.kilua.rpc)
     alias(libs.plugins.kilua)
 }
 
-val mainClassName = "example.MainVerticle"
+extra["mainClassName"] = "example.MainVerticle"
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
@@ -93,8 +92,4 @@ composeCompiler {
             .filterNot { it == KotlinPlatformType.jvm }
             .asIterable()
     )
-}
-
-vertx {
-    mainVerticle = mainClassName
 }
