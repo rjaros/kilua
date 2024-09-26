@@ -55,6 +55,7 @@ public interface IRichTime : IAbstractRichDateTime, TimeFormControl, WithStateFl
 public open class RichTime(
     value: LocalTime? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     format: String = "HH:mm",
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
@@ -62,7 +63,8 @@ public open class RichTime(
     id: String? = null,
     renderConfig: RenderConfig = RenderConfig.Default,
     protected val withStateFlowDelegate: WithStateFlowDelegate<LocalTime?> = WithStateFlowDelegateImpl()
-) : AbstractRichDateTime(disabled, format, inline, locale, className, id, renderConfig = renderConfig), TimeFormControl,
+) : AbstractRichDateTime(disabled, required, format, inline, locale, className, id, renderConfig = renderConfig),
+    TimeFormControl,
     WithStateFlow<LocalTime?> by withStateFlowDelegate, IRichTime {
 
     public override var value: LocalTime? by updatingProperty(
@@ -118,6 +120,7 @@ public open class RichTime(
 private fun IComponent.richTimeRef(
     value: LocalTime? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     format: String = "HH:mm",
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
@@ -126,7 +129,19 @@ private fun IComponent.richTimeRef(
     setup: @Composable IRichTime.() -> Unit = {}
 ): RichTime {
     val component =
-        remember { RichTime(value, disabled, format, inline, locale, className, id, renderConfig = renderConfig) }
+        remember {
+            RichTime(
+                value,
+                disabled,
+                required,
+                format,
+                inline,
+                locale,
+                className,
+                id,
+                renderConfig = renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -136,6 +151,7 @@ private fun IComponent.richTimeRef(
     ComponentNode(component, {
         set(value) { updateProperty(RichTime::value, it) }
         set(disabled) { updateProperty(RichTime::disabled, it) }
+        set(required) { updateProperty(RichTime::required, it) }
         set(format) { updateProperty(RichTime::format, it) }
         set(inline) { updateProperty(RichTime::inline, it) }
         set(locale) { updateProperty(RichTime::locale, it) }
@@ -148,6 +164,7 @@ private fun IComponent.richTimeRef(
 private fun IComponent.richTime(
     value: LocalTime? = null,
     disabled: Boolean? = null,
+    required: Boolean? = null,
     format: String = "HH:mm",
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
@@ -156,7 +173,19 @@ private fun IComponent.richTime(
     setup: @Composable IRichTime.() -> Unit = {}
 ) {
     val component =
-        remember { RichTime(value, disabled, format, inline, locale, className, id, renderConfig = renderConfig) }
+        remember {
+            RichTime(
+                value,
+                disabled,
+                required,
+                format,
+                inline,
+                locale,
+                className,
+                id,
+                renderConfig = renderConfig
+            )
+        }
     DisposableEffect(component.componentId) {
         component.onInsert()
         onDispose {
@@ -166,6 +195,7 @@ private fun IComponent.richTime(
     ComponentNode(component, {
         set(value) { updateProperty(RichTime::value, it) }
         set(disabled) { updateProperty(RichTime::disabled, it) }
+        set(required) { updateProperty(RichTime::required, it) }
         set(format) { updateProperty(RichTime::format, it) }
         set(inline) { updateProperty(RichTime::inline, it) }
         set(locale) { updateProperty(RichTime::locale, it) }
@@ -208,6 +238,7 @@ public fun IComponent.richTimeRef(
     return richTimeRef(
         value,
         disabled,
+        required,
         format,
         inline,
         locale,
@@ -249,7 +280,16 @@ public fun IComponent.richTime(
     setup: @Composable IRichTime.() -> Unit = {}
 ) {
     val bindId = remember { "kilua_tempus_dominus_rt_${RichTime.idCounter++}" }
-    richTime(value, disabled, format, inline, locale, className = className % "input-group kilua-td", bindId) {
+    richTime(
+        value,
+        disabled,
+        required,
+        format,
+        inline,
+        locale,
+        className = className % "input-group kilua-td",
+        bindId
+    ) {
         commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-clock", inputClassName)
         setup()
     }

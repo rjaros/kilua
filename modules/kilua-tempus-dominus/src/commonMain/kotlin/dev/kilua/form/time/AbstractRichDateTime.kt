@@ -126,6 +126,7 @@ public enum class YearHeaderFormat(public val value: String) {
  */
 public abstract class AbstractRichDateTime(
     disabled: Boolean? = null,
+    required: Boolean? = null,
     format: String,
     inline: Boolean = false,
     locale: Locale = LocaleManager.currentLocale,
@@ -212,7 +213,7 @@ public abstract class AbstractRichDateTime(
     /**
      * Determines if the component is required.
      */
-    public override var required: Boolean? by updatingProperty()
+    public override var required: Boolean? by updatingProperty(required)
 
     /**
      * Set the component required state.
