@@ -1066,7 +1066,7 @@ class App : Application() {
                         }
                         buttonRef("Test").onClick {
                             modalCaption += "2"
-                            alert("Test alert", "Test content")
+                            alert("Test alert", "Test <br>content", rich = true)
                         }
                     }
                 }
