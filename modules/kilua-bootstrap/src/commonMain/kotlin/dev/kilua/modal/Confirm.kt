@@ -28,14 +28,16 @@ import dev.kilua.html.Button
 import dev.kilua.html.bsButton
 import dev.kilua.html.bsButtonRef
 import dev.kilua.html.div
+import dev.kilua.html.rawHtml
 import web.dom.events.Event
 
 
 /**
  * Shows the confirmation dialog.
  *
- * @param caption the caption of the alert window
- * @param content the content of the alert window
+ * @param caption the caption of the confirmation dialog
+ * @param content the content of the confirmation dialog
+ * @param rich determines if the window should display rich HTML content
  * @param size the size of the modal window
  * @param fullscreenMode the fullscreen mode of the modal window
  * @param animation determines if the modal window is animated
@@ -54,6 +56,7 @@ import web.dom.events.Event
 public fun confirm(
     caption: String? = null,
     content: String? = null,
+    rich: Boolean = false,
     size: ModalSize? = null,
     fullscreenMode: FullscreenMode? = null,
     animation: Boolean = true,
@@ -83,7 +86,15 @@ public fun confirm(
             null,
         ) {
             val component = this
-            content?.let { div("text-start") { +it } }
+            content?.let {
+                div("text-start") {
+                    if (!rich) {
+                        +it
+                    } else {
+                        rawHtml(it)
+                    }
+                }
+            }
             lateinit var yesButton: Button
             footer {
                 if (cancelVisible) {
