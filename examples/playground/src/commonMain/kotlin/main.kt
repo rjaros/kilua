@@ -110,6 +110,7 @@ import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.JsModule
+import dev.kilua.form.formRef
 import dev.kilua.form.select.select
 import dev.kilua.modal.alert
 import dev.kilua.modal.modal
@@ -125,6 +126,7 @@ import dev.kilua.utils.unsafeCast
 import dev.kilua.useModule
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 import web.JsAny
 import web.JsArray
@@ -179,7 +181,7 @@ data class SearchResult(val total_count: Int, val incomplete_results: Boolean)
 data class Person(val name: String, val age: Int, val city: String)
 
 @Serializable
-data class FormData(val name: String? = null, val lname: String? = null)
+data class FormData(val name: String? = null, val lname: String? = null, val date: LocalDate? = null)
 
 val i18n = I18n(
     "de" to messagesDe,
@@ -235,12 +237,15 @@ class App : Application() {
                         }
                     }
                     tab("Tab 2") {
-                        form<FormData> {
+                        val f = formRef<FormData> {
                             text {
                                 bind(FormData::name)
                             }
-                            text {
+                            text(required = true) {
                                 bind(FormData::lname)
+                            }
+                            richDate(required = true) {
+                                bind(FormData::date)
                             }
                             DisposableEffect(Unit) {
                                 formData?.let { setData(it) }
@@ -250,6 +255,12 @@ class App : Application() {
                                 onDispose {
                                     job.cancel()
                                 }
+                            }
+                        }
+                        button("Validate") {
+                            onClick {
+                                console.log(f.validate().toString())
+                                console.log(f.getData().toString())
                             }
                         }
                     }
