@@ -657,7 +657,14 @@ public data class ColumnDefinition<T : Any>(
     val dblClickMenu: JsAny? = null,
     val headerColumnsMenu: Boolean? = null,
     val headerColumnsMenuTitle: String? = null,
+    val headerColumnsMenuIcon: String? = null,
     val headerColumnsMenuResetTitle: String? = null,
+    val headerColumnsMenuResetIconPrefix: String? = null,
+    val headerColumnsMenuResetIcon: String? = null,
+    val headerColumnsMenuListIconPrefix: String? = null,
+    val headerColumnsMenuListIconChecked: String? = null,
+    val headerColumnsMenuListIconUnchecked: String? = null,
+    val responsiveCollapseAutoIcon: String? = null,
 )
 
 /**
@@ -782,6 +789,11 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
     val tmpHeaderColumnsMenu: ((Event) -> JsArray<JsAny>)? = if (this.headerColumnsMenu == true) {
         { _ ->
             val resetTitle = this.headerColumnsMenuResetTitle ?: "Default columns"
+            val resetIconPrefix = this.headerColumnsMenuResetIconPrefix ?: "fas"
+            val resetIcon = this.headerColumnsMenuResetIcon ?: "fa-rotate"
+            val iconPrefix = this.headerColumnsMenuListIconPrefix ?: "far"
+            val iconChecked = this.headerColumnsMenuListIconChecked ?: "fa-check-square"
+            val iconUnchecked = this.headerColumnsMenuListIconUnchecked ?: "fa-square"
             fun resetColumns() {
                 val persistenceID =
                     tabulator.tabulatorJs?.options?.get("persistenceID")?.let { "tabulator-$it" } ?: "tabulator"
@@ -798,8 +810,8 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                             it.getField()
                         } ?: emptyList()
                 val icon = SafeDomFactory.createElement("i")
-                icon.classList.add("far")
-                icon.classList.add(if (!it.isVisible() && !responsiveHiddenColumns.contains(it.getField())) "fa-square" else "fa-check-square")
+                icon.classList.add(iconPrefix)
+                icon.classList.add(if (!it.isVisible() && !responsiveHiddenColumns.contains(it.getField())) iconUnchecked else iconChecked)
                 val label = SafeDomFactory.createElement("span")
                 val title = SafeDomFactory.createElement("span")
                 title.textContent = " " + it.getDefinition()["title"]
@@ -811,17 +823,17 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                         e.stopPropagation()
                         if (it.isVisible()) {
                             it.hide()
-                            icon.classList.remove("fa-check-square")
-                            icon.classList.add("fa-square")
+                            icon.classList.remove(iconChecked)
+                            icon.classList.add(iconUnchecked)
                         } else if (responsiveHiddenColumns.contains(it.getField())) {
                             it.show()
                             it.hide()
-                            icon.classList.remove("fa-check-square")
-                            icon.classList.add("fa-square")
+                            icon.classList.remove(iconChecked)
+                            icon.classList.add(iconUnchecked)
                         } else {
                             it.show()
-                            icon.classList.remove("fa-square")
-                            icon.classList.add("fa-check-square")
+                            icon.classList.remove(iconUnchecked)
+                            icon.classList.add(iconChecked)
                         }
                         tabulator.tabulatorJs?.redraw(true)
                     }
@@ -831,8 +843,8 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                 separator = true
             }, obj {
                 val icon = SafeDomFactory.createElement("i")
-                icon.classList.add("fas")
-                icon.classList.add("fa-rotate")
+                icon.classList.add(resetIconPrefix)
+                icon.classList.add(resetIcon)
                 val label = SafeDomFactory.createElement("span")
                 val title = SafeDomFactory.createElement("span")
                 title.textContent = " $resetTitle"
@@ -847,7 +859,9 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         }
     } else null
     val headerColumnsMenuTitle = this.headerColumnsMenuTitle ?: "Customize"
+    val headerColumnsMenuIcon = this.headerColumnsMenuIcon ?: "far fa-square-caret-down"
     val responsiveCollapseAuto = this.formatter == Formatter.ResponsiveCollapseAuto
+    val responsiveCollapseAutoIcon = this.responsiveCollapseAutoIcon ?: "fas fa-arrows-up-down"
 
     val responsiveCollapseOptions = if (responsiveCollapseAuto) {
         val headerClick: (JsAny) -> Boolean = {
@@ -872,7 +886,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             "formatter" to "responsiveCollapse",
             "titleFormatter" to "tickCross",
             "titleFormatterParams" to jsObjectOf(
-                "crossElement" to "<i class='fas fa-arrows-up-down'></i>"
+                "crossElement" to "<i class='$responsiveCollapseAutoIcon'></i>"
             ),
             "width" to "40",
             "headerSort" to false,
@@ -889,7 +903,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         listOf(
             "headerHozAlign" to "center",
             "headerMenu" to toJsAny(tmpHeaderColumnsMenu),
-            "headerMenuIcon" to "<i class='far fa-square-caret-down'></i> $headerColumnsMenuTitle"
+            "headerMenuIcon" to "<i class='$headerColumnsMenuIcon'></i> $headerColumnsMenuTitle"
         )
     } else emptyList()
 
@@ -1170,6 +1184,11 @@ public data class TabulatorOptions<T : Any>(
     val resizableRowGuide: Boolean? = null,
     val editorEmptyValue: JsAny? = null,
     val editorEmptyValueFunc: ((JsAny) -> Boolean)? = null,
+    val paginationIconFirst: String? = null,
+    val paginationIconPrev: String? = null,
+    val paginationIconNext: String? = null,
+    val paginationIconLast: String? = null,
+    val paginationIconPageSize: String? = null,
 )
 
 /**

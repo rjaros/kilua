@@ -40,6 +40,8 @@ import web.dom.events.Event
  * @param animation determines if the modal window is animated
  * @param centered determines if the modal window is vertically centered
  * @param scrollable determines if the modal window content is scrollable
+ * @param okTitle the title of the OK button
+ * @param okIcon the icon of the OK button
  * @param callback the callback function that is called when the alert window is hidden
  */
 public fun alert(
@@ -50,6 +52,8 @@ public fun alert(
     animation: Boolean = true,
     centered: Boolean = false,
     scrollable: Boolean = false,
+    okTitle: String = "OK",
+    okIcon: String? = "fas fa-check",
     callback: (() -> Unit)? = null
 ) {
     val modalId = Modal.counter++
@@ -69,7 +73,7 @@ public fun alert(
             content?.let { div("text-start") { +it } }
             lateinit var button: Button
             footer {
-                button = bsButtonRef("OK", "fas fa-check", className = "btn btn-primary") {
+                button = bsButtonRef(okTitle, okIcon, className = "btn btn-primary") {
                     onClick {
                         component.hide()
                     }

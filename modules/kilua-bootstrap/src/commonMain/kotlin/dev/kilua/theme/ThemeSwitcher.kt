@@ -40,6 +40,9 @@ import dev.kilua.utils.rem
  *
  * @param title the title of the theme switcher
  * @param style the style of the theme switcher
+ * @param autoIcon the icon of the theme switcher when the theme is auto
+ * @param lightIcon the icon of the theme switcher when the theme is light
+ * @param darkIcon the icon of the theme switcher when the theme is dark
  * @param round the round state of the theme switcher
  * @param disabled the disabled state of the theme switcher
  * @param className the CSS class name
@@ -51,6 +54,9 @@ import dev.kilua.utils.rem
 public fun IComponent.themeSwitcherRef(
     title: String? = "Switch color theme",
     style: ButtonStyle = ButtonStyle.BtnSecondary,
+    autoIcon: String = "fas fa-circle-half-stroke",
+    lightIcon: String = "fas fa-moon",
+    darkIcon: String = "fas fa-sun",
     round: Boolean = false,
     disabled: Boolean = false,
     className: String? = null,
@@ -60,9 +66,9 @@ public fun IComponent.themeSwitcherRef(
     var icon by remember {
         mutableStateOf(
             when (ThemeManager.theme) {
-                Theme.Auto -> "fas fa-circle-half-stroke"
-                Theme.Light -> "fas fa-moon"
-                Theme.Dark -> "fas fa-sun"
+                Theme.Auto -> autoIcon
+                Theme.Light -> lightIcon
+                Theme.Dark -> darkIcon
             }
         )
     }
@@ -79,10 +85,10 @@ public fun IComponent.themeSwitcherRef(
         onClick {
             if (ThemeManager.theme == Theme.Dark) {
                 ThemeManager.theme = Theme.Light
-                icon = "fas fa-moon"
+                icon = lightIcon
             } else {
                 ThemeManager.theme = Theme.Dark
-                icon = "fas fa-sun"
+                icon = darkIcon
             }
         }
     }
@@ -93,6 +99,9 @@ public fun IComponent.themeSwitcherRef(
  *
  * @param title the title of the theme switcher
  * @param style the style of the theme switcher
+ * @param autoIcon the icon of the theme switcher when the theme is auto
+ * @param lightIcon the icon of the theme switcher when the theme is light
+ * @param darkIcon the icon of the theme switcher when the theme is dark
  * @param round the round state of the theme switcher
  * @param disabled the disabled state of the theme switcher
  * @param className the CSS class name
@@ -103,6 +112,9 @@ public fun IComponent.themeSwitcherRef(
 public fun IComponent.themeSwitcher(
     title: String? = "Switch color theme",
     style: ButtonStyle = ButtonStyle.BtnSecondary,
+    autoIcon: String = "fas fa-circle-half-stroke",
+    lightIcon: String = "fas fa-moon",
+    darkIcon: String = "fas fa-sun",
     round: Boolean = false,
     disabled: Boolean = false,
     className: String? = null,
@@ -112,9 +124,9 @@ public fun IComponent.themeSwitcher(
     var icon by remember {
         mutableStateOf(
             when (ThemeManager.theme) {
-                Theme.Auto -> "fas fa-circle-half-stroke"
-                Theme.Light -> "fas fa-moon"
-                Theme.Dark -> "fas fa-sun"
+                Theme.Auto -> autoIcon
+                Theme.Light -> lightIcon
+                Theme.Dark -> darkIcon
             }
         )
     }
@@ -131,10 +143,10 @@ public fun IComponent.themeSwitcher(
         onClick {
             if (ThemeManager.theme == Theme.Dark) {
                 ThemeManager.theme = Theme.Light
-                icon = "fas fa-moon"
+                icon = lightIcon
             } else {
                 ThemeManager.theme = Theme.Dark
-                icon = "fas fa-sun"
+                icon = darkIcon
             }
         }
     }

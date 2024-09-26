@@ -592,6 +592,24 @@ public abstract class AbstractRichDateTime(
         }
 
     /**
+     * Date/time chooser custom icons.
+     */
+    public override var customIcons: DateTimeIcons? by updatingProperty {
+        refresh()
+    }
+
+    /**
+     * Set the date/time chooser custom icons.
+     */
+    @Composable
+    public override fun customIcons(customIcons: DateTimeIcons?): Unit =
+        composableProperty("customIcons", {
+            this.customIcons = null
+        }) {
+            this.customIcons = customIcons
+        }
+
+    /**
      * The refresh callback used by the theme change event handler.
      */
     protected var refreshCallback: (Event) -> Unit = {
@@ -690,6 +708,19 @@ public abstract class AbstractRichDateTime(
                         this.clear = component.showClear
                         this.close = component.showClose
                         this.today = component.showToday
+                    }
+                    if (component.customIcons != null) {
+                        this.icons = obj {
+                            component.customIcons!!.time?.let { this.time = it }
+                            component.customIcons!!.date?.let { this.date = it }
+                            component.customIcons!!.up?.let { this.up = it }
+                            component.customIcons!!.down?.let { this.down = it }
+                            component.customIcons!!.previous?.let { this.previous = it }
+                            component.customIcons!!.next?.let { this.next = it }
+                            component.customIcons!!.today?.let { this.today = it }
+                            component.customIcons!!.clear?.let { this.clear = it }
+                            component.customIcons!!.close?.let { this.close = it }
+                        }
                     }
                     this.inline = component.inline
                     this.keepOpen = component.keepOpen

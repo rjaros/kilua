@@ -213,6 +213,7 @@ private fun IComponent.richTime(
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
  * @param locale the locale for i18n
+ * @param clockIcon the icon of the clock button
  * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
@@ -229,6 +230,7 @@ public fun IComponent.richTimeRef(
     inline: Boolean = false,
     format: String = "HH:mm",
     locale: Locale = LocaleManager.currentLocale,
+    clockIcon: String = "fas fa-clock",
     inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
@@ -245,7 +247,7 @@ public fun IComponent.richTimeRef(
         className = className % "input-group kilua-td",
         bindId
     ) {
-        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-clock", inputClassName)
+        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, clockIcon, inputClassName)
         setup()
     }
 }
@@ -259,6 +261,7 @@ public fun IComponent.richTimeRef(
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
  * @param locale the locale for i18n
+ * @param clockIcon the icon of the clock button
  * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
@@ -274,6 +277,7 @@ public fun IComponent.richTime(
     inline: Boolean = false,
     format: String = "HH:mm",
     locale: Locale = LocaleManager.currentLocale,
+    clockIcon: String = "fas fa-clock",
     inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
@@ -290,7 +294,7 @@ public fun IComponent.richTime(
         className = className % "input-group kilua-td",
         bindId
     ) {
-        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, "fas fa-clock", inputClassName)
+        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, clockIcon, inputClassName)
         setup()
     }
 }

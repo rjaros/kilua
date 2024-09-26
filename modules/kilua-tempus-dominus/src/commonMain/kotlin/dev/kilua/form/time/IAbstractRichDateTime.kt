@@ -310,6 +310,17 @@ public interface IAbstractRichDateTime : IDiv {
     public fun yearHeaderFormat(yearHeaderFormat: YearHeaderFormat?)
 
     /**
+     * Date/time chooser custom icons.
+     */
+    public val customIcons: DateTimeIcons?
+
+    /**
+     * Set the date/time chooser custom icons.
+     */
+    @Composable
+    public fun customIcons(customIcons: DateTimeIcons?)
+
+    /**
      * The Tempus Dominus instance.
      */
     public val tempusDominusInstance: TempusDominus?

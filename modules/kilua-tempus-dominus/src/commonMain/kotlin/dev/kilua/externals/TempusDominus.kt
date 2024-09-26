@@ -51,6 +51,21 @@ public external class TempusDominusButtons : JsAny {
 }
 
 /**
+ * Tempus Dominus icons configuration.
+ */
+public external class TempusDominusIcons : JsAny {
+    public var time: String
+    public var date: String
+    public var up: String
+    public var down: String
+    public var previous: String
+    public var next: String
+    public var today: String
+    public var clear: String
+    public var close: String
+}
+
+/**
  * Tempus Dominus components configuration.
  */
 public external class TempusDominusComponents : JsAny {
@@ -67,6 +82,7 @@ public external class TempusDominusDisplay : JsAny {
     public var toolbarPlacement: String
     public var sideBySide: Boolean
     public var buttons: TempusDominusButtons
+    public var icons: TempusDominusIcons
     public var inline: Boolean
     public var keepOpen: Boolean
     public var theme: String

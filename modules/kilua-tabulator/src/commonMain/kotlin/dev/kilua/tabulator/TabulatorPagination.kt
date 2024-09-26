@@ -52,6 +52,10 @@ public data class PaginationState(val currentPage: Int, val maxPages: Int, val b
  *
  * @param T type of tabulator data
  * @param tabulatorGetter tabulator accessor function
+ * @param iconFirst icon for the first page button
+ * @param iconPrev icon for the previous page button
+ * @param iconNext icon for the next page button
+ * @param iconLast icon for the last page button
  * @param className CSS class name
  * @param id HTML ID
  * @param init initialization block
@@ -59,6 +63,10 @@ public data class PaginationState(val currentPage: Int, val maxPages: Int, val b
 @Composable
 public fun <T : Any> IComponent.tabulatorPagination(
     tabulatorGetter: () -> Tabulator<T>,
+    iconFirst: String = "fas fa-angles-left",
+    iconPrev: String = "fas fa-angle-left",
+    iconNext: String = "fas fa-angle-right",
+    iconLast: String = "fas fa-angles-right",
     className: String? = null,
     id: String? = null,
     init: @Composable (IDiv.() -> Unit) = {}
@@ -69,7 +77,7 @@ public fun <T : Any> IComponent.tabulatorPagination(
     div("tabulator" % className, id) {
         div(className = "tabulator-footer") {
             borderTop(Border(style = BorderStyle.None))
-            button(icon = "fas fa-angles-left", className = "tabulator-page") {
+            button(icon = iconFirst, className = "tabulator-page") {
                 role("button")
                 ariaLabel("<<")
                 title("<<")
@@ -80,7 +88,7 @@ public fun <T : Any> IComponent.tabulatorPagination(
                     tabulatorGetter().tabulatorJs?.setPage(1.toJsNumber())
                 }
             }
-            button(icon = "fas fa-angle-left", className = "tabulator-page") {
+            button(icon = iconPrev, className = "tabulator-page") {
                 role("button")
                 ariaLabel("<")
                 title("<")
@@ -113,7 +121,7 @@ public fun <T : Any> IComponent.tabulatorPagination(
                     }
                 }
             }
-            button(icon = "fas fa-angle-right", className = "tabulator-page") {
+            button(icon = iconNext, className = "tabulator-page") {
                 role("button")
                 ariaLabel(">")
                 title(">")
@@ -124,7 +132,7 @@ public fun <T : Any> IComponent.tabulatorPagination(
                     tabulatorGetter().tabulatorJs?.nextPage()
                 }
             }
-            button(icon = "fas fa-angles-right", className = "tabulator-page") {
+            button(icon = iconLast, className = "tabulator-page") {
                 role("button")
                 ariaLabel(">>")
                 title(">>")

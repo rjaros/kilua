@@ -43,8 +43,11 @@ import web.dom.events.Event
  * @param scrollable determines if the modal window content is scrollable
  * @param cancelVisible determines if the Cancel button is visible
  * @param yesTitle the title of the Yes button
+ * @param yesIcon the icon of the Yes button
  * @param noTitle the title of the No button
+ * @param noIcon the icon of the No button
  * @param cancelTitle the title of the Cancel button
+ * @param cancelIcon the icon of the Cancel button
  * @param noCallback the callback function that is called when the No button is selected
  * @param yesCallback the callback function that is called when the Yes button is selected
  */
@@ -58,8 +61,11 @@ public fun confirm(
     scrollable: Boolean = false,
     cancelVisible: Boolean = false,
     yesTitle: String = "Yes",
+    yesIcon: String? = "fas fa-check",
     noTitle: String = "No",
+    noIcon: String? = "fas fa-ban",
     cancelTitle: String = "Cancel",
+    cancelIcon: String? = "fas fa-times",
     noCallback: (() -> Unit)? = null,
     yesCallback: (() -> Unit)? = null
 ) {
@@ -81,19 +87,19 @@ public fun confirm(
             lateinit var yesButton: Button
             footer {
                 if (cancelVisible) {
-                    bsButton(cancelTitle, "fas fa-times", className = "btn btn-secondary") {
+                    bsButton(cancelTitle, cancelIcon, className = "btn btn-secondary") {
                         onClick {
                             component.hide()
                         }
                     }
                 }
-                bsButton(noTitle, "fas fa-ban", className = "btn btn-danger") {
+                bsButton(noTitle, noIcon, className = "btn btn-danger") {
                     onClick {
                         component.hide()
                         noCallback?.invoke()
                     }
                 }
-                yesButton = bsButtonRef(yesTitle, "fas fa-check", className = "btn btn-primary") {
+                yesButton = bsButtonRef(yesTitle, yesIcon, className = "btn btn-primary") {
                     onClick {
                         component.hide()
                         yesCallback?.invoke()

@@ -236,6 +236,11 @@ public open class Tabulator<T : Any>(
      */
     protected open fun initializeTabulator() {
         if (renderConfig.isDom) {
+            val paginationIconFirst = options.paginationIconFirst ?: "fas fa-angles-left"
+            val paginationIconPrev = options.paginationIconPrev ?: "fas fa-angle-left"
+            val paginationIconNext = options.paginationIconNext ?: "fas fa-angle-right"
+            val paginationIconLast = options.paginationIconLast ?: "fas fa-angles-right"
+            val paginationIconPageSize = options.paginationIconPageSize ?: "fas fa-up-down"
             val defaultLangs = jsObjectOf(
                 "default" to mapOf(
                     "groups" to mapOf(
@@ -247,15 +252,15 @@ public open class Tabulator<T : Any>(
                         "error" to "!!!"
                     ),
                     "pagination" to mapOf(
-                        "page_size" to "<i class=\"fas fa-up-down\"></i>",
+                        "page_size" to "<i class=\"$paginationIconPageSize\"></i>",
                         "page_title" to "#",
-                        "first" to "<i class=\"fas fa-angles-left\"></i>",
+                        "first" to "<i class=\"$paginationIconFirst\"></i>",
                         "first_title" to "<<",
-                        "last" to "<i class=\"fas fa-angles-right\"></i>",
+                        "last" to "<i class=\"$paginationIconLast\"></i>",
                         "last_title" to ">>",
-                        "prev" to "<i class=\"fas fa-angle-left\"></i>",
+                        "prev" to "<i class=\"$paginationIconPrev\"></i>",
                         "prev_title" to "<",
-                        "next" to "<i class=\"fas fa-angle-right\"></i>",
+                        "next" to "<i class=\"$paginationIconNext\"></i>",
                         "next_title" to ">",
                         "all" to "*",
                         "counter" to mapOf(

@@ -214,6 +214,7 @@ private fun IComponent.richDate(
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
  * @param locale the locale for i18n
+ * @param calendarIcon the icon of the calendar button
  * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
@@ -230,6 +231,7 @@ public fun IComponent.richDateRef(
     inline: Boolean = false,
     format: String = "yyyy-MM-dd",
     locale: Locale = LocaleManager.currentLocale,
+    calendarIcon: String = "fas fa-calendar-alt",
     inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
@@ -254,7 +256,7 @@ public fun IComponent.richDateRef(
             required,
             id,
             inline,
-            "fas fa-calendar-alt",
+            calendarIcon,
             inputClassName
         )
         setup()
@@ -270,6 +272,7 @@ public fun IComponent.richDateRef(
  * @param disabled determines if the field is disabled
  * @param required determines if the field is required
  * @param locale the locale for i18n
+ * @param calendarIcon the icon of the calendar button
  * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
@@ -286,6 +289,7 @@ public fun IComponent.richDate(
     inline: Boolean = false,
     format: String = "yyyy-MM-dd",
     locale: Locale = LocaleManager.currentLocale,
+    calendarIcon: String = "fas fa-calendar-alt",
     inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
@@ -310,7 +314,7 @@ public fun IComponent.richDate(
             required,
             id,
             inline,
-            "fas fa-calendar-alt",
+            calendarIcon,
             inputClassName
         )
         setup()
