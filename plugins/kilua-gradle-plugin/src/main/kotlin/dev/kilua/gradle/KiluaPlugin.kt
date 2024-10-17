@@ -264,7 +264,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                             this.filter {
                                 it.replace(
                                     Regex("""([a-zA-Z_]+)=([a-zA-Z_]+)\.default\.createRequire\([^\)]+\)(.*)(\{\})\.resolve\(([a-zA-Z_]+)\),(.*)\.readFileSync\([a-zA-Z_]+\.fileURLToPath\(([a-zA-Z_]+)\)\)"""),
-                                    """$1=$2.default.createRequire("file:///foo")$3$1("path").resolve($5),$6.readFileSync($7)"""
+                                    """$1=$2.default.createRequire(__filename)$3$1("path").resolve($5),$6.readFileSync($7)"""
                                 )
                             }
                         }
