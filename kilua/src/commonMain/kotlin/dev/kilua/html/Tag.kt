@@ -270,8 +270,9 @@ public open class Tag<E : HTMLElement>(
             if (htmlProperties.isNotEmpty()) {
                 builder.append(" ${htmlProperties.renderAsHtmlAttributes()}")
             }
-            if (tagAttrs.attributesMap.isNotEmpty()) {
-                builder.append(" ${tagAttrs.attributesMap.renderAsHtmlAttributes()}")
+            val filteredAttributesMap = tagAttrs.attributesMap.filterKeys { it !in htmlProperties }
+            if (filteredAttributesMap.isNotEmpty()) {
+                builder.append(" ${filteredAttributesMap.renderAsHtmlAttributes()}")
             }
             if (tagStyle.stylesMap.isNotEmpty()) {
                 builder.append(" style=\"${tagStyle.stylesMap.renderAsCssStyle()}\"")

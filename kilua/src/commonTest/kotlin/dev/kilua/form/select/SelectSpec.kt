@@ -35,7 +35,13 @@ class SelectSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                select(listOfPairs("A", "B"), name = "test", emptyOption = true, placeholder = "A placeholder")
+                select(
+                    listOfPairs("A", "B"),
+                    name = "test",
+                    required = true,
+                    emptyOption = true,
+                    placeholder = "A placeholder"
+                )
             }
             assertEqualsHtml(
                 """<select name="test" required=""><option value="" label="A placeholder" selected="" disabled="" hidden=""></option><option value="$SELECT_EMPTY_VALUE" label=""></option><option value="A" label="A"></option><option value="B" label="B"></option></select>""",
@@ -50,7 +56,13 @@ class SelectSpec : DomSpec {
         run {
             lateinit var select: Select
             root("test") {
-                select = selectRef(listOfPairs("A", "B"), value = "B", name = "test", emptyOption = true, placeholder = "A placeholder")
+                select = selectRef(
+                    listOfPairs("A", "B"),
+                    value = "B",
+                    name = "test",
+                    emptyOption = true,
+                    placeholder = "A placeholder"
+                )
             }
             assertEquals(1, select.selectedIndex, "Should initialize with correct selected index")
             assertEquals("B", select.selectedLabel, "Should initialize with correct selected label")
@@ -70,7 +82,13 @@ class SelectSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                select(listOfPairs("A", "B"), name = "test", emptyOption = true, placeholder = "A placeholder")
+                select(
+                    listOfPairs("A", "B"),
+                    name = "test",
+                    required = true,
+                    emptyOption = true,
+                    placeholder = "A placeholder"
+                )
             }
             assertEqualsHtml(
                 """<select name="test" required=""><option value="" label="A placeholder" selected="" disabled="" hidden=""></option><option value="$SELECT_EMPTY_VALUE" label=""></option><option value="A" label="A"></option><option value="B" label="B"></option></select>""",

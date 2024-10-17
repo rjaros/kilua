@@ -510,7 +510,7 @@ private fun Select.setupSelect(
     component: Select
 ) {
     if (placeholder != null) {
-        this.required = true
+        setAttribute("required", "")
         option(value = "", label = placeholder, disabled = true, selected = true) {
             hidden(true)
         }
