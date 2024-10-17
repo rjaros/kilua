@@ -72,3 +72,7 @@ internal actual fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny = js("f")
 internal actual fun toJsAny(f: (JsAny) -> Boolean): JsAny = js("f")
 
 internal actual fun toJsAny(f: (Event) -> JsArray<JsAny>): JsAny = js("f")
+
+internal actual fun toJsAny(f: (JsAny, JsArray<JsAny>) -> JsAny): JsAny = js("f")
+
+internal actual fun toJsAny(f: (JsAny) -> JsAny): JsAny = js("f")

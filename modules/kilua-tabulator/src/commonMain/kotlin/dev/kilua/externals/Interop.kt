@@ -80,3 +80,7 @@ internal expect fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny
 internal expect fun toJsAny(f: (JsAny) -> Boolean): JsAny
 
 internal expect fun toJsAny(f: (Event) -> JsArray<JsAny>): JsAny
+
+internal expect fun toJsAny(f: (JsAny, JsArray<JsAny>) -> JsAny): JsAny
+
+internal expect fun toJsAny(f: (JsAny) -> JsAny): JsAny

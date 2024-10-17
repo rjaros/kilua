@@ -25,7 +25,6 @@ package dev.kilua.tabulator
 import androidx.compose.runtime.Composable
 import dev.kilua.compose.Root
 import dev.kilua.compose.root
-import dev.kilua.core.Component
 import dev.kilua.core.IComponent
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.externals.CellComponent
@@ -133,7 +132,10 @@ public enum class Formatter(public val formatter: String? = null) {
     RowSelection("rowSelection"),
     ResponsiveCollapse("responsiveCollapse"),
     ResponsiveCollapseAuto("responsiveCollapseAuto"),
-    Toggle;
+    Toggle,
+    Array,
+    Json,
+    Adaptable;
 
     public val value: String = formatter ?: name.toKebabCase()
     override fun toString(): String {
@@ -154,7 +156,8 @@ public enum class Editor {
     List,
     Date,
     Time,
-    Datetime;
+    Datetime,
+    Adaptable;
 
     public val value: String = name.toKebabCase()
     override fun toString(): String {
@@ -665,6 +668,8 @@ public data class ColumnDefinition<T : Any>(
     val headerColumnsMenuListIconChecked: String? = null,
     val headerColumnsMenuListIconUnchecked: String? = null,
     val responsiveCollapseAutoIcon: String? = null,
+    val mutatorImport: JsAny? = null,
+    val mutatorImportParams: JsAny? = null,
 )
 
 /**
@@ -1018,6 +1023,8 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         "headerClickMenu" to headerClickMenu,
         "headerDblClickMenu" to headerDblClickMenu,
         "dblClickMenu" to dblClickMenu,
+        "mutatorImport" to mutatorImport,
+        "mutatorImportParams" to mutatorImportParams,
         *(responsiveCollapseOptions + headerMenuOptions).toTypedArray(),
     )
 }
@@ -1189,6 +1196,12 @@ public data class TabulatorOptions<T : Any>(
     val paginationIconNext: String? = null,
     val paginationIconLast: String? = null,
     val paginationIconPageSize: String? = null,
+    val importHeaderTransform: ((header: JsAny, headers: JsArray<JsAny>) -> JsAny)? = null,
+    val importValueTransform: ((value: JsAny, values: JsArray<JsAny>) -> JsAny)? = null,
+    val importFileValidator: ((file: JsAny) -> JsAny)? = null,
+    val importDataValidator: ((data: JsAny) -> JsAny)? = null,
+    val paginationOutOfRange: JsAny? = null,
+    val selectableRangeAutoFocus: Boolean? = null,
 )
 
 /**
@@ -1350,6 +1363,12 @@ internal fun <T : Any> TabulatorOptions<T>.toJs(
         "resizableColumnGuide" to resizableColumnGuide,
         "resizableRowGuide" to resizableRowGuide,
         "editorEmptyValue" to editorEmptyValue,
-        "editorEmptyValueFunc" to editorEmptyValueFunc?.let { toJsAny(it) }
+        "editorEmptyValueFunc" to editorEmptyValueFunc?.let { toJsAny(it) },
+        "importHeaderTransform" to importHeaderTransform?.let { toJsAny(it) },
+        "importValueTransform" to importValueTransform?.let { toJsAny(it) },
+        "importFileValidator" to importFileValidator?.let { toJsAny(it) },
+        "importDataValidator" to importDataValidator?.let { toJsAny(it) },
+        "paginationOutOfRange" to paginationOutOfRange,
+        "selectableRangeAutoFocus" to selectableRangeAutoFocus,
     )
 }
