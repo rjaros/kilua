@@ -402,11 +402,13 @@ public fun <T : Any> IComponent.tomSelectRemoteRef(
         )
     }
     var tsOptionsState: TomSelectOptions? by remember(tsOptions, preload, openOnFocus) {
+        val forcedPreload = if (preload) true else tsOptions?.preload
+        val forcedOpenOnFocus = if (openOnFocus) true else tsOptions?.openOnFocus
         mutableStateOf(
-            tsOptions?.copy(preload = preload, openOnFocus = openOnFocus, searchField = emptyList())
+            tsOptions?.copy(preload = forcedPreload, openOnFocus = forcedOpenOnFocus, searchField = emptyList())
                 ?: TomSelectOptions(
-                    preload = preload,
-                    openOnFocus = openOnFocus,
+                    preload = forcedPreload,
+                    openOnFocus = forcedOpenOnFocus,
                     searchField = emptyList()
                 )
         )
@@ -525,11 +527,13 @@ public fun <T : Any> IComponent.tomSelectRemote(
         )
     }
     var tsOptionsState: TomSelectOptions? by remember(tsOptions, preload, openOnFocus) {
+        val forcedPreload = if (preload) true else tsOptions?.preload
+        val forcedOpenOnFocus = if (openOnFocus) true else tsOptions?.openOnFocus
         mutableStateOf(
-            tsOptions?.copy(preload = preload, openOnFocus = openOnFocus, searchField = emptyList())
+            tsOptions?.copy(preload = forcedPreload, openOnFocus = forcedOpenOnFocus, searchField = emptyList())
                 ?: TomSelectOptions(
-                    preload = preload,
-                    openOnFocus = openOnFocus,
+                    preload = forcedPreload,
+                    openOnFocus = forcedOpenOnFocus,
                     searchField = emptyList()
                 )
         )
