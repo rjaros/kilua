@@ -20,37 +20,38 @@
  * SOFTWARE.
  */
 
-package io.realworld.layout.shared
+package dev.kilua.ssr
 
 import androidx.compose.runtime.Composable
+import app.softwork.routingcompose.RouteBuilder
 import dev.kilua.core.IComponent
-import dev.kilua.html.helpers.onClickLaunch
-import dev.kilua.html.li
-import dev.kilua.html.link
-import dev.kilua.html.nav
-import dev.kilua.html.ul
-import io.realworld.ConduitManager
-import io.realworld.ConduitState
 
+/**
+ * A router supporting Server-Side Rendering (SSR).
+ *
+ * This router can be used to directly declare UI components for each route,
+ * which will be rendered on the server immediately for every request.
+ */
 @Composable
-fun IComponent.pagination(state: ConduitState, conduitManager: ConduitManager) {
-    val limit = state.pageSize
-    if (state.articlesCount > limit) {
-        nav {
-            ul("pagination") {
-                val numberOfPages = ((state.articlesCount - 1) / limit) + 1
-                for (page in 0 until numberOfPages) {
-                    val className = if (page == state.selectedPage) "page-item active" else "page-item"
-                    li(className) {
-                        link("", "${page + 1}", className = "page-link"){
-                            onClickLaunch { e ->
-                                e.preventDefault()
-                                conduitManager.selectPage(page)
-                            }
-                        }
-                    }
+public fun IComponent.SimpleSsrRouter(
+    initPath: String = "/",
+    contextPath: String = getContextPath(),
+    stateSerializer: (() -> String)? = null,
+    routeBuilder: @Composable (RouteBuilder.() -> Unit)
+) {
+    if (renderConfig.isDom) {
+        SsrRouter("$contextPath$initPath", active = true, useDoneCallback = false) {
+            if (contextPath.isNotEmpty()) {
+                route("$contextPath$initPath") {
+                    routeBuilder()
                 }
+            } else {
+                routeBuilder()
             }
+        }
+    } else {
+        SsrRouter(initPath, active = true, stateSerializer, useDoneCallback = false) {
+            routeBuilder()
         }
     }
 }

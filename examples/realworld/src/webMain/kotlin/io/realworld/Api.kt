@@ -42,7 +42,7 @@ import io.realworld.model.TagsDto
 import io.realworld.model.User
 import io.realworld.model.UserDto
 
-const val API_URL = "https://api.realworld.io/api"
+const val API_URL = "https://realworld-backend-micronaut.onrender.com/api"
 
 @Stable // Workaround https://youtrack.jetbrains.com/issue/KT-67330
 class Api(private val tokenProvider: TokenProvider) {

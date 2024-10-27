@@ -96,19 +96,23 @@ class ConduitManager : TokenProvider {
         }
     }
 
-    fun CoroutineScope.withProgress(block: suspend () -> Unit): Job {
+    suspend fun withProgress(block: suspend () -> Unit) {
         progress.start()
         progressCount++
+        try {
+            block()
+            progressCount--
+            if (progressCount <= 0) progress.end()
+        } catch (e: Exception) {
+            progressCount--
+            if (progressCount <= 0) progress.end()
+            throw e
+        }
+    }
+
+    fun CoroutineScope.withProgress(block: suspend () -> Unit): Job {
         return launch {
-            try {
-                block()
-                progressCount--
-                if (progressCount <= 0) progress.end()
-            } catch (e: Exception) {
-                progressCount--
-                if (progressCount <= 0) progress.end()
-                throw e
-            }
+            withProgress(block)
         }
     }
 
@@ -191,41 +195,43 @@ class ConduitManager : TokenProvider {
         Router.global.navigate(View.HOME.url)
     }
 
-    fun homePage(done: () -> Unit) {
+    suspend fun homePage() {
         processAction(ConduitAction.HomePage)
         if (state.value.user != null) {
-            selectFeed(FeedType.USER, done = done)
+            selectFeed(FeedType.USER)
         } else {
-            selectFeed(FeedType.GLOBAL, done = done)
+            selectFeed(FeedType.GLOBAL)
         }
         loadTags()
     }
 
-    fun selectFeed(feedType: FeedType, selectedTag: String? = null, profile: User? = null, done: () -> Unit = {}) {
+    suspend fun selectFeed(
+        feedType: FeedType,
+        selectedTag: String? = null,
+        profile: User? = null
+    ) {
         processAction(ConduitAction.SelectFeed(feedType, selectedTag, profile))
-        loadArticles(done)
+        loadArticles()
     }
 
-    fun selectPage(page: Int) {
+    suspend fun selectPage(page: Int) {
         processAction(ConduitAction.SelectPage(page))
         loadArticles()
     }
 
-    fun showArticle(slug: String, done: () -> Unit) {
+    suspend fun showArticle(slug: String) {
         if (state.value.article?.slug != slug) {
             processAction(ConduitAction.ClearArticle)
         }
-        appScope.withProgress {
+        withProgress {
             try {
                 val article = appScope.async { api.article(slug) }
                 val articleComments = appScope.async { api.articleComments(slug) }
                 processAction(ConduitAction.ShowArticle(article.await()))
                 processAction(ConduitAction.ShowArticleCommets(articleComments.await()))
                 processAction(ConduitAction.ArticlePage)
-                done()
             } catch (e: Exception) {
                 console.log(e.message)
-                done()
             }
         }
     }
@@ -267,19 +273,18 @@ class ConduitManager : TokenProvider {
         }
     }
 
-    fun showProfile(username: String, favorites: Boolean, done: () -> Unit) {
+    suspend fun showProfile(username: String, favorites: Boolean) {
         val feedType = if (favorites) FeedType.PROFILE_FAVORITED else FeedType.PROFILE
         if (state.value.profile?.username != username) {
             processAction(ConduitAction.SelectFeed(feedType, null, null))
         }
-        appScope.withProgress {
+        withProgress {
             try {
                 val user = api.profile(username)
-                selectFeed(feedType, null, user, done)
+                selectFeed(feedType, null, user)
                 processAction(ConduitAction.ProfilePage(feedType))
             } catch (e: Exception) {
                 console.log(e.message)
-                done()
             }
         }
     }
@@ -299,11 +304,11 @@ class ConduitManager : TokenProvider {
         }
     }
 
-    private fun loadArticles(done: () -> Unit = {}) {
+    private suspend fun loadArticles() {
         if (state.value.articles == null) {
             processAction(ConduitAction.ArticlesLoading)
         }
-        appScope.withProgress {
+        withProgress {
             try {
                 val state = state.value
                 val limit = state.pageSize
@@ -316,10 +321,8 @@ class ConduitManager : TokenProvider {
                     FeedType.PROFILE_FAVORITED -> api.articles(null, null, state.profile?.username, offset, limit)
                 }
                 processAction(ConduitAction.ArticlesLoaded(articleDto.articles, articleDto.articlesCount))
-                done()
             } catch (e: Exception) {
                 console.log(e.message)
-                done()
             }
         }
     }

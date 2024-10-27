@@ -29,8 +29,8 @@ import dev.kilua.RsupProgressModule
 import dev.kilua.compose.root
 import dev.kilua.html.header
 import dev.kilua.html.main
-import dev.kilua.ssr.SsrRouteEffect
-import dev.kilua.ssr.SsrRouter
+import dev.kilua.ssr.AsyncSsrRouter
+import dev.kilua.ssr.routeAction
 import dev.kilua.startApplication
 import dev.kilua.utils.decodeURIComponent
 import io.realworld.layout.articles.article
@@ -54,11 +54,11 @@ class App : Application() {
         root("root") {
             val state by conduitManager.state.collectAsState()
 
-            SsrRouter(
+            AsyncSsrRouter(
                 initPath = View.HOME.url,
-                !state.appLoading,
-                { conduitManager.serializeStateForSsr() }
-            ) { done ->
+                active = !state.appLoading,
+                stateSerializer = { conduitManager.serializeStateForSsr() }
+            ) {
                 header {
                     headerNav(state)
                 }
@@ -76,80 +76,67 @@ class App : Application() {
                 footer()
 
                 route(View.HOME.url) {
-                    if (!state.appLoading) {
-                        SsrRouteEffect {
-                            conduitManager.homePage(done)
-                        }
+                    routeAction {
+                        conduitManager.homePage()
                     }
                 }
                 route(View.ARTICLE.url) {
                     string { slug ->
-                        SsrRouteEffect(slug) {
-                            conduitManager.showArticle(slug, done)
+                        routeAction {
+                            conduitManager.showArticle(slug)
                         }
                     }
                     noMatch {
-                        SsrRouteEffect {
-                            done()
-                        }
+                        routeAction {}
                     }
                 }
                 route(View.PROFILE.url) {
                     string {
                         val username = decodeURIComponent(it)
                         route("/favorites") {
-                            SsrRouteEffect(username) {
-                                conduitManager.showProfile(username, true, done)
+                            routeAction {
+                                conduitManager.showProfile(username, true)
                             }
                         }
                         noMatch {
-                            SsrRouteEffect(username) {
-                                conduitManager.showProfile(username, false, done)
+                            routeAction {
+                                conduitManager.showProfile(username, false)
                             }
                         }
                     }
                     noMatch {
-                        SsrRouteEffect {
-                            done()
-                        }
+                        routeAction {}
                     }
                 }
                 route(View.LOGIN.url) {
-                    SsrRouteEffect {
+                    routeAction {
                         conduitManager.loginPage()
-                        done()
                     }
                 }
                 route(View.REGISTER.url) {
-                    SsrRouteEffect {
+                    routeAction {
                         conduitManager.registerPage()
-                        done()
                     }
                 }
                 route(View.EDITOR.url) {
                     string { slug ->
-                        SsrRouteEffect(slug) {
+                        routeAction(slug) {
                             conduitManager.editorPage(slug)
-                            done()
                         }
                     }
                     noMatch {
-                        SsrRouteEffect {
+                        routeAction {
                             conduitManager.editorPage()
-                            done()
                         }
                     }
                 }
                 route(View.SETTINGS.url) {
-                    SsrRouteEffect {
+                    routeAction {
                         conduitManager.settingsPage()
-                        done()
                     }
                 }
                 noMatch {
-                    SsrRouteEffect {
-                        done()
-                    }
+                    routeAction {}
                 }
             }
         }

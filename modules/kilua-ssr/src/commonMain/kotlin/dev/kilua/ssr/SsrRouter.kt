@@ -23,10 +23,13 @@
 package dev.kilua.ssr
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,50 +56,30 @@ import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 import web.JsAny
 import web.toJsString
+
+internal typealias DoneCallback = () -> Unit
+
+internal val DoneCallbackCompositionLocal: ProvidableCompositionLocal<DoneCallback?> =
+    compositionLocalOf { null }
 
 /**
  * A router supporting Server-Side Rendering (SSR).
  * Uses a [BrowserRouter] when running in the browser and a custom router when running on the server.
  */
 @Composable
-public fun IComponent.SsrRouter(
+internal fun IComponent.SsrRouter(
     initPath: String,
-    ssrCondition: Boolean = true,
+    active: Boolean = true,
     stateSerializer: (() -> String)? = null,
-    routeBuilder: @Composable RouteBuilder.() -> Unit
-) {
-    SsrRouter(initPath, ssrCondition, stateSerializer, routeBuilder, null)
-}
-
-/**
- * A router supporting Server-Side Rendering (SSR) with manual "done" callback.
- * Uses a [BrowserRouter] when running in the browser and a custom router when running on the server.
- */
-@Composable
-public fun IComponent.SsrRouter(
-    initPath: String,
-    ssrCondition: Boolean = true,
-    stateSerializer: (() -> String)? = null,
-    routeBuilder: @Composable RouteBuilder.(done: () -> Unit) -> Unit
-) {
-    SsrRouter(initPath, ssrCondition, stateSerializer, null, routeBuilder)
-}
-
-@Composable
-private fun IComponent.SsrRouter(
-    initPath: String,
-    ssrCondition: Boolean = true,
-    stateSerializer: (() -> String)? = null,
-    routeBuilder: @Composable (RouteBuilder.() -> Unit)?,
-    routeBuilderWithCallback: @Composable (RouteBuilder.(done: () -> Unit) -> Unit)?
+    useDoneCallback: Boolean = false,
+    routeBuilder: @Composable (RouteBuilder.() -> Unit),
 ) {
     if (renderConfig.isDom) {
-        if (routeBuilder != null) {
+        CompositionLocalProvider(DoneCallbackCompositionLocal provides {}) {
             BrowserRouter(initPath, routeBuilder)
-        } else if (routeBuilderWithCallback != null) {
-            BrowserRouter(initPath) { routeBuilderWithCallback {} }
         }
     } else {
         val router = remember {
@@ -111,24 +94,24 @@ private fun IComponent.SsrRouter(
             state
         }
 
-        router.route(initPath) {
-            if (routeBuilder != null) {
-                routeBuilder()
-            } else if (routeBuilderWithCallback != null) {
-                routeBuilderWithCallback {
-                    externalCondition = true
-                }
-            }
-            @Suppress("UNUSED_EXPRESSION")
-            externalCondition // access value to trigger recomposition on locale change
-            if (ssrCondition && (routeBuilderWithCallback == null || externalCondition)) {
-                SideEffect {
-                    router.sendRender?.let {
-                        it(router.getRenderingResult())
-                        router.sendRender = null
-                        router.lock = false
+        if (active) {
+            CompositionLocalProvider(DoneCallbackCompositionLocal provides {
+                externalCondition = true
+            }) {
+                router.route(initPath) {
+                    routeBuilder()
+                    @Suppress("UNUSED_EXPRESSION")
+                    externalCondition // access value to trigger recomposition on locale change
+                    if (!useDoneCallback || externalCondition) {
+                        SideEffect {
+                            router.sendRender?.let {
+                                it(router.getRenderingResult())
+                                router.sendRender = null
+                                router.lock = false
+                            }
+                            externalCondition = false
+                        }
                     }
-                    externalCondition = false
                 }
             }
         }
@@ -248,31 +231,23 @@ internal class SsrRouter(
     }
 }
 
-private val RouteBuilder.pathKey: String
-    get() = path + (parameters?.raw?.let { "?$it" } ?: "")
-
-private val RouteBuilder.NoMatch.pathKey: String
-    get() = remainingPath + (parameters?.raw?.let { "?$it" } ?: "")
-
 /**
- * LaunchedEffect wrapper prepared to catch and execute effect for all not matched routes.
- * Use to make sure all routes are processed with SSR engine.
+ * LaunchedEffect wrapper which automatically add route path as a key.
+ * Used to make sure all routes are processed with the SSR engine.
  */
 @Composable
-public fun RouteBuilder.SsrRouteEffect(key: String? = null, block: suspend CoroutineScope.() -> Unit) {
-    LaunchedEffect(key?.let { "$it$pathKey" } ?: pathKey) {
-        block()
-    }
-}
-
-/**
- * LaunchedEffect wrapper prepared to catch and execute effect for all not matched routes.
- * Use to make sure all routes are processed with SSR engine.
- */
-@Composable
-public fun RouteBuilder.NoMatch.SsrRouteEffect(key: String? = null, block: suspend CoroutineScope.() -> Unit) {
-    LaunchedEffect(key?.let { "$it$pathKey" } ?: pathKey) {
-        block()
+public fun routeAction(vararg keys: String?, block: suspend CoroutineScope.() -> Unit) {
+    val done = DoneCallbackCompositionLocal.current
+    LaunchedEffect(Router.current.currentPath.toString(), *keys) {
+        supervisorScope {
+            launch {
+                try {
+                    block()
+                } finally {
+                    done?.invoke()
+                }
+            }
+        }
     }
 }
 

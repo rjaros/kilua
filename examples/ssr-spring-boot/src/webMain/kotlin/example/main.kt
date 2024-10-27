@@ -31,7 +31,7 @@ import dev.kilua.html.div
 import dev.kilua.html.navLink
 import dev.kilua.html.px
 import dev.kilua.panel.vPanel
-import dev.kilua.ssr.SsrRouter
+import dev.kilua.ssr.SimpleSsrRouter
 import dev.kilua.startApplication
 import kotlin.random.Random
 
@@ -40,7 +40,7 @@ class App : Application() {
     override fun start() {
 
         root("root") {
-            SsrRouter(initPath = "/") { ->
+            SimpleSsrRouter {
                 div {
                     margin(20.px)
                     route("/") {

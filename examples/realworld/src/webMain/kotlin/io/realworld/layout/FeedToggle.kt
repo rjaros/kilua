@@ -25,6 +25,7 @@ package io.realworld.layout
 import androidx.compose.runtime.Composable
 import dev.kilua.core.IComponent
 import dev.kilua.html.div
+import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.html.li
 import dev.kilua.html.link
 import dev.kilua.html.linkRef
@@ -40,7 +41,7 @@ fun IComponent.feedToggle(state: ConduitState, conduitManager: ConduitManager) {
             if (state.user != null) {
                 li("nav-item") {
                     val className = if (state.feedType == FeedType.USER) "nav-link active" else "nav-link"
-                    linkRef("", "Your Feed", className = className).onClick { e ->
+                    linkRef("", "Your Feed", className = className).onClickLaunch { e ->
                         e.preventDefault()
                         conduitManager.selectFeed(FeedType.USER)
                     }
@@ -48,7 +49,7 @@ fun IComponent.feedToggle(state: ConduitState, conduitManager: ConduitManager) {
             }
             li("nav-item") {
                 val className = if (state.feedType == FeedType.GLOBAL) "nav-link active" else "nav-link"
-                linkRef("", "Global Feed", className = className).onClick { e ->
+                linkRef("", "Global Feed", className = className).onClickLaunch { e ->
                     e.preventDefault()
                     conduitManager.selectFeed(FeedType.GLOBAL)
                 }

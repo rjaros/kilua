@@ -25,6 +25,7 @@ package io.realworld.layout.shared
 import androidx.compose.runtime.Composable
 import dev.kilua.core.IComponent
 import dev.kilua.html.div
+import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.html.link
 import dev.kilua.html.pt
 import io.realworld.ConduitManager
@@ -43,7 +44,7 @@ fun IComponent.tags(state: ConduitState, conduitManager: ConduitManager) {
             div("tag-list") {
                 state.tags.forEach { tag ->
                     link("", tag, className = "tag-pill tag-default") {
-                        onClick {
+                        onClickLaunch {
                             it.preventDefault()
                             conduitManager.selectFeed(FeedType.TAG, selectedTag = tag)
                         }
