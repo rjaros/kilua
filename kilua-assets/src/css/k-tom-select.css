@@ -40,6 +40,12 @@
     border-top: 1px solid #888888;
 }
 
+.ts-wrapper.form-select-sm .ts-control, .ts-wrapper.form-control-sm .ts-control {
+    padding-left: 0.5rem;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
 [data-bs-theme="dark"] .ts-control, [data-bs-theme="dark"] .ts-control input, [data-bs-theme="dark"] .ts-dropdown {
     color: inherit;
 }
