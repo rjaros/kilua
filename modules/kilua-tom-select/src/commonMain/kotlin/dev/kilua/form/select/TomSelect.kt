@@ -32,6 +32,7 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
 import dev.kilua.externals.assign
+import dev.kilua.externals.get
 import dev.kilua.externals.obj
 import dev.kilua.form.StringFormControl
 import dev.kilua.html.ITag
@@ -49,6 +50,7 @@ import dev.kilua.utils.unsafeCast
 import web.JsAny
 import web.JsArray
 import web.JsString
+import web.clear
 import web.dom.HTMLOptionElement
 import web.dom.HTMLSelectElement
 import web.dom.asList
@@ -615,7 +617,8 @@ public open class TomSelect(
      * Removes all unselected options from the control.
      */
     public override fun clearOptions() {
-        tomSelectInstance?.clearOptions { true }
+        tomSelectInstance?.clearOptions { false }
+        tomSelectInstance?.get("input")?.unsafeCast<HTMLSelectElement>()?.clear()
     }
 
 }
