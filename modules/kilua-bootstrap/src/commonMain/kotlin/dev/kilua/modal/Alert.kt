@@ -91,8 +91,8 @@ public fun alert(
                 }
             }
             onEvent<Event>("hidden.bs.modal") {
-                callback?.invoke()
                 Modal.modalStateMap.remove(modalId)
+                callback?.invoke()
             }
             onEvent<Event>("shown.bs.modal") {
                 button.focus()

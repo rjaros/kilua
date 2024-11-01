@@ -96,6 +96,7 @@ public fun confirm(
                 }
             }
             lateinit var yesButton: Button
+            var callback: (() -> Unit)? = null
             footer {
                 if (cancelVisible) {
                     bsButton(cancelTitle, cancelIcon, className = "btn btn-secondary") {
@@ -106,19 +107,20 @@ public fun confirm(
                 }
                 bsButton(noTitle, noIcon, className = "btn btn-danger") {
                     onClick {
+                        callback = noCallback
                         component.hide()
-                        noCallback?.invoke()
                     }
                 }
                 yesButton = bsButtonRef(yesTitle, yesIcon, className = "btn btn-primary") {
                     onClick {
+                        callback = yesCallback
                         component.hide()
-                        yesCallback?.invoke()
                     }
                 }
             }
             onEvent<Event>("hidden.bs.modal") {
                 Modal.modalStateMap.remove(modalId)
+                callback?.invoke()
             }
             onEvent<Event>("shown.bs.modal") {
                 yesButton.focus()
