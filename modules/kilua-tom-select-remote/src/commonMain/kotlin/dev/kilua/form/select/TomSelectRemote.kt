@@ -375,7 +375,7 @@ public fun <T : Any> IComponent.tomSelectRemoteRef(
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks, preload, openOnFocus) {
         val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
             { query, callback ->
-                tomSelectRemote.tomSelectInstance?.clearOptions { true }
+                tomSelectRemote.clearOptions()
                 KiluaScope.launch {
                     val result = getOptionsForTomSelectRemote(
                         serviceManager,
@@ -500,7 +500,7 @@ public fun <T : Any> IComponent.tomSelectRemote(
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks, preload, openOnFocus) {
         val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
             { query, callback ->
-                tomSelectRemote.tomSelectInstance?.clearOptions { true }
+                tomSelectRemote.clearOptions()
                 KiluaScope.launch {
                     val result = getOptionsForTomSelectRemote(
                         serviceManager,
