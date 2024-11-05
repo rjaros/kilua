@@ -189,7 +189,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (cssNames.any { this.file.toString().endsWith(it) }) {
+                        if (cssNames.any { this.file.toString().replace('\\', '/').endsWith(it) }) {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         }
                     }
@@ -258,10 +258,11 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         )
                     }
                     eachFile {
-                        if (cssNames.any { this.file.toString().endsWith(it) }) {
+                        if (cssNames.any { this.file.toString().replace('\\', '/').endsWith(it) }) {
                             this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
                         } else if (this.name.equals("main.bundle.js")) {
                             this.filter {
+                                filteringCharset = "UTF-8"
                                 it.replace(
                                     Regex("""([a-zA-Z_]+)=([a-zA-Z_]+)\.default\.createRequire\([^\)]+\)(.*)(\{\})\.resolve\(([a-zA-Z_]+)\),(.*)\.readFileSync\([a-zA-Z_]+\.fileURLToPath\(([a-zA-Z_]+)\)\)"""),
                                     """$1=$2.default.createRequire(__filename)$3$1("path").resolve($5),$6.readFileSync($7)"""
