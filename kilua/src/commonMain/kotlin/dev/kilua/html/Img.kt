@@ -149,7 +149,7 @@ public fun IComponent.imgRef(
     id: String? = null,
     content: @Composable IImg.() -> Unit = {}
 ): Img {
-    val component = remember { Img(src, alt, className, renderConfig = renderConfig) }
+    val component = remember { Img(src, alt, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(src) { updateProperty(Img::src, it) }
         set(alt) { updateProperty(Img::alt, it) }
@@ -175,7 +175,7 @@ public fun IComponent.img(
     id: String? = null,
     content: @Composable IImg.() -> Unit = {}
 ) {
-    val component = remember { Img(src, alt, className, renderConfig = renderConfig) }
+    val component = remember { Img(src, alt, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(src) { updateProperty(Img::src, it) }
         set(alt) { updateProperty(Img::alt, it) }

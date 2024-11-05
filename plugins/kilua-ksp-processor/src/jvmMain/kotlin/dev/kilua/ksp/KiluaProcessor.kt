@@ -154,7 +154,7 @@ public class KiluaProcessor(
             appendLine(" */")
             appendLine("@Composable")
             appendLine("public fun IComponent.${functionName}(className: String? = null, id: String? = null, content: @Composable $interfaceName.() -> Unit = {}) {")
-            appendLine("    val component = remember { $className(className, renderConfig = renderConfig) }")
+            appendLine("    val component = remember { $className(className, id, renderConfig = renderConfig) }")
             appendLine("    ComponentNode(component, {")
             appendLine("        set(className) { updateProperty($className::className, it) }")
             appendLine("        set(id) { updateProperty($className::id, it) }")
