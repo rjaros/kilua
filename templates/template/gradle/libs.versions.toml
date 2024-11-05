@@ -1,5 +1,5 @@
 [versions]
-kilua = "0.0.15"
+kilua = "0.0.16"
 kotlin = "2.0.21"
 compose = "1.7.0"
 
