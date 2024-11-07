@@ -66,6 +66,7 @@ public class SsrEngine(
     private val logger = LoggerFactory.getLogger(SsrEngine::class.java)
 
     private val workingDir: Path = createTempDirectory("ssr")
+    private var nodeJsProcess: Process? = null
     private val httpClient = HttpClient(CIO)
 
     private val ssrService: String = externalSsrService ?: "http://localhost:${port ?: 7788}"
@@ -92,6 +93,8 @@ public class SsrEngine(
 
     init {
         Runtime.getRuntime().addShutdownHook(Thread {
+            nodeJsProcess?.destroy()
+            Thread.sleep(1000)
             @OptIn(ExperimentalPathApi::class)
             workingDir.deleteRecursively()
         })
@@ -109,7 +112,7 @@ public class SsrEngine(
                     process.redirectErrorStream(true)
                     process.redirectOutput(ProcessBuilder.Redirect.INHERIT)
                     process.directory(workingDir.toFile())
-                    process.start()
+                    nodeJsProcess = process.start()
                 }
             } else {
                 logger.warn("Failed to find SSR resources")

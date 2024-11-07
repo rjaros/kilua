@@ -1,6 +1,7 @@
 plugins {
     `kotlin-dsl`
     kotlin("jvm")
+    alias(libs.plugins.kotlinx.serialization)
     id("java-gradle-plugin")
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
@@ -56,6 +57,7 @@ dependencies {
     implementation(kotlin("gradle-plugin"))
     implementation(libs.compose.gradle.plugin)
     implementation(libs.tomlj)
+    implementation(libs.kaml)
 }
 
 tasks.register<Jar>("javadocJar") {

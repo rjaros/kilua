@@ -22,9 +22,12 @@
 
 package dev.kilua.gradle
 
+import dev.kilua.gradle.tasks.KiluaExportHtmlTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.api.file.RegularFile
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.create
@@ -163,7 +166,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     from("build/kotlin-webpack/js.ssr/productionExecutable")
                     into("build/dist/js.ssr/productionExecutable")
                 }
-                tasks.create("jsArchiveSSR", Jar::class).apply {
+                tasks.register("jsArchiveSSR", Jar::class) {
                     dependsOn("jsBrowserDistributionSSR")
                     group = KILUA_TASK_GROUP
                     description = "Packages webpack js bundle for server-side rendering."
@@ -232,7 +235,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     }
                     into("build/dist/wasmJs.ssr/productionExecutable")
                 }
-                tasks.create("wasmJsArchiveSSR", Jar::class).apply {
+                tasks.register("wasmJsArchiveSSR", Jar::class) {
                     dependsOn("wasmJsBrowserDistributionSSR")
                     group = KILUA_TASK_GROUP
                     description = "Packages webpack wasmJs bundle for server-side rendering."
@@ -284,17 +287,30 @@ public abstract class KiluaPlugin : Plugin<Project> {
                                     dependsOn("jsArchiveSSR")
                                     from(project.tasks["jsArchiveSSR"].outputs.files)
                                 }
+                                registerKiluaExportHtmlTask("exportHtmlWithJs", archiveFile) {
+                                    dependsOn(it)
+                                }
+                                registerKiluaExportTask("exportWithJs", "exportHtmlWithJs", "js") {
+                                    dependsOn("exportHtmlWithJs")
+                                }
                             }
                         }
                         tasks.findByName("jarWithWasmJs")?.let {
                             tasks.getByName("jarWithWasmJs", Jar::class) {
                                 dependsOn("wasmJsArchiveSSR")
                                 from(project.tasks["wasmJsArchiveSSR"].outputs.files)
+                                registerKiluaExportHtmlTask("exportHtmlWithWasmJs", archiveFile) {
+                                    dependsOn(it)
+                                }
+                                registerKiluaExportTask("exportWithWasmJs", "exportHtmlWithWasmJs", "wasmJs") {
+                                    dependsOn("exportHtmlWithWasmJs")
+                                }
                             }
                         }
                     }
                 }
             }
+
         }
         tasks.withType<BinaryenExec> {
             binaryenArgs = mutableListOf(
@@ -317,6 +333,46 @@ public abstract class KiluaPlugin : Plugin<Project> {
             tasks.withType<org.jetbrains.compose.web.tasks.UnpackSkikoWasmRuntimeTask> {
                 enabled = false
             }
+        }
+    }
+
+    private fun KiluaPluginContext.registerKiluaExportHtmlTask(
+        name: String,
+        applicationArchive: Provider<RegularFile>,
+        configuration: KiluaExportHtmlTask.() -> Unit = {}
+    ) {
+        logger.debug("registering KiluaExportHtmlTask")
+        tasks.register<KiluaExportHtmlTask>(name) {
+            val exportYmlFile = layout.projectDirectory.file(kiluaExtension.exportYml).get().asFile
+            if (exportYmlFile.exists()) {
+                exportYml.set(exportYmlFile)
+            }
+            applicationJar.set(applicationArchive)
+            exportDirectory.set(layout.buildDirectory.dir("exportedHtml"))
+            configuration()
+        }
+    }
+
+    private fun KiluaPluginContext.registerKiluaExportTask(
+        name: String,
+        exportHtmlTaskName: String,
+        prefix: String,
+        configuration: Copy.() -> Unit = {}
+    ) {
+        logger.debug("registering KiluaExportTask")
+        tasks.register<Copy>(name) {
+            group = KILUA_TASK_GROUP
+            description = "Export the SSR application as static files"
+            destinationDir = layout.buildDirectory.dir("site").get().asFile
+            val exported = project.tasks.getByName(exportHtmlTaskName).outputs
+            val distribution =
+                project.tasks.getByName(
+                    "${prefix}BrowserDistribution",
+                    Copy::class
+                ).outputs
+            from(exported, distribution)
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+            configuration()
         }
     }
 

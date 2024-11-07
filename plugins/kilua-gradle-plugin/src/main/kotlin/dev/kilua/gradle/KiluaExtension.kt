@@ -44,6 +44,8 @@ public abstract class KiluaExtension @Inject constructor(
 
     public val disableSkiko: Property<Boolean> = kiluaGradleProperty("disableSkiko")
 
+    public val exportYml: Property<String> = kiluaGradleProperty("exportYml", "export.yml")
+
     private fun kiluaGradleProperty(
         property: String,
         default: Boolean = true,
@@ -52,5 +54,14 @@ public abstract class KiluaExtension @Inject constructor(
             .map { it.toBoolean() }
             .orElse(default)
         return objects.property<Boolean>().convention(convention)
+    }
+
+    private fun kiluaGradleProperty(
+        property: String,
+        default: String,
+    ): Property<String> {
+        val convention = providers.gradleProperty("dev.kilua.plugin.$property")
+            .orElse(default)
+        return objects.property<String>().convention(convention)
     }
 }
