@@ -22,6 +22,9 @@
 
 package dev.kilua
 
+import web.JsAny
+import kotlin.js.JsName
+
 /**
  * Helper annotation for JS/Wasm compatibility.
  */
@@ -35,4 +38,12 @@ public expect annotation class JsModule(val import: String)
 @Suppress("NOTHING_TO_INLINE")
 public inline fun <T> useModule(@Suppress("UNUSED_PARAMETER") module: T) {
     // empty body
+}
+
+/**
+ * Helper class for JS/Wasm compatibility.
+ */
+public open external class LocalResource : JsAny {
+    @JsName("default")
+    public val url: String
 }
