@@ -218,6 +218,7 @@ private fun IComponent.modal(
  *
  * @param caption the caption of the modal window
  * @param closeButton determines if the close button is visible
+ * @param closeButtonAction the close button action (if not provided, the modal will be closed)
  * @param size the size of the modal window
  * @param fullscreenMode the fullscreen mode of the modal window
  * @param animation determines if the modal window is animated
@@ -233,6 +234,7 @@ private fun IComponent.modal(
 public fun IComponent.modalRef(
     caption: String? = null,
     closeButton: Boolean = true,
+    closeButtonAction: (() -> Unit)? = null,
     size: ModalSize? = null,
     fullscreenMode: FullscreenMode? = null,
     animation: Boolean = true,
@@ -244,7 +246,7 @@ public fun IComponent.modalRef(
     content: @Composable IModal.() -> Unit = {}
 ): Modal {
     return modalRef("modal" % if (animation) "fade" else null % className, id) {
-        setupModal(escape, size, fullscreenMode, centered, scrollable, caption, closeButton, content)
+        setupModal(caption, closeButton, closeButtonAction, size, fullscreenMode, centered, scrollable, escape, content)
     }
 }
 
@@ -253,6 +255,7 @@ public fun IComponent.modalRef(
  *
  * @param caption the caption of the modal window
  * @param closeButton determines if the close button is visible
+ * @param closeButtonAction the close button action (if not provided, the modal will be closed)
  * @param size the size of the modal window
  * @param fullscreenMode the fullscreen mode of the modal window
  * @param animation determines if the modal window is animated
@@ -267,6 +270,7 @@ public fun IComponent.modalRef(
 public fun IComponent.modal(
     caption: String? = null,
     closeButton: Boolean = true,
+    closeButtonAction: (() -> Unit)? = null,
     size: ModalSize? = null,
     fullscreenMode: FullscreenMode? = null,
     animation: Boolean = true,
@@ -278,19 +282,20 @@ public fun IComponent.modal(
     content: @Composable IModal.() -> Unit = {}
 ) {
     modal("modal" % if (animation) "fade" else null % className, id) {
-        setupModal(escape, size, fullscreenMode, centered, scrollable, caption, closeButton, content)
+        setupModal(caption, closeButton, closeButtonAction, size, fullscreenMode, centered, scrollable, escape, content)
     }
 }
 
 @Composable
 private fun IModal.setupModal(
-    escape: Boolean,
+    caption: String?,
+    closeButton: Boolean,
+    closeButtonAction: (() -> Unit)?,
     size: ModalSize?,
     fullscreenMode: FullscreenMode?,
     centered: Boolean,
     scrollable: Boolean,
-    caption: String?,
-    closeButton: Boolean,
+    escape: Boolean,
     content: @Composable (IModal.() -> Unit)
 ) {
     role("dialog")
@@ -308,8 +313,14 @@ private fun IModal.setupModal(
                     if (closeButton) {
                         button(className = "btn-close") {
                             ariaLabel("Close")
-                            onClick {
-                                component.hide()
+                            if (closeButtonAction != null) {
+                                onClick {
+                                    closeButtonAction()
+                                }
+                            } else {
+                                onClick {
+                                    component.hide()
+                                }
                             }
                         }
                     }

@@ -78,6 +78,7 @@ public fun confirm(
         modal(
             caption,
             cancelVisible,
+            null,
             size,
             fullscreenMode,
             animation,

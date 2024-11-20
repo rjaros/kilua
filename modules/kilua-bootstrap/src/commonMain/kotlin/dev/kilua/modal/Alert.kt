@@ -64,6 +64,7 @@ public fun alert(
         modal(
             caption,
             true,
+            null,
             size,
             fullscreenMode,
             animation,
