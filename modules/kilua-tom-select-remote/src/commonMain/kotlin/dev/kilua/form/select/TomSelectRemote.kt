@@ -35,6 +35,7 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.get
+import dev.kilua.html.div
 import dev.kilua.rpc.RemoteOption
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.utils.StringPair
@@ -242,6 +243,7 @@ internal fun <T : Any> IComponent.tomSelectRemoteRef(
             set(className) { updateProperty(TomSelectRemote<T>::className, it % "form-select") }
             set(id) { updateProperty(TomSelectRemote<T>::id, it) }
         }, setup)
+        div() // Empty div as a placeholder for the generated HTML element
         component
     }
 }
@@ -316,6 +318,7 @@ internal fun <T : Any> IComponent.tomSelectRemote(
             set(className) { updateProperty(TomSelectRemote<T>::className, it % "form-select") }
             set(id) { updateProperty(TomSelectRemote<T>::id, it) }
         }, setup)
+        div() // Empty div as a placeholder for the generated HTML elements
     }
 }
 

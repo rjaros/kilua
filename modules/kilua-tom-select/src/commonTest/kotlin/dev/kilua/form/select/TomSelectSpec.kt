@@ -81,7 +81,7 @@ B
                 )
             }
             assertEqualsHtml(
-                """<select name="select" class="form-select" multiple></select>""",
+                """<select name="select" class="form-select" multiple></select><div></div>""",
                 root.innerHTML,
                 "Should render Tom Select component to a String"
             )

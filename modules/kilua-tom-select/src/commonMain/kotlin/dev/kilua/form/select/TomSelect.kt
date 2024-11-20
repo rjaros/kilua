@@ -37,6 +37,7 @@ import dev.kilua.externals.obj
 import dev.kilua.form.StringFormControl
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
+import dev.kilua.html.div
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
@@ -51,6 +52,7 @@ import web.JsAny
 import web.JsArray
 import web.JsString
 import web.clear
+import web.document
 import web.dom.HTMLOptionElement
 import web.dom.HTMLSelectElement
 import web.dom.asList
@@ -513,8 +515,7 @@ public open class TomSelect(
     }
 
     override fun onRemove() {
-        tomSelectInstance?.destroy()
-        tomSelectInstance = null
+        destroyTomSelect()
     }
 
     /**
@@ -543,7 +544,7 @@ public open class TomSelect(
      */
     protected open fun refresh() {
         if (tomSelectInstance != null) {
-            tomSelectInstance?.destroy()
+            destroyTomSelect()
             initializeTomSelect()
         }
     }
@@ -610,6 +611,23 @@ public open class TomSelect(
             }
             tomSelectInstance = TomSelectJs(element, tomSelectOptions)
             refreshValue()
+            element.nextSibling?.nextSibling?.let {
+                // Remove additional empty div to make place for the generated ts-wrapper
+                it.parentNode?.removeChild(it)
+            }
+        }
+    }
+
+    /**
+     * Destroys the Tom Select instance.
+     */
+    protected open fun destroyTomSelect() {
+        if (renderConfig.isDom && tomSelectInstance != null) {
+            tomSelectInstance!!.destroy()
+            tomSelectInstance = null
+            // Restore the empty div after the Tom Select instance is removed
+            val emptyDiv = document.createElement("div")
+            element.insertAdjacentElement("afterend", emptyDiv)
         }
     }
 
@@ -702,6 +720,7 @@ public fun IComponent.tomSelectRef(
             set(className) { updateProperty(TomSelect::className, it % "form-select") }
             set(id) { updateProperty(TomSelect::id, it) }
         }, setup)
+        div() // Empty div as a placeholder for the generated HTML element
         component
     }
 }
@@ -784,5 +803,6 @@ public fun IComponent.tomSelect(
             set(className) { updateProperty(TomSelect::className, it % "form-select") }
             set(id) { updateProperty(TomSelect::id, it) }
         }, setup)
+        div() // Empty div as a placeholder for the generated HTML element
     }
 }

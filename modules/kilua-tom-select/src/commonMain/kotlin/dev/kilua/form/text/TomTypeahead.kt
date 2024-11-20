@@ -37,6 +37,7 @@ import dev.kilua.form.Autocomplete
 import dev.kilua.form.InputType
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.toJs
+import dev.kilua.html.div
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.rem
@@ -48,6 +49,7 @@ import web.JsAny
 import web.JsArray
 import web.JsBoolean
 import web.JsString
+import web.document
 import web.toBoolean
 import web.toJsString
 
@@ -185,8 +187,7 @@ public open class TomTypeahead(
     }
 
     override fun onRemove() {
-        tomSelectInstance?.destroy()
-        tomSelectInstance = null
+        destroyTomSelect()
     }
 
     /**
@@ -221,7 +222,7 @@ public open class TomTypeahead(
      */
     protected open fun refresh() {
         if (tomSelectInstance != null) {
-            tomSelectInstance?.destroy()
+            destroyTomSelect()
             initializeTomSelect()
         }
     }
@@ -295,6 +296,23 @@ public open class TomTypeahead(
             }
             tomSelectInstance = TomSelectJs(element, tomSelectOptions)
             refreshValue()
+            element.nextSibling?.nextSibling?.let {
+                // Remove additional empty div to make place for the generated ts-wrapper
+                it.parentNode?.removeChild(it)
+            }
+        }
+    }
+
+    /**
+     * Destroys the Tom Select instance.
+     */
+    protected open fun destroyTomSelect() {
+        if (renderConfig.isDom && tomSelectInstance != null) {
+            tomSelectInstance!!.destroy()
+            tomSelectInstance = null
+            // Restore the empty div after the Tom Select instance is removed
+            val emptyDiv = document.createElement("div")
+            element.insertAdjacentElement("afterend", emptyDiv)
         }
     }
 
@@ -363,6 +381,7 @@ public fun IComponent.tomTypeaheadRef(
         set(className) { updateProperty(TomTypeahead::className, it % "form-control kilua-typeahead") }
         set(id) { updateProperty(TomTypeahead::id, it) }
     }, setup)
+    div() // Empty div as a placeholder for the generated HTML element
     return component
 }
 
@@ -428,4 +447,5 @@ public fun IComponent.tomTypeahead(
         set(className) { updateProperty(TomTypeahead::className, it % "form-control kilua-typeahead") }
         set(id) { updateProperty(TomTypeahead::id, it) }
     }, setup)
+    div() // Empty div as a placeholder for the generated HTML element
 }
