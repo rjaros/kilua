@@ -84,7 +84,7 @@ public fun alert(
             }
             lateinit var button: Button
             footer {
-                button = bsButtonRef(okTitle, okIcon, className = "btn btn-primary") {
+                button = bsButtonRef(okTitle, okIcon) {
                     onClick {
                         component.hide()
                     }
