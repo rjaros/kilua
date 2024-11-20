@@ -25,7 +25,7 @@ kotlin {
         }
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         mainRun {
-            mainClass.set("io.vertx.core.Launcher")
+            mainClass.set("io.vertx.launcher.application.VertxApplication")
         }
     }
     js(IR) {

@@ -25,6 +25,7 @@ kotlin {
                 api(libs.vertx.web)
                 api(libs.vertx.lang.kotlin)
                 api(libs.vertx.lang.kotlin.coroutines)
+                api(libs.vertx.launcher.application)
             }
         }
     }

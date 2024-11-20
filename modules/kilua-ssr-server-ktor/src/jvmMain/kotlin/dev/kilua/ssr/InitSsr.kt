@@ -66,7 +66,7 @@ public fun Application.initSsr() {
     }
 }
 
-private suspend fun PipelineContext<Unit, ApplicationCall>.respondSsr() {
+private suspend fun RoutingContext.respondSsr() {
     if (call.request.path() == "/favicon.ico") {
         call.respond(HttpStatusCode.NotFound)
     } else {
