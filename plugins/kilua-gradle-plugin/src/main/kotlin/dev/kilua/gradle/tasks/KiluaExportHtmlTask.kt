@@ -43,6 +43,9 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
             add("$javaHome/bin/java")
             add("-jar")
             add(applicationJar.get().asFile.canonicalPath)
+            exportYml?.parameters?.forEach {
+                add(it)
+            }
         }.toTypedArray()
         val processBuilder = ProcessBuilder(*processParams)
         processBuilder.redirectErrorStream(true)

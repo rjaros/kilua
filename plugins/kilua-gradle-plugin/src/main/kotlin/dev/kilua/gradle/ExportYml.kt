@@ -26,6 +26,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class ExportYml(
+    public val parameters: List<String>? = null,
     public val language: String? = null,
     public val pages: List<String>? = null,
 )
