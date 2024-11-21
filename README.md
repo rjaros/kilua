@@ -26,6 +26,7 @@ KVision users (component based API, allowing some imperative, direct ways to int
 one of the most widely used tool for i18n.
 - Deploy your application with full SSR (Server Side Rendering) for better 
 SEO performance and user experience.
+- Export your application as a set of static HTML files for more affordable hosting solutions.
 
 ## Project status
 
@@ -33,6 +34,9 @@ Kilua is being actively developed. Please create an issue for any bugs or featur
 Contributions and PRs are welcomed. All artifacts are published to Maven Central.
 
 ## Documentation and examples
+
+The official guide is published at [https://kilua.gitbook.io/kilua-guide](https://kilua.gitbook.io/kilua-guide). 
+It's still a work in progress and may be incomplete.
 
 Current API documentation is published at [https://rjaros.github.io/kilua/api/](https://rjaros.github.io/kilua/api/).
 
@@ -57,6 +61,8 @@ For fullstack and SSR examples additional tasks are available:
 - `./gradlew :examples:[exampleName]:jvmRun` - run the backend application for development on `http://localhost:8080` 
 - `./gradlew :examples:[exampleName]:jarWithJs` - build and package the production application with JS frontend to `examples/[exampleName]/build/libs` directory
 - `./gradlew :examples:[exampleName]:jarWithWasmJs` - build and package the production application with Wasm frontend to `examples/[exampleName]/build/libs` directory
+- `./gradlew :examples:[exampleName]:exportWithJs` - export static site with JS frontend to `examples/[exampleName]/build/site` directory
+- `./gradlew :examples:[exampleName]:exportWithWasmJs` - export static site with Wasm frontend to `examples/[exampleName]/build/site` directory
 
 To run packaged fullstack or SSR example just use `java -jar [exampleName]-[version].jar` command.
 
