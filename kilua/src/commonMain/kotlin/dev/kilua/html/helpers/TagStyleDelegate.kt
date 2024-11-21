@@ -1463,6 +1463,7 @@ public open class TagStyleDelegateImpl<E : HTMLElement>(
                 propertyValues.remove(name)
                 elementNullable?.style?.removeProperty(name)
             }
+            onSetCallback?.invoke(propertyValues)
         }
     }
 
