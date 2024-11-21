@@ -143,5 +143,6 @@ dev.kilua.form.text
 dev.kilua.form.text.i18n
 module:kilua-gradle-plugin
 dev.kilua.gradle
+dev.kilua.gradle.tasks
 module:kilua-ksp-processor
 dev.kilua.ksp
