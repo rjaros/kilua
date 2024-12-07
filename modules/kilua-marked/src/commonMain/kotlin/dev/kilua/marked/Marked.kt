@@ -25,6 +25,7 @@ package dev.kilua.marked
 import dev.kilua.externals.MarkedOptionsJs
 import dev.kilua.externals.obj
 import dev.kilua.externals.parse
+import dev.kilua.externals.use
 import web.JsAny
 
 /**
@@ -62,4 +63,13 @@ internal fun MarkedOptions.toJs(): MarkedOptionsJs {
  */
 public fun parseMarkdown(text: String, options: MarkedOptions = MarkedOptions()): String {
     return parse(text, options.toJs())
+}
+
+/**
+ * Use extension.
+ *
+ * @param ext extension objects
+ */
+public fun useExtension(vararg ext: JsAny) {
+    return use(*ext)
 }

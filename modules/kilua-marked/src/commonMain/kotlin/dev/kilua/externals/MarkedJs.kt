@@ -37,3 +37,5 @@ internal external class MarkedOptionsJs : JsAny {
 }
 
 internal external fun parse(text: String, options: MarkedOptionsJs): String
+
+internal external fun use(vararg extension: JsAny)
