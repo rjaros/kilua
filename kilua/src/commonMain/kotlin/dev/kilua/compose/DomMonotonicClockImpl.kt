@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2024 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,24 @@
 
 package dev.kilua.compose
 
-import androidx.compose.runtime.DefaultMonotonicFrameClock
-import dev.kilua.utils.isDom
+import androidx.compose.runtime.MonotonicFrameClock
+import web.window
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
-internal actual val defaultMonotonicFrameClock = if (isDom) DefaultMonotonicFrameClock else NoDomMonotonicClockImpl()
+/**
+ * A simple MonotonicFrameClock implementation.
+ */
+internal class DomMonotonicClockImpl : MonotonicFrameClock {
+    override suspend fun <R> withFrameNanos(
+        onFrame: (Long) -> R
+    ): R = suspendCoroutine { continuation ->
+        window.requestAnimationFrame {
+            val duration = it.toDuration(DurationUnit.MILLISECONDS)
+            val result = onFrame(duration.inWholeNanoseconds)
+            continuation.resume(result)
+        }
+    }
+}

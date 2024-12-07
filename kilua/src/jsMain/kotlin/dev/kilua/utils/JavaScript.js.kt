@@ -30,6 +30,7 @@ public actual inline fun <T> Any?.cast(): T {
     return this.unsafeCastJs<T>()
 }
 
+@Suppress("NOTHING_TO_INLINE")
 public actual inline fun <T : JsAny> JsAny.unsafeCast(): T {
     return this.unsafeCastJs<T>()
 }
