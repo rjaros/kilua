@@ -101,8 +101,8 @@ public enum class Sorter {
     Datetime,
     Array;
 
-    public val value: kotlin.String = name.toKebabCase()
-    override fun toString(): kotlin.String {
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
         return value
     }
 }
@@ -169,7 +169,7 @@ public enum class Editor(public val editor: String? = null) {
 /**
  * Built-in validators.
  */
-public enum class Validator(public val validator: kotlin.String? = null) {
+public enum class Validator(public val validator: String? = null) {
     Required,
     Unique,
     Integer,
@@ -184,8 +184,8 @@ public enum class Validator(public val validator: kotlin.String? = null) {
     Regex,
     Alphanumeric;
 
-    public val value: kotlin.String = validator ?: name.toKebabCase()
-    override fun toString(): kotlin.String {
+    public val value: String = validator ?: name.toKebabCase()
+    override fun toString(): String {
         return value
     }
 }
