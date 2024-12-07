@@ -636,7 +636,9 @@ public open class TomSelect(
      */
     public override fun clearOptions() {
         tomSelectInstance?.clearOptions { false }
-        tomSelectInstance?.get("input")?.unsafeCast<HTMLSelectElement>()?.clear()
+        if (tomSelectInstance != null && tomSelectInstance!!["input"] != null && tomSelectInstance!!["input"]!!["clear"] != null) {
+            tomSelectInstance!!["input"]!!.unsafeCast<HTMLSelectElement>().clear()
+        }
     }
 
 }
