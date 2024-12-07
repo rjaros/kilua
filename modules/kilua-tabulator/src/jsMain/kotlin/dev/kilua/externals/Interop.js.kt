@@ -69,6 +69,8 @@ internal actual fun toJsAny(f: (String, JsAny) -> Boolean): JsAny = f.unsafeCast
 
 internal actual fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny = f.unsafeCast<JsAny>()
 
+internal actual fun toJsAny(f: (JsAny, JsAny, JsAny) -> JsAny): JsAny = f.unsafeCast<JsAny>()
+
 internal actual fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny = f.unsafeCast<JsAny>()
 
 internal actual fun toJsAny(f: (JsAny) -> Boolean): JsAny = f.unsafeCast<JsAny>()

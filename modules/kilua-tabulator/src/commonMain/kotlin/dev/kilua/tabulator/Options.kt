@@ -480,7 +480,9 @@ public data class DownloadConfig(
     val columnGroups: Boolean? = null,
     val rowGroups: Boolean? = null,
     val columnCalcs: Boolean? = null,
-    val rowHeaders: Boolean? = null
+    val rowHeaders: Boolean? = null,
+    val columnHeaders: Boolean? = null,
+    val dataTree: Boolean? = null,
 )
 
 /**
@@ -491,7 +493,9 @@ internal fun DownloadConfig.toJs(): JsAny {
         "columnGroups" to columnGroups,
         "rowGroups" to rowGroups,
         "columnCalcs" to columnCalcs,
-        "rowHeaders" to rowHeaders
+        "rowHeaders" to rowHeaders,
+        "columnHeaders" to columnHeaders,
+        "dataTree" to dataTree,
     )
 }
 
@@ -556,10 +560,12 @@ public data class ColumnDefinition<T : Any>(
     val download: ((column: ColumnComponent) -> Boolean)? = null,
     val titleDownload: String? = null,
     val topCalc: Calc? = null,
+    val topCalcFunc: ((values: JsAny, data: JsAny, calcParams: JsAny) -> JsAny)? = null,
     val topCalcParams: JsAny? = null,
     val topCalcFormatter: Formatter? = null,
     val topCalcFormatterParams: JsAny? = null,
     val bottomCalc: Calc? = null,
+    val bottomCalcFunc: ((values: JsAny, data: JsAny, calcParams: JsAny) -> JsAny)? = null,
     val bottomCalcParams: JsAny? = null,
     val bottomCalcFormatter: Formatter? = null,
     val bottomCalcFormatterParams: JsAny? = null,
@@ -671,6 +677,8 @@ public data class ColumnDefinition<T : Any>(
     val responsiveCollapseAutoIcon: String? = null,
     val mutatorImport: JsAny? = null,
     val mutatorImportParams: JsAny? = null,
+    val accessorDownload: JsAny? = null,
+    val accessorDownloadParams: JsAny? = null,
 )
 
 /**
@@ -944,11 +952,11 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         "validatorParams" to validatorParams,
         "download" to download?.let { toJsAny(it) },
         "titleDownload" to titleDownload,
-        "topCalc" to topCalc?.value,
+        "topCalc" to (topCalcFunc?.let { toJsAny(it) } ?: topCalc?.value),
         "topCalcParams" to topCalcParams,
         "topCalcFormatter" to topCalcFormatter?.value,
         "topCalcFormatterParams" to topCalcFormatterParams,
-        "bottomCalc" to bottomCalc?.value,
+        "bottomCalc" to (bottomCalcFunc?.let { toJsAny(it) } ?: bottomCalc?.value),
         "bottomCalcParams" to bottomCalcParams,
         "bottomCalcFormatter" to bottomCalcFormatter?.value,
         "bottomCalcFormatterParams" to bottomCalcFormatterParams,
@@ -1026,6 +1034,8 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         "dblClickMenu" to dblClickMenu,
         "mutatorImport" to mutatorImport,
         "mutatorImportParams" to mutatorImportParams,
+        "accessorDownload" to accessorDownload,
+        "accessorDownloadParams" to accessorDownloadParams,
         *(responsiveCollapseOptions + headerMenuOptions).toTypedArray(),
     )
 }
@@ -1203,6 +1213,19 @@ public data class TabulatorOptions<T : Any>(
     val importDataValidator: ((data: JsAny) -> JsAny)? = null,
     val paginationOutOfRange: JsAny? = null,
     val selectableRangeAutoFocus: Boolean? = null,
+    val groupBy: JsAny? = null,
+    val groupHeader: JsAny? = null,
+    val groupHeaderPrint: JsAny? = null,
+    val groupHeaderClipboard: JsAny? = null,
+    val groupHeaderDownload: JsAny? = null,
+    val groupHeaderHtmlOutput: JsAny? = null,
+    val groupStartOpen: JsAny? = null,
+    val groupToggleElement: JsAny? = null,
+    val groupValues: JsAny? = null,
+    val groupUpdateOnCellEdit: Boolean? = null,
+    val groupClosedShowCalcs: Boolean? = null,
+    val columnCalcs: JsAny? = null,
+    val downloadEncoder: JsAny? = null,
 )
 
 /**
@@ -1371,5 +1394,18 @@ internal fun <T : Any> TabulatorOptions<T>.toJs(
         "importDataValidator" to importDataValidator?.let { toJsAny(it) },
         "paginationOutOfRange" to paginationOutOfRange,
         "selectableRangeAutoFocus" to selectableRangeAutoFocus,
+        "groupBy" to groupBy,
+        "groupHeader" to groupHeader,
+        "groupHeaderPrint" to groupHeaderPrint,
+        "groupHeaderClipboard" to groupHeaderClipboard,
+        "groupHeaderDownload" to groupHeaderDownload,
+        "groupHeaderHtmlOutput" to groupHeaderHtmlOutput,
+        "groupStartOpen" to groupStartOpen,
+        "groupToggleElement" to groupToggleElement,
+        "groupValues" to groupValues,
+        "groupUpdateOnCellEdit" to groupUpdateOnCellEdit,
+        "groupClosedShowCalcs" to groupClosedShowCalcs,
+        "columnCalcs" to columnCalcs,
+        "downloadEncoder" to downloadEncoder,
     )
 }

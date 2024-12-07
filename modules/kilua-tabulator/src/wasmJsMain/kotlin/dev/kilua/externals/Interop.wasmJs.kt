@@ -67,6 +67,8 @@ internal actual fun toJsAny(f: (String, JsAny) -> Boolean): JsAny = js("f")
 
 internal actual fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny = js("f")
 
+internal actual fun toJsAny(f: (JsAny, JsAny, JsAny) -> JsAny): JsAny = js("f")
+
 internal actual fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny = js("f")
 
 internal actual fun toJsAny(f: (JsAny) -> Boolean): JsAny = js("f")
