@@ -146,20 +146,21 @@ public enum class Formatter(public val formatter: String? = null) {
 /**
  * Built-in editors.
  */
-public enum class Editor {
+public enum class Editor(public val editor: String? = null) {
     Input,
     Textarea,
     Number,
     Range,
-    Tick,
+    TickCross("tickCross"),
     Star,
     List,
     Date,
     Time,
     Datetime,
-    Adaptable;
+    Adaptable,
+    Progress;
 
-    public val value: String = name.toKebabCase()
+    public val value: String = editor ?: name.toKebabCase()
     override fun toString(): String {
         return value
     }
