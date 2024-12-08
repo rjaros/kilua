@@ -1055,4 +1055,215 @@ public interface TagStyleFun<E : HTMLElement> {
     @Composable
     public fun style(name: String, value: String?)
 
+    public companion object {
+
+        //
+        // These extension functions are required as a workaround for Compose limitations (https://issuetracker.google.com/issues/165812010)
+        //
+
+        /**
+         * Set the border of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.border(
+            width: CssSize? = null,
+            style: BorderStyle? = null,
+            color: Color? = null
+        ) {
+            if (width != null || style != null || color != null) {
+                border(Border(width, style, color))
+            } else {
+                border(null)
+            }
+        }
+
+        /**
+         * Set the top border of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.borderTop(
+            width: CssSize? = null,
+            style: BorderStyle? = null,
+            color: Color? = null
+        ) {
+            if (width != null || style != null || color != null) {
+                borderTop(Border(width, style, color))
+            } else {
+                borderTop(null)
+            }
+        }
+
+        /**
+         * Set the right border of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.borderRight(
+            width: CssSize? = null,
+            style: BorderStyle? = null,
+            color: Color? = null
+        ) {
+            if (width != null || style != null || color != null) {
+                borderRight(Border(width, style, color))
+            } else {
+                borderRight(null)
+            }
+        }
+
+        /**
+         * Set the bottom border of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.borderBottom(
+            width: CssSize? = null,
+            style: BorderStyle? = null,
+            color: Color? = null
+        ) {
+            if (width != null || style != null || color != null) {
+                borderBottom(Border(width, style, color))
+            } else {
+                borderBottom(null)
+            }
+        }
+
+        /**
+         * Set the left border of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.borderLeft(
+            width: CssSize? = null,
+            style: BorderStyle? = null,
+            color: Color? = null
+        ) {
+            if (width != null || style != null || color != null) {
+                borderLeft(Border(width, style, color))
+            } else {
+                borderLeft(null)
+            }
+        }
+
+
+        /**
+         * Set the background of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.background(
+            color: Color? = null, image: String? = null,
+            positionX: CssSize? = null, positionY: CssSize? = null,
+            sizeX: CssSize? = null, sizeY: CssSize? = null,
+            size: BgSize? = null, repeat: BgRepeat? = null,
+            origin: BgOrigin? = null, clip: BgClip? = null,
+            attachment: BgAttach? = null
+        ) {
+            if (color != null || image != null || positionX != null || positionY != null || sizeX != null || sizeY != null ||
+                size != null || repeat != null || origin != null || clip != null || attachment != null
+            ) {
+                background(
+                    Background(
+                        color,
+                        image,
+                        positionX,
+                        positionY,
+                        sizeX,
+                        sizeY,
+                        size,
+                        repeat,
+                        origin,
+                        clip,
+                        attachment
+                    )
+                )
+            } else {
+                background(null)
+            }
+        }
+
+        /**
+         * Set the CSS Text decoration of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.textDecoration(
+            line: TextDecorationLine? = null, style: TextDecorationStyle? = null, color: Color? = null
+        ) {
+            if (line != null || style != null || color != null) {
+                textDecoration(TextDecoration(line, style, color))
+            } else {
+                textDecoration(null)
+            }
+        }
+
+
+        /**
+         * Set the CSS Text shadow of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.textShadow(
+            hShadow: CssSize? = null, vShadow: CssSize? = null, blurRadius: CssSize? = null, color: Color? = null
+        ) {
+            if (hShadow != null || vShadow != null || blurRadius != null || color != null) {
+                textShadow(TextShadow(hShadow, vShadow, blurRadius, color))
+            } else {
+                textShadow(null)
+            }
+        }
+
+        /**
+         * Set the outline of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.outline(
+            width: CssSize? = null,
+            style: OutlineStyle? = null,
+            color: Color? = null
+        ) {
+            if (width != null || style != null || color != null) {
+                outline(Outline(width, style, color))
+            } else {
+                outline(null)
+            }
+        }
+
+        /**
+         * Set the box shadow of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.boxShadow(
+            hOffset: CssSize? = null, vOffset: CssSize? = null,
+            blurRadius: CssSize? = null, spreadRadius: CssSize? = null,
+            color: Color? = null, inset: Boolean = false
+        ) {
+            if (hOffset != null || vOffset != null || blurRadius != null || spreadRadius != null || color != null || inset) {
+                boxShadow(BoxShadow(hOffset, vOffset, blurRadius, spreadRadius, color, inset))
+            } else {
+                boxShadow(null)
+            }
+        }
+
+        /**
+         * Set the CSS transition effect for the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.transition(
+            property: String? = null, duration: Double? = null, timingFunction: String? = null, delay: Double? = null
+        ) {
+            if (property != null && duration != null) {
+                transition(Transition(property, duration, timingFunction, delay))
+            } else {
+                transition(null)
+            }
+        }
+
+        /**
+         * Set the list style of the current component.
+         */
+        @Composable
+        public fun <E : HTMLElement> TagStyleFun<E>.listStyle(
+            type: ListStyleType? = null, position: ListStylePosition? = null, image: String? = null
+        ) {
+            if (type != null || position != null || image != null) {
+                listStyle(ListStyle(type, position, image))
+            } else {
+                listStyle(null)
+            }
+        }
+    }
 }
