@@ -219,6 +219,21 @@ class App : Application() {
 
                 var apply by remember { mutableStateOf(true) }
 
+                range {
+                    cursor(Cursor.Pointer)
+                    style("accent-color", "red")
+                    style {
+                        style("appearance", "none")
+                        background(Color.hex(0xdddddd))
+                        pElement("-webkit-slider-thumb") {
+                            style("appearance", "none")
+                            width(20.px)
+                            height(20.px)
+                            background(Color.hex(0x8758ff))
+                        }
+                    }
+                }
+
                 range(min = 1, max = 10) {
                     cursor(Cursor.Pointer)
                     flexGrow(1)
@@ -278,7 +293,7 @@ class App : Application() {
                         }
                     }
                     LaunchedEffect(Unit) {
-                    //    this@modal.show()
+                        //    this@modal.show()
                     }
                 }
 
@@ -703,7 +718,8 @@ class App : Application() {
 
                 tomSelect(emptyOption = true) {
                     emptyOption(true)
-                    tsCallbacks(TomSelectCallbacks(
+                    tsCallbacks(
+                        TomSelectCallbacks(
                         load = { query, callback ->
                             promise {
                                 val result = try {
