@@ -64,6 +64,7 @@ import dev.kilua.form.time.richTime
 import dev.kilua.html.*
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.style
+import dev.kilua.html.style.globalStyle
 import dev.kilua.i18n.I18n
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
@@ -111,7 +112,12 @@ import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.JsModule
 import dev.kilua.form.formRef
+import dev.kilua.form.number.range
 import dev.kilua.form.select.select
+import dev.kilua.html.helpers.TagStyleFun.Companion.background
+import dev.kilua.html.helpers.TagStyleFun.Companion.border
+import dev.kilua.html.style.pClass
+import dev.kilua.html.style.pElement
 import dev.kilua.modal.alert
 import dev.kilua.modal.modal
 import dev.kilua.utils.cast
@@ -125,6 +131,7 @@ import dev.kilua.utils.today
 import dev.kilua.utils.unsafeCast
 import dev.kilua.useModule
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
@@ -210,6 +217,58 @@ class App : Application() {
 
                 margin(20.px)
 
+                var apply by remember { mutableStateOf(true) }
+
+                range(min = 1, max = 10) {
+                    cursor(Cursor.Pointer)
+                    flexGrow(1)
+                    height(4.px)
+                    marginLeft(8.px)
+                    marginRight(8.px)
+                    style("accent-color", "red")
+                    if (apply) {
+                        val cls = globalStyle {
+                            style("appearance", "none")
+                            background(Color.hex(0xdddddd))
+                            pElement("-webkit-slider-thumb") {
+                                style("appearance", "none")
+                                width(20.px)
+                                height(20.px)
+                                background(Color.hex(0x8758ff))
+                            }
+                        }
+                        className("rrr" % cls)
+                    } else {
+                        className("rrr")
+                    }
+                }
+
+                button("Toggle") {
+                    onClick {
+                        apply = !apply
+                    }
+                }
+
+                hr()
+
+                val range0 by rangeRef(200, min = 0, max = 200).stateFlow.mapNotNull { it?.toInt() }.collectAsState(0)
+
+                div {
+                    style {
+                        width(range0.px)
+                        height(100.px)
+                        border(1.px, style = BorderStyle.Solid, color = Color.Red)
+                        pClass(PClass.Hover) {
+                            background(Color.Blue)
+                        }
+                        pElement("-webkit-slider-thumb") {
+                            background(Color.Blue)
+                        }
+                    }
+                }
+
+                hr()
+
                 modal(size = ModalSize.ModalSm) {
                     vPanel {
                         bsButton("Close") {
@@ -219,7 +278,7 @@ class App : Application() {
                         }
                     }
                     LaunchedEffect(Unit) {
-                        this@modal.show()
+                    //    this@modal.show()
                     }
                 }
 
@@ -300,19 +359,19 @@ class App : Application() {
                     println("recomposing div xx")
                     +"Hello World! $count"
                     if (count == 1) {
-                        background(Background(color = Color.Blue))
+                        background(Color.Blue)
                         attribute("x-test", "test 1")
                         title("ala")
                         className("ala")
                     }
                     if (count == 2) {
-                        background(Background(color = Color.Aqua))
+                        background(Color.Aqua)
                         attribute("x-test", "test 2")
                         title("ala2")
                         className("ma")
                     }
                     if (count == 4) {
-                        background(Background(color = Color.Green))
+                        background(Color.Green)
                     }
                     onClick {
                         cast<Tag<HTMLElement>>().title = "test"
@@ -322,19 +381,19 @@ class App : Application() {
                 tag("h1") {
                     +"Hello World 2! $count"
                     if (count == 1) {
-                        background(Background(color = Color.Yellow))
+                        background(Color.Yellow)
                         attribute("x-test", "test 1")
                         title("ala")
                         className("ala")
                     }
                     if (count == 2) {
-                        background(Background(color = Color.Orange))
+                        background(Color.Orange)
                         attribute("x-test", "test 2")
                         title("ala2")
                         className("ma")
                     }
                     if (count == 3) {
-                        background(Background(color = Color.Fuchsia))
+                        background(Color.Fuchsia)
                     }
                 }
                 button("Button") {
@@ -735,7 +794,7 @@ class App : Application() {
                 val randomElements = remember { mutableStateListOf<UInt>() }
 
                 div {
-                    border(Border(1.px, style = BorderStyle.Solid, color = Color.Red))
+                    border(1.px, style = BorderStyle.Solid, color = Color.Red)
                     height(600.px)
                     overflow(Overflow.Auto)
 
@@ -974,21 +1033,21 @@ class App : Application() {
                     item("First slide", "First slide label") {
                         div("d-block w-100") {
                             height(200.px)
-                            background(Background(color = Color.Red))
+                            background(Color.Red)
                             pt("Nulla vitae elit libero, a pharetra augue mollis interdum.")
                         }
                     }
                     item("Second slide", "Second slide label") {
                         div("d-block w-100") {
                             height(200.px)
-                            background(Background(color = Color.Green))
+                            background(Color.Green)
                             pt("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
                         }
                     }
                     item("Third slide", "Third slide label") {
                         div("d-block w-100") {
                             height(200.px)
-                            background(Background(color = Color.Blue))
+                            background(Color.Blue)
                             pt("Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
                         }
                     }
@@ -1046,7 +1105,7 @@ class App : Application() {
                 var modalCaption by remember { mutableStateOf("Test") }
 
                 if (modalCaption == "Test2") {
-                    style(modalCaption) {
+                    globalStyle(modalCaption) {
                         margin = 20.px
                     }
                 }
@@ -1234,19 +1293,19 @@ class App : Application() {
 
                 val i by rangeRef(0, 1, 255).collectAsState()
 
-                val className = style(".test") {
+                val className = globalStyle(".test") {
                     console.log("recompose 1")
-                    background = Background(color = Color.rgb(i?.toInt() ?: 0, 0, 0))
+                    background(Color.rgb(i?.toInt() ?: 0, 0, 0))
                     style("h1", PClass.Hover) {
-                        color = Color.Green
+                        color(Color.Green)
                     }
                     style("h1") {
                         style("div") {
-                            color = Color.Blue
+                            color(Color.Blue)
                         }
                     }
                     style("input", PClass.Focus) {
-                        border = Border(1.px, BorderStyle.Solid, Color.Red)
+                        border(1.px, BorderStyle.Solid, Color.Red)
                     }
                 }
 
