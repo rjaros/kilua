@@ -29,72 +29,23 @@ import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.toKebabCase
 
-
-/**
- * CSS pseudo classes.
- */
-public enum class PClass {
-    Active,
-    Checked,
-    Disabled,
-    Empty,
-    Enabled,
-    FirstChild,
-    FirstOfType,
-    Focus,
-    Hover,
-    InRange,
-    Invalid,
-    LastChild,
-    LastOfType,
-    Link,
-    OnlyOfType,
-    OnlyChild,
-    Optional,
-    OutOfRange,
-    ReadOnly,
-    ReadWrite,
-    Required,
-    Root,
-    Target,
-    Valid,
-    Visited;
-
-    public val value: String = name.toKebabCase()
-    override fun toString(): String = value
-}
-
-/**
- * CSS pseudo elements.
- */
-public enum class PElement {
-    After,
-    Before,
-    FirstLetter,
-    FirstLine,
-    Marker,
-    Selection;
-
-    public val value: String = name.toKebabCase()
-    override fun toString(): String = value
-}
-
 /**
  * Internal container for CSS style parameters.
  */
 internal data class StyleParams(
     val selector: String,
-    val pClass: PClass? = null,
-    val pElement: PElement? = null,
+    val pClass: String? = null,
+    val pElement: String? = null,
     val mediaQuery: String? = null,
     val styles: Map<String, Any> = emptyMap(),
-    val parentStyle: StyleParams? = null
+    val parentStyle: StyleParams? = null,
+    val forParent: Boolean = false
 ) {
     private fun getStyleDeclaration(): String {
         val pseudoElementName = pElement?.let { "::$it" } ?: ""
         val pseudoClassName = pClass?.let { ":$it" } ?: ""
         val fullSelector = "$selector$pseudoElementName$pseudoClassName"
-        return (parentStyle?.let { it.getStyleDeclaration() + " " } ?: "") + fullSelector
+        return (parentStyle?.let { it.getStyleDeclaration() + if (!forParent) " " else "" } ?: "") + fullSelector
     }
 
     fun renderAsCss(): String {

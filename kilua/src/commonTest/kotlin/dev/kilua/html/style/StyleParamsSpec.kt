@@ -34,7 +34,7 @@ class StyleParamsSpec : DomSpec {
     fun render() {
         run {
             root("test") {
-                style(
+                globalStyle(
                     ".test",
                     PClass.Hover,
                     PElement.FirstLetter,

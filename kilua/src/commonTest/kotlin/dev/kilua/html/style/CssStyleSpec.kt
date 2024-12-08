@@ -36,7 +36,7 @@ class CssStyleSpec : DomSpec {
         run {
             lateinit var className: String
             root("test") {
-                className = style(".test") {
+                className = globalStyle(".test") {
                     margin = 10.px
                     style("h1") {
                         color = Color.Red
