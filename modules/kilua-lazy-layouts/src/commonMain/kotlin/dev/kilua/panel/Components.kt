@@ -20,7 +20,6 @@ package dev.kilua.panel
 import androidx.compose.runtime.Composable
 import dev.kilua.core.IComponent
 import dev.kilua.html.Display
-import dev.kilua.html.Div
 import dev.kilua.html.FlexDirection
 import dev.kilua.html.IDiv
 import dev.kilua.html.div
@@ -56,7 +55,7 @@ import dev.kilua.html.div
  */
 @Composable
 public fun IComponent.lazyColumn(
-    setup: IDiv.() -> Unit = {},
+    setup: @Composable IDiv.() -> Unit = {},
     block: LazyDsl.() -> Unit,
 ) {
     div {
@@ -77,7 +76,7 @@ public fun IComponent.lazyColumn(
  */
 @Composable
 public fun IComponent.lazyRow(
-    setup: IDiv.() -> Unit = {},
+    setup: @Composable IDiv.() -> Unit = {},
     block: LazyDsl.() -> Unit,
 ) {
     div {
