@@ -28,8 +28,8 @@ import dev.kilua.core.SafeDomFactory
 import dev.kilua.externals.console
 import dev.kilua.externals.obj
 import dev.kilua.html.div
+import dev.kilua.html.px
 import dev.kilua.utils.toList
-import web.document
 import web.dom.observers.IntersectionObserver
 import kotlin.random.Random
 import kotlin.random.nextUInt
@@ -64,5 +64,10 @@ internal fun IComponent.visibilityDetector(onVisible: () -> Unit) {
         }
     }
 
-    div(id = id)
+    div(id = id) {
+        div {
+            width(10.px)
+            height(10.px)
+        }
+    }
 }
