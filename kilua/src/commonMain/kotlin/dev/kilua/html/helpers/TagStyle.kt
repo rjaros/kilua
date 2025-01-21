@@ -417,6 +417,11 @@ public interface TagStyle<E : HTMLElement>: TagStyleFun<E> {
     public override var gridTemplateAreas: List<String>?
 
     /**
+     * CSS grid template.
+     */
+    public override var gridTemplate: String?
+
+    /**
      * CSS grid/flex column gap.
      */
     public override var columnGap: CssSize?
@@ -429,12 +434,12 @@ public interface TagStyle<E : HTMLElement>: TagStyleFun<E> {
     /**
      * CSS grid column start.
      */
-    public override var gridColumnStart: Int?
+    public override var gridColumnStart: String?
 
     /**
      * CSS grid row start.
      */
-    public override var gridRowStart: Int?
+    public override var gridRowStart: String?
 
     /**
      * CSS grid column end.
@@ -445,6 +450,16 @@ public interface TagStyle<E : HTMLElement>: TagStyleFun<E> {
      * CSS grid row end.
      */
     public override var gridRowEnd: String?
+
+    /**
+     * CSS grid column.
+     */
+    public override var gridColumn: String?
+
+    /**
+     * CSS grid row.
+     */
+    public override var gridRow: String?
 
     /**
      * CSS grid area.

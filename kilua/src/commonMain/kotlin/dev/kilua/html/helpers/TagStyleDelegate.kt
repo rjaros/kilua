@@ -1220,6 +1220,22 @@ public open class TagStyleDelegateImpl<E : HTMLElement>(
         this.gridTemplateAreas = gridTemplateAreas
     }
 
+
+    override var gridTemplate: String? by updatingProperty {
+        if (it != null) {
+            element.style.setProperty("grid-template", it)
+        } else {
+            element.style.removeProperty("grid-template")
+        }
+    }
+
+    @Composable
+    override fun gridTemplate(gridTemplate: String?): Unit = composableProperty("gridTemplate", {
+        this.gridTemplate = null
+    }) {
+        this.gridTemplate = gridTemplate
+    }
+
     override var columnGap: CssSize? by updatingProperty {
         if (it != null) {
             element.style.setProperty("column-gap", it.toString())
@@ -1250,31 +1266,31 @@ public open class TagStyleDelegateImpl<E : HTMLElement>(
         this.rowGap = rowGap
     }
 
-    override var gridColumnStart: Int? by updatingProperty {
+    override var gridColumnStart: String? by updatingProperty {
         if (it != null) {
-            element.style.setProperty("grid-column-start", it.toString())
+            element.style.setProperty("grid-column-start", it)
         } else {
             element.style.removeProperty("grid-column-start")
         }
     }
 
     @Composable
-    override fun gridColumnStart(gridColumnStart: Int?): Unit = composableProperty("gridColumnStart", {
+    override fun gridColumnStart(gridColumnStart: String?): Unit = composableProperty("gridColumnStart", {
         this.gridColumnStart = null
     }) {
         this.gridColumnStart = gridColumnStart
     }
 
-    override var gridRowStart: Int? by updatingProperty {
+    override var gridRowStart: String? by updatingProperty {
         if (it != null) {
-            element.style.setProperty("grid-row-start", it.toString())
+            element.style.setProperty("grid-row-start", it)
         } else {
             element.style.removeProperty("grid-row-start")
         }
     }
 
     @Composable
-    override fun gridRowStart(gridRowStart: Int?): Unit = composableProperty("gridRowStart", {
+    override fun gridRowStart(gridRowStart: String?): Unit = composableProperty("gridRowStart", {
         this.gridRowStart = null
     }) {
         this.gridRowStart = gridRowStart
@@ -1308,6 +1324,37 @@ public open class TagStyleDelegateImpl<E : HTMLElement>(
         this.gridRowEnd = null
     }) {
         this.gridRowEnd = gridRowEnd
+    }
+
+
+    override var gridColumn: String? by updatingProperty {
+        if (it != null) {
+            element.style.setProperty("grid-column", it)
+        } else {
+            element.style.removeProperty("grid-column")
+        }
+    }
+
+    @Composable
+    override fun gridColumn(gridColumn: String?): Unit = composableProperty("gridColumn", {
+        this.gridColumn = null
+    }) {
+        this.gridColumn = gridColumn
+    }
+
+    override var gridRow: String? by updatingProperty {
+        if (it != null) {
+            element.style.setProperty("grid-row", it)
+        } else {
+            element.style.removeProperty("grid-row")
+        }
+    }
+
+    @Composable
+    override fun gridRow(gridRow: String?): Unit = composableProperty("gridRow", {
+        this.gridRow = null
+    }) {
+        this.gridRow = gridRow
     }
 
     override var gridArea: String? by updatingProperty {

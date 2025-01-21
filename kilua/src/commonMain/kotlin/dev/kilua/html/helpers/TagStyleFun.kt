@@ -880,6 +880,17 @@ public interface TagStyleFun<E : HTMLElement> {
     public fun gridTemplateAreas(gridTemplateAreas: List<String>?)
 
     /**
+     * CSS grid template.
+     */
+    public val gridTemplate: String?
+
+    /**
+     * Set the CSS grid template.
+     */
+    @Composable
+    public fun gridTemplate(gridTemplate: String?)
+
+    /**
      * CSS grid/flex column gap.
      */
     public val columnGap: CssSize?
@@ -904,24 +915,24 @@ public interface TagStyleFun<E : HTMLElement> {
     /**
      * CSS grid column start.
      */
-    public val gridColumnStart: Int?
+    public val gridColumnStart: String?
 
     /**
      * Set the CSS grid column start.
      */
     @Composable
-    public fun gridColumnStart(gridColumnStart: Int?)
+    public fun gridColumnStart(gridColumnStart: String?)
 
     /**
      * CSS grid row start.
      */
-    public val gridRowStart: Int?
+    public val gridRowStart: String?
 
     /**
      * Set the CSS grid row start.
      */
     @Composable
-    public fun gridRowStart(gridRowStart: Int?)
+    public fun gridRowStart(gridRowStart: String?)
 
     /**
      * CSS grid column end.
@@ -944,6 +955,28 @@ public interface TagStyleFun<E : HTMLElement> {
      */
     @Composable
     public fun gridRowEnd(gridRowEnd: String?)
+
+    /**
+     * CSS grid column.
+     */
+    public val gridColumn: String?
+
+    /**
+     * Set the CSS grid column.
+     */
+    @Composable
+    public fun gridColumn(gridColumn: String?)
+
+    /**
+     * CSS grid row.
+     */
+    public val gridRow: String?
+
+    /**
+     * Set the CSS grid row.
+     */
+    @Composable
+    public fun gridRow(gridRow: String?)
 
     /**
      * CSS grid area.
