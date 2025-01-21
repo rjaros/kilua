@@ -453,7 +453,7 @@ public abstract class AbstractRichDateTime(
     /**
      * Automatically open the chooser popup.
      */
-    public override var allowInputToggle: Boolean by updatingProperty(true) {
+    public override var allowInputToggle: Boolean by updatingProperty(false) {
         refresh()
     }
 
@@ -462,7 +462,7 @@ public abstract class AbstractRichDateTime(
      */
     @Composable
     public override fun allowInputToggle(allowInputToggle: Boolean): Unit = composableProperty("allowInputToggle", {
-        this.allowInputToggle = true
+        this.allowInputToggle = false
     }) {
         this.allowInputToggle = allowInputToggle
     }
