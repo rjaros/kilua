@@ -740,6 +740,27 @@ public abstract class AbstractRichDateTime(
         }
     }
 
+    /**
+     * Shows the popup.
+     */
+    public fun showPopup() {
+        tempusDominusInstance?.show()
+    }
+
+    /**
+     * Hides the popup.
+     */
+    public fun hidePopup() {
+        tempusDominusInstance?.hide()
+    }
+
+    /**
+     * Toggles the popup.
+     */
+    public fun togglePopup() {
+        tempusDominusInstance?.toggle()
+    }
+
     public companion object {
 
         /**
@@ -774,6 +795,7 @@ internal fun IDiv.commonRichDateTime(
     inline: Boolean,
     icon: String,
     inputClassName: String?,
+    onBlurCallback: () -> Unit,
 ) {
     attribute("data-td-target-input", "nearest")
     attribute("data-td-target-toggle", "nearest")
@@ -789,6 +811,9 @@ internal fun IDiv.commonRichDateTime(
         attribute("data-td-target", "#$bindId")
         onChange {
             it.stopPropagation()
+        }
+        onBlur {
+            onBlurCallback()
         }
     }
     span("input-group-text") {

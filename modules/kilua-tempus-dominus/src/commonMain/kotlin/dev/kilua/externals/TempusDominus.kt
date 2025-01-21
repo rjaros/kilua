@@ -122,11 +122,10 @@ public external class TempusDominus(element: HTMLElement, options: TempusDominus
 
     public var dates: TempusDominusDates
 
-    /** These methods don't work
     public fun toggle()
     public fun show()
     public fun hide()
-     **/
+
     public fun disable()
     public fun enable()
     public fun clear()

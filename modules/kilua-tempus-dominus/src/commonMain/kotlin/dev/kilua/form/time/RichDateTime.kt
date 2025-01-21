@@ -260,7 +260,9 @@ public fun IComponent.richDateTimeRef(
             inline,
             calendarIcon,
             inputClassName
-        )
+        ) {
+            tempusDominusInstance?.hide()
+        }
         setup()
     }
 }
@@ -317,7 +319,9 @@ public fun IComponent.richDateTime(
             inline,
             calendarIcon,
             inputClassName
-        )
+        ) {
+            tempusDominusInstance?.hide()
+        }
         setup()
     }
 }
