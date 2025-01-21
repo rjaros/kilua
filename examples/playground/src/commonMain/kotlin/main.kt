@@ -111,15 +111,24 @@ import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.JsModule
+import dev.kilua.LocalResource
 import dev.kilua.form.formRef
 import dev.kilua.form.number.range
 import dev.kilua.form.select.select
 import dev.kilua.html.helpers.TagStyleFun.Companion.background
 import dev.kilua.html.helpers.TagStyleFun.Companion.border
+import dev.kilua.html.helpers.TagStyleFun.Companion.textDecoration
+import dev.kilua.html.helpers.TagStyleFun.Companion.textShadow
+import dev.kilua.html.helpers.TagStyleFun.Companion.boxShadow
 import dev.kilua.html.style.pClass
 import dev.kilua.html.style.pElement
 import dev.kilua.modal.alert
 import dev.kilua.modal.modal
+import dev.kilua.panel.Dir
+import dev.kilua.panel.flexPanel
+import dev.kilua.panel.gridPanel
+import dev.kilua.panel.hPanel
+import dev.kilua.panel.lazyRow
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsObjectOf
@@ -150,6 +159,9 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextUInt
 import kotlin.time.Duration.Companion.seconds
+
+@JsModule("./modules/json/test.json")
+external object testJson : LocalResource
 
 @JsModule("./modules/i18n/messages-de.po")
 external object messagesDe : JsAny
@@ -209,6 +221,8 @@ class App : Application() {
 
     override fun start() {
 
+        console.log(testJson.content["test"])
+
         ThemeManager.init()
 
         root("root") {
@@ -216,6 +230,118 @@ class App : Application() {
             div {
 
                 margin(20.px)
+                splitPanel {
+                    width(300.px)
+                    height(300.px)
+                    left {
+                        width(50.perc)
+                        pt("First panel")
+                    }
+                    right {
+                        width(50.perc)
+                        pt("Second panel")
+                    }
+                }
+                splitPanel(dir = Dir.Horizontal) {
+                    width(300.px)
+                    height(300.px)
+                    top {
+                        height(50.perc)
+                        pt("First panel")
+                    }
+                    bottom {
+                        height(50.perc)
+                        pt("Second panel")
+                    }
+                }
+
+                gridPanel(columnGap = 5.px, rowGap = 5.px, justifyItems = JustifyItems.Center) {
+                    div {
+                        gridRow("1")
+                        gridColumn("1")
+                        +"Component 1, 1"
+                    }
+                    div {
+                        gridArea("1 / 2")
+                        +"Component 1, 2"
+                    }
+                    div {
+                        gridArea("2 / 1")
+                        +"Component 2, 1"
+                    }
+                    div {
+                        gridArea("auto")
+                        +"Component 2, 2"
+                    }
+                }
+
+                flexPanel(
+                    FlexDirection.Row,
+                    FlexWrap.Wrap,
+                    JustifyContent.FlexStart,
+                    AlignItems.Center,
+                    columnGap = 10.px
+                ) {
+                    div {
+                        order(3)
+                        flexGrow(2)
+                        +"1"
+                    }
+                    div {
+                        order(1)
+                        +"2"
+                    }
+                    div {
+                        order(2)
+                        +"3"
+                    }
+                }
+                hPanel(gap = 5.px) {
+                    div {
+                        +"Component 1"
+                    }
+                    div {
+                        +"Component 2"
+                    }
+                    div {
+                        +"Component 3"
+                    }
+                }
+                vPanel(gap = 5.px) {
+                    div {
+                        +"Component 1"
+                    }
+                    div {
+                        +"Component 2"
+                    }
+                    div {
+                        +"Component 3"
+                    }
+                }
+
+                div {
+                    border(1.px, style = BorderStyle.Solid, color = Color.Red)
+                    height(100.px)
+                    width(600.px)
+                    overflowY(Overflow.Hidden)
+                    overflowX(Overflow.Auto)
+                    lazyRow({
+                        height(100.px)
+                        columnGap(2.px)
+                        alignItems(AlignItems.Center)
+                    }) {
+                        items(200) {
+                            div {
+                                width(30.px)
+                                height(30.px)
+                                border(1.px, BorderStyle.Solid, Color.Black)
+                                +"$it"
+                            }
+                        }
+                    }
+                }
+
+                hr()
 
                 var apply by remember { mutableStateOf(true) }
 
@@ -720,31 +846,31 @@ class App : Application() {
                     emptyOption(true)
                     tsCallbacks(
                         TomSelectCallbacks(
-                        load = { query, callback ->
-                            promise {
-                                val result = try {
-                                    restClient.callDynamic("https://api.github.com/search/repositories") {
-                                        data = jsObjectOf("q" to query)
-                                        resultTransform = { it?.get("items") }
+                            load = { query, callback ->
+                                promise {
+                                    val result = try {
+                                        restClient.callDynamic("https://api.github.com/search/repositories") {
+                                            data = jsObjectOf("q" to query)
+                                            resultTransform = { it?.get("items") }
+                                        }
+                                    } catch (e: RemoteRequestException) {
+                                        console.log(e.toString())
+                                        null
                                     }
-                                } catch (e: RemoteRequestException) {
-                                    console.log(e.toString())
-                                    null
+                                    result?.let { items: JsAny ->
+                                        callback(items.unsafeCast<JsArray<JsAny>>().toList().map { item ->
+                                            jsObjectOf(
+                                                "value" to item["id"]!!,
+                                                "text" to item["name"]!!,
+                                                "subtext" to item["owner"]!!["login"]!!
+                                            )
+                                        }.toJsArray())
+                                    } ?: callback(jsArrayOf())
+                                    obj()
                                 }
-                                result?.let { items: JsAny ->
-                                    callback(items.unsafeCast<JsArray<JsAny>>().toList().map { item ->
-                                        jsObjectOf(
-                                            "value" to item["id"]!!,
-                                            "text" to item["name"]!!,
-                                            "subtext" to item["owner"]!!["login"]!!
-                                        )
-                                    }.toJsArray())
-                                } ?: callback(jsArrayOf())
-                                obj()
-                            }
-                        },
-                        shouldLoad = { it.length >= 3 }
-                    ))
+                            },
+                            shouldLoad = { it.length >= 3 }
+                        ))
                     tsRenders(TomSelectRenders(option = { item, escape ->
                         val subtext: String? = item["subtext"]?.toString()
                         """
