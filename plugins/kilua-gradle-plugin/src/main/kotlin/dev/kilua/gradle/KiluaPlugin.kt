@@ -225,9 +225,6 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     from(wasmJsProcessResources)
                     exclude("/tailwind/**")
                     from("build/kotlin-webpack/wasmJs.ssr/productionExecutable")
-                    from("build/compileSync/wasmJs/main/productionExecutable/optimized") {
-                        include { it.name.endsWith(".wasm") }
-                    }
                     into("build/dist/wasmJs.ssr/productionExecutable")
                 }
                 tasks.register<Jar>("wasmJsArchiveSSR") {
