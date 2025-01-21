@@ -46,4 +46,7 @@ public inline fun <T> useModule(@Suppress("UNUSED_PARAMETER") module: T) {
 public open external class LocalResource : JsAny {
     @JsName("default")
     public val url: String
+
+    @JsName("default")
+    public val content: JsAny
 }
