@@ -3,19 +3,26 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPom
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
+import org.gradle.api.tasks.TaskProvider
+import org.gradle.api.tasks.bundling.Jar
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.project
+import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
+import org.jetbrains.dokka.gradle.DokkaExtension
+import org.jetbrains.dokka.gradle.tasks.DokkaBaseTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import java.net.URI
 
 fun KotlinMultiplatformExtension.compilerOptions() {
     targets.configureEach {
@@ -101,11 +108,11 @@ fun Project.setupKsp() {
         kotlin.srcDir("${layout.buildDirectory.asFile.get()}/generated/ksp/metadata/commonMain/kotlin")
     }
 
-    tasks.getByName("dokkaHtml") {
+    tasks.getByName("dokkaGenerateModuleHtml") {
         dependsOn("kspCommonMainKotlinMetadata")
     }
 
-    tasks.getByName("dokkaHtmlPartial") {
+    tasks.getByName("dokkaGeneratePublicationHtml") {
         dependsOn("kspCommonMainKotlinMetadata")
     }
 
@@ -123,8 +130,8 @@ fun Project.setupKsp() {
 
     tasks.withType<KotlinCompilationTask<*>>()
         .matching { it.name == "compileKotlinJs" || it.name == "compileKotlinWasmJs" }.configureEach {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
+            dependsOn("kspCommonMainKotlinMetadata")
+        }
 }
 
 const val kiluaProjectName = "Kilua"
@@ -177,5 +184,28 @@ fun Project.setupPublishing() {
     tasks.withType<AbstractPublishToMaven>().configureEach {
         val signingTasks = tasks.withType<Sign>()
         mustRunAfter(signingTasks)
+    }
+}
+
+fun Project.setupDokka(provider: TaskProvider<DokkaBaseTask>, path: String = "modules/") {
+    tasks.register<Jar>("javadocJar") {
+        dependsOn(provider)
+        from(provider.map { it.outputs })
+        archiveClassifier.set("javadoc")
+    }
+
+    extensions.getByType<DokkaExtension>().run {
+        dokkaSourceSets.invoke {
+            configureEach {
+                sourceLink {
+                    localDirectory.set(projectDir.resolve("src"))
+                    remoteUrl.set(URI("https://github.com/rjaros/kilua/tree/main/$path${project.name}/src"))
+                    remoteLineSuffix.set("#L")
+                }
+            }
+        }
+        dokkaGeneratorIsolation.set(ProcessIsolation {
+            maxHeapSize.set("8g")
+        })
     }
 }

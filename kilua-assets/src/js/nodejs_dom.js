@@ -34,6 +34,7 @@ if (typeof process !== 'undefined') {
         kilua: true,
         documentElement: new Element(),
         head: new Element(),
+        nodeType: 9,
         createElement: function(name) {
             return new Element()
         },
@@ -42,7 +43,10 @@ if (typeof process !== 'undefined') {
     globalThis.window = {
         document: globalThis.document,
         addEventListener(name, callback) {},
-        setTimeout: globalThis.setTimeout
+        setTimeout: globalThis.setTimeout,
+        Element: {
+            prototype: null
+        }
     }
     globalThis.customElements = {
         get: function (name) {},

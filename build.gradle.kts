@@ -7,8 +7,8 @@ plugins {
     alias(libs.plugins.npm.publish) apply false
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.dokka)
     alias(libs.plugins.nmcp)
+    id("org.jetbrains.dokka")
     id("maven-publish")
 }
 
@@ -66,6 +66,7 @@ nmcp {
         project(":modules:kilua-fontawesome")
         project(":modules:kilua-i18n")
         project(":modules:kilua-imask")
+        project(":modules:kilua-jetpack")
         project(":modules:kilua-lazy-layouts")
         project(":modules:kilua-marked")
         project(":modules:kilua-rest")
@@ -98,4 +99,44 @@ nmcp {
         password = findProperty("mavenCentralPassword")?.toString()
         publicationType = "USER_MANAGED"
     }
+}
+
+dependencies {
+    dokka(project(":kilua"))
+    dokka(project(":modules:kilua-annotations"))
+    dokka(project(":modules:kilua-bootstrap"))
+    dokka(project(":modules:kilua-bootstrap-icons"))
+    dokka(project(":modules:kilua-common-types"))
+    dokka(project(":modules:kilua-core-modules"))
+    dokka(project(":modules:kilua-dom"))
+    dokka(project(":modules:kilua-fontawesome"))
+    dokka(project(":modules:kilua-i18n"))
+    dokka(project(":modules:kilua-imask"))
+    dokka(project(":modules:kilua-jetpack"))
+    dokka(project(":modules:kilua-lazy-layouts"))
+    dokka(project(":modules:kilua-marked"))
+    dokka(project(":modules:kilua-rest"))
+    dokka(project(":modules:kilua-routing"))
+    dokka(project(":modules:kilua-rsup-progress"))
+    dokka(project(":modules:kilua-sanitize-html"))
+    dokka(project(":modules:kilua-select-remote"))
+    dokka(project(":modules:kilua-splitjs"))
+    dokka(project(":modules:kilua-ssr"))
+    dokka(project(":modules:kilua-ssr-server"))
+    dokka(project(":modules:kilua-ssr-server-javalin"))
+    dokka(project(":modules:kilua-ssr-server-jooby"))
+    dokka(project(":modules:kilua-ssr-server-ktor"))
+    dokka(project(":modules:kilua-ssr-server-micronaut"))
+    dokka(project(":modules:kilua-ssr-server-spring-boot"))
+    dokka(project(":modules:kilua-ssr-server-vertx"))
+    dokka(project(":modules:kilua-svg"))
+    dokka(project(":modules:kilua-tabulator"))
+    dokka(project(":modules:kilua-tabulator-remote"))
+    dokka(project(":modules:kilua-tailwindcss"))
+    dokka(project(":modules:kilua-tempus-dominus"))
+    dokka(project(":modules:kilua-testutils"))
+    dokka(project(":modules:kilua-toastify"))
+    dokka(project(":modules:kilua-tom-select"))
+    dokka(project(":modules:kilua-tom-select-remote"))
+    dokka(project(":modules:kilua-trix"))
 }

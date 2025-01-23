@@ -1,8 +1,8 @@
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.detekt)
-    alias(libs.plugins.dokka)
     alias(libs.plugins.nmcp)
+    id("org.jetbrains.dokka")
     id("maven-publish")
     id("signing")
 }
@@ -45,12 +45,7 @@ kotlin {
     }
 }
 
-tasks.register<Jar>("javadocJar") {
-    dependsOn(tasks.dokkaHtml)
-    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
-    archiveClassifier.set("javadoc")
-}
-
+setupDokka(tasks.dokkaGenerate)
 setupPublishing()
 
 nmcp {
