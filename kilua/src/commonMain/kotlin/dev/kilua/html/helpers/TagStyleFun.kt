@@ -110,6 +110,17 @@ public interface TagStyleFun<E : HTMLElement> {
     public fun display(display: Display?)
 
     /**
+     * CSS visibility of the current component.
+     */
+    public val visibility: Visibility?
+
+    /**
+     * Set the CSS visibility of the current component.
+     */
+    @Composable
+    public fun visibility(visibility: Visibility?)
+
+    /**
      * CSS position of the current component.
      */
     public val position: Position?

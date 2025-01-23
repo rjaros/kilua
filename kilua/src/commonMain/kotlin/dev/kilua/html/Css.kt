@@ -170,6 +170,19 @@ public enum class Display {
 }
 
 /**
+ * Definitions of CSS visibility options.
+ */
+public enum class Visibility {
+    Visible,
+    Hidden,
+    Collapse;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String = value
+
+}
+
+/**
  * Definitions of CSS position options.
  */
 public enum class Position {

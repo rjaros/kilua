@@ -167,6 +167,21 @@ public open class TagStyleDelegateImpl<E : HTMLElement>(
         this.display = display
     }
 
+    override var visibility: Visibility? by updatingProperty {
+        if (it != null) {
+            element.style.visibility = it.value
+        } else {
+            element.style.removeProperty("visibility")
+        }
+    }
+
+    @Composable
+    override fun visibility(visibility: Visibility?): Unit = composableProperty("visibility", {
+        this.visibility = null
+    }) {
+        this.visibility = visibility
+    }
+
     override var position: Position? by updatingProperty {
         if (it != null) {
             element.style.position = it.value

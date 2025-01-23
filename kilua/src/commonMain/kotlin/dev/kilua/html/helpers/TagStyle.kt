@@ -67,6 +67,11 @@ public interface TagStyle<E : HTMLElement>: TagStyleFun<E> {
     public override var display: Display?
 
     /**
+     * CSS visibility of the current component.
+     */
+    public override var visibility: Visibility?
+
+    /**
      * CSS position of the current component.
      */
     public override var position: Position?
