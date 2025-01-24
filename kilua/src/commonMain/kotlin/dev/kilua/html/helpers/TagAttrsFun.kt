@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import web.dom.HTMLElement
 
 /**
- * Common tag attributes.
+ * Common tag immutable attributes.
  */
 public interface TagAttrsFun {
     /**

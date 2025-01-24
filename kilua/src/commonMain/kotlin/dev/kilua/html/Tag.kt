@@ -42,7 +42,7 @@ import web.dom.HTMLElement
 /**
  * Base interface for all HTML tags components.
  */
-public interface ITag<E : HTMLElement> : IComponent, TagAttrsFun, TagStyleFun, TagEvents, TagDnd {
+public interface ITag<E : HTMLElement> : IComponent, TagBaseFun, TagAttrsFun, TagStyleFun, TagEvents, TagDnd {
     /**
      * The render configuration of the current component.
      */
@@ -52,28 +52,6 @@ public interface ITag<E : HTMLElement> : IComponent, TagAttrsFun, TagStyleFun, T
      * The DOM element of the current component.
      */
     public val element: E
-
-    /**
-     * The CSS class of the current component.
-     */
-    public val className: String?
-
-    /**
-     * The CSS class of the current component.
-     */
-    @Composable
-    public fun className(className: String?)
-
-    /**
-     * The ID attribute of the current component.
-     */
-    public val id: String?
-
-    /**
-     * The ID attribute of the current component.
-     */
-    @Composable
-    public fun id(id: String?)
 
     /**
      * Makes the element focused.

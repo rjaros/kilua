@@ -23,7 +23,6 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import web.dom.HTMLElement
 import web.dom.events.Event
 import web.dom.events.FocusEvent
 import web.dom.events.InputEvent

@@ -27,7 +27,7 @@ import androidx.compose.runtime.Composable
 import dev.kilua.html.*
 
 /**
- * Common tag CSS styles.
+ * Common tag immutable CSS styles.
  */
 public interface TagStyleFun {
 
