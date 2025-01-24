@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.jetpack
+package dev.kilua.compose.ui
 
 import dev.kilua.html.*
 
@@ -892,4 +892,105 @@ public fun Modifier.listStyle(
     } else {
         listStyle(null)
     }
+}
+
+/**
+ * Set the width of the current component to given (by default maximum) value.
+ */
+public fun Modifier.fillMaxWidth(fraction: Float = 1.0f) = styleModifier {
+    width((100 * fraction).perc)
+}
+
+/**
+ * Set the height of the current component to given (by default maximum) value.
+ */
+public fun Modifier.fillMaxHeight(fraction: Float = 1.0f) = styleModifier {
+    height((100 * fraction).perc)
+}
+
+/**
+ * Set the size (both width and height) of the current component to given (by default minimum) value.
+ */
+public fun Modifier.fillMaxSize(fraction: Float = 1.0f) = styleModifier {
+    width((100 * fraction).perc)
+    height((100 * fraction).perc)
+}
+
+/**
+ * Set the size (both width and height) of the current component.
+ */
+public fun Modifier.size(size: CssSize?) = styleModifier {
+    width(size)
+    height(size)
+}
+
+/**
+ * Set the size (both width and height) of the current component.
+ */
+public fun Modifier.size(width: CssSize?, height: CssSize?) = styleModifier {
+    width(width)
+    height(height)
+}
+
+/**
+ * Set the minimal size (both width and height) of the current component.
+ */
+public fun Modifier.minSize(size: CssSize?) = styleModifier {
+    minWidth(size)
+    minHeight(size)
+}
+
+/**
+ * Set the minimal size (both width and height) of the current component.
+ */
+public fun Modifier.minSize(width: CssSize?, height: CssSize?) = styleModifier {
+    minWidth(width)
+    minHeight(height)
+}
+
+/**
+ * Set the maximal size (both width and height) of the current component.
+ */
+public fun Modifier.maxSize(size: CssSize?) = styleModifier {
+    maxWidth(size)
+    maxHeight(size)
+}
+
+/**
+ * Set the maximal size (both width and height) of the current component.
+ */
+public fun Modifier.maxSize(width: CssSize?, height: CssSize?) = styleModifier {
+    maxWidth(width)
+    maxHeight(height)
+}
+
+/**
+ * Constrain the width of the component to be between min and max.
+ */
+public fun Modifier.widthIn(min: CssSize? = null, max: CssSize? = null) = styleModifier {
+    min?.let { minWidth(it) }
+    max?.let { maxWidth(it) }
+}
+
+/**
+ * Constrain the height of the component to be between min and max.
+ */
+public fun Modifier.heightIn(min: CssSize? = null, max: CssSize? = null) = styleModifier {
+    min?.let { minHeight(it) }
+    max?.let { maxHeight(it) }
+}
+
+/**
+ * Constrain the size (both width and height) of the component to be between min and max.
+ */
+public fun Modifier.sizeIn(
+    minWidth: CssSize? = null,
+    minHeight: CssSize? = null,
+    maxWidth: CssSize? = null,
+    maxHeight: CssSize? = null
+) = styleModifier {
+    minWidth?.let { minWidth(it) }
+    minHeight?.let { minHeight(it) }
+    maxWidth?.let { maxWidth(it) }
+    maxHeight?.let { maxHeight(it) }
 }

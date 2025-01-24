@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.jetpack
+package dev.kilua.compose.ui
 
 /**
  * Set the CSS class of the current component.

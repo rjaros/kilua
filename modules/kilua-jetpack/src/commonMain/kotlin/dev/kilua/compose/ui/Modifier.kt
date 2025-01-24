@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.jetpack
+package dev.kilua.compose.ui
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.ITag
