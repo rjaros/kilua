@@ -29,12 +29,11 @@ import dev.kilua.externals.AbortController
 import dev.kilua.externals.buildAddEventListenerOptions
 import dev.kilua.utils.cast
 import dev.kilua.utils.nativeMapOf
+import web.document
 import web.dom.HTMLElement
-import web.dom.events.Event
-import web.dom.events.FocusEvent
-import web.dom.events.InputEvent
-import web.dom.events.KeyboardEvent
-import web.dom.events.MouseEvent
+import web.dom.TouchEvent
+import web.dom.events.*
+import web.dom.pointerevents.PointerEvent
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.set
@@ -169,6 +168,96 @@ public open class TagEventsDelegateImpl<E : HTMLElement>(
     }
 
     @Composable
+    override fun onTouchStart(listener: (TouchEvent) -> Unit): Int {
+        return onEvent(TOUCH_START, listener)
+    }
+
+    override fun onTouchStartDirect(listener: (TouchEvent) -> Unit): Int {
+        return onEventDirect(TOUCH_START, listener)
+    }
+
+    @Composable
+    override fun onTouchEnd(listener: (TouchEvent) -> Unit): Int {
+        return onEvent(TOUCH_END, listener)
+    }
+
+    override fun onTouchEndDirect(listener: (TouchEvent) -> Unit): Int {
+        return onEventDirect(TOUCH_END, listener)
+    }
+
+    @Composable
+    override fun onTouchCancel(listener: (TouchEvent) -> Unit): Int {
+        return onEvent(TOUCH_CANCEL, listener)
+    }
+
+    override fun onTouchCancelDirect(listener: (TouchEvent) -> Unit): Int {
+        return onEventDirect(TOUCH_CANCEL, listener)
+    }
+
+    @Composable
+    override fun onMouseDown(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_DOWN, listener)
+    }
+
+    override fun onMouseDownDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_DOWN, listener)
+    }
+
+    @Composable
+    override fun onMouseUp(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_UP, listener)
+    }
+
+    override fun onMouseUpDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_UP, listener)
+    }
+
+    @Composable
+    override fun onMouseLeave(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_LEAVE, listener)
+    }
+
+    override fun onMouseLeaveDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_LEAVE, listener)
+    }
+
+    @Composable
+    override fun onMouseOver(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_OVER, listener)
+    }
+
+    override fun onMouseOverDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_OVER, listener)
+    }
+
+    @Composable
+    override fun onMouseOut(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_OUT, listener)
+    }
+
+    override fun onMouseOutDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_OUT, listener)
+    }
+
+    @Composable
+    override fun onPointerDown(listener: (PointerEvent) -> Unit): Int {
+        return onEvent(POINTER_DOWN, listener)
+    }
+
+    override fun onPointerDownDirect(listener: (PointerEvent) -> Unit): Int {
+        return onEventDirect(POINTER_DOWN, listener)
+    }
+
+    @Composable
+    override fun onPointerUp(listener: (PointerEvent) -> Unit): Int {
+        return onEvent(POINTER_UP, listener)
+    }
+
+    override fun onPointerUpDirect(listener: (PointerEvent) -> Unit): Int {
+        return onEventDirect(POINTER_UP, listener)
+    }
+
+    @Composable
     override fun <E : Event> onEvent(name: String, listener: (E) -> Unit): Int {
         val id = remember { counter++ }
         onEventInternal(id, name, listener)
@@ -216,3 +305,23 @@ public open class TagEventsDelegateImpl<E : HTMLElement>(
         private var counter = 0
     }
 }
+
+@Composable
+public fun onGlobalPointerUp(callback: () -> Unit) {
+    DisposableEffect(Unit) {
+        val listener = { _: Event -> callback() }
+        document.addEventListener(POINTER_UP, listener)
+        onDispose { document.removeEventListener(POINTER_UP, listener) }
+    }
+}
+
+private const val TOUCH_START = "touchstart"
+private const val TOUCH_END = "touchend"
+private const val TOUCH_CANCEL = "touchcancel"
+private const val MOUSE_DOWN = "mousedown"
+private const val MOUSE_UP = "mouseup"
+private const val MOUSE_LEAVE = "mouseleave"
+private const val MOUSE_OVER = "mouseover"
+private const val MOUSE_OUT = "mouseout"
+private const val POINTER_DOWN = "pointerdown"
+private const val POINTER_UP = "pointerup"

@@ -23,11 +23,9 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import web.dom.events.Event
-import web.dom.events.FocusEvent
-import web.dom.events.InputEvent
-import web.dom.events.KeyboardEvent
-import web.dom.events.MouseEvent
+import web.dom.TouchEvent
+import web.dom.events.*
+import web.dom.pointerevents.PointerEvent
 
 /**
  * Common tag events.
@@ -143,6 +141,116 @@ public interface TagEvents {
      * Add key press event listener (not composable).
      */
     public fun onKeypressDirect(listener: (KeyboardEvent) -> Unit): Int
+
+    /**
+     * Add touch start event listener (composable).
+     */
+    @Composable
+    public fun onTouchStart(listener: (TouchEvent) -> Unit): Int
+
+    /**
+     * Add touch start event listener (not composable).
+     */
+    public fun onTouchStartDirect(listener: (TouchEvent) -> Unit): Int
+
+    /**
+     * Add touch end event listener (composable).
+     */
+    @Composable
+    public fun onTouchEnd(listener: (TouchEvent) -> Unit): Int
+
+    /**
+     * Add touch end event listener (not composable).
+     */
+    public fun onTouchEndDirect(listener: (TouchEvent) -> Unit): Int
+
+    /**
+     * Add touch cancel event listener (composable).
+     */
+    @Composable
+    public fun onTouchCancel(listener: (TouchEvent) -> Unit): Int
+
+    /**
+     * Add touch cancel event listener (not composable).
+     */
+    public fun onTouchCancelDirect(listener: (TouchEvent) -> Unit): Int
+
+    /**
+     * Add mouse down event listener (composable).
+     */
+    @Composable
+    public fun onMouseDown(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse down event listener (not composable).
+     */
+    public fun onMouseDownDirect(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse up event listener (composable).
+     */
+    @Composable
+    public fun onMouseUp(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse up event listener (not composable).
+     */
+    public fun onMouseUpDirect(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse leave event listener (composable).
+     */
+    @Composable
+    public fun onMouseLeave(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse leave event listener (not composable).
+     */
+    public fun onMouseLeaveDirect(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse over event listener (composable).
+     */
+    @Composable
+    public fun onMouseOver(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse over event listener (not composable).
+     */
+    public fun onMouseOverDirect(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse out event listener (composable).
+     */
+    @Composable
+    public fun onMouseOut(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse out event listener (not composable).
+     */
+    public fun onMouseOutDirect(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add pointer down event listener (composable).
+     */
+    @Composable
+    public fun onPointerDown(listener: (PointerEvent) -> Unit): Int
+
+    /**
+     * Add pointer down event listener (not composable).
+     */
+    public fun onPointerDownDirect(listener: (PointerEvent) -> Unit): Int
+
+    /**
+     * Add pointer up event listener (composable).
+     */
+    @Composable
+    public fun onPointerUp(listener: (PointerEvent) -> Unit): Int
+
+    /**
+     * Add pointer up event listener (not composable).
+     */
+    public fun onPointerUpDirect(listener: (PointerEvent) -> Unit): Int
 
     /**
      * Add event listener by event name (composable).
