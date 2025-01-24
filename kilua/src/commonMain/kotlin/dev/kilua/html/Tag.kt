@@ -42,7 +42,7 @@ import web.dom.HTMLElement
 /**
  * Base interface for all HTML tags components.
  */
-public interface ITag<E : HTMLElement> : IComponent, TagAttrsFun<E>, TagStyleFun<E>, TagEvents<E>, TagDnd<E> {
+public interface ITag<E : HTMLElement> : IComponent, TagAttrsFun, TagStyleFun, TagEvents, TagDnd {
     /**
      * The render configuration of the current component.
      */
@@ -84,6 +84,14 @@ public interface ITag<E : HTMLElement> : IComponent, TagAttrsFun<E>, TagStyleFun
      * Makes the element blur.
      */
     public fun blur()
+
+    /**
+     * Use the modifier for the current tag.
+     */
+    @Composable
+    public operator fun ModifierBase.unaryPlus() {
+        this.useOn(this@ITag)
+    }
 }
 
 /**
@@ -102,7 +110,7 @@ public open class Tag<E : HTMLElement>(
     protected val tagDnd: TagDndDelegate<E> = TagDndDelegateImpl(!renderConfig.isDom || !isDom)
 ) :
     ComponentBase(SafeDomFactory.createElement(tagName, namespace), renderConfig),
-    TagAttrs<E> by tagAttrs, TagStyle<E> by tagStyle, TagEvents<E> by tagEvents, TagDnd<E> by tagDnd, ITag<E> {
+    TagAttrs by tagAttrs, TagStyle by tagStyle, TagEvents by tagEvents, TagDnd by tagDnd, ITag<E> {
 
     /**
      * A list of properties rendered as html attributes for the current component.

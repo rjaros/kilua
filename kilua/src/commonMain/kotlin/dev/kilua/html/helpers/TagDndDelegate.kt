@@ -31,7 +31,7 @@ import web.dom.HTMLElement
 /**
  * Common drag and drop methods delegate.
  */
-public interface TagDndDelegate<E : HTMLElement> : TagDnd<E> {
+public interface TagDndDelegate<E : HTMLElement> : TagDnd {
     /**
      * Connects the delegate with the given Tag.
      */

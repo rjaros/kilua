@@ -29,7 +29,7 @@ import web.dom.HTMLElement
 /**
  * Common drag and drop methods.
  */
-public interface TagDnd<E : HTMLElement> {
+public interface TagDnd {
     /**
      * Sets D&D data for the current widget. It also makes it draggable.
      * @param format D&D data format

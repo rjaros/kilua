@@ -86,7 +86,7 @@ public enum class PElement {
  * An object with CSS properties.
  */
 public class CssStyle(internal val key: String, onSetCallback: ((Map<String, Any>) -> Unit)) :
-    TagStyle<HTMLStyleElement> by TagStyleDelegateImpl(true, onSetCallback)
+    TagStyle by TagStyleDelegateImpl<HTMLStyleElement>(true, onSetCallback)
 
 /**
  * Declares a global CSS rule and returns its selector.

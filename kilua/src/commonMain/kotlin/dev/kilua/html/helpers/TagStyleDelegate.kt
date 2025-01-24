@@ -29,7 +29,7 @@ import dev.kilua.html.*
 import dev.kilua.utils.cast
 import web.dom.HTMLElement
 
-public interface TagStyleDelegate<E : HTMLElement> : TagStyle<E> {
+public interface TagStyleDelegate<E : HTMLElement> : TagStyle {
     /**
      * The map of CSS styles.
      */

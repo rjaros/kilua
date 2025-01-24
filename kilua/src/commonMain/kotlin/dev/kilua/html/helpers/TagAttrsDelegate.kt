@@ -25,12 +25,11 @@ package dev.kilua.html.helpers
 import androidx.compose.runtime.Composable
 import dev.kilua.core.PropertyDelegate
 import web.dom.HTMLElement
-import kotlin.collections.set
 
 /**
  * Common tag attributes delegate.
  */
-public interface TagAttrsDelegate<E : HTMLElement> : TagAttrs<E> {
+public interface TagAttrsDelegate<E : HTMLElement> : TagAttrs {
 
     /**
      * The map of attributes.

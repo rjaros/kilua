@@ -25,12 +25,11 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.*
-import web.dom.HTMLElement
 
 /**
  * Common tag CSS styles.
  */
-public interface TagStyleFun<E : HTMLElement> {
+public interface TagStyleFun {
 
     /**
      * Width of the current component.
@@ -1109,7 +1108,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the border of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.border(
+        public fun TagStyleFun.border(
             width: CssSize? = null,
             style: BorderStyle? = null,
             color: Color? = null
@@ -1125,7 +1124,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the top border of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.borderTop(
+        public fun TagStyleFun.borderTop(
             width: CssSize? = null,
             style: BorderStyle? = null,
             color: Color? = null
@@ -1141,7 +1140,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the right border of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.borderRight(
+        public fun TagStyleFun.borderRight(
             width: CssSize? = null,
             style: BorderStyle? = null,
             color: Color? = null
@@ -1157,7 +1156,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the bottom border of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.borderBottom(
+        public fun TagStyleFun.borderBottom(
             width: CssSize? = null,
             style: BorderStyle? = null,
             color: Color? = null
@@ -1173,7 +1172,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the left border of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.borderLeft(
+        public fun TagStyleFun.borderLeft(
             width: CssSize? = null,
             style: BorderStyle? = null,
             color: Color? = null
@@ -1190,7 +1189,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the background of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.background(
+        public fun TagStyleFun.background(
             color: Color? = null, image: String? = null,
             positionX: CssSize? = null, positionY: CssSize? = null,
             sizeX: CssSize? = null, sizeY: CssSize? = null,
@@ -1225,7 +1224,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the CSS Text decoration of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.textDecoration(
+        public fun TagStyleFun.textDecoration(
             line: TextDecorationLine? = null, style: TextDecorationStyle? = null, color: Color? = null
         ) {
             if (line != null || style != null || color != null) {
@@ -1240,7 +1239,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the CSS Text shadow of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.textShadow(
+        public fun TagStyleFun.textShadow(
             hShadow: CssSize? = null, vShadow: CssSize? = null, blurRadius: CssSize? = null, color: Color? = null
         ) {
             if (hShadow != null || vShadow != null || blurRadius != null || color != null) {
@@ -1254,7 +1253,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the outline of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.outline(
+        public fun TagStyleFun.outline(
             width: CssSize? = null,
             style: OutlineStyle? = null,
             color: Color? = null
@@ -1270,7 +1269,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the box shadow of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.boxShadow(
+        public fun TagStyleFun.boxShadow(
             hOffset: CssSize? = null, vOffset: CssSize? = null,
             blurRadius: CssSize? = null, spreadRadius: CssSize? = null,
             color: Color? = null, inset: Boolean = false
@@ -1286,7 +1285,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the CSS transition effect for the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.transition(
+        public fun TagStyleFun.transition(
             property: String? = null, duration: Double? = null, timingFunction: String? = null, delay: Double? = null
         ) {
             if (property != null && duration != null) {
@@ -1300,7 +1299,7 @@ public interface TagStyleFun<E : HTMLElement> {
          * Set the list style of the current component.
          */
         @Composable
-        public fun <E : HTMLElement> TagStyleFun<E>.listStyle(
+        public fun TagStyleFun.listStyle(
             type: ListStyleType? = null, position: ListStylePosition? = null, image: String? = null
         ) {
             if (type != null || position != null || image != null) {

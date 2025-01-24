@@ -28,7 +28,7 @@ import web.dom.HTMLElement
 /**
  * Common tag attributes.
  */
-public interface TagAttrsFun<E : HTMLElement> {
+public interface TagAttrsFun {
     /**
      * The title attribute.
      */

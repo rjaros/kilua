@@ -24,12 +24,11 @@
 package dev.kilua.html.helpers
 
 import dev.kilua.html.*
-import web.dom.HTMLElement
 
 /**
  * Common tag CSS styles.
  */
-public interface TagStyle<E : HTMLElement>: TagStyleFun<E> {
+public interface TagStyle : TagStyleFun {
 
     /**
      * Width of the current component.

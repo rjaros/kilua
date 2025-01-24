@@ -42,7 +42,7 @@ import kotlin.collections.set
 /**
  * Common tag events delegate.
  */
-public interface TagEventsDelegate<E : HTMLElement> : TagEvents<E> {
+public interface TagEventsDelegate<E : HTMLElement> : TagEvents {
     /**
      * The map of events.
      */
