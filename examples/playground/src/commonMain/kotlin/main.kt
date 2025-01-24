@@ -34,7 +34,18 @@ import dev.kilua.Application
 import dev.kilua.JsModule
 import dev.kilua.KiluaScope
 import dev.kilua.LocalResource
+import dev.kilua.compose.foundation.layout.Arrangement
+import dev.kilua.compose.foundation.layout.Row
 import dev.kilua.compose.root
+import dev.kilua.compose.ui.Alignment
+import dev.kilua.compose.ui.Modifier
+import dev.kilua.compose.ui.border
+import dev.kilua.compose.ui.className
+import dev.kilua.compose.ui.clickable
+import dev.kilua.compose.ui.display
+import dev.kilua.compose.ui.id
+import dev.kilua.compose.ui.onEvent
+import dev.kilua.compose.ui.title
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
 import dev.kilua.externals.get
@@ -77,13 +88,6 @@ import dev.kilua.html.style.style
 import dev.kilua.i18n.I18n
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
-import dev.kilua.jetpack.Modifier
-import dev.kilua.jetpack.border
-import dev.kilua.jetpack.className
-import dev.kilua.jetpack.display
-import dev.kilua.jetpack.id
-import dev.kilua.jetpack.title
-import dev.kilua.jetpack.visibility
 import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
 import dev.kilua.modal.alert
@@ -156,6 +160,7 @@ import web.dom.CustomEvent
 import web.dom.HTMLElement
 import web.dom.Text
 import web.dom.events.Event
+import web.dom.events.MouseEvent
 import web.toJsNumber
 import web.toJsString
 import web.window
@@ -237,19 +242,49 @@ class App : Application() {
 
                 margin(20.px)
 
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(20.px, Alignment.CenterHorizontally),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    div {
+                        height(50.px)
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Hello World!"
+                    }
+                    div {
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Hello World!"
+                    }
+                    div {
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Hello World!"
+                    }
+                }
+
+                hr()
+
                 div {
                     var useMod by remember { mutableStateOf(true) }
 
                     val modifier = Modifier.display(Display.InlineBlock)
                         .id("ala")
-                        .title("Tytuł")
+                        .onEvent<MouseEvent>("mouseover") {
+                            console.log("mouseover")
+                        }.title("Tytuł")
                         .className("klasa")
                         .border(1.px, BorderStyle.Solid) then (
-                            if (useMod) {
-                                Modifier.visibility(Visibility.Hidden)
-                            } else {
-                                Modifier.visibility(Visibility.Visible)
+                            Modifier.clickable(useMod) {
+                                console.log("click")
                             }
+//                            if (useMod) {
+//                                Modifier.onClick {
+//                                    console.log("click")
+//                                }
+//                            } else {
+//                                Modifier.onDblclick {
+//                                    console.log("dblclick")
+//                                }
+//                            }
                             )
 
                     div {
