@@ -31,7 +31,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import dev.kilua.Application
+import dev.kilua.JsModule
 import dev.kilua.KiluaScope
+import dev.kilua.LocalResource
 import dev.kilua.compose.root
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
@@ -47,11 +49,14 @@ import dev.kilua.form.check.checkBox
 import dev.kilua.form.check.checkBoxRef
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
+import dev.kilua.form.formRef
 import dev.kilua.form.number.imaskNumeric
 import dev.kilua.form.number.numeric
+import dev.kilua.form.number.range
 import dev.kilua.form.number.rangeRef
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.TomSelectRenders
+import dev.kilua.form.select.select
 import dev.kilua.form.select.tomSelect
 import dev.kilua.form.select.tomSelectRef
 import dev.kilua.form.text.richTextRef
@@ -62,21 +67,39 @@ import dev.kilua.form.time.richDate
 import dev.kilua.form.time.richDateTimeRef
 import dev.kilua.form.time.richTime
 import dev.kilua.html.*
+import dev.kilua.html.helpers.TagStyleFun.Companion.background
+import dev.kilua.html.helpers.TagStyleFun.Companion.border
 import dev.kilua.html.style.PClass
-import dev.kilua.html.style.style
 import dev.kilua.html.style.globalStyle
+import dev.kilua.html.style.pClass
+import dev.kilua.html.style.pElement
+import dev.kilua.html.style.style
 import dev.kilua.i18n.I18n
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
+import dev.kilua.jetpack.Modifier
+import dev.kilua.jetpack.border
+import dev.kilua.jetpack.className
+import dev.kilua.jetpack.display
+import dev.kilua.jetpack.id
+import dev.kilua.jetpack.title
+import dev.kilua.jetpack.visibility
 import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
+import dev.kilua.modal.alert
 import dev.kilua.modal.confirm
+import dev.kilua.modal.modal
 import dev.kilua.modal.modalRef
+import dev.kilua.panel.Dir
 import dev.kilua.panel.OffPlacement
 import dev.kilua.panel.TabPosition
 import dev.kilua.panel.accordion
 import dev.kilua.panel.carousel
+import dev.kilua.panel.flexPanel
+import dev.kilua.panel.gridPanel
+import dev.kilua.panel.hPanel
 import dev.kilua.panel.lazyColumn
+import dev.kilua.panel.lazyRow
 import dev.kilua.panel.offcanvasRef
 import dev.kilua.panel.splitPanel
 import dev.kilua.panel.tabPanel
@@ -110,25 +133,7 @@ import dev.kilua.theme.themeSwitcher
 import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
-import dev.kilua.JsModule
-import dev.kilua.LocalResource
-import dev.kilua.form.formRef
-import dev.kilua.form.number.range
-import dev.kilua.form.select.select
-import dev.kilua.html.helpers.TagStyleFun.Companion.background
-import dev.kilua.html.helpers.TagStyleFun.Companion.border
-import dev.kilua.html.helpers.TagStyleFun.Companion.textDecoration
-import dev.kilua.html.helpers.TagStyleFun.Companion.textShadow
-import dev.kilua.html.helpers.TagStyleFun.Companion.boxShadow
-import dev.kilua.html.style.pClass
-import dev.kilua.html.style.pElement
-import dev.kilua.modal.alert
-import dev.kilua.modal.modal
-import dev.kilua.panel.Dir
-import dev.kilua.panel.flexPanel
-import dev.kilua.panel.gridPanel
-import dev.kilua.panel.hPanel
-import dev.kilua.panel.lazyRow
+import dev.kilua.useModule
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsObjectOf
@@ -138,7 +143,6 @@ import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.today
 import dev.kilua.utils.unsafeCast
-import dev.kilua.useModule
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
@@ -225,11 +229,43 @@ class App : Application() {
 
         ThemeManager.init()
 
+        Modifier.display(Display.Flex)
+
         root("root") {
 
             div {
 
                 margin(20.px)
+
+                div {
+                    var useMod by remember { mutableStateOf(true) }
+
+                    val modifier = Modifier.display(Display.InlineBlock)
+                        .id("ala")
+                        .title("Tytuł")
+                        .className("klasa")
+                        .border(1.px, BorderStyle.Solid) then (
+                            if (useMod) {
+                                Modifier.visibility(Visibility.Hidden)
+                            } else {
+                                Modifier.visibility(Visibility.Visible)
+                            }
+                            )
+
+                    div {
+                        +modifier
+                        +"Test"
+                    }
+
+                    button("Toggle") {
+                        onClick {
+                            useMod = !useMod
+                        }
+                    }
+                }
+
+                hr()
+
                 splitPanel {
                     width(300.px)
                     height(300.px)
@@ -1027,6 +1063,13 @@ class App : Application() {
                 button("Set null") {
                     onClick {
                         rd.value = null
+                    }
+                }
+
+                button("toggle") {
+                    onClick {
+                        rd.tempusDominusInstance?.toggle()
+                        it.stopPropagation()
                     }
                 }
 
