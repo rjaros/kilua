@@ -24,21 +24,21 @@ package dev.kilua.compose.ui
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.ITag
-import dev.kilua.html.helpers.TagEvents
+import dev.kilua.html.helpers.TagDnd
 import web.dom.HTMLElement
 
 /**
- * A modifier class for common tag events.
+ * A modifier class for drag and drop methods.
  */
-public class EventsModifier(internal val events: @Composable TagEvents.() -> Unit) : Modifier.Element {
+public class DndModifier(internal val dnd: @Composable TagDnd.() -> Unit) : Modifier.Element {
     @Composable
     override fun <E : HTMLElement> useOn(tag: ITag<E>) {
-        events.invoke(tag)
+        dnd.invoke(tag)
     }
 }
 
 /**
- * Create a modifier instance for given common tag events.
+ * Create a modifier instance for given drag and drop methods.
  */
-public fun Modifier.eventsModifier(events: @Composable TagEvents.() -> Unit): Modifier =
-    this then EventsModifier(events)
+public fun Modifier.dndModifier(dnd: @Composable TagDnd.() -> Unit): Modifier =
+    this then DndModifier(dnd)
