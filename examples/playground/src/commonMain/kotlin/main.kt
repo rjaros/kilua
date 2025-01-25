@@ -20,6 +20,7 @@
  * SOFTWARE.
  */
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -34,7 +35,25 @@ import dev.kilua.Application
 import dev.kilua.JsModule
 import dev.kilua.KiluaScope
 import dev.kilua.LocalResource
+import dev.kilua.compose.adaptive.Breakpoint
+import dev.kilua.compose.adaptive.TailwindcssBreakpoint
+import dev.kilua.compose.adaptive.WindowWidthSizeClass
+import dev.kilua.compose.adaptive.currentWindowSizeClass
+import dev.kilua.compose.adaptive.rememberBreakpoint
+import dev.kilua.compose.adaptive.rememberOrientation
+import dev.kilua.compose.adaptive.rememberTailwindcssBreakpoint
 import dev.kilua.compose.root
+import dev.kilua.compose.ui.Modifier
+import dev.kilua.compose.ui.background
+import dev.kilua.compose.ui.border
+import dev.kilua.compose.ui.className
+import dev.kilua.compose.ui.display
+import dev.kilua.compose.ui.height
+import dev.kilua.compose.ui.id
+import dev.kilua.compose.ui.title
+import dev.kilua.compose.ui.visibility
+import dev.kilua.compose.ui.width
+import dev.kilua.core.IComponent
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
 import dev.kilua.externals.get
@@ -77,13 +96,6 @@ import dev.kilua.html.style.style
 import dev.kilua.i18n.I18n
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
-import dev.kilua.jetpack.Modifier
-import dev.kilua.jetpack.border
-import dev.kilua.jetpack.className
-import dev.kilua.jetpack.display
-import dev.kilua.jetpack.id
-import dev.kilua.jetpack.title
-import dev.kilua.jetpack.visibility
 import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
 import dev.kilua.modal.alert
@@ -1771,4 +1783,80 @@ class App : Application() {
 
         }
     }
+}
+
+@Composable
+private fun IComponent.ResponsiveLayout() {
+    val windowAdaptiveInfo = currentWindowSizeClass()
+    val breakpoint by rememberBreakpoint()
+    val tailwindcssBreakpoint by rememberTailwindcssBreakpoint()
+    val orientation by rememberOrientation()
+
+    div {
+        +Modifier
+            .width(
+                when (windowAdaptiveInfo.widthSizeClass) {
+                    WindowWidthSizeClass.Compact -> 50.px
+                    WindowWidthSizeClass.Medium -> 100.px
+                    WindowWidthSizeClass.Expanded -> 200.px
+                }
+            )
+            .height(
+                when (windowAdaptiveInfo.widthSizeClass) {
+                    WindowWidthSizeClass.Compact -> 50.px
+                    WindowWidthSizeClass.Medium -> 100.px
+                    WindowWidthSizeClass.Expanded -> 200.px
+                }
+            )
+            .background(Color.Red)
+    }
+    div {
+        +Modifier
+            .width(
+                when (breakpoint) {
+                    Breakpoint.Mobile -> 50.px
+                    Breakpoint.SmallTablet -> 100.px
+                    Breakpoint.Tablet -> 150.px
+                    Breakpoint.Laptop -> 200.px
+                    Breakpoint.Desktop -> 300.px
+                }
+            )
+            .height(
+                when (breakpoint) {
+                    Breakpoint.Mobile -> 50.px
+                    Breakpoint.SmallTablet -> 100.px
+                    Breakpoint.Tablet -> 150.px
+                    Breakpoint.Laptop -> 200.px
+                    Breakpoint.Desktop -> 300.px
+                }
+            )
+            .background(Color.Green)
+    }
+
+    div {
+        +Modifier
+            .width(
+                when (tailwindcssBreakpoint) {
+                    TailwindcssBreakpoint.DEFAULT -> 50.px
+                    TailwindcssBreakpoint.SM -> 100.px
+                    TailwindcssBreakpoint.MD -> 150.px
+                    TailwindcssBreakpoint.LG -> 200.px
+                    TailwindcssBreakpoint.XL -> 250.px
+                    TailwindcssBreakpoint.XL2 -> 300.px
+                }
+            )
+            .height(
+                when (tailwindcssBreakpoint) {
+                    TailwindcssBreakpoint.DEFAULT -> 50.px
+                    TailwindcssBreakpoint.SM -> 100.px
+                    TailwindcssBreakpoint.MD -> 150.px
+                    TailwindcssBreakpoint.LG -> 200.px
+                    TailwindcssBreakpoint.XL -> 250.px
+                    TailwindcssBreakpoint.XL2 -> 300.px
+                }
+            )
+            .background(Color.Blue)
+    }
+
+    divt(orientation.toString())
 }
