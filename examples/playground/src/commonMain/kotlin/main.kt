@@ -35,16 +35,21 @@ import dev.kilua.JsModule
 import dev.kilua.KiluaScope
 import dev.kilua.LocalResource
 import dev.kilua.compose.foundation.layout.Arrangement
+import dev.kilua.compose.foundation.layout.Box
 import dev.kilua.compose.foundation.layout.Row
 import dev.kilua.compose.root
 import dev.kilua.compose.ui.Alignment
 import dev.kilua.compose.ui.Modifier
+import dev.kilua.compose.ui.background
 import dev.kilua.compose.ui.border
 import dev.kilua.compose.ui.className
 import dev.kilua.compose.ui.clickable
 import dev.kilua.compose.ui.display
+import dev.kilua.compose.ui.fillMaxWidth
+import dev.kilua.compose.ui.height
 import dev.kilua.compose.ui.id
 import dev.kilua.compose.ui.onEvent
+import dev.kilua.compose.ui.size
 import dev.kilua.compose.ui.title
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
@@ -77,49 +82,14 @@ import dev.kilua.form.text.tomTypeaheadRef
 import dev.kilua.form.time.richDate
 import dev.kilua.form.time.richDateTimeRef
 import dev.kilua.form.time.richTime
-import dev.kilua.html.AlignItems
-import dev.kilua.html.BorderStyle
-import dev.kilua.html.BsColor
-import dev.kilua.html.Button
-import dev.kilua.html.ButtonSize
-import dev.kilua.html.ButtonStyle
-import dev.kilua.html.ButtonType
-import dev.kilua.html.Color
-import dev.kilua.html.Cursor
-import dev.kilua.html.Display
-import dev.kilua.html.Div
-import dev.kilua.html.FlexDirection
-import dev.kilua.html.FlexWrap
-import dev.kilua.html.JustifyContent
-import dev.kilua.html.JustifyItems
-import dev.kilua.html.Overflow
-import dev.kilua.html.Tag
-import dev.kilua.html.br
-import dev.kilua.html.bsButton
-import dev.kilua.html.bsButtonRef
-import dev.kilua.html.button
-import dev.kilua.html.buttonRef
-import dev.kilua.html.div
-import dev.kilua.html.divRef
-import dev.kilua.html.h1
-import dev.kilua.html.h1t
-import dev.kilua.html.h2t
+import dev.kilua.html.*
 import dev.kilua.html.helpers.TagStyleFun.Companion.background
 import dev.kilua.html.helpers.TagStyleFun.Companion.border
-import dev.kilua.html.hr
-import dev.kilua.html.li
-import dev.kilua.html.link
-import dev.kilua.html.perc
-import dev.kilua.html.pt
-import dev.kilua.html.px
-import dev.kilua.html.span
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.globalStyle
 import dev.kilua.html.style.pClass
 import dev.kilua.html.style.pElement
 import dev.kilua.html.style.style
-import dev.kilua.html.tag
-import dev.kilua.html.textNode
 import dev.kilua.i18n.I18n
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
@@ -277,12 +247,28 @@ class App : Application() {
 
                 margin(20.px)
 
+                Box(Modifier.size(500.px).border(1.px, BorderStyle.Solid, Color.Black)) {
+                    Box(Modifier.size(100.px).align(Alignment.TopCenter).background(Color.Red)) {
+                        +"TopCenter"
+                    }
+                    Box(Modifier.size(80.px).align(Alignment.CenterEnd).background(Color.Green)) {
+                        +"CenterEnd"
+                    }
+                    Box(Modifier.fillMaxWidth().height(30.px).align(Alignment.BottomCenter).background(Color.Yellow)) {
+                        +"BottomCenter"
+                    }
+                    Box(Modifier.size(60.px).align(Alignment.Center).background(Color.Silver)) {
+                        +"Center"
+                    }
+                }
+
+                hr()
+
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(20.px, Alignment.CenterHorizontally),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     div {
-                        height(50.px)
                         border(1.px, BorderStyle.Solid, Color.Red)
                         +"Hello World!"
                     }
