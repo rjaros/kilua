@@ -32,7 +32,11 @@ import dev.kilua.utils.nativeMapOf
 import web.document
 import web.dom.HTMLElement
 import web.dom.TouchEvent
-import web.dom.events.*
+import web.dom.events.Event
+import web.dom.events.FocusEvent
+import web.dom.events.InputEvent
+import web.dom.events.KeyboardEvent
+import web.dom.events.MouseEvent
 import web.dom.pointerevents.PointerEvent
 import kotlin.collections.component1
 import kotlin.collections.component2
