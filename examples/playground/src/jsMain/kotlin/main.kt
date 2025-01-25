@@ -37,6 +37,7 @@ fun main() {
         TomSelectModule,
         ToastifyModule,
         TrixModule,
+        JetpackModule,
 //        TailwindcssModule,
         CoreModule
     )

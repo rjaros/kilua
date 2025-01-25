@@ -26,6 +26,7 @@ import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
 import dev.kilua.FontAwesomeModule
 import dev.kilua.ImaskModule
+import dev.kilua.JetpackModule
 import dev.kilua.SplitjsModule
 import dev.kilua.TabulatorModule
 import dev.kilua.TempusDominusModule
@@ -49,6 +50,7 @@ fun main() {
         TomSelectModule,
         ToastifyModule,
         TrixModule,
+        JetpackModule,
 //        TailwindcssModule,
         CoreModule
     )
