@@ -23,18 +23,34 @@
 package dev.kilua.compose.foundation.layout
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import dev.kilua.compose.ui.Alignment
 import dev.kilua.compose.ui.Modifier
+import dev.kilua.compose.ui.alignSelf
+import dev.kilua.compose.ui.attrsModifier
 import dev.kilua.core.IComponent
-import dev.kilua.html.IDiv
+import dev.kilua.html.AlignItems
 import dev.kilua.panel.vPanel
+
+@Immutable
+public interface ColumnScope : FlexScope {
+    public fun Modifier.align(alignment: Alignment.Horizontal): Modifier = attrsModifier {
+        when (alignment) {
+            Alignment.Start -> alignSelf(AlignItems.FlexStart)
+            Alignment.CenterHorizontally -> alignSelf(AlignItems.Center)
+            Alignment.End -> alignSelf(AlignItems.FlexEnd)
+        }
+    }
+}
+
+internal object ColumnScopeInstance : ColumnScope
 
 @Composable
 public fun IComponent.Column(
     modifier: Modifier = Modifier,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    content: @Composable IDiv.() -> Unit
+    content: @Composable ColumnScope.() -> Unit
 ) {
     val gap = if (verticalArrangement is SpacedAligned) verticalArrangement.space else null
     vPanel(
@@ -43,6 +59,6 @@ public fun IComponent.Column(
         gap = gap
     ) {
         +modifier
-        content()
+        ColumnScopeInstance.content()
     }
 }
