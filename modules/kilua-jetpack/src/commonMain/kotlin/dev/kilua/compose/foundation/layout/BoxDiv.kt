@@ -23,24 +23,32 @@
 package dev.kilua.compose.foundation.layout
 
 import androidx.compose.runtime.Composable
-import dev.kilua.compose.ui.Alignment
-import dev.kilua.compose.ui.Modifier
+import androidx.compose.runtime.remember
+import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
-
-internal object BoxScopeInstance : BoxScope
+import dev.kilua.core.RenderConfig
+import dev.kilua.html.Div
 
 /**
- * A layout composable that places its children stacked over each other.
- * You can use the align modifier to specify where the composable should be drawn.
+ * A dedicated internal component for the Box composable to force a specific CSS class.
+ */
+internal class BoxDiv(
+    renderConfig: RenderConfig = RenderConfig.Default
+) : Div(renderConfig = renderConfig) {
+    init {
+        internalClassName = "kilua-jetpack-box"
+        initElementClassList()
+    }
+}
+
+/**
+ * A dedicated internal composable for the BoxDiv component.
  */
 @Composable
-public fun IComponent.Box(
-    modifier: Modifier = Modifier,
-    contentAlignment: Alignment = Alignment.TopStart,
-    content: @Composable BoxScope.() -> Unit
+internal fun IComponent.boxDiv(
+    content: @Composable BoxDiv.() -> Unit = {}
 ) {
-    boxDiv {
-        +modifier
-        BoxScopeInstance.content()
-    }
+    val component = remember { BoxDiv(renderConfig) }
+    ComponentNode(component, {
+    }, content)
 }

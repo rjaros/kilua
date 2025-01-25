@@ -1,3 +1,4 @@
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 /*
  * Copyright (c) 2025 Robert Jaros
  *
@@ -20,27 +21,20 @@
  * SOFTWARE.
  */
 
-package dev.kilua.compose.foundation.layout
+package dev.kilua
 
-import androidx.compose.runtime.Composable
-import dev.kilua.compose.ui.Alignment
-import dev.kilua.compose.ui.Modifier
-import dev.kilua.core.IComponent
+import web.JsAny
 
-internal object BoxScopeInstance : BoxScope
+@JsModule("zzz-kilua-assets/k-jetpack.css")
+internal external object JetpackCss : JsAny
 
 /**
- * A layout composable that places its children stacked over each other.
- * You can use the align modifier to specify where the composable should be drawn.
+ * Initializer for Kilua Jetpack module.
  */
-@Composable
-public fun IComponent.Box(
-    modifier: Modifier = Modifier,
-    contentAlignment: Alignment = Alignment.TopStart,
-    content: @Composable BoxScope.() -> Unit
-) {
-    boxDiv {
-        +modifier
-        BoxScopeInstance.content()
+public object JetpackModule : ModuleInitializer {
+
+    override fun initialize() {
+        useModule(JetpackCss)
+        CssRegister.register("zzz-kilua-assets/k-jetpack.css")
     }
 }
