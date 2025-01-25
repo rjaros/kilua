@@ -190,25 +190,25 @@ public fun Modifier.clickable(enabled: Boolean = true, onClick: (MouseEvent) -> 
 }
 
 /**
- * Add click and dblclick events listeners when [enabled] is true.
+ * Add click, double-click and long-click events listeners when [enabled] is true.
  * This function mimics the behavior of combinedClickable in Jetpack Compose.
  * An extension function for the [Modifier] that allows handling of click, double-click, and long click events.
  * This function combines multiple input events (like mouse and touch) to trigger the respective actions
  * based on the user's interaction.
  *
- * @param onClick A lambda function to be invoked on a regular single click (non-long click).
- * @param onDoubleClick An optional lambda function that will be invoked on a double-click.
- *                      If `null`, no action is taken.
  * @param onLongClick An optional lambda function that will be invoked on a long-click.
  *                    If `null`, no action is taken.
+ * @param onDoubleClick An optional lambda function that will be invoked on a double-click.
+ *                      If `null`, no action is taken.
+ * @param onClick A lambda function to be invoked on a regular single click (non-long click).
  */
 public fun Modifier.combinedClickable(
     enabled: Boolean = true,
-    onClick: () -> Unit,
-    onDoubleClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
+    onDoubleClick: (() -> Unit)? = null,
+    onClick: () -> Unit,
 ) = eventsModifier {
     if (enabled) {
-        onCombineClick(onClick, onDoubleClick, onLongClick)
+        onCombineClick(onLongClick, onDoubleClick, onClick)
     }
 }

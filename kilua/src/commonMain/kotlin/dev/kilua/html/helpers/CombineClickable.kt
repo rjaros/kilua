@@ -35,16 +35,16 @@ import web.window
  * It combines multiple input events such as mouse and touch events to trigger the respective
  * actions based on the user's interaction.
  *
- * @param onClick A lambda function to be invoked on a regular single click (non-long click).
+ * @param onLongClick An optional lambda function that will be invoked on a long click. If `null`, no action is taken.
  * @param onDoubleClick An optional lambda function that will be invoked on a double click. If `null`,
  * no action is taken.
- * @param onLongClick An optional lambda function that will be invoked on a long click. If `null`, no action is taken.
+ * @param onClick A lambda function to be invoked on a regular single click (non-long click).
  */
 @Composable
 public fun TagEvents.onCombineClick(
-    onClick: () -> Unit,
-    onDoubleClick: (() -> Unit)? = null,
     onLongClick: (() -> Unit)? = null,
+    onDoubleClick: (() -> Unit)? = null,
+    onClick: () -> Unit,
 ) {
     var singleClickTimer by remember { mutableStateOf<Int?>(null) }
     var longClickTimer by remember { mutableStateOf<Int?>(null) }
