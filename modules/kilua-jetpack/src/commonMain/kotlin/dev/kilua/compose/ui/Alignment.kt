@@ -55,4 +55,10 @@ public sealed class Alignment(public val alignItems: AlignItems, public val just
     public object Start : Horizontal(AlignItems.Start, JustifyContent.Start)
     public object CenterHorizontally : Horizontal(AlignItems.Center, JustifyContent.Center)
     public object End : Horizontal(AlignItems.End, JustifyContent.End)
+
+    public val placeValue: String = if (alignItems.value == justifyItems.value) {
+        alignItems.value
+    } else {
+        "${alignItems.value} ${justifyItems.value}"
+    }
 }

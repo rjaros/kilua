@@ -40,6 +40,7 @@ public fun IComponent.Box(
     content: @Composable BoxScope.() -> Unit
 ) {
     boxDiv {
+        style("place-items", contentAlignment.placeValue)
         +modifier
         BoxScopeInstance.content()
     }

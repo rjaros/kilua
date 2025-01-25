@@ -27,14 +27,14 @@ package dev.kilua.compose.foundation.layout
 import androidx.compose.runtime.Immutable
 import dev.kilua.compose.ui.Alignment
 import dev.kilua.compose.ui.Modifier
-import dev.kilua.compose.ui.alignSelf
-import dev.kilua.compose.ui.justifySelf
+import dev.kilua.compose.ui.style
 
 /**
  * Allows declaring mapping from Jetpack Compose align() modifier to CSS Grid align-self and justify-self.
  */
 @Immutable
 public interface BoxScope {
-    public fun Modifier.align(alignment: Alignment): Modifier =
-        alignSelf(alignment.alignItems).justifySelf(alignment.justifyItems)
+    public fun Modifier.align(alignment: Alignment): Modifier {
+        return style("place-self", alignment.placeValue)
+    }
 }
