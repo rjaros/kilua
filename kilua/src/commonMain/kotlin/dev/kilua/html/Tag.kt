@@ -243,7 +243,7 @@ public open class Tag<E : HTMLElement>(
             builder.append("<$tagName")
             if (namespace != null && renderNamespaceToString) builder.append(" xmlns=\"$namespace\"")
             if (internalClassName != null && className != null) {
-                builder.append(" class=\"$internalCssClasses $className\"")
+                builder.append(" class=\"$internalClassName $className\"")
             } else if (className != null) {
                 builder.append(" class=\"$className\"")
             } else if (internalClassName != null) {
