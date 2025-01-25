@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2025 Robert Jaros
+ * Copyright (c) 2025 Ghasem Shirdel
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,35 +24,16 @@
 package dev.kilua.compose.foundation.layout
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import dev.kilua.compose.ui.Alignment
 import dev.kilua.compose.ui.Modifier
-import dev.kilua.compose.ui.alignSelf
-import dev.kilua.compose.ui.attrsModifier
-import dev.kilua.compose.ui.flexGrow
 import dev.kilua.core.IComponent
-import dev.kilua.html.AlignItems
 import dev.kilua.panel.hPanel
-
-@Immutable
-public interface FlexScope {
-    // Convenient remapping to "flexGrow" for users coming from the world of Android
-    public fun Modifier.weight(value: Int): Modifier = flexGrow(value)
-}
-
-@Immutable
-public interface RowScope : FlexScope {
-    public fun Modifier.align(alignment: Alignment.Vertical): Modifier = attrsModifier {
-        when (alignment) {
-            Alignment.Top -> alignSelf(AlignItems.FlexStart)
-            Alignment.CenterVertically -> alignSelf(AlignItems.Center)
-            Alignment.Bottom -> alignSelf(AlignItems.FlexEnd)
-        }
-    }
-}
 
 internal object RowScopeInstance : RowScope
 
+/**
+ * A layout composable that places its children in a horizontal sequence.
+ */
 @Composable
 public fun IComponent.Row(
     modifier: Modifier = Modifier,

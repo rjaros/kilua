@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2025 Robert Jaros
+ * Copyright (c) 2025 Ghasem Shirdel
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +24,13 @@
 package dev.kilua.compose.ui
 
 import dev.kilua.html.helpers.onCombineClick
+import web.dom.TouchEvent
 import web.dom.events.Event
 import web.dom.events.FocusEvent
 import web.dom.events.InputEvent
 import web.dom.events.KeyboardEvent
 import web.dom.events.MouseEvent
+import web.dom.pointerevents.PointerEvent
 
 /**
  * Add click event listener.
@@ -97,6 +100,76 @@ public fun Modifier.onKeyup(listener: (KeyboardEvent) -> Unit) = eventsModifier 
  */
 public fun Modifier.onKeypress(listener: (KeyboardEvent) -> Unit) = eventsModifier {
     onKeypress(listener)
+}
+
+/**
+ * Add touch start event listener.
+ */
+public fun Modifier.onTouchStart(listener: (TouchEvent) -> Unit) = eventsModifier {
+    onTouchStart(listener)
+}
+
+/**
+ * Add touch end event listener.
+ */
+public fun Modifier.onTouchEnd(listener: (TouchEvent) -> Unit) = eventsModifier {
+    onTouchEnd(listener)
+}
+
+/**
+ * Add touch cancel event listener.
+ */
+public fun Modifier.onTouchCancel(listener: (TouchEvent) -> Unit) = eventsModifier {
+    onTouchCancel(listener)
+}
+
+/**
+ * Add mouse down event listener.
+ */
+public fun Modifier.onMouseDown(listener: (MouseEvent) -> Unit) = eventsModifier {
+    onMouseDown(listener)
+}
+
+/**
+ * Add mouse up event listener.
+ */
+public fun Modifier.onMouseUp(listener: (MouseEvent) -> Unit) = eventsModifier {
+    onMouseUp(listener)
+}
+
+/**
+ * Add mouse leave event listener.
+ */
+public fun Modifier.onMouseLeave(listener: (MouseEvent) -> Unit) = eventsModifier {
+    onMouseLeave(listener)
+}
+
+/**
+ * Add mouse over event listener.
+ */
+public fun Modifier.onMouseOver(listener: (MouseEvent) -> Unit) = eventsModifier {
+    onMouseOver(listener)
+}
+
+/**
+ * Add mouse out event listener.
+ */
+public fun Modifier.onMouseOut(listener: (MouseEvent) -> Unit) = eventsModifier {
+    onMouseOut(listener)
+}
+
+/**
+ * Add pointer down event listener.
+ */
+public fun Modifier.onPointerDown(listener: (PointerEvent) -> Unit) = eventsModifier {
+    onPointerDown(listener)
+}
+
+/**
+ * Add pointer up event listener.
+ */
+public fun Modifier.onPointerUp(listener: (PointerEvent) -> Unit) = eventsModifier {
+    onPointerUp(listener)
 }
 
 /**

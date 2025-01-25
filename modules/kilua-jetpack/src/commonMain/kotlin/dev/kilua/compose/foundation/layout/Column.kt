@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2025 Robert Jaros
+ * Copyright (c) 2025 Ghasem Shirdel
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +24,16 @@
 package dev.kilua.compose.foundation.layout
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import dev.kilua.compose.ui.Alignment
 import dev.kilua.compose.ui.Modifier
-import dev.kilua.compose.ui.alignSelf
-import dev.kilua.compose.ui.attrsModifier
 import dev.kilua.core.IComponent
-import dev.kilua.html.AlignItems
 import dev.kilua.panel.vPanel
-
-@Immutable
-public interface ColumnScope : FlexScope {
-    public fun Modifier.align(alignment: Alignment.Horizontal): Modifier = attrsModifier {
-        when (alignment) {
-            Alignment.Start -> alignSelf(AlignItems.FlexStart)
-            Alignment.CenterHorizontally -> alignSelf(AlignItems.Center)
-            Alignment.End -> alignSelf(AlignItems.FlexEnd)
-        }
-    }
-}
 
 internal object ColumnScopeInstance : ColumnScope
 
+/**
+ * A layout composable that places its children in a vertical sequence.
+ */
 @Composable
 public fun IComponent.Column(
     modifier: Modifier = Modifier,
