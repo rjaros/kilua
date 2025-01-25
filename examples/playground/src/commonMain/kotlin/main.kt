@@ -77,13 +77,6 @@ import dev.kilua.html.style.style
 import dev.kilua.i18n.I18n
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
-import dev.kilua.compose.ui.border
-import dev.kilua.compose.ui.className
-import dev.kilua.compose.ui.display
-import dev.kilua.compose.ui.id
-import dev.kilua.compose.ui.title
-import dev.kilua.compose.ui.Modifier
-import dev.kilua.compose.ui.visibility
 import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
 import dev.kilua.modal.alert
@@ -237,19 +230,49 @@ class App : Application() {
 
                 margin(20.px)
 
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(20.px, Alignment.CenterHorizontally),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    div {
+                        height(50.px)
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Hello World!"
+                    }
+                    div {
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Hello World!"
+                    }
+                    div {
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Hello World!"
+                    }
+                }
+
+                hr()
+
                 div {
                     var useMod by remember { mutableStateOf(true) }
 
                     val modifier = Modifier.display(Display.InlineBlock)
                         .id("ala")
-                        .title("Tytuł")
+                        .onEvent<MouseEvent>("mouseover") {
+                            console.log("mouseover")
+                        }.title("Tytuł")
                         .className("klasa")
                         .border(1.px, BorderStyle.Solid) then (
-                            if (useMod) {
-                                Modifier.visibility(Visibility.Hidden)
-                            } else {
-                                Modifier.visibility(Visibility.Visible)
+                            Modifier.clickable(useMod) {
+                                console.log("click")
                             }
+//                            if (useMod) {
+//                                Modifier.onClick {
+//                                    console.log("click")
+//                                }
+//                            } else {
+//                                Modifier.onDblclick {
+//                                    console.log("dblclick")
+//                                }
+//                            }
                             )
 
                     div {
