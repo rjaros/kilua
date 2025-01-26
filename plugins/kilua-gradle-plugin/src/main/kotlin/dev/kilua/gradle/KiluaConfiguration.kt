@@ -25,8 +25,19 @@ package dev.kilua.gradle
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ExportYml(
-    public val parameters: List<String>? = null,
+public data class KiluaConfiguration(
+    public val export: Export? = null,
+    public val ssr: Ssr? = null,
+)
+
+@Serializable
+public data class Export(
+    public val serverParameters: List<String>? = null,
     public val language: String? = null,
     public val pages: List<String>? = null,
+)
+
+@Serializable
+public data class Ssr(
+    public val includedCssFiles: List<String>? = null,
 )

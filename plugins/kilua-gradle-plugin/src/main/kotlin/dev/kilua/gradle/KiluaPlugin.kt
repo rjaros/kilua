@@ -22,6 +22,9 @@
 
 package dev.kilua.gradle
 
+import com.charleskorn.kaml.Yaml
+import com.charleskorn.kaml.YamlConfiguration
+import com.charleskorn.kaml.YamlNamingStrategy
 import dev.kilua.gradle.tasks.KiluaExportHtmlTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -102,6 +105,15 @@ public abstract class KiluaPlugin : Plugin<Project> {
         }
 
         if (webpackSsrExists && kiluaExtension.enableGradleTasks.get()) {
+            val kiluaYmlFile = layout.projectDirectory.file(kiluaExtension.kiluaYml).get().asFile
+            val kiluaConfiguration = if (kiluaYmlFile.exists()) {
+                val yamlConfiguration = YamlConfiguration(yamlNamingStrategy = YamlNamingStrategy.SnakeCase)
+                Yaml(configuration = yamlConfiguration).decodeFromString(
+                    KiluaConfiguration.serializer(),
+                    kiluaYmlFile.readText()
+                )
+            } else null
+            val includedCssNames = kiluaConfiguration?.ssr?.includedCssFiles ?: emptyList()
             val cssNames = listOf(
                 "zzz-kilua-assets/k-style.css",
                 "zzz-kilua-assets/k-bootstrap.css",
@@ -128,7 +140,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 "tom-select/dist/css/tom-select.default.min.css",
                 "tom-select/dist/css/tom-select.min.css",
                 "trix/dist/trix.css"
-            )
+            ) + includedCssNames
             val cssFiles = cssNames.map {
                 rootProject.file("build/js/node_modules/$it")
             }
@@ -177,7 +189,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     from(distribution)
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                    inputs.files(distribution, cssFiles)
+                    inputs.files(distribution, cssFiles, kiluaYmlFile)
                     outputs.file(archiveFile)
                     manifest {
                         attributes(
@@ -239,7 +251,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     from(distribution)
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                    inputs.files(distribution, cssFiles)
+                    inputs.files(distribution, cssFiles, kiluaYmlFile)
                     outputs.file(archiveFile)
                     manifest {
                         attributes(
@@ -278,7 +290,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                                     dependsOn("jsArchiveSSR")
                                     from(project.tasks["jsArchiveSSR"].outputs.files)
                                 }
-                                registerKiluaExportHtmlTask("exportHtmlWithJs", archiveFile) {
+                                registerKiluaExportHtmlTask("exportHtmlWithJs", archiveFile, kiluaConfiguration) {
                                     dependsOn(it)
                                 }
                                 registerKiluaExportTask("exportWithJs", "exportHtmlWithJs", "js") {
@@ -290,7 +302,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                             tasks.getByName<Jar>("jarWithWasmJs") {
                                 dependsOn("wasmJsArchiveSSR")
                                 from(project.tasks["wasmJsArchiveSSR"].outputs.files)
-                                registerKiluaExportHtmlTask("exportHtmlWithWasmJs", archiveFile) {
+                                registerKiluaExportHtmlTask("exportHtmlWithWasmJs", archiveFile, kiluaConfiguration) {
                                     dependsOn(it)
                                 }
                                 registerKiluaExportTask("exportWithWasmJs", "exportHtmlWithWasmJs", "wasmJs") {
@@ -330,14 +342,14 @@ public abstract class KiluaPlugin : Plugin<Project> {
     private fun KiluaPluginContext.registerKiluaExportHtmlTask(
         name: String,
         applicationArchive: Provider<RegularFile>,
+        kiluaConfiguration: KiluaConfiguration?,
         configuration: KiluaExportHtmlTask.() -> Unit = {}
     ) {
         logger.debug("registering KiluaExportHtmlTask")
         tasks.register<KiluaExportHtmlTask>(name) {
-            val exportYmlFile = layout.projectDirectory.file(kiluaExtension.exportYml).get().asFile
-            if (exportYmlFile.exists()) {
-                exportYml.set(exportYmlFile)
-            }
+            kiluaConfiguration?.export?.language?.let { exportLanguage.set(it) }
+            kiluaConfiguration?.export?.serverParameters?.let { exportServerParameters.set(it) }
+            kiluaConfiguration?.export?.pages?.let { exportPages.set(it) }
             applicationJar.set(applicationArchive)
             exportDirectory.set(layout.buildDirectory.dir("exportedHtml"))
             configuration()

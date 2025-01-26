@@ -1,12 +1,13 @@
 package dev.kilua.gradle.tasks
 
-import com.charleskorn.kaml.Yaml
-import dev.kilua.gradle.ExportYml
 import dev.kilua.gradle.KiluaPlugin
 import dev.kilua.gradle.readContent
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
@@ -17,9 +18,17 @@ import java.net.URL
 
 public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
 
-    @get:InputFile
     @get:Optional
-    public abstract val exportYml: RegularFileProperty
+    @get:Input
+    public abstract val exportLanguage: Property<String>
+
+    @get:Optional
+    @get:Input
+    public abstract val exportServerParameters: ListProperty<String>
+
+    @get:Optional
+    @get:Input
+    public abstract val exportPages: ListProperty<String>
 
     @get:InputFile
     public abstract val applicationJar: RegularFileProperty
@@ -34,16 +43,12 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
 
     @TaskAction
     public fun generate() {
-        val exportYml: ExportYml? = exportYml.asFile.orNull?.let {
-            Yaml.default.decodeFromString(ExportYml.serializer(), it.readText())
-        }
         val javaHome = File(System.getProperty("java.home")).invariantSeparatorsPath
-
         val processParams = buildList<String> {
             add("$javaHome/bin/java")
             add("-jar")
             add(applicationJar.get().asFile.canonicalPath)
-            exportYml?.parameters?.forEach {
+            exportServerParameters.orNull?.forEach {
                 add(it)
             }
         }.toTypedArray()
@@ -55,11 +60,11 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
         println("Exporting pages ...")
         try {
             if (!process.isAlive) error("The SSR application failed to run (exit code: ${process.exitValue()})")
-            if (exportYml != null) {
-                val headers = if (exportYml.language != null) {
-                    mapOf("Accept-Language" to exportYml.language)
-                } else null
-                exportYml.pages?.filter { it.startsWith("/") }?.forEach { page ->
+            val headers = if (exportLanguage.isPresent) {
+                mapOf("Accept-Language" to exportLanguage.get())
+            } else null
+            if (exportPages.isPresent) {
+                exportPages.get().filter { it.startsWith("/") }.forEach { page ->
                     val content = URL("http://localhost:8080${page}").readContent(headers)
                     if (content != null) {
                         val fileName = if (page.endsWith("/")) {
@@ -74,7 +79,7 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
                     }
                 }
             } else {
-                URL("http://localhost:8080/").readContent()?.let { index ->
+                URL("http://localhost:8080/").readContent(headers)?.let { index ->
                     println("Exporting /index.html")
                     exportDirectory.file("index.html").get().asFile.writeText(index)
                 }
