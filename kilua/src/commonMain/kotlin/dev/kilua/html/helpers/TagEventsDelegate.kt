@@ -38,6 +38,10 @@ import web.dom.events.FocusEvent
 import web.dom.events.InputEvent
 import web.dom.events.KeyboardEvent
 import web.dom.events.MouseEvent
+import web.window
+import kotlin.collections.component1
+import kotlin.collections.component2
+import kotlin.collections.set
 import web.dom.pointerevents.PointerEvent
 
 /**
@@ -320,6 +324,38 @@ public fun onGlobalPointerUp(callback: () -> Unit) {
     }
 }
 
+/**
+ * A composable function that triggers a callback whenever the global window size changes.
+ *
+ * This function registers an event listener for the `resize` event on the global `window` object.
+ * Whenever the window is resized, the provided callback is invoked with the current window dimensions.
+ * The event listener is automatically removed when the composition leaves the composition tree.
+ *
+ * @param callback A lambda function that receives the current window width and height.
+ *                 - `width`: The inner width of the window in pixels.
+ *                 - `height`: The inner height of the window in pixels.
+ *
+ * Example usage:
+ * ```
+ * onGlobalWindowSize { width, height ->
+ *     println("Window size: ${width}x${height}")
+ * }
+ * ```
+ *
+ * @see DisposableEffect
+ */
+@Composable
+public fun onGlobalWindowSize(callback: (width: Int, height: Int) -> Unit) {
+    DisposableEffect(Unit) {
+        val listener = { _: Event ->
+            callback(window.innerWidth, window.innerHeight)
+        }
+        window.addEventListener(RESIZE, listener)
+        onDispose { window.removeEventListener(RESIZE, listener) }
+    }
+}
+
+private const val RESIZE = "resize"
 private const val CLICK = "click"
 private const val CONTEXT_MENU = "contextmenu"
 private const val DBL_CLICK = "dblclick"
