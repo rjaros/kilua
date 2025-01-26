@@ -1,5 +1,6 @@
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +21,20 @@
  * SOFTWARE.
  */
 
-import dev.kilua.BootstrapCssModule
-import dev.kilua.BootstrapIconsModule
-import dev.kilua.BootstrapModule
-import dev.kilua.CoreModule
-import dev.kilua.FontAwesomeModule
-import dev.kilua.ImaskModule
-import dev.kilua.JetpackModule
-import dev.kilua.SplitjsModule
-import dev.kilua.TabulatorModule
-import dev.kilua.TempusDominusModule
-import dev.kilua.ToastifyModule
-import dev.kilua.TomSelectModule
-import dev.kilua.TrixModule
-import dev.kilua.startApplication
+package dev.kilua
 
-fun main() {
-    startApplication(
-        ::App,
-        null,
-        BootstrapModule,
-        BootstrapCssModule,
-        BootstrapIconsModule,
-        FontAwesomeModule,
-        ImaskModule,
-        SplitjsModule,
-        TabulatorModule,
-        TempusDominusModule,
-        TomSelectModule,
-        ToastifyModule,
-        TrixModule,
-        JetpackModule,
-//        TailwindcssModule,
-        CoreModule
-    )
+import web.JsAny
+
+@JsModule("zzz-kilua-assets/k-jetpack.css")
+internal external object JetpackCss : JsAny
+
+/**
+ * Initializer for Kilua Jetpack module.
+ */
+public object JetpackModule : ModuleInitializer {
+
+    override fun initialize() {
+        useModule(JetpackCss)
+        CssRegister.register("zzz-kilua-assets/k-jetpack.css")
+    }
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Ghasem Shirdel
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +30,9 @@ import dev.kilua.externals.AbortController
 import dev.kilua.externals.buildAddEventListenerOptions
 import dev.kilua.utils.cast
 import dev.kilua.utils.nativeMapOf
+import web.document
 import web.dom.HTMLElement
+import web.dom.TouchEvent
 import web.dom.events.Event
 import web.dom.events.FocusEvent
 import web.dom.events.InputEvent
@@ -39,6 +42,7 @@ import web.window
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.set
+import web.dom.pointerevents.PointerEvent
 
 /**
  * Common tag events delegate.
@@ -81,92 +85,182 @@ public open class TagEventsDelegateImpl<E : HTMLElement>(
 
     @Composable
     override fun onClick(listener: (MouseEvent) -> Unit): Int {
-        return onEvent("click", listener)
+        return onEvent(CLICK, listener)
     }
 
     override fun onClickDirect(listener: (MouseEvent) -> Unit): Int {
-        return onEventDirect("click", listener)
+        return onEventDirect(CLICK, listener)
     }
 
     @Composable
     override fun onContextmenu(listener: (MouseEvent) -> Unit): Int {
-        return onEvent("contextmenu", listener)
+        return onEvent(CONTEXT_MENU, listener)
     }
 
     override fun onContextmenuDirect(listener: (MouseEvent) -> Unit): Int {
-        return onEventDirect("contextmenu", listener)
+        return onEventDirect(CONTEXT_MENU, listener)
     }
 
     @Composable
     override fun onDblclick(listener: (MouseEvent) -> Unit): Int {
-        return onEvent("dblclick", listener)
+        return onEvent(DBL_CLICK, listener)
     }
 
     override fun onDblclickDirect(listener: (MouseEvent) -> Unit): Int {
-        return onEventDirect("dblclick", listener)
+        return onEventDirect(DBL_CLICK, listener)
     }
 
     @Composable
     override fun onChange(listener: (Event) -> Unit): Int {
-        return onEvent("change", listener)
+        return onEvent(CHANGE, listener)
     }
 
     override fun onChangeDirect(listener: (Event) -> Unit): Int {
-        return onEventDirect("change", listener)
+        return onEventDirect(CHANGE, listener)
     }
 
     @Composable
     override fun onInput(listener: (InputEvent) -> Unit): Int {
-        return onEvent("input", listener)
+        return onEvent(INPUT, listener)
     }
 
     override fun onInputDirect(listener: (InputEvent) -> Unit): Int {
-        return onEventDirect("input", listener)
+        return onEventDirect(INPUT, listener)
     }
 
     @Composable
     override fun onFocus(listener: (FocusEvent) -> Unit): Int {
-        return onEvent("focus", listener)
+        return onEvent(FOCUS, listener)
     }
 
     override fun onFocusDirect(listener: (FocusEvent) -> Unit): Int {
-        return onEventDirect("focus", listener)
+        return onEventDirect(FOCUS, listener)
     }
 
     @Composable
     override fun onBlur(listener: (FocusEvent) -> Unit): Int {
-        return onEvent("blur", listener)
+        return onEvent(BLUR, listener)
     }
 
     override fun onBlurDirect(listener: (FocusEvent) -> Unit): Int {
-        return onEventDirect("blur", listener)
+        return onEventDirect(BLUR, listener)
     }
 
     @Composable
     override fun onKeydown(listener: (KeyboardEvent) -> Unit): Int {
-        return onEvent("keydown", listener)
+        return onEvent(KEY_DOWN, listener)
     }
 
     override fun onKeydownDirect(listener: (KeyboardEvent) -> Unit): Int {
-        return onEventDirect("keydown", listener)
+        return onEventDirect(KEY_DOWN, listener)
     }
 
     @Composable
     override fun onKeyup(listener: (KeyboardEvent) -> Unit): Int {
-        return onEvent("keyup", listener)
+        return onEvent(KEY_UP, listener)
     }
 
     override fun onKeyupDirect(listener: (KeyboardEvent) -> Unit): Int {
-        return onEventDirect("keyup", listener)
+        return onEventDirect(KEY_UP, listener)
     }
 
     @Composable
     override fun onKeypress(listener: (KeyboardEvent) -> Unit): Int {
-        return onEvent("keypress", listener)
+        return onEvent(KEY_PRESS, listener)
     }
 
     override fun onKeypressDirect(listener: (KeyboardEvent) -> Unit): Int {
-        return onEventDirect("keypress", listener)
+        return onEventDirect(KEY_PRESS, listener)
+    }
+
+    @Composable
+    override fun onTouchStart(listener: (TouchEvent) -> Unit): Int {
+        return onEvent(TOUCH_START, listener)
+    }
+
+    override fun onTouchStartDirect(listener: (TouchEvent) -> Unit): Int {
+        return onEventDirect(TOUCH_START, listener)
+    }
+
+    @Composable
+    override fun onTouchEnd(listener: (TouchEvent) -> Unit): Int {
+        return onEvent(TOUCH_END, listener)
+    }
+
+    override fun onTouchEndDirect(listener: (TouchEvent) -> Unit): Int {
+        return onEventDirect(TOUCH_END, listener)
+    }
+
+    @Composable
+    override fun onTouchCancel(listener: (TouchEvent) -> Unit): Int {
+        return onEvent(TOUCH_CANCEL, listener)
+    }
+
+    override fun onTouchCancelDirect(listener: (TouchEvent) -> Unit): Int {
+        return onEventDirect(TOUCH_CANCEL, listener)
+    }
+
+    @Composable
+    override fun onMouseDown(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_DOWN, listener)
+    }
+
+    override fun onMouseDownDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_DOWN, listener)
+    }
+
+    @Composable
+    override fun onMouseUp(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_UP, listener)
+    }
+
+    override fun onMouseUpDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_UP, listener)
+    }
+
+    @Composable
+    override fun onMouseLeave(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_LEAVE, listener)
+    }
+
+    override fun onMouseLeaveDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_LEAVE, listener)
+    }
+
+    @Composable
+    override fun onMouseOver(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_OVER, listener)
+    }
+
+    override fun onMouseOverDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_OVER, listener)
+    }
+
+    @Composable
+    override fun onMouseOut(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_OUT, listener)
+    }
+
+    override fun onMouseOutDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_OUT, listener)
+    }
+
+    @Composable
+    override fun onPointerDown(listener: (PointerEvent) -> Unit): Int {
+        return onEvent(POINTER_DOWN, listener)
+    }
+
+    override fun onPointerDownDirect(listener: (PointerEvent) -> Unit): Int {
+        return onEventDirect(POINTER_DOWN, listener)
+    }
+
+    @Composable
+    override fun onPointerUp(listener: (PointerEvent) -> Unit): Int {
+        return onEvent(POINTER_UP, listener)
+    }
+
+    override fun onPointerUpDirect(listener: (PointerEvent) -> Unit): Int {
+        return onEventDirect(POINTER_UP, listener)
     }
 
     @Composable
@@ -219,6 +313,18 @@ public open class TagEventsDelegateImpl<E : HTMLElement>(
 }
 
 /**
+ * Global callback for the pointer up event.
+ */
+@Composable
+public fun onGlobalPointerUp(callback: () -> Unit) {
+    DisposableEffect(Unit) {
+        val listener = { _: Event -> callback() }
+        document.addEventListener(POINTER_UP, listener)
+        onDispose { document.removeEventListener(POINTER_UP, listener) }
+    }
+}
+
+/**
  * A composable function that triggers a callback whenever the global window size changes.
  *
  * This function registers an event listener for the `resize` event on the global `window` object.
@@ -250,3 +356,23 @@ public fun onGlobalWindowSize(callback: (width: Int, height: Int) -> Unit) {
 }
 
 private const val RESIZE = "resize"
+private const val CLICK = "click"
+private const val CONTEXT_MENU = "contextmenu"
+private const val DBL_CLICK = "dblclick"
+private const val CHANGE = "change"
+private const val INPUT = "input"
+private const val FOCUS = "focus"
+private const val BLUR = "blur"
+private const val KEY_DOWN = "keydown"
+private const val KEY_UP = "keyup"
+private const val KEY_PRESS = "keypress"
+private const val TOUCH_START = "touchstart"
+private const val TOUCH_END = "touchend"
+private const val TOUCH_CANCEL = "touchcancel"
+private const val MOUSE_DOWN = "mousedown"
+private const val MOUSE_UP = "mouseup"
+private const val MOUSE_LEAVE = "mouseleave"
+private const val MOUSE_OVER = "mouseover"
+private const val MOUSE_OUT = "mouseout"
+private const val POINTER_DOWN = "pointerdown"
+private const val POINTER_UP = "pointerup"

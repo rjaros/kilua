@@ -43,6 +43,11 @@ import dev.kilua.compose.adaptive.rememberBreakpoint
 import dev.kilua.compose.adaptive.rememberOrientation
 import dev.kilua.compose.adaptive.rememberTailwindcssBreakpoint
 import dev.kilua.compose.root
+import dev.kilua.compose.foundation.layout.Arrangement
+import dev.kilua.compose.foundation.layout.Box
+import dev.kilua.compose.foundation.layout.Row
+import dev.kilua.compose.root
+import dev.kilua.compose.ui.Alignment
 import dev.kilua.compose.ui.Modifier
 import dev.kilua.compose.ui.background
 import dev.kilua.compose.ui.border
@@ -54,6 +59,14 @@ import dev.kilua.compose.ui.title
 import dev.kilua.compose.ui.visibility
 import dev.kilua.compose.ui.width
 import dev.kilua.core.IComponent
+import dev.kilua.compose.ui.clickable
+import dev.kilua.compose.ui.display
+import dev.kilua.compose.ui.fillMaxWidth
+import dev.kilua.compose.ui.height
+import dev.kilua.compose.ui.id
+import dev.kilua.compose.ui.onEvent
+import dev.kilua.compose.ui.size
+import dev.kilua.compose.ui.title
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
 import dev.kilua.externals.get
@@ -168,6 +181,7 @@ import web.dom.CustomEvent
 import web.dom.HTMLElement
 import web.dom.Text
 import web.dom.events.Event
+import web.dom.events.MouseEvent
 import web.toJsNumber
 import web.toJsString
 import web.window
@@ -249,19 +263,65 @@ class App : Application() {
 
                 margin(20.px)
 
+                Box(Modifier.size(500.px).border(1.px, BorderStyle.Solid, Color.Black)) {
+                    Box(Modifier.size(100.px).align(Alignment.TopCenter).background(Color.Red)) {
+                        +"TopCenter"
+                    }
+                    Box(Modifier.size(80.px).align(Alignment.CenterEnd).background(Color.Green)) {
+                        +"CenterEnd"
+                    }
+                    Box(Modifier.fillMaxWidth().height(30.px).align(Alignment.BottomCenter).background(Color.Yellow)) {
+                        +"BottomCenter"
+                    }
+                    Box(Modifier.size(60.px).align(Alignment.Center).background(Color.Silver)) {
+                        +"Center"
+                    }
+                }
+
+                hr()
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(20.px, Alignment.CenterHorizontally),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    div {
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Hello World!"
+                    }
+                    div {
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Hello World!"
+                    }
+                    div {
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Hello World!"
+                    }
+                }
+
+                hr()
+
                 div {
                     var useMod by remember { mutableStateOf(true) }
 
                     val modifier = Modifier.display(Display.InlineBlock)
                         .id("ala")
-                        .title("Tytuł")
+                        .onEvent<MouseEvent>("mouseover") {
+                            console.log("mouseover")
+                        }.title("Tytuł")
                         .className("klasa")
                         .border(1.px, BorderStyle.Solid) then (
-                            if (useMod) {
-                                Modifier.visibility(Visibility.Hidden)
-                            } else {
-                                Modifier.visibility(Visibility.Visible)
+                            Modifier.clickable(useMod) {
+                                console.log("click")
                             }
+//                            if (useMod) {
+//                                Modifier.onClick {
+//                                    console.log("click")
+//                                }
+//                            } else {
+//                                Modifier.onDblclick {
+//                                    console.log("dblclick")
+//                                }
+//                            }
                             )
 
                     div {

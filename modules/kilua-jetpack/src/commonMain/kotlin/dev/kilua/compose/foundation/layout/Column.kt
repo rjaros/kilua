@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
+ * Copyright (c) 2025 Ghasem Shirdel
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +21,33 @@
  * SOFTWARE.
  */
 
-import dev.kilua.BootstrapCssModule
-import dev.kilua.BootstrapIconsModule
-import dev.kilua.BootstrapModule
-import dev.kilua.CoreModule
-import dev.kilua.FontAwesomeModule
-import dev.kilua.ImaskModule
-import dev.kilua.JetpackModule
-import dev.kilua.SplitjsModule
-import dev.kilua.TabulatorModule
-import dev.kilua.TempusDominusModule
-import dev.kilua.ToastifyModule
-import dev.kilua.TomSelectModule
-import dev.kilua.TrixModule
-import dev.kilua.startApplication
+package dev.kilua.compose.foundation.layout
 
-fun main() {
-    startApplication(
-        ::App,
-        null,
-        BootstrapModule,
-        BootstrapCssModule,
-        BootstrapIconsModule,
-        FontAwesomeModule,
-        ImaskModule,
-        SplitjsModule,
-        TabulatorModule,
-        TempusDominusModule,
-        TomSelectModule,
-        ToastifyModule,
-        TrixModule,
-        JetpackModule,
-//        TailwindcssModule,
-        CoreModule
-    )
+import androidx.compose.runtime.Composable
+import dev.kilua.compose.ui.Alignment
+import dev.kilua.compose.ui.Modifier
+import dev.kilua.core.IComponent
+import dev.kilua.panel.vPanel
+
+internal object ColumnScopeInstance : ColumnScope
+
+/**
+ * A layout composable that places its children in a vertical sequence.
+ */
+@Composable
+public fun IComponent.Column(
+    modifier: Modifier = Modifier,
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
+    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    val gap = if (verticalArrangement is SpacedAligned) verticalArrangement.space else null
+    vPanel(
+        justifyContent = verticalArrangement.justifyContent,
+        alignItems = horizontalAlignment.alignItems,
+        gap = gap
+    ) {
+        +modifier
+        ColumnScopeInstance.content()
+    }
 }

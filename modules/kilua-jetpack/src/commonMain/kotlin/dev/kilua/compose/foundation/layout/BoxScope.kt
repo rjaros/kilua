@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,39 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package dev.kilua.compose.foundation.layout
 
-import dev.kilua.BootstrapCssModule
-import dev.kilua.BootstrapIconsModule
-import dev.kilua.BootstrapModule
-import dev.kilua.CoreModule
-import dev.kilua.FontAwesomeModule
-import dev.kilua.ImaskModule
-import dev.kilua.JetpackModule
-import dev.kilua.SplitjsModule
-import dev.kilua.TabulatorModule
-import dev.kilua.TempusDominusModule
-import dev.kilua.ToastifyModule
-import dev.kilua.TomSelectModule
-import dev.kilua.TrixModule
-import dev.kilua.startApplication
+// Inspired by Kobweb API
+// See also: https://github.com/varabyte/kobweb/blob/main/frontend/kobweb-compose/src/jsMain/kotlin/com/varabyte/kobweb/compose/foundation/layout/Box.kt
 
-fun main() {
-    startApplication(
-        ::App,
-        null,
-        BootstrapModule,
-        BootstrapCssModule,
-        BootstrapIconsModule,
-        FontAwesomeModule,
-        ImaskModule,
-        SplitjsModule,
-        TabulatorModule,
-        TempusDominusModule,
-        TomSelectModule,
-        ToastifyModule,
-        TrixModule,
-        JetpackModule,
-//        TailwindcssModule,
-        CoreModule
-    )
+import androidx.compose.runtime.Immutable
+import dev.kilua.compose.ui.Alignment
+import dev.kilua.compose.ui.Modifier
+import dev.kilua.compose.ui.style
+
+/**
+ * Allows declaring mapping from Jetpack Compose align() modifier to CSS Grid align-self and justify-self.
+ */
+@Immutable
+public interface BoxScope {
+    public fun Modifier.align(alignment: Alignment): Modifier {
+        return style("place-self", alignment.placeValue)
+    }
 }

@@ -1,6 +1,7 @@
 config.resolve.alias = {
     "zzz-kilua-assets/k-style.css": false,
     "zzz-kilua-assets/k-bootstrap.css": false,
+    "zzz-kilua-assets/k-jetpack.css": false,
     "zzz-kilua-assets/k-splitjs.css": false,
     "zzz-kilua-assets/k-tabulator.css": false,
     "zzz-kilua-assets/k-tempus-dominus.css": false,

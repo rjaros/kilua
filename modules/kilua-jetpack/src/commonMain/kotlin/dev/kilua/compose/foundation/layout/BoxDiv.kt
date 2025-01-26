@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +20,35 @@
  * SOFTWARE.
  */
 
-import dev.kilua.BootstrapCssModule
-import dev.kilua.BootstrapIconsModule
-import dev.kilua.BootstrapModule
-import dev.kilua.CoreModule
-import dev.kilua.FontAwesomeModule
-import dev.kilua.ImaskModule
-import dev.kilua.JetpackModule
-import dev.kilua.SplitjsModule
-import dev.kilua.TabulatorModule
-import dev.kilua.TempusDominusModule
-import dev.kilua.ToastifyModule
-import dev.kilua.TomSelectModule
-import dev.kilua.TrixModule
-import dev.kilua.startApplication
+package dev.kilua.compose.foundation.layout
 
-fun main() {
-    startApplication(
-        ::App,
-        null,
-        BootstrapModule,
-        BootstrapCssModule,
-        BootstrapIconsModule,
-        FontAwesomeModule,
-        ImaskModule,
-        SplitjsModule,
-        TabulatorModule,
-        TempusDominusModule,
-        TomSelectModule,
-        ToastifyModule,
-        TrixModule,
-        JetpackModule,
-//        TailwindcssModule,
-        CoreModule
-    )
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import dev.kilua.compose.ComponentNode
+import dev.kilua.core.IComponent
+import dev.kilua.core.RenderConfig
+import dev.kilua.html.Div
+
+/**
+ * A dedicated internal component for the Box composable to force a specific CSS class.
+ */
+internal class BoxDiv(
+    renderConfig: RenderConfig = RenderConfig.Default
+) : Div(renderConfig = renderConfig) {
+    init {
+        internalClassName = "kilua-jetpack-box"
+        initElementClassList()
+    }
+}
+
+/**
+ * A dedicated internal composable for the BoxDiv component.
+ */
+@Composable
+internal fun IComponent.boxDiv(
+    content: @Composable BoxDiv.() -> Unit = {}
+) {
+    val component = remember { BoxDiv(renderConfig) }
+    ComponentNode(component, {
+    }, content)
 }

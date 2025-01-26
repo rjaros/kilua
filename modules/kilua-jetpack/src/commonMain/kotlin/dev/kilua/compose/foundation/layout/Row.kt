@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
+ * Copyright (c) 2025 Ghasem Shirdel
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +21,33 @@
  * SOFTWARE.
  */
 
-import dev.kilua.BootstrapCssModule
-import dev.kilua.BootstrapIconsModule
-import dev.kilua.BootstrapModule
-import dev.kilua.CoreModule
-import dev.kilua.FontAwesomeModule
-import dev.kilua.ImaskModule
-import dev.kilua.JetpackModule
-import dev.kilua.SplitjsModule
-import dev.kilua.TabulatorModule
-import dev.kilua.TempusDominusModule
-import dev.kilua.ToastifyModule
-import dev.kilua.TomSelectModule
-import dev.kilua.TrixModule
-import dev.kilua.startApplication
+package dev.kilua.compose.foundation.layout
 
-fun main() {
-    startApplication(
-        ::App,
-        null,
-        BootstrapModule,
-        BootstrapCssModule,
-        BootstrapIconsModule,
-        FontAwesomeModule,
-        ImaskModule,
-        SplitjsModule,
-        TabulatorModule,
-        TempusDominusModule,
-        TomSelectModule,
-        ToastifyModule,
-        TrixModule,
-        JetpackModule,
-//        TailwindcssModule,
-        CoreModule
-    )
+import androidx.compose.runtime.Composable
+import dev.kilua.compose.ui.Alignment
+import dev.kilua.compose.ui.Modifier
+import dev.kilua.core.IComponent
+import dev.kilua.panel.hPanel
+
+internal object RowScopeInstance : RowScope
+
+/**
+ * A layout composable that places its children in a horizontal sequence.
+ */
+@Composable
+public fun IComponent.Row(
+    modifier: Modifier = Modifier,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
+    verticalAlignment: Alignment.Vertical = Alignment.Top,
+    content: @Composable RowScope.() -> Unit
+) {
+    val gap = if (horizontalArrangement is SpacedAligned) horizontalArrangement.space else null
+    hPanel(
+        justifyContent = horizontalArrangement.justifyContent,
+        alignItems = verticalAlignment.alignItems,
+        gap = gap
+    ) {
+        +modifier
+        RowScopeInstance.content()
+    }
 }

@@ -1,0 +1,8 @@
+.kilua-jetpack-box {
+    display: grid;
+    grid-template: minmax(0px, 1fr) / minmax(0px, 1fr);
+}
+
+.kilua-jetpack-box > * {
+    grid-area: 1 / 1;
+}
