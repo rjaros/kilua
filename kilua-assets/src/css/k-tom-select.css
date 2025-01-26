@@ -1,9 +1,19 @@
+:root {
+    --ts-pr-clear-button: 0em;
+    --ts-pr-caret: 0rem;
+}
+
+.ts-control > input {
+    min-width: 0;
+}
+
 .ts-wrapper:not(.multi) .ts-control {
     flex-wrap: nowrap;
 }
 
 .ts-control .item {
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .ts-control input::placeholder {
