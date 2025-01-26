@@ -42,7 +42,6 @@ import dev.kilua.compose.adaptive.currentWindowSizeClass
 import dev.kilua.compose.adaptive.rememberBreakpoint
 import dev.kilua.compose.adaptive.rememberOrientation
 import dev.kilua.compose.adaptive.rememberTailwindcssBreakpoint
-import dev.kilua.compose.root
 import dev.kilua.compose.foundation.layout.Arrangement
 import dev.kilua.compose.foundation.layout.Box
 import dev.kilua.compose.foundation.layout.Row
@@ -52,13 +51,6 @@ import dev.kilua.compose.ui.Modifier
 import dev.kilua.compose.ui.background
 import dev.kilua.compose.ui.border
 import dev.kilua.compose.ui.className
-import dev.kilua.compose.ui.display
-import dev.kilua.compose.ui.height
-import dev.kilua.compose.ui.id
-import dev.kilua.compose.ui.title
-import dev.kilua.compose.ui.visibility
-import dev.kilua.compose.ui.width
-import dev.kilua.core.IComponent
 import dev.kilua.compose.ui.clickable
 import dev.kilua.compose.ui.display
 import dev.kilua.compose.ui.fillMaxWidth
@@ -67,6 +59,8 @@ import dev.kilua.compose.ui.id
 import dev.kilua.compose.ui.onEvent
 import dev.kilua.compose.ui.size
 import dev.kilua.compose.ui.title
+import dev.kilua.compose.ui.width
+import dev.kilua.core.IComponent
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.console
 import dev.kilua.externals.get
@@ -262,6 +256,10 @@ class App : Application() {
             div {
 
                 margin(20.px)
+
+                ResponsiveLayout()
+
+                hr()
 
                 Box(Modifier.size(500.px).border(1.px, BorderStyle.Solid, Color.Black)) {
                     Box(Modifier.size(100.px).align(Alignment.TopCenter).background(Color.Red)) {
