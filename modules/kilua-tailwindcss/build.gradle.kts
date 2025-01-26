@@ -27,8 +27,8 @@ kotlin {
                 implementation(project(":kilua"))
                 implementation(npm("postcss", libs.versions.postcss.asProvider().get()))
                 implementation(npm("postcss-loader", libs.versions.postcss.loader.get()))
-                implementation(npm("autoprefixer", libs.versions.autoprefixer.get()))
                 implementation(npm("tailwindcss", libs.versions.tailwindcss.get()))
+                implementation(npm("@tailwindcss/postcss", libs.versions.tailwindcss.get()))
                 implementation(npm("cssnano", libs.versions.cssnano.get()))
                 implementation(npm("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get()))
             }

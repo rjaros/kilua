@@ -409,8 +409,8 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 override("sanitize-html", kiluaVersions["sanitize-html"]!!)
                 override("postcss", kiluaVersions["postcss"]!!)
                 override("postcss-loader", kiluaVersions["postcss-loader"]!!)
-                override("autoprefixer", kiluaVersions["autoprefixer"]!!)
                 override("tailwindcss", kiluaVersions["tailwindcss"]!!)
+                override("@tailwindcss/postcss", kiluaVersions["tailwindcss"]!!)
                 override("cssnano", kiluaVersions["cssnano"]!!)
                 override("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
             }
@@ -441,8 +441,8 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 resolution("sanitize-html", kiluaVersions["sanitize-html"]!!)
                 resolution("postcss", kiluaVersions["postcss"]!!)
                 resolution("postcss-loader", kiluaVersions["postcss-loader"]!!)
-                resolution("autoprefixer", kiluaVersions["autoprefixer"]!!)
                 resolution("tailwindcss", kiluaVersions["tailwindcss"]!!)
+                resolution("@tailwindcss/postcss", kiluaVersions["tailwindcss"]!!)
                 resolution("cssnano", kiluaVersions["cssnano"]!!)
                 resolution("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
             }

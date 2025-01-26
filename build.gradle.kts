@@ -47,8 +47,8 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJ
         override("sanitize-html", libs.versions.sanitize.html.get())
         override("postcss", libs.versions.postcss.asProvider().get())
         override("postcss-loader", libs.versions.postcss.loader.get())
-        override("autoprefixer", libs.versions.autoprefixer.get())
         override("tailwindcss", libs.versions.tailwindcss.get())
+        override("@tailwindcss/postcss", libs.versions.tailwindcss.get())
         override("cssnano", libs.versions.cssnano.get())
         override("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get())
     }
