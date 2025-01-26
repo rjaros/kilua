@@ -30,7 +30,6 @@ import dev.kilua.externals.AbortController
 import dev.kilua.externals.buildAddEventListenerOptions
 import dev.kilua.utils.cast
 import dev.kilua.utils.nativeMapOf
-import web.document
 import web.dom.HTMLElement
 import web.dom.TouchEvent
 import web.dom.events.Event
@@ -38,10 +37,6 @@ import web.dom.events.FocusEvent
 import web.dom.events.InputEvent
 import web.dom.events.KeyboardEvent
 import web.dom.events.MouseEvent
-import web.window
-import kotlin.collections.component1
-import kotlin.collections.component2
-import kotlin.collections.set
 import web.dom.pointerevents.PointerEvent
 
 /**
@@ -312,67 +307,24 @@ public open class TagEventsDelegateImpl<E : HTMLElement>(
     }
 }
 
-/**
- * Global callback for the pointer up event.
- */
-@Composable
-public fun onGlobalPointerUp(callback: () -> Unit) {
-    DisposableEffect(Unit) {
-        val listener = { _: Event -> callback() }
-        document.addEventListener(POINTER_UP, listener)
-        onDispose { document.removeEventListener(POINTER_UP, listener) }
-    }
-}
-
-/**
- * A composable function that triggers a callback whenever the global window size changes.
- *
- * This function registers an event listener for the `resize` event on the global `window` object.
- * Whenever the window is resized, the provided callback is invoked with the current window dimensions.
- * The event listener is automatically removed when the composition leaves the composition tree.
- *
- * @param callback A lambda function that receives the current window width and height.
- *                 - `width`: The inner width of the window in pixels.
- *                 - `height`: The inner height of the window in pixels.
- *
- * Example usage:
- * ```
- * onGlobalWindowSize { width, height ->
- *     println("Window size: ${width}x${height}")
- * }
- * ```
- *
- * @see DisposableEffect
- */
-@Composable
-public fun onGlobalWindowSize(callback: (width: Int, height: Int) -> Unit) {
-    DisposableEffect(Unit) {
-        val listener = { _: Event ->
-            callback(window.innerWidth, window.innerHeight)
-        }
-        window.addEventListener(RESIZE, listener)
-        onDispose { window.removeEventListener(RESIZE, listener) }
-    }
-}
-
-private const val RESIZE = "resize"
-private const val CLICK = "click"
-private const val CONTEXT_MENU = "contextmenu"
-private const val DBL_CLICK = "dblclick"
-private const val CHANGE = "change"
-private const val INPUT = "input"
-private const val FOCUS = "focus"
-private const val BLUR = "blur"
-private const val KEY_DOWN = "keydown"
-private const val KEY_UP = "keyup"
-private const val KEY_PRESS = "keypress"
-private const val TOUCH_START = "touchstart"
-private const val TOUCH_END = "touchend"
-private const val TOUCH_CANCEL = "touchcancel"
-private const val MOUSE_DOWN = "mousedown"
-private const val MOUSE_UP = "mouseup"
-private const val MOUSE_LEAVE = "mouseleave"
-private const val MOUSE_OVER = "mouseover"
-private const val MOUSE_OUT = "mouseout"
-private const val POINTER_DOWN = "pointerdown"
-private const val POINTER_UP = "pointerup"
+internal const val RESIZE = "resize"
+internal const val CLICK = "click"
+internal const val CONTEXT_MENU = "contextmenu"
+internal const val DBL_CLICK = "dblclick"
+internal const val CHANGE = "change"
+internal const val INPUT = "input"
+internal const val FOCUS = "focus"
+internal const val BLUR = "blur"
+internal const val KEY_DOWN = "keydown"
+internal const val KEY_UP = "keyup"
+internal const val KEY_PRESS = "keypress"
+internal const val TOUCH_START = "touchstart"
+internal const val TOUCH_END = "touchend"
+internal const val TOUCH_CANCEL = "touchcancel"
+internal const val MOUSE_DOWN = "mousedown"
+internal const val MOUSE_UP = "mouseup"
+internal const val MOUSE_LEAVE = "mouseleave"
+internal const val MOUSE_OVER = "mouseover"
+internal const val MOUSE_OUT = "mouseout"
+internal const val POINTER_DOWN = "pointerdown"
+internal const val POINTER_UP = "pointerup"

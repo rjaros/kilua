@@ -1,5 +1,4 @@
 /*
- * Copyright (c) 2023 Robert Jaros
  * Copyright (c) 2025 Ghasem Shirdel
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,6 +30,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import dev.kilua.compose.adaptive.WindowHeightSizeClass.Companion.DefaultSizeClasses
+import dev.kilua.compose.adaptive.WindowWidthSizeClass.Companion.DefaultSizeClasses
 import dev.kilua.html.helpers.onGlobalWindowSize
 import web.window
 import kotlin.contracts.ExperimentalContracts

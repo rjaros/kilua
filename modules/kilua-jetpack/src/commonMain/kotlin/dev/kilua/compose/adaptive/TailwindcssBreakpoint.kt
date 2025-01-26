@@ -1,5 +1,4 @@
 /*
- * Copyright (c) 2023 Robert Jaros
  * Copyright (c) 2025 Ghasem Shirdel
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
