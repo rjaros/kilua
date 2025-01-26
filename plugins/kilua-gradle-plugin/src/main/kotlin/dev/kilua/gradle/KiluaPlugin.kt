@@ -238,6 +238,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     from(wasmJsProcessResources)
                     exclude("/tailwind/**")
                     from("build/kotlin-webpack/wasmJs.ssr/productionExecutable")
+                    // A wasm file with original name is still loaded from the main js file
+                    from("build/compileSync/wasmJs/main/productionExecutable/optimized") {
+                        include { it.name.endsWith(".wasm") }
+                    }
                     into("build/dist/wasmJs.ssr/productionExecutable")
                 }
                 tasks.register<Jar>("wasmJsArchiveSSR") {
