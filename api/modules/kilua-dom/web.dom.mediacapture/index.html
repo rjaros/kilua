@@ -25,40 +25,72 @@
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../../index.html">
-                            kilua-project
-                    </a>            </div>
-            <div class="library-version">0.0.18
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.19
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-dom/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":modules:kilua-dom/commonMain" data-filter=":modules:kilua-dom/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-dom:dokkaHtmlPartial/commonMain">common</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="package" id="content" pageids="kilua-dom::web.dom.mediacapture////PointingToDeclaration//-200797687">
+<div class="main-content" data-page-type="package" id="content" pageids="kilua-dom::web.dom.mediacapture////PointingToDeclaration//-1497488939">
   <div class="breadcrumbs"><a href="../index.html">kilua-dom</a><span class="delimiter">/</span><span class="current">web.dom.mediacapture</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
@@ -68,452 +100,452 @@
     <div class="tabs-section-body">
       <div data-togglable="TYPE">
         <h2 class="">Types</h2>
-        <div class="table"><a data-name="905485748%2FClasslikes%2F-200797687" anchor-label="Capabilities" id="905485748%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="905485748%2FClasslikes%2F-1497488939" anchor-label="Capabilities" id="905485748%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-capabilities/index.html"><span><span>Capabilities</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="905485748%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="905485748%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-capabilities/index.html">Capabilities</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-capabilities/index.html">Capabilities</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1494023563%2FClasslikes%2F-200797687" anchor-label="ConstrainablePattern" id="1494023563%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1494023563%2FClasslikes%2F-1497488939" anchor-label="ConstrainablePattern" id="1494023563%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-constrainable-pattern/index.html"><span>Constrainable</span><wbr><span><span>Pattern</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1494023563%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1494023563%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrainable-pattern/index.html">ConstrainablePattern</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrainable-pattern/index.html">ConstrainablePattern</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1310301745%2FClasslikes%2F-200797687" anchor-label="ConstrainBooleanParameters" id="-1310301745%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1310301745%2FClasslikes%2F-1497488939" anchor-label="ConstrainBooleanParameters" id="-1310301745%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-constrain-boolean-parameters/index.html"><span>Constrain</span><wbr><span>Boolean</span><wbr><span><span>Parameters</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1310301745%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1310301745%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrain-boolean-parameters/index.html">ConstrainBooleanParameters</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/ConstrainBooleanParameters">ConstrainBooleanParameters</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrain-boolean-parameters/index.html">ConstrainBooleanParameters</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/ConstrainBooleanParameters">ConstrainBooleanParameters</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-113497564%2FClasslikes%2F-200797687" anchor-label="ConstrainDOMStringParameters" id="-113497564%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-113497564%2FClasslikes%2F-1497488939" anchor-label="ConstrainDOMStringParameters" id="-113497564%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-constrain-d-o-m-string-parameters/index.html"><span>Constrain</span><wbr><span>DOMString</span><wbr><span><span>Parameters</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-113497564%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-113497564%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrain-d-o-m-string-parameters/index.html">ConstrainDOMStringParameters</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/ConstrainDOMStringParameters">ConstrainDOMStringParameters</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrain-d-o-m-string-parameters/index.html">ConstrainDOMStringParameters</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/ConstrainDOMStringParameters">ConstrainDOMStringParameters</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="348324693%2FClasslikes%2F-200797687" anchor-label="ConstrainDoubleRange" id="348324693%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="348324693%2FClasslikes%2F-1497488939" anchor-label="ConstrainDoubleRange" id="348324693%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-constrain-double-range/index.html"><span>Constrain</span><wbr><span>Double</span><wbr><span><span>Range</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="348324693%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="348324693%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrain-double-range/index.html">ConstrainDoubleRange</a> : <a href="-double-range/index.html">DoubleRange</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrain-double-range/index.html">ConstrainDoubleRange</a> : <a href="-double-range/index.html">DoubleRange</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-508074206%2FClasslikes%2F-200797687" anchor-label="Constraints" id="-508074206%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-508074206%2FClasslikes%2F-1497488939" anchor-label="Constraints" id="-508074206%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-constraints/index.html"><span><span>Constraints</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-508074206%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-508074206%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constraints/index.html">Constraints</a> : <a href="-constraint-set/index.html">ConstraintSet</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constraints/index.html">Constraints</a> : <a href="-constraint-set/index.html">ConstraintSet</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2081114419%2FClasslikes%2F-200797687" anchor-label="ConstraintSet" id="2081114419%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="2081114419%2FClasslikes%2F-1497488939" anchor-label="ConstraintSet" id="2081114419%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-constraint-set/index.html"><span>Constraint</span><wbr><span><span>Set</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2081114419%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2081114419%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constraint-set/index.html">ConstraintSet</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constraint-set/index.html">ConstraintSet</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2108528373%2FClasslikes%2F-200797687" anchor-label="ConstrainULongRange" id="2108528373%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="2108528373%2FClasslikes%2F-1497488939" anchor-label="ConstrainULongRange" id="2108528373%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-constrain-u-long-range/index.html"><span>Constrain</span><wbr><span>ULong</span><wbr><span><span>Range</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2108528373%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2108528373%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrain-u-long-range/index.html">ConstrainULongRange</a> : <a href="-u-long-range/index.html">ULongRange</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-constrain-u-long-range/index.html">ConstrainULongRange</a> : <a href="-u-long-range/index.html">ULongRange</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-40911316%2FClasslikes%2F-200797687" anchor-label="DoubleRange" id="-40911316%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-40911316%2FClasslikes%2F-1497488939" anchor-label="DoubleRange" id="-40911316%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-double-range/index.html"><span>Double</span><wbr><span><span>Range</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-40911316%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-40911316%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-double-range/index.html">DoubleRange</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/DoubleRange">DoubleRange</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-double-range/index.html">DoubleRange</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/DoubleRange">DoubleRange</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-94021302%2FClasslikes%2F-200797687" anchor-label="InputDeviceInfo" id="-94021302%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-94021302%2FClasslikes%2F-1497488939" anchor-label="InputDeviceInfo" id="-94021302%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-input-device-info/index.html"><span>Input</span><wbr><span>Device</span><wbr><span><span>Info</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-94021302%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-94021302%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-input-device-info/index.html">InputDeviceInfo</a> : <a href="-media-device-info/index.html">MediaDeviceInfo</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-input-device-info/index.html">InputDeviceInfo</a> : <a href="-media-device-info/index.html">MediaDeviceInfo</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="694549232%2FClasslikes%2F-200797687" anchor-label="MediaDeviceInfo" id="694549232%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="694549232%2FClasslikes%2F-1497488939" anchor-label="MediaDeviceInfo" id="694549232%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-device-info/index.html"><span>Media</span><wbr><span>Device</span><wbr><span><span>Info</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="694549232%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="694549232%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-media-device-info/index.html">MediaDeviceInfo</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaDeviceInfo">MediaDeviceInfo</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-media-device-info/index.html">MediaDeviceInfo</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaDeviceInfo">MediaDeviceInfo</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2116195018%2FClasslikes%2F-200797687" anchor-label="MediaDeviceKind" id="2116195018%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="2116195018%2FClasslikes%2F-1497488939" anchor-label="MediaDeviceKind" id="2116195018%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-device-kind/index.html"><span>Media</span><wbr><span>Device</span><wbr><span><span>Kind</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2116195018%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2116195018%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-device-kind/index.html">MediaDeviceKind</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-device-kind/index.html">MediaDeviceKind</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1063637391%2FClasslikes%2F-200797687" anchor-label="MediaDevices" id="-1063637391%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1063637391%2FClasslikes%2F-1497488939" anchor-label="MediaDevices" id="-1063637391%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-devices/index.html"><span>Media</span><wbr><span><span>Devices</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1063637391%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1063637391%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-media-devices/index.html">MediaDevices</a> : <a href="../web.dom.events/-event-target/index.html">EventTarget</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaDevices">MediaDevices</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-media-devices/index.html">MediaDevices</a> : <a href="../web.dom.events/-event-target/index.html">EventTarget</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaDevices">MediaDevices</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="863137940%2FClasslikes%2F-200797687" anchor-label="MediaStream" id="863137940%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="863137940%2FClasslikes%2F-1497488939" anchor-label="MediaStream" id="863137940%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-stream/index.html"><span>Media</span><wbr><span><span>Stream</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="863137940%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="863137940%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-media-stream/index.html">MediaStream</a> : <a href="../web.dom.events/-event-target/index.html">EventTarget</a>, <a href="../web.dom/-media-provider/index.html">MediaProvider</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaStream">MediaStream</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-media-stream/index.html">MediaStream</a> : <a href="../web.dom.events/-event-target/index.html">EventTarget</a>, <a href="../web.dom/-media-provider/index.html">MediaProvider</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaStream">MediaStream</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1076066664%2FClasslikes%2F-200797687" anchor-label="MediaStreamConstraints" id="-1076066664%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1076066664%2FClasslikes%2F-1497488939" anchor-label="MediaStreamConstraints" id="-1076066664%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-stream-constraints/index.html"><span>Media</span><wbr><span>Stream</span><wbr><span><span>Constraints</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1076066664%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1076066664%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-stream-constraints/index.html">MediaStreamConstraints</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaStreamConstraints">MediaStreamConstraints</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-stream-constraints/index.html">MediaStreamConstraints</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaStreamConstraints">MediaStreamConstraints</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1175365917%2FClasslikes%2F-200797687" anchor-label="MediaStreamTrack" id="-1175365917%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1175365917%2FClasslikes%2F-1497488939" anchor-label="MediaStreamTrack" id="-1175365917%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-stream-track/index.html"><span>Media</span><wbr><span>Stream</span><wbr><span><span>Track</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1175365917%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1175365917%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-media-stream-track/index.html">MediaStreamTrack</a> : <a href="../web.dom.events/-event-target/index.html">EventTarget</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaStreamTrack">MediaStreamTrack</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-media-stream-track/index.html">MediaStreamTrack</a> : <a href="../web.dom.events/-event-target/index.html">EventTarget</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaStreamTrack">MediaStreamTrack</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2032553861%2FClasslikes%2F-200797687" anchor-label="MediaStreamTrackEvent" id="2032553861%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="2032553861%2FClasslikes%2F-1497488939" anchor-label="MediaStreamTrackEvent" id="2032553861%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-stream-track-event/index.html"><span>Media</span><wbr><span>Stream</span><wbr><span>Track</span><wbr><span><span>Event</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2032553861%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2032553861%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-media-stream-track-event/index.html">MediaStreamTrackEvent</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">eventInitDict<span class="token operator">: </span><a href="-media-stream-track-event-init/index.html">MediaStreamTrackEventInit</a></span></span><span class="token punctuation">)</span> : <a href="../web.dom.events/-event/index.html">Event</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaStreamTrackEvent">MediaStreamTrackEvent</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-media-stream-track-event/index.html">MediaStreamTrackEvent</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">eventInitDict<span class="token operator">: </span><a href="-media-stream-track-event-init/index.html">MediaStreamTrackEventInit</a></span></span><span class="token punctuation">)</span> : <a href="../web.dom.events/-event/index.html">Event</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaStreamTrackEvent">MediaStreamTrackEvent</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1217109419%2FClasslikes%2F-200797687" anchor-label="MediaStreamTrackEventInit" id="-1217109419%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1217109419%2FClasslikes%2F-1497488939" anchor-label="MediaStreamTrackEventInit" id="-1217109419%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-stream-track-event-init/index.html"><span>Media</span><wbr><span>Stream</span><wbr><span>Track</span><wbr><span>Event</span><wbr><span><span>Init</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1217109419%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1217109419%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-stream-track-event-init/index.html">MediaStreamTrackEventInit</a> : <a href="../web.dom/-event-init/index.html">EventInit</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-stream-track-event-init/index.html">MediaStreamTrackEventInit</a> : <a href="../web.dom/-event-init/index.html">EventInit</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1461825170%2FClasslikes%2F-200797687" anchor-label="MediaStreamTrackState" id="-1461825170%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1461825170%2FClasslikes%2F-1497488939" anchor-label="MediaStreamTrackState" id="-1461825170%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-stream-track-state/index.html"><span>Media</span><wbr><span>Stream</span><wbr><span>Track</span><wbr><span><span>State</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1461825170%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1461825170%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-stream-track-state/index.html">MediaStreamTrackState</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-stream-track-state/index.html">MediaStreamTrackState</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-612603155%2FClasslikes%2F-200797687" anchor-label="MediaTrackCapabilities" id="-612603155%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-612603155%2FClasslikes%2F-1497488939" anchor-label="MediaTrackCapabilities" id="-612603155%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-track-capabilities/index.html"><span>Media</span><wbr><span>Track</span><wbr><span><span>Capabilities</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-612603155%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-612603155%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-capabilities/index.html">MediaTrackCapabilities</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-capabilities/index.html">MediaTrackCapabilities</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="274239177%2FClasslikes%2F-200797687" anchor-label="MediaTrackConstraints" id="274239177%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="274239177%2FClasslikes%2F-1497488939" anchor-label="MediaTrackConstraints" id="274239177%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-track-constraints/index.html"><span>Media</span><wbr><span>Track</span><wbr><span><span>Constraints</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="274239177%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="274239177%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-constraints/index.html">MediaTrackConstraints</a> : <a href="-media-track-constraint-set/index.html">MediaTrackConstraintSet</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaTrackConstraints">MediaTrackConstraints</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-constraints/index.html">MediaTrackConstraints</a> : <a href="-media-track-constraint-set/index.html">MediaTrackConstraintSet</a>, <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaTrackConstraints">MediaTrackConstraints</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2029968614%2FClasslikes%2F-200797687" anchor-label="MediaTrackConstraintSet" id="-2029968614%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-2029968614%2FClasslikes%2F-1497488939" anchor-label="MediaTrackConstraintSet" id="-2029968614%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-track-constraint-set/index.html"><span>Media</span><wbr><span>Track</span><wbr><span>Constraint</span><wbr><span><span>Set</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2029968614%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2029968614%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-constraint-set/index.html">MediaTrackConstraintSet</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-constraint-set/index.html">MediaTrackConstraintSet</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="336481312%2FClasslikes%2F-200797687" anchor-label="MediaTrackSettings" id="336481312%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="336481312%2FClasslikes%2F-1497488939" anchor-label="MediaTrackSettings" id="336481312%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-track-settings/index.html"><span>Media</span><wbr><span>Track</span><wbr><span><span>Settings</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="336481312%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="336481312%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-settings/index.html">MediaTrackSettings</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaTrackSettings">MediaTrackSettings</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-settings/index.html">MediaTrackSettings</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaTrackSettings">MediaTrackSettings</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="227597371%2FClasslikes%2F-200797687" anchor-label="MediaTrackSupportedConstraints" id="227597371%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="227597371%2FClasslikes%2F-1497488939" anchor-label="MediaTrackSupportedConstraints" id="227597371%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-media-track-supported-constraints/index.html"><span>Media</span><wbr><span>Track</span><wbr><span>Supported</span><wbr><span><span>Constraints</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="227597371%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="227597371%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-supported-constraints/index.html">MediaTrackSupportedConstraints</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaTrackSupportedConstraints">MediaTrackSupportedConstraints</a> to Kotlin</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-media-track-supported-constraints/index.html">MediaTrackSupportedConstraints</a> : <a href="../web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/MediaTrackSupportedConstraints">MediaTrackSupportedConstraints</a> to Kotlin</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-63852348%2FClasslikes%2F-200797687" anchor-label="OverconstrainedErrorEvent" id="-63852348%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-63852348%2FClasslikes%2F-1497488939" anchor-label="OverconstrainedErrorEvent" id="-63852348%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-overconstrained-error-event/index.html"><span>Overconstrained</span><wbr><span>Error</span><wbr><span><span>Event</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-63852348%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-63852348%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-overconstrained-error-event/index.html">OverconstrainedErrorEvent</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">eventInitDict<span class="token operator">: </span><a href="-overconstrained-error-event-init/index.html">OverconstrainedErrorEventInit</a></span></span><span class="token punctuation">)</span> : <a href="../web.dom.events/-event/index.html">Event</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-overconstrained-error-event/index.html">OverconstrainedErrorEvent</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">eventInitDict<span class="token operator">: </span><a href="-overconstrained-error-event-init/index.html">OverconstrainedErrorEventInit</a></span></span><span class="token punctuation">)</span> : <a href="../web.dom.events/-event/index.html">Event</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="392104980%2FClasslikes%2F-200797687" anchor-label="OverconstrainedErrorEventInit" id="392104980%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="392104980%2FClasslikes%2F-1497488939" anchor-label="OverconstrainedErrorEventInit" id="392104980%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-overconstrained-error-event-init/index.html"><span>Overconstrained</span><wbr><span>Error</span><wbr><span>Event</span><wbr><span><span>Init</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="392104980%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="392104980%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-overconstrained-error-event-init/index.html">OverconstrainedErrorEventInit</a> : <a href="../web.dom/-event-init/index.html">EventInit</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-overconstrained-error-event-init/index.html">OverconstrainedErrorEventInit</a> : <a href="../web.dom/-event-init/index.html">EventInit</a>, <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="866712167%2FClasslikes%2F-200797687" anchor-label="Settings" id="866712167%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="866712167%2FClasslikes%2F-1497488939" anchor-label="Settings" id="866712167%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-settings/index.html"><span><span>Settings</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="866712167%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="866712167%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-settings/index.html">Settings</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-settings/index.html">Settings</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-813521602%2FClasslikes%2F-200797687" anchor-label="ULongRange" id="-813521602%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-813521602%2FClasslikes%2F-1497488939" anchor-label="ULongRange" id="-813521602%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-u-long-range/index.html"><span>ULong</span><wbr><span><span>Range</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-813521602%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-813521602%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-u-long-range/index.html">ULongRange</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-u-long-range/index.html">ULongRange</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1773124383%2FClasslikes%2F-200797687" anchor-label="VideoFacingModeEnum" id="1773124383%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1773124383%2FClasslikes%2F-1497488939" anchor-label="VideoFacingModeEnum" id="1773124383%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-video-facing-mode-enum/index.html"><span>Video</span><wbr><span>Facing</span><wbr><span>Mode</span><wbr><span><span>Enum</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1773124383%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1773124383%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-video-facing-mode-enum/index.html">VideoFacingModeEnum</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-video-facing-mode-enum/index.html">VideoFacingModeEnum</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-311660155%2FClasslikes%2F-200797687" anchor-label="VideoResizeModeEnum" id="-311660155%2FClasslikes%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-311660155%2FClasslikes%2F-1497488939" anchor-label="VideoResizeModeEnum" id="-311660155%2FClasslikes%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-video-resize-mode-enum/index.html"><span>Video</span><wbr><span>Resize</span><wbr><span>Mode</span><wbr><span><span>Enum</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-311660155%2FClasslikes%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-311660155%2FClasslikes%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-video-resize-mode-enum/index.html">VideoResizeModeEnum</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-video-resize-mode-enum/index.html">VideoResizeModeEnum</a> : <a href="../web/-js-any/index.html">JsAny</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -523,12 +555,18 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-

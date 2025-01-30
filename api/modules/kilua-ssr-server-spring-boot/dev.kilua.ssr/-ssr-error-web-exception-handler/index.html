@@ -25,61 +25,93 @@
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../../../index.html">
-                            kilua-project
-                    </a>            </div>
-            <div class="library-version">0.0.18
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.19
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":modules:kilua-ssr-server-spring-boot/jvmMain">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":modules:kilua-ssr-server-spring-boot/jvmMain" data-filter=":modules:kilua-ssr-server-spring-boot/jvmMain">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain">jvm</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="classlike" id="content" pageids="kilua-ssr-server-spring-boot::dev.kilua.ssr/SsrErrorWebExceptionHandler///PointingToDeclaration//-1890433940">
+<div class="main-content" data-page-type="classlike" id="content" pageids="kilua-ssr-server-spring-boot::dev.kilua.ssr/SsrErrorWebExceptionHandler///PointingToDeclaration//-604979710">
   <div class="breadcrumbs"><a href="../../index.html">kilua-ssr-server-spring-boot</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.ssr</a><span class="delimiter">/</span><span class="current">SsrErrorWebExceptionHandler</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Ssr</span><wbr><span>Error</span><wbr><span>Web</span><wbr><span>Exception</span><wbr><span><span>Handler</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.stereotype/Component///PointingToDeclaration/"><span class="token annotation builtin">Component</span></span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.core.annotation/Order///PointingToDeclaration/"><span class="token annotation builtin">Order</span></span><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token constant">-2</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">SsrErrorWebExceptionHandler</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">viewResolvers<span class="token operator">: </span><span data-unresolved-link="org.springframework.beans.factory/ObjectProvider///PointingToDeclaration/">ObjectProvider</span><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.web.reactive.result.view/ViewResolver///PointingToDeclaration/">ViewResolver</span><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">serverCodecConfigurer<span class="token operator">: </span><span data-unresolved-link="org.springframework.http.codec/ServerCodecConfigurer///PointingToDeclaration/">ServerCodecConfigurer</span><span class="token punctuation">, </span></span><span class="parameter ">errorAttributes<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.web.reactive.error/ErrorAttributes///PointingToDeclaration/">ErrorAttributes</span><span class="token punctuation">, </span></span><span class="parameter ">resources<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.autoconfigure.web/WebProperties///PointingToDeclaration/">WebProperties</span><span class="token punctuation">, </span></span><span class="parameter ">serverProperties<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.autoconfigure.web/ServerProperties///PointingToDeclaration/">ServerProperties</span><span class="token punctuation">, </span></span><span class="parameter ">applicationContext<span class="token operator">: </span><span data-unresolved-link="org.springframework.context/ApplicationContext///PointingToDeclaration/">ApplicationContext</span><span class="token punctuation">, </span></span><span class="parameter ">ssrEngine<span class="token operator">: </span><a href="../../../../modules/kilua-ssr-server/dev.kilua.ssr/-ssr-engine/index.html">SsrEngine</a></span></span><span class="token punctuation">)</span> : <span data-unresolved-link="org.springframework.boot.autoconfigure.web.reactive.error/DefaultErrorWebExceptionHandler///PointingToDeclaration/">DefaultErrorWebExceptionHandler</span></div><p class="paragraph">404 error handler for SSR and history api routing.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot/jvmMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.stereotype/Component///PointingToDeclaration/"><span class="token annotation builtin">Component</span></span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.springframework.core.annotation/Order///PointingToDeclaration/"><span class="token annotation builtin">Order</span></span><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token constant">-2</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">SsrErrorWebExceptionHandler</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">viewResolvers<span class="token operator">: </span><span data-unresolved-link="org.springframework.beans.factory/ObjectProvider///PointingToDeclaration/">ObjectProvider</span><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.web.reactive.result.view/ViewResolver///PointingToDeclaration/">ViewResolver</span><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">serverCodecConfigurer<span class="token operator">: </span><span data-unresolved-link="org.springframework.http.codec/ServerCodecConfigurer///PointingToDeclaration/">ServerCodecConfigurer</span><span class="token punctuation">, </span></span><span class="parameter ">errorAttributes<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.web.reactive.error/ErrorAttributes///PointingToDeclaration/">ErrorAttributes</span><span class="token punctuation">, </span></span><span class="parameter ">resources<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.autoconfigure.web/WebProperties///PointingToDeclaration/">WebProperties</span><span class="token punctuation">, </span></span><span class="parameter ">serverProperties<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.autoconfigure.web/ServerProperties///PointingToDeclaration/">ServerProperties</span><span class="token punctuation">, </span></span><span class="parameter ">applicationContext<span class="token operator">: </span><span data-unresolved-link="org.springframework.context/ApplicationContext///PointingToDeclaration/">ApplicationContext</span><span class="token punctuation">, </span></span><span class="parameter ">ssrEngine<span class="token operator">: </span><a href="../../../../modules/kilua-ssr-server/dev.kilua.ssr/-ssr-engine/index.html">SsrEngine</a></span></span><span class="token punctuation">)</span> : <span data-unresolved-link="org.springframework.boot.autoconfigure.web.reactive.error/DefaultErrorWebExceptionHandler///PointingToDeclaration/">DefaultErrorWebExceptionHandler</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-ssr-server-spring-boot/src/jvmMain/kotlin/dev/kilua/ssr/SsrErrorWebExceptionHandler.kt#L48">source</a>)</span></span></div><p class="paragraph">404 error handler for SSR and history api routing.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="">Constructors</h2>
-        <div class="table"><a data-name="5504849%2FConstructors%2F-1890433940" anchor-label="SsrErrorWebExceptionHandler" id="5504849%2FConstructors%2F-1890433940" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain">
+        <div class="table"><a data-name="5504849%2FConstructors%2F-604979710" anchor-label="SsrErrorWebExceptionHandler" id="5504849%2FConstructors%2F-604979710" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-ssr-server-spring-boot/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-ssr-error-web-exception-handler.html"><span>Ssr</span><wbr><span>Error</span><wbr><span>Web</span><wbr><span>Exception</span><wbr><span><span>Handler</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="5504849%2FConstructors%2F-1890433940"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="5504849%2FConstructors%2F-604979710"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">viewResolvers<span class="token operator">: </span><span data-unresolved-link="org.springframework.beans.factory/ObjectProvider///PointingToDeclaration/">ObjectProvider</span><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.web.reactive.result.view/ViewResolver///PointingToDeclaration/">ViewResolver</span><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">serverCodecConfigurer<span class="token operator">: </span><span data-unresolved-link="org.springframework.http.codec/ServerCodecConfigurer///PointingToDeclaration/">ServerCodecConfigurer</span><span class="token punctuation">, </span></span><span class="parameter ">errorAttributes<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.web.reactive.error/ErrorAttributes///PointingToDeclaration/">ErrorAttributes</span><span class="token punctuation">, </span></span><span class="parameter ">resources<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.autoconfigure.web/WebProperties///PointingToDeclaration/">WebProperties</span><span class="token punctuation">, </span></span><span class="parameter ">serverProperties<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.autoconfigure.web/ServerProperties///PointingToDeclaration/">ServerProperties</span><span class="token punctuation">, </span></span><span class="parameter ">applicationContext<span class="token operator">: </span><span data-unresolved-link="org.springframework.context/ApplicationContext///PointingToDeclaration/">ApplicationContext</span><span class="token punctuation">, </span></span><span class="parameter ">ssrEngine<span class="token operator">: </span><a href="../../../../modules/kilua-ssr-server/dev.kilua.ssr/-ssr-engine/index.html">SsrEngine</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot/jvmMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">viewResolvers<span class="token operator">: </span><span data-unresolved-link="org.springframework.beans.factory/ObjectProvider///PointingToDeclaration/">ObjectProvider</span><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.web.reactive.result.view/ViewResolver///PointingToDeclaration/">ViewResolver</span><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">serverCodecConfigurer<span class="token operator">: </span><span data-unresolved-link="org.springframework.http.codec/ServerCodecConfigurer///PointingToDeclaration/">ServerCodecConfigurer</span><span class="token punctuation">, </span></span><span class="parameter ">errorAttributes<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.web.reactive.error/ErrorAttributes///PointingToDeclaration/">ErrorAttributes</span><span class="token punctuation">, </span></span><span class="parameter ">resources<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.autoconfigure.web/WebProperties///PointingToDeclaration/">WebProperties</span><span class="token punctuation">, </span></span><span class="parameter ">serverProperties<span class="token operator">: </span><span data-unresolved-link="org.springframework.boot.autoconfigure.web/ServerProperties///PointingToDeclaration/">ServerProperties</span><span class="token punctuation">, </span></span><span class="parameter ">applicationContext<span class="token operator">: </span><span data-unresolved-link="org.springframework.context/ApplicationContext///PointingToDeclaration/">ApplicationContext</span><span class="token punctuation">, </span></span><span class="parameter ">ssrEngine<span class="token operator">: </span><a href="../../../../modules/kilua-ssr-server/dev.kilua.ssr/-ssr-engine/index.html">SsrEngine</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -88,77 +120,77 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="">Functions</h2>
-        <div class="table"><a data-name="-717614822%2FFunctions%2F-1890433940" anchor-label="afterPropertiesSet" id="-717614822%2FFunctions%2F-1890433940" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain">
+        <div class="table"><a data-name="954313743%2FFunctions%2F-604979710" anchor-label="afterPropertiesSet" id="954313743%2FFunctions%2F-604979710" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-717614822%2FFunctions%2F-1890433940"><span>after</span><wbr><span>Properties</span><wbr><span><span>Set</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-717614822%2FFunctions%2F-1890433940"></span>
+                  <div><a href="index.html#954313743%2FFunctions%2F-604979710"><span>after</span><wbr><span>Properties</span><wbr><span><span>Set</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="954313743%2FFunctions%2F-604979710"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-717614822%2FFunctions%2F-1890433940"><span class="token function">afterPropertiesSet</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#954313743%2FFunctions%2F-604979710"><span class="token function">afterPropertiesSet</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-639301199%2FFunctions%2F-1890433940" anchor-label="handle" id="-639301199%2FFunctions%2F-1890433940" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain">
+<a data-name="1221469036%2FFunctions%2F-604979710" anchor-label="handle" id="1221469036%2FFunctions%2F-604979710" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-639301199%2FFunctions%2F-1890433940"><span><span>handle</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-639301199%2FFunctions%2F-1890433940"></span>
+                  <div><a href="index.html#1221469036%2FFunctions%2F-604979710"><span><span>handle</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1221469036%2FFunctions%2F-604979710"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-639301199%2FFunctions%2F-1890433940"><span class="token function">handle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">exchange<span class="token operator">: </span><span data-unresolved-link="org.springframework.web.server/ServerWebExchange///PointingToDeclaration/">ServerWebExchange</span><span class="token punctuation">, </span></span><span class="parameter ">throwable<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html">Throwable</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="reactor.core.publisher/Mono///PointingToDeclaration/">Mono</span><span class="token operator">&lt;</span><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Void.html">Void</a><span class="token operator">&gt;</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1221469036%2FFunctions%2F-604979710"><span class="token function">handle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">exchange<span class="token operator">: </span><span data-unresolved-link="org.springframework.web.server/ServerWebExchange///PointingToDeclaration/">ServerWebExchange</span><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">throwable<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="reactor.core.publisher/Mono///PointingToDeclaration/">Mono</span><span class="token operator">&lt;</span><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html">Void</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1722195561%2FFunctions%2F-1890433940" anchor-label="setMessageReaders" id="1722195561%2FFunctions%2F-1890433940" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain">
+<a data-name="1722195561%2FFunctions%2F-604979710" anchor-label="setMessageReaders" id="1722195561%2FFunctions%2F-604979710" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#1722195561%2FFunctions%2F-1890433940"><span>set</span><wbr><span>Message</span><wbr><span><span>Readers</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1722195561%2FFunctions%2F-1890433940"></span>
+                  <div><a href="index.html#1722195561%2FFunctions%2F-604979710"><span>set</span><wbr><span>Message</span><wbr><span><span>Readers</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1722195561%2FFunctions%2F-604979710"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1722195561%2FFunctions%2F-1890433940"><span class="token function">setMessageReaders</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">messageReaders<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.http.codec/HttpMessageReader///PointingToDeclaration/">HttpMessageReader</span><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1722195561%2FFunctions%2F-604979710"><span class="token function">setMessageReaders</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">messageReaders<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.http.codec/HttpMessageReader///PointingToDeclaration/">HttpMessageReader</span><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="468907785%2FFunctions%2F-1890433940" anchor-label="setMessageWriters" id="468907785%2FFunctions%2F-1890433940" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain">
+<a data-name="468907785%2FFunctions%2F-604979710" anchor-label="setMessageWriters" id="468907785%2FFunctions%2F-604979710" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#468907785%2FFunctions%2F-1890433940"><span>set</span><wbr><span>Message</span><wbr><span><span>Writers</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="468907785%2FFunctions%2F-1890433940"></span>
+                  <div><a href="index.html#468907785%2FFunctions%2F-604979710"><span>set</span><wbr><span>Message</span><wbr><span><span>Writers</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="468907785%2FFunctions%2F-604979710"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#468907785%2FFunctions%2F-1890433940"><span class="token function">setMessageWriters</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">messageWriters<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.http.codec/HttpMessageWriter///PointingToDeclaration/">HttpMessageWriter</span><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#468907785%2FFunctions%2F-604979710"><span class="token function">setMessageWriters</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">messageWriters<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.http.codec/HttpMessageWriter///PointingToDeclaration/">HttpMessageWriter</span><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1104382952%2FFunctions%2F-1890433940" anchor-label="setViewResolvers" id="-1104382952%2FFunctions%2F-1890433940" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain">
+<a data-name="-1104382952%2FFunctions%2F-604979710" anchor-label="setViewResolvers" id="-1104382952%2FFunctions%2F-604979710" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-ssr-server-spring-boot/jvmMain" data-filterable-set=":modules:kilua-ssr-server-spring-boot/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-1104382952%2FFunctions%2F-1890433940"><span>set</span><wbr><span>View</span><wbr><span><span>Resolvers</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1104382952%2FFunctions%2F-1890433940"></span>
+                  <div><a href="index.html#-1104382952%2FFunctions%2F-604979710"><span>set</span><wbr><span>View</span><wbr><span><span>Resolvers</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1104382952%2FFunctions%2F-604979710"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot:dokkaHtmlPartial/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1104382952%2FFunctions%2F-1890433940"><span class="token function">setViewResolvers</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">viewResolvers<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.web.reactive.result.view/ViewResolver///PointingToDeclaration/">ViewResolver</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-ssr-server-spring-boot/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1104382952%2FFunctions%2F-604979710"><span class="token function">setViewResolvers</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">viewResolvers<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span data-unresolved-link="org.springframework.web.reactive.result.view/ViewResolver///PointingToDeclaration/">ViewResolver</span><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -168,12 +200,18 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-

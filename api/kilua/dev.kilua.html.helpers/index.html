@@ -25,40 +25,72 @@
 <link href="../../styles/prism.css" rel="Stylesheet">
 <link href="../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script>
 <script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../index.html">
-                            kilua-project
-                    </a>            </div>
-            <div class="library-version">0.0.18
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.19
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kilua/commonMain" data-filter=":kilua/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua:dokkaHtmlPartial/commonMain">common</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="package" id="content" pageids="kilua::dev.kilua.html.helpers////PointingToDeclaration//-1322303221">
+<div class="main-content" data-page-type="package" id="content" pageids="kilua::dev.kilua.html.helpers////PointingToDeclaration//-787921261">
   <div class="breadcrumbs"><a href="../index.html">kilua</a><span class="delimiter">/</span><span class="current">dev.kilua.html.helpers</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
@@ -68,227 +100,272 @@
     <div class="tabs-section-body">
       <div data-togglable="TYPE">
         <h2 class="">Types</h2>
-        <div class="table"><a data-name="-657199095%2FClasslikes%2F-1322303221" anchor-label="PropertyListBuilder" id="-657199095%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="1844980745%2FClasslikes%2F-787921261" anchor-label="ModifierBase" id="1844980745%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-modifier-base/index.html"><span>Modifier</span><wbr><span><span>Base</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1844980745%2FClasslikes%2F-787921261"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-modifier-base/index.html">ModifierBase</a></div><div class="brief "><p class="paragraph">A base interface for integration with modifiers.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-657199095%2FClasslikes%2F-787921261" anchor-label="PropertyListBuilder" id="-657199095%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-property-list-builder/index.html"><span>Property</span><wbr><span>List</span><wbr><span><span>Builder</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-657199095%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-657199095%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-property-list-builder/index.html">PropertyListBuilder</a></div><div class="brief "><p class="paragraph">Property list builder interface.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-property-list-builder/index.html">PropertyListBuilder</a></div><div class="brief "><p class="paragraph">Property list builder interface.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-243626711%2FClasslikes%2F-1322303221" anchor-label="TagAttrs" id="-243626711%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-243626711%2FClasslikes%2F-787921261" anchor-label="TagAttrs" id="-243626711%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-attrs/index.html"><span>Tag</span><wbr><span><span>Attrs</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-243626711%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-243626711%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-attrs/index.html">TagAttrs</a><span class="token operator">&lt;</span><a href="-tag-attrs/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-attrs-fun/index.html">TagAttrsFun</a><span class="token operator">&lt;</span><a href="-tag-attrs/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common tag attributes.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-attrs/index.html">TagAttrs</a> : <a href="-tag-attrs-fun/index.html">TagAttrsFun</a></div><div class="brief "><p class="paragraph">Common tag attributes.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1135445796%2FClasslikes%2F-1322303221" anchor-label="TagAttrsDelegate" id="1135445796%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1135445796%2FClasslikes%2F-787921261" anchor-label="TagAttrsDelegate" id="1135445796%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-attrs-delegate/index.html"><span>Tag</span><wbr><span>Attrs</span><wbr><span><span>Delegate</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1135445796%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1135445796%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-attrs-delegate/index.html">TagAttrsDelegate</a><span class="token operator">&lt;</span><a href="-tag-attrs-delegate/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-attrs/index.html">TagAttrs</a><span class="token operator">&lt;</span><a href="-tag-attrs-delegate/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common tag attributes delegate.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-attrs-delegate/index.html">TagAttrsDelegate</a><span class="token operator">&lt;</span><a href="-tag-attrs-delegate/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-attrs/index.html">TagAttrs</a></div><div class="brief "><p class="paragraph">Common tag attributes delegate.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2015066268%2FClasslikes%2F-1322303221" anchor-label="TagAttrsDelegateImpl" id="-2015066268%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-2015066268%2FClasslikes%2F-787921261" anchor-label="TagAttrsDelegateImpl" id="-2015066268%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-attrs-delegate-impl/index.html"><span>Tag</span><wbr><span>Attrs</span><wbr><span>Delegate</span><wbr><span><span>Impl</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2015066268%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2015066268%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tag-attrs-delegate-impl/index.html">TagAttrsDelegateImpl</a><span class="token operator">&lt;</span><a href="-tag-attrs-delegate-impl/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="../dev.kilua.core/-property-delegate/index.html">PropertyDelegate</a>, <a href="-tag-attrs-delegate/index.html">TagAttrsDelegate</a><span class="token operator">&lt;</span><a href="-tag-attrs-delegate-impl/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common tag attributes delegate implementation.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tag-attrs-delegate-impl/index.html">TagAttrsDelegateImpl</a><span class="token operator">&lt;</span><a href="-tag-attrs-delegate-impl/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="-tag-attrs-delegate/index.html">TagAttrsDelegate</a><span class="token operator">&lt;</span><a href="-tag-attrs-delegate-impl/index.html">E</a><span class="token operator">&gt; </span>, <a href="../dev.kilua.core/-property-delegate/index.html">PropertyDelegate</a></div><div class="brief "><p class="paragraph">Common tag attributes delegate implementation.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2012053434%2FClasslikes%2F-1322303221" anchor-label="TagAttrsFun" id="2012053434%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="2012053434%2FClasslikes%2F-787921261" anchor-label="TagAttrsFun" id="2012053434%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-attrs-fun/index.html"><span>Tag</span><wbr><span>Attrs</span><wbr><span><span>Fun</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2012053434%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2012053434%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-attrs-fun/index.html">TagAttrsFun</a><span class="token operator">&lt;</span><a href="-tag-attrs-fun/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Common tag attributes.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-attrs-fun/index.html">TagAttrsFun</a></div><div class="brief "><p class="paragraph">Common tag immutable attributes.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="508424753%2FClasslikes%2F-1322303221" anchor-label="TagDnd" id="508424753%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1530583014%2FClasslikes%2F-787921261" anchor-label="TagBase" id="1530583014%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-tag-base/index.html"><span>Tag</span><wbr><span><span>Base</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1530583014%2FClasslikes%2F-787921261"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-base/index.html">TagBase</a> : <a href="-tag-base-fun/index.html">TagBaseFun</a></div><div class="brief "><p class="paragraph">Base tag attributes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-668540963%2FClasslikes%2F-787921261" anchor-label="TagBaseFun" id="-668540963%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-tag-base-fun/index.html"><span>Tag</span><wbr><span>Base</span><wbr><span><span>Fun</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-668540963%2FClasslikes%2F-787921261"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-base-fun/index.html">TagBaseFun</a></div><div class="brief "><p class="paragraph">Base tag immutable attributes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="508424753%2FClasslikes%2F-787921261" anchor-label="TagDnd" id="508424753%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-dnd/index.html"><span>Tag</span><wbr><span><span>Dnd</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="508424753%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="508424753%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-dnd/index.html">TagDnd</a><span class="token operator">&lt;</span><a href="-tag-dnd/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Common drag and drop methods.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-dnd/index.html">TagDnd</a></div><div class="brief "><p class="paragraph">Common drag and drop methods.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1888525268%2FClasslikes%2F-1322303221" anchor-label="TagDndDelegate" id="-1888525268%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1888525268%2FClasslikes%2F-787921261" anchor-label="TagDndDelegate" id="-1888525268%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-dnd-delegate/index.html"><span>Tag</span><wbr><span>Dnd</span><wbr><span><span>Delegate</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1888525268%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1888525268%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-dnd-delegate/index.html">TagDndDelegate</a><span class="token operator">&lt;</span><a href="-tag-dnd-delegate/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-dnd/index.html">TagDnd</a><span class="token operator">&lt;</span><a href="-tag-dnd-delegate/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common drag and drop methods delegate.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-dnd-delegate/index.html">TagDndDelegate</a><span class="token operator">&lt;</span><a href="-tag-dnd-delegate/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-dnd/index.html">TagDnd</a></div><div class="brief "><p class="paragraph">Common drag and drop methods delegate.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="903913580%2FClasslikes%2F-1322303221" anchor-label="TagDndDelegateImpl" id="903913580%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="903913580%2FClasslikes%2F-787921261" anchor-label="TagDndDelegateImpl" id="903913580%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-dnd-delegate-impl/index.html"><span>Tag</span><wbr><span>Dnd</span><wbr><span>Delegate</span><wbr><span><span>Impl</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="903913580%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="903913580%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tag-dnd-delegate-impl/index.html">TagDndDelegateImpl</a><span class="token operator">&lt;</span><a href="-tag-dnd-delegate-impl/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="-tag-dnd-delegate/index.html">TagDndDelegate</a><span class="token operator">&lt;</span><a href="-tag-dnd-delegate-impl/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common drag and drop methods delegate implementation.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tag-dnd-delegate-impl/index.html">TagDndDelegateImpl</a><span class="token operator">&lt;</span><a href="-tag-dnd-delegate-impl/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="-tag-dnd-delegate/index.html">TagDndDelegate</a><span class="token operator">&lt;</span><a href="-tag-dnd-delegate-impl/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common drag and drop methods delegate implementation.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1738777314%2FClasslikes%2F-1322303221" anchor-label="TagEvents" id="-1738777314%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1738777314%2FClasslikes%2F-787921261" anchor-label="TagEvents" id="-1738777314%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-events/index.html"><span>Tag</span><wbr><span><span>Events</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1738777314%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1738777314%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="-tag-events/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Common tag events.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-events/index.html">TagEvents</a></div><div class="brief "><p class="paragraph">Common tag events.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1261530599%2FClasslikes%2F-1322303221" anchor-label="TagEventsDelegate" id="-1261530599%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1261530599%2FClasslikes%2F-787921261" anchor-label="TagEventsDelegate" id="-1261530599%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-events-delegate/index.html"><span>Tag</span><wbr><span>Events</span><wbr><span><span>Delegate</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1261530599%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1261530599%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-events-delegate/index.html">TagEventsDelegate</a><span class="token operator">&lt;</span><a href="-tag-events-delegate/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="-tag-events-delegate/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common tag events delegate.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-events-delegate/index.html">TagEventsDelegate</a><span class="token operator">&lt;</span><a href="-tag-events-delegate/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-events/index.html">TagEvents</a></div><div class="brief "><p class="paragraph">Common tag events delegate.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="451743705%2FClasslikes%2F-1322303221" anchor-label="TagEventsDelegateImpl" id="451743705%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="451743705%2FClasslikes%2F-787921261" anchor-label="TagEventsDelegateImpl" id="451743705%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-events-delegate-impl/index.html"><span>Tag</span><wbr><span>Events</span><wbr><span>Delegate</span><wbr><span><span>Impl</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="451743705%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="451743705%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tag-events-delegate-impl/index.html">TagEventsDelegateImpl</a><span class="token operator">&lt;</span><a href="-tag-events-delegate-impl/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="-tag-events-delegate/index.html">TagEventsDelegate</a><span class="token operator">&lt;</span><a href="-tag-events-delegate-impl/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common tag events delegate implementation.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tag-events-delegate-impl/index.html">TagEventsDelegateImpl</a><span class="token operator">&lt;</span><a href="-tag-events-delegate-impl/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="-tag-events-delegate/index.html">TagEventsDelegate</a><span class="token operator">&lt;</span><a href="-tag-events-delegate-impl/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common tag events delegate implementation.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1072354042%2FClasslikes%2F-1322303221" anchor-label="TagStyle" id="1072354042%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1072354042%2FClasslikes%2F-787921261" anchor-label="TagStyle" id="1072354042%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-style/index.html"><span>Tag</span><wbr><span><span>Style</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1072354042%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1072354042%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-style/index.html">TagStyle</a><span class="token operator">&lt;</span><a href="-tag-style/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-style-fun/index.html">TagStyleFun</a><span class="token operator">&lt;</span><a href="-tag-style/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common tag CSS styles.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-style/index.html">TagStyle</a> : <a href="-tag-style-fun/index.html">TagStyleFun</a></div><div class="brief "><p class="paragraph">Common tag CSS styles.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1612223499%2FClasslikes%2F-1322303221" anchor-label="TagStyleDelegate" id="-1612223499%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1612223499%2FClasslikes%2F-787921261" anchor-label="TagStyleDelegate" id="-1612223499%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-style-delegate/index.html"><span>Tag</span><wbr><span>Style</span><wbr><span><span>Delegate</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1612223499%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1612223499%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-style-delegate/index.html">TagStyleDelegate</a><span class="token operator">&lt;</span><a href="-tag-style-delegate/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-style/index.html">TagStyle</a><span class="token operator">&lt;</span><a href="-tag-style-delegate/index.html">E</a><span class="token operator">&gt; </span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-style-delegate/index.html">TagStyleDelegate</a><span class="token operator">&lt;</span><a href="-tag-style-delegate/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span> : <a href="-tag-style/index.html">TagStyle</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1207067723%2FClasslikes%2F-1322303221" anchor-label="TagStyleDelegateImpl" id="-1207067723%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1207067723%2FClasslikes%2F-787921261" anchor-label="TagStyleDelegateImpl" id="-1207067723%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-style-delegate-impl/index.html"><span>Tag</span><wbr><span>Style</span><wbr><span>Delegate</span><wbr><span><span>Impl</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1207067723%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1207067723%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tag-style-delegate-impl/index.html">TagStyleDelegateImpl</a><span class="token operator">&lt;</span><a href="-tag-style-delegate-impl/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">onSetCallback<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="../dev.kilua.core/-property-delegate/index.html">PropertyDelegate</a>, <a href="-tag-style-delegate/index.html">TagStyleDelegate</a><span class="token operator">&lt;</span><a href="-tag-style-delegate-impl/index.html">E</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Common tag CSS styles delegate implementation.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tag-style-delegate-impl/index.html">TagStyleDelegateImpl</a><span class="token operator">&lt;</span><a href="-tag-style-delegate-impl/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">onSetCallback<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="-tag-style-delegate/index.html">TagStyleDelegate</a><span class="token operator">&lt;</span><a href="-tag-style-delegate-impl/index.html">E</a><span class="token operator">&gt; </span>, <a href="../dev.kilua.core/-property-delegate/index.html">PropertyDelegate</a></div><div class="brief "><p class="paragraph">Common tag CSS styles delegate implementation.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1933188169%2FClasslikes%2F-1322303221" anchor-label="TagStyleFun" id="1933188169%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1933188169%2FClasslikes%2F-787921261" anchor-label="TagStyleFun" id="1933188169%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-style-fun/index.html"><span>Tag</span><wbr><span>Style</span><wbr><span><span>Fun</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1933188169%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1933188169%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-style-fun/index.html">TagStyleFun</a><span class="token operator">&lt;</span><a href="-tag-style-fun/index.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Common tag CSS styles.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-tag-style-fun/index.html">TagStyleFun</a></div><div class="brief "><p class="paragraph">Common tag immutable CSS styles.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -297,137 +374,212 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="">Functions</h2>
-        <div class="table"><a data-name="-753867765%2FFunctions%2F-1322303221" anchor-label="buildPropertyList" id="-753867765%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="-753867765%2FFunctions%2F-787921261" anchor-label="buildPropertyList" id="-753867765%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="build-property-list.html"><span>build</span><wbr><span>Property</span><wbr><span><span>List</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-753867765%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-753867765%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="build-property-list.html"><span class="token function">buildPropertyList</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">delegate<span class="token operator">: </span><span class="token punctuation">(</span>builder<span class="token operator">: </span><a href="-property-list-builder/index.html">PropertyListBuilder</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Build a list of properties.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="build-property-list.html"><span class="token function">buildPropertyList</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">delegate<span class="token operator">: </span><span class="token punctuation">(</span>builder<span class="token operator">: </span><a href="-property-list-builder/index.html">PropertyListBuilder</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Build a list of properties.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="748049554%2FFunctions%2F-1322303221" anchor-label="onChangeDirectLaunch" id="748049554%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="473052555%2FFunctions%2F-787921261" anchor-label="onChangeDirectLaunch" id="473052555%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-change-direct-launch.html"><span>on</span><wbr><span>Change</span><wbr><span>Direct</span><wbr><span><span>Launch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="748049554%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="473052555%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-change-direct-launch.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span><a href="on-change-direct-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="on-change-direct-launch.html">E</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="on-change-direct-launch.html">C</a><span class="token punctuation">.</span><a href="on-change-direct-launch.html"><span class="token function">onChangeDirectLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-event/index.html">Event</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on change suspending event handlers (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-change-direct-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&gt; </span><a href="on-change-direct-launch.html">C</a><span class="token punctuation">.</span><a href="on-change-direct-launch.html"><span class="token function">onChangeDirectLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-event/index.html">Event</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on change suspending event handlers (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1196432055%2FFunctions%2F-1322303221" anchor-label="onChangeLaunch" id="-1196432055%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="489918196%2FFunctions%2F-787921261" anchor-label="onChangeLaunch" id="489918196%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-change-launch.html"><span>on</span><wbr><span>Change</span><wbr><span><span>Launch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1196432055%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="489918196%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-change-launch.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span><a href="on-change-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="on-change-launch.html">E</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="on-change-launch.html">C</a><span class="token punctuation">.</span><a href="on-change-launch.html"><span class="token function">onChangeLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-event/index.html">Event</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on change suspending event handlers (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-change-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&gt; </span><a href="on-change-launch.html">C</a><span class="token punctuation">.</span><a href="on-change-launch.html"><span class="token function">onChangeLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-event/index.html">Event</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on change suspending event handlers (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2031197101%2FFunctions%2F-1322303221" anchor-label="onClickDirectLaunch" id="-2031197101%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="2032329458%2FFunctions%2F-787921261" anchor-label="onClickDirectLaunch" id="2032329458%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-click-direct-launch.html"><span>on</span><wbr><span>Click</span><wbr><span>Direct</span><wbr><span><span>Launch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2031197101%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2032329458%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-click-direct-launch.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span><a href="on-click-direct-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="on-click-direct-launch.html">E</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="on-click-direct-launch.html">C</a><span class="token punctuation">.</span><a href="on-click-direct-launch.html"><span class="token function">onClickDirectLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-mouse-event/index.html">MouseEvent</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on click suspending event handlers (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-click-direct-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&gt; </span><a href="on-click-direct-launch.html">C</a><span class="token punctuation">.</span><a href="on-click-direct-launch.html"><span class="token function">onClickDirectLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-mouse-event/index.html">MouseEvent</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on click suspending event handlers (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1760112388%2FFunctions%2F-1322303221" anchor-label="onClickLaunch" id="-1760112388%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-259162071%2FFunctions%2F-787921261" anchor-label="onClickLaunch" id="-259162071%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-click-launch.html"><span>on</span><wbr><span>Click</span><wbr><span><span>Launch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1760112388%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-259162071%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-click-launch.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span><a href="on-click-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="on-click-launch.html">E</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="on-click-launch.html">C</a><span class="token punctuation">.</span><a href="on-click-launch.html"><span class="token function">onClickLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-mouse-event/index.html">MouseEvent</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on click suspending event handlers (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-click-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&gt; </span><a href="on-click-launch.html">C</a><span class="token punctuation">.</span><a href="on-click-launch.html"><span class="token function">onClickLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-mouse-event/index.html">MouseEvent</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on click suspending event handlers (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1637477295%2FFunctions%2F-1322303221" anchor-label="onEventDirectLaunch" id="1637477295%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1814128908%2FFunctions%2F-787921261" anchor-label="onCombineClick" id="1814128908%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-combine-click.html"><span>on</span><wbr><span>Combine</span><wbr><span><span>Click</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1814128908%2FFunctions%2F-787921261"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="-tag-events/index.html">TagEvents</a><span class="token punctuation">.</span><a href="on-combine-click.html"><span class="token function">onCombineClick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">onLongClick<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">onDoubleClick<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">onClick<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">A Composable function that handles click, double-click, and long click events for a component. It combines multiple input events such as mouse and touch events to trigger the respective actions based on the user's interaction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1330285556%2FFunctions%2F-787921261" anchor-label="onEventDirectLaunch" id="-1330285556%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-event-direct-launch.html"><span>on</span><wbr><span>Event</span><wbr><span>Direct</span><wbr><span><span>Launch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1637477295%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1330285556%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-event-direct-launch.html">EV</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom.events/-event/index.html">Event</a><span class="token punctuation">, </span><a href="on-event-direct-launch.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span><a href="on-event-direct-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="on-event-direct-launch.html">E</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="on-event-direct-launch.html">C</a><span class="token punctuation">.</span><a href="on-event-direct-launch.html"><span class="token function">onEventDirectLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="on-event-direct-launch.html">EV</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on change suspending event handlers (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-event-direct-launch.html">EV</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom.events/-event/index.html">Event</a><span class="token punctuation">, </span><a href="on-event-direct-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&gt; </span><a href="on-event-direct-launch.html">C</a><span class="token punctuation">.</span><a href="on-event-direct-launch.html"><span class="token function">onEventDirectLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="on-event-direct-launch.html">EV</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on change suspending event handlers (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1054531290%2FFunctions%2F-1322303221" anchor-label="onEventLaunch" id="-1054531290%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="965857461%2FFunctions%2F-787921261" anchor-label="onEventLaunch" id="965857461%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-event-launch.html"><span>on</span><wbr><span>Event</span><wbr><span><span>Launch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1054531290%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="965857461%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-event-launch.html">EV</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom.events/-event/index.html">Event</a><span class="token punctuation">, </span><a href="on-event-launch.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span><a href="on-event-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="on-event-launch.html">E</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="on-event-launch.html">C</a><span class="token punctuation">.</span><a href="on-event-launch.html"><span class="token function">onEventLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="on-event-launch.html">EV</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on change suspending event handlers (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-event-launch.html">EV</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom.events/-event/index.html">Event</a><span class="token punctuation">, </span><a href="on-event-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&gt; </span><a href="on-event-launch.html">C</a><span class="token punctuation">.</span><a href="on-event-launch.html"><span class="token function">onEventLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="on-event-launch.html">EV</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on change suspending event handlers (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1955575756%2FFunctions%2F-1322303221" anchor-label="onInputDirectLaunch" id="1955575756%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="2142980048%2FFunctions%2F-787921261" anchor-label="onGlobalPointerUp" id="2142980048%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-global-pointer-up.html"><span>on</span><wbr><span>Global</span><wbr><span>Pointer</span><wbr><span><span>Up</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2142980048%2FFunctions%2F-787921261"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="on-global-pointer-up.html"><span class="token function">onGlobalPointerUp</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">callback<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">A composable function that triggers a callback whenever pointer up event is received.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1491017555%2FFunctions%2F-787921261" anchor-label="onGlobalWindowSize" id="-1491017555%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-global-window-size.html"><span>on</span><wbr><span>Global</span><wbr><span>Window</span><wbr><span><span>Size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1491017555%2FFunctions%2F-787921261"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="on-global-window-size.html"><span class="token function">onGlobalWindowSize</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">callback<span class="token operator">: </span><span class="token punctuation">(</span>width<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span>height<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">A composable function that triggers a callback whenever the global window size changes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1901348527%2FFunctions%2F-787921261" anchor-label="onInputDirectLaunch" id="1901348527%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-input-direct-launch.html"><span>on</span><wbr><span>Input</span><wbr><span>Direct</span><wbr><span><span>Launch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1955575756%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1901348527%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-input-direct-launch.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span><a href="on-input-direct-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="on-input-direct-launch.html">E</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="on-input-direct-launch.html">C</a><span class="token punctuation">.</span><a href="on-input-direct-launch.html"><span class="token function">onInputDirectLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-input-event/index.html">InputEvent</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on input suspending event handlers (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-input-direct-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&gt; </span><a href="on-input-direct-launch.html">C</a><span class="token punctuation">.</span><a href="on-input-direct-launch.html"><span class="token function">onInputDirectLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-input-event/index.html">InputEvent</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on input suspending event handlers (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-560186635%2FFunctions%2F-1322303221" anchor-label="onInputLaunch" id="-560186635%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="854949222%2FFunctions%2F-787921261" anchor-label="onInputLaunch" id="854949222%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-input-launch.html"><span>on</span><wbr><span>Input</span><wbr><span><span>Launch</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-560186635%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="854949222%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-input-launch.html">E</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span><a href="on-input-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&lt;</span><a href="on-input-launch.html">E</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="on-input-launch.html">C</a><span class="token punctuation">.</span><a href="on-input-launch.html"><span class="token function">onInputLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-input-event/index.html">InputEvent</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on input suspending event handlers (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="on-input-launch.html">C</a><span class="token operator"> : </span><a href="-tag-events/index.html">TagEvents</a><span class="token operator">&gt; </span><a href="on-input-launch.html">C</a><span class="token punctuation">.</span><a href="on-input-launch.html"><span class="token function">onInputLaunch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coroutineScope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token operator"> = </span>KiluaScope<span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><a href="../../modules/kilua-dom/web.dom.events/-input-event/index.html">InputEvent</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">An extension function for defining on input suspending event handlers (composable).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="472308551%2FFunctions%2F-787921261" anchor-label="rememberIsHoveredAsState" id="472308551%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="remember-is-hovered-as-state.html"><span>remember</span><wbr><span>Is</span><wbr><span>Hovered</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="472308551%2FFunctions%2F-787921261"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="-tag-events/index.html">TagEvents</a><span class="token punctuation">.</span><a href="remember-is-hovered-as-state.html"><span class="token function">rememberIsHoveredAsState</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="androidx.compose.runtime/State///PointingToDeclaration/">State</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A Composable function that creates and remembers the hover state of a component. It tracks whether the component is being hovered over using mouse events.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1132484750%2FFunctions%2F-787921261" anchor-label="rememberIsPressedAsState" id="1132484750%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="remember-is-pressed-as-state.html"><span>remember</span><wbr><span>Is</span><wbr><span>Pressed</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1132484750%2FFunctions%2F-787921261"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="-tag-events/index.html">TagEvents</a><span class="token punctuation">.</span><a href="remember-is-pressed-as-state.html"><span class="token function">rememberIsPressedAsState</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="androidx.compose.runtime/State///PointingToDeclaration/">State</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A Composable function that creates and remembers the pressed state of a component. It tracks whether the component is being pressed using pointer events.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -437,12 +589,18 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-

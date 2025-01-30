@@ -25,61 +25,93 @@
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../../../index.html">
-                            kilua-project
-                    </a>            </div>
-            <div class="library-version">0.0.18
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.19
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-dom/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":modules:kilua-dom/commonMain" data-filter=":modules:kilua-dom/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-dom:dokkaHtmlPartial/commonMain">common</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="classlike" id="content" pageids="kilua-dom::web.dom/DOMMatrix///PointingToDeclaration//-200797687">
+<div class="main-content" data-page-type="classlike" id="content" pageids="kilua-dom::web.dom/DOMMatrix///PointingToDeclaration//-1497488939">
   <div class="breadcrumbs"><a href="../../index.html">kilua-dom</a><span class="delimiter">/</span><a href="../index.html">web.dom</a><span class="delimiter">/</span><span class="current">DOMMatrix</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>DOMMatrix</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">DOMMatrix</a> : <a href="../-d-o-m-matrix-read-only/index.html">DOMMatrixReadOnly</a>, <a href="../../web/-js-any/index.html">JsAny</a></div><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/DOMMatrix">DOMMatrix</a> to Kotlin</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">DOMMatrix</a> : <a href="../-d-o-m-matrix-read-only/index.html">DOMMatrixReadOnly</a>, <a href="../../web/-js-any/index.html">JsAny</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-dom/src/commonMain/kotlin/web/dom/Dom.kt#L5379">source</a>)</span></span></div><p class="paragraph">Exposes the JavaScript <a href="https://developer.mozilla.org/en/docs/Web/API/DOMMatrix">DOMMatrix</a> to Kotlin</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="">Constructors</h2>
-        <div class="table"><a data-name="683343690%2FConstructors%2F-200797687" anchor-label="DOMMatrix" id="683343690%2FConstructors%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="683343690%2FConstructors%2F-1497488939" anchor-label="DOMMatrix" id="683343690%2FConstructors%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-d-o-m-matrix.html"><span><span>DOMMatrix</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="683343690%2FConstructors%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="683343690%2FConstructors%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transformList<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-d-o-m-matrix-read-only/index.html">DOMMatrixReadOnly</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">array32<span class="token operator">: </span><a href="../../web.webgl/-float32-array/index.html">Float32Array</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">array64<span class="token operator">: </span><a href="../../web.webgl/-float64-array/index.html">Float64Array</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">numberSequence<span class="token operator">: </span><a href="../../web/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="../../web/-js-number/index.html">JsNumber</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transformList<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-d-o-m-matrix-read-only/index.html">DOMMatrixReadOnly</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">array32<span class="token operator">: </span><a href="../../web.webgl/-float32-array/index.html">Float32Array</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">array64<span class="token operator">: </span><a href="../../web.webgl/-float64-array/index.html">Float64Array</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">numberSequence<span class="token operator">: </span><a href="../../web/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="../../web/-js-number/index.html">JsNumber</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -88,362 +120,362 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="">Properties</h2>
-        <div class="table"><a data-name="216989327%2FProperties%2F-200797687" anchor-label="a" id="216989327%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="216989327%2FProperties%2F-1497488939" anchor-label="a" id="216989327%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="a.html"><span><span>a</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="216989327%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="216989327%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="a.html">a</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="a.html">a</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="248009134%2FProperties%2F-200797687" anchor-label="b" id="248009134%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="248009134%2FProperties%2F-1497488939" anchor-label="b" id="248009134%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="b.html"><span><span>b</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="248009134%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="248009134%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="b.html">b</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="b.html">b</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="279028941%2FProperties%2F-200797687" anchor-label="c" id="279028941%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="279028941%2FProperties%2F-1497488939" anchor-label="c" id="279028941%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="c.html"><span><span>c</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="279028941%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="279028941%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="c.html">c</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="c.html">c</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="310048748%2FProperties%2F-200797687" anchor-label="d" id="310048748%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="310048748%2FProperties%2F-1497488939" anchor-label="d" id="310048748%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="d.html"><span><span>d</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="310048748%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="310048748%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="d.html">d</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="d.html">d</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="341068555%2FProperties%2F-200797687" anchor-label="e" id="341068555%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="341068555%2FProperties%2F-1497488939" anchor-label="e" id="341068555%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="e.html"><span><span>e</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="341068555%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="341068555%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="e.html">e</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="e.html">e</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="372088362%2FProperties%2F-200797687" anchor-label="f" id="372088362%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="372088362%2FProperties%2F-1497488939" anchor-label="f" id="372088362%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="f.html"><span><span>f</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="372088362%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="372088362%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="f.html">f</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="f.html">f</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2137556912%2FProperties%2F-200797687" anchor-label="is2D" id="-2137556912%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-2137556912%2FProperties%2F-1497488939" anchor-label="is2D" id="-2137556912%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/is2-d.html"><span><span>is2D</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2137556912%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2137556912%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="../-d-o-m-matrix-read-only/is2-d.html">is2D</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="../-d-o-m-matrix-read-only/is2-d.html">is2D</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1936887684%2FProperties%2F-200797687" anchor-label="isIdentity" id="1936887684%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1936887684%2FProperties%2F-1497488939" anchor-label="isIdentity" id="1936887684%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/is-identity.html"><span>is</span><wbr><span><span>Identity</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1936887684%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1936887684%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="../-d-o-m-matrix-read-only/is-identity.html">isIdentity</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="../-d-o-m-matrix-read-only/is-identity.html">isIdentity</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1097664611%2FProperties%2F-200797687" anchor-label="m11" id="1097664611%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1097664611%2FProperties%2F-1497488939" anchor-label="m11" id="1097664611%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m11.html"><span><span>m11</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1097664611%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1097664611%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m11.html">m11</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m11.html">m11</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1128684418%2FProperties%2F-200797687" anchor-label="m12" id="1128684418%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1128684418%2FProperties%2F-1497488939" anchor-label="m12" id="1128684418%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m12.html"><span><span>m12</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1128684418%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1128684418%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m12.html">m12</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m12.html">m12</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1159704225%2FProperties%2F-200797687" anchor-label="m13" id="1159704225%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1159704225%2FProperties%2F-1497488939" anchor-label="m13" id="1159704225%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m13.html"><span><span>m13</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1159704225%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1159704225%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m13.html">m13</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m13.html">m13</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1190724032%2FProperties%2F-200797687" anchor-label="m14" id="1190724032%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1190724032%2FProperties%2F-1497488939" anchor-label="m14" id="1190724032%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m14.html"><span><span>m14</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1190724032%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1190724032%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m14.html">m14</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m14.html">m14</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2059278628%2FProperties%2F-200797687" anchor-label="m21" id="2059278628%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="2059278628%2FProperties%2F-1497488939" anchor-label="m21" id="2059278628%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m21.html"><span><span>m21</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2059278628%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2059278628%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m21.html">m21</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m21.html">m21</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2090298435%2FProperties%2F-200797687" anchor-label="m22" id="2090298435%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="2090298435%2FProperties%2F-1497488939" anchor-label="m22" id="2090298435%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m22.html"><span><span>m22</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2090298435%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2090298435%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m22.html">m22</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m22.html">m22</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2121318242%2FProperties%2F-200797687" anchor-label="m23" id="2121318242%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="2121318242%2FProperties%2F-1497488939" anchor-label="m23" id="2121318242%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m23.html"><span><span>m23</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2121318242%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2121318242%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m23.html">m23</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m23.html">m23</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2142629247%2FProperties%2F-200797687" anchor-label="m24" id="-2142629247%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-2142629247%2FProperties%2F-1497488939" anchor-label="m24" id="-2142629247%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m24.html"><span><span>m24</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2142629247%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2142629247%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m24.html">m24</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m24.html">m24</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1274074651%2FProperties%2F-200797687" anchor-label="m31" id="-1274074651%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1274074651%2FProperties%2F-1497488939" anchor-label="m31" id="-1274074651%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m31.html"><span><span>m31</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1274074651%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1274074651%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m31.html">m31</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m31.html">m31</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1243054844%2FProperties%2F-200797687" anchor-label="m32" id="-1243054844%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1243054844%2FProperties%2F-1497488939" anchor-label="m32" id="-1243054844%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m32.html"><span><span>m32</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1243054844%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1243054844%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m32.html">m32</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m32.html">m32</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1212035037%2FProperties%2F-200797687" anchor-label="m33" id="-1212035037%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1212035037%2FProperties%2F-1497488939" anchor-label="m33" id="-1212035037%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m33.html"><span><span>m33</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1212035037%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1212035037%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m33.html">m33</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m33.html">m33</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1181015230%2FProperties%2F-200797687" anchor-label="m34" id="-1181015230%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1181015230%2FProperties%2F-1497488939" anchor-label="m34" id="-1181015230%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m34.html"><span><span>m34</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1181015230%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1181015230%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m34.html">m34</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m34.html">m34</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-312460634%2FProperties%2F-200797687" anchor-label="m41" id="-312460634%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-312460634%2FProperties%2F-1497488939" anchor-label="m41" id="-312460634%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m41.html"><span><span>m41</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-312460634%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-312460634%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m41.html">m41</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m41.html">m41</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-281440827%2FProperties%2F-200797687" anchor-label="m42" id="-281440827%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-281440827%2FProperties%2F-1497488939" anchor-label="m42" id="-281440827%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m42.html"><span><span>m42</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-281440827%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-281440827%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m42.html">m42</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m42.html">m42</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-250421020%2FProperties%2F-200797687" anchor-label="m43" id="-250421020%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-250421020%2FProperties%2F-1497488939" anchor-label="m43" id="-250421020%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m43.html"><span><span>m43</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-250421020%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-250421020%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m43.html">m43</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m43.html">m43</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-219401213%2FProperties%2F-200797687" anchor-label="m44" id="-219401213%2FProperties%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-219401213%2FProperties%2F-1497488939" anchor-label="m44" id="-219401213%2FProperties%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="m44.html"><span><span>m44</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-219401213%2FProperties%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-219401213%2FProperties%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m44.html">m44</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="m44.html">m44</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -452,437 +484,437 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="">Functions</h2>
-        <div class="table"><a data-name="828975203%2FFunctions%2F-200797687" anchor-label="flipX" id="828975203%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="828975203%2FFunctions%2F-1497488939" anchor-label="flipX" id="828975203%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/flip-x.html"><span>flip</span><wbr><span><span>X</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="828975203%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="828975203%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/flip-x.html"><span class="token function">flipX</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/flip-x.html"><span class="token function">flipX</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="859995010%2FFunctions%2F-200797687" anchor-label="flipY" id="859995010%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="859995010%2FFunctions%2F-1497488939" anchor-label="flipY" id="859995010%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/flip-y.html"><span>flip</span><wbr><span><span>Y</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="859995010%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="859995010%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/flip-y.html"><span class="token function">flipY</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/flip-y.html"><span class="token function">flipY</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2026512866%2FFunctions%2F-200797687" anchor-label="inverse" id="-2026512866%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-2026512866%2FFunctions%2F-1497488939" anchor-label="inverse" id="-2026512866%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/inverse.html"><span><span>inverse</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2026512866%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2026512866%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/inverse.html"><span class="token function">inverse</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/inverse.html"><span class="token function">inverse</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1650814200%2FFunctions%2F-200797687" anchor-label="invertSelf" id="-1650814200%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1650814200%2FFunctions%2F-1497488939" anchor-label="invertSelf" id="-1650814200%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="invert-self.html"><span>invert</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1650814200%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1650814200%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="invert-self.html"><span class="token function">invertSelf</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="invert-self.html"><span class="token function">invertSelf</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="766578429%2FFunctions%2F-200797687" anchor-label="multiply" id="766578429%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="766578429%2FFunctions%2F-1497488939" anchor-label="multiply" id="766578429%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/multiply.html"><span><span>multiply</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="766578429%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="766578429%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/multiply.html"><span class="token function">multiply</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">DOMMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/multiply.html"><span class="token function">multiply</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">DOMMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="186985899%2FFunctions%2F-200797687" anchor-label="multiplySelf" id="186985899%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="186985899%2FFunctions%2F-1497488939" anchor-label="multiplySelf" id="186985899%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="multiply-self.html"><span>multiply</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="186985899%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="186985899%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="multiply-self.html"><span class="token function">multiplySelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">DOMMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="multiply-self.html"><span class="token function">multiplySelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">DOMMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1809802280%2FFunctions%2F-200797687" anchor-label="preMultiplySelf" id="1809802280%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1809802280%2FFunctions%2F-1497488939" anchor-label="preMultiplySelf" id="1809802280%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="pre-multiply-self.html"><span>pre</span><wbr><span>Multiply</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1809802280%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1809802280%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="pre-multiply-self.html"><span class="token function">preMultiplySelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">DOMMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="pre-multiply-self.html"><span class="token function">preMultiplySelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">DOMMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2131341021%2FFunctions%2F-200797687" anchor-label="rotate" id="2131341021%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="2131341021%2FFunctions%2F-1497488939" anchor-label="rotate" id="2131341021%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/rotate.html"><span><span>rotate</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2131341021%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2131341021%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/rotate.html"><span class="token function">rotate</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/rotate.html"><span class="token function">rotate</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1959567356%2FFunctions%2F-200797687" anchor-label="rotateAxisAngle" id="1959567356%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1959567356%2FFunctions%2F-1497488939" anchor-label="rotateAxisAngle" id="1959567356%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/rotate-axis-angle.html"><span>rotate</span><wbr><span>Axis</span><wbr><span><span>Angle</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1959567356%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1959567356%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/rotate-axis-angle.html"><span class="token function">rotateAxisAngle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">z<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/rotate-axis-angle.html"><span class="token function">rotateAxisAngle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">z<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1286731494%2FFunctions%2F-200797687" anchor-label="rotateAxisAngleSelf" id="1286731494%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1286731494%2FFunctions%2F-1497488939" anchor-label="rotateAxisAngleSelf" id="1286731494%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="rotate-axis-angle-self.html"><span>rotate</span><wbr><span>Axis</span><wbr><span>Angle</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1286731494%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1286731494%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="rotate-axis-angle-self.html"><span class="token function">rotateAxisAngleSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">z<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="rotate-axis-angle-self.html"><span class="token function">rotateAxisAngleSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">z<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1880290843%2FFunctions%2F-200797687" anchor-label="rotateFromVector" id="-1880290843%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1880290843%2FFunctions%2F-1497488939" anchor-label="rotateFromVector" id="-1880290843%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/rotate-from-vector.html"><span>rotate</span><wbr><span>From</span><wbr><span><span>Vector</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1880290843%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1880290843%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/rotate-from-vector.html"><span class="token function">rotateFromVector</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/rotate-from-vector.html"><span class="token function">rotateFromVector</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-955051245%2FFunctions%2F-200797687" anchor-label="rotateFromVectorSelf" id="-955051245%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-955051245%2FFunctions%2F-1497488939" anchor-label="rotateFromVectorSelf" id="-955051245%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="rotate-from-vector-self.html"><span>rotate</span><wbr><span>From</span><wbr><span>Vector</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-955051245%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-955051245%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="rotate-from-vector-self.html"><span class="token function">rotateFromVectorSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="rotate-from-vector-self.html"><span class="token function">rotateFromVectorSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1696675979%2FFunctions%2F-200797687" anchor-label="rotateSelf" id="1696675979%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1696675979%2FFunctions%2F-1497488939" anchor-label="rotateSelf" id="1696675979%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="rotate-self.html"><span>rotate</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1696675979%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1696675979%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="rotate-self.html"><span class="token function">rotateSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="rotate-self.html"><span class="token function">rotateSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1164482506%2FFunctions%2F-200797687" anchor-label="scale" id="1164482506%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1164482506%2FFunctions%2F-1497488939" anchor-label="scale" id="1164482506%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/scale.html"><span><span>scale</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1164482506%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1164482506%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/scale.html"><span class="token function">scale</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/scale.html"><span class="token function">scale</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1512424896%2FFunctions%2F-200797687" anchor-label="scale3d" id="1512424896%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1512424896%2FFunctions%2F-1497488939" anchor-label="scale3d" id="1512424896%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/scale3d.html"><span><span>scale3d</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1512424896%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1512424896%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/scale3d.html"><span class="token function">scale3d</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/scale3d.html"><span class="token function">scale3d</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1009256278%2FFunctions%2F-200797687" anchor-label="scale3dSelf" id="-1009256278%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1009256278%2FFunctions%2F-1497488939" anchor-label="scale3dSelf" id="-1009256278%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="scale3d-self.html"><span>scale3d</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1009256278%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1009256278%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="scale3d-self.html"><span class="token function">scale3dSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="scale3d-self.html"><span class="token function">scale3dSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1462823680%2FFunctions%2F-200797687" anchor-label="scaleNonUniform" id="-1462823680%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1462823680%2FFunctions%2F-1497488939" anchor-label="scaleNonUniform" id="-1462823680%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/scale-non-uniform.html"><span>scale</span><wbr><span>Non</span><wbr><span><span>Uniform</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1462823680%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1462823680%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/scale-non-uniform.html"><span class="token function">scaleNonUniform</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scaleX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">scaleY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">scaleZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/scale-non-uniform.html"><span class="token function">scaleNonUniform</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scaleX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">scaleY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">scaleZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1843069974%2FFunctions%2F-200797687" anchor-label="scaleNonUniformSelf" id="-1843069974%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-1843069974%2FFunctions%2F-1497488939" anchor-label="scaleNonUniformSelf" id="-1843069974%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="scale-non-uniform-self.html"><span>scale</span><wbr><span>Non</span><wbr><span>Uniform</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1843069974%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1843069974%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="scale-non-uniform-self.html"><span class="token function">scaleNonUniformSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scaleX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">scaleY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">scaleZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="scale-non-uniform-self.html"><span class="token function">scaleNonUniformSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scaleX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">scaleY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">scaleZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originZ<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="48915508%2FFunctions%2F-200797687" anchor-label="scaleSelf" id="48915508%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="48915508%2FFunctions%2F-1497488939" anchor-label="scaleSelf" id="48915508%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="scale-self.html"><span>scale</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="48915508%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="48915508%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="scale-self.html"><span class="token function">scaleSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scale<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="scale-self.html"><span class="token function">scaleSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originX<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">originY<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="368309416%2FFunctions%2F-200797687" anchor-label="setMatrixValue" id="368309416%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="368309416%2FFunctions%2F-1497488939" anchor-label="setMatrixValue" id="368309416%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="set-matrix-value.html"><span>set</span><wbr><span>Matrix</span><wbr><span><span>Value</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="368309416%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="368309416%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-matrix-value.html"><span class="token function">setMatrixValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transformList<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-matrix-value.html"><span class="token function">setMatrixValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transformList<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="61989508%2FFunctions%2F-200797687" anchor-label="skewX" id="61989508%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="61989508%2FFunctions%2F-1497488939" anchor-label="skewX" id="61989508%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/skew-x.html"><span>skew</span><wbr><span><span>X</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="61989508%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="61989508%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/skew-x.html"><span class="token function">skewX</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sx<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/skew-x.html"><span class="token function">skewX</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sx<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-476459026%2FFunctions%2F-200797687" anchor-label="skewXSelf" id="-476459026%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-476459026%2FFunctions%2F-1497488939" anchor-label="skewXSelf" id="-476459026%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="skew-x-self.html"><span>skew</span><wbr><span><span>XSelf</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-476459026%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-476459026%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="skew-x-self.html"><span class="token function">skewXSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sx<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="skew-x-self.html"><span class="token function">skewXSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sx<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-860694075%2FFunctions%2F-200797687" anchor-label="skewY" id="-860694075%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-860694075%2FFunctions%2F-1497488939" anchor-label="skewY" id="-860694075%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/skew-y.html"><span>skew</span><wbr><span><span>Y</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-860694075%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-860694075%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/skew-y.html"><span class="token function">skewY</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sy<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/skew-y.html"><span class="token function">skewY</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sy<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-925155665%2FFunctions%2F-200797687" anchor-label="skewYSelf" id="-925155665%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-925155665%2FFunctions%2F-1497488939" anchor-label="skewYSelf" id="-925155665%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="skew-y-self.html"><span>skew</span><wbr><span><span>YSelf</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-925155665%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-925155665%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="skew-y-self.html"><span class="token function">skewYSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sy<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="skew-y-self.html"><span class="token function">skewYSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sy<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1975015859%2FFunctions%2F-200797687" anchor-label="toFloat32Array" id="1975015859%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1975015859%2FFunctions%2F-1497488939" anchor-label="toFloat32Array" id="1975015859%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/to-float32-array.html"><span>to</span><wbr><span><span>Float32Array</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1975015859%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1975015859%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/to-float32-array.html"><span class="token function">toFloat32Array</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../web.webgl/-float32-array/index.html">Float32Array</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/to-float32-array.html"><span class="token function">toFloat32Array</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../web.webgl/-float32-array/index.html">Float32Array</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="941271506%2FFunctions%2F-200797687" anchor-label="toFloat64Array" id="941271506%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="941271506%2FFunctions%2F-1497488939" anchor-label="toFloat64Array" id="941271506%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/to-float64-array.html"><span>to</span><wbr><span><span>Float64Array</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="941271506%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="941271506%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/to-float64-array.html"><span class="token function">toFloat64Array</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../web.webgl/-float64-array/index.html">Float64Array</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/to-float64-array.html"><span class="token function">toFloat64Array</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../web.webgl/-float64-array/index.html">Float64Array</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-63565884%2FFunctions%2F-200797687" anchor-label="transformPoint" id="-63565884%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="-63565884%2FFunctions%2F-1497488939" anchor-label="transformPoint" id="-63565884%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/transform-point.html"><span>transform</span><wbr><span><span>Point</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-63565884%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-63565884%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/transform-point.html"><span class="token function">transformPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">point<span class="token operator">: </span><a href="../-d-o-m-point-init/index.html">DOMPointInit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-d-o-m-point/index.html">DOMPoint</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/transform-point.html"><span class="token function">transformPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">point<span class="token operator">: </span><a href="../-d-o-m-point-init/index.html">DOMPointInit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-d-o-m-point/index.html">DOMPoint</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1276915534%2FFunctions%2F-200797687" anchor-label="translate" id="1276915534%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="1276915534%2FFunctions%2F-1497488939" anchor-label="translate" id="1276915534%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../-d-o-m-matrix-read-only/translate.html"><span><span>translate</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1276915534%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1276915534%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/translate.html"><span class="token function">translate</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tx<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">ty<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">tz<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-d-o-m-matrix-read-only/translate.html"><span class="token function">translate</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tx<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">ty<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">tz<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="503982776%2FFunctions%2F-200797687" anchor-label="translateSelf" id="503982776%2FFunctions%2F-200797687" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-dom:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-dom:dokkaHtmlPartial/commonMain">
+<a data-name="503982776%2FFunctions%2F-1497488939" anchor-label="translateSelf" id="503982776%2FFunctions%2F-1497488939" data-filterable-set=":modules:kilua-dom/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-dom/commonMain" data-filterable-set=":modules:kilua-dom/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="translate-self.html"><span>translate</span><wbr><span><span>Self</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="503982776%2FFunctions%2F-200797687"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="503982776%2FFunctions%2F-1497488939"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="translate-self.html"><span class="token function">translateSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tx<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">ty<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">tz<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-dom/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="translate-self.html"><span class="token function">translateSelf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tx<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">ty<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">tz<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DOMMatrix</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -892,12 +924,18 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-

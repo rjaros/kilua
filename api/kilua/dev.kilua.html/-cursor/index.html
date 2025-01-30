@@ -25,616 +25,648 @@
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../../index.html">
-                            kilua-project
-                    </a>            </div>
-            <div class="library-version">0.0.18
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.19
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kilua/commonMain" data-filter=":kilua/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua:dokkaHtmlPartial/commonMain">common</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="classlike" id="content" pageids="kilua::dev.kilua.html/Cursor///PointingToDeclaration//-1322303221">
+<div class="main-content" data-page-type="classlike" id="content" pageids="kilua::dev.kilua.html/Cursor///PointingToDeclaration//-787921261">
   <div class="breadcrumbs"><a href="../../index.html">kilua</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.html</a><span class="delimiter">/</span><span class="current">Cursor</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Cursor</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">Cursor</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">Cursor</a><span class="token operator">&gt; </span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">Cursor</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">Cursor</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/commonMain/kotlin/dev/kilua/html/Css.kt#L495">source</a>)</span></span></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="ENTRY">Entries</button></div>
     <div class="tabs-section-body">
       <div data-togglable="ENTRY">
         <h2 class="">Entries</h2>
-        <div class="table"><a data-name="-1583200396%2FClasslikes%2F-1322303221" anchor-label="Default" id="-1583200396%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="-1583200396%2FClasslikes%2F-787921261" anchor-label="Default" id="-1583200396%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-default/index.html">Default</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1583200396%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1583200396%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-default/index.html">Default</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-default/index.html">Default</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-262456316%2FClasslikes%2F-1322303221" anchor-label="Auto" id="-262456316%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-262456316%2FClasslikes%2F-787921261" anchor-label="Auto" id="-262456316%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-auto/index.html">Auto</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-262456316%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-262456316%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-auto/index.html">Auto</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-auto/index.html">Auto</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="159665101%2FClasslikes%2F-1322303221" anchor-label="None" id="159665101%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="159665101%2FClasslikes%2F-787921261" anchor-label="None" id="159665101%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-none/index.html">None</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="159665101%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="159665101%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-none/index.html">None</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-none/index.html">None</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1717396733%2FClasslikes%2F-1322303221" anchor-label="Alias" id="-1717396733%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1717396733%2FClasslikes%2F-787921261" anchor-label="Alias" id="-1717396733%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-alias/index.html">Alias</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1717396733%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1717396733%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-alias/index.html">Alias</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-alias/index.html">Alias</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1473549441%2FClasslikes%2F-1322303221" anchor-label="AllScroll" id="1473549441%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1473549441%2FClasslikes%2F-787921261" anchor-label="AllScroll" id="1473549441%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-all-scroll/index.html">AllScroll</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1473549441%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1473549441%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-all-scroll/index.html">AllScroll</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-all-scroll/index.html">AllScroll</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="250546295%2FClasslikes%2F-1322303221" anchor-label="Cell" id="250546295%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="250546295%2FClasslikes%2F-787921261" anchor-label="Cell" id="250546295%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-cell/index.html">Cell</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="250546295%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="250546295%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-cell/index.html">Cell</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-cell/index.html">Cell</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="592158881%2FClasslikes%2F-1322303221" anchor-label="ContextMenu" id="592158881%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="592158881%2FClasslikes%2F-787921261" anchor-label="ContextMenu" id="592158881%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-context-menu/index.html">ContextMenu</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="592158881%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="592158881%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-context-menu/index.html">ContextMenu</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-context-menu/index.html">ContextMenu</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1781319545%2FClasslikes%2F-1322303221" anchor-label="ColResize" id="-1781319545%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1781319545%2FClasslikes%2F-787921261" anchor-label="ColResize" id="-1781319545%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-col-resize/index.html">ColResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1781319545%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1781319545%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-col-resize/index.html">ColResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-col-resize/index.html">ColResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2041092278%2FClasslikes%2F-1322303221" anchor-label="Copy" id="-2041092278%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-2041092278%2FClasslikes%2F-787921261" anchor-label="Copy" id="-2041092278%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-copy/index.html">Copy</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2041092278%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2041092278%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-copy/index.html">Copy</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-copy/index.html">Copy</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1661714901%2FClasslikes%2F-1322303221" anchor-label="Crosshair" id="1661714901%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1661714901%2FClasslikes%2F-787921261" anchor-label="Crosshair" id="1661714901%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-crosshair/index.html">Crosshair</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1661714901%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1661714901%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-crosshair/index.html">Crosshair</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-crosshair/index.html">Crosshair</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="614877356%2FClasslikes%2F-1322303221" anchor-label="EResize" id="614877356%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="614877356%2FClasslikes%2F-787921261" anchor-label="EResize" id="614877356%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-e-resize/index.html">EResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="614877356%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="614877356%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-e-resize/index.html">EResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-e-resize/index.html">EResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1166608485%2FClasslikes%2F-1322303221" anchor-label="EwResize" id="-1166608485%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1166608485%2FClasslikes%2F-787921261" anchor-label="EwResize" id="-1166608485%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-ew-resize/index.html">EwResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1166608485%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1166608485%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-ew-resize/index.html">EwResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-ew-resize/index.html">EwResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="827300833%2FClasslikes%2F-1322303221" anchor-label="Grab" id="827300833%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="827300833%2FClasslikes%2F-787921261" anchor-label="Grab" id="827300833%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-grab/index.html">Grab</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="827300833%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="827300833%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-grab/index.html">Grab</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-grab/index.html">Grab</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1226514015%2FClasslikes%2F-1322303221" anchor-label="Grabbing" id="-1226514015%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1226514015%2FClasslikes%2F-787921261" anchor-label="Grabbing" id="-1226514015%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-grabbing/index.html">Grabbing</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1226514015%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1226514015%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-grabbing/index.html">Grabbing</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-grabbing/index.html">Grabbing</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1078048234%2FClasslikes%2F-1322303221" anchor-label="Help" id="-1078048234%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1078048234%2FClasslikes%2F-787921261" anchor-label="Help" id="-1078048234%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-help/index.html">Help</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1078048234%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1078048234%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-help/index.html">Help</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-help/index.html">Help</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-369517914%2FClasslikes%2F-1322303221" anchor-label="Move" id="-369517914%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-369517914%2FClasslikes%2F-787921261" anchor-label="Move" id="-369517914%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-move/index.html">Move</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-369517914%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-369517914%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-move/index.html">Move</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-move/index.html">Move</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2044490699%2FClasslikes%2F-1322303221" anchor-label="NResize" id="-2044490699%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-2044490699%2FClasslikes%2F-787921261" anchor-label="NResize" id="-2044490699%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-n-resize/index.html">NResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2044490699%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2044490699%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-n-resize/index.html">NResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-n-resize/index.html">NResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-978870752%2FClasslikes%2F-1322303221" anchor-label="NeResize" id="-978870752%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-978870752%2FClasslikes%2F-787921261" anchor-label="NeResize" id="-978870752%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-ne-resize/index.html">NeResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-978870752%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-978870752%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-ne-resize/index.html">NeResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-ne-resize/index.html">NeResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="93211780%2FClasslikes%2F-1322303221" anchor-label="NeswResize" id="93211780%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="93211780%2FClasslikes%2F-787921261" anchor-label="NeswResize" id="93211780%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-nesw-resize/index.html">NeswResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="93211780%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="93211780%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-nesw-resize/index.html">NeswResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-nesw-resize/index.html">NeswResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1565394734%2FClasslikes%2F-1322303221" anchor-label="NsResize" id="1565394734%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1565394734%2FClasslikes%2F-787921261" anchor-label="NsResize" id="1565394734%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-ns-resize/index.html">NsResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1565394734%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1565394734%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-ns-resize/index.html">NsResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-ns-resize/index.html">NsResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2002639566%2FClasslikes%2F-1322303221" anchor-label="NwResize" id="-2002639566%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-2002639566%2FClasslikes%2F-787921261" anchor-label="NwResize" id="-2002639566%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-nw-resize/index.html">NwResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2002639566%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2002639566%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-nw-resize/index.html">NwResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-nw-resize/index.html">NwResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="822661124%2FClasslikes%2F-1322303221" anchor-label="NwseResize" id="822661124%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="822661124%2FClasslikes%2F-787921261" anchor-label="NwseResize" id="822661124%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-nwse-resize/index.html">NwseResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="822661124%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="822661124%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-nwse-resize/index.html">NwseResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-nwse-resize/index.html">NwseResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="109358757%2FClasslikes%2F-1322303221" anchor-label="NoDrop" id="109358757%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="109358757%2FClasslikes%2F-787921261" anchor-label="NoDrop" id="109358757%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-no-drop/index.html">NoDrop</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="109358757%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="109358757%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-no-drop/index.html">NoDrop</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-no-drop/index.html">NoDrop</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="978900586%2FClasslikes%2F-1322303221" anchor-label="NotAllowed" id="978900586%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="978900586%2FClasslikes%2F-787921261" anchor-label="NotAllowed" id="978900586%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-not-allowed/index.html">NotAllowed</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="978900586%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="978900586%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-not-allowed/index.html">NotAllowed</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-not-allowed/index.html">NotAllowed</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2125708912%2FClasslikes%2F-1322303221" anchor-label="Pointer" id="2125708912%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="2125708912%2FClasslikes%2F-787921261" anchor-label="Pointer" id="2125708912%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-pointer/index.html">Pointer</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2125708912%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2125708912%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-pointer/index.html">Pointer</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-pointer/index.html">Pointer</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1825431426%2FClasslikes%2F-1322303221" anchor-label="Progress" id="1825431426%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1825431426%2FClasslikes%2F-787921261" anchor-label="Progress" id="1825431426%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-progress/index.html">Progress</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1825431426%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1825431426%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-progress/index.html">Progress</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-progress/index.html">Progress</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-27520031%2FClasslikes%2F-1322303221" anchor-label="RowResize" id="-27520031%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-27520031%2FClasslikes%2F-787921261" anchor-label="RowResize" id="-27520031%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-row-resize/index.html">RowResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-27520031%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-27520031%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-row-resize/index.html">RowResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-row-resize/index.html">RowResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1135824454%2FClasslikes%2F-1322303221" anchor-label="SResize" id="-1135824454%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1135824454%2FClasslikes%2F-787921261" anchor-label="SResize" id="-1135824454%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-s-resize/index.html">SResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1135824454%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1135824454%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-s-resize/index.html">SResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-s-resize/index.html">SResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1419979067%2FClasslikes%2F-1322303221" anchor-label="SeResize" id="1419979067%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1419979067%2FClasslikes%2F-787921261" anchor-label="SeResize" id="1419979067%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-se-resize/index.html">SeResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1419979067%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1419979067%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-se-resize/index.html">SeResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-se-resize/index.html">SeResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="396210253%2FClasslikes%2F-1322303221" anchor-label="SwResize" id="396210253%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="396210253%2FClasslikes%2F-787921261" anchor-label="SwResize" id="396210253%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-sw-resize/index.html">SwResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="396210253%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="396210253%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-sw-resize/index.html">SwResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-sw-resize/index.html">SwResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1404728574%2FClasslikes%2F-1322303221" anchor-label="Text" id="-1404728574%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1404728574%2FClasslikes%2F-787921261" anchor-label="Text" id="-1404728574%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text/index.html">Text</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1404728574%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1404728574%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-text/index.html">Text</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-text/index.html">Text</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-629934056%2FClasslikes%2F-1322303221" anchor-label="VerticalText" id="-629934056%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-629934056%2FClasslikes%2F-787921261" anchor-label="VerticalText" id="-629934056%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-vertical-text/index.html">VerticalText</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-629934056%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-629934056%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-vertical-text/index.html">VerticalText</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-vertical-text/index.html">VerticalText</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-408891458%2FClasslikes%2F-1322303221" anchor-label="WResize" id="-408891458%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-408891458%2FClasslikes%2F-787921261" anchor-label="WResize" id="-408891458%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-w-resize/index.html">WResize</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-408891458%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-408891458%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-w-resize/index.html">WResize</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-w-resize/index.html">WResize</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-552548022%2FClasslikes%2F-1322303221" anchor-label="Wait" id="-552548022%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-552548022%2FClasslikes%2F-787921261" anchor-label="Wait" id="-552548022%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-wait/index.html">Wait</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-552548022%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-552548022%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-wait/index.html">Wait</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-wait/index.html">Wait</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1938740051%2FClasslikes%2F-1322303221" anchor-label="ZoomIn" id="-1938740051%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-1938740051%2FClasslikes%2F-787921261" anchor-label="ZoomIn" id="-1938740051%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-zoom-in/index.html">ZoomIn</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1938740051%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1938740051%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-zoom-in/index.html">ZoomIn</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-zoom-in/index.html">ZoomIn</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-635259346%2FClasslikes%2F-1322303221" anchor-label="ZoomOut" id="-635259346%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-635259346%2FClasslikes%2F-787921261" anchor-label="ZoomOut" id="-635259346%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-zoom-out/index.html">ZoomOut</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-635259346%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-635259346%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-zoom-out/index.html">ZoomOut</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-zoom-out/index.html">ZoomOut</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1832058167%2FClasslikes%2F-1322303221" anchor-label="Initial" id="1832058167%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1832058167%2FClasslikes%2F-787921261" anchor-label="Initial" id="1832058167%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-initial/index.html">Initial</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1832058167%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1832058167%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-initial/index.html">Initial</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-initial/index.html">Initial</a></div></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-565131090%2FClasslikes%2F-1322303221" anchor-label="Inherit" id="-565131090%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-565131090%2FClasslikes%2F-787921261" anchor-label="Inherit" id="-565131090%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-inherit/index.html">Inherit</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-565131090%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-565131090%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><div class="block"><a href="-inherit/index.html">Inherit</a></div></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><a href="-inherit/index.html">Inherit</a></div></div></div></div>
                 </div>
               </div>
             </div>
@@ -643,62 +675,62 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="">Properties</h2>
-        <div class="table"><a data-name="-1436606385%2FProperties%2F-1322303221" anchor-label="entries" id="-1436606385%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="-1436606385%2FProperties%2F-787921261" anchor-label="entries" id="-1436606385%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="entries.html"><span><span>entries</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1436606385%2FProperties%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1436606385%2FProperties%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="entries.html">entries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.enums/-enum-entries/index.html">EnumEntries</a><span class="token operator">&lt;</span><a href="index.html">Cursor</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a representation of an immutable list of all enum entries, in the order they're declared.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="entries.html">entries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.enums/-enum-entries/index.html">EnumEntries</a><span class="token operator">&lt;</span><a href="index.html">Cursor</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a representation of an immutable list of all enum entries, in the order they're declared.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-372974862%2FProperties%2F-1322303221" anchor-label="name" id="-372974862%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-372974862%2FProperties%2F-787921261" anchor-label="name" id="-372974862%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-372974862%2FProperties%2F-1322303221"><span><span>name</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-372974862%2FProperties%2F-1322303221"></span>
+                  <div><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-372974862%2FProperties%2F-787921261"><span><span>name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-372974862%2FProperties%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-372974862%2FProperties%2F-1322303221">name</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">val </span><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-372974862%2FProperties%2F-787921261">name</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-739389684%2FProperties%2F-1322303221" anchor-label="ordinal" id="-739389684%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-739389684%2FProperties%2F-787921261" anchor-label="ordinal" id="-739389684%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-739389684%2FProperties%2F-1322303221"><span><span>ordinal</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-739389684%2FProperties%2F-1322303221"></span>
+                  <div><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-739389684%2FProperties%2F-787921261"><span><span>ordinal</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-739389684%2FProperties%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-739389684%2FProperties%2F-1322303221">ordinal</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">val </span><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-739389684%2FProperties%2F-787921261">ordinal</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="428213006%2FProperties%2F-1322303221" anchor-label="value" id="428213006%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="428213006%2FProperties%2F-787921261" anchor-label="value" id="428213006%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="value.html"><span><span>value</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="428213006%2FProperties%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="428213006%2FProperties%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="value.html">value</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="value.html">value</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -707,47 +739,47 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="">Functions</h2>
-        <div class="table"><a data-name="945407983%2FFunctions%2F-1322303221" anchor-label="toString" id="945407983%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="945407983%2FFunctions%2F-787921261" anchor-label="toString" id="945407983%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-string.html"><span>to</span><wbr><span><span>String</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="945407983%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="945407983%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-764283475%2FFunctions%2F-1322303221" anchor-label="valueOf" id="-764283475%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-764283475%2FFunctions%2F-787921261" anchor-label="valueOf" id="-764283475%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="value-of.html"><span>value</span><wbr><span><span>Of</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-764283475%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-764283475%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="value-of.html"><span class="token function">valueOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Cursor</a></div><div class="brief "><p class="paragraph">Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="value-of.html"><span class="token function">valueOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Cursor</a></div><div class="brief "><p class="paragraph">Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1955956089%2FFunctions%2F-1322303221" anchor-label="values" id="1955956089%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1955956089%2FFunctions%2F-787921261" anchor-label="values" id="1955956089%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="values.html"><span><span>values</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1955956089%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1955956089%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="values.html"><span class="token function">values</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="index.html">Cursor</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns an array containing the constants of this enum type, in the order they're declared.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="values.html"><span class="token function">values</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="index.html">Cursor</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns an array containing the constants of this enum type, in the order they're declared.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -757,12 +789,18 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-

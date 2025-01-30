@@ -69,6 +69,11 @@ module:kilua-imask
 dev.kilua
 dev.kilua.form
 dev.kilua.form.number
+module:kilua-jetpack
+dev.kilua
+dev.kilua.compose.adaptive
+dev.kilua.compose.foundation.layout
+dev.kilua.compose.ui
 module:kilua-lazy-layouts
 dev.kilua.panel
 module:kilua-marked
@@ -141,8 +146,3 @@ dev.kilua
 dev.kilua.externals
 dev.kilua.form.text
 dev.kilua.form.text.i18n
-module:kilua-gradle-plugin
-dev.kilua.gradle
-dev.kilua.gradle.tasks
-module:kilua-ksp-processor
-dev.kilua.ksp

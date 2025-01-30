@@ -25,40 +25,72 @@
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../../index.html">
-                            kilua-project
-                    </a>            </div>
-            <div class="library-version">0.0.18
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.19
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-tempus-dominus/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":modules:kilua-tempus-dominus/commonMain" data-filter=":modules:kilua-tempus-dominus/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">common</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="package" id="content" pageids="kilua-tempus-dominus::dev.kilua.externals////PointingToDeclaration//1539782403">
+<div class="main-content" data-page-type="package" id="content" pageids="kilua-tempus-dominus::dev.kilua.externals////PointingToDeclaration//-1104821861">
   <div class="breadcrumbs"><a href="../index.html">kilua-tempus-dominus</a><span class="delimiter">/</span><span class="current">dev.kilua.externals</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
@@ -68,152 +100,152 @@
     <div class="tabs-section-body">
       <div data-togglable="TYPE">
         <h2 class="">Types</h2>
-        <div class="table"><a data-name="1006879279%2FClasslikes%2F1539782403" anchor-label="Date" id="1006879279%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="1006879279%2FClasslikes%2F-1104821861" anchor-label="Date" id="1006879279%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-date/index.html"><span><span>Date</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1006879279%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1006879279%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-date/index.html">Date</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">JavaScript Date class.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-date/index.html">Date</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">JavaScript Date class.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1720964558%2FClasslikes%2F1539782403" anchor-label="TempusDominus" id="-1720964558%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="-1720964558%2FClasslikes%2F-1104821861" anchor-label="TempusDominus" id="-1720964558%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tempus-dominus/index.html"><span>Tempus</span><wbr><span><span>Dominus</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1720964558%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1720964558%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus/index.html">TempusDominus</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">element<span class="token operator">: </span><a href="../../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="-tempus-dominus-options/index.html">TempusDominusOptions</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus class.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus/index.html">TempusDominus</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">element<span class="token operator">: </span><a href="../../../modules/kilua-dom/web.dom/-h-t-m-l-element/index.html">HTMLElement</a><span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="-tempus-dominus-options/index.html">TempusDominusOptions</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus class.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-105892145%2FClasslikes%2F1539782403" anchor-label="TempusDominusButtons" id="-105892145%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="-105892145%2FClasslikes%2F-1104821861" anchor-label="TempusDominusButtons" id="-105892145%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tempus-dominus-buttons/index.html"><span>Tempus</span><wbr><span>Dominus</span><wbr><span><span>Buttons</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-105892145%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-105892145%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-buttons/index.html">TempusDominusButtons</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus button configuration.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-buttons/index.html">TempusDominusButtons</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus button configuration.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1768023676%2FClasslikes%2F1539782403" anchor-label="TempusDominusComponents" id="1768023676%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="1768023676%2FClasslikes%2F-1104821861" anchor-label="TempusDominusComponents" id="1768023676%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tempus-dominus-components/index.html"><span>Tempus</span><wbr><span>Dominus</span><wbr><span><span>Components</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1768023676%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1768023676%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-components/index.html">TempusDominusComponents</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus components configuration.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-components/index.html">TempusDominusComponents</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus components configuration.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2107133963%2FClasslikes%2F1539782403" anchor-label="TempusDominusDates" id="2107133963%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="2107133963%2FClasslikes%2F-1104821861" anchor-label="TempusDominusDates" id="2107133963%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tempus-dominus-dates/index.html"><span>Tempus</span><wbr><span>Dominus</span><wbr><span><span>Dates</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2107133963%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2107133963%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-dates/index.html">TempusDominusDates</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus dates object.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-dates/index.html">TempusDominusDates</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus dates object.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1195239250%2FClasslikes%2F1539782403" anchor-label="TempusDominusDisplay" id="-1195239250%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="-1195239250%2FClasslikes%2F-1104821861" anchor-label="TempusDominusDisplay" id="-1195239250%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tempus-dominus-display/index.html"><span>Tempus</span><wbr><span>Dominus</span><wbr><span><span>Display</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1195239250%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1195239250%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-display/index.html">TempusDominusDisplay</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus display configuration.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-display/index.html">TempusDominusDisplay</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus display configuration.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="593224982%2FClasslikes%2F1539782403" anchor-label="TempusDominusIcons" id="593224982%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="593224982%2FClasslikes%2F-1104821861" anchor-label="TempusDominusIcons" id="593224982%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tempus-dominus-icons/index.html"><span>Tempus</span><wbr><span>Dominus</span><wbr><span><span>Icons</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="593224982%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="593224982%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-icons/index.html">TempusDominusIcons</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus icons configuration.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-icons/index.html">TempusDominusIcons</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus icons configuration.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1264105416%2FClasslikes%2F1539782403" anchor-label="TempusDominusLocale" id="-1264105416%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="-1264105416%2FClasslikes%2F-1104821861" anchor-label="TempusDominusLocale" id="-1264105416%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tempus-dominus-locale/index.html"><span>Tempus</span><wbr><span>Dominus</span><wbr><span><span>Locale</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1264105416%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1264105416%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tempus-dominus-locale/index.html">TempusDominusLocale</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus Locale.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-tempus-dominus-locale/index.html">TempusDominusLocale</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus Locale.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1255622062%2FClasslikes%2F1539782403" anchor-label="TempusDominusOptions" id="-1255622062%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="-1255622062%2FClasslikes%2F-1104821861" anchor-label="TempusDominusOptions" id="-1255622062%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tempus-dominus-options/index.html"><span>Tempus</span><wbr><span>Dominus</span><wbr><span><span>Options</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1255622062%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1255622062%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-options/index.html">TempusDominusOptions</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus options.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-options/index.html">TempusDominusOptions</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus options.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-96287669%2FClasslikes%2F1539782403" anchor-label="TempusDominusRestrictions" id="-96287669%2FClasslikes%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="-96287669%2FClasslikes%2F-1104821861" anchor-label="TempusDominusRestrictions" id="-96287669%2FClasslikes%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tempus-dominus-restrictions/index.html"><span>Tempus</span><wbr><span>Dominus</span><wbr><span><span>Restrictions</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-96287669%2FClasslikes%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-96287669%2FClasslikes%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-restrictions/index.html">TempusDominusRestrictions</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus restrictions configuration.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-tempus-dominus-restrictions/index.html">TempusDominusRestrictions</a> : <a href="../../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Tempus Dominus restrictions configuration.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -222,17 +254,17 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="">Properties</h2>
-        <div class="table"><a data-name="327103292%2FProperties%2F1539782403" anchor-label="tempusDominusLocales" id="327103292%2FProperties%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="327103292%2FProperties%2F-1104821861" anchor-label="tempusDominusLocales" id="327103292%2FProperties%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tempus-dominus-locales.html"><span>tempus</span><wbr><span>Dominus</span><wbr><span><span>Locales</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="327103292%2FProperties%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="327103292%2FProperties%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="tempus-dominus-locales.html">tempusDominusLocales</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="-tempus-dominus-locale/index.html">TempusDominusLocale</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Map of Tempus Dominus locales.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="tempus-dominus-locales.html">tempusDominusLocales</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="-tempus-dominus-locale/index.html">TempusDominusLocale</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Map of Tempus Dominus locales.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -241,62 +273,62 @@
       </div>
       <div data-togglable="EXTENSION_FUNCTION">
         <h2 class="">Functions</h2>
-        <div class="table"><a data-name="1204010998%2FFunctions%2F1539782403" anchor-label="toDate" id="1204010998%2FFunctions%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="1204010998%2FFunctions%2F-1104821861" anchor-label="toDate" id="1204010998%2FFunctions%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-date.html"><span>to</span><wbr><span><span>Date</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1204010998%2FFunctions%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1204010998%2FFunctions%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span><span class="token punctuation">.</span><a href="to-date.html"><span class="token function">toDate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-date/index.html">Date</a></div><div class="brief "><p class="paragraph">Converts <span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span> to JavaScript <a href="-date/index.html">Date</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="kotlinx.datetime/LocalDateTime///PointingToDeclaration/">LocalDateTime</span><span class="token punctuation">.</span><a href="to-date.html"><span class="token function">toDate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-date/index.html">Date</a></div><div class="brief "><p class="paragraph">Converts <span data-unresolved-link="kotlinx.datetime/LocalDateTime///PointingToDeclaration/">LocalDateTime</span> to JavaScript <a href="-date/index.html">Date</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="kotlinx.datetime/LocalTime///PointingToDeclaration/">LocalTime</span><span class="token punctuation">.</span><a href="to-date.html"><span class="token function">toDate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-date/index.html">Date</a></div><div class="brief "><p class="paragraph">Converts <span data-unresolved-link="kotlinx.datetime/LocalTime///PointingToDeclaration/">LocalTime</span> to JavaScript <a href="-date/index.html">Date</a>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span><span class="token punctuation">.</span><a href="to-date.html"><span class="token function">toDate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-date/index.html">Date</a></div><div class="brief "><p class="paragraph">Converts <span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span> to JavaScript <a href="-date/index.html">Date</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="kotlinx.datetime/LocalDateTime///PointingToDeclaration/">LocalDateTime</span><span class="token punctuation">.</span><a href="to-date.html"><span class="token function">toDate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-date/index.html">Date</a></div><div class="brief "><p class="paragraph">Converts <span data-unresolved-link="kotlinx.datetime/LocalDateTime///PointingToDeclaration/">LocalDateTime</span> to JavaScript <a href="-date/index.html">Date</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="kotlinx.datetime/LocalTime///PointingToDeclaration/">LocalTime</span><span class="token punctuation">.</span><a href="to-date.html"><span class="token function">toDate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-date/index.html">Date</a></div><div class="brief "><p class="paragraph">Converts <span data-unresolved-link="kotlinx.datetime/LocalTime///PointingToDeclaration/">LocalTime</span> to JavaScript <a href="-date/index.html">Date</a>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-65014661%2FFunctions%2F1539782403" anchor-label="toLocalDate" id="-65014661%2FFunctions%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="-65014661%2FFunctions%2F-1104821861" anchor-label="toLocalDate" id="-65014661%2FFunctions%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-local-date.html"><span>to</span><wbr><span>Local</span><wbr><span><span>Date</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-65014661%2FFunctions%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-65014661%2FFunctions%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-date/index.html">Date</a><span class="token punctuation">.</span><a href="to-local-date.html"><span class="token function">toLocalDate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span></div><div class="brief "><p class="paragraph">Converts JavaScript <a href="-date/index.html">Date</a> to <span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-date/index.html">Date</a><span class="token punctuation">.</span><a href="to-local-date.html"><span class="token function">toLocalDate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span></div><div class="brief "><p class="paragraph">Converts JavaScript <a href="-date/index.html">Date</a> to <span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="30306990%2FFunctions%2F1539782403" anchor-label="toLocalDateTime" id="30306990%2FFunctions%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="30306990%2FFunctions%2F-1104821861" anchor-label="toLocalDateTime" id="30306990%2FFunctions%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-local-date-time.html"><span>to</span><wbr><span>Local</span><wbr><span>Date</span><wbr><span><span>Time</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="30306990%2FFunctions%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="30306990%2FFunctions%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-date/index.html">Date</a><span class="token punctuation">.</span><a href="to-local-date-time.html"><span class="token function">toLocalDateTime</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDateTime///PointingToDeclaration/">LocalDateTime</span></div><div class="brief "><p class="paragraph">Converts JavaScript <a href="-date/index.html">Date</a> to <span data-unresolved-link="kotlinx.datetime/LocalDateTime///PointingToDeclaration/">LocalDateTime</span>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-date/index.html">Date</a><span class="token punctuation">.</span><a href="to-local-date-time.html"><span class="token function">toLocalDateTime</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDateTime///PointingToDeclaration/">LocalDateTime</span></div><div class="brief "><p class="paragraph">Converts JavaScript <a href="-date/index.html">Date</a> to <span data-unresolved-link="kotlinx.datetime/LocalDateTime///PointingToDeclaration/">LocalDateTime</span>.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1707216700%2FFunctions%2F1539782403" anchor-label="toLocalTime" id="1707216700%2FFunctions%2F1539782403" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain" data-filterable-set=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain">
+<a data-name="1707216700%2FFunctions%2F-1104821861" anchor-label="toLocalTime" id="1707216700%2FFunctions%2F-1104821861" data-filterable-set=":modules:kilua-tempus-dominus/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-tempus-dominus/commonMain" data-filterable-set=":modules:kilua-tempus-dominus/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-local-time.html"><span>to</span><wbr><span>Local</span><wbr><span><span>Time</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1707216700%2FFunctions%2F1539782403"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1707216700%2FFunctions%2F-1104821861"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-date/index.html">Date</a><span class="token punctuation">.</span><a href="to-local-time.html"><span class="token function">toLocalTime</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalTime///PointingToDeclaration/">LocalTime</span></div><div class="brief "><p class="paragraph">Converts JavaScript <a href="-date/index.html">Date</a> to <span data-unresolved-link="kotlinx.datetime/LocalTime///PointingToDeclaration/">LocalTime</span>.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tempus-dominus/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-date/index.html">Date</a><span class="token punctuation">.</span><a href="to-local-time.html"><span class="token function">toLocalTime</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalTime///PointingToDeclaration/">LocalTime</span></div><div class="brief "><p class="paragraph">Converts JavaScript <a href="-date/index.html">Date</a> to <span data-unresolved-link="kotlinx.datetime/LocalTime///PointingToDeclaration/">LocalTime</span>.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -306,12 +338,18 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-

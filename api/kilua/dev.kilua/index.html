@@ -25,42 +25,88 @@
 <link href="../../styles/prism.css" rel="Stylesheet">
 <link href="../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script>
 <script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../index.html">
-                            kilua-project
-                    </a>            </div>
-            <div class="library-version">0.0.18
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.19
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua/commonMain">common</button>
+                <button class="platform-tag platform-selector js-like" data-active="" data-filter=":kilua/jsMain">js</button>
+                <button class="platform-tag platform-selector wasm-like" data-active="" data-filter=":kilua/wasmJsMain">wasmJs</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kilua/commonMain" data-filter=":kilua/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option js-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kilua/jsMain" data-filter=":kilua/jsMain">
+                                <span class="checkbox--icon"></span>
+                                js
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option wasm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kilua/wasmJsMain" data-filter=":kilua/wasmJsMain">
+                                <span class="checkbox--icon"></span>
+                                wasmJs
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua:dokkaHtmlPartial/commonMain">common</button>
-                <button class="platform-tag platform-selector js-like" data-active="" data-filter=":kilua:dokkaHtmlPartial/jsMain">js</button>
-                <button class="platform-tag platform-selector wasm-like" data-active="" data-filter=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="package" id="content" pageids="kilua::dev.kilua////PointingToDeclaration//372193618">
+<div class="main-content" data-page-type="package" id="content" pageids="kilua::dev.kilua////PointingToDeclaration//-1707745736">
   <div class="breadcrumbs"><a href="../index.html">kilua</a><span class="delimiter">/</span><span class="current">dev.kilua</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
@@ -70,62 +116,62 @@
     <div class="tabs-section-body">
       <div data-togglable="TYPE">
         <h2 class="">Types</h2>
-        <div class="table"><a data-name="1047660943%2FClasslikes%2F-1322303221" anchor-label="Application" id="1047660943%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="1047660943%2FClasslikes%2F-787921261" anchor-label="Application" id="1047660943%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-application/index.html"><span><span>Application</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1047660943%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1047660943%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-application/index.html">Application</a></div><div class="brief "><p class="paragraph">Base class for Kilua applications.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-application/index.html">Application</a></div><div class="brief "><p class="paragraph">Base class for Kilua applications.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1112244799%2FClasslikes%2F-1322303221" anchor-label="HmrState" id="1112244799%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1112244799%2FClasslikes%2F-787921261" anchor-label="HmrState" id="1112244799%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-hmr-state/index.html"><span>Hmr</span><wbr><span><span>State</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1112244799%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1112244799%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-hmr-state/index.html">HmrState</a> : <a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Helper interface for Hot Module Replacement (HMR).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-hmr-state/index.html">HmrState</a> : <a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Helper interface for Hot Module Replacement (HMR).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1988095794%2FClasslikes%2F-1322303221" anchor-label="Hot" id="1988095794%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1988095794%2FClasslikes%2F-787921261" anchor-label="Hot" id="1988095794%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-hot/index.html"><span><span>Hot</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1988095794%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1988095794%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-hot/index.html">Hot</a> : <a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Helper interface for Hot Module Replacement (HMR).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-hot/index.html">Hot</a> : <a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Helper interface for Hot Module Replacement (HMR).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="986279383%2FClasslikes%2F-1322303221" anchor-label="Module" id="986279383%2FClasslikes%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="986279383%2FClasslikes%2F-787921261" anchor-label="Module" id="986279383%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-module/index.html"><span><span>Module</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="986279383%2FClasslikes%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="986279383%2FClasslikes%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-module/index.html">Module</a> : <a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Helper interface for Hot Module Replacement (HMR).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-module/index.html">Module</a> : <a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">Helper interface for Hot Module Replacement (HMR).</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -134,17 +180,17 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="">Properties</h2>
-        <div class="table"><a data-name="-150963134%2FProperties%2F-1322303221" anchor-label="KiluaScope" id="-150963134%2FProperties%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+        <div class="table"><a data-name="-150963134%2FProperties%2F-787921261" anchor-label="KiluaScope" id="-150963134%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-kilua-scope.html"><span>Kilua</span><wbr><span><span>Scope</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-150963134%2FProperties%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-150963134%2FProperties%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-kilua-scope.html">KiluaScope</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span></div><div class="brief "><p class="paragraph">Kilua coroutine scope.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="-kilua-scope.html">KiluaScope</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span></div><div class="brief "><p class="paragraph">Kilua coroutine scope.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -153,83 +199,83 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="">Functions</h2>
-        <div class="table"><a data-name="-1506695798%2FFunctions%2F-2136234132" anchor-label="asDeferred" id="-1506695798%2FFunctions%2F-2136234132" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain">
+        <div class="table"><a data-name="-1912713014%2FFunctions%2F-1707745736" anchor-label="asDeferred" id="-1912713014%2FFunctions%2F-1707745736" data-filterable-set=":kilua/wasmJsMain,:kilua/commonMain,:kilua/jsMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/wasmJsMain,:kilua/commonMain,:kilua/jsMain" data-filterable-set=":kilua/wasmJsMain,:kilua/commonMain,:kilua/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="as-deferred.html"><span>as</span><wbr><span><span>Deferred</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1506695798%2FFunctions%2F-2136234132"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1912713014%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt; </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-deferred.html"><span class="token function">asDeferred</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Convert JS Promise to a Deferred.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt; </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-deferred.html"><span class="token function">asDeferred</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span></div></div>                  </div>
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain" data-active="" data-toggle=":kilua/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua/jsMain" data-filterable-set=":kilua/jsMain" data-toggle=":kilua/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua/wasmJsMain" data-filterable-set=":kilua/wasmJsMain" data-toggle=":kilua/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt; </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-deferred.html"><span class="token function">asDeferred</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Convert JS Promise to a Deferred.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt; </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-deferred.html"><span class="token function">asDeferred</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span></div></div><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt; </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-deferred.html"><span class="token function">asDeferred</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-deferred.html">T</a><span class="token operator">&gt;</span></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="658093486%2FFunctions%2F372193618" anchor-label="asPromise" id="658093486%2FFunctions%2F372193618" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain,:kilua:dokkaHtmlPartial/jsMain,:kilua:dokkaHtmlPartial/wasmJsMain">
+<a data-name="658093486%2FFunctions%2F-1707745736" anchor-label="asPromise" id="658093486%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="as-promise.html"><span>as</span><wbr><span><span>Promise</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="658093486%2FFunctions%2F372193618"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="658093486%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/jsMain" data-filterable-set=":kilua:dokkaHtmlPartial/jsMain" data-toggle=":kilua:dokkaHtmlPartial/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt; </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-promise.html"><span class="token function">asPromise</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Convert Deferred to a JS Promise.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt; </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-promise.html"><span class="token function">asPromise</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt; </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-promise.html"><span class="token function">asPromise</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div>                  </div>
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain" data-active="" data-toggle=":kilua/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua/jsMain" data-filterable-set=":kilua/jsMain" data-toggle=":kilua/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua/wasmJsMain" data-filterable-set=":kilua/wasmJsMain" data-toggle=":kilua/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt; </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-promise.html"><span class="token function">asPromise</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Convert Deferred to a JS Promise.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt; </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-promise.html"><span class="token function">asPromise</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt; </span><span data-unresolved-link="kotlinx.coroutines/Deferred///PointingToDeclaration/">Deferred</span><span class="token operator">&lt;</span><a href="as-promise.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="as-promise.html"><span class="token function">asPromise</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div>                  </div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1223834537%2FFunctions%2F-1322303221" anchor-label="promise" id="1223834537%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="1223834537%2FFunctions%2F-787921261" anchor-label="promise" id="1223834537%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="promise.html"><span><span>promise</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1223834537%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1223834537%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="promise.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt; </span><a href="promise.html"><span class="token function">promise</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="promise.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="promise.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Create a JS Promise from a suspending block.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="promise.html">T</a><span class="token operator"> : </span><a href="../../modules/kilua-dom/web/-js-any/index.html">JsAny</a><span class="token operator">?</span><span class="token operator">&gt; </span><a href="promise.html"><span class="token function">promise</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="promise.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../modules/kilua-dom/web/-promise/index.html">Promise</a><span class="token operator">&lt;</span><a href="promise.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Create a JS Promise from a suspending block.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="910806656%2FFunctions%2F-1322303221" anchor-label="startApplication" id="910806656%2FFunctions%2F-1322303221" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/commonMain" data-filterable-set=":kilua:dokkaHtmlPartial/commonMain">
+<a data-name="-535626432%2FFunctions%2F-787921261" anchor-label="startApplication" id="-535626432%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="start-application.html"><span>start</span><wbr><span><span>Application</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="910806656%2FFunctions%2F-1322303221"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-535626432%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="start-application.html"><span class="token function">startApplication</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">builder<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="-application/index.html">Application</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>moduleInitializers<span class="token operator">: </span><a href="../../modules/kilua-core-modules/dev.kilua/-module-initializer/index.html">ModuleInitializer</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Main function for creating Kilua applications. Initialize Kilua modules.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="start-application.html"><span class="token function">startApplication</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">builder<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="-application/index.html">Application</a><span class="token punctuation">, </span></span><span class="parameter ">hot<span class="token operator">: </span><a href="-hot/index.html">Hot</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>moduleInitializers<span class="token operator">: </span><a href="../../modules/kilua-core-modules/dev.kilua/-module-initializer/index.html">ModuleInitializer</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Main function for creating Kilua applications with HMR support. Initialize Kilua modules.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="start-application.html"><span class="token function">startApplication</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">builder<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="-application/index.html">Application</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>moduleInitializers<span class="token operator">: </span><a href="../../modules/kilua-core-modules/dev.kilua/-module-initializer/index.html">ModuleInitializer</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Main function for creating Kilua applications. Initialize Kilua modules.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="start-application.html"><span class="token function">startApplication</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">builder<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="-application/index.html">Application</a><span class="token punctuation">, </span></span><span class="parameter ">hot<span class="token operator">: </span><a href="-hot/index.html">Hot</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>moduleInitializers<span class="token operator">: </span><a href="../../modules/kilua-core-modules/dev.kilua/-module-initializer/index.html">ModuleInitializer</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Main function for creating Kilua applications with HMR support. Initialize Kilua modules.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1539287524%2FFunctions%2F1066844018" anchor-label="webpackHot" id="-1539287524%2FFunctions%2F1066844018" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain">
+<a data-name="-1539287524%2FFunctions%2F-1278966022" anchor-label="webpackHot" id="-1539287524%2FFunctions%2F-1278966022" data-filterable-set=":kilua/wasmJsMain"></a>
+          <div class="table-row" data-filterable-current=":kilua/wasmJsMain" data-filterable-set=":kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="webpack-hot.html"><span>webpack</span><wbr><span><span>Hot</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1539287524%2FFunctions%2F1066844018"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1539287524%2FFunctions%2F-1278966022"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua:dokkaHtmlPartial/wasmJsMain" data-filterable-set=":kilua:dokkaHtmlPartial/wasmJsMain" data-active="" data-toggle=":kilua:dokkaHtmlPartial/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua:dokkaHtmlPartial/wasmJsMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="webpack-hot.html"><span class="token function">webpackHot</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-hot/index.html">Hot</a></div></div>                  </div>
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua/wasmJsMain" data-filterable-set=":kilua/wasmJsMain" data-active="" data-toggle=":kilua/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/wasmJsMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="webpack-hot.html"><span class="token function">webpackHot</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-hot/index.html">Hot</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -239,12 +285,18 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-
