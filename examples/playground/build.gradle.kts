@@ -59,6 +59,7 @@ kotlin {
                 implementation(project(":modules:kilua-rsup-progress"))
                 implementation(project(":modules:kilua-i18n"))
                 implementation(project(":modules:kilua-svg"))
+                implementation(project(":modules:kilua-routing"))
                 implementation(project(":modules:kilua-jetpack"))
             }
         }
