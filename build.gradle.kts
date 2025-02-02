@@ -51,12 +51,14 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJ
         override("@tailwindcss/postcss", libs.versions.tailwindcss.get())
         override("cssnano", libs.versions.cssnano.get())
         override("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get())
+        override("motion", libs.versions.motion.get())
     }
 }
 
 nmcp {
     publishAggregation {
         project(":kilua")
+        project(":modules:kilua-animation")
         project(":modules:kilua-annotations")
         project(":modules:kilua-bootstrap")
         project(":modules:kilua-bootstrap-icons")
@@ -103,6 +105,7 @@ nmcp {
 
 dependencies {
     dokka(project(":kilua"))
+    dokka(project(":modules:kilua-animation"))
     dokka(project(":modules:kilua-annotations"))
     dokka(project(":modules:kilua-bootstrap"))
     dokka(project(":modules:kilua-bootstrap-icons"))

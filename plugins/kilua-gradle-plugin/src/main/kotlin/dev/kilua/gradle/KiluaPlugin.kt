@@ -116,6 +116,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
             val includedCssNames = kiluaConfiguration?.ssr?.includedCssFiles ?: emptyList()
             val cssNames = listOf(
                 "zzz-kilua-assets/k-style.css",
+                "zzz-kilua-assets/k-animation.css",
                 "zzz-kilua-assets/k-bootstrap.css",
                 "zzz-kilua-assets/k-jetpack.css",
                 "zzz-kilua-assets/k-splitjs.css",
@@ -413,6 +414,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 override("@tailwindcss/postcss", kiluaVersions["tailwindcss"]!!)
                 override("cssnano", kiluaVersions["cssnano"]!!)
                 override("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
+                override("motion", kiluaVersions["motion"]!!)
             }
         }
 
@@ -445,6 +447,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 resolution("@tailwindcss/postcss", kiluaVersions["tailwindcss"]!!)
                 resolution("cssnano", kiluaVersions["cssnano"]!!)
                 resolution("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
+                resolution("motion", kiluaVersions["motion"]!!)
             }
         }
     }

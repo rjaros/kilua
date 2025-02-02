@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "kilua-project"
 include(":kilua")
+include(":modules:kilua-animation")
 include(":modules:kilua-annotations")
 include(":modules:kilua-bootstrap")
 include(":modules:kilua-bootstrap-icons")

@@ -77,6 +77,7 @@ public class SsrEngine(
 
     private val cssAssetsNames = setOf(
         "zzz-kilua-assets/k-style.css",
+        "zzz-kilua-assets/k-animation.css",
         "zzz-kilua-assets/k-bootstrap.css",
         "zzz-kilua-assets/k-jetpack.css",
         "zzz-kilua-assets/k-splitjs.css",

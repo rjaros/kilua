@@ -1,0 +1,59 @@
+@keyframes kilua-fade-in {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes kilua-fade-out {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@keyframes kilua-scale-in {
+    from { scale: 0; }
+    to { scale: 1; }
+}
+
+@keyframes kilua-scale-out {
+    from { scale: 1; }
+    to { scale: 0; }
+}
+
+@keyframes kilua-translate-left-in {
+    from {translate: -100vw}
+    to {translate: 0}
+}
+
+@keyframes kilua-translate-left-out {
+    from {translate: 0}
+    to {translate: -100vw}
+}
+
+@keyframes kilua-translate-right-in {
+    from {translate: 100vw}
+    to {translate: 0}
+}
+
+@keyframes kilua-translate-right-out {
+    from {translate: 0}
+    to {translate: 100vw}
+}
+
+@keyframes kilua-translate-top-in {
+    from {translate: 0 -100vh}
+    to {translate: 0}
+}
+
+@keyframes kilua-translate-top-out {
+    from {translate: 0}
+    to {translate: 0 -100vh}
+}
+
+@keyframes kilua-translate-bottom-in {
+    from {translate: 0 100vh}
+    to {translate: 0}
+}
+
+@keyframes kilua-translate-bottom-out {
+    from {translate: 0}
+    to {translate: 0 100vh}
+}
