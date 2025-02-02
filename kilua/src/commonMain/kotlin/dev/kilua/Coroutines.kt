@@ -50,3 +50,8 @@ public expect fun <T : JsAny?> Promise<T>.asDeferred(): Deferred<T>
  * Create a JS Promise from a suspending block.
  */
 public fun <T : JsAny?> promise(block: suspend () -> T): Promise<T> = KiluaScope.async { block() }.asPromise().cast()
+
+/**
+ * Suspend function to await a JS Promise.
+ */
+public expect suspend fun <T: JsAny?> Promise<T>.await(): T

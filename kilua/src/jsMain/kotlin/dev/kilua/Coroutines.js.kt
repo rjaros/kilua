@@ -27,6 +27,7 @@ import web.JsAny
 import web.Promise
 import kotlinx.coroutines.asDeferred as asDeferredCrt
 import kotlinx.coroutines.asPromise as asPromiseCrt
+import kotlinx.coroutines.await as awaitCrt
 import kotlin.js.Promise as PromiseJs
 
 public actual fun <T> Deferred<T>.asPromise(): Promise<JsAny?> {
@@ -35,4 +36,8 @@ public actual fun <T> Deferred<T>.asPromise(): Promise<JsAny?> {
 
 public actual fun <T : JsAny?> Promise<T>.asDeferred(): Deferred<T> {
     return this.unsafeCast<PromiseJs<T>>().asDeferredCrt()
+}
+
+public actual suspend fun <T : JsAny?> Promise<T>.await(): T {
+    return this.unsafeCast<PromiseJs<T>>().awaitCrt()
 }
