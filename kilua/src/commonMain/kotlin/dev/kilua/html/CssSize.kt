@@ -54,14 +54,14 @@ public enum class CssUnit(public val cssUnit: String) {
  * A type used for defining CSS dimensions (width, heights, margins, paddings, etc.).
  */
 @Stable
-public open class CssSize(protected val cssSize: Number, protected val unit: CssUnit) {
+public open class CssSize(public val size: Number, public val unit: CssUnit) {
 
     public val value: String = when (this.unit) {
         CssUnit.auto -> "auto"
         CssUnit.normal -> "normal"
         CssUnit.initial -> "initial"
         CssUnit.inherit -> "inherit"
-        else -> this.cssSize.toString() + this.unit.cssUnit
+        else -> this.size.toString() + this.unit.cssUnit
     }
 
     override fun toString(): String = value
@@ -70,26 +70,26 @@ public open class CssSize(protected val cssSize: Number, protected val unit: Css
      * Extension operator to increase CssSize units.
      */
     public operator fun plus(i: Number): CssSize {
-        return CssSize(this.cssSize.toDouble() + i.toDouble(), this.unit)
+        return CssSize(this.size.toDouble() + i.toDouble(), this.unit)
     }
 
     /**
      * Extension operator to decrease CssSize units.
      */
     public operator fun minus(i: Number): CssSize {
-        return CssSize(this.cssSize.toDouble() - i.toDouble(), this.unit)
+        return CssSize(this.size.toDouble() - i.toDouble(), this.unit)
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is CssSize) return false
-        if (cssSize != other.cssSize) return false
+        if (size != other.size) return false
         if (unit != other.unit) return false
         return true
     }
 
     override fun hashCode(): Int {
-        var result = cssSize.hashCode()
+        var result = size.hashCode()
         result = 31 * result + unit.hashCode()
         result = 31 * result + value.hashCode()
         return result
