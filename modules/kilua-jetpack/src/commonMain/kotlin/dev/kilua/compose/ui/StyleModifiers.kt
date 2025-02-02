@@ -23,6 +23,7 @@
 package dev.kilua.compose.ui
 
 import dev.kilua.html.*
+import kotlin.time.Duration
 
 /**
  * Width of the current component.
@@ -872,7 +873,7 @@ public fun Modifier.boxShadow(
  * Set the CSS transition effect for the current component.
  */
 public fun Modifier.transition(
-    property: String? = null, duration: Double? = null, timingFunction: String? = null, delay: Double? = null
+    property: String? = null, duration: Duration? = null, timingFunction: String? = null, delay: Duration? = null
 ) = styleModifier {
     if (property != null && duration != null) {
         transition(Transition(property, duration, timingFunction, delay))

@@ -25,6 +25,7 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.*
+import kotlin.time.Duration
 
 /**
  * Common tag immutable CSS styles.
@@ -1286,7 +1287,7 @@ public interface TagStyleFun {
          */
         @Composable
         public fun TagStyleFun.transition(
-            property: String? = null, duration: Double? = null, timingFunction: String? = null, delay: Double? = null
+            property: String? = null, duration: Duration? = null, timingFunction: String? = null, delay: Duration? = null
         ) {
             if (property != null && duration != null) {
                 transition(Transition(property, duration, timingFunction, delay))

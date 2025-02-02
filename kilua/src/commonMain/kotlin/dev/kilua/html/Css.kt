@@ -24,6 +24,8 @@ package dev.kilua.html
 
 import androidx.compose.runtime.Stable
 import dev.kilua.utils.toKebabCase
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
 
 /**
  * Definitions of CSS border styles.
@@ -1072,18 +1074,22 @@ public open class BoxShadow(
 /**
  * Type-safe definition of CSS transition.
  * @param property the name of the property
- * @param duration the duration of the transition effect (in seconds)
+ * @param duration the duration of the transition effect
  * @param timingFunction the timing function of the transition effect
- * @param delay the delay of the transition effect (in seconds)
+ * @param delay the delay of the transition effect
  */
 @Stable
 public open class Transition(
     protected val property: String,
-    protected val duration: Double,
+    protected val duration: Duration,
     protected val timingFunction: String? = null,
-    protected val delay: Double? = null
+    protected val delay: Duration? = null
 ) {
-    public val value: String = listOfNotNull(property, "${duration}s", timingFunction, delay?.let { "${it}s" })
+    public val value: String = listOfNotNull(
+        property,
+        "${duration.toInt(DurationUnit.MILLISECONDS)}ms",
+        timingFunction,
+        delay?.let { "${it.toInt(DurationUnit.MILLISECONDS)}ms" })
         .joinToString(" ")
 
     override fun toString(): String = value

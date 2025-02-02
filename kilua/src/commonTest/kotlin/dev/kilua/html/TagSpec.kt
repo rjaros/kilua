@@ -25,6 +25,7 @@ package dev.kilua.html
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
 import kotlin.test.Test
+import kotlin.time.Duration.Companion.milliseconds
 
 class TagSpec : DomSpec {
 
@@ -47,12 +48,12 @@ class TagSpec : DomSpec {
                             BoxShadow(hOffset = 30.px, vOffset = 40.px, color = Color.hex(0x00eeee))
                         )
                     )
-                    transitionList(listOf(Transition("width", 0.5), Transition("height", 0.6)))
+                    transitionList(listOf(Transition("width", 500.milliseconds), Transition("height", 600.milliseconds)))
                     borderRadiusList(listOf(10.px, 20.px))
                 }
             }
             assertEqualsHtml(
-                """<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus="" style="margin: 10px; display: flex; grid-template-areas: &quot;a a a&quot; &quot;b c c&quot; &quot;b c c&quot;; box-shadow: rgb(0, 255, 255) 10px 20px, rgb(0, 238, 238) 30px 40px; transition: width 0.5s, height 0.6s; border-radius: 10px 20px;"></ol>""",
+                """<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus="" style="margin: 10px; display: flex; grid-template-areas: &quot;a a a&quot; &quot;b c c&quot; &quot;b c c&quot;; box-shadow: rgb(0, 255, 255) 10px 20px, rgb(0, 238, 238) 30px 40px; transition: width 500ms, height 600ms; border-radius: 10px 20px;"></ol>""",
                 root.element.innerHTML,
                 "Should render an HTML tag to DOM"
             )
@@ -78,12 +79,12 @@ class TagSpec : DomSpec {
                             BoxShadow(hOffset = 30.px, vOffset = 40.px, color = Color.hex(0x00eeee))
                         )
                     )
-                    transitionList(listOf(Transition("width", 0.5), Transition("height", 0.6)))
+                    transitionList(listOf(Transition("width", 500.milliseconds), Transition("height", 600.milliseconds)))
                     borderRadiusList(listOf(10.px, 20.px))
                 }
             }
             assertEqualsHtml(
-                """<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus="" style="margin: 10px; display: flex; grid-template-areas: &quot;a a a&quot; &quot;b c c&quot; &quot;b c c&quot;; box-shadow: 10px 20px #00ffff, 30px 40px #00eeee; transition: width 0.5s, height 0.6s; border-radius: 10px 20px;"></ol>""",
+                """<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus="" style="margin: 10px; display: flex; grid-template-areas: &quot;a a a&quot; &quot;b c c&quot; &quot;b c c&quot;; box-shadow: 10px 20px #00ffff, 30px 40px #00eeee; transition: width 500ms, height 600ms; border-radius: 10px 20px;"></ol>""",
                 root.innerHTML,
                 "Should render an HTML tag to a String"
             )
