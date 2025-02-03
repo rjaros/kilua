@@ -12,8 +12,7 @@
                 options: {
                     postcssOptions: {
                         plugins: [
-                            ["tailwindcss", {} ],
-                            ["autoprefixer", {} ],
+                            ["@tailwindcss/postcss", {} ],
                             (config.devServer ? undefined : [ "cssnano", {} ])
                         ]
                     }
