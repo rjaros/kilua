@@ -84,7 +84,7 @@ public sealed class MotionAnimation(
     public class Tween(
         public val duration: Duration = 1.seconds,
         public val ease: MotionEasingFunction = MotionEasingFunction.EaseInOut,
-        public val cubicBezier: List<Int>? = null,
+        public val cubicBezier: List<Double>? = null,
         delay: Duration = Duration.ZERO,
         repeat: Int = 0,
         repeatType: RepeatType? = null,
