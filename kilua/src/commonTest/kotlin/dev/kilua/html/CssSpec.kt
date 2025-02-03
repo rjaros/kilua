@@ -36,6 +36,12 @@ class CssSpec : SimpleSpec {
                 color.toString(),
                 "Should generate color from hex integer"
             )
+            val colorWithAlpha = Color.hex(0xFF3B5C56)
+            assertEquals(
+                "#ff3b5c56",
+                colorWithAlpha.toString(),
+                "Should generate color from hex long value"
+            )
         }
     }
 
@@ -71,6 +77,24 @@ class CssSpec : SimpleSpec {
                 "#112233dd",
                 color.toString(),
                 "Should generate color from RGBA values"
+            )
+        }
+    }
+
+    @Test
+    fun colorCopy() {
+        run {
+            val color = Color.rgb(17, 34, 51).copy(green = 51)
+            assertEquals(
+                "#113333",
+                color.toString(),
+                "Should copy color with new channel values"
+            )
+            val colorAlpha = Color.rgba(17, 34, 51, 221).copy(green = 51, alpha = 255)
+            assertEquals(
+                "#113333ff",
+                colorAlpha.toString(),
+                "Should copy color with alpha channel with new channel values"
             )
         }
     }

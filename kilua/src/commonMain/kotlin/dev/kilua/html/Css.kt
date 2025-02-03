@@ -754,6 +754,58 @@ public open class Color(protected val color: String? = null) {
 
     public val value: String = color.orEmpty()
 
+    /**
+     * Copies the current Color with given channel values.
+     * Can be used on values created with [Color.hex], [Color.rgb] or [Color.rgba] functions.
+     */
+    public fun copy(red: Int? = null, green: Int? = null, blue: Int? = null, alpha: Int? = null): Color {
+        if (!value.startsWith("#")) throw IllegalArgumentException("Source color must be in the hex format")
+        val hex = value.substring(1)
+        if (hex.length != 6 && hex.length != 8) throw IllegalArgumentException("Source color must be in the hex format")
+        val redValue = red ?: hex.substring(0, 2).toIntOrNull(16)
+        ?: throw IllegalArgumentException("Source color must be in the hex format")
+        val greenValue = green ?: hex.substring(2, 4).toIntOrNull(16)
+        ?: throw IllegalArgumentException("Source color must be in the hex format")
+        val blueValue = blue ?: hex.substring(4, 6).toIntOrNull(16)
+        ?: throw IllegalArgumentException("Source color must be in the hex format")
+        return if (hex.length == 6) {
+            if (alpha == null) {
+                rgb(redValue, greenValue, blueValue)
+            } else {
+                rgba(redValue, greenValue, blueValue, alpha)
+            }
+        } else {
+            val alphaValue = alpha ?: hex.substring(6, 8).toInt(16)
+            rgba(redValue, greenValue, blueValue, alphaValue)
+        }
+    }
+
+    /**
+     * Copies the current Color with given channel values.
+     * Can be used on values created with [Color.hex], [Color.rgb] or [Color.rgba] functions.
+     */
+    public fun copy(red: Float? = null, green: Float? = null, blue: Float? = null, alpha: Float? = null): Color {
+        return copy(
+            red?.let { (it * 255).toInt() },
+            green?.let { (it * 255).toInt() },
+            blue?.let { (it * 255).toInt() },
+            alpha?.let { (it * 255).toInt() }
+        )
+    }
+
+    /**
+     * Copies the current Color with given channel values.
+     * Can be used on values created with [Color.hex], [Color.rgb] or [Color.rgba] functions.
+     */
+    public fun copy(red: Double? = null, green: Double? = null, blue: Double? = null, alpha: Double? = null): Color {
+        return copy(
+            red?.let { (it * 255).toInt() },
+            green?.let { (it * 255).toInt() },
+            blue?.let { (it * 255).toInt() },
+            alpha?.let { (it * 255).toInt() }
+        )
+    }
+
     override fun toString(): String = value
     override fun equals(other: Any?): Boolean {
         return this.toString() == other.toString()
@@ -775,6 +827,16 @@ public open class Color(protected val color: String? = null) {
         }
 
         /**
+         * Creates CSS Color with color given in hex format.
+         * @param color color in hex format
+         */
+        @Suppress("MagicNumber")
+        @OptIn(ExperimentalStdlibApi::class)
+        public fun hex(color: Long): Color {
+            return Color("#" + color.toHexString().takeLast(8))
+        }
+
+        /**
          * Creates CSS Color with red, green and blue components
          */
         @Suppress("MagicNumber")
@@ -783,11 +845,43 @@ public open class Color(protected val color: String? = null) {
         }
 
         /**
+         * Creates CSS Color with red, green and blue components
+         */
+        @Suppress("MagicNumber")
+        public fun rgb(red: Float, green: Float, blue: Float): Color {
+            return rgb((red * 255).toInt(), (green * 255).toInt(), (blue * 255).toInt())
+        }
+
+        /**
+         * Creates CSS Color with red, green and blue components
+         */
+        @Suppress("MagicNumber")
+        public fun rgb(red: Double, green: Double, blue: Double): Color {
+            return rgb((red * 255).toInt(), (green * 255).toInt(), (blue * 255).toInt())
+        }
+
+        /**
          * Creates CSS Color with red, green, blue and alpha channel components
          */
         @Suppress("MagicNumber")
         public fun rgba(red: Int, green: Int, blue: Int, alpha: Int): Color {
             return Color("#" + listOf(red, green, blue, alpha).joinToString("") { it.toString(16).padStart(2, '0') })
+        }
+
+        /**
+         * Creates CSS Color with red, green, blue and alpha channel components
+         */
+        @Suppress("MagicNumber")
+        public fun rgba(red: Float, green: Float, blue: Float, alpha: Float): Color {
+            return rgba((red * 255).toInt(), (green * 255).toInt(), (blue * 255).toInt(), (alpha * 255).toInt())
+        }
+
+        /**
+         * Creates CSS Color with red, green, blue and alpha channel components
+         */
+        @Suppress("MagicNumber")
+        public fun rgba(red: Double, green: Double, blue: Double, alpha: Double): Color {
+            return rgba((red * 255).toInt(), (green * 255).toInt(), (blue * 255).toInt(), (alpha * 255).toInt())
         }
 
         public val Aliceblue: Color = Color("aliceblue")
