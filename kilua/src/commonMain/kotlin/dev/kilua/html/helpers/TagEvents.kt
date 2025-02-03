@@ -203,6 +203,17 @@ public interface TagEvents {
     public fun onMouseUpDirect(listener: (MouseEvent) -> Unit): Int
 
     /**
+     * Add mouse enter event listener (composable).
+     */
+    @Composable
+    public fun onMouseEnter(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse enter event listener (not composable).
+     */
+    public fun onMouseEnterDirect(listener: (MouseEvent) -> Unit): Int
+
+    /**
      * Add mouse leave event listener (composable).
      */
     @Composable
@@ -234,6 +245,17 @@ public interface TagEvents {
      * Add mouse out event listener (not composable).
      */
     public fun onMouseOutDirect(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse move event listener (composable).
+     */
+    @Composable
+    public fun onMouseMove(listener: (MouseEvent) -> Unit): Int
+
+    /**
+     * Add mouse move event listener (not composable).
+     */
+    public fun onMouseMoveDirect(listener: (MouseEvent) -> Unit): Int
 
     /**
      * Add pointer down event listener (composable).

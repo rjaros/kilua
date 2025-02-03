@@ -214,6 +214,15 @@ public open class TagEventsDelegateImpl<E : HTMLElement>(
     }
 
     @Composable
+    override fun onMouseEnter(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_ENTER, listener)
+    }
+
+    override fun onMouseEnterDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_ENTER, listener)
+    }
+
+    @Composable
     override fun onMouseLeave(listener: (MouseEvent) -> Unit): Int {
         return onEvent(MOUSE_LEAVE, listener)
     }
@@ -238,6 +247,15 @@ public open class TagEventsDelegateImpl<E : HTMLElement>(
 
     override fun onMouseOutDirect(listener: (MouseEvent) -> Unit): Int {
         return onEventDirect(MOUSE_OUT, listener)
+    }
+
+    @Composable
+    override fun onMouseMove(listener: (MouseEvent) -> Unit): Int {
+        return onEvent(MOUSE_MOVE, listener)
+    }
+
+    override fun onMouseMoveDirect(listener: (MouseEvent) -> Unit): Int {
+        return onEventDirect(MOUSE_MOVE, listener)
     }
 
     @Composable
@@ -323,8 +341,10 @@ internal const val TOUCH_END = "touchend"
 internal const val TOUCH_CANCEL = "touchcancel"
 internal const val MOUSE_DOWN = "mousedown"
 internal const val MOUSE_UP = "mouseup"
+internal const val MOUSE_ENTER = "mouseenter"
 internal const val MOUSE_LEAVE = "mouseleave"
 internal const val MOUSE_OVER = "mouseover"
 internal const val MOUSE_OUT = "mouseout"
+internal const val MOUSE_MOVE = "mousemove"
 internal const val POINTER_DOWN = "pointerdown"
 internal const val POINTER_UP = "pointerup"

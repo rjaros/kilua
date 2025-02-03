@@ -138,6 +138,13 @@ public fun Modifier.onMouseUp(listener: (MouseEvent) -> Unit) = eventsModifier {
 }
 
 /**
+ * Add mouse enter event listener.
+ */
+public fun Modifier.onMouseEnter(listener: (MouseEvent) -> Unit) = eventsModifier {
+    onMouseEnter(listener)
+}
+
+/**
  * Add mouse leave event listener.
  */
 public fun Modifier.onMouseLeave(listener: (MouseEvent) -> Unit) = eventsModifier {
@@ -156,6 +163,13 @@ public fun Modifier.onMouseOver(listener: (MouseEvent) -> Unit) = eventsModifier
  */
 public fun Modifier.onMouseOut(listener: (MouseEvent) -> Unit) = eventsModifier {
     onMouseOut(listener)
+}
+
+/**
+ * Add mouse move event listener.
+ */
+public fun Modifier.onMouseMove(listener: (MouseEvent) -> Unit) = eventsModifier {
+    onMouseMove(listener)
 }
 
 /**
