@@ -37,17 +37,20 @@ import dev.kilua.html.Color
 import dev.kilua.html.CssSize
 import dev.kilua.utils.deepMerge
 
+// Similar behaviour to Compose Animation spring()
+private val defaultAnimation = MotionAnimation.SpringPhysics(stiffness = 1700, damping = 80)
+
 /**
  * Automatically animate [Double] value. When the provided [value] is changed, the animation will
  * run automatically. If there is already an active animation it will animate towards the new value.
  *
  * @param value Target value of the animation
- * @param animation The animation that will be used to change the value through time. [MotionAnimation.Tween]
+ * @param animation The animation that will be used to change the value through time. [MotionAnimation.SpringPhysics]
  *   is used by default.
  * @return A [State] object, the value of which is updated by animation.
  */
 @Composable
-public fun animateDoubleAsState(value: Double, animation: MotionAnimation = MotionAnimation.Tween()): State<Double> =
+public fun animateDoubleAsState(value: Double, animation: MotionAnimation = defaultAnimation): State<Double> =
     animateAsIntState(value, { (it * 100).toInt() }, { (it.toDouble() / 100) }, animation)
 
 /**
@@ -55,12 +58,12 @@ public fun animateDoubleAsState(value: Double, animation: MotionAnimation = Moti
  * run automatically. If there is already an active animation it will animate towards the new value.
  *
  * @param value Target value of the animation
- * @param animation The animation that will be used to change the value through time. [MotionAnimation.Tween]
+ * @param animation The animation that will be used to change the value through time. [MotionAnimation.SpringPhysics]
  *   is used by default.
  * @return A [State] object, the value of which is updated by animation.
  */
 @Composable
-public fun animateFloatAsState(value: Float, animation: MotionAnimation = MotionAnimation.Tween()): State<Float> =
+public fun animateFloatAsState(value: Float, animation: MotionAnimation = defaultAnimation): State<Float> =
     animateAsIntState(value, { (it.toDouble() * 100).toInt() }, { (it.toDouble() / 100).toFloat() }, animation)
 
 /**
@@ -68,12 +71,12 @@ public fun animateFloatAsState(value: Float, animation: MotionAnimation = Motion
  * run automatically. If there is already an active animation it will animate towards the new value.
  *
  * @param value Target value of the animation
- * @param animation The animation that will be used to change the value through time. [MotionAnimation.Tween]
+ * @param animation The animation that will be used to change the value through time. [MotionAnimation.SpringPhysics]
  *   is used by default.
  * @return A [State] object, the value of which is updated by animation.
  */
 @Composable
-public fun animateIntAsState(value: Int, animation: MotionAnimation = MotionAnimation.Tween()): State<Int> =
+public fun animateIntAsState(value: Int, animation: MotionAnimation = defaultAnimation): State<Int> =
     animateAsIntState(value, { it }, { it }, animation)
 
 /**
@@ -81,12 +84,12 @@ public fun animateIntAsState(value: Int, animation: MotionAnimation = MotionAnim
  * run automatically. If there is already an active animation it will animate towards the new value.
  *
  * @param value Target value of the animation
- * @param animation The animation that will be used to change the value through time. [MotionAnimation.Tween]
+ * @param animation The animation that will be used to change the value through time. [MotionAnimation.SpringPhysics]
  *   is used by default.
  * @return A [State] object, the value of which is updated by animation.
  */
 @Composable
-public fun animateLongAsState(value: Long, animation: MotionAnimation = MotionAnimation.Tween()): State<Long> =
+public fun animateLongAsState(value: Long, animation: MotionAnimation = defaultAnimation): State<Long> =
     animateAsIntState(value, { it.toInt() }, { it.toLong() }, animation)
 
 /**
@@ -94,12 +97,12 @@ public fun animateLongAsState(value: Long, animation: MotionAnimation = MotionAn
  * run automatically. If there is already an active animation it will animate towards the new value.
  *
  * @param value Target value of the animation
- * @param animation The animation that will be used to change the value through time. [MotionAnimation.Tween]
+ * @param animation The animation that will be used to change the value through time. [MotionAnimation.SpringPhysics]
  *   is used by default.
  * @return A [State] object, the value of which is updated by animation.
  */
 @Composable
-public fun animateCssSizeAsState(value: CssSize, animation: MotionAnimation = MotionAnimation.Tween()): State<CssSize> =
+public fun animateCssSizeAsState(value: CssSize, animation: MotionAnimation = defaultAnimation): State<CssSize> =
     animateAsIntState(
         value,
         { (it.size.toDouble() * 100).toInt() },
@@ -112,12 +115,12 @@ public fun animateCssSizeAsState(value: CssSize, animation: MotionAnimation = Mo
  * run automatically. If there is already an active animation it will animate towards the new value.
  *
  * @param value Target value of the animation. It needs to be provided using hex format e.g. Color.hex(0x00ff00).
- * @param animation The animation that will be used to change the value through time. [MotionAnimation.Tween]
+ * @param animation The animation that will be used to change the value through time. [MotionAnimation.SpringPhysics]
  *   is used by default.
  * @return A [State] object, the value of which is updated by animation.
  */
 @Composable
-public fun animateColorAsState(value: Color, animation: MotionAnimation = MotionAnimation.Tween()): State<Color> =
+public fun animateColorAsState(value: Color, animation: MotionAnimation = defaultAnimation): State<Color> =
     animateAsStringState(value, { it.value }, { Color(it) }, animation)
 
 @Composable
@@ -132,12 +135,14 @@ internal fun <T> animateAsIntState(
         val animationOptions = animation.toJsAny()
         val intCallback = obj<IntCallback> {
             onUpdate = { v: Int ->
-                this@produceState.value = convertFromInt(v)
+                val newValue = convertFromInt(v)
+                oldValue = newValue
+                this@produceState.value = newValue
             }
         }
         val controls = animate(convertToInt(oldValue), convertToInt(value), deepMerge(animationOptions, intCallback))
-        oldValue = value
         awaitDispose {
+            controls.stop()
             controls.cancel()
         }
     }
@@ -155,13 +160,16 @@ internal fun <T> animateAsStringState(
         val animationOptions = animation.toJsAny()
         val stringCallback = obj<StringCallback> {
             onUpdate = { v: String ->
-                this@produceState.value = convertFromString(v)
+                val newValue = convertFromString(v)
+                oldValue = newValue
+                this@produceState.value = newValue
             }
         }
         val controls =
             animate(convertToString(oldValue), convertToString(value), deepMerge(animationOptions, stringCallback))
         oldValue = value
         awaitDispose {
+            controls.stop()
             controls.cancel()
         }
     }
