@@ -36,6 +36,7 @@ import dev.kilua.externals.obj
 import dev.kilua.html.Color
 import dev.kilua.html.CssSize
 import dev.kilua.utils.deepMerge
+import dev.kilua.utils.isDom
 
 // Similar behaviour to Compose Animation spring()
 private val defaultAnimation = MotionAnimation.SpringPhysics(stiffness = 1700, damping = 80)
@@ -132,18 +133,23 @@ internal fun <T> animateAsIntState(
 ): State<T> {
     var oldValue by remember { mutableStateOf(value) }
     return produceState<T>(oldValue, value) {
-        val animationOptions = animation.toJsAny()
-        val intCallback = obj<IntCallback> {
-            onUpdate = { v: Int ->
-                val newValue = convertFromInt(v)
-                oldValue = newValue
-                this@produceState.value = newValue
+        if (isDom) {
+            val animationOptions = animation.toJsAny()
+            val intCallback = obj<IntCallback> {
+                onUpdate = { v: Int ->
+                    val newValue = convertFromInt(v)
+                    oldValue = newValue
+                    this@produceState.value = newValue
+                }
             }
-        }
-        val controls = animate(convertToInt(oldValue), convertToInt(value), deepMerge(animationOptions, intCallback))
-        awaitDispose {
-            controls.stop()
-            controls.cancel()
+            val controls =
+                animate(convertToInt(oldValue), convertToInt(value), deepMerge(animationOptions, intCallback))
+            awaitDispose {
+                controls.stop()
+                controls.cancel()
+            }
+        } else {
+            this.value = value
         }
     }
 }
@@ -157,20 +163,23 @@ internal fun <T> animateAsStringState(
 ): State<T> {
     var oldValue by remember { mutableStateOf(value) }
     return produceState<T>(oldValue, value) {
-        val animationOptions = animation.toJsAny()
-        val stringCallback = obj<StringCallback> {
-            onUpdate = { v: String ->
-                val newValue = convertFromString(v)
-                oldValue = newValue
-                this@produceState.value = newValue
+        if (isDom) {
+            val animationOptions = animation.toJsAny()
+            val stringCallback = obj<StringCallback> {
+                onUpdate = { v: String ->
+                    val newValue = convertFromString(v)
+                    oldValue = newValue
+                    this@produceState.value = newValue
+                }
             }
-        }
-        val controls =
-            animate(convertToString(oldValue), convertToString(value), deepMerge(animationOptions, stringCallback))
-        oldValue = value
-        awaitDispose {
-            controls.stop()
-            controls.cancel()
+            val controls =
+                animate(convertToString(oldValue), convertToString(value), deepMerge(animationOptions, stringCallback))
+            awaitDispose {
+                controls.stop()
+                controls.cancel()
+            }
+        } else {
+            this.value = value
         }
     }
 }
