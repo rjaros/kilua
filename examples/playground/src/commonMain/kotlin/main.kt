@@ -35,6 +35,13 @@ import dev.kilua.Application
 import dev.kilua.JsModule
 import dev.kilua.KiluaScope
 import dev.kilua.LocalResource
+import dev.kilua.animation.CssTransition
+import dev.kilua.animation.MotionTransition
+import dev.kilua.animation.TransitionType
+import dev.kilua.animation.animateColorAsState
+import dev.kilua.animation.animateCssSizeAsState
+import dev.kilua.animation.animatedVisibility
+import dev.kilua.animation.motionAnimatedVisibility
 import dev.kilua.compose.adaptive.Breakpoint
 import dev.kilua.compose.adaptive.TailwindcssBreakpoint
 import dev.kilua.compose.adaptive.WindowWidthSizeClass
@@ -62,6 +69,7 @@ import dev.kilua.compose.ui.title
 import dev.kilua.compose.ui.width
 import dev.kilua.core.IComponent
 import dev.kilua.dropdown.dropDown
+import dev.kilua.externals.animateMini
 import dev.kilua.externals.console
 import dev.kilua.externals.get
 import dev.kilua.externals.obj
@@ -249,13 +257,69 @@ class App : Application() {
 
         ThemeManager.init()
 
-        Modifier.display(Display.Flex)
-
         root("root") {
 
             div {
 
                 margin(20.px)
+                var enabled by remember { mutableStateOf(true) }
+
+                val width: CssSize by animateCssSizeAsState(if (enabled) 100.px else 900.px)
+                val color: Color by animateColorAsState(if (enabled) Color.hex(0xff0000) else Color.hex(0x0000ff))
+                div {
+                    background(color)
+                    width(width)
+                    height(300.px)
+                    border(1.px, BorderStyle.Solid, Color.Blue)
+                    +"Test 1"
+                    onMouseEnter {
+                        enabled = false
+                    }
+                    onMouseLeave {
+                        enabled = true
+                    }
+                }
+                button("Toggle") {
+                    onClick {
+                        enabled = !enabled
+                    }
+                }
+
+                hr()
+
+                var itemVisible by remember { mutableStateOf(false) }
+
+                hPanel(gap = 10.px) {
+                    button("Show 1") {
+                        onClick {
+                            itemVisible = true
+                        }
+                    }
+                    button("Hide 1") {
+                        onClick {
+                            itemVisible = false
+                        }
+                    }
+                    button("Motion") {
+                        onClick {
+                            animateMini("button", jsObjectOf("rotate" to "360deg"), jsObjectOf("duration" to "2"))
+                        }
+                    }
+                }
+
+                motionAnimatedVisibility(
+                    itemVisible,
+                    MotionTransition(TransitionType.TranslateLeft),
+                ) {
+                    div {
+                        width(300.px)
+                        height(300.px)
+                        border(1.px, BorderStyle.Solid, Color.Red)
+                        +"Test 2"
+                    }
+                }
+
+                hr()
 
                 ResponsiveLayout()
 

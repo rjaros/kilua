@@ -61,6 +61,7 @@ kotlin {
                 implementation(project(":modules:kilua-svg"))
                 implementation(project(":modules:kilua-routing"))
                 implementation(project(":modules:kilua-jetpack"))
+                implementation(project(":modules:kilua-animation"))
             }
         }
         val jsMain by getting {

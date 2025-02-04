@@ -38,6 +38,7 @@ fun main() {
         ToastifyModule,
         TrixModule,
         JetpackModule,
+        AnimationModule,
 //        TailwindcssModule,
         CoreModule
     )

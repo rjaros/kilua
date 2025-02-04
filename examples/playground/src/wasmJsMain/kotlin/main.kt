@@ -20,6 +20,7 @@
  * SOFTWARE.
  */
 
+import dev.kilua.AnimationModule
 import dev.kilua.BootstrapCssModule
 import dev.kilua.BootstrapIconsModule
 import dev.kilua.BootstrapModule
@@ -51,6 +52,7 @@ fun main() {
         ToastifyModule,
         TrixModule,
         JetpackModule,
+        AnimationModule,
 //        TailwindcssModule,
         CoreModule
     )
