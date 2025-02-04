@@ -316,6 +316,22 @@ public open class TomTypeahead(
         }
     }
 
+    override fun focus() {
+        if (tomSelectInstance != null) {
+            tomSelectInstance?.focus()
+        } else {
+            super.focus()
+        }
+    }
+
+    override fun blur() {
+        if (tomSelectInstance != null) {
+            tomSelectInstance?.blur()
+        } else {
+            super.blur()
+        }
+    }
+
 }
 
 /**
