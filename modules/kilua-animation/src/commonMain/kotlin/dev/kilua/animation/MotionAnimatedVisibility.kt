@@ -33,7 +33,6 @@ import dev.kilua.core.IComponent
 import dev.kilua.externals.AnimationPlaybackControls
 import dev.kilua.externals.animate
 import dev.kilua.html.Display
-import dev.kilua.html.Overflow
 import dev.kilua.html.Position
 import dev.kilua.html.divRef
 import dev.kilua.utils.jsObjectOf
@@ -59,18 +58,17 @@ public fun IComponent.motionAnimatedVisibility(
         TransitionType.Fade -> jsObjectOf("opacity" to 1)
         TransitionType.Scale -> jsObjectOf("scale" to 1)
         TransitionType.TranslateLeft,
-        TransitionType.TranslateRight -> jsObjectOf("translate" to "0", "left" to "auto")
-
+        TransitionType.TranslateRight,
         TransitionType.TranslateTop,
-        TransitionType.TranslateBottom -> jsObjectOf("translate" to "0", "top" to "auto")
+        TransitionType.TranslateBottom -> jsObjectOf("translate" to "0")
     }
     val invisibleResult = when (outTransition.type) {
         TransitionType.Fade -> jsObjectOf("opacity" to 0)
         TransitionType.Scale -> jsObjectOf("scale" to 0)
-        TransitionType.TranslateLeft -> jsObjectOf("translate" to "-100%", "left" to "0")
-        TransitionType.TranslateRight -> jsObjectOf("left" to "100vw")
-        TransitionType.TranslateTop -> jsObjectOf("translate" to "0 -100%", "top" to "0")
-        TransitionType.TranslateBottom -> jsObjectOf("top" to "100vh")
+        TransitionType.TranslateLeft -> jsObjectOf("translate" to "-100vh")
+        TransitionType.TranslateRight -> jsObjectOf("translate" to "100vw")
+        TransitionType.TranslateTop -> jsObjectOf("translate" to "0 -100vh")
+        TransitionType.TranslateBottom -> jsObjectOf("translate" to "0 100vh")
     }
 
     var visibilityState by remember { mutableStateOf(visible) }
@@ -78,10 +76,9 @@ public fun IComponent.motionAnimatedVisibility(
     var animationOff by remember { mutableStateOf<AnimationPlaybackControls?>(null) }
 
     val div = divRef {
-        position(Position.Absolute)
-        overflow(Overflow.Hidden)
+        position(Position.Relative)
         zIndex(10)
-        display(Display.InlineBlock)
+        display(if (visibilityState) Display.InlineBlock else Display.None)
         if (visibilityState) {
             content()
         }

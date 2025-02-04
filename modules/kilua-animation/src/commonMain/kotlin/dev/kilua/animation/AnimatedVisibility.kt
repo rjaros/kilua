@@ -57,13 +57,12 @@ public fun IComponent.animatedVisibility(
     var visibilityState by remember { mutableStateOf(visible) }
     var animation: String? by remember { mutableStateOf(null) }
 
-    div {
-        position(Position.Absolute)
-        overflow(Overflow.Hidden)
-        zIndex(10)
-        display(Display.InlineBlock)
-        style("animation", animation)
-        if (visibilityState) {
+    if (visibilityState) {
+        div {
+            position(Position.Relative)
+            zIndex(10)
+            display(Display.InlineBlock)
+            style("animation", animation)
             content()
         }
     }
