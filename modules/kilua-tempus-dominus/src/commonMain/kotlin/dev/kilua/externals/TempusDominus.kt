@@ -39,6 +39,8 @@ public external class TempusDominusRestrictions : JsAny {
     public var disabledDates: JsArray<Date>
     public var enabledDates: JsArray<Date>
     public var daysOfWeekDisabled: JsArray<JsNumber>
+    public var disabledHours: JsArray<JsNumber>
+    public var enabledHours: JsArray<JsNumber>
 }
 
 /**
@@ -54,6 +56,7 @@ public external class TempusDominusButtons : JsAny {
  * Tempus Dominus icons configuration.
  */
 public external class TempusDominusIcons : JsAny {
+    public var type: String
     public var time: String
     public var date: String
     public var up: String
@@ -70,7 +73,13 @@ public external class TempusDominusIcons : JsAny {
  */
 public external class TempusDominusComponents : JsAny {
     public var calendar: Boolean
+    public var date: Boolean
+    public var month: Boolean
+    public var year: Boolean
+    public var decades: Boolean
     public var clock: Boolean
+    public var hours: Boolean
+    public var minutes: Boolean
     public var seconds: Boolean
 }
 
@@ -78,31 +87,35 @@ public external class TempusDominusComponents : JsAny {
  * Tempus Dominus display configuration.
  */
 public external class TempusDominusDisplay : JsAny {
+    public var icons: TempusDominusIcons
+    public var sideBySide: Boolean
+    public var calendarWeeks: Boolean
     public var viewMode: String
     public var toolbarPlacement: String
-    public var sideBySide: Boolean
-    public var buttons: TempusDominusButtons
-    public var icons: TempusDominusIcons
-    public var inline: Boolean
     public var keepOpen: Boolean
-    public var theme: String
+    public var buttons: TempusDominusButtons
     public var components: TempusDominusComponents
+    public var inline: Boolean
+    public var theme: String
 }
 
 /**
  * Tempus Dominus options.
  */
 public external class TempusDominusOptions : JsAny {
-    public var useCurrent: Boolean
-    public var defaultDate: Date
-    public var stepping: Int
     public var allowInputToggle: Boolean
-    public var viewDate: Date
+    public var container: JsAny
+    public var defaultDate: Date
+    public var display: TempusDominusDisplay
+    public var keepInvalid: Boolean
+    public var localization: JsAny
+    public var meta: JsAny
     public var promptTimeOnDateChange: Boolean
     public var promptTimeOnDateChangeTransitionDelay: Int
     public var restrictions: TempusDominusRestrictions
-    public var display: TempusDominusDisplay
-    public var localization: JsAny
+    public var stepping: Int
+    public var useCurrent: Boolean
+    public var viewDate: Date
 }
 
 /**

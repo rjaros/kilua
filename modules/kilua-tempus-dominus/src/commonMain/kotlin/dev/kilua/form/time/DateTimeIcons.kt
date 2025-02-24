@@ -26,6 +26,7 @@ package dev.kilua.form.time
  * Date and time component custom icons.
  */
 public data class DateTimeIcons(
+    public val type: String? = null,
     public val time: String? = null,
     public val date: String? = null,
     public val up: String? = null,

@@ -27,6 +27,7 @@ import dev.kilua.externals.TempusDominus
 import dev.kilua.html.IDiv
 import dev.kilua.i18n.Locale
 import kotlinx.datetime.LocalDate
+import web.JsAny
 import kotlin.time.Duration
 
 /**
@@ -200,6 +201,28 @@ public interface IAbstractRichDateTime : IDiv {
     public fun disabledDates(disabledDates: List<LocalDate>?)
 
     /**
+     * A list of enabled hours.
+     */
+    public val enabledHours: List<Int>?
+
+    /**
+     * Set the list of enabled hours.
+     */
+    @Composable
+    public fun enabledHours(enabledHours: List<Int>?)
+
+    /**
+     * A list of disabled hours.
+     */
+    public val disabledHours: List<Int>?
+
+    /**
+     * Set the list of disabled hours.
+     */
+    @Composable
+    public fun disabledHours(disabledHours: List<Int>?)
+
+    /**
      * Keep the popup open after selecting a date.
      */
     public val keepOpen: Boolean
@@ -319,6 +342,61 @@ public interface IAbstractRichDateTime : IDiv {
      */
     @Composable
     public fun customIcons(customIcons: DateTimeIcons?)
+
+    /**
+     * Allows to select a date that is invalid according to the rules.
+     */
+    public val keepInvalid: Boolean
+
+    /**
+     * Set to allow selecting a date that is invalid according to the rules.
+     */
+    @Composable
+    public fun keepInvalid(keepInvalid: Boolean)
+
+    /**
+     * The target container to use for the widget instead of body.
+     */
+    public val container: JsAny?
+
+    /**
+     * Set the target container to use for the widget instead of body.
+     */
+    @Composable
+    public fun container(container: JsAny?)
+
+    /**
+     * The extra information about the date picker.
+     */
+    public val meta: JsAny?
+
+    /**
+     * Set the extra information about the date picker.
+     */
+    @Composable
+    public fun meta(meta: JsAny?)
+
+    /**
+     * Displays an additional column with the calendar week.
+     */
+    public val calendarWeeks: Boolean
+
+    /**
+     * Set if an additional column with the calendar week should be displayed.
+     */
+    @Composable
+    public fun calendarWeeks(calendarWeeks: Boolean)
+
+    /**
+     * The hour cycle. If not set it's determined by the locale.
+     */
+    public val hourCycle: HourCycle?
+
+    /**
+     * Set the hour cycle. If not set it's determined by the locale.
+     */
+    @Composable
+    public fun hourCycle(hourCycle: HourCycle?)
 
     /**
      * The Tempus Dominus instance.

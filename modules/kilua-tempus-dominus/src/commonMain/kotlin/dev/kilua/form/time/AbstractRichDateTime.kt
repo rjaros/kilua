@@ -45,6 +45,7 @@ import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import kotlinx.datetime.LocalDate
+import web.JsAny
 import web.document
 import web.dom.events.Event
 import web.toJsNumber
@@ -122,6 +123,21 @@ public enum class YearHeaderFormat(public val value: String) {
 }
 
 /**
+ * Tempus Dominus hour cycle.
+ */
+public enum class HourCycle {
+    H11,
+    H12,
+    H23,
+    H24;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
  * Tempus Dominus abstract rich date time component.
  */
 public abstract class AbstractRichDateTime(
@@ -137,16 +153,10 @@ public abstract class AbstractRichDateTime(
 
     private val initialFormat: String = format
 
-    /**
-     * The date/time format.
-     */
     public override var format: String by updatingProperty(format) {
         refresh()
     }
 
-    /**
-     * Set the date/time format.
-     */
     @Composable
     public override fun format(format: String): Unit = composableProperty("format", {
         this.format = initialFormat
@@ -159,7 +169,7 @@ public abstract class AbstractRichDateTime(
      */
     internal val inputFormat: String
         get() {
-            val hourCycle = guessHourCycle(locale.language)
+            val hourCycle = hourCycle ?: guessHourCycle(locale.language)
             return if (hourCycle == HourCycle.H11 || hourCycle == HourCycle.H12) {
                 format.replace("HH:mm:ss", "hh:mm:ss T").replace("HH:mm", "hh:mm T")
             } else format
@@ -172,16 +182,10 @@ public abstract class AbstractRichDateTime(
         refresh()
     }
 
-    /**
-     * The locale for i18n.
-     */
     public override var locale: Locale by updatingProperty(locale) {
         refresh()
     }
 
-    /**
-     * Set the locale for i18n.
-     */
     @Composable
     public override fun locale(locale: Locale): Unit = composableProperty("locale", {
         this.locale = LocaleManager.currentLocale
@@ -189,9 +193,6 @@ public abstract class AbstractRichDateTime(
         this.locale = locale
     }
 
-    /**
-     * Determines if the component is disabled.
-     */
     public override var disabled: Boolean? by updatingProperty(disabled) {
         if (it == true) {
             tempusDominusInstance?.disable()
@@ -200,9 +201,6 @@ public abstract class AbstractRichDateTime(
         }
     }
 
-    /**
-     * Set the component disabled state.
-     */
     @Composable
     public override fun disabled(disabled: Boolean?): Unit = composableProperty("disabled", {
         this.disabled = null
@@ -210,14 +208,8 @@ public abstract class AbstractRichDateTime(
         this.disabled = disabled
     }
 
-    /**
-     * Determines if the component is required.
-     */
     public override var required: Boolean? by updatingProperty(required)
 
-    /**
-     * Set the component required state.
-     */
     @Composable
     public override fun required(required: Boolean?): Unit = composableProperty("required", {
         this.required = null
@@ -225,14 +217,8 @@ public abstract class AbstractRichDateTime(
         this.required = required
     }
 
-    /**
-     * The component name.
-     */
     public override var name: String? by updatingProperty()
 
-    /**
-     * Set the component name.
-     */
     @Composable
     public override fun name(name: String?): Unit = composableProperty("name", {
         this.name = null
@@ -245,16 +231,10 @@ public abstract class AbstractRichDateTime(
      */
     public open var customValidity: String? by updatingProperty()
 
-    /**
-     * Days of the week that should be disabled.
-     */
     public override var daysOfWeekDisabled: List<Int>? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the days of the week that should be disabled.
-     */
     @Composable
     public override fun daysOfWeekDisabled(daysOfWeekDisabled: List<Int>?): Unit =
         composableProperty("daysOfWeekDisabled", {
@@ -263,16 +243,10 @@ public abstract class AbstractRichDateTime(
             this.daysOfWeekDisabled = daysOfWeekDisabled
         }
 
-    /**
-     * Determines if *Clear* button should be visible.
-     */
     public override var showClear: Boolean by updatingProperty(true) {
         refresh()
     }
 
-    /**
-     * Set if *Clear* button should be visible.
-     */
     @Composable
     public override fun showClear(showClear: Boolean): Unit = composableProperty("showClear", {
         this.showClear = true
@@ -280,16 +254,10 @@ public abstract class AbstractRichDateTime(
         this.showClear = showClear
     }
 
-    /**
-     * Determines if *Close* button should be visible.
-     */
     public override var showClose: Boolean by updatingProperty(true) {
         refresh()
     }
 
-    /**
-     * Set if *Close* button should be visible.
-     */
     @Composable
     public override fun showClose(showClose: Boolean): Unit = composableProperty("showClose", {
         this.showClose = true
@@ -297,16 +265,10 @@ public abstract class AbstractRichDateTime(
         this.showClose = showClose
     }
 
-    /**
-     * Determines if *Today* button should be visible.
-     */
     public override var showToday: Boolean by updatingProperty(true) {
         refresh()
     }
 
-    /**
-     * Set if *Today* button should be visible.
-     */
     @Composable
     public override fun showToday(showToday: Boolean): Unit = composableProperty("showToday", {
         this.showToday = true
@@ -314,16 +276,10 @@ public abstract class AbstractRichDateTime(
         this.showToday = showToday
     }
 
-    /**
-     * The increment used to build the hour view.
-     */
     public override var stepping: Int by updatingProperty(1) {
         refresh()
     }
 
-    /**
-     * Set the increment used to build the hour view.
-     */
     @Composable
     public override fun stepping(stepping: Int): Unit = composableProperty("stepping", {
         this.stepping = 1
@@ -331,16 +287,10 @@ public abstract class AbstractRichDateTime(
         this.stepping = stepping
     }
 
-    /**
-     * Prevents date selection before this date.
-     */
     public override var minDate: LocalDate? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the minimum date.
-     */
     @Composable
     public override fun minDate(minDate: LocalDate?): Unit = composableProperty("minDate", {
         this.minDate = null
@@ -348,16 +298,10 @@ public abstract class AbstractRichDateTime(
         this.minDate = minDate
     }
 
-    /**
-     * Prevents date selection after this date.
-     */
     public override var maxDate: LocalDate? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the maximum date.
-     */
     @Composable
     public override fun maxDate(maxDate: LocalDate?): Unit = composableProperty("maxDate", {
         this.maxDate = null
@@ -365,16 +309,10 @@ public abstract class AbstractRichDateTime(
         this.maxDate = maxDate
     }
 
-    /**
-     * Shows date and time pickers side by side.
-     */
     public override var sideBySide: Boolean by updatingProperty(false) {
         refresh()
     }
 
-    /**
-     * Set if date and time pickers should be shown side by side.
-     */
     @Composable
     public override fun sideBySide(sideBySide: Boolean): Unit = composableProperty("sideBySide", {
         this.sideBySide = false
@@ -382,16 +320,10 @@ public abstract class AbstractRichDateTime(
         this.sideBySide = sideBySide
     }
 
-    /**
-     * A list of enabled dates.
-     */
     public override var enabledDates: List<LocalDate>? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the list of enabled dates.
-     */
     @Composable
     public override fun enabledDates(enabledDates: List<LocalDate>?): Unit = composableProperty("enabledDates", {
         this.enabledDates = null
@@ -399,16 +331,10 @@ public abstract class AbstractRichDateTime(
         this.enabledDates = enabledDates
     }
 
-    /**
-     * A list of disabled dates.
-     */
     public override var disabledDates: List<LocalDate>? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the list of disabled dates.
-     */
     @Composable
     public override fun disabledDates(disabledDates: List<LocalDate>?): Unit = composableProperty("disabledDates", {
         this.disabledDates = null
@@ -416,16 +342,32 @@ public abstract class AbstractRichDateTime(
         this.disabledDates = disabledDates
     }
 
-    /**
-     * Keep the popup open after selecting a date.
-     */
+    public override var enabledHours: List<Int>? by updatingProperty {
+        refresh()
+    }
+
+    @Composable
+    public override fun enabledHours(enabledHours: List<Int>?): Unit = composableProperty("enabledHours", {
+        this.enabledHours = null
+    }) {
+        this.enabledHours = enabledHours
+    }
+
+    public override var disabledHours: List<Int>? by updatingProperty {
+        refresh()
+    }
+
+    @Composable
+    public override fun disabledHours(disabledHours: List<Int>?): Unit = composableProperty("disabledHours", {
+        this.disabledHours = null
+    }) {
+        this.disabledHours = disabledHours
+    }
+
     public override var keepOpen: Boolean by updatingProperty(false) {
         refresh()
     }
 
-    /**
-     * Set if the popup should be kept open after selecting a date.
-     */
     @Composable
     public override fun keepOpen(keepOpen: Boolean): Unit = composableProperty("keepOpen", {
         this.keepOpen = false
@@ -433,16 +375,10 @@ public abstract class AbstractRichDateTime(
         this.keepOpen = keepOpen
     }
 
-    /**
-     * Date/time chooser color theme.
-     */
     public override var theme: Theme? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the date/time chooser color theme.
-     */
     @Composable
     public override fun theme(theme: Theme?): Unit = composableProperty("theme", {
         this.theme = null
@@ -450,16 +386,10 @@ public abstract class AbstractRichDateTime(
         this.theme = theme
     }
 
-    /**
-     * Automatically open the chooser popup.
-     */
     public override var allowInputToggle: Boolean by updatingProperty(false) {
         refresh()
     }
 
-    /**
-     * Set if the chooser popup should be automatically opened.
-     */
     @Composable
     public override fun allowInputToggle(allowInputToggle: Boolean): Unit = composableProperty("allowInputToggle", {
         this.allowInputToggle = false
@@ -467,16 +397,10 @@ public abstract class AbstractRichDateTime(
         this.allowInputToggle = allowInputToggle
     }
 
-    /**
-     * The view date of the date/time chooser.
-     */
     public override var viewDate: LocalDate? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the view date of the date/time chooser.
-     */
     @Composable
     public override fun viewDate(viewDate: LocalDate?): Unit = composableProperty("viewDate", {
         this.viewDate = null
@@ -484,16 +408,10 @@ public abstract class AbstractRichDateTime(
         this.viewDate = viewDate
     }
 
-    /**
-     * Automatically open time component after date is selected.
-     */
     public override var promptTimeOnDateChange: Boolean by updatingProperty(false) {
         refresh()
     }
 
-    /**
-     * Set if time component should be automatically opened after date is selected.
-     */
     @Composable
     public override fun promptTimeOnDateChange(promptTimeOnDateChange: Boolean): Unit =
         composableProperty("promptTimeOnDateChange", {
@@ -502,16 +420,10 @@ public abstract class AbstractRichDateTime(
             this.promptTimeOnDateChange = promptTimeOnDateChange
         }
 
-    /**
-     * The delay for the time component opening after date is selected.
-     */
     public override var promptTimeOnDateChangeTransitionDelay: Duration? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the delay for the time component opening after date is selected.
-     */
     @Composable
     public override fun promptTimeOnDateChangeTransitionDelay(promptTimeOnDateChangeTransitionDelay: Duration?): Unit =
         composableProperty("promptTimeOnDateChangeTransitionDelay", {
@@ -520,16 +432,10 @@ public abstract class AbstractRichDateTime(
             this.promptTimeOnDateChangeTransitionDelay = promptTimeOnDateChangeTransitionDelay
         }
 
-    /**
-     * Default view mode of the date/time chooser.
-     */
     public override var viewMode: ViewMode? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the default view mode of the date/time chooser.
-     */
     @Composable
     public override fun viewMode(viewMode: ViewMode?): Unit = composableProperty("viewMode", {
         this.viewMode = null
@@ -537,16 +443,10 @@ public abstract class AbstractRichDateTime(
         this.viewMode = viewMode
     }
 
-    /**
-     * Date/time chooser toolbar placement.
-     */
     public override var toolbarPlacement: ToolbarPlacement? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the date/time chooser toolbar placement.
-     */
     @Composable
     public override fun toolbarPlacement(toolbarPlacement: ToolbarPlacement?): Unit =
         composableProperty("toolbarPlacement", {
@@ -555,16 +455,10 @@ public abstract class AbstractRichDateTime(
             this.toolbarPlacement = toolbarPlacement
         }
 
-    /**
-     * Date/time chooser month header format.
-     */
     public override var monthHeaderFormat: MonthHeaderFormat? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the date/time chooser month header format.
-     */
     @Composable
     public override fun monthHeaderFormat(monthHeaderFormat: MonthHeaderFormat?): Unit =
         composableProperty("monthHeaderFormat", {
@@ -573,16 +467,10 @@ public abstract class AbstractRichDateTime(
             this.monthHeaderFormat = monthHeaderFormat
         }
 
-    /**
-     * Date/time chooser year header format.
-     */
     public override var yearHeaderFormat: YearHeaderFormat? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the date/time chooser year header format.
-     */
     @Composable
     public override fun yearHeaderFormat(yearHeaderFormat: YearHeaderFormat?): Unit =
         composableProperty("yearHeaderFormat", {
@@ -591,16 +479,10 @@ public abstract class AbstractRichDateTime(
             this.yearHeaderFormat = yearHeaderFormat
         }
 
-    /**
-     * Date/time chooser custom icons.
-     */
     public override var customIcons: DateTimeIcons? by updatingProperty {
         refresh()
     }
 
-    /**
-     * Set the date/time chooser custom icons.
-     */
     @Composable
     public override fun customIcons(customIcons: DateTimeIcons?): Unit =
         composableProperty("customIcons", {
@@ -608,6 +490,61 @@ public abstract class AbstractRichDateTime(
         }) {
             this.customIcons = customIcons
         }
+
+    public override var keepInvalid: Boolean by updatingProperty(false) {
+        refresh()
+    }
+
+    @Composable
+    public override fun keepInvalid(keepInvalid: Boolean): Unit = composableProperty("keepInvalid", {
+        this.keepInvalid = false
+    }) {
+        this.keepInvalid = keepInvalid
+    }
+
+    public override var container: JsAny? by updatingProperty {
+        refresh()
+    }
+
+    @Composable
+    public override fun container(container: JsAny?): Unit = composableProperty("container", {
+        this.container = null
+    }) {
+        this.container = container
+    }
+
+    public override var meta: JsAny? by updatingProperty {
+        refresh()
+    }
+
+    @Composable
+    public override fun meta(meta: JsAny?): Unit = composableProperty("meta", {
+        this.meta = null
+    }) {
+        this.meta = meta
+    }
+
+    public override var calendarWeeks: Boolean by updatingProperty(false) {
+        refresh()
+    }
+
+    @Composable
+    public override fun calendarWeeks(calendarWeeks: Boolean): Unit = composableProperty("calendarWeeks", {
+        this.calendarWeeks = false
+    }) {
+        this.calendarWeeks = calendarWeeks
+    }
+
+    public override var hourCycle: HourCycle? by updatingProperty {
+        refresh()
+    }
+
+    @Composable
+    public override fun hourCycle(hourCycle: HourCycle?): Unit = composableProperty("hourCycle", {
+        this.hourCycle = null
+    }) {
+        this.hourCycle = hourCycle
+    }
 
     /**
      * The refresh callback used by the theme change event handler.
@@ -665,6 +602,9 @@ public abstract class AbstractRichDateTime(
                     "year" to if (yearHeaderFormat != null) yearHeaderFormat!!.value else "2-digit"
                 )
             }
+            if (hourCycle != null) {
+                locale["hourCycle"] = hourCycle!!.value.toJsString()
+            }
             val initialViewMode = viewMode ?: if (calendarView) ViewMode.Calendar else ViewMode.Clock
             val currentTheme = if (theme == null || theme == Theme.Auto) {
                 document.documentElement?.getAttribute("data-bs-theme")?.let { theme ->
@@ -690,6 +630,13 @@ public abstract class AbstractRichDateTime(
                 if (component.promptTimeOnDateChangeTransitionDelay != null)
                     this.promptTimeOnDateChangeTransitionDelay =
                         component.promptTimeOnDateChangeTransitionDelay!!.inWholeMilliseconds.toInt()
+                this.keepInvalid = component.keepInvalid
+                if (component.container != null) {
+                    this.container = component.container!!
+                }
+                if (component.meta != null) {
+                    this.meta = component.meta!!
+                }
                 this.restrictions = obj {
                     if (component.minDate != null) this.minDate = component.minDate!!.toDate()
                     if (component.maxDate != null) this.maxDate = component.maxDate!!.toDate()
@@ -699,18 +646,15 @@ public abstract class AbstractRichDateTime(
                         component.disabledDates!!.map { it.toDate() }.toJsArray()
                     if (!component.daysOfWeekDisabled.isNullOrEmpty()) this.daysOfWeekDisabled =
                         component.daysOfWeekDisabled!!.map { it.toJsNumber() }.toJsArray()
+                    if (!component.enabledHours.isNullOrEmpty()) this.enabledHours =
+                        component.enabledHours!!.map { it.toJsNumber() }.toJsArray()
+                    if (!component.disabledHours.isNullOrEmpty()) this.disabledHours =
+                        component.disabledHours!!.map { it.toJsNumber() }.toJsArray()
                 }
                 this.display = obj {
-                    this.viewMode = initialViewMode.value
-                    component.toolbarPlacement?.let { this.toolbarPlacement = it.value }
-                    this.sideBySide = component.sideBySide
-                    this.buttons = obj {
-                        this.clear = component.showClear
-                        this.close = component.showClose
-                        this.today = component.showToday
-                    }
                     if (component.customIcons != null) {
                         this.icons = obj {
+                            component.customIcons!!.type?.let { this.type = it }
                             component.customIcons!!.time?.let { this.time = it }
                             component.customIcons!!.date?.let { this.date = it }
                             component.customIcons!!.up?.let { this.up = it }
@@ -722,14 +666,23 @@ public abstract class AbstractRichDateTime(
                             component.customIcons!!.close?.let { this.close = it }
                         }
                     }
-                    this.inline = component.inline
+                    this.sideBySide = component.sideBySide
+                    this.calendarWeeks = component.calendarWeeks
+                    this.viewMode = initialViewMode.value
+                    component.toolbarPlacement?.let { this.toolbarPlacement = it.value }
                     this.keepOpen = component.keepOpen
-                    currentTheme?.let { this.theme = it.value }
+                    this.buttons = obj {
+                        this.clear = component.showClear
+                        this.close = component.showClose
+                        this.today = component.showToday
+                    }
                     this.components = obj {
                         this.calendar = calendarView
                         this.clock = clockView
                         this.seconds = secondsView
                     }
+                    this.inline = component.inline
+                    currentTheme?.let { this.theme = it.value }
                 }
                 this.localization = locale
             }
@@ -762,13 +715,6 @@ public abstract class AbstractRichDateTime(
     }
 
     public companion object {
-
-        /**
-         * Time format hour cycle.
-         */
-        private enum class HourCycle {
-            H11, H12, H23, H24
-        }
 
         /**
          * Tries to guess the hour cycle for given language.
