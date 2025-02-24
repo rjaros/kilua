@@ -35,6 +35,7 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.get
+import dev.kilua.externals.obj
 import dev.kilua.html.div
 import dev.kilua.rpc.RemoteOption
 import dev.kilua.rpc.RpcServiceMgr
@@ -145,10 +146,14 @@ public open class TomSelectRemote<out T : Any>(
                     requestFilter,
                     null,
                     value
-                ).map {
-                    it.unsafeCast<JsAny>()
-                }.toJsArray()
-                tomSelectInstance?.addOptions(result, false)
+                )
+                val resultWithOption = if (emptyOption) {
+                    listOf(obj<RemoteOptionExt> {
+                        value = ""
+                        text = "\u00a0"
+                    }) + result
+                } else result
+                tomSelectInstance?.addOptions(resultWithOption.toJsArray(), false)
                 super.refreshValue()
             }
         } else {
