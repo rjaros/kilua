@@ -49,9 +49,6 @@ fun KotlinMultiplatformExtension.kotlinJsTargets(withNode: Boolean = true) {
         }
         if (withNode) {
             nodejs {
-                testTask {
-                    useMocha()
-                }
             }
         }
     }
@@ -70,15 +67,12 @@ fun KotlinMultiplatformExtension.kotlinWasmTargets(withNode: Boolean = true) {
         }
         if (withNode) {
             nodejs {
-                testTask {
-                    useMocha()
-                }
             }
         }
     }
 }
 
-fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = "17") {
+fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = "21") {
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(target))
     }
@@ -93,7 +87,7 @@ fun KotlinMultiplatformExtension.kotlinJvmTargets(target: String = "17") {
     }
 }
 
-fun KotlinJvmProjectExtension.kotlinJvmTargets(target: String = "17") {
+fun KotlinJvmProjectExtension.kotlinJvmTargets(target: String = "21") {
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(target))
     }

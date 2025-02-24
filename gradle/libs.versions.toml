@@ -1,36 +1,37 @@
 [versions]
 kilua = "0.0.19"
 kilua-published = "0.0.19"
-kotlin = "2.1.10"
-compose = "1.8.0-alpha02"
+kotlin = "2.1.20-RC"
+compose = "1.8.0-alpha03"
 dokka = "2.0.0"
 nmcp = "0.0.8"
-ksp = "2.1.10-1.0.29"
-detekt = "1.23.7"
-npm-publish = "3.4.2"
+ksp = "2.1.20-RC-1.0.30"
+detekt = "1.23.8"
+npm-publish = "3.5.3"
 gradle-plugin-publish = "1.3.1"
-kilua-rpc = "0.0.26"
+kilua-rpc = "0.0.28"
 kilua-gettext = "0.0.2"
 kotlinx-atomicfu = "0.27.0"
 kotlinx-coroutines = "1.10.1"
 kotlinx-serialization = "1.8.0"
-kotlinx-datetime = "0.6.1"
+kotlinx-datetime = "0.6.2"
+kotlinx-browser = "0.3"
 javalin = "6.4.0"
-jooby = "3.6.0"
-ktor = "3.0.3"
+jooby = "3.6.1"
+ktor = "3.1.0"
 koin = "4.1.0-Beta5"
-koin-annotations = "2.0.0-RC1"
-micronaut = "4.7.4"
+koin-annotations = "2.0.0-RC5"
+micronaut = "4.7.6"
 micronaut-plugins = "4.4.5"
-spring-boot = "3.4.2"
+spring-boot = "3.4.3"
 spring-dependency-management = "1.1.7"
-vertx = "5.0.0.CR4"
+vertx = "5.0.0.CR5"
 vertx-plugin = "1.4.0"
 ballast = "4.2.1"
-shadow = "9.0.0-beta6"
+shadow = "9.0.0-beta9"
 logback = "1.5.16"
 tomlj = "1.1.1"
-kaml = "0.67.0"
+kaml = "0.72.0"
 resources-optimizer = "2.6.5"
 expiring-map = "0.5.11"
 npm-kilua-assets = "0.0.19"
@@ -46,19 +47,19 @@ fontawesome = "6.7.2"
 trix = "2.1.12"
 toastify = "1.12.0"
 tempus-dominus = "6.9.11"
-tom-select = "2.4.2"
+tom-select = "2.4.3"
 imask = "7.6.1"
 tabulator = "6.3.1"
 rsup-progress = "3.2.0"
 lz-string = "1.5.0"
-marked = "15.0.6"
+marked = "15.0.7"
 sanitize-html = "2.14.0"
-postcss = "8.5.1"
+postcss = "8.5.3"
 postcss-loader = "8.1.1"
-tailwindcss = "4.0.1"
+tailwindcss = "4.0.8"
 cssnano = "7.0.6"
 mini-css-extract-plugin = "2.9.2"
-motion = "12.0.6"
+motion = "12.4.7"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
@@ -66,6 +67,7 @@ kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core",
 kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version.ref = "kotlinx-browser" }
 ksp-symbol-processing-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 javalin = { module = "io.javalin:javalin", version.ref = "javalin" }
 jooby-kotlin = { module = "io.jooby:jooby-kotlin", version.ref = "jooby" }
@@ -106,7 +108,6 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 npm-publish = { id = "dev.petuska.npm.publish", version.ref = "npm-publish" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 nmcp = { id = "com.gradleup.nmcp", version.ref = "nmcp" }
 kilua-rpc = { id = "dev.kilua.rpc", version.ref = "kilua-rpc" }
 gradle-plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "gradle-plugin-publish" }

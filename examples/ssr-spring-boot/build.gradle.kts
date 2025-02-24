@@ -20,9 +20,8 @@ extra["mainClassName"] = "example.MainKt"
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
     jvm {
-        withJava()
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")

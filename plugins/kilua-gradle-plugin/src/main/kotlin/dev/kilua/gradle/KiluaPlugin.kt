@@ -183,10 +183,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     group = KILUA_TASK_GROUP
                     description = "Packages webpack js bundle for server-side rendering."
                     archiveFileName.set("ssr.zip")
-                    val distribution =
-                        project.tasks.getByName<Copy>(
-                            "jsBrowserDistributionSSR",
-                        ).outputs
+                    val distribution = project.tasks.getByName("jsBrowserDistributionSSR").outputs
                     from(distribution)
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -250,9 +247,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     group = KILUA_TASK_GROUP
                     description = "Packages webpack wasmJs bundle for server-side rendering."
                     archiveFileName.set("ssr.zip")
-                    val distribution = project.tasks.getByName<Copy>(
-                        "wasmJsBrowserDistributionSSR",
-                    ).outputs
+                    val distribution = project.tasks.getByName("wasmJsBrowserDistributionSSR").outputs
                     from(distribution)
                     from(cssFiles)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -373,9 +368,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
             description = "Export the SSR application as static files"
             destinationDir = layout.buildDirectory.dir("site").get().asFile
             val exported = project.tasks.getByName(exportHtmlTaskName).outputs
-            val distribution = project.tasks.getByName<Copy>(
-                "${prefix}BrowserDistribution",
-            ).outputs
+            val distribution = project.tasks.getByName("${prefix}BrowserDistribution").outputs
             from(exported, distribution)
             duplicatesStrategy = DuplicatesStrategy.EXCLUDE
             configuration()

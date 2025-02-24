@@ -14,7 +14,7 @@ import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import java.io.File
-import java.net.URL
+import java.net.URI
 
 public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
 
@@ -65,7 +65,7 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
             } else null
             if (exportPages.isPresent) {
                 exportPages.get().filter { it.startsWith("/") }.forEach { page ->
-                    val content = URL("http://localhost:8080${page}").readContent(headers)
+                    val content = URI("http://localhost:8080${page}").toURL().readContent(headers)
                     if (content != null) {
                         val fileName = if (page.endsWith("/")) {
                             page + "index.html"
@@ -79,7 +79,7 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
                     }
                 }
             } else {
-                URL("http://localhost:8080/").readContent(headers)?.let { index ->
+                URI("http://localhost:8080/").toURL().readContent(headers)?.let { index ->
                     println("Exporting /index.html")
                     exportDirectory.file("index.html").get().asFile.writeText(index)
                 }
