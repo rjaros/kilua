@@ -97,6 +97,7 @@ import dev.kilua.form.text.richTextRef
 import dev.kilua.form.text.text
 import dev.kilua.form.text.textRef
 import dev.kilua.form.text.tomTypeaheadRef
+import dev.kilua.form.time.HourCycle
 import dev.kilua.form.time.richDate
 import dev.kilua.form.time.richDateTimeRef
 import dev.kilua.form.time.richTime
@@ -1171,6 +1172,7 @@ class App : Application() {
                 }
 
                 richTime(now().time) {
+                    hourCycle(HourCycle.H11)
                     onChange {
                         console.log(this.getValueAsString())
                     }
