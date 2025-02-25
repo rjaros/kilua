@@ -21,6 +21,10 @@ dev.kilua.i18n
 dev.kilua.panel
 dev.kilua.state
 dev.kilua.utils
+module:kilua-animation
+dev.kilua
+dev.kilua.animation
+dev.kilua.externals
 module:kilua-annotations
 dev.kilua.annotations
 module:kilua-bootstrap

@@ -1,0 +1,351 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>dev.kilua.animation</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+<a class="library-name--link" href="../../../index.html">
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.20
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-animation/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":modules:kilua-animation/commonMain" data-filter=":modules:kilua-animation/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </div>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="package" id="content" pageids="kilua-animation::dev.kilua.animation////PointingToDeclaration//-1213927337">
+  <div class="breadcrumbs"><a href="../index.html">kilua-animation</a><span class="delimiter">/</span><span class="current">dev.kilua.animation</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-779323580%2FClasslikes%2F-1213927337" anchor-label="CssTimingFunction" id="-779323580%2FClasslikes%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-css-timing-function/index.html"><span>Css</span><wbr><span>Timing</span><wbr><span><span>Function</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-779323580%2FClasslikes%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-css-timing-function/index.html">CssTimingFunction</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-css-timing-function/index.html">CssTimingFunction</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">CSS animation timing functions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1940243985%2FClasslikes%2F-1213927337" anchor-label="CssTransition" id="1940243985%2FClasslikes%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-css-transition/index.html"><span>Css</span><wbr><span><span>Transition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1940243985%2FClasslikes%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-css-transition/index.html">CssTransition</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>type<span class="token operator">: </span><a href="-transition-type/index.html">TransitionType</a><span class="token operator"> = </span>TransitionType.Fade<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>duration<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration/index.html">Duration</a><span class="token operator"> = </span>1.seconds<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>timingFunction<span class="token operator">: </span><a href="-css-timing-function/index.html">CssTimingFunction</a><span class="token operator"> = </span>CssTimingFunction.Ease<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>customTimingFunction<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">CSS animation transition parameters.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="75445275%2FClasslikes%2F-1213927337" anchor-label="MotionAnimation" id="75445275%2FClasslikes%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-motion-animation/index.html"><span>Motion</span><wbr><span><span>Animation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="75445275%2FClasslikes%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Stable///PointingToDeclaration/"><span class="token annotation builtin">Stable</span></span></div></div><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="-motion-animation/index.html">MotionAnimation</a></div><div class="brief "><p class="paragraph">Motion animation parameters.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="835608896%2FClasslikes%2F-1213927337" anchor-label="MotionEasingFunction" id="835608896%2FClasslikes%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-motion-easing-function/index.html"><span>Motion</span><wbr><span>Easing</span><wbr><span><span>Function</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="835608896%2FClasslikes%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-motion-easing-function/index.html">MotionEasingFunction</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-motion-easing-function/index.html">MotionEasingFunction</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Motion animation easing functions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2032599886%2FClasslikes%2F-1213927337" anchor-label="MotionTransition" id="2032599886%2FClasslikes%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-motion-transition/index.html"><span>Motion</span><wbr><span><span>Transition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2032599886%2FClasslikes%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-motion-transition/index.html">MotionTransition</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>type<span class="token operator">: </span><a href="-transition-type/index.html">TransitionType</a><span class="token operator"> = </span>TransitionType.Fade<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>animation<span class="token operator">: </span><a href="-motion-animation/index.html">MotionAnimation</a><span class="token operator"> = </span>MotionAnimation.Tween()</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Motion animation transition parameters.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1518279364%2FClasslikes%2F-1213927337" anchor-label="RepeatType" id="1518279364%2FClasslikes%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-repeat-type/index.html"><span>Repeat</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1518279364%2FClasslikes%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-repeat-type/index.html">RepeatType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-repeat-type/index.html">RepeatType</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Motion animation repeat types.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="677476682%2FClasslikes%2F-1213927337" anchor-label="TransitionType" id="677476682%2FClasslikes%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-transition-type/index.html"><span>Transition</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="677476682%2FClasslikes%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-transition-type/index.html">TransitionType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-transition-type/index.html">TransitionType</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Animation transition types.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="1976314198%2FFunctions%2F-1213927337" anchor-label="animateColorAsState" id="1976314198%2FFunctions%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="animate-color-as-state.html"><span>animate</span><wbr><span>Color</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1976314198%2FFunctions%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="animate-color-as-state.html"><span class="token function">animateColorAsState</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="../../../kilua/dev.kilua.html/-color/index.html">Color</a><span class="token punctuation">, </span></span><span class="parameter ">animation<span class="token operator">: </span><a href="-motion-animation/index.html">MotionAnimation</a><span class="token operator"> = </span>defaultAnimation</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="androidx.compose.runtime/State///PointingToDeclaration/">State</span><span class="token operator">&lt;</span><a href="../../../kilua/dev.kilua.html/-color/index.html">Color</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Automatically animate <a href="../../../kilua/dev.kilua.html/-color/index.html">Color</a> value. When the provided <a href="animate-color-as-state.html">value</a> is changed, the animation will run automatically. If there is already an active animation it will animate towards the new value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2133550858%2FFunctions%2F-1213927337" anchor-label="animateCssSizeAsState" id="-2133550858%2FFunctions%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="animate-css-size-as-state.html"><span>animate</span><wbr><span>Css</span><wbr><span>Size</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2133550858%2FFunctions%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="animate-css-size-as-state.html"><span class="token function">animateCssSizeAsState</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="../../../kilua/dev.kilua.html/-css-size/index.html">CssSize</a><span class="token punctuation">, </span></span><span class="parameter ">animation<span class="token operator">: </span><a href="-motion-animation/index.html">MotionAnimation</a><span class="token operator"> = </span>defaultAnimation</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="androidx.compose.runtime/State///PointingToDeclaration/">State</span><span class="token operator">&lt;</span><a href="../../../kilua/dev.kilua.html/-css-size/index.html">CssSize</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Automatically animate <a href="../../../kilua/dev.kilua.html/-css-size/index.html">CssSize</a> value. When the provided <a href="animate-css-size-as-state.html">value</a> is changed, the animation will run automatically. If there is already an active animation it will animate towards the new value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2096351351%2FFunctions%2F-1213927337" anchor-label="animateDoubleAsState" id="2096351351%2FFunctions%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="animate-double-as-state.html"><span>animate</span><wbr><span>Double</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2096351351%2FFunctions%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="animate-double-as-state.html"><span class="token function">animateDoubleAsState</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">animation<span class="token operator">: </span><a href="-motion-animation/index.html">MotionAnimation</a><span class="token operator"> = </span>defaultAnimation</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="androidx.compose.runtime/State///PointingToDeclaration/">State</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Automatically animate <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a> value. When the provided <a href="animate-double-as-state.html">value</a> is changed, the animation will run automatically. If there is already an active animation it will animate towards the new value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="811252732%2FFunctions%2F-1213927337" anchor-label="animatedVisibility" id="811252732%2FFunctions%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="animated-visibility.html"><span>animated</span><wbr><span><span>Visibility</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="811252732%2FFunctions%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="../../../kilua/dev.kilua.core/-i-component/index.html">IComponent</a><span class="token punctuation">.</span><a href="animated-visibility.html"><span class="token function">animatedVisibility</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">visible<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">transition<span class="token operator">: </span><a href="-css-transition/index.html">CssTransition</a><span class="token operator"> = </span>CssTransition()<span class="token punctuation">, </span></span><span class="parameter ">outTransition<span class="token operator">: </span><a href="-css-transition/index.html">CssTransition</a><span class="token operator"> = </span>transition<span class="token punctuation">, </span></span><span class="parameter ">content<span class="token operator">: </span><span><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span>&nbsp;</span><a href="../../../kilua/dev.kilua.core/-i-component/index.html">IComponent</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The <a href="animated-visibility.html">animatedVisibility</a> composable animates the appearance and disappearance of its content, as <a href="animated-visibility.html">visible</a> value changes. Different in/out animations can be specified using <a href="animated-visibility.html">transition</a> and <a href="animated-visibility.html">outTransition</a>. The function uses CSS animations to animate the visibility of the content.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="725708941%2FFunctions%2F-1213927337" anchor-label="animateFloatAsState" id="725708941%2FFunctions%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="animate-float-as-state.html"><span>animate</span><wbr><span>Float</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="725708941%2FFunctions%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="animate-float-as-state.html"><span class="token function">animateFloatAsState</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><span class="token punctuation">, </span></span><span class="parameter ">animation<span class="token operator">: </span><a href="-motion-animation/index.html">MotionAnimation</a><span class="token operator"> = </span>defaultAnimation</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="androidx.compose.runtime/State///PointingToDeclaration/">State</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Automatically animate <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a> value. When the provided <a href="animate-float-as-state.html">value</a> is changed, the animation will run automatically. If there is already an active animation it will animate towards the new value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-270965779%2FFunctions%2F-1213927337" anchor-label="animateIntAsState" id="-270965779%2FFunctions%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="animate-int-as-state.html"><span>animate</span><wbr><span>Int</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-270965779%2FFunctions%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="animate-int-as-state.html"><span class="token function">animateIntAsState</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">animation<span class="token operator">: </span><a href="-motion-animation/index.html">MotionAnimation</a><span class="token operator"> = </span>defaultAnimation</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="androidx.compose.runtime/State///PointingToDeclaration/">State</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Automatically animate <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a> value. When the provided <a href="animate-int-as-state.html">value</a> is changed, the animation will run automatically. If there is already an active animation it will animate towards the new value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1239421663%2FFunctions%2F-1213927337" anchor-label="animateLongAsState" id="-1239421663%2FFunctions%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="animate-long-as-state.html"><span>animate</span><wbr><span>Long</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1239421663%2FFunctions%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="animate-long-as-state.html"><span class="token function">animateLongAsState</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">animation<span class="token operator">: </span><a href="-motion-animation/index.html">MotionAnimation</a><span class="token operator"> = </span>defaultAnimation</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="androidx.compose.runtime/State///PointingToDeclaration/">State</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Automatically animate <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a> value. When the provided <a href="animate-long-as-state.html">value</a> is changed, the animation will run automatically. If there is already an active animation it will animate towards the new value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1909221842%2FFunctions%2F-1213927337" anchor-label="motionAnimatedVisibility" id="-1909221842%2FFunctions%2F-1213927337" data-filterable-set=":modules:kilua-animation/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":modules:kilua-animation/commonMain" data-filterable-set=":modules:kilua-animation/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="motion-animated-visibility.html"><span>motion</span><wbr><span>Animated</span><wbr><span><span>Visibility</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1909221842%2FFunctions%2F-1213927337"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-animation/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">fun </span><a href="../../../kilua/dev.kilua.core/-i-component/index.html">IComponent</a><span class="token punctuation">.</span><a href="motion-animated-visibility.html"><span class="token function">motionAnimatedVisibility</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">visible<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">transition<span class="token operator">: </span><a href="-motion-transition/index.html">MotionTransition</a><span class="token operator"> = </span>MotionTransition()<span class="token punctuation">, </span></span><span class="parameter ">outTransition<span class="token operator">: </span><a href="-motion-transition/index.html">MotionTransition</a><span class="token operator"> = </span>transition<span class="token punctuation">, </span></span><span class="parameter ">content<span class="token operator">: </span><span><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span>&nbsp;</span><a href="../../../kilua/dev.kilua.core/-i-component/index.html">IComponent</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The <a href="motion-animated-visibility.html">motionAnimatedVisibility</a> composable animates the appearance and disappearance of its content, as <a href="motion-animated-visibility.html">visible</a> value changes. Different in/out animations can be specified using <a href="motion-animated-visibility.html">transition</a> and <a href="motion-animated-visibility.html">outTransition</a>. The function uses Motion animations to animate the visibility of the content.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
