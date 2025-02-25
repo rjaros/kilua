@@ -47,12 +47,12 @@ More documentation, including tutorials and guides, is planned for the future.
 
 ## Building and running the examples
 
-To build the examples, you need to have JDK 17 or later installed.
+To build the examples, you need to have JDK 21 or later installed.
 
 The following tasks are available from the root project level:
 
-- `./gradlew -t :examples:[exampleName]:jsRun` - run the webpack dev server in continuous build mode for JS target on `http://localhost:3000`
-- `./gradlew -t :examples:[exampleName]:wasmJsRun` - run the webpack dev server in continuous build mode for Wasm target on `http://localhost:3000`
+- `./gradlew -t :examples:[exampleName]:jsBrowserDevelopmentRun` - run the webpack dev server in continuous build mode for JS target on `http://localhost:3000`
+- `./gradlew -t :examples:[exampleName]:wasmJsBrowserDevelopmentRun` - run the webpack dev server in continuous build mode for Wasm target on `http://localhost:3000`
 - `./gradlew :examples:[exampleName]:jsBrowserDistribution` - build production application for JS target to `examples/[exampleName]/build/dist/js/productionExecutable` directory
 - `./gradlew :examples:[exampleName]:wasmJsBrowserDistribution` - build production application for Wasm target to `examples/[exampleName]/build/dist/wasmJs/productionExecutable` directory
 
