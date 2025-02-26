@@ -24,12 +24,12 @@ package dev.kilua.ssr
 
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.application.hooks.*
 import io.ktor.server.http.content.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.util.*
-import io.ktor.util.pipeline.*
 import java.util.*
 
 internal val ssrEngineKey: AttributeKey<SsrEngine> = AttributeKey("ssrEngine")
@@ -47,33 +47,31 @@ public fun Application.initSsr() {
     val noCache = environment.config.propertyOrNull("ssr.noCache")?.getString()?.toBooleanStrictOrNull() ?: false
     val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, noCache)
     attributes.put(ssrEngineKey, ssrEngine)
+    install(SsrPlugin)
     routing {
         get("/index.html") {
-            respondSsr()
+            call.respondSsr()
         }
         singlePageApplication {
             defaultPage = UUID.randomUUID().toString() // Non-existing resource
             filesPath = "/assets"
             useResources = true
         }
-        route("/") {
-            route("{static-content-path-parameter...}") {// Important name from Ktor sources!
-                get {
-                    respondSsr()
-                }
-            }
+    }
+}
+
+private val SsrPlugin: ApplicationPlugin<Unit> = createApplicationPlugin(name = "KiluaSsrPlugin") {
+    on(ResponseBodyReadyForSend) { call, content ->
+        if (content.status == HttpStatusCode.NotFound && call.request.path() != "/favicon.ico") {
+            call.respondSsr()
         }
     }
 }
 
-private suspend fun RoutingContext.respondSsr() {
-    if (call.request.path() == "/favicon.ico") {
-        call.respond(HttpStatusCode.NotFound)
-    } else {
-        val ssrEngine = call.application.attributes[ssrEngineKey]
-        call.respondText(ContentType.Text.Html, HttpStatusCode.OK) {
-            val language = call.request.acceptLanguageItems().firstOrNull()?.value
-            ssrEngine.getSsrContent(call.request.uri, language)
-        }
+private suspend fun ApplicationCall.respondSsr() {
+    val ssrEngine = application.attributes[ssrEngineKey]
+    respondText(ContentType.Text.Html, HttpStatusCode.OK) {
+        val language = request.acceptLanguageItems().firstOrNull()?.value
+        ssrEngine.getSsrContent(request.uri, language)
     }
 }
