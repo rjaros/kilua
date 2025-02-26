@@ -57,8 +57,14 @@ public class KiluaProcessor(
             .filterIsInstance<KSClassDeclaration>().filter(KSNode::validate)
             .filter { it.classKind == ClassKind.INTERFACE && it.simpleName.asString().startsWith("I") }
             .forEach { classDeclaration ->
-                val tagName = classDeclaration.getAnnotationsByType(SimpleHtmlComponent::class).first().tagName
-                val withText = classDeclaration.getAnnotationsByType(SimpleHtmlComponent::class).first().withText
+                val simpleHtmlComponent = classDeclaration.getAnnotationsByType(SimpleHtmlComponent::class).first()
+                val tagName = simpleHtmlComponent.tagName
+                // workaround KSP2 issue with annotations default parameter values
+                val withText = try {
+                    simpleHtmlComponent.withText
+                } catch (_: Exception) {
+                    false
+                }
                 val parentType = classDeclaration.superTypes.firstOrNull()?.resolve()
                 val parentTypeName = parentType?.declaration?.qualifiedName?.asString()
                 if (parentTypeName == "dev.kilua.html.ITag") {
