@@ -32,6 +32,7 @@ import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Copy
+import org.gradle.api.tasks.Sync
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.findByType
@@ -98,7 +99,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
             }
         }
 
-        tasks.withType<Copy>().matching {
+        tasks.withType<Sync>().matching {
             it.name == "jsBrowserDistribution" || it.name == "wasmJsBrowserDistribution"
         }.configureEach {
             exclude("/tailwind/**", "/modules/**")
