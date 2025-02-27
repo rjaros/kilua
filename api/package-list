@@ -110,8 +110,6 @@ module:kilua-ssr-server-jooby
 dev.kilua.ssr
 module:kilua-ssr-server-ktor
 dev.kilua.ssr
-module:kilua-ssr-server-micronaut
-dev.kilua.ssr
 module:kilua-ssr-server-spring-boot
 dev.kilua.ssr
 module:kilua-ssr-server-vertx
