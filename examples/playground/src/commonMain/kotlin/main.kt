@@ -1242,18 +1242,18 @@ class App : Application() {
 
                 dropDown("A dropdown", "fas fa-search", style = ButtonStyle.BtnDanger, arrowVisible = false) {
                     li {
-                        link("#", "Link 1", className = "dropdown-item")
+                        a("#", "Link 1", className = "dropdown-item")
                     }
                     li {
-                        link("#", "Link 2", className = "dropdown-item")
+                        a("#", "Link 2", className = "dropdown-item")
                     }
                     li {
                         dropDown("An inner dropdown", innerDropDown = true) {
                             li {
-                                link("#", "Link 3", className = "dropdown-item")
+                                a("#", "Link 3", className = "dropdown-item")
                             }
                             li {
-                                link("#", "Link 4", className = "dropdown-item")
+                                a("#", "Link 4", className = "dropdown-item")
                             }
                         }
                     }
@@ -1533,7 +1533,7 @@ class App : Application() {
                     }
                 }
 
-                link("https://www.google.com", "Google", "bi-google", className = "btn btn-primary")
+                a("https://www.google.com", "Google", "bi-google", className = "btn btn-primary")
 
                 br()
 

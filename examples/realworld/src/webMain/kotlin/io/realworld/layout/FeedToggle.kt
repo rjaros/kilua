@@ -24,11 +24,10 @@ package io.realworld.layout
 
 import androidx.compose.runtime.Composable
 import dev.kilua.core.IComponent
+import dev.kilua.html.a
 import dev.kilua.html.div
 import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.html.li
-import dev.kilua.html.link
-import dev.kilua.html.linkRef
 import dev.kilua.html.ul
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
@@ -41,22 +40,26 @@ fun IComponent.feedToggle(state: ConduitState, conduitManager: ConduitManager) {
             if (state.user != null) {
                 li("nav-item") {
                     val className = if (state.feedType == FeedType.USER) "nav-link active" else "nav-link"
-                    linkRef("", "Your Feed", className = className).onClickLaunch { e ->
-                        e.preventDefault()
-                        conduitManager.selectFeed(FeedType.USER)
+                    a("", "Your Feed", className = className) {
+                        onClickLaunch { e ->
+                            e.preventDefault()
+                            conduitManager.selectFeed(FeedType.USER)
+                        }
                     }
                 }
             }
             li("nav-item") {
                 val className = if (state.feedType == FeedType.GLOBAL) "nav-link active" else "nav-link"
-                linkRef("", "Global Feed", className = className).onClickLaunch { e ->
-                    e.preventDefault()
-                    conduitManager.selectFeed(FeedType.GLOBAL)
+                a("", "Global Feed", className = className) {
+                    onClickLaunch { e ->
+                        e.preventDefault()
+                        conduitManager.selectFeed(FeedType.GLOBAL)
+                    }
                 }
             }
             if (state.selectedTag != null) {
                 li("nav-item") {
-                    link("", "#${state.selectedTag}", className = "nav-link active"){
+                    a("", "#${state.selectedTag}", className = "nav-link active") {
                         onClick { e ->
                             e.preventDefault()
                         }

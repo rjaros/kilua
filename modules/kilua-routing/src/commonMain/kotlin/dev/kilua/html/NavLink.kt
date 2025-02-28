@@ -28,7 +28,7 @@ import dev.kilua.core.IComponent
 import dev.kilua.utils.isDom
 
 /**
- * Creates a [Link] component with router support, returning a reference.
+ * Creates a [A] component with router support, returning a reference.
  *
  * @param href the link URL
  * @param label the link label
@@ -39,7 +39,7 @@ import dev.kilua.utils.isDom
  * @param className the CSS class name
  * @param id the ID attribute of the component
  * @param content the content of the component
- * @return the [Link] component
+ * @return the [A] component
  */
 @Composable
 public fun IComponent.navLinkRef(
@@ -51,16 +51,16 @@ public fun IComponent.navLinkRef(
     replace: Boolean = false,
     className: String? = null,
     id: String? = null,
-    content: @Composable ILink.() -> Unit = {}
-): Link {
-    return linkRef(href, label, icon, target, className, id) {
+    content: @Composable IA.() -> Unit = {}
+): A {
+    return aRef(href, label, icon, target, className, id) {
         setupNavLink(href, hide, replace)
         content()
     }
 }
 
 /**
- * Creates a [Link] component with router support.
+ * Creates a [A] component with router support.
  *
  * @param href the link URL
  * @param label the link label
@@ -82,16 +82,16 @@ public fun IComponent.navLink(
     replace: Boolean = false,
     className: String? = null,
     id: String? = null,
-    content: @Composable ILink.() -> Unit = {}
+    content: @Composable IA.() -> Unit = {}
 ) {
-    link(href, label, icon, target, className, id) {
+    a(href, label, icon, target, className, id) {
         setupNavLink(href, hide, replace)
         content()
     }
 }
 
 @Composable
-private fun ILink.setupNavLink(href: String?, hide: Boolean, replace: Boolean) {
+private fun IA.setupNavLink(href: String?, hide: Boolean, replace: Boolean) {
     if (href != null && isDom) {
         val router = Router.current
         onClick {

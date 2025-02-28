@@ -34,7 +34,7 @@ import web.dom.HTMLAnchorElement
 /**
  * HTML A component.
  */
-public interface ILink : ITag<HTMLAnchorElement> {
+public interface IA : ITag<HTMLAnchorElement> {
     /**
      * The URL of the link.
      */
@@ -72,14 +72,14 @@ public interface ILink : ITag<HTMLAnchorElement> {
 /**
  * HTML A component.
  */
-public open class Link(
+public open class A(
     href: String? = null,
     target: String? = null,
     className: String? = null,
     id: String? = null,
     renderConfig: RenderConfig = RenderConfig.Default
 ) :
-    Tag<HTMLAnchorElement>("a", className, id, renderConfig = renderConfig), ILink {
+    Tag<HTMLAnchorElement>("a", className, id, renderConfig = renderConfig), IA {
 
     /**
      * The URL of the link.
@@ -165,36 +165,36 @@ public open class Link(
 }
 
 /**
- * Creates a [Link] component, returning a reference.
+ * Creates a [A] component, returning a reference.
  *
  * @param href the link URL
  * @param target the link target
  * @param className the CSS class name
  * @param id the ID attribute of the link
  * @param content the content of the component
- * @return the [Link] component
+ * @return the [A] component
  */
 @Composable
-private fun IComponent.linkRef(
+private fun IComponent.aRef(
     href: String? = null,
     target: String? = null,
     className: String? = null,
     id: String? = null,
-    content: @Composable ILink.() -> Unit = {}
-): Link {
-    val component = remember { Link(href, target, className, id, renderConfig = renderConfig) }
+    content: @Composable IA.() -> Unit = {}
+): A {
+    val component = remember { A(href, target, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
-        set(href) { updateProperty(Link::href, it) }
-        set(target) { updateProperty(Link::target, it) }
-        set(className) { updateProperty(Link::className, it) }
-        set(id) { updateProperty(Link::id, it) }
+        set(href) { updateProperty(A::href, it) }
+        set(target) { updateProperty(A::target, it) }
+        set(className) { updateProperty(A::className, it) }
+        set(id) { updateProperty(A::id, it) }
     }, content)
     return component
 }
 
 
 /**
- * Creates a [Link] component with a given label and icon, returning a reference.
+ * Creates a [A] component with a given label and icon, returning a reference.
  *
  * @param href the link URL
  * @param label the link label
@@ -203,29 +203,29 @@ private fun IComponent.linkRef(
  * @param className the CSS class name
  * @param id the ID attribute of the link
  * @param content the content of the component
- * @return the [Link] component
+ * @return the [A] component
  */
 @Composable
-public fun IComponent.linkRef(
+public fun IComponent.aRef(
     href: String? = null,
     label: String? = null,
     icon: String? = null,
     target: String? = null,
     className: String? = null,
     id: String? = null,
-    content: @Composable ILink.() -> Unit = {}
-): Link {
+    content: @Composable IA.() -> Unit = {}
+): A {
     val iconClassName = if (label != null && icon != null) {
         className % "icon-link"
     } else className
-    return linkRef(href, target, iconClassName, id) {
+    return aRef(href, target, iconClassName, id) {
         atom(label, icon)
         content()
     }
 }
 
 /**
- * Creates a [Link] component.
+ * Creates a [A] component.
  *
  * @param href the link URL
  * @param target the link target
@@ -234,25 +234,25 @@ public fun IComponent.linkRef(
  * @param content the content of the component
  */
 @Composable
-private fun IComponent.link(
+private fun IComponent.a(
     href: String? = null,
     target: String? = null,
     className: String? = null,
     id: String? = null,
-    content: @Composable ILink.() -> Unit = {}
+    content: @Composable IA.() -> Unit = {}
 ) {
-    val component = remember { Link(href, target, className, id, renderConfig = renderConfig) }
+    val component = remember { A(href, target, className, id, renderConfig = renderConfig) }
     ComponentNode(component, {
-        set(href) { updateProperty(Link::href, it) }
-        set(target) { updateProperty(Link::target, it) }
-        set(className) { updateProperty(Link::className, it) }
-        set(id) { updateProperty(Link::id, it) }
+        set(href) { updateProperty(A::href, it) }
+        set(target) { updateProperty(A::target, it) }
+        set(className) { updateProperty(A::className, it) }
+        set(id) { updateProperty(A::id, it) }
     }, content)
 }
 
 
 /**
- * Creates a [Link] component with a given label and icon.
+ * Creates a [A] component with a given label and icon.
  *
  * @param href the link URL
  * @param label the link label
@@ -263,19 +263,19 @@ private fun IComponent.link(
  * @param content the content of the component
  */
 @Composable
-public fun IComponent.link(
+public fun IComponent.a(
     href: String? = null,
     label: String? = null,
     icon: String? = null,
     target: String? = null,
     className: String? = null,
     id: String? = null,
-    content: @Composable ILink.() -> Unit = {}
+    content: @Composable IA.() -> Unit = {}
 ) {
     val iconClassName = if (label != null && icon != null) {
         className % "icon-link"
     } else className
-    link(href, target, iconClassName, id) {
+    a(href, target, iconClassName, id) {
         atom(label, icon)
         content()
     }

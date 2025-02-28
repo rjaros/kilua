@@ -24,29 +24,25 @@ package dev.kilua.html
 
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.test.normalizeHtml
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
-class LinkTagSpec : DomSpec {
+class ASpec : DomSpec {
 
     @Test
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                linkTag("test") {
+                a(href = "https://google.com", label = "A link", target = "_blank", className = "test") {
                     id("test-id")
                     title("A title")
                     ariaLabel("A title")
                     attribute("data-test", "test")
-                    margin(10.px)
-                    display(Display.Flex)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<link class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">"""),
-                normalizeHtml(root.element.innerHTML),
-                "Should render an HTML Link tag to DOM"
+            assertEqualsHtml(
+                """<a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a>""",
+                root.element.innerHTML,
+                "Should render an HTML A tag to DOM"
             )
         }
     }
@@ -55,19 +51,17 @@ class LinkTagSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                linkTag("test") {
+                a(href = "https://google.com", label = "A link", target = "_blank", className = "test") {
                     id("test-id")
                     title("A title")
                     ariaLabel("A title")
                     attribute("data-test", "test")
-                    margin(10.px)
-                    display(Display.Flex)
                 }
             }
-            assertEquals(
-                normalizeHtml("""<div><link class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></div>"""),
-                normalizeHtml(root.renderToString()),
-                "Should render an HTML Link tag to a String"
+            assertEqualsHtml(
+                """<div><a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a></div>""",
+                root.renderToString(),
+                "Should render an HTML A tag to a String"
             )
         }
     }

@@ -31,6 +31,7 @@ import dev.kilua.form.check.checkBox
 import dev.kilua.form.text.Text
 import dev.kilua.form.text.text
 import dev.kilua.form.text.textRef
+import dev.kilua.html.a
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.footer
@@ -38,7 +39,6 @@ import dev.kilua.html.h1
 import dev.kilua.html.header
 import dev.kilua.html.label
 import dev.kilua.html.li
-import dev.kilua.html.link
 import dev.kilua.html.section
 import dev.kilua.html.span
 import dev.kilua.html.strong
@@ -161,16 +161,16 @@ class App : Application(), KoinComponent {
                     }
                     ul(className = "filters") {
                         li {
-                            link("#/", "All", className = if (mode == Mode.All) "selected" else null)
+                            a("#/", "All", className = if (mode == Mode.All) "selected" else null)
                         }
                         li {
-                            link(
+                            a(
                                 "#/active", "Active",
                                 className = if (mode == Mode.Active) "selected" else null
                             )
                         }
                         li {
-                            link(
+                            a(
                                 "#/completed", "Completed",
                                 className = if (mode == Mode.Completed) "selected" else null
                             )

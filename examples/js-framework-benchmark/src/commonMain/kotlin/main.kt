@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.compose.root
 import dev.kilua.html.Span
+import dev.kilua.html.a
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1
@@ -197,7 +198,7 @@ class App : Application() {
                                                 +item.id.toString()
                                             }
                                             td(className = "col-md-4") {
-                                                link(label = item.label) {
+                                                a(label = item.label) {
                                                     element.addEventListener("click") {
                                                         selected = item
                                                     }

@@ -24,9 +24,9 @@ package io.realworld.layout.shared
 
 import androidx.compose.runtime.Composable
 import dev.kilua.core.IComponent
+import dev.kilua.html.a
 import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.html.li
-import dev.kilua.html.link
 import dev.kilua.html.nav
 import dev.kilua.html.ul
 import io.realworld.ConduitManager
@@ -42,7 +42,7 @@ fun IComponent.pagination(state: ConduitState, conduitManager: ConduitManager) {
                 for (page in 0 until numberOfPages) {
                     val className = if (page == state.selectedPage) "page-item active" else "page-item"
                     li(className) {
-                        link("", "${page + 1}", className = "page-link"){
+                        a("", "${page + 1}", className = "page-link") {
                             onClickLaunch { e ->
                                 e.preventDefault()
                                 conduitManager.selectPage(page)

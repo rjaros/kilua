@@ -329,7 +329,7 @@ public interface ILi : ITag<HTMLLIElement>
  * HTML Link component.
  */
 @SimpleHtmlComponent("link")
-public interface ILinkTag : ITag<HTMLLinkElement>
+public interface ILink : ITag<HTMLLinkElement>
 
 /**
  * HTML Main component.
