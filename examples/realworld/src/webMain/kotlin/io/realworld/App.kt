@@ -25,7 +25,7 @@ package io.realworld
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import dev.kilua.Application
-import dev.kilua.RsupProgressModule
+import dev.kilua.CoreModule
 import dev.kilua.compose.root
 import dev.kilua.html.header
 import dev.kilua.html.main
@@ -144,5 +144,5 @@ class App : Application() {
 }
 
 fun main() {
-    startApplication(::App, null, RsupProgressModule)
+    startApplication(::App, CoreModule)
 }
