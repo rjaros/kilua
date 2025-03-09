@@ -31,16 +31,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
+import app.softwork.routingcompose.Router
 import dev.kilua.Application
 import dev.kilua.JsModule
 import dev.kilua.KiluaScope
 import dev.kilua.LocalResource
-import dev.kilua.animation.CssTransition
 import dev.kilua.animation.MotionTransition
 import dev.kilua.animation.TransitionType
 import dev.kilua.animation.animateColorAsState
 import dev.kilua.animation.animateCssSizeAsState
-import dev.kilua.animation.animatedVisibility
 import dev.kilua.animation.motionAnimatedVisibility
 import dev.kilua.compose.adaptive.Breakpoint
 import dev.kilua.compose.adaptive.TailwindcssBreakpoint
@@ -104,6 +103,7 @@ import dev.kilua.form.time.richTime
 import dev.kilua.html.*
 import dev.kilua.html.helpers.TagStyleFun.Companion.background
 import dev.kilua.html.helpers.TagStyleFun.Companion.border
+import dev.kilua.html.helpers.onCombineClick
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.globalStyle
 import dev.kilua.html.style.pClass
@@ -145,6 +145,11 @@ import dev.kilua.promise
 import dev.kilua.rest.RemoteRequestException
 import dev.kilua.rest.RestClient
 import dev.kilua.rest.callDynamic
+import dev.kilua.routing.SimpleBrowserRouter
+import dev.kilua.routing.global
+import dev.kilua.routing.intAction
+import dev.kilua.routing.noMatchAction
+import dev.kilua.routing.routeAction
 import dev.kilua.state.collectAsState
 import dev.kilua.svg.path
 import dev.kilua.svg.svg
@@ -261,6 +266,82 @@ class App : Application() {
         root("root") {
 
             div {
+
+                button("navigate to /about") {
+                    onEvent<Event>("") {
+
+                    }
+                    onCombineClick {  }
+                    onClick {
+                        Router.global.navigate("/about")
+                    }
+                }
+
+                SimpleBrowserRouter("/") {
+                    route("/") {
+                        p {
+                            +"Home"
+                        }
+                    }
+                    route("/article") {
+                        int { articleId ->
+                            p {
+                                +"Article: $articleId"
+                            }
+                        }
+                        noMatch {
+                            p {
+                                +"Article ID not specified"
+                            }
+                        }
+                    }
+                    route("/about") {
+                        p {
+                            +"About"
+                        }
+                    }
+                    noMatch {
+                        p {
+                            +"Not found"
+                        }
+                    }
+                }
+
+                hr()
+
+                SimpleBrowserRouter("/") {
+
+                    var state by remember { mutableStateOf("Home") }
+
+                    p {
+                        +state
+                    }
+
+                    routeAction("/") {
+                        state = "Home"
+                    }
+                    route("/article") {
+                        intAction { articleId ->
+                            state = "Article: $articleId"
+                        }
+                        noMatchAction {
+                            state = "Article ID not specified"
+                        }
+                    }
+                    routeAction("/about") {
+                        state = "About"
+                    }
+                    noMatchAction {
+                        state = "Not found"
+                    }
+                }
+
+                hr()
+
+                button("A button with an icon", "fas fa-asterisk")
+                a("https://google.com", "A link with an icon", "fab fa-google")
+
+                atom("Some label with an icon", "fas fa-plus", separator = " ", iconFirst = false)
 
                 margin(20.px)
                 var enabled by remember { mutableStateOf(true) }
