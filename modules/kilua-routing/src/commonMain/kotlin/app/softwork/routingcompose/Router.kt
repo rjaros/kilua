@@ -19,16 +19,18 @@ package app.softwork.routingcompose
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 
+@Stable
 public interface Router {
     /**
      * The current path
      */
-    public val currentPath: Path
+    public fun currentPath(): Path
 
     /**
      * Navigate to a new path.
@@ -54,26 +56,15 @@ public interface Router {
         public val current: Router
             @Composable
             get() = RouterCompositionLocal.current
-
-        /**
-         * Internal global router instance for use outside of composition.
-         * Do not use directly, use [global] instead.
-         */
-        public var internalGlobalRouter: Router? = null
-
-        /**
-         * Provide the global router instance for use outside of composition.
-         */
-        public val global: Router
-            get() = internalGlobalRouter ?: error("Router not defined.")
     }
 }
 
 internal val RouterCompositionLocal: ProvidableCompositionLocal<Router> =
     compositionLocalOf { error("Router not defined, cannot provide through RouterCompositionLocal.") }
 
+@Routing
 @Composable
-public fun Router.route(
+public operator fun Router.invoke(
     initRoute: String,
     routing: @Composable RouteBuilder.() -> Unit
 ) {
@@ -81,11 +72,8 @@ public fun Router.route(
         val rawPath by getPath(initRoute)
         val path = Path.from(rawPath)
         val node = remember(path) {
-            RouteBuilder.routeBuilderCache.getOrPut("${path.path} $path") {
-                RouteBuilder(
-                    path.path,
-                    path
-                )
+            RouteBuilder.routeBuilderCache.getOrPut("${this.hashCode()} ${path.path} $path") {
+                RouteBuilder(path.path, path)
             }
         }
         node.routing()
@@ -96,10 +84,20 @@ public fun Router.navigate(to: String, parameters: Parameters, hide: Boolean = f
     navigate("$to?$parameters", hide = hide, replace = replace)
 }
 
-public fun Router.navigate(to: String, parameters: Map<String, List<String>>, hide: Boolean = false, replace: Boolean = false) {
+public fun Router.navigate(
+    to: String,
+    parameters: Map<String, List<String>>,
+    hide: Boolean = false,
+    replace: Boolean = false
+) {
     navigate(to, Parameters.from(parameters), hide = hide, replace = replace)
 }
 
-public fun Router.navigate(to: String, parameters: Map<String, String>, hide: Boolean = false, replace: Boolean = false) {
+public fun Router.navigate(
+    to: String,
+    parameters: Map<String, String>,
+    hide: Boolean = false,
+    replace: Boolean = false
+) {
     navigate(to, Parameters.from(parameters), hide = hide, replace = replace)
 }

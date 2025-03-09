@@ -18,7 +18,9 @@ package app.softwork.routingcompose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,6 +58,7 @@ import dev.kilua.utils.nativeMapOf
  * ```
  */
 @Routing
+@Stable
 public class RouteBuilder internal constructor(private val basePath: String, private val remainingPath: Path) {
     public val path: String = remainingPath.path
     public val parameters: Parameters? = remainingPath.parameters
@@ -110,7 +113,7 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
         val currentRouter = Router.current
         val delegatingRouter = remember(newPath) { DelegateRouter(basePath, currentRouter) }
         CompositionLocalProvider(RouterCompositionLocal provides delegatingRouter) {
-            val newState = routeBuilderCache.getOrPut("$basePath $newPath") {
+            val newState = routeBuilderCache.getOrPut("${currentRouter.hashCode()} $basePath $newPath") {
                 RouteBuilder(basePath, newPath)
             }
             newState.nestedRoute()
@@ -159,8 +162,9 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
         }
     }
 
+    @Immutable
     @Routing
-    public class NoMatch(public val remainingPath: String, public val parameters: Parameters?) {
+    public class NoMatch internal constructor(public val remainingPath: String, public val parameters: Parameters?) {
         @Routing
         @Composable
         public fun redirect(target: String, hide: Boolean = false) {

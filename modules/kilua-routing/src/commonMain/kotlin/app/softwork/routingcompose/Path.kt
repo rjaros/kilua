@@ -16,6 +16,9 @@
  */
 package app.softwork.routingcompose
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 public data class Path(val path: String, val parameters: Parameters?) {
     internal fun newPath(currentPath: String) = Path(path = path.removePrefix("/$currentPath"), parameters)
 

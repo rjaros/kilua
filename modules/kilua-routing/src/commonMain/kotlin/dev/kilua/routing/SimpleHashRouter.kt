@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +20,15 @@
  * SOFTWARE.
  */
 
-package dev.kilua.ssr
+package dev.kilua.routing
 
 import androidx.compose.runtime.Composable
+import app.softwork.routingcompose.HashRouter
 import app.softwork.routingcompose.RouteBuilder
-import dev.kilua.core.IComponent
+import app.softwork.routingcompose.invoke
 
-/**
- * A router supporting Server-Side Rendering (SSR).
- *
- * This router can be used to directly declare UI components for each route,
- * which will be rendered on the server immediately for every request.
- */
 @Composable
-public fun IComponent.SimpleSsrRouter(
-    initRoute: String = "/",
-    contextPath: String = getContextPath(),
-    stateSerializer: (() -> String)? = null,
-    routing: @Composable (RouteBuilder.() -> Unit)
-) {
-    if (renderConfig.isDom) {
-        SsrRouter("$contextPath$initRoute", active = true, useDoneCallback = false) {
-            if (contextPath.isNotEmpty()) {
-                route("$contextPath$initRoute") {
-                    routing()
-                }
-            } else {
-                routing()
-            }
-        }
-    } else {
-        SsrRouter(initRoute, active = true, stateSerializer, useDoneCallback = false) {
-            routing()
-        }
-    }
+public fun SimpleHashRouter(initRoute: String, routing: @Composable RouteBuilder.() -> Unit) {
+    HashRouter(initRoute, routing)
+    internalGlobalRouter = HashRouter
 }

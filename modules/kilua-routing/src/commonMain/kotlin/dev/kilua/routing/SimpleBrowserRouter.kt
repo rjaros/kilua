@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,45 +20,27 @@
  * SOFTWARE.
  */
 
-package dev.kilua.ssr
+package dev.kilua.routing
 
 import androidx.compose.runtime.Composable
+import app.softwork.routingcompose.BrowserRouter
 import app.softwork.routingcompose.RouteBuilder
-import dev.kilua.core.IComponent
+import app.softwork.routingcompose.invoke
 
-/**
- * A router supporting Server-Side Rendering (SSR).
- *
- * This router will defer the rendering on the server until some asynchronous
- * operation (e.g. fetching data) is finished. It requires the use of [dev.kilua.routing.RouteEffect],
- * [dev.kilua.routing.routeAction], [dev.kilua.routing.stringAction], [dev.kilua.routing.intAction]
- * or [dev.kilua.routing.noMatchAction] for every declared route.
- *
- * Note:
- * Be sure to use one of the above functions for every possible route to ensure the
- * server-side rendering is completed.
- */
 @Composable
-public fun IComponent.AsyncSsrRouter(
-    initRoute: String = "/",
-    contextPath: String = getContextPath(),
-    active: Boolean = true,
-    stateSerializer: (() -> String)? = null,
-    routing: @Composable (RouteBuilder.() -> Unit)
+public fun SimpleBrowserRouter(
+    initRoute: String,
+    contextPath: String = "",
+    routing: @Composable RouteBuilder.() -> Unit
 ) {
-    if (renderConfig.isDom) {
-        SsrRouter("$contextPath$initRoute", active, useDoneCallback = true) {
-            if (contextPath.isNotEmpty()) {
-                route("$contextPath$initRoute") {
-                    routing()
-                }
-            } else {
+    BrowserRouter("$contextPath$initRoute") {
+        if (contextPath.isNotEmpty()) {
+            route("$contextPath$initRoute") {
                 routing()
             }
-        }
-    } else {
-        SsrRouter(initRoute, active, stateSerializer, useDoneCallback = true) {
+        } else {
             routing()
         }
     }
+    internalGlobalRouter = BrowserRouter
 }

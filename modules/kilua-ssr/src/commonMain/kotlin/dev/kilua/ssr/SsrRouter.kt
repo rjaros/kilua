@@ -24,12 +24,9 @@ package dev.kilua.ssr
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,7 +35,7 @@ import app.softwork.routingcompose.BrowserRouter
 import app.softwork.routingcompose.Path
 import app.softwork.routingcompose.RouteBuilder
 import app.softwork.routingcompose.Router
-import app.softwork.routingcompose.route
+import app.softwork.routingcompose.invoke
 import dev.kilua.CssRegister
 import dev.kilua.KiluaScope
 import dev.kilua.core.ComponentBase
@@ -49,21 +46,16 @@ import dev.kilua.externals.set
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
+import dev.kilua.routing.DoneCallbackCompositionLocal
+import dev.kilua.routing.internalGlobalRouter
 import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.unsafeCast
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import web.JsAny
 import web.toJsString
-
-internal typealias DoneCallback = () -> Unit
-
-internal val DoneCallbackCompositionLocal: ProvidableCompositionLocal<DoneCallback?> =
-    compositionLocalOf { null }
 
 /**
  * A router supporting Server-Side Rendering (SSR).
@@ -80,10 +72,11 @@ internal fun IComponent.SsrRouter(
     if (renderConfig.isDom) {
         CompositionLocalProvider(DoneCallbackCompositionLocal provides {}) {
             BrowserRouter(initPath, routeBuilder)
+            internalGlobalRouter = BrowserRouter
         }
     } else {
         val router = remember {
-            SsrRouter(initPath, this.cast(), stateSerializer).also { Router.internalGlobalRouter = it }
+            SsrRouter(initPath, this.cast(), stateSerializer).also { internalGlobalRouter = it }
         }
 
         var externalCondition by remember {
@@ -98,7 +91,7 @@ internal fun IComponent.SsrRouter(
             CompositionLocalProvider(DoneCallbackCompositionLocal provides {
                 externalCondition = true
             }) {
-                router.route(initPath) {
+                router(initPath) {
                     routeBuilder()
                     @Suppress("UNUSED_EXPRESSION")
                     externalCondition // access value to trigger recomposition on locale change
@@ -152,8 +145,7 @@ internal class SsrRouter(
         }
     }
 
-    override val currentPath: Path
-        get() = Path.from(currentLocation.value)
+    override fun currentPath(): Path = Path.from(currentLocation.value)
 
     private val currentLocation: MutableState<String> = mutableStateOf(initPath)
 
@@ -196,7 +188,7 @@ internal class SsrRouter(
                     val clientLanguage =
                         req.headers["x-kilua-locale"]?.toString() ?: LocaleManager.defaultLocale.language
                     val localeChanged = LocaleManager.currentLocale.language != clientLanguage
-                    val pathChanged = currentPath.toString() != req.url
+                    val pathChanged = currentPath().toString() != req.url
                     if (localeChanged || pathChanged) {
                         sendRender = {
                             res.end(it)
@@ -228,26 +220,6 @@ internal class SsrRouter(
                 res.end("Not Found")
             }
         }.listen(port)
-    }
-}
-
-/**
- * LaunchedEffect wrapper which automatically add route path as a key.
- * Used to make sure all routes are processed with the SSR engine.
- */
-@Composable
-public fun routeAction(vararg keys: String?, block: suspend CoroutineScope.() -> Unit) {
-    val done = DoneCallbackCompositionLocal.current
-    LaunchedEffect(Router.current.currentPath.toString(), *keys) {
-        supervisorScope {
-            launch {
-                try {
-                    block()
-                } finally {
-                    done?.invoke()
-                }
-            }
-        }
     }
 }
 
