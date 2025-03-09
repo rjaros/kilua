@@ -33,6 +33,7 @@ import dev.kilua.html.Color
 import dev.kilua.progress.Progress
 import dev.kilua.progress.ProgressOptions
 import dev.kilua.rest.RemoteRequestException
+import dev.kilua.routing.global
 import dev.kilua.ssr.getSsrState
 import dev.kilua.utils.isDom
 import dev.kilua.utils.toList
@@ -48,7 +49,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import web.JsAny
 import web.JsArray
@@ -110,7 +110,7 @@ class ConduitManager : TokenProvider {
         }
     }
 
-    fun CoroutineScope.withProgress(block: suspend () -> Unit): Job {
+    fun CoroutineScope.launchWithProgress(block: suspend () -> Unit): Job {
         return launch {
             withProgress(block)
         }
@@ -125,7 +125,7 @@ class ConduitManager : TokenProvider {
     }
 
     fun login(email: String?, password: String?) {
-        appScope.withProgress {
+        appScope.launchWithProgress {
             try {
                 val user = api.login(email, password)
                 processAction(ConduitAction.Login(user))
@@ -148,7 +148,7 @@ class ConduitManager : TokenProvider {
     }
 
     fun settings(image: String?, username: String?, bio: String?, email: String?, password: String?) {
-        appScope.withProgress {
+        appScope.launchWithProgress {
             try {
                 val user = api.settings(image, username, bio, email, password)
                 processAction(ConduitAction.Login(user))
@@ -171,7 +171,7 @@ class ConduitManager : TokenProvider {
     }
 
     fun register(username: String?, email: String?, password: String?) {
-        appScope.withProgress {
+        appScope.launchWithProgress {
             try {
                 val user = api.register(username, email, password)
                 processAction(ConduitAction.Login(user))
@@ -237,7 +237,7 @@ class ConduitManager : TokenProvider {
     }
 
     fun articleComment(slug: String, comment: String?) {
-        appScope.withProgress {
+        appScope.launchWithProgress {
             try {
                 val newComment = api.articleComment(slug, comment)
                 processAction(ConduitAction.AddComment(newComment))
@@ -248,7 +248,7 @@ class ConduitManager : TokenProvider {
     }
 
     fun articleCommentDelete(slug: String, id: Int) {
-        appScope.withProgress {
+        appScope.launchWithProgress {
             try {
                 api.articleCommentDelete(slug, id)
                 processAction(ConduitAction.DeleteComment(id))
@@ -260,7 +260,7 @@ class ConduitManager : TokenProvider {
 
     fun toggleFavoriteArticle(article: Article) {
         if (state.value.user != null) {
-            appScope.withProgress {
+            appScope.launchWithProgress {
                 try {
                     val articleUpdated = api.articleFavorite(article.slug!!, !article.favorited)
                     processAction(ConduitAction.ArticleUpdated(articleUpdated))
@@ -291,7 +291,7 @@ class ConduitManager : TokenProvider {
 
     fun toggleProfileFollow(user: User) {
         if (state.value.user != null) {
-            appScope.withProgress {
+            appScope.launchWithProgress {
                 try {
                     val changedUser = api.profileFollow(user.username!!, !user.following!!)
                     processAction(ConduitAction.ProfileFollowChanged(changedUser))
@@ -329,7 +329,7 @@ class ConduitManager : TokenProvider {
 
     private fun loadTags() {
         if (state.value.tags == null) processAction(ConduitAction.TagsLoading)
-        appScope.withProgress {
+        appScope.launchWithProgress {
             try {
                 val tags = api.tags()
                 processAction(ConduitAction.TagsLoaded(tags))
@@ -343,7 +343,7 @@ class ConduitManager : TokenProvider {
         if (slug == null) {
             processAction(ConduitAction.EditorPage(null))
         } else {
-            appScope.withProgress {
+            appScope.launchWithProgress {
                 try {
                     val article = api.article(slug)
                     processAction(ConduitAction.EditorPage(article))
@@ -355,7 +355,7 @@ class ConduitManager : TokenProvider {
     }
 
     fun createArticle(title: String?, description: String?, body: String?, tags: String?) {
-        appScope.withProgress {
+        appScope.launchWithProgress {
             val tagList = tags?.split(" ")?.toList() ?: emptyList()
             try {
                 val article = api.createArticle(title, description, body, tagList)
@@ -376,7 +376,7 @@ class ConduitManager : TokenProvider {
     }
 
     fun updateArticle(slug: String, title: String?, description: String?, body: String?, tags: String?) {
-        appScope.withProgress {
+        appScope.launchWithProgress {
             val tagList = tags?.split(" ")?.toList() ?: emptyList()
             try {
                 val article = api.updateArticle(slug, title, description, body, tagList)
@@ -397,7 +397,7 @@ class ConduitManager : TokenProvider {
     }
 
     fun deleteArticle(slug: String) {
-        appScope.withProgress {
+        appScope.launchWithProgress {
             try {
                 api.deleteArticle(slug)
                 Router.global.navigate(View.HOME.url)

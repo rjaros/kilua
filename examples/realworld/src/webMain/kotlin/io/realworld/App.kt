@@ -29,8 +29,10 @@ import dev.kilua.CoreModule
 import dev.kilua.compose.root
 import dev.kilua.html.header
 import dev.kilua.html.main
+import dev.kilua.routing.noMatchAction
+import dev.kilua.routing.routeAction
+import dev.kilua.routing.stringAction
 import dev.kilua.ssr.AsyncSsrRouter
-import dev.kilua.ssr.routeAction
 import dev.kilua.startApplication
 import dev.kilua.utils.decodeURIComponent
 import io.realworld.layout.articles.article
@@ -55,7 +57,7 @@ class App : Application() {
             val state by conduitManager.state.collectAsState()
 
             AsyncSsrRouter(
-                initPath = View.HOME.url,
+                initRoute = View.HOME.url,
                 active = !state.appLoading,
                 stateSerializer = { conduitManager.serializeStateForSsr() }
             ) {
@@ -75,69 +77,45 @@ class App : Application() {
                 }
                 footer()
 
-                route(View.HOME.url) {
-                    routeAction {
-                        conduitManager.homePage()
-                    }
+                routeAction(View.HOME.url) {
+                    conduitManager.homePage()
                 }
                 route(View.ARTICLE.url) {
-                    string { slug ->
-                        routeAction {
-                            conduitManager.showArticle(slug)
-                        }
+                    stringAction { slug ->
+                        conduitManager.showArticle(slug)
                     }
-                    noMatch {
-                        routeAction {}
-                    }
+                    noMatchAction {}
                 }
                 route(View.PROFILE.url) {
                     string {
                         val username = decodeURIComponent(it)
-                        route("/favorites") {
-                            routeAction {
-                                conduitManager.showProfile(username, true)
-                            }
+                        routeAction("/favorites") {
+                            conduitManager.showProfile(username, true)
                         }
-                        noMatch {
-                            routeAction {
-                                conduitManager.showProfile(username, false)
-                            }
+                        noMatchAction {
+                            conduitManager.showProfile(username, false)
                         }
                     }
-                    noMatch {
-                        routeAction {}
-                    }
+                    noMatchAction {}
                 }
-                route(View.LOGIN.url) {
-                    routeAction {
-                        conduitManager.loginPage()
-                    }
+                routeAction(View.LOGIN.url) {
+                    conduitManager.loginPage()
                 }
-                route(View.REGISTER.url) {
-                    routeAction {
-                        conduitManager.registerPage()
-                    }
+                routeAction(View.REGISTER.url) {
+                    conduitManager.registerPage()
                 }
                 route(View.EDITOR.url) {
-                    string { slug ->
-                        routeAction(slug) {
-                            conduitManager.editorPage(slug)
-                        }
+                    stringAction { slug ->
+                        conduitManager.editorPage(slug)
                     }
-                    noMatch {
-                        routeAction {
-                            conduitManager.editorPage()
-                        }
+                    noMatchAction {
+                        conduitManager.editorPage()
                     }
                 }
-                route(View.SETTINGS.url) {
-                    routeAction {
-                        conduitManager.settingsPage()
-                    }
+                routeAction(View.SETTINGS.url) {
+                    conduitManager.settingsPage()
                 }
-                noMatch {
-                    routeAction {}
-                }
+                noMatchAction {}
             }
         }
     }

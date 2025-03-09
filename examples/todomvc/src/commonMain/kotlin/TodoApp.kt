@@ -23,7 +23,6 @@
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import app.softwork.routingcompose.HashRouter
 import dev.kilua.Application
 import dev.kilua.compose.root
 import dev.kilua.core.IComponent
@@ -43,6 +42,7 @@ import dev.kilua.html.section
 import dev.kilua.html.span
 import dev.kilua.html.strong
 import dev.kilua.html.ul
+import dev.kilua.routing.SimpleHashRouter
 import dev.kilua.startApplication
 import web.dom.events.FocusEvent
 import web.dom.events.KeyboardEvent
@@ -57,7 +57,7 @@ class App : Application() {
 
     override fun start() {
         root("root") {
-            HashRouter(initPath = "/") {
+            SimpleHashRouter("/") {
                 route("/") {
                     todoView(Mode.All)
                 }
