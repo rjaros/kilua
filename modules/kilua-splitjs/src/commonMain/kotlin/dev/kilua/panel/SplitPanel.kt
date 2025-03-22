@@ -442,10 +442,10 @@ public open class SplitPanel(
                     splitter.cast<Tag<*>>().element
                 },
                 onDrag = { eventSizes, _ ->
-                    dispatchEvent("dragSplitPanel", buildCustomEventInit(eventSizes.cast()))
+                    dispatchEvent("drag", buildCustomEventInit(eventSizes.cast()))
                 },
                 onDragStart = { eventSizes, _ ->
-                    dispatchEvent("dragStartSplitPanel", buildCustomEventInit(eventSizes.cast()))
+                    dispatchEvent("dragStart", buildCustomEventInit(eventSizes.cast()))
                 },
                 onDragEnd = { eventSizes, _ ->
                     for (i in eventSizes.indices) {
@@ -461,7 +461,7 @@ public open class SplitPanel(
                             )
                         }
                     }
-                    dispatchEvent("dragEndSplitPanel", buildCustomEventInit(eventSizes.cast()))
+                    dispatchEvent("dragEnd", buildCustomEventInit(eventSizes.cast()))
                 }
             ))
         }
