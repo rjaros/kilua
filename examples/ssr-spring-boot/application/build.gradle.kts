@@ -1,6 +1,5 @@
 plugins {
     kotlin("jvm")
-    alias(libs.plugins.spring.dependency.management)
     id("org.springframework.boot")
 }
 

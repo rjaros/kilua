@@ -8,13 +8,9 @@ plugins {
     kotlin("plugin.spring") version libs.versions.kotlin.get()
     id("org.jetbrains.compose")
     kotlin("plugin.compose")
-    alias(libs.plugins.spring.dependency.management)
     alias(libs.plugins.kilua.rpc)
     alias(libs.plugins.kilua)
 }
-
-extra["kotlin.version"] = libs.versions.kotlin.get()
-extra["kotlin-coroutines.version"] = libs.versions.kotlinx.coroutines.get()
 
 extra["mainClassName"] = "example.MainKt"
 
@@ -80,6 +76,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("reflect"))
                 implementation(project(":modules:kilua-ssr-server-spring-boot"))
+                implementation(project.dependencies.platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
                 implementation("org.springframework.boot:spring-boot-starter")
                 implementation("org.springframework.boot:spring-boot-starter-webflux")
             }
