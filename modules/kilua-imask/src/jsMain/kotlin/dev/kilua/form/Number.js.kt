@@ -22,7 +22,7 @@
 
 package dev.kilua.form
 
-import web.JsAny
+import js.core.JsAny
 
 internal actual fun jsNumber(): JsAny {
     @Suppress("UnsafeCastFromDynamic")

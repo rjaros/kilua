@@ -27,7 +27,7 @@
 
 package web.dom.observers
 
-import web.JsAny
+import js.core.JsAny
 
 /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/ResizeObserverSize) */
 external class ResizeObserverSize : JsAny {

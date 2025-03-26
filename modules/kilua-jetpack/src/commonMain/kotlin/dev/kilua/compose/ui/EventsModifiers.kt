@@ -24,13 +24,13 @@
 package dev.kilua.compose.ui
 
 import dev.kilua.html.helpers.onCombineClick
-import web.dom.TouchEvent
-import web.dom.events.Event
-import web.dom.events.FocusEvent
-import web.dom.events.InputEvent
-import web.dom.events.KeyboardEvent
-import web.dom.events.MouseEvent
-import web.dom.pointerevents.PointerEvent
+import web.events.Event
+import web.uievents.FocusEvent
+import web.uievents.InputEvent
+import web.uievents.KeyboardEvent
+import web.uievents.MouseEvent
+import web.uievents.PointerEvent
+import web.uievents.TouchEvent
 
 /**
  * Add click event listener.

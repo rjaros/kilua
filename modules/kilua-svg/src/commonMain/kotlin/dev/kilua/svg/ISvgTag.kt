@@ -25,7 +25,7 @@ package dev.kilua.svg
 import androidx.compose.runtime.Composable
 import dev.kilua.html.CssSize
 import dev.kilua.html.ITag
-import web.dom.HTMLElement
+import web.html.HTMLElement
 
 /**
  * Base SVG tag interface.

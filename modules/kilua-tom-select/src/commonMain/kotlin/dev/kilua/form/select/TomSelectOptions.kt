@@ -23,15 +23,15 @@
 package dev.kilua.form.select
 
 import dev.kilua.externals.TomSelectOptionsJs
-import dev.kilua.externals.obj
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.toJsAny
-import web.JsAny
-import web.dom.HTMLElement
-import web.toJsBoolean
-import web.toJsString
+import dev.kilua.utils.toJsBoolean
+import dev.kilua.utils.toJsString
+import js.core.JsAny
+import js.objects.jso
+import web.html.HTMLElement
 
 /**
  * Tom Select options.
@@ -82,35 +82,37 @@ public fun TomSelectOptions.toJs(emptyOption: Boolean): TomSelectOptionsJs {
     val createTemp: JsAny? = if (createFun != null) {
         { input: String, callback: (JsAny) -> Unit ->
             createFun.invoke(input) {
-                callback(jsObjectOf(
-                    "value" to it.first,
-                    "text" to it.second
-                ))
+                callback(
+                    jsObjectOf(
+                        "value" to it.first,
+                        "text" to it.second
+                    )
+                )
             }
         }.cast()
     } else {
         create?.toJsBoolean()
     }
     val plugins = jsObjectOf(
-        "change_listener" to obj(),
-        "caret_position" to if (caretPosition != null) obj() else null,
-        "checkbox_options" to if (checkboxOptions != null) obj() else null,
+        "change_listener" to jso(),
+        "caret_position" to if (caretPosition != null) jso() else null,
+        "checkbox_options" to if (checkboxOptions != null) jso() else null,
         "clear_button" to if (clearButtonTitle != null) mapOf(
             "title" to clearButtonTitle
         ) else null,
         "dropdown_header" to if (dropdownHeaderTitle != null) mapOf(
             "title" to dropdownHeaderTitle
         ) else null,
-        "dropdown_input" to if (dropdownInput != null) obj() else null,
-        "input_autogrow" to if (inputAutogrow != null) obj() else null,
-        "no_active_items" to if (noActiveItems != null) obj() else null,
-        "no_backspace_delete" to if (noBackspaceDelete != null) obj() else null,
+        "dropdown_input" to if (dropdownInput != null) jso() else null,
+        "input_autogrow" to if (inputAutogrow != null) jso() else null,
+        "no_active_items" to if (noActiveItems != null) jso() else null,
+        "no_backspace_delete" to if (noBackspaceDelete != null) jso() else null,
         "remove_button" to if (removeButtonTitle != null) mapOf(
             "title" to removeButtonTitle
         ) else null,
-        "restore_on_backspace" to if (restoreOnBackspace != null) obj() else null
+        "restore_on_backspace" to if (restoreOnBackspace != null) jso() else null
     )
-    return obj {
+    return jso {
         if (createTemp != null) this.create = createTemp
         if (self.createOnBlur != null) this.createOnBlur = self.createOnBlur
         if (self.createFilter != null) this.createFilter = self.createFilter
@@ -137,10 +139,12 @@ public fun TomSelectOptions.toJs(emptyOption: Boolean): TomSelectOptionsJs {
             this.controlInput = self.controlInput
         }
         this.plugins = plugins
-        if (self.options != null) this.options = if (emptyOption) (listOf(jsObjectOf(
-            "value" to "",
-            "text" to "\u00a0"
-        )) + self.options).toJsAny().cast() else self.options.toJsAny().cast()
+        if (self.options != null) this.options = if (emptyOption) (listOf(
+            jsObjectOf(
+                "value" to "",
+                "text" to "\u00a0"
+            )
+        ) + self.options).toJsAny().cast() else self.options.toJsAny().cast()
         if (self.dataAttr != null) this.dataAttr = self.dataAttr
         if (self.valueField != null) this.valueField = self.valueField
         if (self.labelField != null) this.labelField = self.labelField

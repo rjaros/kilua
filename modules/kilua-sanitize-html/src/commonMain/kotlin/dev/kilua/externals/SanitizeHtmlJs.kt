@@ -23,10 +23,10 @@
 
 package dev.kilua.externals
 
-import dev.kilua.JsModule
-import web.JsAny
-import web.JsArray
-import web.JsString
+import dev.kilua.utils.JsArray
+import js.import.JsModule
+import js.core.JsAny
+import js.core.JsString
 
 internal external class SanitizeHtmlOptionsJs : JsAny {
     var allowedTags: JsAny

@@ -38,11 +38,10 @@ class RichTextSpec : DomSpec {
             }
             val innerHTML = root.element.innerHTML.replace(Regex("input=\"[^\"]*\""), "input=\"id_input\"")
                 .replace(Regex("toolbar=\"[^\"]*\""), "toolbar=\"id_toolbar\"")
-            console.log(root.element.innerHTML)
             assertTrue(innerHTML.contains("<input"), "Should render hidden input element")
             assertTrue(innerHTML.contains("<trix-toolbar"), "Should render trix toolbar element")
             assertTrue(
-                innerHTML.contains("<trix-editor placeholder=\"A placeholder\" role=\"textbox\" input=\"id_input\" toolbar=\"id_toolbar\" contenteditable=\"\">"),
+                innerHTML.contains("<trix-editor placeholder=\"A placeholder\" role=\"textbox\" input=\"id_input\" toolbar=\"id_toolbar\" contenteditable=\"\" connected=\"\">"),
                 "Should render trix editor element"
             )
         }

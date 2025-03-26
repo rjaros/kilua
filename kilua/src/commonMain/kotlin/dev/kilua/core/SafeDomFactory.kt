@@ -26,7 +26,7 @@ import dev.kilua.externals.nodeJsCreateComment
 import dev.kilua.externals.nodeJsCreateElement
 import dev.kilua.externals.nodeJsCreateText
 import dev.kilua.utils.isDom
-import web.document
+import web.dom.document
 import web.dom.Comment
 import web.dom.Element
 import web.dom.Text

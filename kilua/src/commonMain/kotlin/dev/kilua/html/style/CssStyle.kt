@@ -30,8 +30,8 @@ import dev.kilua.html.helpers.TagStyle
 import dev.kilua.html.helpers.TagStyleDelegateImpl
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLElement
-import web.dom.HTMLStyleElement
+import web.html.HTMLElement
+import web.html.HTMLStyleElement
 
 /**
  * CSS pseudo classes.

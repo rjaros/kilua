@@ -25,7 +25,7 @@ package dev.kilua.animation
 import androidx.compose.runtime.Stable
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.toKebabCase
-import web.JsAny
+import js.core.JsAny
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 

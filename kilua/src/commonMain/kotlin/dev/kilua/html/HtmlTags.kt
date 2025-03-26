@@ -23,7 +23,9 @@
 package dev.kilua.html
 
 import dev.kilua.annotations.SimpleHtmlComponent
-import web.dom.*
+import web.components.HTMLSlotElement
+import web.components.HTMLTemplateElement
+import web.html.*
 
 /**
  * HTML Abbr component.
@@ -478,7 +480,7 @@ public interface ISection : ITag<HTMLElement>
 /**
  * HTML Slot component.
  */
-@SimpleHtmlComponent("slot")
+@SimpleHtmlComponent("slot", domPackage = "web.components")
 public interface ISlot : ITag<HTMLSlotElement>
 
 /**
@@ -538,7 +540,7 @@ public interface ITbody : ITag<HTMLTableSectionElement>
 /**
  * HTML Template component.
  */
-@SimpleHtmlComponent("template")
+@SimpleHtmlComponent("template", domPackage = "web.components")
 public interface ITemplate : ITag<HTMLTemplateElement>
 
 /**

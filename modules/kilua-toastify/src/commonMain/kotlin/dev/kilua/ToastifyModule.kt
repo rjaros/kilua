@@ -23,7 +23,8 @@
 
 package dev.kilua
 
-import web.JsAny
+import js.core.JsAny
+import js.import.JsModule
 
 @JsModule("toastify-js/src/toastify.css")
 internal external object ToastifyCss : JsAny

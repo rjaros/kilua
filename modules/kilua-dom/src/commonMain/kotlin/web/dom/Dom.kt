@@ -13,7 +13,7 @@
 
 package web.dom
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsNumber
 import web.JsString
@@ -31,7 +31,7 @@ import web.files.*
 import web.performance.*
 import web.workers.*
 import web.xhr.*
-import web.Promise
+import js.promise.Promise
 
 public abstract external class HTMLAllCollection : JsAny {
     open val length: Int

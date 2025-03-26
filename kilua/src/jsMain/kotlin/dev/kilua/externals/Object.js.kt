@@ -23,35 +23,7 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-
-@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-public actual inline fun obj(): JsAny {
-    return js("{}")
-}
-
-/**
- * Helper function for creating dynamic JavaScript objects.
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun obj(noinline init: dynamic.() -> Unit): dynamic {
-    return (obj()).apply(init)
-}
-
-/**
- * Operator to set property on JS Object
- */
-public actual operator fun JsAny.set(key: String, value: JsAny) {
-    this.asDynamic()[key] = value
-}
-
-/**
- * Operator to get property from JS Object
- */
-@Suppress("UnsafeCastFromDynamic")
-public actual operator fun JsAny.get(key: String): JsAny? {
-    return this.asDynamic()[key]
-}
+import js.core.JsAny
 
 /**
  * Get the list of keys from JS Object
@@ -77,8 +49,3 @@ public actual fun delete(o: JsAny, key: String): Unit = js("delete o[key]")
  * Returns JS type of a given value
  */
 public actual fun jsTypeOf(o: JsAny?): String = kotlin.js.jsTypeOf(o)
-
-/**
- * Return undefined value
- */
-public actual fun undefined(): JsAny? = undefined.unsafeCast<JsAny?>()

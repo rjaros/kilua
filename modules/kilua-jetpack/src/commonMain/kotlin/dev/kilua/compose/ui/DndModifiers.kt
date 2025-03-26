@@ -23,7 +23,7 @@
 package dev.kilua.compose.ui
 
 import androidx.compose.runtime.Composable
-import web.dom.DragEvent
+import web.uievents.DragEvent
 
 /**
  * Sets D&D data for the current widget. It also makes it draggable.

@@ -23,7 +23,8 @@
 
 package dev.kilua
 
-import web.JsAny
+import js.core.JsAny
+import js.import.JsModule
 
 @JsModule("@fortawesome/fontawesome-free/css/all.min.css")
 internal external object FontAwesomeCss : JsAny

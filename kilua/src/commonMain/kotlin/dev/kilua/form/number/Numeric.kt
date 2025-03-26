@@ -35,7 +35,7 @@ import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.toFixedNoRound
 import dev.kilua.utils.toLocaleString
-import web.dom.events.Event
+import web.events.Event
 
 /**
  * The default number of decimal digits.

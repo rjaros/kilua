@@ -13,14 +13,14 @@
 
 package web.webgl
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsNumber
 import web.JsString
 import web.dom.EventInit
-import web.dom.HTMLCanvasElement
+import web.html.HTMLCanvasElement
 import web.dom.RenderingContext
-import web.dom.events.Event
+import web.events.Event
 
 public external interface WebGLContextAttributes : JsAny {
     var alpha: Boolean? /* = true */

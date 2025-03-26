@@ -24,28 +24,7 @@
 package dev.kilua.externals
 
 import dev.kilua.utils.toArray
-import web.JsAny
-
-public actual fun obj(): JsAny = js("({})")
-
-private fun objSet(obj: JsAny, key: String, value: JsAny): Unit = js("{ obj[key] = value }")
-
-@Suppress("RedundantNullableReturnType")
-private fun objGet(obj: JsAny, key: String): JsAny? = js("obj[key]")
-
-/**
- * Operator to set property on JS Object
- */
-public actual operator fun JsAny.set(key: String, value: JsAny) {
-    objSet(this, key, value)
-}
-
-/**
- * Operator to get property from JS Object
- */
-public actual operator fun JsAny.get(key: String): JsAny? {
-    return objGet(this, key)
-}
+import js.core.JsAny
 
 private fun jsKeys(obj: JsAny): JsArray<JsString> = js("Object.keys(obj)")
 
@@ -74,8 +53,3 @@ public actual fun delete(o: JsAny, key: String): Unit = js("delete o[key]")
  * Return native JS type of a given value
  */
 public actual fun jsTypeOf(o: JsAny?): String = js("typeof o")
-
-/**
- * Return undefined value
- */
-public actual fun undefined(): JsAny? = null

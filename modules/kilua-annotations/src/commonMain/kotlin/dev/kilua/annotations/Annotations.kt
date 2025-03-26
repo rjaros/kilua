@@ -23,4 +23,4 @@
 package dev.kilua.annotations
 
 @Target(AnnotationTarget.CLASS)
-public annotation class SimpleHtmlComponent(val tagName: String, val withText: Boolean = false)
+public annotation class SimpleHtmlComponent(val tagName: String, val withText: Boolean = false, val domPackage: String = "web.html")

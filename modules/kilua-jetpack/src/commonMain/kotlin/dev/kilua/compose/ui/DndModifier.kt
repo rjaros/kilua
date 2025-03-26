@@ -25,7 +25,7 @@ package dev.kilua.compose.ui
 import androidx.compose.runtime.Composable
 import dev.kilua.html.ITag
 import dev.kilua.html.helpers.TagDnd
-import web.dom.HTMLElement
+import web.html.HTMLElement
 
 /**
  * A modifier class for drag and drop methods.

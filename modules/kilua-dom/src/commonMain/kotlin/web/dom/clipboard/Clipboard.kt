@@ -13,12 +13,12 @@
 
 package web.dom.clipboard
 
-import web.JsAny
+import js.core.JsAny
 import web.dom.DataTransfer
 import web.dom.EventInit
-import web.dom.events.Event
-import web.dom.events.EventTarget
-import web.Promise
+import web.events.Event
+import web.events.EventTarget
+import js.promise.Promise
 
 public external interface ClipboardEventInit : EventInit, JsAny {
     var clipboardData: DataTransfer? /* = null */

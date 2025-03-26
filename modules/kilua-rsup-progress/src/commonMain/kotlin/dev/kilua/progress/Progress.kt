@@ -25,12 +25,12 @@ package dev.kilua.progress
 import dev.kilua.externals.RsupProgress
 import dev.kilua.externals.RsupProgressOptions
 import dev.kilua.externals.RsupProgressPromiseOptions
-import dev.kilua.externals.obj
 import dev.kilua.html.Color
 import dev.kilua.utils.isDom
 import dev.kilua.utils.toKebabCase
-import web.JsAny
-import web.Promise
+import js.core.JsAny
+import js.objects.jso
+import js.promise.Promise
 import kotlin.time.Duration
 
 /**
@@ -66,7 +66,7 @@ public data class ProgressOptions(
 
 internal fun ProgressOptions.toJs(): RsupProgressOptions {
     val self = this
-    return obj {
+    return jso {
         if (self.height != null) this.height = self.height
         if (self.className != null) this.className = self.className
         if (self.color != null) this.color = self.color.value
@@ -91,7 +91,7 @@ public data class ProgressPromiseOptions(
 
 internal fun ProgressPromiseOptions.toJs(): RsupProgressPromiseOptions {
     val self = this
-    return obj {
+    return jso {
         if (self.min != null) this.min = self.min.inWholeMilliseconds.toInt()
         if (self.delay != null) this.delay = self.delay.inWholeMilliseconds.toInt()
         if (self.waitAnimation != null) this.waitAnimation = self.waitAnimation

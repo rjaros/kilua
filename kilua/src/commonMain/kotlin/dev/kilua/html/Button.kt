@@ -30,8 +30,9 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLButtonElement
-import web.dom.events.MouseEvent
+import web.events.EventType
+import web.html.HTMLButtonElement
+import web.uievents.MouseEvent
 
 /**
  * Button types.
@@ -91,7 +92,11 @@ public open class Button(
      * The type of the button.
      */
     public override var type: ButtonType by updatingProperty(type) {
-        element.type = it.value
+        element.type = when(it) {
+            ButtonType.Button -> web.html.ButtonType.button
+            ButtonType.Submit -> web.html.ButtonType.submit
+            ButtonType.Reset -> web.html.ButtonType.reset
+        }
     }
 
     /**
@@ -128,7 +133,11 @@ public open class Button(
     init {
         if (renderConfig.isDom) {
             @Suppress("LeakingThis")
-            element.type = type.value
+            element.type = when(type) {
+                ButtonType.Button -> web.html.ButtonType.button
+                ButtonType.Submit -> web.html.ButtonType.submit
+                ButtonType.Reset -> web.html.ButtonType.reset
+            }
             if (disabled != null) {
                 @Suppress("LeakingThis")
                 element.disabled = disabled
@@ -144,7 +153,7 @@ public open class Button(
             element.click()
         } else {
             tagEvents.eventsMap["click"]?.forEach {
-                it.value(MouseEvent("click"))
+                it.value(MouseEvent(EventType<MouseEvent>("click")))
             }
         }
     }

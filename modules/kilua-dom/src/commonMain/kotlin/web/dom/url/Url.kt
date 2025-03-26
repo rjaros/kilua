@@ -13,7 +13,7 @@
 
 package web.dom.url
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsString
 import web.dom.mediasource.*

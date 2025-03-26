@@ -13,7 +13,7 @@
 
 package web.dom.pointerevents
 
-import web.JsAny
+import js.core.JsAny
 import web.dom.events.MouseEvent
 import web.dom.events.MouseEventInit
 

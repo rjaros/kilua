@@ -27,8 +27,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import web.dom.events.Event
-import web.window
+import web.events.Event
+import web.timers.Timeout
+import web.timers.clearTimeout
+import web.timers.setTimeout
 
 /**
  * A Composable function that handles click, double-click, and long click events for a component.
@@ -46,8 +48,8 @@ public fun TagEvents.onCombineClick(
     onDoubleClick: (() -> Unit)? = null,
     onClick: () -> Unit,
 ) {
-    var singleClickTimer by remember { mutableStateOf<Int?>(null) }
-    var longClickTimer by remember { mutableStateOf<Int?>(null) }
+    var singleClickTimer by remember { mutableStateOf<Timeout?>(null) }
+    var longClickTimer by remember { mutableStateOf<Timeout?>(null) }
     var clickCount by remember { mutableStateOf(0) }
     var isLongClickTriggered by remember { mutableStateOf(false) }
 
@@ -56,7 +58,7 @@ public fun TagEvents.onCombineClick(
         {
             isLongClickTriggered = false
 
-            longClickTimer = window.setTimeout({
+            longClickTimer = setTimeout({
                 isLongClickTriggered = true
                 onLongClick?.invoke()
                 clickCount = 0
@@ -67,7 +69,7 @@ public fun TagEvents.onCombineClick(
 
     val endEvent: (Event) -> Unit = remember {
         {
-            longClickTimer?.let { window.clearTimeout(it) }
+            longClickTimer?.let { clearTimeout(it) }
             longClickTimer = null
         }
     }
@@ -90,7 +92,7 @@ public fun TagEvents.onCombineClick(
 
         clickCount++
         if (clickCount == 1) {
-            singleClickTimer = window.setTimeout({
+            singleClickTimer = setTimeout({
                 if (clickCount == 1) {
                     onClick()
                 }
@@ -98,7 +100,7 @@ public fun TagEvents.onCombineClick(
                 null
             }, DOUBLE_CLICK_DELAY)
         } else if (clickCount == 2) {
-            singleClickTimer?.let { window.clearTimeout(it) }
+            singleClickTimer?.let { clearTimeout(it) }
             clickCount = 0
             onDoubleClick?.invoke()
         }

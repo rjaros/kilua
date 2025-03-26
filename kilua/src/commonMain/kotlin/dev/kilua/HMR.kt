@@ -1,4 +1,4 @@
-@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE", "INTERFACE_WITH_SUPERCLASS")
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -22,7 +22,7 @@
  */
 package dev.kilua
 
-import web.JsAny
+import js.core.JsAny
 
 /**
  * Helper interface for Hot Module Replacement (HMR).

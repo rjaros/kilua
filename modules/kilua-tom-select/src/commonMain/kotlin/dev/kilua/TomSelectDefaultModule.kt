@@ -23,7 +23,8 @@
 
 package dev.kilua
 
-import web.JsAny
+import js.core.JsAny
+import js.import.JsModule
 
 @JsModule("tom-select/dist/css/tom-select.default.min.css")
 internal external object TomSelectDefaultCss : JsAny

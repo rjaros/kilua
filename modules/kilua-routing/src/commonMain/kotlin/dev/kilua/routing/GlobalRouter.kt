@@ -26,9 +26,9 @@ import app.softwork.routingcompose.Router
 
 /**
  * Internal global router instance for use outside of composition.
+ * Do not use directly. Use Router.global instead.
  */
-@PublishedApi
-internal var internalGlobalRouter: Router? = null
+public var internalGlobalRouter: Router? = null
 
 /**
  * Provides the global router instance for use outside of composition.

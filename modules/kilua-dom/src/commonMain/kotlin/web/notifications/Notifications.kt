@@ -13,15 +13,15 @@
 
 package web.notifications
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsNumber
-import web.dom.events.Event
-import web.dom.events.EventTarget
+import web.events.Event
+import web.events.EventTarget
 import web.dom.events.MouseEvent
 import web.workers.ExtendableEvent
 import web.workers.ExtendableEventInit
-import web.Promise
+import js.promise.Promise
 
 /**
  * Exposes the JavaScript [Notification](https://developer.mozilla.org/en/docs/Web/API/Notification) to Kotlin

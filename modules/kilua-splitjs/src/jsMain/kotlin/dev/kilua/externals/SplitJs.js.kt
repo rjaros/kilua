@@ -24,8 +24,8 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.dom.HTMLElement
+import js.core.JsAny
+import web.html.HTMLElement
 
 internal external class SplitJsOptionsExt : JsAny {
     var sizes: Array<Number>

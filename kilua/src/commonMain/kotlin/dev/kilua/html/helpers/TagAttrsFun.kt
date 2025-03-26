@@ -23,7 +23,6 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import web.dom.HTMLElement
 
 /**
  * Common tag immutable attributes.

@@ -25,8 +25,8 @@ package dev.kilua.externals
 
 import dev.kilua.panel.Dir
 import dev.kilua.panel.GutterAlign
-import web.JsAny
-import web.dom.HTMLElement
+import js.core.JsAny
+import web.html.HTMLElement
 
 /**
  * Split.js native instance.

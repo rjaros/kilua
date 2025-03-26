@@ -22,8 +22,8 @@
 
 package dev.kilua.ssr
 
-import dev.kilua.JsModule
-import web.JsAny
+import js.import.JsModule
+import js.core.JsAny
 
 /**
  * Node.js HTTP server.

@@ -26,7 +26,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import web.window
+import web.cssom.MediaQuery
+import web.cssom.matchMedia
+import web.events.EventHandler
 
 // Inspired by the SpotifyClone API
 // See also: https://github.com/shubhamsinghshubham777/SpotifyClone/blob/main/src/commonMain/kotlin/util.kt
@@ -39,10 +41,10 @@ import web.window
  */
 @Composable
 public fun rememberMediaQueryAsState(query: String): State<Boolean> {
-    val mediaQuery = remember(query) { window.matchMedia(query) }
+    val mediaQuery = remember(query) { matchMedia(MediaQuery(query)) }
     val matches = remember { mutableStateOf(mediaQuery.matches) }
     LaunchedEffect(Unit) {
-        mediaQuery.onchange = {
+        mediaQuery.onchange = EventHandler {
             matches.value = mediaQuery.matches
         }
     }

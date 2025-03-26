@@ -20,20 +20,14 @@
  * SOFTWARE.
  */
 
-package dev.kilua.externals
+package dev.kilua.utils
 
-import web.JsAny
-import web.dom.AddEventListenerOptions
-import web.dom.CustomEventInit
+import kotlin.js.toDouble as jsToDouble
+import kotlin.js.toInt as jsToInt
+import kotlin.js.toJsNumber as jsToJsNumber
+import js.core.JsNumber
 
-public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
-    return obj<AddEventListenerOptions> {
-        this.asDynamic()["signal"] = signal
-    }
-}
-
-public actual fun buildCustomEventInit(detail: JsAny?): CustomEventInit {
-    return obj<CustomEventInit> {
-        if (detail != null) this.detail = detail
-    }
-}
+public actual fun JsNumber.toDouble(): Double = this.unsafeCast<kotlin.js.JsNumber>().jsToDouble()
+public actual fun Double.toJsNumber(): JsNumber = this.jsToJsNumber().unsafeCast()
+public actual fun JsNumber.toInt(): Int = this.unsafeCast<kotlin.js.JsNumber>().jsToInt()
+public actual fun Int.toJsNumber(): JsNumber = this.jsToJsNumber().unsafeCast()

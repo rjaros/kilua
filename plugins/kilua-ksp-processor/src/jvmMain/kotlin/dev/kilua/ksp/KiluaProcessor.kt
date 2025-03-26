@@ -65,6 +65,11 @@ public class KiluaProcessor(
                 } catch (_: Exception) {
                     false
                 }
+                val domPackage = try {
+                    simpleHtmlComponent.domPackage
+                } catch (_: Exception) {
+                    "web.html"
+                }
                 val parentType = classDeclaration.superTypes.firstOrNull()?.resolve()
                 val parentTypeName = parentType?.declaration?.qualifiedName?.asString()
                 if (parentTypeName == "dev.kilua.html.ITag") {
@@ -87,6 +92,7 @@ public class KiluaProcessor(
                                             interfaceName,
                                             functionName,
                                             typeArgName,
+                                            domPackage,
                                             tagName,
                                             withText
                                         )
@@ -110,6 +116,7 @@ public class KiluaProcessor(
         interfaceName: String,
         functionName: String,
         typeArgName: String,
+        domPackage: String,
         tagName: String,
         withText: Boolean
     ): String {
@@ -125,7 +132,7 @@ public class KiluaProcessor(
             appendLine("import dev.kilua.core.IComponent")
             appendLine("import dev.kilua.core.RenderConfig")
             appendLine("import dev.kilua.html.Tag")
-            appendLine("import web.dom.$typeArgName")
+            appendLine("import $domPackage.$typeArgName")
             appendLine()
             appendLine("/**")
             appendLine(" * HTML $className component.")

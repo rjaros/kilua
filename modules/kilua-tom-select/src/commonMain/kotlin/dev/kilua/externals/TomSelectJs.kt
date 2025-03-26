@@ -23,11 +23,11 @@
 
 package dev.kilua.externals
 
-import dev.kilua.JsModule
-import web.JsAny
-import web.JsArray
-import web.JsString
-import web.dom.HTMLElement
+import dev.kilua.utils.JsArray
+import js.import.JsModule
+import js.core.JsAny
+import js.core.JsString
+import web.html.HTMLElement
 
 /**
  * Tom Select renders configuration.

@@ -22,30 +22,7 @@
 
 package dev.kilua.externals
 
-import dev.kilua.utils.unsafeCast
-import web.JsAny
-
-/**
- * Return empty JS Object
- */
-public expect fun obj(): JsAny
-
-/**
- * Helper function for creating JavaScript objects with given type.
- */
-public inline fun <T : JsAny> obj(init: T.() -> Unit): T {
-    return (obj().unsafeCast<T>()).apply(init)
-}
-
-/**
- * Operator to set property on JS Object
- */
-public expect operator fun JsAny.set(key: String, value: JsAny)
-
-/**
- * Operator to get property from JS Object
- */
-public expect operator fun JsAny.get(key: String): JsAny?
+import js.core.JsAny
 
 /**
  * Get the list of keys from JS Object
@@ -66,13 +43,3 @@ public expect fun delete(o: JsAny, key: String)
  * Return native JS type of a given value
  */
 public expect fun jsTypeOf(o: JsAny?): String
-
-/**
- * Return undefined value
- */
-public expect fun undefined(): JsAny?
-
-/**
- * JavaScript global object
- */
-public external val globalThis: JsAny

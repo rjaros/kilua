@@ -6,7 +6,7 @@
 
 package web.dom
 
-import web.JsAny
+import js.core.JsAny
 
 public external interface ItemArrayLike<out T : JsAny?> : JsAny {
     public val length: Int

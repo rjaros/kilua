@@ -22,11 +22,11 @@
 
 package dev.kilua.externals
 
-import web.JsAny
+import js.core.JsAny
 import web.dom.Element
-import web.dom.events.Event
+import web.events.Event
 
-internal external interface TabulatorMenuItem : JsAny {
+internal external class TabulatorMenuItem : JsAny {
     var label: Element
     var action: (Event) -> Unit
     var separator: Boolean

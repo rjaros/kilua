@@ -24,17 +24,17 @@
 
 package dev.kilua.externals
 
-import dev.kilua.JsModule
-import web.JsAny
-import web.JsNumber
-import web.Promise
-import web.dom.HTMLElement
+import js.import.JsModule
+import js.core.JsAny
+import js.core.JsNumber
+import js.promise.Promise
+import web.html.HTMLElement
 
 /**
  * The animation playback controls.
  * Allows to control the Motion animation run and access its properties.
  */
-public external interface AnimationPlaybackControls : JsAny {
+public external class AnimationPlaybackControls : JsAny {
     public val duration: JsNumber
     public var time: JsNumber
     public var speed: JsNumber

@@ -32,8 +32,8 @@ import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLInputElement
-import web.dom.events.Event
+import web.events.Event
+import web.html.HTMLInputElement
 
 /**
  * Type of the check input control (checkbox or radiobutton).
@@ -240,7 +240,10 @@ public abstract class AbstractCheck(
             @Suppress("LeakingThis")
             element.checked = value
             @Suppress("LeakingThis")
-            element.type = type.value
+            element.type = when(type) {
+                CheckInputType.Checkbox -> web.html.InputType.checkbox
+                CheckInputType.Radio -> web.html.InputType.radio
+            }
             if (name != null) {
                 @Suppress("LeakingThis")
                 element.name = name

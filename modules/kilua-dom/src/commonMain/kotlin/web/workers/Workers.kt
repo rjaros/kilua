@@ -13,7 +13,7 @@
 
 package web.workers
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsString
 import web.dom.AbstractWorker
@@ -22,14 +22,14 @@ import web.dom.MessageEvent
 import web.dom.MessagePort
 import web.dom.WorkerGlobalScope
 import web.dom.WorkerType
-import web.dom.events.Event
-import web.dom.events.EventTarget
+import web.events.Event
+import web.events.EventTarget
 import web.fetch.Request
 import web.fetch.Response
 import web.notifications.GetNotificationOptions
 import web.notifications.NotificationEvent
 import web.notifications.NotificationOptions
-import web.Promise
+import js.promise.Promise
 
 /**
  * Exposes the JavaScript [ServiceWorker](https://developer.mozilla.org/en/docs/Web/API/ServiceWorker) to Kotlin

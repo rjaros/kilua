@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Robert Jaros
+ * Copyright (c) 2023 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,13 +20,22 @@
  * SOFTWARE.
  */
 
-package dev.kilua.rest
+package dev.kilua.utils
 
-import web.Promise
-import web.fetch.RequestInit
-import web.fetch.Response
+import js.core.JsNumber
 
-/**
- * JavaScript fetch function
- */
-internal external fun fetch(input: String, init: RequestInit): Promise<Response>
+public actual fun JsNumber.toDouble(): Double {
+    return this.unsafeCast<Number>().toDouble()
+}
+
+public actual fun Double.toJsNumber(): JsNumber {
+    return this.unsafeCast<JsNumber>()
+}
+
+public actual fun JsNumber.toInt(): Int {
+    return this.unsafeCast<Number>().toInt()
+}
+
+public actual fun Int.toJsNumber(): JsNumber {
+    return this.unsafeCast<JsNumber>()
+}

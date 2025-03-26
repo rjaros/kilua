@@ -13,9 +13,9 @@
 
 package web.performance
 
-import web.JsAny
+import js.core.JsAny
 import web.JsNumber
-import web.dom.events.EventTarget
+import web.events.EventTarget
 
 /**
  * Exposes the JavaScript [Performance](https://developer.mozilla.org/en/docs/Web/API/Performance) to Kotlin

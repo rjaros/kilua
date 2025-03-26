@@ -20,6 +20,11 @@
  * SOFTWARE.
  */
 
-package dev.kilua
+package dev.kilua.utils
 
-public actual typealias JsModule = kotlin.js.JsModule
+import kotlin.js.toBoolean as jsToBoolean
+import kotlin.js.toJsBoolean as jsToJsBoolean
+
+public actual fun JsBoolean.toBoolean(): Boolean = this.jsToBoolean()
+
+public actual fun Boolean.toJsBoolean(): JsBoolean = this.jsToJsBoolean()

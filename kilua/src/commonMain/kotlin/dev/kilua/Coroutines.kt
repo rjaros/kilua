@@ -28,8 +28,8 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
-import web.JsAny
-import web.Promise
+import js.core.JsAny
+import js.promise.Promise
 
 /**
  * Kilua coroutine scope.
@@ -54,4 +54,4 @@ public fun <T : JsAny?> promise(block: suspend () -> T): Promise<T> = KiluaScope
 /**
  * Suspend function to await a JS Promise.
  */
-public expect suspend fun <T: JsAny?> Promise<T>.await(): T
+public expect suspend fun <T: JsAny?> Promise<T>.awaitCrt(): T

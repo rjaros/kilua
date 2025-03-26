@@ -32,8 +32,7 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
 import dev.kilua.externals.assign
-import dev.kilua.externals.get
-import dev.kilua.externals.obj
+import dev.kilua.utils.jsGet
 import dev.kilua.form.StringFormControl
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
@@ -42,21 +41,22 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.cast
+import dev.kilua.utils.clear
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
+import dev.kilua.utils.toJsString
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import web.JsAny
-import web.JsArray
-import web.JsString
-import web.clear
-import web.document
-import web.dom.HTMLOptionElement
-import web.dom.HTMLSelectElement
-import web.dom.asList
-import web.toJsString
+import js.core.JsAny
+import js.core.JsString
+import js.objects.jso
+import web.dom.InsertPosition
+import web.dom.document
+import web.html.HTMLOptionElement
+import web.html.HTMLSelectElement
 
 /**
  * Tom Select component.
@@ -455,7 +455,7 @@ public open class TomSelect(
      * The label of the currently selected option.
      */
     public override val selectedLabel: String?
-        get() = element.options.asList().find {
+        get() = element.options.toList().find {
             it.unsafeCast<HTMLOptionElement>().value == this.value
         }?.textContent
 
@@ -555,7 +555,7 @@ public open class TomSelect(
     protected open fun initializeTomSelect() {
         if (renderConfig.isDom) {
             val self = this
-            val tomSelectOptions = obj<TomSelectOptionsJs> {
+            val tomSelectOptions = jso<TomSelectOptionsJs> {
                 this.maxItems = if (!self.multiple) 1 else null
                 this.maxOptions = self.maxOptions
                 this.allowEmptyOption = self.emptyOption
@@ -604,7 +604,7 @@ public open class TomSelect(
                 if (tsRenders != null) {
                     this.render = tsRenders!!.toJs()
                 } else {
-                    this.render = obj {
+                    this.render = jso {
                         no_results = null
                     }
                 }
@@ -627,7 +627,7 @@ public open class TomSelect(
             tomSelectInstance = null
             // Restore the empty div after the Tom Select instance is removed
             val emptyDiv = document.createElement("div")
-            element.insertAdjacentElement("afterend", emptyDiv)
+            element.insertAdjacentElement(InsertPosition.afterend, emptyDiv)
         }
     }
 
@@ -636,8 +636,8 @@ public open class TomSelect(
      */
     public override fun clearOptions() {
         tomSelectInstance?.clearOptions { false }
-        if (tomSelectInstance != null && tomSelectInstance!!["input"] != null && tomSelectInstance!!["input"]!!["clear"] != null) {
-            tomSelectInstance!!["input"]!!.unsafeCast<HTMLSelectElement>().clear()
+        if (tomSelectInstance != null && tomSelectInstance!!.jsGet("input") != null && tomSelectInstance!!.jsGet("input")!!.jsGet("clear") != null) {
+            tomSelectInstance!!.jsGet("input")!!.unsafeCast<HTMLSelectElement>().clear()
         }
     }
 

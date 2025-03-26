@@ -13,7 +13,7 @@
 
 package web.dom.css
 
-import web.JsAny
+import js.core.JsAny
 import web.JsString
 import web.dom.ItemArrayLike
 

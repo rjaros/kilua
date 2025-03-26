@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-present Robert Jaros
+ * Copyright (c) 2023 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,14 @@
  * SOFTWARE.
  */
 
-package dev.kilua
+package dev.kilua.utils
 
-public actual typealias JsModule = kotlin.js.JsModule
+import js.core.JsBoolean
+
+public actual fun JsBoolean.toBoolean(): Boolean {
+    return this.unsafeCast<Boolean>()
+}
+
+public actual fun Boolean.toJsBoolean(): JsBoolean {
+    return this.unsafeCast<JsBoolean>()
+}

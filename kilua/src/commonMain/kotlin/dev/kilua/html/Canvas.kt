@@ -28,9 +28,8 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
-import dev.kilua.utils.cast
-import web.dom.CanvasRenderingContext2D
-import web.dom.HTMLCanvasElement
+import web.canvas.CanvasRenderingContext2D
+import web.html.HTMLCanvasElement
 
 /**
  * HTML Canvas component.
@@ -117,7 +116,7 @@ public open class Canvas(
      */
     public override val context2D: CanvasRenderingContext2D? =
         @Suppress("LeakingThis")
-        if (renderConfig.isDom) element.getContext("2d").cast() else null
+        if (renderConfig.isDom) element.getContext(CanvasRenderingContext2D.ID) else null
 
     init {
         if (renderConfig.isDom) {

@@ -33,7 +33,7 @@ import androidx.compose.runtime.setValue
 import dev.kilua.compose.adaptive.WindowHeightSizeClass.Companion.DefaultSizeClasses
 import dev.kilua.compose.adaptive.WindowWidthSizeClass.Companion.DefaultSizeClasses
 import dev.kilua.html.helpers.onGlobalWindowSize
-import web.window
+import web.window.window
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 

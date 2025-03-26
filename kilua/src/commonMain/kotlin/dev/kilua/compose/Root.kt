@@ -32,12 +32,12 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.core.StringRenderConfig
+import dev.kilua.utils.clear
 import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
-import web.clear
 import web.dom.Element
 
 internal val defaultMonotonicFrameClock: MonotonicFrameClock =

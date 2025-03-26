@@ -22,15 +22,8 @@
 
 package dev.kilua
 
-import web.JsAny
+import js.core.JsAny
 import kotlin.js.JsName
-
-/**
- * Helper annotation for JS/Wasm compatibility.
- */
-@Retention(AnnotationRetention.BINARY)
-@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
-public expect annotation class JsModule(val import: String)
 
 /**
  * Helper function for JS/Wasm compatibility.

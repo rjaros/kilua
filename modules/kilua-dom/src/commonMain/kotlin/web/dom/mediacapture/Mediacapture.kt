@@ -13,15 +13,15 @@
 
 package web.dom.mediacapture
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsBoolean
 import web.JsString
 import web.dom.EventInit
 import web.dom.MediaProvider
-import web.dom.events.Event
-import web.dom.events.EventTarget
-import web.Promise
+import web.events.Event
+import web.events.EventTarget
+import js.promise.Promise
 
 /**
  * Exposes the JavaScript [MediaStream](https://developer.mozilla.org/en/docs/Web/API/MediaStream) to Kotlin

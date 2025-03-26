@@ -25,7 +25,7 @@ package dev.kilua.compose.ui
 import androidx.compose.runtime.Composable
 import dev.kilua.html.ITag
 import dev.kilua.html.helpers.ModifierBase
-import web.dom.HTMLElement
+import web.html.HTMLElement
 
 // Inspired by the official Jetpack Compose API and Kobweb API
 // See also: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui/src/commonMain/kotlin/androidx/compose/ui/Modifier.kt

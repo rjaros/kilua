@@ -22,20 +22,22 @@
 
 package dev.kilua.compose
 
-import dev.kilua.externals.obj
-import dev.kilua.utils.cast
+import dev.kilua.utils.obj
+import js.promise.Promise
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Runnable
-import web.Promise
 import kotlin.coroutines.CoroutineContext
 
 /**
  * Coroutine dispatcher based on JavaScript Promise.
  */
 internal class PromiseDispatcher : CoroutineDispatcher() {
+    private val obj = obj()
+
     override fun dispatch(context: CoroutineContext, block: Runnable) {
-        Promise.resolve(obj()).then {
-            block.run().cast()
+        Promise.resolve(obj).then {
+            block.run()
+            obj
         }
     }
 }

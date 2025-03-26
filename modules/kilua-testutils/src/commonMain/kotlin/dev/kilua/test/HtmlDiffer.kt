@@ -24,8 +24,8 @@
 
 package dev.kilua.test
 
-import dev.kilua.JsModule
-import web.JsAny
+import js.import.JsModule
+import js.core.JsAny
 
 @Suppress("UnusedPrivateProperty")
 public external class HtmlDiffer(preset: String) : JsAny {

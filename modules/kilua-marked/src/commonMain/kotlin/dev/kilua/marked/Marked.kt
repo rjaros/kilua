@@ -23,10 +23,10 @@
 package dev.kilua.marked
 
 import dev.kilua.externals.MarkedOptionsJs
-import dev.kilua.externals.obj
 import dev.kilua.externals.parse
 import dev.kilua.externals.use
-import web.JsAny
+import js.core.JsAny
+import js.objects.jso
 
 /**
  * Marked parser options.
@@ -43,7 +43,7 @@ public data class MarkedOptions(
 
 internal fun MarkedOptions.toJs(): MarkedOptionsJs {
     val self = this
-    return obj {
+    return jso {
         if (self.gfm != null) this.gfm = self.gfm
         if (self.breaks != null) this.breaks = self.breaks
         if (self.pedantic != null) this.pedantic = self.pedantic

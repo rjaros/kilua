@@ -21,7 +21,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import web.window
+import web.events.EventHandler
+import web.window.window
 
 /**
  * This [Router] implementation uses `/#/path` to persistent the current route in [window.location.hash].
@@ -38,7 +39,7 @@ public data object HashRouter : Router {
     override fun getPath(initPath: String): State<String> {
         LaunchedEffect(Unit) {
             currentHash.value = window.location.hash.currentURL() ?: initPath
-            window.onhashchange = {
+            window.onhashchange = EventHandler {
                 currentHash.value = window.location.hash.currentURL() ?: ""
             }
         }

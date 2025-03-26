@@ -24,30 +24,33 @@ package dev.kilua.utils
 
 import dev.kilua.externals.assign
 import dev.kilua.externals.concat
-import dev.kilua.externals.get
 import dev.kilua.externals.isArray
 import dev.kilua.externals.jsTypeOf
 import dev.kilua.externals.keys
-import dev.kilua.externals.obj
-import dev.kilua.externals.set
-import dev.kilua.externals.undefined
-import web.JsAny
-import web.JsArray
-import web.get
-import web.set
-import web.toJsBoolean
-import web.toJsNumber
-import web.toJsString
+import js.array.ArrayLike
+import js.core.JsAny
+import js.objects.jso
+import js.reflect.Reflect
+import kotlin.js.undefined
 
 /**
- * JavaScript encodeURIComponent function
+ * Create an empty JS object
  */
-public external fun encodeURIComponent(value: String): String
+public fun obj(): JsAny = jso<JsAny>()
 
 /**
- * JavaScript decodeURIComponent function
+ * Function to set property on JS Object
  */
-public external fun decodeURIComponent(value: String): String
+public fun JsAny.jsSet(key: String, value: JsAny) {
+    Reflect.set(this, key.toJsString(), value)
+}
+
+/**
+ * Function to get property from JS Object
+ */
+public fun JsAny.jsGet(key: String): JsAny? {
+    return Reflect.get(this, key.toJsString())
+}
 
 /**
  * Utility extension function for casting. Uses unsafeCast() on JS.
@@ -92,6 +95,13 @@ public fun <T : JsAny> List<T>.toJsArray(): JsArray<T> {
 }
 
 /**
+ * Convert ArrayLike to Kotlin List.
+ */
+public fun <T : JsAny> ArrayLike<T>.toList(): List<T> {
+    return List(length) { get(it) }
+}
+
+/**
  * Create a JsArray object.
  */
 public fun <T : JsAny> jsArrayOf(vararg elements: T): JsArray<T> {
@@ -132,7 +142,7 @@ public fun <T> T.toJsAny(): JsAny? {
             val obj = obj()
             for (entry in this.entries) {
                 if (entry.value != null) {
-                    obj[entry.key.toString()] = entry.value.toJsAny()!!
+                    obj.jsSet(entry.key.toString(), entry.value.toJsAny()!!)
                 }
             }
             obj
@@ -161,20 +171,21 @@ public fun jsObjectOf(
  */
 public fun deepMerge(target: JsAny, source: JsAny): JsAny {
     fun isObject(obj: JsAny?): Boolean {
-        return obj != null && obj != undefined() && jsTypeOf(obj) == "object"
+        @Suppress("SENSELESS_COMPARISON")
+        return obj != null && obj != undefined && jsTypeOf(obj) == "object"
     }
     if (!isObject(target) || !isObject(source)) return source
     for (key in keys(source)) {
-        val targetValue = target[key]
-        val sourceValue = source[key]
+        val targetValue = target.jsGet(key)
+        val sourceValue = source.jsGet(key)
         if (isArray(targetValue) && isArray(sourceValue)) {
-            target[key] = concat(targetValue!!.unsafeCast<JsArray<JsAny>>(), sourceValue.cast())
+            target.jsSet(key, concat(targetValue!!.unsafeCast<JsArray<JsAny>>(), sourceValue.cast()))
         } else if (isObject(targetValue) && isObject(sourceValue)) {
             val newObj = obj()
             assign(newObj, targetValue!!)
-            target[key] = deepMerge(newObj, sourceValue!!)
+            target.jsSet(key, deepMerge(newObj, sourceValue!!))
         } else if (sourceValue != null) {
-            target[key] = sourceValue
+            target.jsSet(key, sourceValue)
         }
     }
     return target

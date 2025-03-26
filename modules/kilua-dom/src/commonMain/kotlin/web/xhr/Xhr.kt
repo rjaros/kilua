@@ -13,14 +13,14 @@
 
 package web.xhr
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsNumber
 import web.dom.Document
 import web.dom.EventInit
-import web.dom.HTMLFormElement
-import web.dom.events.Event
-import web.dom.events.EventTarget
+import web.html.HTMLFormElement
+import web.events.Event
+import web.events.EventTarget
 import web.dom.url.URLSearchParams
 import web.files.Blob
 

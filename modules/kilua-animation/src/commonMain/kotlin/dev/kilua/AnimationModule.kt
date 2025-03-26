@@ -23,7 +23,8 @@
 
 package dev.kilua
 
-import web.JsAny
+import js.core.JsAny
+import js.import.JsModule
 
 @JsModule("zzz-kilua-assets/k-animation.css")
 internal external object AnimationCss : JsAny

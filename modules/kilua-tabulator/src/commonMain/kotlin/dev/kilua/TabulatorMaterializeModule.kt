@@ -23,7 +23,8 @@
 
 package dev.kilua
 
-import web.JsAny
+import js.core.JsAny
+import js.import.JsModule
 
 @JsModule("tabulator-tables/dist/css/tabulator_materialize.min.css")
 internal external object TabulatorMaterializeCss : JsAny

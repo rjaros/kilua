@@ -23,8 +23,8 @@
 
 package dev.kilua.externals
 
-import dev.kilua.JsModule
-import web.JsAny
+import js.import.JsModule
+import js.core.JsAny
 
 public external class ToastOptions : JsAny {
     public var text: String?

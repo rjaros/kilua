@@ -35,7 +35,7 @@ import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.strongt
 import dev.kilua.utils.rem
-import web.dom.events.Event
+import web.events.Event
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 

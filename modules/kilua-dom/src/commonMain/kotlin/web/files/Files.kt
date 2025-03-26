@@ -13,14 +13,14 @@
 
 package web.files
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsNumber
 import web.dom.ImageBitmapSource
 import web.dom.ItemArrayLike
 import web.dom.MediaProvider
-import web.dom.events.Event
-import web.dom.events.EventTarget
+import web.events.Event
+import web.events.EventTarget
 import web.webgl.ArrayBuffer
 import web.xhr.ProgressEvent
 

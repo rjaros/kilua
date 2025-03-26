@@ -38,8 +38,8 @@ import dev.kilua.html.h5t
 import dev.kilua.utils.cast
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLDivElement
-import web.dom.events.Event
+import web.html.HTMLDivElement
+import web.events.Event
 
 /**
  * The offcanvas placement.

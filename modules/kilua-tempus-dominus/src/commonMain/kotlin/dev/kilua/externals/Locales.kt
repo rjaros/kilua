@@ -23,9 +23,9 @@
 
 package dev.kilua.externals
 
-import dev.kilua.JsModule
+import js.import.JsModule
 import dev.kilua.utils.nativeMapOf
-import web.JsAny
+import js.core.JsAny
 
 /**
  * Tempus Dominus Locale.

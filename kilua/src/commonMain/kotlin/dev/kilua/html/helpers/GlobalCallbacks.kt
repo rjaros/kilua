@@ -25,9 +25,13 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import web.document
-import web.dom.events.Event
-import web.window
+import web.dom.document
+import web.events.Event
+import web.events.EventType
+import web.events.addEventListener
+import web.events.removeEventListener
+import web.uievents.PointerEvent
+import web.window.window
 
 /**
  * A composable function that triggers a callback whenever pointer up event is received.
@@ -51,8 +55,8 @@ import web.window
 public fun onGlobalPointerUp(callback: () -> Unit) {
     DisposableEffect(Unit) {
         val listener = { _: Event -> callback() }
-        document.addEventListener(POINTER_UP, listener)
-        onDispose { document.removeEventListener(POINTER_UP, listener) }
+        document.addEventListener(EventType<PointerEvent>(POINTER_UP), listener)
+        onDispose { document.removeEventListener(EventType<PointerEvent>(POINTER_UP), listener) }
     }
 }
 
@@ -82,7 +86,7 @@ public fun onGlobalWindowSize(callback: (width: Int, height: Int) -> Unit) {
         val listener = { _: Event ->
             callback(window.innerWidth, window.innerHeight)
         }
-        window.addEventListener(RESIZE, listener)
-        onDispose { window.removeEventListener(RESIZE, listener) }
+        window.addEventListener(EventType<Event>(RESIZE), listener)
+        onDispose { window.removeEventListener(EventType<Event>(RESIZE), listener) }
     }
 }

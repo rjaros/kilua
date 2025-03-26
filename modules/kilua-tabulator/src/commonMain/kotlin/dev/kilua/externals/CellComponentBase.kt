@@ -22,13 +22,13 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.dom.HTMLElement
+import js.core.JsAny
+import web.html.HTMLElement
 
 /**
  * JavaScript Tabulator cell component base interface.
  */
-public external interface CellComponentBase : JsAny {
+public external class CellComponentBase : JsAny {
     public fun getValue(): JsAny?
     public fun getElement(): HTMLElement
     public fun getTable(): TabulatorJs

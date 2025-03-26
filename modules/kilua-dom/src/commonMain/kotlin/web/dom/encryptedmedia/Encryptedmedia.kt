@@ -13,14 +13,14 @@
 
 package web.dom.encryptedmedia
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsString
-import web.Promise
+import js.promise.Promise
 import web.dom.EventInit
 import web.dom.MessageEvent
-import web.dom.events.Event
-import web.dom.events.EventTarget
+import web.events.Event
+import web.events.EventTarget
 import web.webgl.ArrayBuffer
 
 /**

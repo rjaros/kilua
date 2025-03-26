@@ -29,9 +29,9 @@ kotlin {
                 api(libs.kotlinx.atomicfu)
                 api(libs.kotlinx.coroutines)
                 api(libs.kotlinx.serialization.json)
+                api(libs.wrappers.browser)
                 api(project(":modules:kilua-annotations"))
                 api(project(":modules:kilua-common-types"))
-                api(project(":modules:kilua-dom"))
                 api(project(":modules:kilua-core-modules"))
 //                implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.9-SNAPSHOT.tgz"))
                 implementation(npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get()))
@@ -54,7 +54,6 @@ kotlin {
         }
         val wasmJsMain by getting {
             dependencies {
-                api(libs.kotlinx.browser)
             }
         }
     }

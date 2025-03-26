@@ -23,7 +23,8 @@
 
 package dev.kilua
 
-import web.JsAny
+import js.core.JsAny
+import js.import.JsModule
 
 @JsModule("bootstrap-icons/font/bootstrap-icons.min.css")
 internal external object BootstrapIconsCss : JsAny

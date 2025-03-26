@@ -24,11 +24,11 @@
 
 package dev.kilua.externals
 
-import dev.kilua.JsModule
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.dom.HTMLElement
+import dev.kilua.utils.JsArray
+import js.import.JsModule
+import js.core.JsAny
+import js.core.JsNumber
+import web.html.HTMLElement
 
 /**
  * Tempus Dominus restrictions configuration.

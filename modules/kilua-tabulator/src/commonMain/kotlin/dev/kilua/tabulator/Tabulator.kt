@@ -32,19 +32,23 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.externals.JSON
 import dev.kilua.externals.TabulatorJs
 import dev.kilua.externals.TabulatorTablesJs.TabulatorFull
-import dev.kilua.externals.buildCustomEventInit
+import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.externals.delete
-import dev.kilua.externals.get
-import dev.kilua.externals.obj
+import dev.kilua.externals.jsTypeOf
+import dev.kilua.utils.jsGet
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.cast
 import dev.kilua.utils.deepMerge
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.rem
+import dev.kilua.utils.toInt
 import dev.kilua.utils.toJsArray
+import dev.kilua.utils.toJsBoolean
+import dev.kilua.utils.toJsNumber
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.unsafeCast
 import kotlinx.serialization.KSerializer
@@ -52,15 +56,11 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.dom.HTMLDivElement
-import web.dom.observers.ResizeObserver
-import web.toInt
-import web.toJsBoolean
-import web.toJsNumber
-import web.window
+import js.core.JsAny
+import js.core.JsNumber
+import web.html.HTMLDivElement
+import web.resize.ResizeObserver
+import web.timers.clearTimeout
 import kotlin.reflect.KClass
 
 /**
@@ -218,7 +218,7 @@ public open class Tabulator<T : Any>(
 
     private fun removeCustomEditors() {
         EditorRoot.cancel?.invoke(null)
-        EditorRoot.disposeTimer?.let { window.clearTimeout(it) }
+        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsNumber().unsafeCast()) }
         EditorRoot.root?.dispose()
         EditorRoot.root = null
     }
@@ -290,20 +290,20 @@ public open class Tabulator<T : Any>(
                     tabulatorJs?.setPageSize(pageSize ?: 0)
                     tabulatorJs?.setPage(currentPage!!.toJsNumber())
                 }
-                dispatchEvent("tableBuilt", buildCustomEventInit(obj()))
+                dispatchEvent("tableBuilt", buildCustomEventInit())
             }
             tabulatorJs?.on("pageLoaded") { ->
                 registeredPaginationStateSetters.forEach {
                     val currentPage = tabulatorJs?.getPage()?.unsafeCast<JsNumber>()?.toInt() ?: 1
                     val maxPages = tabulatorJs?.getPageMax()?.unsafeCast<JsNumber>()?.toInt() ?: 1
-                    val buttonCount = tabulatorJs?.options?.get("paginationButtonCount")?.unsafeCast<JsNumber>()
+                    val buttonCount = tabulatorJs?.options?.jsGet("paginationButtonCount")?.unsafeCast<JsNumber>()
                         ?.toInt() ?: 5
                     it(PaginationState(currentPage, maxPages, buttonCount))
                 }
-                dispatchEvent("pageLoaded", buildCustomEventInit(obj()))
+                dispatchEvent("pageLoaded", buildCustomEventInit())
             }
             tabulatorJs?.on("renderComplete") { ->
-                dispatchEvent("renderComplete", buildCustomEventInit(obj()))
+                dispatchEvent("renderComplete", buildCustomEventInit())
             }
         }
     }
@@ -322,11 +322,11 @@ public open class Tabulator<T : Any>(
             }
             if (tabulatorJs != null) {
                 // Workaround for Tabulator crash on disposing
-                val resizeTable = tabulatorJs!!["modules"]!!["resizeTable"]
-                if (resizeTable != null && resizeTable["table"]?.get("element")?.get("parentNode") == null) {
-                    if (resizeTable["containerObserver"] != null) {
-                        if (resizeTable["containerObserver"]!!["disconnect"] != null) {
-                            resizeTable["containerObserver"]?.unsafeCast<ResizeObserver>()?.disconnect()
+                val resizeTable = tabulatorJs!!.jsGet("modules")!!.jsGet("resizeTable")
+                if (resizeTable != null && resizeTable.jsGet("table")?.jsGet("element")?.jsGet("parentNode") == null) {
+                    if (resizeTable.jsGet("containerObserver") != null && jsTypeOf(resizeTable.jsGet("containerObserver")) == "object") {
+                        if (resizeTable.jsGet("containerObserver")!!.jsGet("disconnect") != null) {
+                            resizeTable.jsGet("containerObserver")?.unsafeCast<ResizeObserver>()?.disconnect()
                         }
                         delete(resizeTable, "containerObserver")
                     }

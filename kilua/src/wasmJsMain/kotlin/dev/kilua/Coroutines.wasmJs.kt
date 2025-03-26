@@ -24,11 +24,11 @@ package dev.kilua
 
 import dev.kilua.utils.cast
 import kotlinx.coroutines.Deferred
-import web.JsAny
-import web.Promise
+import js.core.JsAny
+import js.promise.Promise
 import kotlinx.coroutines.asDeferred as asDeferredCrt
 import kotlinx.coroutines.asPromise as asPromiseCrt
-import kotlinx.coroutines.await as awaitCrt
+import kotlinx.coroutines.await as awaitCoroutines
 import kotlin.js.Promise as PromiseJs
 
 public actual fun <T> Deferred<T>.asPromise(): Promise<JsAny?> {
@@ -39,6 +39,6 @@ public actual fun <T : JsAny?> Promise<T>.asDeferred(): Deferred<T> {
     return this.unsafeCast<PromiseJs<T>>().asDeferredCrt()
 }
 
-public actual suspend fun <T : JsAny?> Promise<T>.await(): T {
-    return this.unsafeCast<PromiseJs<T>>().awaitCrt()
+public actual suspend fun <T : JsAny?> Promise<T>.awaitCrt(): T {
+    return this.unsafeCast<PromiseJs<T>>().awaitCoroutines()
 }

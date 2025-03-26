@@ -25,10 +25,10 @@ package dev.kilua.popup
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import dev.kilua.externals.Bootstrap
-import dev.kilua.externals.obj
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.utils.cast
+import js.objects.jso
 import kotlin.time.Duration
 
 /**
@@ -59,22 +59,22 @@ public fun ITag<*>.tooltip(
     disposePopover()
     val tooltipTrigger = triggers?.joinToString(" ") { it.value }
     val tooltipDelay: Bootstrap.TooltipDelay? = if (delay != null && hideDelay != null) {
-        obj {
+        jso {
             show = delay.inWholeMilliseconds.toInt()
             hide = hideDelay.inWholeMilliseconds.toInt()
         }
     } else if (delay != null) {
-        obj {
+        jso {
             show = delay.inWholeMilliseconds.toInt()
             hide = delay.inWholeMilliseconds.toInt()
         }
     } else if (hideDelay != null) {
-        obj {
+        jso {
             show = 0
             hide = hideDelay.inWholeMilliseconds.toInt()
         }
     } else null
-    val tooltip = Bootstrap.Tooltip(element, obj {
+    val tooltip = Bootstrap.Tooltip(element, jso {
         this.title = title
         this.animation = animation
         if (tooltipDelay != null) this.delay = tooltipDelay

@@ -24,7 +24,7 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.ITag
-import web.dom.HTMLElement
+import web.html.HTMLElement
 
 /**
  * A base interface for integration with modifiers.

@@ -28,9 +28,8 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.buildCustomEventInit
-import dev.kilua.externals.get
-import dev.kilua.externals.obj
+import dev.kilua.utils.buildCustomEventInit
+import dev.kilua.utils.jsGet
 import dev.kilua.externals.toDate
 import dev.kilua.externals.toLocalTime
 import dev.kilua.form.TimeFormControl
@@ -42,7 +41,7 @@ import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.rem
 import dev.kilua.utils.unsafeCast
 import kotlinx.datetime.LocalTime
-import web.dom.events.Event
+import web.events.Event
 
 /**
  * Tempus Dominus rich time component.
@@ -87,14 +86,14 @@ public open class RichTime(
         withStateFlowDelegate.formControl(this)
         @Suppress("LeakingThis")
         onEventDirect<Event>("change.td") {
-            val date = it["detail"]?.get("date")?.unsafeCast<dev.kilua.externals.Date>()
+            val date = it.jsGet("detail")?.jsGet("date")?.unsafeCast<dev.kilua.externals.Date>()
             this.value = date?.toLocalTime()
-            dispatchEvent("change", buildCustomEventInit(obj()))
+            dispatchEvent("change", buildCustomEventInit())
         }
         @Suppress("LeakingThis")
         onEventDirect<Event>("error.td") {
             this.value = null
-            dispatchEvent("change", buildCustomEventInit(obj()))
+            dispatchEvent("change", buildCustomEventInit())
         }
     }
 

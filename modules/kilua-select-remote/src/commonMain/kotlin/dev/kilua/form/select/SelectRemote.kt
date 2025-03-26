@@ -30,11 +30,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.KiluaScope
 import dev.kilua.core.IComponent
+import dev.kilua.externals.JSON
+import dev.kilua.externals.console
+import dev.kilua.rpc.CallAgent
+import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.utils.StringPair
+import dev.kilua.utils.toJsString
+import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.launch
-import web.fetch.RequestInit
+import kotlinx.serialization.builtins.ListSerializer
+import web.http.RequestInit
 
 /**
  * Creates [Select] component with a remote data source, returning a reference.
@@ -178,9 +185,33 @@ public fun <T : Any> IComponent.selectRemote(
     }
 }
 
-internal expect suspend fun <T : Any> getOptionsForSelectRemote(
+internal suspend fun <T : Any> getOptionsForSelectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?) -> List<SimpleRemoteOption>,
-    stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
-): List<StringPair>
+    stateFunction: (() -> String)?,
+    requestFilter: (suspend RequestInit.() -> Unit)?,
+): List<StringPair> {
+    val (url, method) = serviceManager.requireCall(function)
+    val callAgent = CallAgent()
+    val state = stateFunction?.invoke()?.let { JSON.stringify(it.toJsString()) }
+    return try {
+        val result = callAgent.jsonRpcCall(
+            url,
+            listOf(state),
+            method = method, requestFilter = requestFilter?.let { requestFilterParam ->
+                {
+                    val self = this.unsafeCast<RequestInit>()
+                    self.requestFilterParam()
+                }
+            }
+        )
+        RpcSerialization.plain.decodeFromString(
+            ListSerializer(SimpleRemoteOption.serializer()), result
+        ).map {
+            it.value to (it.text ?: it.value)
+        }
+    } catch (e: Exception) {
+        console.error(e.message)
+        emptyList()
+    }
+}

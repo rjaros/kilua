@@ -23,8 +23,9 @@
 package dev.kilua.utils
 
 import kotlinx.coroutines.suspendCancellableCoroutine
-import web.files.File
-import web.files.FileReader
+import web.events.EventHandler
+import web.file.File
+import web.file.FileReader
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
@@ -33,11 +34,11 @@ import kotlin.coroutines.resumeWithException
  */
 public suspend fun File.getContent(): String = suspendCancellableCoroutine { cont ->
     val reader = FileReader()
-    reader.onload = {
+    reader.onload = EventHandler {
         cont.resume(reader.result.toString())
     }
-    reader.onerror = { e ->
-        cont.resumeWithException(Exception(e.type))
+    reader.onerror = EventHandler { e ->
+        cont.resumeWithException(Exception(e.type.toString()))
     }
     reader.readAsDataURL(this@getContent)
 }

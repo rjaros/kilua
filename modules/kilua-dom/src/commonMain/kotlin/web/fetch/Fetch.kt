@@ -13,8 +13,8 @@
 
 package web.fetch
 
-import web.JsAny
-import web.Promise
+import js.core.JsAny
+import js.promise.Promise
 
 /**
  * Exposes the JavaScript [Headers](https://developer.mozilla.org/en/docs/Web/API/Headers) to Kotlin

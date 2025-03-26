@@ -22,12 +22,12 @@
 
 package dev.kilua.ssr
 
-import dev.kilua.externals.get
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.cast
+import dev.kilua.utils.jsGet
 import dev.kilua.utils.toList
-import web.JsAny
-import web.JsArray
-import web.JsString
+import js.core.JsAny
+import js.core.JsString
 
 /**
  * Node.js process object.
@@ -39,7 +39,7 @@ internal external val process: JsAny?
  */
 public fun getCommandLineParameter(name: String): String? {
     return if (process != null) {
-        val args = process["argv"].cast<JsArray<JsString>>().toList().map { it.toString() }.drop(2)
+        val args = process.jsGet("argv").cast<JsArray<JsString>>().toList().map { it.toString() }.drop(2)
         val index = args.indexOfFirst { it == name }
         if (index != -1 && index < args.size - 1) {
             args[index + 1]

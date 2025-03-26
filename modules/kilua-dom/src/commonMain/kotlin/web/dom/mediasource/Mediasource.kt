@@ -13,14 +13,14 @@
 
 package web.dom.mediasource
 
-import web.JsAny
+import js.core.JsAny
 import web.dom.AudioTrackList
 import web.dom.MediaProvider
 import web.dom.TextTrackList
 import web.dom.TimeRanges
 import web.dom.VideoTrackList
-import web.dom.events.Event
-import web.dom.events.EventTarget
+import web.events.Event
+import web.events.EventTarget
 
 /**
  * Exposes the JavaScript [MediaSource](https://developer.mozilla.org/en/docs/Web/API/MediaSource) to Kotlin

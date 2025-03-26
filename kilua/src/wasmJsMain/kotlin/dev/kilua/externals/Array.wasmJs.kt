@@ -23,8 +23,7 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.JsArray
+import js.core.JsAny
 
 /**
  * Returns whether the given value is an array

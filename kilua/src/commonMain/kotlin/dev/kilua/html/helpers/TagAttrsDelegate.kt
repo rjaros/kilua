@@ -24,7 +24,7 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.core.PropertyDelegate
-import web.dom.HTMLElement
+import web.html.HTMLElement
 
 /**
  * Common tag attributes delegate.

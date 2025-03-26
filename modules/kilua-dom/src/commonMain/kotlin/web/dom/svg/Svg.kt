@@ -13,7 +13,7 @@
 
 package web.dom.svg
 
-import web.JsAny
+import js.core.JsAny
 import web.dom.*
 import web.dom.css.ElementCSSInlineStyle
 import web.dom.css.LinkStyle

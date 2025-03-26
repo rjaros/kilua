@@ -25,8 +25,8 @@ package dev.kilua.html
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
 import dev.kilua.test.normalizeHtml
-import web.dom.ImageData
-import web.toJsString
+import dev.kilua.utils.toJsString
+import web.images.ImageData
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -60,7 +60,7 @@ class CanvasSpec : DomSpec {
                         it.moveTo(0.0, 0.0)
                         it.lineTo(100.0, 100.0)
                         it.stroke()
-                        imageData = it.getImageData(1.0, 1.0, 2.0, 2.0)
+                        imageData = it.getImageData(1, 1, 2, 2)
                     }
                 }
             }

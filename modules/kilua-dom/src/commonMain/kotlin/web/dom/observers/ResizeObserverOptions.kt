@@ -27,7 +27,7 @@
 
 package web.dom.observers
 
-import web.JsAny
+import js.core.JsAny
 
 external interface ResizeObserverOptions : JsAny {
     var box: JsAny?

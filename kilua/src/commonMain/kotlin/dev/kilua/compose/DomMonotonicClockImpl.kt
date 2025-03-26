@@ -23,7 +23,10 @@
 package dev.kilua.compose
 
 import androidx.compose.runtime.MonotonicFrameClock
-import web.window
+import dev.kilua.utils.toDouble
+import dev.kilua.utils.unsafeCast
+import js.core.JsNumber
+import web.animations.requestAnimationFrame
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.time.DurationUnit
@@ -36,8 +39,8 @@ internal class DomMonotonicClockImpl : MonotonicFrameClock {
     override suspend fun <R> withFrameNanos(
         onFrame: (Long) -> R
     ): R = suspendCoroutine { continuation ->
-        window.requestAnimationFrame {
-            val duration = it.toDuration(DurationUnit.MILLISECONDS)
+        requestAnimationFrame {
+            val duration = it.unsafeCast<JsNumber>().toDouble().toDuration(DurationUnit.MILLISECONDS)
             val result = onFrame(duration.inWholeNanoseconds)
             continuation.resume(result)
         }

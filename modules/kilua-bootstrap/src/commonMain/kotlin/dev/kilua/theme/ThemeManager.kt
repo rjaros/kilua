@@ -22,13 +22,18 @@
 
 package dev.kilua.theme
 
-import dev.kilua.externals.buildCustomEventInit
+import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.utils.isDom
 import dev.kilua.utils.toKebabCase
-import web.document
-import web.dom.CustomEvent
-import web.localStorage
-import web.window
+import js.core.JsAny
+import web.cssom.MediaQuery
+import web.cssom.matchMedia
+import web.dom.document
+import web.events.CustomEvent
+import web.events.Event
+import web.events.EventType
+import web.events.addEventListener
+import web.storage.localStorage
 
 /**
  * Bootstrap color themes.
@@ -61,11 +66,16 @@ public object ThemeManager {
             setStoredTheme(value)
             if (isDom) {
                 if (value == Theme.Auto) {
-                    document.documentElement?.setAttribute("data-bs-theme", getPreferredTheme().value)
+                    document.documentElement.setAttribute("data-bs-theme", getPreferredTheme().value)
                 } else {
-                    document.documentElement?.setAttribute("data-bs-theme", value.value)
+                    document.documentElement.setAttribute("data-bs-theme", value.value)
                 }
-                document.dispatchEvent(CustomEvent("kilua.theme.changed", buildCustomEventInit(null)))
+                document.dispatchEvent(
+                    CustomEvent(
+                        EventType<CustomEvent<JsAny>>("kilua.theme.changed"),
+                        buildCustomEventInit()
+                    )
+                )
             }
         }
 
@@ -78,16 +88,16 @@ public object ThemeManager {
         this.theme = initialTheme ?: getStoredTheme() ?: getPreferredTheme()
         if (isDom) {
             if (theme == Theme.Auto) {
-                document.documentElement?.setAttribute("data-bs-theme", getPreferredTheme().value)
+                document.documentElement.setAttribute("data-bs-theme", getPreferredTheme().value)
             } else {
-                document.documentElement?.setAttribute("data-bs-theme", theme.value)
+                document.documentElement.setAttribute("data-bs-theme", theme.value)
             }
-            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change") {
+            matchMedia(MediaQuery("(prefers-color-scheme: dark)")).addEventListener(EventType<Event>("change"), {
                 val storedTheme = getStoredTheme() ?: Theme.Auto
                 if (storedTheme == Theme.Auto) {
-                    document.documentElement?.setAttribute("data-bs-theme", getPreferredTheme().value)
+                    document.documentElement.setAttribute("data-bs-theme", getPreferredTheme().value)
                 }
-            }
+            })
         }
     }
 
@@ -104,7 +114,7 @@ public object ThemeManager {
     }
 
     private fun getPreferredTheme(): Theme {
-        return if (isDom && window.matchMedia("(prefers-color-scheme: dark)").matches) Theme.Dark else Theme.Light
+        return if (isDom && matchMedia(MediaQuery("(prefers-color-scheme: dark)")).matches) Theme.Dark else Theme.Light
     }
 
 }

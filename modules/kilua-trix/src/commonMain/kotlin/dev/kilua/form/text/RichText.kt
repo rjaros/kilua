@@ -29,9 +29,8 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
-import dev.kilua.externals.buildCustomEventInit
+import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.externals.getEditorFromElement
-import dev.kilua.externals.obj
 import dev.kilua.form.InputType
 import dev.kilua.form.StringFormControl
 import dev.kilua.form.text.i18n.getToolbarContent
@@ -45,13 +44,13 @@ import dev.kilua.initializeTrix
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
+import dev.kilua.utils.clear
+import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import web.clear
-import web.dom.HTMLButtonElement
-import web.dom.HTMLElement
-import web.dom.HTMLInputElement
-import web.dom.asList
-import web.dom.events.Event
+import web.html.HTMLButtonElement
+import web.html.HTMLElement
+import web.html.HTMLInputElement
+import web.events.Event
 
 /**
  * Trix rich text editor component.
@@ -328,7 +327,7 @@ public open class RichText(
                 input?.let { SafeDomFactory.getElementById(it) }?.let {
                     val elementValue = it.unsafeCast<HTMLInputElement>().value
                     setInternalValueFromString(elementValue)
-                    dispatchEvent("change", buildCustomEventInit(obj()))
+                    dispatchEvent("change", buildCustomEventInit())
                 }
             }
             @Suppress("LeakingThis")
@@ -343,7 +342,7 @@ public open class RichText(
      */
     protected fun toolbarDisable(disable: Boolean) {
         toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.run {
-            querySelectorAll("button").asList().forEach {
+            querySelectorAll("button").toList().forEach {
                 it.unsafeCast<HTMLButtonElement>().disabled = disable
             }
         }

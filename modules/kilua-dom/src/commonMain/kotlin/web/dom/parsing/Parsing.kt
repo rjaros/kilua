@@ -13,7 +13,7 @@
 
 package web.dom.parsing
 
-import web.JsAny
+import js.core.JsAny
 import web.dom.Document
 import web.dom.Node
 

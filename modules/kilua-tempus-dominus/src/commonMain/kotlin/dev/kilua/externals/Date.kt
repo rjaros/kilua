@@ -23,7 +23,11 @@
 
 package dev.kilua.externals
 
+import dev.kilua.utils.toDouble
+import dev.kilua.utils.toJsNumber
 import dev.kilua.utils.today
+import js.core.JsAny
+import js.core.JsNumber
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -33,10 +37,6 @@ import kotlinx.datetime.atDate
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import web.JsAny
-import web.JsNumber
-import web.toDouble
-import web.toJsNumber
 
 /**
  * JavaScript Date class.

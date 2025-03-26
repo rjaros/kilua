@@ -25,8 +25,8 @@ package dev.kilua.form.text.i18n
 import dev.kilua.externals.Trix
 import dev.kilua.externals.TrixLocale
 import dev.kilua.externals.assign
-import dev.kilua.externals.obj
 import dev.kilua.utils.cast
+import dev.kilua.utils.obj
 
 internal actual fun getTrixLocaleEn(): TrixLocale {
     return obj().apply { assign(this, Trix.config.lang) }.cast()

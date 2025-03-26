@@ -32,11 +32,11 @@ import androidx.compose.runtime.setValue
 import dev.kilua.externals.IntCallback
 import dev.kilua.externals.StringCallback
 import dev.kilua.externals.animate
-import dev.kilua.externals.obj
 import dev.kilua.html.Color
 import dev.kilua.html.CssSize
 import dev.kilua.utils.deepMerge
 import dev.kilua.utils.isDom
+import js.objects.jso
 
 // Similar behaviour to Compose Animation spring()
 private val defaultAnimation = MotionAnimation.SpringPhysics(stiffness = 1700, damping = 80)
@@ -135,7 +135,7 @@ internal fun <T> animateAsIntState(
     return produceState<T>(oldValue, value) {
         if (isDom) {
             val animationOptions = animation.toJsAny()
-            val intCallback = obj<IntCallback> {
+            val intCallback = jso<IntCallback> {
                 onUpdate = { v: Int ->
                     val newValue = convertFromInt(v)
                     oldValue = newValue
@@ -165,7 +165,7 @@ internal fun <T> animateAsStringState(
     return produceState<T>(oldValue, value) {
         if (isDom) {
             val animationOptions = animation.toJsAny()
-            val stringCallback = obj<StringCallback> {
+            val stringCallback = jso<StringCallback> {
                 onUpdate = { v: String ->
                     val newValue = convertFromString(v)
                     oldValue = newValue

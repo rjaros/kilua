@@ -25,7 +25,10 @@ import dev.kilua.compose.Root
 import dev.kilua.html.style.StyleParams
 import dev.kilua.i18n.DefaultLocale
 import dev.kilua.utils.isDom
-import web.document
+import web.dom.document
+import web.events.Event
+import web.events.EventType
+import web.events.addEventListener
 
 /**
  * Base class for Kilua applications.
@@ -106,11 +109,12 @@ public fun startApplication(
         it.data
     }
 
+    @Suppress("SENSELESS_COMPARISON")
     if (!isDom || document.body != null) {
         application = start(state)
     } else {
         application = null
         @Suppress("MoveLambdaOutsideParentheses", "RedundantSuppression")
-        document.addEventListener("DOMContentLoaded", { application = start(state) })
+        document.addEventListener(EventType<Event>("DOMContentLoaded"), { application = start(state) })
     }
 }

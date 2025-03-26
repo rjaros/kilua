@@ -28,7 +28,7 @@ import dev.kilua.html.Button
 import dev.kilua.html.bsButtonRef
 import dev.kilua.html.div
 import dev.kilua.html.rawHtml
-import web.dom.events.Event
+import web.events.Event
 
 
 /**

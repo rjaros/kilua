@@ -1,4 +1,3 @@
-@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -20,32 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package dev.kilua.utils
 
-package dev.kilua.externals
+import js.core.JsAny
 
-import web.JsAny
-import web.dom.AddEventListenerOptions
-import web.dom.CustomEventInit
-
-/**
- * JavaScript AbortSignal class
- */
-public external class AbortSignal : JsAny
-
-/**
- * JavaScript AbortController class
- */
-public external class AbortController : JsAny {
-    public val signal: AbortSignal
-    public fun abort()
+@Suppress("EXPECTED_EXTERNAL_DECLARATION")
+public expect external class JsArray<T : JsAny?>() : JsAny {
+    public val length: Int
 }
 
-/**
- * Build AddEventListenerOptions with a signal controller to remove the listener.
- */
-public expect fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions
+public expect operator fun <T : JsAny?> JsArray<T>.get(index: Int): T?
 
-/**
- * Build CustomEventInit with a detail object.
- */
-public expect fun buildCustomEventInit(detail: JsAny?): CustomEventInit
+public expect operator fun <T : JsAny?> JsArray<T>.set(index: Int, value: T)

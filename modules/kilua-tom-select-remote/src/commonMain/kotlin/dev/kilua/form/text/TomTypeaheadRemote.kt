@@ -26,15 +26,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.KiluaScope
 import dev.kilua.core.IComponent
+import dev.kilua.externals.JSON
+import dev.kilua.externals.console
 import dev.kilua.form.InputType
 import dev.kilua.form.select.TomSelectCallbacks
+import dev.kilua.rpc.CallAgent
+import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.toJsArray
+import dev.kilua.utils.toJsString
+import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.launch
-import web.JsAny
-import web.JsArray
-import web.fetch.RequestInit
-import web.toJsString
+import js.core.JsAny
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.builtins.serializer
+import web.http.RequestInit
 
 /**
  * Creates [TomTypeahead] component with a remote data source, returning a reference.
@@ -175,10 +182,32 @@ public fun <T : Any> IComponent.tomTypeaheadRemote(
     )
 }
 
-internal expect suspend fun <T : Any> getOptionsForTomTypeaheadRemote(
+internal suspend fun <T : Any> getOptionsForTomTypeaheadRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?) -> List<String>,
-    stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
-    query: String?,
-): List<String>
+    stateFunction: (() -> String)?,
+    requestFilter: (suspend RequestInit.() -> Unit)?,
+    query: String?
+): List<String> {
+    val (url, method) = serviceManager.requireCall(function)
+    val callAgent = CallAgent()
+    val state = stateFunction?.invoke()?.let { JSON.stringify(it.toJsString()) }
+    val queryParam = query?.let { JSON.stringify(it.toJsString()) }
+    return try {
+        val result = callAgent.jsonRpcCall(
+            url,
+            listOf(queryParam, state),
+            method = method,
+            requestFilter = requestFilter?.let { requestFilterParam ->
+                {
+                    val self = this.unsafeCast<RequestInit>()
+                    self.requestFilterParam()
+                }
+            }
+        )
+        RpcSerialization.plain.decodeFromString(ListSerializer(String.serializer()), result)
+    } catch (e: Exception) {
+        console.error(e.message)
+        emptyList()
+    }
+}

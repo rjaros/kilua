@@ -19,22 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package dev.kilua.utils
 
-package dev.kilua.externals
+import js.core.JsNumber
 
-import web.JsAny
-import web.dom.AddEventListenerOptions
-import web.dom.CustomEventInit
+public expect fun JsNumber.toDouble(): Double
 
-public actual fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
-    return buildAddEventListenerOptionsInternal(signal)
-}
+public expect fun Double.toJsNumber(): JsNumber
 
-internal fun buildAddEventListenerOptionsInternal(signal: AbortSignal): AddEventListenerOptions =
-    js("({ 'signal': signal })")
+public expect fun JsNumber.toInt(): Int
 
-public actual fun buildCustomEventInit(detail: JsAny?): CustomEventInit {
-    return obj {
-        if (detail != null) this.detail = detail
-    }
-}
+public expect fun Int.toJsNumber(): JsNumber

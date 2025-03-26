@@ -34,19 +34,26 @@ import dev.kilua.KiluaScope
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.get
-import dev.kilua.externals.obj
+import dev.kilua.externals.JSON
+import dev.kilua.externals.console
+import dev.kilua.utils.get
 import dev.kilua.html.div
+import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RemoteOption
+import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.StringPair
+import dev.kilua.utils.jsGet
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
+import dev.kilua.utils.toJsString
 import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.launch
-import web.JsAny
-import web.JsArray
-import web.fetch.RequestInit
+import js.core.JsAny
+import js.objects.jso
+import kotlinx.serialization.builtins.ListSerializer
+import web.http.RequestInit
 
 internal external class RemoteOptionExt : JsAny {
     var value: String?
@@ -137,7 +144,7 @@ public open class TomSelectRemote<out T : Any>(
     }
 
     override fun refreshValue() {
-        if (value != null && tomSelectInstance != null && tomSelectInstance!!.options[value!!] == null) {
+        if (value != null && tomSelectInstance != null && tomSelectInstance!!.options.jsGet(value!!) == null) {
             KiluaScope.launch {
                 val result = getOptionsForTomSelectRemote(
                     serviceManager,
@@ -148,7 +155,7 @@ public open class TomSelectRemote<out T : Any>(
                     value
                 )
                 val resultWithOption = if (emptyOption) {
-                    listOf(obj<RemoteOptionExt> {
+                    listOf(jso<RemoteOptionExt> {
                         value = ""
                         text = "\u00a0"
                     }) + result
@@ -597,11 +604,51 @@ internal fun renderItem(data: JsAny, escape: (String) -> String): String {
     return "<div>${renderOption(data, escape)}</div"
 }
 
-internal expect suspend fun <T : Any> getOptionsForTomSelectRemote(
+internal suspend fun <T : Any> getOptionsForTomSelectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
-    stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    stateFunction: (() -> String)?,
+    requestFilter: (suspend RequestInit.() -> Unit)?,
     query: String?,
-    initial: String?,
-): List<RemoteOptionExt>
+    initial: String?
+): List<RemoteOptionExt> {
+    val (url, method) = serviceManager.requireCall(function)
+    val callAgent = CallAgent()
+    val state = stateFunction?.invoke()?.let { JSON.stringify(it.toJsString()) }
+    val queryParam = query?.let { JSON.stringify(it.toJsString()) }
+    val initialParam = initial?.let { JSON.stringify(it.toJsString()) }
+    return try {
+        val result = callAgent.jsonRpcCall(
+            url,
+            listOf(queryParam, initialParam, state),
+            method = method,
+            requestFilter = requestFilter?.let { requestFilterParam ->
+                {
+                    val self = this.unsafeCast<RequestInit>()
+                    self.requestFilterParam()
+                }
+            }
+        )
+        RpcSerialization.plain.decodeFromString(ListSerializer(RemoteOption.serializer()), result)
+            .mapIndexed { index, option ->
+                jso<RemoteOptionExt> {
+                    if (option.divider) {
+                        this.value = "divider${index}"
+                        this.divider = true
+                        this.disabled = true
+                    } else {
+                        this.value = option.value
+                        if (option.text != null) this.text = option.text
+                        if (option.className != null) this.className = option.className
+                        if (option.disabled) this.disabled = true
+                        if (option.subtext != null) this.subtext = option.subtext
+                        if (option.icon != null) this.icon = option.icon
+                        if (option.content != null) this.content = option.content
+                    }
+                }
+            }
+    } catch (e: Exception) {
+        console.error(e.message)
+        emptyList()
+    }
+}

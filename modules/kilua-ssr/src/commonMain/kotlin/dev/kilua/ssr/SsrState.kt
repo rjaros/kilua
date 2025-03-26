@@ -22,14 +22,14 @@
 
 package dev.kilua.ssr
 
-import dev.kilua.externals.get
 import dev.kilua.utils.isDom
+import dev.kilua.utils.jsGet
 import kotlinx.serialization.json.Json
-import web.window
+import web.window.window
 
 public inline fun <reified T> getSsrState(json: Json = Json.Default): T? {
     return if (isDom) {
-        window["KILUA_SSR_STATE"]?.toString()?.let {
+        window.jsGet("KILUA_SSR_STATE")?.toString()?.let {
             json.decodeFromString(decompressFromEncodedURIComponent(it))
         }
     } else null

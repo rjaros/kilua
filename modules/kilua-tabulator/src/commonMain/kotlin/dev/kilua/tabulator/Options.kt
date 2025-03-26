@@ -32,31 +32,33 @@ import dev.kilua.externals.CellComponentBase
 import dev.kilua.externals.ColumnComponent
 import dev.kilua.externals.RowComponent
 import dev.kilua.externals.TabulatorMenuItem
-import dev.kilua.externals.get
-import dev.kilua.externals.obj
-import dev.kilua.externals.set
+import dev.kilua.utils.jsGet
+import dev.kilua.utils.jsSet
 import dev.kilua.externals.toJsAny
-import dev.kilua.externals.undefined
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
+import dev.kilua.utils.toInt
 import dev.kilua.utils.toJsArray
+import dev.kilua.utils.toJsBoolean
+import dev.kilua.utils.toJsNumber
+import dev.kilua.utils.toJsString
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.Promise
-import web.document
+import js.core.JsAny
+import js.core.JsNumber
+import js.objects.jso
+import js.promise.Promise
+import web.dom.document
 import web.dom.Element
-import web.dom.HTMLElement
-import web.dom.asList
-import web.dom.events.Event
-import web.localStorage
-import web.toJsBoolean
-import web.toJsNumber
-import web.toJsString
-import web.window
+import web.html.HTMLElement
+import web.events.Event
+import web.storage.localStorage
+import web.timers.clearTimeout
+import web.timers.setTimeout
+import web.window.window
+import kotlin.js.undefined
 import kotlin.reflect.KClass
 
 /**
@@ -697,7 +699,8 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                 cell.getData().cast()
             }
             val rootElement = SafeDomFactory.createElement("div").unsafeCast<HTMLElement>()
-            if (onRendered != undefined()) {
+            @Suppress("SENSELESS_COMPARISON")
+            if (onRendered != undefined) {
                 onRendered {
                     val root = root(rootElement, false, tabulator.renderConfig) {
                         formatterComponentFunction.invoke(this, cell, { callback ->
@@ -705,7 +708,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                         }, data)
                     }
                     tabulator.addCustomRoot(root)
-                    if (cell["checkHeight"] != undefined()) cell.unsafeCast<CellComponent>().checkHeight()
+                    if (cell.jsGet("checkHeight") != undefined) cell.unsafeCast<CellComponent>().checkHeight()
                     (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX = "visible"
                     (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY = "visible"
                     onRenderedCallback?.invoke()
@@ -723,7 +726,8 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         { cell: CellComponentBase, _: JsAny?, onRendered: (callback: () -> Unit) -> Unit ->
             var onRenderedCallback: (() -> Unit)? = null
             val rootElement = SafeDomFactory.createElement("div").unsafeCast<HTMLElement>()
-            if (onRendered != undefined()) {
+            @Suppress("SENSELESS_COMPARISON")
+            if (onRendered != undefined) {
                 onRendered {
                     val root = root(rootElement, false, tabulator.renderConfig) {
                         titleFormatterComponentFunction.invoke(this, cell) { callback ->
@@ -760,8 +764,8 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         { cell: CellComponent,
           onRendered: (callback: () -> Unit) -> Unit,
           success: (value: JsAny?) -> Unit, cancel: (value: JsAny?) -> Unit, _: JsAny? ->
-            if (cell.getElement()["style"] != null) cell.getElement().unsafeCast<HTMLElement>().style["overflow"] =
-                "visible".toJsString()
+            if (cell.getElement().jsGet("style") != null)
+                cell.getElement().unsafeCast<HTMLElement>().style.jsSet("overflow", "visible".toJsString())
             var onRenderedCallback: (() -> Unit)? = null
             val data: T = if (kClass != null) {
                 tabulator.toKotlinObj(cell.getData())
@@ -769,10 +773,11 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                 cell.getData().cast()
             }
             val rootElement = SafeDomFactory.createElement("div").unsafeCast<HTMLElement>()
-            if (onRendered != undefined()) {
+            @Suppress("SENSELESS_COMPARISON")
+            if (onRendered != undefined) {
                 onRendered {
                     if (EditorRoot.root != null) {
-                        EditorRoot.disposeTimer?.let { window.clearTimeout(it) }
+                        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsNumber().unsafeCast()) }
                         EditorRoot.root?.dispose()
                     }
                     EditorRoot.root = root(rootElement, false, tabulator.renderConfig) {
@@ -780,17 +785,17 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                             onRenderedCallback = callback
                         }, { value ->
                             success(value)
-                            EditorRoot.disposeTimer = window.setTimeout({
+                            EditorRoot.disposeTimer = setTimeout({
                                 EditorRoot.root?.dispose()
                                 EditorRoot.disposeTimer = null
                                 EditorRoot.root = null
                                 EditorRoot.cancel = null
                                 null
-                            }, 500)
+                            }, 500).unsafeCast<JsNumber>().toInt()
                         }, cancel, data)
                     }
                     EditorRoot.cancel = cancel
-                    if (cell["checkHeight"] != undefined()) cell.checkHeight()
+                    if (cell.jsGet("checkHeight") != undefined) cell.checkHeight()
                     (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX = "visible"
                     (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY = "visible"
                     onRenderedCallback?.invoke()
@@ -810,16 +815,16 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             val iconUnchecked = this.headerColumnsMenuListIconUnchecked ?: "fa-square"
             fun resetColumns() {
                 val persistenceID =
-                    tabulator.tabulatorJs?.options?.get("persistenceID")?.let { "tabulator-$it" } ?: "tabulator"
+                    tabulator.tabulatorJs?.options?.jsGet("persistenceID")?.let { "tabulator-$it" } ?: "tabulator"
                 localStorage.removeItem("$persistenceID-columns")
                 window.location.reload()
             }
 
             val columns = tabulator.tabulatorJs?.getColumns(false)?.toList()?.filter {
-                !it.getDefinition()["title"]?.toString().isNullOrEmpty()
+                !it.getDefinition().jsGet("title")?.toString().isNullOrEmpty()
             }?.map {
                 val responsiveHiddenColumns =
-                    (tabulator.tabulatorJs?.modules?.get("responsiveLayout")?.get("hiddenColumns")
+                    (tabulator.tabulatorJs?.modules?.jsGet("responsiveLayout")?.jsGet("hiddenColumns")
                         ?.unsafeCast<JsArray<ColumnComponent>>())?.toList()?.map {
                             it.getField()
                         } ?: emptyList()
@@ -828,10 +833,10 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                 icon.classList.add(if (!it.isVisible() && !responsiveHiddenColumns.contains(it.getField())) iconUnchecked else iconChecked)
                 val label = SafeDomFactory.createElement("span")
                 val title = SafeDomFactory.createElement("span")
-                title.textContent = " " + it.getDefinition()["title"]
+                title.textContent = " " + it.getDefinition().jsGet("title")
                 label.appendChild(icon)
                 label.appendChild(title)
-                obj<TabulatorMenuItem> {
+                jso<TabulatorMenuItem> {
                     this.label = label
                     this.action = { e: Event ->
                         e.stopPropagation()
@@ -853,9 +858,9 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                     }
                 }
             } ?: emptyList()
-            (columns + listOf(obj {
+            (columns + listOf(jso {
                 separator = true
-            }, obj {
+            }, jso {
                 val icon = SafeDomFactory.createElement("i")
                 icon.classList.add(resetIconPrefix)
                 icon.classList.add(resetIcon)
@@ -880,16 +885,16 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
     val responsiveCollapseOptions = if (responsiveCollapseAuto) {
         val headerClick: (JsAny) -> Boolean = {
             val columnsOpened = document.querySelectorAll("div.tabulator-responsive-collapse-toggle")
-                .asList().firstOrNull()?.let {
+                .toList().firstOrNull()?.let {
                     (it.unsafeCast<HTMLElement>()).classList.contains("open")
                 } ?: false
             if (columnsOpened) {
-                document.querySelectorAll("div.tabulator-responsive-collapse-toggle.open").asList()
+                document.querySelectorAll("div.tabulator-responsive-collapse-toggle.open").toList()
                     .forEach {
                         (it.unsafeCast<HTMLElement>()).click()
                     }
             } else {
-                document.querySelectorAll("div.tabulator-responsive-collapse-toggle:not(.open)").asList()
+                document.querySelectorAll("div.tabulator-responsive-collapse-toggle:not(.open)").toList()
                     .forEach {
                         (it.unsafeCast<HTMLElement>()).click()
                     }

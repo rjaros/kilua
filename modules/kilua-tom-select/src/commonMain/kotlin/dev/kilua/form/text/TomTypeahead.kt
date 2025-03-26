@@ -31,27 +31,28 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
 import dev.kilua.externals.assign
-import dev.kilua.externals.get
-import dev.kilua.externals.obj
+import dev.kilua.utils.jsGet
 import dev.kilua.form.Autocomplete
 import dev.kilua.form.InputType
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.toJs
 import dev.kilua.html.div
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.rem
+import dev.kilua.utils.toBoolean
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toJsArray
+import dev.kilua.utils.toJsString
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import web.JsAny
-import web.JsArray
-import web.JsBoolean
-import web.JsString
-import web.document
-import web.toBoolean
-import web.toJsString
+import js.core.JsAny
+import js.core.JsBoolean
+import js.core.JsString
+import js.objects.jso
+import web.dom.InsertPosition
+import web.dom.document
 
 /**
  * Tom Typeahead input component
@@ -199,8 +200,8 @@ public open class TomTypeahead(
                 val existingOption = tomSelectInstance?.getOption(value!!, false)
                 if (existingOption == null) {
                     tomSelectInstance?.clearOptions { option ->
-                        option["created"]?.unsafeCast<JsBoolean>()?.toBoolean() != true ||
-                                option["value"]?.unsafeCast<JsString>()?.toString() == value
+                        option.jsGet("created")?.unsafeCast<JsBoolean>()?.toBoolean() != true ||
+                                option.jsGet("value")?.unsafeCast<JsString>()?.toString() == value
                     }
                     tomSelectInstance?.addOption(
                         jsObjectOf(
@@ -233,7 +234,7 @@ public open class TomTypeahead(
     protected open fun initializeTomSelect() {
         if (renderConfig.isDom) {
             val self = this
-            val tomSelectOptions = obj<TomSelectOptionsJs> {
+            val tomSelectOptions = jso<TomSelectOptionsJs> {
                 this.maxItems = 1
                 this.create = { input: JsString ->
                     val oldValue = tomSelectInstance?.getValue()?.unsafeCast<JsString>()?.toString()?.ifBlank { null }
@@ -256,7 +257,7 @@ public open class TomTypeahead(
                         )
                     }.toJsArray()
                 }
-                this.render = obj {
+                this.render = jso {
                     this.option_create = { _: JsAny, _: (String) -> String ->
                         ""
                     }
@@ -283,8 +284,8 @@ public open class TomTypeahead(
                 }
                 this.onOptionAdd = { value: String, _: JsAny ->
                     tomSelectInstance?.clearOptions { option: JsAny ->
-                        option["created"]?.unsafeCast<JsBoolean>()?.toBoolean() != true ||
-                                option["value"]?.unsafeCast<JsString>()?.toString() == value
+                        option.jsGet("created")?.unsafeCast<JsBoolean>()?.toBoolean() != true ||
+                                option.jsGet("value")?.unsafeCast<JsString>()?.toString() == value
                     }
                 }
                 this.onFocus = {
@@ -312,7 +313,7 @@ public open class TomTypeahead(
             tomSelectInstance = null
             // Restore the empty div after the Tom Select instance is removed
             val emptyDiv = document.createElement("div")
-            element.insertAdjacentElement("afterend", emptyDiv)
+            element.insertAdjacentElement(InsertPosition.afterend, emptyDiv)
         }
     }
 

@@ -26,11 +26,13 @@ import androidx.compose.runtime.setValue
 import dev.kilua.core.IComponent
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.externals.console
-import dev.kilua.externals.obj
 import dev.kilua.html.div
 import dev.kilua.html.px
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.toList
-import web.dom.observers.IntersectionObserver
+import dev.kilua.utils.unsafeCast
+import web.intersection.IntersectionObserver
+import web.intersection.IntersectionObserverEntry
 import kotlin.random.Random
 import kotlin.random.nextUInt
 
@@ -50,11 +52,11 @@ internal fun IComponent.visibilityDetector(onVisible: () -> Unit) {
 
         val observer = IntersectionObserver(
             callback = { entries, _ ->
-                if (entries.toList().any { it.isIntersecting }) {
+                if (entries.unsafeCast<JsArray<IntersectionObserverEntry>>().toList().any { it.isIntersecting }) {
                     onVisible()
                     hit++
                 }
-            }, obj {}
+            }
         )
 
         observer.observe(div)

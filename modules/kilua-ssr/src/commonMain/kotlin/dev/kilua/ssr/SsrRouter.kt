@@ -40,9 +40,6 @@ import dev.kilua.CssRegister
 import dev.kilua.KiluaScope
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.IComponent
-import dev.kilua.externals.get
-import dev.kilua.externals.globalThis
-import dev.kilua.externals.set
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
@@ -50,12 +47,15 @@ import dev.kilua.routing.DoneCallbackCompositionLocal
 import dev.kilua.routing.internalGlobalRouter
 import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
+import dev.kilua.utils.jsGet
+import dev.kilua.utils.jsSet
 import dev.kilua.utils.nativeMapOf
+import dev.kilua.utils.toJsString
 import dev.kilua.utils.unsafeCast
+import js.core.JsAny
+import js.globals.globalThis
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import web.JsAny
-import web.toJsString
 
 /**
  * A router supporting Server-Side Rendering (SSR).
@@ -134,11 +134,11 @@ internal class SsrRouter(
         if (!root.renderConfig.isDom) {
             val rpcUrlPrefix = getCommandLineParameter("--rpc-url-prefix")
             if (rpcUrlPrefix != null) {
-                globalThis["rpc_url_prefix"] = rpcUrlPrefix.toJsString()
+                globalThis.jsSet("rpc_url_prefix", rpcUrlPrefix.toJsString())
             }
             val contextPath = getCommandLineParameter("--context-path")
             if (contextPath != null) {
-                globalThis["ssr_context_path"] = contextPath.toJsString()
+                globalThis.jsSet("ssr_context_path", contextPath.toJsString())
             }
             val port = getCommandLineParameter("--port")?.toIntOrNull()
             startSsr(port ?: 7788)
@@ -186,7 +186,7 @@ internal class SsrRouter(
                     }
                     lock = true
                     val clientLanguage =
-                        req.headers["x-kilua-locale"]?.toString() ?: LocaleManager.defaultLocale.language
+                        req.headers.jsGet("x-kilua-locale")?.toString() ?: LocaleManager.defaultLocale.language
                     val localeChanged = LocaleManager.currentLocale.language != clientLanguage
                     val pathChanged = currentPath().toString() != req.url
                     if (localeChanged || pathChanged) {
@@ -227,5 +227,6 @@ internal class SsrRouter(
  * Get the context path configured for the SSR engine.
  */
 public fun getContextPath(): String {
-    return (if (isDom) globalThis["ssr_context_path"]?.toString() else getCommandLineParameter("--context-path")) ?: ""
+    return (if (isDom) globalThis.jsGet("ssr_context_path")?.toString() else getCommandLineParameter("--context-path"))
+        ?: ""
 }

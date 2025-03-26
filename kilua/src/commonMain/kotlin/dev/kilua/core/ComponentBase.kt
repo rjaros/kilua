@@ -22,13 +22,13 @@
 
 package dev.kilua.core
 
+import dev.kilua.utils.clear
 import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
-import web.clear
-import web.dom.CustomEvent
-import web.dom.CustomEventInit
 import web.dom.Node
-import web.dom.get
+import web.events.CustomEvent
+import web.events.CustomEventInit
+import web.events.EventType
 
 /**
  * Base class for all components.
@@ -132,8 +132,8 @@ public abstract class ComponentBase(
     /**
      * Dispatches a custom event.
      */
-    public open fun dispatchEvent(type: String, eventInitDict: CustomEventInit): Boolean {
-        val event = CustomEvent(type, eventInitDict)
+    public open fun dispatchEvent(type: String, eventInitDict: CustomEventInit<*>): Boolean {
+        val event = CustomEvent(EventType(type), eventInitDict)
         return if (renderConfig.isDom) node.dispatchEvent(event) else true
     }
 

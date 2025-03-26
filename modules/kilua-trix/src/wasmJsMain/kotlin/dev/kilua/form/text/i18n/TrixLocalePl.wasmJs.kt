@@ -23,10 +23,10 @@
 package dev.kilua.form.text.i18n
 
 import dev.kilua.externals.TrixLocale
-import dev.kilua.externals.obj
+import js.objects.jso
 
 internal actual fun getTrixLocalePl(): TrixLocale {
-    return obj<TrixLocaleWasm> {
+    return jso<TrixLocaleWasm> {
         initTrixLocalePl()
     }
 }

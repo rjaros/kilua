@@ -30,9 +30,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
-import web.JsAny
-import web.Promise
-import web.document
+import js.core.JsAny
+import js.promise.Promise
+import web.dom.InsertPosition
+import web.dom.document
 import kotlin.test.DefaultAsserter.assertTrue
 
 public val testScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
@@ -94,7 +95,7 @@ public interface DomSpec : TestSpec {
         if (isDom) {
             val fixture = "<div style=\"display: none\" id=\"pretest\">" +
                     "<div id=\"${getTestId()}\"></div></div>"
-            document.body?.insertAdjacentHTML("afterbegin", fixture)
+            document.body.insertAdjacentHTML(InsertPosition.afterbegin, fixture)
         }
     }
 

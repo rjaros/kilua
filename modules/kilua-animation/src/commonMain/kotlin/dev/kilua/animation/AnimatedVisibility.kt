@@ -30,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.core.IComponent
 import dev.kilua.html.Display
-import dev.kilua.html.Overflow
 import dev.kilua.html.Position
 import dev.kilua.html.div
 import kotlinx.coroutines.delay

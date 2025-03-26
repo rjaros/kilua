@@ -29,7 +29,7 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.toKebabCase
-import web.dom.HTMLTableCellElement
+import web.html.HTMLTableCellElement
 
 /**
  * Table header scopes.

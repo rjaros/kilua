@@ -22,13 +22,18 @@
 
 package dev.kilua.theme
 
-import dev.kilua.externals.buildCustomEventInit
+import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.utils.isDom
 import dev.kilua.utils.toKebabCase
-import web.document
-import web.dom.CustomEvent
-import web.localStorage
-import web.window
+import js.core.JsAny
+import web.cssom.MediaQuery
+import web.cssom.matchMedia
+import web.dom.document
+import web.events.CustomEvent
+import web.events.Event
+import web.events.EventType
+import web.events.addEventListener
+import web.storage.localStorage
 
 /**
  * Tailwindcss color themes.
@@ -61,11 +66,16 @@ public object ThemeManager {
             setStoredTheme(value)
             if (isDom) {
                 if (value == Theme.Auto && getPreferredTheme() == Theme.Dark || value == Theme.Dark) {
-                    document.documentElement?.classList?.add("dark")
+                    document.documentElement.classList.add("dark")
                 } else {
-                    document.documentElement?.classList?.remove("dark")
+                    document.documentElement.classList.remove("dark")
                 }
-                document.dispatchEvent(CustomEvent("kilua.theme.changed", buildCustomEventInit(null)))
+                document.dispatchEvent(
+                    CustomEvent(
+                        EventType<CustomEvent<JsAny>>("kilua.theme.changed"),
+                        buildCustomEventInit()
+                    )
+                )
             }
         }
 
@@ -78,20 +88,20 @@ public object ThemeManager {
         this.theme = initialTheme ?: getStoredTheme() ?: getPreferredTheme()
         if (isDom) {
             if (theme == Theme.Auto && getPreferredTheme() == Theme.Dark || theme == Theme.Dark) {
-                document.documentElement?.classList?.add("dark")
+                document.documentElement.classList.add("dark")
             } else {
-                document.documentElement?.classList?.remove("dark")
+                document.documentElement.classList.remove("dark")
             }
-            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change") {
+            matchMedia(MediaQuery("(prefers-color-scheme: dark)")).addEventListener(EventType<Event>("change"), {
                 val storedTheme = getStoredTheme() ?: Theme.Auto
                 if (storedTheme == Theme.Auto) {
                     if (getPreferredTheme() == Theme.Dark) {
-                        document.documentElement?.classList?.add("dark")
+                        document.documentElement.classList.add("dark")
                     } else {
-                        document.documentElement?.classList?.remove("dark")
+                        document.documentElement.classList.remove("dark")
                     }
                 }
-            }
+            })
         }
     }
 
@@ -108,7 +118,7 @@ public object ThemeManager {
     }
 
     private fun getPreferredTheme(): Theme {
-        return if (isDom && window.matchMedia("(prefers-color-scheme: dark)").matches) Theme.Dark else Theme.Light
+        return if (isDom && matchMedia(MediaQuery("(prefers-color-scheme: dark)")).matches) Theme.Dark else Theme.Light
     }
 
 }

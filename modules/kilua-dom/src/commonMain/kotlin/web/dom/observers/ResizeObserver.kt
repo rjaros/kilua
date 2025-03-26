@@ -27,7 +27,7 @@
 
 package web.dom.observers
 
-import web.JsAny
+import js.core.JsAny
 import web.dom.Element
 
 /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/ResizeObserver) */

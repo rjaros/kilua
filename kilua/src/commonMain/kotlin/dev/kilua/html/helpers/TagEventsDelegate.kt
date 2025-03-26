@@ -26,18 +26,20 @@ package dev.kilua.html.helpers
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
-import dev.kilua.externals.AbortController
-import dev.kilua.externals.buildAddEventListenerOptions
+import dev.kilua.utils.buildAddEventListenerOptions
 import dev.kilua.utils.cast
 import dev.kilua.utils.nativeMapOf
-import web.dom.HTMLElement
-import web.dom.TouchEvent
-import web.dom.events.Event
-import web.dom.events.FocusEvent
-import web.dom.events.InputEvent
-import web.dom.events.KeyboardEvent
-import web.dom.events.MouseEvent
-import web.dom.pointerevents.PointerEvent
+import web.abort.AbortController
+import web.events.Event
+import web.events.EventType
+import web.events.addEventListener
+import web.html.HTMLElement
+import web.uievents.FocusEvent
+import web.uievents.InputEvent
+import web.uievents.KeyboardEvent
+import web.uievents.MouseEvent
+import web.uievents.PointerEvent
+import web.uievents.TouchEvent
 
 /**
  * Common tag events delegate.
@@ -305,7 +307,7 @@ public open class TagEventsDelegateImpl<E : HTMLElement>(
         eventsAbortControllers[name]?.abort()
         val abortController = AbortController()
         eventsAbortControllers[name] = abortController
-        element.addEventListener(name, { event ->
+        element.addEventListener(EventType<Event>(name), { event ->
             listeners.forEach { (_, listener) ->
                 listener(event)
             }

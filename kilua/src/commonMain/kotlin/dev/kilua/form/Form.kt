@@ -30,10 +30,7 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.JSON
-import dev.kilua.externals.get
 import dev.kilua.externals.keys
-import dev.kilua.externals.obj
-import dev.kilua.externals.set
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
@@ -41,8 +38,16 @@ import dev.kilua.types.KFile
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.Serialization.toObj
 import dev.kilua.utils.cast
+import dev.kilua.utils.jsGet
+import dev.kilua.utils.jsSet
 import dev.kilua.utils.nativeMapOf
+import dev.kilua.utils.obj
+import dev.kilua.utils.toJsAny
+import dev.kilua.utils.toJsBoolean
+import dev.kilua.utils.toJsNumber
+import dev.kilua.utils.toJsString
 import dev.kilua.utils.toKebabCase
+import js.core.JsAny
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -58,11 +63,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import web.JsAny
-import web.dom.HTMLFormElement
-import web.toJsBoolean
-import web.toJsNumber
-import web.toJsString
+import web.html.HTMLFormElement
+import web.window.WindowName
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 
@@ -136,7 +138,10 @@ public class Form<K : Any>(
      */
     public var method: FormMethod? by updatingProperty(method) {
         if (it != null) {
-            element.method = it.toString()
+            element.method = when (it) {
+                FormMethod.Get -> web.form.FormMethod.get
+                FormMethod.Post -> web.form.FormMethod.post
+            }
         } else {
             element.removeAttribute("method")
         }
@@ -178,7 +183,11 @@ public class Form<K : Any>(
      */
     public var enctype: FormEnctype? by updatingProperty(enctype) {
         if (it != null) {
-            element.enctype = it.toString()
+            element.enctype = when(it) {
+                FormEnctype.Urlencoded -> web.form.FormEncType.applicationXWwwFormUrlencoded
+                FormEnctype.Multipart -> web.form.FormEncType.multipartFormData
+                FormEnctype.Plain -> web.form.FormEncType.textPlain
+            }
         } else {
             element.removeAttribute("enctype")
         }
@@ -220,7 +229,7 @@ public class Form<K : Any>(
      */
     public var target: String? by updatingProperty {
         if (it != null) {
-            element.target = it
+            element.target = WindowName(it)
         } else {
             element.removeAttribute("target")
         }
@@ -262,7 +271,10 @@ public class Form<K : Any>(
      */
     public var autocomplete: FormAutocomplete? by updatingProperty {
         if (it != null) {
-            element.autocomplete = it.toString()
+            element.autocomplete = when(it) {
+                FormAutocomplete.On -> web.autofill.AutoFillBase.on
+                FormAutocomplete.Off -> web.autofill.AutoFillBase.off
+            }
         } else {
             element.removeAttribute("autocomplete")
         }
@@ -372,13 +384,20 @@ public class Form<K : Any>(
     init {
         if (renderConfig.isDom) {
             if (method != null) {
-                element.method = method.toString()
+                element.method = when(method) {
+                    FormMethod.Get -> web.form.FormMethod.get
+                    FormMethod.Post -> web.form.FormMethod.post
+                }
             }
             if (action != null) {
                 element.action = action
             }
             if (enctype != null) {
-                element.enctype = enctype.toString()
+                element.enctype = when(enctype) {
+                    FormEnctype.Urlencoded -> web.form.FormEncType.applicationXWwwFormUrlencoded
+                    FormEnctype.Multipart -> web.form.FormEncType.multipartFormData
+                    FormEnctype.Plain -> web.form.FormEncType.textPlain
+                }
             }
         }
         mapToObjectConverter = serializer?.let {
@@ -387,35 +406,35 @@ public class Form<K : Any>(
                 map.forEach { (key, value) ->
                     when (value) {
                         is LocalDate, is LocalDateTime, is LocalTime -> {
-                            json[key] = value.toString().toJsString()
+                            json.jsSet(key, value.toString().toJsString())
                         }
 
                         is String -> {
-                            json[key] = value.toJsString()
+                            json.jsSet(key, value.toJsString())
                         }
 
                         is Boolean -> {
-                            json[key] = value.toJsBoolean()
+                            json.jsSet(key, value.toJsBoolean())
                         }
 
                         is Int -> {
-                            json[key] = value.toJsNumber()
+                            json.jsSet(key, value.toJsNumber())
                         }
 
                         is Double -> {
-                            json[key] = value.toJsNumber()
+                            json.jsSet(key, value.toJsNumber())
                         }
 
                         is List<*> -> {
                             @Suppress("UNCHECKED_CAST")
                             (value as? List<KFile>)?.toObj(ListSerializer(KFile.serializer()))?.let {
-                                json[key] = it
+                                json.jsSet(key, it)
                             }
                         }
 
                         else -> {
                             if (value != null) {
-                                json[key] = value.cast()
+                                json.jsSet(key, value.toJsAny()!!)
                             }
                         }
                     }
@@ -441,7 +460,7 @@ public class Form<K : Any>(
      * @param json data model as Object
      */
     private fun setDataInternalFromSingleObject(json: JsAny, key: String) {
-        val jsonValue = json[key]
+        val jsonValue = json.jsGet(key)
         if (jsonValue != null) {
             when (val formField = fields[key]) {
                 is StringFormControl -> formField.value = jsonValue.toString()

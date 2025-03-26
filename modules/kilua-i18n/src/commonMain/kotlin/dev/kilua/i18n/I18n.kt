@@ -26,9 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import dev.kilua.externals.get
+import dev.kilua.utils.jsGet
 import name.kropp.kotlinx.gettext.Gettext
-import web.JsAny
+import js.core.JsAny
 
 /**
  * Provides translations by the underlying gettext library.
@@ -37,7 +37,7 @@ public class I18n(vararg localeData: Pair<String, JsAny>) : LocaleChangeListener
 
     private val localeMap: Map<String, Gettext> = localeData.associate { (locale, data) ->
         val poFile = try {
-            data["default"]!!.toString()
+            data.jsGet("default")!!.toString()
         } catch (e: Throwable) {
             data.toString()
         }

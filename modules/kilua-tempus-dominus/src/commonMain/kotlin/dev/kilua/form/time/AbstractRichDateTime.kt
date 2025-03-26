@@ -29,8 +29,7 @@ import dev.kilua.externals.Date
 import dev.kilua.externals.Intl
 import dev.kilua.externals.TempusDominus
 import dev.kilua.externals.TempusDominusOptions
-import dev.kilua.externals.obj
-import dev.kilua.externals.set
+import dev.kilua.utils.jsSet
 import dev.kilua.externals.tempusDominusLocales
 import dev.kilua.externals.toDate
 import dev.kilua.form.text.text
@@ -43,13 +42,17 @@ import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
+import dev.kilua.utils.toJsNumber
+import dev.kilua.utils.toJsString
 import dev.kilua.utils.toKebabCase
 import kotlinx.datetime.LocalDate
-import web.JsAny
-import web.document
-import web.dom.events.Event
-import web.toJsNumber
-import web.toJsString
+import js.core.JsAny
+import js.objects.jso
+import web.dom.document
+import web.events.Event
+import web.events.EventType
+import web.events.addEventListener
+import web.events.removeEventListener
 import kotlin.time.Duration
 
 /**
@@ -556,7 +559,7 @@ public abstract class AbstractRichDateTime(
     override fun onInsert() {
         initializeTempusDominus()
         if (renderConfig.isDom) {
-            document.addEventListener("kilua.theme.changed", refreshCallback)
+            document.addEventListener(EventType<Event>("kilua.theme.changed"), refreshCallback)
         }
     }
 
@@ -564,7 +567,7 @@ public abstract class AbstractRichDateTime(
         tempusDominusInstance?.dispose()
         tempusDominusInstance = null
         if (renderConfig.isDom) {
-            document.removeEventListener("kilua.theme.changed", refreshCallback)
+            document.removeEventListener(EventType<Event>("kilua.theme.changed"), refreshCallback)
         }
     }
 
@@ -593,28 +596,29 @@ public abstract class AbstractRichDateTime(
         if (renderConfig.isDom) {
             val secondsView = format.contains("ss")
             val language = locale.language
-            val locale = tempusDominusLocales[language]?.localization ?: obj()
-            locale["locale"] = language.toJsString()
-            locale["format"] = inputFormat.toJsString()
+            val locale = tempusDominusLocales[language]?.localization ?: jso()
+            val map = mutableMapOf("a" to "b")
+            locale.jsSet("locale", language.toJsString())
+            locale.jsSet("format", inputFormat.toJsString())
             if (monthHeaderFormat != null || yearHeaderFormat != null) {
-                locale["dayViewHeaderFormat"] = jsObjectOf(
+                locale.jsSet("dayViewHeaderFormat", jsObjectOf(
                     "month" to if (monthHeaderFormat != null) monthHeaderFormat!!.value else "long",
                     "year" to if (yearHeaderFormat != null) yearHeaderFormat!!.value else "2-digit"
-                )
+                ))
             }
             if (hourCycle != null) {
-                locale["hourCycle"] = hourCycle!!.value.toJsString()
+                locale.jsSet("hourCycle", hourCycle!!.value.toJsString())
             }
             val initialViewMode = viewMode ?: if (calendarView) ViewMode.Calendar else ViewMode.Clock
             val currentTheme = if (theme == null || theme == Theme.Auto) {
-                document.documentElement?.getAttribute("data-bs-theme")?.let { theme ->
+                document.documentElement.getAttribute("data-bs-theme")?.let { theme ->
                     Theme.entries.find { theme == it.value }
                 }
             } else {
                 theme
             }
             val component = this
-            val tempusDominusOptions = obj<TempusDominusOptions> {
+            val tempusDominusOptions = jso<TempusDominusOptions> {
                 this.useCurrent = component.inline
                 if (defaultValue != null) {
                     this.defaultDate = defaultValue
@@ -637,7 +641,7 @@ public abstract class AbstractRichDateTime(
                 if (component.meta != null) {
                     this.meta = component.meta!!
                 }
-                this.restrictions = obj {
+                this.restrictions = jso {
                     if (component.minDate != null) this.minDate = component.minDate!!.toDate()
                     if (component.maxDate != null) this.maxDate = component.maxDate!!.toDate()
                     if (!component.enabledDates.isNullOrEmpty()) this.enabledDates =
@@ -651,9 +655,9 @@ public abstract class AbstractRichDateTime(
                     if (!component.disabledHours.isNullOrEmpty()) this.disabledHours =
                         component.disabledHours!!.map { it.toJsNumber() }.toJsArray()
                 }
-                this.display = obj {
+                this.display = jso {
                     if (component.customIcons != null) {
-                        this.icons = obj {
+                        this.icons = jso {
                             component.customIcons!!.type?.let { this.type = it }
                             component.customIcons!!.time?.let { this.time = it }
                             component.customIcons!!.date?.let { this.date = it }
@@ -671,12 +675,12 @@ public abstract class AbstractRichDateTime(
                     this.viewMode = initialViewMode.value
                     component.toolbarPlacement?.let { this.toolbarPlacement = it.value }
                     this.keepOpen = component.keepOpen
-                    this.buttons = obj {
+                    this.buttons = jso {
                         this.clear = component.showClear
                         this.close = component.showClose
                         this.today = component.showToday
                     }
-                    this.components = obj {
+                    this.components = jso {
                         this.calendar = calendarView
                         this.clock = clockView
                         this.seconds = secondsView

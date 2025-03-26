@@ -23,7 +23,7 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import web.dom.DragEvent
+import web.uievents.DragEvent
 
 /**
  * Common drag and drop methods.

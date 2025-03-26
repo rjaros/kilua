@@ -29,25 +29,30 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.JSON
-import dev.kilua.externals.get
-import dev.kilua.externals.globalThis
-import dev.kilua.externals.undefined
 import dev.kilua.promise
+import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RemoteData
 import dev.kilua.rpc.RemoteFilter
 import dev.kilua.rpc.RemoteSorter
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.Serialization
+import dev.kilua.utils.jsArrayOf
+import dev.kilua.utils.jsGet
+import dev.kilua.utils.jsSet
 import dev.kilua.utils.rem
+import dev.kilua.utils.toJsString
+import dev.kilua.utils.unsafeCast
+import js.core.JsAny
+import js.globals.globalThis
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import web.JsAny
-import web.JsArray
-import web.fetch.RequestInit
+import web.http.RequestInit
+import kotlin.js.undefined
 import kotlin.reflect.KClass
 
 public open class TabulatorRemote<T : Any>(
@@ -186,15 +191,15 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemoteRef(
 ): TabulatorRemote<T> {
     val optionsState = remember {
         val (url, _) = serviceManager.requireCall(function)
-        val rpcUrlPrefix = globalThis["rpc_url_prefix"]
-        val urlPrefix: String = if (rpcUrlPrefix != undefined()) "$rpcUrlPrefix/" else ""
+        val rpcUrlPrefix = globalThis.jsGet("rpc_url_prefix")
+        val urlPrefix: String = if (rpcUrlPrefix != undefined) "$rpcUrlPrefix/" else ""
         options.copy(
             ajaxURL = urlPrefix + url.drop(1),
             ajaxRequestFunc = { _, _, params ->
-                val page = params["page"]?.toString()
-                val size = params["size"]?.toString()
-                val filters = params["filter"]?.let { JSON.stringify(it) }
-                val sorters = params["sort"]?.let { JSON.stringify(it) }
+                val page = params.jsGet("page")?.toString()
+                val size = params.jsGet("size")?.toString()
+                val filters = params.jsGet("filter")?.let { JSON.stringify(it) }
+                val sorters = params.jsGet("sort")?.let { JSON.stringify(it) }
                 promise {
                     getDataForTabulatorRemote(
                         serviceManager,
@@ -256,15 +261,15 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
 ) {
     val optionsState = remember {
         val (url, _) = serviceManager.requireCall(function)
-        val rpcUrlPrefix = globalThis["rpc_url_prefix"]
-        val urlPrefix: String = if (rpcUrlPrefix != undefined()) "$rpcUrlPrefix/" else ""
+        val rpcUrlPrefix = globalThis.jsGet("rpc_url_prefix")
+        val urlPrefix: String = if (rpcUrlPrefix != undefined) "$rpcUrlPrefix/" else ""
         options.copy(
             ajaxURL = urlPrefix + url.drop(1),
             ajaxRequestFunc = { _, _, params ->
-                val page = params["page"]?.toString()
-                val size = params["size"]?.toString()
-                val filters = params["filter"]?.let { JSON.stringify(it) }
-                val sorters = params["sort"]?.let { JSON.stringify(it) }
+                val page = params.jsGet("page")?.toString()
+                val size = params.jsGet("size")?.toString()
+                val filters = params.jsGet("filter")?.let { JSON.stringify(it) }
+                val sorters = params.jsGet("sort")?.let { JSON.stringify(it) }
                 promise {
                     getDataForTabulatorRemote(
                         serviceManager,
@@ -295,13 +300,38 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
     )
 }
 
-public expect suspend fun <T : Any, E : Any> getDataForTabulatorRemote(
+public suspend fun <T : Any, E : Any> getDataForTabulatorRemote(
     serviceManager: RpcServiceMgr<E>,
     function: suspend E.(Int?, Int?, List<RemoteFilter>?, List<RemoteSorter>?, String?) -> RemoteData<T>,
-    stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    stateFunction: (() -> String)?,
+    requestFilter: (suspend RequestInit.() -> Unit)?,
     page: String?,
     size: String?,
     filters: String?,
     sorters: String?
-): JsArray<JsAny>
+): JsArray<JsAny> {
+    val (url, method) = serviceManager.requireCall(function)
+    val callAgent = CallAgent()
+    val state = stateFunction?.invoke()?.let { JSON.stringify(it.toJsString()) }
+    val r = callAgent.jsonRpcCall(
+        url,
+        listOf(page, size, filters, sorters, state),
+        method = method,
+        requestFilter = requestFilter?.let { requestFilterParam ->
+            {
+                val self = this.unsafeCast<RequestInit>()
+                self.requestFilterParam()
+            }
+        })
+    val result = JSON.parse<JsAny>(r)
+    return if (page != null) {
+        if (result.jsGet("data") == null) {
+            result.jsSet("data", jsArrayOf<JsAny>())
+        }
+        result.unsafeCast()
+    } else if (result.jsGet("data") == null) {
+        jsArrayOf()
+    } else {
+        result.jsGet("data")!!.unsafeCast()
+    }
+}

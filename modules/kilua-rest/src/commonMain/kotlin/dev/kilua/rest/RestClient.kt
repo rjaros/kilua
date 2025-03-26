@@ -25,12 +25,12 @@ package dev.kilua.rest
 import dev.kilua.externals.JSON
 import dev.kilua.externals.console
 import dev.kilua.externals.delete
-import dev.kilua.externals.get
+import dev.kilua.utils.jsGet
 import dev.kilua.externals.keys
-import dev.kilua.externals.obj
-import dev.kilua.externals.set
+import dev.kilua.utils.jsSet
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.cast
+import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerializationStrategy
@@ -38,12 +38,18 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import web.JsAny
-import web.dom.url.URLSearchParams
-import web.fetch.RequestInit
-import web.fetch.Response
-import web.toJsString
-import web.window
+import js.core.JsAny
+import js.core.JsString
+import js.objects.ReadonlyRecord
+import js.objects.jso
+import js.promise.catch
+import web.http.BodyInit
+import web.http.Headers
+import web.http.RequestInit
+import web.http.RequestMethod
+import web.http.Response
+import web.http.fetchAsync
+import web.url.URLSearchParams
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
@@ -260,18 +266,23 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
         block: RestRequestConfig<T, V>.() -> Unit = {}
     ): RestResponse<T> {
         val restRequestConfig = RestRequestConfig<T, V>().apply(block)
-        val requestInit = obj<RequestInit> {}
-        requestInit.method = restRequestConfig.method.name
-        if (restRequestConfig.data != null &&
+        val method = when(restRequestConfig.method) {
+            HttpMethod.Get -> RequestMethod.GET
+            HttpMethod.Post -> RequestMethod.POST
+            HttpMethod.Put -> RequestMethod.PUT
+            HttpMethod.Delete -> RequestMethod.DELETE
+            HttpMethod.Options -> RequestMethod.OPTIONS
+            HttpMethod.Head -> RequestMethod.HEAD
+        }
+        val body = if (restRequestConfig.data != null &&
             restRequestConfig.method != HttpMethod.Get && restRequestConfig.method != HttpMethod.Head
         ) {
-            requestInit.body = when (restRequestConfig.contentType) {
+            when (restRequestConfig.contentType) {
                 "application/json" -> {
                     if (restRequestConfig.serializer != null) {
-                        JsonInstance.encodeToString(restRequestConfig.serializer!!, restRequestConfig.data!!)
-                            .toJsString()
+                        BodyInit(JsonInstance.encodeToString(restRequestConfig.serializer!!, restRequestConfig.data!!))
                     } else {
-                        JSON.stringify(restRequestConfig.data!!.cast()).toJsString()
+                        BodyInit(JSON.stringify(restRequestConfig.data!!.cast()))
                     }
                 }
 
@@ -281,7 +292,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
                     } else {
                         restRequestConfig.data!!.cast()
                     }
-                    URLSearchParams(removeNulls(dataSer))
+                    URLSearchParams(removeNulls(dataSer).unsafeCast<ReadonlyRecord<JsString, JsString>>())
                 }
 
                 else -> {
@@ -292,6 +303,21 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
                     }
                 }
             }
+        } else null
+        val headers = Headers()
+        if (restRequestConfig.contentType != null) {
+            headers.append("Content-Type", restRequestConfig.contentType!!)
+        }
+        restClientConfig.headers?.invoke()?.forEach {
+            headers.append(it.first, it.second)
+        }
+        restRequestConfig.headers?.invoke()?.forEach {
+            headers.append(it.first, it.second)
+        }
+        val requestInit = jso<RequestInit> {
+            jsSet("method", method)
+            if (body != null) jsSet("body", body)
+            jsSet("headers", headers)
         }
         val dataUrl = if (restRequestConfig.method == HttpMethod.Get && restRequestConfig.data != null) {
             val dataSer = if (restRequestConfig.serializer != null) {
@@ -299,25 +325,15 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
             } else {
                 restRequestConfig.data!!.cast()
             }
-            url + "?" + URLSearchParams(removeNulls(dataSer)).toString()
+            url + "?" + URLSearchParams(removeNulls(dataSer).unsafeCast<ReadonlyRecord<JsString, JsString>>()).toString()
         } else {
             url
         }
         val fetchUrl = if (restClientConfig.baseUrl != null) restClientConfig.baseUrl + dataUrl else dataUrl
-        requestInit.headers = obj()
-        if (restRequestConfig.contentType != null) {
-            requestInit.headers!!["Content-Type"] = restRequestConfig.contentType!!.toJsString()
-        }
-        restClientConfig.headers?.invoke()?.forEach {
-            requestInit.headers!![it.first] = it.second.toJsString()
-        }
-        restRequestConfig.headers?.invoke()?.forEach {
-            requestInit.headers!![it.first] = it.second.toJsString()
-        }
         restClientConfig.requestFilter?.invoke(requestInit)
         restRequestConfig.requestFilter?.invoke(requestInit)
         return suspendCancellableCoroutine { continuation ->
-            fetch(fetchUrl, requestInit).then { response ->
+            fetchAsync(fetchUrl, requestInit).then { response ->
                 if (response.ok) {
                     val statusText = response.statusText
                     if (response.status != HTTP_NO_CONTENT) {
@@ -338,11 +354,11 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
                             continuation.resume(RestResponse(result, statusText, response))
                         } else {
                             val body = when (restRequestConfig.responseBodyType) {
-                                ResponseBodyType.Json -> response.json()
-                                ResponseBodyType.Text -> response.text()
-                                ResponseBodyType.Blob -> response.blob()
-                                ResponseBodyType.FormData -> response.formData()
-                                ResponseBodyType.ArrayBuffer -> response.arrayBuffer()
+                                ResponseBodyType.Json -> response.jsonAsync()
+                                ResponseBodyType.Text -> response.textAsync()
+                                ResponseBodyType.Blob -> response.blobAsync()
+                                ResponseBodyType.FormData -> response.formDataAsync()
+                                ResponseBodyType.ArrayBuffer -> response.arrayBufferAsync()
                                 ResponseBodyType.ReadableStream -> throw IllegalStateException() // not possible
                             }
                             body.then {
@@ -429,7 +445,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
      */
     protected fun removeNulls(data: JsAny): JsAny {
         keys(data).forEach {
-            if (data[it] == null) {
+            if (data.jsGet(it) == null) {
                 delete(data, it)
             }
         }

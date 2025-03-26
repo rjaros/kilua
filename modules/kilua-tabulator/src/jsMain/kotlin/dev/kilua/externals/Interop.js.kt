@@ -22,12 +22,12 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.Promise
+import dev.kilua.utils.JsArray
+import js.core.JsAny
+import js.core.JsNumber
+import js.promise.Promise
 import web.dom.Element
-import web.dom.events.Event
+import web.events.Event
 
 internal actual fun toJsAny(f: (JsAny, JsAny, RowComponent, RowComponent, ColumnComponent, String, JsAny?) -> JsNumber): JsAny =
     f.unsafeCast<JsAny>()

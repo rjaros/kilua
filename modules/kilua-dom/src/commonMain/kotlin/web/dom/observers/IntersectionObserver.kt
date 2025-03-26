@@ -27,7 +27,7 @@
 
 package web.dom.observers
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsNumber
 import web.dom.Element

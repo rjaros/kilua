@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.form.InputType
 import dev.kilua.form.TriStateFormControl
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
@@ -35,8 +34,8 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import web.dom.HTMLInputElement
-import web.dom.events.Event
+import web.events.Event
+import web.html.HTMLInputElement
 
 /**
  * Tri-state CheckBox input component.
@@ -241,7 +240,7 @@ public open class TriStateCheckBox(
                 element.indeterminate = true
             }
             @Suppress("LeakingThis")
-            element.type = InputType.Checkbox.value
+            element.type = web.html.InputType.checkbox
             if (name != null) {
                 @Suppress("LeakingThis")
                 element.name = name

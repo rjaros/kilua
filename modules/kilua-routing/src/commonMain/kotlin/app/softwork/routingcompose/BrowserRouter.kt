@@ -21,8 +21,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import web.window
-import web.dom.Location
+import web.events.EventHandler
+import web.history.history
+import web.location.Location
+import web.window.window
 
 /**
  * A router leveraging the History API (https://developer.mozilla.org/en-US/docs/Web/API/History).
@@ -50,7 +52,7 @@ public data object BrowserRouter : Router {
     override fun getPath(initPath: String): State<String> {
         LaunchedEffect(Unit) {
             currentLocation.value = window.location.newPath().takeUnless { it == "/" } ?: initPath
-            window.onpopstate = {
+            window.onpopstate = EventHandler {
                 currentLocation.value = window.location.newPath()
                 Unit
             }
@@ -65,9 +67,9 @@ public data object BrowserRouter : Router {
             currentLocation.value = to
         } else {
             if (replace) {
-                window.history.replaceState(null, "", to)
+                history.replaceState(null, "", to)
             } else {
-                window.history.pushState(null, "", to)
+                history.pushState(null, "", to)
             }
             /*
              The history API unfortunately provides no callback to listen to

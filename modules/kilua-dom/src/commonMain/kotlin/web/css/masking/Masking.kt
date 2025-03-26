@@ -13,7 +13,7 @@
 
 package web.css.masking
 
-import web.JsAny
+import js.core.JsAny
 import web.dom.svg.SVGAnimatedEnumeration
 import web.dom.svg.SVGAnimatedLength
 import web.dom.svg.SVGAnimatedTransformList

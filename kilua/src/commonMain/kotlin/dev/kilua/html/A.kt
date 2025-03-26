@@ -29,7 +29,7 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
-import web.dom.HTMLAnchorElement
+import web.html.HTMLAnchorElement
 
 /**
  * HTML A component.
@@ -107,7 +107,7 @@ public open class A(
      */
     public override var target: String? by updatingProperty(target) {
         if (it != null) {
-            element.target = it
+            element.setAttribute("target", it)
         } else {
             element.removeAttribute("target")
         }
@@ -152,7 +152,7 @@ public open class A(
             }
             if (target != null) {
                 @Suppress("LeakingThis")
-                element.target = target
+                element.setAttribute("target", target)
             }
         }
     }

@@ -22,12 +22,12 @@
 
 package dev.kilua.externals
 
-import web.JsAny
-import web.JsArray
-import web.JsNumber
-import web.Promise
+import dev.kilua.utils.JsArray
+import js.core.JsAny
+import js.core.JsNumber
+import js.promise.Promise
 import web.dom.Element
-import web.dom.events.Event
+import web.events.Event
 
 /**
  * A set of hrlper functions to convert different Kotlin functions to JavaScript functions (JsAny).

@@ -13,7 +13,7 @@
 
 package web.dom.events
 
-import web.JsAny
+import js.core.JsAny
 import web.JsArray
 import web.JsNumber
 import web.dom.*
