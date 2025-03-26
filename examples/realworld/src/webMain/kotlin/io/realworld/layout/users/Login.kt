@@ -40,7 +40,7 @@ import dev.kilua.html.ul
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
-import web.dom.events.Event
+import web.events.Event
 
 @Composable
 fun IComponent.loginPage(state: ConduitState, conduitManager: ConduitManager) {

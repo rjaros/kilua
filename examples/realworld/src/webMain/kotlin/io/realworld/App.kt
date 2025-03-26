@@ -34,7 +34,6 @@ import dev.kilua.routing.routeAction
 import dev.kilua.routing.stringAction
 import dev.kilua.ssr.AsyncSsrRouter
 import dev.kilua.startApplication
-import dev.kilua.utils.decodeURIComponent
 import io.realworld.layout.articles.article
 import io.realworld.layout.homePage
 import io.realworld.layout.profilePage
@@ -44,6 +43,7 @@ import io.realworld.layout.users.editorPage
 import io.realworld.layout.users.loginPage
 import io.realworld.layout.users.registerPage
 import io.realworld.layout.users.settingsPage
+import js.uri.decodeURIComponent
 
 class App : Application() {
 

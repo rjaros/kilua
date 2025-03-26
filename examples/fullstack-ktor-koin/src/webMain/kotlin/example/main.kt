@@ -36,7 +36,6 @@ import dev.kilua.TabulatorModule
 import dev.kilua.TomSelectModule
 import dev.kilua.compose.root
 import dev.kilua.externals.console
-import dev.kilua.externals.set
 import dev.kilua.form.select.selectRemote
 import dev.kilua.form.select.tomSelectRemote
 import dev.kilua.form.text.tomTypeaheadRemote
@@ -58,14 +57,12 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.serialization.serializer
-import web.toJsString
 
 class App : Application() {
 
     private val pingService = getService<IPingService>()
 
     override fun start() {
-
         root("root") {
             var value by remember { mutableStateOf("Hello World!") }
             vPanel(gap = 10.px) {
@@ -74,19 +71,19 @@ class App : Application() {
                 selectRemote(getServiceManager(), IPingService::dictionary, stateFunction = {
                     "Some state"
                 }, requestFilter = {
-                    headers["X-My-Header"] = "My value".toJsString()
+                    headers?.append("X-My-Header", "My value")
                 }, value = "2", placeholder = "Select value", className = "form-select")
 
                 tomSelectRemote(getServiceManager(), IPingService::dictionaryTs, stateFunction = {
                     "Some state"
                 }, requestFilter = {
-                    headers["X-My-Header"] = "My value".toJsString()
+                    headers?.append("X-My-Header", "My value")
                 }, value = "uk", placeholder = "Select value", openOnFocus = true, preload = true, emptyOption = true)
 
                 tomTypeaheadRemote(getServiceManager(), IPingService::suggestionList, stateFunction = {
                     "Some state"
                 }, requestFilter = {
-                    headers["X-My-Header"] = "My value".toJsString()
+                    headers?.append("X-My-Header", "My value")
                 }, placeholder = "Country")
 
                 tabulatorRemote(

@@ -20,8 +20,6 @@
  * SOFTWARE.
  */
 
-import dev.kilua.externals.get
-import dev.kilua.externals.set
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -32,8 +30,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
-import web.localStorage
-import web.toJsString
+import web.storage.localStorage
 
 class ViewModel {
     private val appScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
@@ -98,7 +95,7 @@ class ViewModel {
     }
 
     private fun loadModel(): List<Todo> {
-        return localStorage["todos-kilua"]?.let {
+        return localStorage.getItem("todos-kilua")?.let {
             json.decodeFromString(
                 ListSerializer(Todo.serializer()),
                 it.toString()
@@ -108,7 +105,7 @@ class ViewModel {
 
     private fun saveModel(todos: List<Todo>) {
         val jsonString = json.encodeToString(ListSerializer(Todo.serializer()), todos)
-        localStorage["todos-kilua"] = jsonString.toJsString()
+        localStorage.setItem("todos-kilua", jsonString)
     }
 
 }

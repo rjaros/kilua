@@ -23,23 +23,24 @@
 package io.realworld
 
 import app.softwork.routingcompose.Router
-import dev.kilua.asDeferred
 import dev.kilua.externals.JSON
 import dev.kilua.externals.console
-import dev.kilua.externals.get
 import dev.kilua.externals.keys
-import dev.kilua.externals.set
 import dev.kilua.html.Color
 import dev.kilua.progress.Progress
 import dev.kilua.progress.ProgressOptions
 import dev.kilua.rest.RemoteRequestException
 import dev.kilua.routing.global
 import dev.kilua.ssr.getSsrState
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.isDom
+import dev.kilua.utils.jsGet
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
 import io.realworld.model.Article
 import io.realworld.model.User
+import js.core.JsAny
+import js.core.JsString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -50,11 +51,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
-import web.JsAny
-import web.JsArray
-import web.JsString
-import web.localStorage
-import web.toJsString
+import web.storage.localStorage
 
 const val JWT_TOKEN = "jwtToken"
 
@@ -135,7 +132,7 @@ class ConduitManager : TokenProvider {
                 processAction(
                     ConduitAction.LoginError(
                         parseErrors(
-                            e.response?.text()?.asDeferred()?.await()?.toString()
+                            e.response?.text()
                         )
                     )
                 )
@@ -158,7 +155,7 @@ class ConduitManager : TokenProvider {
                 processAction(
                     ConduitAction.SettingsError(
                         parseErrors(
-                            e.response?.text()?.asDeferred()?.await()?.toString()
+                            e.response?.text()
                         )
                     )
                 )
@@ -182,7 +179,7 @@ class ConduitManager : TokenProvider {
                     ConduitAction.RegisterError(
                         username,
                         email,
-                        parseErrors(e.response?.text()?.asDeferred()?.await()?.toString())
+                        parseErrors(e.response?.text())
                     )
                 )
             }
@@ -368,7 +365,7 @@ class ConduitManager : TokenProvider {
                             description = description,
                             body = body,
                             tagList = tagList
-                        ), parseErrors(e.response?.text()?.asDeferred()?.await()?.toString())
+                        ), parseErrors(e.response?.text())
                     )
                 )
             }
@@ -389,7 +386,7 @@ class ConduitManager : TokenProvider {
                             description = description,
                             body = body,
                             tagList = tagList
-                        ), parseErrors(e.response?.text()?.asDeferred()?.await()?.toString())
+                        ), parseErrors(e.response?.text())
                     )
                 )
             }
@@ -408,11 +405,11 @@ class ConduitManager : TokenProvider {
     }
 
     override fun getJwtToken(): String? {
-        return if (isDom) localStorage[JWT_TOKEN]?.toString() else null
+        return if (isDom) localStorage.getItem(JWT_TOKEN)?.toString() else null
     }
 
     private fun saveJwtToken(token: String) {
-        if (isDom) localStorage[JWT_TOKEN] = token.toJsString()
+        if (isDom) localStorage.setItem(JWT_TOKEN, token)
     }
 
     private fun deleteJwtToken() {
@@ -424,9 +421,9 @@ class ConduitManager : TokenProvider {
             try {
                 val result = mutableListOf<String>()
                 val json = JSON.parse<JsAny>(it)
-                val errors = json["errors"]!!
+                val errors = json.jsGet("errors")!!
                 for (key in keys(errors)) {
-                    val tab: JsArray<JsString> = errors[key]!!.unsafeCast()
+                    val tab: JsArray<JsString> = errors.jsGet(key)!!.unsafeCast()
                     result.addAll(tab.toList().map { "$key $it" })
                 }
                 result

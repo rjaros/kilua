@@ -39,6 +39,9 @@ import dev.kilua.html.td
 import dev.kilua.html.tr
 import dev.kilua.startApplication
 import dev.kilua.utils.cast
+import web.events.Event
+import web.events.EventType
+import web.events.addEventListener
 
 var idCounter = 1
 
@@ -199,9 +202,9 @@ class App : Application() {
                                             }
                                             td(className = "col-md-4") {
                                                 a(label = item.label) {
-                                                    element.addEventListener("click") {
+                                                    element.addEventListener(EventType<Event>("click"), {
                                                         selected = item
-                                                    }
+                                                    })
                                                 }
                                             }
                                             td(className = "col-md-1") {
@@ -209,11 +212,11 @@ class App : Application() {
                                                     span("glyphicon glyphicon-remove") {
                                                         cast<Span>().setAttribute("aria-hidden", "true")
                                                     }
-                                                    element.addEventListener("click") {
+                                                    element.addEventListener(EventType<Event>("click"), {
                                                         val newData = data.toMutableList()
                                                         newData.remove(item)
                                                         data = newData
-                                                    }
+                                                    })
                                                 }
                                             }
                                             td(className = "col-md-6")

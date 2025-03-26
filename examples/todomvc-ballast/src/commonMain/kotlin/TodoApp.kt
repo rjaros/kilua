@@ -47,12 +47,10 @@ import dev.kilua.startApplication
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
-import web.dom.events.FocusEvent
-import web.dom.events.KeyboardEvent
-import web.dom.events.MouseEvent
-
-const val ENTER_KEY = 13
-const val ESC_KEY = 27
+import web.keyboard.KeyCode
+import web.uievents.FocusEvent
+import web.uievents.KeyboardEvent
+import web.uievents.MouseEvent
 
 class App : Application(), KoinComponent {
 
@@ -84,7 +82,7 @@ class App : Application(), KoinComponent {
                 text(placeholder = "What needs to be done?", className = "new-todo") {
                     autofocus(true)
                     onEvent<KeyboardEvent>("keydown") { e ->
-                        if (e.keyCode == ENTER_KEY) {
+                        if (e.code == KeyCode.Enter) {
                             todoViewModel.addTodo(this.value)
                             this.value = null
                         }
@@ -138,11 +136,11 @@ class App : Application(), KoinComponent {
                                         }
                                     }
                                     onEvent<KeyboardEvent>("keydown") { e ->
-                                        if (e.keyCode == ENTER_KEY) {
+                                        if (e.code == KeyCode.Enter) {
                                             todoViewModel.editTodo(index, this.value)
                                             this@li.element.classList.remove("editing")
                                         }
-                                        if (e.keyCode == ESC_KEY) {
+                                        if (e.code == KeyCode.Escape) {
                                             this@li.element.classList.remove("editing")
                                         }
                                     }

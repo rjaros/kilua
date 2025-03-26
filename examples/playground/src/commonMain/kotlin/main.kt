@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import app.softwork.routingcompose.Router
 import dev.kilua.Application
-import dev.kilua.JsModule
 import dev.kilua.KiluaScope
 import dev.kilua.LocalResource
 import dev.kilua.animation.MotionTransition
@@ -70,8 +69,6 @@ import dev.kilua.core.IComponent
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.animateMini
 import dev.kilua.externals.console
-import dev.kilua.externals.get
-import dev.kilua.externals.obj
 import dev.kilua.form.EnumMask
 import dev.kilua.form.ImaskOptions
 import dev.kilua.form.MaskAutofix
@@ -167,32 +164,39 @@ import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.useModule
+import dev.kilua.utils.JsArray
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
+import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.now
+import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
+import dev.kilua.utils.toJsNumber
+import dev.kilua.utils.toJsString
 import dev.kilua.utils.toList
 import dev.kilua.utils.today
 import dev.kilua.utils.unsafeCast
+import js.core.JsAny
+import js.import.JsModule
+import js.objects.jso
+import js.promise.Promise
+import js.regexp.RegExp
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
-import web.JsAny
-import web.JsArray
-import web.Promise
-import web.RegExp
-import web.dom.CustomEvent
-import web.dom.HTMLElement
 import web.dom.Text
-import web.dom.events.Event
-import web.dom.events.MouseEvent
-import web.toJsNumber
-import web.toJsString
-import web.window
+import web.events.CustomEvent
+import web.events.Event
+import web.events.EventType
+import web.events.addEventListener
+import web.events.removeEventListener
+import web.html.HTMLElement
+import web.timers.setTimeout
+import web.uievents.MouseEvent
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextUInt
@@ -259,7 +263,7 @@ class App : Application() {
 
     override fun start() {
 
-        console.log(testJson.content["test"])
+        console.log(testJson.content.jsGet("test"))
 
         ThemeManager.init()
 
@@ -271,7 +275,7 @@ class App : Application() {
                     onEvent<Event>("") {
 
                     }
-                    onCombineClick {  }
+                    onCombineClick { }
                     onClick {
                         Router.global.navigate("/about")
                     }
@@ -808,8 +812,8 @@ class App : Application() {
                 button("Progress start") {
                     onClick {
                         progress.promise(Promise { resolve, reject ->
-                            window.setTimeout({
-                                resolve(obj()).cast()
+                            setTimeout({
+                                resolve(jso()).cast()
                             }, 3000)
                         })
                     }
@@ -838,7 +842,7 @@ class App : Application() {
 
                 console.log("recompose before tabulator")
 
-                tabulator(
+                tabulator<Person>(
                     personList,
                     options = TabulatorOptions(
                         height = "${heighttab}px",
@@ -921,10 +925,10 @@ class App : Application() {
                             }),
                             ColumnDefinition("City", "city", formatterComponentFunction = { cell, params, data ->
                                 div {
-                                    +data["city"].toString()
+                                    +data.jsGet("city").toString()
                                 }
                             }, editorComponentFunction = { cell, onRendered, success, cancel, data ->
-                                text(data["city"].toString()) {
+                                text(data.jsGet("city").toString()) {
                                     onChange {
                                         success(this.value?.toJsString())
                                     }
@@ -968,10 +972,10 @@ class App : Application() {
                             }),
                             ColumnDefinition("City", "city", formatterComponentFunction = { cell, params, data ->
                                 div {
-                                    +data["city"].toString()
+                                    +data.jsGet("city").toString()
                                 }
                             }, editorComponentFunction = { cell, onRendered, success, cancel, data ->
-                                text(data["city"].toString()) {
+                                text(data.jsGet("city").toString()) {
                                     onChange {
                                         success(this.value?.toJsString())
                                     }
@@ -1103,7 +1107,7 @@ class App : Application() {
                                     val result = try {
                                         restClient.callDynamic("https://api.github.com/search/repositories") {
                                             data = jsObjectOf("q" to query)
-                                            resultTransform = { it?.get("items") }
+                                            resultTransform = { it?.jsGet("items") }
                                         }
                                     } catch (e: RemoteRequestException) {
                                         console.log(e.toString())
@@ -1112,9 +1116,9 @@ class App : Application() {
                                     result?.let { items: JsAny ->
                                         callback(items.unsafeCast<JsArray<JsAny>>().toList().map { item ->
                                             jsObjectOf(
-                                                "value" to item["id"]!!,
-                                                "text" to item["name"]!!,
-                                                "subtext" to item["owner"]!!["login"]!!
+                                                "value" to item.jsGet("id")!!,
+                                                "text" to item.jsGet("name")!!,
+                                                "subtext" to item.jsGet("owner")?.jsGet("login")!!
                                             )
                                         }.toJsArray())
                                     } ?: callback(jsArrayOf())
@@ -1124,10 +1128,10 @@ class App : Application() {
                             shouldLoad = { it.length >= 3 }
                         ))
                     tsRenders(TomSelectRenders(option = { item, escape ->
-                        val subtext: String? = item["subtext"]?.toString()
+                        val subtext: String? = item.jsGet("subtext")?.toString()
                         """
                         <div>
-                            <span class="title">${escape(item["text"].toString())}</span>
+                            <span class="title">${escape(item.jsGet("text").toString())}</span>
                             <small>${subtext?.let { "(" + escape(it) + ")" } ?: ""}</small>
                         </div>
                     """.trimIndent()
@@ -1310,7 +1314,7 @@ class App : Application() {
                                 "https://api.github.com/search/repositories",
                                 Query("kvision")
                             ) {
-                                this.resultTransform = { it!!["total_count"] }
+                                this.resultTransform = { it!!.jsGet("total_count") }
                             }
                         }.then {
                             console.log(it)
@@ -1610,7 +1614,7 @@ class App : Application() {
                     tab("Test3", "fab fa-chrome", closable = true) {
                         pt("Test3")
                     }
-                    onEvent<CustomEvent>("closeTab") {
+                    onEvent<CustomEvent<*>>("closeTab") {
                     }
                 }
 
@@ -1639,7 +1643,7 @@ class App : Application() {
                             }
                         }
                     }
-                    onEvent<CustomEvent>("closeTab") {
+                    onEvent<CustomEvent<*>>("closeTab") {
                         tabs.removeAt(it.detail.toString().toIntOrNull() ?: 0)
                     }
                 }
@@ -1876,9 +1880,9 @@ class App : Application() {
                                 val f = { _: Event ->
                                     console.log("click $name of ${list.size}")
                                 }
-                                element.addEventListener("click", f)
+                                element.addEventListener(EventType<Event>("click"), f)
                                 onDispose {
-                                    element.removeEventListener("click", f)
+                                    element.removeEventListener(EventType<Event>("click"), f)
                                 }
                             }
                         }
@@ -1913,9 +1917,8 @@ class App : Application() {
                 +"test span"
                 onClick {
                     cast<Button>().disabled = !(disabled ?: false)
-                    window.setTimeout({
+                    setTimeout({
                         cast<Button>().disabled = !(disabled ?: false)
-                        obj()
                     }, 1000)
                 }
             }
@@ -1966,9 +1969,9 @@ class App : Application() {
                                     val f = { _: Event ->
                                         console.log("button2 click")
                                     }
-                                    element.addEventListener("click", f)
+                                    element.addEventListener(EventType<Event>("click"), f)
                                     onDispose {
-                                        element.removeEventListener("click", f)
+                                        element.removeEventListener(EventType<Event>("click"), f)
                                     }
                                 }
                             }
