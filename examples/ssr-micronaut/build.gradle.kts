@@ -47,6 +47,9 @@ kotlin {
             }
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
     wasmJs {
         useEsModules()
@@ -62,6 +65,9 @@ kotlin {
             }
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
     sourceSets {
         val commonMain by getting {

@@ -51,6 +51,9 @@ fun KotlinMultiplatformExtension.kotlinJsTargets(withNode: Boolean = true) {
             nodejs {
             }
         }
+        compilerOptions {
+            target.set("es2015")
+        }
     }
 }
 
@@ -68,6 +71,9 @@ fun KotlinMultiplatformExtension.kotlinWasmTargets(withNode: Boolean = true) {
         if (withNode) {
             nodejs {
             }
+        }
+        compilerOptions {
+            target.set("es2015")
         }
     }
 }
