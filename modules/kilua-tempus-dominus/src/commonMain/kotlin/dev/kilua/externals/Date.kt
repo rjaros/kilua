@@ -23,11 +23,13 @@
 
 package dev.kilua.externals
 
-import dev.kilua.utils.toDouble
-import dev.kilua.utils.toJsNumber
 import dev.kilua.utils.today
+import dev.kilua.utils.unsafeCast
 import js.core.JsAny
+import js.core.JsDouble
 import js.core.JsNumber
+import js.core.JsPrimitives.toDouble
+import js.core.JsPrimitives.toJsDouble
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -51,14 +53,18 @@ public external class Date() : JsAny {
  * Converts [LocalDateTime] to JavaScript [Date].
  */
 public fun LocalDateTime.toDate(): Date {
-    return Date(this.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble().toJsNumber())
+    return Date(
+        this.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble().toJsDouble().unsafeCast()
+    )
 }
 
 /**
  * Converts [LocalDate] to JavaScript [Date].
  */
 public fun LocalDate.toDate(): Date {
-    return Date(this.atStartOfDayIn(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble().toJsNumber())
+    return Date(
+        this.atStartOfDayIn(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble().toJsDouble().unsafeCast()
+    )
 }
 
 /**
@@ -72,7 +78,8 @@ public fun LocalTime.toDate(): Date {
  * Converts JavaScript [Date] to [LocalDateTime].
  */
 public fun Date.toLocalDateTime(): LocalDateTime {
-    return Instant.fromEpochMilliseconds(getTime().toDouble().toLong()).toLocalDateTime(TimeZone.currentSystemDefault())
+    return Instant.fromEpochMilliseconds(getTime().unsafeCast<JsDouble>().toDouble().toLong())
+        .toLocalDateTime(TimeZone.currentSystemDefault())
 }
 
 /**

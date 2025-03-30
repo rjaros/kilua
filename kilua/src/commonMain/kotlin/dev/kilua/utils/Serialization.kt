@@ -21,11 +21,11 @@
  */
 package dev.kilua.utils
 
-import dev.kilua.externals.JSON
+import js.core.JsAny
+import js.json.parse
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import js.core.JsAny
 
 /**
  * JSON serialization utility functions
@@ -49,6 +49,6 @@ public object Serialization {
      * @param serializer a serializer for T
      */
     public fun <T> T.toObj(serializer: SerializationStrategy<T>): JsAny {
-        return JSON.parse((customConfiguration ?: Json).encodeToString(serializer, this))
+        return parse((customConfiguration ?: Json).encodeToString(serializer, this))
     }
 }

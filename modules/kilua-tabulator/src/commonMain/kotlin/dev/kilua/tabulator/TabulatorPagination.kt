@@ -35,7 +35,7 @@ import dev.kilua.html.IDiv
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.utils.rem
-import dev.kilua.utils.toJsNumber
+import js.core.JsPrimitives.toJsInt
 
 /**
  * Pagination state.
@@ -85,7 +85,7 @@ public fun <T : Any> IComponent.tabulatorPagination(
                     disabled(true)
                 }
                 onClick {
-                    tabulatorGetter().tabulatorJs?.setPage(1.toJsNumber())
+                    tabulatorGetter().tabulatorJs?.setPage(1.toJsInt())
                 }
             }
             button(icon = iconPrev, className = "tabulator-page") {
@@ -117,7 +117,7 @@ public fun <T : Any> IComponent.tabulatorPagination(
                     ariaLabel("# $pageNumber")
                     title("# $pageNumber")
                     onClick {
-                        tabulatorGetter().tabulatorJs?.setPage(pageNumber.toJsNumber())
+                        tabulatorGetter().tabulatorJs?.setPage(pageNumber.toJsInt())
                     }
                 }
             }
@@ -140,7 +140,7 @@ public fun <T : Any> IComponent.tabulatorPagination(
                     disabled(true)
                 }
                 onClick {
-                    tabulatorGetter().tabulatorJs?.setPage(paginationState.maxPages.toJsNumber())
+                    tabulatorGetter().tabulatorJs?.setPage(paginationState.maxPages.toJsInt())
                 }
             }
         }

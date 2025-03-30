@@ -37,9 +37,9 @@ import dev.kilua.html.ul
 import dev.kilua.utils.rem
 import io.realworld.ConduitManager
 import io.realworld.View
-import io.realworld.externals.Date
 import io.realworld.externals.format
 import io.realworld.model.Article
+import js.date.Date
 
 @Composable
 fun IComponent.articlePreview(article: Article, conduitManager: ConduitManager) {
@@ -53,7 +53,9 @@ fun IComponent.articlePreview(article: Article, conduitManager: ConduitManager) 
             div("info") {
                 navLink("${View.PROFILE.url}/${article.author?.username}", article.author?.username ?: "", className = "author")
                 span("date") {
-                    +Date(article.createdAt).format()
+                    if (article.createdAt != null) {
+                        +Date(article.createdAt).format()
+                    }
                 }
             }
             val btnStyle = if (article.favorited) "btn-primary" else "btn-outline-primary"

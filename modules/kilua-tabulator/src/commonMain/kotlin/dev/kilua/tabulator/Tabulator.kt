@@ -29,12 +29,9 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.compose.Root
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.JSON
 import dev.kilua.externals.TabulatorJs
 import dev.kilua.externals.TabulatorTablesJs.TabulatorFull
 import dev.kilua.utils.buildCustomEventInit
-import dev.kilua.externals.delete
-import dev.kilua.externals.jsTypeOf
 import dev.kilua.utils.jsGet
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
@@ -42,13 +39,12 @@ import dev.kilua.utils.JsArray
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.cast
 import dev.kilua.utils.deepMerge
+import dev.kilua.utils.delete
 import dev.kilua.utils.jsObjectOf
+import dev.kilua.utils.jsTypeOf
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.rem
-import dev.kilua.utils.toInt
 import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toJsBoolean
-import dev.kilua.utils.toJsNumber
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.unsafeCast
 import kotlinx.serialization.KSerializer
@@ -57,7 +53,13 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
 import js.core.JsAny
+import js.core.JsInt
 import js.core.JsNumber
+import js.core.JsPrimitives.toInt
+import js.core.JsPrimitives.toJsBoolean
+import js.core.JsPrimitives.toJsInt
+import js.json.parse
+import js.json.stringify
 import web.html.HTMLDivElement
 import web.resize.ResizeObserver
 import web.timers.clearTimeout
@@ -218,7 +220,7 @@ public open class Tabulator<T : Any>(
 
     private fun removeCustomEditors() {
         EditorRoot.cancel?.invoke(null)
-        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsNumber().unsafeCast()) }
+        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsInt().unsafeCast()) }
         EditorRoot.root?.dispose()
         EditorRoot.root = null
     }
@@ -288,15 +290,15 @@ public open class Tabulator<T : Any>(
                 initialized = true
                 if (currentPage != null) {
                     tabulatorJs?.setPageSize(pageSize ?: 0)
-                    tabulatorJs?.setPage(currentPage!!.toJsNumber())
+                    tabulatorJs?.setPage(currentPage!!.toJsInt())
                 }
                 dispatchEvent("tableBuilt", buildCustomEventInit())
             }
             tabulatorJs?.on("pageLoaded") { ->
                 registeredPaginationStateSetters.forEach {
-                    val currentPage = tabulatorJs?.getPage()?.unsafeCast<JsNumber>()?.toInt() ?: 1
-                    val maxPages = tabulatorJs?.getPageMax()?.unsafeCast<JsNumber>()?.toInt() ?: 1
-                    val buttonCount = tabulatorJs?.options?.jsGet("paginationButtonCount")?.unsafeCast<JsNumber>()
+                    val currentPage = tabulatorJs?.getPage()?.unsafeCast<JsInt>()?.toInt() ?: 1
+                    val maxPages = tabulatorJs?.getPageMax()?.unsafeCast<JsInt>()?.toInt() ?: 1
+                    val buttonCount = tabulatorJs?.options?.jsGet("paginationButtonCount")?.unsafeCast<JsInt>()
                         ?.toInt() ?: 5
                     it(PaginationState(currentPage, maxPages, buttonCount))
                 }
@@ -317,7 +319,7 @@ public open class Tabulator<T : Any>(
                 val page = tabulatorJs?.getPage()
                 if (page != null && page != false.toJsBoolean()) {
                     pageSize = tabulatorJs?.getPageSize()
-                    currentPage = page.unsafeCast<JsNumber>().toInt()
+                    currentPage = page.unsafeCast<JsInt>().toInt()
                 }
             }
             if (tabulatorJs != null) {
@@ -370,7 +372,7 @@ public open class Tabulator<T : Any>(
             if (jsonHelper == null || serializer == null) {
                 throw IllegalStateException("The data class can't be deserialized. Please provide a serializer when creating the Tabulator instance.")
             } else {
-                jsonHelper!!.decodeFromString(serializer, JSON.stringify(data))
+                jsonHelper!!.decodeFromString(serializer, stringify(data))
             }
         } else data.cast()
     }
@@ -395,7 +397,7 @@ public open class Tabulator<T : Any>(
         return if (jsonHelper == null || serializer == null) {
             throw IllegalStateException("The data class can't be serialized. Please provide a serializer when creating the Tabulator instance.")
         } else {
-            JSON.parse<JsAny>(jsonHelper!!.encodeToString(serializer, data))
+            parse<JsAny>(jsonHelper!!.encodeToString(serializer, data))
         }
     }
 

@@ -28,7 +28,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import dev.kilua.awaitCrt
 import dev.kilua.core.IComponent
 import dev.kilua.externals.AnimationPlaybackControls
 import dev.kilua.externals.animate
@@ -87,7 +86,7 @@ public fun IComponent.motionAnimatedVisibility(
     LaunchedEffect(visible) {
         if (renderConfig.isDom) {
             if (visible) {
-                animate(div.element, invisibleResult, jsObjectOf("duration" to 0)).then {}.awaitCrt()
+                animate(div.element, invisibleResult, jsObjectOf("duration" to 0)).then {}.await()
                 visibilityState = true
                 animationOn = animate(
                     div.element,
@@ -95,7 +94,7 @@ public fun IComponent.motionAnimatedVisibility(
                     transition.animation.toJsAny()
                 )
                 try {
-                    animationOn?.then {}?.awaitCrt()
+                    animationOn?.then {}?.await()
                 } finally {
                     animationOn?.stop()
                     animationOn?.cancel()
@@ -108,7 +107,7 @@ public fun IComponent.motionAnimatedVisibility(
                     outTransition.animation.toJsAny()
                 )
                 try {
-                    animationOff?.then {}?.awaitCrt()
+                    animationOff?.then {}?.await()
                 } finally {
                     animationOff?.stop()
                     animationOff?.cancel()

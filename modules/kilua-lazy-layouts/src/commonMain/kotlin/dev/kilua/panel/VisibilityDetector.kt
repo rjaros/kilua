@@ -25,12 +25,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.core.IComponent
 import dev.kilua.core.SafeDomFactory
-import dev.kilua.externals.console
 import dev.kilua.html.div
 import dev.kilua.html.px
 import dev.kilua.utils.JsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
+import web.console.console
 import web.intersection.IntersectionObserver
 import web.intersection.IntersectionObserverEntry
 import kotlin.random.Random

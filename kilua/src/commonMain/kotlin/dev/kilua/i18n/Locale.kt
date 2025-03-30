@@ -22,8 +22,8 @@
 
 package dev.kilua.i18n
 
-import dev.kilua.externals.console
 import dev.kilua.utils.toLocaleString
+import web.console.console
 
 /**
  * Base i18n interface.

@@ -25,6 +25,11 @@ package dev.kilua.utils
 import js.core.JsAny
 import kotlin.js.unsafeCast as unsafeCastJs
 
+@Suppress("UnsafeCastFromDynamic")
+public actual fun delete(o: JsAny, key: String): Unit = js("delete o[key]")
+
+public actual fun jsTypeOf(o: JsAny?): String = kotlin.js.jsTypeOf(o)
+
 @Suppress("NOTHING_TO_INLINE")
 public actual inline fun <T> Any?.cast(): T {
     return this.unsafeCastJs<T>()
@@ -34,3 +39,10 @@ public actual inline fun <T> Any?.cast(): T {
 public actual inline fun <T : JsAny> JsAny.unsafeCast(): T {
     return this.unsafeCastJs<T>()
 }
+
+@Suppress("UnsafeCastFromDynamic")
+public actual fun isArray(o: JsAny?): Boolean = js("Array").isArray(o)
+
+@Suppress("UnsafeCastFromDynamic")
+public actual fun <T : JsAny> concat(array1: JsArray<T>, array2: JsArray<T>): JsArray<T> =
+    array1.asDynamic().concat(array2)

@@ -22,13 +22,14 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.assign
-import dev.kilua.externals.concat
-import dev.kilua.externals.isArray
-import dev.kilua.externals.jsTypeOf
-import dev.kilua.externals.keys
 import js.array.ArrayLike
 import js.core.JsAny
+import js.core.JsPrimitives.toJsBoolean
+import js.core.JsPrimitives.toJsDouble
+import js.core.JsPrimitives.toJsInt
+import js.core.JsPrimitives.toJsString
+import js.core.JsString
+import js.objects.Object
 import js.objects.jso
 import js.reflect.Reflect
 import kotlin.js.undefined
@@ -53,6 +54,29 @@ public fun JsAny.jsGet(key: String): JsAny? {
 }
 
 /**
+ * Get the list of keys from JS Object
+ */
+public fun keys(o: JsAny): List<String> =
+    Object.keys(o).unsafeCast<JsArray<JsString>>().toArray<JsString>().asList().map { it.toString() }
+
+/**
+ * Copies all properties from source object to target object
+ */
+public fun assign(target: JsAny, source: JsAny) {
+    Object.assign(target, source)
+}
+
+/**
+ * Delete a property from an object
+ */
+public expect fun delete(o: JsAny, key: String)
+
+/**
+ * Return native JS type of a given value
+ */
+public expect fun jsTypeOf(o: JsAny?): String
+
+/**
  * Utility extension function for casting. Uses unsafeCast() on JS.
  */
 public expect inline fun <T> Any?.cast(): T
@@ -61,6 +85,17 @@ public expect inline fun <T> Any?.cast(): T
  * Utility extension function for unsafe casting. Uses unsafeCast() on JS and WasmJs.
  */
 public expect inline fun <T : JsAny> JsAny.unsafeCast(): T
+
+/**
+ * Returns whether the given value is an array
+ */
+public expect fun isArray(o: JsAny?): Boolean
+
+/**
+ * Merge two arrays.
+ * Returns a new array containing the contents of both given arrays.
+ */
+public expect fun <T : JsAny> concat(array1: JsArray<T>, array2: JsArray<T>): JsArray<T>
 
 /**
  * Convert JsArray to Kotlin Array.
@@ -119,8 +154,8 @@ public fun <T : JsAny> jsArrayOf(vararg elements: T): JsArray<T> {
 public fun <T> T.toJsAny(): JsAny? {
     return when (this) {
         is String -> this.toJsString()
-        is Int -> this.toJsNumber()
-        is Double -> this.toJsNumber()
+        is Int -> this.toJsInt()
+        is Double -> this.toJsDouble()
         is Boolean -> this.toJsBoolean()
         is Array<*> -> {
             val array = JsArray<JsAny?>()

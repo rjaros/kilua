@@ -35,7 +35,6 @@ import dev.kilua.FontAwesomeModule
 import dev.kilua.TabulatorModule
 import dev.kilua.TomSelectModule
 import dev.kilua.compose.root
-import dev.kilua.externals.console
 import dev.kilua.form.select.selectRemote
 import dev.kilua.form.select.tomSelectRemote
 import dev.kilua.form.text.tomTypeaheadRemote
@@ -57,6 +56,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.serialization.serializer
+import web.console.console
 
 class App : Application() {
 

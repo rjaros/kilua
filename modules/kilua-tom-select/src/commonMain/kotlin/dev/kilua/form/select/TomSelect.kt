@@ -31,7 +31,6 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
-import dev.kilua.externals.assign
 import dev.kilua.utils.jsGet
 import dev.kilua.form.StringFormControl
 import dev.kilua.html.ITag
@@ -43,14 +42,15 @@ import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.JsArray
 import dev.kilua.utils.StringPair
+import dev.kilua.utils.assign
 import dev.kilua.utils.cast
 import dev.kilua.utils.clear
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
 import js.core.JsAny
+import js.core.JsPrimitives.toJsString
 import js.core.JsString
 import js.objects.jso
 import web.dom.InsertPosition

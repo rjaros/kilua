@@ -27,7 +27,7 @@ package dev.kilua.externals
 import dev.kilua.utils.JsArray
 import js.import.JsModule
 import js.core.JsAny
-import js.core.JsNumber
+import js.core.JsInt
 import web.html.HTMLElement
 
 /**
@@ -38,9 +38,9 @@ public external class TempusDominusRestrictions : JsAny {
     public var maxDate: Date
     public var disabledDates: JsArray<Date>
     public var enabledDates: JsArray<Date>
-    public var daysOfWeekDisabled: JsArray<JsNumber>
-    public var disabledHours: JsArray<JsNumber>
-    public var enabledHours: JsArray<JsNumber>
+    public var daysOfWeekDisabled: JsArray<JsInt>
+    public var disabledHours: JsArray<JsInt>
+    public var enabledHours: JsArray<JsInt>
 }
 
 /**

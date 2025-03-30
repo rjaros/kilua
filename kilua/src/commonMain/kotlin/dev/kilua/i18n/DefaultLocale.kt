@@ -22,15 +22,15 @@
 
 package dev.kilua.i18n
 
-import dev.kilua.externals.Intl
 import dev.kilua.utils.isDom
+import js.intl.DateTimeFormat
 import web.navigator.navigator
 
 /**
  * Auto-detected default system locale.
  */
 public data class DefaultLocale(
-    override val language: String = if (isDom) navigator.language else Intl.DateTimeFormat()
+    override val language: String = if (isDom) navigator.language else DateTimeFormat()
         .resolvedOptions().locale,
     override val decimalSeparator: Char = decimalSeparator(language),
     override val thousandsSeparator: Char? = thousandsSeparator(language),

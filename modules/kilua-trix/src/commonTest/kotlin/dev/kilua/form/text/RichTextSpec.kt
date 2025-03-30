@@ -23,7 +23,6 @@
 package dev.kilua.form.text
 
 import dev.kilua.compose.root
-import dev.kilua.externals.console
 import dev.kilua.test.DomSpec
 import kotlin.test.Test
 import kotlin.test.assertTrue

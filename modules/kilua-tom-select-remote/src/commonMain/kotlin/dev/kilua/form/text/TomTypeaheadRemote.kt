@@ -26,8 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dev.kilua.KiluaScope
 import dev.kilua.core.IComponent
-import dev.kilua.externals.JSON
-import dev.kilua.externals.console
 import dev.kilua.form.InputType
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.rpc.CallAgent
@@ -35,12 +33,14 @@ import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.utils.JsArray
 import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.launch
 import js.core.JsAny
+import js.core.JsPrimitives.toJsString
+import js.json.stringify
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
+import web.console.console
 import web.http.RequestInit
 
 /**
@@ -191,8 +191,8 @@ internal suspend fun <T : Any> getOptionsForTomTypeaheadRemote(
 ): List<String> {
     val (url, method) = serviceManager.requireCall(function)
     val callAgent = CallAgent()
-    val state = stateFunction?.invoke()?.let { JSON.stringify(it.toJsString()) }
-    val queryParam = query?.let { JSON.stringify(it.toJsString()) }
+    val state = stateFunction?.invoke()?.let { stringify(it.toJsString()) }
+    val queryParam = query?.let { stringify(it.toJsString()) }
     return try {
         val result = callAgent.jsonRpcCall(
             url,

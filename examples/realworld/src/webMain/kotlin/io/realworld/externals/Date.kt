@@ -22,13 +22,10 @@
 
 package io.realworld.externals
 
-import dev.kilua.externals.Intl
 import dev.kilua.utils.jsObjectOf
-import js.core.JsAny
-
-external class Date() : JsAny {
-    constructor(value: String?)
-}
+import dev.kilua.utils.unsafeCast
+import js.date.Date
+import js.intl.DateTimeFormat
 
 fun Date.format(): String =
-    Intl.DateTimeFormat("en-US", jsObjectOf("year" to "numeric", "month" to "long", "day" to "numeric")).format(this)
+    DateTimeFormat("en-US", jsObjectOf("year" to "numeric", "month" to "long", "day" to "numeric").unsafeCast()).format(this)

@@ -23,9 +23,6 @@
 package io.realworld
 
 import app.softwork.routingcompose.Router
-import dev.kilua.externals.JSON
-import dev.kilua.externals.console
-import dev.kilua.externals.keys
 import dev.kilua.html.Color
 import dev.kilua.progress.Progress
 import dev.kilua.progress.ProgressOptions
@@ -35,12 +32,14 @@ import dev.kilua.ssr.getSsrState
 import dev.kilua.utils.JsArray
 import dev.kilua.utils.isDom
 import dev.kilua.utils.jsGet
+import dev.kilua.utils.keys
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
 import io.realworld.model.Article
 import io.realworld.model.User
 import js.core.JsAny
 import js.core.JsString
+import js.json.parse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -51,6 +50,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
+import web.console.console
 import web.storage.localStorage
 
 const val JWT_TOKEN = "jwtToken"
@@ -420,7 +420,7 @@ class ConduitManager : TokenProvider {
         return message?.let {
             try {
                 val result = mutableListOf<String>()
-                val json = JSON.parse<JsAny>(it)
+                val json = parse<JsAny>(it)
                 val errors = json.jsGet("errors")!!
                 for (key in keys(errors)) {
                     val tab: JsArray<JsString> = errors.jsGet(key)!!.unsafeCast()

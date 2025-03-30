@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NoLiveLiterals
 import dev.kilua.core.RenderConfig
 import dev.kilua.externals.Date
-import dev.kilua.externals.Intl
 import dev.kilua.externals.TempusDominus
 import dev.kilua.externals.TempusDominusOptions
 import dev.kilua.utils.jsSet
@@ -42,11 +41,14 @@ import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toJsNumber
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.toKebabCase
+import dev.kilua.utils.unsafeCast
 import kotlinx.datetime.LocalDate
 import js.core.JsAny
+import js.core.JsPrimitives.toJsInt
+import js.core.JsPrimitives.toJsString
+import js.intl.DateTimeFormat
+import js.intl.DateTimeFormatOptions
 import js.objects.jso
 import web.dom.document
 import web.events.Event
@@ -649,11 +651,11 @@ public abstract class AbstractRichDateTime(
                     if (!component.disabledDates.isNullOrEmpty()) this.disabledDates =
                         component.disabledDates!!.map { it.toDate() }.toJsArray()
                     if (!component.daysOfWeekDisabled.isNullOrEmpty()) this.daysOfWeekDisabled =
-                        component.daysOfWeekDisabled!!.map { it.toJsNumber() }.toJsArray()
+                        component.daysOfWeekDisabled!!.map { it.toJsInt() }.toJsArray()
                     if (!component.enabledHours.isNullOrEmpty()) this.enabledHours =
-                        component.enabledHours!!.map { it.toJsNumber() }.toJsArray()
+                        component.enabledHours!!.map { it.toJsInt() }.toJsArray()
                     if (!component.disabledHours.isNullOrEmpty()) this.disabledHours =
-                        component.disabledHours!!.map { it.toJsNumber() }.toJsArray()
+                        component.disabledHours!!.map { it.toJsInt() }.toJsArray()
                 }
                 this.display = jso {
                     if (component.customIcons != null) {
@@ -724,8 +726,8 @@ public abstract class AbstractRichDateTime(
          * Tries to guess the hour cycle for given language.
          */
         private fun guessHourCycle(language: String): HourCycle? {
-            val template = jsObjectOf("hour" to "numeric")
-            val hourCycle = Intl.DateTimeFormat(language, template).resolvedOptions().hourCycle
+            val template = jsObjectOf("hour" to "numeric").unsafeCast<DateTimeFormatOptions>()
+            val hourCycle = DateTimeFormat(language, template).resolvedOptions().hourCycle.toString()
             return HourCycle.entries.find { it.name.lowercase() == hourCycle }
         }
     }

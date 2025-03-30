@@ -29,8 +29,6 @@ import dev.kilua.KiluaScope
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.JSON
-import dev.kilua.externals.keys
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
@@ -40,14 +38,18 @@ import dev.kilua.utils.Serialization.toObj
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
+import dev.kilua.utils.keys
 import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
-import dev.kilua.utils.toJsBoolean
-import dev.kilua.utils.toJsNumber
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.toKebabCase
 import js.core.JsAny
+import js.core.JsPrimitives.toJsBoolean
+import js.core.JsPrimitives.toJsDouble
+import js.core.JsPrimitives.toJsInt
+import js.core.JsPrimitives.toJsString
+import js.json.parse
+import js.json.stringify
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -183,7 +185,7 @@ public class Form<K : Any>(
      */
     public var enctype: FormEnctype? by updatingProperty(enctype) {
         if (it != null) {
-            element.enctype = when(it) {
+            element.enctype = when (it) {
                 FormEnctype.Urlencoded -> web.form.FormEncType.applicationXWwwFormUrlencoded
                 FormEnctype.Multipart -> web.form.FormEncType.multipartFormData
                 FormEnctype.Plain -> web.form.FormEncType.textPlain
@@ -271,7 +273,7 @@ public class Form<K : Any>(
      */
     public var autocomplete: FormAutocomplete? by updatingProperty {
         if (it != null) {
-            element.autocomplete = when(it) {
+            element.autocomplete = when (it) {
                 FormAutocomplete.On -> web.autofill.AutoFillBase.on
                 FormAutocomplete.Off -> web.autofill.AutoFillBase.off
             }
@@ -384,7 +386,7 @@ public class Form<K : Any>(
     init {
         if (renderConfig.isDom) {
             if (method != null) {
-                element.method = when(method) {
+                element.method = when (method) {
                     FormMethod.Get -> web.form.FormMethod.get
                     FormMethod.Post -> web.form.FormMethod.post
                 }
@@ -393,7 +395,7 @@ public class Form<K : Any>(
                 element.action = action
             }
             if (enctype != null) {
-                element.enctype = when(enctype) {
+                element.enctype = when (enctype) {
                     FormEnctype.Urlencoded -> web.form.FormEncType.applicationXWwwFormUrlencoded
                     FormEnctype.Multipart -> web.form.FormEncType.multipartFormData
                     FormEnctype.Plain -> web.form.FormEncType.textPlain
@@ -418,11 +420,11 @@ public class Form<K : Any>(
                         }
 
                         is Int -> {
-                            json.jsSet(key, value.toJsNumber())
+                            json.jsSet(key, value.toJsInt())
                         }
 
                         is Double -> {
-                            json.jsSet(key, value.toJsNumber())
+                            json.jsSet(key, value.toJsDouble())
                         }
 
                         is List<*> -> {
@@ -444,12 +446,12 @@ public class Form<K : Any>(
         }
         mapToClassConverter = serializer?.let {
             { map ->
-                jsonInstance!!.decodeFromString(serializer, JSON.stringify(mapToObjectConverter!!.invoke(map)))
+                jsonInstance!!.decodeFromString(serializer, stringify(mapToObjectConverter!!.invoke(map)))
             }
         }
         classToObjectConverter = serializer?.let {
             {
-                JSON.parse(jsonInstance!!.encodeToString(serializer, it))
+                parse(jsonInstance!!.encodeToString(serializer, it))
             }
         }
     }
@@ -474,7 +476,7 @@ public class Form<K : Any>(
                 is KFilesFormControl -> {
                     formField.value = Json.decodeFromString(
                         ListSerializer(KFile.serializer()),
-                        JSON.stringify(jsonValue)
+                        stringify(jsonValue)
                     )
                 }
 
@@ -609,7 +611,7 @@ public class Form<K : Any>(
      */
     public fun getDataJson(): JsAny {
         return if (serializer != null) {
-            JSON.parse(
+            parse(
                 jsonInstance!!.encodeToString(
                     serializer,
                     getData()

@@ -30,17 +30,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.KiluaScope
 import dev.kilua.core.IComponent
-import dev.kilua.externals.JSON
-import dev.kilua.externals.console
 import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.utils.StringPair
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.unsafeCast
+import js.core.JsPrimitives.toJsString
+import js.json.stringify
 import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
+import web.console.console
 import web.http.RequestInit
 
 /**
@@ -193,7 +193,7 @@ internal suspend fun <T : Any> getOptionsForSelectRemote(
 ): List<StringPair> {
     val (url, method) = serviceManager.requireCall(function)
     val callAgent = CallAgent()
-    val state = stateFunction?.invoke()?.let { JSON.stringify(it.toJsString()) }
+    val state = stateFunction?.invoke()?.let { stringify(it.toJsString()) }
     return try {
         val result = callAgent.jsonRpcCall(
             url,

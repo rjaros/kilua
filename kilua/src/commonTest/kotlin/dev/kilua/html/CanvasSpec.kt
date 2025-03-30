@@ -24,8 +24,7 @@ package dev.kilua.html
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
-import dev.kilua.test.normalizeHtml
-import dev.kilua.utils.toJsString
+import js.core.JsPrimitives.toJsString
 import web.images.ImageData
 import kotlin.test.Test
 import kotlin.test.assertEquals

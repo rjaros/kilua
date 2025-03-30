@@ -29,16 +29,17 @@ import dev.kilua.externals.ImaskOptionsJs
 import dev.kilua.externals.NumberMaskOptionsJs
 import dev.kilua.externals.PatternMaskOptionsJs
 import dev.kilua.externals.RangeMaskOptionsJs
-import dev.kilua.externals.assign
 import dev.kilua.utils.jsSet
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
+import dev.kilua.utils.assign
 import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toJsBoolean
-import dev.kilua.utils.toJsNumber
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.toKebabCase
+import dev.kilua.utils.unsafeCast
 import js.core.JsAny
+import js.core.JsPrimitives.toJsBoolean
+import js.core.JsPrimitives.toJsDouble
+import js.core.JsPrimitives.toJsString
 import js.objects.jso
 import js.regexp.RegExp
 
@@ -190,8 +191,8 @@ internal fun NumberMask.toJs(): NumberMaskOptionsJs {
         if (self.normalizeZeros != null) this.normalizeZeros = self.normalizeZeros
         this.radix = self.locale.decimalSeparator.toString()
         this.mapToRadix = self.mapToRadix.map { it.toString().toJsString() }.toJsArray()
-        if (self.min != null) this.min = self.min.toDouble().toJsNumber()
-        if (self.max != null) this.max = self.max.toDouble().toJsNumber()
+        if (self.min != null) this.min = self.min.toDouble().toJsDouble().unsafeCast()
+        if (self.max != null) this.max = self.max.toDouble().toJsDouble().unsafeCast()
     }
 }
 

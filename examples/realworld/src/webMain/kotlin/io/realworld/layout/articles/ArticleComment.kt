@@ -34,10 +34,10 @@ import dev.kilua.html.span
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
-import io.realworld.externals.Date
 import io.realworld.externals.format
 import io.realworld.model.Article
 import io.realworld.model.Comment
+import js.date.Date
 
 @Composable
 fun IComponent.articleComment(
@@ -63,7 +63,9 @@ fun IComponent.articleComment(
                 className = "comment-author"
             )
             span("date-posted") {
-                +Date(comment.createdAt ?: "").format()
+                if (comment.createdAt != null) {
+                    +Date(comment.createdAt).format()
+                }
             }
             if (state.user != null && state.user.username == comment.author?.username) {
                 span("mod-options") {

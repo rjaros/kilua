@@ -36,9 +36,9 @@ import dev.kilua.html.spant
 import io.realworld.ConduitManager
 import io.realworld.ConduitState
 import io.realworld.View
-import io.realworld.externals.Date
 import io.realworld.externals.format
 import io.realworld.model.Article
+import js.date.Date
 
 @Composable
 fun IComponent.articleMeta(article: Article, state: ConduitState, conduitManager: ConduitManager) {
@@ -55,7 +55,9 @@ fun IComponent.articleMeta(article: Article, state: ConduitState, conduitManager
                 className = "author"
             )
             span("date") {
-                +Date(article.createdAt).format()
+                if (article.createdAt != null) {
+                    +Date(article.createdAt).format()
+                }
             }
         }
         if (article.author?.username != state.user?.username) {

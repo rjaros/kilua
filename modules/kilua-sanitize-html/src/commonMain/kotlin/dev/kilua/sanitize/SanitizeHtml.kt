@@ -25,9 +25,9 @@ package dev.kilua.sanitize
 import dev.kilua.externals.SanitizeHtmlOptionsJs
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toJsBoolean
-import dev.kilua.utils.toJsString
 import js.core.JsAny
+import js.core.JsPrimitives.toJsBoolean
+import js.core.JsPrimitives.toJsString
 import js.objects.jso
 import js.regexp.RegExp
 

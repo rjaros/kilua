@@ -22,8 +22,8 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.JSON
 import dev.kilua.test.SimpleSpec
+import js.json.stringify
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -31,13 +31,13 @@ class JavaScriptSpec : SimpleSpec {
 
     @Test
     fun toJsAny() {
-        assertEquals("\"test\"", JSON.stringify("test".toJsAny()))
-        assertEquals("45", JSON.stringify(45.toJsAny()))
-        assertEquals("45.5", JSON.stringify(45.5.toJsAny()))
-        assertEquals("true", JSON.stringify(true.toJsAny()))
+        assertEquals("\"test\"", stringify("test".toJsAny()))
+        assertEquals("45", stringify(45.toJsAny()))
+        assertEquals("45.5", stringify(45.5.toJsAny()))
+        assertEquals("true", stringify(true.toJsAny()))
         assertEquals(
             """{"string":"value","int":5,"boolean":true,"double":14.5,"obj":{"a":1,"b":2},"array":["string",5,true],"list":["string",5,false],"map":{"m1":"Some value","m2":{"m3":"Some value 3"}}}""",
-            JSON.stringify(
+            stringify(
                 mapOf(
                     "string" to "value",
                     "int" to 5,
@@ -75,7 +75,7 @@ class JavaScriptSpec : SimpleSpec {
             val result = deepMerge(target, source)
             assertEquals(
                 """{"a":{"b":{"c":"c","d":"d","e":"e"},"array":[1,2,3,4]}}""",
-                JSON.stringify(result),
+                stringify(result),
                 "Should deeply merge two JS objects"
             )
         }

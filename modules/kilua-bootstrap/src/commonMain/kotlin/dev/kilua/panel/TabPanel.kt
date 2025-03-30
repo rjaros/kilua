@@ -44,7 +44,7 @@ import dev.kilua.html.li
 import dev.kilua.html.ul
 import dev.kilua.utils.cast
 import dev.kilua.utils.rem
-import dev.kilua.utils.toJsString
+import js.core.JsPrimitives.toJsString
 import web.html.HTMLDivElement
 
 /**

@@ -34,9 +34,6 @@ import dev.kilua.KiluaScope
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.JSON
-import dev.kilua.externals.console
-import dev.kilua.utils.get
 import dev.kilua.html.div
 import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RemoteOption
@@ -47,12 +44,14 @@ import dev.kilua.utils.StringPair
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.launch
 import js.core.JsAny
+import js.core.JsPrimitives.toJsString
+import js.json.stringify
 import js.objects.jso
 import kotlinx.serialization.builtins.ListSerializer
+import web.console.console
 import web.http.RequestInit
 
 internal external class RemoteOptionExt : JsAny {
@@ -614,9 +613,9 @@ internal suspend fun <T : Any> getOptionsForTomSelectRemote(
 ): List<RemoteOptionExt> {
     val (url, method) = serviceManager.requireCall(function)
     val callAgent = CallAgent()
-    val state = stateFunction?.invoke()?.let { JSON.stringify(it.toJsString()) }
-    val queryParam = query?.let { JSON.stringify(it.toJsString()) }
-    val initialParam = initial?.let { JSON.stringify(it.toJsString()) }
+    val state = stateFunction?.invoke()?.let { stringify(it.toJsString()) }
+    val queryParam = query?.let { stringify(it.toJsString()) }
+    val initialParam = initial?.let { stringify(it.toJsString()) }
     return try {
         val result = callAgent.jsonRpcCall(
             url,

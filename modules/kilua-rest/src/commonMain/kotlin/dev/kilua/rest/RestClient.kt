@@ -22,14 +22,12 @@
 
 package dev.kilua.rest
 
-import dev.kilua.externals.JSON
-import dev.kilua.externals.console
-import dev.kilua.externals.delete
 import dev.kilua.utils.jsGet
-import dev.kilua.externals.keys
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.cast
+import dev.kilua.utils.delete
+import dev.kilua.utils.keys
 import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.serialization.DeserializationStrategy
@@ -40,9 +38,12 @@ import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
 import js.core.JsAny
 import js.core.JsString
+import js.json.parse
+import js.json.stringify
 import js.objects.ReadonlyRecord
 import js.objects.jso
 import js.promise.catch
+import web.console.console
 import web.http.BodyInit
 import web.http.Headers
 import web.http.RequestInit
@@ -282,7 +283,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
                     if (restRequestConfig.serializer != null) {
                         BodyInit(JsonInstance.encodeToString(restRequestConfig.serializer!!, restRequestConfig.data!!))
                     } else {
-                        BodyInit(JSON.stringify(restRequestConfig.data!!.cast()))
+                        BodyInit(stringify(restRequestConfig.data!!.cast()))
                     }
                 }
 
@@ -346,7 +347,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
                             val result = if (restRequestConfig.deserializer != null) {
                                 JsonInstance.decodeFromString(
                                     restRequestConfig.deserializer!!,
-                                    JSON.stringify(transformed)
+                                    stringify(transformed)
                                 )
                             } else {
                                 transformed.cast()
@@ -370,7 +371,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
                                 val result = if (restRequestConfig.deserializer != null) {
                                     JsonInstance.decodeFromString(
                                         restRequestConfig.deserializer!!,
-                                        JSON.stringify(transformed)
+                                        stringify(transformed)
                                     )
                                 } else {
                                     transformed.cast()
@@ -437,7 +438,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
      * @param serializer a serializer for T
      */
     protected fun <T> T.toObj(serializer: SerializationStrategy<T>): JsAny {
-        return JSON.parse(JsonInstance.encodeToString(serializer, this))
+        return parse(JsonInstance.encodeToString(serializer, this))
     }
 
     /**

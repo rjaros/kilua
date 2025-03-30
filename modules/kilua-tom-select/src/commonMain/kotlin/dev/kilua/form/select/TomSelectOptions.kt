@@ -27,9 +27,9 @@ import dev.kilua.utils.StringPair
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.toJsAny
-import dev.kilua.utils.toJsBoolean
-import dev.kilua.utils.toJsString
 import js.core.JsAny
+import js.core.JsPrimitives.toJsBoolean
+import js.core.JsPrimitives.toJsString
 import js.objects.jso
 import web.html.HTMLElement
 

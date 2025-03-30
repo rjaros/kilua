@@ -32,28 +32,30 @@ import dev.kilua.externals.CellComponentBase
 import dev.kilua.externals.ColumnComponent
 import dev.kilua.externals.RowComponent
 import dev.kilua.externals.TabulatorMenuItem
-import dev.kilua.utils.jsGet
-import dev.kilua.utils.jsSet
 import dev.kilua.externals.toJsAny
 import dev.kilua.utils.JsArray
 import dev.kilua.utils.cast
+import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
-import dev.kilua.utils.toInt
+import dev.kilua.utils.jsSet
 import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toJsBoolean
-import dev.kilua.utils.toJsNumber
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
 import js.core.JsAny
+import js.core.JsInt
 import js.core.JsNumber
+import js.core.JsPrimitives.toInt
+import js.core.JsPrimitives.toJsBoolean
+import js.core.JsPrimitives.toJsDouble
+import js.core.JsPrimitives.toJsInt
+import js.core.JsPrimitives.toJsString
 import js.objects.jso
 import js.promise.Promise
-import web.dom.document
 import web.dom.Element
-import web.html.HTMLElement
+import web.dom.document
 import web.events.Event
+import web.html.HTMLElement
 import web.storage.localStorage
 import web.timers.clearTimeout
 import web.timers.setTimeout
@@ -777,7 +779,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             if (onRendered != undefined) {
                 onRendered {
                     if (EditorRoot.root != null) {
-                        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsNumber().unsafeCast()) }
+                        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsInt().unsafeCast()) }
                         EditorRoot.root?.dispose()
                     }
                     EditorRoot.root = root(rootElement, false, tabulator.renderConfig) {
@@ -791,7 +793,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                                 EditorRoot.root = null
                                 EditorRoot.cancel = null
                                 null
-                            }, 500).unsafeCast<JsNumber>().toInt()
+                            }, 500).unsafeCast<JsInt>().toInt()
                         }, cancel, data)
                     }
                     EditorRoot.cancel = cancel
@@ -945,7 +947,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         "hideInHtml" to hideInHtml,
         "sorter" to (sorterFunction?.let { f ->
             toJsAny { a: JsAny, b: JsAny, aRow: RowComponent, bRow: RowComponent, column: ColumnComponent, dir: String, sorterParams: JsAny? ->
-                f(a, b, aRow, bRow, column, dir, sorterParams).toJsNumber()
+                f(a, b, aRow, bRow, column, dir, sorterParams).toJsDouble().unsafeCast()
             }
         } ?: sorter?.value),
         "sorterParams" to sorterParams,

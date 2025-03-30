@@ -22,11 +22,6 @@
 
 package dev.kilua.utils
 
-/**
- * CommonJS require function
- */
-public external fun require(module: String): dynamic
-
 @Suppress("UnsafeCastFromDynamic")
 public actual val isDom: Boolean =
     js("typeof document !== 'undefined' && typeof document.kilua == 'undefined'")

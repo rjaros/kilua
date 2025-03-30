@@ -22,16 +22,17 @@
 
 package dev.kilua.test
 
-import dev.kilua.asPromise
 import dev.kilua.compose.Root
 import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
+import dev.kilua.utils.obj
+import js.core.JsAny
+import js.coroutines.asPromise
+import js.promise.Promise
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
-import js.core.JsAny
-import js.promise.Promise
 import web.dom.InsertPosition
 import web.dom.document
 import kotlin.test.DefaultAsserter.assertTrue
@@ -54,6 +55,7 @@ public interface TestSpec {
         beforeTest()
         return testScope.async {
             code()
+            obj()
         }.asPromise().finally {
             afterTest()
         }.cast()
@@ -86,6 +88,7 @@ public interface DomSpec : TestSpec {
         beforeTest()
         return testScope.async {
             if (isDom) code()
+            obj()
         }.asPromise().finally {
             afterTest()
         }.cast()

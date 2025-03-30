@@ -26,7 +26,6 @@ import dev.kilua.Application
 import dev.kilua.BootstrapCssModule
 import dev.kilua.CoreModule
 import dev.kilua.compose.root
-import dev.kilua.externals.console
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
@@ -40,6 +39,7 @@ import dev.kilua.startApplication
 import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.rem
 import kotlinx.serialization.Serializable
+import web.console.console
 
 @Serializable
 data class UserForm(

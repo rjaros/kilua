@@ -50,9 +50,9 @@ import dev.kilua.utils.isDom
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.nativeMapOf
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.unsafeCast
 import js.core.JsAny
+import js.core.JsPrimitives.toJsString
 import js.globals.globalThis
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

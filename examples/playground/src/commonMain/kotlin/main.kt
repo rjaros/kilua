@@ -68,7 +68,6 @@ import dev.kilua.compose.ui.width
 import dev.kilua.core.IComponent
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.animateMini
-import dev.kilua.externals.console
 import dev.kilua.form.EnumMask
 import dev.kilua.form.ImaskOptions
 import dev.kilua.form.MaskAutofix
@@ -173,12 +172,12 @@ import dev.kilua.utils.now
 import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toJsNumber
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.toList
 import dev.kilua.utils.today
 import dev.kilua.utils.unsafeCast
 import js.core.JsAny
+import js.core.JsPrimitives.toJsInt
+import js.core.JsPrimitives.toJsString
 import js.import.JsModule
 import js.objects.jso
 import js.promise.Promise
@@ -188,6 +187,7 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
+import web.console.console
 import web.dom.Text
 import web.events.CustomEvent
 import web.events.Event
@@ -865,7 +865,7 @@ class App : Application() {
                             }, editorComponentFunction = { cell, onRendered, success, cancel, data ->
                                 text(data.age.toString()) {
                                     onChange {
-                                        success(this.value?.toIntOrNull()?.toJsNumber())
+                                        success(this.value?.toIntOrNull()?.toJsInt())
                                     }
                                     onBlur {
                                         cancel(null)

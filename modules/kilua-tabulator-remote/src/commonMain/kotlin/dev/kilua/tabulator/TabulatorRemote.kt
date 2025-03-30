@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.JSON
 import dev.kilua.promise
 import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RemoteData
@@ -42,10 +41,12 @@ import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.rem
-import dev.kilua.utils.toJsString
 import dev.kilua.utils.unsafeCast
 import js.core.JsAny
+import js.core.JsPrimitives.toJsString
 import js.globals.globalThis
+import js.json.parse
+import js.json.stringify
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -198,8 +199,8 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemoteRef(
             ajaxRequestFunc = { _, _, params ->
                 val page = params.jsGet("page")?.toString()
                 val size = params.jsGet("size")?.toString()
-                val filters = params.jsGet("filter")?.let { JSON.stringify(it) }
-                val sorters = params.jsGet("sort")?.let { JSON.stringify(it) }
+                val filters = params.jsGet("filter")?.let { stringify(it) }
+                val sorters = params.jsGet("sort")?.let { stringify(it) }
                 promise {
                     getDataForTabulatorRemote(
                         serviceManager,
@@ -268,8 +269,8 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
             ajaxRequestFunc = { _, _, params ->
                 val page = params.jsGet("page")?.toString()
                 val size = params.jsGet("size")?.toString()
-                val filters = params.jsGet("filter")?.let { JSON.stringify(it) }
-                val sorters = params.jsGet("sort")?.let { JSON.stringify(it) }
+                val filters = params.jsGet("filter")?.let { stringify(it) }
+                val sorters = params.jsGet("sort")?.let { stringify(it) }
                 promise {
                     getDataForTabulatorRemote(
                         serviceManager,
@@ -312,7 +313,7 @@ public suspend fun <T : Any, E : Any> getDataForTabulatorRemote(
 ): JsArray<JsAny> {
     val (url, method) = serviceManager.requireCall(function)
     val callAgent = CallAgent()
-    val state = stateFunction?.invoke()?.let { JSON.stringify(it.toJsString()) }
+    val state = stateFunction?.invoke()?.let { stringify(it.toJsString()) }
     val r = callAgent.jsonRpcCall(
         url,
         listOf(page, size, filters, sorters, state),
@@ -323,7 +324,7 @@ public suspend fun <T : Any, E : Any> getDataForTabulatorRemote(
                 self.requestFilterParam()
             }
         })
-    val result = JSON.parse<JsAny>(r)
+    val result = parse<JsAny>(r)
     return if (page != null) {
         if (result.jsGet("data") == null) {
             result.jsSet("data", jsArrayOf<JsAny>())

@@ -23,13 +23,12 @@
 package dev.kilua.form.text.i18n
 
 import dev.kilua.externals.Trix
-import dev.kilua.externals.assign
 import dev.kilua.i18n.Locale
-import dev.kilua.utils.cast
+import dev.kilua.utils.assign
 
 internal actual fun getToolbarContent(locale: Locale): String {
     val trixLocale =
         TrixLocales.locales[locale.language] ?: TrixLocales.locales[locale.languageBase] ?: TrixLocales.trixLocaleEn
-    assign(Trix.config.lang, trixLocale.cast())
+    assign(Trix.config.lang, trixLocale)
     return Trix.config.toolbar.getDefaultHTML()
 }
