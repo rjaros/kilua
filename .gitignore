@@ -12,3 +12,4 @@ refreshW.sh
 /examples/fullstack-ktor-koin/logs
 /examples/ssr-ktor/logs/
 /examples.sh
+/examples_wasm.sh
