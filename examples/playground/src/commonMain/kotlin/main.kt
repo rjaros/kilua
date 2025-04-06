@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import app.softwork.routingcompose.Router
 import dev.kilua.Application
-import dev.kilua.KiluaScope
 import dev.kilua.LocalResource
 import dev.kilua.animation.MotionTransition
 import dev.kilua.animation.TransitionType
@@ -67,7 +66,9 @@ import dev.kilua.compose.ui.title
 import dev.kilua.compose.ui.width
 import dev.kilua.core.IComponent
 import dev.kilua.dropdown.dropDown
+import dev.kilua.externals.JsArray
 import dev.kilua.externals.animateMini
+import dev.kilua.form.Autocomplete
 import dev.kilua.form.EnumMask
 import dev.kilua.form.ImaskOptions
 import dev.kilua.form.MaskAutofix
@@ -137,7 +138,6 @@ import dev.kilua.popup.toggleTooltip
 import dev.kilua.popup.tooltip
 import dev.kilua.progress.Progress
 import dev.kilua.progress.ProgressOptions
-import dev.kilua.promise
 import dev.kilua.rest.RemoteRequestException
 import dev.kilua.rest.RestClient
 import dev.kilua.rest.callDynamic
@@ -163,13 +163,15 @@ import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.useModule
-import dev.kilua.utils.JsArray
+import dev.kilua.utils.KiluaScope
+import dev.kilua.utils.call
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.now
 import dev.kilua.utils.obj
+import dev.kilua.utils.promise
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toList
@@ -179,7 +181,6 @@ import js.core.JsAny
 import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toJsString
 import js.import.JsModule
-import js.objects.jso
 import js.promise.Promise
 import js.regexp.RegExp
 import kotlinx.coroutines.flow.launchIn
@@ -202,34 +203,34 @@ import kotlin.random.nextInt
 import kotlin.random.nextUInt
 import kotlin.time.Duration.Companion.seconds
 
-@JsModule("./modules/json/test.json")
+@JsModule("/kotlin/modules/json/test.json")
 external object testJson : LocalResource
 
-@JsModule("./modules/i18n/messages-de.po")
+@JsModule("/kotlin/modules/i18n/messages-de.po")
 external object messagesDe : JsAny
 
-@JsModule("./modules/i18n/messages-en.po")
+@JsModule("/kotlin/modules/i18n/messages-en.po")
 external object messagesEn : JsAny
 
-@JsModule("./modules/i18n/messages-es.po")
+@JsModule("/kotlin/modules/i18n/messages-es.po")
 external object messagesEs : JsAny
 
-@JsModule("./modules/i18n/messages-fr.po")
+@JsModule("/kotlin/modules/i18n/messages-fr.po")
 external object messagesFr : JsAny
 
-@JsModule("./modules/i18n/messages-ja.po")
+@JsModule("/kotlin/modules/i18n/messages-ja.po")
 external object messagesJa : JsAny
 
-@JsModule("./modules/i18n/messages-ko.po")
+@JsModule("/kotlin/modules/i18n/messages-ko.po")
 external object messagesKo : JsAny
 
-@JsModule("./modules/i18n/messages-pl.po")
+@JsModule("/kotlin/modules/i18n/messages-pl.po")
 external object messagesPl : JsAny
 
-@JsModule("./modules/i18n/messages-ru.po")
+@JsModule("/kotlin/modules/i18n/messages-ru.po")
 external object messagesRu : JsAny
 
-@JsModule("./modules/css/style.css")
+@JsModule("/kotlin/modules/css/style.css")
 external object css
 
 @Serializable
@@ -813,7 +814,7 @@ class App : Application() {
                     onClick {
                         progress.promise(Promise { resolve, reject ->
                             setTimeout({
-                                resolve(jso()).cast()
+                                resolve.call(obj()).cast()
                             }, 3000)
                         })
                     }
@@ -1130,11 +1131,11 @@ class App : Application() {
                     tsRenders(TomSelectRenders(option = { item, escape ->
                         val subtext: String? = item.jsGet("subtext")?.toString()
                         """
-                        <div>
-                            <span class="title">${escape(item.jsGet("text").toString())}</span>
-                            <small>${subtext?.let { "(" + escape(it) + ")" } ?: ""}</small>
-                        </div>
-                    """.trimIndent()
+                                        <div>
+                                            <span class="title">${escape(item.jsGet("text").toString())}</span>
+                                            <small>${subtext?.let { "(" + escape(it) + ")" } ?: ""}</small>
+                                        </div>
+                                    """.trimIndent()
                     }))
                     onChange {
                         console.log(this.value)
@@ -1147,6 +1148,10 @@ class App : Application() {
                 var multi by remember { mutableStateOf(true) }
                 var tsdis by remember { mutableStateOf(false) }
 
+                label("test-tom-select") {
+                    +"A Field"
+                }
+
                 val tselect = tomSelectRef(
                     listOf("cat" to "Cat", "dog" to "Dog", "mouse" to "Mouse"),
                     value = tsvalue,
@@ -1154,7 +1159,7 @@ class App : Application() {
                     emptyOption = true,
                     multiple = multi,
                     disabled = tsdis,
-                    id = "test"
+                    id = "test-tom-select"
                 ) {
                     LaunchedEffect(Unit) {
                         stateFlow.onEach {
@@ -1240,11 +1245,13 @@ class App : Application() {
 
                 val rd = richDateTimeRef(
                     now(),
-                    name = "data",
                     placeholder = "Podaj datę",
                     inline = dtInline,
                     id = "test"
                 ) {
+                    name("data")
+                    required(true)
+                    autocomplete(Autocomplete.Off)
                     onChange {
                         console.log(this.getValueAsString())
                     }
@@ -1848,9 +1855,9 @@ class App : Application() {
                                 }
                             }
                         }
-//                    stateFlow.onEach {
-//                        this.validate()
-//                    }.launchIn(KiluaScope)
+                        //                    stateFlow.onEach {
+                        //                        this.validate()
+                        //                    }.launchIn(KiluaScope)
                     }
 
                 }
@@ -1859,7 +1866,7 @@ class App : Application() {
             console.log("recomposing")
             val x = tag("address", "address3") {
                 +"address23"
-//                setStyle("color", "red")
+                //                setStyle("color", "red")
             }
 
             var size by remember { mutableStateOf(1) }
@@ -1871,7 +1878,7 @@ class App : Application() {
 
             div {
                 for (name in list) {
-//                    key(name) {
+                    //                    key(name) {
                     div {
                         +name
                         button {

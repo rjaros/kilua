@@ -29,7 +29,7 @@ import dev.kilua.progress.ProgressOptions
 import dev.kilua.rest.RemoteRequestException
 import dev.kilua.routing.global
 import dev.kilua.ssr.getSsrState
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import dev.kilua.utils.isDom
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.keys

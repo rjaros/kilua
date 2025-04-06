@@ -28,4 +28,6 @@ import js.date.Date
 import js.intl.DateTimeFormat
 
 fun Date.format(): String =
-    DateTimeFormat("en-US", jsObjectOf("year" to "numeric", "month" to "long", "day" to "numeric").unsafeCast()).format(this)
+    DateTimeFormat("en-US", jsObjectOf("year" to "numeric", "month" to "long", "day" to "numeric").unsafeCast()).format(
+        this
+    )
