@@ -66,17 +66,21 @@ public open class RichDateTime(
     DateTimeFormControl,
     WithStateFlow<LocalDateTime?> by withStateFlowDelegate, IRichDateTime {
 
+    private var sendChangeEvent: Boolean = true
+
     public override var value: LocalDateTime? by updatingProperty(
         value,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
         if (tempusDominusInstance != null) {
             val currentValue = tempusDominusInstance!!.dates.lastPicked?.toLocalDateTime()
             if (it != currentValue) {
+                sendChangeEvent = false
                 if (it != null) {
                     tempusDominusInstance!!.dates.setValue(tempusDominusInstance!!.dates.parseInput(it.toDate()))
                 } else {
                     tempusDominusInstance?.clear()
                 }
+                sendChangeEvent = true
             }
         }
     }
@@ -86,9 +90,11 @@ public open class RichDateTime(
         withStateFlowDelegate.formControl(this)
         @Suppress("LeakingThis")
         onEventDirect<Event>("change.td") {
-            val date = it.jsGet("detail")?.jsGet("date")?.unsafeCast<dev.kilua.externals.Date>()
-            this.value = date?.toLocalDateTime()
-            dispatchEvent("change", buildCustomEventInit())
+            if (sendChangeEvent) {
+                val date = it.jsGet("detail")?.jsGet("date")?.unsafeCast<js.date.Date>()
+                this.value = date?.toLocalDateTime()
+                dispatchEvent("change", buildCustomEventInit())
+            }
         }
         @Suppress("LeakingThis")
         onEventDirect<Event>("error.td") {
