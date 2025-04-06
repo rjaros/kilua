@@ -30,8 +30,9 @@ import dev.kilua.externals.TempusDominus
 import dev.kilua.externals.TempusDominusOptions
 import dev.kilua.utils.jsSet
 import dev.kilua.externals.tempusDominusLocales
-import dev.kilua.externals.toDate
-import dev.kilua.form.text.text
+import dev.kilua.form.Autocomplete
+import dev.kilua.form.text.Text
+import dev.kilua.form.text.textRef
 import dev.kilua.html.Div
 import dev.kilua.html.IDiv
 import dev.kilua.html.i
@@ -213,7 +214,9 @@ public abstract class AbstractRichDateTime(
         this.disabled = disabled
     }
 
-    public override var required: Boolean? by updatingProperty(required)
+    public override var required: Boolean? by updatingProperty(required) {
+        inputText?.required = it
+    }
 
     @Composable
     public override fun required(required: Boolean?): Unit = composableProperty("required", {
@@ -222,13 +225,26 @@ public abstract class AbstractRichDateTime(
         this.required = required
     }
 
-    public override var name: String? by updatingProperty()
+    public override var name: String? by updatingProperty {
+        inputText?.name = it
+    }
 
     @Composable
     public override fun name(name: String?): Unit = composableProperty("name", {
         this.name = null
     }) {
         this.name = name
+    }
+
+    public override var autocomplete: Autocomplete? by updatingProperty {
+        inputText?.autocomplete = it
+    }
+
+    @Composable
+    public override fun autocomplete(autocomplete: Autocomplete?): Unit = composableProperty("autocomplete", {
+        this.autocomplete = null
+    }) {
+        this.autocomplete = autocomplete
     }
 
     /**
@@ -588,6 +604,8 @@ public abstract class AbstractRichDateTime(
      */
     public override var tempusDominusInstance: TempusDominus? = null
 
+    internal var inputText: Text? = null
+
     protected abstract fun initializeTempusDominus()
 
     /**
@@ -748,10 +766,10 @@ internal fun IDiv.commonRichDateTime(
     icon: String,
     inputClassName: String?,
     onBlurCallback: () -> Unit,
-) {
+): Text {
     attribute("data-td-target-input", "nearest")
     attribute("data-td-target-toggle", "nearest")
-    text(
+    val text = textRef(
         name = name,
         placeholder = placeholder,
         disabled = disabled,
@@ -774,4 +792,5 @@ internal fun IDiv.commonRichDateTime(
         attribute("data-td-toggle", "datetimepicker")
         i(icon) {}
     }
+    return text
 }

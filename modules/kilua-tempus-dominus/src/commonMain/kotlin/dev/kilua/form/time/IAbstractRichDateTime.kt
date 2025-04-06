@@ -24,6 +24,7 @@ package dev.kilua.form.time
 
 import androidx.compose.runtime.Composable
 import dev.kilua.externals.TempusDominus
+import dev.kilua.form.Autocomplete
 import dev.kilua.html.IDiv
 import dev.kilua.i18n.Locale
 import kotlinx.datetime.LocalDate
@@ -89,6 +90,17 @@ public interface IAbstractRichDateTime : IDiv {
      */
     @Composable
     public fun name(name: String?)
+
+    /**
+     * The autocomplete attribute of the generated HTML input element.
+     */
+    public val autocomplete: Autocomplete?
+
+    /**
+     * Set the autocomplete attribute of the generated HTML input element.
+     */
+    @Composable
+    public fun autocomplete(autocomplete: Autocomplete?)
 
     /**
      * Days of the week that should be disabled.

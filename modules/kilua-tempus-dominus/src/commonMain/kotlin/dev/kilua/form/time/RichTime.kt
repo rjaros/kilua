@@ -255,9 +255,10 @@ public fun IComponent.richTimeRef(
         className = className % "input-group kilua-td",
         bindId
     ) {
-        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, clockIcon, inputClassName) {
-            tempusDominusInstance?.hide()
-        }
+        (this as AbstractRichDateTime).inputText =
+            commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, clockIcon, inputClassName) {
+                tempusDominusInstance?.hide()
+            }
         setup()
     }
 }
@@ -304,9 +305,10 @@ public fun IComponent.richTime(
         className = className % "input-group kilua-td",
         bindId
     ) {
-        commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, clockIcon, inputClassName) {
-            tempusDominusInstance?.hide()
-        }
+        (this as AbstractRichDateTime).inputText =
+            commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, clockIcon, inputClassName) {
+                tempusDominusInstance?.hide()
+            }
         setup()
     }
 }

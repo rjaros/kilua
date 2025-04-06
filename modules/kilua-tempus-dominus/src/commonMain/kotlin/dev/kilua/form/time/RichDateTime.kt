@@ -258,7 +258,7 @@ public fun IComponent.richDateTimeRef(
         className = className % "input-group kilua-td",
         bindId
     ) {
-        commonRichDateTime(
+        (this as AbstractRichDateTime).inputText = commonRichDateTime(
             bindId,
             name,
             placeholder,
@@ -317,7 +317,7 @@ public fun IComponent.richDateTime(
         className = className % "input-group kilua-td",
         bindId
     ) {
-        commonRichDateTime(
+        (this as AbstractRichDateTime).inputText = commonRichDateTime(
             bindId,
             name,
             placeholder,
