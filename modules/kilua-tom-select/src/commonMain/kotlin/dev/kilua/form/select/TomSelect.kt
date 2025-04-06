@@ -615,6 +615,7 @@ public open class TomSelect(
                 // Remove additional empty div to make place for the generated ts-wrapper
                 it.parentNode?.removeChild(it)
             }
+            if (element.ariaLabel == null) element.ariaLabel = placeholder ?: "Select option"
         }
     }
 
