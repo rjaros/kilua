@@ -22,7 +22,7 @@
 
 package dev.kilua.ssr
 
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.toList

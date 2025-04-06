@@ -23,7 +23,7 @@
 package dev.kilua.form.select
 
 import dev.kilua.externals.TomSelectCallbacksJs
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import js.core.JsAny
 import js.objects.jso
 

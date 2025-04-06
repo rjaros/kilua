@@ -1,6 +1,5 @@
-@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +20,11 @@
  * SOFTWARE.
  */
 
-package dev.kilua.externals
+package dev.kilua.utils
 
-import dev.kilua.utils.today
-import dev.kilua.utils.unsafeCast
-import js.core.JsAny
-import js.core.JsDouble
-import js.core.JsNumber
 import js.core.JsPrimitives.toDouble
 import js.core.JsPrimitives.toJsDouble
+import js.date.Date
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -41,20 +36,11 @@ import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
 /**
- * JavaScript Date class.
- */
-public external class Date() : JsAny {
-    public constructor(time: JsNumber)
-
-    public fun getTime(): JsNumber
-}
-
-/**
  * Converts [LocalDateTime] to JavaScript [Date].
  */
 public fun LocalDateTime.toDate(): Date {
     return Date(
-        this.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble().toJsDouble().unsafeCast()
+        this.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble()
     )
 }
 
@@ -63,7 +49,7 @@ public fun LocalDateTime.toDate(): Date {
  */
 public fun LocalDate.toDate(): Date {
     return Date(
-        this.atStartOfDayIn(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble().toJsDouble().unsafeCast()
+        this.atStartOfDayIn(TimeZone.currentSystemDefault()).toEpochMilliseconds().toDouble()
     )
 }
 
@@ -78,7 +64,7 @@ public fun LocalTime.toDate(): Date {
  * Converts JavaScript [Date] to [LocalDateTime].
  */
 public fun Date.toLocalDateTime(): LocalDateTime {
-    return Instant.fromEpochMilliseconds(getTime().unsafeCast<JsDouble>().toDouble().toLong())
+    return Instant.fromEpochMilliseconds(getTime().toJsDouble().toDouble().toLong())
         .toLocalDateTime(TimeZone.currentSystemDefault())
 }
 

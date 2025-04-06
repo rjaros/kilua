@@ -40,7 +40,7 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.assign
 import dev.kilua.utils.cast
@@ -53,7 +53,6 @@ import js.core.JsAny
 import js.core.JsPrimitives.toJsString
 import js.core.JsString
 import js.objects.jso
-import web.dom.InsertPosition
 import web.dom.document
 import web.html.HTMLOptionElement
 import web.html.HTMLSelectElement
@@ -628,7 +627,7 @@ public open class TomSelect(
             tomSelectInstance = null
             // Restore the empty div after the Tom Select instance is removed
             val emptyDiv = document.createElement("div")
-            element.insertAdjacentElement(InsertPosition.afterend, emptyDiv)
+            element.insertAdjacentElement("afterend".toJsString().unsafeCast(), emptyDiv)
         }
     }
 

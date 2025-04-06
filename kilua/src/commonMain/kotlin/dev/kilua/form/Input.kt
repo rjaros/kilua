@@ -30,6 +30,8 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
+import dev.kilua.utils.unsafeCast
+import js.core.JsPrimitives.toJsString
 import web.events.Event
 import web.html.HTMLInputElement
 
@@ -199,30 +201,7 @@ public abstract class Input<T : Any>(
      * The type attribute of the generated HTML input element.
      */
     public override var type: InputType by updatingProperty(type) {
-        element.type = when(it) {
-            InputType.Text -> web.html.InputType.text
-            InputType.Password -> web.html.InputType.password
-            InputType.Email -> web.html.InputType.email
-            InputType.Tel -> web.html.InputType.tel
-            InputType.Url -> web.html.InputType.url
-            InputType.Number -> web.html.InputType.number
-            InputType.Date -> web.html.InputType.date
-            InputType.Time -> web.html.InputType.time
-            InputType.DatetimeLocal -> web.html.InputType.datetimeLocal
-            InputType.Month -> web.html.InputType.month
-            InputType.Week -> web.html.InputType.week
-            InputType.Color -> web.html.InputType.color
-            InputType.File -> web.html.InputType.file
-            InputType.Checkbox -> web.html.InputType.checkbox
-            InputType.Radio -> web.html.InputType.radio
-            InputType.Submit -> web.html.InputType.submit
-            InputType.Reset -> web.html.InputType.reset
-            InputType.Button -> web.html.InputType.button
-            InputType.Hidden -> web.html.InputType.hidden
-            InputType.Image -> web.html.InputType.image
-            InputType.Range -> web.html.InputType.range
-            InputType.Search -> web.html.InputType.search
-        }
+        element.type = it.value.toJsString().unsafeCast()
     }
 
     /**
@@ -342,7 +321,7 @@ public abstract class Input<T : Any>(
      */
     public override var autocomplete: Autocomplete? by updatingProperty {
         if (it != null) {
-            element.setAttribute("autocomplete", it.value)
+            element.autocomplete = it.value.toJsString().unsafeCast()
         } else {
             element.removeAttribute("autocomplete")
         }
@@ -452,30 +431,7 @@ public abstract class Input<T : Any>(
                 element.value = value.toString()
             }
             @Suppress("LeakingThis")
-            element.type = when(type) {
-                InputType.Text -> web.html.InputType.text
-                InputType.Password -> web.html.InputType.password
-                InputType.Email -> web.html.InputType.email
-                InputType.Tel -> web.html.InputType.tel
-                InputType.Url -> web.html.InputType.url
-                InputType.Number -> web.html.InputType.number
-                InputType.Date -> web.html.InputType.date
-                InputType.Time -> web.html.InputType.time
-                InputType.DatetimeLocal -> web.html.InputType.datetimeLocal
-                InputType.Month -> web.html.InputType.month
-                InputType.Week -> web.html.InputType.week
-                InputType.Color -> web.html.InputType.color
-                InputType.File -> web.html.InputType.file
-                InputType.Checkbox -> web.html.InputType.checkbox
-                InputType.Radio -> web.html.InputType.radio
-                InputType.Submit -> web.html.InputType.submit
-                InputType.Reset -> web.html.InputType.reset
-                InputType.Button -> web.html.InputType.button
-                InputType.Hidden -> web.html.InputType.hidden
-                InputType.Image -> web.html.InputType.image
-                InputType.Range -> web.html.InputType.range
-                InputType.Search -> web.html.InputType.search
-            }
+            element.type = type.value.toJsString().unsafeCast()
             if (name != null) {
                 @Suppress("LeakingThis")
                 element.name = name

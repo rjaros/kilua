@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,13 +20,16 @@
  * SOFTWARE.
  */
 
-package dev.kilua
+package dev.kilua.utils
 
-import dev.kilua.utils.cast
 import js.core.JsAny
-import js.coroutines.asPromise
+import js.errors.JsError
+import js.errors.JsErrorLike
 import js.promise.Promise
+import js.promise.PromiseReject
+import js.promise.PromiseResolve
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
@@ -39,4 +42,40 @@ public val KiluaScope: CoroutineScope = CoroutineScope(Dispatchers.Default + Sup
 /**
  * Create a JS Promise from a suspending block.
  */
-public fun <T : JsAny?> promise(block: suspend () -> T): Promise<T> = KiluaScope.async { block() }.asPromise().cast()
+public fun <T : JsAny?> promise(block: suspend () -> T): Promise<T> =
+    KiluaScope.async { block() }.asPromise().unsafeCast()
+
+/**
+ * Convert Deferred to a JS Promise.
+ */
+public expect fun <T> Deferred<T>.asPromise(): Promise<JsAny?>
+
+/**
+ * Convert JS Promise to a Deferred.
+ */
+public expect fun <T : JsAny?> Promise<T>.asDeferred(): Deferred<T>
+
+/**
+ * Suspend function to await a JS Promise.
+ */
+public expect suspend fun <T: JsAny?> Promise<T>.awaitPromise(): T
+
+/**
+ * Workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2774
+ */
+public expect inline fun <T : JsAny?> PromiseResolve<T>.call(value: T)
+
+/**
+ * Workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2774
+ */
+public expect inline fun PromiseReject.call()
+
+/**
+ * Workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2774
+ */
+public expect inline fun PromiseReject.call(reason: JsError)
+
+/**
+ * Workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2774
+ */
+public expect inline fun PromiseReject.call(reason: JsErrorLike)

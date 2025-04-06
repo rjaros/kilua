@@ -1,3 +1,4 @@
+@file:Suppress("INTERFACE_WITH_SUPERCLASS")
 /*
  * Copyright (c) 2024 Robert Jaros
  *
@@ -26,7 +27,7 @@ import js.core.JsAny
 import web.dom.Element
 import web.events.Event
 
-internal external class TabulatorMenuItem : JsAny {
+internal external interface TabulatorMenuItem : JsAny {
     var label: Element
     var action: (Event) -> Unit
     var separator: Boolean

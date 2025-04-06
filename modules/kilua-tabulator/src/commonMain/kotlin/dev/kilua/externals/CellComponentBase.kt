@@ -1,3 +1,4 @@
+@file:Suppress("INTERFACE_WITH_SUPERCLASS")
 /*
  * Copyright (c) 2024 Robert Jaros
  *
@@ -28,7 +29,7 @@ import web.html.HTMLElement
 /**
  * JavaScript Tabulator cell component base interface.
  */
-public external class CellComponentBase : JsAny {
+public external interface CellComponentBase : JsAny {
     public fun getValue(): JsAny?
     public fun getElement(): HTMLElement
     public fun getTable(): TabulatorJs

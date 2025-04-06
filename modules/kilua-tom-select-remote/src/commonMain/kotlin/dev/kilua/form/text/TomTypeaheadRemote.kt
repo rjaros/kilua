@@ -24,14 +24,14 @@ package dev.kilua.form.text
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.kilua.KiluaScope
+import dev.kilua.utils.KiluaScope
 import dev.kilua.core.IComponent
 import dev.kilua.form.InputType
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.unsafeCast
 import kotlinx.coroutines.launch

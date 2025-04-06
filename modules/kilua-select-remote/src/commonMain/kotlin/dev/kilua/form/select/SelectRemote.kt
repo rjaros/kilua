@@ -28,7 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import dev.kilua.KiluaScope
+import dev.kilua.utils.KiluaScope
 import dev.kilua.core.IComponent
 import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RpcSerialization

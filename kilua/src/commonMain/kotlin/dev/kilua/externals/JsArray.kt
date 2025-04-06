@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-present Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,20 +19,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package dev.kilua.externals
 
-package dev.kilua.utils
+import js.core.JsAny
 
-@Suppress("UnsafeCastFromDynamic")
-public actual fun Double.toFixed(size: Int): String {
-    return this.asDynamic().toFixed(size)
+/**
+ * A JavaScript array (workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2763)
+ */
+@Suppress("EXPECTED_EXTERNAL_DECLARATION")
+public expect external class JsArray<T : JsAny?>() : JsAny {
+    public val length: Int
 }
 
-@Suppress("UnsafeCastFromDynamic")
-public actual fun Double.toLocaleString(locale: String): String {
-    return this.asDynamic().toLocaleString(locale)
-}
+public expect operator fun <T : JsAny?> JsArray<T>.get(index: Int): T?
 
-@Suppress("UnsafeCastFromDynamic")
-public actual fun Int.toLocaleString(locale: String): String {
-    return this.asDynamic().toLocaleString(locale)
-}
+public expect operator fun <T : JsAny?> JsArray<T>.set(index: Int, value: T)

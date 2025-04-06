@@ -32,6 +32,8 @@ import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.toKebabCase
+import dev.kilua.utils.unsafeCast
+import js.core.JsPrimitives.toJsString
 import web.events.Event
 import web.html.HTMLInputElement
 
@@ -240,10 +242,7 @@ public abstract class AbstractCheck(
             @Suppress("LeakingThis")
             element.checked = value
             @Suppress("LeakingThis")
-            element.type = when(type) {
-                CheckInputType.Checkbox -> web.html.InputType.checkbox
-                CheckInputType.Radio -> web.html.InputType.radio
-            }
+            element.type = type.value.toJsString().unsafeCast()
             if (name != null) {
                 @Suppress("LeakingThis")
                 element.name = name

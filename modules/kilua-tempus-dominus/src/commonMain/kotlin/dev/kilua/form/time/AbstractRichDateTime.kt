@@ -25,10 +25,8 @@ package dev.kilua.form.time
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NoLiveLiterals
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.Date
 import dev.kilua.externals.TempusDominus
 import dev.kilua.externals.TempusDominusOptions
-import dev.kilua.utils.jsSet
 import dev.kilua.externals.tempusDominusLocales
 import dev.kilua.form.Autocomplete
 import dev.kilua.form.text.Text
@@ -40,17 +38,19 @@ import dev.kilua.html.span
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.jsObjectOf
+import dev.kilua.utils.jsSet
 import dev.kilua.utils.rem
+import dev.kilua.utils.toDate
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.unsafeCast
-import kotlinx.datetime.LocalDate
 import js.core.JsAny
 import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toJsString
+import js.date.Date
 import js.intl.DateTimeFormat
-import js.intl.DateTimeFormatOptions
 import js.objects.jso
+import kotlinx.datetime.LocalDate
 import web.dom.document
 import web.events.Event
 import web.events.EventType
@@ -621,10 +621,12 @@ public abstract class AbstractRichDateTime(
             locale.jsSet("locale", language.toJsString())
             locale.jsSet("format", inputFormat.toJsString())
             if (monthHeaderFormat != null || yearHeaderFormat != null) {
-                locale.jsSet("dayViewHeaderFormat", jsObjectOf(
-                    "month" to if (monthHeaderFormat != null) monthHeaderFormat!!.value else "long",
-                    "year" to if (yearHeaderFormat != null) yearHeaderFormat!!.value else "2-digit"
-                ))
+                locale.jsSet(
+                    "dayViewHeaderFormat", jsObjectOf(
+                        "month" to if (monthHeaderFormat != null) monthHeaderFormat!!.value else "long",
+                        "year" to if (yearHeaderFormat != null) yearHeaderFormat!!.value else "2-digit"
+                    )
+                )
             }
             if (hourCycle != null) {
                 locale.jsSet("hourCycle", hourCycle!!.value.toJsString())
@@ -744,8 +746,8 @@ public abstract class AbstractRichDateTime(
          * Tries to guess the hour cycle for given language.
          */
         private fun guessHourCycle(language: String): HourCycle? {
-            val template = jsObjectOf("hour" to "numeric").unsafeCast<DateTimeFormatOptions>()
-            val hourCycle = DateTimeFormat(language, template).resolvedOptions().hourCycle.toString()
+            val template = jsObjectOf("hour" to "numeric")
+            val hourCycle = DateTimeFormat(language, template.unsafeCast()).resolvedOptions().hourCycle.toString()
             return HourCycle.entries.find { it.name.lowercase() == hourCycle }
         }
     }

@@ -20,18 +20,11 @@
  * SOFTWARE.
  */
 
-package dev.kilua.utils
+package dev.kilua.externals
 
-import dev.kilua.externals.NumberExt
+import js.core.JsAny
 
-public actual fun Double.toFixed(size: Int): String {
-    return this.toJsNumber().unsafeCast<NumberExt>().toFixed(size)
-}
-
-public actual fun Double.toLocaleString(locale: String): String {
-    return this.toJsNumber().unsafeCast<NumberExt>().toLocaleString(locale)
-}
-
-public actual fun Int.toLocaleString(locale: String): String {
-    return this.toJsNumber().unsafeCast<NumberExt>().toLocaleString(locale)
+internal external class NumberExt : JsAny {
+    fun toFixed(digits: Int): String
+    fun toLocaleString(locale: String): String
 }

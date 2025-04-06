@@ -24,7 +24,6 @@
 
 package dev.kilua.externals
 
-import dev.kilua.utils.JsArray
 import js.import.JsModule
 import js.core.JsAny
 import js.promise.Promise

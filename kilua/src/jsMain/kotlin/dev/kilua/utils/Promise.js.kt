@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,15 +19,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package dev.kilua.utils
 
 import js.core.JsAny
+import js.errors.JsError
+import js.errors.JsErrorLike
+import js.promise.Promise
+import js.promise.PromiseReject
+import js.promise.PromiseResolve
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.asDeferred
+import kotlinx.coroutines.asPromise
+import kotlin.js.Promise as PromiseJs
 
-@Suppress("EXPECTED_EXTERNAL_DECLARATION")
-public expect external class JsArray<T : JsAny?>() : JsAny {
-    public val length: Int
+public actual fun <T> Deferred<T>.asPromise(): Promise<JsAny?> = asPromise().unsafeCast()
+
+public actual fun <T : JsAny?> Promise<T>.asDeferred(): Deferred<T> = unsafeCast<PromiseJs<T>>().asDeferred()
+
+public actual suspend fun <T : JsAny?> Promise<T>.awaitPromise(): T = await()
+
+@Suppress("NOTHING_TO_INLINE")
+public actual inline fun <T : JsAny?> PromiseResolve<T>.call(value: T) {
+    this.asDynamic()(value)
 }
 
-public expect operator fun <T : JsAny?> JsArray<T>.get(index: Int): T?
+@Suppress("NOTHING_TO_INLINE")
+public actual inline fun PromiseReject.call() {
+    this.asDynamic()()
+}
 
-public expect operator fun <T : JsAny?> JsArray<T>.set(index: Int, value: T)
+@Suppress("NOTHING_TO_INLINE")
+public actual inline fun PromiseReject.call(reason: JsError) {
+    this.asDynamic()(reason)
+}
+
+@Suppress("NOTHING_TO_INLINE")
+public actual inline fun PromiseReject.call(reason: JsErrorLike) {
+    this.asDynamic()(reason)
+}

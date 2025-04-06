@@ -26,14 +26,15 @@ import dev.kilua.compose.Root
 import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
 import dev.kilua.utils.obj
+import dev.kilua.utils.unsafeCast
 import js.core.JsAny
+import js.core.JsPrimitives.toJsString
 import js.coroutines.asPromise
 import js.promise.Promise
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
-import web.dom.InsertPosition
 import web.dom.document
 import kotlin.test.DefaultAsserter.assertTrue
 
@@ -98,7 +99,7 @@ public interface DomSpec : TestSpec {
         if (isDom) {
             val fixture = "<div style=\"display: none\" id=\"pretest\">" +
                     "<div id=\"${getTestId()}\"></div></div>"
-            document.body.insertAdjacentHTML(InsertPosition.afterbegin, fixture)
+            document.body.insertAdjacentHTML("afterbegin".toJsString().unsafeCast(), fixture)
         }
     }
 

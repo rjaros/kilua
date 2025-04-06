@@ -37,7 +37,7 @@ import app.softwork.routingcompose.RouteBuilder
 import app.softwork.routingcompose.Router
 import app.softwork.routingcompose.invoke
 import dev.kilua.CssRegister
-import dev.kilua.KiluaScope
+import dev.kilua.utils.KiluaScope
 import dev.kilua.core.ComponentBase
 import dev.kilua.core.IComponent
 import dev.kilua.i18n.Locale

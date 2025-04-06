@@ -22,37 +22,33 @@
 
 package dev.kilua.rest
 
-import dev.kilua.utils.jsGet
-import dev.kilua.utils.jsSet
 import dev.kilua.utils.Serialization
+import dev.kilua.utils.awaitPromise
 import dev.kilua.utils.cast
 import dev.kilua.utils.delete
+import dev.kilua.utils.jsGet
+import dev.kilua.utils.jsSet
 import dev.kilua.utils.keys
 import dev.kilua.utils.unsafeCast
-import kotlinx.coroutines.suspendCancellableCoroutine
+import js.core.JsAny
+import js.core.JsPrimitives.toJsString
+import js.core.JsString
+import js.json.parse
+import js.json.stringify
+import js.objects.ReadonlyRecord
+import js.objects.jso
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import js.core.JsAny
-import js.core.JsString
-import js.json.parse
-import js.json.stringify
-import js.objects.ReadonlyRecord
-import js.objects.jso
-import js.promise.catch
-import web.console.console
 import web.http.BodyInit
 import web.http.Headers
 import web.http.RequestInit
-import web.http.RequestMethod
 import web.http.Response
 import web.http.fetchAsync
 import web.url.URLSearchParams
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 
 
 /**
@@ -267,14 +263,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
         block: RestRequestConfig<T, V>.() -> Unit = {}
     ): RestResponse<T> {
         val restRequestConfig = RestRequestConfig<T, V>().apply(block)
-        val method = when(restRequestConfig.method) {
-            HttpMethod.Get -> RequestMethod.GET
-            HttpMethod.Post -> RequestMethod.POST
-            HttpMethod.Put -> RequestMethod.PUT
-            HttpMethod.Delete -> RequestMethod.DELETE
-            HttpMethod.Options -> RequestMethod.OPTIONS
-            HttpMethod.Head -> RequestMethod.HEAD
-        }
+        val method = restRequestConfig.method.name.toJsString()
         val body = if (restRequestConfig.data != null &&
             restRequestConfig.method != HttpMethod.Get && restRequestConfig.method != HttpMethod.Head
         ) {
@@ -333,103 +322,81 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
         val fetchUrl = if (restClientConfig.baseUrl != null) restClientConfig.baseUrl + dataUrl else dataUrl
         restClientConfig.requestFilter?.invoke(requestInit)
         restRequestConfig.requestFilter?.invoke(requestInit)
-        return suspendCancellableCoroutine { continuation ->
-            fetchAsync(fetchUrl, requestInit).then { response ->
-                if (response.ok) {
-                    val statusText = response.statusText
-                    if (response.status != HTTP_NO_CONTENT) {
-                        if (restRequestConfig.responseBodyType == ResponseBodyType.ReadableStream) {
-                            val transformed = if (restRequestConfig.resultTransform != null) {
-                                restRequestConfig.resultTransform!!.invoke(response.body)
-                            } else {
-                                response.body
-                            }
-                            val result = if (restRequestConfig.deserializer != null) {
-                                JsonInstance.decodeFromString(
-                                    restRequestConfig.deserializer!!,
-                                    stringify(transformed)
-                                )
-                            } else {
-                                transformed.cast()
-                            }
-                            continuation.resume(RestResponse(result, statusText, response))
+        var response: Response? = null
+        return try {
+            response = fetchAsync(fetchUrl, requestInit).awaitPromise()
+            if (response.ok) {
+                val statusText = response.statusText
+                if (response.status != HTTP_NO_CONTENT) {
+                    if (restRequestConfig.responseBodyType == ResponseBodyType.ReadableStream) {
+                        val transformed = if (restRequestConfig.resultTransform != null) {
+                            restRequestConfig.resultTransform!!.invoke(response.body)
                         } else {
-                            val body = when (restRequestConfig.responseBodyType) {
-                                ResponseBodyType.Json -> response.jsonAsync()
-                                ResponseBodyType.Text -> response.textAsync()
-                                ResponseBodyType.Blob -> response.blobAsync()
-                                ResponseBodyType.FormData -> response.formDataAsync()
-                                ResponseBodyType.ArrayBuffer -> response.arrayBufferAsync()
-                                ResponseBodyType.ReadableStream -> throw IllegalStateException() // not possible
-                            }
-                            body.then {
-                                val transformed = if (restRequestConfig.resultTransform != null) {
-                                    restRequestConfig.resultTransform!!.invoke(it)
-                                } else {
-                                    it
-                                }
-                                val result = if (restRequestConfig.deserializer != null) {
-                                    JsonInstance.decodeFromString(
-                                        restRequestConfig.deserializer!!,
-                                        stringify(transformed)
-                                    )
-                                } else {
-                                    transformed.cast()
-                                }
-                                continuation.resume(RestResponse(result, statusText, response))
-                                null
-                            }.catch {
-                                console.log(it)
-                                continuation.resumeWithException(
-                                    RemoteRequestException.create(
-                                        XHR_ERROR,
-                                        fetchUrl,
-                                        restRequestConfig.method,
-                                        "Incorrect body type",
-                                        response
-                                    )
-                                )
-                                null
-                            }
+                            response.body
                         }
-                    } else {
-                        if (restRequestConfig.deserializer != null) {
-                            continuation.resumeWithException(
-                                RemoteRequestException.create(
-                                    XHR_ERROR,
-                                    fetchUrl,
-                                    restRequestConfig.method,
-                                    "Empty body",
-                                    response
-                                )
+                        val result = if (restRequestConfig.deserializer != null) {
+                            JsonInstance.decodeFromString(
+                                restRequestConfig.deserializer!!,
+                                stringify(transformed)
                             )
                         } else {
-                            continuation.resume(RestResponse(null, statusText, response))
+                            transformed.cast()
                         }
+                        RestResponse(result, statusText, response)
+                    } else {
+                        val body = when (restRequestConfig.responseBodyType) {
+                            ResponseBodyType.Json -> response.jsonAsync().awaitPromise()!!
+                            ResponseBodyType.Text -> response.textAsync().awaitPromise()
+                            ResponseBodyType.Blob -> response.blobAsync().awaitPromise()
+                            ResponseBodyType.FormData -> response.formDataAsync().awaitPromise()
+                            ResponseBodyType.ArrayBuffer -> response.arrayBufferAsync().awaitPromise()
+                            ResponseBodyType.ReadableStream -> throw IllegalStateException() // not possible
+                        }
+                        val transformed = if (restRequestConfig.resultTransform != null) {
+                            restRequestConfig.resultTransform!!.invoke(body)
+                        } else {
+                            body
+                        }
+                        val result = if (restRequestConfig.deserializer != null) {
+                            JsonInstance.decodeFromString(
+                                restRequestConfig.deserializer!!,
+                                stringify(transformed)
+                            )
+                        } else {
+                            transformed.cast()
+                        }
+                        RestResponse(result, statusText, response)
                     }
                 } else {
-                    continuation.resumeWithException(
-                        RemoteRequestException.create(
-                            response.status,
+                    if (restRequestConfig.deserializer != null) {
+                        throw RemoteRequestException.create(
+                            XHR_ERROR,
                             fetchUrl,
                             restRequestConfig.method,
-                            response.statusText,
+                            "Empty body",
                             response
                         )
-                    )
+                    } else {
+                        RestResponse(null, statusText, response)
+                    }
                 }
-                null
-            }.catch {
-                continuation.resumeWithException(
-                    RemoteRequestException.create(
-                        XHR_ERROR,
-                        fetchUrl,
-                        restRequestConfig.method,
-                        "Connection error"
-                    )
+            } else {
+                throw RemoteRequestException.create(
+                    response.status,
+                    fetchUrl,
+                    restRequestConfig.method,
+                    response.statusText,
+                    response
                 )
-                null
             }
+        } catch (e: Throwable) {
+            throw RemoteRequestException.create(
+                XHR_ERROR,
+                fetchUrl,
+                restRequestConfig.method,
+                e.message ?: "Unknown error",
+                response
+            )
         }
     }
 

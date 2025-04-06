@@ -36,7 +36,7 @@ import dev.kilua.form.InputType
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.toJs
 import dev.kilua.html.div
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import dev.kilua.utils.assign
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
@@ -51,7 +51,6 @@ import js.core.JsPrimitives.toBoolean
 import js.core.JsPrimitives.toJsString
 import js.core.JsString
 import js.objects.jso
-import web.dom.InsertPosition
 import web.dom.document
 
 /**
@@ -314,7 +313,7 @@ public open class TomTypeahead(
             tomSelectInstance = null
             // Restore the empty div after the Tom Select instance is removed
             val emptyDiv = document.createElement("div")
-            element.insertAdjacentElement(InsertPosition.afterend, emptyDiv)
+            element.insertAdjacentElement("afterend".toJsString().unsafeCast(), emptyDiv)
         }
     }
 

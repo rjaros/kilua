@@ -22,6 +22,9 @@
 
 package dev.kilua.utils
 
+import dev.kilua.externals.JsArray
+import dev.kilua.externals.get
+import dev.kilua.externals.set
 import js.array.ArrayLike
 import js.core.JsAny
 import js.core.JsPrimitives.toJsBoolean

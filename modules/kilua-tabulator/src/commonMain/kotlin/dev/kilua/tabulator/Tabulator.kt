@@ -35,7 +35,7 @@ import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.utils.jsGet
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.cast
 import dev.kilua.utils.deepMerge
@@ -54,7 +54,6 @@ import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
 import js.core.JsAny
 import js.core.JsInt
-import js.core.JsNumber
 import js.core.JsPrimitives.toInt
 import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsInt

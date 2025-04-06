@@ -25,7 +25,7 @@ package dev.kilua.state
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
-import dev.kilua.KiluaScope
+import dev.kilua.utils.KiluaScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

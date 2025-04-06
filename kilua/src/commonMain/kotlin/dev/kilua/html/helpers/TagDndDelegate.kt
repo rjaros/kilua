@@ -24,7 +24,7 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.Tag
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
 import js.core.JsString

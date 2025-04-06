@@ -30,7 +30,7 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import dev.kilua.KiluaScope
+import dev.kilua.utils.KiluaScope
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
@@ -39,7 +39,7 @@ import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RemoteOption
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.rem

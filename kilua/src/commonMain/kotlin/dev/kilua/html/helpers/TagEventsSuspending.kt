@@ -23,7 +23,7 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import dev.kilua.KiluaScope
+import dev.kilua.utils.KiluaScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import web.events.Event

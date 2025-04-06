@@ -1,5 +1,5 @@
 @file:JsModule("motion")
-@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE", "INTERFACE_WITH_SUPERCLASS")
 /*
  * Copyright (c) 2025 Robert Jaros
  *
@@ -34,7 +34,7 @@ import web.html.HTMLElement
  * The animation playback controls.
  * Allows to control the Motion animation run and access its properties.
  */
-public external class AnimationPlaybackControls : JsAny {
+public external interface AnimationPlaybackControls : JsAny {
     public val duration: JsNumber
     public var time: JsNumber
     public var speed: JsNumber

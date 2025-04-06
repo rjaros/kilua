@@ -25,7 +25,7 @@ package dev.kilua.form
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
-import dev.kilua.KiluaScope
+import dev.kilua.utils.KiluaScope
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
@@ -43,6 +43,7 @@ import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toKebabCase
+import dev.kilua.utils.unsafeCast
 import js.core.JsAny
 import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsDouble
@@ -140,10 +141,7 @@ public class Form<K : Any>(
      */
     public var method: FormMethod? by updatingProperty(method) {
         if (it != null) {
-            element.method = when (it) {
-                FormMethod.Get -> web.form.FormMethod.get
-                FormMethod.Post -> web.form.FormMethod.post
-            }
+            element.method = it.value.toJsString().unsafeCast()
         } else {
             element.removeAttribute("method")
         }
@@ -185,11 +183,7 @@ public class Form<K : Any>(
      */
     public var enctype: FormEnctype? by updatingProperty(enctype) {
         if (it != null) {
-            element.enctype = when (it) {
-                FormEnctype.Urlencoded -> web.form.FormEncType.applicationXWwwFormUrlencoded
-                FormEnctype.Multipart -> web.form.FormEncType.multipartFormData
-                FormEnctype.Plain -> web.form.FormEncType.textPlain
-            }
+            element.enctype = it.value.toJsString().unsafeCast()
         } else {
             element.removeAttribute("enctype")
         }
@@ -273,10 +267,7 @@ public class Form<K : Any>(
      */
     public var autocomplete: FormAutocomplete? by updatingProperty {
         if (it != null) {
-            element.autocomplete = when (it) {
-                FormAutocomplete.On -> web.autofill.AutoFillBase.on
-                FormAutocomplete.Off -> web.autofill.AutoFillBase.off
-            }
+            element.autocomplete = it.value.toJsString().unsafeCast()
         } else {
             element.removeAttribute("autocomplete")
         }
@@ -386,20 +377,13 @@ public class Form<K : Any>(
     init {
         if (renderConfig.isDom) {
             if (method != null) {
-                element.method = when (method) {
-                    FormMethod.Get -> web.form.FormMethod.get
-                    FormMethod.Post -> web.form.FormMethod.post
-                }
+                element.method = method.value.toJsString().unsafeCast()
             }
             if (action != null) {
                 element.action = action
             }
             if (enctype != null) {
-                element.enctype = when (enctype) {
-                    FormEnctype.Urlencoded -> web.form.FormEncType.applicationXWwwFormUrlencoded
-                    FormEnctype.Multipart -> web.form.FormEncType.multipartFormData
-                    FormEnctype.Plain -> web.form.FormEncType.textPlain
-                }
+                element.enctype = enctype.value.toJsString().unsafeCast()
             }
         }
         mapToObjectConverter = serializer?.let {

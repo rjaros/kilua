@@ -22,7 +22,6 @@
 
 package dev.kilua.externals
 
-import dev.kilua.utils.JsArray
 import js.core.JsAny
 import js.core.JsNumber
 import js.promise.Promise

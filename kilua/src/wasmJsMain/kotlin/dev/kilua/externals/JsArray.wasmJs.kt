@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,13 @@
 
 package dev.kilua.externals
 
-internal external class NumberExt : JsAny {
-    fun toFixed(digits: Int): String
-    fun toLocaleString(locale: String): String
+import kotlin.js.get as jsGet
+import kotlin.js.set as jsSet
+
+public actual typealias JsArray<T> = kotlin.js.JsArray<T>
+
+public actual operator fun <T : JsAny?> JsArray<T>.get(index: Int): T? = this.jsGet(index)
+
+public actual operator fun <T : JsAny?> JsArray<T>.set(index: Int, value: T) {
+    this.jsSet(index, value)
 }

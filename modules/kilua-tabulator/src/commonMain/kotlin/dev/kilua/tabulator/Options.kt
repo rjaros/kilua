@@ -33,7 +33,7 @@ import dev.kilua.externals.ColumnComponent
 import dev.kilua.externals.RowComponent
 import dev.kilua.externals.TabulatorMenuItem
 import dev.kilua.externals.toJsAny
-import dev.kilua.utils.JsArray
+import dev.kilua.externals.JsArray
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
