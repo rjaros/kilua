@@ -99,6 +99,9 @@ public open class RichTime(
         @Suppress("LeakingThis")
         onEventDirect<Event>("error.td") {
             this.value = null
+            if (tempusDominusInstance != null) {
+                tempusDominusInstance?.clear()
+            }
             dispatchEvent("change", buildCustomEventInit())
         }
     }
