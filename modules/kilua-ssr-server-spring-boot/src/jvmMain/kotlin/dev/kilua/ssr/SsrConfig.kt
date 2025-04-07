@@ -35,5 +35,5 @@ public open class SsrConfig(
     public val rpcUrlPrefix: String? = null,
     public val rootId: String? = null,
     public val contextPath: String? = null,
-    public val noCache: Boolean = false
+    public val cacheTime: Int = DEFAULT_SSR_CACHE_TIME
 )

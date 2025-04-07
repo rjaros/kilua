@@ -45,6 +45,6 @@ public open class SsrConfiguration {
         ssrConfig.rpcUrlPrefix,
         ssrConfig.rootId,
         ssrConfig.contextPath,
-        ssrConfig.noCache
+        ssrConfig.cacheTime
     )
 }

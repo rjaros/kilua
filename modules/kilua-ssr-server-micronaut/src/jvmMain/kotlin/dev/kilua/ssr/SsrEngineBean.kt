@@ -47,11 +47,11 @@ public open class SsrEngineBean {
     @field:Property(name = "ssr.contextPath")
     private var contextPath: String? = null
 
-    @field:Property(name = "ssr.noCache")
-    private var noCache: Boolean? = null
+    @field:Property(name = "ssr.cacheTime")
+    private var cacheTime: Int? = null
 
     @Context
     public open fun ssrEngine(): SsrEngine {
-        return SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, noCache ?: false)
+        return SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, cacheTime ?: DEFAULT_SSR_CACHE_TIME)
     }
 }

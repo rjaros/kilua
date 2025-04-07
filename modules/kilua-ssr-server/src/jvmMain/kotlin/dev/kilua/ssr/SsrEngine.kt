@@ -42,6 +42,8 @@ import kotlin.io.path.deleteRecursively
 import kotlin.io.path.readText
 import kotlin.io.path.reader
 
+public const val DEFAULT_SSR_CACHE_TIME: Int = 10
+
 /**
  * Server-Side Rendering engine for Kilua.
  *
@@ -51,7 +53,7 @@ import kotlin.io.path.reader
  * @param rpcUrlPrefix a prefix for the Kilua RPC fullstack services.
  * @param rootId an ID of the root element in the HTML template.
  * @param contextPath a context path for the application.
- * @param noCache a flag to disable caching of SSR content.
+ * @param cacheTime a default time to cache SSR content in minutes (default is 10).
  */
 public class SsrEngine(
     nodeExecutable: String? = null,
@@ -60,7 +62,7 @@ public class SsrEngine(
     rpcUrlPrefix: String? = null,
     rootId: String? = null,
     contextPath: String? = null,
-    private val noCache: Boolean = false
+    private val cacheTime: Int = DEFAULT_SSR_CACHE_TIME
 ) {
 
     private val logger = LoggerFactory.getLogger(SsrEngine::class.java)
@@ -89,7 +91,7 @@ public class SsrEngine(
     )
 
     private val cache: MutableMap<CacheKey, String> = ExpiringMap.builder()
-        .expiration(10, TimeUnit.MINUTES)
+        .expiration(cacheTime.toLong(), TimeUnit.MINUTES)
         .expirationPolicy(ExpirationPolicy.CREATED)
         .build()
 
@@ -188,7 +190,7 @@ public class SsrEngine(
     public suspend fun getSsrContent(uri: String, locale: String? = null): String {
         return try {
             processCss()
-            if (noCache) {
+            if (cacheTime <= 0) {
                 getInternalSsrContent(uri, locale)
             } else {
                 cache.getOrPut(CacheKey(uri, locale)) {

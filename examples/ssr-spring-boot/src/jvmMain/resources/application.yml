@@ -11,4 +11,4 @@ ssr:
 #  rpcUrlPrefix: "http://localhost:8080"
 #  rootId: "root"
 #  contextPath: "/"
-#  noCache: false
+#  cacheTime: 10

@@ -44,9 +44,10 @@ public fun Application.initSsr() {
     val rpcUrlPrefix = environment.config.propertyOrNull("ssr.rpcUrlPrefix")?.getString()
     val rootId = environment.config.propertyOrNull("ssr.rootId")?.getString()
     val contextPath = environment.config.propertyOrNull("ssr.contextPath")?.getString()
-    val noCache = environment.config.propertyOrNull("ssr.noCache")?.getString()?.toBooleanStrictOrNull() ?: false
-    val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, noCache)
-    attributes.put(ssrEngineKey, ssrEngine)
+    val cacheTime =
+        environment.config.propertyOrNull("ssr.cacheTime")?.getString()?.toIntOrNull() ?: DEFAULT_SSR_CACHE_TIME
+    val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, cacheTime)
+    attributes.put(SsrEngineKey, ssrEngine)
     install(SsrPlugin)
     routing {
         get("/index.html") {
