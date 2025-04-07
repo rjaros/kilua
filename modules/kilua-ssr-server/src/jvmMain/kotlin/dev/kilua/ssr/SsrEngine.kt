@@ -28,6 +28,8 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import net.jodah.expiringmap.ExpirationPolicy
 import net.jodah.expiringmap.ExpiringMap
@@ -36,6 +38,7 @@ import org.slf4j.LoggerFactory
 import java.io.StringWriter
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.createTempDirectory
 import kotlin.io.path.deleteRecursively
@@ -69,7 +72,10 @@ public class SsrEngine(
 
     private val workingDir: Path = createTempDirectory("ssr")
     private var nodeJsProcess: Process? = null
+    private var isShuttingDown: Boolean = false
     private val httpClient = HttpClient(CIO)
+
+    private val lockingFlow = MutableStateFlow(false)
 
     private val ssrService: String = externalSsrService ?: "http://localhost:${port ?: 7788}"
     private val root: String = rootId ?: "root"
@@ -97,6 +103,7 @@ public class SsrEngine(
 
     init {
         Runtime.getRuntime().addShutdownHook(Thread {
+            isShuttingDown = true
             nodeJsProcess?.destroy()
             Thread.sleep(1000)
             @OptIn(ExperimentalPathApi::class)
@@ -112,11 +119,21 @@ public class SsrEngine(
                     if (port != null) processBuilderParams.addAll(listOf("--port", port.toString()))
                     if (rpcUrlPrefix != null) processBuilderParams.addAll(listOf("--rpc-url-prefix", rpcUrlPrefix))
                     if (contextPath != null) processBuilderParams.addAll(listOf("--context-path", contextPath))
-                    val process = ProcessBuilder(*processBuilderParams.toTypedArray())
-                    process.redirectErrorStream(true)
-                    process.redirectOutput(ProcessBuilder.Redirect.INHERIT)
-                    process.directory(workingDir.toFile())
-                    nodeJsProcess = process.start()
+                    thread {
+                        while (!isShuttingDown) {
+                            val processBuilder = ProcessBuilder(*processBuilderParams.toTypedArray())
+                            processBuilder.redirectErrorStream(true)
+                            processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                            processBuilder.directory(workingDir.toFile())
+                            print("NodeJS SSR process is starting ...")
+                            nodeJsProcess = processBuilder.start()
+                            println(" done.")
+                            Thread.sleep(1000)
+                            lockingFlow.value = true
+                            nodeJsProcess!!.waitFor()
+                            lockingFlow.value = false
+                        }
+                    }
                 }
             } else {
                 logger.warn("Failed to find SSR resources")
@@ -130,6 +147,7 @@ public class SsrEngine(
      * Get CSS stylesheet content for SSR.
      */
     public suspend fun getCssContent(): String {
+        if (!lockingFlow.value) lockingFlow.first { it }
         val response = httpClient.post(ssrService)
         return if (response.status == HttpStatusCode.OK) {
             val textResponse = response.bodyAsText()
@@ -159,6 +177,7 @@ public class SsrEngine(
         if (uri.count { it == '?' } > 1) {
             throw Exception("Invalid URI: $uri")
         }
+        if (!lockingFlow.value) lockingFlow.first { it }
         val response = httpClient.get("$ssrService$uri") {
             if (locale != null) {
                 header("x-kilua-locale", locale)
@@ -208,4 +227,11 @@ public class SsrEngine(
         return indexTemplate.replace("<div id=\"$root\"></div>", "<div id=\"$root\">$content</div>")
     }
 
+    /**
+     * Restart the SSR NodeJs process.
+     */
+    public suspend fun restartSsrProcess() {
+        if (!lockingFlow.value) lockingFlow.first { it }
+        httpClient.delete(ssrService)
+    }
 }

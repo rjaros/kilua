@@ -215,6 +215,8 @@ internal class SsrRouter(
                 res.statusCode = 200
                 res.setHeader("Content-Type", "text/plain")
                 res.end(CssRegister.cssFiles.joinToString("\n") { it })
+            } else if (req.method == "DELETE") {
+                process?.exit(1)
             } else {
                 res.statusCode = 404
                 res.end("Not Found")
