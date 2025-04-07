@@ -27,10 +27,16 @@ import dev.kilua.utils.jsGet
 import kotlinx.serialization.json.Json
 import web.window.window
 
-public inline fun <reified T> getSsrState(json: Json = Json.Default): T? {
+public fun getSsrState(): String? {
     return if (isDom) {
         window.jsGet("KILUA_SSR_STATE")?.toString()?.let {
-            json.decodeFromString(decompressFromEncodedURIComponent(it))
+            decompressFromEncodedURIComponent(it)
         }
     } else null
+}
+
+public inline fun <reified T> getSsrState(json: Json = Json.Default): T? {
+    return getSsrState()?.let {
+        return json.decodeFromString(it)
+    }
 }
