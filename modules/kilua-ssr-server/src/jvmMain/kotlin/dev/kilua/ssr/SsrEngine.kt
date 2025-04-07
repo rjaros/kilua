@@ -80,6 +80,7 @@ public class SsrEngine(
     private val ssrService: String = externalSsrService ?: "http://localhost:${port ?: 7788}"
     private val root: String = rootId ?: "root"
 
+    private var cssContent: String? = null
     private var cssProcessed: Boolean = false
     private var indexTemplate: String = ""
 
@@ -147,26 +148,29 @@ public class SsrEngine(
      * Get CSS stylesheet content for SSR.
      */
     public suspend fun getCssContent(): String {
-        if (!lockingFlow.value) lockingFlow.first { it }
-        val response = httpClient.post(ssrService)
-        return if (response.status == HttpStatusCode.OK) {
-            val textResponse = response.bodyAsText()
-            if (textResponse.isNotEmpty()) {
-                withContext(Dispatchers.IO) {
-                    textResponse.split("\n").joinToString("\n") {
-                        if (cssAssetsNames.contains(it) || it.startsWith("css/") || it.startsWith("modules/css/")) {
-                            val cssCompressor = CssCompressor(workingDir.resolve(it).reader())
-                            val writer = StringWriter()
-                            cssCompressor.compress(writer, -1)
-                            writer.toString()
-                        } else workingDir.resolve(it).readText()
+        return cssContent ?: run {
+            if (!lockingFlow.value) lockingFlow.first { it }
+            val response = httpClient.post(ssrService)
+            cssContent = if (response.status == HttpStatusCode.OK) {
+                val textResponse = response.bodyAsText()
+                if (textResponse.isNotEmpty()) {
+                    withContext(Dispatchers.IO) {
+                        textResponse.split("\n").joinToString("\n") {
+                            if (cssAssetsNames.contains(it) || it.startsWith("css/") || it.startsWith("modules/css/")) {
+                                val cssCompressor = CssCompressor(workingDir.resolve(it).reader())
+                                val writer = StringWriter()
+                                cssCompressor.compress(writer, -1)
+                                writer.toString()
+                            } else workingDir.resolve(it).readText()
+                        }
                     }
+                } else {
+                    ""
                 }
             } else {
-                ""
+                throw Exception("Connection to the SSR service failed with status ${response.status}")
             }
-        } else {
-            throw Exception("Connection to the SSR service failed with status ${response.status}")
+            cssContent!!
         }
     }
 
