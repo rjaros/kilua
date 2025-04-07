@@ -232,6 +232,10 @@ public class SsrEngine(
      */
     public suspend fun restartSsrProcess() {
         if (!lockingFlow.value) lockingFlow.first { it }
-        httpClient.delete(ssrService)
+        try {
+            httpClient.delete(ssrService)
+        } catch (_: Exception) {
+            // ignore exceptions
+        }
     }
 }
