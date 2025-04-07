@@ -31,7 +31,11 @@ import io.jooby.handler.AssetSource
 import io.jooby.kt.Kooby
 import kotlinx.coroutines.runBlocking
 
-private const val SSR_ENGINE_KEY = "dev.kilua.ssr.engine.key"
+/**
+ * A key for storing the SSR engine in the Jooby context.
+ * It can be used to retrieve the default SsrEngine class instance from the Jooby context.
+ */
+public const val SsrEngineKey: String = "dev.kilua.ssr.engine.key"
 
 /**
  * Initialization function for Kilua Server-Side Rendering.
@@ -49,7 +53,7 @@ public fun Kooby.initSsr() {
         (config.getString("ssr.cacheTime")?.toIntOrNull() ?: DEFAULT_SSR_CACHE_TIME) else DEFAULT_SSR_CACHE_TIME
     val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, cacheTime)
     before { ctx ->
-        ctx.setAttribute(SSR_ENGINE_KEY, ssrEngine)
+        ctx.setAttribute(SsrEngineKey, ssrEngine)
     }
     use {
         val response = next.apply(ctx)
@@ -83,7 +87,7 @@ private suspend fun Context.respondSsr() {
     } else {
         val uri = requestPath + queryString()
         val language = header("Accept-Language").valueOrNull()?.split(",")?.firstOrNull()?.split(";")?.firstOrNull()
-        val ssrEngine = getAttribute<SsrEngine>(SSR_ENGINE_KEY)!!
+        val ssrEngine = getAttribute<SsrEngine>(SsrEngineKey)!!
         responseType = MediaType.html
         responseCode = StatusCode.OK
         send(ssrEngine.getSsrContent(uri, language))

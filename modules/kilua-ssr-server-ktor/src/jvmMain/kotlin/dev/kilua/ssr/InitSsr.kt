@@ -32,7 +32,11 @@ import io.ktor.server.routing.*
 import io.ktor.util.*
 import java.util.*
 
-internal val ssrEngineKey: AttributeKey<SsrEngine> = AttributeKey("ssrEngine")
+/**
+ * A key for storing the SsrEngine in the Ktor application attributes.
+ * It can be used to retrieve the default SsrEngine class instance from the Ktor application attributes.
+ */
+public val SsrEngineKey: AttributeKey<SsrEngine> = AttributeKey("ssrEngine")
 
 /**
  * Initialization function for Kilua Server-Side Rendering.
@@ -70,7 +74,7 @@ private val SsrPlugin: ApplicationPlugin<Unit> = createApplicationPlugin(name = 
 }
 
 private suspend fun ApplicationCall.respondSsr() {
-    val ssrEngine = application.attributes[ssrEngineKey]
+    val ssrEngine = application.attributes[SsrEngineKey]
     respondText(ContentType.Text.Html, HttpStatusCode.OK) {
         val language = request.acceptLanguageItems().firstOrNull()?.value
         ssrEngine.getSsrContent(request.uri, language)

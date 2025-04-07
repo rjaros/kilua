@@ -33,7 +33,12 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import java.util.*
 
-private const val SSR_ENGINE_KEY = "dev.kilua.ssr.engine.key"
+/**
+ * A key for storing the default SSR engine in the Vert.x routing context.
+ * It can be used to retrieve the default SsrEngine class instance from the Vert.x context.
+ */
+public const val SsrEngineKey: String = "dev.kilua.ssr.engine.key"
+
 private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
 /**
@@ -52,20 +57,20 @@ public fun Vertx.initSsr(router: Router) {
     val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, cacheTime)
 
     router.get("/").handler { ctx ->
-        ctx.put(SSR_ENGINE_KEY, ssrEngine)
+        ctx.put(SsrEngineKey, ssrEngine)
         applicationScope.launch(ctx.vertx().dispatcher()) {
             ctx.respondSsr()
         }
     }
     router.get("/index.html").handler { ctx ->
-        ctx.put(SSR_ENGINE_KEY, ssrEngine)
+        ctx.put(SsrEngineKey, ssrEngine)
         applicationScope.launch(ctx.vertx().dispatcher()) {
             ctx.respondSsr()
         }
     }
     router.route("/*").last().handler(StaticHandler.create())
     router.get().last().handler { ctx ->
-        ctx.put(SSR_ENGINE_KEY, ssrEngine)
+        ctx.put(SsrEngineKey, ssrEngine)
         applicationScope.launch(ctx.vertx().dispatcher()) {
             ctx.respondSsr()
         }
@@ -78,7 +83,7 @@ private suspend fun RoutingContext.respondSsr() {
     } else {
         val uri = request().path() + (request().query()?.let { "?$it" } ?: "")
         val language = request().getHeader("Accept-Language")?.split(",")?.firstOrNull()?.split(";")?.firstOrNull()
-        val ssrEngine = get<SsrEngine>(SSR_ENGINE_KEY)
+        val ssrEngine = get<SsrEngine>(SsrEngineKey)
         response().putHeader("Content-Type", "text/html").end(ssrEngine.getSsrContent(uri, language))
     }
 }

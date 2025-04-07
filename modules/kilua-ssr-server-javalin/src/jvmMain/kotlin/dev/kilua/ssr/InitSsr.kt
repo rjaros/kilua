@@ -33,7 +33,12 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.future.future
 import java.util.*
 
-private val ssrEngineKey = Key<SsrEngine>("ssrEngine")
+/**
+ * A key for storing the default SSR engine in the Javalin app data.
+ * It can be used to retrieve the default SsrEngine class instance from the Javalin context.
+ */
+public val SsrEngineKey: Key<SsrEngine> = Key<SsrEngine>("ssrEngine")
+
 private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
 /**
@@ -59,7 +64,7 @@ public fun Javalin.initSsr() {
         cacheTime
     )
     with(unsafeConfig()) {
-        appData(ssrEngineKey, ssrEngine)
+        appData(SsrEngineKey, ssrEngine)
         get("/") {
             it.respondSsr()
         }
@@ -79,7 +84,7 @@ private fun Context.respondSsr() {
     } else {
         val uri = path() + (queryString()?.let { "?$it" } ?: "")
         val language = header("Accept-Language")?.split(",")?.firstOrNull()?.split(";")?.firstOrNull()
-        val ssrEngine = appData(ssrEngineKey)
+        val ssrEngine = appData(SsrEngineKey)
         val future = applicationScope.future {
             ssrEngine.getSsrContent(uri, language)
         }
