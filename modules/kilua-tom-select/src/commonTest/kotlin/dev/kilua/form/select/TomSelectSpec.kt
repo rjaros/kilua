@@ -42,7 +42,7 @@ class TomSelectSpec : DomSpec {
                 )
             }
             assertEqualsHtml(
-                """<select multiple="multiple" name="select" placeholder="A placeholder" id="tomselect-1" tabindex="-1" class="form-select tomselected ts-hidden-accessible">
+                """<select multiple="multiple" name="select" placeholder="A placeholder" id="tomselect-1" tabindex="-1" class="form-select tomselected ts-hidden-accessible" aria-label="A placeholder">
 <option value="A">
 A
 </option>
