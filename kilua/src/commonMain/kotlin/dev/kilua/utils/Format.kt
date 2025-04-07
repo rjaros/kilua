@@ -22,31 +22,6 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.NumberExt
-import js.core.JsPrimitives.toJsDouble
-import js.core.JsPrimitives.toJsInt
-
-/**
- * Utility extension function to format a Double with a given number of digits after the decimal point.
- */
-public fun Double.toFixed(size: Int = 2): String {
-    return this.toJsDouble().unsafeCast<NumberExt>().toFixed(size)
-}
-
-/**
- * Utility extension function to format a Double according to the given locale.
- */
-public fun Double.toLocaleString(locale: String): String {
-    return this.toJsDouble().unsafeCast<NumberExt>().toLocaleString(locale)
-}
-
-/**
- * Utility extension function to format an Int according to the given locale.
- */
-public fun Int.toLocaleString(locale: String): String {
-    return this.toJsInt().unsafeCast<NumberExt>().toLocaleString(locale)
-}
-
 /**
  * Utility extension function to convert string from kebab-case to camelCase.
  */

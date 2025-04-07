@@ -22,7 +22,8 @@
 
 package dev.kilua.i18n
 
-import dev.kilua.utils.toLocaleString
+import js.core.JsPrimitives.toJsString
+import js.core.toLocaleString
 import web.console.console
 
 /**
@@ -57,7 +58,7 @@ public interface Locale {
 @Suppress("TooGenericExceptionCaught", "MagicNumber")
 public fun decimalSeparator(language: String): Char {
     return try {
-        (1.1).toLocaleString(language).dropLast(1).last()
+        (1.1).toLocaleString(language.toJsString()).dropLast(1).last()
     } catch (e: Exception) {
         console.log("Cannot determine decimal separator for language: $language (${e.message})")
         '.'
@@ -67,7 +68,7 @@ public fun decimalSeparator(language: String): Char {
 @Suppress("TooGenericExceptionCaught", "MagicNumber")
 public fun thousandsSeparator(language: String): Char? {
     return try {
-        val thousand = (1000).toLocaleString(language)
+        val thousand = (1000).toLocaleString(language.toJsString())
         if (thousand.length == 5) {
             thousand[1]
         } else {

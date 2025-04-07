@@ -29,12 +29,6 @@ import kotlin.test.assertEquals
 class FormatSpec : SimpleSpec {
 
     @Test
-    fun toFixed() {
-        val formatted = 123.346.toFixed(2)
-        assertEquals("123.35", formatted)
-    }
-
-    @Test
     fun toCamelCase() {
         val marginTop = "margin-top".toCamelCase()
         assertEquals("marginTop", marginTop, "Should convert a kebab-case string to camelCase")

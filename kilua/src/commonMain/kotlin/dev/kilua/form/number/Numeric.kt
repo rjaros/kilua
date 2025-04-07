@@ -34,7 +34,8 @@ import dev.kilua.form.NumberFormControl
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.toFixedNoRound
-import dev.kilua.utils.toLocaleString
+import js.core.JsPrimitives.toJsString
+import js.core.toLocaleString
 import web.events.Event
 
 /**
@@ -212,7 +213,7 @@ public open class Numeric(
     }
 
     override fun valueToString(value: Number?): String? {
-        return value?.toFixedNoRound(decimals)?.toDouble()?.toLocaleString(locale.language)
+        return value?.toFixedNoRound(decimals)?.toDouble()?.toLocaleString(locale.language.toJsString())
     }
 
     protected open fun formatElement() {
