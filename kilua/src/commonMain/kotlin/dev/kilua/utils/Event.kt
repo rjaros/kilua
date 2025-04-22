@@ -46,7 +46,6 @@
 package dev.kilua.utils
 
 import js.core.JsAny
-import js.objects.jso
 import web.abort.AbortSignal
 import web.events.AddEventListenerOptions
 import web.events.CustomEventInit
@@ -55,7 +54,7 @@ import web.events.CustomEventInit
  * Build AddEventListenerOptions with a signal controller to remove the listener.
  */
 public fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOptions {
-    return jso<AddEventListenerOptions> {
+    return obj {
         jsSet("signal", signal)
     }
 }
@@ -64,7 +63,7 @@ public fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOp
  * Build CustomEventInit with a detail object.
  */
 public fun buildCustomEventInit(detail: JsAny? = null): CustomEventInit<*> {
-    return jso<CustomEventInit<*>> {
+    return obj {
         if (detail != null) jsSet("detail", detail)
     }
 }

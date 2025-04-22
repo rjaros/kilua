@@ -33,6 +33,7 @@ import dev.kilua.utils.jsSet
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.assign
+import dev.kilua.utils.obj
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.unsafeCast
@@ -40,7 +41,6 @@ import js.core.JsAny
 import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsString
-import js.objects.jso
 import js.regexp.RegExp
 
 /**
@@ -89,14 +89,14 @@ public data class PatternMask(
  */
 internal fun PatternMask.toJs(): PatternMaskOptionsJs {
     val self = this
-    return jso {
+    return obj {
         this.mask = pattern
         if (self.lazy != null) this.lazy = self.lazy
         if (self.eager != null) this.eager = self.eager
         if (self.placeholderChar != null) this.placeholderChar = self.placeholderChar.toString()
         if (self.definitions != null) this.definitions = self.definitions
         if (self.blocks != null) {
-            this.blocks = jso {
+            this.blocks = obj {
                 self.blocks.forEach { (def, options) ->
                     jsSet(def, options.toJs())
                 }
@@ -129,7 +129,7 @@ internal fun RangeMask.toJs(): RangeMaskOptionsJs {
         else -> null
     }
     val self = this
-    return jso {
+    return obj {
         this.mask = ImaskObjJs.MaskedRange
         this.from = self.from
         this.to = self.to
@@ -156,7 +156,7 @@ public data class EnumMask(
  */
 internal fun EnumMask.toJs(): EnumMaskOptionsJs {
     val self = this
-    return jso {
+    return obj {
         this.mask = ImaskObjJs.MaskedEnum
         this.enum = self.enum.map { it.toJsString() }.toJsArray()
         if (self.lazy != null) this.lazy = self.lazy
@@ -183,7 +183,7 @@ public data class NumberMask(
  */
 internal fun NumberMask.toJs(): NumberMaskOptionsJs {
     val self = this
-    return jso {
+    return obj {
         this.mask = jsNumber()
         if (self.scale != null) this.scale = self.scale
         if (self.locale.thousandsSeparator != null) this.thousandsSeparator = self.locale.thousandsSeparator.toString()
@@ -227,7 +227,7 @@ internal fun ImaskOptions.toJs(): ImaskOptionsJs {
         else -> null
     }
 
-    return jso {
+    return obj {
         if (pattern != null) {
             val patternOptions = pattern.toJs()
             assign(this, patternOptions)
@@ -243,7 +243,7 @@ internal fun ImaskOptions.toJs(): ImaskOptionsJs {
         } else if (regExp != null) {
             jsSet("mask", regExp)
         } else if (function != null) {
-            val functionOptions = jso<FunctionMaskOptionsJs> {
+            val functionOptions = obj<FunctionMaskOptionsJs> {
                 this.mask = function
             }
             assign(this, functionOptions)

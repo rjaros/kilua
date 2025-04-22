@@ -29,6 +29,7 @@ import dev.kilua.utils.delete
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.keys
+import dev.kilua.utils.obj
 import dev.kilua.utils.unsafeCast
 import js.core.JsAny
 import js.core.JsPrimitives.toJsString
@@ -36,7 +37,6 @@ import js.core.JsString
 import js.json.parse
 import js.json.stringify
 import js.objects.ReadonlyRecord
-import js.objects.jso
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.Json
@@ -304,7 +304,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
         restRequestConfig.headers?.invoke()?.forEach {
             headers.append(it.first, it.second)
         }
-        val requestInit = jso<RequestInit> {
+        val requestInit = obj<RequestInit> {
             jsSet("method", method)
             if (body != null) jsSet("body", body)
             jsSet("headers", headers)

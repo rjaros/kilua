@@ -42,6 +42,7 @@ import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.externals.JsArray
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.jsGet
+import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.unsafeCast
@@ -49,7 +50,6 @@ import kotlinx.coroutines.launch
 import js.core.JsAny
 import js.core.JsPrimitives.toJsString
 import js.json.stringify
-import js.objects.jso
 import kotlinx.serialization.builtins.ListSerializer
 import web.console.console
 import web.http.RequestInit
@@ -154,7 +154,7 @@ public open class TomSelectRemote<out T : Any>(
                     value
                 )
                 val resultWithOption = if (emptyOption) {
-                    listOf(jso<RemoteOptionExt> {
+                    listOf(obj<RemoteOptionExt> {
                         value = ""
                         text = "\u00a0"
                     }) + result
@@ -630,7 +630,7 @@ internal suspend fun <T : Any> getOptionsForTomSelectRemote(
         )
         RpcSerialization.plain.decodeFromString(ListSerializer(RemoteOption.serializer()), result)
             .mapIndexed { index, option ->
-                jso<RemoteOptionExt> {
+                obj {
                     if (option.divider) {
                         this.value = "divider${index}"
                         this.divider = true

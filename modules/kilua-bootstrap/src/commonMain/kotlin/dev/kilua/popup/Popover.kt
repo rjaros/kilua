@@ -28,7 +28,7 @@ import dev.kilua.externals.Bootstrap
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
 import dev.kilua.utils.cast
-import js.objects.jso
+import dev.kilua.utils.obj
 import kotlin.time.Duration
 
 /**
@@ -61,22 +61,22 @@ public fun ITag<*>.popover(
     disposeTooltip()
     val popoverTrigger = triggers?.joinToString(" ") { it.value }
     val popoverDelay: Bootstrap.PopoverDelay? = if (delay != null && hideDelay != null) {
-        jso {
+        obj {
             show = delay.inWholeMilliseconds.toInt()
             hide = hideDelay.inWholeMilliseconds.toInt()
         }
     } else if (delay != null) {
-        jso {
+        obj {
             show = delay.inWholeMilliseconds.toInt()
             hide = delay.inWholeMilliseconds.toInt()
         }
     } else if (hideDelay != null) {
-        jso {
+        obj {
             show = 0
             hide = hideDelay.inWholeMilliseconds.toInt()
         }
     } else null
-    val popover = Bootstrap.Popover(element, jso {
+    val popover = Bootstrap.Popover(element, obj {
         this.content = content
         if (title != null) this.title = title
         this.animation = animation

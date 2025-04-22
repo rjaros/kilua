@@ -23,8 +23,8 @@
 package dev.kilua.form.select
 
 import dev.kilua.externals.TomSelectRendersJs
+import dev.kilua.utils.obj
 import js.core.JsAny
-import js.objects.jso
 
 /**
  * Tom Select rendering options.
@@ -46,7 +46,7 @@ public data class TomSelectRenders(
  */
 public fun TomSelectRenders.toJs(): TomSelectRendersJs {
     val self = this
-    return jso {
+    return obj {
         if (self.option != null) this.option = self.option
         if (self.item != null) this.item = self.item
         if (self.optionCreate != null) this.option_create = self.optionCreate

@@ -26,11 +26,11 @@ import dev.kilua.externals.TomSelectOptionsJs
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
+import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
 import js.core.JsAny
 import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsString
-import js.objects.jso
 import web.html.HTMLElement
 
 /**
@@ -94,25 +94,25 @@ public fun TomSelectOptions.toJs(emptyOption: Boolean): TomSelectOptionsJs {
         create?.toJsBoolean()
     }
     val plugins = jsObjectOf(
-        "change_listener" to jso(),
-        "caret_position" to if (caretPosition != null) jso() else null,
-        "checkbox_options" to if (checkboxOptions != null) jso() else null,
+        "change_listener" to obj(),
+        "caret_position" to if (caretPosition != null) obj() else null,
+        "checkbox_options" to if (checkboxOptions != null) obj() else null,
         "clear_button" to if (clearButtonTitle != null) mapOf(
             "title" to clearButtonTitle
         ) else null,
         "dropdown_header" to if (dropdownHeaderTitle != null) mapOf(
             "title" to dropdownHeaderTitle
         ) else null,
-        "dropdown_input" to if (dropdownInput != null) jso() else null,
-        "input_autogrow" to if (inputAutogrow != null) jso() else null,
-        "no_active_items" to if (noActiveItems != null) jso() else null,
-        "no_backspace_delete" to if (noBackspaceDelete != null) jso() else null,
+        "dropdown_input" to if (dropdownInput != null) obj() else null,
+        "input_autogrow" to if (inputAutogrow != null) obj() else null,
+        "no_active_items" to if (noActiveItems != null) obj() else null,
+        "no_backspace_delete" to if (noBackspaceDelete != null) obj() else null,
         "remove_button" to if (removeButtonTitle != null) mapOf(
             "title" to removeButtonTitle
         ) else null,
-        "restore_on_backspace" to if (restoreOnBackspace != null) jso() else null
+        "restore_on_backspace" to if (restoreOnBackspace != null) obj() else null
     )
-    return jso {
+    return obj {
         if (createTemp != null) this.create = createTemp
         if (self.createOnBlur != null) this.createOnBlur = self.createOnBlur
         if (self.createFilter != null) this.createFilter = self.createFilter

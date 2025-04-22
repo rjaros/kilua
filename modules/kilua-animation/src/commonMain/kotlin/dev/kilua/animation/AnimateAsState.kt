@@ -36,7 +36,7 @@ import dev.kilua.html.Color
 import dev.kilua.html.CssSize
 import dev.kilua.utils.deepMerge
 import dev.kilua.utils.isDom
-import js.objects.jso
+import dev.kilua.utils.obj
 
 // Similar behaviour to Compose Animation spring()
 private val defaultAnimation = MotionAnimation.SpringPhysics(stiffness = 1700, damping = 80)
@@ -135,7 +135,7 @@ internal fun <T> animateAsIntState(
     return produceState<T>(oldValue, value) {
         if (isDom) {
             val animationOptions = animation.toJsAny()
-            val intCallback = jso<IntCallback> {
+            val intCallback = obj<IntCallback> {
                 onUpdate = { v: Int ->
                     val newValue = convertFromInt(v)
                     oldValue = newValue
@@ -165,7 +165,7 @@ internal fun <T> animateAsStringState(
     return produceState<T>(oldValue, value) {
         if (isDom) {
             val animationOptions = animation.toJsAny()
-            val stringCallback = jso<StringCallback> {
+            val stringCallback = obj<StringCallback> {
                 onUpdate = { v: String ->
                     val newValue = convertFromString(v)
                     oldValue = newValue

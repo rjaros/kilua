@@ -23,12 +23,12 @@
 package dev.kilua.sanitize
 
 import dev.kilua.externals.SanitizeHtmlOptionsJs
+import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toJsArray
 import js.core.JsAny
 import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsString
-import js.objects.jso
 import js.regexp.RegExp
 
 /**
@@ -68,7 +68,7 @@ public data class SanitizeHtmlOptions(
 
 internal fun SanitizeHtmlOptions.toJs(): SanitizeHtmlOptionsJs {
     val self = this
-    return jso {
+    return obj {
         if (self.allowAllTags) {
             this.allowedTags = false.toJsBoolean()
         } else if (self.allowedTags != null) {

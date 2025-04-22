@@ -33,14 +33,20 @@ import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toJsString
 import js.core.JsString
 import js.objects.Object
-import js.objects.jso
+import js.objects.unsafeJso
 import js.reflect.Reflect
 import kotlin.js.undefined
 
 /**
+ * Create a JS object with a block of code to set its properties.
+ */
+public inline fun<T: JsAny> obj(block: T.() -> Unit): T = unsafeJso(block)
+
+/**
  * Create an empty JS object
  */
-public fun obj(): JsAny = jso<JsAny>()
+@Suppress("NOTHING_TO_INLINE")
+public inline fun obj(): JsAny = unsafeJso()
 
 /**
  * Function to set property on JS Object

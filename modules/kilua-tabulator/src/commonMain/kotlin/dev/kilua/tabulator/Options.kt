@@ -38,6 +38,7 @@ import dev.kilua.utils.cast
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.jsSet
+import dev.kilua.utils.obj
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.toList
@@ -50,7 +51,6 @@ import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toJsString
-import js.objects.jso
 import js.promise.Promise
 import web.dom.Element
 import web.dom.document
@@ -838,7 +838,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                 title.textContent = " " + it.getDefinition().jsGet("title")
                 label.appendChild(icon)
                 label.appendChild(title)
-                jso<TabulatorMenuItem> {
+                obj<TabulatorMenuItem> {
                     this.label = label
                     this.action = { e: Event ->
                         e.stopPropagation()
@@ -860,9 +860,9 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                     }
                 }
             } ?: emptyList()
-            (columns + listOf(jso {
+            (columns + listOf(obj {
                 separator = true
-            }, jso {
+            }, obj {
                 val icon = SafeDomFactory.createElement("i")
                 icon.classList.add(resetIconPrefix)
                 icon.classList.add(resetIcon)

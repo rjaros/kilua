@@ -45,6 +45,7 @@ import dev.kilua.utils.StringPair
 import dev.kilua.utils.assign
 import dev.kilua.utils.cast
 import dev.kilua.utils.clear
+import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toList
@@ -52,7 +53,6 @@ import dev.kilua.utils.unsafeCast
 import js.core.JsAny
 import js.core.JsPrimitives.toJsString
 import js.core.JsString
-import js.objects.jso
 import web.dom.document
 import web.html.HTMLOptionElement
 import web.html.HTMLSelectElement
@@ -554,7 +554,7 @@ public open class TomSelect(
     protected open fun initializeTomSelect() {
         if (renderConfig.isDom) {
             val self = this
-            val tomSelectOptions = jso<TomSelectOptionsJs> {
+            val tomSelectOptions = obj<TomSelectOptionsJs> {
                 this.maxItems = if (!self.multiple) 1 else null
                 this.maxOptions = self.maxOptions
                 this.allowEmptyOption = self.emptyOption
@@ -603,7 +603,7 @@ public open class TomSelect(
                 if (tsRenders != null) {
                     this.render = tsRenders!!.toJs()
                 } else {
-                    this.render = jso {
+                    this.render = obj {
                         no_results = null
                     }
                 }

@@ -25,7 +25,7 @@ package dev.kilua.toastify
 import dev.kilua.ToastifyModule
 import dev.kilua.externals.ToastOptions
 import dev.kilua.externals.Toastify
-import js.objects.jso
+import dev.kilua.utils.obj
 import kotlin.time.Duration
 
 /**
@@ -143,7 +143,7 @@ internal object ToastifyObj {
             ToastPosition.BottomRight, ToastPosition.BottomLeft -> "bottom"
             else -> null
         }
-        val optJs = jso<ToastOptions> {
+        val optJs = obj<ToastOptions> {
             this.text = text
             if (duration != null) this.duration = duration.inWholeMilliseconds.toInt()
             if (destination != null) this.destination = destination

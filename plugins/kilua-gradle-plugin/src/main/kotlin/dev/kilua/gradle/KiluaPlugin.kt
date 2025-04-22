@@ -38,12 +38,14 @@ import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByName
+import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenExec
+import org.jetbrains.kotlin.gradle.targets.js.NpmVersions
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+import org.jetbrains.kotlin.gradle.targets.wasm.binaryen.BinaryenExec
 import org.tomlj.Toml
 
 public abstract class KiluaPlugin : Plugin<Project> {
@@ -158,6 +160,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     dependsOn("jsProductionExecutableCompileSync")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack js bundle for server-side rendering."
+                    val method = this.javaClass.declaredMethods.find { it.name == "setVersions\$kotlin_gradle_plugin_common" }
+                    val prop = project.objects.property<NpmVersions>()
+                    prop.set(NpmVersions())
+                    method?.invoke(this, prop)
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackJs.entryModuleName.get())
@@ -218,6 +224,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     dependsOn("wasmJsProductionExecutableCompileSync")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack wasmJs bundle for server-side rendering."
+                    val method = this.javaClass.declaredMethods.find { it.name == "setVersions\$kotlin_gradle_plugin_common" }
+                    val prop = project.objects.property<NpmVersions>()
+                    prop.set(NpmVersions())
+                    method?.invoke(this, prop)
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackWasmJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackWasmJs.entryModuleName.get())

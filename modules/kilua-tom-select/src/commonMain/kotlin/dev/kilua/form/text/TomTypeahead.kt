@@ -40,6 +40,7 @@ import dev.kilua.externals.JsArray
 import dev.kilua.utils.assign
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
+import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toJsArray
@@ -50,7 +51,6 @@ import js.core.JsBoolean
 import js.core.JsPrimitives.toBoolean
 import js.core.JsPrimitives.toJsString
 import js.core.JsString
-import js.objects.jso
 import web.dom.document
 
 /**
@@ -233,7 +233,7 @@ public open class TomTypeahead(
     protected open fun initializeTomSelect() {
         if (renderConfig.isDom) {
             val self = this
-            val tomSelectOptions = jso<TomSelectOptionsJs> {
+            val tomSelectOptions = obj<TomSelectOptionsJs> {
                 this.maxItems = 1
                 this.create = { input: JsString ->
                     val oldValue = tomSelectInstance?.getValue()?.unsafeCast<JsString>()?.toString()?.ifBlank { null }
@@ -256,7 +256,7 @@ public open class TomTypeahead(
                         )
                     }.toJsArray()
                 }
-                this.render = jso {
+                this.render = obj {
                     this.option_create = { _: JsAny, _: (String) -> String ->
                         ""
                     }

@@ -24,8 +24,8 @@ package dev.kilua.form.select
 
 import dev.kilua.externals.TomSelectCallbacksJs
 import dev.kilua.externals.JsArray
+import dev.kilua.utils.obj
 import js.core.JsAny
-import js.objects.jso
 
 /**
  * Tom Select callback functions.
@@ -55,7 +55,7 @@ public data class TomSelectCallbacks(
  */
 public fun TomSelectCallbacks.toJs(): TomSelectCallbacksJs {
     val self = this
-    return jso {
+    return obj {
         if (self.load != null) this.load = self.load
         if (self.shouldLoad != null) this.shouldLoad = self.shouldLoad
         if (self.score != null) this.score = self.score
