@@ -160,10 +160,11 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     dependsOn("jsProductionExecutableCompileSync")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack js bundle for server-side rendering."
-                    val method = this.javaClass.declaredMethods.find { it.name == "setVersions\$kotlin_gradle_plugin_common" }
+                    // Workaround to initialize internal "versions" property
+                    val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
                     val prop = project.objects.property<NpmVersions>()
                     prop.set(NpmVersions())
-                    method?.invoke(this, prop)
+                    method.invoke(this, prop)
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackJs.entryModuleName.get())
@@ -224,10 +225,11 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     dependsOn("wasmJsProductionExecutableCompileSync")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack wasmJs bundle for server-side rendering."
-                    val method = this.javaClass.declaredMethods.find { it.name == "setVersions\$kotlin_gradle_plugin_common" }
+                    // Workaround to initialize internal "versions" property
+                    val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
                     val prop = project.objects.property<NpmVersions>()
                     prop.set(NpmVersions())
-                    method?.invoke(this, prop)
+                    method.invoke(this, prop)
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackWasmJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackWasmJs.entryModuleName.get())
