@@ -159,6 +159,32 @@ public fun IComponent.tdRef(
 }
 
 /**
+ * Creates a [Td] component with text, returning a reference.
+ *
+ * @param text the text of the component
+ * @param colspan the number of columns the cell extends
+ * @param rowspan the number of rows the cell extends
+ * @param className the CSS class name
+ * @param id the ID attribute of the cell component
+ * @param content the content of the component
+ * @return the [Td] component
+ */
+@Composable
+public fun IComponent.tdtRef(
+    text: String,
+    colspan: Int? = null,
+    rowspan: Int? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ITd.() -> Unit = {}
+): Td {
+    return tdRef(colspan, rowspan, className, id) {
+        +text
+        content()
+    }
+}
+
+/**
  * Creates a [Td] component.
  *
  * @param colspan the number of columns the cell extends
@@ -183,4 +209,30 @@ public fun IComponent.td(
         set(className) { updateProperty(Td::className, it) }
         set(id) { updateProperty(Td::id, it) }
     }, content)
+}
+
+/**
+ * Creates a [Td] component with text.
+ *
+ * @param text the text of the component
+ * @param colspan the number of columns the cell extends
+ * @param rowspan the number of rows the cell extends
+ * @param className the CSS class name
+ * @param id the ID attribute of the cell component
+ * @param content the content of the component
+ * @return the [Td] component
+ */
+@Composable
+public fun IComponent.tdt(
+    text: String,
+    colspan: Int? = null,
+    rowspan: Int? = null,
+    className: String? = null,
+    id: String? = null,
+    content: @Composable ITd.() -> Unit = {}
+) {
+    td(colspan, rowspan, className, id) {
+        +text
+        content()
+    }
 }

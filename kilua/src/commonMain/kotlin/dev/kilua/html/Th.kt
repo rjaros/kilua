@@ -211,6 +211,37 @@ public fun IComponent.thRef(
 }
 
 /**
+ * Creates a [Th] component with text, returning a reference.
+ *
+ * @param text the text of the component
+ * @param colspan the number of columns the cell extends
+ * @param rowspan the number of rows the cell extends
+ * @param className the CSS class name
+ * @param id the ID attribute of the cell component
+ * @param content the content of the component
+ * @return the [Th] component
+ */
+@Composable
+public fun IComponent.thtRef(
+    text: String,
+    colspan: Int? = null, rowspan: Int? = null,
+    scope: ThScope? = null, className: String? = null,
+    id: String? = null,
+    content: @Composable ITh.() -> Unit = {}
+): Th {
+    return thRef(
+        colspan = colspan,
+        rowspan = rowspan,
+        scope = scope,
+        className = className,
+        id = id
+    ) {
+        +text
+        content()
+    }
+}
+
+/**
  * Creates a [Th] component.
  *
  * @param colspan the number of columns the cell extends
@@ -233,4 +264,34 @@ public fun IComponent.th(
         set(scope) { updateProperty(Th::scope, it) }
         set(className) { updateProperty(Th::className, it) }
     }, content)
+}
+
+/**
+ * Creates a [Th] component with text.
+ *
+ * @param text the text of the component
+ * @param colspan the number of columns the cell extends
+ * @param rowspan the number of rows the cell extends
+ * @param className the CSS class name
+ * @param id the ID attribute of the cell component
+ * @param content the content of the component
+ */
+@Composable
+public fun IComponent.tht(
+    text: String,
+    colspan: Int? = null, rowspan: Int? = null,
+    scope: ThScope? = null, className: String? = null,
+    id: String? = null,
+    content: @Composable ITh.() -> Unit = {}
+) {
+    th(
+        colspan = colspan,
+        rowspan = rowspan,
+        scope = scope,
+        className = className,
+        id = id
+    ) {
+        +text
+        content()
+    }
 }
