@@ -752,6 +752,14 @@ public abstract class AbstractRichDateTime(
         tempusDominusInstance?.toggle()
     }
 
+    override fun focus() {
+        inputText?.focus()
+    }
+
+    override fun blur() {
+        inputText?.blur()
+    }
+
     public companion object {
 
         /**
