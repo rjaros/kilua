@@ -26,7 +26,3 @@ kotlin {
 
 setupDokka(tasks.dokkaGenerate, path = "plugins/")
 setupPublishing()
-
-nmcp {
-    publishAllPublications {}
-}

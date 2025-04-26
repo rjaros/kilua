@@ -41,7 +41,3 @@ dependencies {
 
 setupDokka(tasks.dokkaGenerate)
 setupPublishing()
-
-nmcp {
-    publishAllPublications {}
-}

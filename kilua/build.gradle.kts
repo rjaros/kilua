@@ -63,7 +63,3 @@ setupKsp()
 
 setupDokka(tasks.dokkaGenerate, path = "")
 setupPublishing()
-
-nmcp {
-    publishAllPublications {}
-}

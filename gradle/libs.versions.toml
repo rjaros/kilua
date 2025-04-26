@@ -2,9 +2,9 @@
 kilua = "0.0.23"
 kilua-published = "0.0.23"
 kotlin = "2.2.0-Beta1"
-compose = "1.8.0-beta02"
+compose = "1.8.0-rc01"
 dokka = "2.0.0"
-nmcp = "0.0.8"
+nmcp = "0.1.2"
 ksp = "2.2.0-Beta1-2.0.0"
 detekt = "1.23.8"
 npm-publish = "3.5.3"
@@ -23,8 +23,8 @@ koin = "4.1.0-Beta7"
 koin-annotations = "2.0.1-Beta1"
 micronaut = "4.8.2"
 micronaut-plugins = "4.5.3"
-spring-boot = "3.4.4"
-vertx = "5.0.0.CR6"
+spring-boot = "3.4.5"
+vertx = "5.0.0.CR7"
 ballast = "4.2.1"
 shadow = "9.0.0-beta12"
 logback = "1.5.18"
@@ -50,14 +50,14 @@ imask = "7.6.1"
 tabulator = "6.3.1"
 rsup-progress = "3.2.0"
 lz-string = "1.5.0"
-marked = "15.0.8"
+marked = "15.0.11"
 sanitize-html = "2.16.0"
 postcss = "8.5.3"
 postcss-loader = "8.1.1"
 tailwindcss = "4.1.4"
 cssnano = "7.0.6"
 mini-css-extract-plugin = "2.9.2"
-motion = "12.7.4"
+motion = "12.9.2"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
@@ -107,6 +107,7 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 npm-publish = { id = "dev.petuska.npm.publish", version.ref = "npm-publish" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 nmcp = { id = "com.gradleup.nmcp", version.ref = "nmcp" }
+nmcp-aggregation = { id = "com.gradleup.nmcp.aggregation", version.ref = "nmcp" }
 kilua-rpc = { id = "dev.kilua.rpc", version.ref = "kilua-rpc" }
 gradle-plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "gradle-plugin-publish" }
 kilua = { id = "dev.kilua", version.ref = "kilua-published" }

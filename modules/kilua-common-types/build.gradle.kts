@@ -44,7 +44,3 @@ kotlin {
 
 setupDokka(tasks.dokkaGenerate)
 setupPublishing()
-
-nmcp {
-    publishAllPublications {}
-}
