@@ -70,15 +70,16 @@ public class SsrEngine(
 
     private val logger = LoggerFactory.getLogger(SsrEngine::class.java)
 
-    private val workingDir: Path = createTempDirectory("ssr")
+    private var isSSR: Boolean = true
+    private var workingDir: Path? = null
     private var nodeJsProcess: Process? = null
     private var isShuttingDown: Boolean = false
-    private val httpClient = HttpClient(CIO)
-
     private val lockingFlow = MutableStateFlow(false)
 
     private val ssrService: String = externalSsrService ?: "http://localhost:${port ?: 7788}"
     private val root: String = rootId ?: "root"
+
+    private val httpClient = HttpClient(CIO)
 
     private var cssContent: String? = null
     private var cssProcessed: Boolean = false
@@ -108,14 +109,15 @@ public class SsrEngine(
             nodeJsProcess?.destroy()
             Thread.sleep(1000)
             @OptIn(ExperimentalPathApi::class)
-            workingDir.deleteRecursively()
+            workingDir?.deleteRecursively()
         })
-        try {
-            val ssrZip = this.javaClass.getResourceAsStream("/ssr.zip")
-            if (ssrZip != null) {
-                FileUtils.unzip(ssrZip, workingDir.toFile())
-                indexTemplate = workingDir.resolve("index.html").readText()
-                if (externalSsrService == null) {
+        if (externalSsrService == null) {
+            try {
+                val ssrZip = this.javaClass.getResourceAsStream("/ssr.zip")
+                if (ssrZip != null) {
+                    workingDir = createTempDirectory("ssr")
+                    FileUtils.unzip(ssrZip, workingDir!!.toFile())
+                    indexTemplate = workingDir!!.resolve("index.html").readText()
                     val processBuilderParams = mutableListOf(nodeExecutable ?: "node", "main.bundle.js")
                     if (port != null) processBuilderParams.addAll(listOf("--port", port.toString()))
                     if (rpcUrlPrefix != null) processBuilderParams.addAll(listOf("--rpc-url-prefix", rpcUrlPrefix))
@@ -125,7 +127,7 @@ public class SsrEngine(
                             val processBuilder = ProcessBuilder(*processBuilderParams.toTypedArray())
                             processBuilder.redirectErrorStream(true)
                             processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
-                            processBuilder.directory(workingDir.toFile())
+                            processBuilder.directory(workingDir!!.toFile())
                             print("NodeJS SSR process is starting ...")
                             nodeJsProcess = processBuilder.start()
                             println(" done.")
@@ -133,14 +135,19 @@ public class SsrEngine(
                             lockingFlow.value = true
                             nodeJsProcess!!.waitFor()
                             lockingFlow.value = false
+                            nodeJsProcess = null
                         }
                     }
+                } else {
+                    logger.warn("No SSR resources. Disabling SSR.")
+                    isSSR = false
                 }
-            } else {
-                logger.warn("Failed to find SSR resources")
+            } catch (e: Exception) {
+                logger.error("Failed to initialize SSR engine. Disabling SSR.", e)
+                isSSR = false
             }
-        } catch (e: Exception) {
-            logger.error("Failed to initialize SSR engine", e)
+        } else {
+            lockingFlow.value = true
         }
     }
 
@@ -148,6 +155,7 @@ public class SsrEngine(
      * Get CSS stylesheet content for SSR.
      */
     public suspend fun getCssContent(): String {
+        if (!isSSR) throw IllegalStateException("SSR is not enabled.")
         return cssContent ?: run {
             if (!lockingFlow.value) lockingFlow.first { it }
             val response = httpClient.post(ssrService)
@@ -157,11 +165,11 @@ public class SsrEngine(
                     withContext(Dispatchers.IO) {
                         textResponse.split("\n").joinToString("\n") {
                             if (cssAssetsNames.contains(it) || it.startsWith("css/") || it.startsWith("modules/css/")) {
-                                val cssCompressor = CssCompressor(workingDir.resolve(it).reader())
+                                val cssCompressor = CssCompressor(workingDir!!.resolve(it).reader())
                                 val writer = StringWriter()
                                 cssCompressor.compress(writer, -1)
                                 writer.toString()
-                            } else workingDir.resolve(it).readText()
+                            } else workingDir!!.resolve(it).readText()
                         }
                     }
                 } else {
@@ -178,6 +186,7 @@ public class SsrEngine(
      * Get root content for SSR.
      */
     public suspend fun getRootContent(uri: String, locale: String? = null): String {
+        if (!isSSR) throw IllegalStateException("SSR is not enabled.")
         if (uri.count { it == '?' } > 1) {
             throw Exception("Invalid URI: $uri")
         }
@@ -235,11 +244,13 @@ public class SsrEngine(
      * Restart the SSR NodeJs process.
      */
     public suspend fun restartSsrProcess() {
-        if (!lockingFlow.value) lockingFlow.first { it }
-        try {
-            httpClient.delete(ssrService)
-        } catch (_: Exception) {
-            // ignore exceptions
+        if (isSSR) {
+            if (!lockingFlow.value) lockingFlow.first { it }
+            try {
+                httpClient.delete(ssrService)
+            } catch (_: Exception) {
+                // ignore exceptions
+            }
         }
     }
 }
