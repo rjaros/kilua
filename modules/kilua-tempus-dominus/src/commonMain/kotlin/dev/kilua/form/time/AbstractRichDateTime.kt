@@ -34,6 +34,7 @@ import dev.kilua.form.text.textRef
 import dev.kilua.html.Div
 import dev.kilua.html.IDiv
 import dev.kilua.html.i
+import dev.kilua.html.px
 import dev.kilua.html.span
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
@@ -567,6 +568,17 @@ public abstract class AbstractRichDateTime(
         this.hourCycle = hourCycle
     }
 
+    public override var keyboardNavigation: Boolean by updatingProperty(true) {
+        refresh()
+    }
+
+    @Composable
+    public override fun keyboardNavigation(keyboardNavigation: Boolean): Unit = composableProperty("keyboardNavigation", {
+        this.keyboardNavigation = true
+    }) {
+        this.keyboardNavigation = keyboardNavigation
+    }
+
     /**
      * The refresh callback used by the theme change event handler.
      */
@@ -617,7 +629,6 @@ public abstract class AbstractRichDateTime(
             val secondsView = format.contains("ss")
             val language = locale.language
             val locale = tempusDominusLocales[language]?.localization ?: obj()
-            val map = mutableMapOf("a" to "b")
             locale.jsSet("locale", language.toJsString())
             locale.jsSet("format", inputFormat.toJsString())
             if (monthHeaderFormat != null || yearHeaderFormat != null) {
@@ -709,6 +720,7 @@ public abstract class AbstractRichDateTime(
                     }
                     this.inline = component.inline
                     currentTheme?.let { this.theme = it.value }
+                    this.keyboardNavigation = component.keyboardNavigation
                 }
                 this.localization = locale
             }
@@ -788,10 +800,12 @@ internal fun IDiv.commonRichDateTime(
             onBlurCallback()
         }
     }
-    span("input-group-text") {
+    span("input-group-text form-control") {
+        maxWidth(43.px)
         visible(!inline)
         attribute("data-td-target", "#$bindId")
         attribute("data-td-toggle", "datetimepicker")
+        tabindex(0)
         i(icon) {}
     }
     return text

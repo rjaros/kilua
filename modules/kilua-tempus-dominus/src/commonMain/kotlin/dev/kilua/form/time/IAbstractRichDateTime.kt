@@ -411,6 +411,17 @@ public interface IAbstractRichDateTime : IDiv {
     public fun hourCycle(hourCycle: HourCycle?)
 
     /**
+     * Specifies whether the picker should allow keyboard navigation.
+     */
+    public val keyboardNavigation: Boolean
+
+    /**
+     * Specifies whether the picker should allow keyboard navigation.
+     */
+    @Composable
+    public fun keyboardNavigation(keyboardNavigation: Boolean)
+
+    /**
      * The Tempus Dominus instance.
      */
     public val tempusDominusInstance: TempusDominus?

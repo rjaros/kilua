@@ -97,6 +97,7 @@ public external class TempusDominusDisplay : JsAny {
     public var components: TempusDominusComponents
     public var inline: Boolean
     public var theme: String
+    public var keyboardNavigation: Boolean
 }
 
 /**
