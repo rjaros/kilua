@@ -1247,8 +1247,10 @@ class App : Application() {
                     now(),
                     placeholder = "Podaj datę",
                     inline = dtInline,
-                    id = "test"
+                    id = "test",
+                    inputClassName = "form-control-lg"
                 ) {
+                    keyboardNavigation(false)
                     name("data")
                     required(true)
                     autocomplete(Autocomplete.Off)
