@@ -26,7 +26,7 @@ package dev.kilua
 import js.core.JsAny
 import js.import.JsModule
 
-@JsModule("./tailwind/tailwind.twcss")
+@JsModule("/kotlin/tailwind/tailwind.twcss")
 internal external object TailwindcssCss : JsAny
 
 /**
