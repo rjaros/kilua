@@ -85,6 +85,7 @@ public fun confirm(
             centered,
             scrollable,
             cancelVisible,
+            true,
             null,
         ) {
             val component = this

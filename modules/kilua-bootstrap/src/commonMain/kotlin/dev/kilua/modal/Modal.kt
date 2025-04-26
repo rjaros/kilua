@@ -225,6 +225,7 @@ private fun IComponent.modal(
  * @param centered determines if the modal window is vertically centered
  * @param scrollable determines if the modal window content is scrollable
  * @param escape determines if the modal window can be closed by pressing the escape key
+ * @param focus determines if the modal window should be focused
  * @param className the CSS class name
  * @param id the ID attribute of the modal window
  * @param content the content of the modal window
@@ -241,12 +242,13 @@ public fun IComponent.modalRef(
     centered: Boolean = false,
     scrollable: Boolean = false,
     escape: Boolean = true,
+    focus: Boolean = true,
     className: String? = null,
     id: String? = null,
     content: @Composable IModal.() -> Unit = {}
 ): Modal {
     return modalRef("modal" % if (animation) "fade" else null % className, id) {
-        setupModal(caption, closeButton, closeButtonAction, size, fullscreenMode, centered, scrollable, escape, content)
+        setupModal(caption, closeButton, closeButtonAction, size, fullscreenMode, centered, scrollable, escape, focus, content)
     }
 }
 
@@ -262,6 +264,7 @@ public fun IComponent.modalRef(
  * @param centered determines if the modal window is vertically centered
  * @param scrollable determines if the modal window content is scrollable
  * @param escape determines if the modal window can be closed by pressing the escape key
+ * @param focus determines if the modal window should be focused
  * @param className the CSS class name
  * @param id the ID attribute of the modal window
  * @param content the content of the modal window
@@ -277,12 +280,13 @@ public fun IComponent.modal(
     centered: Boolean = false,
     scrollable: Boolean = false,
     escape: Boolean = true,
+    focus: Boolean = true,
     className: String? = null,
     id: String? = null,
     content: @Composable IModal.() -> Unit = {}
 ) {
     modal("modal" % if (animation) "fade" else null % className, id) {
-        setupModal(caption, closeButton, closeButtonAction, size, fullscreenMode, centered, scrollable, escape, content)
+        setupModal(caption, closeButton, closeButtonAction, size, fullscreenMode, centered, scrollable, escape, focus, content)
     }
 }
 
@@ -296,12 +300,14 @@ private fun IModal.setupModal(
     centered: Boolean,
     scrollable: Boolean,
     escape: Boolean,
+    focus: Boolean,
     content: @Composable (IModal.() -> Unit)
 ) {
     role("dialog")
     tabindex(-1)
     attribute("data-bs-keyboard", "$escape")
     attribute("data-bs-backdrop", if (escape) "true" else "static")
+    attribute("data-bs-focus", "$focus")
     val component = this.cast<Modal>()
     div("modal-dialog" % size?.value % fullscreenMode?.value % if (centered) "modal-dialog-centered" else null % if (scrollable) "modal-dialog-scrollable" else null) {
         div("modal-content") {

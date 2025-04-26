@@ -71,6 +71,7 @@ public fun alert(
             centered,
             scrollable,
             true,
+            true,
             null,
         ) {
             val component = this

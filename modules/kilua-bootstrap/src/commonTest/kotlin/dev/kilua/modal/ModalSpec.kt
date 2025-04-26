@@ -45,7 +45,7 @@ class ModalSpec : DomSpec {
         }
         delay(100)
         assertEqualsHtml(
-            """<div role="dialog" tabindex="-1" data-bs-keyboard="true" data-bs-backdrop="true" class="modal fade show" aria-modal="true" style="display: block;">
+            """<div role="dialog" tabindex="-1" data-bs-keyboard="true" data-bs-backdrop="true" data-bs-focus="true" class="modal fade show" aria-modal="true" style="display: block;">
             <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
