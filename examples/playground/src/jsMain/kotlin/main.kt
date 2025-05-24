@@ -40,6 +40,7 @@ fun main() {
         JetpackModule,
         AnimationModule,
 //        TailwindcssModule,
+        LeafletModule,
         CoreModule
     )
 }

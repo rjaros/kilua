@@ -68,6 +68,11 @@ import dev.kilua.core.IComponent
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.JsArray
 import dev.kilua.externals.animateMini
+import dev.kilua.externals.leaflet.control.Layers
+import dev.kilua.externals.leaflet.control.Zoom
+import dev.kilua.externals.leaflet.geo.LatLng
+import dev.kilua.externals.leaflet.layer.FeatureGroup
+import dev.kilua.externals.leaflet.map.LeafletMap
 import dev.kilua.form.Autocomplete
 import dev.kilua.form.EnumMask
 import dev.kilua.form.ImaskOptions
@@ -109,6 +114,10 @@ import dev.kilua.html.style.style
 import dev.kilua.i18n.I18n
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
+import dev.kilua.maps.DefaultTileLayers
+import dev.kilua.maps.LeafletObjectFactory
+import dev.kilua.maps.MapsOptions
+import dev.kilua.maps.maps
 import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
 import dev.kilua.modal.alert
@@ -198,6 +207,7 @@ import web.events.removeEventListener
 import web.html.HTMLElement
 import web.timers.setTimeout
 import web.uievents.MouseEvent
+import web.window.window
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextUInt
@@ -338,6 +348,39 @@ class App : Application() {
                     }
                     noMatchAction {
                         state = "Not found"
+                    }
+                }
+                val lat = 51.505
+                val lng = -0.09
+                val positionP = LatLng(lat, lng)
+                var zoomP by remember { mutableStateOf(3) }
+                maps {
+                    width(300.px)
+                    height(300.px)
+                    configureLeafletMap {
+                        setView(positionP, zoomP)
+                        println("zoom: $zoomP")
+                        val featureGroup = FeatureGroup()
+                        featureGroup.addTo(this)
+                        val marker = LeafletObjectFactory.marker(positionP)
+                        marker.addEventListener("click", {
+                            window.open("https://www.openstreetmap.org/?mlat=$lat&mlon=$lng#map=18/$lat/$lng&layers=N")
+                        })
+                        marker.addTo(featureGroup)
+                        DefaultTileLayers.OpenStreetMap.addTo(this)
+//                        if (featureGroup.getBounds().isValid()) {
+//                            fitBounds(featureGroup.getBounds())
+//                        }
+                    }
+                }
+                button("Zoom in") {
+                    onClick {
+                        zoomP++
+                    }
+                }
+                button("Zoom out") {
+                    onClick {
+                        zoomP--
                     }
                 }
 
