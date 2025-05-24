@@ -287,7 +287,6 @@ public fun IComponent.richDateRef(
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
  * @param setup a function for setting up the component
- * @return a [RichDate] component
  */
 @Composable
 public fun IComponent.richDate(
