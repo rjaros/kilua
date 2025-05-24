@@ -13,6 +13,7 @@ config.resolve.alias = {
     "bootstrap/dist/css/bootstrap.min.css": false,
     "bootstrap-icons/font/bootstrap-icons.css": false,
     "@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css": false,
+    "leaflet/dist/leaflet.css": false,
     "tabulator-tables/dist/css/tabulator.min.css": false,
     "tabulator-tables/dist/css/tabulator_bootstrap5.min.css": false,
     "tabulator-tables/dist/css/tabulator_bulma.min.css": false,
