@@ -131,6 +131,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 "zzz-kilua-assets/k-trix.css",
                 "bootstrap/dist/css/bootstrap.min.css",
                 "@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css",
+                "leaflet/dist/leaflet.css",
                 "tabulator-tables/dist/css/tabulator.min.css",
                 "tabulator-tables/dist/css/tabulator_bootstrap5.min.css",
                 "tabulator-tables/dist/css/tabulator_bulma.min.css",
@@ -423,6 +424,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 override("cssnano", kiluaVersions["cssnano"]!!)
                 override("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
                 override("motion", kiluaVersions["motion"]!!)
+                override("leaflet", kiluaVersions["leaflet"]!!)
             }
         }
 
@@ -456,6 +458,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 resolution("cssnano", kiluaVersions["cssnano"]!!)
                 resolution("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
                 resolution("motion", kiluaVersions["motion"]!!)
+                resolution("leaflet", kiluaVersions["leaflet"]!!)
             }
         }
     }

@@ -58,6 +58,7 @@ tailwindcss = "4.1.4"
 cssnano = "7.0.6"
 mini-css-extract-plugin = "2.9.2"
 motion = "12.9.2"
+leaflet = "2.0.0-alpha"
 
 [libraries]
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }

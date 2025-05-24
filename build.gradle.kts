@@ -53,6 +53,7 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJ
         override("cssnano", libs.versions.cssnano.get())
         override("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get())
         override("motion", libs.versions.motion.get())
+        override("leaflet", libs.versions.leaflet.get())
     }
 }
 
@@ -77,6 +78,7 @@ dependencies {
     nmcpAggregation(project(":modules:kilua-imask"))
     nmcpAggregation(project(":modules:kilua-jetpack"))
     nmcpAggregation(project(":modules:kilua-lazy-layouts"))
+    nmcpAggregation(project(":modules:kilua-leaflet"))
     nmcpAggregation(project(":modules:kilua-marked"))
     nmcpAggregation(project(":modules:kilua-rest"))
     nmcpAggregation(project(":modules:kilua-routing"))
@@ -116,6 +118,7 @@ dependencies {
     dokka(project(":modules:kilua-imask"))
     dokka(project(":modules:kilua-jetpack"))
     dokka(project(":modules:kilua-lazy-layouts"))
+    dokka(project(":modules:kilua-leaflet"))
     dokka(project(":modules:kilua-marked"))
     dokka(project(":modules:kilua-rest"))
     dokka(project(":modules:kilua-routing"))
