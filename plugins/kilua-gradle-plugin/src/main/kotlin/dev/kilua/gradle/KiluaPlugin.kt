@@ -81,6 +81,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
         val kiluaVersions: Map<String, String>
     ) : Project by project
 
+    @Suppress("LongMethod", "ComplexMethod")
     private fun KiluaPluginContext.configureProject() {
         logger.debug("Configuring Kotlin/MPP plugin")
 
@@ -388,6 +389,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
         }
     }
 
+    @Suppress("LongMethod")
     private fun KiluaPluginContext.configureNodeEcosystem() {
         logger.debug("configuring Node")
 

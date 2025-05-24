@@ -16,6 +16,8 @@ import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import java.io.File
 import java.net.URI
 
+private const val DEFAULT_SLEEP_TIME = 5000L
+
 public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
 
     @get:Optional
@@ -56,7 +58,7 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
         processBuilder.redirectErrorStream(true)
         processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
         val process = processBuilder.start()
-        Thread.sleep(5000)
+        Thread.sleep(DEFAULT_SLEEP_TIME)
         println("Exporting pages ...")
         try {
             if (!process.isAlive) error("The SSR application failed to run (exit code: ${process.exitValue()})")

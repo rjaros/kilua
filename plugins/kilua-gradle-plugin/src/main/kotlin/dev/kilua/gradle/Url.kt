@@ -25,9 +25,11 @@ package dev.kilua.gradle
 import java.net.HttpURLConnection
 import java.net.URL
 
+private const val DEFAULT_READ_TIMEOUT = 5000
+
 public fun URL.readContent(headers: Map<String, String>? = null): String? {
     val httpURLConnection = this.openConnection() as HttpURLConnection
-    httpURLConnection.readTimeout = 5000
+    httpURLConnection.readTimeout = DEFAULT_READ_TIMEOUT
     headers?.forEach { (key, value) -> httpURLConnection.setRequestProperty(key, value) }
     val status = httpURLConnection.responseCode
     return if (status == HttpURLConnection.HTTP_OK) {
