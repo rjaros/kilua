@@ -514,7 +514,6 @@ public fun IComponent.splitPanelRef(
  * @param className the CSS class name
  * @param id the ID attribute of the component
  * @param content the content of the component
- * @return the [SplitPanel] component
  */
 @Composable
 public fun IComponent.splitPanel(
