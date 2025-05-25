@@ -98,7 +98,6 @@ public fun IComponent.motionAnimatedVisibility(
                     animationOn?.then {}?.awaitPromise()
                 } finally {
                     animationOn?.stop()
-                    animationOn?.cancel()
                     animationOn = null
                 }
             } else {
@@ -111,7 +110,6 @@ public fun IComponent.motionAnimatedVisibility(
                     animationOff?.then {}?.awaitPromise()
                 } finally {
                     animationOff?.stop()
-                    animationOff?.cancel()
                     animationOff = null
                     visibilityState = false
                 }

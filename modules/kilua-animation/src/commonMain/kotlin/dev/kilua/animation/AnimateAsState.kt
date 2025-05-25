@@ -146,7 +146,6 @@ internal fun <T> animateAsIntState(
                 animate(convertToInt(oldValue), convertToInt(value), deepMerge(animationOptions, intCallback))
             awaitDispose {
                 controls.stop()
-                controls.cancel()
             }
         } else {
             this.value = value
@@ -176,7 +175,6 @@ internal fun <T> animateAsStringState(
                 animate(convertToString(oldValue), convertToString(value), deepMerge(animationOptions, stringCallback))
             awaitDispose {
                 controls.stop()
-                controls.cancel()
             }
         } else {
             this.value = value
