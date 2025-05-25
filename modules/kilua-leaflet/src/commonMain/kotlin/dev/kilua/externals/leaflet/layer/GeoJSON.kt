@@ -27,8 +27,8 @@ package dev.kilua.externals.leaflet.layer
 import dev.kilua.externals.JsArray
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.layer.vector.Path.PathOptions
-import js.array.JsTuple2
-import js.array.JsTuple3
+import js.array.Tuple2
+import js.array.Tuple3
 import js.core.JsAny
 import js.core.JsNumber
 import js.import.JsModule
@@ -57,24 +57,24 @@ public open external class GeoJSON(
         /**
          * Creates a LatLng object from 2 numbers (longitude, latitude) used in GeoJSON for points.
          */
-        public fun coordsToLatLng(coords: JsTuple2<JsNumber, JsNumber>): LatLng
+        public fun coordsToLatLng(coords: Tuple2<JsNumber, JsNumber>): LatLng
 
         /**
          * Creates a LatLng object from 3 numbers (longitude, latitude, altitude) used in GeoJSON
          * for points.
          */
-        public fun coordsToLatLng(coords: JsTuple3<JsNumber, JsNumber, JsNumber>): LatLng
+        public fun coordsToLatLng(coords: Tuple3<JsNumber, JsNumber, JsNumber>): LatLng
 
         public fun coordsToLatLngs(
             coords: JsArray<JsAny>,
             levelsDeep: Int = definedExternally,
-            coordsToLatLng: (coords: JsTuple2<JsNumber, JsNumber>) -> LatLng = definedExternally
+            coordsToLatLng: (coords: Tuple2<JsNumber, JsNumber>) -> LatLng = definedExternally
         ): JsArray<JsAny>
 
         public fun coordsToLatLngs(
             coords: JsArray<JsAny>,
             levelsDeep: Int = definedExternally,
-            coordsToLatLng: (coords: JsTuple3<JsNumber, JsNumber, JsNumber>) -> LatLng = definedExternally
+            coordsToLatLng: (coords: Tuple3<JsNumber, JsNumber, JsNumber>) -> LatLng = definedExternally
         ): JsArray<JsAny>
 
         public fun latLngToCoords(latlng: LatLng): JsArray<JsNumber>

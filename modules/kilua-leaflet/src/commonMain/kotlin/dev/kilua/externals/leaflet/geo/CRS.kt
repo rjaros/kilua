@@ -27,7 +27,7 @@ package dev.kilua.externals.leaflet.geo
 import dev.kilua.externals.leaflet.core.Class
 import dev.kilua.externals.leaflet.geometry.Bounds
 import dev.kilua.externals.leaflet.geometry.Point
-import js.array.JsTuple2
+import js.array.Tuple2
 import js.core.JsAny
 import js.core.JsNumber
 import js.import.JsModule
@@ -60,13 +60,13 @@ public abstract external class CRS : JsAny {
      * If undefined, the longitude axis does not wrap around.
      * @see [wrapLat]
      */
-    public var wrapLng: JsTuple2<JsNumber, JsNumber>? /* JsTuple<Number, Number> */
+    public var wrapLng: Tuple2<JsNumber, JsNumber>? /* JsTuple<Number, Number> */
 
     /**
      * Like [wrapLng], but for the latitude (vertical) axis.
      * @see [wrapLng]
      */
-    public var wrapLat: JsTuple2<JsNumber, JsNumber>? /* JsTuple<Number, Number> */
+    public var wrapLat: Tuple2<JsNumber, JsNumber>? /* JsTuple<Number, Number> */
 
     /** If true, the coordinate space will be unbounded (infinite in both axes) */
     public var infinite: Boolean?
