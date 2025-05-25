@@ -1,0 +1,693 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>LeafletMapOptions</title>
+<link href="../../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../../ui-kit/ui-kit.min.js" defer></script>
+<script type="text/javascript" src="../../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+<a class="library-name--link" href="../../../../../index.html">
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.25
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-leaflet/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":modules:kilua-leaflet/commonMain" data-filter=":modules:kilua-leaflet/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </div>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="kilua-leaflet::dev.kilua.externals.leaflet.map/LeafletMap.LeafletMapOptions///PointingToDeclaration//1856419216">
+  <div class="breadcrumbs"><a href="../../../index.html">kilua-leaflet</a><span class="delimiter">/</span><a href="../../index.html">dev.kilua.externals.leaflet.map</a><span class="delimiter">/</span><a href="../index.html">LeafletMap</a><span class="delimiter">/</span><span class="current">LeafletMapOptions</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Leaflet</span><wbr><span>Map</span><wbr><span><span>Options</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">LeafletMapOptions</a> : <span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-leaflet/src/commonMain/kotlin/dev/kilua/externals/leaflet/map/LeafletMap.kt#L257">source</a>)</span></span></div><p class="paragraph">Constructor parameters for <a href="../index.html">LeafletMap</a></p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-942673897%2FProperties%2F1856419216" anchor-label="attributionControl" id="-942673897%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="attribution-control.html"><span>attribution</span><wbr><span><span>Control</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-942673897%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="attribution-control.html">attributionControl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1426774033%2FProperties%2F1856419216" anchor-label="bounceAtZoomLimits" id="-1426774033%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bounce-at-zoom-limits.html"><span>bounce</span><wbr><span>At</span><wbr><span>Zoom</span><wbr><span><span>Limits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1426774033%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="bounce-at-zoom-limits.html">bounceAtZoomLimits</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1905335865%2FProperties%2F1856419216" anchor-label="boxZoom" id="-1905335865%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="box-zoom.html"><span>box</span><wbr><span><span>Zoom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1905335865%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="box-zoom.html">boxZoom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1747850368%2FProperties%2F1856419216" anchor-label="center" id="-1747850368%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="center.html"><span><span>center</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1747850368%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="center.html">center</a><span class="token operator">: </span><a href="../../../dev.kilua.externals.leaflet.geo/-lat-lng/index.html">LatLng</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="786337072%2FProperties%2F1856419216" anchor-label="closePopupOnClick" id="786337072%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="close-popup-on-click.html"><span>close</span><wbr><span>Popup</span><wbr><span>On</span><wbr><span><span>Click</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="786337072%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="close-popup-on-click.html">closePopupOnClick</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1634673377%2FProperties%2F1856419216" anchor-label="crs" id="1634673377%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="crs.html"><span><span>crs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1634673377%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="crs.html">crs</a><span class="token operator">: </span><a href="../../../dev.kilua.externals.leaflet.geo/-c-r-s/index.html">CRS</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="159017691%2FProperties%2F1856419216" anchor-label="doubleClickZoom" id="159017691%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="double-click-zoom.html"><span>double</span><wbr><span>Click</span><wbr><span><span>Zoom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="159017691%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="double-click-zoom.html">doubleClickZoom</a><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1935717946%2FProperties%2F1856419216" anchor-label="dragging" id="-1935717946%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="dragging.html"><span><span>dragging</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1935717946%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="dragging.html">dragging</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1245107082%2FProperties%2F1856419216" anchor-label="easeLinearity" id="1245107082%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ease-linearity.html"><span>ease</span><wbr><span><span>Linearity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1245107082%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="ease-linearity.html">easeLinearity</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-826849571%2FProperties%2F1856419216" anchor-label="fadeAnimation" id="-826849571%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="fade-animation.html"><span>fade</span><wbr><span><span>Animation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-826849571%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="fade-animation.html">fadeAnimation</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1266901707%2FProperties%2F1856419216" anchor-label="inertia" id="1266901707%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="inertia.html"><span><span>inertia</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1266901707%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="inertia.html">inertia</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1870754924%2FProperties%2F1856419216" anchor-label="inertiaDeceleration" id="1870754924%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="inertia-deceleration.html"><span>inertia</span><wbr><span><span>Deceleration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1870754924%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="inertia-deceleration.html">inertiaDeceleration</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2141433032%2FProperties%2F1856419216" anchor-label="inertiaMaxSpeed" id="2141433032%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="inertia-max-speed.html"><span>inertia</span><wbr><span>Max</span><wbr><span><span>Speed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2141433032%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="inertia-max-speed.html">inertiaMaxSpeed</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1456157138%2FProperties%2F1856419216" anchor-label="keyboard" id="-1456157138%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="keyboard.html"><span><span>keyboard</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1456157138%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="keyboard.html">keyboard</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1358871635%2FProperties%2F1856419216" anchor-label="keyboardPanDelta" id="1358871635%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="keyboard-pan-delta.html"><span>keyboard</span><wbr><span>Pan</span><wbr><span><span>Delta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1358871635%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="keyboard-pan-delta.html">keyboardPanDelta</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-428550349%2FProperties%2F1856419216" anchor-label="layers" id="-428550349%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="layers.html"><span><span>layers</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-428550349%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="layers.html">layers</a><span class="token operator">: </span><a href="../../../../../kilua/dev.kilua.externals/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="../../../dev.kilua.externals.leaflet.layer/-layer/index.html">Layer</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1556775602%2FProperties%2F1856419216" anchor-label="markerZoomAnimation" id="-1556775602%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="marker-zoom-animation.html"><span>marker</span><wbr><span>Zoom</span><wbr><span><span>Animation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1556775602%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="marker-zoom-animation.html">markerZoomAnimation</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1353635028%2FProperties%2F1856419216" anchor-label="maxBounds" id="-1353635028%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-bounds.html"><span>max</span><wbr><span><span>Bounds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1353635028%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="max-bounds.html">maxBounds</a><span class="token operator">: </span><a href="../../../dev.kilua.externals.leaflet.geo/-lat-lng-bounds/index.html">LatLngBounds</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1261821625%2FProperties%2F1856419216" anchor-label="maxBoundsViscosity" id="-1261821625%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-bounds-viscosity.html"><span>max</span><wbr><span>Bounds</span><wbr><span><span>Viscosity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1261821625%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="max-bounds-viscosity.html">maxBoundsViscosity</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1137093838%2FProperties%2F1856419216" anchor-label="maxZoom" id="1137093838%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-zoom.html"><span>max</span><wbr><span><span>Zoom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1137093838%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="max-zoom.html">maxZoom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-464635232%2FProperties%2F1856419216" anchor-label="minZoom" id="-464635232%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="min-zoom.html"><span>min</span><wbr><span><span>Zoom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-464635232%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="min-zoom.html">minZoom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-757160531%2FProperties%2F1856419216" anchor-label="preferCanvas" id="-757160531%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="prefer-canvas.html"><span>prefer</span><wbr><span><span>Canvas</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-757160531%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="prefer-canvas.html">preferCanvas</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-956632878%2FProperties%2F1856419216" anchor-label="renderer" id="-956632878%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="renderer.html"><span><span>renderer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-956632878%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="renderer.html">renderer</a><span class="token operator">: </span><a href="../../../dev.kilua.externals.leaflet.layer.vector/-renderer/index.html">Renderer</a><span class="token operator">&lt;</span><a href="../../../dev.kilua.externals.leaflet.layer.vector/-renderer/-renderer-options/index.html">Renderer.RendererOptions</a><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1015330276%2FProperties%2F1856419216" anchor-label="scrollWheelZoom" id="1015330276%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="scroll-wheel-zoom.html"><span>scroll</span><wbr><span>Wheel</span><wbr><span><span>Zoom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1015330276%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="scroll-wheel-zoom.html">scrollWheelZoom</a><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1956476414%2FProperties%2F1856419216" anchor-label="tap" id="-1956476414%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tap.html"><span><span>tap</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1956476414%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="tap.html">tap</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-852082741%2FProperties%2F1856419216" anchor-label="tapTolerance" id="-852082741%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tap-tolerance.html"><span>tap</span><wbr><span><span>Tolerance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-852082741%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="tap-tolerance.html">tapTolerance</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1383850707%2FProperties%2F1856419216" anchor-label="touchZoom" id="1383850707%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="touch-zoom.html"><span>touch</span><wbr><span><span>Zoom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1383850707%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="touch-zoom.html">touchZoom</a><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="6186822%2FProperties%2F1856419216" anchor-label="trackResize" id="6186822%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="track-resize.html"><span>track</span><wbr><span><span>Resize</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="6186822%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="track-resize.html">trackResize</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1062541545%2FProperties%2F1856419216" anchor-label="transform3DLimit" id="-1062541545%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="transform3-d-limit.html"><span><span>transform3DLimit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1062541545%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="transform3-d-limit.html">transform3DLimit</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-973992012%2FProperties%2F1856419216" anchor-label="wheelDebounceTime" id="-973992012%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="wheel-debounce-time.html"><span>wheel</span><wbr><span>Debounce</span><wbr><span><span>Time</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-973992012%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="wheel-debounce-time.html">wheelDebounceTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="773976814%2FProperties%2F1856419216" anchor-label="wheelPxPerZoomLevel" id="773976814%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="wheel-px-per-zoom-level.html"><span>wheel</span><wbr><span>Px</span><wbr><span>Per</span><wbr><span>Zoom</span><wbr><span><span>Level</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="773976814%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="wheel-px-per-zoom-level.html">wheelPxPerZoomLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1336679664%2FProperties%2F1856419216" anchor-label="worldCopyJump" id="1336679664%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="world-copy-jump.html"><span>world</span><wbr><span>Copy</span><wbr><span><span>Jump</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1336679664%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="world-copy-jump.html">worldCopyJump</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="489593794%2FProperties%2F1856419216" anchor-label="zoom" id="489593794%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zoom.html"><span><span>zoom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="489593794%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="zoom.html">zoom</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1311342988%2FProperties%2F1856419216" anchor-label="zoomAnimation" id="-1311342988%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zoom-animation.html"><span>zoom</span><wbr><span><span>Animation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1311342988%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="zoom-animation.html">zoomAnimation</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-711869189%2FProperties%2F1856419216" anchor-label="zoomAnimationThreshold" id="-711869189%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zoom-animation-threshold.html"><span>zoom</span><wbr><span>Animation</span><wbr><span><span>Threshold</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-711869189%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="zoom-animation-threshold.html">zoomAnimationThreshold</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="461307259%2FProperties%2F1856419216" anchor-label="zoomControl" id="461307259%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zoom-control.html"><span>zoom</span><wbr><span><span>Control</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="461307259%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="zoom-control.html">zoomControl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1162466880%2FProperties%2F1856419216" anchor-label="zoomDelta" id="1162466880%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zoom-delta.html"><span>zoom</span><wbr><span><span>Delta</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1162466880%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="zoom-delta.html">zoomDelta</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1900214120%2FProperties%2F1856419216" anchor-label="zoomSnap" id="-1900214120%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zoom-snap.html"><span>zoom</span><wbr><span><span>Snap</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1900214120%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">var </span><a href="zoom-snap.html">zoomSnap</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

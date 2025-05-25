@@ -1,0 +1,360 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Attribution</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+<a class="library-name--link" href="../../../../index.html">
+                    kilua-project
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.25
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-leaflet/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":modules:kilua-leaflet/commonMain" data-filter=":modules:kilua-leaflet/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </div>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kilua-project
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="kilua-leaflet::dev.kilua.externals.leaflet.control/Attribution///PointingToDeclaration//1856419216">
+  <div class="breadcrumbs"><a href="../../index.html">kilua-leaflet</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.externals.leaflet.control</a><span class="delimiter">/</span><span class="current">Attribution</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Attribution</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">Attribution</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">options<span class="token operator">: </span><a href="-attribution-options/index.html">Attribution.AttributionOptions</a><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span> : <a href="../-control/index.html">Control</a><span class="token operator">&lt;</span><a href="-attribution-options/index.html">Attribution.AttributionOptions</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-leaflet/src/commonMain/kotlin/dev/kilua/externals/leaflet/control/Attribution.kt#L34">source</a>)</span></span></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="281234273%2FConstructors%2F1856419216" anchor-label="Attribution" id="281234273%2FConstructors%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-attribution.html"><span><span>Attribution</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="281234273%2FConstructors%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">options<span class="token operator">: </span><a href="-attribution-options/index.html">Attribution.AttributionOptions</a><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-435043251%2FClasslikes%2F1856419216" anchor-label="AttributionOptions" id="-435043251%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-attribution-options/index.html"><span>Attribution</span><wbr><span><span>Options</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-435043251%2FClasslikes%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-attribution-options/index.html">AttributionOptions</a> : <a href="../-control/-control-options/index.html">Control.ControlOptions</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-1357463549%2FProperties%2F1856419216" anchor-label="onAdd" id="-1357463549%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-control/on-add.html"><span>on</span><wbr><span><span>Add</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1357463549%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="../-control/on-add.html">onAdd</a><span class="token operator">: </span><span class="token punctuation">(</span>map<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.map/-leaflet-map/index.html">LeafletMap</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span data-unresolved-link="web.html/HTMLElement///PointingToDeclaration/">HTMLElement</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Should return the container DOM element for the control and add listeners on relevant map events. Called on <a href="../-control/add-to.html">addTo</a></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="230789266%2FProperties%2F1856419216" anchor-label="onRemove" id="230789266%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-control/on-remove.html"><span>on</span><wbr><span><span>Remove</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="230789266%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="../-control/on-remove.html">onRemove</a><span class="token operator">: </span><span class="token punctuation">(</span>map<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.map/-leaflet-map/index.html">LeafletMap</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Optional method. Should contain all clean up code that removes the listeners previously added in onAdd. Called on <a href="../-control/remove.html">remove</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="1160382571%2FFunctions%2F1856419216" anchor-label="addAttribution" id="1160382571%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="add-attribution.html"><span>add</span><wbr><span><span>Attribution</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1160382571%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="add-attribution.html"><span class="token function">addAttribution</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">text<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Attribution</a></div><div class="brief "><p class="paragraph">Adds an attribution text (e.g. <code class="lang-kotlin">Vector data &amp;copy; Mapbox</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="905428400%2FFunctions%2F1856419216" anchor-label="addInitHook" id="905428400%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.kilua.externals.leaflet.core/-class/add-init-hook.html"><span>add</span><wbr><span>Init</span><wbr><span><span>Hook</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="905428400%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.core/-class/add-init-hook.html"><span class="token function">addInitHook</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">initHookFn<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span></div><div class="brief "><p class="paragraph">Adds a constructor hook to the class.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.core/-class/add-init-hook.html"><span class="token function">addInitHook</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">methodName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>args<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1794126700%2FFunctions%2F1856419216" anchor-label="addTo" id="-1794126700%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-control/add-to.html"><span>add</span><wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1794126700%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-control/add-to.html"><span class="token function">addTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.map/-leaflet-map/index.html">LeafletMap</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-control/index.html">Control</a><span class="token operator">&lt;</span><a href="-attribution-options/index.html">Attribution.AttributionOptions</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Adds the control to the given map.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-200118518%2FFunctions%2F1856419216" anchor-label="getContainer" id="-200118518%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-control/get-container.html"><span>get</span><wbr><span><span>Container</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-200118518%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-control/get-container.html"><span class="token function">getContainer</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="web.html/HTMLElement///PointingToDeclaration/">HTMLElement</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the HTMLElement that contains the control.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-350914490%2FFunctions%2F1856419216" anchor-label="getPosition" id="-350914490%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-control/get-position.html"><span>get</span><wbr><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-350914490%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-control/get-position.html"><span class="token function">getPosition</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet/-positions-union/index.html">PositionsUnion</a></div><div class="brief "><p class="paragraph">Returns the position of the control.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1593283503%2FFunctions%2F1856419216" anchor-label="include" id="-1593283503%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.kilua.externals.leaflet.core/-class/include.html"><span><span>include</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1593283503%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.core/-class/include.html"><span class="token function">include</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">props<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span></div><div class="brief "><p class="paragraph">Includes a mixin into the current class.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1575801387%2FFunctions%2F1856419216" anchor-label="mergeOptions" id="-1575801387%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.kilua.externals.leaflet.core/-class/merge-options.html"><span>merge</span><wbr><span><span>Options</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1575801387%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.core/-class/merge-options.html"><span class="token function">mergeOptions</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">props<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span></div><div class="brief "><p class="paragraph">Merges options into the defaults of the class.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="709619825%2FFunctions%2F1856419216" anchor-label="remove" id="709619825%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-control/remove.html"><span><span>remove</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="709619825%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-control/remove.html"><span class="token function">remove</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-control/index.html">Control</a><span class="token operator">&lt;</span><a href="-attribution-options/index.html">Attribution.AttributionOptions</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Removes the control from the map it is currently active on.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-59299236%2FFunctions%2F1856419216" anchor-label="removeAttribution" id="-59299236%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="remove-attribution.html"><span>remove</span><wbr><span><span>Attribution</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-59299236%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="remove-attribution.html"><span class="token function">removeAttribution</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">text<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Attribution</a></div><div class="brief "><p class="paragraph">Removes an attribution text.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-910036342%2FFunctions%2F1856419216" anchor-label="setPosition" id="-910036342%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-control/set-position.html"><span>set</span><wbr><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-910036342%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-control/set-position.html"><span class="token function">setPosition</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet/-positions-union/index.html">PositionsUnion</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-control/index.html">Control</a><span class="token operator">&lt;</span><a href="-attribution-options/index.html">Attribution.AttributionOptions</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Sets the position of the control.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1956857805%2FFunctions%2F1856419216" anchor-label="setPrefix" id="1956857805%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-prefix.html"><span>set</span><wbr><span><span>Prefix</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1956857805%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="set-prefix.html"><span class="token function">setPrefix</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">prefix<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Attribution</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="set-prefix.html"><span class="token function">setPrefix</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">prefix<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Attribution</a></div><div class="brief "><p class="paragraph">The HTML text shown before the attributions. Pass <code class="lang-kotlin">false</code> to disable.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
