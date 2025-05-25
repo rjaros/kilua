@@ -35,161 +35,161 @@ import web.uievents.TouchEvent
 /**
  * Add click event listener.
  */
-public fun Modifier.onClick(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onClick(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onClick(listener)
 }
 
 /**
  * Add context menu event listener.
  */
-public fun Modifier.onContextmenu(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onContextmenu(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onContextmenu(listener)
 }
 
 /**
  * Add double click event listener.
  */
-public fun Modifier.onDblclick(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onDblclick(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onDblclick(listener)
 }
 
 /**
  * Add change event listener.
  */
-public fun Modifier.onChange(listener: (Event) -> Unit) = eventsModifier {
+public fun Modifier.onChange(listener: (Event) -> Unit): Modifier = eventsModifier {
     onChange(listener)
 }
 
 /**
  * Add input event listener.
  */
-public fun Modifier.onInput(listener: (InputEvent) -> Unit) = eventsModifier {
+public fun Modifier.onInput(listener: (InputEvent) -> Unit): Modifier = eventsModifier {
     onInput(listener)
 }
 
 /**
  * Add focus event listener.
  */
-public fun Modifier.onFocus(listener: (FocusEvent) -> Unit) = eventsModifier {
+public fun Modifier.onFocus(listener: (FocusEvent) -> Unit): Modifier = eventsModifier {
     onFocus(listener)
 }
 
 /**
  * Add blur event listener.
  */
-public fun Modifier.onBlur(listener: (FocusEvent) -> Unit) = eventsModifier {
+public fun Modifier.onBlur(listener: (FocusEvent) -> Unit): Modifier = eventsModifier {
     onBlur(listener)
 }
 
 /**
  * Add key down event listener.
  */
-public fun Modifier.onKeydown(listener: (KeyboardEvent) -> Unit) = eventsModifier {
+public fun Modifier.onKeydown(listener: (KeyboardEvent) -> Unit): Modifier = eventsModifier {
     onKeydown(listener)
 }
 
 /**
  * Add key up event listener.
  */
-public fun Modifier.onKeyup(listener: (KeyboardEvent) -> Unit) = eventsModifier {
+public fun Modifier.onKeyup(listener: (KeyboardEvent) -> Unit): Modifier = eventsModifier {
     onKeyup(listener)
 }
 
 /**
  * Add key press event listener.
  */
-public fun Modifier.onKeypress(listener: (KeyboardEvent) -> Unit) = eventsModifier {
+public fun Modifier.onKeypress(listener: (KeyboardEvent) -> Unit): Modifier = eventsModifier {
     onKeypress(listener)
 }
 
 /**
  * Add touch start event listener.
  */
-public fun Modifier.onTouchStart(listener: (TouchEvent) -> Unit) = eventsModifier {
+public fun Modifier.onTouchStart(listener: (TouchEvent) -> Unit): Modifier = eventsModifier {
     onTouchStart(listener)
 }
 
 /**
  * Add touch end event listener.
  */
-public fun Modifier.onTouchEnd(listener: (TouchEvent) -> Unit) = eventsModifier {
+public fun Modifier.onTouchEnd(listener: (TouchEvent) -> Unit): Modifier = eventsModifier {
     onTouchEnd(listener)
 }
 
 /**
  * Add touch cancel event listener.
  */
-public fun Modifier.onTouchCancel(listener: (TouchEvent) -> Unit) = eventsModifier {
+public fun Modifier.onTouchCancel(listener: (TouchEvent) -> Unit): Modifier = eventsModifier {
     onTouchCancel(listener)
 }
 
 /**
  * Add mouse down event listener.
  */
-public fun Modifier.onMouseDown(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onMouseDown(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onMouseDown(listener)
 }
 
 /**
  * Add mouse up event listener.
  */
-public fun Modifier.onMouseUp(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onMouseUp(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onMouseUp(listener)
 }
 
 /**
  * Add mouse enter event listener.
  */
-public fun Modifier.onMouseEnter(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onMouseEnter(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onMouseEnter(listener)
 }
 
 /**
  * Add mouse leave event listener.
  */
-public fun Modifier.onMouseLeave(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onMouseLeave(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onMouseLeave(listener)
 }
 
 /**
  * Add mouse over event listener.
  */
-public fun Modifier.onMouseOver(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onMouseOver(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onMouseOver(listener)
 }
 
 /**
  * Add mouse out event listener.
  */
-public fun Modifier.onMouseOut(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onMouseOut(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onMouseOut(listener)
 }
 
 /**
  * Add mouse move event listener.
  */
-public fun Modifier.onMouseMove(listener: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.onMouseMove(listener: (MouseEvent) -> Unit): Modifier = eventsModifier {
     onMouseMove(listener)
 }
 
 /**
  * Add pointer down event listener.
  */
-public fun Modifier.onPointerDown(listener: (PointerEvent) -> Unit) = eventsModifier {
+public fun Modifier.onPointerDown(listener: (PointerEvent) -> Unit): Modifier = eventsModifier {
     onPointerDown(listener)
 }
 
 /**
  * Add pointer up event listener.
  */
-public fun Modifier.onPointerUp(listener: (PointerEvent) -> Unit) = eventsModifier {
+public fun Modifier.onPointerUp(listener: (PointerEvent) -> Unit): Modifier = eventsModifier {
     onPointerUp(listener)
 }
 
 /**
  * Add event listener by event name.
  */
-public fun <EV : Event> Modifier.onEvent(name: String, listener: (EV) -> Unit) = eventsModifier {
+public fun <EV : Event> Modifier.onEvent(name: String, listener: (EV) -> Unit): Modifier = eventsModifier {
     onEvent(name, listener)
 }
 
@@ -197,7 +197,7 @@ public fun <EV : Event> Modifier.onEvent(name: String, listener: (EV) -> Unit) =
  * Add click event listener when [enabled] is true.
  * This function mimics the behavior of clickable in Jetpack Compose.
  */
-public fun Modifier.clickable(enabled: Boolean = true, onClick: (MouseEvent) -> Unit) = eventsModifier {
+public fun Modifier.clickable(enabled: Boolean = true, onClick: (MouseEvent) -> Unit): Modifier = eventsModifier {
     if (enabled) {
         onClick(onClick)
     }
@@ -221,7 +221,7 @@ public fun Modifier.combinedClickable(
     onLongClick: (() -> Unit)? = null,
     onDoubleClick: (() -> Unit)? = null,
     onClick: () -> Unit,
-) = eventsModifier {
+): Modifier = eventsModifier {
     if (enabled) {
         onCombineClick(onLongClick, onDoubleClick, onClick)
     }

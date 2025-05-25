@@ -25,69 +25,69 @@ package dev.kilua.compose.ui
 /**
  * Set the title attribute.
  */
-public fun Modifier.title(title: String?) = attrsModifier {
+public fun Modifier.title(title: String?): Modifier = attrsModifier {
     title(title)
 }
 
 /**
  * Set the tabindex attribute.
  */
-public fun Modifier.tabindex(tabindex: Int?) = attrsModifier {
+public fun Modifier.tabindex(tabindex: Int?): Modifier = attrsModifier {
     tabindex(tabindex)
 }
 
 /**
  * Set the draggable attribute.
  */
-public fun Modifier.draggable(draggable: Boolean?) = attrsModifier {
+public fun Modifier.draggable(draggable: Boolean?): Modifier = attrsModifier {
     draggable(draggable)
 }
 
 /**
  * Set the role attribute.
  */
-public fun Modifier.role(role: String?) = attrsModifier {
+public fun Modifier.role(role: String?): Modifier = attrsModifier {
     role(role)
 }
 
 /**
  * Set the aria-label attribute.
  */
-public fun Modifier.ariaLabel(ariaLabel: String?) = attrsModifier {
+public fun Modifier.ariaLabel(ariaLabel: String?): Modifier = attrsModifier {
     ariaLabel(ariaLabel)
 }
 
 /**
  * Set the aria-labelledby attribute.
  */
-public fun Modifier.ariaLabelledby(ariaLabelledby: String?) = attrsModifier {
+public fun Modifier.ariaLabelledby(ariaLabelledby: String?): Modifier = attrsModifier {
     ariaLabelledby(ariaLabelledby)
 }
 
 /**
  * Set the aria-describedby attribute.
  */
-public fun Modifier.ariaDescribedby(ariaDescribedby: String?) = attrsModifier {
+public fun Modifier.ariaDescribedby(ariaDescribedby: String?): Modifier = attrsModifier {
     ariaDescribedby(ariaDescribedby)
 }
 
 /**
  * Set the accesskey attribute.
  */
-public fun Modifier.accesskey(accesskey: Char?) = attrsModifier {
+public fun Modifier.accesskey(accesskey: Char?): Modifier = attrsModifier {
     accesskey(accesskey)
 }
 
 /**
  * Set the autofocus attribute.
  */
-public fun Modifier.autofocus(autofocus: Boolean?) = attrsModifier {
+public fun Modifier.autofocus(autofocus: Boolean?): Modifier = attrsModifier {
     autofocus(autofocus)
 }
 
 /**
  * Set value for the given attribute.
  */
-public fun Modifier.attribute(name: String, value: String?) = attrsModifier {
+public fun Modifier.attribute(name: String, value: String?): Modifier = attrsModifier {
     attribute(name, value)
 }

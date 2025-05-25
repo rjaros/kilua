@@ -45,22 +45,22 @@ public actual suspend fun <T : JsAny?> Promise<T>.awaitPromise(): T = unsafeCast
 internal fun <T : JsAny?> call(resolve: PromiseResolve<T>, value: T): Unit = js("resolve(value)")
 
 @Suppress("NOTHING_TO_INLINE")
-public actual inline fun <T : JsAny?> PromiseResolve<T>.call(value: T) = call(this, value)
+public actual inline fun <T : JsAny?> PromiseResolve<T>.call(value: T): Unit = call(this, value)
 
 @PublishedApi
 internal fun call(reject: PromiseReject): Unit = js("reject()")
 
 @Suppress("NOTHING_TO_INLINE")
-public actual inline fun PromiseReject.call() = call(this)
+public actual inline fun PromiseReject.call(): Unit = call(this)
 
 @PublishedApi
 internal fun call(reject: PromiseReject, reason: JsError): Unit = js("reject(reason)")
 
 @Suppress("NOTHING_TO_INLINE")
-public actual inline fun PromiseReject.call(reason: JsError) = call(this, reason)
+public actual inline fun PromiseReject.call(reason: JsError): Unit = call(this, reason)
 
 @PublishedApi
 internal fun call(reject: PromiseReject, reason: JsErrorLike): Unit = js("reject(reason)")
 
 @Suppress("NOTHING_TO_INLINE")
-public actual inline fun PromiseReject.call(reason: JsErrorLike) = call(this, reason)
+public actual inline fun PromiseReject.call(reason: JsErrorLike): Unit = call(this, reason)

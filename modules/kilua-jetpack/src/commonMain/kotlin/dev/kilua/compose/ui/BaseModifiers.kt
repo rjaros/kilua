@@ -25,13 +25,13 @@ package dev.kilua.compose.ui
 /**
  * Set the CSS class of the current component.
  */
-public fun Modifier.className(className: String?) = baseModifier {
+public fun Modifier.className(className: String?): Modifier = baseModifier {
     className(className)
 }
 
 /**
  * Set the ID attribute of the current component.
  */
-public fun Modifier.id(id: String?) = baseModifier {
+public fun Modifier.id(id: String?): Modifier = baseModifier {
     id(id)
 }

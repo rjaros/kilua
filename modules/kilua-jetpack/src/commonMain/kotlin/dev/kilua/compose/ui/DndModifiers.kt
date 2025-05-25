@@ -29,14 +29,14 @@ import web.uievents.DragEvent
  * Sets D&D data for the current widget. It also makes it draggable.
  */
 @Composable
-public fun Modifier.setDragDropData(format: String, data: String) = dndModifier {
+public fun Modifier.setDragDropData(format: String, data: String): Modifier = dndModifier {
     setDragDropData(format, data)
 }
 
 /**
  * Clears D&D data for the current component. It also makes it not draggable.
  */
-public fun Modifier.clearDragDropData() = dndModifier {
+public fun Modifier.clearDragDropData(): Modifier = dndModifier {
     clearDragDropData()
 }
 
@@ -44,7 +44,7 @@ public fun Modifier.clearDragDropData() = dndModifier {
  * Sets the current component as a D&D drop target with helper callback accepting String data.
  */
 @Composable
-public fun Modifier.setDropTargetData(format: String, callback: (String?) -> Unit) = dndModifier {
+public fun Modifier.setDropTargetData(format: String, callback: (String?) -> Unit): Modifier = dndModifier {
     setDropTargetData(format, callback)
 }
 
@@ -52,7 +52,7 @@ public fun Modifier.setDropTargetData(format: String, callback: (String?) -> Uni
  * Sets the current component as a D&D drop target.
  */
 @Composable
-public fun Modifier.setDropTarget(format: String, callback: (DragEvent) -> Unit) = dndModifier {
+public fun Modifier.setDropTarget(format: String, callback: (DragEvent) -> Unit): Modifier = dndModifier {
     setDropTarget(format, callback)
 }
 
@@ -60,7 +60,7 @@ public fun Modifier.setDropTarget(format: String, callback: (DragEvent) -> Unit)
  * Sets the current component as a D&D drop target.
  */
 @Composable
-public fun Modifier.setDropTarget(callback: (DragEvent) -> Unit) = dndModifier {
+public fun Modifier.setDropTarget(callback: (DragEvent) -> Unit): Modifier = dndModifier {
     setDropTarget(callback)
 }
 
@@ -68,13 +68,13 @@ public fun Modifier.setDropTarget(callback: (DragEvent) -> Unit) = dndModifier {
  * Sets the current component as a D&D drop target.
  */
 @Composable
-public fun Modifier.setDropTarget(formats: Set<String>?, callback: (DragEvent) -> Unit) = dndModifier {
+public fun Modifier.setDropTarget(formats: Set<String>?, callback: (DragEvent) -> Unit): Modifier = dndModifier {
     setDropTarget(formats, callback)
 }
 
 /**
  * Unsets the current component as a D&D drop target.
  */
-public fun Modifier.clearDropTarget() = dndModifier {
+public fun Modifier.clearDropTarget(): Modifier = dndModifier {
     clearDropTarget()
 }
