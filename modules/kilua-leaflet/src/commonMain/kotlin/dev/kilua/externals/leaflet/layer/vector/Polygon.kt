@@ -34,8 +34,6 @@ import kotlin.js.definedExternally
  *
  * Note that points you pass when creating a polygon shouldn't have an additional last point equal
  * to the first one — it's better to filter out such points.
- *
- * @param T [dev.kilua.externals.geojson.Polygon] or [dev.kilua.externals.geojson.MultiPolygon]
  */
 public open external class Polygon :
     Polyline {

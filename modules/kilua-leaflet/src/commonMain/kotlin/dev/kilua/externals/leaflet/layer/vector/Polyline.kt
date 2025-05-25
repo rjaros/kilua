@@ -36,8 +36,6 @@ import kotlin.js.definedExternally
  * A class for drawing polyline overlays on a map. Extends [Path].
  *
  * See [`https://github.com/Leaflet/Leaflet/blob/v1.7.1/src/layer/vector/Polyline.js`](https://github.com/Leaflet/Leaflet/blob/v1.7.1/src/layer/vector/Polyline.js)
- *
- * @param T [dev.kilua.externals.geojson.LineString] or [dev.kilua.externals.geojson.MultiLineString]
  */
 public open external class Polyline : Path<Polyline.PolylineOptions> {
 

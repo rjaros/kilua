@@ -91,8 +91,7 @@ public open external class GeoJSON(
 
         /**
          * A Function defining how GeoJSON points spawn Leaflet layers. It is internally called
-         * when data is added, passing the GeoJSON [Feature<Point>][dev.kilua.externals.geojson.Feature]
-         * and its [LatLng].
+         * when data is added, passing the GeoJSON and its [LatLng].
          *
          * The default is to spawn a default Marker:
          */

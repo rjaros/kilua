@@ -41,11 +41,9 @@ public open external class LayerGroup(
     options: LayerOptions = definedExternally
 ) : Layer<LayerOptions> {
     /**
-     * Returns a GeoJSON representation of the layer group (as a GeoJSON [GeometryCollection],
-     * [Feature<MultiPoint>][Feature] or [GeometryCollection]).
+     * Returns a GeoJSON representation of the layer group.
      */
     public open fun toGeoJSON(precision: Double = definedExternally): JsAny
-    /* geojson.FeatureCollection<GeoJsonGeometry, P> | geojson.Feature<geojson.MultiPoint, P> | geojson.GeometryCollection */
 
     /** Adds the given layer to the group. */
     public open fun addLayer(layer: Layer<*>): LayerGroup /* this */
@@ -81,12 +79,5 @@ public open external class LayerGroup(
     public open fun setZIndex(zIndex: Int): LayerGroup /* this */
     public open fun getLayerId(layer: Layer<*>): Int
 
-    /**
-     * Type is one of:
-     * * [`FeatureCollection<geojson.GeometryObject, P>`][dev.kilua.externals.geojson.FeatureCollection]
-     * * [`Feature<geojson.MultiPoint, P>`][dev.kilua.externals.geojson.Feature]
-     * * [`GeometryCollection`][dev.kilua.externals.geojson.GeometryCollection]`
-     * * `undefined`
-     */
     public open var feature: JsAny
 }
