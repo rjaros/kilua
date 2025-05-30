@@ -5,6 +5,7 @@
     "coroutines": "1.10.2",
     "ksp": "2.2.0-RC-2.0.1",
     "kilua-rpc": "0.0.34",
+    "datetime": "0.6.2",
     "logback": "1.5.18",
     "template-javalin": {
     },
