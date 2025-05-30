@@ -83,14 +83,14 @@
         },
         {
             "name": "kilua-tom-select",
-            "description": "Advanced TomSelect and TomTypeahead (autocomplete) form components",
+            "description": "Advanced select and typeahead form components",
             "initializers": [
                 "TomSelectModule"
             ]
         },
         {
             "name": "kilua-imask",
-            "description": "Text input mask support with Imask.js library, ImaskNumeric form component",
+            "description": "Text input mask support, numeric form component",
             "initializers": [
                 "ImaskModule"
             ]
@@ -122,7 +122,7 @@
         },
         {
             "name": "kilua-leaflet",
-            "description": "Maps component, based on Leaflet library",
+            "description": "Maps component",
             "initializers": [
                 "LeafletModule"
             ]
@@ -160,24 +160,6 @@
         {
             "name": "kilua-rest",
             "description": "Configurable REST/HTTP client"
-        },
-        {
-            "name": "kilua-select-remote",
-            "description": "Fullstack version of the select form component"
-        },
-        {
-            "name": "kilua-tom-select-remote",
-            "description": "Fullstack versions of TomSelect and TomTypeahead form components",
-            "initializers": [
-                "TomSelectModule"
-            ]
-        },
-        {
-            "name": "kilua-tabulator-remote",
-            "description": "Fullstack version of the tabulator component",
-            "initializers": [
-                "TabulatorModule"
-            ]
         }
     ]
 }
