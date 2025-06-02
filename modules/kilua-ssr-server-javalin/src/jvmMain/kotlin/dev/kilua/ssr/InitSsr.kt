@@ -46,7 +46,10 @@ private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Defa
  */
 public fun Javalin.initSsr() {
     val prop = Properties()
-    prop.load(this::class.java.getResourceAsStream("/application.properties"))
+    val stream = this::class.java.getResourceAsStream("/application.properties")
+    if (stream != null) {
+        prop.load(stream)
+    }
     val nodeExecutable = prop.getProperty("ssr.nodeExecutable")
     val port = prop.getProperty("ssr.port")?.toIntOrNull()
     val externalSsrService = prop.getProperty("ssr.externalSsrService")

@@ -42,7 +42,7 @@ public const val SsrEngineKey: String = "dev.kilua.ssr.engine.key"
  */
 public fun Kooby.initSsr() {
     val config = environment.config
-    val nodeExecutable = config.getString("ssr.nodeExecutable")
+    val nodeExecutable = if (config.hasPath("ssr.nodeExecutable")) config.getString("ssr.nodeExecutable") else null
     val port = if (config.hasPath("ssr.port")) config.getString("ssr.port")?.toIntOrNull() else null
     val externalSsrService =
         if (config.hasPath("ssr.externalSsrService")) config.getString("ssr.externalSsrService") else null
