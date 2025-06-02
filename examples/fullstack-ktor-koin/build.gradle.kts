@@ -18,7 +18,6 @@ val mainClassName = "io.ktor.server.netty.EngineMain"
 kotlin {
     jvmToolchain(21)
     jvm {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
         }
