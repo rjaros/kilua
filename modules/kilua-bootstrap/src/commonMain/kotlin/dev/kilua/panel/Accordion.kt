@@ -258,10 +258,15 @@ private fun IAccordion.setupAccordion(
         accordion.items[itemId]?.let { item ->
             div("accordion-item") {
                 h2("accordion-header") {
+                    val iconLink = if (item.label != null && item.icon != null) {
+                        "icon-link"
+                    } else {
+                        null
+                    }
                     button(
                         item.label,
                         item.icon,
-                        className = "accordion-button" % if (index != openedIndex) "collapsed" else null
+                        className = "accordion-button" % iconLink % if (index != openedIndex) "collapsed" else null
                     ) {
                         attribute("data-bs-toggle", "collapse")
                         attribute("data-bs-target", "#$accordionId-item-$index")
