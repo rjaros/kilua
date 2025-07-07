@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +20,38 @@
  * SOFTWARE.
  */
 
-package dev.kilua.ssr
+package dev.kilua.routing
 
 import androidx.compose.runtime.Composable
-import app.softwork.routingcompose.RouteBuilder
+import androidx.compose.runtime.CompositionLocalProvider
+import app.softwork.routingcompose.HashRouter
+import app.softwork.routingcompose.invoke
 import dev.kilua.core.IComponent
 
 /**
- * A router supporting Server-Side Rendering (SSR).
+ * Creates a [HashRouter] with the specified initial route.
  *
- * This router can be used to directly declare UI components for each route,
- * which will be rendered on the server immediately for every request.
+ * @param initRoute the initial route to navigate to (default is "/")
+ * @param routing the routing configuration block
  */
 @Composable
-public fun IComponent.SimpleSsrRouter(
+public fun IComponent.hashRouter(
     initRoute: String = "/",
-    contextPath: String = getContextPath(),
-    stateSerializer: (() -> String)? = null,
-    routing: @Composable (RouteBuilder.() -> Unit)
+    routing: @RoutingDsl RoutingBuilder.(RoutingContext) -> Unit
 ) {
-    if (renderConfig.isDom) {
-        SsrRouter("$contextPath$initRoute", active = true, useDoneCallback = false) {
-            if (contextPath.isNotEmpty()) {
-                route("$contextPath$initRoute") {
-                    routing()
-                }
-            } else {
-                routing()
+    val routingBuilder = RoutingBuilderImpl()
+    val routingContext = RoutingContextImpl()
+    routingBuilder.routing(routingContext)
+    val routingModel = routingBuilder.getRoutingModel()
+    CompositionLocalProvider(RoutingModelCompositionLocal provides routingModel) {
+        HashRouter(initRoute) {
+            routingContext.apply {
+                path = this@HashRouter.path
+                parameters = this@HashRouter.parameters
             }
+            routingModel.apply(this@hashRouter, this, routingContext, routingModel.defaultMeta)
         }
-    } else {
-        SsrRouter(initRoute, active = true, stateSerializer, useDoneCallback = false) {
-            routing()
-        }
+        globalRouter = HashRouter
     }
+    RoutingModel.globalRoutingModel = routingModel
 }

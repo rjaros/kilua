@@ -42,11 +42,14 @@ import dev.kilua.html.section
 import dev.kilua.html.span
 import dev.kilua.html.strong
 import dev.kilua.html.ul
-import dev.kilua.routing.SimpleHashRouter
+import dev.kilua.routing.hashRouter
 import dev.kilua.startApplication
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
+import web.cssom.ClassName
+import web.keyboard.Enter
+import web.keyboard.Escape
 import web.keyboard.KeyCode
 import web.uievents.FocusEvent
 import web.uievents.KeyboardEvent
@@ -58,15 +61,21 @@ class App : Application(), KoinComponent {
 
     override fun start() {
         root("root") {
-            SimpleHashRouter("/") {
+            hashRouter {
                 route("/") {
-                    todoView(Mode.All)
+                    view {
+                        todoView(Mode.All)
+                    }
                 }
                 route("/active") {
-                    todoView(Mode.Active)
+                    view {
+                        todoView(Mode.Active)
+                    }
                 }
                 route("/completed") {
-                    todoView(Mode.Completed)
+                    view {
+                        todoView(Mode.Completed)
+                    }
                 }
             }
         }
@@ -117,7 +126,7 @@ class App : Application(), KoinComponent {
                                     label {
                                         +todo.title
                                         onEvent<MouseEvent>("dblclick") {
-                                            this@li.element.classList.add("editing")
+                                            this@li.element.classList.add(ClassName("editing"))
                                             edit.value = todo.title
                                             edit.focus()
                                         }
@@ -130,18 +139,18 @@ class App : Application(), KoinComponent {
                                 }
                                 edit = textRef(className = "edit") {
                                     onEvent<FocusEvent>("blur") {
-                                        if (this@li.element.classList.contains("editing")) {
-                                            this@li.element.classList.remove("editing")
+                                        if (this@li.element.classList.contains(ClassName("editing"))) {
+                                            this@li.element.classList.remove(ClassName("editing"))
                                             todoViewModel.editTodo(index, this.value)
                                         }
                                     }
                                     onEvent<KeyboardEvent>("keydown") { e ->
                                         if (e.code == KeyCode.Enter) {
                                             todoViewModel.editTodo(index, this.value)
-                                            this@li.element.classList.remove("editing")
+                                            this@li.element.classList.remove(ClassName("editing"))
                                         }
                                         if (e.code == KeyCode.Escape) {
-                                            this@li.element.classList.remove("editing")
+                                            this@li.element.classList.remove(ClassName("editing"))
                                         }
                                     }
                                 }

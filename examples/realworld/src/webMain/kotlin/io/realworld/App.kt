@@ -29,10 +29,7 @@ import dev.kilua.CoreModule
 import dev.kilua.compose.root
 import dev.kilua.html.header
 import dev.kilua.html.main
-import dev.kilua.routing.noMatchAction
-import dev.kilua.routing.routeAction
-import dev.kilua.routing.stringAction
-import dev.kilua.ssr.AsyncSsrRouter
+import dev.kilua.ssr.ssrRouter
 import dev.kilua.startApplication
 import io.realworld.layout.articles.article
 import io.realworld.layout.homePage
@@ -56,66 +53,80 @@ class App : Application() {
         root("root") {
             val state by conduitManager.state.collectAsState()
 
-            AsyncSsrRouter(
+            ssrRouter(
                 initRoute = View.HOME.url,
                 active = !state.appLoading,
                 stateSerializer = { conduitManager.serializeStateForSsr() }
             ) {
-                header {
-                    headerNav(state)
-                }
-                main {
-                    when (state.view) {
-                        View.HOME -> homePage(state, conduitManager)
-                        View.ARTICLE -> article(state, conduitManager)
-                        View.PROFILE -> profilePage(state, conduitManager)
-                        View.LOGIN -> loginPage(state, conduitManager)
-                        View.REGISTER -> registerPage(state, conduitManager)
-                        View.EDITOR -> editorPage(state, conduitManager)
-                        View.SETTINGS -> settingsPage(state, conduitManager)
+                defaultContent {
+                    header {
+                        headerNav(state)
                     }
+                    main {
+                        when (state.view) {
+                            View.HOME -> homePage(state, conduitManager)
+                            View.ARTICLE -> article(state, conduitManager)
+                            View.PROFILE -> profilePage(state, conduitManager)
+                            View.LOGIN -> loginPage(state, conduitManager)
+                            View.REGISTER -> registerPage(state, conduitManager)
+                            View.EDITOR -> editorPage(state, conduitManager)
+                            View.SETTINGS -> settingsPage(state, conduitManager)
+                        }
+                    }
+                    footer()
                 }
-                footer()
 
-                routeAction(View.HOME.url) {
-                    conduitManager.homePage()
+                route(View.HOME.url) {
+                    action {
+                        conduitManager.homePage()
+                    }
                 }
                 route(View.ARTICLE.url) {
-                    stringAction { slug ->
-                        conduitManager.showArticle(slug)
+                    string {
+                        action { slug ->
+                            conduitManager.showArticle(slug)
+                        }
                     }
-                    noMatchAction {}
                 }
                 route(View.PROFILE.url) {
-                    string {
-                        val username = decodeURIComponent(it)
-                        routeAction("/favorites") {
-                            conduitManager.showProfile(username, true)
+                    string { ctx ->
+                        route("/favorites") {
+                            action {
+                                val username = decodeURIComponent(ctx.value)
+                                conduitManager.showProfile(username, true)
+                            }
                         }
-                        noMatchAction {
+                        action {
+                            val username = decodeURIComponent(ctx.value)
                             conduitManager.showProfile(username, false)
                         }
                     }
-                    noMatchAction {}
                 }
-                routeAction(View.LOGIN.url) {
-                    conduitManager.loginPage()
+                route(View.LOGIN.url) {
+                    action {
+                        conduitManager.loginPage()
+                    }
                 }
-                routeAction(View.REGISTER.url) {
-                    conduitManager.registerPage()
+                route(View.REGISTER.url) {
+                    action {
+                        conduitManager.registerPage()
+                    }
                 }
                 route(View.EDITOR.url) {
-                    stringAction { slug ->
-                        conduitManager.editorPage(slug)
+                    string {
+                        action { slug ->
+                            conduitManager.editorPage(slug)
+                        }
                     }
-                    noMatchAction {
+                    action {
                         conduitManager.editorPage()
                     }
                 }
-                routeAction(View.SETTINGS.url) {
-                    conduitManager.settingsPage()
+                route(View.SETTINGS.url) {
+                    action {
+                        conduitManager.settingsPage()
+                    }
                 }
-                noMatchAction {}
             }
         }
     }

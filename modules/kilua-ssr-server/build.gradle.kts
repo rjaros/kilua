@@ -21,6 +21,7 @@ kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
+                api(libs.kotlinx.serialization.json)
                 api(libs.ktor.client.core)
                 api(libs.ktor.client.cio)
                 api(libs.resources.optimizer)

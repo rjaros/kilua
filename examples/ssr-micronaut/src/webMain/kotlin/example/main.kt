@@ -31,7 +31,7 @@ import dev.kilua.html.div
 import dev.kilua.html.navLink
 import dev.kilua.html.px
 import dev.kilua.panel.vPanel
-import dev.kilua.ssr.SimpleSsrRouter
+import dev.kilua.ssr.ssrRouter
 import dev.kilua.startApplication
 import kotlin.random.Random
 
@@ -40,32 +40,38 @@ class App : Application() {
     override fun start() {
 
         root("root") {
-            SimpleSsrRouter {
-                div {
-                    margin(20.px)
+            div {
+                margin(20.px)
+                ssrRouter {
                     route("/") {
-                        vPanel(gap = 10.px) {
-                            div {
-                                +"Root page"
+                        content {
+                            vPanel(gap = 10.px) {
+                                div {
+                                    +"Root page"
+                                }
+                                navLink("/about", "Go to About page")
+                                navLink("/page${Random.nextInt()}", "Go to random page")
                             }
-                            navLink("/about", "Go to About page")
-                            navLink("/page${Random.nextInt()}", "Go to random page")
                         }
                     }
                     route("/about") {
-                        vPanel(gap = 10.px) {
-                            div {
-                                +"About page"
+                        content {
+                            vPanel(gap = 10.px) {
+                                div {
+                                    +"About page"
+                                }
+                                navLink("/", "Return to root page")
                             }
-                            navLink("/", "Return to root page")
                         }
                     }
                     string {
-                        vPanel(gap = 10.px) {
-                            div {
-                                +"A random page: $it"
+                        content {
+                            vPanel(gap = 10.px) {
+                                div {
+                                    +"A random page: $it"
+                                }
+                                navLink("/", "Return to root page")
                             }
-                            navLink("/", "Return to root page")
                         }
                     }
                 }

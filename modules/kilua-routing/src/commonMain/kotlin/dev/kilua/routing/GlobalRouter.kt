@@ -28,10 +28,10 @@ import app.softwork.routingcompose.Router
  * Internal global router instance for use outside of composition.
  * Do not use directly. Use Router.global instead.
  */
-public var internalGlobalRouter: Router? = null
+public var globalRouter: Router? = null
 
 /**
  * Provides the global router instance for use outside of composition.
  */
 public val Router.Companion.global: Router
-    get() = internalGlobalRouter ?: error("Router not defined")
+    get() = globalRouter ?: error("Router not defined")

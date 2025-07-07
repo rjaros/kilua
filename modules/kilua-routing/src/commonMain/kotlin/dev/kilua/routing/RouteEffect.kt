@@ -23,24 +23,32 @@
 package dev.kilua.routing
 
 import androidx.compose.runtime.Composable
-import app.softwork.routingcompose.BrowserRouter
-import app.softwork.routingcompose.RouteBuilder
-import app.softwork.routingcompose.invoke
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.compositionLocalOf
+import app.softwork.routingcompose.Router
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 
+public val DoneCallbackCompositionLocal: ProvidableCompositionLocal<(() -> Unit)?> =
+    compositionLocalOf { null }
+
+/**
+ * LaunchedEffect wrapper which automatically adds route path as a key.
+ * It also supports executing done callback, which is used by the SSR router.
+ */
 @Composable
-public fun SimpleBrowserRouter(
-    initRoute: String,
-    contextPath: String = "",
-    routing: @Composable RouteBuilder.() -> Unit
-) {
-    BrowserRouter("$contextPath$initRoute") {
-        if (contextPath.isNotEmpty()) {
-            route("$contextPath$initRoute") {
-                routing()
+internal fun RouteEffect(vararg keys: String?, block: suspend () -> Unit) {
+    val doneCallback = DoneCallbackCompositionLocal.current
+    LaunchedEffect(Router.current.currentPath().toString(), *keys) {
+        supervisorScope {
+            launch {
+                try {
+                    block()
+                } finally {
+                    doneCallback?.invoke()
+                }
             }
-        } else {
-            routing()
         }
     }
-    internalGlobalRouter = BrowserRouter
 }

@@ -31,6 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
 import net.jodah.expiringmap.ExpirationPolicy
 import net.jodah.expiringmap.ExpiringMap
 import org.primefaces.extensions.optimizerplugin.optimizer.CssCompressor
@@ -186,12 +187,32 @@ public class SsrEngine(
      * Get root content for SSR.
      */
     public suspend fun getRootContent(uri: String, locale: String? = null): String {
+        return getDataFromSsrService(HttpMethod.Get, uri, locale)
+    }
+
+    /**
+     * Get metadata for SSR.
+     */
+    public suspend fun getMetadata(uri: String, locale: String? = null): Meta? {
+        val metaJson = getDataFromSsrService(HttpMethod.Put, uri, locale)
+        return if (metaJson.isEmpty()) {
+            return null
+        } else {
+            Json.decodeFromString(metaJson)
+        }
+    }
+
+    /**
+     * Get client side content for SSR.
+     */
+    private suspend fun getDataFromSsrService(httpMethod: HttpMethod, uri: String, locale: String? = null): String {
         if (!isSSR) throw IllegalStateException("SSR is not enabled.")
         if (uri.count { it == '?' } > 1) {
             throw Exception("Invalid URI: $uri")
         }
         if (!lockingFlow.value) lockingFlow.first { it }
-        val response = httpClient.get("$ssrService$uri") {
+        val response = httpClient.request("$ssrService$uri") {
+            method = httpMethod
             if (locale != null) {
                 header("x-kilua-locale", locale)
             }
@@ -231,13 +252,17 @@ public class SsrEngine(
             }
         } catch (e: Exception) {
             logger.error("Connection to the SSR service failed", e)
+            restartSsrProcess()
             indexTemplate
         }
     }
 
     private suspend fun getInternalSsrContent(uri: String, locale: String?): String {
         val content = getRootContent(uri, locale)
-        return indexTemplate.replace("<div id=\"$root\"></div>", "<div id=\"$root\">$content</div>")
+        val meta = getMetadata(uri, locale)?.toHtml() ?: ""
+        return indexTemplate
+            .replace("<head>\n", "<head>\n$meta")
+            .replace("<div id=\"$root\"></div>", "<div id=\"$root\">$content</div>")
     }
 
     /**
