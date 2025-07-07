@@ -38,9 +38,11 @@ import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByName
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.NpmVersions
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
@@ -85,7 +87,15 @@ public abstract class KiluaPlugin : Plugin<Project> {
     private fun KiluaPluginContext.configureProject() {
         logger.debug("Configuring Kotlin/MPP plugin")
 
-        val webpackSsrExists = layout.projectDirectory.dir("webpack.config.ssr.d").asFile.exists()
+        kotlinMppExtension.targets.configureEach {
+            compilations.configureEach {
+                compileTaskProvider.configure {
+                    compilerOptions {
+                        optIn.add("kotlin.time.ExperimentalTime")
+                    }
+                }
+            }
+        }
 
         tasks.withType<Copy>().matching {
             it.name == "jsProcessResources" || it.name == "wasmJsProcessResources"
