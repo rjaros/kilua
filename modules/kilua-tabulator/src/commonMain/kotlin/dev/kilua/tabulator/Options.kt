@@ -52,6 +52,7 @@ import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toJsString
 import js.promise.Promise
+import web.cssom.ClassName
 import web.dom.Element
 import web.dom.document
 import web.events.Event
@@ -810,11 +811,11 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
     val tmpHeaderColumnsMenu: ((Event) -> JsArray<JsAny>)? = if (this.headerColumnsMenu == true) {
         { _ ->
             val resetTitle = this.headerColumnsMenuResetTitle ?: "Default columns"
-            val resetIconPrefix = this.headerColumnsMenuResetIconPrefix ?: "fas"
-            val resetIcon = this.headerColumnsMenuResetIcon ?: "fa-rotate"
-            val iconPrefix = this.headerColumnsMenuListIconPrefix ?: "far"
-            val iconChecked = this.headerColumnsMenuListIconChecked ?: "fa-check-square"
-            val iconUnchecked = this.headerColumnsMenuListIconUnchecked ?: "fa-square"
+            val resetIconPrefix = ClassName(this.headerColumnsMenuResetIconPrefix ?: "fas")
+            val resetIcon = ClassName(this.headerColumnsMenuResetIcon ?: "fa-rotate")
+            val iconPrefix = ClassName(this.headerColumnsMenuListIconPrefix ?: "far")
+            val iconChecked = ClassName(this.headerColumnsMenuListIconChecked ?: "fa-check-square")
+            val iconUnchecked = ClassName(this.headerColumnsMenuListIconUnchecked ?: "fa-square")
             fun resetColumns() {
                 val persistenceID =
                     tabulator.tabulatorJs?.options?.jsGet("persistenceID")?.let { "tabulator-$it" } ?: "tabulator"
@@ -888,7 +889,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         val headerClick: (JsAny) -> Boolean = {
             val columnsOpened = document.querySelectorAll("div.tabulator-responsive-collapse-toggle")
                 .toList().firstOrNull()?.let {
-                    (it.unsafeCast<HTMLElement>()).classList.contains("open")
+                    (it.unsafeCast<HTMLElement>()).classList.contains(ClassName("open"))
                 } ?: false
             if (columnsOpened) {
                 document.querySelectorAll("div.tabulator-responsive-collapse-toggle.open").toList()

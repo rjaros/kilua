@@ -26,6 +26,7 @@ import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.utils.isDom
 import dev.kilua.utils.toKebabCase
 import js.core.JsAny
+import web.cssom.ClassName
 import web.cssom.MediaQuery
 import web.cssom.matchMedia
 import web.dom.document
@@ -66,9 +67,9 @@ public object ThemeManager {
             setStoredTheme(value)
             if (isDom) {
                 if (value == Theme.Auto && getPreferredTheme() == Theme.Dark || value == Theme.Dark) {
-                    document.documentElement.classList.add("dark")
+                    document.documentElement.classList.add(ClassName("dark"))
                 } else {
-                    document.documentElement.classList.remove("dark")
+                    document.documentElement.classList.remove(ClassName("dark"))
                 }
                 document.dispatchEvent(
                     CustomEvent(
@@ -88,17 +89,17 @@ public object ThemeManager {
         this.theme = initialTheme ?: getStoredTheme() ?: getPreferredTheme()
         if (isDom) {
             if (theme == Theme.Auto && getPreferredTheme() == Theme.Dark || theme == Theme.Dark) {
-                document.documentElement.classList.add("dark")
+                document.documentElement.classList.add(ClassName("dark"))
             } else {
-                document.documentElement.classList.remove("dark")
+                document.documentElement.classList.remove(ClassName("dark"))
             }
             matchMedia(MediaQuery("(prefers-color-scheme: dark)")).addEventListener(EventType<Event>("change"), {
                 val storedTheme = getStoredTheme() ?: Theme.Auto
                 if (storedTheme == Theme.Auto) {
                     if (getPreferredTheme() == Theme.Dark) {
-                        document.documentElement.classList.add("dark")
+                        document.documentElement.classList.add(ClassName("dark"))
                     } else {
-                        document.documentElement.classList.remove("dark")
+                        document.documentElement.classList.remove(ClassName("dark"))
                     }
                 }
             })

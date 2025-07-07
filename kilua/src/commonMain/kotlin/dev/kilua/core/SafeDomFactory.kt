@@ -29,6 +29,7 @@ import dev.kilua.utils.isDom
 import web.dom.document
 import web.dom.Comment
 import web.dom.Element
+import web.dom.ElementId
 import web.dom.Text
 
 /**
@@ -71,7 +72,7 @@ public object SafeDomFactory {
      */
     public fun getElementById(id: String): Element? {
         return if (isDom) {
-            document.getElementById(id)
+            document.getElementById(ElementId(id))
         } else null
     }
 

@@ -37,6 +37,8 @@ import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.renderAsHtmlAttributes
 import dev.kilua.utils.unsafeCast
+import web.cssom.ClassName
+import web.dom.ElementId
 import web.html.HTMLElement
 
 /**
@@ -136,7 +138,7 @@ public open class Tag<E : HTMLElement>(
      */
     public override var id: String? by updatingProperty(id) {
         if (it != null) {
-            element.id = it
+            element.id = ElementId(it)
         } else {
             element.removeAttribute("id")
         }
@@ -189,7 +191,7 @@ public open class Tag<E : HTMLElement>(
         initElementClassList()
         if (renderConfig.isDom && id != null) {
             @Suppress("LeakingThis")
-            element.id = id
+            element.id = ElementId(id)
         }
     }
 
@@ -201,11 +203,11 @@ public open class Tag<E : HTMLElement>(
             val internalClassNameLoc = internalClassName
             val classNameLoc = className
             if (internalClassNameLoc != null && classNameLoc != null) {
-                element.className = "$internalClassNameLoc $classNameLoc"
+                element.className = ClassName("$internalClassNameLoc $classNameLoc")
             } else if (classNameLoc != null) {
-                element.className = classNameLoc
+                element.className = ClassName(classNameLoc)
             } else if (internalClassNameLoc != null) {
-                element.className = internalClassNameLoc
+                element.className = ClassName(internalClassNameLoc)
             }
         }
     }
@@ -218,11 +220,11 @@ public open class Tag<E : HTMLElement>(
             val internalClassNameLoc = internalClassName
             val classNameLoc = className
             if (internalClassNameLoc != null && classNameLoc != null) {
-                element.className = "$internalClassNameLoc $classNameLoc"
+                element.className = ClassName("$internalClassNameLoc $classNameLoc")
             } else if (classNameLoc != null) {
-                element.className = classNameLoc
+                element.className = ClassName(classNameLoc)
             } else if (internalClassNameLoc != null) {
-                element.className = internalClassNameLoc
+                element.className = ClassName(internalClassNameLoc)
             } else {
                 element.removeAttribute("class")
             }

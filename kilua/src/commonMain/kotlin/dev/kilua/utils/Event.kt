@@ -62,7 +62,7 @@ public fun buildAddEventListenerOptions(signal: AbortSignal): AddEventListenerOp
 /**
  * Build CustomEventInit with a detail object.
  */
-public fun buildCustomEventInit(detail: JsAny? = null): CustomEventInit<*> {
+public fun buildCustomEventInit(detail: JsAny? = null): CustomEventInit<JsAny> {
     return obj {
         if (detail != null) jsSet("detail", detail)
     }

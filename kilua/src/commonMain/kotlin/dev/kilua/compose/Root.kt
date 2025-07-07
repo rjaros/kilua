@@ -39,6 +39,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
 import web.dom.Element
+import web.dom.ElementId
 
 internal val defaultMonotonicFrameClock: MonotonicFrameClock =
     if (isDom) DomMonotonicClockImpl() else NoDomMonotonicClockImpl()
@@ -123,7 +124,7 @@ public class Root(
                 SafeDomFactory.getElementById("kilua_top_level_composables")?.remove()
                 SafeDomFactory.getFirstElementByTagName("body")?.let { body ->
                     val topLevelComposablesRoot = SafeDomFactory.createElement("div")
-                    topLevelComposablesRoot.id = "kilua_top_level_composables"
+                    topLevelComposablesRoot.id = ElementId("kilua_top_level_composables")
                     body.appendChild(topLevelComposablesRoot)
                     NonDisposableRoot(topLevelComposablesRoot) {
                         topLevelComposables.forEach {

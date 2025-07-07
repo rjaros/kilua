@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.utils.promise
 import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RemoteData
 import dev.kilua.rpc.RemoteFilter
@@ -40,6 +39,7 @@ import dev.kilua.utils.Serialization
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
+import dev.kilua.utils.promise
 import dev.kilua.utils.rem
 import dev.kilua.utils.unsafeCast
 import js.core.JsAny

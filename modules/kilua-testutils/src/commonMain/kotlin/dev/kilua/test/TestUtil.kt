@@ -35,6 +35,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
+import web.dom.ElementId
 import web.dom.document
 import kotlin.test.DefaultAsserter.assertTrue
 
@@ -105,13 +106,13 @@ public interface DomSpec : TestSpec {
 
     override fun afterTest() {
         if (isDom) {
-            val div = document.getElementById("pretest")
+            val div = document.getElementById(ElementId("pretest"))
             div?.let {
                 while (it.hasChildNodes()) {
                     it.removeChild(it.firstChild!!)
                 }
             }
-            val modalBackdrop = document.getElementById(".modal-backdrop")
+            val modalBackdrop = document.getElementById(ElementId(".modal-backdrop"))
             modalBackdrop?.remove()
         }
         Root.disposeAllRoots()

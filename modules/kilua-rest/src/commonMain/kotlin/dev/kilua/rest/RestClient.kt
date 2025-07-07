@@ -23,7 +23,6 @@
 package dev.kilua.rest
 
 import dev.kilua.utils.Serialization
-import dev.kilua.utils.awaitPromise
 import dev.kilua.utils.cast
 import dev.kilua.utils.delete
 import dev.kilua.utils.jsGet
@@ -37,6 +36,7 @@ import js.core.JsString
 import js.json.parse
 import js.json.stringify
 import js.objects.ReadonlyRecord
+import js.promise.await
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.Json
@@ -324,7 +324,7 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
         restRequestConfig.requestFilter?.invoke(requestInit)
         var response: Response? = null
         return try {
-            response = fetchAsync(fetchUrl, requestInit).awaitPromise()
+            response = fetchAsync(fetchUrl, requestInit).await()
             if (response.ok) {
                 val statusText = response.statusText
                 if (response.status != HTTP_NO_CONTENT) {
@@ -345,11 +345,11 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
                         RestResponse(result, statusText, response)
                     } else {
                         val body = when (restRequestConfig.responseBodyType) {
-                            ResponseBodyType.Json -> response.jsonAsync().awaitPromise()!!
-                            ResponseBodyType.Text -> response.textAsync().awaitPromise()
-                            ResponseBodyType.Blob -> response.blobAsync().awaitPromise()
-                            ResponseBodyType.FormData -> response.formDataAsync().awaitPromise()
-                            ResponseBodyType.ArrayBuffer -> response.arrayBufferAsync().awaitPromise()
+                            ResponseBodyType.Json -> response.jsonAsync().await()!!
+                            ResponseBodyType.Text -> response.textAsync().await()
+                            ResponseBodyType.Blob -> response.blobAsync().await()
+                            ResponseBodyType.FormData -> response.formDataAsync().await()
+                            ResponseBodyType.ArrayBuffer -> response.arrayBufferAsync().await()
                             ResponseBodyType.ReadableStream -> throw IllegalStateException() // not possible
                         }
                         val transformed = if (restRequestConfig.resultTransform != null) {

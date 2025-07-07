@@ -31,6 +31,7 @@ fun KotlinMultiplatformExtension.compilerOptions() {
                 compilerOptions {
                     freeCompilerArgs.add("-Xexpect-actual-classes")
                     freeCompilerArgs.add("-Xdont-warn-on-error-suppression")
+                    optIn.add("kotlin.time.ExperimentalTime")
                 }
             }
         }

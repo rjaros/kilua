@@ -25,7 +25,6 @@ package dev.kilua.utils
 import js.core.JsPrimitives.toDouble
 import js.core.JsPrimitives.toJsDouble
 import js.date.Date
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -34,6 +33,7 @@ import kotlinx.datetime.atDate
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Instant
 
 /**
  * Converts [LocalDateTime] to JavaScript [Date].

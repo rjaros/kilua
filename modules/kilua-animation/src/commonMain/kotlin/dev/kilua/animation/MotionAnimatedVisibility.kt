@@ -34,8 +34,8 @@ import dev.kilua.externals.animate
 import dev.kilua.html.Display
 import dev.kilua.html.Position
 import dev.kilua.html.divRef
-import dev.kilua.utils.awaitPromise
 import dev.kilua.utils.jsObjectOf
+import js.promise.await
 
 /**
  * The [motionAnimatedVisibility] composable animates the appearance and disappearance of its content, as
@@ -87,7 +87,7 @@ public fun IComponent.motionAnimatedVisibility(
     LaunchedEffect(visible) {
         if (renderConfig.isDom) {
             if (visible) {
-                animate(div.element, invisibleResult, jsObjectOf("duration" to 0)).then {}.awaitPromise()
+                animate(div.element, invisibleResult, jsObjectOf("duration" to 0)).then {}.await()
                 visibilityState = true
                 animationOn = animate(
                     div.element,
@@ -95,7 +95,7 @@ public fun IComponent.motionAnimatedVisibility(
                     transition.animation.toJsAny()
                 )
                 try {
-                    animationOn?.then {}?.awaitPromise()
+                    animationOn?.then {}?.await()
                 } finally {
                     animationOn?.stop()
                     animationOn = null
@@ -107,7 +107,7 @@ public fun IComponent.motionAnimatedVisibility(
                     outTransition.animation.toJsAny()
                 )
                 try {
-                    animationOff?.then {}?.awaitPromise()
+                    animationOff?.then {}?.await()
                 } finally {
                     animationOff?.stop()
                     animationOff = null

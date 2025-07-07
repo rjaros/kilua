@@ -23,13 +23,9 @@
 package dev.kilua.utils
 
 import js.core.JsAny
-import js.errors.JsError
-import js.errors.JsErrorLike
+import js.coroutines.asPromise
 import js.promise.Promise
-import js.promise.PromiseReject
-import js.promise.PromiseResolve
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
@@ -44,38 +40,3 @@ public val KiluaScope: CoroutineScope = CoroutineScope(Dispatchers.Default + Sup
  */
 public fun <T : JsAny?> promise(block: suspend () -> T): Promise<T> =
     KiluaScope.async { block() }.asPromise().unsafeCast()
-
-/**
- * Convert Deferred to a JS Promise.
- */
-public expect fun <T> Deferred<T>.asPromise(): Promise<JsAny?>
-
-/**
- * Convert JS Promise to a Deferred.
- */
-public expect fun <T : JsAny?> Promise<T>.asDeferred(): Deferred<T>
-
-/**
- * Suspend function to await a JS Promise.
- */
-public expect suspend fun <T: JsAny?> Promise<T>.awaitPromise(): T
-
-/**
- * Workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2774
- */
-public expect inline fun <T : JsAny?> PromiseResolve<T>.call(value: T)
-
-/**
- * Workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2774
- */
-public expect inline fun PromiseReject.call()
-
-/**
- * Workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2774
- */
-public expect inline fun PromiseReject.call(reason: JsError)
-
-/**
- * Workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2774
- */
-public expect inline fun PromiseReject.call(reason: JsErrorLike)

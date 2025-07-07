@@ -51,6 +51,7 @@ import js.core.JsBoolean
 import js.core.JsPrimitives.toBoolean
 import js.core.JsPrimitives.toJsString
 import js.core.JsString
+import web.dom.ElementId
 import web.dom.document
 
 /**
@@ -139,7 +140,7 @@ public open class TomTypeahead(
 
     override var id: String? by updatingProperty(id) {
         if (it != null) {
-            element.id = it
+            element.id = ElementId(it)
         } else {
             element.removeAttribute("id")
         }
