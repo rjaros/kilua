@@ -68,11 +68,8 @@ import dev.kilua.core.IComponent
 import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.JsArray
 import dev.kilua.externals.animateMini
-import dev.kilua.externals.leaflet.control.Layers
-import dev.kilua.externals.leaflet.control.Zoom
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.layer.FeatureGroup
-import dev.kilua.externals.leaflet.map.LeafletMap
 import dev.kilua.form.Autocomplete
 import dev.kilua.form.EnumMask
 import dev.kilua.form.ImaskOptions
@@ -94,6 +91,7 @@ import dev.kilua.form.select.TomSelectRenders
 import dev.kilua.form.select.select
 import dev.kilua.form.select.tomSelect
 import dev.kilua.form.select.tomSelectRef
+import dev.kilua.form.text.password
 import dev.kilua.form.text.richTextRef
 import dev.kilua.form.text.text
 import dev.kilua.form.text.textRef
@@ -105,6 +103,7 @@ import dev.kilua.form.time.richTime
 import dev.kilua.html.*
 import dev.kilua.html.helpers.TagStyleFun.Companion.background
 import dev.kilua.html.helpers.TagStyleFun.Companion.border
+import dev.kilua.html.helpers.onClickLaunch
 import dev.kilua.html.helpers.onCombineClick
 import dev.kilua.html.style.PClass
 import dev.kilua.html.style.globalStyle
@@ -116,7 +115,6 @@ import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
 import dev.kilua.maps.DefaultTileLayers
 import dev.kilua.maps.LeafletObjectFactory
-import dev.kilua.maps.MapsOptions
 import dev.kilua.maps.maps
 import dev.kilua.modal.FullscreenMode
 import dev.kilua.modal.ModalSize
@@ -124,20 +122,7 @@ import dev.kilua.modal.alert
 import dev.kilua.modal.confirm
 import dev.kilua.modal.modal
 import dev.kilua.modal.modalRef
-import dev.kilua.panel.Dir
-import dev.kilua.panel.OffPlacement
-import dev.kilua.panel.TabPosition
-import dev.kilua.panel.accordion
-import dev.kilua.panel.carousel
-import dev.kilua.panel.flexPanel
-import dev.kilua.panel.gridPanel
-import dev.kilua.panel.hPanel
-import dev.kilua.panel.lazyColumn
-import dev.kilua.panel.lazyRow
-import dev.kilua.panel.offcanvasRef
-import dev.kilua.panel.splitPanel
-import dev.kilua.panel.tabPanel
-import dev.kilua.panel.vPanel
+import dev.kilua.panel.*
 import dev.kilua.popup.Placement
 import dev.kilua.popup.Trigger
 import dev.kilua.popup.disableTooltip
@@ -147,14 +132,16 @@ import dev.kilua.popup.toggleTooltip
 import dev.kilua.popup.tooltip
 import dev.kilua.progress.Progress
 import dev.kilua.progress.ProgressOptions
+import dev.kilua.rest.HttpMethod
 import dev.kilua.rest.RemoteRequestException
 import dev.kilua.rest.RestClient
+import dev.kilua.rest.RestResponse
+import dev.kilua.rest.call
 import dev.kilua.rest.callDynamic
-import dev.kilua.routing.SimpleBrowserRouter
+import dev.kilua.rest.requestDynamic
+import dev.kilua.routing.RoutingModel
 import dev.kilua.routing.global
-import dev.kilua.routing.intAction
-import dev.kilua.routing.noMatchAction
-import dev.kilua.routing.routeAction
+import dev.kilua.routing.hashRouter
 import dev.kilua.state.collectAsState
 import dev.kilua.svg.path
 import dev.kilua.svg.svg
@@ -173,7 +160,6 @@ import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.useModule
 import dev.kilua.utils.KiluaScope
-import dev.kilua.utils.call
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsGet
@@ -190,13 +176,20 @@ import js.core.JsAny
 import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toJsString
 import js.import.JsModule
+import js.json.parse
 import js.promise.Promise
+import js.promise.invoke
 import js.regexp.RegExp
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
 import kotlinx.datetime.LocalDate
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import web.console.console
 import web.dom.Text
 import web.events.CustomEvent
@@ -255,6 +248,33 @@ data class Person(val name: String, val age: Int, val city: String)
 @Serializable
 data class FormData(val name: String? = null, val lname: String? = null, val date: LocalDate? = null)
 
+@Serializable(with = ObjectIdSerializer::class)
+class ObjectId(val id: Int) {
+    override fun toString(): String {
+        return "$id"
+    }
+}
+
+object ObjectIdSerializer : KSerializer<ObjectId> {
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("ObjectId")
+    override fun deserialize(decoder: Decoder): ObjectId {
+        val str = decoder.decodeString()
+        return ObjectId(str.toInt())
+    }
+
+    override fun serialize(encoder: Encoder, value: ObjectId) {
+        encoder.encodeString(value.toString())
+    }
+}
+
+@Serializable
+data class LoginForm(
+    val username: String? = null,
+    val password: String? = null,
+    val rememberMe: Boolean = false,
+    val test: ObjectId? = null
+)
+
 val i18n = I18n(
     "de" to messagesDe,
     "en" to messagesEn,
@@ -265,6 +285,14 @@ val i18n = I18n(
     "pl" to messagesPl,
     "ru" to messagesRu
 )
+
+external class MoveInfo : JsAny {
+    val from: Int
+    val to: Int
+}
+
+@Serializable
+data class Repository(val id: Int, val full_name: String?, val description: String?, val fork: Boolean)
 
 class App : Application() {
 
@@ -282,6 +310,296 @@ class App : Application() {
 
             div {
 
+                val carousel = carouselRef(fade = true) {
+                    item("First slide", "First slide label") {
+                        div("d-block w-100") {
+                            height(200.px)
+                            background(Color.Red)
+                        }
+                    }
+                    item("Second slide", "Second slide label") {
+                        div("d-block w-100") {
+                            height(200.px)
+                            background(Color.Green)
+                        }
+                    }
+                    item("Third slide", "Third slide label") {
+                        div("d-block w-100") {
+                            height(200.px)
+                            background(Color.Blue)
+                        }
+                    }
+                }
+                button("Play") {
+                    onClick {
+                        carousel.cycle()
+                    }
+                }
+                button("Pause") {
+                    onClick {
+                        carousel.pause()
+                    }
+                }
+
+                hr()
+
+                accordion(flush = true, alwaysOpen = true, openedIndex = 1) {
+                    item("Google", "fab fa-google") {
+                        +"Google is a technology company that specializes in Internet-related services and products."
+                    }
+                    item("Apple", "fab fa-apple") {
+                        +"Apple Inc. is a technology company that designs, manufactures, and markets consumer electronics, computer software, and online services."
+                    }
+                    item("Microsoft", "fab fa-microsoft") {
+                        +"Microsoft Corporation is a technology company that produces computer software, consumer electronics, personal computers, and related services."
+                    }
+                }
+
+                hr()
+
+                val offcanvas = offcanvasRef(
+                    "Some caption",
+                    placement = OffPlacement.OffcanvasEnd,
+                    responsiveType = OffResponsiveType.OffcanvasLg,
+                    closeButton = false,
+                    bodyScrolling = true,
+                    backdrop = false,
+                    escape = false,
+                ) {
+                    p {
+                        +"This is an offcanvas example."
+                    }
+                }
+                button("Open offcanvas", className = "d-lg-none") {
+                    onClick {
+                        offcanvas.toggle()
+                    }
+                }
+
+                hr()
+
+                val tabs2 = mutableStateListOf<Triple<String, String, @Composable IComponent.() -> Unit>>(
+                    Triple("Apple", "fab fa-apple", {
+                        div {
+                            +"Apple description"
+                        }
+                    }), Triple("Google", "fab fa-google", {
+                        div {
+                            +"Google description"
+                        }
+                    }), Triple("Microsoft", "fab fa-microsoft", {
+                        div {
+                            +"Microsoft description"
+                        }
+                    })
+                )
+
+                tabPanel(draggableTabs = true) {
+                    tabs2.forEach { (title, icon, content) ->
+                        tab(title, icon) {
+                            content()
+                        }
+                    }
+                    onEvent<CustomEvent<*>>("moveTab") {
+                        val info = parse<MoveInfo>(it.detail.toString())
+                        if (info.from < info.to) {
+                            tabs2.add(info.to + 1, tabs2[info.from])
+                            tabs2.removeAt(info.from)
+                        } else {
+                            tabs2.add(info.to, tabs2[info.from])
+                            tabs2.removeAt(info.from + 1)
+                        }
+                    }
+                }
+
+                hr()
+
+                bsButton("Click me", style = ButtonStyle.BtnSuccess, size = ButtonSize.BtnLg) {
+                    onClick {
+                        console.log("Hello Bootstrap!")
+                    }
+                }
+
+                div("${BsBorder.Border} ${BsBorder.BorderDanger} ${BsRounded.RoundedPill} ${BsColor.TextBgInfo}") {
+                    width(300.px)
+                    padding(10.px)
+                    +"Hello Bootstrap!"
+                }
+
+                hr()
+
+                val restClient = RestClient()
+
+                button("Rest") {
+                    onClickLaunch {
+                        val result: JsAny? = restClient.callDynamic("https://api.github.com/search/repositories") {
+                            data = jsObjectOf("q" to "kilua")
+
+                        }
+                        console.log(result)
+                        val items: List<Repository> = restClient.call("https://api.github.com/search/repositories") {
+                            data = jsObjectOf("q" to "kilua")
+                            resultTransform = { it?.jsGet("items") }
+                        }
+                        println(items)
+
+                        val result2: JsAny? =
+                            restClient.callDynamic("https://api.github.com/search/repositories", Query("kilua"))
+                        console.log(result2)
+
+                        val searchResult: SearchResult =
+                            restClient.call("https://api.github.com/search/repositories", Query("kilua")) {
+                                method = HttpMethod.Post
+                                contentType = "application/json"
+                                headers = {
+                                    listOf(
+                                        "User-Agent" to "KiluaApp"
+                                    )
+                                }
+                            }
+                        println(searchResult)
+
+                        val restResponse: RestResponse<JsAny> =
+                            restClient.requestDynamic("https://api.github.com/search/repositories") {
+                                data = jsObjectOf("q" to "kilua")
+                                headers = {
+                                    listOf(
+                                        "User-Agent" to "KiluaApp"
+                                    )
+                                }
+                            }
+                        println(restResponse.response.headers.get("Content-Type"))
+                    }
+                }
+
+                hr()
+
+                div {
+                    border(1.px, BorderStyle.Solid, Color.Black)
+                    width(100.px)
+                    height(100.px)
+                    setDragDropData("text/plain", "Element")
+                }
+
+                div {
+                    background(Color.Lightgray)
+                    border(1.px, BorderStyle.Solid, Color.Black)
+                    width(200.px)
+                    height(200.px)
+                    setDropTargetData("text/plain") { data ->
+                        println("Dropped data: $data")
+                    }
+                }
+
+                hr()
+
+                form {
+                    fieldWithLabel("Username") {
+                        text(id = it) {
+                            bind("username")
+                        }
+                    }
+                    fieldWithLabel("Password") {
+                        password(id = it) {
+                            bind("password")
+                        }
+                    }
+                    button("Login") {
+                        onClick {
+                            val map = this@form.getData()
+                            println("Username: ${map["username"]}")
+                            println("Password: ${map["password"]}")
+                        }
+                    }
+                }
+
+                form<LoginForm> {
+                    val validation by validationStateFlow.collectAsState()
+
+                    vPanel(gap = 5.px) {
+                        if (validation.isInvalid && validation.invalidMessage != null) {
+                            div {
+                                color(Color.Red)
+                                +validation.invalidMessage!!
+                            }
+                        }
+                        maxWidth(400.px)
+                        hPanel(justifyContent = JustifyContent.SpaceBetween, gap = 15.px) {
+                            fieldWithLabel("Username") {
+                                text(id = it, required = true) {
+                                    bindWithValidationMessage(LoginForm::username) {
+                                        (it.value != null && it.value!!.length <= 20) to "Maximum length is 20 characters"
+                                    }
+                                }
+                            }
+                        }
+                        val validationUsername = validation[LoginForm::username]
+                        if (validationUsername?.isInvalid == true || validationUsername?.isEmptyWhenRequired == true) {
+                            div {
+                                color(Color.Red)
+                                if (validationUsername.isEmptyWhenRequired) {
+                                    +"Username is required"
+                                } else if (validationUsername.invalidMessage != null) {
+                                    +validationUsername.invalidMessage!!
+                                }
+                            }
+                        }
+                        hPanel(justifyContent = JustifyContent.SpaceBetween, gap = 15.px) {
+                            fieldWithLabel("Password") {
+                                password(id = it, required = true) {
+                                    bind(LoginForm::password)
+                                }
+                            }
+                        }
+                        val validationPassword = validation[LoginForm::password]
+                        if (validationPassword?.isInvalid == true || validationPassword?.isEmptyWhenRequired == true) {
+                            div {
+                                color(Color.Red)
+                                if (validationPassword.isEmptyWhenRequired) {
+                                    +"Password is required"
+                                } else if (validationPassword.invalidMessage != null) {
+                                    +validationPassword.invalidMessage!!
+                                }
+                            }
+                        }
+                        hPanel(justifyContent = JustifyContent.Start, gap = 5.px) {
+                            fieldWithLabel("Remember me", labelAfter = true) {
+                                checkBox(id = it) {
+                                    bind(LoginForm::rememberMe)
+                                }
+                            }
+                        }
+                        hPanel(justifyContent = JustifyContent.Start, gap = 5.px) {
+                            fieldWithLabel("Test") {
+                                text(id = it) {
+                                    bindCustom(LoginForm::test)
+                                }
+                            }
+                        }
+                        hPanel(justifyContent = JustifyContent.Center) {
+                            button("Login") {
+                                onClick {
+                                    if (this@form.validate()) {
+                                        println("Login data: ${this@form.getData()}")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    validator = {
+                        if (this[LoginForm::username] == this[LoginForm::password]) {
+                            it.copy(isInvalid = true, invalidMessage = "Don't use the same username and password")
+                        } else {
+                            it
+                        }
+                    }
+                    LaunchedEffect(Unit) {
+                        this@form.setData(LoginForm(rememberMe = true, test = ObjectId(Random.nextInt(1, 10))))
+                    }
+                }
+
+                hr()
+
                 button("navigate to /about") {
                     onEvent<Event>("") {
 
@@ -292,64 +610,120 @@ class App : Application() {
                     }
                 }
 
-                SimpleBrowserRouter("/") {
+                var home by remember { mutableStateOf("Home") }
+
+                button("change home") {
+                    onClick {
+                        home = "Home 2"
+                        console.log("RoutingModel: ${RoutingModel.global}")
+                    }
+                }
+
+                hashRouter { ctx ->
+                    defaultMeta {
+                        author = "Kilua Team"
+                    }
                     route("/") {
-                        p {
-                            +"Home"
+                        view {
+                            p {
+                                +"Home"
+                                +"RoutingModel: ${RoutingModel.current}"
+                            }
+                        }
+                        meta {
+                            description = home
+                            keywords = listOf("home", "welcome")
+                            view {
+                                println("executing meta view for home")
+                                title = home
+                            }
                         }
                     }
                     route("/article") {
-                        int { articleId ->
-                            p {
-                                +"Article: $articleId"
+                        meta {
+                            titleTemplate = "Article - %s"
+                        }
+                        route("/head") {
+                            meta {
+                                title = "Head"
+                            }
+                            view {
+                                p {
+                                    +"Head article"
+                                }
                             }
                         }
-                        noMatch {
-                            p {
-                                +"Article ID not specified"
+                        int {
+                            view { articleId ->
+                                p {
+                                    +"Article: $articleId"
+                                }
                             }
+                        }
+                        view {
+                            p {
+                                +"RoutingModel: ${RoutingModel.current}"
+                            }
+                        }
+                        action {
+                            console.log("No article ID provided")
+                            println(RoutingModel.global.pathList())
                         }
                     }
                     route("/about") {
-                        p {
-                            +"About"
+                        view {
+                            p {
+                                +"About"
+                            }
                         }
                     }
-                    noMatch {
+                    route("/admin", "/admin2") {
+                        route("/test1") {
+                            view {
+                                p {
+                                    +"Admin test1 page"
+                                }
+                            }
+                            meta {
+                                title = "Admin Test1"
+                                description = "This is the admin test1 page"
+                                keywords = listOf("admin", "test1")
+                            }
+                        }
+                        route("/test2") {
+                            route("/xxx") {
+                                view {
+                                    p {
+                                        +"Admin test2 page with xxx"
+                                    }
+                                }
+                            }
+                            view {
+                                p {
+                                    +"Admin test2 page"
+                                }
+                            }
+                        }
+                        view {
+                            p {
+                                +"Admin page"
+                            }
+                        }
+                    }
+                    meta {
+                        description = "Not found page"
+                    }
+                    view {
                         p {
                             +"Not found"
+                            button("Show metadata for this page") {
+                                onClick {
+                                }
+                            }
                         }
                     }
                 }
 
-                hr()
-
-                SimpleBrowserRouter("/") {
-
-                    var state by remember { mutableStateOf("Home") }
-
-                    p {
-                        +state
-                    }
-
-                    routeAction("/") {
-                        state = "Home"
-                    }
-                    route("/article") {
-                        intAction { articleId ->
-                            state = "Article: $articleId"
-                        }
-                        noMatchAction {
-                            state = "Article ID not specified"
-                        }
-                    }
-                    routeAction("/about") {
-                        state = "About"
-                    }
-                    noMatchAction {
-                        state = "Not found"
-                    }
-                }
                 val lat = 51.505
                 val lng = -0.09
                 val positionP = LatLng(lat, lng)
@@ -857,7 +1231,7 @@ class App : Application() {
                     onClick {
                         progress.promise(Promise { resolve, reject ->
                             setTimeout({
-                                resolve.call(obj()).cast()
+                                resolve(obj())
                             }, 3000)
                         })
                     }
@@ -1138,7 +1512,7 @@ class App : Application() {
 
                 hr()
 
-                val restClient = RestClient()
+                val restClient2 = RestClient()
 
                 console.log("recomposing before tom select")
 
@@ -1149,7 +1523,7 @@ class App : Application() {
                             load = { query, callback ->
                                 promise {
                                     val result = try {
-                                        restClient.callDynamic("https://api.github.com/search/repositories") {
+                                        restClient2.callDynamic("https://api.github.com/search/repositories") {
                                             data = jsObjectOf("q" to query)
                                             resultTransform = { it?.jsGet("items") }
                                         }
@@ -1415,6 +1789,7 @@ class App : Application() {
                 hr()
 
                 themeSwitcher(style = ButtonStyle.BtnSuccess, round = true)
+                themeSwitcher(autoIcon = "bi bi-circle-half", darkIcon = "bi bi-moon", lightIcon = "bi bi-sun")
 
                 hr()
 
