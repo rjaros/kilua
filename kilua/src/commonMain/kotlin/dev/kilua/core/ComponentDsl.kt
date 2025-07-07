@@ -20,15 +20,10 @@
  * SOFTWARE.
  */
 
-package dev.kilua.routing
+package dev.kilua.core
 
-import androidx.compose.runtime.Composable
-import app.softwork.routingcompose.HashRouter
-import app.softwork.routingcompose.RouteBuilder
-import app.softwork.routingcompose.invoke
-
-@Composable
-public fun SimpleHashRouter(initRoute: String, routing: @Composable RouteBuilder.() -> Unit) {
-    HashRouter(initRoute, routing)
-    internalGlobalRouter = HashRouter
-}
+/**
+ * A marker for Kilua HTML DSL
+ */
+@DslMarker
+public annotation class ComponentDsl

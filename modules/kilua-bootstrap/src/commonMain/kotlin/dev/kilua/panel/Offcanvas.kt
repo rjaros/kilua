@@ -292,7 +292,7 @@ private fun IOffcanvas.setupOffcanvas(
         }
     }
     div("offcanvas-body") {
-        content() // !!! the content is called on Offcanvas receiver (component), but dom nodes are emitted inside offcanvas-body div
+        this@setupOffcanvas.content() // !!! the content is called on Offcanvas receiver (component), but dom nodes are emitted inside offcanvas-body div
     }
     DisposableEffect(component.componentId) {
         component.onInsert()

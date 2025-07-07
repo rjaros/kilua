@@ -21,12 +21,14 @@
  */
 package dev.kilua.form
 
+import androidx.compose.runtime.Composable
 import dev.kilua.state.WithStateFlow
 import dev.kilua.types.KFile
 import dev.kilua.utils.cast
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
+import kotlin.reflect.KProperty1
 
 /**
  * Input controls validation status.
@@ -80,6 +82,33 @@ public interface FormControl<T> : WithStateFlow<T> {
      * Blur the form control.
      */
     public fun blur()
+
+    /**
+     * Binds a form control to the form with a dynamic key.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun bind(
+        key: String,
+        validator: ((FormControl<T>) -> Boolean)? = null,
+    ) {
+        Form.current.bind(this, key, validator)
+    }
+
+    /**
+     * Binds a form control to the form with a dynamic key.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun bindWithValidationMessage(
+        key: String,
+        validator: ((FormControl<T>) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key, null, validator)
+    }
+
 }
 
 /**
@@ -105,17 +134,122 @@ public interface GenericNonNullableFormControl<T : Any> : FormControl<T> {
 /**
  * Base interface of a form control with a text value.
  */
-public interface StringFormControl : GenericFormControl<String>
+public interface StringFormControl : GenericFormControl<String> {
+    /**
+     * Bind a string control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bind(
+        key: KProperty1<K, String?>,
+        validator: ((StringFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind a string control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindWithValidationMessage(
+        key: KProperty1<K, String?>,
+        validator: ((StringFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
+
+    /**
+     * Bind a string control to the form bound to custom field type.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bindCustom(
+        key: KProperty1<K, Any?>,
+        validator: ((StringFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind a string control to the form bound to custom field type.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindCustomWithValidationMessage(
+        key: KProperty1<K, Any?>,
+        validator: ((StringFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
+}
 
 /**
  * Base interface of a form control with a numeric value.
  */
-public interface NumberFormControl : GenericFormControl<Number>
+public interface NumberFormControl : GenericFormControl<Number> {
+    /**
+     * Bind a numeric control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bind(
+        key: KProperty1<K, Number?>,
+        validator: ((NumberFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind a numeric control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindWithValidationMessage(
+        key: KProperty1<K, Number?>,
+        validator: ((NumberFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
+}
 
 /**
  * Base interface of a form control with an integer value.
  */
-public interface IntFormControl : GenericFormControl<Int>
+public interface IntFormControl : GenericFormControl<Int> {
+
+    /**
+     * Bind an integer control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bind(
+        key: KProperty1<K, Int?>,
+        validator: ((IntFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind an integer control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindWithValidationMessage(
+        key: KProperty1<K, Int?>,
+        validator: ((IntFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
+}
 
 /**
  * Base interface of a form control with a boolean value.
@@ -124,27 +258,160 @@ public interface BoolFormControl : GenericNonNullableFormControl<Boolean> {
     override fun setValue(value: Any?) {
         this.value = value?.cast() ?: false
     }
+
+    /**
+     * Bind a boolean control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bind(
+        key: KProperty1<K, Boolean?>,
+        validator: ((BoolFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind a boolean control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindWithValidationMessage(
+        key: KProperty1<K, Boolean?>,
+        validator: ((BoolFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
 }
 
 /**
  * Base interface of a form control with a nullable boolean value.
  */
-public interface TriStateFormControl : GenericFormControl<Boolean>
+public interface TriStateFormControl : GenericFormControl<Boolean> {
+    /**
+     * Bind a nullable boolean control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bind(
+        key: KProperty1<K, Boolean?>,
+        validator: ((TriStateFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind a nullable boolean control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindWithValidationMessage(
+        key: KProperty1<K, Boolean?>,
+        validator: ((TriStateFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
+}
 
 /**
  * Base interface of a form control with a date and time value.
  */
-public interface DateTimeFormControl : GenericFormControl<LocalDateTime>
+public interface DateTimeFormControl : GenericFormControl<LocalDateTime> {
+
+    /**
+     * Bind a date and time control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bind(
+        key: KProperty1<K, LocalDateTime?>,
+        validator: ((DateTimeFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind a date and time control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindWithValidationMessage(
+        key: KProperty1<K, LocalDateTime?>,
+        validator: ((DateTimeFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
+}
 
 /**
  * Base interface of a form control with a date value.
  */
-public interface DateFormControl : GenericFormControl<LocalDate>
+public interface DateFormControl : GenericFormControl<LocalDate> {
+
+    /**
+     * Bind a date control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bind(
+        key: KProperty1<K, LocalDate?>,
+        validator: ((DateFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind a date control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindWithValidationMessage(
+        key: KProperty1<K, LocalDate?>,
+        validator: ((DateFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
+}
 
 /**
  * Base interface of a form control with a time value.
  */
-public interface TimeFormControl : GenericFormControl<LocalTime>
+public interface TimeFormControl : GenericFormControl<LocalTime> {
+
+    /**
+     * Bind a time control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bind(
+        key: KProperty1<K, LocalTime?>,
+        validator: ((TimeFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind a time control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindWithValidationMessage(
+        key: KProperty1<K, LocalTime?>,
+        validator: ((TimeFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
+}
 
 /**
  * Base interface of a form control with a list of files value.
@@ -155,4 +422,30 @@ public interface KFilesFormControl : GenericFormControl<List<KFile>> {
      * Returns the list of selected files with content.
      */
     public suspend fun getFilesWithContent(): List<KFile>?
+
+    /**
+     * Bind a files control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function
+     */
+    @Composable
+    public fun <K: Any> bind(
+        key: KProperty1<K, List<KFile>?>,
+        validator: ((KFilesFormControl) -> Boolean)? = null
+    ) {
+        Form.current.bind(this, key.name, validator)
+    }
+
+    /**
+     * Bind a files control to the form.
+     * @param key key identifier of the control
+     * @param validator optional validation function which also returns a validation message
+     */
+    @Composable
+    public fun <K: Any> bindWithValidationMessage(
+        key: KProperty1<K, List<KFile>?>,
+        validator: ((KFilesFormControl) -> Pair<Boolean, String?>)? = null,
+    ) {
+        Form.current.bind(this, key.name, null, validator)
+    }
 }

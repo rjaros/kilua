@@ -29,6 +29,7 @@ import dev.kilua.html.textNode
 /**
  * Base immutable component interface.
  */
+@ComponentDsl
 public interface IComponent {
 
     /**

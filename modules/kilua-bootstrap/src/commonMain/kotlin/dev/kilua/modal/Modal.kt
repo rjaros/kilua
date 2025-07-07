@@ -333,7 +333,7 @@ private fun IModal.setupModal(
                 }
             }
             div("modal-body") {
-                content() // !!! the content is called on Modal receiver (component), but dom nodes are emitted inside modal-body div
+                this@setupModal.content() // !!! the content is called on Modal receiver (component), but dom nodes are emitted inside modal-body div
             }
             div("modal-footer") {
                 component.footerContent?.invoke(this)

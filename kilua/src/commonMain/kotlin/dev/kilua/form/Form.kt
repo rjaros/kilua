@@ -23,16 +23,20 @@
 package dev.kilua.form
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
-import dev.kilua.utils.KiluaScope
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
+import dev.kilua.form.Form.Companion.FormCompositionLocal
 import dev.kilua.html.Tag
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.types.KFile
+import dev.kilua.utils.KiluaScope
 import dev.kilua.utils.Serialization
 import dev.kilua.utils.Serialization.toObj
 import dev.kilua.utils.cast
@@ -608,337 +612,30 @@ public class Form<K : Any>(
 
     /**
      * Binds a form control to the form with a dynamic key.
+     * @param formControl the form control component to bind
      * @param key key identifier of the control
      * @param validator optional validation function
      * @param validatorWithMessage optional validation function which also returns a validation message
-     * @return the control itself
      */
     @Composable
-    private fun <T, C : FormControl<T>> C.bind(
+    public fun <T, C : FormControl<T>> bind(
+        formControl: C,
         key: String,
         validator: ((C) -> Boolean)? = null,
         validatorWithMessage: ((C) -> Pair<Boolean, String?>)? = null
-    ): C {
-        this@Form.fields[key] = this
-        this@Form.fieldsParams[key] = FieldParams(validator, validatorWithMessage)
+    ) {
+        fields[key] = formControl
+        fieldsParams[key] = FieldParams(validator, validatorWithMessage)
         if (validator != null || validatorWithMessage != null) novalidate = true
         DisposableEffect(key) {
-            val job = this@bind.stateFlow.onEach {
-                this@Form.updateStateFlow(getData())
+            val job = formControl.stateFlow.onEach {
+                updateStateFlow(getData())
             }.launchIn(KiluaScope)
             onDispose {
                 job.cancel()
                 unbind(key)
             }
         }
-        return this
-    }
-
-    /**
-     * Binds a form control to the form with a dynamic key.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <T, C : FormControl<T>> C.bind(
-        key: String,
-        validator: ((C) -> Boolean)? = null,
-    ): C {
-        return bind(key, validator, null)
-    }
-
-    /**
-     * Binds a form control to the form with a dynamic key.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     */
-    @Composable
-    public fun <T, C : FormControl<T>> C.bindWithValidationMessage(
-        key: String,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key, null, validator)
-    }
-
-    /**
-     * Bind a string control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : StringFormControl> C.bind(
-        key: KProperty1<K, String?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind a string control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : StringFormControl> C.bindWithValidationMessage(
-        key: KProperty1<K, String?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
-    }
-
-    /**
-     * Bind a string control to the form bound to custom field type.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : StringFormControl> C.bindCustom(
-        key: KProperty1<K, Any?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind a string control to the form bound to custom field type.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : StringFormControl> C.bindCustomWithValidationMessage(
-        key: KProperty1<K, Any?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
-    }
-
-    /**
-     * Bind a boolean control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : BoolFormControl> C.bind(
-        key: KProperty1<K, Boolean?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind a boolean control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : BoolFormControl> C.bindWithValidationMessage(
-        key: KProperty1<K, Boolean?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
-    }
-
-    /**
-     * Bind a nullable boolean control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : TriStateFormControl> C.bind(
-        key: KProperty1<K, Boolean?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind a nullable boolean control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : TriStateFormControl> C.bindWithValidationMessage(
-        key: KProperty1<K, Boolean?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
-    }
-
-    /**
-     * Bind an integer control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : IntFormControl> C.bind(
-        key: KProperty1<K, Int?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind an integer control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : IntFormControl> C.bindWithValidationMessage(
-        key: KProperty1<K, Int?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
-    }
-
-    /**
-     * Bind a number control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : NumberFormControl> C.bind(
-        key: KProperty1<K, Number?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind a number control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : NumberFormControl> C.bindWithValidationMessage(
-        key: KProperty1<K, Number?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
-    }
-
-    /**
-     * Bind a date control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : DateFormControl> C.bind(
-        key: KProperty1<K, LocalDate?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind a date control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : DateFormControl> C.bindWithValidationMessage(
-        key: KProperty1<K, LocalDate?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
-    }
-
-    /**
-     * Bind a datetime control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : DateTimeFormControl> C.bind(
-        key: KProperty1<K, LocalDateTime?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind a datetime control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : DateTimeFormControl> C.bindWithValidationMessage(
-        key: KProperty1<K, LocalDateTime?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
-    }
-
-    /**
-     * Bind a time control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : TimeFormControl> C.bind(
-        key: KProperty1<K, LocalTime?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind a time control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : TimeFormControl> C.bindWithValidationMessage(
-        key: KProperty1<K, LocalTime?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
-    }
-
-    /**
-     * Bind a files control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : KFilesFormControl> C.bind(
-        key: KProperty1<K, List<KFile>?>,
-        validator: ((C) -> Boolean)? = null
-    ): C {
-        return bind(key.name, validator, null)
-    }
-
-    /**
-     * Bind a files control to the form.
-     * @param key key identifier of the control
-     * @param validator optional validation function which also returns a validation message
-     * @return the control itself
-     */
-    @Composable
-    public fun <C : KFilesFormControl> C.bindWithValidationMessage(
-        key: KProperty1<K, List<KFile>?>,
-        validator: ((C) -> Pair<Boolean, String?>)? = null,
-    ): C {
-        return bind(key.name, null, validator)
     }
 
     /**
@@ -1133,8 +830,19 @@ public class Form<K : Any>(
                 renderConfig = renderConfig
             )
         }
-    }
 
+        /**
+         * Provide the current Form component through a CompositionLocal so deeper level
+         * Composables in the composition can have access to the current form.
+         */
+        public val current: Form<*>
+            @Composable
+            get() = FormCompositionLocal.current
+
+        @PublishedApi
+        internal val FormCompositionLocal: ProvidableCompositionLocal<Form<*>> =
+            compositionLocalOf { error("There is no form component defined.") }
+    }
 }
 
 /**
@@ -1161,7 +869,7 @@ public inline fun <reified K : Any> IComponent.formRef(
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
     id: String? = null,
-    content: @Composable Form<K>.() -> Unit = {}
+    crossinline content: @Composable Form<K>.() -> Unit = {}
 ): Form<K> {
     val component =
         remember {
@@ -1186,14 +894,16 @@ public inline fun <reified K : Any> IComponent.formRef(
             component.onRemove()
         }
     }
-    ComponentNode(component, {
-        set(initialData) { if (it != null) setDataFromCompose(it) }
-        set(method) { updateProperty(Form<K>::method, it) }
-        set(action) { updateProperty(Form<K>::action, it) }
-        set(enctype) { updateProperty(Form<K>::enctype, it) }
-        set(className) { updateProperty(Form<K>::className, it) }
-        set(id) { updateProperty(Form<K>::id, it) }
-    }, content)
+    CompositionLocalProvider(FormCompositionLocal provides component) {
+        ComponentNode(component, {
+            set(initialData) { if (it != null) setDataFromCompose(it) }
+            set(method) { updateProperty(Form<K>::method, it) }
+            set(action) { updateProperty(Form<K>::action, it) }
+            set(enctype) { updateProperty(Form<K>::enctype, it) }
+            set(className) { updateProperty(Form<K>::className, it) }
+            set(id) { updateProperty(Form<K>::id, it) }
+        }, content)
+    }
     return component
 }
 
@@ -1247,14 +957,16 @@ public fun IComponent.formRef(
             component.onRemove()
         }
     }
-    ComponentNode(component, {
-        set(initialData) { if (it != null) setDataFromCompose(it) }
-        set(method) { updateProperty(Form<Map<String, Any?>>::method, it) }
-        set(action) { updateProperty(Form<Map<String, Any?>>::action, it) }
-        set(enctype) { updateProperty(Form<Map<String, Any?>>::enctype, it) }
-        set(className) { updateProperty(Form<Map<String, Any?>>::className, it) }
-        set(id) { updateProperty(Form<Map<String, Any?>>::id, it) }
-    }, content)
+    CompositionLocalProvider(FormCompositionLocal provides component) {
+        ComponentNode(component, {
+            set(initialData) { if (it != null) setDataFromCompose(it) }
+            set(method) { updateProperty(Form<Map<String, Any?>>::method, it) }
+            set(action) { updateProperty(Form<Map<String, Any?>>::action, it) }
+            set(enctype) { updateProperty(Form<Map<String, Any?>>::enctype, it) }
+            set(className) { updateProperty(Form<Map<String, Any?>>::className, it) }
+            set(id) { updateProperty(Form<Map<String, Any?>>::id, it) }
+        }, content)
+    }
     return component
 }
 
@@ -1281,7 +993,7 @@ public inline fun <reified K : Any> IComponent.form(
     customSerializers: Map<KClass<*>, KSerializer<*>>? = null,
     className: String? = null,
     id: String? = null,
-    content: @Composable Form<K>.() -> Unit = {}
+    crossinline content: @Composable Form<K>.() -> Unit = {}
 ) {
     val component =
         remember {
@@ -1306,14 +1018,16 @@ public inline fun <reified K : Any> IComponent.form(
             component.onRemove()
         }
     }
-    ComponentNode(component, {
-        set(initialData) { if (it != null) setDataFromCompose(it) }
-        set(method) { updateProperty(Form<K>::method, it) }
-        set(action) { updateProperty(Form<K>::action, it) }
-        set(enctype) { updateProperty(Form<K>::enctype, it) }
-        set(className) { updateProperty(Form<K>::className, it) }
-        set(id) { updateProperty(Form<K>::id, it) }
-    }, content)
+    CompositionLocalProvider(FormCompositionLocal provides component) {
+        ComponentNode(component, {
+            set(initialData) { if (it != null) setDataFromCompose(it) }
+            set(method) { updateProperty(Form<K>::method, it) }
+            set(action) { updateProperty(Form<K>::action, it) }
+            set(enctype) { updateProperty(Form<K>::enctype, it) }
+            set(className) { updateProperty(Form<K>::className, it) }
+            set(id) { updateProperty(Form<K>::id, it) }
+        }, content)
+    }
 }
 
 /**
@@ -1365,12 +1079,14 @@ public fun IComponent.form(
             component.onRemove()
         }
     }
-    ComponentNode(component, {
-        set(initialData) { if (it != null) setDataFromCompose(it) }
-        set(method) { updateProperty(Form<Map<String, Any?>>::method, it) }
-        set(action) { updateProperty(Form<Map<String, Any?>>::action, it) }
-        set(enctype) { updateProperty(Form<Map<String, Any?>>::enctype, it) }
-        set(className) { updateProperty(Form<Map<String, Any?>>::className, it) }
-        set(id) { updateProperty(Form<Map<String, Any?>>::id, it) }
-    }, content)
+    CompositionLocalProvider(FormCompositionLocal provides component) {
+        ComponentNode(component, {
+            set(initialData) { if (it != null) setDataFromCompose(it) }
+            set(method) { updateProperty(Form<Map<String, Any?>>::method, it) }
+            set(action) { updateProperty(Form<Map<String, Any?>>::action, it) }
+            set(enctype) { updateProperty(Form<Map<String, Any?>>::enctype, it) }
+            set(className) { updateProperty(Form<Map<String, Any?>>::className, it) }
+            set(id) { updateProperty(Form<Map<String, Any?>>::id, it) }
+        }, content)
+    }
 }

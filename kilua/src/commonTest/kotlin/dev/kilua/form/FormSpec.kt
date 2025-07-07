@@ -22,7 +22,6 @@
 
 package dev.kilua.form
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.form.check.CheckBox
 import dev.kilua.form.check.checkBox
@@ -30,6 +29,7 @@ import dev.kilua.form.check.checkBoxRef
 import dev.kilua.form.text.Text
 import dev.kilua.form.text.text
 import dev.kilua.form.text.textRef
+import dev.kilua.test.DomSpec
 import dev.kilua.types.KFile
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
