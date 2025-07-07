@@ -78,14 +78,16 @@ public abstract class KiluaPlugin : Plugin<Project> {
     }
 
     private data class KiluaPluginContext(
-        private val project: Project,
+        val project: Project,
         val kiluaExtension: KiluaExtension,
         val kiluaVersions: Map<String, String>
-    ) : Project by project
+    )
 
     @Suppress("LongMethod", "ComplexMethod")
     private fun KiluaPluginContext.configureProject() {
-        logger.debug("Configuring Kotlin/MPP plugin")
+        project.logger.debug("Configuring Kotlin/MPP plugin")
+
+        val kotlinMppExtension = project.extensions.getByType<KotlinMultiplatformExtension>()
 
         kotlinMppExtension.targets.configureEach {
             compilations.configureEach {
@@ -97,7 +99,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
             }
         }
 
-        tasks.withType<Copy>().matching {
+        val webpackSsrExists = project.layout.projectDirectory.dir("webpack.config.ssr.d").asFile.exists()
+
+        val srcDir = project.layout.projectDirectory.dir("src").asFile.absolutePath + "/**/*.kt"
+        project.tasks.withType<Copy>().matching {
             it.name == "jsProcessResources" || it.name == "wasmJsProcessResources"
         }.configureEach {
             eachFile {
@@ -105,21 +110,21 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     this.filter {
                         it.replace(
                             "SOURCES",
-                            project.layout.projectDirectory.dir("src").asFile.absolutePath + "/**/*.kt"
+                            srcDir
                         )
                     }
                 }
             }
         }
 
-        tasks.withType<Sync>().matching {
+        project.tasks.withType<Sync>().matching {
             it.name == "jsBrowserDistribution" || it.name == "wasmJsBrowserDistribution"
         }.configureEach {
             exclude("/tailwind/**", "/modules/**")
         }
 
         if (webpackSsrExists && kiluaExtension.enableGradleTasks.get()) {
-            val kiluaYmlFile = layout.projectDirectory.file(kiluaExtension.kiluaYml).get().asFile
+            val kiluaYmlFile = project.layout.projectDirectory.file(kiluaExtension.kiluaYml).get().asFile
             val kiluaConfiguration = if (kiluaYmlFile.exists()) {
                 val yamlConfiguration = YamlConfiguration(yamlNamingStrategy = YamlNamingStrategy.SnakeCase)
                 Yaml(configuration = yamlConfiguration).decodeFromString(
@@ -157,38 +162,51 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 "tom-select/dist/css/tom-select.min.css",
                 "trix/dist/trix.css"
             ) + includedCssNames
-            val cssFiles = cssNames.map {
-                rootProject.file("build/js/node_modules/$it")
+            val cssFilesJs = cssNames.map {
+                project.rootProject.file("build/js/node_modules/$it")
             }
-
-            if (tasks.findByName("jsBrowserProductionWebpack") != null) {
-                val kotlinWebpackJs = tasks.getByName<KotlinWebpack>("jsBrowserProductionWebpack")
-                tasks.register<KotlinWebpack>(
+            val cssFilesWasmJs = cssNames.map {
+                project.rootProject.file("build/wasm/node_modules/$it")
+            }
+            val manifestMap = mapOf(
+                "Implementation-Title" to project.rootProject.name,
+                "Implementation-Group" to project.rootProject.group,
+                "Implementation-Version" to project.rootProject.version,
+                "Timestamp" to System.currentTimeMillis()
+            )
+            if (project.tasks.findByName("jsBrowserProductionWebpack") != null) {
+                val kotlinWebpackJs = project.tasks.getByName<KotlinWebpack>("jsBrowserProductionWebpack")
+                val jsProcessResources = project.tasks.getByName<Copy>("jsProcessResources")
+                val projectObjects = project.objects
+                val webpackConfigSsrDir = project.file("webpack.config.ssr.d")
+                val productionExecutableDir = project.file("build/kotlin-webpack/js.ssr/productionExecutable")
+                val productionExecutableDirSSR = project.file("build/dist/js.ssr/productionExecutable")
+                val nodeModulesDir = project.rootProject.file("build/js/node_modules")
+                project.tasks.register<KotlinWebpack>(
                     "jsBrowserProductionWebpackSSR",
                     kotlinWebpackJs.compilation,
-                    project.objects
+                    projectObjects
                 )
-                tasks.getByName<KotlinWebpack>("jsBrowserProductionWebpackSSR").apply {
+                project.tasks.getByName<KotlinWebpack>("jsBrowserProductionWebpackSSR").apply {
                     dependsOn("jsProductionExecutableCompileSync")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack js bundle for server-side rendering."
                     // Workaround to initialize internal "versions" property
                     val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
-                    val prop = project.objects.property<NpmVersions>()
+                    val prop = projectObjects.property<NpmVersions>()
                     prop.set(NpmVersions())
                     method.invoke(this, prop)
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackJs.entryModuleName.get())
                     esModules.set(kotlinWebpackJs.esModules.get())
-                    outputDirectory.set(file("build/kotlin-webpack/js.ssr/productionExecutable"))
+                    outputDirectory.set(productionExecutableDir)
                     mainOutputFileName.set("main.bundle.js")
                     this.webpackConfigApplier {
-                        configDirectory = file("webpack.config.ssr.d")
+                        configDirectory = webpackConfigSsrDir
                     }
                 }
-                val jsProcessResources = tasks.getByName<Copy>("jsProcessResources")
-                tasks.register<Copy>("jsBrowserDistributionSSR") {
+                project.tasks.register<Copy>("jsBrowserDistributionSSR") {
                     dependsOn("jsBrowserProductionWebpackSSR")
                     group = KILUA_TASK_GROUP
                     description = "Assembles js distribution files for server-side rendering."
@@ -196,64 +214,63 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     from(jsProcessResources)
                     exclude("/tailwind/**")
                     from("build/kotlin-webpack/js.ssr/productionExecutable")
-                    into("build/dist/js.ssr/productionExecutable")
+                    into(productionExecutableDirSSR)
                 }
-                tasks.register<Jar>("jsArchiveSSR") {
+                project.tasks.register<Jar>("jsArchiveSSR") {
                     dependsOn("jsBrowserDistributionSSR")
                     group = KILUA_TASK_GROUP
                     description = "Packages webpack js bundle for server-side rendering."
                     archiveFileName.set("ssr.zip")
-                    val distribution = project.tasks.getByName("jsBrowserDistributionSSR").outputs
-                    from(distribution)
-                    from(cssFiles)
+                    from(productionExecutableDirSSR)
+                    from(cssFilesJs)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                    inputs.files(distribution, cssFiles, kiluaYmlFile)
+                    inputs.files(productionExecutableDirSSR, cssFilesJs, kiluaYmlFile)
                     outputs.file(archiveFile)
                     manifest {
                         attributes(
-                            mapOf(
-                                "Implementation-Title" to rootProject.name,
-                                "Implementation-Group" to rootProject.group,
-                                "Implementation-Version" to rootProject.version,
-                                "Timestamp" to System.currentTimeMillis()
-                            )
+                            manifestMap
                         )
                     }
                     eachFile {
                         if (cssNames.any { this.file.toString().replace('\\', '/').endsWith(it) }) {
-                            this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
+                            this.path = this.file.relativeTo(nodeModulesDir).toString()
                         }
                     }
                 }
             }
-            if (tasks.findByName("wasmJsBrowserProductionWebpack") != null) {
-                val kotlinWebpackWasmJs = tasks.getByName<KotlinWebpack>("wasmJsBrowserProductionWebpack")
-                tasks.register<KotlinWebpack>(
+            if (project.tasks.findByName("wasmJsBrowserProductionWebpack") != null) {
+                val kotlinWebpackWasmJs = project.tasks.getByName<KotlinWebpack>("wasmJsBrowserProductionWebpack")
+                val wasmJsProcessResources = project.tasks.getByName<Copy>("wasmJsProcessResources")
+                val projectObjects = project.objects
+                val webpackConfigSsrDir = project.file("webpack.config.ssr.d")
+                val productionExecutableDir = project.file("build/kotlin-webpack/wasmJs.ssr/productionExecutable")
+                val productionExecutableDirSSR = project.file("build/dist/wasmJs.ssr/productionExecutable")
+                val nodeModulesDir = project.rootProject.file("build/wasm/node_modules")
+                project.tasks.register<KotlinWebpack>(
                     "wasmJsBrowserProductionWebpackSSR",
                     kotlinWebpackWasmJs.compilation,
-                    project.objects
+                    projectObjects
                 )
-                tasks.getByName<KotlinWebpack>("wasmJsBrowserProductionWebpackSSR").apply {
+                project.tasks.getByName<KotlinWebpack>("wasmJsBrowserProductionWebpackSSR").apply {
                     dependsOn("wasmJsProductionExecutableCompileSync")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack wasmJs bundle for server-side rendering."
                     // Workaround to initialize internal "versions" property
                     val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
-                    val prop = project.objects.property<NpmVersions>()
+                    val prop = projectObjects.property<NpmVersions>()
                     prop.set(NpmVersions())
                     method.invoke(this, prop)
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackWasmJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackWasmJs.entryModuleName.get())
                     esModules.set(kotlinWebpackWasmJs.esModules.get())
-                    outputDirectory.set(file("build/kotlin-webpack/wasmJs.ssr/productionExecutable"))
+                    outputDirectory.set(productionExecutableDir)
                     mainOutputFileName.set("main.bundle.js")
                     this.webpackConfigApplier {
-                        configDirectory = file("webpack.config.ssr.d")
+                        configDirectory = webpackConfigSsrDir
                     }
                 }
-                val wasmJsProcessResources = tasks.getByName<Copy>("wasmJsProcessResources")
-                tasks.register<Copy>("wasmJsBrowserDistributionSSR") {
+                project.tasks.register<Copy>("wasmJsBrowserDistributionSSR") {
                     dependsOn("wasmJsBrowserProductionWebpackSSR")
                     group = KILUA_TASK_GROUP
                     description = "Assembles wasmJs distribution files for server-side rendering."
@@ -265,33 +282,27 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     from("build/compileSync/wasmJs/main/productionExecutable/optimized") {
                         include { it.name.endsWith(".wasm") }
                     }
-                    into("build/dist/wasmJs.ssr/productionExecutable")
+                    into(productionExecutableDirSSR)
                 }
-                tasks.register<Jar>("wasmJsArchiveSSR") {
+                project.tasks.register<Jar>("wasmJsArchiveSSR") {
                     dependsOn("wasmJsBrowserDistributionSSR")
                     group = KILUA_TASK_GROUP
                     description = "Packages webpack wasmJs bundle for server-side rendering."
                     archiveFileName.set("ssr.zip")
-                    val distribution = project.tasks.getByName("wasmJsBrowserDistributionSSR").outputs
-                    from(distribution)
-                    from(cssFiles)
+                    from(productionExecutableDirSSR)
+                    from(cssFilesWasmJs)
                     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                    inputs.files(distribution, cssFiles, kiluaYmlFile)
+                    inputs.files(productionExecutableDirSSR, cssFilesWasmJs, kiluaYmlFile)
                     outputs.file(archiveFile)
                     manifest {
                         attributes(
-                            mapOf(
-                                "Implementation-Title" to rootProject.name,
-                                "Implementation-Group" to rootProject.group,
-                                "Implementation-Version" to rootProject.version,
-                                "Timestamp" to System.currentTimeMillis()
-                            )
+                            manifestMap
                         )
                     }
                     filteringCharset = "UTF-8"
                     eachFile {
                         if (cssNames.any { this.file.toString().replace('\\', '/').endsWith(it) }) {
-                            this.path = this.file.relativeTo(rootProject.file("build/js/node_modules")).toString()
+                            this.path = this.file.relativeTo(nodeModulesDir).toString()
                         } else if (this.name.equals("main.bundle.js")) {
                             this.filter {
                                 it.replace(
@@ -303,9 +314,9 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     }
                 }
             }
-            plugins.withId("dev.kilua.rpc") {
-                afterEvaluate {
-                    afterEvaluate {
+            project.plugins.withId("dev.kilua.rpc") {
+                project.afterEvaluate {
+                    project.afterEvaluate {
                         tasks.findByName("jarWithJs")?.let {
                             tasks.getByName<Jar>("jarWithJs") {
                                 if (tasks.findByName("wasmJsArchiveSSR") != null) {
@@ -340,7 +351,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
             }
 
         }
-        tasks.withType<BinaryenExec> {
+        project.tasks.withType<BinaryenExec> {
             binaryenArgs = mutableListOf(
                 "--enable-nontrapping-float-to-int",
                 "--enable-gc",
@@ -358,7 +369,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
         }
         val dontDisableSkikoProjectProperty = project.findProperty("dev.kilua.plugin.disableSkiko") == "false"
         if (!dontDisableSkikoProjectProperty && kiluaExtension.disableSkiko.get()) {
-            tasks.withType<org.jetbrains.compose.web.tasks.UnpackSkikoWasmRuntimeTask> {
+            project.tasks.withType<org.jetbrains.compose.web.tasks.UnpackSkikoWasmRuntimeTask> {
                 enabled = false
             }
         }
@@ -370,13 +381,13 @@ public abstract class KiluaPlugin : Plugin<Project> {
         kiluaConfiguration: KiluaConfiguration?,
         configuration: KiluaExportHtmlTask.() -> Unit = {}
     ) {
-        logger.debug("registering KiluaExportHtmlTask")
-        tasks.register<KiluaExportHtmlTask>(name) {
+        project.logger.debug("registering KiluaExportHtmlTask")
+        project.tasks.register<KiluaExportHtmlTask>(name) {
             kiluaConfiguration?.export?.language?.let { exportLanguage.set(it) }
             kiluaConfiguration?.export?.serverParameters?.let { exportServerParameters.set(it) }
             kiluaConfiguration?.export?.pages?.let { exportPages.set(it) }
             applicationJar.set(applicationArchive)
-            exportDirectory.set(layout.buildDirectory.dir("exportedHtml"))
+            exportDirectory.set(project.layout.buildDirectory.dir("exportedHtml"))
             configuration()
         }
     }
@@ -387,11 +398,11 @@ public abstract class KiluaPlugin : Plugin<Project> {
         prefix: String,
         configuration: Copy.() -> Unit = {}
     ) {
-        logger.debug("registering KiluaExportTask")
-        tasks.register<Copy>(name) {
+        project.logger.debug("registering KiluaExportTask")
+        project.tasks.register<Copy>(name) {
             group = KILUA_TASK_GROUP
             description = "Export the SSR application as static files"
-            destinationDir = layout.buildDirectory.dir("site").get().asFile
+            destinationDir = project.layout.buildDirectory.dir("site").get().asFile
             val exported = project.tasks.getByName(exportHtmlTaskName).outputs
             val distribution = project.tasks.getByName("${prefix}BrowserDistribution").outputs
             from(exported, distribution)
@@ -402,10 +413,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
 
     @Suppress("LongMethod")
     private fun KiluaPluginContext.configureNodeEcosystem() {
-        logger.debug("configuring Node")
+        project.logger.debug("configuring Node")
 
-        rootProject.extensions.findByType<org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension>()?.apply {
-            logger.debug("configuring Npm")
+        project.rootProject.extensions.findByType<org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension>()?.apply {
+            project.logger.debug("configuring Npm")
             if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
                 override("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
                 override("zzz-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
@@ -438,8 +449,8 @@ public abstract class KiluaPlugin : Plugin<Project> {
             }
         }
 
-        rootProject.extensions.findByType<YarnRootExtension>()?.apply {
-            logger.debug("configuring Yarn")
+        project.rootProject.extensions.findByType<YarnRootExtension>()?.apply {
+            project.logger.debug("configuring Yarn")
             if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
                 resolution("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
                 resolution("zzz-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
