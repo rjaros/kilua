@@ -26,13 +26,12 @@ import app.softwork.routingcompose.Parameters
 
 /**
  * Represents the context of a routing operation, providing access to the current path,
- * remaining path, parameters, and metadata.
+ * remaining path and parameters.
  */
 public interface RoutingContext {
     public val path: String?
     public val remainingPath: String?
     public val parameters: Parameters?
-    public val meta: Meta?
 }
 
 /**
@@ -51,13 +50,32 @@ public interface IntRoutingContext : RoutingContext {
 
 /**
  * Default implementation of [RoutingContext].
- * Provides properties for path, remaining path, parameters, and metadata.
+ * Provides properties for path, remaining path and parameters.
  */
 public open class RoutingContextImpl : RoutingContext {
+    private var pathInitialized: Boolean = false
     override var path: String? = null
+        set(value) {
+            field = value
+            pathInitialized = true
+        }
+        get() = if (pathInitialized) field else error("Path is not set. Use context values inside view or action blocks only.")
+
+    private var remainingPathInitialized: Boolean = false
     override var remainingPath: String? = null
+        set(value) {
+            field = value
+            remainingPathInitialized = true
+        }
+        get() = if (remainingPathInitialized) field else error("Remaining path is not set. Use context values inside view or action blocks only.")
+
+    private var parametersInitialized: Boolean = false
     override var parameters: Parameters? = null
-    override var meta: Meta? = null
+        set(value) {
+            field = value
+            parametersInitialized = true
+        }
+        get() = if (parametersInitialized) field else error("Parameters are not set. Use context values inside view or action blocks only.")
 }
 
 /**
@@ -65,9 +83,13 @@ public open class RoutingContextImpl : RoutingContext {
  * Holds a string value that can be accessed within the routing context.
  */
 public class StringRoutingContextImpl : RoutingContextImpl(), StringRoutingContext {
-    internal var sValue: String? = null
-    override val value: String
-        get() = sValue ?: error("Value is not set. Use context values inside view or action blocks only.")
+    private var valueInitialized: Boolean = false
+    override var value: String = ""
+        set(value) {
+            field = value
+            valueInitialized = true
+        }
+        get() = if (valueInitialized) field else error("Value is not set. Use context values inside view or action blocks only.")
 }
 
 /**
@@ -75,7 +97,11 @@ public class StringRoutingContextImpl : RoutingContextImpl(), StringRoutingConte
  * Holds a numeric value that can be accessed within the routing context.
  */
 public class IntRoutingContextImpl : RoutingContextImpl(), IntRoutingContext {
-    internal var iValue: Int? = null
-    override val value: Int
-        get() = iValue ?: error("Value is not set. Use context values inside view or action blocks only.")
+    private var valueInitialized: Boolean = false
+    override var value: Int = 0
+        set(value) {
+            field = value
+            valueInitialized = true
+        }
+        get() = if (valueInitialized) field else error("Value is not set. Use context values inside view or action blocks only.")
 }

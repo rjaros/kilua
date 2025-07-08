@@ -144,7 +144,7 @@ public class RoutingModel(
                         routeModel.context.apply {
                             path = this@string.path
                             parameters = this@string.parameters
-                            sValue = stringValue
+                            value = stringValue
                         }
                         if (routeModel.meta is MetaImpl) {
                             routeModel.meta.view?.invoke(routeModel.meta)
@@ -175,7 +175,7 @@ public class RoutingModel(
                         routeModel.context.apply {
                             path = this@int.path
                             parameters = this@int.parameters
-                            iValue = intValue
+                            value = intValue
                         }
                         if (routeModel.meta is MetaImpl) {
                             routeModel.meta.view?.invoke(routeModel.meta)
