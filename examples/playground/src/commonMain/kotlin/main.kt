@@ -139,6 +139,7 @@ import dev.kilua.rest.RestResponse
 import dev.kilua.rest.call
 import dev.kilua.rest.callDynamic
 import dev.kilua.rest.requestDynamic
+import dev.kilua.routing.Meta
 import dev.kilua.routing.RoutingModel
 import dev.kilua.routing.global
 import dev.kilua.routing.hashRouter
@@ -711,13 +712,19 @@ class App : Application() {
                         }
                     }
                     meta {
-                        description = "Not found page"
+                        view {
+                            description = "Not found page" + ctx.path
+                        }
                     }
                     view {
                         p {
                             +"Not found"
-                            button("Show metadata for this page") {
+                            button("Show remaining path for this page") {
                                 onClick {
+                                    console.log(ctx.path)
+                                    console.log(ctx.parameters.toString())
+                                    console.log(ctx.remainingPath)
+                                    console.log(Meta.current.toString())
                                 }
                             }
                         }
