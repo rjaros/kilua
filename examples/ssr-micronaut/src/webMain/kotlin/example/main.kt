@@ -44,7 +44,7 @@ class App : Application() {
                 margin(20.px)
                 ssrRouter {
                     route("/") {
-                        content {
+                        view {
                             vPanel(gap = 10.px) {
                                 div {
                                     +"Root page"
@@ -55,7 +55,7 @@ class App : Application() {
                         }
                     }
                     route("/about") {
-                        content {
+                        view {
                             vPanel(gap = 10.px) {
                                 div {
                                     +"About page"
@@ -65,7 +65,7 @@ class App : Application() {
                         }
                     }
                     string {
-                        content {
+                        view {
                             vPanel(gap = 10.px) {
                                 div {
                                     +"A random page: $it"

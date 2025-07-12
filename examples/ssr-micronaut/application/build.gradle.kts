@@ -28,18 +28,3 @@ micronaut {
         optimizeNetty.set(true)
     }
 }
-
-tasks {
-    withType<JavaExec> {
-        jvmArgs("-XX:TieredStopAtLevel=1", "-Dcom.sun.management.jmxremote")
-        if (gradle.startParameter.isContinuous) {
-            systemProperties(
-                mapOf(
-                    "micronaut.io.watch.restart" to "true",
-                    "micronaut.io.watch.enabled" to "true",
-                    "micronaut.io.watch.paths" to "src/jvmMain"
-                )
-            )
-        }
-    }
-}
