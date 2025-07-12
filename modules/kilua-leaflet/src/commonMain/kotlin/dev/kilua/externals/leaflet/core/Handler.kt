@@ -43,8 +43,8 @@ public open external class Handler(map: LeafletMap) : Class {
     public open fun enabled(): Boolean
 
     /** Called when the handler is enabled, should add event hooks. */
-    public open val addHooks: (() -> Unit)?
+    public fun addHooks()
 
     /** Called when the handler is disabled, should remove the event hooks added previously. */
-    public open val removeHooks: (() -> Unit)?
+    public fun removeHooks()
 }

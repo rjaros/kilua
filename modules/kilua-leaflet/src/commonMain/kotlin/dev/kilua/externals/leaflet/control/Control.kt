@@ -68,13 +68,13 @@ public abstract external class Control<T : ControlOptions>(
      * Should return the container DOM element for the control and add listeners on relevant map
      * events. Called on [addTo]
      */
-    public open val onAdd: ((map: LeafletMap) -> HTMLElement)?
+    public fun onAdd(map: LeafletMap): HTMLElement?
 
     /**
      * Optional method. Should contain all clean up code that removes the listeners previously
      * added in onAdd. Called on [remove].
      */
-    public open val onRemove: ((map: LeafletMap) -> Unit)?
+    public fun onRemove(map: LeafletMap)
 
     public interface ControlOptions : JsAny {
         /**
