@@ -22,11 +22,13 @@
 
 package example
 
+import androidx.compose.runtime.Composable
 import dev.kilua.Application
 import dev.kilua.BootstrapCssModule
 import dev.kilua.BootstrapModule
 import dev.kilua.CoreModule
 import dev.kilua.compose.root
+import dev.kilua.core.IComponent
 import dev.kilua.html.div
 import dev.kilua.html.navLink
 import dev.kilua.html.px
@@ -35,43 +37,50 @@ import dev.kilua.ssr.ssrRouter
 import dev.kilua.startApplication
 import kotlin.random.Random
 
+@Composable
+fun IComponent.template(content: @Composable IComponent.() -> Unit) {
+    div {
+        margin(20.px)
+        vPanel(gap = 10.px) {
+            content()
+        }
+    }
+}
+
 class App : Application() {
 
     override fun start() {
 
         root("root") {
-            div {
-                margin(20.px)
-                ssrRouter {
-                    route("/") {
-                        view {
-                            vPanel(gap = 10.px) {
-                                div {
-                                    +"Root page"
-                                }
-                                navLink("/about", "Go to About page")
-                                navLink("/page${Random.nextInt()}", "Go to random page")
+            ssrRouter {
+                route("/") {
+                    view {
+                        template {
+                            div {
+                                +"Root page"
                             }
+                            navLink("/about", "Go to About page")
+                            navLink("/page${Random.nextInt()}", "Go to random page")
                         }
                     }
-                    route("/about") {
-                        view {
-                            vPanel(gap = 10.px) {
-                                div {
-                                    +"About page"
-                                }
-                                navLink("/", "Return to root page")
+                }
+                route("/about") {
+                    view {
+                        template {
+                            div {
+                                +"About page"
                             }
+                            navLink("/", "Return to root page")
                         }
                     }
-                    string {
-                        view {
-                            vPanel(gap = 10.px) {
-                                div {
-                                    +"A random page: $it"
-                                }
-                                navLink("/", "Return to root page")
+                }
+                string {
+                    view {
+                        template {
+                            div {
+                                +"A random page: $it"
                             }
+                            navLink("/", "Return to root page")
                         }
                     }
                 }
