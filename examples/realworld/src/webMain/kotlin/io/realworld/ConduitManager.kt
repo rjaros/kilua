@@ -51,6 +51,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import web.console.console
+import web.http.text
 import web.storage.localStorage
 
 const val JWT_TOKEN = "jwtToken"
