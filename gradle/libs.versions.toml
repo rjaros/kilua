@@ -26,7 +26,6 @@ micronaut-plugins = "4.5.4"
 spring-boot = "3.5.3"
 vertx = "5.0.1"
 ballast = "4.2.1"
-shadow = "9.0.0-rc1"
 logback = "1.5.18"
 tomlj = "1.1.1"
 kaml = "0.83.0"
@@ -113,7 +112,6 @@ kilua-rpc = { id = "dev.kilua.rpc", version.ref = "kilua-rpc" }
 gradle-plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "gradle-plugin-publish" }
 kilua = { id = "dev.kilua", version.ref = "kilua-published" }
 jooby = { id = "io.jooby.run", version.ref = "jooby" }
-shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 micronaut-application = { id = "io.micronaut.application", version.ref = "micronaut-plugins" }
 micronaut-aot = { id = "io.micronaut.aot", version.ref = "micronaut-plugins" }

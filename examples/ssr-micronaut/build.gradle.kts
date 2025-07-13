@@ -9,7 +9,6 @@ plugins {
     kotlin("plugin.compose")
     id("com.google.devtools.ksp")
     kotlin("plugin.allopen") version libs.versions.kotlin.get()
-    alias(libs.plugins.shadow)
     alias(libs.plugins.kilua.rpc)
     alias(libs.plugins.kilua)
 }

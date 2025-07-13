@@ -7,7 +7,6 @@ plugins {
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
     kotlin("plugin.compose")
-    alias(libs.plugins.shadow)
     alias(libs.plugins.kilua.rpc)
     alias(libs.plugins.kilua)
 }
