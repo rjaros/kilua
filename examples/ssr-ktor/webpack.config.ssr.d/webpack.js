@@ -11,7 +11,7 @@ config.resolve.alias = {
     "zzz-kilua-assets/k-trix.css": false,
     "@fortawesome/fontawesome-free/css/all.min.css": false,
     "bootstrap/dist/css/bootstrap.min.css": false,
-    "bootstrap-icons/font/bootstrap-icons.css": false,
+    "bootstrap-icons/font/bootstrap-icons.min.css": false,
     "@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css": false,
     "leaflet/dist/leaflet.css": false,
     "tabulator-tables/dist/css/tabulator.min.css": false,
