@@ -43,11 +43,10 @@ import dev.kilua.externals.leaflet.layer.overlay.Tooltip
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip.TooltipOptions
 import dev.kilua.externals.leaflet.layer.vector.Path
 import dev.kilua.externals.leaflet.layer.vector.Renderer
-import dev.kilua.utils.obj
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 import web.html.HTMLElement
-import web.uievents.MouseEvent
+import web.mouse.MouseEvent
 import kotlin.js.JsName
 import kotlin.js.definedExternally
 

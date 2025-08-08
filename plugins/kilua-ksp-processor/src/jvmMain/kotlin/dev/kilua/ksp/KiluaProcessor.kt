@@ -83,7 +83,7 @@ public class KiluaProcessor(
                         val dependencies =
                             classDeclaration.containingFile?.let { Dependencies(true, it) } ?: Dependencies(true)
                         codeGenerator.createNewFile(dependencies, packageName, className).writer().use {
-                            when (codeGenerator.generatedFile.first().toString().sourceSetBelow("ksp")) {
+                            when (codeGenerator.generatedFile.first().toString().sourceSetBelowKsp()) {
                                 "commonMain" -> {
                                     it.write(
                                         generateCommonCode(
@@ -106,9 +106,9 @@ public class KiluaProcessor(
         return emptyList()
     }
 
-    private fun String.sourceSetBelow(startDirectoryName: String): String =
-        substringAfter("${File.separator}$startDirectoryName${File.separator}").substringBefore("${File.separator}kotlin${File.separator}")
-            .substringAfterLast(File.separatorChar)
+    private fun String.sourceSetBelowKsp(): String =
+        substringAfter("${File.separator}build${File.separator}generated${File.separator}ksp${File.separator}")
+            .substringAfter(File.separatorChar).substringBefore(File.separatorChar)
 
     private fun generateCommonCode(
         packageName: String,

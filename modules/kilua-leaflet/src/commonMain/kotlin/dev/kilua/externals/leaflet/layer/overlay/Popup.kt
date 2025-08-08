@@ -28,7 +28,7 @@ import dev.kilua.externals.leaflet.geometry.Point
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.Popup.PopupOptions
 import dev.kilua.externals.leaflet.map.LeafletMap
-import js.import.JsModule
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 /**

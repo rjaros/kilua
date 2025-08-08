@@ -27,7 +27,7 @@ package dev.kilua.externals.leaflet.layer.overlay
 import dev.kilua.externals.leaflet.DirectionsUnion
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip.TooltipOptions
-import js.import.JsModule
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 public open external class Tooltip(

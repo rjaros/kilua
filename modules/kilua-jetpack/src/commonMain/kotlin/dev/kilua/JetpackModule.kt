@@ -24,7 +24,7 @@
 package dev.kilua
 
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 
 @JsModule("zzz-kilua-assets/k-jetpack.css")
 internal external object JetpackCss : JsAny

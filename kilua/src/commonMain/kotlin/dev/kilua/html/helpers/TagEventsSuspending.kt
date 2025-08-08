@@ -27,8 +27,8 @@ import dev.kilua.utils.KiluaScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import web.events.Event
-import web.uievents.InputEvent
-import web.uievents.MouseEvent
+import web.input.InputEvent
+import web.mouse.MouseEvent
 
 /**
  * An extension function for defining on click suspending event handlers (composable).

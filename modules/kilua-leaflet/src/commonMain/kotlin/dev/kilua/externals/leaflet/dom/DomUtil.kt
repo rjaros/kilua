@@ -31,7 +31,7 @@ import dev.kilua.externals.leaflet.geometry.Point
 import js.core.JsAny
 import js.core.JsNumber
 import js.core.JsString
-import js.import.JsModule
+import kotlin.js.JsModule
 import web.html.HTMLElement
 import kotlin.js.definedExternally
 

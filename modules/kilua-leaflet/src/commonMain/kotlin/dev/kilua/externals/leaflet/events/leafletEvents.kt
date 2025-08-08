@@ -34,10 +34,10 @@ import dev.kilua.externals.leaflet.layer.overlay.Popup
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip
 import js.core.JsAny
 import js.errors.JsError
-import js.import.JsModule
+import kotlin.js.JsModule
 import web.html.HTMLImageElement
-import web.uievents.KeyboardEvent
-import web.uievents.MouseEvent
+import web.keyboard.KeyboardEvent
+import web.mouse.MouseEvent
 
 public external interface LeafletEvent : JsAny {
     public var type: String

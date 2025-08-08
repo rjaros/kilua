@@ -4,6 +4,7 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         mavenCentral()
+        maven { url = uri("https://redirector.kotlinlang.org/maven/dev/") }
         mavenLocal()
     }
 }
@@ -12,6 +13,7 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         google()
+        maven { url = uri("https://redirector.kotlinlang.org/maven/dev/") }
         mavenLocal()
     }
 }

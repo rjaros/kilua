@@ -15,7 +15,7 @@ detekt {
 
 kotlin {
     explicitApi()
-    compilerOptions()
+    compilerOptions(withWasmMetadata = false)
     kotlinJsTargets()
     kotlinWasmTargets()
     kotlinJvmTargets()

@@ -90,10 +90,14 @@ public abstract class KiluaPlugin : Plugin<Project> {
         val kotlinMppExtension = project.extensions.getByType<KotlinMultiplatformExtension>()
 
         kotlinMppExtension.targets.configureEach {
+            val targetName = name
             compilations.configureEach {
                 compileTaskProvider.configure {
                     compilerOptions {
                         optIn.add("kotlin.time.ExperimentalTime")
+                        if (targetName == "wasmJs") {
+                            optIn.add("kotlin.js.ExperimentalWasmJsInterop")
+                        }
                     }
                 }
             }
@@ -191,11 +195,15 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     dependsOn("jsProductionExecutableCompileSync")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack js bundle for server-side rendering."
-                    // Workaround to initialize internal "versions" property
+                    // Workaround to initialize internal "versions" properties
                     val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
                     val prop = projectObjects.property<NpmVersions>()
                     prop.set(NpmVersions())
                     method.invoke(this, prop)
+                    val method2 = javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
+                    val prop2 = projectObjects.property<Boolean>()
+                    prop2.set(false)
+                    method2.invoke(this, prop2)
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackJs.entryModuleName.get())
@@ -255,11 +263,15 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     dependsOn("wasmJsProductionExecutableCompileSync")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack wasmJs bundle for server-side rendering."
-                    // Workaround to initialize internal "versions" property
+                    // Workaround to initialize internal "versions" properties
                     val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
                     val prop = projectObjects.property<NpmVersions>()
                     prop.set(NpmVersions())
                     method.invoke(this, prop)
+                    val method2 = javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
+                    val prop2 = projectObjects.property<Boolean>()
+                    prop2.set(true)
+                    method2.invoke(this, prop2)
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackWasmJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackWasmJs.entryModuleName.get())

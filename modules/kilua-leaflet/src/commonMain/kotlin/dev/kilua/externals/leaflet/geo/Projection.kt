@@ -27,7 +27,7 @@ package dev.kilua.externals.leaflet.geo
 import dev.kilua.externals.leaflet.geometry.Bounds
 import dev.kilua.externals.leaflet.geometry.Point
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 
 /**
  * An object with methods for projecting geographical coordinates of the world onto a flat surface

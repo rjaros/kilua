@@ -141,6 +141,7 @@ import dev.kilua.rest.callDynamic
 import dev.kilua.rest.requestDynamic
 import dev.kilua.routing.Meta
 import dev.kilua.routing.RoutingModel
+import dev.kilua.routing.browserRouter
 import dev.kilua.routing.global
 import dev.kilua.routing.hashRouter
 import dev.kilua.state.collectAsState
@@ -176,7 +177,7 @@ import dev.kilua.utils.unsafeCast
 import js.core.JsAny
 import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toJsString
-import js.import.JsModule
+import kotlin.js.JsModule
 import js.json.parse
 import js.promise.Promise
 import js.promise.invoke
@@ -199,8 +200,8 @@ import web.events.EventType
 import web.events.addEventListener
 import web.events.removeEventListener
 import web.html.HTMLElement
+import web.mouse.MouseEvent
 import web.timers.setTimeout
-import web.uievents.MouseEvent
 import web.window.window
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -620,7 +621,105 @@ class App : Application() {
                     }
                 }
 
-                hashRouter { ctx ->
+                var state by remember { mutableStateOf("Home") }
+
+                browserRouter { ctx ->
+                    defaultContent {
+                        p {
+                            +state
+                            button("Log routing tree model") {
+                                onClick {
+                                    console.log("RoutingModel: ${RoutingModel.global}")
+                                }
+                            }
+                        }
+                    }
+                    defaultMeta {
+                        titleTemplate = "% - My page"
+                        description = "The description of my home page"
+                        keywords = listOf("home", "page")
+                    }
+                    route("/") {
+                        action {
+                            state = "Home"
+                        }
+                        meta {
+                            title = "Home"
+                        }
+                    }
+                    route("/article") {
+                        int { ctx ->
+                            action { articleId ->
+                                state = "Article: $articleId"
+                            }
+                            meta {
+                                view {
+                                    title = "Article ${ctx.value}"
+                                }
+                            }
+                        }
+                        action {
+                            state = "Article ID not specified"
+                        }
+                        meta {
+                            title = "404"
+                        }
+                    }
+                    route("/about") { ctx ->
+                        action {
+                            state = "About"
+                            console.log("Current parameters: ${ctx.parameters}")
+                        }
+                        meta {
+                            title = "About"
+                        }
+                    }
+                    action {
+                        state = "Not found"
+                        console.log("Remaining path: ${ctx.remainingPath}")
+                    }
+                    meta {
+                        title = "404"
+                    }
+                }
+
+/*                browserRouter {
+                    route("/") {
+                        view {
+                            p {
+                                +"Home: $home"
+                            }
+                        }
+                    }
+                    route("/article") {
+                        int {
+                            view { articleId ->
+                                p {
+                                    +"Article: $articleId"
+                                }
+                            }
+                        }
+                        view {
+                            p {
+                                +"Article ID not specified"
+                            }
+                        }
+                    }
+                    route("/about") {
+                        view {
+                            p {
+                                +"About"
+                            }
+                        }
+                    }
+                    view {
+                        p {
+                            +"Not found"
+                        }
+                    }
+                }*/
+
+/*                hashRouter { ctx ->
                     defaultMeta {
                         author = "Kilua Team"
                     }
@@ -729,7 +828,7 @@ class App : Application() {
                             }
                         }
                     }
-                }
+                }*/
 
                 val lat = 51.505
                 val lng = -0.09

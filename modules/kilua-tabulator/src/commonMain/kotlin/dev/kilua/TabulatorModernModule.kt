@@ -24,7 +24,7 @@
 package dev.kilua
 
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 
 @JsModule("tabulator-tables/dist/css/tabulator_modern.min.css")
 internal external object TabulatorModernCss : JsAny

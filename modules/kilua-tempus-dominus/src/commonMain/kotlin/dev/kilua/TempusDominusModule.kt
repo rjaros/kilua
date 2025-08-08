@@ -24,7 +24,7 @@
 package dev.kilua
 
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 
 @JsModule("@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css")
 internal external object TempusDominusCss : JsAny

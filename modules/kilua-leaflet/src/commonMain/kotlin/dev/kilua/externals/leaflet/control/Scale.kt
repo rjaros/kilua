@@ -27,8 +27,8 @@ package dev.kilua.externals.leaflet.control
 
 import dev.kilua.externals.leaflet.control.Scale.ScaleOptions
 import dev.kilua.externals.leaflet.events.LeafletEventHandlerFnMap
-import js.import.JsModule
-import js.import.JsQualifier
+import kotlin.js.JsModule
+import kotlin.js.JsQualifier
 import kotlin.js.definedExternally
 
 /**

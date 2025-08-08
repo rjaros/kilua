@@ -30,7 +30,7 @@ import web.events.Event
 import web.events.EventType
 import web.events.addEventListener
 import web.events.removeEventListener
-import web.uievents.PointerEvent
+import web.pointer.PointerEvent
 import web.window.window
 
 /**

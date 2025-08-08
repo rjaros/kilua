@@ -34,7 +34,7 @@ import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.unsafeCast
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 import web.html.HTMLElement
 import kotlin.js.definedExternally
 

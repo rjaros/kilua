@@ -28,8 +28,8 @@ import dev.kilua.externals.JsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
 import js.core.JsString
+import web.dnd.DragEvent
 import web.html.HTMLElement
-import web.uievents.DragEvent
 
 /**
  * Common drag and drop methods delegate.

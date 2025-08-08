@@ -13,6 +13,7 @@ plugins {
 
 repositories {
     gradlePluginPortal()
+    maven { url = uri("https://redirector.kotlinlang.org/maven/dev/") }
 }
 
 detekt {

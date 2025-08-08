@@ -24,14 +24,18 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import java.net.URI
 
-fun KotlinMultiplatformExtension.compilerOptions() {
+fun KotlinMultiplatformExtension.compilerOptions(withWasmMetadata: Boolean = true) {
     targets.configureEach {
+        val targetName = name
         compilations.configureEach {
             compileTaskProvider.configure {
                 compilerOptions {
                     freeCompilerArgs.add("-Xexpect-actual-classes")
                     freeCompilerArgs.add("-Xdont-warn-on-error-suppression")
                     optIn.add("kotlin.time.ExperimentalTime")
+                    if (targetName == "wasmJs" || (withWasmMetadata && targetName == "metadata")) {
+                        optIn.add("kotlin.js.ExperimentalWasmJsInterop")
+                    }
                 }
             }
         }

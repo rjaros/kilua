@@ -27,8 +27,8 @@ package dev.kilua.externals.leaflet.control
 
 import dev.kilua.externals.leaflet.control.Zoom.ZoomControlOptions
 import dev.kilua.externals.leaflet.map.LeafletMap
-import js.import.JsModule
-import js.import.JsQualifier
+import kotlin.js.JsModule
+import kotlin.js.JsQualifier
 import kotlin.js.definedExternally
 
 /**

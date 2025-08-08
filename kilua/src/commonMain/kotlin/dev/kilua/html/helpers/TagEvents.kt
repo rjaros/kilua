@@ -25,12 +25,12 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import web.events.Event
-import web.uievents.FocusEvent
-import web.uievents.InputEvent
-import web.uievents.KeyboardEvent
-import web.uievents.MouseEvent
-import web.uievents.PointerEvent
-import web.uievents.TouchEvent
+import web.focus.FocusEvent
+import web.input.InputEvent
+import web.keyboard.KeyboardEvent
+import web.mouse.MouseEvent
+import web.pointer.PointerEvent
+import web.touch.TouchEvent
 
 /**
  * Common tag events.

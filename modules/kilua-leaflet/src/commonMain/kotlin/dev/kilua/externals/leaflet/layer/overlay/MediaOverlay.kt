@@ -26,7 +26,7 @@ package dev.kilua.externals.leaflet.layer.overlay
 
 import dev.kilua.externals.leaflet.geo.LatLngBounds
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 
 /**
  * Artificial interface that does not represent a Leaflet type. It is used to align

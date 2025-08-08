@@ -33,13 +33,13 @@ import web.abort.AbortController
 import web.events.Event
 import web.events.EventType
 import web.events.addEventListener
+import web.focus.FocusEvent
 import web.html.HTMLElement
-import web.uievents.FocusEvent
-import web.uievents.InputEvent
-import web.uievents.KeyboardEvent
-import web.uievents.MouseEvent
-import web.uievents.PointerEvent
-import web.uievents.TouchEvent
+import web.input.InputEvent
+import web.keyboard.KeyboardEvent
+import web.mouse.MouseEvent
+import web.pointer.PointerEvent
+import web.touch.TouchEvent
 
 /**
  * Common tag events delegate.
