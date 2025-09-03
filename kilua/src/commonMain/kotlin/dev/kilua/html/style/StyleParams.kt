@@ -27,7 +27,6 @@ import dev.kilua.compose.NonDisposableRoot
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.renderAsCssStyle
-import dev.kilua.utils.toKebabCase
 
 /**
  * Internal container for CSS style parameters.

@@ -24,9 +24,7 @@ package dev.kilua.html.style
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
-import dev.kilua.test.normalizeHtml
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class StyleSpec : DomSpec {
 
