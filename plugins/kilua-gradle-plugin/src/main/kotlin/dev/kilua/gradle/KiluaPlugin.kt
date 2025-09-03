@@ -349,23 +349,6 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     }
                 }
             }
-
-        }
-        project.tasks.withType<BinaryenExec> {
-            binaryenArgs = mutableListOf(
-                "--enable-nontrapping-float-to-int",
-                "--enable-gc",
-                "--enable-reference-types",
-                "--enable-exception-handling",
-                "--enable-bulk-memory",
-                "--inline-functions-with-loops",
-                "--traps-never-happen",
-                "--fast-math",
-                "--closed-world",
-                "-O3", "--gufa",
-                "-O3", "--gufa",
-                "-O3", "--gufa",
-            )
         }
         val dontDisableSkikoProjectProperty = project.findProperty("dev.kilua.plugin.disableSkiko") == "false"
         if (!dontDisableSkikoProjectProperty && kiluaExtension.disableSkiko.get()) {
