@@ -26,7 +26,7 @@
 package dev.kilua.externals.leaflet.events
 
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 
 
 public external interface LeafletEventHandlerFnMap : JsAny {

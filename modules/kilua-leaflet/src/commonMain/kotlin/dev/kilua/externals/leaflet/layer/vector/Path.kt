@@ -27,7 +27,7 @@ package dev.kilua.externals.leaflet.layer.vector
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.vector.Path.PathOptions
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 import web.dom.Element
 import kotlin.js.definedExternally
 

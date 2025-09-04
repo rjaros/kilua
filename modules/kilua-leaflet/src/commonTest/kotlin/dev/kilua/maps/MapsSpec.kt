@@ -46,7 +46,7 @@ class MapsSpec : DomSpec {
                     val featureGroup = FeatureGroup()
                     featureGroup.addTo(this)
                     val marker = LeafletObjectFactory.marker(position)
-                    marker.addEventListener("click", {
+                    marker.on("click", {
                         window.open("https://www.openstreetmap.org/?mlat=$lat&mlon=$lng#map=18/$lat/$lng&layers=N")
                     })
                     marker.addTo(featureGroup)
@@ -130,7 +130,7 @@ Leaflet
                         val featureGroup = FeatureGroup()
                         featureGroup.addTo(this)
                         val marker = LeafletObjectFactory.marker(position)
-                        marker.addEventListener("click", {
+                        marker.on("click", {
                             window.open("https://www.openstreetmap.org/?mlat=$lat&mlon=$lng#map=18/$lat/$lng&layers=N")
                         })
                         marker.addTo(featureGroup)

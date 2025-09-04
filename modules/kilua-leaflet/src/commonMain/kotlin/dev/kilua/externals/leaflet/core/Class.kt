@@ -25,7 +25,7 @@
 package dev.kilua.externals.leaflet.core
 
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 
 /**
  * [`L.Class`](https://leafletjs.com/SlavaUkraini/reference.html#class)

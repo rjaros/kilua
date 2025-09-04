@@ -23,7 +23,7 @@
 
 package dev.kilua.externals
 
-import js.import.JsModule
+import kotlin.js.JsModule
 import js.core.JsAny
 import js.core.JsNumber
 import js.core.JsString

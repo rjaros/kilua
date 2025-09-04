@@ -35,9 +35,6 @@ kotlin {
                 api(project(":modules:kilua-core-modules"))
 //                implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.9-SNAPSHOT.tgz"))
                 implementation(npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get()))
-                implementation(npm("css-loader", libs.versions.css.loader.get()))
-                implementation(npm("style-loader", libs.versions.style.loader.get()))
-                implementation(npm("imports-loader", libs.versions.imports.loader.get()))
             }
         }
         val commonTest by getting {
@@ -50,6 +47,7 @@ kotlin {
         }
         val jsMain by getting {
             dependencies {
+                implementation(npm("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get()))
             }
         }
         val wasmJsMain by getting {

@@ -24,7 +24,7 @@
 
 package dev.kilua.test
 
-import js.import.JsModule
+import kotlin.js.JsModule
 import js.core.JsAny
 
 @Suppress("UnusedPrivateProperty")

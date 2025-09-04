@@ -28,6 +28,7 @@ import com.charleskorn.kaml.YamlNamingStrategy
 import dev.kilua.gradle.tasks.KiluaExportHtmlTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
@@ -44,10 +45,14 @@ import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.NpmVersions
+import org.jetbrains.kotlin.gradle.targets.js.npm.BaseNpmExtension
+import org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
-import org.jetbrains.kotlin.gradle.targets.wasm.binaryen.BinaryenExec
+import org.jetbrains.kotlin.gradle.targets.wasm.npm.WasmNpmExtension
+import org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnRootExtension
+import org.jetbrains.kotlin.gradle.targets.web.yarn.BaseYarnRootExtension
 import org.tomlj.Toml
 
 public abstract class KiluaPlugin : Plugin<Project> {
@@ -90,10 +95,14 @@ public abstract class KiluaPlugin : Plugin<Project> {
         val kotlinMppExtension = project.extensions.getByType<KotlinMultiplatformExtension>()
 
         kotlinMppExtension.targets.configureEach {
+            val targetName = name
             compilations.configureEach {
                 compileTaskProvider.configure {
                     compilerOptions {
                         optIn.add("kotlin.time.ExperimentalTime")
+                        if (targetName == "metadata" || targetName == "js" || targetName == "wasmJs") {
+                            optIn.add("kotlin.js.ExperimentalWasmJsInterop")
+                        }
                     }
                 }
             }
@@ -191,11 +200,26 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     dependsOn("jsProductionExecutableCompileSync")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack js bundle for server-side rendering."
-                    // Workaround to initialize internal "versions" property
-                    val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
-                    val prop = projectObjects.property<NpmVersions>()
-                    prop.set(NpmVersions())
-                    method.invoke(this, prop)
+                    try {
+                        // Workaround to initialize internal properties of the KotlinWebpack class
+                        val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
+                        val prop = projectObjects.property<NpmVersions>()
+                        prop.set(NpmVersions())
+                        method.invoke(this, prop)
+                        val method2 = javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
+                        val prop2 = projectObjects.property<Boolean>()
+                        prop2.set(false)
+                        method2.invoke(this, prop2)
+                        val method3 = kotlinWebpackJs.javaClass.getDeclaredMethod("getNpmToolingEnvDir\$kotlin_gradle_plugin_common")
+                        val prop3 = method3.invoke(kotlinWebpackJs) as DirectoryProperty
+                        val method4 = javaClass.getDeclaredMethod(
+                            "setNpmToolingEnvDir\$kotlin_gradle_plugin_common",
+                            Object::class.java
+                        )
+                        method4.invoke(this, prop3.get())
+                    } catch (e: Exception) {
+                        logger.error("Failed to initialize KotlinWebpack properties", e)
+                    }
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackJs.entryModuleName.get())
@@ -252,14 +276,29 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     projectObjects
                 )
                 project.tasks.getByName<KotlinWebpack>("wasmJsBrowserProductionWebpackSSR").apply {
-                    dependsOn("wasmJsProductionExecutableCompileSync")
+                    dependsOn("wasmJsBrowserProductionWebpack")
                     group = KILUA_TASK_GROUP
                     description = "Builds webpack wasmJs bundle for server-side rendering."
-                    // Workaround to initialize internal "versions" property
-                    val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
-                    val prop = projectObjects.property<NpmVersions>()
-                    prop.set(NpmVersions())
-                    method.invoke(this, prop)
+                    try {
+                        // Workaround to initialize internal properties of the KotlinWebpack class
+                        val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
+                        val prop = projectObjects.property<NpmVersions>()
+                        prop.set(NpmVersions())
+                        method.invoke(this, prop)
+                        val method2 = javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
+                        val prop2 = projectObjects.property<Boolean>()
+                        prop2.set(true)
+                        method2.invoke(this, prop2)
+                        val method3 = kotlinWebpackWasmJs.javaClass.getDeclaredMethod("getNpmToolingEnvDir\$kotlin_gradle_plugin_common")
+                        val prop3 = method3.invoke(kotlinWebpackWasmJs) as DirectoryProperty
+                        val method4 = javaClass.getDeclaredMethod(
+                            "setNpmToolingEnvDir\$kotlin_gradle_plugin_common",
+                            Object::class.java
+                        )
+                        method4.invoke(this, prop3.get())
+                    } catch (e: Exception) {
+                        logger.error("Failed to initialize KotlinWebpack properties", e)
+                    }
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
                     inputFilesDirectory.set(kotlinWebpackWasmJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackWasmJs.entryModuleName.get())
@@ -398,14 +437,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
     private fun KiluaPluginContext.configureNodeEcosystem() {
         project.logger.debug("configuring Node")
 
-        project.rootProject.extensions.findByType<org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension>()?.apply {
-            project.logger.debug("configuring Npm")
+        fun BaseNpmExtension.configureOverrides() {
             if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
                 override("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
                 override("zzz-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
-                override("css-loader", kiluaVersions["css-loader"]!!)
-                override("style-loader", kiluaVersions["style-loader"]!!)
-                override("imports-loader", kiluaVersions["imports-loader"]!!)
                 override("split.js", kiluaVersions["splitjs"]!!)
                 override("html-differ", kiluaVersions["html-differ"]!!)
                 override("@popperjs/core", kiluaVersions["popperjs-core"]!!)
@@ -432,14 +467,18 @@ public abstract class KiluaPlugin : Plugin<Project> {
             }
         }
 
-        project.rootProject.extensions.findByType<YarnRootExtension>()?.apply {
-            project.logger.debug("configuring Yarn")
+        project.rootProject.extensions.findByType<NpmExtension>()?.apply {
+            configureOverrides()
+        }
+
+        project.rootProject.extensions.findByType<WasmNpmExtension>()?.apply {
+            configureOverrides()
+        }
+
+        fun BaseYarnRootExtension.configureResolutions() {
             if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
                 resolution("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
                 resolution("zzz-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
-                resolution("css-loader", kiluaVersions["css-loader"]!!)
-                resolution("style-loader", kiluaVersions["style-loader"]!!)
-                resolution("imports-loader", kiluaVersions["imports-loader"]!!)
                 resolution("split.js", kiluaVersions["splitjs"]!!)
                 resolution("html-differ", kiluaVersions["html-differ"]!!)
                 resolution("@popperjs/core", kiluaVersions["popperjs-core"]!!)
@@ -465,6 +504,15 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 resolution("leaflet", kiluaVersions["leaflet"]!!)
             }
         }
+
+        project.rootProject.extensions.findByType<YarnRootExtension>()?.apply {
+            configureResolutions()
+        }
+
+        project.rootProject.extensions.findByType<WasmYarnRootExtension>()?.apply {
+            configureResolutions()
+        }
+
     }
 
     public companion object {

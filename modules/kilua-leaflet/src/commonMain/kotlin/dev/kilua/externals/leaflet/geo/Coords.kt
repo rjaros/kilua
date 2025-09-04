@@ -25,7 +25,7 @@
 package dev.kilua.externals.leaflet.geo
 
 import dev.kilua.externals.leaflet.geometry.Point
-import js.import.JsModule
+import kotlin.js.JsModule
 
 
 public open external class Coords : Point {

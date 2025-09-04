@@ -34,7 +34,7 @@ import dev.kilua.utils.unsafeCast
 import js.core.JsPrimitives.toJsString
 import web.events.EventType
 import web.html.HTMLButtonElement
-import web.uievents.MouseEvent
+import web.mouse.MouseEvent
 
 /**
  * Button types.
@@ -147,7 +147,7 @@ public open class Button(
             element.click()
         } else {
             tagEvents.eventsMap["click"]?.forEach {
-                it.value(MouseEvent(EventType<MouseEvent>("click")))
+                it.value(MouseEvent(EventType("click")))
             }
         }
     }

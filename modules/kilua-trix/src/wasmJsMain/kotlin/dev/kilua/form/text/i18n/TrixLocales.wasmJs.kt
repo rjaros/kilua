@@ -31,7 +31,7 @@ import dev.kilua.utils.unsafeCast
 /**
  * A TrixLocale class implementing JsAny interface.
  */
-internal external class TrixLocaleWasm : TrixLocale, JsAny
+internal external interface TrixLocaleWasm : TrixLocale, JsAny
 
 internal actual fun getToolbarContent(locale: Locale): String {
     val trixLocale =

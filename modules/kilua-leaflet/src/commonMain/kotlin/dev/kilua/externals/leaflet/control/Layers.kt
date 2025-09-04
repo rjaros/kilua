@@ -28,8 +28,8 @@ package dev.kilua.externals.leaflet.control
 import dev.kilua.externals.leaflet.control.Layers.LayersOptions
 import dev.kilua.externals.leaflet.layer.Layer
 import js.core.JsNumber
-import js.import.JsModule
-import js.import.JsQualifier
+import kotlin.js.JsModule
+import kotlin.js.JsQualifier
 import kotlin.js.definedExternally
 
 /**

@@ -26,7 +26,7 @@ package dev.kilua.externals.leaflet.layer.vector
 
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geo.LatLngBounds
-import js.import.JsModule
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 

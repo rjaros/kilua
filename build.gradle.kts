@@ -28,9 +28,36 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJ
     rootProject.the<org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension>().apply {
         override("aaa-kilua-assets", libs.versions.npm.kilua.assets.get())
         override("zzz-kilua-assets", libs.versions.npm.kilua.assets.get())
-        override("css-loader", libs.versions.css.loader.get())
-        override("style-loader", libs.versions.style.loader.get())
-        override("imports-loader", libs.versions.imports.loader.get())
+        override("split.js", libs.versions.splitjs.get())
+        override("html-differ", libs.versions.html.differ.get())
+        override("@popperjs/core", libs.versions.popperjs.core.get())
+        override("bootstrap", libs.versions.bootstrap.asProvider().get())
+        override("bootstrap-icons", libs.versions.bootstrap.icons.get())
+        override("@fortawesome/fontawesome-free", libs.versions.fontawesome.get())
+        override("trix", libs.versions.trix.get())
+        override("@eonasdan/tempus-dominus", libs.versions.tempus.dominus.get())
+        override("tom-select", libs.versions.tom.select.get())
+        override("imask", libs.versions.imask.get())
+        override("tabulator-tables", libs.versions.tabulator.get())
+        override("rsup-progress", libs.versions.rsup.progress.get())
+        override("lz-string", libs.versions.lz.string.get())
+        override("marked", libs.versions.marked.get())
+        override("sanitize-html", libs.versions.sanitize.html.get())
+        override("postcss", libs.versions.postcss.asProvider().get())
+        override("postcss-loader", libs.versions.postcss.loader.get())
+        override("tailwindcss", libs.versions.tailwindcss.get())
+        override("@tailwindcss/postcss", libs.versions.tailwindcss.get())
+        override("cssnano", libs.versions.cssnano.get())
+        override("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get())
+        override("motion", libs.versions.motion.get())
+        override("leaflet", libs.versions.leaflet.get())
+    }
+}
+
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsRootPlugin> {
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.wasm.npm.WasmNpmExtension>().apply {
+        override("aaa-kilua-assets", libs.versions.npm.kilua.assets.get())
+        override("zzz-kilua-assets", libs.versions.npm.kilua.assets.get())
         override("split.js", libs.versions.splitjs.get())
         override("html-differ", libs.versions.html.differ.get())
         override("@popperjs/core", libs.versions.popperjs.core.get())
@@ -62,6 +89,7 @@ nmcpAggregation {
         username = findProperty("mavenCentralUsername")?.toString()
         password = findProperty("mavenCentralPassword")?.toString()
         publishingType = "USER_MANAGED"
+        publicationName = "Kilua $version"
     }
 }
 

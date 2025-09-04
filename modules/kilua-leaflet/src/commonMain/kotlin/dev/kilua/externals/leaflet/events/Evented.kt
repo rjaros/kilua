@@ -26,7 +26,7 @@ package dev.kilua.externals.leaflet.events
 
 import dev.kilua.externals.leaflet.core.Class
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 // Note: this can be simplified
@@ -92,59 +92,4 @@ public open external class Evented : Class {
     public open fun addEventParent(obj: Evented): Evented /* this */
 
     public open fun removeEventParent(obj: Evented): Evented /* this */
-
-    public open fun addEventListener(type: LeafletEventId,                 fn: LeafletEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletControlEventId,          fn: LayersControlEventHandlerFn,   context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletLayerEventId,            fn: LayerEventHandlerFn,           context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletResizeEventId,           fn: ResizeEventHandlerFn,          context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletPopupEventId,            fn: PopupEventHandlerFn,           context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletTooltipEventId,          fn: TooltipEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletErrorEventId,            fn: ErrorEventHandlerFn,           context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletLocationEventId,         fn: LocationEventHandlerFn,        context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletMouseEventId,            fn: LeafletMouseEventHandlerFn,    context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletKeyboardEventId,         fn: LeafletKeyboardEventHandlerFn, context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletZoomAnimEventId,         fn: ZoomAnimEventHandlerFn,        context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletDragEndEventId,          fn: DragEndEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletTileEventId,             fn: TileEventHandlerFn,            context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(type: LeafletTileErrorId,             fn: TileErrorEventHandlerFn,       context: JsAny = definedExternally): Evented /* this */
-    public open fun addEventListener(eventMap: LeafletEventHandlerFnMap): Evented /* this */
-
-    public open fun removeEventListener(type: LeafletEventId,              fn: LeafletEventHandlerFn = definedExternally,         context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletAnyEventId): Evented /* this */
-    public open fun removeEventListener(type: LeafletControlEventId,       fn: LayersControlEventHandlerFn = definedExternally,   context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletLayerEventId,         fn: LayerEventHandlerFn = definedExternally,           context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletResizeEventId,        fn: ResizeEventHandlerFn = definedExternally,          context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletPopupEventId,         fn: PopupEventHandlerFn = definedExternally,           context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletTooltipEventId,       fn: TooltipEventHandlerFn = definedExternally,         context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletErrorEventId,         fn: ErrorEventHandlerFn = definedExternally,           context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletLocationEventId,      fn: LocationEventHandlerFn = definedExternally,        context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletMouseEventId,         fn: LeafletMouseEventHandlerFn = definedExternally,    context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletKeyboardEventId,      fn: LeafletKeyboardEventHandlerFn = definedExternally, context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletZoomAnimEventId,      fn: ZoomAnimEventHandlerFn = definedExternally,        context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletDragEndEventId,       fn: DragEndEventHandlerFn = definedExternally,         context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletTileEventId,          fn: TileEventHandlerFn = definedExternally,            context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(type: LeafletTileErrorId,          fn: TileErrorEventHandlerFn = definedExternally,       context: JsAny = definedExternally): Evented /* this */
-    public open fun removeEventListener(eventMap: LeafletEventHandlerFnMap): Evented /* this */
-
-    public open fun clearAllEventListeners(): Evented /* this */
-
-    public open fun addOneTimeEventListener(type: LeafletEventId,          fn: LeafletEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletControlEventId,   fn: LayersControlEventHandlerFn,   context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletLayerEventId,     fn: LayerEventHandlerFn,           context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletResizeEventId,    fn: ResizeEventHandlerFn,          context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletPopupEventId,     fn: PopupEventHandlerFn,           context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletTooltipEventId,   fn: TooltipEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletErrorEventId,     fn: ErrorEventHandlerFn,           context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletLocationEventId,  fn: LocationEventHandlerFn,        context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletMouseEventId,     fn: LeafletMouseEventHandlerFn,    context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletKeyboardEventId,  fn: LeafletKeyboardEventHandlerFn, context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletZoomAnimEventId,  fn: ZoomAnimEventHandlerFn,        context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletDragEndEventId,   fn: DragEndEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletTileEventId,      fn: TileEventHandlerFn,            context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(type: LeafletTileErrorId,      fn: TileErrorEventHandlerFn,       context: JsAny = definedExternally): Evented /* this */
-    public open fun addOneTimeEventListener(eventMap: LeafletEventHandlerFnMap): Evented /* this */
-
-    public open fun fireEvent(type: String, data: JsAny = definedExternally, propagate: Boolean = definedExternally): Evented /* this */
-
-    public open fun hasEventListeners(type: String): Boolean
 }

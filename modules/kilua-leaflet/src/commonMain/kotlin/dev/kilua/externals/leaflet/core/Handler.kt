@@ -25,7 +25,7 @@
 package dev.kilua.externals.leaflet.core
 
 import dev.kilua.externals.leaflet.map.LeafletMap
-import js.import.JsModule
+import kotlin.js.JsModule
 
 /**
  * Abstract class for map interaction handlers

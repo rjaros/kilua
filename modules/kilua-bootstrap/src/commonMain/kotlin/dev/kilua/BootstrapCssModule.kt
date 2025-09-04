@@ -24,7 +24,7 @@
 package dev.kilua
 
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 
 @JsModule("bootstrap/dist/css/bootstrap.min.css")
 internal external object BootstrapCss : JsAny

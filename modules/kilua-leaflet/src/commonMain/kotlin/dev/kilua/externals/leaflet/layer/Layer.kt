@@ -35,7 +35,7 @@ import dev.kilua.externals.leaflet.layer.overlay.Tooltip
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip.TooltipOptions
 import dev.kilua.externals.leaflet.map.LeafletMap
 import js.core.JsAny
-import js.import.JsModule
+import kotlin.js.JsModule
 import web.html.HTMLElement
 import kotlin.js.definedExternally
 
@@ -149,7 +149,7 @@ public abstract external class  Layer<T : LayerOptions>(
     public interface InteractiveLayerOptions : LayerOptions {
         /** If true, the popup/tooltip will listen to the mouse events. */
         public var interactive: Boolean?
-        public var bubblingMouseEvents: Boolean?
+        public var bubblingPointerEvents: Boolean?
     }
 
 }

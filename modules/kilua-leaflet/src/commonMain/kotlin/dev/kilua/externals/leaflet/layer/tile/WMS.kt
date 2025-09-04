@@ -28,8 +28,8 @@ package dev.kilua.externals.leaflet.layer.tile
 
 import dev.kilua.externals.leaflet.geo.CRS
 import js.core.JsAny
-import js.import.JsModule
-import js.import.JsQualifier
+import kotlin.js.JsModule
+import kotlin.js.JsQualifier
 import kotlin.js.definedExternally
 
 /**

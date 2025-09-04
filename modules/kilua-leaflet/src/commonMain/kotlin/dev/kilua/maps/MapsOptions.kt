@@ -70,9 +70,9 @@ public data class MapsOptions(
     val scrollWheelZoom: JsAny? = null,
     val wheelDebounceTime: Double? = null,
     val wheelPxPerZoomLevel: Double? = null,
-    val tap: Boolean? = null,
+    val tapHold: Boolean? = null,
     val tapTolerance: Double? = null,
-    val touchZoom: JsAny? = null,
+    val pinchZoom: JsAny? = null,
     val bounceAtZoomLimits: Boolean? = null,
 )
 
@@ -111,8 +111,8 @@ internal fun MapsOptions.toJs(): LeafletMapOptions = obj {
     if (this@toJs.scrollWheelZoom != null) this.scrollWheelZoom = this@toJs.scrollWheelZoom
     if (this@toJs.wheelDebounceTime != null) this.wheelDebounceTime = this@toJs.wheelDebounceTime
     if (this@toJs.wheelPxPerZoomLevel != null) this.wheelPxPerZoomLevel = this@toJs.wheelPxPerZoomLevel
-    if (this@toJs.tap != null) this.tap = this@toJs.tap
+    if (this@toJs.tapHold != null) this.tapHold = this@toJs.tapHold
     if (this@toJs.tapTolerance != null) this.tapTolerance = this@toJs.tapTolerance
-    if (this@toJs.touchZoom != null) this.touchZoom = this@toJs.touchZoom
+    if (this@toJs.pinchZoom != null) this.pinchZoom = this@toJs.pinchZoom
     if (this@toJs.bounceAtZoomLimits != null) this.bounceAtZoomLimits = this@toJs.bounceAtZoomLimits
 }

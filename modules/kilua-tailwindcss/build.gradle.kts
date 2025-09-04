@@ -30,7 +30,6 @@ kotlin {
                 implementation(npm("tailwindcss", libs.versions.tailwindcss.get()))
                 implementation(npm("@tailwindcss/postcss", libs.versions.tailwindcss.get()))
                 implementation(npm("cssnano", libs.versions.cssnano.get()))
-                implementation(npm("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get()))
             }
         }
         val commonTest by getting {

@@ -1,4 +1,5 @@
-@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE", "NON_ABSTRACT_MEMBER_OF_EXTERNAL_INTERFACE")
+
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -23,16 +24,21 @@
 
 package dev.kilua.externals
 
-import js.import.JsModule
 import dev.kilua.utils.nativeMapOf
 import js.core.JsAny
+import kotlin.js.JsModule
+import kotlin.js.definedExternally
 
 /**
  * Tempus Dominus Locale.
  */
-public open external class TempusDominusLocale : JsAny {
+public external interface TempusDominusLocale : JsAny {
     public var name: String
+        set(value) = definedExternally
+        get() = definedExternally
     public var localization: JsAny
+        set(value) = definedExternally
+        get() = definedExternally
 }
 
 @JsModule("@eonasdan/tempus-dominus/dist/locales/ar.js")

@@ -31,7 +31,7 @@ import dev.kilua.externals.leaflet.geometry.Point
 import js.core.JsAny
 import js.core.JsNumber
 import js.core.JsString
-import js.import.JsModule
+import kotlin.js.JsModule
 import web.html.HTMLElement
 import kotlin.js.definedExternally
 
@@ -46,26 +46,11 @@ import kotlin.js.definedExternally
  */
 public external object DomUtil : JsAny {
 
-    /** Vendor-prefixed transform style name (e.g. 'webkitTransform' for WebKit). */
-    public val TRANSFORM: String
-
-    /** Vendor-prefixed transition style name. */
-    public val TRANSITION: String
-
-    /** Vendor-prefixed transitionend event name. */
-    public val TRANSITION_END: String
-
     /** Get Element by the given HTML-Element */
     public fun get(element: HTMLElement): HTMLElement?
 
     /** Get Element by its ID */
     public fun get(element: String): HTMLElement?
-
-    /**
-     * Returns the value for a certain style attribute on an element, including computed values or
-     * values set through CSS.
-     */
-    public fun getStyle(el: HTMLElement, styleAttrib: String): String?
 
     /**
      * Creates an HTML element with `tagName`, sets its class to `className`, and optionally
@@ -81,17 +66,8 @@ public external object DomUtil : JsAny {
         container: HTMLElement = definedExternally
     ): HTMLElement
 
-    public fun remove(el: HTMLElement)
-    public fun empty(el: HTMLElement)
     public fun toFront(el: HTMLElement)
     public fun toBack(el: HTMLElement)
-    public fun hasClass(el: HTMLElement, name: String): Boolean
-    public fun addClass(el: HTMLElement, name: String)
-    public fun removeClass(el: HTMLElement, name: String)
-    public fun setClass(el: HTMLElement, name: String)
-    public fun getClass(el: HTMLElement): String
-    public fun setOpacity(el: HTMLElement, opacity: JsNumber)
-    public fun testProp(props: JsArray<JsString>): JsAny // string | false
     public fun setTransform(el: HTMLElement, offset: Point, scale: JsNumber = definedExternally)
 
     /**
@@ -119,4 +95,14 @@ public external object DomUtil : JsAny {
      * Cancels the effects of a previous [preventOutline].
      */
     public fun restoreOutline()
+
+    /**
+     * Finds the closest parent node which size (width and height) is not null.
+     */
+    public fun getSizedParentNode(element: HTMLElement): HTMLElement
+
+    /**
+     * Computes the CSS scale currently applied on the element.
+     */
+    public fun getScale(el: HTMLElement): Point
 }

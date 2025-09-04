@@ -29,7 +29,7 @@ import js.core.JsAny
  * Trix editor locale strings.
  */
 @Suppress("PropertyName", "VariableNaming")
-public open external class TrixLocale : JsAny {
+public external interface TrixLocale : JsAny {
     public var GB: String
     public var KB: String
     public var MB: String

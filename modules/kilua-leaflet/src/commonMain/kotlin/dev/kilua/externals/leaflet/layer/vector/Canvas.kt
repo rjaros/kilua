@@ -24,7 +24,7 @@
 
 package dev.kilua.externals.leaflet.layer.vector
 
-import js.import.JsModule
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 /**

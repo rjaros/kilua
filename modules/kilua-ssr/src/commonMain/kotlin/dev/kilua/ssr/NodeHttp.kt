@@ -22,7 +22,7 @@
 
 package dev.kilua.ssr
 
-import js.import.JsModule
+import kotlin.js.JsModule
 import js.core.JsAny
 
 /**

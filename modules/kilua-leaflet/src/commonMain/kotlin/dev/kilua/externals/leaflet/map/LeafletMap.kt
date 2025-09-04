@@ -43,11 +43,10 @@ import dev.kilua.externals.leaflet.layer.overlay.Tooltip
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip.TooltipOptions
 import dev.kilua.externals.leaflet.layer.vector.Path
 import dev.kilua.externals.leaflet.layer.vector.Renderer
-import dev.kilua.utils.obj
 import js.core.JsAny
-import js.import.JsModule
 import web.html.HTMLElement
-import web.uievents.MouseEvent
+import web.pointer.PointerEvent
+import kotlin.js.JsModule
 import kotlin.js.JsName
 import kotlin.js.definedExternally
 
@@ -246,9 +245,9 @@ public open external class LeafletMap : Evented {
     public open fun layerPointToContainerPoint(point: Point): Point
     public open fun containerPointToLatLng(point: Point): LatLng
     public open fun latLngToContainerPoint(latlng: LatLng): Point
-    public open fun mouseEventToContainerPoint(ev: MouseEvent): Point
-    public open fun mouseEventToLayerPoint(ev: MouseEvent): Point
-    public open fun mouseEventToLatLng(ev: MouseEvent): LatLng
+    public open fun pointerEventToContainerPoint(ev: PointerEvent): Point
+    public open fun pointerEventToLayerPoint(ev: PointerEvent): Point
+    public open fun pointerEventToLatLng(ev: PointerEvent): LatLng
     //</editor-fold>
 
     //</editor-fold>
@@ -307,9 +306,9 @@ public open external class LeafletMap : Evented {
         public var wheelPxPerZoomLevel: Double?
 
         // Touch interaction options
-        public var tap: Boolean?
+        public var tapHold: Boolean?
         public var tapTolerance: Double?
-        public var touchZoom: JsAny? /* Boolean? | "center" */
+        public var pinchZoom: JsAny? /* Boolean? | "center" */
         public var bounceAtZoomLimits: Boolean?
     }
 
