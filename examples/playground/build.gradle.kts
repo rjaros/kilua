@@ -14,6 +14,9 @@ kotlin {
         useEsModules()
         browser {
             commonWebpackConfig {
+                cssSupport {
+                    enabled = true
+                }
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
@@ -32,6 +35,9 @@ kotlin {
         useEsModules()
         browser {
             commonWebpackConfig {
+                cssSupport {
+                    enabled = true
+                }
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
@@ -69,14 +75,6 @@ kotlin {
                 implementation(project(":modules:kilua-jetpack"))
                 implementation(project(":modules:kilua-animation"))
                 implementation(project(":modules:kilua-leaflet"))
-            }
-        }
-        val jsMain by getting {
-            dependencies {
-            }
-        }
-        val wasmJsMain by getting {
-            dependencies {
             }
         }
     }

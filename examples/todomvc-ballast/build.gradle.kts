@@ -14,6 +14,9 @@ kotlin {
         useEsModules()
         browser {
             commonWebpackConfig {
+                cssSupport {
+                    enabled = true
+                }
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
@@ -32,6 +35,9 @@ kotlin {
         useEsModules()
         browser {
             commonWebpackConfig {
+                cssSupport {
+                    enabled = true
+                }
                 outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
@@ -57,14 +63,6 @@ kotlin {
                 implementation(libs.ballast.sync)
                 implementation(libs.ballast.undo)
                 implementation(libs.koin.core)
-            }
-        }
-        val jsMain by getting {
-            dependencies {
-            }
-        }
-        val wasmJsMain by getting {
-            dependencies {
             }
         }
     }

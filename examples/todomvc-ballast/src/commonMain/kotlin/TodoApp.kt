@@ -48,12 +48,12 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 import web.cssom.ClassName
+import web.focus.FocusEvent
 import web.keyboard.Enter
 import web.keyboard.Escape
 import web.keyboard.KeyCode
-import web.uievents.FocusEvent
-import web.uievents.KeyboardEvent
-import web.uievents.MouseEvent
+import web.keyboard.KeyboardEvent
+import web.mouse.MouseEvent
 
 class App : Application(), KoinComponent {
 
