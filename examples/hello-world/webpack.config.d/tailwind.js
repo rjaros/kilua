@@ -1,12 +1,7 @@
 ;(function() {
     config.module.rules.push({
-        test: /\.twcss$/,
+        test: /tailwind\.css$/,
         use: [
-            "style-loader",
-            {
-                loader: "css-loader",
-                options: {sourceMap: false}
-            },
             {
                 loader: "postcss-loader",
                 options: {

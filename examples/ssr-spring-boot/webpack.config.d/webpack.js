@@ -1,12 +1,29 @@
 config.resolve.fallback = {
     "http": false,
-}
+};
+config.resolve.modules.push("kotlin");
+config.watchOptions = config.watchOptions || {
+    ignored: ["**/*.kt", "**/node_modules"]
+};
 if (config.devServer) {
+    config.devServer.client = {
+        overlay: false
+    };
     config.devServer.hot = true;
     config.devServer.open = false;
     config.devServer.port = 3000;
     config.devServer.historyApiFallback = true;
     config.devtool = 'eval-cheap-source-map';
+    config.devServer.static = config.devServer.static.map(file => {
+        if (typeof file === "string") {
+            return {
+                directory: file,
+                watch: false,
+            }
+        } else {
+            return file
+        }
+    });
 } else {
     config.devtool = undefined;
     config.resolve.alias = {
@@ -37,8 +54,8 @@ if (config.devServer) {
         "tom-select/dist/css/tom-select.default.min.css": false,
         "tom-select/dist/css/tom-select.min.css": false,
         "trix/dist/trix.css": false,
-        "/kotlin/tailwind/tailwind.twcss": false,
-    }
+        "./tailwind/tailwind.css": false,
+    };
 }
 
 // disable bundle size warning

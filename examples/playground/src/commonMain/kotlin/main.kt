@@ -208,34 +208,34 @@ import kotlin.random.nextInt
 import kotlin.random.nextUInt
 import kotlin.time.Duration.Companion.seconds
 
-@JsModule("/kotlin/modules/json/test.json")
+@JsModule("./modules/json/test.json")
 external object testJson : LocalResource
 
-@JsModule("/kotlin/modules/i18n/messages-de.po")
+@JsModule("./modules/i18n/messages-de.po")
 external object messagesDe : JsAny
 
-@JsModule("/kotlin/modules/i18n/messages-en.po")
+@JsModule("./modules/i18n/messages-en.po")
 external object messagesEn : JsAny
 
-@JsModule("/kotlin/modules/i18n/messages-es.po")
+@JsModule("./modules/i18n/messages-es.po")
 external object messagesEs : JsAny
 
-@JsModule("/kotlin/modules/i18n/messages-fr.po")
+@JsModule("./modules/i18n/messages-fr.po")
 external object messagesFr : JsAny
 
-@JsModule("/kotlin/modules/i18n/messages-ja.po")
+@JsModule("./modules/i18n/messages-ja.po")
 external object messagesJa : JsAny
 
-@JsModule("/kotlin/modules/i18n/messages-ko.po")
+@JsModule("./modules/i18n/messages-ko.po")
 external object messagesKo : JsAny
 
-@JsModule("/kotlin/modules/i18n/messages-pl.po")
+@JsModule("./modules/i18n/messages-pl.po")
 external object messagesPl : JsAny
 
-@JsModule("/kotlin/modules/i18n/messages-ru.po")
+@JsModule("./modules/i18n/messages-ru.po")
 external object messagesRu : JsAny
 
-@JsModule("/kotlin/modules/css/style.css")
+@JsModule("./modules/css/style.css")
 external object css
 
 @Serializable

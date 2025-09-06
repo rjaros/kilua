@@ -1,7 +1,7 @@
 ;(function() {
     const MiniCssExtractPlugin = require("mini-css-extract-plugin");
     config.module.rules.push({
-        test: /\.twcss$/,
+        test: /tailwind\.css$/,
         use: [
             MiniCssExtractPlugin.loader,
             {
