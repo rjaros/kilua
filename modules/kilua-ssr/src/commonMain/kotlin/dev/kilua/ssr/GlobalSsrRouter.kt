@@ -24,9 +24,11 @@ package dev.kilua.ssr
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.InternalComposeApi
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.currentCompositionContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -98,13 +100,17 @@ internal fun IComponent.GlobalSsrRouter(
                     @Suppress("UNUSED_EXPRESSION")
                     externalCondition // access value to trigger recomposition on locale change
                     if (!useDoneCallback || externalCondition) {
+                        @OptIn(InternalComposeApi::class)
+                        val recomposer = currentCompositionContext
                         SideEffect {
-                            router.sendRender?.let {
-                                it(router.getRenderingResult())
-                                router.sendRender = null
-                                router.lock = false
+                            recomposer.scheduleFrameEndCallback {
+                                router.sendRender?.let {
+                                    it(router.getRenderingResult())
+                                    router.sendRender = null
+                                    router.lock = false
+                                }
+                                externalCondition = false
                             }
-                            externalCondition = false
                         }
                     }
                 }
