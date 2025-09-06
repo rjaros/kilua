@@ -31,6 +31,7 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.externals.leaflet.map.LeafletMap
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
+import web.console.console
 import web.html.HTMLDivElement
 
 
@@ -53,6 +54,7 @@ public interface IMaps : ITag<HTMLDivElement> {
     /**
      * Apply some configuration to [Leaflet Map][LeafletMap].
      */
+    @Composable
     public fun configureLeafletMap(configure: LeafletMap.() -> Unit)
 
     /**
@@ -94,9 +96,10 @@ public open class Maps(
         this.options = options
     }
 
+    @Composable
     public override fun configureLeafletMap(configure: LeafletMap.() -> Unit) {
         leafletMapConfigurer = configure
-        leafletMap?.leafletMapConfigurer()
+        refresh()
     }
 
     override fun onInsert() {
@@ -111,8 +114,10 @@ public open class Maps(
      * Refresh Leaflet Map by destroying and recreating it.
      */
     protected open fun refresh() {
-        destroyLeafletMap()
-        initializeLeafletMap()
+        if (leafletMap != null) {
+            destroyLeafletMap()
+            initializeLeafletMap()
+        }
     }
 
     /**
@@ -129,8 +134,10 @@ public open class Maps(
      * Destroy the Leaflet Map instance.
      */
     protected open fun destroyLeafletMap() {
-        leafletMap?.remove()
-        leafletMap = null
+        if (renderConfig.isDom) {
+            leafletMap?.remove()
+            leafletMap = null
+        }
     }
 }
 
