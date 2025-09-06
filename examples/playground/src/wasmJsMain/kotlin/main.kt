@@ -20,42 +20,8 @@
  * SOFTWARE.
  */
 
-import dev.kilua.AnimationModule
-import dev.kilua.BootstrapCssModule
-import dev.kilua.BootstrapIconsModule
-import dev.kilua.BootstrapModule
-import dev.kilua.CoreModule
-import dev.kilua.FontAwesomeModule
-import dev.kilua.ImaskModule
-import dev.kilua.JetpackModule
-import dev.kilua.LeafletModule
-import dev.kilua.SplitjsModule
-import dev.kilua.TabulatorModule
-import dev.kilua.TempusDominusModule
-import dev.kilua.ToastifyModule
-import dev.kilua.TomSelectModule
-import dev.kilua.TrixModule
-import dev.kilua.startApplication
+import dev.kilua.Hot
 
-fun main() {
-    startApplication(
-        ::App,
-        null,
-        BootstrapModule,
-        BootstrapCssModule,
-        BootstrapIconsModule,
-        FontAwesomeModule,
-        ImaskModule,
-        SplitjsModule,
-        TabulatorModule,
-        TempusDominusModule,
-        TomSelectModule,
-        ToastifyModule,
-        TrixModule,
-        JetpackModule,
-        AnimationModule,
-//        TailwindcssModule,
-        LeafletModule,
-        CoreModule
-    )
+actual fun webpackHot(): Hot? {
+    return null
 }

@@ -32,8 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import app.softwork.routingcompose.Router
-import dev.kilua.Application
-import dev.kilua.LocalResource
+import dev.kilua.*
 import dev.kilua.animation.MotionTransition
 import dev.kilua.animation.TransitionType
 import dev.kilua.animation.animateColorAsState
@@ -139,11 +138,9 @@ import dev.kilua.rest.RestResponse
 import dev.kilua.rest.call
 import dev.kilua.rest.callDynamic
 import dev.kilua.rest.requestDynamic
-import dev.kilua.routing.Meta
 import dev.kilua.routing.RoutingModel
 import dev.kilua.routing.browserRouter
 import dev.kilua.routing.global
-import dev.kilua.routing.hashRouter
 import dev.kilua.state.collectAsState
 import dev.kilua.svg.path
 import dev.kilua.svg.svg
@@ -160,7 +157,6 @@ import dev.kilua.theme.themeSwitcher
 import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
-import dev.kilua.useModule
 import dev.kilua.utils.KiluaScope
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
@@ -177,7 +173,6 @@ import dev.kilua.utils.unsafeCast
 import js.core.JsAny
 import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toJsString
-import kotlin.js.JsModule
 import js.json.parse
 import js.promise.Promise
 import js.promise.invoke
@@ -203,6 +198,7 @@ import web.html.HTMLElement
 import web.mouse.MouseEvent
 import web.timers.setTimeout
 import web.window.window
+import kotlin.js.JsModule
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextUInt
@@ -2601,3 +2597,28 @@ private fun IComponent.ResponsiveLayout() {
 
     divt(orientation.toString())
 }
+
+fun main() {
+    startApplication(
+        ::App,
+        webpackHot(),
+        BootstrapModule,
+        BootstrapCssModule,
+        BootstrapIconsModule,
+        FontAwesomeModule,
+        ImaskModule,
+        SplitjsModule,
+        TabulatorModule,
+        TempusDominusModule,
+        TomSelectModule,
+        ToastifyModule,
+        TrixModule,
+        JetpackModule,
+        AnimationModule,
+//        TailwindcssModule,
+        LeafletModule,
+        CoreModule
+    )
+}
+
+expect fun webpackHot(): Hot?

@@ -20,27 +20,8 @@
  * SOFTWARE.
  */
 
-import dev.kilua.*
+import dev.kilua.Hot
 
-fun main() {
-    startApplication(
-        ::App,
-        js("import.meta.webpackHot").unsafeCast<Hot?>(),
-        BootstrapModule,
-        BootstrapCssModule,
-        BootstrapIconsModule,
-        FontAwesomeModule,
-        ImaskModule,
-        SplitjsModule,
-        TabulatorModule,
-        TempusDominusModule,
-        TomSelectModule,
-        ToastifyModule,
-        TrixModule,
-        JetpackModule,
-        AnimationModule,
-//        TailwindcssModule,
-        LeafletModule,
-        CoreModule
-    )
+actual fun webpackHot(): Hot? {
+    return js("import.meta.webpackHot").unsafeCast<Hot?>()
 }
