@@ -1,4 +1,4 @@
-@file:JsModule("aaa-kilua-assets/nodejs_dom.js")
+@file:JsModule("aaa-kilua-assets/nodejs_dom.mjs")
 /*
  * Copyright (c) 2023 Robert Jaros
  *
