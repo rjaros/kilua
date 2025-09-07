@@ -1,5 +1,7 @@
+import dev.kilua.Hot
+
 /*
- * Copyright (c) 2024 Robert Jaros
+ * Copyright (c) 2025 Robert Jaros
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,43 +22,6 @@
  * SOFTWARE.
  */
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import dev.kilua.Application
-import dev.kilua.Hot
-import dev.kilua.compose.root
-import dev.kilua.html.button
-import dev.kilua.html.div
-import dev.kilua.startApplication
-
-class App : Application() {
-
-    var counter by mutableStateOf(0)
-
-    override fun start(state: String?) {
-        if (state != null) {
-            this.counter = state.toInt()
-        }
-        root("root") {
-            div {
-                +"Counter value: $counter"
-            }
-            button("Increment") {
-                onClick {
-                    counter++
-                }
-            }
-        }
-    }
-
-    override fun dispose(): String {
-        return counter.toString()
-    }
+actual fun webpackHot(): Hot? {
+    return null
 }
-
-fun main() {
-    startApplication(::App, webpackHot())
-}
-
-expect fun webpackHot(): Hot?
