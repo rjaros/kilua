@@ -36,7 +36,7 @@ class App : Application() {
 
     override fun start(state: String?) {
         if (state != null) {
-            this.counter = state.toInt()
+            counter = state.toInt()
         }
         root("root") {
             div {
