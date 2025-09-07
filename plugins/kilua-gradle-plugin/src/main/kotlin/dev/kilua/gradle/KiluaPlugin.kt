@@ -127,7 +127,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
         }
 
         project.tasks.withType<Sync>().matching {
-            it.name == "jsBrowserDistribution" || it.name == "wasmJsBrowserDistribution"
+            it.name == "jsBrowserDistribution" || it.name == "wasmJsBrowserDistribution" || it.name == "composeCompatibilityBrowserDistribution"
         }.configureEach {
             exclude("/tailwind/**", "/modules/**")
         }
@@ -202,15 +202,18 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     description = "Builds webpack js bundle for server-side rendering."
                     try {
                         // Workaround to initialize internal properties of the KotlinWebpack class
-                        val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
+                        val method =
+                            javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
                         val prop = projectObjects.property<NpmVersions>()
                         prop.set(NpmVersions())
                         method.invoke(this, prop)
-                        val method2 = javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
+                        val method2 =
+                            javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
                         val prop2 = projectObjects.property<Boolean>()
                         prop2.set(false)
                         method2.invoke(this, prop2)
-                        val method3 = kotlinWebpackJs.javaClass.getDeclaredMethod("getNpmToolingEnvDir\$kotlin_gradle_plugin_common")
+                        val method3 =
+                            kotlinWebpackJs.javaClass.getDeclaredMethod("getNpmToolingEnvDir\$kotlin_gradle_plugin_common")
                         val prop3 = method3.invoke(kotlinWebpackJs) as DirectoryProperty
                         val method4 = javaClass.getDeclaredMethod(
                             "setNpmToolingEnvDir\$kotlin_gradle_plugin_common",
@@ -281,15 +284,18 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     description = "Builds webpack wasmJs bundle for server-side rendering."
                     try {
                         // Workaround to initialize internal properties of the KotlinWebpack class
-                        val method = javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
+                        val method =
+                            javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
                         val prop = projectObjects.property<NpmVersions>()
                         prop.set(NpmVersions())
                         method.invoke(this, prop)
-                        val method2 = javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
+                        val method2 =
+                            javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
                         val prop2 = projectObjects.property<Boolean>()
                         prop2.set(true)
                         method2.invoke(this, prop2)
-                        val method3 = kotlinWebpackWasmJs.javaClass.getDeclaredMethod("getNpmToolingEnvDir\$kotlin_gradle_plugin_common")
+                        val method3 =
+                            kotlinWebpackWasmJs.javaClass.getDeclaredMethod("getNpmToolingEnvDir\$kotlin_gradle_plugin_common")
                         val prop3 = method3.invoke(kotlinWebpackWasmJs) as DirectoryProperty
                         val method4 = javaClass.getDeclaredMethod(
                             "setNpmToolingEnvDir\$kotlin_gradle_plugin_common",
@@ -368,7 +374,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                                 registerKiluaExportHtmlTask("exportHtmlWithJs", archiveFile, kiluaConfiguration) {
                                     dependsOn(it)
                                 }
-                                registerKiluaExportTask("exportWithJs", "exportHtmlWithJs", "js") {
+                                registerKiluaExportTask("exportWithJs", "exportHtmlWithJs", "js", false) {
                                     dependsOn("exportHtmlWithJs")
                                 }
                             }
@@ -380,7 +386,12 @@ public abstract class KiluaPlugin : Plugin<Project> {
                                 registerKiluaExportHtmlTask("exportHtmlWithWasmJs", archiveFile, kiluaConfiguration) {
                                     dependsOn(it)
                                 }
-                                registerKiluaExportTask("exportWithWasmJs", "exportHtmlWithWasmJs", "wasmJs") {
+                                registerKiluaExportTask(
+                                    "exportWithWasmJs",
+                                    "exportHtmlWithWasmJs",
+                                    "wasmJs",
+                                    tasks.findByName("jarWithJs") != null
+                                ) {
                                     dependsOn("exportHtmlWithWasmJs")
                                 }
                             }
@@ -418,6 +429,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
         name: String,
         exportHtmlTaskName: String,
         prefix: String,
+        isCompat: Boolean,
         configuration: Copy.() -> Unit = {}
     ) {
         project.logger.debug("registering KiluaExportTask")
@@ -426,7 +438,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
             description = "Export the SSR application as static files"
             destinationDir = project.layout.buildDirectory.dir("site").get().asFile
             val exported = project.tasks.getByName(exportHtmlTaskName).outputs
-            val distribution = project.tasks.getByName("${prefix}BrowserDistribution").outputs
+            val distributionTask = if (isCompat && prefix == "wasmJs") {
+                "composeCompatibilityBrowserDistribution"
+            } else "${prefix}BrowserDistribution"
+            val distribution = project.tasks.getByName(distributionTask).outputs
             from(exported, distribution)
             duplicatesStrategy = DuplicatesStrategy.EXCLUDE
             configuration()
