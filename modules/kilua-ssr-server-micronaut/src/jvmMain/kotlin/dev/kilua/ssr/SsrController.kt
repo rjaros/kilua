@@ -21,6 +21,7 @@
  */
 package dev.kilua.ssr
 
+import io.micronaut.context.annotation.Property
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
@@ -29,6 +30,7 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Error
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Produces
+import io.micronaut.http.server.util.HttpHostResolver
 import jakarta.inject.Inject
 
 /**
@@ -40,6 +42,12 @@ public open class SsrController {
     @Inject
     public lateinit var ssrEngine: SsrEngine
 
+    @Inject
+    public lateinit var hostResolver: HttpHostResolver
+
+    @field:Property(name = "ssr.sitemap")
+    private var sitemap: Boolean? = null
+
     @Produces(MediaType.TEXT_HTML)
     @Get("/")
     public suspend fun root(request: HttpRequest<*>): HttpResponse<String> =
@@ -50,6 +58,16 @@ public open class SsrController {
     public suspend fun index(request: HttpRequest<*>): HttpResponse<String> =
         HttpResponse.ok(ssrEngine.getSsrContent(request.uri.toString(), request.headers.acceptLanguage()?.language))
 
+    @Produces(MediaType.TEXT_XML)
+    @Get("/sitemap.xml")
+    public suspend fun sitemap(request: HttpRequest<*>): HttpResponse<String> {
+        return if (sitemap != false) {
+            val baseUrl = hostResolver.resolve(request)
+            HttpResponse.ok(ssrEngine.getSitemapContent(baseUrl))
+        } else {
+            HttpResponse.notFound()
+        }
+    }
 }
 
 /**

@@ -22,6 +22,7 @@
 
 package dev.kilua.ssr
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
@@ -38,6 +39,10 @@ import org.springframework.web.reactive.function.server.coRouter
  */
 @Configuration
 public open class SsrRouterConfiguration {
+
+    @Autowired
+    private lateinit var ssrConfig: SsrConfig
+
     /**
      * These routes have higher priority then the index route from Kilua-RPC library.
      */
@@ -46,6 +51,9 @@ public open class SsrRouterConfiguration {
     public open fun ssrRoutes(ssrHandler: SsrHandler): RouterFunction<ServerResponse> = coRouter {
         GET("/", ssrHandler::handleRoot)
         GET("/index.html", ssrHandler::handleRoot)
+        if (ssrConfig.sitemap) {
+            GET("/sitemap.xml", ssrHandler::handleSitemap)
+        }
     }
 }
 
@@ -61,5 +69,11 @@ public open class SsrHandler(
         val language = request.headers().acceptLanguage().firstOrNull()?.range
         return ServerResponse.ok().contentType(MediaType.TEXT_HTML)
             .bodyValueAndAwait(ssrEngine.getSsrContent(uri, language))
+    }
+
+    public open suspend fun handleSitemap(request: ServerRequest): ServerResponse {
+        val uri = request.uriBuilder().replacePath(null).replaceQuery(null).build().toString()
+        return ServerResponse.ok().contentType(MediaType.TEXT_XML)
+            .bodyValueAndAwait(ssrEngine.getSitemapContent(uri))
     }
 }

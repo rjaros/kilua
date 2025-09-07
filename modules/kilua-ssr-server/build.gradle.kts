@@ -26,6 +26,7 @@ kotlin {
                 api(libs.ktor.client.cio)
                 api(libs.resources.optimizer)
                 api(libs.expiring.map)
+                api(libs.xml.builder)
                 api(libs.logback.classic)
             }
         }

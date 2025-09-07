@@ -47,6 +47,8 @@ import dev.kilua.i18n.SimpleLocale
 import dev.kilua.routing.DoneCallbackCompositionLocal
 import dev.kilua.routing.Meta
 import dev.kilua.routing.MetaImpl
+import dev.kilua.routing.RoutingModel
+import dev.kilua.routing.Sitemap
 import dev.kilua.routing.globalRouter
 import dev.kilua.utils.KiluaScope
 import dev.kilua.utils.cast
@@ -60,6 +62,7 @@ import js.core.JsPrimitives.toJsString
 import js.globals.globalThis
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 
 /**
  * A router supporting Server-Side Rendering (SSR).
@@ -231,6 +234,15 @@ internal class SsrRouter(
                 res.statusCode = 200
                 res.setHeader("Content-Type", "text/plain")
                 res.end(CssRegister.cssFiles.joinToString("\n") { it })
+            } else if (req.method == "PATCH") {
+                res.statusCode = 200
+                res.setHeader("Content-Type", "text/plain")
+                val sitemap = RoutingModel.global.pathList().map { (path, meta) ->
+                    meta?.sitemap?.let {
+                        it.copy(loc = it.loc ?: path)
+                    } ?: Sitemap(loc = path)
+                }
+                res.end(Json.encodeToString(sitemap))
             } else if (req.method == "DELETE") {
                 process?.exit(1)
             } else {

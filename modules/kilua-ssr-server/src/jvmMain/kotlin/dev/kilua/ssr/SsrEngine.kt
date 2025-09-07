@@ -35,6 +35,8 @@ import kotlinx.serialization.json.Json
 import net.jodah.expiringmap.ExpirationPolicy
 import net.jodah.expiringmap.ExpiringMap
 import org.primefaces.extensions.optimizerplugin.optimizer.CssCompressor
+import org.redundent.kotlin.xml.PrintOptions
+import org.redundent.kotlin.xml.xml
 import org.slf4j.LoggerFactory
 import java.io.StringWriter
 import java.nio.file.Path
@@ -71,6 +73,8 @@ public class SsrEngine(
 
     private val logger = LoggerFactory.getLogger(SsrEngine::class.java)
 
+    private val json = Json { ignoreUnknownKeys = true }
+
     private var isSSR: Boolean = true
     private var workingDir: Path? = null
     private var nodeJsProcess: Process? = null
@@ -84,6 +88,7 @@ public class SsrEngine(
 
     private var cssContent: String? = null
     private var cssProcessed: Boolean = false
+    private var sitemapContent: String? = null
     private var indexTemplate: String = ""
 
     private val cssAssetsNames = setOf(
@@ -198,7 +203,50 @@ public class SsrEngine(
         return if (metaJson.isEmpty()) {
             return null
         } else {
-            Json.decodeFromString(metaJson)
+            json.decodeFromString(metaJson)
+        }
+    }
+
+    /**
+     * Get CSS stylesheet content for SSR.
+     */
+    public suspend fun getSitemapContent(baseUrl: String): String {
+        if (!isSSR) throw IllegalStateException("SSR is not enabled.")
+        return sitemapContent ?: run {
+            if (!lockingFlow.value) lockingFlow.first { it }
+            val response = httpClient.patch(ssrService)
+            sitemapContent = if (response.status == HttpStatusCode.OK) {
+                val sitemapList = json.decodeFromString<List<Sitemap>>(response.bodyAsText())
+                val sitemap = xml("urlset") {
+                    xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9"
+                    sitemapList.forEach {
+                        "url" {
+                            "loc" {
+                                -"$baseUrl${it.loc}"
+                            }
+                            it.lastmod?.let {
+                                "lastmod" {
+                                    -it
+                                }
+                            }
+                            it.changefreq?.let {
+                                "changefreq" {
+                                    -it.lowercase()
+                                }
+                            }
+                            it.priority?.let {
+                                "priority" {
+                                    -it.toString()
+                                }
+                            }
+                        }
+                    }
+                }
+                sitemap.toString(PrintOptions(singleLineTextElements = true))
+            } else {
+                throw Exception("Connection to the SSR service failed with status ${response.status}")
+            }
+            sitemapContent!!
         }
     }
 

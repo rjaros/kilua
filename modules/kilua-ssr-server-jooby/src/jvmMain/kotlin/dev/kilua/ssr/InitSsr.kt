@@ -51,6 +51,7 @@ public fun Kooby.initSsr() {
     val contextPath = if (config.hasPath("ssr.contextPath")) config.getString("ssr.contextPath") else null
     val cacheTime = if (config.hasPath("ssr.cacheTime"))
         (config.getString("ssr.cacheTime")?.toIntOrNull() ?: DEFAULT_SSR_CACHE_TIME) else DEFAULT_SSR_CACHE_TIME
+    val sitemap = if (config.hasPath("ssr.sitemap")) config.getBoolean("ssr.sitemap") else true
     val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, cacheTime)
     before { ctx ->
         ctx.setAttribute(SsrEngineKey, ssrEngine)
@@ -68,6 +69,11 @@ public fun Kooby.initSsr() {
         }
         get("/index.html") {
             ctx.respondSsr()
+        }
+        if (sitemap) {
+            get("/sitemap.xml") {
+                ctx.respondSitemap()
+            }
         }
     }
     val assets = AssetSource.create(javaClass.classLoader, "assets")
@@ -92,4 +98,17 @@ private suspend fun Context.respondSsr() {
         responseCode = StatusCode.OK
         send(ssrEngine.getSsrContent(uri, language))
     }
+}
+
+private suspend fun Context.respondSitemap() {
+    val ssrEngine = getAttribute<SsrEngine>(SsrEngineKey)!!
+    responseType = MediaType.xml
+    responseCode = StatusCode.OK
+    val portPart = if (scheme == "http" && port == 80 || scheme == "https" && port == 443) {
+        ""
+    } else {
+        ":$port"
+    }
+    val baseUrl = "$scheme://$host$portPart"
+    send(ssrEngine.getSitemapContent(baseUrl))
 }

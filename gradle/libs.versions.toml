@@ -31,6 +31,7 @@ tomlj = "1.1.1"
 kaml = "0.93.0"
 resources-optimizer = "2.7.3"
 expiring-map = "0.5.11"
+xml-builder = "1.9.3"
 npm-kilua-assets = "0.0.19"
 splitjs = "1.6.5"
 html-differ = "1.4.0"
@@ -94,6 +95,7 @@ tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
 kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
 resources-optimizer = { module = "org.primefaces.extensions:resources-optimizer-maven-plugin", version.ref = "resources-optimizer" }
 expiring-map = { module = "net.jodah:expiringmap", version.ref = "expiring-map" }
+xml-builder = { module = "org.redundent:kotlin-xml-builder", version.ref = "xml-builder" }
 kilua-gettext = { module = "dev.kilua:kilua-gettext", version.ref = "kilua-gettext" }
 compose-gradle-plugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
 

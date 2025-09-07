@@ -27,6 +27,7 @@ kotlin {
                 api(libs.kotlinx.coroutines.reactor)
                 api(project.dependencies.platform(libs.micronaut.platform))
                 api("io.micronaut:micronaut-http")
+                api("io.micronaut:micronaut-http-server")
                 api("io.micronaut:micronaut-router")
                 api("io.micronaut.reactor:micronaut-reactor")
             }

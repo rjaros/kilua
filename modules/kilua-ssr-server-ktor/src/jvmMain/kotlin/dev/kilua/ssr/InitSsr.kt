@@ -26,6 +26,7 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.application.hooks.*
 import io.ktor.server.http.content.*
+import io.ktor.server.plugins.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -50,12 +51,18 @@ public fun Application.initSsr() {
     val contextPath = environment.config.propertyOrNull("ssr.contextPath")?.getString()
     val cacheTime =
         environment.config.propertyOrNull("ssr.cacheTime")?.getString()?.toIntOrNull() ?: DEFAULT_SSR_CACHE_TIME
+    val sitemap = environment.config.propertyOrNull("ssr.sitemap")?.getString()?.toBooleanStrictOrNull() ?: true
     val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, cacheTime)
     attributes.put(SsrEngineKey, ssrEngine)
     install(SsrPlugin)
     routing {
         get("/index.html") {
             call.respondSsr()
+        }
+        if (sitemap) {
+            get("/sitemap.xml") {
+                call.respondSitemap()
+            }
         }
         singlePageApplication {
             defaultPage = UUID.randomUUID().toString() // Non-existing resource
@@ -78,5 +85,19 @@ private suspend fun ApplicationCall.respondSsr() {
     respondText(ContentType.Text.Html, HttpStatusCode.OK) {
         val language = request.acceptLanguageItems().firstOrNull()?.value
         ssrEngine.getSsrContent(request.uri, language)
+    }
+}
+
+private suspend fun ApplicationCall.respondSitemap() {
+    val ssrEngine = application.attributes[SsrEngineKey]
+    respondText(ContentType.Text.Xml, HttpStatusCode.OK) {
+        val portPart =
+            if (request.origin.scheme == "http" && request.port() == 80 || request.origin.scheme == "https" && request.port() == 443) {
+                ""
+            } else {
+                ":${request.port()}"
+            }
+        val baseUrl = "${request.origin.scheme}://${request.host()}$portPart"
+        ssrEngine.getSitemapContent(baseUrl)
     }
 }

@@ -25,6 +25,17 @@ package dev.kilua.ssr
 import kotlinx.serialization.Serializable
 
 /**
+ * Represents sitemap metadata for a web page.
+ */
+@Serializable
+public data class Sitemap(
+    public var loc: String,
+    public var lastmod: String? = null,
+    public var changefreq: String? = null,
+    public var priority: Double? = null
+)
+
+/**
  * Represents an Open Graph image with optional width, height, and alt text.
  */
 @Serializable

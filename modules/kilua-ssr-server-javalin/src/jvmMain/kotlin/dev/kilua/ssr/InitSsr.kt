@@ -24,6 +24,7 @@ package dev.kilua.ssr
 
 import io.javalin.Javalin
 import io.javalin.config.Key
+import io.javalin.http.ContentType
 import io.javalin.http.Context
 import io.javalin.http.HttpStatus
 import io.javalin.http.staticfiles.Location
@@ -57,6 +58,7 @@ public fun Javalin.initSsr() {
     val rootId = prop.getProperty("ssr.rootId")
     val contextPath = prop.getProperty("ssr.contextPath")
     val cacheTime = prop.getProperty("ssr.cacheTime")?.toIntOrNull() ?: DEFAULT_SSR_CACHE_TIME
+    val sitemap = prop.getProperty("ssr.sitemap")?.toBooleanStrictOrNull() ?: true
     val ssrEngine = SsrEngine(
         nodeExecutable,
         port,
@@ -73,6 +75,11 @@ public fun Javalin.initSsr() {
         }
         get("/index.html") {
             it.respondSsr()
+        }
+        if (sitemap) {
+            get("/sitemap.xml") {
+                it.respondSitemap()
+            }
         }
         staticFiles.add("/assets", Location.CLASSPATH)
         spaRoot.addHandler("/") { ctx ->
@@ -93,4 +100,13 @@ private fun Context.respondSsr() {
         }
         future { future.thenAccept { html(it) } }
     }
+}
+
+private fun Context.respondSitemap() {
+    val ssrEngine = appData(SsrEngineKey)
+    val future = applicationScope.future {
+        val baseUrl = "${scheme()}://${host()}"
+        ssrEngine.getSitemapContent(baseUrl)
+    }
+    future { future.thenAccept { contentType(ContentType.TEXT_XML).result(it) } }
 }

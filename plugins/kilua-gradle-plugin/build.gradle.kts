@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.compose.gradle.plugin)
     implementation(libs.tomlj)
     implementation(libs.kaml)
+    implementation(libs.xml.builder)
 }
 
 tasks.getByName("jar", Jar::class) {

@@ -31,6 +31,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import java.net.URI
 import java.util.*
 
 /**
@@ -57,6 +58,7 @@ public fun Vertx.initSsr(router: Router) {
     val rootId = prop.getProperty("ssr.rootId")
     val contextPath = prop.getProperty("ssr.contextPath")
     val cacheTime = prop.getProperty("ssr.cacheTime")?.toIntOrNull() ?: DEFAULT_SSR_CACHE_TIME
+    val sitemap = prop.getProperty("ssr.sitemap")?.toBooleanStrictOrNull() ?: true
     val ssrEngine = SsrEngine(nodeExecutable, port, externalSsrService, rpcUrlPrefix, rootId, contextPath, cacheTime)
 
     router.get("/").handler { ctx ->
@@ -69,6 +71,14 @@ public fun Vertx.initSsr(router: Router) {
         ctx.put(SsrEngineKey, ssrEngine)
         applicationScope.launch(ctx.vertx().dispatcher()) {
             ctx.respondSsr()
+        }
+    }
+    if (sitemap) {
+        router.get("/sitemap.xml").handler { ctx ->
+            ctx.put(SsrEngineKey, ssrEngine)
+            applicationScope.launch(ctx.vertx().dispatcher()) {
+                ctx.respondSitemap()
+            }
         }
     }
     router.route("/*").last().handler(StaticHandler.create())
@@ -89,4 +99,50 @@ private suspend fun RoutingContext.respondSsr() {
         val ssrEngine = get<SsrEngine>(SsrEngineKey)
         response().putHeader("Content-Type", "text/html").end(ssrEngine.getSsrContent(uri, language))
     }
+}
+
+private suspend fun RoutingContext.respondSitemap() {
+    val baseUrl = externalizeUrl()
+    val ssrEngine = get<SsrEngine>(SsrEngineKey)
+    response().putHeader("Content-Type", "text/xml").end(ssrEngine.getSitemapContent(baseUrl))
+}
+
+private fun RoutingContext.externalizeUrl(): String {
+    val cleanHeaders = request().headers().filterNot { it.value.isNullOrBlank() }.associate { it.key to it.value }
+    return externalizeURI(URI(request().absoluteURI()), cleanHeaders).toString()
+}
+
+private fun externalizeURI(requestUri: URI, headers: Map<String, String>): URI {
+    val forwardedScheme = headers.get("X-Forwarded-Proto")
+        ?: headers.get("X-Forwarded-Scheme")
+        ?: requestUri.getScheme()
+
+    val (forwardedHost, forwardedHostOptionalPort) =
+        dividePort(headers.get("X-Forwarded-Host") ?: requestUri.getHost())
+
+    val fallbackPort = requestUri.getPort().let { explicitPort ->
+        if (explicitPort <= 0) {
+            if ("https" == forwardedScheme) 443 else 80
+        } else {
+            explicitPort
+        }
+    }
+    val requestPort: Int = headers.get("X-Forwarded-Port")?.toInt()
+        ?: forwardedHostOptionalPort
+        ?: fallbackPort
+    val finalPort = when {
+        forwardedScheme == "https" && requestPort == 443 -> ""
+        forwardedScheme == "http" && requestPort == 80 -> ""
+        else -> ":$requestPort"
+    }
+    return URI("$forwardedScheme://$forwardedHost$finalPort")
+}
+
+private fun dividePort(hostWithOptionalPort: String): Pair<String, Int?> {
+    val parts = if (hostWithOptionalPort.startsWith('[')) {
+        Pair(hostWithOptionalPort.substringBefore(']') + ']', hostWithOptionalPort.substringAfter("]:", ""))
+    } else {
+        Pair(hostWithOptionalPort.substringBefore(':'), hostWithOptionalPort.substringAfter(':', ""))
+    }
+    return Pair(parts.first, if (parts.second.isBlank()) null else parts.second.toInt())
 }

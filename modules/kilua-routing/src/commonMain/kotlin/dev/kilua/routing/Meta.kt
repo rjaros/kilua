@@ -23,8 +23,31 @@
 package dev.kilua.routing
 
 import androidx.compose.runtime.Composable
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+
+@Serializable
+public enum class Changefreq {
+    Always,
+    Hourly,
+    Daily,
+    Weekly,
+    Monthly,
+    Yearly,
+    Never;
+}
+
+/**
+ * Represents sitemap metadata for a web page.
+ */
+@Serializable
+public data class Sitemap(
+    public var loc: String? = null,
+    public var lastmod: LocalDate? = null,
+    public var changefreq: Changefreq? = null,
+    public var priority: Double? = null
+)
 
 /**
  * Represents an Open Graph image with optional width, height, and alt text.
@@ -85,6 +108,7 @@ public interface Meta {
     public var formatDetectionTelephone: Boolean?
     public var formatDetectionAddress: Boolean?
     public var icon: String?
+    public var sitemap: Sitemap?
     public var shortcutIcon: String?
     public var openGraph: OpenGraph?
     public var robots: Robots?
@@ -136,9 +160,9 @@ public class MetaImpl : Meta {
     override var formatDetectionAddress: Boolean? = null
     override var icon: String? = null
     override var shortcutIcon: String? = null
+    override var sitemap: Sitemap? = null
     override var openGraph: OpenGraph? = null
     override var robots: Robots? = null
-
     override val customMeta: MutableMap<String, String> = mutableMapOf()
 
     public var view: (@Composable @RoutingDsl Meta.() -> Unit)? = null
@@ -173,6 +197,7 @@ public class MetaImpl : Meta {
             if (formatDetectionAddress != null) append("formatDetectionAddress=$formatDetectionAddress, ")
             if (icon != null) append("icon=$icon, ")
             if (shortcutIcon != null) append("shortcutIcon=$shortcutIcon, ")
+            if (sitemap != null) append("sitemap=$sitemap, ")
             if (openGraph != null) append("openGraph=$openGraph, ")
             if (robots != null) append("robots=$robots, ")
             if (customMeta.isNotEmpty()) {
@@ -219,6 +244,7 @@ internal fun mergeMetadataWithDefault(meta: Meta?, parentMeta: Meta?, defaultMet
             formatDetectionAddress = meta?.formatDetectionAddress ?: defaultMeta?.formatDetectionAddress
             icon = meta?.icon ?: defaultMeta?.icon
             shortcutIcon = meta?.shortcutIcon ?: defaultMeta?.shortcutIcon
+            sitemap = meta?.sitemap ?: defaultMeta?.sitemap
             openGraph = meta?.openGraph ?: defaultMeta?.openGraph
             robots = meta?.robots ?: defaultMeta?.robots
             if (defaultMeta != null) {
@@ -259,6 +285,7 @@ internal fun mergeMetadataWithParent(meta: Meta?, parentMeta: Meta?): Meta? {
                 formatDetectionAddress = meta.formatDetectionAddress
                 icon = meta.icon
                 shortcutIcon = meta.shortcutIcon
+                sitemap = meta.sitemap
                 openGraph = meta.openGraph
                 robots = meta.robots
                 customMeta.putAll(meta.customMeta)
