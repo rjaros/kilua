@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kilua template</title>
+    <base href="/">
+    <script type="module">
+        import './template-vite.mjs';
+        if (import.meta.hot) {
+            import.meta.hot.accept('./template-vite.mjs');
+        }
+    </script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+</html>
