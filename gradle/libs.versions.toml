@@ -1,6 +1,6 @@
 [versions]
-kilua = "0.0.26"
-kilua-published = "0.0.26"
+kilua = "0.0.27"
+kilua-published = "0.0.27"
 kotlin = "2.2.20-RC2"
 compose = "1.10.0-alpha01"
 dokka = "2.1.0-Beta"
