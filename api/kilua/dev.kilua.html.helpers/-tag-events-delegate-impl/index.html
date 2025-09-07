@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>TagEventsDelegateImpl</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua/commonMain">common</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":kilua/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,45 +62,47 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="kilua::dev.kilua.html.helpers/TagEventsDelegateImpl///PointingToDeclaration//-787921261">
   <div class="breadcrumbs"><a href="../../index.html">kilua</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.html.helpers</a><span class="delimiter">/</span><span class="current">TagEventsDelegateImpl</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Tag</span><wbr><span>Events</span><wbr><span>Delegate</span><wbr><span><span>Impl</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">TagEventsDelegateImpl</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator"> : </span><span data-unresolved-link="web.html/HTMLElement///PointingToDeclaration/">HTMLElement</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="../-tag-events-delegate/index.html">TagEventsDelegate</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/commonMain/kotlin/dev/kilua/html/helpers/TagEventsDelegate.kt#L63">source</a>)</span></span></div><p class="paragraph">Common tag events delegate implementation.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">TagEventsDelegateImpl</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator"> : </span><span data-unresolved-link="web.html/HTMLElement///PointingToDeclaration/">HTMLElement</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">skipUpdates<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="../-tag-events-delegate/index.html">TagEventsDelegate</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt; </span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/commonMain/kotlin/dev/kilua/html/helpers/TagEventsDelegate.kt#L63">source</a>)</span></span></div><p class="paragraph">Common tag events delegate implementation.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
-        <h2 class="">Constructors</h2>
+        <h2 class="tableheader">Constructors</h2>
         <div class="table"><a data-name="135591041%2FConstructors%2F-787921261" anchor-label="TagEventsDelegateImpl" id="135591041%2FConstructors%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tag-events-delegate-impl.html"><span>Tag</span><wbr><span>Events</span><wbr><span>Delegate</span><wbr><span><span>Impl</span></span></a></div>
@@ -119,9 +119,9 @@
         </div>
       </div>
       <div data-togglable="TYPE">
-        <h2 class="">Types</h2>
+        <h2 class="tableheader">Types</h2>
         <div class="table"><a data-name="-706449125%2FClasslikes%2F-787921261" anchor-label="Companion" id="-706449125%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
@@ -138,9 +138,9 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="-163823695%2FProperties%2F-787921261" anchor-label="eventsMap" id="-163823695%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="events-map.html"><span>events</span><wbr><span><span>Map</span></span></a></div>
@@ -157,9 +157,9 @@
         </div>
       </div>
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="447264166%2FFunctions%2F-787921261" anchor-label="elementWithEvents" id="447264166%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="element-with-events.html"><span>element</span><wbr><span>With</span><wbr><span><span>Events</span></span></a></div>
@@ -173,38 +173,38 @@
               </div>
             </div>
           </div>
-<a data-name="1082898756%2FFunctions%2F-787921261" anchor-label="onBlur" id="1082898756%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="160273449%2FFunctions%2F-787921261" anchor-label="onBlur" id="160273449%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-blur.html"><span>on</span><wbr><span><span>Blur</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1082898756%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="160273449%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-blur.html"><span class="token function">onBlur</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/FocusEvent///PointingToDeclaration/">FocusEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add blur event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-blur.html"><span class="token function">onBlur</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.focus/FocusEvent///PointingToDeclaration/">FocusEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add blur event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1287386061%2FFunctions%2F-787921261" anchor-label="onBlurDirect" id="1287386061%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="1722650176%2FFunctions%2F-787921261" anchor-label="onBlurDirect" id="1722650176%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-blur-direct.html"><span>on</span><wbr><span>Blur</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1287386061%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1722650176%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-blur-direct.html"><span class="token function">onBlurDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/FocusEvent///PointingToDeclaration/">FocusEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add blur event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-blur-direct.html"><span class="token function">onBlurDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.focus/FocusEvent///PointingToDeclaration/">FocusEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add blur event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="769274253%2FFunctions%2F-787921261" anchor-label="onChange" id="769274253%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-change.html"><span>on</span><wbr><span><span>Change</span></span></a></div>
@@ -219,7 +219,7 @@
             </div>
           </div>
 <a data-name="-1559911964%2FFunctions%2F-787921261" anchor-label="onChangeDirect" id="-1559911964%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-change-direct.html"><span>on</span><wbr><span>Change</span><wbr><span><span>Direct</span></span></a></div>
@@ -233,38 +233,38 @@
               </div>
             </div>
           </div>
-<a data-name="1601342732%2FFunctions%2F-787921261" anchor-label="onClick" id="1601342732%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="1637567162%2FFunctions%2F-787921261" anchor-label="onClick" id="1637567162%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-click.html"><span>on</span><wbr><span><span>Click</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1601342732%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1637567162%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-click.html"><span class="token function">onClick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add click event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-click.html"><span class="token function">onClick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add click event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1141015595%2FFunctions%2F-787921261" anchor-label="onClickDirect" id="-1141015595%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-902367087%2FFunctions%2F-787921261" anchor-label="onClickDirect" id="-902367087%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-click-direct.html"><span>on</span><wbr><span>Click</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1141015595%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-902367087%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-click-direct.html"><span class="token function">onClickDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add click event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-click-direct.html"><span class="token function">onClickDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add click event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="1814128908%2FFunctions%2F-787921261" anchor-label="onCombineClick" id="1814128908%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../on-combine-click.html"><span>on</span><wbr><span>Combine</span><wbr><span><span>Click</span></span></a></div>
@@ -278,68 +278,68 @@
               </div>
             </div>
           </div>
-<a data-name="-717903598%2FFunctions%2F-787921261" anchor-label="onContextmenu" id="-717903598%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1437655948%2FFunctions%2F-787921261" anchor-label="onContextmenu" id="-1437655948%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-contextmenu.html"><span>on</span><wbr><span><span>Contextmenu</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-717903598%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1437655948%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-contextmenu.html"><span class="token function">onContextmenu</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add context menu event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-contextmenu.html"><span class="token function">onContextmenu</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add context menu event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-10421413%2FFunctions%2F-787921261" anchor-label="onContextmenuDirect" id="-10421413%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-430893365%2FFunctions%2F-787921261" anchor-label="onContextmenuDirect" id="-430893365%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-contextmenu-direct.html"><span>on</span><wbr><span>Contextmenu</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-10421413%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-430893365%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-contextmenu-direct.html"><span class="token function">onContextmenuDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add context menu event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-contextmenu-direct.html"><span class="token function">onContextmenuDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add context menu event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1218298378%2FFunctions%2F-787921261" anchor-label="onDblclick" id="1218298378%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1741789572%2FFunctions%2F-787921261" anchor-label="onDblclick" id="-1741789572%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-dblclick.html"><span>on</span><wbr><span><span>Dblclick</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1218298378%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1741789572%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-dblclick.html"><span class="token function">onDblclick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add double click event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-dblclick.html"><span class="token function">onDblclick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add double click event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="425753171%2FFunctions%2F-787921261" anchor-label="onDblclickDirect" id="425753171%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-448611629%2FFunctions%2F-787921261" anchor-label="onDblclickDirect" id="-448611629%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-dblclick-direct.html"><span>on</span><wbr><span>Dblclick</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="425753171%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-448611629%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-dblclick-direct.html"><span class="token function">onDblclickDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add double click event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-dblclick-direct.html"><span class="token function">onDblclickDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add double click event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="802236894%2FFunctions%2F-787921261" anchor-label="onEvent" id="802236894%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-event.html"><span>on</span><wbr><span><span>Event</span></span></a></div>
@@ -354,7 +354,7 @@
             </div>
           </div>
 <a data-name="1437838069%2FFunctions%2F-787921261" anchor-label="onEventDirect" id="1437838069%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-event-direct.html"><span>on</span><wbr><span>Event</span><wbr><span><span>Direct</span></span></a></div>
@@ -368,518 +368,518 @@
               </div>
             </div>
           </div>
-<a data-name="-559018615%2FFunctions%2F-787921261" anchor-label="onFocus" id="-559018615%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-291754492%2FFunctions%2F-787921261" anchor-label="onFocus" id="-291754492%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-focus.html"><span>on</span><wbr><span><span>Focus</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-559018615%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-291754492%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-focus.html"><span class="token function">onFocus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/FocusEvent///PointingToDeclaration/">FocusEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add focus event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-focus.html"><span class="token function">onFocus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.focus/FocusEvent///PointingToDeclaration/">FocusEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add focus event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="383598674%2FFunctions%2F-787921261" anchor-label="onFocusDirect" id="383598674%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1550182437%2FFunctions%2F-787921261" anchor-label="onFocusDirect" id="-1550182437%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-focus-direct.html"><span>on</span><wbr><span>Focus</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="383598674%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1550182437%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-focus-direct.html"><span class="token function">onFocusDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/FocusEvent///PointingToDeclaration/">FocusEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add focus event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-focus-direct.html"><span class="token function">onFocusDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.focus/FocusEvent///PointingToDeclaration/">FocusEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add focus event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1829837239%2FFunctions%2F-787921261" anchor-label="onInput" id="-1829837239%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="1292437486%2FFunctions%2F-787921261" anchor-label="onInput" id="1292437486%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-input.html"><span>on</span><wbr><span><span>Input</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1829837239%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1292437486%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-input.html"><span class="token function">onInput</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/InputEvent///PointingToDeclaration/">InputEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add input event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-input.html"><span class="token function">onInput</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.input/InputEvent///PointingToDeclaration/">InputEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add input event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1133394834%2FFunctions%2F-787921261" anchor-label="onInputDirect" id="1133394834%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-674373819%2FFunctions%2F-787921261" anchor-label="onInputDirect" id="-674373819%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-input-direct.html"><span>on</span><wbr><span>Input</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1133394834%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-674373819%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-input-direct.html"><span class="token function">onInputDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/InputEvent///PointingToDeclaration/">InputEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add input event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-input-direct.html"><span class="token function">onInputDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.input/InputEvent///PointingToDeclaration/">InputEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add input event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1493899915%2FFunctions%2F-787921261" anchor-label="onKeydown" id="-1493899915%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-179722705%2FFunctions%2F-787921261" anchor-label="onKeydown" id="-179722705%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-keydown.html"><span>on</span><wbr><span><span>Keydown</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1493899915%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-179722705%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keydown.html"><span class="token function">onKeydown</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key down event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keydown.html"><span class="token function">onKeydown</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.keyboard/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key down event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1132233524%2FFunctions%2F-787921261" anchor-label="onKeydownDirect" id="-1132233524%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="181943686%2FFunctions%2F-787921261" anchor-label="onKeydownDirect" id="181943686%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-keydown-direct.html"><span>on</span><wbr><span>Keydown</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1132233524%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="181943686%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keydown-direct.html"><span class="token function">onKeydownDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key down event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keydown-direct.html"><span class="token function">onKeydownDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.keyboard/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key down event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1767145306%2FFunctions%2F-787921261" anchor-label="onKeypress" id="-1767145306%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-452968096%2FFunctions%2F-787921261" anchor-label="onKeypress" id="-452968096%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-keypress.html"><span>on</span><wbr><span><span>Keypress</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1767145306%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-452968096%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keypress.html"><span class="token function">onKeypress</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key press event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keypress.html"><span class="token function">onKeypress</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.keyboard/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key press event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="296431421%2FFunctions%2F-787921261" anchor-label="onKeypressDirect" id="296431421%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="1610608631%2FFunctions%2F-787921261" anchor-label="onKeypressDirect" id="1610608631%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-keypress-direct.html"><span>on</span><wbr><span>Keypress</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="296431421%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1610608631%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keypress-direct.html"><span class="token function">onKeypressDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key press event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keypress-direct.html"><span class="token function">onKeypressDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.keyboard/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key press event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="137047644%2FFunctions%2F-787921261" anchor-label="onKeyup" id="137047644%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="1451224854%2FFunctions%2F-787921261" anchor-label="onKeyup" id="1451224854%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-keyup.html"><span>on</span><wbr><span><span>Keyup</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="137047644%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1451224854%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keyup.html"><span class="token function">onKeyup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key up event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keyup.html"><span class="token function">onKeyup</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.keyboard/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key up event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1503870067%2FFunctions%2F-787921261" anchor-label="onKeyupDirect" id="1503870067%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1476920019%2FFunctions%2F-787921261" anchor-label="onKeyupDirect" id="-1476920019%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-keyup-direct.html"><span>on</span><wbr><span>Keyup</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1503870067%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1476920019%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keyup-direct.html"><span class="token function">onKeyupDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key up event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-keyup-direct.html"><span class="token function">onKeyupDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.keyboard/KeyboardEvent///PointingToDeclaration/">KeyboardEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add key up event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1151521579%2FFunctions%2F-787921261" anchor-label="onMouseDown" id="1151521579%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-770518789%2FFunctions%2F-787921261" anchor-label="onMouseDown" id="-770518789%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-down.html"><span>on</span><wbr><span>Mouse</span><wbr><span><span>Down</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1151521579%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-770518789%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-down.html"><span class="token function">onMouseDown</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse down event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-down.html"><span class="token function">onMouseDown</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse down event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1497525940%2FFunctions%2F-787921261" anchor-label="onMouseDownDirect" id="1497525940%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1226372590%2FFunctions%2F-787921261" anchor-label="onMouseDownDirect" id="-1226372590%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-down-direct.html"><span>on</span><wbr><span>Mouse</span><wbr><span>Down</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1497525940%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1226372590%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-down-direct.html"><span class="token function">onMouseDownDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse down event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-down-direct.html"><span class="token function">onMouseDownDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse down event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-211024029%2FFunctions%2F-787921261" anchor-label="onMouseEnter" id="-211024029%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1856452669%2FFunctions%2F-787921261" anchor-label="onMouseEnter" id="-1856452669%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-enter.html"><span>on</span><wbr><span>Mouse</span><wbr><span><span>Enter</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-211024029%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1856452669%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-enter.html"><span class="token function">onMouseEnter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse enter event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-enter.html"><span class="token function">onMouseEnter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse enter event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1672583404%2FFunctions%2F-787921261" anchor-label="onMouseEnterDirect" id="1672583404%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1086666022%2FFunctions%2F-787921261" anchor-label="onMouseEnterDirect" id="-1086666022%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-enter-direct.html"><span>on</span><wbr><span>Mouse</span><wbr><span>Enter</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1672583404%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1086666022%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-enter-direct.html"><span class="token function">onMouseEnterDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse enter event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-enter-direct.html"><span class="token function">onMouseEnterDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse enter event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1700322046%2FFunctions%2F-787921261" anchor-label="onMouseLeave" id="-1700322046%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="973121156%2FFunctions%2F-787921261" anchor-label="onMouseLeave" id="973121156%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-leave.html"><span>on</span><wbr><span>Mouse</span><wbr><span><span>Leave</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1700322046%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="973121156%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-leave.html"><span class="token function">onMouseLeave</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse leave event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-leave.html"><span class="token function">onMouseLeave</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse leave event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1650574155%2FFunctions%2F-787921261" anchor-label="onMouseLeaveDirect" id="1650574155%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1751722789%2FFunctions%2F-787921261" anchor-label="onMouseLeaveDirect" id="-1751722789%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-leave-direct.html"><span>on</span><wbr><span>Mouse</span><wbr><span>Leave</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1650574155%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1751722789%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-leave-direct.html"><span class="token function">onMouseLeaveDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse leave event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-leave-direct.html"><span class="token function">onMouseLeaveDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse leave event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-897829862%2FFunctions%2F-787921261" anchor-label="onMouseMove" id="-897829862%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1092374932%2FFunctions%2F-787921261" anchor-label="onMouseMove" id="-1092374932%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-move.html"><span>on</span><wbr><span>Mouse</span><wbr><span><span>Move</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-897829862%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1092374932%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-move.html"><span class="token function">onMouseMove</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse move event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-move.html"><span class="token function">onMouseMove</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse move event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="293937251%2FFunctions%2F-787921261" anchor-label="onMouseMoveDirect" id="293937251%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-495038781%2FFunctions%2F-787921261" anchor-label="onMouseMoveDirect" id="-495038781%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-move-direct.html"><span>on</span><wbr><span>Mouse</span><wbr><span>Move</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="293937251%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-495038781%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-move-direct.html"><span class="token function">onMouseMoveDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse move event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-move-direct.html"><span class="token function">onMouseMoveDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse move event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-631041639%2FFunctions%2F-787921261" anchor-label="onMouseOut" id="-631041639%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="1125833037%2FFunctions%2F-787921261" anchor-label="onMouseOut" id="1125833037%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-out.html"><span>on</span><wbr><span>Mouse</span><wbr><span><span>Out</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-631041639%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1125833037%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-out.html"><span class="token function">onMouseOut</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse out event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-out.html"><span class="token function">onMouseOut</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse out event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="474587810%2FFunctions%2F-787921261" anchor-label="onMouseOutDirect" id="474587810%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="1703415012%2FFunctions%2F-787921261" anchor-label="onMouseOutDirect" id="1703415012%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-out-direct.html"><span>on</span><wbr><span>Mouse</span><wbr><span>Out</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="474587810%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1703415012%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-out-direct.html"><span class="token function">onMouseOutDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse out event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-out-direct.html"><span class="token function">onMouseOutDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse out event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-350610467%2FFunctions%2F-787921261" anchor-label="onMouseOver" id="-350610467%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-910846583%2FFunctions%2F-787921261" anchor-label="onMouseOver" id="-910846583%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-over.html"><span>on</span><wbr><span>Mouse</span><wbr><span><span>Over</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-350610467%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-910846583%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-over.html"><span class="token function">onMouseOver</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse over event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-over.html"><span class="token function">onMouseOver</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse over event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1824986650%2FFunctions%2F-787921261" anchor-label="onMouseOverDirect" id="-1824986650%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1977897952%2FFunctions%2F-787921261" anchor-label="onMouseOverDirect" id="-1977897952%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-over-direct.html"><span>on</span><wbr><span>Mouse</span><wbr><span>Over</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1824986650%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1977897952%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-over-direct.html"><span class="token function">onMouseOverDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse over event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-over-direct.html"><span class="token function">onMouseOverDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse over event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-537268956%2FFunctions%2F-787921261" anchor-label="onMouseUp" id="-537268956%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="374710690%2FFunctions%2F-787921261" anchor-label="onMouseUp" id="374710690%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-up.html"><span>on</span><wbr><span>Mouse</span><wbr><span><span>Up</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-537268956%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="374710690%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-up.html"><span class="token function">onMouseUp</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse up event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-up.html"><span class="token function">onMouseUp</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse up event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-955094547%2FFunctions%2F-787921261" anchor-label="onMouseUpDirect" id="-955094547%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-738295431%2FFunctions%2F-787921261" anchor-label="onMouseUpDirect" id="-738295431%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-mouse-up-direct.html"><span>on</span><wbr><span>Mouse</span><wbr><span>Up</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-955094547%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-738295431%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-up-direct.html"><span class="token function">onMouseUpDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse up event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-mouse-up-direct.html"><span class="token function">onMouseUpDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.mouse/MouseEvent///PointingToDeclaration/">MouseEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add mouse up event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="575732843%2FFunctions%2F-787921261" anchor-label="onPointerDown" id="575732843%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-443103885%2FFunctions%2F-787921261" anchor-label="onPointerDown" id="-443103885%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-pointer-down.html"><span>on</span><wbr><span>Pointer</span><wbr><span><span>Down</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="575732843%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-443103885%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-pointer-down.html"><span class="token function">onPointerDown</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/PointerEvent///PointingToDeclaration/">PointerEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add pointer down event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-pointer-down.html"><span class="token function">onPointerDown</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.pointer/PointerEvent///PointingToDeclaration/">PointerEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add pointer down event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="681519028%2FFunctions%2F-787921261" anchor-label="onPointerDownDirect" id="681519028%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="1084329226%2FFunctions%2F-787921261" anchor-label="onPointerDownDirect" id="1084329226%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-pointer-down-direct.html"><span>on</span><wbr><span>Pointer</span><wbr><span>Down</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="681519028%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1084329226%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-pointer-down-direct.html"><span class="token function">onPointerDownDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/PointerEvent///PointingToDeclaration/">PointerEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add pointer down event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-pointer-down-direct.html"><span class="token function">onPointerDownDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.pointer/PointerEvent///PointingToDeclaration/">PointerEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add pointer down event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1770036700%2FFunctions%2F-787921261" anchor-label="onPointerUp" id="-1770036700%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-241679206%2FFunctions%2F-787921261" anchor-label="onPointerUp" id="-241679206%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-pointer-up.html"><span>on</span><wbr><span>Pointer</span><wbr><span><span>Up</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1770036700%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-241679206%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-pointer-up.html"><span class="token function">onPointerUp</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/PointerEvent///PointingToDeclaration/">PointerEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add pointer up event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-pointer-up.html"><span class="token function">onPointerUp</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.pointer/PointerEvent///PointingToDeclaration/">PointerEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add pointer up event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1376689837%2FFunctions%2F-787921261" anchor-label="onPointerUpDirect" id="1376689837%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-832908559%2FFunctions%2F-787921261" anchor-label="onPointerUpDirect" id="-832908559%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-pointer-up-direct.html"><span>on</span><wbr><span>Pointer</span><wbr><span>Up</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1376689837%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-832908559%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-pointer-up-direct.html"><span class="token function">onPointerUpDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/PointerEvent///PointingToDeclaration/">PointerEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add pointer up event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-pointer-up-direct.html"><span class="token function">onPointerUpDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.pointer/PointerEvent///PointingToDeclaration/">PointerEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add pointer up event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1165416573%2FFunctions%2F-787921261" anchor-label="onTouchCancel" id="-1165416573%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="30330197%2FFunctions%2F-787921261" anchor-label="onTouchCancel" id="30330197%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-touch-cancel.html"><span>on</span><wbr><span>Touch</span><wbr><span><span>Cancel</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1165416573%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="30330197%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-cancel.html"><span class="token function">onTouchCancel</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch cancel event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-cancel.html"><span class="token function">onTouchCancel</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.touch/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch cancel event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-471255668%2FFunctions%2F-787921261" anchor-label="onTouchCancelDirect" id="-471255668%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="1786487788%2FFunctions%2F-787921261" anchor-label="onTouchCancelDirect" id="1786487788%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-touch-cancel-direct.html"><span>on</span><wbr><span>Touch</span><wbr><span>Cancel</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-471255668%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1786487788%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-cancel-direct.html"><span class="token function">onTouchCancelDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch cancel event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-cancel-direct.html"><span class="token function">onTouchCancelDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.touch/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch cancel event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1636618162%2FFunctions%2F-787921261" anchor-label="onTouchEnd" id="1636618162%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1230197882%2FFunctions%2F-787921261" anchor-label="onTouchEnd" id="-1230197882%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-touch-end.html"><span>on</span><wbr><span>Touch</span><wbr><span><span>End</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1636618162%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1230197882%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-end.html"><span class="token function">onTouchEnd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch end event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-end.html"><span class="token function">onTouchEnd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.touch/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch end event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-908870021%2FFunctions%2F-787921261" anchor-label="onTouchEndDirect" id="-908870021%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="218913117%2FFunctions%2F-787921261" anchor-label="onTouchEndDirect" id="218913117%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-touch-end-direct.html"><span>on</span><wbr><span>Touch</span><wbr><span>End</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-908870021%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="218913117%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-end-direct.html"><span class="token function">onTouchEndDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch end event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-end-direct.html"><span class="token function">onTouchEndDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.touch/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch end event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1122406087%2FFunctions%2F-787921261" anchor-label="onTouchStart" id="-1122406087%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="453758815%2FFunctions%2F-787921261" anchor-label="onTouchStart" id="453758815%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-touch-start.html"><span>on</span><wbr><span>Touch</span><wbr><span><span>Start</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1122406087%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="453758815%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-start.html"><span class="token function">onTouchStart</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch start event listener (composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.compose.runtime/Composable///PointingToDeclaration/"><span class="token annotation builtin">Composable</span></span></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-start.html"><span class="token function">onTouchStart</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.touch/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch start event listener (composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-49488190%2FFunctions%2F-787921261" anchor-label="onTouchStartDirect" id="-49488190%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+<a data-name="-1083345290%2FFunctions%2F-787921261" anchor-label="onTouchStartDirect" id="-1083345290%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-touch-start-direct.html"><span>on</span><wbr><span>Touch</span><wbr><span>Start</span><wbr><span><span>Direct</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-49488190%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1083345290%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-start-direct.html"><span class="token function">onTouchStartDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.uievents/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch start event listener (not composable).</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-touch-start-direct.html"><span class="token function">onTouchStartDirect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="web.touch/TouchEvent///PointingToDeclaration/">TouchEvent</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Add touch start event listener (not composable).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="472308551%2FFunctions%2F-787921261" anchor-label="rememberIsHoveredAsState" id="472308551%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../remember-is-hovered-as-state.html"><span>remember</span><wbr><span>Is</span><wbr><span>Hovered</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
@@ -894,7 +894,7 @@
             </div>
           </div>
 <a data-name="1132484750%2FFunctions%2F-787921261" anchor-label="rememberIsPressedAsState" id="1132484750%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../remember-is-pressed-as-state.html"><span>remember</span><wbr><span>Is</span><wbr><span>Pressed</span><wbr><span>As</span><wbr><span><span>State</span></span></a></div>
@@ -909,7 +909,7 @@
             </div>
           </div>
 <a data-name="495577184%2FFunctions%2F-787921261" anchor-label="removeEventListener" id="495577184%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="remove-event-listener.html"><span>remove</span><wbr><span>Event</span><wbr><span><span>Listener</span></span></a></div>
@@ -929,17 +929,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

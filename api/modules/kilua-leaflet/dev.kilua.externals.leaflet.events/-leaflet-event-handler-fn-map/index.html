@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>LeafletEventHandlerFnMap</title>
-<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../../styles/main.css" rel="Stylesheet">
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-leaflet/commonMain">common</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":modules:kilua-leaflet/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,45 +62,47 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="kilua-leaflet::dev.kilua.externals.leaflet.events/LeafletEventHandlerFnMap///PointingToDeclaration//1856419216">
   <div class="breadcrumbs"><a href="../../index.html">kilua-leaflet</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.externals.leaflet.events</a><span class="delimiter">/</span><span class="current">LeafletEventHandlerFnMap</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Leaflet</span><wbr><span>Event</span><wbr><span>Handler</span><wbr><span>Fn</span><wbr><span><span>Map</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">LeafletEventHandlerFnMap</a> : <span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-leaflet/src/commonMain/kotlin/dev/kilua/externals/leaflet/events/LeafletEventHandlerFnMap.kt#L32">source</a>)</span></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">LeafletEventHandlerFnMap</a> : <span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-leaflet/src/commonMain/kotlin/dev/kilua/externals/leaflet/events/LeafletEventHandlerFnMap.kt#L32">source</a>)</span></span></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="1318663794%2FProperties%2F1856419216" anchor-label="add" id="1318663794%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="add.html"><span><span>add</span></span></a></div>
@@ -117,7 +117,7 @@
             </div>
           </div>
 <a data-name="-983032269%2FProperties%2F1856419216" anchor-label="autopanstart" id="-983032269%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="autopanstart.html"><span><span>autopanstart</span></span></a></div>
@@ -132,7 +132,7 @@
             </div>
           </div>
 <a data-name="2090970147%2FProperties%2F1856419216" anchor-label="baselayerchange" id="2090970147%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="baselayerchange.html"><span><span>baselayerchange</span></span></a></div>
@@ -147,7 +147,7 @@
             </div>
           </div>
 <a data-name="345781739%2FProperties%2F1856419216" anchor-label="click" id="345781739%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="click.html"><span><span>click</span></span></a></div>
@@ -162,7 +162,7 @@
             </div>
           </div>
 <a data-name="2132832805%2FProperties%2F1856419216" anchor-label="contextmenu" id="2132832805%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="contextmenu.html"><span><span>contextmenu</span></span></a></div>
@@ -177,7 +177,7 @@
             </div>
           </div>
 <a data-name="351368173%2FProperties%2F1856419216" anchor-label="dblclick" id="351368173%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="dblclick.html"><span><span>dblclick</span></span></a></div>
@@ -192,7 +192,7 @@
             </div>
           </div>
 <a data-name="-291939355%2FProperties%2F1856419216" anchor-label="down" id="-291939355%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="down.html"><span><span>down</span></span></a></div>
@@ -207,7 +207,7 @@
             </div>
           </div>
 <a data-name="-953959533%2FProperties%2F1856419216" anchor-label="drag" id="-953959533%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="drag.html"><span><span>drag</span></span></a></div>
@@ -222,7 +222,7 @@
             </div>
           </div>
 <a data-name="-804059220%2FProperties%2F1856419216" anchor-label="dragend" id="-804059220%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="dragend.html"><span><span>dragend</span></span></a></div>
@@ -237,7 +237,7 @@
             </div>
           </div>
 <a data-name="-1170567291%2FProperties%2F1856419216" anchor-label="dragstart" id="-1170567291%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="dragstart.html"><span><span>dragstart</span></span></a></div>
@@ -252,7 +252,7 @@
             </div>
           </div>
 <a data-name="1106000235%2FProperties%2F1856419216" anchor-label="error" id="1106000235%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="error.html"><span><span>error</span></span></a></div>
@@ -267,7 +267,7 @@
             </div>
           </div>
 <a data-name="-1940642670%2FProperties%2F1856419216" anchor-label="keydown" id="-1940642670%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="keydown.html"><span><span>keydown</span></span></a></div>
@@ -282,7 +282,7 @@
             </div>
           </div>
 <a data-name="259398787%2FProperties%2F1856419216" anchor-label="keypress" id="259398787%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="keypress.html"><span><span>keypress</span></span></a></div>
@@ -297,7 +297,7 @@
             </div>
           </div>
 <a data-name="383030905%2FProperties%2F1856419216" anchor-label="keyup" id="383030905%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="keyup.html"><span><span>keyup</span></span></a></div>
@@ -312,7 +312,7 @@
             </div>
           </div>
 <a data-name="711033239%2FProperties%2F1856419216" anchor-label="layeradd" id="711033239%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="layeradd.html"><span><span>layeradd</span></span></a></div>
@@ -327,7 +327,7 @@
             </div>
           </div>
 <a data-name="-1372162434%2FProperties%2F1856419216" anchor-label="layerremove" id="-1372162434%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="layerremove.html"><span><span>layerremove</span></span></a></div>
@@ -342,7 +342,7 @@
             </div>
           </div>
 <a data-name="967036961%2FProperties%2F1856419216" anchor-label="load" id="967036961%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="load.html"><span><span>load</span></span></a></div>
@@ -357,7 +357,7 @@
             </div>
           </div>
 <a data-name="532354871%2FProperties%2F1856419216" anchor-label="loading" id="532354871%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="loading.html"><span><span>loading</span></span></a></div>
@@ -372,7 +372,7 @@
             </div>
           </div>
 <a data-name="1009391712%2FProperties%2F1856419216" anchor-label="locationerror" id="1009391712%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="locationerror.html"><span><span>locationerror</span></span></a></div>
@@ -387,7 +387,7 @@
             </div>
           </div>
 <a data-name="1076269094%2FProperties%2F1856419216" anchor-label="locationfound" id="1076269094%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="locationfound.html"><span><span>locationfound</span></span></a></div>
@@ -402,7 +402,7 @@
             </div>
           </div>
 <a data-name="-1510228340%2FProperties%2F1856419216" anchor-label="mousedown" id="-1510228340%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="mousedown.html"><span><span>mousedown</span></span></a></div>
@@ -417,7 +417,7 @@
             </div>
           </div>
 <a data-name="-808072643%2FProperties%2F1856419216" anchor-label="mousemove" id="-808072643%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="mousemove.html"><span><span>mousemove</span></span></a></div>
@@ -432,7 +432,7 @@
             </div>
           </div>
 <a data-name="-821946146%2FProperties%2F1856419216" anchor-label="mouseout" id="-821946146%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="mouseout.html"><span><span>mouseout</span></span></a></div>
@@ -447,7 +447,7 @@
             </div>
           </div>
 <a data-name="30663322%2FProperties%2F1856419216" anchor-label="mouseover" id="30663322%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="mouseover.html"><span><span>mouseover</span></span></a></div>
@@ -462,7 +462,7 @@
             </div>
           </div>
 <a data-name="-5347597%2FProperties%2F1856419216" anchor-label="mouseup" id="-5347597%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="mouseup.html"><span><span>mouseup</span></span></a></div>
@@ -477,7 +477,7 @@
             </div>
           </div>
 <a data-name="410216342%2FProperties%2F1856419216" anchor-label="move" id="410216342%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="move.html"><span><span>move</span></span></a></div>
@@ -492,7 +492,7 @@
             </div>
           </div>
 <a data-name="378878153%2FProperties%2F1856419216" anchor-label="moveend" id="378878153%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="moveend.html"><span><span>moveend</span></span></a></div>
@@ -507,7 +507,7 @@
             </div>
           </div>
 <a data-name="1760882018%2FProperties%2F1856419216" anchor-label="movestart" id="1760882018%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="movestart.html"><span><span>movestart</span></span></a></div>
@@ -522,7 +522,7 @@
             </div>
           </div>
 <a data-name="-1386983018%2FProperties%2F1856419216" anchor-label="overlayadd" id="-1386983018%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="overlayadd.html"><span><span>overlayadd</span></span></a></div>
@@ -537,7 +537,7 @@
             </div>
           </div>
 <a data-name="1284583967%2FProperties%2F1856419216" anchor-label="overlayremove" id="1284583967%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="overlayremove.html"><span><span>overlayremove</span></span></a></div>
@@ -552,7 +552,7 @@
             </div>
           </div>
 <a data-name="773462907%2FProperties%2F1856419216" anchor-label="popupclose" id="773462907%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="popupclose.html"><span><span>popupclose</span></span></a></div>
@@ -567,7 +567,7 @@
             </div>
           </div>
 <a data-name="-1791793347%2FProperties%2F1856419216" anchor-label="popupopen" id="-1791793347%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="popupopen.html"><span><span>popupopen</span></span></a></div>
@@ -582,7 +582,7 @@
             </div>
           </div>
 <a data-name="-340473822%2FProperties%2F1856419216" anchor-label="preclick" id="-340473822%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="preclick.html"><span><span>preclick</span></span></a></div>
@@ -597,7 +597,7 @@
             </div>
           </div>
 <a data-name="270829180%2FProperties%2F1856419216" anchor-label="predrag" id="270829180%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="predrag.html"><span><span>predrag</span></span></a></div>
@@ -612,7 +612,7 @@
             </div>
           </div>
 <a data-name="1557516227%2FProperties%2F1856419216" anchor-label="remove" id="1557516227%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="remove.html"><span><span>remove</span></span></a></div>
@@ -627,7 +627,7 @@
             </div>
           </div>
 <a data-name="-1793900141%2FProperties%2F1856419216" anchor-label="resize" id="-1793900141%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="resize.html"><span><span>resize</span></span></a></div>
@@ -642,7 +642,7 @@
             </div>
           </div>
 <a data-name="-1039344487%2FProperties%2F1856419216" anchor-label="tileerror" id="-1039344487%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tileerror.html"><span><span>tileerror</span></span></a></div>
@@ -657,7 +657,7 @@
             </div>
           </div>
 <a data-name="-764735693%2FProperties%2F1856419216" anchor-label="tileload" id="-764735693%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tileload.html"><span><span>tileload</span></span></a></div>
@@ -672,7 +672,7 @@
             </div>
           </div>
 <a data-name="1452703717%2FProperties%2F1856419216" anchor-label="tileloadstart" id="1452703717%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tileloadstart.html"><span><span>tileloadstart</span></span></a></div>
@@ -687,7 +687,7 @@
             </div>
           </div>
 <a data-name="1187404858%2FProperties%2F1856419216" anchor-label="tileunload" id="1187404858%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tileunload.html"><span><span>tileunload</span></span></a></div>
@@ -702,7 +702,7 @@
             </div>
           </div>
 <a data-name="506637842%2FProperties%2F1856419216" anchor-label="tooltipclose" id="506637842%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tooltipclose.html"><span><span>tooltipclose</span></span></a></div>
@@ -717,7 +717,7 @@
             </div>
           </div>
 <a data-name="-553474618%2FProperties%2F1856419216" anchor-label="tooltipopen" id="-553474618%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tooltipopen.html"><span><span>tooltipopen</span></span></a></div>
@@ -732,7 +732,7 @@
             </div>
           </div>
 <a data-name="-1026385496%2FProperties%2F1856419216" anchor-label="unload" id="-1026385496%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="unload.html"><span><span>unload</span></span></a></div>
@@ -747,7 +747,7 @@
             </div>
           </div>
 <a data-name="-1860438242%2FProperties%2F1856419216" anchor-label="update" id="-1860438242%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="update.html"><span><span>update</span></span></a></div>
@@ -762,7 +762,7 @@
             </div>
           </div>
 <a data-name="-1570251543%2FProperties%2F1856419216" anchor-label="viewreset" id="-1570251543%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="viewreset.html"><span><span>viewreset</span></span></a></div>
@@ -777,7 +777,7 @@
             </div>
           </div>
 <a data-name="-1357568556%2FProperties%2F1856419216" anchor-label="zoom" id="-1357568556%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom.html"><span><span>zoom</span></span></a></div>
@@ -792,7 +792,7 @@
             </div>
           </div>
 <a data-name="1588020579%2FProperties%2F1856419216" anchor-label="zoomanim" id="1588020579%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoomanim.html"><span><span>zoomanim</span></span></a></div>
@@ -807,7 +807,7 @@
             </div>
           </div>
 <a data-name="1187965387%2FProperties%2F1856419216" anchor-label="zoomend" id="1187965387%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoomend.html"><span><span>zoomend</span></span></a></div>
@@ -822,7 +822,7 @@
             </div>
           </div>
 <a data-name="-333157803%2FProperties%2F1856419216" anchor-label="zoomlevelschange" id="-333157803%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoomlevelschange.html"><span><span>zoomlevelschange</span></span></a></div>
@@ -837,7 +837,7 @@
             </div>
           </div>
 <a data-name="1904633316%2FProperties%2F1856419216" anchor-label="zoomstart" id="1904633316%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoomstart.html"><span><span>zoomstart</span></span></a></div>
@@ -857,17 +857,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

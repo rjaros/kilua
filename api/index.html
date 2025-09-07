@@ -1,43 +1,41 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>All modules</title>
     <link href="images/logo-icon.svg" rel="icon" type="image/svg">
-    <script>var pathToRoot = "";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+        <script>var pathToRoot = "";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="scripts/sourceset_dependencies.js" async="async"></script>
 <link href="styles/style.css" rel="Stylesheet">
 <link href="styles/main.css" rel="Stylesheet">
 <link href="styles/prism.css" rel="Stylesheet">
 <link href="styles/logo-styles.css" rel="Stylesheet">
-<link href="styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="scripts/prism.js" async="async"></script>
 <script type="text/javascript" src="ui-kit/ui-kit.min.js" defer="defer"></script>
-<script type="text/javascript" src="scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-            <a class="library-name--link" href="index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="index.html" tabindex="1">
                     kilua-project
             </a>
         <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
@@ -45,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.0.26        </div>
+0.0.27        </div>
         <div class="navigation-controls">
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
                     type="button">Switch theme
@@ -54,32 +52,34 @@
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
-                        data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" id="content" pageIds="kilua-project::.ext/allModules///PointingToDeclaration//0">
   <div class="breadcrumbs"></div>
   <div class="cover ">
     <h2 class="">All modules:</h2>
     <div class="table"><a data-name="195278835%2FMain%2F0" anchor-label="kilua" id="195278835%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="kilua/index.html">kilua</a></div>
@@ -90,7 +90,7 @@
         </div>
       </div>
 <a data-name="-317734052%2FMain%2F0" anchor-label="kilua-animation" id="-317734052%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-animation/index.html">kilua-animation</a></div>
@@ -101,7 +101,7 @@
         </div>
       </div>
 <a data-name="-354949124%2FMain%2F0" anchor-label="kilua-annotations" id="-354949124%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-annotations/index.html">kilua-annotations</a></div>
@@ -112,7 +112,7 @@
         </div>
       </div>
 <a data-name="-800633934%2FMain%2F0" anchor-label="kilua-bootstrap" id="-800633934%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-bootstrap/index.html">kilua-bootstrap</a></div>
@@ -123,7 +123,7 @@
         </div>
       </div>
 <a data-name="1740249221%2FMain%2F0" anchor-label="kilua-bootstrap-icons" id="1740249221%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-bootstrap-icons/index.html">kilua-bootstrap-icons</a></div>
@@ -134,7 +134,7 @@
         </div>
       </div>
 <a data-name="842032491%2FMain%2F0" anchor-label="kilua-common-types" id="842032491%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-common-types/index.html">kilua-common-types</a></div>
@@ -145,7 +145,7 @@
         </div>
       </div>
 <a data-name="1112834665%2FMain%2F0" anchor-label="kilua-core-modules" id="1112834665%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-core-modules/index.html">kilua-core-modules</a></div>
@@ -156,7 +156,7 @@
         </div>
       </div>
 <a data-name="-61003796%2FMain%2F0" anchor-label="kilua-fontawesome" id="-61003796%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-fontawesome/index.html">kilua-fontawesome</a></div>
@@ -167,7 +167,7 @@
         </div>
       </div>
 <a data-name="-768578492%2FMain%2F0" anchor-label="kilua-i18n" id="-768578492%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-i18n/index.html">kilua-i18n</a></div>
@@ -178,7 +178,7 @@
         </div>
       </div>
 <a data-name="-1090137941%2FMain%2F0" anchor-label="kilua-imask" id="-1090137941%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-imask/index.html">kilua-imask</a></div>
@@ -189,7 +189,7 @@
         </div>
       </div>
 <a data-name="-538896850%2FMain%2F0" anchor-label="kilua-jetpack" id="-538896850%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-jetpack/index.html">kilua-jetpack</a></div>
@@ -200,7 +200,7 @@
         </div>
       </div>
 <a data-name="-780144526%2FMain%2F0" anchor-label="kilua-lazy-layouts" id="-780144526%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-lazy-layouts/index.html">kilua-lazy-layouts</a></div>
@@ -211,7 +211,7 @@
         </div>
       </div>
 <a data-name="580078275%2FMain%2F0" anchor-label="kilua-leaflet" id="580078275%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-leaflet/index.html">kilua-leaflet</a></div>
@@ -222,7 +222,7 @@
         </div>
       </div>
 <a data-name="747455926%2FMain%2F0" anchor-label="kilua-marked" id="747455926%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-marked/index.html">kilua-marked</a></div>
@@ -233,7 +233,7 @@
         </div>
       </div>
 <a data-name="1899742030%2FMain%2F0" anchor-label="kilua-rest" id="1899742030%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-rest/index.html">kilua-rest</a></div>
@@ -244,7 +244,7 @@
         </div>
       </div>
 <a data-name="-1912222694%2FMain%2F0" anchor-label="kilua-routing" id="-1912222694%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-routing/index.html">kilua-routing</a></div>
@@ -255,7 +255,7 @@
         </div>
       </div>
 <a data-name="-1267666846%2FMain%2F0" anchor-label="kilua-rsup-progress" id="-1267666846%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-rsup-progress/index.html">kilua-rsup-progress</a></div>
@@ -266,7 +266,7 @@
         </div>
       </div>
 <a data-name="-1664334031%2FMain%2F0" anchor-label="kilua-sanitize-html" id="-1664334031%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-sanitize-html/index.html">kilua-sanitize-html</a></div>
@@ -277,7 +277,7 @@
         </div>
       </div>
 <a data-name="-1635240823%2FMain%2F0" anchor-label="kilua-select-remote" id="-1635240823%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-select-remote/index.html">kilua-select-remote</a></div>
@@ -288,7 +288,7 @@
         </div>
       </div>
 <a data-name="-393941603%2FMain%2F0" anchor-label="kilua-splitjs" id="-393941603%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-splitjs/index.html">kilua-splitjs</a></div>
@@ -299,7 +299,7 @@
         </div>
       </div>
 <a data-name="-337900594%2FMain%2F0" anchor-label="kilua-ssr" id="-337900594%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-ssr/index.html">kilua-ssr</a></div>
@@ -310,7 +310,7 @@
         </div>
       </div>
 <a data-name="-276286908%2FMain%2F0" anchor-label="kilua-ssr-server" id="-276286908%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-ssr-server/index.html">kilua-ssr-server</a></div>
@@ -321,7 +321,7 @@
         </div>
       </div>
 <a data-name="516436258%2FMain%2F0" anchor-label="kilua-ssr-server-javalin" id="516436258%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-ssr-server-javalin/index.html">kilua-ssr-server-javalin</a></div>
@@ -332,7 +332,7 @@
         </div>
       </div>
 <a data-name="1731908848%2FMain%2F0" anchor-label="kilua-ssr-server-jooby" id="1731908848%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-ssr-server-jooby/index.html">kilua-ssr-server-jooby</a></div>
@@ -343,7 +343,7 @@
         </div>
       </div>
 <a data-name="660953445%2FMain%2F0" anchor-label="kilua-ssr-server-ktor" id="660953445%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-ssr-server-ktor/index.html">kilua-ssr-server-ktor</a></div>
@@ -354,7 +354,7 @@
         </div>
       </div>
 <a data-name="-348561445%2FMain%2F0" anchor-label="kilua-ssr-server-micronaut" id="-348561445%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-ssr-server-micronaut/index.html">kilua-ssr-server-micronaut</a></div>
@@ -365,7 +365,7 @@
         </div>
       </div>
 <a data-name="860441855%2FMain%2F0" anchor-label="kilua-ssr-server-spring-boot" id="860441855%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-ssr-server-spring-boot/index.html">kilua-ssr-server-spring-boot</a></div>
@@ -376,7 +376,7 @@
         </div>
       </div>
 <a data-name="-1434393622%2FMain%2F0" anchor-label="kilua-ssr-server-vertx" id="-1434393622%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-ssr-server-vertx/index.html">kilua-ssr-server-vertx</a></div>
@@ -387,7 +387,7 @@
         </div>
       </div>
 <a data-name="-2089243716%2FMain%2F0" anchor-label="kilua-svg" id="-2089243716%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-svg/index.html">kilua-svg</a></div>
@@ -398,7 +398,7 @@
         </div>
       </div>
 <a data-name="1464422494%2FMain%2F0" anchor-label="kilua-tabulator" id="1464422494%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-tabulator/index.html">kilua-tabulator</a></div>
@@ -409,7 +409,7 @@
         </div>
       </div>
 <a data-name="1217854481%2FMain%2F0" anchor-label="kilua-tabulator-remote" id="1217854481%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-tabulator-remote/index.html">kilua-tabulator-remote</a></div>
@@ -420,7 +420,7 @@
         </div>
       </div>
 <a data-name="-379202987%2FMain%2F0" anchor-label="kilua-tailwindcss" id="-379202987%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-tailwindcss/index.html">kilua-tailwindcss</a></div>
@@ -431,7 +431,7 @@
         </div>
       </div>
 <a data-name="1575379256%2FMain%2F0" anchor-label="kilua-tempus-dominus" id="1575379256%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-tempus-dominus/index.html">kilua-tempus-dominus</a></div>
@@ -442,7 +442,7 @@
         </div>
       </div>
 <a data-name="1490977761%2FMain%2F0" anchor-label="kilua-testutils" id="1490977761%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-testutils/index.html">kilua-testutils</a></div>
@@ -453,7 +453,7 @@
         </div>
       </div>
 <a data-name="1792125517%2FMain%2F0" anchor-label="kilua-toastify" id="1792125517%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-toastify/index.html">kilua-toastify</a></div>
@@ -464,7 +464,7 @@
         </div>
       </div>
 <a data-name="-2013601301%2FMain%2F0" anchor-label="kilua-tom-select" id="-2013601301%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-tom-select/index.html">kilua-tom-select</a></div>
@@ -475,7 +475,7 @@
         </div>
       </div>
 <a data-name="-533331484%2FMain%2F0" anchor-label="kilua-tom-select-remote" id="-533331484%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-tom-select-remote/index.html">kilua-tom-select-remote</a></div>
@@ -486,7 +486,7 @@
         </div>
       </div>
 <a data-name="-927756011%2FMain%2F0" anchor-label="kilua-trix" id="-927756011%2FMain%2F0" data-filterable-set=""></a>
-      <div class="table-row">
+      <div class="table-row table-row_multimodule">
         <div class="main-subrow ">
           <div class="w-100"><span class="inline-flex">
               <div><a href="modules/kilua-trix/index.html">kilua-trix</a></div>
@@ -500,17 +500,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

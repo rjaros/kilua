@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>BsColor</title>
-<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../../styles/main.css" rel="Stylesheet">
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-bootstrap/commonMain">common</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":modules:kilua-bootstrap/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,45 +62,47 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="kilua-bootstrap::dev.kilua.html/BsColor///PointingToDeclaration//-850498495">
   <div class="breadcrumbs"><a href="../../index.html">kilua-bootstrap</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.html</a><span class="delimiter">/</span><span class="current">BsColor</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Bs</span><wbr><span><span>Color</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-bootstrap/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">BsColor</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">BsColor</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-bootstrap/src/commonMain/kotlin/dev/kilua/html/Css.kt#L93">source</a>)</span></span></div><p class="paragraph">Bootstrap color css classes.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-bootstrap/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">BsColor</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">BsColor</a><span class="token operator">&gt; </span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-bootstrap/src/commonMain/kotlin/dev/kilua/html/Css.kt#L93">source</a>)</span></span></div><p class="paragraph">Bootstrap color css classes.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="ENTRY">Entries</button></div>
     <div class="tabs-section-body">
       <div data-togglable="ENTRY">
-        <h2 class="">Entries</h2>
+        <h2 class="tableheader">Entries</h2>
         <div class="table"><a data-name="-2125234250%2FClasslikes%2F-850498495" anchor-label="TextPrimary" id="-2125234250%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-primary/index.html">TextPrimary</a></div>
@@ -117,7 +117,7 @@
             </div>
           </div>
 <a data-name="411872850%2FClasslikes%2F-850498495" anchor-label="TextPrimaryEmphasis" id="411872850%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-primary-emphasis/index.html">TextPrimaryEmphasis</a></div>
@@ -132,7 +132,7 @@
             </div>
           </div>
 <a data-name="-735572056%2FClasslikes%2F-850498495" anchor-label="TextSecondary" id="-735572056%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-secondary/index.html">TextSecondary</a></div>
@@ -147,7 +147,7 @@
             </div>
           </div>
 <a data-name="-1173148604%2FClasslikes%2F-850498495" anchor-label="TextSecondaryEmphasis" id="-1173148604%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-secondary-emphasis/index.html">TextSecondaryEmphasis</a></div>
@@ -162,7 +162,7 @@
             </div>
           </div>
 <a data-name="522006007%2FClasslikes%2F-850498495" anchor-label="TextSuccess" id="522006007%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-success/index.html">TextSuccess</a></div>
@@ -177,7 +177,7 @@
             </div>
           </div>
 <a data-name="103320467%2FClasslikes%2F-850498495" anchor-label="TextSuccessEmphasis" id="103320467%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-success-emphasis/index.html">TextSuccessEmphasis</a></div>
@@ -192,7 +192,7 @@
             </div>
           </div>
 <a data-name="549250263%2FClasslikes%2F-850498495" anchor-label="TextDanger" id="549250263%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-danger/index.html">TextDanger</a></div>
@@ -207,7 +207,7 @@
             </div>
           </div>
 <a data-name="1536385651%2FClasslikes%2F-850498495" anchor-label="TextDangerEmphasis" id="1536385651%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-danger-emphasis/index.html">TextDangerEmphasis</a></div>
@@ -222,7 +222,7 @@
             </div>
           </div>
 <a data-name="-1987043376%2FClasslikes%2F-850498495" anchor-label="TextWarning" id="-1987043376%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-warning/index.html">TextWarning</a></div>
@@ -237,7 +237,7 @@
             </div>
           </div>
 <a data-name="-115567508%2FClasslikes%2F-850498495" anchor-label="TextWarningEmphasis" id="-115567508%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-warning-emphasis/index.html">TextWarningEmphasis</a></div>
@@ -252,7 +252,7 @@
             </div>
           </div>
 <a data-name="2133377570%2FClasslikes%2F-850498495" anchor-label="TextInfo" id="2133377570%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-info/index.html">TextInfo</a></div>
@@ -267,7 +267,7 @@
             </div>
           </div>
 <a data-name="-1562458946%2FClasslikes%2F-850498495" anchor-label="TextInfoEmphasis" id="-1562458946%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-info-emphasis/index.html">TextInfoEmphasis</a></div>
@@ -282,7 +282,7 @@
             </div>
           </div>
 <a data-name="-1437793334%2FClasslikes%2F-850498495" anchor-label="TextLight" id="-1437793334%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-light/index.html">TextLight</a></div>
@@ -297,7 +297,7 @@
             </div>
           </div>
 <a data-name="387636838%2FClasslikes%2F-850498495" anchor-label="TextLightEmphasis" id="387636838%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-light-emphasis/index.html">TextLightEmphasis</a></div>
@@ -312,7 +312,7 @@
             </div>
           </div>
 <a data-name="1820712682%2FClasslikes%2F-850498495" anchor-label="TextDark" id="1820712682%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-dark/index.html">TextDark</a></div>
@@ -327,7 +327,7 @@
             </div>
           </div>
 <a data-name="886479238%2FClasslikes%2F-850498495" anchor-label="TextDarkEmphasis" id="886479238%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-dark-emphasis/index.html">TextDarkEmphasis</a></div>
@@ -342,7 +342,7 @@
             </div>
           </div>
 <a data-name="-29264653%2FClasslikes%2F-850498495" anchor-label="TextBlack" id="-29264653%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-black/index.html">TextBlack</a></div>
@@ -357,7 +357,7 @@
             </div>
           </div>
 <a data-name="-1675095139%2FClasslikes%2F-850498495" anchor-label="TextWhite" id="-1675095139%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-white/index.html">TextWhite</a></div>
@@ -372,7 +372,7 @@
             </div>
           </div>
 <a data-name="-143981546%2FClasslikes%2F-850498495" anchor-label="TextBody" id="-143981546%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-body/index.html">TextBody</a></div>
@@ -387,7 +387,7 @@
             </div>
           </div>
 <a data-name="221184934%2FClasslikes%2F-850498495" anchor-label="TextBodySecondary" id="221184934%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-body-secondary/index.html">TextBodySecondary</a></div>
@@ -402,7 +402,7 @@
             </div>
           </div>
 <a data-name="-1037098232%2FClasslikes%2F-850498495" anchor-label="TextBodyTertiary" id="-1037098232%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-body-tertiary/index.html">TextBodyTertiary</a></div>
@@ -417,7 +417,7 @@
             </div>
           </div>
 <a data-name="1787417266%2FClasslikes%2F-850498495" anchor-label="TextBodyEmphasis" id="1787417266%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-body-emphasis/index.html">TextBodyEmphasis</a></div>
@@ -432,7 +432,7 @@
             </div>
           </div>
 <a data-name="-1399858546%2FClasslikes%2F-850498495" anchor-label="TextBlack50" id="-1399858546%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-black50/index.html">TextBlack50</a></div>
@@ -447,7 +447,7 @@
             </div>
           </div>
 <a data-name="1799976632%2FClasslikes%2F-850498495" anchor-label="TextWhite50" id="1799976632%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-white50/index.html">TextWhite50</a></div>
@@ -462,7 +462,7 @@
             </div>
           </div>
 <a data-name="21483121%2FClasslikes%2F-850498495" anchor-label="TextBgPrimary" id="21483121%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-bg-primary/index.html">TextBgPrimary</a></div>
@@ -477,7 +477,7 @@
             </div>
           </div>
 <a data-name="675519395%2FClasslikes%2F-850498495" anchor-label="TextBgSecondary" id="675519395%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-bg-secondary/index.html">TextBgSecondary</a></div>
@@ -492,7 +492,7 @@
             </div>
           </div>
 <a data-name="-1626243918%2FClasslikes%2F-850498495" anchor-label="TextBgSuccess" id="-1626243918%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-bg-success/index.html">TextBgSuccess</a></div>
@@ -507,7 +507,7 @@
             </div>
           </div>
 <a data-name="-2013900100%2FClasslikes%2F-850498495" anchor-label="TextBgDanger" id="-2013900100%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-bg-danger/index.html">TextBgDanger</a></div>
@@ -522,7 +522,7 @@
             </div>
           </div>
 <a data-name="159673995%2FClasslikes%2F-850498495" anchor-label="TextBgWarning" id="159673995%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-bg-warning/index.html">TextBgWarning</a></div>
@@ -537,7 +537,7 @@
             </div>
           </div>
 <a data-name="356410695%2FClasslikes%2F-850498495" anchor-label="TextBgInfo" id="356410695%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-bg-info/index.html">TextBgInfo</a></div>
@@ -552,7 +552,7 @@
             </div>
           </div>
 <a data-name="-689191611%2FClasslikes%2F-850498495" anchor-label="TextBgLight" id="-689191611%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-bg-light/index.html">TextBgLight</a></div>
@@ -567,7 +567,7 @@
             </div>
           </div>
 <a data-name="43745807%2FClasslikes%2F-850498495" anchor-label="TextBgDark" id="43745807%2FClasslikes%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-bg-dark/index.html">TextBgDark</a></div>
@@ -584,9 +584,9 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="-1705801823%2FProperties%2F-850498495" anchor-label="entries" id="-1705801823%2FProperties%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="entries.html"><span><span>entries</span></span></a></div>
@@ -601,7 +601,7 @@
             </div>
           </div>
 <a data-name="-372974862%2FProperties%2F-850498495" anchor-label="name" id="-372974862%2FProperties%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.toast/-toast-position/-middle-center/index.html#-372974862%2FProperties%2F-850498495"><span><span>name</span></span></a></div>
@@ -616,7 +616,7 @@
             </div>
           </div>
 <a data-name="-739389684%2FProperties%2F-850498495" anchor-label="ordinal" id="-739389684%2FProperties%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.toast/-toast-position/-middle-center/index.html#-739389684%2FProperties%2F-850498495"><span><span>ordinal</span></span></a></div>
@@ -631,7 +631,7 @@
             </div>
           </div>
 <a data-name="-340781344%2FProperties%2F-850498495" anchor-label="value" id="-340781344%2FProperties%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="value.html"><span><span>value</span></span></a></div>
@@ -648,9 +648,9 @@
         </div>
       </div>
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="1190283997%2FFunctions%2F-850498495" anchor-label="toString" id="1190283997%2FFunctions%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="to-string.html"><span>to</span><wbr><span><span>String</span></span></a></div>
@@ -665,7 +665,7 @@
             </div>
           </div>
 <a data-name="69698459%2FFunctions%2F-850498495" anchor-label="valueOf" id="69698459%2FFunctions%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="value-of.html"><span>value</span><wbr><span><span>Of</span></span></a></div>
@@ -680,7 +680,7 @@
             </div>
           </div>
 <a data-name="-408032281%2FFunctions%2F-850498495" anchor-label="values" id="-408032281%2FFunctions%2F-850498495" data-filterable-set=":modules:kilua-bootstrap/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-bootstrap/commonMain" data-filterable-set=":modules:kilua-bootstrap/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="values.html"><span><span>values</span></span></a></div>
@@ -700,17 +700,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

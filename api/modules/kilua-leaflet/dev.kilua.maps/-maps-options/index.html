@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>MapsOptions</title>
-<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../../styles/main.css" rel="Stylesheet">
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-leaflet/commonMain">common</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":modules:kilua-leaflet/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,45 +62,47 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="kilua-leaflet::dev.kilua.maps/MapsOptions///PointingToDeclaration//1856419216">
   <div class="breadcrumbs"><a href="../../index.html">kilua-leaflet</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.maps</a><span class="delimiter">/</span><span class="current">MapsOptions</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Maps</span><wbr><span><span>Options</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">MapsOptions</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>preferCanvas<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>attributionControl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomControl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>closePopupOnClick<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomSnap<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomDelta<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>trackResize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>boxZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>doubleClickZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>dragging<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>crs<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-c-r-s/index.html">CRS</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>center<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng/index.html">LatLng</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maxZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>minZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>layers<span class="token operator">: </span><a href="../../../../kilua/dev.kilua.externals/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="../../dev.kilua.externals.leaflet.layer/-layer/index.html">Layer</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maxBounds<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng-bounds/index.html">LatLngBounds</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>renderer<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.layer.vector/-renderer/index.html">Renderer</a><span class="token operator">&lt;</span><a href="../../dev.kilua.externals.leaflet.layer.vector/-renderer/-renderer-options/index.html">Renderer.RendererOptions</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomAnimationThreshold<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fadeAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>markerZoomAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>transform3DLimit<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inertia<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inertiaDeceleration<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inertiaMaxSpeed<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>easeLinearity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>worldCopyJump<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maxBoundsViscosity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>keyboard<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>keyboardPanDelta<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>scrollWheelZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>wheelDebounceTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>wheelPxPerZoomLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>tap<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>tapTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>touchZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>bounceAtZoomLimits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-leaflet/src/commonMain/kotlin/dev/kilua/maps/MapsOptions.kt#L38">source</a>)</span></span></div><p class="paragraph">Options for the Leaflet Map.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">MapsOptions</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>preferCanvas<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>attributionControl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomControl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>closePopupOnClick<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomSnap<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomDelta<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>trackResize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>boxZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>doubleClickZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>dragging<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>crs<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-c-r-s/index.html">CRS</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>center<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng/index.html">LatLng</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maxZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>minZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>layers<span class="token operator">: </span><a href="../../../../kilua/dev.kilua.externals/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="../../dev.kilua.externals.leaflet.layer/-layer/index.html">Layer</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maxBounds<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng-bounds/index.html">LatLngBounds</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>renderer<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.layer.vector/-renderer/index.html">Renderer</a><span class="token operator">&lt;</span><a href="../../dev.kilua.externals.leaflet.layer.vector/-renderer/-renderer-options/index.html">Renderer.RendererOptions</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>zoomAnimationThreshold<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fadeAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>markerZoomAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>transform3DLimit<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inertia<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inertiaDeceleration<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inertiaMaxSpeed<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>easeLinearity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>worldCopyJump<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maxBoundsViscosity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>keyboard<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>keyboardPanDelta<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>scrollWheelZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>wheelDebounceTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>wheelPxPerZoomLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>tapHold<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>tapTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pinchZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>bounceAtZoomLimits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-leaflet/src/commonMain/kotlin/dev/kilua/maps/MapsOptions.kt#L38">source</a>)</span></span></div><p class="paragraph">Options for the Leaflet Map.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
-        <h2 class="">Constructors</h2>
+        <h2 class="tableheader">Constructors</h2>
         <div class="table"><a data-name="1977272670%2FConstructors%2F1856419216" anchor-label="MapsOptions" id="1977272670%2FConstructors%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-maps-options.html"><span>Maps</span><wbr><span><span>Options</span></span></a></div>
@@ -111,7 +111,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">preferCanvas<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">attributionControl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomControl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">closePopupOnClick<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomSnap<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomDelta<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">trackResize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">boxZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">doubleClickZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">dragging<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">crs<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-c-r-s/index.html">CRS</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">center<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng/index.html">LatLng</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maxZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">minZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">layers<span class="token operator">: </span><a href="../../../../kilua/dev.kilua.externals/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="../../dev.kilua.externals.leaflet.layer/-layer/index.html">Layer</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maxBounds<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng-bounds/index.html">LatLngBounds</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">renderer<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.layer.vector/-renderer/index.html">Renderer</a><span class="token operator">&lt;</span><a href="../../dev.kilua.externals.leaflet.layer.vector/-renderer/-renderer-options/index.html">Renderer.RendererOptions</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomAnimationThreshold<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">fadeAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">markerZoomAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">transform3DLimit<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">inertia<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">inertiaDeceleration<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">inertiaMaxSpeed<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">easeLinearity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">worldCopyJump<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maxBoundsViscosity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">keyboard<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">keyboardPanDelta<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">scrollWheelZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">wheelDebounceTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">wheelPxPerZoomLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">tap<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">tapTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">touchZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">bounceAtZoomLimits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">preferCanvas<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">attributionControl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomControl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">closePopupOnClick<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomSnap<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomDelta<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">trackResize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">boxZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">doubleClickZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">dragging<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">crs<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-c-r-s/index.html">CRS</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">center<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng/index.html">LatLng</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maxZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">minZoom<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">layers<span class="token operator">: </span><a href="../../../../kilua/dev.kilua.externals/-js-array/index.html">JsArray</a><span class="token operator">&lt;</span><a href="../../dev.kilua.externals.leaflet.layer/-layer/index.html">Layer</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maxBounds<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng-bounds/index.html">LatLngBounds</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">renderer<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.layer.vector/-renderer/index.html">Renderer</a><span class="token operator">&lt;</span><a href="../../dev.kilua.externals.leaflet.layer.vector/-renderer/-renderer-options/index.html">Renderer.RendererOptions</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">zoomAnimationThreshold<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">fadeAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">markerZoomAnimation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">transform3DLimit<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">inertia<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">inertiaDeceleration<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">inertiaMaxSpeed<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">easeLinearity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">worldCopyJump<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maxBoundsViscosity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">keyboard<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">keyboardPanDelta<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">scrollWheelZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">wheelDebounceTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">wheelPxPerZoomLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">tapHold<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">tapTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">pinchZoom<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">bounceAtZoomLimits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -119,9 +119,9 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="-1223849972%2FProperties%2F1856419216" anchor-label="attributionControl" id="-1223849972%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="attribution-control.html"><span>attribution</span><wbr><span><span>Control</span></span></a></div>
@@ -136,7 +136,7 @@
             </div>
           </div>
 <a data-name="-1707950108%2FProperties%2F1856419216" anchor-label="bounceAtZoomLimits" id="-1707950108%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="bounce-at-zoom-limits.html"><span>bounce</span><wbr><span>At</span><wbr><span>Zoom</span><wbr><span><span>Limits</span></span></a></div>
@@ -151,7 +151,7 @@
             </div>
           </div>
 <a data-name="-2044677902%2FProperties%2F1856419216" anchor-label="boxZoom" id="-2044677902%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="box-zoom.html"><span>box</span><wbr><span><span>Zoom</span></span></a></div>
@@ -166,7 +166,7 @@
             </div>
           </div>
 <a data-name="-228324619%2FProperties%2F1856419216" anchor-label="center" id="-228324619%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="center.html"><span><span>center</span></span></a></div>
@@ -181,7 +181,7 @@
             </div>
           </div>
 <a data-name="-331111781%2FProperties%2F1856419216" anchor-label="closePopupOnClick" id="-331111781%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="close-popup-on-click.html"><span>close</span><wbr><span>Popup</span><wbr><span>On</span><wbr><span><span>Click</span></span></a></div>
@@ -196,7 +196,7 @@
             </div>
           </div>
 <a data-name="270876556%2FProperties%2F1856419216" anchor-label="crs" id="270876556%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="crs.html"><span><span>crs</span></span></a></div>
@@ -211,7 +211,7 @@
             </div>
           </div>
 <a data-name="-43262202%2FProperties%2F1856419216" anchor-label="doubleClickZoom" id="-43262202%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="double-click-zoom.html"><span>double</span><wbr><span>Click</span><wbr><span><span>Zoom</span></span></a></div>
@@ -226,7 +226,7 @@
             </div>
           </div>
 <a data-name="-1960353797%2FProperties%2F1856419216" anchor-label="dragging" id="-1960353797%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="dragging.html"><span><span>dragging</span></span></a></div>
@@ -241,7 +241,7 @@
             </div>
           </div>
 <a data-name="96294517%2FProperties%2F1856419216" anchor-label="easeLinearity" id="96294517%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="ease-linearity.html"><span>ease</span><wbr><span><span>Linearity</span></span></a></div>
@@ -256,7 +256,7 @@
             </div>
           </div>
 <a data-name="-1975662136%2FProperties%2F1856419216" anchor-label="fadeAnimation" id="-1975662136%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fade-animation.html"><span>fade</span><wbr><span><span>Animation</span></span></a></div>
@@ -271,7 +271,7 @@
             </div>
           </div>
 <a data-name="1127559670%2FProperties%2F1856419216" anchor-label="inertia" id="1127559670%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="inertia.html"><span><span>inertia</span></span></a></div>
@@ -286,7 +286,7 @@
             </div>
           </div>
 <a data-name="1744231191%2FProperties%2F1856419216" anchor-label="inertiaDeceleration" id="1744231191%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="inertia-deceleration.html"><span>inertia</span><wbr><span><span>Deceleration</span></span></a></div>
@@ -301,7 +301,7 @@
             </div>
           </div>
 <a data-name="1939153139%2FProperties%2F1856419216" anchor-label="inertiaMaxSpeed" id="1939153139%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="inertia-max-speed.html"><span>inertia</span><wbr><span>Max</span><wbr><span><span>Speed</span></span></a></div>
@@ -316,7 +316,7 @@
             </div>
           </div>
 <a data-name="-1480792989%2FProperties%2F1856419216" anchor-label="keyboard" id="-1480792989%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="keyboard.html"><span><span>keyboard</span></span></a></div>
@@ -331,7 +331,7 @@
             </div>
           </div>
 <a data-name="-616837752%2FProperties%2F1856419216" anchor-label="keyboardPanDelta" id="-616837752%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="keyboard-pan-delta.html"><span>keyboard</span><wbr><span>Pan</span><wbr><span><span>Delta</span></span></a></div>
@@ -346,7 +346,7 @@
             </div>
           </div>
 <a data-name="1090975400%2FProperties%2F1856419216" anchor-label="layers" id="1090975400%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="layers.html"><span><span>layers</span></span></a></div>
@@ -361,7 +361,7 @@
             </div>
           </div>
 <a data-name="-1683299335%2FProperties%2F1856419216" anchor-label="markerZoomAnimation" id="-1683299335%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="marker-zoom-animation.html"><span>marker</span><wbr><span>Zoom</span><wbr><span><span>Animation</span></span></a></div>
@@ -376,7 +376,7 @@
             </div>
           </div>
 <a data-name="-2117346409%2FProperties%2F1856419216" anchor-label="maxBounds" id="-2117346409%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="max-bounds.html"><span>max</span><wbr><span><span>Bounds</span></span></a></div>
@@ -391,7 +391,7 @@
             </div>
           </div>
 <a data-name="-1542997700%2FProperties%2F1856419216" anchor-label="maxBoundsViscosity" id="-1542997700%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="max-bounds-viscosity.html"><span>max</span><wbr><span>Bounds</span><wbr><span><span>Viscosity</span></span></a></div>
@@ -406,7 +406,7 @@
             </div>
           </div>
 <a data-name="997751801%2FProperties%2F1856419216" anchor-label="maxZoom" id="997751801%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="max-zoom.html"><span>max</span><wbr><span><span>Zoom</span></span></a></div>
@@ -421,7 +421,7 @@
             </div>
           </div>
 <a data-name="-603977269%2FProperties%2F1856419216" anchor-label="minZoom" id="-603977269%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="min-zoom.html"><span>min</span><wbr><span><span>Zoom</span></span></a></div>
@@ -435,8 +435,23 @@
               </div>
             </div>
           </div>
+<a data-name="-2078843997%2FProperties%2F1856419216" anchor-label="pinchZoom" id="-2078843997%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pinch-zoom.html"><span>pinch</span><wbr><span><span>Zoom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2078843997%2FProperties%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="pinch-zoom.html">pinchZoom</a><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 <a data-name="-2041144990%2FProperties%2F1856419216" anchor-label="preferCanvas" id="-2041144990%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="prefer-canvas.html"><span>prefer</span><wbr><span><span>Canvas</span></span></a></div>
@@ -451,7 +466,7 @@
             </div>
           </div>
 <a data-name="-981268729%2FProperties%2F1856419216" anchor-label="renderer" id="-981268729%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="renderer.html"><span><span>renderer</span></span></a></div>
@@ -466,7 +481,7 @@
             </div>
           </div>
 <a data-name="813050383%2FProperties%2F1856419216" anchor-label="scrollWheelZoom" id="813050383%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="scroll-wheel-zoom.html"><span>scroll</span><wbr><span>Wheel</span><wbr><span><span>Zoom</span></span></a></div>
@@ -480,23 +495,23 @@
               </div>
             </div>
           </div>
-<a data-name="974694061%2FProperties%2F1856419216" anchor-label="tap" id="974694061%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+<a data-name="1261416110%2FProperties%2F1856419216" anchor-label="tapHold" id="1261416110%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="tap.html"><span><span>tap</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="974694061%2FProperties%2F1856419216"></span>
+                  <div><a href="tap-hold.html"><span>tap</span><wbr><span><span>Hold</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1261416110%2FProperties%2F1856419216"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="tap.html">tap</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="tap-hold.html">tapHold</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="-2136067200%2FProperties%2F1856419216" anchor-label="tapTolerance" id="-2136067200%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tap-tolerance.html"><span>tap</span><wbr><span><span>Tolerance</span></span></a></div>
@@ -510,23 +525,8 @@
               </div>
             </div>
           </div>
-<a data-name="620139326%2FProperties%2F1856419216" anchor-label="touchZoom" id="620139326%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="touch-zoom.html"><span>touch</span><wbr><span><span>Zoom</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="620139326%2FProperties%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="touch-zoom.html">touchZoom</a><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
 <a data-name="518957297%2FProperties%2F1856419216" anchor-label="trackResize" id="518957297%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="track-resize.html"><span>track</span><wbr><span><span>Resize</span></span></a></div>
@@ -541,7 +541,7 @@
             </div>
           </div>
 <a data-name="1256716364%2FProperties%2F1856419216" anchor-label="transform3DLimit" id="1256716364%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="transform3-d-limit.html"><span><span>transform3DLimit</span></span></a></div>
@@ -556,7 +556,7 @@
             </div>
           </div>
 <a data-name="-2091440865%2FProperties%2F1856419216" anchor-label="wheelDebounceTime" id="-2091440865%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="wheel-debounce-time.html"><span>wheel</span><wbr><span>Debounce</span><wbr><span><span>Time</span></span></a></div>
@@ -571,7 +571,7 @@
             </div>
           </div>
 <a data-name="647453081%2FProperties%2F1856419216" anchor-label="wheelPxPerZoomLevel" id="647453081%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="wheel-px-per-zoom-level.html"><span>wheel</span><wbr><span>Px</span><wbr><span>Per</span><wbr><span>Zoom</span><wbr><span><span>Level</span></span></a></div>
@@ -586,7 +586,7 @@
             </div>
           </div>
 <a data-name="187867099%2FProperties%2F1856419216" anchor-label="worldCopyJump" id="187867099%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="world-copy-jump.html"><span>world</span><wbr><span>Copy</span><wbr><span><span>Jump</span></span></a></div>
@@ -601,7 +601,7 @@
             </div>
           </div>
 <a data-name="1161565303%2FProperties%2F1856419216" anchor-label="zoom" id="1161565303%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom.html"><span><span>zoom</span></span></a></div>
@@ -616,7 +616,7 @@
             </div>
           </div>
 <a data-name="1834811743%2FProperties%2F1856419216" anchor-label="zoomAnimation" id="1834811743%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom-animation.html"><span>zoom</span><wbr><span><span>Animation</span></span></a></div>
@@ -631,7 +631,7 @@
             </div>
           </div>
 <a data-name="1000886896%2FProperties%2F1856419216" anchor-label="zoomAnimationThreshold" id="1000886896%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom-animation-threshold.html"><span>zoom</span><wbr><span>Animation</span><wbr><span><span>Threshold</span></span></a></div>
@@ -646,7 +646,7 @@
             </div>
           </div>
 <a data-name="974077734%2FProperties%2F1856419216" anchor-label="zoomControl" id="974077734%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom-control.html"><span>zoom</span><wbr><span><span>Control</span></span></a></div>
@@ -661,7 +661,7 @@
             </div>
           </div>
 <a data-name="398755499%2FProperties%2F1856419216" anchor-label="zoomDelta" id="398755499%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom-delta.html"><span>zoom</span><wbr><span><span>Delta</span></span></a></div>
@@ -676,7 +676,7 @@
             </div>
           </div>
 <a data-name="-1924849971%2FProperties%2F1856419216" anchor-label="zoomSnap" id="-1924849971%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom-snap.html"><span>zoom</span><wbr><span><span>Snap</span></span></a></div>
@@ -696,17 +696,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

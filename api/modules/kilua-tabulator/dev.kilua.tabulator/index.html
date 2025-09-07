@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>dev.kilua.tabulator</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-tabulator/commonMain">common</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":modules:kilua-tabulator/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,32 +62,34 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="package" id="content" pageids="kilua-tabulator::dev.kilua.tabulator////PointingToDeclaration//-1155403755">
   <div class="breadcrumbs"><a href="../index.html">kilua-tabulator</a><span class="delimiter">/</span><span class="current">dev.kilua.tabulator</span></div>
   <div class="cover ">
@@ -99,9 +99,9 @@
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
     <div class="tabs-section-body">
       <div data-togglable="TYPE">
-        <h2 class="">Types</h2>
+        <h2 class="tableheader">Types</h2>
         <div class="table"><a data-name="1149456155%2FClasslikes%2F-1155403755" anchor-label="AddRowMode" id="1149456155%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-add-row-mode/index.html"><span>Add</span><wbr><span>Row</span><wbr><span><span>Mode</span></span></a></div>
@@ -116,7 +116,7 @@
             </div>
           </div>
 <a data-name="184438502%2FClasslikes%2F-1155403755" anchor-label="Align" id="184438502%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-align/index.html"><span><span>Align</span></span></a></div>
@@ -131,7 +131,7 @@
             </div>
           </div>
 <a data-name="-2042938846%2FClasslikes%2F-1155403755" anchor-label="Calc" id="-2042938846%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-calc/index.html"><span><span>Calc</span></span></a></div>
@@ -146,7 +146,7 @@
             </div>
           </div>
 <a data-name="143897774%2FClasslikes%2F-1155403755" anchor-label="ColumnDefinition" id="143897774%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-column-definition/index.html"><span>Column</span><wbr><span><span>Definition</span></span></a></div>
@@ -161,7 +161,7 @@
             </div>
           </div>
 <a data-name="337676696%2FClasslikes%2F-1155403755" anchor-label="ColumnPosition" id="337676696%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-column-position/index.html"><span>Column</span><wbr><span><span>Position</span></span></a></div>
@@ -176,7 +176,7 @@
             </div>
           </div>
 <a data-name="-933155667%2FClasslikes%2F-1155403755" anchor-label="DownloadConfig" id="-933155667%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-download-config/index.html"><span>Download</span><wbr><span><span>Config</span></span></a></div>
@@ -191,7 +191,7 @@
             </div>
           </div>
 <a data-name="273198218%2FClasslikes%2F-1155403755" anchor-label="Editor" id="273198218%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-editor/index.html"><span><span>Editor</span></span></a></div>
@@ -206,7 +206,7 @@
             </div>
           </div>
 <a data-name="-571084693%2FClasslikes%2F-1155403755" anchor-label="EditTriggerEvent" id="-571084693%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-edit-trigger-event/index.html"><span>Edit</span><wbr><span>Trigger</span><wbr><span><span>Event</span></span></a></div>
@@ -221,7 +221,7 @@
             </div>
           </div>
 <a data-name="1733678303%2FClasslikes%2F-1155403755" anchor-label="Filter" id="1733678303%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-filter/index.html"><span><span>Filter</span></span></a></div>
@@ -236,7 +236,7 @@
             </div>
           </div>
 <a data-name="-1458761348%2FClasslikes%2F-1155403755" anchor-label="FilterMode" id="-1458761348%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-filter-mode/index.html"><span>Filter</span><wbr><span><span>Mode</span></span></a></div>
@@ -251,7 +251,7 @@
             </div>
           </div>
 <a data-name="711897025%2FClasslikes%2F-1155403755" anchor-label="Formatter" id="711897025%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-formatter/index.html"><span><span>Formatter</span></span></a></div>
@@ -266,7 +266,7 @@
             </div>
           </div>
 <a data-name="1112539256%2FClasslikes%2F-1155403755" anchor-label="HeaderSortClickElement" id="1112539256%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-header-sort-click-element/index.html"><span>Header</span><wbr><span>Sort</span><wbr><span>Click</span><wbr><span><span>Element</span></span></a></div>
@@ -281,7 +281,7 @@
             </div>
           </div>
 <a data-name="437469275%2FClasslikes%2F-1155403755" anchor-label="ImportFormat" id="437469275%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-import-format/index.html"><span>Import</span><wbr><span><span>Format</span></span></a></div>
@@ -296,7 +296,7 @@
             </div>
           </div>
 <a data-name="-1171776241%2FClasslikes%2F-1155403755" anchor-label="ImportReader" id="-1171776241%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-import-reader/index.html"><span>Import</span><wbr><span><span>Reader</span></span></a></div>
@@ -311,7 +311,7 @@
             </div>
           </div>
 <a data-name="-1515514210%2FClasslikes%2F-1155403755" anchor-label="ITabulator" id="-1515514210%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-i-tabulator/index.html"><span><span>ITabulator</span></span></a></div>
@@ -326,7 +326,7 @@
             </div>
           </div>
 <a data-name="-584953491%2FClasslikes%2F-1155403755" anchor-label="Layout" id="-584953491%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-layout/index.html"><span><span>Layout</span></span></a></div>
@@ -341,7 +341,7 @@
             </div>
           </div>
 <a data-name="1899130266%2FClasslikes%2F-1155403755" anchor-label="PaginationMode" id="1899130266%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-pagination-mode/index.html"><span>Pagination</span><wbr><span><span>Mode</span></span></a></div>
@@ -356,7 +356,7 @@
             </div>
           </div>
 <a data-name="-229943148%2FClasslikes%2F-1155403755" anchor-label="PaginationState" id="-229943148%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-pagination-state/index.html"><span>Pagination</span><wbr><span><span>State</span></span></a></div>
@@ -371,7 +371,7 @@
             </div>
           </div>
 <a data-name="365483453%2FClasslikes%2F-1155403755" anchor-label="ProgressiveMode" id="365483453%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-progressive-mode/index.html"><span>Progressive</span><wbr><span><span>Mode</span></span></a></div>
@@ -386,7 +386,7 @@
             </div>
           </div>
 <a data-name="973166795%2FClasslikes%2F-1155403755" anchor-label="RangeMode" id="973166795%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-range-mode/index.html"><span>Range</span><wbr><span><span>Mode</span></span></a></div>
@@ -401,7 +401,7 @@
             </div>
           </div>
 <a data-name="948488807%2FClasslikes%2F-1155403755" anchor-label="RenderType" id="948488807%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-render-type/index.html"><span>Render</span><wbr><span><span>Type</span></span></a></div>
@@ -416,7 +416,7 @@
             </div>
           </div>
 <a data-name="1001207193%2FClasslikes%2F-1155403755" anchor-label="ResponsiveLayout" id="1001207193%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-responsive-layout/index.html"><span>Responsive</span><wbr><span><span>Layout</span></span></a></div>
@@ -431,7 +431,7 @@
             </div>
           </div>
 <a data-name="-1906769795%2FClasslikes%2F-1155403755" anchor-label="RowPos" id="-1906769795%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-row-pos/index.html"><span>Row</span><wbr><span><span>Pos</span></span></a></div>
@@ -446,7 +446,7 @@
             </div>
           </div>
 <a data-name="1846553352%2FClasslikes%2F-1155403755" anchor-label="RowPosition" id="1846553352%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-row-position/index.html"><span>Row</span><wbr><span><span>Position</span></span></a></div>
@@ -461,7 +461,7 @@
             </div>
           </div>
 <a data-name="1930649836%2FClasslikes%2F-1155403755" anchor-label="Sorter" id="1930649836%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-sorter/index.html"><span><span>Sorter</span></span></a></div>
@@ -476,7 +476,7 @@
             </div>
           </div>
 <a data-name="-1972648434%2FClasslikes%2F-1155403755" anchor-label="SortingDir" id="-1972648434%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-sorting-dir/index.html"><span>Sorting</span><wbr><span><span>Dir</span></span></a></div>
@@ -491,7 +491,7 @@
             </div>
           </div>
 <a data-name="963867286%2FClasslikes%2F-1155403755" anchor-label="SortMode" id="963867286%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-sort-mode/index.html"><span>Sort</span><wbr><span><span>Mode</span></span></a></div>
@@ -506,7 +506,7 @@
             </div>
           </div>
 <a data-name="-206561757%2FClasslikes%2F-1155403755" anchor-label="TableType" id="-206561757%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-table-type/index.html"><span>Table</span><wbr><span><span>Type</span></span></a></div>
@@ -521,7 +521,7 @@
             </div>
           </div>
 <a data-name="-129403063%2FClasslikes%2F-1155403755" anchor-label="Tabulator" id="-129403063%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tabulator/index.html"><span><span>Tabulator</span></span></a></div>
@@ -536,7 +536,7 @@
             </div>
           </div>
 <a data-name="1667618139%2FClasslikes%2F-1155403755" anchor-label="TabulatorOptions" id="1667618139%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tabulator-options/index.html"><span>Tabulator</span><wbr><span><span>Options</span></span></a></div>
@@ -551,7 +551,7 @@
             </div>
           </div>
 <a data-name="33617849%2FClasslikes%2F-1155403755" anchor-label="TextDirection" id="33617849%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-text-direction/index.html"><span>Text</span><wbr><span><span>Direction</span></span></a></div>
@@ -566,7 +566,7 @@
             </div>
           </div>
 <a data-name="-1004749255%2FClasslikes%2F-1155403755" anchor-label="Validator" id="-1004749255%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-validator/index.html"><span><span>Validator</span></span></a></div>
@@ -581,7 +581,7 @@
             </div>
           </div>
 <a data-name="-1389818872%2FClasslikes%2F-1155403755" anchor-label="VAlign" id="-1389818872%2FClasslikes%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-v-align/index.html"><span><span>VAlign</span></span></a></div>
@@ -598,9 +598,9 @@
         </div>
       </div>
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="2075601638%2FFunctions%2F-1155403755" anchor-label="getClass" id="2075601638%2FFunctions%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-class.html"><span>get</span><wbr><span><span>Class</span></span></a></div>
@@ -615,7 +615,7 @@
             </div>
           </div>
 <a data-name="317960234%2FFunctions%2F-1155403755" anchor-label="tabulator" id="317960234%2FFunctions%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tabulator.html"><span><span>tabulator</span></span></a></div>
@@ -630,7 +630,7 @@
             </div>
           </div>
 <a data-name="-312466657%2FFunctions%2F-1155403755" anchor-label="tabulatorPagination" id="-312466657%2FFunctions%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tabulator-pagination.html"><span>tabulator</span><wbr><span><span>Pagination</span></span></a></div>
@@ -645,7 +645,7 @@
             </div>
           </div>
 <a data-name="2031612318%2FFunctions%2F-1155403755" anchor-label="tabulatorRef" id="2031612318%2FFunctions%2F-1155403755" data-filterable-set=":modules:kilua-tabulator/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":modules:kilua-tabulator/commonMain" data-filterable-set=":modules:kilua-tabulator/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tabulator-ref.html"><span>tabulator</span><wbr><span><span>Ref</span></span></a></div>
@@ -665,17 +665,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

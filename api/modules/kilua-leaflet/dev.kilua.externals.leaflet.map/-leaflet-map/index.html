@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>LeafletMap</title>
-<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../../styles/main.css" rel="Stylesheet">
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-leaflet/commonMain">common</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":modules:kilua-leaflet/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,45 +62,47 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="kilua-leaflet::dev.kilua.externals.leaflet.map/LeafletMap///PointingToDeclaration//1856419216">
   <div class="breadcrumbs"><a href="../../index.html">kilua-leaflet</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.externals.leaflet.map</a><span class="delimiter">/</span><span class="current">LeafletMap</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Leaflet</span><wbr><span><span>Map</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">LeafletMap</a> : <a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-leaflet/src/commonMain/kotlin/dev/kilua/externals/leaflet/map/LeafletMap.kt#L61">source</a>)</span></span></div><p class="paragraph">The central class of the API — it is used to create a map on a page and manipulate it.</p><p class="paragraph">https://leafletjs.com/reference.html#map-example</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">LeafletMap</a> : <a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-leaflet/src/commonMain/kotlin/dev/kilua/externals/leaflet/map/LeafletMap.kt#L60">source</a>)</span></span></div><p class="paragraph">The central class of the API — it is used to create a map on a page and manipulate it.</p><p class="paragraph">https://leafletjs.com/reference.html#map-example</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
-        <h2 class="">Constructors</h2>
+        <h2 class="tableheader">Constructors</h2>
         <div class="table"><a data-name="-681989426%2FConstructors%2F1856419216" anchor-label="LeafletMap" id="-681989426%2FConstructors%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-leaflet-map.html"><span>Leaflet</span><wbr><span><span>Map</span></span></a></div>
@@ -119,9 +119,9 @@
         </div>
       </div>
       <div data-togglable="TYPE">
-        <h2 class="">Types</h2>
+        <h2 class="tableheader">Types</h2>
         <div class="table"><a data-name="666611777%2FClasslikes%2F1856419216" anchor-label="AnimatedOption" id="666611777%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-animated-option/index.html"><span>Animated</span><wbr><span><span>Option</span></span></a></div>
@@ -136,7 +136,7 @@
             </div>
           </div>
 <a data-name="-1176760159%2FClasslikes%2F1856419216" anchor-label="FitBoundsOptions" id="-1176760159%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-fit-bounds-options/index.html"><span>Fit</span><wbr><span>Bounds</span><wbr><span><span>Options</span></span></a></div>
@@ -151,7 +151,7 @@
             </div>
           </div>
 <a data-name="721902919%2FClasslikes%2F1856419216" anchor-label="InvalidateSizeOptions" id="721902919%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-invalidate-size-options/index.html"><span>Invalidate</span><wbr><span>Size</span><wbr><span><span>Options</span></span></a></div>
@@ -166,7 +166,7 @@
             </div>
           </div>
 <a data-name="1302695818%2FClasslikes%2F1856419216" anchor-label="LeafletMapOptions" id="1302695818%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-leaflet-map-options/index.html"><span>Leaflet</span><wbr><span>Map</span><wbr><span><span>Options</span></span></a></div>
@@ -181,7 +181,7 @@
             </div>
           </div>
 <a data-name="-1837949763%2FClasslikes%2F1856419216" anchor-label="LocateOptions" id="-1837949763%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-locate-options/index.html"><span>Locate</span><wbr><span><span>Options</span></span></a></div>
@@ -196,7 +196,7 @@
             </div>
           </div>
 <a data-name="-1841534604%2FClasslikes%2F1856419216" anchor-label="PanInsideOptions" id="-1841534604%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-pan-inside-options/index.html"><span>Pan</span><wbr><span>Inside</span><wbr><span><span>Options</span></span></a></div>
@@ -211,7 +211,7 @@
             </div>
           </div>
 <a data-name="-1401017064%2FClasslikes%2F1856419216" anchor-label="PanOptions" id="-1401017064%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-pan-options/index.html"><span>Pan</span><wbr><span><span>Options</span></span></a></div>
@@ -226,7 +226,7 @@
             </div>
           </div>
 <a data-name="85494590%2FClasslikes%2F1856419216" anchor-label="ZoomOptions" id="85494590%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-zoom-options/index.html"><span>Zoom</span><wbr><span><span>Options</span></span></a></div>
@@ -241,7 +241,7 @@
             </div>
           </div>
 <a data-name="-435231675%2FClasslikes%2F1856419216" anchor-label="ZoomPanOptions" id="-435231675%2FClasslikes%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-zoom-pan-options/index.html"><span>Zoom</span><wbr><span>Pan</span><wbr><span><span>Options</span></span></a></div>
@@ -258,9 +258,9 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="-491654618%2FProperties%2F1856419216" anchor-label="attributionControl" id="-491654618%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="attribution-control.html"><span>attribution</span><wbr><span><span>Control</span></span></a></div>
@@ -275,7 +275,7 @@
             </div>
           </div>
 <a data-name="-1881566440%2FProperties%2F1856419216" anchor-label="boxZoom" id="-1881566440%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="box-zoom.html"><span>box</span><wbr><span><span>Zoom</span></span></a></div>
@@ -290,7 +290,7 @@
             </div>
           </div>
 <a data-name="994786092%2FProperties%2F1856419216" anchor-label="doubleClickZoom" id="994786092%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="double-click-zoom.html"><span>double</span><wbr><span>Click</span><wbr><span><span>Zoom</span></span></a></div>
@@ -305,7 +305,7 @@
             </div>
           </div>
 <a data-name="-1198865771%2FProperties%2F1856419216" anchor-label="dragging" id="-1198865771%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="dragging.html"><span><span>dragging</span></span></a></div>
@@ -320,7 +320,7 @@
             </div>
           </div>
 <a data-name="-719304963%2FProperties%2F1856419216" anchor-label="keyboard" id="-719304963%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="keyboard.html"><span><span>keyboard</span></span></a></div>
@@ -335,7 +335,7 @@
             </div>
           </div>
 <a data-name="-906481480%2FProperties%2F1856419216" anchor-label="options" id="-906481480%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="options.html"><span><span>options</span></span></a></div>
@@ -350,7 +350,7 @@
             </div>
           </div>
 <a data-name="1851098677%2FProperties%2F1856419216" anchor-label="scrollWheelZoom" id="1851098677%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="scroll-wheel-zoom.html"><span>scroll</span><wbr><span>Wheel</span><wbr><span><span>Zoom</span></span></a></div>
@@ -365,7 +365,7 @@
             </div>
           </div>
 <a data-name="741641171%2FProperties%2F1856419216" anchor-label="tap" id="741641171%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="tap.html"><span><span>tap</span></span></a></div>
@@ -380,7 +380,7 @@
             </div>
           </div>
 <a data-name="-1543535644%2FProperties%2F1856419216" anchor-label="touchZoom" id="-1543535644%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="touch-zoom.html"><span>touch</span><wbr><span><span>Zoom</span></span></a></div>
@@ -395,7 +395,7 @@
             </div>
           </div>
 <a data-name="446602828%2FProperties%2F1856419216" anchor-label="zoomControl" id="446602828%2FProperties%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom-control.html"><span>zoom</span><wbr><span><span>Control</span></span></a></div>
@@ -412,9 +412,9 @@
         </div>
       </div>
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="-1584389598%2FFunctions%2F1856419216" anchor-label="addControl" id="-1584389598%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="add-control.html"><span>add</span><wbr><span><span>Control</span></span></a></div>
@@ -428,23 +428,8 @@
               </div>
             </div>
           </div>
-<a data-name="1496623014%2FFunctions%2F1856419216" anchor-label="addEventListener" id="1496623014%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span>add</span><wbr><span>Event</span><wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1496623014%2FFunctions%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">eventMap<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-event-handler-fn-map/index.html">LeafletEventHandlerFnMap</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-drag-end-event-id/index.html">LeafletDragEndEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-drag-end-event-handler-fn/index.html">DragEndEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-error-event-id/index.html">LeafletErrorEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-error-event-handler-fn/index.html">ErrorEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-layer-event-id/index.html">LeafletLayerEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-layer-event-handler-fn/index.html">LayerEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-control-event-id/index.html">LeafletControlEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-layers-control-event-handler-fn/index.html">LayersControlEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-event-id/index.html">LeafletEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-event-handler-fn/index.html">LeafletEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-keyboard-event-id/index.html">LeafletKeyboardEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-keyboard-event-handler-fn/index.html">LeafletKeyboardEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-mouse-event-id/index.html">LeafletMouseEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-mouse-event-handler-fn/index.html">LeafletMouseEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-location-event-id/index.html">LeafletLocationEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-location-event-handler-fn/index.html">LocationEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-popup-event-id/index.html">LeafletPopupEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-popup-event-handler-fn/index.html">PopupEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-resize-event-id/index.html">LeafletResizeEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-resize-event-handler-fn/index.html">ResizeEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-tile-error-id/index.html">LeafletTileErrorId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-tile-error-event-handler-fn/index.html">TileErrorEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-tile-event-id/index.html">LeafletTileEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-tile-event-handler-fn/index.html">TileEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-tooltip-event-id/index.html">LeafletTooltipEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-tooltip-event-handler-fn/index.html">TooltipEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-listener.html"><span class="token function">addEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-zoom-anim-event-id/index.html">LeafletZoomAnimEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-zoom-anim-event-handler-fn/index.html">ZoomAnimEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
 <a data-name="1879666986%2FFunctions%2F1856419216" anchor-label="addEventParent" id="1879666986%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.events/-evented/add-event-parent.html"><span>add</span><wbr><span>Event</span><wbr><span><span>Parent</span></span></a></div>
@@ -459,7 +444,7 @@
             </div>
           </div>
 <a data-name="591869683%2FFunctions%2F1856419216" anchor-label="addHandler" id="591869683%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="add-handler.html"><span>add</span><wbr><span><span>Handler</span></span></a></div>
@@ -474,7 +459,7 @@
             </div>
           </div>
 <a data-name="905428400%2FFunctions%2F1856419216" anchor-label="addInitHook" id="905428400%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.core/-class/add-init-hook.html"><span>add</span><wbr><span>Init</span><wbr><span><span>Hook</span></span></a></div>
@@ -489,7 +474,7 @@
             </div>
           </div>
 <a data-name="1776336854%2FFunctions%2F1856419216" anchor-label="addLayer" id="1776336854%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="add-layer.html"><span>add</span><wbr><span><span>Layer</span></span></a></div>
@@ -503,38 +488,8 @@
               </div>
             </div>
           </div>
-<a data-name="684628493%2FFunctions%2F1856419216" anchor-label="addOneTimeEventListener" id="684628493%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span>add</span><wbr><span>One</span><wbr><span>Time</span><wbr><span>Event</span><wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="684628493%2FFunctions%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">eventMap<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-event-handler-fn-map/index.html">LeafletEventHandlerFnMap</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-drag-end-event-id/index.html">LeafletDragEndEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-drag-end-event-handler-fn/index.html">DragEndEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-error-event-id/index.html">LeafletErrorEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-error-event-handler-fn/index.html">ErrorEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-layer-event-id/index.html">LeafletLayerEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-layer-event-handler-fn/index.html">LayerEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-control-event-id/index.html">LeafletControlEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-layers-control-event-handler-fn/index.html">LayersControlEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-event-id/index.html">LeafletEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-event-handler-fn/index.html">LeafletEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-keyboard-event-id/index.html">LeafletKeyboardEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-keyboard-event-handler-fn/index.html">LeafletKeyboardEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-mouse-event-id/index.html">LeafletMouseEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-mouse-event-handler-fn/index.html">LeafletMouseEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-location-event-id/index.html">LeafletLocationEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-location-event-handler-fn/index.html">LocationEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-popup-event-id/index.html">LeafletPopupEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-popup-event-handler-fn/index.html">PopupEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-resize-event-id/index.html">LeafletResizeEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-resize-event-handler-fn/index.html">ResizeEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-tile-error-id/index.html">LeafletTileErrorId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-tile-error-event-handler-fn/index.html">TileErrorEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-tile-event-id/index.html">LeafletTileEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-tile-event-handler-fn/index.html">TileEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-tooltip-event-id/index.html">LeafletTooltipEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-tooltip-event-handler-fn/index.html">TooltipEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/add-one-time-event-listener.html"><span class="token function">addOneTimeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-zoom-anim-event-id/index.html">LeafletZoomAnimEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-zoom-anim-event-handler-fn/index.html">ZoomAnimEventHandlerFn</a><span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-<a data-name="-1797318724%2FFunctions%2F1856419216" anchor-label="clearAllEventListeners" id="-1797318724%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="../../dev.kilua.externals.leaflet.events/-evented/clear-all-event-listeners.html"><span>clear</span><wbr><span>All</span><wbr><span>Event</span><wbr><span><span>Listeners</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1797318724%2FFunctions%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/clear-all-event-listeners.html"><span class="token function">clearAllEventListeners</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
 <a data-name="-1553047131%2FFunctions%2F1856419216" anchor-label="closePopup" id="-1553047131%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="close-popup.html"><span>close</span><wbr><span><span>Popup</span></span></a></div>
@@ -549,7 +504,7 @@
             </div>
           </div>
 <a data-name="1103125189%2FFunctions%2F1856419216" anchor-label="closeTooltip" id="1103125189%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="close-tooltip.html"><span>close</span><wbr><span><span>Tooltip</span></span></a></div>
@@ -564,7 +519,7 @@
             </div>
           </div>
 <a data-name="425603260%2FFunctions%2F1856419216" anchor-label="containerPointToLatLng" id="425603260%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="container-point-to-lat-lng.html"><span>container</span><wbr><span>Point</span><wbr><span>To</span><wbr><span>Lat</span><wbr><span><span>Lng</span></span></a></div>
@@ -579,7 +534,7 @@
             </div>
           </div>
 <a data-name="-1443749405%2FFunctions%2F1856419216" anchor-label="containerPointToLayerPoint" id="-1443749405%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="container-point-to-layer-point.html"><span>container</span><wbr><span>Point</span><wbr><span>To</span><wbr><span>Layer</span><wbr><span><span>Point</span></span></a></div>
@@ -594,7 +549,7 @@
             </div>
           </div>
 <a data-name="1255897811%2FFunctions%2F1856419216" anchor-label="createPane" id="1255897811%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-pane.html"><span>create</span><wbr><span><span>Pane</span></span></a></div>
@@ -609,7 +564,7 @@
             </div>
           </div>
 <a data-name="-1858432304%2FFunctions%2F1856419216" anchor-label="distance" id="-1858432304%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="distance.html"><span><span>distance</span></span></a></div>
@@ -624,7 +579,7 @@
             </div>
           </div>
 <a data-name="-1973522331%2FFunctions%2F1856419216" anchor-label="eachLayer" id="-1973522331%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="each-layer.html"><span>each</span><wbr><span><span>Layer</span></span></a></div>
@@ -639,7 +594,7 @@
             </div>
           </div>
 <a data-name="-513210539%2FFunctions%2F1856419216" anchor-label="fire" id="-513210539%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.events/-evented/fire.html"><span><span>fire</span></span></a></div>
@@ -653,23 +608,8 @@
               </div>
             </div>
           </div>
-<a data-name="1079284759%2FFunctions%2F1856419216" anchor-label="fireEvent" id="1079284759%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="../../dev.kilua.externals.leaflet.events/-evented/fire-event.html"><span>fire</span><wbr><span><span>Event</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1079284759%2FFunctions%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/fire-event.html"><span class="token function">fireEvent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">propagate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
 <a data-name="2056202054%2FFunctions%2F1856419216" anchor-label="fitBounds" id="2056202054%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fit-bounds.html"><span>fit</span><wbr><span><span>Bounds</span></span></a></div>
@@ -684,7 +624,7 @@
             </div>
           </div>
 <a data-name="-700511378%2FFunctions%2F1856419216" anchor-label="fitWorld" id="-700511378%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fit-world.html"><span>fit</span><wbr><span><span>World</span></span></a></div>
@@ -699,7 +639,7 @@
             </div>
           </div>
 <a data-name="1924329138%2FFunctions%2F1856419216" anchor-label="flyTo" id="1924329138%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fly-to.html"><span>fly</span><wbr><span><span>To</span></span></a></div>
@@ -714,7 +654,7 @@
             </div>
           </div>
 <a data-name="768633897%2FFunctions%2F1856419216" anchor-label="flyToBounds" id="768633897%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fly-to-bounds.html"><span>fly</span><wbr><span>To</span><wbr><span><span>Bounds</span></span></a></div>
@@ -729,7 +669,7 @@
             </div>
           </div>
 <a data-name="1756636171%2FFunctions%2F1856419216" anchor-label="getBounds" id="1756636171%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-bounds.html"><span>get</span><wbr><span><span>Bounds</span></span></a></div>
@@ -744,7 +684,7 @@
             </div>
           </div>
 <a data-name="-1467901953%2FFunctions%2F1856419216" anchor-label="getBoundsZoom" id="-1467901953%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-bounds-zoom.html"><span>get</span><wbr><span>Bounds</span><wbr><span><span>Zoom</span></span></a></div>
@@ -759,7 +699,7 @@
             </div>
           </div>
 <a data-name="839705195%2FFunctions%2F1856419216" anchor-label="getCenter" id="839705195%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-center.html"><span>get</span><wbr><span><span>Center</span></span></a></div>
@@ -774,7 +714,7 @@
             </div>
           </div>
 <a data-name="595601945%2FFunctions%2F1856419216" anchor-label="getContainer" id="595601945%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-container.html"><span>get</span><wbr><span><span>Container</span></span></a></div>
@@ -789,7 +729,7 @@
             </div>
           </div>
 <a data-name="-253062333%2FFunctions%2F1856419216" anchor-label="getMaxZoom" id="-253062333%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-max-zoom.html"><span>get</span><wbr><span>Max</span><wbr><span><span>Zoom</span></span></a></div>
@@ -804,7 +744,7 @@
             </div>
           </div>
 <a data-name="-1854791403%2FFunctions%2F1856419216" anchor-label="getMinZoom" id="-1854791403%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-min-zoom.html"><span>get</span><wbr><span>Min</span><wbr><span><span>Zoom</span></span></a></div>
@@ -819,7 +759,7 @@
             </div>
           </div>
 <a data-name="-1984249968%2FFunctions%2F1856419216" anchor-label="getPane" id="-1984249968%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-pane.html"><span>get</span><wbr><span><span>Pane</span></span></a></div>
@@ -834,7 +774,7 @@
             </div>
           </div>
 <a data-name="-1813102001%2FFunctions%2F1856419216" anchor-label="getPanes" id="-1813102001%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-panes.html"><span>get</span><wbr><span><span>Panes</span></span></a></div>
@@ -849,7 +789,7 @@
             </div>
           </div>
 <a data-name="-1837040705%2FFunctions%2F1856419216" anchor-label="getPixelBounds" id="-1837040705%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-pixel-bounds.html"><span>get</span><wbr><span>Pixel</span><wbr><span><span>Bounds</span></span></a></div>
@@ -864,7 +804,7 @@
             </div>
           </div>
 <a data-name="876213358%2FFunctions%2F1856419216" anchor-label="getPixelOrigin" id="876213358%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-pixel-origin.html"><span>get</span><wbr><span>Pixel</span><wbr><span><span>Origin</span></span></a></div>
@@ -879,7 +819,7 @@
             </div>
           </div>
 <a data-name="1313091805%2FFunctions%2F1856419216" anchor-label="getPixelWorldBounds" id="1313091805%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-pixel-world-bounds.html"><span>get</span><wbr><span>Pixel</span><wbr><span>World</span><wbr><span><span>Bounds</span></span></a></div>
@@ -894,7 +834,7 @@
             </div>
           </div>
 <a data-name="1315737502%2FFunctions%2F1856419216" anchor-label="getRenderer" id="1315737502%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-renderer.html"><span>get</span><wbr><span><span>Renderer</span></span></a></div>
@@ -909,7 +849,7 @@
             </div>
           </div>
 <a data-name="1913314114%2FFunctions%2F1856419216" anchor-label="getScaleZoom" id="1913314114%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-scale-zoom.html"><span>get</span><wbr><span>Scale</span><wbr><span><span>Zoom</span></span></a></div>
@@ -924,7 +864,7 @@
             </div>
           </div>
 <a data-name="110888191%2FFunctions%2F1856419216" anchor-label="getSize" id="110888191%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-size.html"><span>get</span><wbr><span><span>Size</span></span></a></div>
@@ -939,7 +879,7 @@
             </div>
           </div>
 <a data-name="1694519661%2FFunctions%2F1856419216" anchor-label="getZoom" id="1694519661%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-zoom.html"><span>get</span><wbr><span><span>Zoom</span></span></a></div>
@@ -954,7 +894,7 @@
             </div>
           </div>
 <a data-name="539536060%2FFunctions%2F1856419216" anchor-label="getZoomScale" id="539536060%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-zoom-scale.html"><span>get</span><wbr><span>Zoom</span><wbr><span><span>Scale</span></span></a></div>
@@ -968,23 +908,8 @@
               </div>
             </div>
           </div>
-<a data-name="509860606%2FFunctions%2F1856419216" anchor-label="hasEventListeners" id="509860606%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="../../dev.kilua.externals.leaflet.events/-evented/has-event-listeners.html"><span>has</span><wbr><span>Event</span><wbr><span><span>Listeners</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="509860606%2FFunctions%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/has-event-listeners.html"><span class="token function">hasEventListeners</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
 <a data-name="771983567%2FFunctions%2F1856419216" anchor-label="hasLayer" id="771983567%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="has-layer.html"><span>has</span><wbr><span><span>Layer</span></span></a></div>
@@ -999,7 +924,7 @@
             </div>
           </div>
 <a data-name="-1593283503%2FFunctions%2F1856419216" anchor-label="include" id="-1593283503%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.core/-class/include.html"><span><span>include</span></span></a></div>
@@ -1014,7 +939,7 @@
             </div>
           </div>
 <a data-name="-15079282%2FFunctions%2F1856419216" anchor-label="invalidateSize" id="-15079282%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="invalidate-size.html"><span>invalidate</span><wbr><span><span>Size</span></span></a></div>
@@ -1029,7 +954,7 @@
             </div>
           </div>
 <a data-name="1106483693%2FFunctions%2F1856419216" anchor-label="latLngToContainerPoint" id="1106483693%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="lat-lng-to-container-point.html"><span>lat</span><wbr><span>Lng</span><wbr><span>To</span><wbr><span>Container</span><wbr><span><span>Point</span></span></a></div>
@@ -1044,7 +969,7 @@
             </div>
           </div>
 <a data-name="643186109%2FFunctions%2F1856419216" anchor-label="latLngToLayerPoint" id="643186109%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="lat-lng-to-layer-point.html"><span>lat</span><wbr><span>Lng</span><wbr><span>To</span><wbr><span>Layer</span><wbr><span><span>Point</span></span></a></div>
@@ -1059,7 +984,7 @@
             </div>
           </div>
 <a data-name="768063203%2FFunctions%2F1856419216" anchor-label="layerPointToContainerPoint" id="768063203%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="layer-point-to-container-point.html"><span>layer</span><wbr><span>Point</span><wbr><span>To</span><wbr><span>Container</span><wbr><span><span>Point</span></span></a></div>
@@ -1074,7 +999,7 @@
             </div>
           </div>
 <a data-name="1327355148%2FFunctions%2F1856419216" anchor-label="layerPointToLatLng" id="1327355148%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="layer-point-to-lat-lng.html"><span>layer</span><wbr><span>Point</span><wbr><span>To</span><wbr><span>Lat</span><wbr><span><span>Lng</span></span></a></div>
@@ -1089,7 +1014,7 @@
             </div>
           </div>
 <a data-name="1877920971%2FFunctions%2F1856419216" anchor-label="listens" id="1877920971%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.events/-evented/listens.html"><span><span>listens</span></span></a></div>
@@ -1104,7 +1029,7 @@
             </div>
           </div>
 <a data-name="-1364955041%2FFunctions%2F1856419216" anchor-label="locate" id="-1364955041%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="locate.html"><span><span>locate</span></span></a></div>
@@ -1119,7 +1044,7 @@
             </div>
           </div>
 <a data-name="-1575801387%2FFunctions%2F1856419216" anchor-label="mergeOptions" id="-1575801387%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.core/-class/merge-options.html"><span>merge</span><wbr><span><span>Options</span></span></a></div>
@@ -1133,53 +1058,8 @@
               </div>
             </div>
           </div>
-<a data-name="1997072545%2FFunctions%2F1856419216" anchor-label="mouseEventToContainerPoint" id="1997072545%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="mouse-event-to-container-point.html"><span>mouse</span><wbr><span>Event</span><wbr><span>To</span><wbr><span>Container</span><wbr><span><span>Point</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1997072545%2FFunctions%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="mouse-event-to-container-point.html"><span class="token function">mouseEventToContainerPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ev<span class="token operator">: </span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geometry/-point/index.html">Point</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-<a data-name="-2045704424%2FFunctions%2F1856419216" anchor-label="mouseEventToLatLng" id="-2045704424%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="mouse-event-to-lat-lng.html"><span>mouse</span><wbr><span>Event</span><wbr><span>To</span><wbr><span>Lat</span><wbr><span><span>Lng</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2045704424%2FFunctions%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="mouse-event-to-lat-lng.html"><span class="token function">mouseEventToLatLng</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ev<span class="token operator">: </span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng/index.html">LatLng</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-<a data-name="1218457169%2FFunctions%2F1856419216" anchor-label="mouseEventToLayerPoint" id="1218457169%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="mouse-event-to-layer-point.html"><span>mouse</span><wbr><span>Event</span><wbr><span>To</span><wbr><span>Layer</span><wbr><span><span>Point</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1218457169%2FFunctions%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="mouse-event-to-layer-point.html"><span class="token function">mouseEventToLayerPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ev<span class="token operator">: </span><span data-unresolved-link="web.uievents/MouseEvent///PointingToDeclaration/">MouseEvent</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geometry/-point/index.html">Point</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
 <a data-name="-896272902%2FFunctions%2F1856419216" anchor-label="off" id="-896272902%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.events/-evented/off.html"><span><span>off</span></span></a></div>
@@ -1194,7 +1074,7 @@
             </div>
           </div>
 <a data-name="-737196488%2FFunctions%2F1856419216" anchor-label="on" id="-737196488%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.events/-evented/on.html"><span><span>on</span></span></a></div>
@@ -1209,7 +1089,7 @@
             </div>
           </div>
 <a data-name="139390747%2FFunctions%2F1856419216" anchor-label="once" id="139390747%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.events/-evented/once.html"><span><span>once</span></span></a></div>
@@ -1224,7 +1104,7 @@
             </div>
           </div>
 <a data-name="-1840750093%2FFunctions%2F1856419216" anchor-label="openPopup" id="-1840750093%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="open-popup.html"><span>open</span><wbr><span><span>Popup</span></span></a></div>
@@ -1239,7 +1119,7 @@
             </div>
           </div>
 <a data-name="-1476667675%2FFunctions%2F1856419216" anchor-label="openTooltip" id="-1476667675%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="open-tooltip.html"><span>open</span><wbr><span><span>Tooltip</span></span></a></div>
@@ -1254,7 +1134,7 @@
             </div>
           </div>
 <a data-name="-1416205293%2FFunctions%2F1856419216" anchor-label="panBy" id="-1416205293%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="pan-by.html"><span>pan</span><wbr><span><span>By</span></span></a></div>
@@ -1269,7 +1149,7 @@
             </div>
           </div>
 <a data-name="952728347%2FFunctions%2F1856419216" anchor-label="panInside" id="952728347%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="pan-inside.html"><span>pan</span><wbr><span><span>Inside</span></span></a></div>
@@ -1284,7 +1164,7 @@
             </div>
           </div>
 <a data-name="516369557%2FFunctions%2F1856419216" anchor-label="panInsideBounds" id="516369557%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="pan-inside-bounds.html"><span>pan</span><wbr><span>Inside</span><wbr><span><span>Bounds</span></span></a></div>
@@ -1299,7 +1179,7 @@
             </div>
           </div>
 <a data-name="391786976%2FFunctions%2F1856419216" anchor-label="panTo" id="391786976%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="pan-to.html"><span>pan</span><wbr><span><span>To</span></span></a></div>
@@ -1313,8 +1193,53 @@
               </div>
             </div>
           </div>
+<a data-name="156050965%2FFunctions%2F1856419216" anchor-label="pointerEventToContainerPoint" id="156050965%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pointer-event-to-container-point.html"><span>pointer</span><wbr><span>Event</span><wbr><span>To</span><wbr><span>Container</span><wbr><span><span>Point</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="156050965%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="pointer-event-to-container-point.html"><span class="token function">pointerEventToContainerPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ev<span class="token operator">: </span><span data-unresolved-link="web.pointer/PointerEvent///PointingToDeclaration/">PointerEvent</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geometry/-point/index.html">Point</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="941371006%2FFunctions%2F1856419216" anchor-label="pointerEventToLatLng" id="941371006%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pointer-event-to-lat-lng.html"><span>pointer</span><wbr><span>Event</span><wbr><span>To</span><wbr><span>Lat</span><wbr><span><span>Lng</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="941371006%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="pointer-event-to-lat-lng.html"><span class="token function">pointerEventToLatLng</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ev<span class="token operator">: </span><span data-unresolved-link="web.pointer/PointerEvent///PointingToDeclaration/">PointerEvent</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geo/-lat-lng/index.html">LatLng</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1544732059%2FFunctions%2F1856419216" anchor-label="pointerEventToLayerPoint" id="-1544732059%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pointer-event-to-layer-point.html"><span>pointer</span><wbr><span>Event</span><wbr><span>To</span><wbr><span>Layer</span><wbr><span><span>Point</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1544732059%2FFunctions%2F1856419216"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="pointer-event-to-layer-point.html"><span class="token function">pointerEventToLayerPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ev<span class="token operator">: </span><span data-unresolved-link="web.pointer/PointerEvent///PointingToDeclaration/">PointerEvent</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.geometry/-point/index.html">Point</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 <a data-name="-88546169%2FFunctions%2F1856419216" anchor-label="project" id="-88546169%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="project.html"><span><span>project</span></span></a></div>
@@ -1329,7 +1254,7 @@
             </div>
           </div>
 <a data-name="-2127895872%2FFunctions%2F1856419216" anchor-label="remove" id="-2127895872%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="remove.html"><span><span>remove</span></span></a></div>
@@ -1344,7 +1269,7 @@
             </div>
           </div>
 <a data-name="1198100695%2FFunctions%2F1856419216" anchor-label="removeControl" id="1198100695%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="remove-control.html"><span>remove</span><wbr><span><span>Control</span></span></a></div>
@@ -1358,23 +1283,8 @@
               </div>
             </div>
           </div>
-<a data-name="1184591532%2FFunctions%2F1856419216" anchor-label="removeEventListener" id="1184591532%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span>remove</span><wbr><span>Event</span><wbr><span><span>Listener</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1184591532%2FFunctions%2F1856419216"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-leaflet/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">eventMap<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-event-handler-fn-map/index.html">LeafletEventHandlerFnMap</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-any-event-id/index.html">LeafletAnyEventId</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-drag-end-event-id/index.html">LeafletDragEndEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-drag-end-event-handler-fn/index.html">DragEndEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-error-event-id/index.html">LeafletErrorEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-error-event-handler-fn/index.html">ErrorEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-layer-event-id/index.html">LeafletLayerEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-layer-event-handler-fn/index.html">LayerEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-control-event-id/index.html">LeafletControlEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-layers-control-event-handler-fn/index.html">LayersControlEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-event-id/index.html">LeafletEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-event-handler-fn/index.html">LeafletEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-keyboard-event-id/index.html">LeafletKeyboardEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-keyboard-event-handler-fn/index.html">LeafletKeyboardEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-mouse-event-id/index.html">LeafletMouseEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-mouse-event-handler-fn/index.html">LeafletMouseEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-location-event-id/index.html">LeafletLocationEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-location-event-handler-fn/index.html">LocationEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-popup-event-id/index.html">LeafletPopupEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-popup-event-handler-fn/index.html">PopupEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-resize-event-id/index.html">LeafletResizeEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-resize-event-handler-fn/index.html">ResizeEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-tile-error-id/index.html">LeafletTileErrorId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-tile-error-event-handler-fn/index.html">TileErrorEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-tile-event-id/index.html">LeafletTileEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-tile-event-handler-fn/index.html">TileEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-tooltip-event-id/index.html">LeafletTooltipEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-tooltip-event-handler-fn/index.html">TooltipEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-listener.html"><span class="token function">removeEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-leaflet-zoom-anim-event-id/index.html">LeafletZoomAnimEventId</a><span class="token punctuation">, </span></span><span class="parameter ">fn<span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-zoom-anim-event-handler-fn/index.html">ZoomAnimEventHandlerFn</a><span class="token operator"> = </span>definedExternally<span class="token punctuation">, </span></span><span class="parameter ">context<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator"> = </span>definedExternally</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.externals.leaflet.events/-evented/index.html">Evented</a></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
 <a data-name="739210525%2FFunctions%2F1856419216" anchor-label="removeEventParent" id="739210525%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.externals.leaflet.events/-evented/remove-event-parent.html"><span>remove</span><wbr><span>Event</span><wbr><span><span>Parent</span></span></a></div>
@@ -1389,7 +1299,7 @@
             </div>
           </div>
 <a data-name="-1874027957%2FFunctions%2F1856419216" anchor-label="removeLayer" id="-1874027957%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="remove-layer.html"><span>remove</span><wbr><span><span>Layer</span></span></a></div>
@@ -1404,7 +1314,7 @@
             </div>
           </div>
 <a data-name="-1367534927%2FFunctions%2F1856419216" anchor-label="setMaxBounds" id="-1367534927%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="set-max-bounds.html"><span>set</span><wbr><span>Max</span><wbr><span><span>Bounds</span></span></a></div>
@@ -1419,7 +1329,7 @@
             </div>
           </div>
 <a data-name="-1650937043%2FFunctions%2F1856419216" anchor-label="setMaxZoom" id="-1650937043%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="set-max-zoom.html"><span>set</span><wbr><span>Max</span><wbr><span><span>Zoom</span></span></a></div>
@@ -1434,7 +1344,7 @@
             </div>
           </div>
 <a data-name="-1687248257%2FFunctions%2F1856419216" anchor-label="setMinZoom" id="-1687248257%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="set-min-zoom.html"><span>set</span><wbr><span>Min</span><wbr><span><span>Zoom</span></span></a></div>
@@ -1449,7 +1359,7 @@
             </div>
           </div>
 <a data-name="641497163%2FFunctions%2F1856419216" anchor-label="setView" id="641497163%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="set-view.html"><span>set</span><wbr><span><span>View</span></span></a></div>
@@ -1464,7 +1374,7 @@
             </div>
           </div>
 <a data-name="141924853%2FFunctions%2F1856419216" anchor-label="setZoom" id="141924853%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="set-zoom.html"><span>set</span><wbr><span><span>Zoom</span></span></a></div>
@@ -1479,7 +1389,7 @@
             </div>
           </div>
 <a data-name="389290619%2FFunctions%2F1856419216" anchor-label="setZoomAround" id="389290619%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="set-zoom-around.html"><span>set</span><wbr><span>Zoom</span><wbr><span><span>Around</span></span></a></div>
@@ -1494,7 +1404,7 @@
             </div>
           </div>
 <a data-name="789492418%2FFunctions%2F1856419216" anchor-label="stop" id="789492418%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="stop.html"><span><span>stop</span></span></a></div>
@@ -1509,7 +1419,7 @@
             </div>
           </div>
 <a data-name="475202512%2FFunctions%2F1856419216" anchor-label="stopLocate" id="475202512%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="stop-locate.html"><span>stop</span><wbr><span><span>Locate</span></span></a></div>
@@ -1524,7 +1434,7 @@
             </div>
           </div>
 <a data-name="485165087%2FFunctions%2F1856419216" anchor-label="unproject" id="485165087%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="unproject.html"><span><span>unproject</span></span></a></div>
@@ -1539,7 +1449,7 @@
             </div>
           </div>
 <a data-name="1877861379%2FFunctions%2F1856419216" anchor-label="whenReady" id="1877861379%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="when-ready.html"><span>when</span><wbr><span><span>Ready</span></span></a></div>
@@ -1554,7 +1464,7 @@
             </div>
           </div>
 <a data-name="2059703437%2FFunctions%2F1856419216" anchor-label="wrapLatLng" id="2059703437%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="wrap-lat-lng.html"><span>wrap</span><wbr><span>Lat</span><wbr><span><span>Lng</span></span></a></div>
@@ -1569,7 +1479,7 @@
             </div>
           </div>
 <a data-name="-1349887453%2FFunctions%2F1856419216" anchor-label="wrapLatLngBounds" id="-1349887453%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="wrap-lat-lng-bounds.html"><span>wrap</span><wbr><span>Lat</span><wbr><span>Lng</span><wbr><span><span>Bounds</span></span></a></div>
@@ -1584,7 +1494,7 @@
             </div>
           </div>
 <a data-name="509893717%2FFunctions%2F1856419216" anchor-label="zoomIn" id="509893717%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom-in.html"><span>zoom</span><wbr><span><span>In</span></span></a></div>
@@ -1599,7 +1509,7 @@
             </div>
           </div>
 <a data-name="-1911196956%2FFunctions%2F1856419216" anchor-label="zoomOut" id="-1911196956%2FFunctions%2F1856419216" data-filterable-set=":modules:kilua-leaflet/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-leaflet/commonMain" data-filterable-set=":modules:kilua-leaflet/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="zoom-out.html"><span>zoom</span><wbr><span><span>Out</span></span></a></div>
@@ -1619,17 +1529,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

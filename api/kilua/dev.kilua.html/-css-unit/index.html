@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>CssUnit</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua/commonMain">common</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":kilua/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,45 +62,47 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="kilua::dev.kilua.html/CssUnit///PointingToDeclaration//-787921261">
   <div class="breadcrumbs"><a href="../../index.html">kilua</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.html</a><span class="delimiter">/</span><span class="current">CssUnit</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Css</span><wbr><span><span>Unit</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">CssUnit</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">CssUnit</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/commonMain/kotlin/dev/kilua/html/CssSize.kt#L31">source</a>)</span></span></div><p class="paragraph">Definitions of CSS units.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">CssUnit</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">CssUnit</a><span class="token operator">&gt; </span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/commonMain/kotlin/dev/kilua/html/CssSize.kt#L31">source</a>)</span></span></div><p class="paragraph">Definitions of CSS units.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="ENTRY">Entries</button></div>
     <div class="tabs-section-body">
       <div data-togglable="ENTRY">
-        <h2 class="">Entries</h2>
+        <h2 class="tableheader">Entries</h2>
         <div class="table"><a data-name="2066743322%2FClasslikes%2F-787921261" anchor-label="px" id="2066743322%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="px/index.html">px</a></div>
@@ -117,7 +117,7 @@
             </div>
           </div>
 <a data-name="-1359212778%2FClasslikes%2F-787921261" anchor-label="pt" id="-1359212778%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="pt/index.html">pt</a></div>
@@ -132,7 +132,7 @@
             </div>
           </div>
 <a data-name="1230317242%2FClasslikes%2F-787921261" anchor-label="em" id="1230317242%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="em/index.html">em</a></div>
@@ -147,7 +147,7 @@
             </div>
           </div>
 <a data-name="1815088892%2FClasslikes%2F-787921261" anchor-label="cm" id="1815088892%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="cm/index.html">cm</a></div>
@@ -162,7 +162,7 @@
             </div>
           </div>
 <a data-name="-1108769358%2FClasslikes%2F-787921261" anchor-label="mm" id="-1108769358%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="mm/index.html">mm</a></div>
@@ -177,7 +177,7 @@
             </div>
           </div>
 <a data-name="1991004791%2FClasslikes%2F-787921261" anchor-label="in" id="1991004791%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="in/index.html">in</a></div>
@@ -192,7 +192,7 @@
             </div>
           </div>
 <a data-name="186601157%2FClasslikes%2F-787921261" anchor-label="pc" id="186601157%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="pc/index.html">pc</a></div>
@@ -207,7 +207,7 @@
             </div>
           </div>
 <a data-name="753869239%2FClasslikes%2F-787921261" anchor-label="ch" id="753869239%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="ch/index.html">ch</a></div>
@@ -222,7 +222,7 @@
             </div>
           </div>
 <a data-name="-737839632%2FClasslikes%2F-787921261" anchor-label="rem" id="-737839632%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="rem/index.html">rem</a></div>
@@ -237,7 +237,7 @@
             </div>
           </div>
 <a data-name="-1617802477%2FClasslikes%2F-787921261" anchor-label="vw" id="-1617802477%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="vw/index.html">vw</a></div>
@@ -252,7 +252,7 @@
             </div>
           </div>
 <a data-name="-506494140%2FClasslikes%2F-787921261" anchor-label="vh" id="-506494140%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="vh/index.html">vh</a></div>
@@ -267,7 +267,7 @@
             </div>
           </div>
 <a data-name="-1434990162%2FClasslikes%2F-787921261" anchor-label="vmin" id="-1434990162%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="vmin/index.html">vmin</a></div>
@@ -282,7 +282,7 @@
             </div>
           </div>
 <a data-name="-1268431552%2FClasslikes%2F-787921261" anchor-label="vmax" id="-1268431552%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="vmax/index.html">vmax</a></div>
@@ -297,7 +297,7 @@
             </div>
           </div>
 <a data-name="-2057437960%2FClasslikes%2F-787921261" anchor-label="perc" id="-2057437960%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="perc/index.html">perc</a></div>
@@ -312,7 +312,7 @@
             </div>
           </div>
 <a data-name="1764928901%2FClasslikes%2F-787921261" anchor-label="units" id="1764928901%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="units/index.html">units</a></div>
@@ -327,7 +327,7 @@
             </div>
           </div>
 <a data-name="1429992961%2FClasslikes%2F-787921261" anchor-label="auto" id="1429992961%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="auto/index.html">auto</a></div>
@@ -342,7 +342,7 @@
             </div>
           </div>
 <a data-name="146897849%2FClasslikes%2F-787921261" anchor-label="normal" id="146897849%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="normal/index.html">normal</a></div>
@@ -357,7 +357,7 @@
             </div>
           </div>
 <a data-name="-1327585766%2FClasslikes%2F-787921261" anchor-label="initial" id="-1327585766%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="initial/index.html">initial</a></div>
@@ -372,7 +372,7 @@
             </div>
           </div>
 <a data-name="570192273%2FClasslikes%2F-787921261" anchor-label="inherit" id="570192273%2FClasslikes%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="inherit/index.html">inherit</a></div>
@@ -389,9 +389,9 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="1882287093%2FProperties%2F-787921261" anchor-label="cssUnit" id="1882287093%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="css-unit.html"><span>css</span><wbr><span><span>Unit</span></span></a></div>
@@ -406,7 +406,7 @@
             </div>
           </div>
 <a data-name="730650028%2FProperties%2F-787921261" anchor-label="entries" id="730650028%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="entries.html"><span><span>entries</span></span></a></div>
@@ -421,7 +421,7 @@
             </div>
           </div>
 <a data-name="-372974862%2FProperties%2F-787921261" anchor-label="name" id="-372974862%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-372974862%2FProperties%2F-787921261"><span><span>name</span></span></a></div>
@@ -436,7 +436,7 @@
             </div>
           </div>
 <a data-name="-739389684%2FProperties%2F-787921261" anchor-label="ordinal" id="-739389684%2FProperties%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.html.style/-p-element/-selection/index.html#-739389684%2FProperties%2F-787921261"><span><span>ordinal</span></span></a></div>
@@ -453,9 +453,9 @@
         </div>
       </div>
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="1065656176%2FFunctions%2F-787921261" anchor-label="valueOf" id="1065656176%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="value-of.html"><span>value</span><wbr><span><span>Of</span></span></a></div>
@@ -470,7 +470,7 @@
             </div>
           </div>
 <a data-name="-329437060%2FFunctions%2F-787921261" anchor-label="values" id="-329437060%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="values.html"><span><span>values</span></span></a></div>
@@ -490,17 +490,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

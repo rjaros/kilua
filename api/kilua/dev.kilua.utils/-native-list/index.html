@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>NativeList</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,35 +24,33 @@
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kilua/commonMain">common</button>
-                <button class="platform-tag platform-selector js-like" data-active="" data-filter=":kilua/jsMain">js</button>
-                <button class="platform-tag platform-selector wasm-like" data-active="" data-filter=":kilua/wasmJsMain">wasmJs</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":kilua/commonMain">common</button>
+                <button class="platform-tag platform-selector js-like" data-active="" aria-pressed="true" data-filter=":kilua/jsMain">js</button>
+                <button class="platform-tag platform-selector wasm-like" data-active="" aria-pressed="true" data-filter=":kilua/wasmJsMain">wasmJs</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -80,47 +78,49 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="kilua::dev.kilua.utils/NativeList///PointingToDeclaration//-1707745736">
   <div class="breadcrumbs"><a href="../../index.html">kilua</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.utils</a><span class="delimiter">/</span><span class="current">NativeList</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Native</span><wbr><span><span>List</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain" data-active="" data-toggle=":kilua/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua/jsMain" data-filterable-set=":kilua/jsMain" data-toggle=":kilua/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua/wasmJsMain" data-filterable-set=":kilua/wasmJsMain" data-toggle=":kilua/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">class </span><a href="index.html">NativeList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/commonMain/kotlin/dev/kilua/utils/NativeList.kt#L29">source</a>)</span></span></div><p class="paragraph">A mutable list implementation based on a native array on JS target.</p></div><div class="content sourceset-dependent-content" data-togglable=":kilua/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="index.html">NativeList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/jsMain/kotlin/dev/kilua/utils/NativeList.js.kt#L26">source</a>)</span></span></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">NativeList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/wasmJsMain/kotlin/dev/kilua/utils/NativeList.wasmJs.kt#L25">source</a>)</span></span></div></div>    </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">class </span><a href="index.html">NativeList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt; </span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/commonMain/kotlin/dev/kilua/utils/NativeList.kt#L29">source</a>)</span></span></div><p class="paragraph">A mutable list implementation based on a native array on JS target.</p></div><div class="content sourceset-dependent-content" data-togglable=":kilua/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="index.html">NativeList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt; </span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/jsMain/kotlin/dev/kilua/utils/NativeList.js.kt#L26">source</a>)</span></span></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">NativeList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt;</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a><span class="token operator">&lt;</span><a href="index.html">E</a><span class="token operator">&gt; </span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/wasmJsMain/kotlin/dev/kilua/utils/NativeList.wasmJs.kt#L25">source</a>)</span></span></div></div>    </div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
-        <h2 class="">Constructors</h2>
+        <h2 class="tableheader">Constructors</h2>
         <div class="table"><a data-name="594851878%2FConstructors%2F-463948111" anchor-label="NativeList" id="594851878%2FConstructors%2F-463948111" data-filterable-set=":kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-native-list.html"><span>Native</span><wbr><span><span>List</span></span></a></div>
@@ -139,12 +139,12 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="1280879313%2FProperties%2F-1707745736" anchor-label="size" id="1280879313%2FProperties%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="size.html"><span><span>size</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/size.html"><span><span>size</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1280879313%2FProperties%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -160,12 +160,12 @@
         </div>
       </div>
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="-151526222%2FFunctions%2F-1707745736" anchor-label="add" id="-151526222%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="add.html"><span><span>add</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/add.html"><span><span>add</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-151526222%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -179,10 +179,10 @@
             </div>
           </div>
 <a data-name="1199054476%2FFunctions%2F-1707745736" anchor-label="addAll" id="1199054476%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="add-all.html"><span>add</span><wbr><span><span>All</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/add-all.html"><span>add</span><wbr><span><span>All</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1199054476%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -196,7 +196,7 @@
             </div>
           </div>
 <a data-name="-710831028%2FFunctions%2F-1861676363" anchor-label="asJsArrayView" id="-710831028%2FFunctions%2F-1861676363" data-filterable-set=":kilua/jsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/jsMain" data-filterable-set=":kilua/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/jsMain" data-filterable-set=":kilua/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-710831028%2FFunctions%2F-1861676363"><span>as</span><wbr><span>Js</span><wbr><span>Array</span><wbr><span><span>View</span></span></a></div>
@@ -213,7 +213,7 @@
             </div>
           </div>
 <a data-name="1548877638%2FFunctions%2F-1861676363" anchor-label="asJsReadonlyArrayView" id="1548877638%2FFunctions%2F-1861676363" data-filterable-set=":kilua/jsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/jsMain" data-filterable-set=":kilua/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/jsMain" data-filterable-set=":kilua/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#1548877638%2FFunctions%2F-1861676363"><span>as</span><wbr><span>Js</span><wbr><span>Readonly</span><wbr><span>Array</span><wbr><span><span>View</span></span></a></div>
@@ -230,10 +230,10 @@
             </div>
           </div>
 <a data-name="1811566415%2FFunctions%2F-1707745736" anchor-label="clear" id="1811566415%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="clear.html"><span><span>clear</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/clear.html"><span><span>clear</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1811566415%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -247,10 +247,10 @@
             </div>
           </div>
 <a data-name="-431478323%2FFunctions%2F-1707745736" anchor-label="contains" id="-431478323%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="contains.html"><span><span>contains</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/contains.html"><span><span>contains</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-431478323%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -264,10 +264,10 @@
             </div>
           </div>
 <a data-name="213083235%2FFunctions%2F-1707745736" anchor-label="containsAll" id="213083235%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="contains-all.html"><span>contains</span><wbr><span><span>All</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/contains-all.html"><span>contains</span><wbr><span><span>All</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="213083235%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -281,10 +281,10 @@
             </div>
           </div>
 <a data-name="-390416041%2FFunctions%2F-1707745736" anchor-label="get" id="-390416041%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="get.html"><span><span>get</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/get.html"><span><span>get</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-390416041%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -298,10 +298,10 @@
             </div>
           </div>
 <a data-name="-1907190383%2FFunctions%2F-1707745736" anchor-label="indexOf" id="-1907190383%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index-of.html"><span>index</span><wbr><span><span>Of</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/index-of.html"><span>index</span><wbr><span><span>Of</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1907190383%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -315,10 +315,10 @@
             </div>
           </div>
 <a data-name="1583278977%2FFunctions%2F-1707745736" anchor-label="isEmpty" id="1583278977%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="is-empty.html"><span>is</span><wbr><span><span>Empty</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/is-empty.html"><span>is</span><wbr><span><span>Empty</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1583278977%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -332,10 +332,10 @@
             </div>
           </div>
 <a data-name="-1963446799%2FFunctions%2F-1707745736" anchor-label="iterator" id="-1963446799%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="iterator.html"><span><span>iterator</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/iterator.html"><span><span>iterator</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1963446799%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -349,10 +349,10 @@
             </div>
           </div>
 <a data-name="-600793391%2FFunctions%2F-1707745736" anchor-label="lastIndexOf" id="-600793391%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="last-index-of.html"><span>last</span><wbr><span>Index</span><wbr><span><span>Of</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/last-index-of.html"><span>last</span><wbr><span>Index</span><wbr><span><span>Of</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-600793391%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -366,10 +366,10 @@
             </div>
           </div>
 <a data-name="486568282%2FFunctions%2F-1707745736" anchor-label="listIterator" id="486568282%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="list-iterator.html"><span>list</span><wbr><span><span>Iterator</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/list-iterator.html"><span>list</span><wbr><span><span>Iterator</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="486568282%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -383,7 +383,7 @@
             </div>
           </div>
 <a data-name="942370014%2FFunctions%2F-787921261" anchor-label="pairs" id="942370014%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../pairs.html"><span><span>pairs</span></span></a></div>
@@ -398,10 +398,10 @@
             </div>
           </div>
 <a data-name="-1882499921%2FFunctions%2F-1707745736" anchor-label="remove" id="-1882499921%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="remove.html"><span><span>remove</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/remove.html"><span><span>remove</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1882499921%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -415,10 +415,10 @@
             </div>
           </div>
 <a data-name="1902851919%2FFunctions%2F-1707745736" anchor-label="removeAll" id="1902851919%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="remove-all.html"><span>remove</span><wbr><span><span>All</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/remove-all.html"><span>remove</span><wbr><span><span>All</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1902851919%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -432,10 +432,10 @@
             </div>
           </div>
 <a data-name="-1193861989%2FFunctions%2F-1707745736" anchor-label="removeAt" id="-1193861989%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="remove-at.html"><span>remove</span><wbr><span><span>At</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/remove-at.html"><span>remove</span><wbr><span><span>At</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1193861989%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -449,10 +449,10 @@
             </div>
           </div>
 <a data-name="937062255%2FFunctions%2F-1707745736" anchor-label="retainAll" id="937062255%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="retain-all.html"><span>retain</span><wbr><span><span>All</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/retain-all.html"><span>retain</span><wbr><span><span>All</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="937062255%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -466,10 +466,10 @@
             </div>
           </div>
 <a data-name="2018240079%2FFunctions%2F-1707745736" anchor-label="set" id="2018240079%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="set.html"><span><span>set</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/set.html"><span><span>set</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2018240079%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -483,10 +483,10 @@
             </div>
           </div>
 <a data-name="1588851091%2FFunctions%2F-1707745736" anchor-label="subList" id="1588851091%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain"></a>
-          <div class="table-row" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
+          <div class="table-row table-row_content" data-filterable-current=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain,:kilua/wasmJsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="sub-list.html"><span>sub</span><wbr><span><span>List</span></span></a></div>
+                  <div><a href="../../../kilua/dev.kilua.utils/-native-list/sub-list.html"><span>sub</span><wbr><span><span>List</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1588851091%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
@@ -500,7 +500,7 @@
             </div>
           </div>
 <a data-name="786573288%2FFunctions%2F-787921261" anchor-label="syncWithList" id="786573288%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../sync-with-list.html"><span>sync</span><wbr><span>With</span><wbr><span><span>List</span></span></a></div>
@@ -515,7 +515,7 @@
             </div>
           </div>
 <a data-name="-2111987325%2FFunctions%2F-787921261" anchor-label="toJsArray" id="-2111987325%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../to-js-array.html"><span>to</span><wbr><span>Js</span><wbr><span><span>Array</span></span></a></div>
@@ -535,17 +535,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>TomSelectOptionsJs</title>
-<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../../styles/main.css" rel="Stylesheet">
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-tom-select/commonMain">common</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":modules:kilua-tom-select/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,45 +62,47 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="kilua-tom-select::dev.kilua.externals/TomSelectOptionsJs///PointingToDeclaration//-1846587896">
   <div class="breadcrumbs"><a href="../../index.html">kilua-tom-select</a><span class="delimiter">/</span><a href="../index.html">dev.kilua.externals</a><span class="delimiter">/</span><span class="current">TomSelectOptionsJs</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Tom</span><wbr><span>Select</span><wbr><span>Options</span><wbr><span><span>Js</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tom-select/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">TomSelectOptionsJs</a> : <span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-tom-select/src/commonMain/kotlin/dev/kilua/externals/TomSelectJs.kt#L72">source</a>)</span></span></div><p class="paragraph">Tom Select options.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-tom-select/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">TomSelectOptionsJs</a> : <span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/modules/kilua-tom-select/src/commonMain/kotlin/dev/kilua/externals/TomSelectJs.kt#L72">source</a>)</span></span></div><p class="paragraph">Tom Select options.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
-        <h2 class="">Constructors</h2>
+        <h2 class="tableheader">Constructors</h2>
         <div class="table"><a data-name="933332546%2FConstructors%2F-1846587896" anchor-label="TomSelectOptionsJs" id="933332546%2FConstructors%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tom-select-options-js.html"><span>Tom</span><wbr><span>Select</span><wbr><span>Options</span><wbr><span><span>Js</span></span></a></div>
@@ -119,9 +119,9 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="295214612%2FProperties%2F-1846587896" anchor-label="addPrecedence" id="295214612%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="add-precedence.html"><span>add</span><wbr><span><span>Precedence</span></span></a></div>
@@ -136,7 +136,7 @@
             </div>
           </div>
 <a data-name="769181698%2FProperties%2F-1846587896" anchor-label="allowEmptyOption" id="769181698%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="allow-empty-option.html"><span>allow</span><wbr><span>Empty</span><wbr><span><span>Option</span></span></a></div>
@@ -151,7 +151,7 @@
             </div>
           </div>
 <a data-name="-1904768781%2FProperties%2F-1846587896" anchor-label="caretPosition" id="-1904768781%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="caret-position.html"><span>caret</span><wbr><span><span>Position</span></span></a></div>
@@ -166,7 +166,7 @@
             </div>
           </div>
 <a data-name="874274756%2FProperties%2F-1846587896" anchor-label="checkboxOptions" id="874274756%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="checkbox-options.html"><span>checkbox</span><wbr><span><span>Options</span></span></a></div>
@@ -181,7 +181,7 @@
             </div>
           </div>
 <a data-name="-617714846%2FProperties%2F-1846587896" anchor-label="clearButtonTitle" id="-617714846%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="clear-button-title.html"><span>clear</span><wbr><span>Button</span><wbr><span><span>Title</span></span></a></div>
@@ -196,7 +196,7 @@
             </div>
           </div>
 <a data-name="-1711772133%2FProperties%2F-1846587896" anchor-label="closeAfterSelect" id="-1711772133%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="close-after-select.html"><span>close</span><wbr><span>After</span><wbr><span><span>Select</span></span></a></div>
@@ -211,7 +211,7 @@
             </div>
           </div>
 <a data-name="1665745454%2FProperties%2F-1846587896" anchor-label="controlInput" id="1665745454%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="control-input.html"><span>control</span><wbr><span><span>Input</span></span></a></div>
@@ -226,7 +226,7 @@
             </div>
           </div>
 <a data-name="-1045402881%2FProperties%2F-1846587896" anchor-label="create" id="-1045402881%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create.html"><span><span>create</span></span></a></div>
@@ -241,7 +241,7 @@
             </div>
           </div>
 <a data-name="365032679%2FProperties%2F-1846587896" anchor-label="createFilter" id="365032679%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-filter.html"><span>create</span><wbr><span><span>Filter</span></span></a></div>
@@ -256,7 +256,7 @@
             </div>
           </div>
 <a data-name="69853372%2FProperties%2F-1846587896" anchor-label="createFun" id="69853372%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-fun.html"><span>create</span><wbr><span><span>Fun</span></span></a></div>
@@ -271,7 +271,7 @@
             </div>
           </div>
 <a data-name="482192697%2FProperties%2F-1846587896" anchor-label="createOnBlur" id="482192697%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="create-on-blur.html"><span>create</span><wbr><span>On</span><wbr><span><span>Blur</span></span></a></div>
@@ -286,7 +286,7 @@
             </div>
           </div>
 <a data-name="-2017828704%2FProperties%2F-1846587896" anchor-label="dataAttr" id="-2017828704%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="data-attr.html"><span>data</span><wbr><span><span>Attr</span></span></a></div>
@@ -301,7 +301,7 @@
             </div>
           </div>
 <a data-name="-235098335%2FProperties%2F-1846587896" anchor-label="disabledField" id="-235098335%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="disabled-field.html"><span>disabled</span><wbr><span><span>Field</span></span></a></div>
@@ -316,7 +316,7 @@
             </div>
           </div>
 <a data-name="1497063941%2FProperties%2F-1846587896" anchor-label="dropdownHeaderTitle" id="1497063941%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="dropdown-header-title.html"><span>dropdown</span><wbr><span>Header</span><wbr><span><span>Title</span></span></a></div>
@@ -331,7 +331,7 @@
             </div>
           </div>
 <a data-name="2078021926%2FProperties%2F-1846587896" anchor-label="dropdownInput" id="2078021926%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="dropdown-input.html"><span>dropdown</span><wbr><span><span>Input</span></span></a></div>
@@ -346,7 +346,7 @@
             </div>
           </div>
 <a data-name="-1100626509%2FProperties%2F-1846587896" anchor-label="duplicates" id="-1100626509%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="duplicates.html"><span><span>duplicates</span></span></a></div>
@@ -361,7 +361,7 @@
             </div>
           </div>
 <a data-name="-1261514994%2FProperties%2F-1846587896" anchor-label="hidePlaceholder" id="-1261514994%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="hide-placeholder.html"><span>hide</span><wbr><span><span>Placeholder</span></span></a></div>
@@ -376,7 +376,7 @@
             </div>
           </div>
 <a data-name="1087415966%2FProperties%2F-1846587896" anchor-label="hideSelected" id="1087415966%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="hide-selected.html"><span>hide</span><wbr><span><span>Selected</span></span></a></div>
@@ -391,7 +391,7 @@
             </div>
           </div>
 <a data-name="951538699%2FProperties%2F-1846587896" anchor-label="highlight" id="951538699%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="highlight.html"><span><span>highlight</span></span></a></div>
@@ -406,7 +406,7 @@
             </div>
           </div>
 <a data-name="-1269081453%2FProperties%2F-1846587896" anchor-label="inputAutogrow" id="-1269081453%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="input-autogrow.html"><span>input</span><wbr><span><span>Autogrow</span></span></a></div>
@@ -421,7 +421,7 @@
             </div>
           </div>
 <a data-name="1652071893%2FProperties%2F-1846587896" anchor-label="labelField" id="1652071893%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="label-field.html"><span>label</span><wbr><span><span>Field</span></span></a></div>
@@ -436,7 +436,7 @@
             </div>
           </div>
 <a data-name="-1149191723%2FProperties%2F-1846587896" anchor-label="load" id="-1149191723%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="load.html"><span><span>load</span></span></a></div>
@@ -451,7 +451,7 @@
             </div>
           </div>
 <a data-name="-998687777%2FProperties%2F-1846587896" anchor-label="loadingClass" id="-998687777%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="loading-class.html"><span>loading</span><wbr><span><span>Class</span></span></a></div>
@@ -466,7 +466,7 @@
             </div>
           </div>
 <a data-name="-1019471413%2FProperties%2F-1846587896" anchor-label="loadThrottle" id="-1019471413%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="load-throttle.html"><span>load</span><wbr><span><span>Throttle</span></span></a></div>
@@ -481,7 +481,7 @@
             </div>
           </div>
 <a data-name="-955253825%2FProperties%2F-1846587896" anchor-label="maxItems" id="-955253825%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="max-items.html"><span>max</span><wbr><span><span>Items</span></span></a></div>
@@ -496,7 +496,7 @@
             </div>
           </div>
 <a data-name="1323846177%2FProperties%2F-1846587896" anchor-label="maxOptions" id="1323846177%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="max-options.html"><span>max</span><wbr><span><span>Options</span></span></a></div>
@@ -511,7 +511,7 @@
             </div>
           </div>
 <a data-name="1590796166%2FProperties%2F-1846587896" anchor-label="noActiveItems" id="1590796166%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="no-active-items.html"><span>no</span><wbr><span>Active</span><wbr><span><span>Items</span></span></a></div>
@@ -526,7 +526,7 @@
             </div>
           </div>
 <a data-name="-1149137578%2FProperties%2F-1846587896" anchor-label="noBackspaceDelete" id="-1149137578%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="no-backspace-delete.html"><span>no</span><wbr><span>Backspace</span><wbr><span><span>Delete</span></span></a></div>
@@ -541,7 +541,7 @@
             </div>
           </div>
 <a data-name="-1102021547%2FProperties%2F-1846587896" anchor-label="onBlur" id="-1102021547%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-blur.html"><span>on</span><wbr><span><span>Blur</span></span></a></div>
@@ -556,7 +556,7 @@
             </div>
           </div>
 <a data-name="-1526907226%2FProperties%2F-1846587896" anchor-label="onFocus" id="-1526907226%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-focus.html"><span>on</span><wbr><span><span>Focus</span></span></a></div>
@@ -571,7 +571,7 @@
             </div>
           </div>
 <a data-name="-990412398%2FProperties%2F-1846587896" anchor-label="onOptionAdd" id="-990412398%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-option-add.html"><span>on</span><wbr><span>Option</span><wbr><span><span>Add</span></span></a></div>
@@ -586,7 +586,7 @@
             </div>
           </div>
 <a data-name="64893091%2FProperties%2F-1846587896" anchor-label="onOptionRemove" id="64893091%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="on-option-remove.html"><span>on</span><wbr><span>Option</span><wbr><span><span>Remove</span></span></a></div>
@@ -601,7 +601,7 @@
             </div>
           </div>
 <a data-name="-2066714608%2FProperties%2F-1846587896" anchor-label="openOnFocus" id="-2066714608%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="open-on-focus.html"><span>open</span><wbr><span>On</span><wbr><span><span>Focus</span></span></a></div>
@@ -616,7 +616,7 @@
             </div>
           </div>
 <a data-name="-1366610463%2FProperties%2F-1846587896" anchor-label="options" id="-1366610463%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="options.html"><span><span>options</span></span></a></div>
@@ -631,7 +631,7 @@
             </div>
           </div>
 <a data-name="1745412971%2FProperties%2F-1846587896" anchor-label="persist" id="1745412971%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="persist.html"><span><span>persist</span></span></a></div>
@@ -646,7 +646,7 @@
             </div>
           </div>
 <a data-name="-331414753%2FProperties%2F-1846587896" anchor-label="plugins" id="-331414753%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="plugins.html"><span><span>plugins</span></span></a></div>
@@ -661,7 +661,7 @@
             </div>
           </div>
 <a data-name="-846928682%2FProperties%2F-1846587896" anchor-label="preload" id="-846928682%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="preload.html"><span><span>preload</span></span></a></div>
@@ -676,7 +676,7 @@
             </div>
           </div>
 <a data-name="-279935139%2FProperties%2F-1846587896" anchor-label="removeButtonTitle" id="-279935139%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="remove-button-title.html"><span>remove</span><wbr><span>Button</span><wbr><span><span>Title</span></span></a></div>
@@ -691,7 +691,7 @@
             </div>
           </div>
 <a data-name="-182793307%2FProperties%2F-1846587896" anchor-label="render" id="-182793307%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="render.html"><span><span>render</span></span></a></div>
@@ -706,7 +706,7 @@
             </div>
           </div>
 <a data-name="2146323913%2FProperties%2F-1846587896" anchor-label="restoreOnBackspace" id="2146323913%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="restore-on-backspace.html"><span>restore</span><wbr><span>On</span><wbr><span><span>Backspace</span></span></a></div>
@@ -721,7 +721,7 @@
             </div>
           </div>
 <a data-name="1433413617%2FProperties%2F-1846587896" anchor-label="searchConjunction" id="1433413617%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="search-conjunction.html"><span>search</span><wbr><span><span>Conjunction</span></span></a></div>
@@ -736,7 +736,7 @@
             </div>
           </div>
 <a data-name="-572883507%2FProperties%2F-1846587896" anchor-label="searchField" id="-572883507%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="search-field.html"><span>search</span><wbr><span><span>Field</span></span></a></div>
@@ -751,7 +751,7 @@
             </div>
           </div>
 <a data-name="1908303205%2FProperties%2F-1846587896" anchor-label="selectOnTab" id="1908303205%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="select-on-tab.html"><span>select</span><wbr><span>On</span><wbr><span><span>Tab</span></span></a></div>
@@ -766,7 +766,7 @@
             </div>
           </div>
 <a data-name="1837814723%2FProperties%2F-1846587896" anchor-label="sortField" id="1837814723%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="sort-field.html"><span>sort</span><wbr><span><span>Field</span></span></a></div>
@@ -781,7 +781,7 @@
             </div>
           </div>
 <a data-name="1107556242%2FProperties%2F-1846587896" anchor-label="valueField" id="1107556242%2FProperties%2F-1846587896" data-filterable-set=":modules:kilua-tom-select/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-tom-select/commonMain" data-filterable-set=":modules:kilua-tom-select/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="value-field.html"><span>value</span><wbr><span><span>Field</span></span></a></div>
@@ -801,17 +801,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>dev.kilua.routing</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
                     kilua-project
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.26
+        <div class="library-version" id="library-version">0.0.27
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":modules:kilua-routing/commonMain">common</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":modules:kilua-routing/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,32 +62,34 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kilua-project
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="package" id="content" pageids="kilua-routing::dev.kilua.routing////PointingToDeclaration//-554012967">
   <div class="breadcrumbs"><a href="../index.html">kilua-routing</a><span class="delimiter">/</span><span class="current">dev.kilua.routing</span></div>
   <div class="cover ">
@@ -99,9 +99,9 @@
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
     <div class="tabs-section-body">
       <div data-togglable="TYPE">
-        <h2 class="">Types</h2>
+        <h2 class="tableheader">Types</h2>
         <div class="table"><a data-name="479247669%2FClasslikes%2F-554012967" anchor-label="BaseRoutingBuilder" id="479247669%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-base-routing-builder/index.html"><span>Base</span><wbr><span>Routing</span><wbr><span><span>Builder</span></span></a></div>
@@ -116,7 +116,7 @@
             </div>
           </div>
 <a data-name="824986869%2FClasslikes%2F-554012967" anchor-label="BaseRoutingBuilderImpl" id="824986869%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-base-routing-builder-impl/index.html"><span>Base</span><wbr><span>Routing</span><wbr><span>Builder</span><wbr><span><span>Impl</span></span></a></div>
@@ -130,8 +130,23 @@
               </div>
             </div>
           </div>
+<a data-name="-996136845%2FClasslikes%2F-554012967" anchor-label="Changefreq" id="-996136845%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-changefreq/index.html"><span><span>Changefreq</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-996136845%2FClasslikes%2F-554012967"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-routing/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">enum </span><a href="-changefreq/index.html">Changefreq</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-changefreq/index.html">Changefreq</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 <a data-name="-1425197501%2FClasslikes%2F-554012967" anchor-label="IntRoutingBuilder" id="-1425197501%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-int-routing-builder/index.html"><span>Int</span><wbr><span>Routing</span><wbr><span><span>Builder</span></span></a></div>
@@ -146,7 +161,7 @@
             </div>
           </div>
 <a data-name="-880177405%2FClasslikes%2F-554012967" anchor-label="IntRoutingBuilderImpl" id="-880177405%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-int-routing-builder-impl/index.html"><span>Int</span><wbr><span>Routing</span><wbr><span>Builder</span><wbr><span><span>Impl</span></span></a></div>
@@ -161,7 +176,7 @@
             </div>
           </div>
 <a data-name="959393455%2FClasslikes%2F-554012967" anchor-label="IntRoutingContext" id="959393455%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-int-routing-context/index.html"><span>Int</span><wbr><span>Routing</span><wbr><span><span>Context</span></span></a></div>
@@ -176,7 +191,7 @@
             </div>
           </div>
 <a data-name="232878447%2FClasslikes%2F-554012967" anchor-label="IntRoutingContextImpl" id="232878447%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-int-routing-context-impl/index.html"><span>Int</span><wbr><span>Routing</span><wbr><span>Context</span><wbr><span><span>Impl</span></span></a></div>
@@ -191,7 +206,7 @@
             </div>
           </div>
 <a data-name="-696951114%2FClasslikes%2F-554012967" anchor-label="Meta" id="-696951114%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-meta/index.html"><span><span>Meta</span></span></a></div>
@@ -206,7 +221,7 @@
             </div>
           </div>
 <a data-name="1022510582%2FClasslikes%2F-554012967" anchor-label="MetaImpl" id="1022510582%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-meta-impl/index.html"><span>Meta</span><wbr><span><span>Impl</span></span></a></div>
@@ -221,7 +236,7 @@
             </div>
           </div>
 <a data-name="-706207517%2FClasslikes%2F-554012967" anchor-label="OpenGraph" id="-706207517%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-open-graph/index.html"><span>Open</span><wbr><span><span>Graph</span></span></a></div>
@@ -236,7 +251,7 @@
             </div>
           </div>
 <a data-name="948566500%2FClasslikes%2F-554012967" anchor-label="OpenGraphImage" id="948566500%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-open-graph-image/index.html"><span>Open</span><wbr><span>Graph</span><wbr><span><span>Image</span></span></a></div>
@@ -251,7 +266,7 @@
             </div>
           </div>
 <a data-name="1295640200%2FClasslikes%2F-554012967" anchor-label="PlainRoutingBuilder" id="1295640200%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-plain-routing-builder/index.html"><span>Plain</span><wbr><span>Routing</span><wbr><span><span>Builder</span></span></a></div>
@@ -266,7 +281,7 @@
             </div>
           </div>
 <a data-name="732599496%2FClasslikes%2F-554012967" anchor-label="PlainRoutingBuilderImpl" id="732599496%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-plain-routing-builder-impl/index.html"><span>Plain</span><wbr><span>Routing</span><wbr><span>Builder</span><wbr><span><span>Impl</span></span></a></div>
@@ -281,7 +296,7 @@
             </div>
           </div>
 <a data-name="1615606642%2FClasslikes%2F-554012967" anchor-label="Robots" id="1615606642%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-robots/index.html"><span><span>Robots</span></span></a></div>
@@ -296,7 +311,7 @@
             </div>
           </div>
 <a data-name="-1412319650%2FClasslikes%2F-554012967" anchor-label="Route" id="-1412319650%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-route/index.html"><span><span>Route</span></span></a></div>
@@ -311,7 +326,7 @@
             </div>
           </div>
 <a data-name="-925758906%2FClasslikes%2F-554012967" anchor-label="RoutingBuilder" id="-925758906%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-routing-builder/index.html"><span>Routing</span><wbr><span><span>Builder</span></span></a></div>
@@ -326,7 +341,7 @@
             </div>
           </div>
 <a data-name="317630854%2FClasslikes%2F-554012967" anchor-label="RoutingBuilderImpl" id="317630854%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-routing-builder-impl/index.html"><span>Routing</span><wbr><span>Builder</span><wbr><span><span>Impl</span></span></a></div>
@@ -341,7 +356,7 @@
             </div>
           </div>
 <a data-name="1458832050%2FClasslikes%2F-554012967" anchor-label="RoutingContext" id="1458832050%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-routing-context/index.html"><span>Routing</span><wbr><span><span>Context</span></span></a></div>
@@ -356,7 +371,7 @@
             </div>
           </div>
 <a data-name="1430686706%2FClasslikes%2F-554012967" anchor-label="RoutingContextImpl" id="1430686706%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-routing-context-impl/index.html"><span>Routing</span><wbr><span>Context</span><wbr><span><span>Impl</span></span></a></div>
@@ -371,7 +386,7 @@
             </div>
           </div>
 <a data-name="-1442683292%2FClasslikes%2F-554012967" anchor-label="RoutingDsl" id="-1442683292%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-routing-dsl/index.html"><span>Routing</span><wbr><span><span>Dsl</span></span></a></div>
@@ -386,7 +401,7 @@
             </div>
           </div>
 <a data-name="1127485048%2FClasslikes%2F-554012967" anchor-label="RoutingModel" id="1127485048%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-routing-model/index.html"><span>Routing</span><wbr><span><span>Model</span></span></a></div>
@@ -400,8 +415,23 @@
               </div>
             </div>
           </div>
+<a data-name="2066665458%2FClasslikes%2F-554012967" anchor-label="Sitemap" id="2066665458%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-sitemap/index.html"><span><span>Sitemap</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2066665458%2FClasslikes%2F-554012967"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":modules:kilua-routing/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="-sitemap/index.html">Sitemap</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">var </span>loc<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>lastmod<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>changefreq<span class="token operator">: </span><a href="-changefreq/index.html">Changefreq</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>priority<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Represents sitemap metadata for a web page.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 <a data-name="-1067333259%2FClasslikes%2F-554012967" anchor-label="StringRoutingBuilder" id="-1067333259%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-string-routing-builder/index.html"><span>String</span><wbr><span>Routing</span><wbr><span><span>Builder</span></span></a></div>
@@ -416,7 +446,7 @@
             </div>
           </div>
 <a data-name="823998773%2FClasslikes%2F-554012967" anchor-label="StringRoutingBuilderImpl" id="823998773%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-string-routing-builder-impl/index.html"><span>String</span><wbr><span>Routing</span><wbr><span>Builder</span><wbr><span><span>Impl</span></span></a></div>
@@ -431,7 +461,7 @@
             </div>
           </div>
 <a data-name="1317257697%2FClasslikes%2F-554012967" anchor-label="StringRoutingContext" id="1317257697%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-string-routing-context/index.html"><span>String</span><wbr><span>Routing</span><wbr><span><span>Context</span></span></a></div>
@@ -446,7 +476,7 @@
             </div>
           </div>
 <a data-name="1937054625%2FClasslikes%2F-554012967" anchor-label="StringRoutingContextImpl" id="1937054625%2FClasslikes%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-string-routing-context-impl/index.html"><span>String</span><wbr><span>Routing</span><wbr><span>Context</span><wbr><span><span>Impl</span></span></a></div>
@@ -463,9 +493,9 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="-551535588%2FProperties%2F-554012967" anchor-label="DoneCallbackCompositionLocal" id="-551535588%2FProperties%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-done-callback-composition-local.html"><span>Done</span><wbr><span>Callback</span><wbr><span>Composition</span><wbr><span><span>Local</span></span></a></div>
@@ -480,7 +510,7 @@
             </div>
           </div>
 <a data-name="847968868%2FProperties%2F-554012967" anchor-label="global" id="847968868%2FProperties%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="global.html"><span><span>global</span></span></a></div>
@@ -495,7 +525,7 @@
             </div>
           </div>
 <a data-name="-1819435560%2FProperties%2F-554012967" anchor-label="globalRouter" id="-1819435560%2FProperties%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="global-router.html"><span>global</span><wbr><span><span>Router</span></span></a></div>
@@ -510,7 +540,7 @@
             </div>
           </div>
 <a data-name="-1413096576%2FProperties%2F-554012967" anchor-label="RoutingModelCompositionLocal" id="-1413096576%2FProperties%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-routing-model-composition-local.html"><span>Routing</span><wbr><span>Model</span><wbr><span>Composition</span><wbr><span><span>Local</span></span></a></div>
@@ -527,9 +557,9 @@
         </div>
       </div>
       <div data-togglable="EXTENSION_FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="-518138919%2FFunctions%2F-554012967" anchor-label="browserRouter" id="-518138919%2FFunctions%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="browser-router.html"><span>browser</span><wbr><span><span>Router</span></span></a></div>
@@ -544,7 +574,7 @@
             </div>
           </div>
 <a data-name="-734855620%2FFunctions%2F-554012967" anchor-label="hashRouter" id="-734855620%2FFunctions%2F-554012967" data-filterable-set=":modules:kilua-routing/commonMain"></a>
-          <div class="table-row" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
+          <div class="table-row table-row_content" data-filterable-current=":modules:kilua-routing/commonMain" data-filterable-set=":modules:kilua-routing/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="hash-router.html"><span>hash</span><wbr><span><span>Router</span></span></a></div>
@@ -564,17 +594,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
