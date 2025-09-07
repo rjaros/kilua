@@ -13,6 +13,9 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
+import org.redundent.kotlin.xml.Node
+import org.redundent.kotlin.xml.TextElement
+import org.redundent.kotlin.xml.parse
 import java.io.File
 import java.net.URI
 
@@ -65,8 +68,24 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
             val headers = if (exportLanguage.isPresent) {
                 mapOf("Accept-Language" to exportLanguage.get())
             } else null
+            val pagesList = mutableListOf<String>()
+            try {
+                val sitemap = parse("http://localhost:8080/sitemap.xml")
+                sitemap.children.filterIsInstance<Node>().forEach {
+                    val loc = it.first("loc")
+                    if (loc.children.size == 1 && loc.children[0] is TextElement) {
+                        val uri = URI((loc.children[0] as TextElement).text)
+                        pagesList.add(uri.path)
+                    }
+                }
+            } catch (e: Exception) {
+                println("Sitemap parsing failed: ${e.message}")
+            }
             if (exportPages.isPresent) {
-                exportPages.get().filter { it.startsWith("/") }.forEach { page ->
+                pagesList.addAll(exportPages.get().filter { it.startsWith("/") })
+            }
+            if (pagesList.isNotEmpty()) {
+                pagesList.forEach { page ->
                     val content = URI("http://localhost:8080${page}").toURL().readContent(headers)
                     if (content != null) {
                         val fileName = if (page.endsWith("/")) {
