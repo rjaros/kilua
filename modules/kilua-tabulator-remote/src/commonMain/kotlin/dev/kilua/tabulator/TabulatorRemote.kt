@@ -190,7 +190,7 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemoteRef(
     id: String? = null,
     noinline content: @Composable ITabulator<T>.() -> Unit = {}
 ): TabulatorRemote<T> {
-    val optionsState = remember(options) {
+    val optionsState = remember(options.toString()) {
         val (url, _) = serviceManager.requireCall(function)
         val rpcUrlPrefix = globalThis.jsGet("rpc_url_prefix")
         val urlPrefix: String = if (rpcUrlPrefix != undefined) "$rpcUrlPrefix/" else ""
@@ -260,7 +260,7 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
     id: String? = null,
     noinline content: @Composable ITabulator<T>.() -> Unit = {}
 ) {
-    val optionsState = remember(options) {
+    val optionsState = remember(options.toString()) {
         val (url, _) = serviceManager.requireCall(function)
         val rpcUrlPrefix = globalThis.jsGet("rpc_url_prefix")
         val urlPrefix: String = if (rpcUrlPrefix != undefined) "$rpcUrlPrefix/" else ""
