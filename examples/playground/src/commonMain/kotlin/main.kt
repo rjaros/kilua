@@ -78,6 +78,7 @@ import dev.kilua.form.PatternMask
 import dev.kilua.form.RangeMask
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.check.checkBoxRef
+import dev.kilua.form.check.radioGroup
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.form.form
 import dev.kilua.form.formRef
@@ -162,6 +163,7 @@ import dev.kilua.utils.cast
 import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
+import dev.kilua.utils.listOfPairs
 import dev.kilua.utils.now
 import dev.kilua.utils.obj
 import dev.kilua.utils.promise
@@ -492,6 +494,10 @@ class App : Application() {
                 hr()
 
                 form {
+                    radioGroup(listOfPairs("Option 1", "Option 2", "Option 3"), groupClassName = "form-check", inputClassName = "form-check-input", labelClassName = "form-check-label") {
+                        bind("radio")
+                    }
+
                     fieldWithLabel("Username") {
                         text(id = it) {
                             bind("username")
@@ -505,8 +511,14 @@ class App : Application() {
                     button("Login") {
                         onClick {
                             val map = this@form.getData()
+                            println(map)
                             println("Username: ${map["username"]}")
                             println("Password: ${map["password"]}")
+                        }
+                    }
+                    button("Test") {
+                        onClick {
+                            this@form.setData(mapOf("radio" to "Option 2"))
                         }
                     }
                 }
