@@ -109,7 +109,7 @@ public open class RadioGroup(
     public override var inline: Boolean by updatingProperty(inline) {
         children.forEach { child ->
             if (child is Div) {
-                child.className = if (it) "kilua-radio-inline" else null
+                child.className = if (it) "kilua-radio-inline" else "kilua-radio"
             }
         }
     }
@@ -312,7 +312,7 @@ private fun RadioGroup.setupOptions(
         fieldWithLabel(
             option.second,
             labelAfter = true,
-            groupClassName = if (component.inline) "kilua-radio-inline" else null
+            groupClassName = if (component.inline) "kilua-radio-inline" else "kilua-radio"
         ) {
             radio(
                 value = option.first == component.value,
