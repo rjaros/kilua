@@ -31,10 +31,12 @@ import dev.kilua.form.StringFormControl
 import dev.kilua.form.fieldWithLabel
 import dev.kilua.html.Div
 import dev.kilua.html.IDiv
+import dev.kilua.html.Label
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.StringPair
+import dev.kilua.utils.rem
 
 /**
  * Radio button component.
@@ -50,6 +52,39 @@ public interface IRadioGroup : IDiv, StringFormControl, WithStateFlow<String?> {
      */
     @Composable
     public fun inline(inline: Boolean)
+
+    /**
+     * The CSS class name for the group wrapper.
+     */
+    public val groupClassName: String?
+
+    /**
+     * Set the CSS class name for the group wrapper.
+     */
+    @Composable
+    public fun groupClassName(groupClassName: String?)
+
+    /**
+     * The CSS class name for the input elements.
+     */
+    public val inputClassName: String?
+
+    /**
+     * Set the CSS class name for the input elements.
+     */
+    @Composable
+    public fun inputClassName(inputClassName: String?)
+
+    /**
+     * The CSS class name for the label elements.
+     */
+    public val labelClassName: String?
+
+    /**
+     * Set the CSS class name for the label elements.
+     */
+    @Composable
+    public fun labelClassName(labelClassName: String?)
 
     /**
      * The name attribute of the generated HTML radio input elements.
@@ -89,6 +124,9 @@ public open class RadioGroup(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    groupClassName: String? = null,
+    inputClassName: String? = null,
+    labelClassName: String? = null,
     className: String? = null,
     id: String? = null,
     renderConfig: RenderConfig = RenderConfig.Default,
@@ -109,7 +147,7 @@ public open class RadioGroup(
     public override var inline: Boolean by updatingProperty(inline) {
         children.forEach { child ->
             if (child is Div) {
-                child.className = if (it) "kilua-radio-inline" else "kilua-radio"
+                child.className = (if (it) "kilua-radio-inline" else "kilua-radio") % groupClassName
             }
         }
     }
@@ -122,6 +160,65 @@ public open class RadioGroup(
         this.inline = false
     }) {
         this.inline = inline
+    }
+
+    /**
+     * The CSS class name for the group wrapper.
+     */
+    public override var groupClassName: String? by updatingProperty(groupClassName) {
+        children.forEach { child ->
+            if (child is Div) {
+                child.className = (if (inline) "kilua-radio-inline" else "kilua-radio") % it
+            }
+        }
+    }
+
+    /**
+     * Set the CSS class name for the group wrapper.
+     */
+    @Composable
+    public override fun groupClassName(groupClassName: String?): Unit = composableProperty("groupClassName", {
+        this.groupClassName = null
+    }) {
+        this.groupClassName = groupClassName
+    }
+
+    /**
+     * The CSS class name for the input elements.
+     */
+    public override var inputClassName: String? by updatingProperty(inputClassName) {
+        findAllRadios().forEach { radio ->
+            radio.className = it
+        }
+    }
+
+    /**
+     * Set the CSS class name for the input elements.
+     */
+    @Composable
+    public override fun inputClassName(inputClassName: String?): Unit = composableProperty("inputClassName", {
+        this.inputClassName = null
+    }) {
+        this.inputClassName = inputClassName
+    }
+
+    /**
+     * The CSS class name for the label elements.
+     */
+    public override var labelClassName: String? by updatingProperty(labelClassName) {
+        findAllLabels().forEach { label ->
+            label.className = it
+        }
+    }
+
+    /**
+     * Set the CSS class name for the label elements.
+     */
+    @Composable
+    public override fun labelClassName(labelClassName: String?): Unit = composableProperty("labelClassName", {
+        this.labelClassName = null
+    }) {
+        this.labelClassName = labelClassName
     }
 
     /**
@@ -216,6 +313,21 @@ public open class RadioGroup(
         }
     }
 
+    /**
+     * Find all label components in this group.
+     */
+    protected open fun findAllLabels(): List<Label> {
+        return children.flatMap { child ->
+            if (child is Div) {
+                child.children.mapNotNull { subChild ->
+                    if (subChild is Label) {
+                        subChild
+                    } else null
+                }
+            } else emptyList()
+        }
+    }
+
     override fun getValueAsString(): String? {
         return value.toString()
     }
@@ -230,6 +342,9 @@ public open class RadioGroup(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
+ * @param groupClassName the CSS class name for the group wrapper
+ * @param inputClassName the CSS class name for the input elements
+ * @param labelClassName the CSS class name for the label elements
  * @param className the CSS class name
  * @param id the ID of the input
  * @param setup a function for setting up the component
@@ -243,17 +358,37 @@ public fun IComponent.radioGroupRef(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    groupClassName: String? = null,
+    inputClassName: String? = null,
+    labelClassName: String? = null,
     className: String? = null,
     id: String? = null,
     setup: @Composable IRadioGroup.() -> Unit = {}
 ): RadioGroup {
-    val component = remember { RadioGroup(value, inline, name, disabled, required, className, id, renderConfig) }
+    val component = remember {
+        RadioGroup(
+            value,
+            inline,
+            name,
+            disabled,
+            required,
+            groupClassName,
+            inputClassName,
+            labelClassName,
+            className,
+            id,
+            renderConfig
+        )
+    }
     ComponentNode(component, {
         set(value) { updateProperty(RadioGroup::value, it) }
         set(inline) { updateProperty(RadioGroup::inline, it) }
         set(name) { updateProperty(RadioGroup::name, it) }
         set(disabled) { updateProperty(RadioGroup::disabled, it) }
         set(required) { updateProperty(RadioGroup::required, it) }
+        set(groupClassName) { updateProperty(RadioGroup::groupClassName, it) }
+        set(inputClassName) { updateProperty(RadioGroup::inputClassName, it) }
+        set(labelClassName) { updateProperty(RadioGroup::labelClassName, it) }
         set(className) { updateProperty(RadioGroup::className, it) }
         set(id) { updateProperty(RadioGroup::id, it) }
     }) {
@@ -272,6 +407,9 @@ public fun IComponent.radioGroupRef(
  * @param name the name of the input
  * @param disabled whether the input is disabled
  * @param required whether the input is required
+ * @param groupClassName the CSS class name for the group wrapper
+ * @param inputClassName the CSS class name for the input elements
+ * @param labelClassName the CSS class name for the label elements
  * @param className the CSS class name
  * @param id the ID of the input
  * @param setup a function for setting up the component
@@ -284,17 +422,37 @@ public fun IComponent.radioGroup(
     name: String? = null,
     disabled: Boolean? = null,
     required: Boolean? = null,
+    groupClassName: String? = null,
+    inputClassName: String? = null,
+    labelClassName: String? = null,
     className: String? = null,
     id: String? = null,
     setup: @Composable IRadioGroup.() -> Unit = {}
 ) {
-    val component = remember { RadioGroup(value, inline, name, disabled, required, className, id, renderConfig) }
+    val component = remember {
+        RadioGroup(
+            value,
+            inline,
+            name,
+            disabled,
+            required,
+            groupClassName,
+            inputClassName,
+            labelClassName,
+            className,
+            id,
+            renderConfig
+        )
+    }
     ComponentNode(component, {
         set(value) { updateProperty(RadioGroup::value, it) }
         set(inline) { updateProperty(RadioGroup::inline, it) }
         set(name) { updateProperty(RadioGroup::name, it) }
         set(disabled) { updateProperty(RadioGroup::disabled, it) }
         set(required) { updateProperty(RadioGroup::required, it) }
+        set(groupClassName) { updateProperty(RadioGroup::groupClassName, it) }
+        set(inputClassName) { updateProperty(RadioGroup::inputClassName, it) }
+        set(labelClassName) { updateProperty(RadioGroup::labelClassName, it) }
         set(className) { updateProperty(RadioGroup::className, it) }
         set(id) { updateProperty(RadioGroup::id, it) }
     }) {
@@ -311,14 +469,16 @@ private fun RadioGroup.setupOptions(
     options?.forEachIndexed { index, option ->
         fieldWithLabel(
             option.second,
+            className = component.labelClassName,
             labelAfter = true,
-            groupClassName = if (component.inline) "kilua-radio-inline" else "kilua-radio"
+            groupClassName = (if (component.inline) "kilua-radio-inline" else "kilua-radio") % component.groupClassName
         ) {
             radio(
                 value = option.first == component.value,
                 name = component.name ?: "name_${component.componentId}",
                 disabled = component.disabled,
                 required = component.required,
+                className = component.inputClassName,
                 id = it
             ) {
                 if (index == 0 && component.autofocus == true) {

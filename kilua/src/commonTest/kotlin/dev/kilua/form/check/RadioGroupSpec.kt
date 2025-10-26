@@ -34,12 +34,19 @@ class RadioGroupSpec : DomSpec {
     fun render() {
         runWhenDomAvailable {
             val root = root("test") {
-                radioGroup(listOfPairs("A", "B"), name = "test", inline = true)
+                radioGroup(
+                    listOfPairs("A", "B"),
+                    name = "test",
+                    inline = true,
+                    groupClassName = "form-check",
+                    inputClassName = "form-check-input",
+                    labelClassName = "form-check-label"
+                )
             }
             assertEqualsHtml(
-                """<div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="A"><label for="id">A</label></div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="B"><label for="id">B</label></div></div>""",
+                """<div><div class="kilua-radio-inline form-check"><input type="radio" name="test" id="id" value="A" class="form-check-input"><label class="form-check-label" for="id">A</label></div><div class="kilua-radio-inline form-check"><input type="radio" name="test" id="id" class="form-check-input" value="B"><label class="form-check-label" for="id">B</label></div></div>""",
                 root.element.innerHTML.asStringOrNull(),
-                "Should render radio button group  to DOM"
+                "Should render radio button group to DOM"
             )
         }
     }
@@ -48,10 +55,15 @@ class RadioGroupSpec : DomSpec {
     fun renderToString() {
         run {
             val root = root {
-                radioGroup(listOfPairs("A", "B"), name = "test", inline = true)
+                radioGroup(
+                    listOfPairs("A", "B"), name = "test", inline = true,
+                    groupClassName = "form-check",
+                    inputClassName = "form-check-input",
+                    labelClassName = "form-check-label"
+                )
             }
             assertEqualsHtml(
-                """<div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="A"><label for="id">A</label></div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="B"><label for="id">B</label></div></div>""",
+                """<div><div class="kilua-radio-inline form-check"><input type="radio" name="test" id="id" value="A" class="form-check-input"><label class="form-check-label" for="id">A</label></div><div class="kilua-radio-inline form-check"><input type="radio" name="test" id="id" class="form-check-input" value="B"><label class="form-check-label" for="id">B</label></div></div>""",
                 root.innerHTML,
                 "Should render radio button group to a String"
             )
