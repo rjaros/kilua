@@ -24,6 +24,7 @@ package dev.kilua.html
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class RawHtmlSpec : DomSpec {
@@ -36,7 +37,7 @@ class RawHtmlSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<span style="display: contents;"><p style="color: red;"><b>Test</b></p></span>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an HTML tag with some raw HTML content"
             )
         }

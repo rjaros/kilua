@@ -28,6 +28,7 @@ import dev.kilua.compose.ui.Modifier
 import dev.kilua.compose.ui.className
 import dev.kilua.html.div
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class ColumnSpec : DomSpec {
@@ -51,7 +52,7 @@ class ColumnSpec : DomSpec {
         }
         assertEqualsHtml(
             """<div class="a_class" style="display: flex; flex-direction: column; justify-content: space-around; align-items: start;"><div style="align-self: flex-start;">Some text1</div><div>Some text2</div><div style="align-self: flex-end;">Some text3</div></div>""",
-            root.element.innerHTML,
+            root.element.innerHTML.asStringOrNull(),
             "Should render a Column with some children"
         )
     }

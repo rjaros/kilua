@@ -22,6 +22,4 @@
 
 package dev.kilua.form
 
-import js.core.JsAny
-
 internal actual fun jsNumber(): JsAny = js("Number")

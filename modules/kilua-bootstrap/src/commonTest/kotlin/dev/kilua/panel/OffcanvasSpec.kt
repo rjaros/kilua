@@ -26,6 +26,7 @@ import dev.kilua.compose.root
 import dev.kilua.html.pt
 import dev.kilua.test.DomSpec
 import kotlinx.coroutines.delay
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class OffcanvasSpec : DomSpec {
@@ -57,7 +58,7 @@ Offcanvas content
 </div>
 <div class="offcanvas-backdrop fade show">
 </div>""",
-            root.element.innerHTML,
+            root.element.innerHTML.asStringOrNull(),
             "Should render an Offcanvas component to DOM"
         )
     }

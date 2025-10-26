@@ -26,16 +26,17 @@ import dev.kilua.externals.JsArray
 import dev.kilua.externals.get
 import dev.kilua.externals.set
 import js.array.ArrayLike
-import js.core.JsAny
-import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsInt
-import js.core.JsPrimitives.toJsString
-import js.core.JsString
 import js.objects.Object
 import js.objects.unsafeJso
 import js.reflect.Reflect
+import kotlin.js.JsAny
+import kotlin.js.JsString
+import kotlin.js.toJsBoolean
+import kotlin.js.toJsString
 import kotlin.js.undefined
+import kotlin.toString
 
 /**
  * Create a JS object with a block of code to set its properties.
@@ -52,14 +53,14 @@ public inline fun obj(): JsAny = unsafeJso()
  * Function to set property on JS Object
  */
 public fun JsAny.jsSet(key: String, value: JsAny) {
-    Reflect.set(this, key.toJsString(), value)
+    Reflect.set(this, key, value)
 }
 
 /**
  * Function to get property from JS Object
  */
 public fun JsAny.jsGet(key: String): JsAny? {
-    return Reflect.get(this, key.toJsString())
+    return Reflect.get(this, key)
 }
 
 /**

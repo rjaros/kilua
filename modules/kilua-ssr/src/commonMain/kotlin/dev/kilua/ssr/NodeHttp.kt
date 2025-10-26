@@ -23,7 +23,7 @@
 package dev.kilua.ssr
 
 import kotlin.js.JsModule
-import js.core.JsAny
+import kotlin.js.JsAny
 
 /**
  * Node.js HTTP server.

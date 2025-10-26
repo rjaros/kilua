@@ -29,6 +29,7 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -44,7 +45,7 @@ class DateSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="date" name="date" min="2023-10-14" max="2023-10-16" step="1">"""),
-                normalizeHtml(root.element.innerHTML),
+                normalizeHtml(root.element.innerHTML.asStringOrNull()),
                 "Should render date input element to DOM"
             )
         }

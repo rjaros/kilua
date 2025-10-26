@@ -26,10 +26,10 @@ import dev.kilua.externals.SanitizeHtmlOptionsJs
 import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toJsArray
-import js.core.JsAny
-import js.core.JsPrimitives.toJsBoolean
-import js.core.JsPrimitives.toJsString
 import js.regexp.RegExp
+import kotlin.js.JsAny
+import kotlin.js.toJsBoolean
+import kotlin.js.toJsString
 
 /**
  * Disallowed tags modes.

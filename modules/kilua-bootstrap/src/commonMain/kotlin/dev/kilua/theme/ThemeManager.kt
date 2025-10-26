@@ -25,7 +25,6 @@ package dev.kilua.theme
 import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.utils.isDom
 import dev.kilua.utils.toKebabCase
-import js.core.JsAny
 import web.cssom.MediaQuery
 import web.cssom.matchMedia
 import web.dom.document
@@ -34,6 +33,7 @@ import web.events.Event
 import web.events.EventType
 import web.events.addEventListener
 import web.storage.localStorage
+import kotlin.js.JsAny
 
 /**
  * Bootstrap color themes.

@@ -24,7 +24,7 @@
 
 package dev.kilua.externals.leaflet.geo
 
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 
 

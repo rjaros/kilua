@@ -31,10 +31,10 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.unsafeCast
-import js.core.JsPrimitives.toJsString
 import web.events.EventType
 import web.html.HTMLButtonElement
 import web.mouse.MouseEvent
+import kotlin.js.toJsString
 
 /**
  * Button types.

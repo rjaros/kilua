@@ -35,6 +35,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.serialization.Serializable
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -75,7 +76,7 @@ class FormSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<form method="get" action="/action" enctype="multipart/form-data" novalidate><input type="text"><input type="checkbox"></form>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render form element to DOM"
             )
         }

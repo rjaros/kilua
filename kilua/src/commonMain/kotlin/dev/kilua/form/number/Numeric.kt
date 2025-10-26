@@ -34,9 +34,9 @@ import dev.kilua.form.NumberFormControl
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.toFixedNoRound
-import js.core.JsPrimitives.toJsString
 import js.core.toLocaleString
 import web.events.Event
+import kotlin.js.toJsString
 
 /**
  * The default number of decimal digits.

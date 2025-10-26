@@ -28,10 +28,10 @@ import dev.kilua.utils.cast
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
-import js.core.JsAny
-import js.core.JsPrimitives.toJsBoolean
-import js.core.JsPrimitives.toJsString
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.toJsBoolean
+import kotlin.js.toJsString
 
 /**
  * Tom Select options.

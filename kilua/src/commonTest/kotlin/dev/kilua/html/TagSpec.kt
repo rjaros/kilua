@@ -24,6 +24,7 @@ package dev.kilua.html
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -54,7 +55,7 @@ class TagSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<ol class="test" id="test-id" title="A title" aria-label="A title" data-test="test" autofocus="" style="margin: 10px; display: flex; grid-template-areas: &quot;a a a&quot; &quot;b c c&quot; &quot;b c c&quot;; box-shadow: rgb(0, 255, 255) 10px 20px, rgb(0, 238, 238) 30px 40px; transition: width 500ms, height 600ms; border-radius: 10px 20px;"></ol>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an HTML tag to DOM"
             )
         }

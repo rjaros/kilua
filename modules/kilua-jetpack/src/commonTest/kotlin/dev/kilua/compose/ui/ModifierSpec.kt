@@ -29,6 +29,7 @@ import dev.kilua.html.TextAlign
 import dev.kilua.html.div
 import dev.kilua.html.px
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class ModifierSpec : DomSpec {
@@ -48,7 +49,7 @@ class ModifierSpec : DomSpec {
         }
         assertEqualsHtml(
             """<div id="id" class="a_class" title="Some title" style="display: inline-block; border: 1px solid; text-align: center;">Some text</div>""",
-            root.element.innerHTML,
+            root.element.innerHTML.asStringOrNull(),
             "Should render an element with a custom modifier"
         )
     }

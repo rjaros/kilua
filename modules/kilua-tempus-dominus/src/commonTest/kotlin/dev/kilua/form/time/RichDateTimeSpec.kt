@@ -24,10 +24,9 @@ package dev.kilua.form.time
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
-import dev.kilua.test.normalizeHtml
 import kotlinx.datetime.LocalDateTime
+import web.html.asStringOrNull
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class RichDateTimeSpec : DomSpec {
 
@@ -49,8 +48,8 @@ class RichDateTimeSpec : DomSpec {
 </i>
 </span>
 </div>""".replace(Regex("kilua_tempus_dominus_rdt_[0-9]*"), "kilua_tempus_dominus_rdt_0"),
-                root.element.innerHTML
-                    .replace(Regex("kilua_tempus_dominus_rdt_[0-9]*"), "kilua_tempus_dominus_rdt_0"),
+                root.element.innerHTML.asStringOrNull()
+                    ?.replace(Regex("kilua_tempus_dominus_rdt_[0-9]*"), "kilua_tempus_dominus_rdt_0"),
                 "Should render Tempus Dominus date and time component to DOM"
             )
         }

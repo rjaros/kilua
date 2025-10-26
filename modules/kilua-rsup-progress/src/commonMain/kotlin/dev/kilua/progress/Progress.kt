@@ -29,8 +29,8 @@ import dev.kilua.html.Color
 import dev.kilua.utils.isDom
 import dev.kilua.utils.obj
 import dev.kilua.utils.toKebabCase
-import js.core.JsAny
 import js.promise.Promise
+import kotlin.js.JsAny
 import kotlin.time.Duration
 
 /**

@@ -48,11 +48,8 @@ import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.unsafeCast
-import js.core.JsAny
-import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsInt
-import js.core.JsPrimitives.toJsString
 import js.json.parse
 import js.json.stringify
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -72,6 +69,9 @@ import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
 import web.html.HTMLFormElement
 import web.window.WindowName
+import kotlin.js.JsAny
+import kotlin.js.toJsBoolean
+import kotlin.js.toJsString
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 
@@ -166,7 +166,7 @@ public class Form<K : Any>(
      */
     public var action: String? by updatingProperty(action) {
         if (it != null) {
-            element.action = it.toString()
+            element.action = it
         } else {
             element.removeAttribute("action")
         }

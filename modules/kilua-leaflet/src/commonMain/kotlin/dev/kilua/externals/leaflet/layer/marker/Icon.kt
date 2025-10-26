@@ -26,9 +26,9 @@ package dev.kilua.externals.leaflet.layer.marker
 
 import dev.kilua.externals.leaflet.geometry.Point
 import dev.kilua.externals.leaflet.layer.Layer
-import js.core.JsAny
-import kotlin.js.JsModule
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 import kotlin.js.JsName
 import kotlin.js.definedExternally
 

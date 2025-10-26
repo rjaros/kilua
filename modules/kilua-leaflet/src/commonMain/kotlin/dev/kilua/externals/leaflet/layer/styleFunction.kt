@@ -24,6 +24,6 @@
 package dev.kilua.externals.leaflet.layer
 
 import dev.kilua.externals.leaflet.layer.vector.Path
-import js.core.JsAny
+import kotlin.js.JsAny
 
 public typealias StyleFunction = (feature: JsAny) -> Path.PathOptions

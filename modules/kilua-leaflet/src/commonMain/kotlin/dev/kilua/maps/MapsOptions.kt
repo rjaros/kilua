@@ -30,7 +30,7 @@ import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.vector.Renderer
 import dev.kilua.externals.leaflet.map.LeafletMap.LeafletMapOptions
 import dev.kilua.utils.obj
-import js.core.JsAny
+import kotlin.js.JsAny
 
 /**
  * Options for the Leaflet Map.

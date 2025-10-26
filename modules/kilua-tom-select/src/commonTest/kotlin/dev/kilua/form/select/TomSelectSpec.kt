@@ -25,6 +25,7 @@ package dev.kilua.form.select
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
 import dev.kilua.utils.listOfPairs
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class TomSelectSpec : DomSpec {
@@ -62,7 +63,7 @@ B
 </div>
 </div>
 </div>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render Tom Select component to DOM"
             )
         }

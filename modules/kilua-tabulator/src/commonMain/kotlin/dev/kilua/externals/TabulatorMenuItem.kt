@@ -23,9 +23,9 @@
 
 package dev.kilua.externals
 
-import js.core.JsAny
 import web.dom.Element
 import web.events.Event
+import kotlin.js.JsAny
 
 internal external interface TabulatorMenuItem : JsAny {
     var label: Element

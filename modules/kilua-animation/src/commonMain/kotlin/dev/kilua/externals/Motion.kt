@@ -24,11 +24,11 @@
 
 package dev.kilua.externals
 
-import kotlin.js.JsModule
-import js.core.JsAny
 import js.core.JsNumber
 import js.promise.Promise
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 
 /**
  * The animation playback controls.

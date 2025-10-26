@@ -25,7 +25,7 @@
 package dev.kilua.externals.leaflet.layer.tile
 
 import dev.kilua.externals.leaflet.layer.tile.TileLayer.TileLayerOptions
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
 

@@ -25,6 +25,7 @@ package dev.kilua.html
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.test.normalizeHtml
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -46,7 +47,7 @@ class IframeSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<iframe src="https://google.com" name="test" width="300" height="200" sandbox="allow-popups allow-forms" style="margin: 10px;"></iframe>"""),
-                normalizeHtml(root.element.innerHTML),
+                normalizeHtml(root.element.innerHTML.asStringOrNull()),
                 "Should render an HTML Iframe tag to DOM"
             )
         }

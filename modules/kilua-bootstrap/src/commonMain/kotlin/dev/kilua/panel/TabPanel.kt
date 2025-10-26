@@ -32,7 +32,6 @@ import androidx.compose.runtime.setValue
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.html.CommentNode
 import dev.kilua.html.IDiv
 import dev.kilua.html.ITag
@@ -42,10 +41,11 @@ import dev.kilua.html.commentNode
 import dev.kilua.html.div
 import dev.kilua.html.li
 import dev.kilua.html.ul
+import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.utils.cast
 import dev.kilua.utils.rem
-import js.core.JsPrimitives.toJsString
 import web.html.HTMLDivElement
+import kotlin.js.toJsString
 
 /**
  * Tab position.

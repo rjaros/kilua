@@ -51,6 +51,7 @@ import web.html.HTMLButtonElement
 import web.html.HTMLElement
 import web.html.HTMLInputElement
 import web.events.Event
+import web.html.HtmlSource
 
 /**
  * Trix rich text editor component.
@@ -353,7 +354,7 @@ public open class RichText(
      */
     protected fun toolbarLocalize() {
         toolbar?.let { SafeDomFactory.getElementById(it) }?.unsafeCast<HTMLElement>()?.innerHTML =
-            getToolbarContent(locale)
+            HtmlSource(getToolbarContent(locale))
     }
 
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {

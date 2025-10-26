@@ -25,6 +25,7 @@ package dev.kilua.html
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.test.normalizeHtml
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -38,7 +39,7 @@ class ButtonSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<button type="submit">test</button>"""),
-                normalizeHtml(root.element.innerHTML),
+                normalizeHtml(root.element.innerHTML.asStringOrNull()),
                 "Should render a BUTTON HTML tag to DOM"
             )
         }

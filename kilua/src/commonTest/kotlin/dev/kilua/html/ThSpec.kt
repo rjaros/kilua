@@ -22,11 +22,10 @@
 
 package dev.kilua.html
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.test.normalizeHtml
+import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class ThSpec : DomSpec {
 
@@ -45,7 +44,7 @@ class ThSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<th class="test" colspan="2" rowspan="1" scope="col" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></th>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an HTML Th tag to DOM"
             )
         }

@@ -45,10 +45,10 @@
 
 package dev.kilua.utils
 
-import js.core.JsAny
 import web.abort.AbortSignal
 import web.events.AddEventListenerOptions
 import web.events.CustomEventInit
+import kotlin.js.JsAny
 
 /**
  * Build AddEventListenerOptions with a signal controller to remove the listener.

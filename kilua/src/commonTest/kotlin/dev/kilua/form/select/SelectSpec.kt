@@ -25,6 +25,7 @@ package dev.kilua.form.select
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.utils.listOfPairs
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -45,7 +46,7 @@ class SelectSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<select name="test" required=""><option value="" label="A placeholder" selected="" disabled="" hidden=""></option><option value="$SELECT_EMPTY_VALUE" label=""></option><option value="A" label="A"></option><option value="B" label="B"></option></select>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render select element to DOM"
             )
         }

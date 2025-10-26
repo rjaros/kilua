@@ -22,6 +22,6 @@
 
 package dev.kilua.form
 
-import js.core.JsAny
+import kotlin.js.JsAny
 
 internal expect fun jsNumber(): JsAny

@@ -28,9 +28,9 @@ import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geo.LatLngBounds
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.ImageOverlay.ImageOverlayOptions
-import js.core.JsAny
-import kotlin.js.JsModule
 import web.html.HTMLImageElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 /**

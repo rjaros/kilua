@@ -23,9 +23,9 @@
 
 package dev.kilua.externals
 
+import kotlin.js.JsAny
 import kotlin.js.JsModule
-import js.core.JsAny
-import js.core.JsString
+import kotlin.js.JsString
 
 internal external class SanitizeHtmlOptionsJs : JsAny {
     var allowedTags: JsAny

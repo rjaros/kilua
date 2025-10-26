@@ -24,6 +24,7 @@ package dev.kilua.html
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class TextNodeSpec : DomSpec {
@@ -36,7 +37,7 @@ class TextNodeSpec : DomSpec {
             }
             assertEqualsHtml(
                 """test &amp;nbsp; &lt;b&gt;not so bold&lt;/b&gt;""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an HTML text node to DOM"
             )
         }

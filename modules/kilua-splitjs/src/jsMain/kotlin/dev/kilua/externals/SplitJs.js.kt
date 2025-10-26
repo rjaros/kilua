@@ -24,7 +24,6 @@
 
 package dev.kilua.externals
 
-import js.core.JsAny
 import web.html.HTMLElement
 
 internal external class SplitJsOptionsExt : JsAny {

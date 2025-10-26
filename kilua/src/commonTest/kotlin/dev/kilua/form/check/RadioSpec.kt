@@ -24,6 +24,7 @@ package dev.kilua.form.check
 
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class RadioSpec : DomSpec {
@@ -39,7 +40,7 @@ class RadioSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<input type="radio" name="test" checked="" value="extra">""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render radio button element to DOM"
             )
         }

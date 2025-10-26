@@ -22,7 +22,7 @@
  */
 package dev.kilua
 
-import js.core.JsAny
+import kotlin.js.JsAny
 
 /**
  * Helper interface for Hot Module Replacement (HMR).

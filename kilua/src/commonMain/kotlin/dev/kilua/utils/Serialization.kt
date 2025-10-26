@@ -21,11 +21,11 @@
  */
 package dev.kilua.utils
 
-import js.core.JsAny
 import js.json.parse
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotlin.js.JsAny
 
 /**
  * JSON serialization utility functions

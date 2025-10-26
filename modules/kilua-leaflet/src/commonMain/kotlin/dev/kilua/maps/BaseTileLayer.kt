@@ -26,7 +26,7 @@ package dev.kilua.maps
 import dev.kilua.externals.leaflet.control.Control
 import dev.kilua.externals.leaflet.layer.tile.TileLayer
 import dev.kilua.maps.LeafletObjectFactory.tileLayer
-import js.core.JsPrimitives.toJsString
+import kotlin.js.toJsString
 
 /**
  * Some default [TileLayer]s from publicly available tile providers.

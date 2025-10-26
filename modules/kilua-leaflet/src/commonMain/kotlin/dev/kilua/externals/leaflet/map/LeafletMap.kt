@@ -43,9 +43,9 @@ import dev.kilua.externals.leaflet.layer.overlay.Tooltip
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip.TooltipOptions
 import dev.kilua.externals.leaflet.layer.vector.Path
 import dev.kilua.externals.leaflet.layer.vector.Renderer
-import js.core.JsAny
 import web.html.HTMLElement
 import web.pointer.PointerEvent
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 import kotlin.js.JsName
 import kotlin.js.definedExternally

@@ -26,7 +26,8 @@ package dev.kilua
 import dev.kilua.externals.leaflet.layer.marker.Icon
 import dev.kilua.utils.delete
 import dev.kilua.utils.obj
-import js.core.JsAny
+import kotlin.Suppress
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 
 @JsModule("leaflet/dist/leaflet.css")

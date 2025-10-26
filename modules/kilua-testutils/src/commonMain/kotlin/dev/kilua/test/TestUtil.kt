@@ -27,8 +27,6 @@ import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
 import dev.kilua.utils.obj
 import dev.kilua.utils.unsafeCast
-import js.core.JsAny
-import js.core.JsPrimitives.toJsString
 import js.coroutines.asPromise
 import js.promise.Promise
 import kotlinx.coroutines.CoroutineScope
@@ -37,6 +35,8 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import web.dom.ElementId
 import web.dom.document
+import kotlin.js.JsAny
+import kotlin.js.toJsString
 import kotlin.test.DefaultAsserter.assertTrue
 
 public val testScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())

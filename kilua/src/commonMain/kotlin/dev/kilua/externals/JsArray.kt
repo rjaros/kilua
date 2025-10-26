@@ -21,7 +21,7 @@
  */
 package dev.kilua.externals
 
-import js.core.JsAny
+import kotlin.js.JsAny
 
 /**
  * A JavaScript array (workaround for https://github.com/JetBrains/kotlin-wrappers/issues/2763)

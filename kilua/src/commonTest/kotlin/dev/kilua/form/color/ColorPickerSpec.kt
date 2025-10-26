@@ -25,6 +25,7 @@ package dev.kilua.form.color
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.test.normalizeHtml
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -40,7 +41,7 @@ class ColorPickerSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="color" name="test" autofocus="">"""),
-                normalizeHtml(root.element.innerHTML),
+                normalizeHtml(root.element.innerHTML.asStringOrNull()),
                 "Should render color picker element to DOM"
             )
         }

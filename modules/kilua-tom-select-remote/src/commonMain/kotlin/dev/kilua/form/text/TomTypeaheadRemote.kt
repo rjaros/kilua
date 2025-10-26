@@ -24,24 +24,24 @@ package dev.kilua.form.text
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import dev.kilua.utils.KiluaScope
 import dev.kilua.core.IComponent
+import dev.kilua.externals.JsArray
 import dev.kilua.form.InputType
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
-import dev.kilua.externals.JsArray
+import dev.kilua.utils.KiluaScope
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.unsafeCast
-import kotlinx.coroutines.launch
-import js.core.JsAny
-import js.core.JsPrimitives.toJsString
 import js.json.stringify
+import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
 import web.console.console
 import web.http.RequestInit
+import kotlin.js.JsAny
+import kotlin.js.toJsString
 
 /**
  * Creates [TomTypeahead] component with a remote data source, returning a reference.

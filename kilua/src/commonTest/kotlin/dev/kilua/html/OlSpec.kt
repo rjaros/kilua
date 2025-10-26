@@ -22,11 +22,10 @@
 
 package dev.kilua.html
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.test.normalizeHtml
+import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class OlSpec : DomSpec {
 
@@ -43,7 +42,7 @@ class OlSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<ol class="test" type="A" start="2" id="test-id" title="A title"><li>Item 1</li><li>Item 2</li></ol>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an HTML Ol tag to DOM"
             )
         }

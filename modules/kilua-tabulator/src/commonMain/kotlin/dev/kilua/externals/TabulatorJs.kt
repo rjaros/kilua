@@ -24,10 +24,10 @@
 
 package dev.kilua.externals
 
-import kotlin.js.JsModule
-import js.core.JsAny
 import js.promise.Promise
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 
 /**
  * JavaScript Tabulator component.

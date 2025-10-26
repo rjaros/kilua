@@ -22,9 +22,12 @@
 
 package dev.kilua.i18n
 
-import js.core.JsPrimitives.toJsString
 import js.core.toLocaleString
 import web.console.console
+import kotlin.js.toJsString
+import kotlin.text.dropLast
+import kotlin.text.last
+import kotlin.text.split
 
 /**
  * Base i18n interface.

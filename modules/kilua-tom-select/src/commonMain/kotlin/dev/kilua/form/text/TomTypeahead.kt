@@ -28,17 +28,17 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
+import dev.kilua.externals.JsArray
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
-import dev.kilua.utils.jsGet
 import dev.kilua.form.Autocomplete
 import dev.kilua.form.InputType
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.toJs
 import dev.kilua.html.div
-import dev.kilua.externals.JsArray
 import dev.kilua.utils.assign
 import dev.kilua.utils.cast
+import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.obj
 import dev.kilua.utils.rem
@@ -46,13 +46,13 @@ import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import js.core.JsAny
-import js.core.JsBoolean
-import js.core.JsPrimitives.toBoolean
-import js.core.JsPrimitives.toJsString
-import js.core.JsString
 import web.dom.ElementId
 import web.dom.document
+import kotlin.js.JsAny
+import kotlin.js.JsBoolean
+import kotlin.js.JsString
+import kotlin.js.toBoolean
+import kotlin.js.toJsString
 
 /**
  * Tom Typeahead input component

@@ -31,9 +31,9 @@ import dev.kilua.externals.leaflet.geo.LatLngBounds
 import dev.kilua.externals.leaflet.geometry.Point
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.tile.GridLayer.GridLayerOptions
-import js.core.JsAny
-import kotlin.js.JsModule
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 /**

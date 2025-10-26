@@ -27,6 +27,7 @@ import dev.kilua.compose.root
 import dev.kilua.i18n.SimpleLocale
 import dev.kilua.test.DomSpec
 import dev.kilua.test.normalizeHtml
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -43,7 +44,7 @@ class ImaskNumericSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="text" maxlength="14" value="1,235.32">"""),
-                normalizeHtml(root.element.innerHTML),
+                normalizeHtml(root.element.innerHTML.asStringOrNull()),
                 "Should render masked numeric input element to DOM"
             )
         }

@@ -53,7 +53,7 @@ public abstract class ComponentBase(
         if (index < size) {
             children.add(index, component)
             if (renderConfig.isDom) {
-                node.insertBefore(component.node, node.childNodes[index]!!)
+                node.insertBefore(component.node, node.childNodes[index])
             }
         } else {
             children.add(component)
@@ -72,7 +72,7 @@ public abstract class ComponentBase(
         repeat(count) {
             val child = children.removeAt(index)
             child.parent = null
-            if (renderConfig.isDom) node.removeChild(node.childNodes[index]!!)
+            if (renderConfig.isDom) node.removeChild(node.childNodes[index])
         }
     }
 
@@ -91,8 +91,8 @@ public abstract class ComponentBase(
                 children[from] = toEl
                 if (renderConfig.isDom) {
                     val toIndex = if (from > to) to else to - 1
-                    val childElement = node.removeChild(node.childNodes[from]!!)
-                    node.insertBefore(childElement, node.childNodes[toIndex]!!)
+                    val childElement = node.removeChild(node.childNodes[from])
+                    node.insertBefore(childElement, node.childNodes[toIndex])
                 }
             } else {
                 for (i in 0..<count) {
@@ -100,12 +100,12 @@ public abstract class ComponentBase(
                     val toIndex = if (from > to) to + i else to + count - 2
                     val child = children.removeAt(fromIndex)
                     val childElement = if (renderConfig.isDom) {
-                        node.removeChild(node.childNodes[fromIndex]!!)
+                        node.removeChild(node.childNodes[fromIndex])
                     } else null
                     if (toIndex < children.size) {
                         children.add(toIndex, child)
                         if (childElement != null) {
-                            node.insertBefore(childElement, node.childNodes[toIndex]!!)
+                            node.insertBefore(childElement, node.childNodes[toIndex])
                         }
                     } else {
                         children.add(child)

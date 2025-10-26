@@ -24,7 +24,7 @@
 package dev.kilua.externals
 
 import kotlin.js.JsModule
-import js.core.JsAny
+import kotlin.js.JsAny
 
 internal external class MarkedOptionsJs : JsAny {
     var gfm: Boolean

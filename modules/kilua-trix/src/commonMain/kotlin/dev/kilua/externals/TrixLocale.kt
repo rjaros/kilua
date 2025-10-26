@@ -23,7 +23,7 @@
 
 package dev.kilua.externals
 
-import js.core.JsAny
+import kotlin.js.JsAny
 
 /**
  * Trix editor locale strings.

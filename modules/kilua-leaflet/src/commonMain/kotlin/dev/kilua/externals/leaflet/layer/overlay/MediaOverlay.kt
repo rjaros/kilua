@@ -25,7 +25,7 @@
 package dev.kilua.externals.leaflet.layer.overlay
 
 import dev.kilua.externals.leaflet.geo.LatLngBounds
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 
 /**

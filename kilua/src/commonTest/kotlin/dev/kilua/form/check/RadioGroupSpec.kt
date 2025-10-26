@@ -25,6 +25,7 @@ package dev.kilua.form.check
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.utils.listOfPairs
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class RadioGroupSpec : DomSpec {
@@ -37,7 +38,7 @@ class RadioGroupSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="A"><label for="id">A</label></div><div class="kilua-radio-inline"><input type="radio" name="test" id="id" value="B"><label for="id">B</label></div></div>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render radio button group  to DOM"
             )
         }

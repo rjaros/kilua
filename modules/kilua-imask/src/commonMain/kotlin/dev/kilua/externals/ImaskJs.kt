@@ -23,11 +23,11 @@
 
 package dev.kilua.externals
 
-import kotlin.js.JsModule
-import js.core.JsAny
 import js.core.JsNumber
-import js.core.JsString
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
+import kotlin.js.JsString
 
 internal external class ImaskJs : JsAny {
     var unmaskedValue: String?

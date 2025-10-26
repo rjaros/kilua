@@ -28,20 +28,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import dev.kilua.utils.KiluaScope
 import dev.kilua.core.IComponent
 import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.rpc.SimpleRemoteOption
+import dev.kilua.utils.KiluaScope
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.unsafeCast
-import js.core.JsPrimitives.toJsString
 import js.json.stringify
 import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
 import web.console.console
 import web.http.RequestInit
+import kotlin.js.toJsString
 
 /**
  * Creates [Select] component with a remote data source, returning a reference.

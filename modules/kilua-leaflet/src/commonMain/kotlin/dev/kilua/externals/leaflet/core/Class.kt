@@ -24,7 +24,7 @@
 
 package dev.kilua.externals.leaflet.core
 
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 
 /**

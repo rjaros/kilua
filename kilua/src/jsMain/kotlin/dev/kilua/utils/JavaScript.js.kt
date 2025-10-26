@@ -23,7 +23,6 @@
 package dev.kilua.utils
 
 import dev.kilua.externals.JsArray
-import js.core.JsAny
 import kotlin.js.unsafeCast as unsafeCastJs
 
 @Suppress("UnsafeCastFromDynamic")

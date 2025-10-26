@@ -28,6 +28,7 @@ import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
 import kotlinx.coroutines.delay
 import kotlinx.serialization.Serializable
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 @Serializable
@@ -120,7 +121,7 @@ City
 </div>
 </div>
 </div>            """.trimIndent(),
-            root.element.innerHTML,
+            root.element.innerHTML.asStringOrNull(),
             "Should render a Tabulator component to DOM"
         )
 

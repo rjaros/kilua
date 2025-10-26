@@ -25,6 +25,7 @@ package dev.kilua.form
 import dev.kilua.compose.root
 import dev.kilua.form.text.text
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class FieldWithLabelSpec : DomSpec {
@@ -39,7 +40,7 @@ class FieldWithLabelSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<div class="group"><label for="id" class="form-label">A label</label><div class="wrapper"><input type="text" id="id"></div></div>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render form element with a label to DOM"
             )
         }
@@ -78,7 +79,7 @@ class FieldWithLabelSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<div class="group"><div class="wrapper"><input type="text" id="id"></div><label for="id" class="form-label">A label</label></div>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render form element with a label after the input to DOM"
             )
         }

@@ -203,12 +203,12 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     try {
                         // Workaround to initialize internal properties of the KotlinWebpack class
                         val method =
-                            javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
+                            javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Any::class.java)
                         val prop = projectObjects.property<NpmVersions>()
                         prop.set(NpmVersions())
                         method.invoke(this, prop)
                         val method2 =
-                            javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
+                            javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Any::class.java)
                         val prop2 = projectObjects.property<Boolean>()
                         prop2.set(false)
                         method2.invoke(this, prop2)
@@ -217,7 +217,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         val prop3 = method3.invoke(kotlinWebpackJs) as DirectoryProperty
                         val method4 = javaClass.getDeclaredMethod(
                             "setNpmToolingEnvDir\$kotlin_gradle_plugin_common",
-                            Object::class.java
+                            Any::class.java
                         )
                         method4.invoke(this, prop3.get())
                     } catch (e: Exception) {
@@ -285,12 +285,12 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     try {
                         // Workaround to initialize internal properties of the KotlinWebpack class
                         val method =
-                            javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Object::class.java)
+                            javaClass.getDeclaredMethod("setVersions\$kotlin_gradle_plugin_common", Any::class.java)
                         val prop = projectObjects.property<NpmVersions>()
                         prop.set(NpmVersions())
                         method.invoke(this, prop)
                         val method2 =
-                            javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Object::class.java)
+                            javaClass.getDeclaredMethod("setGetIsWasm\$kotlin_gradle_plugin_common", Any::class.java)
                         val prop2 = projectObjects.property<Boolean>()
                         prop2.set(true)
                         method2.invoke(this, prop2)
@@ -299,7 +299,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         val prop3 = method3.invoke(kotlinWebpackWasmJs) as DirectoryProperty
                         val method4 = javaClass.getDeclaredMethod(
                             "setNpmToolingEnvDir\$kotlin_gradle_plugin_common",
-                            Object::class.java
+                            Any::class.java
                         )
                         method4.invoke(this, prop3.get())
                     } catch (e: Exception) {

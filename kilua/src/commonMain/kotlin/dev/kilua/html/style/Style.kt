@@ -29,6 +29,7 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.Tag
 import web.html.HTMLStyleElement
+import web.html.HtmlSource
 
 /**
  * Internal HTML Style component.
@@ -37,12 +38,12 @@ internal class Style(cssText: String, renderConfig: RenderConfig = RenderConfig.
     Tag<HTMLStyleElement>("style", null, renderConfig = renderConfig) {
 
     var cssText: String by updatingProperty(cssText) {
-        element.innerHTML = it
+        element.innerHTML = HtmlSource(it)
     }
 
     init {
         if (renderConfig.isDom) {
-            element.innerHTML = cssText
+            element.innerHTML = HtmlSource(cssText)
         }
     }
 

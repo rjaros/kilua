@@ -23,8 +23,8 @@
 
 package dev.kilua.externals
 
-import js.core.JsAny
 import web.dom.Element
+import kotlin.js.JsAny
 
 /**
  * Internal Editor class.

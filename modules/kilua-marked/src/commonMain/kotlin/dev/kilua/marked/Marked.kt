@@ -26,7 +26,7 @@ import dev.kilua.externals.MarkedOptionsJs
 import dev.kilua.externals.parse
 import dev.kilua.externals.use
 import dev.kilua.utils.obj
-import js.core.JsAny
+import kotlin.js.JsAny
 
 /**
  * Marked parser options.

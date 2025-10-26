@@ -29,9 +29,9 @@ import dev.kilua.externals.leaflet.core.Handler
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geometry.Point
 import dev.kilua.externals.leaflet.layer.Layer
-import js.core.JsAny
-import kotlin.js.JsModule
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 /**

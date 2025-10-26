@@ -25,6 +25,7 @@ package dev.kilua.html
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.test.normalizeHtml
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -45,7 +46,7 @@ class ScriptSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<script class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;"></script>"""),
-                normalizeHtml(root.element.innerHTML),
+                normalizeHtml(root.element.innerHTML.asStringOrNull()),
                 "Should render an HTML Script tag to DOM"
             )
         }

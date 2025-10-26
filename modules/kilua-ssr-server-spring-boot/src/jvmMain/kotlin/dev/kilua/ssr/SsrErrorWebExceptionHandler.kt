@@ -24,10 +24,10 @@ package dev.kilua.ssr
 
 import kotlinx.coroutines.reactor.mono
 import org.springframework.beans.factory.ObjectProvider
-import org.springframework.boot.autoconfigure.web.ServerProperties
 import org.springframework.boot.autoconfigure.web.WebProperties
-import org.springframework.boot.autoconfigure.web.reactive.error.DefaultErrorWebExceptionHandler
-import org.springframework.boot.web.reactive.error.ErrorAttributes
+import org.springframework.boot.web.server.autoconfigure.ServerProperties
+import org.springframework.boot.webflux.autoconfigure.error.DefaultErrorWebExceptionHandler
+import org.springframework.boot.webflux.error.ErrorAttributes
 import org.springframework.context.ApplicationContext
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus

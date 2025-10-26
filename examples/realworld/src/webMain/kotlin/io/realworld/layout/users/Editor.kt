@@ -114,7 +114,7 @@ fun IComponent.editorPage(state: ConduitState, conduitManager: ConduitManager) {
                                     )
                                 } else {
                                     conduitManager.updateArticle(
-                                        state.editedArticle?.slug!!,
+                                        state.editedArticle.slug,
                                         titleInput.value,
                                         descriptionInput.value,
                                         bodyInput.value,

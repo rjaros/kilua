@@ -28,6 +28,7 @@ import dev.kilua.html.pt
 import dev.kilua.test.DomSpec
 import kotlinx.coroutines.delay
 import web.dom.document
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class ModalSpec : DomSpec {
@@ -68,7 +69,7 @@ class ModalSpec : DomSpec {
             </div>
             </div>
             </div>""",
-            document.querySelector(".modal")?.outerHTML,
+            document.querySelector(".modal")?.outerHTML?.asStringOrNull(),
             "Should render a Modal component to DOM"
         )
     }

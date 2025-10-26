@@ -26,6 +26,7 @@ import dev.kilua.compose.root
 import dev.kilua.html.p
 import dev.kilua.test.DomSpec
 import kotlinx.coroutines.delay
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class AccordionSpec : DomSpec {
@@ -91,8 +92,8 @@ Item 3
 </div>
 </div>
 </div>""".replace(Regex("sid=\\d+"), "sid=0").replace(Regex("kilua_accordion_[0-9]*"), "kilua_accordion_0"),
-            root.element.innerHTML.replace(Regex("sid=\\d+"), "sid=0")
-                .replace(Regex("kilua_accordion_[0-9]*"), "kilua_accordion_0"),
+            root.element.innerHTML.asStringOrNull()?.replace(Regex("sid=\\d+"), "sid=0")
+                ?.replace(Regex("kilua_accordion_[0-9]*"), "kilua_accordion_0"),
             "Should render an Accordion component to DOM"
         )
     }

@@ -27,6 +27,7 @@ import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.layer.FeatureGroup
 import dev.kilua.html.px
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import web.window.window
 import kotlin.test.Test
 
@@ -109,7 +110,7 @@ Leaflet
 </div>
 </div>
 </div>""",
-            root.element.innerHTML,
+            root.element.innerHTML.asStringOrNull(),
             "Should render a Leaflet map component with a marker"
         )
     }

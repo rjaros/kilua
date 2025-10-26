@@ -23,9 +23,9 @@
 
 package dev.kilua.externals
 
-import kotlin.js.JsModule
-import js.core.JsAny
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 
 /**
  * External Bootstrap object.

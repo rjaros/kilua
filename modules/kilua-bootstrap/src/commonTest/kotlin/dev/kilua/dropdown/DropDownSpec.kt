@@ -28,6 +28,7 @@ import dev.kilua.html.a
 import dev.kilua.html.hr
 import dev.kilua.html.li
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class DropDownSpec : DomSpec {
@@ -70,7 +71,7 @@ Link 2
 </li>
 </ul>
 </div>""",
-            root.element.innerHTML,
+            root.element.innerHTML.asStringOrNull(),
             "Should render a Bootstrap dropdown component to DOM"
         )
     }

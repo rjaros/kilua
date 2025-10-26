@@ -29,9 +29,9 @@ import dev.kilua.externals.leaflet.geometry.Point
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.DivOverlay.DivOverlayOptions
 import dev.kilua.externals.leaflet.map.LeafletMap
-import js.core.JsAny
-import kotlin.js.JsModule
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 public open external class DivOverlay<T : DivOverlayOptions>(

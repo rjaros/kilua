@@ -30,9 +30,6 @@ import dev.kilua.utils.jsSet
 import dev.kilua.utils.keys
 import dev.kilua.utils.obj
 import dev.kilua.utils.unsafeCast
-import js.core.JsAny
-import js.core.JsPrimitives.toJsString
-import js.core.JsString
 import js.json.parse
 import js.json.stringify
 import js.objects.ReadonlyRecord
@@ -49,6 +46,9 @@ import web.http.RequestInit
 import web.http.Response
 import web.http.fetchAsync
 import web.url.URLSearchParams
+import kotlin.js.JsAny
+import kotlin.js.JsString
+import kotlin.js.toJsString
 
 
 /**

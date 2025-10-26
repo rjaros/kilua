@@ -30,6 +30,7 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.atTime
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -52,7 +53,7 @@ class DateTimeSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="datetime-local" name="date" min="2023-10-14T00:00" max="2023-10-16T00:00" step="60" value="2023-10-15T12:30">"""),
-                normalizeHtml(root.element.innerHTML),
+                normalizeHtml(root.element.innerHTML.asStringOrNull()),
                 "Should render date and time input element to DOM"
             )
         }

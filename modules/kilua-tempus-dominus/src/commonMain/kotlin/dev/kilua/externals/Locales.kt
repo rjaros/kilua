@@ -25,7 +25,7 @@
 package dev.kilua.externals
 
 import dev.kilua.utils.nativeMapOf
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
 

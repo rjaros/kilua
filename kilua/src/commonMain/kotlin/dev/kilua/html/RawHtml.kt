@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
+import web.html.HtmlSource
 
 /**
  * HTML Span component with raw HTML content.
@@ -41,12 +42,12 @@ public open class RawHtml(
         display = Display.Contents
         if (renderConfig.isDom) {
             @Suppress("LeakingThis")
-            element.innerHTML = rawHtml
+            element.innerHTML = HtmlSource(rawHtml)
         }
     }
 
     public var rawHtml: String by updatingProperty(rawHtml) {
-        element.innerHTML = it
+        element.innerHTML = HtmlSource(it)
     }
 
     override fun renderToStringBuilder(builder: StringBuilder) {

@@ -24,6 +24,7 @@ package dev.kilua.html
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class BsButtonSpec : DomSpec {
@@ -35,7 +36,7 @@ class BsButtonSpec : DomSpec {
         }
         assertEqualsHtml(
             """<button type="button" class="btn btn-primary icon-link"><i class="fas fa-home"></i> A button</button>""",
-            root.element.innerHTML,
+            root.element.innerHTML.asStringOrNull(),
             "Should render a Bootstrap button component to DOM"
         )
     }

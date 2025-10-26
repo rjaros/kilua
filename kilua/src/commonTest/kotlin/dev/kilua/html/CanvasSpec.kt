@@ -24,8 +24,9 @@ package dev.kilua.html
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
-import js.core.JsPrimitives.toJsString
+import web.html.asStringOrNull
 import web.images.ImageData
+import kotlin.js.toJsString
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -41,7 +42,7 @@ class CanvasSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<canvas class="test" width="300" height="200" id="test-id"></canvas>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an HTML Canvas tag to DOM"
             )
         }

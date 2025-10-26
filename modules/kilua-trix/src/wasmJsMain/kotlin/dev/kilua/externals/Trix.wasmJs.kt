@@ -24,8 +24,6 @@
 
 package dev.kilua.externals
 
-import js.core.JsAny
-
 /**
  * Native JS Trix toolbar object.
  */

@@ -36,9 +36,9 @@ import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.unsafeCast
-import js.core.JsPrimitives.toJsString
 import web.events.Event
 import web.html.HTMLInputElement
+import kotlin.js.toJsString
 
 /**
  * Tri-state CheckBox input component.

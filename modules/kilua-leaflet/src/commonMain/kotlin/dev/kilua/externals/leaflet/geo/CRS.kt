@@ -28,8 +28,8 @@ import dev.kilua.externals.leaflet.core.Class
 import dev.kilua.externals.leaflet.geometry.Bounds
 import dev.kilua.externals.leaflet.geometry.Point
 import js.array.Tuple2
-import js.core.JsAny
 import js.core.JsNumber
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 
 /**

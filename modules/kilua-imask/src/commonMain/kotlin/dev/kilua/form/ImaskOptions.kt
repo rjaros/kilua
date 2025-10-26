@@ -29,19 +29,19 @@ import dev.kilua.externals.ImaskOptionsJs
 import dev.kilua.externals.NumberMaskOptionsJs
 import dev.kilua.externals.PatternMaskOptionsJs
 import dev.kilua.externals.RangeMaskOptionsJs
-import dev.kilua.utils.jsSet
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.assign
+import dev.kilua.utils.jsSet
 import dev.kilua.utils.obj
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.unsafeCast
-import js.core.JsAny
-import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsDouble
-import js.core.JsPrimitives.toJsString
 import js.regexp.RegExp
+import kotlin.js.JsAny
+import kotlin.js.toJsBoolean
+import kotlin.js.toJsString
 
 /**
  * Text input mask overwrite modes.

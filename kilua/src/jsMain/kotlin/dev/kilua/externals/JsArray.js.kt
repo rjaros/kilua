@@ -22,8 +22,6 @@
 
 package dev.kilua.externals
 
-import js.core.JsAny
-
 @JsName("Array")
 public actual external class JsArray<T : JsAny?> actual constructor() : JsAny {
     public actual val length: Int

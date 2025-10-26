@@ -33,9 +33,9 @@ import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.unsafeCast
-import js.core.JsPrimitives.toJsString
 import web.events.Event
 import web.html.HTMLInputElement
+import kotlin.js.toJsString
 
 /**
  * Type of the check input control (checkbox or radiobutton).

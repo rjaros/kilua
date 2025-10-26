@@ -23,7 +23,7 @@
 
 package dev.kilua
 
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 
 @JsModule("zzz-kilua-assets/k-jetpack.css")

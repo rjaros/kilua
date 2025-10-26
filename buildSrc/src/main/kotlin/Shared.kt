@@ -33,7 +33,7 @@ fun KotlinMultiplatformExtension.compilerOptions(withWasmMetadata: Boolean = tru
                     freeCompilerArgs.add("-Xexpect-actual-classes")
                     freeCompilerArgs.add("-Xdont-warn-on-error-suppression")
                     optIn.add("kotlin.time.ExperimentalTime")
-                    if (targetName == "wasmJs" || (withWasmMetadata && targetName == "metadata")) {
+                    if (targetName == "wasmJs" || targetName == "js" || (withWasmMetadata && targetName == "metadata")) {
                         optIn.add("kotlin.js.ExperimentalWasmJsInterop")
                     }
                 }

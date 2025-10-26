@@ -26,7 +26,7 @@ package dev.kilua.externals.leaflet.layer.marker
 
 import dev.kilua.externals.leaflet.geometry.Point
 import dev.kilua.externals.leaflet.layer.marker.DivIcon.DivIconOptions
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
 

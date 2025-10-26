@@ -24,6 +24,7 @@ package dev.kilua.html
 
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class ASpec : DomSpec {
@@ -41,7 +42,7 @@ class ASpec : DomSpec {
             }
             assertEqualsHtml(
                 """<a class="test" href="https://google.com" target="_blank" id="test-id" title="A title" aria-label="A title" data-test="test">A link</a>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an HTML A tag to DOM"
             )
         }

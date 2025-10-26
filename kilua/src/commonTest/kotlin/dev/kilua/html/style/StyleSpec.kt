@@ -24,6 +24,7 @@ package dev.kilua.html.style
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class StyleSpec : DomSpec {
@@ -36,7 +37,7 @@ class StyleSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<style>.test { }</style>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an HTML Style tag to DOM"
             )
         }

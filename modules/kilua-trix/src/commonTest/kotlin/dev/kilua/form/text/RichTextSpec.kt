@@ -24,6 +24,7 @@ package dev.kilua.form.text
 
 import dev.kilua.compose.root
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -35,8 +36,8 @@ class RichTextSpec : DomSpec {
             val root = root("test") {
                 richText("Some text", placeholder = "A placeholder")
             }
-            val innerHTML = root.element.innerHTML.replace(Regex("input=\"[^\"]*\""), "input=\"id_input\"")
-                .replace(Regex("toolbar=\"[^\"]*\""), "toolbar=\"id_toolbar\"")
+            val innerHTML = root.element.innerHTML.asStringOrNull()?.replace(Regex("input=\"[^\"]*\""), "input=\"id_input\"")
+                ?.replace(Regex("toolbar=\"[^\"]*\""), "toolbar=\"id_toolbar\"") ?: ""
             assertTrue(innerHTML.contains("<input"), "Should render hidden input element")
             assertTrue(innerHTML.contains("<trix-toolbar"), "Should render trix toolbar element")
             assertTrue(

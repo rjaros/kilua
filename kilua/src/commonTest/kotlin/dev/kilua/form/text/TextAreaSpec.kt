@@ -22,11 +22,10 @@
 
 package dev.kilua.form.text
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.test.normalizeHtml
+import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class TextAreaSpec : DomSpec {
 
@@ -42,7 +41,7 @@ class TextAreaSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<textarea cols="12" rows="13" name="test" maxlength="200" placeholder="A placeholder" autofocus readonly wrap="hard"></textarea>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render html area element to DOM"
             )
         }

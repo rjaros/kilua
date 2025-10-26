@@ -22,13 +22,13 @@
 
 package dev.kilua.utils
 
-import js.core.JsAny
 import js.coroutines.asPromise
 import js.promise.Promise
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
+import kotlin.js.JsAny
 
 /**
  * Kilua coroutine scope.

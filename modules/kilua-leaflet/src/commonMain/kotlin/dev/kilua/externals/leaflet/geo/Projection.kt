@@ -26,7 +26,7 @@ package dev.kilua.externals.leaflet.geo
 
 import dev.kilua.externals.leaflet.geometry.Bounds
 import dev.kilua.externals.leaflet.geometry.Point
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 
 /**

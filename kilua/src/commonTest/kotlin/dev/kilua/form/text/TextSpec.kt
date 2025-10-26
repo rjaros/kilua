@@ -22,11 +22,10 @@
 
 package dev.kilua.form.text
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.test.normalizeHtml
+import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class TextSpec : DomSpec {
 
@@ -41,7 +40,7 @@ class TextSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<input type="text" name="test" maxlength="200" placeholder="A placeholder" autofocus="" readonly="">""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render text element to DOM"
             )
         }

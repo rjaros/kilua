@@ -26,6 +26,7 @@ import dev.kilua.compose.root
 import dev.kilua.html.p
 import dev.kilua.test.DomSpec
 import kotlinx.coroutines.delay
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class CarouselSpec : DomSpec {
@@ -103,8 +104,8 @@ Next
 </span>
 </button>
 </div>""".replace(Regex("sid=\\d+"), "sid=0").replace(Regex("kilua_carousel_[0-9]*"), "kilua_carousel_0"),
-            root.element.innerHTML.replace(Regex("sid=\\d+"), "sid=0")
-                .replace(Regex("kilua_carousel_[0-9]*"), "kilua_carousel_0"),
+            root.element.innerHTML.asStringOrNull()?.replace(Regex("sid=\\d+"), "sid=0")
+                ?.replace(Regex("kilua_carousel_[0-9]*"), "kilua_carousel_0"),
             "Should render an Carousel component to DOM"
         )
     }

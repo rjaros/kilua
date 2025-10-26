@@ -23,13 +23,13 @@
 package io.realworld
 
 import app.softwork.routingcompose.Router
+import dev.kilua.externals.JsArray
 import dev.kilua.html.Color
 import dev.kilua.progress.Progress
 import dev.kilua.progress.ProgressOptions
 import dev.kilua.rest.RemoteRequestException
 import dev.kilua.routing.global
 import dev.kilua.ssr.getSsrState
-import dev.kilua.externals.JsArray
 import dev.kilua.utils.isDom
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.keys
@@ -37,8 +37,6 @@ import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
 import io.realworld.model.Article
 import io.realworld.model.User
-import js.core.JsAny
-import js.core.JsString
 import js.json.parse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,6 +51,21 @@ import kotlinx.serialization.json.Json
 import web.console.console
 import web.http.text
 import web.storage.localStorage
+import kotlin.Boolean
+import kotlin.Exception
+import kotlin.Int
+import kotlin.String
+import kotlin.Unit
+import kotlin.collections.List
+import kotlin.collections.emptyList
+import kotlin.collections.listOf
+import kotlin.collections.map
+import kotlin.collections.mutableListOf
+import kotlin.collections.toList
+import kotlin.js.JsAny
+import kotlin.js.JsString
+import kotlin.let
+import kotlin.text.split
 
 const val JWT_TOKEN = "jwtToken"
 
@@ -406,7 +419,7 @@ class ConduitManager : TokenProvider {
     }
 
     override fun getJwtToken(): String? {
-        return if (isDom) localStorage.getItem(JWT_TOKEN)?.toString() else null
+        return if (isDom) localStorage.getItem(JWT_TOKEN) else null
     }
 
     private fun saveJwtToken(token: String) {

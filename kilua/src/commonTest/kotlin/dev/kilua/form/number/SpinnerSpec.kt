@@ -22,9 +22,9 @@
 
 package dev.kilua.form.number
 
-import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
-import dev.kilua.test.normalizeHtml
+import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -40,7 +40,7 @@ class SpinnerSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<input type="number" name="test" min="10" max="20" step="1" autofocus="">""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render spinner input element to DOM"
             )
         }

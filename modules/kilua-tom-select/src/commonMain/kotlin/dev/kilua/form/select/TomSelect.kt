@@ -29,9 +29,9 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
+import dev.kilua.externals.JsArray
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
-import dev.kilua.utils.jsGet
 import dev.kilua.form.StringFormControl
 import dev.kilua.html.ITag
 import dev.kilua.html.Tag
@@ -40,22 +40,22 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.externals.JsArray
 import dev.kilua.utils.StringPair
 import dev.kilua.utils.assign
 import dev.kilua.utils.cast
 import dev.kilua.utils.clear
+import dev.kilua.utils.jsGet
 import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import js.core.JsAny
-import js.core.JsPrimitives.toJsString
-import js.core.JsString
 import web.dom.document
 import web.html.HTMLOptionElement
 import web.html.HTMLSelectElement
+import kotlin.js.JsAny
+import kotlin.js.JsString
+import kotlin.js.toJsString
 
 /**
  * Tom Select component.

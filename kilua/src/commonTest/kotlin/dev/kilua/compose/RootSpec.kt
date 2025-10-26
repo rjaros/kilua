@@ -39,6 +39,7 @@ import dev.kilua.html.px
 import dev.kilua.test.DomSpec
 import dev.kilua.test.normalizeHtml
 import kotlinx.coroutines.delay
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -86,7 +87,7 @@ class RootSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<div id="test"><div class="a_class" id="main" custom="value" style="text-align: center; border: 1px dotted red; padding-top: 2px;"><div>Some content</div><button type="submit">A button</button></div></div>"""),
-                normalizeHtml(root.element.outerHTML),
+                normalizeHtml(root.element.outerHTML.asStringOrNull()),
                 "Should render root element with some content to DOM"
             )
         }
@@ -137,7 +138,7 @@ class RootSpec : DomSpec {
         delay(100)
         assertEquals(
             normalizeHtml("""<div>Counter: 2<button type="button">Increment</button></div>"""),
-            normalizeHtml(root.element.innerHTML),
+            normalizeHtml(root.element.innerHTML.asStringOrNull()),
             "Should recompose DOM nodes when state changes"
         )
     }

@@ -34,9 +34,9 @@ import dev.kilua.externals.leaflet.layer.overlay.Popup.PopupOptions
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip.TooltipOptions
 import dev.kilua.externals.leaflet.map.LeafletMap
-import js.core.JsAny
-import kotlin.js.JsModule
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 /**

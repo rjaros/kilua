@@ -68,9 +68,9 @@ import dev.kilua.externals.leaflet.map.LeafletMap
 import dev.kilua.externals.leaflet.map.LeafletMap.LeafletMapOptions
 import dev.kilua.utils.obj
 import dev.kilua.utils.toJsArray
-import js.core.JsPrimitives.toJsString
 import web.html.HTMLElement
 import web.html.HTMLVideoElement
+import kotlin.js.toJsString
 
 /**
  * Leaflet constructors.

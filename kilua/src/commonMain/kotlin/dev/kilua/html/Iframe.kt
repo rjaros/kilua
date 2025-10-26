@@ -30,6 +30,7 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.toKebabCase
 import web.html.HTMLIFrameElement
+import web.html.HtmlSource
 
 /**
  * Iframe sandbox options.
@@ -161,7 +162,7 @@ public open class Iframe(
      */
     public override var srcdoc: String? by updatingProperty(srcdoc) {
         if (it != null) {
-            element.srcdoc = it
+            element.srcdoc = HtmlSource(it)
         } else {
             element.removeAttribute("srcdoc")
         }
@@ -263,7 +264,7 @@ public open class Iframe(
             }
             if (srcdoc != null) {
                 @Suppress("LeakingThis")
-                element.srcdoc = srcdoc
+                element.srcdoc = HtmlSource(srcdoc)
             }
             if (name != null) {
                 @Suppress("LeakingThis")

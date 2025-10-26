@@ -28,7 +28,7 @@ import dev.kilua.form.Autocomplete
 import dev.kilua.html.IDiv
 import dev.kilua.i18n.Locale
 import kotlinx.datetime.LocalDate
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.time.Duration
 
 /**

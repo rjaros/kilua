@@ -26,6 +26,7 @@ import dev.kilua.compose.root
 import dev.kilua.html.perc
 import dev.kilua.html.px
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class SvgSpec : DomSpec {
@@ -49,7 +50,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><animate></animate><animateMotion></animateMotion><animateTransform></animateTransform><defs></defs><filter></filter><g></g><marker></marker><mpath></mpath><switch></switch><tspan></tspan></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an SVG nodes to DOM"
             )
         }
@@ -92,7 +93,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><clipPath id="myClip"><circle cx="40px" cy="35px" r="36px"></circle></clipPath></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a clipPath node to DOM"
             )
         }
@@ -109,7 +110,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><mask id="myMask"></mask></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a mask node to DOM"
             )
         }
@@ -127,7 +128,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><a href="/docs/Web/SVG/Element/circle" target="_blank"></a></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an a node to DOM"
             )
         }
@@ -145,7 +146,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><desc id="myDesc">some description</desc></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a desc node to DOM"
             )
         }
@@ -166,7 +167,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><rect x="0" y="0" style="width: 10px; height: 10px;"><set attributeName="class" to="round" begin="me.click" dur="2s"></set></rect></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a set node to DOM"
             )
         }
@@ -184,7 +185,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><rect x="10" y="20" style="width: 30px; height: 30px;"><title>some title</title></rect></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a title node to DOM"
             )
         }
@@ -202,7 +203,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><text x="20" y="30" class="small">some text</text></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a text node to DOM"
             )
         }
@@ -218,7 +219,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><textPath href="#someHref">Some text</textPath></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a textPath node to DOM"
             )
         }
@@ -239,7 +240,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><ellipse class="myClass" cx="50" cy="60" rx="70" ry="20" color="yellow"></ellipse><ellipse cx="50px" cy="60px" rx="70%" ry="20px" color="red"></ellipse></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an ellipse node to DOM"
             )
         }
@@ -281,7 +282,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><circle cx="50" cy="60" r="70" color="red"></circle><circle cx="50px" cy="60px" r="70%" color="red"></circle></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a circle node to DOM"
             )
         }
@@ -302,7 +303,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><rect x="0" y="20" style="width: 100px; height: 200px;" color="red"></rect><rect x="0px" y="20px" style="width: 100px; height: 200px;" color="red"></rect></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a rect node to DOM"
             )
         }
@@ -320,7 +321,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><image href="/image.png" preserveAspectRatio="xMidYMid meet"></image></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an image node to DOM"
             )
         }
@@ -341,7 +342,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><line x1="0" y1="80" x2="100" y2="20" stroke="red"></line><line x1="0px" y1="80px" x2="100px" y2="20px" stroke="black"></line></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a line node to DOM"
             )
         }
@@ -359,7 +360,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><polyline points="0,100 50,25 50,75 100,0" stroke="red"></polyline></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a polyline node to DOM"
             )
         }
@@ -377,7 +378,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><polygon points="0,100 50,25 50,75 100,0" stroke="red"></polygon></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a polygon node to DOM"
             )
         }
@@ -402,7 +403,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><linearGradient id="myGradient"><stop offset="10%" stop-color="gold"></stop><stop offset="95%" stop-color="red"></stop></linearGradient></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a linearGradient node to DOM"
             )
         }
@@ -427,7 +428,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><radialGradient id="myGradient"><stop offset="10%" stop-color="gold"></stop><stop offset="95%" stop-color="red"></stop></radialGradient></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a radialGradient node to DOM"
             )
         }
@@ -447,7 +448,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><pattern id="myPattern"><polygon points="0,100 50,25 50,75 100,0" stroke="red"></polygon></pattern></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a pattern node to DOM"
             )
         }
@@ -463,7 +464,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><view id="one" viewBox="0 0 100 100"></view></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a view node to DOM"
             )
         }
@@ -479,7 +480,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><path d="M 10,30 A 20,20 0,0,1 50,30 A 20,20 0,0,1 90,30 Q 90,60 50,90 Q 10,60 10,30 z"></path></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a path node to DOM"
             )
         }
@@ -505,7 +506,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><symbol id="myDot" width="10" height="10" viewBox="0 0 2 2"><circle cx="1px" cy="1px" r="1px"></circle></symbol><use style="opacity: 1;" href="myDot" x="5" y="5"></use></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render a use node to DOM"
             )
         }
@@ -525,7 +526,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg><circle cx="12px" cy="22px" r="5%"></circle></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an SVG element to DOM"
             )
         }
@@ -539,7 +540,7 @@ class SvgSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<svg viewBox="0 0 200 200"></svg>""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render an SVG element with viewBox to DOM"
             )
         }

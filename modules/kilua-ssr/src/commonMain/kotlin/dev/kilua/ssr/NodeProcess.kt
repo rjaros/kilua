@@ -24,8 +24,8 @@ package dev.kilua.ssr
 
 import dev.kilua.externals.JsArray
 import dev.kilua.utils.toList
-import js.core.JsAny
-import js.core.JsString
+import kotlin.js.JsAny
+import kotlin.js.JsString
 
 /**
  * Node.js HTTP server.

@@ -28,9 +28,9 @@ import dev.kilua.externals.JsArray
 import dev.kilua.externals.leaflet.geo.LatLngBounds
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.ImageOverlay.ImageOverlayOptions
-import js.core.JsString
-import kotlin.js.JsModule
 import web.html.HTMLVideoElement
+import kotlin.js.JsModule
+import kotlin.js.JsString
 import kotlin.js.definedExternally
 
 public open external class VideoOverlay : Layer<VideoOverlay.VideoOverlayOptions>, MediaOverlay {

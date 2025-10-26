@@ -30,10 +30,10 @@ import dev.kilua.core.SafeDomFactory
 import dev.kilua.externals.CellComponent
 import dev.kilua.externals.CellComponentBase
 import dev.kilua.externals.ColumnComponent
+import dev.kilua.externals.JsArray
 import dev.kilua.externals.RowComponent
 import dev.kilua.externals.TabulatorMenuItem
 import dev.kilua.externals.toJsAny
-import dev.kilua.externals.JsArray
 import dev.kilua.utils.cast
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
@@ -43,14 +43,11 @@ import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
-import js.core.JsAny
 import js.core.JsInt
 import js.core.JsNumber
 import js.core.JsPrimitives.toInt
-import js.core.JsPrimitives.toJsBoolean
 import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsInt
-import js.core.JsPrimitives.toJsString
 import js.promise.Promise
 import web.cssom.ClassName
 import web.dom.Element
@@ -61,6 +58,9 @@ import web.storage.localStorage
 import web.timers.clearTimeout
 import web.timers.setTimeout
 import web.window.window
+import kotlin.js.JsAny
+import kotlin.js.toJsBoolean
+import kotlin.js.toJsString
 import kotlin.js.undefined
 import kotlin.reflect.KClass
 

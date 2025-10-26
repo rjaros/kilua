@@ -24,6 +24,7 @@ package dev.kilua.form.upload
 
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class UploadSpec : DomSpec {
@@ -38,7 +39,7 @@ class UploadSpec : DomSpec {
             }
             assertEqualsHtml(
                 """<input type="file" name="test" multiple="" accept="text/plain,image/*" autofocus="">""",
-                root.element.innerHTML,
+                root.element.innerHTML.asStringOrNull(),
                 "Should render file input element to DOM"
             )
         }

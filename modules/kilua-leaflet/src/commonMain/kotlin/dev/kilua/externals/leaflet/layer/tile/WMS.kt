@@ -27,7 +27,7 @@
 package dev.kilua.externals.leaflet.layer.tile
 
 import dev.kilua.externals.leaflet.geo.CRS
-import js.core.JsAny
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 import kotlin.js.JsQualifier
 import kotlin.js.definedExternally

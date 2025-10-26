@@ -57,12 +57,12 @@ import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.unsafeCast
-import js.core.JsAny
-import js.core.JsPrimitives.toJsString
 import js.globals.globalThis
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
+import kotlin.js.JsAny
+import kotlin.js.toJsString
 
 /**
  * A router supporting Server-Side Rendering (SSR).

@@ -25,6 +25,7 @@ package dev.kilua.html
 import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.test.normalizeHtml
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -45,7 +46,7 @@ class H6Spec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<h6 class="test" id="test-id" title="A title" aria-label="A title" data-test="test" style="margin: 10px; display: flex;">Lorem ipsum</h6>"""),
-                normalizeHtml(root.element.innerHTML),
+                normalizeHtml(root.element.innerHTML.asStringOrNull()),
                 "Should render an HTML H6 tag to DOM"
             )
         }

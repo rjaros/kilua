@@ -39,8 +39,8 @@ import dev.kilua.externals.leaflet.layer.vector.Polygon
 import dev.kilua.externals.leaflet.layer.vector.Polyline
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
-import js.core.JsAny
 import web.html.HTMLElement
+import kotlin.js.JsAny
 
 /**
  * See [`Map.js#L1124`](https://github.com/Leaflet/Leaflet/blob/v1.8.0/src/map/Map.js#L1124)

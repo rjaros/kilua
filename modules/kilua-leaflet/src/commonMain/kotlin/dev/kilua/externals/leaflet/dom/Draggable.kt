@@ -26,9 +26,9 @@
 package dev.kilua.externals.leaflet.dom
 
 import dev.kilua.externals.leaflet.events.Evented
-import js.core.JsAny
-import kotlin.js.JsModule
 import web.html.HTMLElement
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 /**

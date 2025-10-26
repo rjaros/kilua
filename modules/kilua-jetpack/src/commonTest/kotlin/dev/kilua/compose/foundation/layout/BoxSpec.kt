@@ -29,6 +29,7 @@ import dev.kilua.compose.ui.className
 import dev.kilua.compose.ui.size
 import dev.kilua.html.px
 import dev.kilua.test.DomSpec
+import web.html.asStringOrNull
 import kotlin.test.Test
 
 class BoxSpec : DomSpec {
@@ -47,7 +48,7 @@ class BoxSpec : DomSpec {
         }
         assertEqualsHtml(
             """<div class="kilua-jetpack-box a_class" style="place-items: center;"><div class="kilua-jetpack-box" style="place-items: start; place-self: start end;">Some text1</div><div class="kilua-jetpack-box" style="place-items: start; width: 100px; height: 100px; place-self: center end;">Some text2</div></div>""",
-            root.element.innerHTML,
+            root.element.innerHTML.asStringOrNull(),
             "Should render a Box with some children"
         )
     }

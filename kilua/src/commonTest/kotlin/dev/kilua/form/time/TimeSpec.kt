@@ -26,6 +26,7 @@ import dev.kilua.test.DomSpec
 import dev.kilua.compose.root
 import dev.kilua.test.normalizeHtml
 import kotlinx.datetime.LocalTime
+import web.html.asStringOrNull
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -47,7 +48,7 @@ class TimeSpec : DomSpec {
             }
             assertEquals(
                 normalizeHtml("""<input type="time" name="time" min="12:00" max="12:50" step="60" value="12:30">"""),
-                normalizeHtml(root.element.innerHTML),
+                normalizeHtml(root.element.innerHTML.asStringOrNull()),
                 "Should render time input element to DOM"
             )
         }
