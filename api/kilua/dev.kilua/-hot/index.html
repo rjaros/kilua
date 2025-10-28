@@ -39,12 +39,13 @@
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.0.27
+        <div class="library-version" id="library-version">0.0.28
         </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":kilua/commonMain">common</button>
                 <button class="platform-tag platform-selector js-like" data-active="" aria-pressed="true" data-filter=":kilua/jsMain">js</button>
+                <button class="platform-tag platform-selector wasm-like" data-active="" aria-pressed="true" data-filter=":kilua/wasmJsMain">wasmJs</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
                 <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
@@ -65,6 +66,13 @@
                                 <input type="checkbox" class="checkbox--input" id=":kilua/jsMain" data-filter=":kilua/jsMain">
                                 <span class="checkbox--icon"></span>
                                 js
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option wasm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kilua/wasmJsMain" data-filter=":kilua/wasmJsMain">
+                                <span class="checkbox--icon"></span>
+                                wasmJs
                             </label>
                         </li>
                 </ul>
@@ -102,7 +110,7 @@
   <div class="breadcrumbs"><a href="../../index.html">kilua</a><span class="delimiter">/</span><a href="../index.html">dev.kilua</a><span class="delimiter">/</span><span class="current">Hot</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Hot</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">Hot</a> : <span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/commonMain/kotlin/dev/kilua/HMR.kt#L44">source</a>)</span></span></div><p class="paragraph">Helper interface for Hot Module Replacement (HMR).</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">Hot</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/rjaros/kilua/tree/main/kilua/src/commonMain/kotlin/dev/kilua/HMR.kt#L44">source</a>)</span></span></div><p class="paragraph">Helper interface for Hot Module Replacement (HMR).</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
@@ -158,49 +166,49 @@
               </div>
             </div>
           </div>
-<a data-name="-1659358077%2FFunctions%2F-787921261" anchor-label="jsGet" id="-1659358077%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+<a data-name="-1620499567%2FFunctions%2F-787921261" anchor-label="jsGet" id="-1620499567%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
           <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.utils/js-get.html"><span>js</span><wbr><span><span>Get</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1659358077%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1620499567%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token punctuation">.</span><a href="../../dev.kilua.utils/js-get.html"><span class="token function">jsGet</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Function to get property from JS Object</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="token punctuation">.</span><a href="../../dev.kilua.utils/js-get.html"><span class="token function">jsGet</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Function to get property from JS Object</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="542029185%2FFunctions%2F-787921261" anchor-label="jsSet" id="542029185%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
+<a data-name="132001373%2FFunctions%2F-787921261" anchor-label="jsSet" id="132001373%2FFunctions%2F-787921261" data-filterable-set=":kilua/commonMain"></a>
           <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.utils/js-set.html"><span>js</span><wbr><span><span>Set</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="542029185%2FFunctions%2F-787921261"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="132001373%2FFunctions%2F-787921261"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token punctuation">.</span><a href="../../dev.kilua.utils/js-set.html"><span class="token function">jsSet</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Function to set property on JS Object</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="token punctuation">.</span><a href="../../dev.kilua.utils/js-set.html"><span class="token function">jsSet</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Function to set property on JS Object</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-452310104%2FFunctions%2F-717514226" anchor-label="unsafeCast" id="-452310104%2FFunctions%2F-717514226" data-filterable-set=":kilua/commonMain,:kilua/jsMain"></a>
-          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain,:kilua/jsMain" data-filterable-set=":kilua/commonMain,:kilua/jsMain">
+<a data-name="-342468052%2FFunctions%2F-1707745736" anchor-label="unsafeCast" id="-342468052%2FFunctions%2F-1707745736" data-filterable-set=":kilua/commonMain,:kilua/wasmJsMain,:kilua/jsMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kilua/commonMain,:kilua/wasmJsMain,:kilua/jsMain" data-filterable-set=":kilua/commonMain,:kilua/wasmJsMain,:kilua/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="../../dev.kilua.utils/unsafe-cast.html"><span>unsafe</span><wbr><span><span>Cast</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-452310104%2FFunctions%2F-717514226"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-342468052%2FFunctions%2F-1707745736"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain" data-active="" data-toggle=":kilua/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua/jsMain" data-filterable-set=":kilua/jsMain" data-toggle=":kilua/jsMain">js</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a><span class="token operator"> : </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">&gt; </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token punctuation">.</span><a href="../../dev.kilua.utils/unsafe-cast.html"><span class="token function">unsafeCast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a></div><div class="brief "><p class="paragraph">Utility extension function for unsafe casting. Uses unsafeCast() on JS and WasmJs.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a><span class="token operator"> : </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token operator">&gt; </span><span data-unresolved-link="js.core/JsAny///PointingToDeclaration/">JsAny</span><span class="token punctuation">.</span><a href="../../dev.kilua.utils/unsafe-cast.html"><span class="token function">unsafeCast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a></div></div>                  </div>
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kilua/commonMain" data-filterable-set=":kilua/commonMain" data-active="" data-toggle=":kilua/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kilua/jsMain" data-filterable-set=":kilua/jsMain" data-toggle=":kilua/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kilua/wasmJsMain" data-filterable-set=":kilua/wasmJsMain" data-toggle=":kilua/wasmJsMain">wasmJs</button></div>
+<div class="content sourceset-dependent-content" data-togglable=":kilua/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="token punctuation">.</span><a href="../../dev.kilua.utils/unsafe-cast.html"><span class="token function">unsafeCast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a></div><div class="brief "><p class="paragraph">Utility extension function for unsafe casting. Uses unsafeCast() on JS and WasmJs.</p></div></div><div class="content sourceset-dependent-content" data-active="" data-togglable=":kilua/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="token punctuation">.</span><a href="../../dev.kilua.utils/unsafe-cast.html"><span class="token function">unsafeCast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kilua/wasmJsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a><span class="token punctuation">.</span><a href="../../dev.kilua.utils/unsafe-cast.html"><span class="token function">unsafeCast</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.kilua.utils/unsafe-cast.html">T</a></div></div>                  </div>
                 </div>
               </div>
             </div>
