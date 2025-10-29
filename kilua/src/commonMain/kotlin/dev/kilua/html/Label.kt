@@ -28,6 +28,7 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
+import web.dom.ElementId
 import web.html.HTMLLabelElement
 
 /**
@@ -62,7 +63,7 @@ public open class Label(
      */
     public override var htmlFor: String? by updatingProperty(htmlFor, name = "for") {
         if (it != null) {
-            element.htmlFor = it
+            element.htmlFor = ElementId(it)
         } else {
             element.removeAttribute("for")
         }
@@ -82,7 +83,7 @@ public open class Label(
         if (renderConfig.isDom) {
             if (htmlFor != null) {
                 @Suppress("LeakingThis")
-                element.htmlFor = htmlFor
+                element.htmlFor = ElementId(htmlFor)
             }
         }
     }

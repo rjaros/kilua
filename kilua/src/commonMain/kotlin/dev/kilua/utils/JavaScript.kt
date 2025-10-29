@@ -28,6 +28,7 @@ import dev.kilua.externals.set
 import js.array.ArrayLike
 import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsInt
+import js.core.JsPrimitives.toKotlinString
 import js.objects.Object
 import js.objects.unsafeJso
 import js.reflect.Reflect
@@ -67,7 +68,7 @@ public fun JsAny.jsGet(key: String): JsAny? {
  * Get the list of keys from JS Object
  */
 public fun keys(o: JsAny): List<String> =
-    Object.keys(o).unsafeCast<JsArray<JsString>>().toArray<JsString>().asList().map { it.toString() }
+    Object.keys(o).unsafeCast<JsArray<JsString>>().toArray<JsString>().asList().map { it.toKotlinString() }
 
 /**
  * Copies all properties from source object to target object

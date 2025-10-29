@@ -45,9 +45,9 @@ import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
 import js.core.JsInt
 import js.core.JsNumber
-import js.core.JsPrimitives.toInt
 import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsInt
+import js.core.JsPrimitives.toKotlinInt
 import js.promise.Promise
 import web.cssom.ClassName
 import web.dom.Element
@@ -794,7 +794,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                                 EditorRoot.root = null
                                 EditorRoot.cancel = null
                                 null
-                            }, 500).unsafeCast<JsInt>().toInt()
+                            }, 500).unsafeCast<JsInt>().toKotlinInt()
                         }, cancel, data)
                     }
                     EditorRoot.cancel = cancel

@@ -27,6 +27,7 @@ import dev.kilua.externals.JsArray
 import dev.kilua.html.Tag
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
+import js.core.JsPrimitives.toKotlinString
 import web.dnd.DragEvent
 import web.html.HTMLElement
 import kotlin.Boolean
@@ -131,7 +132,7 @@ public open class TagDndDelegateImpl<E : HTMLElement>(
     @Composable
     public override fun setDropTarget(formats: Set<String>?, callback: (DragEvent) -> Unit) {
         dragOverId = tag.onEvent("dragover") { e: DragEvent ->
-            val types = e.dataTransfer?.types?.unsafeCast<JsArray<JsString>>()?.toList()?.map { it.toString() }?.toSet() ?: emptySet()
+            val types = e.dataTransfer?.types?.unsafeCast<JsArray<JsString>>()?.toList()?.map { it.toKotlinString() }?.toSet() ?: emptySet()
             if (formats == null || formats.intersect(types).isNotEmpty()) {
                 e.preventDefault()
             }

@@ -22,8 +22,8 @@
 
 package dev.kilua.utils
 
-import js.core.JsPrimitives.toDouble
 import js.core.JsPrimitives.toJsDouble
+import js.core.JsPrimitives.toKotlinDouble
 import js.date.Date
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -64,7 +64,7 @@ public fun LocalTime.toDate(): Date {
  * Converts JavaScript [Date] to [LocalDateTime].
  */
 public fun Date.toLocalDateTime(): LocalDateTime {
-    return Instant.fromEpochMilliseconds(getTime().toJsDouble().toDouble().toLong())
+    return Instant.fromEpochMilliseconds(getTime().toJsDouble().toKotlinDouble().toLong())
         .toLocalDateTime(TimeZone.currentSystemDefault())
 }
 

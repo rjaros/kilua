@@ -46,6 +46,7 @@ import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.unsafeCast
+import js.core.JsPrimitives.toKotlinString
 import web.dom.ElementId
 import web.dom.document
 import kotlin.js.JsAny
@@ -201,7 +202,7 @@ public open class TomTypeahead(
                 if (existingOption == null) {
                     tomSelectInstance?.clearOptions { option ->
                         option.jsGet("created")?.unsafeCast<JsBoolean>()?.toBoolean() != true ||
-                                option.jsGet("value")?.unsafeCast<JsString>()?.toString() == value
+                                option.jsGet("value")?.unsafeCast<JsString>()?.toKotlinString() == value
                     }
                     tomSelectInstance?.addOption(
                         jsObjectOf(
@@ -237,7 +238,7 @@ public open class TomTypeahead(
             val tomSelectOptions = obj<TomSelectOptionsJs> {
                 this.maxItems = 1
                 this.create = { input: JsString ->
-                    val oldValue = tomSelectInstance?.getValue()?.unsafeCast<JsString>()?.toString()?.ifBlank { null }
+                    val oldValue = tomSelectInstance?.getValue()?.unsafeCast<JsString>()?.toKotlinString()?.ifBlank { null }
                         ?.let { "$it " } ?: ""
                     jsObjectOf(
                         "value" to "$oldValue$input",
@@ -285,7 +286,7 @@ public open class TomTypeahead(
                 this.onOptionAdd = { value: String, _: JsAny ->
                     tomSelectInstance?.clearOptions { option: JsAny ->
                         option.jsGet("created")?.unsafeCast<JsBoolean>()?.toBoolean() != true ||
-                                option.jsGet("value")?.unsafeCast<JsString>()?.toString() == value
+                                option.jsGet("value")?.unsafeCast<JsString>()?.toKotlinString() == value
                     }
                 }
                 this.onFocus = {

@@ -48,8 +48,8 @@ import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.unsafeCast
 import js.core.JsInt
-import js.core.JsPrimitives.toInt
 import js.core.JsPrimitives.toJsInt
+import js.core.JsPrimitives.toKotlinInt
 import js.json.parse
 import js.json.stringify
 import kotlinx.serialization.KSerializer
@@ -295,10 +295,10 @@ public open class Tabulator<T : Any>(
             }
             tabulatorJs?.on("pageLoaded") { ->
                 registeredPaginationStateSetters.forEach {
-                    val currentPage = tabulatorJs?.getPage()?.unsafeCast<JsInt>()?.toInt() ?: 1
-                    val maxPages = tabulatorJs?.getPageMax()?.unsafeCast<JsInt>()?.toInt() ?: 1
+                    val currentPage = tabulatorJs?.getPage()?.unsafeCast<JsInt>()?.toKotlinInt() ?: 1
+                    val maxPages = tabulatorJs?.getPageMax()?.unsafeCast<JsInt>()?.toKotlinInt() ?: 1
                     val buttonCount = tabulatorJs?.options?.jsGet("paginationButtonCount")?.unsafeCast<JsInt>()
-                        ?.toInt() ?: 5
+                        ?.toKotlinInt() ?: 5
                     it(PaginationState(currentPage, maxPages, buttonCount))
                 }
                 dispatchEvent("pageLoaded", buildCustomEventInit())
@@ -318,7 +318,7 @@ public open class Tabulator<T : Any>(
                 val page = tabulatorJs?.getPage()
                 if (page != null && page != false.toJsBoolean()) {
                     pageSize = tabulatorJs?.getPageSize()
-                    currentPage = page.unsafeCast<JsInt>().toInt()
+                    currentPage = page.unsafeCast<JsInt>().toKotlinInt()
                 }
             }
             if (tabulatorJs != null) {

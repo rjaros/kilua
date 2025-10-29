@@ -98,7 +98,7 @@ class ViewModel {
         return localStorage.getItem("todos-kilua")?.let {
             json.decodeFromString(
                 ListSerializer(Todo.serializer()),
-                it.toString()
+                it
             )
         } ?: emptyList()
     }

@@ -31,7 +31,7 @@ class TodoSavedStateAdapter(private val json: Json, private val storage: Storage
             todos = storage.getItem("todos-kilua")?.let {
                 json.decodeFromString(
                     ListSerializer(Todo.serializer()),
-                    it.toString()
+                    it
                 )
             } ?: emptyList(), All
         )
