@@ -202,23 +202,23 @@
     "@types/send" "*"
 
 "@types/express@*":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@types/express/-/express-5.0.4.tgz#975e7fc1097066a83b992fd2bb8a4819622e8bae"
-  integrity sha512-g64dbryHk7loCIrsa0R3shBnEu5p6LPJ09bu9NG58+jz+cRUjFrc3Bz0kNQ7j9bXeCsrRDvNET1G54P/GJkAyA==
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@types/express/-/express-5.0.5.tgz#3ba069177caa34ab96585ca23b3984d752300cdc"
+  integrity sha512-LuIQOcb6UmnF7C1PCFmEU1u2hmiHL43fgFQX67sN3H4Z+0Yk0Neo++mFsBjhOAuLzvlQeqAAkeDOZrJs9rzumQ==
   dependencies:
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "^5.0.0"
-    "@types/serve-static" "*"
+    "@types/serve-static" "^1"
 
 "@types/express@^4.17.21":
-  version "4.17.24"
-  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.24.tgz#7d4be463143e9f2f146ef805a619076ce4aaec26"
-  integrity sha512-Mbrt4SRlXSTWryOnHAh2d4UQ/E7n9lZyGSi6KgX+4hkuL9soYbLOVXVhnk/ODp12YsGc95f4pOvqywJ6kngUwg==
+  version "4.17.25"
+  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.25.tgz#070c8c73a6fee6936d65c195dbbfb7da5026649b"
+  integrity sha512-dVd04UKsfpINUnK0yBoYHDF3xu7xVH4BuDotC/xGuycx4CgbP48X/KF/586bcObxT0HENHXEU8Nqtu6NR+eKhw==
   dependencies:
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "^4.17.33"
     "@types/qs" "*"
-    "@types/serve-static" "*"
+    "@types/serve-static" "^1"
 
 "@types/http-errors@*":
   version "2.0.5"
@@ -250,9 +250,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@>=10.0.0":
-  version "24.9.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.9.1.tgz#b7360b3c789089e57e192695a855aa4f6981a53c"
-  integrity sha512-QoiaXANRkSXK6p0Duvt56W208du4P9Uye9hWLWgGMDTEoKPhuenzNcC4vGUmrNkiOKTlIrBoyNQYNpSwfEZXSg==
+  version "24.9.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.9.2.tgz#90ded2422dbfcafcf72080f28975adc21366148d"
+  integrity sha512-uWN8YqxXxqFMX2RqGOrumsKeti4LlmIMIyV0lgut4jx7KQBcBiW6vkDtIBvHnHIquwNfJhk8v2OtmO8zXWHfPA==
   dependencies:
     undici-types "~7.16.0"
 
@@ -293,7 +293,7 @@
   dependencies:
     "@types/express" "*"
 
-"@types/serve-static@*", "@types/serve-static@^1.15.5":
+"@types/serve-static@^1", "@types/serve-static@^1.15.5":
   version "1.15.10"
   resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.15.10.tgz#768169145a778f8f5dfcb6360aead414a3994fee"
   integrity sha512-tRs1dB+g8Itk72rlSI2ZrW6vZg0YrLI81iQSTkMmOqnqCaNr/8Ek4VwWcN5vZgCYWbg/JJSGBlUaYGAOP73qBw==
@@ -565,9 +565,9 @@ base64id@2.0.0, base64id@~2.0.0:
   integrity sha512-lGe34o6EHj9y3Kts9R4ZYs/Gr+6N7MCaMlIFA3F1R2O5/m7K06AxfSeO5530PEERE6/WyEg3lsuyw4GHlPZHog==
 
 baseline-browser-mapping@^2.8.19:
-  version "2.8.20"
-  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.8.20.tgz#6766cf270f3668d20b6712b9c54cc911b87da714"
-  integrity sha512-JMWsdF+O8Orq3EMukbUN1QfbLK9mX2CkUmQBcW2T0s8OmdAUL5LLM/6wFwSrqXzlXB13yhyK9gTKS1rIizOduQ==
+  version "2.8.21"
+  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.8.21.tgz#2f9cccde871bfa4aec9dbf92d0ee746e4f1892e4"
+  integrity sha512-JU0h5APyQNsHOlAM7HnQnPToSDQoEBZqzu/YBlqDnEeymPnZDREeXJA3KBMQee+dKteAxZ2AtvQEvVYdZf241Q==
 
 batch@0.6.1:
   version "0.6.1"
@@ -1004,9 +1004,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.5.238:
-  version "1.5.240"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.240.tgz#bfd946570a723aa3754370065d02e23e30824774"
-  integrity sha512-OBwbZjWgrCOH+g6uJsA2/7Twpas2OlepS9uvByJjR2datRDuKGYeD+nP8lBBks2qnB7bGJNHDUx7c/YLaT3QMQ==
+  version "1.5.243"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.243.tgz#b13b4a046f49f46574d643d4e2ec2ea33ce8cfe7"
+  integrity sha512-ZCphxFW3Q1TVhcgS9blfut1PX8lusVi2SvXQgmEEnK4TCmE1JhH2JkjJN+DNt0pJJwfBri5AROBnz2b/C+YU9g==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -1789,9 +1789,9 @@ kotlin-web-helpers@3.0.0:
     format-util "^1.0.5"
 
 launch-editor@^2.6.1:
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/launch-editor/-/launch-editor-2.11.1.tgz#61a0b7314a42fd84a6cbb564573d9e9ffcf3d72b"
-  integrity sha512-SEET7oNfgSaB6Ym0jufAdCeo3meJVeCaaDyzRygy0xsp2BFKCprcfHljTq4QkzTLUxEKkFK6OK4811YM2oSrRg==
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/launch-editor/-/launch-editor-2.12.0.tgz#cc740f4e0263a6b62ead2485f9896e545321f817"
+  integrity sha512-giOHXoOtifjdHqUamwKq6c49GzBdLjvxrd2D+Q4V6uOHopJv7p9VJxikDsQ/CBXZbEITgUqSVHXLTG3VhPP1Dg==
   dependencies:
     picocolors "^1.1.1"
     shell-quote "^1.8.3"
@@ -1855,9 +1855,9 @@ media-typer@0.3.0:
   integrity sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==
 
 memfs@^4.43.1:
-  version "4.49.0"
-  resolved "https://registry.yarnpkg.com/memfs/-/memfs-4.49.0.tgz#bc35069570d41a31c62e31f1a6ec6057a8ea82f0"
-  integrity sha512-L9uC9vGuc4xFybbdOpRLoOAOq1YEBBsocCs5NVW32DfU+CZWWIn3OVF+lB8Gp4ttBVSMazwrTrjv8ussX/e3VQ==
+  version "4.50.0"
+  resolved "https://registry.yarnpkg.com/memfs/-/memfs-4.50.0.tgz#1832177d5592ec1e6a816fb4fe01012ada2856e7"
+  integrity sha512-N0LUYQMUA1yS5tJKmMtU9yprPm6ZIg24yr/OVv/7t6q0kKDIho4cBbXRi1XKttUmNYDYgF/q45qrKE/UhGO0CA==
   dependencies:
     "@jsonjoy.com/json-pack" "^1.11.0"
     "@jsonjoy.com/util" "^1.9.0"
