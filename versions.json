@@ -1,7 +1,7 @@
 {
     "kilua": "0.0.29",
     "kotlin": "2.3.0-Beta2",
-    "compose": "1.10.0-alpha04",
+    "compose": "1.10.0-alpha03",
     "coroutines": "1.10.2",
     "ksp": "2.3.0",
     "kilua-rpc": "0.0.39",
