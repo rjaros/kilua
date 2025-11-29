@@ -28,10 +28,11 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.form.StringFormControl
-import dev.kilua.form.fieldWithLabel
 import dev.kilua.html.Div
 import dev.kilua.html.IDiv
 import dev.kilua.html.Label
+import dev.kilua.html.div
+import dev.kilua.html.label
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
@@ -345,6 +346,7 @@ public open class RadioGroup(
  * @param groupClassName the CSS class name for the group wrapper
  * @param inputClassName the CSS class name for the input elements
  * @param labelClassName the CSS class name for the label elements
+ * @param addon an optional composable addon for each option
  * @param className the CSS class name
  * @param id the ID of the input
  * @param setup a function for setting up the component
@@ -361,6 +363,7 @@ public fun IComponent.radioGroupRef(
     groupClassName: String? = null,
     inputClassName: String? = null,
     labelClassName: String? = null,
+    addon: (@Composable IComponent.(Int, StringPair, String) -> Unit)? = null,
     className: String? = null,
     id: String? = null,
     setup: @Composable IRadioGroup.() -> Unit = {}
@@ -393,7 +396,7 @@ public fun IComponent.radioGroupRef(
         set(id) { updateProperty(RadioGroup::id, it) }
     }) {
         setup(component)
-        setupOptions(options, component)
+        setupOptions(options, addon, component)
     }
     return component
 }
@@ -410,6 +413,7 @@ public fun IComponent.radioGroupRef(
  * @param groupClassName the CSS class name for the group wrapper
  * @param inputClassName the CSS class name for the input elements
  * @param labelClassName the CSS class name for the label elements
+ * @param addon an optional composable addon for each option
  * @param className the CSS class name
  * @param id the ID of the input
  * @param setup a function for setting up the component
@@ -425,6 +429,7 @@ public fun IComponent.radioGroup(
     groupClassName: String? = null,
     inputClassName: String? = null,
     labelClassName: String? = null,
+    addon: (@Composable IComponent.(Int, StringPair, String) -> Unit)? = null,
     className: String? = null,
     id: String? = null,
     setup: @Composable IRadioGroup.() -> Unit = {}
@@ -457,29 +462,26 @@ public fun IComponent.radioGroup(
         set(id) { updateProperty(RadioGroup::id, it) }
     }) {
         setup(component)
-        setupOptions(options, component)
+        setupOptions(options, addon, component)
     }
 }
 
 @Composable
 private fun RadioGroup.setupOptions(
     options: List<StringPair>?,
+    addon: (@Composable IComponent.(Int, StringPair, String) -> Unit)? = null,
     component: RadioGroup
 ) {
     options?.forEachIndexed { index, option ->
-        fieldWithLabel(
-            option.second,
-            className = component.labelClassName,
-            labelAfter = true,
-            groupClassName = (if (component.inline) "kilua-radio-inline" else "kilua-radio") % component.groupClassName
-        ) {
+        val forId = "id_${component.componentId}_$index"
+        div((if (component.inline) "kilua-radio-inline" else "kilua-radio") % component.groupClassName) {
             radio(
                 value = option.first == component.value,
                 name = component.name ?: "name_${component.componentId}",
                 disabled = component.disabled,
                 required = component.required,
                 className = component.inputClassName,
-                id = it
+                id = forId
             ) {
                 if (index == 0 && component.autofocus == true) {
                     this.autofocus(true)
@@ -489,6 +491,8 @@ private fun RadioGroup.setupOptions(
                     component.value = this.extraValue
                 }
             }
+            label(forId, component.labelClassName) { +option.second }
+            addon?.invoke(this, index, option, forId)
         }
     }
 }
