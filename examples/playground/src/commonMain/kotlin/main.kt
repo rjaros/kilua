@@ -316,7 +316,7 @@ class App : Application() {
                     groupClassName = "form-check",
                     inputClassName = "form-check-input",
                     labelClassName = "form-check-label",
-                    addonSetup = { index, option, id ->
+                    addon = { index, option, id ->
                         i("fas fa-info-circle fa-lg") {
                             tooltip(option.second)
                         }
