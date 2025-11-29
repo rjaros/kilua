@@ -1,35 +1,35 @@
 [versions]
 kilua = "0.0.29"
 kilua-published = "0.0.29"
-kotlin = "2.3.0-Beta2"
-compose = "1.10.0-alpha03"
+kotlin = "2.3.0-RC"
+compose = "1.10.0-beta02"
 dokka = "2.1.0"
-nmcp = "1.2.0"
-ksp = "2.3.0"
+nmcp = "1.3.0"
+ksp = "2.3.3"
 detekt = "1.23.8"
-npm-publish = "4.1.4"
+npm-publish = "4.1.8"
 gradle-plugin-publish = "2.0.0"
-kilua-rpc = "0.0.39"
+kilua-rpc = "0.0.40"
 kilua-gettext = "0.0.2"
 kotlinx-atomicfu = "0.29.0"
 kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-datetime = "0.7.1"
-wrappers = "2025.10.14"
+wrappers = "2025.11.12"
 javalin = "6.7.0"
-jooby = "4.0.7"
-ktor = "3.3.1"
+jooby = "4.0.12"
+ktor = "3.3.3"
 koin = "4.1.1"
-koin-annotations = "2.3.0"
-micronaut = "4.10.0"
-micronaut-plugins = "4.6.0"
-spring-boot = "4.0.0-RC1"
+koin-annotations = "2.3.1"
+micronaut = "4.10.2"
+micronaut-plugins = "4.6.1"
+spring-boot = "4.0.0"
 vertx = "5.0.5"
 ballast = "4.2.1"
-logback = "1.5.20"
+logback = "1.5.21"
 tomlj = "1.1.1"
-kaml = "0.99.0"
-resources-optimizer = "2.7.3"
+kaml = "0.104.0"
+resources-optimizer = "2.7.5"
 expiring-map = "0.5.11"
 xml-builder = "1.9.3"
 npm-kilua-assets = "0.0.19"
@@ -47,17 +47,18 @@ imask = "7.6.1"
 tabulator = "6.3.1"
 rsup-progress = "3.2.0"
 lz-string = "1.5.0"
-marked = "16.4.1"
+marked = "17.0.1"
 sanitize-html = "2.17.0"
 postcss = "8.5.6"
 postcss-loader = "8.2.0"
-tailwindcss = "4.1.16"
-cssnano = "7.1.1"
+tailwindcss = "4.1.17"
+cssnano = "7.1.2"
 mini-css-extract-plugin = "2.9.4"
 motion = "12.23.24"
 leaflet = "2.0.0-alpha.1"
 
 [libraries]
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose" }
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor", version.ref = "kotlinx-coroutines" }
@@ -85,6 +86,7 @@ vertx-web = { module = "io.vertx:vertx-web", version.ref = "vertx" }
 vertx-lang-kotlin = { module = "io.vertx:vertx-lang-kotlin", version.ref = "vertx" }
 vertx-lang-kotlin-coroutines = { module = "io.vertx:vertx-lang-kotlin-coroutines", version.ref = "vertx" }
 vertx-launcher-application = { module = "io.vertx:vertx-launcher-application", version.ref = "vertx" }
+vertx-codegen-api = { module = "io.vertx:vertx-codegen-api", version.ref = "vertx" }
 ballast-core = { module = "io.github.copper-leaf:ballast-core", version.ref = "ballast" }
 ballast-saved-state = { module = "io.github.copper-leaf:ballast-saved-state", version.ref = "ballast" }
 ballast-repository = { module = "io.github.copper-leaf:ballast-repository", version.ref = "ballast" }

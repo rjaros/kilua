@@ -26,6 +26,7 @@ kotlin {
                 api(libs.vertx.lang.kotlin)
                 api(libs.vertx.lang.kotlin.coroutines)
                 api(libs.vertx.launcher.application)
+                api(libs.vertx.codegen.api)
             }
         }
     }

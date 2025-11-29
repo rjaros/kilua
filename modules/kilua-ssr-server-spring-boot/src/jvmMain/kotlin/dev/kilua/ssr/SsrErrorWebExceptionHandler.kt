@@ -25,7 +25,6 @@ package dev.kilua.ssr
 import kotlinx.coroutines.reactor.mono
 import org.springframework.beans.factory.ObjectProvider
 import org.springframework.boot.autoconfigure.web.WebProperties
-import org.springframework.boot.web.server.autoconfigure.ServerProperties
 import org.springframework.boot.webflux.autoconfigure.error.DefaultErrorWebExceptionHandler
 import org.springframework.boot.webflux.error.ErrorAttributes
 import org.springframework.context.ApplicationContext
@@ -50,11 +49,10 @@ public open class SsrErrorWebExceptionHandler(
     serverCodecConfigurer: ServerCodecConfigurer,
     errorAttributes: ErrorAttributes,
     resources: WebProperties,
-    serverProperties: ServerProperties,
     applicationContext: ApplicationContext,
     private val ssrEngine: SsrEngine
 ) :
-    DefaultErrorWebExceptionHandler(errorAttributes, resources.resources, serverProperties.error, applicationContext) {
+    DefaultErrorWebExceptionHandler(errorAttributes, resources.resources, resources.error, applicationContext) {
     init {
         super.setMessageWriters(serverCodecConfigurer.writers)
         super.setMessageReaders(serverCodecConfigurer.readers)

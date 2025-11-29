@@ -24,6 +24,7 @@ package dev.kilua.ssr
 
 import dev.kilua.externals.JsArray
 import dev.kilua.utils.toList
+import js.core.JsPrimitives.toKotlinString
 import kotlin.js.JsAny
 import kotlin.js.JsString
 
@@ -45,7 +46,7 @@ internal external val process: NodeProcess?
  */
 public fun getCommandLineParameter(name: String): String? {
     return if (process != null) {
-        val args = process.argv.toList().map { it.toString() }.drop(2)
+        val args = process.argv.toList().map { it.toKotlinString() }.drop(2)
         val index = args.indexOfFirst { it == name }
         if (index != -1 && index < args.size - 1) {
             args[index + 1]

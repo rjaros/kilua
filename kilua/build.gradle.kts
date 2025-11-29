@@ -25,7 +25,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(compose.runtime)
+                api(libs.compose.runtime)
                 api(libs.kotlinx.atomicfu)
                 api(libs.kotlinx.coroutines)
                 api(libs.kotlinx.serialization.json)
