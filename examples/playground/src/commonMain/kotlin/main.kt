@@ -310,6 +310,22 @@ class App : Application() {
 
             div {
 
+                radioGroup(
+                    listOfPairs("Option 1", "Option 2", "Option 3", "Option 4"),
+                    inline = true,
+                    groupClassName = "form-check",
+                    inputClassName = "form-check-input",
+                    labelClassName = "form-check-label",
+                    addonSetup = { index, option, id ->
+                        i("fas fa-info-circle fa-lg") {
+                            tooltip(option.second)
+                        }
+                    }
+                )
+
+
+                hr()
+
                 val carousel = carouselRef(fade = true) {
                     item("First slide", "First slide label") {
                         div("d-block w-100") {
@@ -494,7 +510,12 @@ class App : Application() {
                 hr()
 
                 form {
-                    radioGroup(listOfPairs("Option 1", "Option 2", "Option 3"), groupClassName = "form-check", inputClassName = "form-check-input", labelClassName = "form-check-label") {
+                    radioGroup(
+                        listOfPairs("Option 1", "Option 2", "Option 3"),
+                        groupClassName = "form-check",
+                        inputClassName = "form-check-input",
+                        labelClassName = "form-check-label"
+                    ) {
                         bind("radio")
                     }
 
@@ -691,152 +712,152 @@ class App : Application() {
                     }
                 }
 
-/*                browserRouter {
-                    route("/") {
-                        view {
-                            p {
-                                +"Home: $home"
-                            }
-                        }
-                    }
-                    route("/article") {
-                        int {
-                            view { articleId ->
-                                p {
-                                    +"Article: $articleId"
-                                }
-                            }
-                        }
-                        view {
-                            p {
-                                +"Article ID not specified"
-                            }
-                        }
-                    }
-                    route("/about") {
-                        view {
-                            p {
-                                +"About"
-                            }
-                        }
-                    }
-                    view {
-                        p {
-                            +"Not found"
-                        }
-                    }
-                }*/
-
-/*                hashRouter { ctx ->
-                    defaultMeta {
-                        author = "Kilua Team"
-                    }
-                    route("/") {
-                        view {
-                            p {
-                                +"Home"
-                                +"RoutingModel: ${RoutingModel.current}"
-                            }
-                        }
-                        meta {
-                            description = home
-                            keywords = listOf("home", "welcome")
-                            view {
-                                println("executing meta view for home")
-                                title = home
-                            }
-                        }
-                    }
-                    route("/article") {
-                        meta {
-                            titleTemplate = "Article - %s"
-                        }
-                        route("/head") {
-                            meta {
-                                title = "Head"
-                            }
-                            view {
-                                p {
-                                    +"Head article"
-                                }
-                            }
-                        }
-                        int {
-                            view { articleId ->
-                                p {
-                                    +"Article: $articleId"
-                                }
-                            }
-                        }
-                        view {
-                            p {
-                                +"RoutingModel: ${RoutingModel.current}"
-                            }
-                        }
-                        action {
-                            console.log("No article ID provided")
-                            println(RoutingModel.global.pathList())
-                        }
-                    }
-                    route("/about") {
-                        view {
-                            p {
-                                +"About"
-                            }
-                        }
-                    }
-                    route("/admin", "/admin2") {
-                        route("/test1") {
-                            view {
-                                p {
-                                    +"Admin test1 page"
-                                }
-                            }
-                            meta {
-                                title = "Admin Test1"
-                                description = "This is the admin test1 page"
-                                keywords = listOf("admin", "test1")
-                            }
-                        }
-                        route("/test2") {
-                            route("/xxx") {
-                                view {
-                                    p {
-                                        +"Admin test2 page with xxx"
+                /*                browserRouter {
+                                    route("/") {
+                                        view {
+                                            p {
+                                                +"Home: $home"
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                            view {
-                                p {
-                                    +"Admin test2 page"
-                                }
-                            }
-                        }
-                        view {
-                            p {
-                                +"Admin page"
-                            }
-                        }
-                    }
-                    meta {
-                        view {
-                            description = "Not found page" + ctx.path
-                        }
-                    }
-                    view {
-                        p {
-                            +"Not found"
-                            button("Show remaining path for this page") {
-                                onClick {
-                                    console.log(ctx.path)
-                                    console.log(ctx.parameters.toString())
-                                    console.log(ctx.remainingPath)
-                                    console.log(Meta.current.toString())
-                                }
-                            }
-                        }
-                    }
-                }*/
+                                    route("/article") {
+                                        int {
+                                            view { articleId ->
+                                                p {
+                                                    +"Article: $articleId"
+                                                }
+                                            }
+                                        }
+                                        view {
+                                            p {
+                                                +"Article ID not specified"
+                                            }
+                                        }
+                                    }
+                                    route("/about") {
+                                        view {
+                                            p {
+                                                +"About"
+                                            }
+                                        }
+                                    }
+                                    view {
+                                        p {
+                                            +"Not found"
+                                        }
+                                    }
+                                }*/
+
+                /*                hashRouter { ctx ->
+                                    defaultMeta {
+                                        author = "Kilua Team"
+                                    }
+                                    route("/") {
+                                        view {
+                                            p {
+                                                +"Home"
+                                                +"RoutingModel: ${RoutingModel.current}"
+                                            }
+                                        }
+                                        meta {
+                                            description = home
+                                            keywords = listOf("home", "welcome")
+                                            view {
+                                                println("executing meta view for home")
+                                                title = home
+                                            }
+                                        }
+                                    }
+                                    route("/article") {
+                                        meta {
+                                            titleTemplate = "Article - %s"
+                                        }
+                                        route("/head") {
+                                            meta {
+                                                title = "Head"
+                                            }
+                                            view {
+                                                p {
+                                                    +"Head article"
+                                                }
+                                            }
+                                        }
+                                        int {
+                                            view { articleId ->
+                                                p {
+                                                    +"Article: $articleId"
+                                                }
+                                            }
+                                        }
+                                        view {
+                                            p {
+                                                +"RoutingModel: ${RoutingModel.current}"
+                                            }
+                                        }
+                                        action {
+                                            console.log("No article ID provided")
+                                            println(RoutingModel.global.pathList())
+                                        }
+                                    }
+                                    route("/about") {
+                                        view {
+                                            p {
+                                                +"About"
+                                            }
+                                        }
+                                    }
+                                    route("/admin", "/admin2") {
+                                        route("/test1") {
+                                            view {
+                                                p {
+                                                    +"Admin test1 page"
+                                                }
+                                            }
+                                            meta {
+                                                title = "Admin Test1"
+                                                description = "This is the admin test1 page"
+                                                keywords = listOf("admin", "test1")
+                                            }
+                                        }
+                                        route("/test2") {
+                                            route("/xxx") {
+                                                view {
+                                                    p {
+                                                        +"Admin test2 page with xxx"
+                                                    }
+                                                }
+                                            }
+                                            view {
+                                                p {
+                                                    +"Admin test2 page"
+                                                }
+                                            }
+                                        }
+                                        view {
+                                            p {
+                                                +"Admin page"
+                                            }
+                                        }
+                                    }
+                                    meta {
+                                        view {
+                                            description = "Not found page" + ctx.path
+                                        }
+                                    }
+                                    view {
+                                        p {
+                                            +"Not found"
+                                            button("Show remaining path for this page") {
+                                                onClick {
+                                                    console.log(ctx.path)
+                                                    console.log(ctx.parameters.toString())
+                                                    console.log(ctx.remainingPath)
+                                                    console.log(Meta.current.toString())
+                                                }
+                                            }
+                                        }
+                                    }
+                                }*/
 
                 val lat = 51.505
                 val lng = -0.09
