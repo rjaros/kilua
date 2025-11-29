@@ -29,39 +29,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import dev.kilua.core.IComponent
-import dev.kilua.rpc.AbstractServiceException
-import dev.kilua.rpc.ContentTypeException
-import dev.kilua.rpc.HTTP_UNAUTHORIZED
-import dev.kilua.rpc.HttpMethod
-import dev.kilua.rpc.JsonRpcRequest
-import dev.kilua.rpc.JsonRpcResponseJs
+import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
-import dev.kilua.rpc.SecurityException
-import dev.kilua.rpc.ServiceException
 import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.utils.KiluaScope
 import dev.kilua.utils.StringPair
-import dev.kilua.utils.jsGet
-import dev.kilua.utils.jsSet
 import dev.kilua.utils.unsafeCast
-import js.globals.globalThis
 import js.json.stringify
-import js.objects.unsafeJso
-import js.promise.await
-import js.uri.encodeURIComponent
 import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
 import web.console.console
-import web.http.BodyInit
-import web.http.Headers
 import web.http.RequestInit
-import web.http.RequestMethod
-import web.http.fetchAsync
-import web.url.URLSearchParams
-import kotlin.js.JsAny
 import kotlin.js.toJsString
-import kotlin.js.undefined
 
 /**
  * Creates [Select] component with a remote data source, returning a reference.
@@ -212,7 +192,7 @@ internal suspend fun <T : Any> getOptionsForSelectRemote(
     requestFilter: (suspend RequestInit.() -> Unit)?,
 ): List<StringPair> {
     val (url, method) = serviceManager.requireCall(function)
-    val callAgent = KiluaCallAgent()
+    val callAgent = CallAgent()
     val state = stateFunction?.invoke()?.let { stringify(it.toJsString()) }
     return try {
         val result = callAgent.jsonRpcCall(
@@ -233,95 +213,5 @@ internal suspend fun <T : Any> getOptionsForSelectRemote(
     } catch (e: Exception) {
         console.error(e.message)
         emptyList()
-    }
-}
-
-//
-// Workaround https://youtrack.jetbrains.com/issue/KT-82005/JS-2.3.0-Beta1-2-TypeError-after-code-change
-//
-internal class KiluaCallAgent {
-
-    suspend fun jsonRpcCall(
-        url: String,
-        data: List<String?> = listOf(),
-        method: HttpMethod = HttpMethod.POST,
-        requestFilter: (suspend RequestInit.() -> Unit)? = null
-    ): String {
-        val rpcUrlPrefix = globalThis.jsGet("rpc_url_prefix")
-        val urlPrefix: String = if (rpcUrlPrefix != undefined) "$rpcUrlPrefix/" else ""
-        val jsonRpcRequest = JsonRpcRequest(1, url, data)
-        val body =
-            if (method == HttpMethod.GET) null else BodyInit(RpcSerialization.plain.encodeToString(jsonRpcRequest))
-        val requestInit = getRequestInit(method, body, "application/json")
-        requestFilter?.invoke(requestInit)
-        val urlAddr = urlPrefix + url.drop(1)
-        val fetchUrl = if (method == HttpMethod.GET) {
-            val urlSearchParams = URLSearchParams()
-            data.forEachIndexed { index, s ->
-                if (s != null) urlSearchParams.append("p$index", encodeURIComponent(s))
-            }
-            "$urlAddr?$urlSearchParams"
-        } else {
-            urlAddr
-        }
-        val response = try {
-            fetchAsync(fetchUrl, requestInit).await()
-        } catch (e: Throwable) {
-            throw Exception("Failed to fetch $fetchUrl: ${e.message}")
-        }
-        return if (response.ok && response.headers.get("content-type") == "application/json") {
-            val jsonRpcResponse = js.reflect.unsafeCast<JsonRpcResponseJs>(response.jsonAsync().await()!!)
-            when {
-                method != HttpMethod.GET && jsonRpcResponse.id != jsonRpcRequest.id ->
-                    throw Exception("Invalid response ID")
-
-                jsonRpcResponse.error != null -> {
-                    if (jsonRpcResponse.exceptionType == "dev.kilua.rpc.ServiceException") {
-                        throw ServiceException(jsonRpcResponse.error!!)
-                    } else if (jsonRpcResponse.exceptionJson != null) {
-                        throw RpcSerialization.getJson()
-                            .decodeFromString<AbstractServiceException>(jsonRpcResponse.exceptionJson!!)
-                    } else {
-                        throw Exception(jsonRpcResponse.error)
-                    }
-                }
-
-                jsonRpcResponse.result != null -> jsonRpcResponse.result!!
-                else -> throw Exception("Invalid response")
-            }
-        } else if (response.ok) {
-            throw ContentTypeException("Invalid response content type: ${response.headers.get("content-type")}")
-        } else {
-            if (response.status.toInt() == HTTP_UNAUTHORIZED) {
-                throw SecurityException(response.statusText)
-            } else {
-                throw Exception(response.statusText)
-            }
-        }
-    }
-
-    private fun getRequestMethod(httpMethod: HttpMethod): RequestMethod = when (httpMethod) {
-        HttpMethod.GET -> js.reflect.unsafeCast("GET")
-        HttpMethod.POST -> js.reflect.unsafeCast("POST")
-        HttpMethod.PUT -> js.reflect.unsafeCast("PUT")
-        HttpMethod.DELETE -> js.reflect.unsafeCast("DELETE")
-        HttpMethod.OPTIONS -> js.reflect.unsafeCast("OPTIONS")
-    }
-
-    private fun getRequestInit(
-        method: HttpMethod,
-        body: JsAny?,
-        contentType: String
-    ): RequestInit {
-        val requestMethod = getRequestMethod(method)
-        val headers = Headers()
-        headers.append("Content-Type", contentType)
-        headers.append("X-Requested-With", "XMLHttpRequest")
-        return unsafeJso {
-            jsSet("method", requestMethod)
-            if (body != null) jsSet("body", body)
-            jsSet("headers", headers)
-            jsSet("credentials", "include".toJsString())
-        }
     }
 }

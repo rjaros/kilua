@@ -27,8 +27,8 @@ import androidx.compose.runtime.remember
 import dev.kilua.core.IComponent
 import dev.kilua.externals.JsArray
 import dev.kilua.form.InputType
-import dev.kilua.form.select.KiluaCallAgentTs
 import dev.kilua.form.select.TomSelectCallbacks
+import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.utils.KiluaScope
@@ -190,7 +190,7 @@ internal suspend fun <T : Any> getOptionsForTomTypeaheadRemote(
     query: String?
 ): List<String> {
     val (url, method) = serviceManager.requireCall(function)
-    val callAgent = KiluaCallAgentTs()
+    val callAgent = CallAgent()
     val state = stateFunction?.invoke()?.let { stringify(it.toJsString()) }
     val queryParam = query?.let { stringify(it.toJsString()) }
     return try {
