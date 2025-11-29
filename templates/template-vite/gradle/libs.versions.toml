@@ -1,7 +1,7 @@
 [versions]
-kilua = "0.0.29"
-kotlin = "2.3.0-Beta2"
-compose = "1.10.0-alpha03"
+kilua = "0.0.30"
+kotlin = "2.3.0-RC"
+compose = "1.10.0-beta02"
 vite-kotlin = "0.6.3"
 
 [libraries]
