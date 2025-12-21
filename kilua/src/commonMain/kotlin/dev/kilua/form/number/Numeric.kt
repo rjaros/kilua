@@ -33,6 +33,7 @@ import dev.kilua.form.InputType
 import dev.kilua.form.NumberFormControl
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
+import dev.kilua.utils.obj
 import dev.kilua.utils.toFixedNoRound
 import js.core.toLocaleString
 import web.events.Event
@@ -229,7 +230,10 @@ public open class Numeric(
     }
 
     override fun valueToString(value: Number?): String? {
-        return value?.toFixedNoRound(decimals)?.toDouble()?.toLocaleString(locale.language.toJsString())
+        return value?.toFixedNoRound(decimals)?.toDouble()?.toLocaleString(locale.language.toJsString(), obj {
+            maximumFractionDigits = decimals
+            minimumFractionDigits = decimals
+        })
     }
 
     protected open fun formatElement() {
