@@ -148,7 +148,18 @@ public interface IInput<T : Any> : ITag<HTMLInputElement>, GenericFormControl<T>
     /**
      * The input mask options.
      */
-    public var maskOptions: MaskOptions?
+    public val maskOptions: MaskOptions?
+
+    /**
+     * Set the input mask options.
+     */
+    @Composable
+    public fun maskOptions(maskOptions: MaskOptions?)
+
+    /**
+     * Set the input mask options using a producer function.
+     */
+    public fun maskOptions(maskOptionsProducer: (() -> MaskOptions?)?): Unit
 
     /**
      * Install the input mask controller.
@@ -178,6 +189,8 @@ public abstract class Input<T : Any>(
     protected val withStateFlowDelegate: WithStateFlowDelegate<T?> = WithStateFlowDelegateImpl()
 ) : Tag<HTMLInputElement>("input", className, id, null, renderConfig = renderConfig), GenericFormControl<T>,
     WithStateFlow<T?> by withStateFlowDelegate, IInput<T> {
+
+    protected var maskOptionsProducer: (() -> MaskOptions?)? = null
 
     public override var value: T? by updatingProperty(
         value,
@@ -416,6 +429,24 @@ public abstract class Input<T : Any>(
             field = value
             installMask()
         }
+
+    /**
+     * Set the input mask options.
+     */
+    @Composable
+    public override fun maskOptions(maskOptions: MaskOptions?): Unit = composableProperty("maskOptions", {
+        this.maskOptions = null
+    }) {
+        this.maskOptions = maskOptions
+    }
+
+    /**
+     * Set the input mask options using a producer function.
+     */
+    override fun maskOptions(maskOptionsProducer: (() -> MaskOptions?)?) {
+        this.maskOptionsProducer = maskOptionsProducer
+        this.maskOptions = maskOptionsProducer?.invoke()
+    }
 
     /**
      * The input mask controller.

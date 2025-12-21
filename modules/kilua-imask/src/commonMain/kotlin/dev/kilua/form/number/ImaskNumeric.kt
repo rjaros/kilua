@@ -65,17 +65,19 @@ public fun IComponent.imaskNumericRef(
     setup: @Composable INumeric.() -> Unit = {}
 ): Numeric {
     return numericRef(value, min, max, decimals, name, placeholder, disabled, required, locale, className, id) {
-        maskOptions = ImaskOptions(
-            number = NumberMask(
-                scale = decimals,
-                padFractionalZeros = padFractionalZeros,
-                normalizeZeros = normalizeZeros,
-                min = min,
-                max = max,
-                locale = locale
-            )
-        )
         setup()
+        maskOptions {
+            ImaskOptions(
+                number = NumberMask(
+                    scale = this.decimals,
+                    padFractionalZeros = padFractionalZeros,
+                    normalizeZeros = normalizeZeros,
+                    min = this.min,
+                    max = this.max,
+                    locale = this.locale
+                )
+            )
+        }
     }
 }
 
@@ -114,16 +116,18 @@ public fun IComponent.imaskNumeric(
     setup: @Composable INumeric.() -> Unit = {}
 ) {
     numeric(value, min, max, decimals, name, placeholder, disabled, required, locale, className, id) {
-        maskOptions = ImaskOptions(
-            number = NumberMask(
-                scale = decimals,
-                padFractionalZeros = padFractionalZeros,
-                normalizeZeros = normalizeZeros,
-                min = min,
-                max = max,
-                locale = locale
-            )
-        )
         setup()
+        maskOptions {
+            ImaskOptions(
+                number = NumberMask(
+                    scale = this.decimals,
+                    padFractionalZeros = padFractionalZeros,
+                    normalizeZeros = normalizeZeros,
+                    min = this.min,
+                    max = this.max,
+                    locale = this.locale
+                )
+            )
+        }
     }
 }

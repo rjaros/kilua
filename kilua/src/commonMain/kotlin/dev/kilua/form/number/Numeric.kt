@@ -128,7 +128,11 @@ public open class Numeric(
     /**
      * The minimum value.
      */
-    public override var min: Number? by updatingProperty(min)
+    public override var min: Number? by updatingProperty(min) {
+        if (maskOptionsProducer != null) {
+            maskOptions = maskOptionsProducer!!.invoke()
+        }
+    }
 
     /**
      * Set the minimum value.
@@ -143,7 +147,11 @@ public open class Numeric(
     /**
      * The maximum value.
      */
-    public override var max: Number? by updatingProperty(max)
+    public override var max: Number? by updatingProperty(max) {
+        if (maskOptionsProducer != null) {
+            maskOptions = maskOptionsProducer!!.invoke()
+        }
+    }
 
     /**
      * Set the maximum value.
@@ -158,7 +166,11 @@ public open class Numeric(
     /**
      * The number of decimal digits.
      */
-    public override var decimals: Int by updatingProperty(decimals)
+    public override var decimals: Int by updatingProperty(decimals) {
+        if (maskOptionsProducer != null) {
+            maskOptions = maskOptionsProducer!!.invoke()
+        }
+    }
 
     /**
      * Set the number of decimal digits.
@@ -173,7 +185,11 @@ public open class Numeric(
     /**
      * The locale for formatting the number.
      */
-    public override var locale: Locale by updatingProperty(locale)
+    public override var locale: Locale by updatingProperty(locale) {
+        if (maskOptionsProducer != null) {
+            maskOptions = maskOptionsProducer!!.invoke()
+        }
+    }
 
     /**
      * Set the locale for formatting the number.
