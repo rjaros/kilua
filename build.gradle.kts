@@ -91,6 +91,7 @@ nmcpAggregation {
         publishingType = "USER_MANAGED"
         publicationName = "Kilua $version"
     }
+    allowDuplicateProjectNames.set(true)
 }
 
 dependencies {
@@ -105,6 +106,7 @@ dependencies {
     nmcpAggregation(project(":modules:kilua-i18n"))
     nmcpAggregation(project(":modules:kilua-imask"))
     nmcpAggregation(project(":modules:kilua-jetpack"))
+    nmcpAggregation(project(":modules:kilua-ktml"))
     nmcpAggregation(project(":modules:kilua-lazy-layouts"))
     nmcpAggregation(project(":modules:kilua-leaflet"))
     nmcpAggregation(project(":modules:kilua-marked"))
@@ -145,6 +147,7 @@ dependencies {
     dokka(project(":modules:kilua-i18n"))
     dokka(project(":modules:kilua-imask"))
     dokka(project(":modules:kilua-jetpack"))
+    dokka(project(":modules:kilua-ktml"))
     dokka(project(":modules:kilua-lazy-layouts"))
     dokka(project(":modules:kilua-leaflet"))
     dokka(project(":modules:kilua-marked"))
