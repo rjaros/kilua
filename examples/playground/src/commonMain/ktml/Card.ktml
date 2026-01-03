@@ -1,0 +1,10 @@
+<card fragment header="${String? = null}" content="$String">
+    <div class="card">
+        <div if="${header != null}" class="card-header">
+            $header
+        </div>
+        <div class="card-body">
+            $content
+        </div>
+    </div>
+</card>

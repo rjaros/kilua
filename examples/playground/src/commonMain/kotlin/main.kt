@@ -86,6 +86,7 @@ import dev.kilua.form.number.imaskNumeric
 import dev.kilua.form.number.numeric
 import dev.kilua.form.number.range
 import dev.kilua.form.number.rangeRef
+import dev.kilua.form.number.spinner
 import dev.kilua.form.select.TomSelectCallbacks
 import dev.kilua.form.select.TomSelectRenders
 import dev.kilua.form.select.select
@@ -113,6 +114,8 @@ import dev.kilua.html.style.style
 import dev.kilua.i18n.I18n
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.i18n.SimpleLocale
+import dev.kilua.ktml.Ktml
+import dev.kilua.ktml.ktml
 import dev.kilua.maps.DefaultTileLayers
 import dev.kilua.maps.LeafletObjectFactory
 import dev.kilua.maps.maps
@@ -172,6 +175,7 @@ import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toList
 import dev.kilua.utils.today
 import dev.kilua.utils.unsafeCast
+import dev.ktml.templates.KtmlRegistry
 import js.core.JsPrimitives.toJsInt
 import js.json.parse
 import js.promise.Promise
@@ -305,10 +309,37 @@ class App : Application() {
         console.log(testJson.content.jsGet("test"))
 
         ThemeManager.init()
+        Ktml.init(KtmlRegistry)
 
         root("root") {
 
             div {
+                var templateHeader by remember { mutableStateOf("Ktml Template Header") }
+
+                ktml("card", mutableMapOf("header" to templateHeader, "content" to "This is a card created using Ktml template."))
+
+                button("Change header") {
+                    onClick {
+                        templateHeader = "Ktml Template Header Changed"
+                    }
+                }
+
+                hr()
+
+//                var decimals by remember { mutableStateOf(3) }
+
+                numeric(decimals = 5) {
+//                    min(0)
+//                    max(100)
+                }
+
+                button("Change decimals") {
+                    onClick {
+//                        x.value = 1234.56789
+                    }
+                }
+
+                hr()
 
                 radioGroup(
                     listOfPairs("Option 1", "Option 2", "Option 3", "Option 4"),
@@ -318,7 +349,9 @@ class App : Application() {
                     labelClassName = "form-check-label",
                     addon = { index, option, id ->
                         i("fas fa-info-circle fa-lg") {
-                            tooltip(option.second)
+                            fontSize(19.px)
+                            marginBottom(3.px)
+                            tooltip(option.second, triggers = listOf(Trigger.Hover))
                         }
                     }
                 )
@@ -519,22 +552,29 @@ class App : Application() {
                         bind("radio")
                     }
 
-                    fieldWithLabel("Username") {
-                        text(id = it) {
+                    fieldWithLabel("Username3") {
+                        text(id = it, required = true) {
+                            autocomplete(Autocomplete.Off)
                             bind("username")
                         }
                     }
-                    fieldWithLabel("Password") {
+                    fieldWithLabel("Password3") {
                         password(id = it) {
+                            autocomplete(Autocomplete.Off)
                             bind("password")
                         }
                     }
                     button("Login") {
                         onClick {
-                            val map = this@form.getData()
-                            println(map)
-                            println("Username: ${map["username"]}")
-                            println("Password: ${map["password"]}")
+                            if (this@form.validate()) {
+                                val map = this@form.getData()
+                                println(map)
+                                println("Username: ${map["username"]}")
+                                println("Password: ${map["password"]}")
+                            } else {
+                                this@form.reportValidity()
+                                println("Validation failed")
+                            }
                         }
                     }
                     button("Test") {
@@ -1546,23 +1586,25 @@ class App : Application() {
 
                 vPanel {
                     text {
-                        maskOptions = ImaskOptions(pattern = PatternMask("000-000-000"))
+                        maskOptions(ImaskOptions(pattern = PatternMask("000-000-000")))
                     }
                     text {
-                        maskOptions = ImaskOptions(pattern = PatternMask("000-000-000", eager = true))
+                        maskOptions(ImaskOptions(pattern = PatternMask("000-000-000", eager = true)))
                     }
                     text {
-                        maskOptions = ImaskOptions(pattern = PatternMask("000-000-000", lazy = false, eager = true))
+                        maskOptions(ImaskOptions(pattern = PatternMask("000-000-000", lazy = false, eager = true)))
                     }
                     text {
-                        maskOptions = ImaskOptions(
-                            pattern = PatternMask(
-                                "{Ple\\ase fill ye\\ar 19}YY{, month }MM{ \\and v\\alue }VL",
-                                lazy = false,
-                                blocks = mapOf(
-                                    "YY" to ImaskOptions(pattern = PatternMask("00")),
-                                    "MM" to ImaskOptions(range = RangeMask(1, 12)),
-                                    "VL" to ImaskOptions(enum = EnumMask(listOf("TV", "HD", "VR")))
+                        maskOptions(
+                            ImaskOptions(
+                                pattern = PatternMask(
+                                    "{Ple\\ase fill ye\\ar 19}YY{, month }MM{ \\and v\\alue }VL",
+                                    lazy = false,
+                                    blocks = mapOf(
+                                        "YY" to ImaskOptions(pattern = PatternMask("00")),
+                                        "MM" to ImaskOptions(range = RangeMask(1, 12)),
+                                        "VL" to ImaskOptions(enum = EnumMask(listOf("TV", "HD", "VR")))
+                                    )
                                 )
                             )
                         )
@@ -1571,17 +1613,18 @@ class App : Application() {
                         }
                     }
                     text {
-                        maskOptions =
-                            ImaskOptions(range = RangeMask(0, 100, maxLength = 3, autofix = MaskAutofix.Pad))
+                        maskOptions(ImaskOptions(range = RangeMask(0, 100, maxLength = 3, autofix = MaskAutofix.Pad)))
                     }
                     numeric(123.44, placeholder = "Enter a number") {
-                        maskOptions = ImaskOptions(
-                            number = NumberMask(
-                                scale = 2,
-                                padFractionalZeros = true,
-                                normalizeZeros = true,
-                                min = -10000,
-                                max = 10000,
+                        maskOptions(
+                            ImaskOptions(
+                                number = NumberMask(
+                                    scale = 2,
+                                    padFractionalZeros = true,
+                                    normalizeZeros = true,
+                                    min = -10000,
+                                    max = 10000,
+                                )
                             )
                         )
                         onInput {
@@ -1589,10 +1632,10 @@ class App : Application() {
                         }
                     }
                     text {
-                        maskOptions = ImaskOptions(regExp = RegExp("^[0-9]*$"))
+                        maskOptions(ImaskOptions(regExp = RegExp("^[0-9]*$")))
                     }
                     text {
-                        maskOptions = ImaskOptions(function = { it.startsWith("1") })
+                        maskOptions(ImaskOptions(function = { it.startsWith("1") }))
                         onInput {
                             console.log(this.value)
                         }
@@ -1603,7 +1646,7 @@ class App : Application() {
                         }
                     }
                     text {
-                        maskOptions = ImaskOptions(pattern = PatternMask("00{-}000", lazy = false, eager = true))
+                        maskOptions(ImaskOptions(pattern = PatternMask("00{-}000", lazy = false, eager = true)))
                     }
                 }
 
@@ -2333,14 +2376,19 @@ class App : Application() {
                             }
                         }
                         fieldWithLabel("City", "form-label", groupClassName = "col-md-6") {
-                            textRef(required = true, className = "form-control").bind("city").also {
+                            spinner(required = true, className = "form-control", min = 0, max = 100) {
                                 div("invalid-feedback") {
                                     +"Please provide a valid city."
                                 }
                             }
+                            /*                            textRef(required = true, className = "form-control").bind("city").also {
+                                                            div("invalid-feedback") {
+                                                                +"Please provide a valid city."
+                                                            }
+                                                        }*/
                         }
                         fieldWithLabel("State", "form-label", groupClassName = "col-md-3") {
-                            tomTypeaheadRef(
+/*                            tomTypeaheadRef(
                                 listOf("Alaska", "California"),
                                 placeholder = "Choose...",
                                 id = it,
@@ -2348,7 +2396,7 @@ class App : Application() {
                             ).bind("state")
                             div("invalid-feedback") {
                                 +"Please select a valid state."
-                            }
+                            }*/
                             /*                            tomSelect(
                                                             listOfPairs("Alaska", "California"),
                                                             emptyOption = true,
@@ -2371,12 +2419,12 @@ class App : Application() {
                                 +"Please select a valid state."
                             }*/
 
-                            /*select(listOfPairs("Alaska"), className = "form-select", placeholder = "Choose...")
-                                .bind("state").also {
-                                    div("invalid-feedback") {
-                                        +"Please select a valid state."
-                                    }
-                                }*/
+                            select(listOfPairs("Alaska", "Alabama"), value = null, className = "form-select", required = true) {
+                                bind("state")
+                            }
+                            div("invalid-feedback") {
+                                +"Please select a valid state."
+                            }
                         }
                         fieldWithLabel("Zip", "form-label", groupClassName = "col-md-3") {
                             textRef(required = true, className = "form-control").bind("zip").also {

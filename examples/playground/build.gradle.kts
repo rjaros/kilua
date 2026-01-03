@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.compose")
     kotlin("plugin.compose")
     alias(libs.plugins.kilua)
+    alias(libs.plugins.ktml)
 }
 
 @OptIn(ExperimentalWasmDsl::class)
@@ -75,6 +76,7 @@ kotlin {
                 implementation(project(":modules:kilua-jetpack"))
                 implementation(project(":modules:kilua-animation"))
                 implementation(project(":modules:kilua-leaflet"))
+                implementation(project(":modules:kilua-ktml"))
             }
         }
     }
