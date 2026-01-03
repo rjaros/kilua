@@ -29,6 +29,9 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import web.html.HTMLOptionElement
+import web.html.Hidden
+import web.html.`false`
+import web.html.`true`
 
 /**
  * HTML Option component.
@@ -204,7 +207,7 @@ public open class Option(
      */
     public override var hidden: Boolean? by updatingProperty {
         if (it != null) {
-            element.hidden = it
+            element.hidden = if (it) Hidden.`true` else Hidden.`false`
         } else {
             element.removeAttribute("hidden")
         }
