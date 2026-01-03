@@ -26,6 +26,7 @@ micronaut-plugins = "4.6.1"
 spring-boot = "4.0.1"
 vertx = "5.0.6"
 ballast = "5.0.1"
+ktml = "0.1.12"
 logback = "1.5.23"
 tomlj = "1.1.1"
 kaml = "0.104.0"
@@ -92,6 +93,7 @@ ballast-saved-state = { module = "io.github.copper-leaf:ballast-saved-state", ve
 ballast-repository = { module = "io.github.copper-leaf:ballast-repository", version.ref = "ballast" }
 ballast-sync = { module = "io.github.copper-leaf:ballast-sync", version.ref = "ballast" }
 ballast-undo = { module = "io.github.copper-leaf:ballast-undo", version.ref = "ballast" }
+ktml-runtime = { module = "dev.ktml:ktml-runtime", version.ref = "ktml" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
 kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
@@ -116,3 +118,4 @@ jooby = { id = "io.jooby.run", version.ref = "jooby" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 micronaut-application = { id = "io.micronaut.application", version.ref = "micronaut-plugins" }
 micronaut-aot = { id = "io.micronaut.aot", version.ref = "micronaut-plugins" }
+ktml = { id = "dev.ktml.gradle", version.ref = "ktml" }
