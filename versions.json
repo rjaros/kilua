@@ -1,28 +1,29 @@
 {
-    "kilua": "0.0.30",
-    "kotlin": "2.3.0-RC",
-    "compose": "1.10.0-beta02",
+    "kilua": "0.0.31",
+    "kotlin": "2.3.0",
+    "compose": "1.11.0-alpha01",
     "coroutines": "1.10.2",
     "ksp": "2.3.3",
-    "kilua-rpc": "0.0.40",
+    "kilua-rpc": "0.0.41",
     "datetime": "0.7.1",
-    "logback": "1.5.21",
+    "logback": "1.5.23",
     "gettext": "0.7.0",
-    "vite-kotlin": "0.6.3",
+    "vite-kotlin": "0.7.1",
+    "ktml": "0.1.12",
     "template-javalin": {
     },
     "template-jooby": {
-        "jooby": "4.0.12"
+        "jooby": "4.0.13"
     },
     "template-ktor": {
         "ktor": "3.3.3"
     },
     "template-micronaut": {
-        "micronaut": "4.10.2",
+        "micronaut": "4.10.6",
         "micronaut-plugins": "4.6.1"
     },
     "template-spring-boot": {
-        "spring-boot": "4.0.0"
+        "spring-boot": "4.0.1"
     },
     "template-vertx": {
     },
@@ -163,6 +164,10 @@
         {
             "name": "kilua-rest",
             "description": "Configurable REST/HTTP client"
+        },
+        {
+            "name": "kilua-ktml",
+            "description": "KTML templating engine"
         }
     ]
 }
