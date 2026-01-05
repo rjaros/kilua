@@ -3,7 +3,7 @@
     "kotlin": "2.3.0",
     "compose": "1.11.0-alpha01",
     "coroutines": "1.10.2",
-    "ksp": "2.3.3",
+    "ksp": "2.3.4",
     "kilua-rpc": "0.0.41",
     "datetime": "0.7.1",
     "logback": "1.5.23",
