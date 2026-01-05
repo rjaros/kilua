@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kilua)
+    alias(libs.plugins.vite.kotlin)
 }
 
 @OptIn(ExperimentalWasmDsl::class)
@@ -17,7 +18,6 @@ kotlin {
                 cssSupport {
                     enabled = true
                 }
-                outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
             testTask {
@@ -38,7 +38,6 @@ kotlin {
                 cssSupport {
                     enabled = true
                 }
-                outputFileName = "main.bundle.js"
                 sourceMaps = false
             }
             testTask {
@@ -58,5 +57,15 @@ kotlin {
                 implementation(libs.kilua)
             }
         }
+    }
+}
+
+vite {
+    autoRewriteIndex.set(true)
+    build {
+        target = "es2020"
+    }
+    server {
+        port = 3000
     }
 }
