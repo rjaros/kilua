@@ -6,6 +6,7 @@
     "ksp": "2.3.4",
     "kilua-rpc": "0.0.41",
     "datetime": "0.7.1",
+    "tailwindcss": "4.1.18",
     "logback": "1.5.23",
     "gettext": "0.7.0",
     "vite-kotlin": "0.7.1",
