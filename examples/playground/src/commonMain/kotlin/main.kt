@@ -65,7 +65,6 @@ import dev.kilua.compose.ui.title
 import dev.kilua.compose.ui.width
 import dev.kilua.core.IComponent
 import dev.kilua.dropdown.dropDown
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.animateMini
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.layer.FeatureGroup
@@ -163,7 +162,6 @@ import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
 import dev.kilua.utils.KiluaScope
 import dev.kilua.utils.cast
-import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.listOfPairs
@@ -171,11 +169,9 @@ import dev.kilua.utils.now
 import dev.kilua.utils.obj
 import dev.kilua.utils.promise
 import dev.kilua.utils.rem
-import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toList
 import dev.kilua.utils.today
-import dev.kilua.utils.unsafeCast
 import dev.ktml.templates.KtmlRegistry
+import js.array.jsArrayOf
 import js.core.JsPrimitives.toJsInt
 import js.json.parse
 import js.promise.Promise
@@ -203,8 +199,12 @@ import web.mouse.MouseEvent
 import web.timers.setTimeout
 import web.window.window
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 import kotlin.js.JsModule
+import kotlin.js.toJsArray
 import kotlin.js.toJsString
+import kotlin.js.toList
+import kotlin.js.unsafeCast
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextUInt
@@ -348,9 +348,12 @@ class App : Application() {
                     inputClassName = "form-check-input",
                     labelClassName = "form-check-label",
                     addon = { index, option, id ->
-                        i("fas fa-info-circle fa-lg") {
-                            fontSize(19.px)
-                            marginBottom(3.px)
+                        div {
+                            display(Display.InlineBlock)
+                            i("fas fa-info-circle fa-lg") {
+                                fontSize(19.px)
+                                marginBottom(3.px)
+                            }
                             tooltip(option.second, triggers = listOf(Trigger.Hover))
                         }
                     }

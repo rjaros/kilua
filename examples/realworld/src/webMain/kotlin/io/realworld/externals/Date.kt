@@ -23,11 +23,15 @@
 package io.realworld.externals
 
 import dev.kilua.utils.jsObjectOf
-import dev.kilua.utils.unsafeCast
 import js.date.Date
 import js.intl.DateTimeFormat
+import js.intl.DateTimeFormatOptions
+import kotlin.js.unsafeCast
 
 fun Date.format(): String =
-    DateTimeFormat("en-US", jsObjectOf("year" to "numeric", "month" to "long", "day" to "numeric").unsafeCast()).format(
+    DateTimeFormat(
+        "en-US",
+        jsObjectOf("year" to "numeric", "month" to "long", "day" to "numeric").unsafeCast<DateTimeFormatOptions>()
+    ).format(
         this
     )
