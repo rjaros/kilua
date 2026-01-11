@@ -25,7 +25,6 @@
 
 package dev.kilua.externals.leaflet.map
 
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.leaflet.control.Attribution
 import dev.kilua.externals.leaflet.control.Control
 import dev.kilua.externals.leaflet.control.Zoom
@@ -46,6 +45,7 @@ import dev.kilua.externals.leaflet.layer.vector.Renderer
 import web.html.HTMLElement
 import web.pointer.PointerEvent
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.JsName
 import kotlin.js.definedExternally

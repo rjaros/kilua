@@ -28,6 +28,7 @@ import js.core.JsInt
 import js.date.Date
 import web.html.HTMLElement
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 import kotlin.js.JsModule
 
 /**

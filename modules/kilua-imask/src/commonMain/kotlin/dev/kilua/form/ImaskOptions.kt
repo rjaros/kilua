@@ -34,14 +34,15 @@ import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.assign
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.obj
-import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
-import dev.kilua.utils.unsafeCast
+import js.core.JsNumber
 import js.core.JsPrimitives.toJsDouble
 import js.regexp.RegExp
 import kotlin.js.JsAny
+import kotlin.js.toJsArray
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 
 /**
  * Text input mask overwrite modes.
@@ -191,8 +192,8 @@ internal fun NumberMask.toJs(): NumberMaskOptionsJs {
         if (self.normalizeZeros != null) this.normalizeZeros = self.normalizeZeros
         this.radix = self.locale.decimalSeparator.toString()
         this.mapToRadix = self.mapToRadix.map { it.toString().toJsString() }.toJsArray()
-        if (self.min != null) this.min = self.min.toDouble().toJsDouble().unsafeCast()
-        if (self.max != null) this.max = self.max.toDouble().toJsDouble().unsafeCast()
+        if (self.min != null) this.min = self.min.toDouble().toJsDouble().unsafeCast<JsNumber>()
+        if (self.max != null) this.max = self.max.toDouble().toJsDouble().unsafeCast<JsNumber>()
     }
 }
 

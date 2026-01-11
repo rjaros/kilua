@@ -29,7 +29,6 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.compose.Root
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.TabulatorJs
 import dev.kilua.externals.TabulatorTablesJs.TabulatorFull
 import dev.kilua.html.ITag
@@ -44,9 +43,7 @@ import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.jsTypeOf
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.rem
-import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
-import dev.kilua.utils.unsafeCast
 import js.core.JsInt
 import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toKotlinInt
@@ -59,9 +56,13 @@ import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
 import web.html.HTMLDivElement
 import web.resize.ResizeObserver
+import web.timers.Timeout
 import web.timers.clearTimeout
 import kotlin.js.JsAny
+import kotlin.js.JsArray
+import kotlin.js.toJsArray
 import kotlin.js.toJsBoolean
+import kotlin.js.unsafeCast
 import kotlin.reflect.KClass
 
 /**
@@ -219,7 +220,7 @@ public open class Tabulator<T : Any>(
 
     private fun removeCustomEditors() {
         EditorRoot.cancel?.invoke(null)
-        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsInt().unsafeCast()) }
+        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsInt().unsafeCast<Timeout>()) }
         EditorRoot.root?.dispose()
         EditorRoot.root = null
     }

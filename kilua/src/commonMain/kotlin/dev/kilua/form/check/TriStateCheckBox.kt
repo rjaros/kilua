@@ -35,10 +35,10 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.utils.unsafeCast
 import web.events.Event
 import web.html.HTMLInputElement
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 
 /**
  * Tri-state CheckBox input component.
@@ -243,7 +243,7 @@ public open class TriStateCheckBox(
                 element.indeterminate = true
             }
             @Suppress("LeakingThis")
-            element.type = InputType.Checkbox.value.toJsString().unsafeCast()
+            element.type = InputType.Checkbox.value.toJsString().unsafeCast<web.html.InputType>()
             if (name != null) {
                 @Suppress("LeakingThis")
                 element.name = name

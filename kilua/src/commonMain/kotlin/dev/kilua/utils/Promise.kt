@@ -39,4 +39,4 @@ public val KiluaScope: CoroutineScope = CoroutineScope(Dispatchers.Default + Sup
  * Create a JS Promise from a suspending block.
  */
 public fun <T : JsAny?> promise(block: suspend () -> T): Promise<T> =
-    KiluaScope.async { block() }.asPromise().unsafeCast()
+    KiluaScope.async { block() }.asPromise()

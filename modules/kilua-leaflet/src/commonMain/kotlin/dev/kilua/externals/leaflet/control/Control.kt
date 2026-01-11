@@ -32,11 +32,11 @@ import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.map.LeafletMap
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
-import dev.kilua.utils.unsafeCast
 import web.html.HTMLElement
 import kotlin.js.JsAny
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
+import kotlin.js.unsafeCast
 
 /**
  * `Control` is a base class for implementing map controls. Handles positioning. All other controls
@@ -97,7 +97,7 @@ public abstract external class Control<T : ControlOptions>(
 /** Native getter for [LayersObject] */
 @Suppress("NOTHING_TO_INLINE")
 public inline operator fun LayersObject.get(name: String): Layer<*>? =
-    jsGet(name)?.unsafeCast()
+    jsGet(name)?.unsafeCast<Layer<*>>()
 
 /** Native setter for [LayersObject] */
 @Suppress("NOTHING_TO_INLINE")

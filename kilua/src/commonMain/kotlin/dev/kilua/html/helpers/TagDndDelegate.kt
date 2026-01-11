@@ -23,26 +23,11 @@
 package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
-import dev.kilua.externals.JsArray
 import dev.kilua.html.Tag
-import dev.kilua.utils.toList
-import dev.kilua.utils.unsafeCast
 import js.core.JsPrimitives.toKotlinString
 import web.dnd.DragEvent
 import web.html.HTMLElement
-import kotlin.Boolean
-import kotlin.Int
-import kotlin.String
-import kotlin.Unit
-import kotlin.collections.Set
-import kotlin.collections.emptySet
-import kotlin.collections.intersect
-import kotlin.collections.isNotEmpty
-import kotlin.collections.map
-import kotlin.collections.setOf
-import kotlin.collections.toSet
-import kotlin.js.JsString
-import kotlin.let
+import kotlin.js.toList
 
 /**
  * Common drag and drop methods delegate.
@@ -132,7 +117,7 @@ public open class TagDndDelegateImpl<E : HTMLElement>(
     @Composable
     public override fun setDropTarget(formats: Set<String>?, callback: (DragEvent) -> Unit) {
         dragOverId = tag.onEvent("dragover") { e: DragEvent ->
-            val types = e.dataTransfer?.types?.unsafeCast<JsArray<JsString>>()?.toList()?.map { it.toKotlinString() }?.toSet() ?: emptySet()
+            val types = e.dataTransfer?.types?.toList()?.map { it.toKotlinString() }?.toSet() ?: emptySet()
             if (formats == null || formats.intersect(types).isNotEmpty()) {
                 e.preventDefault()
             }

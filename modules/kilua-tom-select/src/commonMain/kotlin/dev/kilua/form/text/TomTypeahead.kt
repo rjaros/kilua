@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
 import dev.kilua.form.Autocomplete
@@ -43,17 +42,19 @@ import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
-import dev.kilua.utils.toJsArray
-import dev.kilua.utils.toList
-import dev.kilua.utils.unsafeCast
 import js.core.JsPrimitives.toKotlinString
 import web.dom.ElementId
+import web.dom.InsertPosition
 import web.dom.document
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 import kotlin.js.JsBoolean
 import kotlin.js.JsString
 import kotlin.js.toBoolean
+import kotlin.js.toJsArray
 import kotlin.js.toJsString
+import kotlin.js.toList
+import kotlin.js.unsafeCast
 
 /**
  * Tom Typeahead input component
@@ -315,7 +316,7 @@ public open class TomTypeahead(
             tomSelectInstance = null
             // Restore the empty div after the Tom Select instance is removed
             val emptyDiv = document.createElement("div")
-            element.insertAdjacentElement("afterend".toJsString().unsafeCast(), emptyDiv)
+            element.insertAdjacentElement("afterend".toJsString().unsafeCast<InsertPosition>(), emptyDiv)
         }
     }
 

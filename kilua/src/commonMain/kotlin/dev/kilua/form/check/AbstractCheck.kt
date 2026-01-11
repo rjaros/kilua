@@ -32,10 +32,10 @@ import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
 import dev.kilua.utils.toKebabCase
-import dev.kilua.utils.unsafeCast
 import web.events.Event
 import web.html.HTMLInputElement
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 
 /**
  * Type of the check input control (checkbox or radiobutton).
@@ -242,7 +242,7 @@ public abstract class AbstractCheck(
             @Suppress("LeakingThis")
             element.checked = value
             @Suppress("LeakingThis")
-            element.type = type.value.toJsString().unsafeCast()
+            element.type = type.value.toJsString().unsafeCast<web.html.InputType>()
             if (name != null) {
                 @Suppress("LeakingThis")
                 element.name = name

@@ -26,7 +26,7 @@ import dev.kilua.externals.Trix
 import dev.kilua.externals.TrixLocale
 import dev.kilua.i18n.Locale
 import dev.kilua.utils.assign
-import dev.kilua.utils.unsafeCast
+import kotlin.js.unsafeCast
 
 /**
  * A TrixLocale class implementing JsAny interface.

@@ -26,7 +26,6 @@ import dev.kilua.compose.Root
 import dev.kilua.utils.cast
 import dev.kilua.utils.isDom
 import dev.kilua.utils.obj
-import dev.kilua.utils.unsafeCast
 import js.coroutines.asPromise
 import js.promise.Promise
 import kotlinx.coroutines.CoroutineScope
@@ -34,9 +33,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import web.dom.ElementId
+import web.dom.InsertPosition
 import web.dom.document
 import kotlin.js.JsAny
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 import kotlin.test.DefaultAsserter.assertTrue
 
 public val testScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
@@ -100,7 +101,7 @@ public interface DomSpec : TestSpec {
         if (isDom) {
             val fixture = "<div style=\"display: none\" id=\"pretest\">" +
                     "<div id=\"${getTestId()}\"></div></div>"
-            document.body.insertAdjacentHTML("afterbegin".toJsString().unsafeCast(), fixture)
+            document.body.insertAdjacentHTML("afterbegin".toJsString().unsafeCast<InsertPosition>(), fixture)
         }
     }
 

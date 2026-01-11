@@ -23,7 +23,6 @@
 package dev.kilua.utils
 
 import kotlin.js.JsArray
-import kotlin.js.unsafeCast as unsafeCastJs
 
 public actual fun delete(o: JsAny, key: String): Unit = js("delete o[key]")
 
@@ -32,11 +31,6 @@ public actual fun jsTypeOf(o: JsAny?): String = js("typeof o")
 @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 public actual inline fun <T> Any?.cast(): T {
     return this as T
-}
-
-@Suppress("NOTHING_TO_INLINE")
-public actual inline fun <T : JsAny> JsAny.unsafeCast(): T {
-    return this.unsafeCastJs()
 }
 
 public actual fun isArray(o: JsAny?): Boolean = js("Array.isArray(o)")

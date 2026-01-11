@@ -24,11 +24,11 @@
 
 package dev.kilua.externals.leaflet.layer.vector
 
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geo.LatLngBounds
 import dev.kilua.externals.leaflet.geometry.Point
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
 

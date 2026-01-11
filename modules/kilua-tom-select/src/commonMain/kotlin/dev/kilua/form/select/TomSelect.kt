@@ -29,7 +29,6 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.TomSelectJs
 import dev.kilua.externals.TomSelectOptionsJs
 import dev.kilua.form.StringFormControl
@@ -49,13 +48,16 @@ import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toList
-import dev.kilua.utils.unsafeCast
+import web.dom.InsertPosition
 import web.dom.document
 import web.html.HTMLOptionElement
 import web.html.HTMLSelectElement
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 import kotlin.js.JsString
 import kotlin.js.toJsString
+import kotlin.js.toList
+import kotlin.js.unsafeCast
 
 /**
  * Tom Select component.
@@ -582,7 +584,7 @@ public open class TomSelect(
                     val callbacksObj = self.tsCallbacks!!.toJs()
                     assign(this, callbacksObj)
                     if (self.tsCallbacks!!.load != null) {
-                        this.load = { query: String, callback: (JsArray<JsAny>) -> Unit ->
+                        this.load = { query: String, callback: (JsArray<out JsAny>) -> Unit ->
                             tsCallbacks!!.load!!(query) { options ->
                                 if (emptyOption) {
                                     callback(
@@ -627,7 +629,7 @@ public open class TomSelect(
             tomSelectInstance = null
             // Restore the empty div after the Tom Select instance is removed
             val emptyDiv = document.createElement("div")
-            element.insertAdjacentElement("afterend".toJsString().unsafeCast(), emptyDiv)
+            element.insertAdjacentElement("afterend".toJsString().unsafeCast<InsertPosition>(), emptyDiv)
         }
     }
 

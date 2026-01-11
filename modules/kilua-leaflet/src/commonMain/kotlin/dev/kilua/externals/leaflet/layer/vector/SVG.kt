@@ -24,10 +24,10 @@
 
 package dev.kilua.externals.leaflet.layer.vector
 
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.leaflet.geometry.Point
-import kotlin.js.JsModule
 import web.svg.SVGElement
+import kotlin.js.JsArray
+import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 public open external class SVG(

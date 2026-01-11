@@ -29,8 +29,8 @@ import dev.kilua.core.ComponentBase
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
-import dev.kilua.utils.unsafeCast
 import web.dom.Comment
+import kotlin.js.unsafeCast
 
 /**
  * HTML comment node component.

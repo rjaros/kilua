@@ -23,12 +23,12 @@
 package dev.kilua.compose
 
 import androidx.compose.runtime.MonotonicFrameClock
-import dev.kilua.utils.unsafeCast
 import js.core.JsDouble
 import js.core.JsPrimitives.toKotlinDouble
 import web.animations.requestAnimationFrame
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+import kotlin.js.unsafeCast
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 

@@ -36,10 +36,10 @@ import dev.kilua.utils.isDom
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.renderAsCssStyle
 import dev.kilua.utils.renderAsHtmlAttributes
-import dev.kilua.utils.unsafeCast
 import web.cssom.ClassName
 import web.dom.ElementId
 import web.html.HTMLElement
+import kotlin.js.unsafeCast
 
 /**
  * Base interface for all HTML tags components.

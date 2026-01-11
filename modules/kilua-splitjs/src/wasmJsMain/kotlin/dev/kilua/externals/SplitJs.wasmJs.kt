@@ -23,9 +23,7 @@
 package dev.kilua.externals
 
 import dev.kilua.panel.Dir
-import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.obj
-import dev.kilua.utils.toList
 import web.html.HTMLElement
 
 internal external class SplitJsOptionsExt : JsAny {
@@ -45,13 +43,13 @@ internal external class SplitJsOptionsExt : JsAny {
 }
 
 @JsModule("split.js")
-internal external fun splitJsExt(elements: JsArray<JsAny>, options: SplitJsOptionsExt): SplitJsInstance
+internal external fun splitJsExt(elements: JsArray<HTMLElement>, options: SplitJsOptionsExt): SplitJsInstance
 
 @Suppress("SpreadOperator")
 internal actual fun splitJs(elements: List<HTMLElement>, options: SplitJsOptions): SplitJsInstance {
     val splitJsDirection = if (options.direction == Dir.Horizontal) "vertical" else "horizontal"
-    return splitJsExt(jsArrayOf(*elements.toTypedArray()), obj {
-        sizes = jsArrayOf(*options.sizes.map { it.toJsNumber() }.toTypedArray())
+    return splitJsExt(elements.toTypedArray().toJsArray(), obj {
+        sizes = options.sizes.map { it.toJsNumber() }.toTypedArray().toJsArray()
         direction = splitJsDirection
         gutterSize = options.gutterSize
         if (options.gutterAlign != null) gutterAlign = options.gutterAlign.toString()

@@ -30,11 +30,11 @@ import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import dev.kilua.utils.unsafeCast
 import web.events.EventType
 import web.html.HTMLButtonElement
 import web.mouse.MouseEvent
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 
 /**
  * Button types.
@@ -94,7 +94,7 @@ public open class Button(
      * The type of the button.
      */
     public override var type: ButtonType by updatingProperty(type) {
-        element.type = it.value.toJsString().unsafeCast()
+        element.type = it.value.toJsString().unsafeCast<web.html.ButtonType>()
     }
 
     /**
@@ -131,7 +131,7 @@ public open class Button(
     init {
         if (renderConfig.isDom) {
             @Suppress("LeakingThis")
-            element.type = type.value.toJsString().unsafeCast()
+            element.type = type.value.toJsString().unsafeCast<web.html.ButtonType>()
             if (disabled != null) {
                 @Suppress("LeakingThis")
                 element.disabled = disabled

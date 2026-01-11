@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
-import dev.kilua.externals.JsArray
 import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RemoteData
 import dev.kilua.rpc.RemoteFilter
@@ -36,12 +35,11 @@ import dev.kilua.rpc.RemoteSorter
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.utils.Serialization
-import dev.kilua.utils.jsArrayOf
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.promise
 import dev.kilua.utils.rem
-import dev.kilua.utils.unsafeCast
+import js.array.jsArrayOf
 import js.globals.globalThis
 import js.json.parse
 import js.json.stringify
@@ -52,8 +50,10 @@ import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
 import web.http.RequestInit
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 import kotlin.js.toJsString
 import kotlin.js.undefined
+import kotlin.js.unsafeCast
 import kotlin.reflect.KClass
 
 public open class TabulatorRemote<T : Any>(
@@ -310,7 +310,7 @@ public suspend fun <T : Any, E : Any> getDataForTabulatorRemote(
     size: String?,
     filters: String?,
     sorters: String?
-): JsArray<JsAny> {
+): JsArray<out JsAny> {
     val (url, method) = serviceManager.requireCall(function)
     val callAgent = CallAgent()
     val state = stateFunction?.invoke()?.let { stringify(it.toJsString()) }
@@ -329,10 +329,10 @@ public suspend fun <T : Any, E : Any> getDataForTabulatorRemote(
         if (result.jsGet("data") == null) {
             result.jsSet("data", jsArrayOf<JsAny>())
         }
-        result.unsafeCast()
+        result.unsafeCast<JsArray<out JsAny>>()
     } else if (result.jsGet("data") == null) {
         jsArrayOf()
     } else {
-        result.jsGet("data")!!.unsafeCast()
+        result.jsGet("data")!!.unsafeCast<JsArray<out JsAny>>()
     }
 }

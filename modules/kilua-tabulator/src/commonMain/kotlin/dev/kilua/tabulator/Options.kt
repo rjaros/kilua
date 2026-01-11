@@ -30,7 +30,6 @@ import dev.kilua.core.SafeDomFactory
 import dev.kilua.externals.CellComponent
 import dev.kilua.externals.CellComponentBase
 import dev.kilua.externals.ColumnComponent
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.RowComponent
 import dev.kilua.externals.TabulatorMenuItem
 import dev.kilua.externals.toJsAny
@@ -39,10 +38,8 @@ import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.obj
-import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.toList
-import dev.kilua.utils.unsafeCast
 import js.core.JsInt
 import js.core.JsNumber
 import js.core.JsPrimitives.toJsDouble
@@ -55,13 +52,18 @@ import web.dom.document
 import web.events.Event
 import web.html.HTMLElement
 import web.storage.localStorage
+import web.timers.Timeout
 import web.timers.clearTimeout
 import web.timers.setTimeout
 import web.window.window
 import kotlin.js.JsAny
+import kotlin.js.JsArray
+import kotlin.js.toJsArray
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
+import kotlin.js.toList
 import kotlin.js.undefined
+import kotlin.js.unsafeCast
 import kotlin.reflect.KClass
 
 /**
@@ -780,7 +782,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             if (onRendered != undefined) {
                 onRendered {
                     if (EditorRoot.root != null) {
-                        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsInt().unsafeCast()) }
+                        EditorRoot.disposeTimer?.let { clearTimeout(it.toJsInt().unsafeCast<Timeout>()) }
                         EditorRoot.root?.dispose()
                     }
                     EditorRoot.root = root(rootElement, false, tabulator.renderConfig) {
@@ -948,7 +950,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         "hideInHtml" to hideInHtml,
         "sorter" to (sorterFunction?.let { f ->
             toJsAny { a: JsAny, b: JsAny, aRow: RowComponent, bRow: RowComponent, column: ColumnComponent, dir: String, sorterParams: JsAny? ->
-                f(a, b, aRow, bRow, column, dir, sorterParams).toJsDouble().unsafeCast()
+                f(a, b, aRow, bRow, column, dir, sorterParams).toJsDouble().unsafeCast<JsNumber>()
             }
         } ?: sorter?.value),
         "sorterParams" to sorterParams,
@@ -1096,7 +1098,7 @@ public data class TabulatorOptions<T : Any>(
     val scrollToRowPosition: RowPosition? = null,
     val scrollToRowIfVisible: Boolean? = null,
     val index: String? = null,
-    val data: JsArray<JsAny>? = null,
+    val data: JsArray<out JsAny>? = null,
     val ajaxURL: String? = null,
     val ajaxParams: JsAny? = null,
     val ajaxConfig: JsAny? = null,

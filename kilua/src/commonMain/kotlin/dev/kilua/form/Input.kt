@@ -30,10 +30,10 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
-import dev.kilua.utils.unsafeCast
 import web.events.Event
 import web.html.HTMLInputElement
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 
 /**
  * Base interface form HTML input components.
@@ -214,7 +214,7 @@ public abstract class Input<T : Any>(
      * The type attribute of the generated HTML input element.
      */
     public override var type: InputType by updatingProperty(type) {
-        element.type = it.value.toJsString().unsafeCast()
+        element.type = it.value.toJsString().unsafeCast<web.html.InputType>()
     }
 
     /**
@@ -334,7 +334,7 @@ public abstract class Input<T : Any>(
      */
     public override var autocomplete: Autocomplete? by updatingProperty {
         if (it != null) {
-            element.autocomplete = it.value.toJsString().unsafeCast()
+            element.autocomplete = it.value.toJsString().unsafeCast<web.autofill.AutoFill>()
         } else {
             element.removeAttribute("autocomplete")
         }
@@ -462,7 +462,7 @@ public abstract class Input<T : Any>(
                 element.value = value.toString()
             }
             @Suppress("LeakingThis")
-            element.type = type.value.toJsString().unsafeCast()
+            element.type = type.value.toJsString().unsafeCast<web.html.InputType>()
             if (name != null) {
                 @Suppress("LeakingThis")
                 element.name = name

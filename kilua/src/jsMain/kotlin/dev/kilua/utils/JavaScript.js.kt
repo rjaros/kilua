@@ -22,9 +22,6 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.JsArray
-import kotlin.js.unsafeCast as unsafeCastJs
-
 @Suppress("UnsafeCastFromDynamic")
 public actual fun delete(o: JsAny, key: String): Unit = js("delete o[key]")
 
@@ -32,12 +29,7 @@ public actual fun jsTypeOf(o: JsAny?): String = kotlin.js.jsTypeOf(o)
 
 @Suppress("NOTHING_TO_INLINE")
 public actual inline fun <T> Any?.cast(): T {
-    return this.unsafeCastJs<T>()
-}
-
-@Suppress("NOTHING_TO_INLINE")
-public actual inline fun <T : JsAny> JsAny.unsafeCast(): T {
-    return this.unsafeCastJs<T>()
+    return this.unsafeCast<T>()
 }
 
 @Suppress("UnsafeCastFromDynamic")

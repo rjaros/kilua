@@ -43,12 +43,11 @@ import dev.kilua.utils.jsSet
 import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toDate
-import dev.kilua.utils.toJsArray
 import dev.kilua.utils.toKebabCase
-import dev.kilua.utils.unsafeCast
 import js.core.JsPrimitives.toJsInt
 import js.date.Date
 import js.intl.DateTimeFormat
+import js.intl.DateTimeFormatOptions
 import kotlinx.datetime.LocalDate
 import web.dom.document
 import web.events.Event
@@ -56,7 +55,9 @@ import web.events.EventType
 import web.events.addEventListener
 import web.events.removeEventListener
 import kotlin.js.JsAny
+import kotlin.js.toJsArray
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 import kotlin.time.Duration
 
 /**
@@ -767,7 +768,7 @@ public abstract class AbstractRichDateTime(
          */
         private fun guessHourCycle(language: String): HourCycle? {
             val template = jsObjectOf("hour" to "numeric")
-            val hourCycle = DateTimeFormat(language, template.unsafeCast()).resolvedOptions().hourCycle.toString()
+            val hourCycle = DateTimeFormat(language, template.unsafeCast<DateTimeFormatOptions>()).resolvedOptions().hourCycle.toString()
             return HourCycle.entries.find { it.name.lowercase() == hourCycle }
         }
     }

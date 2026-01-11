@@ -22,9 +22,6 @@
 
 package dev.kilua.utils
 
-import dev.kilua.externals.JsArray
-import dev.kilua.externals.get
-import dev.kilua.externals.set
 import js.array.ArrayLike
 import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsInt
@@ -33,16 +30,18 @@ import js.objects.Object
 import js.objects.unsafeJso
 import js.reflect.Reflect
 import kotlin.js.JsAny
-import kotlin.js.JsString
+import kotlin.js.JsArray
+import kotlin.js.set
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
+import kotlin.js.toList
 import kotlin.js.undefined
-import kotlin.toString
+import kotlin.js.unsafeCast
 
 /**
  * Create a JS object with a block of code to set its properties.
  */
-public inline fun<T: JsAny> obj(block: T.() -> Unit): T = unsafeJso(block)
+public inline fun <T : JsAny> obj(block: T.() -> Unit): T = unsafeJso(block)
 
 /**
  * Create an empty JS object
@@ -68,7 +67,7 @@ public fun JsAny.jsGet(key: String): JsAny? {
  * Get the list of keys from JS Object
  */
 public fun keys(o: JsAny): List<String> =
-    Object.keys(o).unsafeCast<JsArray<JsString>>().toArray<JsString>().asList().map { it.toKotlinString() }
+    Object.keys(o).toList().map { it.toKotlinString() }
 
 /**
  * Copies all properties from source object to target object
@@ -93,11 +92,6 @@ public expect fun jsTypeOf(o: JsAny?): String
 public expect inline fun <T> Any?.cast(): T
 
 /**
- * Utility extension function for unsafe casting. Uses unsafeCast() on JS and WasmJs.
- */
-public expect inline fun <T : JsAny> JsAny.unsafeCast(): T
-
-/**
  * Returns whether the given value is an array
  */
 public expect fun isArray(o: JsAny?): Boolean
@@ -109,53 +103,10 @@ public expect fun isArray(o: JsAny?): Boolean
 public expect fun <T : JsAny> concat(array1: JsArray<T>, array2: JsArray<T>): JsArray<T>
 
 /**
- * Convert JsArray to Kotlin Array.
- */
-public inline fun <reified T : JsAny> JsArray<T>.toArray(): Array<T> {
-    return Array(length) { get(it)!! }
-}
-
-/**
- * Convert Kotlin Array to JsArray.
- */
-public fun <T : JsAny> Array<T>.toJsArray(): JsArray<T> {
-    return jsArrayOf(*this)
-}
-
-/**
- * Convert JsArray to Kotlin List.
- */
-public fun <T : JsAny> JsArray<T>.toList(): List<T> {
-    return List(length) { get(it)!! }
-}
-
-/**
- * Convert Kotlin List to JsArray.
- */
-public fun <T : JsAny> List<T>.toJsArray(): JsArray<T> {
-    val array = JsArray<T>()
-    for (i in this.indices) {
-        array[i] = this[i]
-    }
-    return array
-}
-
-/**
  * Convert ArrayLike to Kotlin List.
  */
 public fun <T : JsAny> ArrayLike<T>.toList(): List<T> {
     return List(length) { get(it) }
-}
-
-/**
- * Create a JsArray object.
- */
-public fun <T : JsAny> jsArrayOf(vararg elements: T): JsArray<T> {
-    val array = JsArray<T>()
-    for (i in elements.indices) {
-        array[i] = elements[i]
-    }
-    return array
 }
 
 /**

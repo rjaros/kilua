@@ -23,7 +23,6 @@
 
 package dev.kilua.maps
 
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.leaflet.control.Attribution
 import dev.kilua.externals.leaflet.control.Attribution.AttributionOptions
 import dev.kilua.externals.leaflet.control.Control.LayersObject
@@ -67,9 +66,10 @@ import dev.kilua.externals.leaflet.layer.vector.SVG
 import dev.kilua.externals.leaflet.map.LeafletMap
 import dev.kilua.externals.leaflet.map.LeafletMap.LeafletMapOptions
 import dev.kilua.utils.obj
-import dev.kilua.utils.toJsArray
 import web.html.HTMLElement
 import web.html.HTMLVideoElement
+import kotlin.js.JsArray
+import kotlin.js.toJsArray
 import kotlin.js.toJsString
 
 /**

@@ -25,6 +25,7 @@ package dev.kilua.externals
 
 import web.html.HTMLElement
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.JsString
 
@@ -47,7 +48,7 @@ public external class TomSelectRendersJs : JsAny {
  * Tom Select callbacks configuration.
  */
 public external class TomSelectCallbacksJs : JsAny {
-    public var load: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)
+    public var load: ((query: String, callback: (JsArray<out JsAny>) -> Unit) -> Unit)
     public var shouldLoad: ((query: String) -> Boolean)
     public var score: ((search: String) -> (JsAny) -> Int)
     public var onInitialize: (() -> Unit)
@@ -83,7 +84,7 @@ public external class TomSelectOptionsJs : JsAny {
     public var options: JsArray<JsAny>
     public var controlInput: HTMLElement?
     public var plugins: JsAny
-    public var load: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)
+    public var load: ((query: String, callback: (JsArray<out JsAny>) -> Unit) -> Unit)
     public var render: TomSelectRendersJs
     public var hideSelected: Boolean
     public var closeAfterSelect: Boolean

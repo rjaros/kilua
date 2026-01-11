@@ -39,9 +39,9 @@ import dev.kilua.utils.jsGet
 import dev.kilua.utils.rem
 import dev.kilua.utils.toDate
 import dev.kilua.utils.toLocalDate
-import dev.kilua.utils.unsafeCast
 import kotlinx.datetime.LocalDate
 import web.events.Event
+import kotlin.js.unsafeCast
 
 /**
  * Tempus Dominus rich date component.

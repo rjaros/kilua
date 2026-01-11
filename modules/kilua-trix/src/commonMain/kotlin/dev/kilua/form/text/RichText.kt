@@ -29,7 +29,6 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.core.SafeDomFactory
-import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.externals.getEditorFromElement
 import dev.kilua.form.InputType
 import dev.kilua.form.StringFormControl
@@ -44,14 +43,15 @@ import dev.kilua.initializeTrix
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
+import dev.kilua.utils.buildCustomEventInit
 import dev.kilua.utils.clear
 import dev.kilua.utils.toList
-import dev.kilua.utils.unsafeCast
+import web.events.Event
 import web.html.HTMLButtonElement
 import web.html.HTMLElement
 import web.html.HTMLInputElement
-import web.events.Event
 import web.html.HtmlSource
+import kotlin.js.unsafeCast
 
 /**
  * Trix rich text editor component.

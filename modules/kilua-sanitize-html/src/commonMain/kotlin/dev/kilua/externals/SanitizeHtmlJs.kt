@@ -24,6 +24,7 @@
 package dev.kilua.externals
 
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.JsString
 

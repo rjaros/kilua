@@ -26,7 +26,7 @@ import dev.kilua.externals.Trix
 import dev.kilua.externals.TrixLocale
 import dev.kilua.utils.assign
 import dev.kilua.utils.obj
-import dev.kilua.utils.unsafeCast
+import kotlin.js.unsafeCast
 
 internal actual fun getTrixLocaleEn(): TrixLocale {
     return obj().apply { assign(this, Trix.config.lang) }.unsafeCast()

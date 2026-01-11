@@ -28,12 +28,12 @@ import dev.kilua.compose.ComponentNode
 import dev.kilua.core.IComponent
 import dev.kilua.core.RenderConfig
 import dev.kilua.html.helpers.PropertyListBuilder
-import dev.kilua.utils.unsafeCast
 import web.canvas.CanvasRenderingContext2D
 import web.canvas.CanvasRenderingContext2DSettings
 import web.html.HTMLCanvasElement
 import web.rendering.RenderingContextId
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 
 /**
  * HTML Canvas component.

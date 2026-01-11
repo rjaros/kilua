@@ -24,9 +24,9 @@
 
 package dev.kilua.externals.leaflet.layer
 
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.leaflet.geo.LatLngBounds
 import dev.kilua.externals.leaflet.layer.vector.Path.PathOptions
+import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
 

@@ -22,7 +22,6 @@
 
 package dev.kilua.maps
 
-import dev.kilua.externals.JsArray
 import dev.kilua.externals.leaflet.geo.CRS
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geo.LatLngBounds
@@ -31,6 +30,7 @@ import dev.kilua.externals.leaflet.layer.vector.Renderer
 import dev.kilua.externals.leaflet.map.LeafletMap.LeafletMapOptions
 import dev.kilua.utils.obj
 import kotlin.js.JsAny
+import kotlin.js.JsArray
 
 /**
  * Options for the Leaflet Map.

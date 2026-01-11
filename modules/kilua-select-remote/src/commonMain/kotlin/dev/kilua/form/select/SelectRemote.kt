@@ -35,13 +35,13 @@ import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.rpc.SimpleRemoteOption
 import dev.kilua.utils.KiluaScope
 import dev.kilua.utils.StringPair
-import dev.kilua.utils.unsafeCast
 import js.json.stringify
 import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
 import web.console.console
 import web.http.RequestInit
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 
 /**
  * Creates [Select] component with a remote data source, returning a reference.

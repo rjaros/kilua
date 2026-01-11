@@ -47,7 +47,6 @@ import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toKebabCase
-import dev.kilua.utils.unsafeCast
 import js.core.JsPrimitives.toJsDouble
 import js.core.JsPrimitives.toJsInt
 import js.json.parse
@@ -72,6 +71,7 @@ import web.window.WindowName
 import kotlin.js.JsAny
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
+import kotlin.js.unsafeCast
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 
@@ -145,7 +145,7 @@ public class Form<K : Any>(
      */
     public var method: FormMethod? by updatingProperty(method) {
         if (it != null) {
-            element.method = it.value.toJsString().unsafeCast()
+            element.method = it.value.toJsString().unsafeCast<web.form.FormMethod>()
         } else {
             element.removeAttribute("method")
         }
@@ -187,7 +187,7 @@ public class Form<K : Any>(
      */
     public var enctype: FormEnctype? by updatingProperty(enctype) {
         if (it != null) {
-            element.enctype = it.value.toJsString().unsafeCast()
+            element.enctype = it.value.toJsString().unsafeCast<web.form.FormEncType>()
         } else {
             element.removeAttribute("enctype")
         }
@@ -271,7 +271,7 @@ public class Form<K : Any>(
      */
     public var autocomplete: FormAutocomplete? by updatingProperty {
         if (it != null) {
-            element.autocomplete = it.value.toJsString().unsafeCast()
+            element.autocomplete = it.value.toJsString().unsafeCast<web.autofill.AutoFillBase>()
         } else {
             element.removeAttribute("autocomplete")
         }
@@ -381,13 +381,13 @@ public class Form<K : Any>(
     init {
         if (renderConfig.isDom) {
             if (method != null) {
-                element.method = method.value.toJsString().unsafeCast()
+                element.method = method.value.toJsString().unsafeCast<web.form.FormMethod>()
             }
             if (action != null) {
                 element.action = action
             }
             if (enctype != null) {
-                element.enctype = enctype.value.toJsString().unsafeCast()
+                element.enctype = enctype.value.toJsString().unsafeCast<web.form.FormEncType>()
             }
         }
         mapToObjectConverter = serializer?.let {

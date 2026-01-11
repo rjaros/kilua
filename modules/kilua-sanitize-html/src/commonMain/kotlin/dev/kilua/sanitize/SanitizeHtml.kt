@@ -25,9 +25,9 @@ package dev.kilua.sanitize
 import dev.kilua.externals.SanitizeHtmlOptionsJs
 import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
-import dev.kilua.utils.toJsArray
 import js.regexp.RegExp
 import kotlin.js.JsAny
+import kotlin.js.toJsArray
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
 
