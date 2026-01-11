@@ -88,10 +88,15 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
                 pagesList.forEach { page ->
                     val content = URI("http://localhost:8080${page}").toURL().readContent(headers)
                     if (content != null) {
-                        val fileName = if (page.endsWith("/")) {
-                            page + "index.html"
+                        val isParentPage = pagesList.any { it != page && it.startsWith("$page/") }
+                        val fileName = if (!isParentPage) {
+                            if (page.endsWith("/")) {
+                                page + "index.html"
+                            } else {
+                                "$page.html"
+                            }
                         } else {
-                            "$page.html"
+                            "$page/index.html"
                         }
                         println("Exporting $fileName")
                         val destinationFile = exportDirectory.file(fileName.drop(1)).get().asFile
