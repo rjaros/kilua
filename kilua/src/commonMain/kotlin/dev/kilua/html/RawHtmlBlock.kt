@@ -32,10 +32,26 @@ import web.html.HtmlSource
 /**
  * HTML Div component with raw HTML content.
  */
+public interface IRawHtmlBlock : IDiv {
+    /**
+     * The raw HTML content.
+     */
+    public val rawHtml: String
+
+    /**
+     * Set the raw HTML content.
+     */
+    @Composable
+    public fun rawHtml(rawHtml: String)
+}
+
+/**
+ * HTML Div component with raw HTML content.
+ */
 public open class RawHtmlBlock(
     rawHtml: String,
     renderConfig: RenderConfig = RenderConfig.Default
-) : Div(renderConfig = renderConfig) {
+) : Div(renderConfig = renderConfig), IRawHtmlBlock {
 
     init {
         @Suppress("LeakingThis")
@@ -46,8 +62,15 @@ public open class RawHtmlBlock(
         }
     }
 
-    public var rawHtml: String by updatingProperty(rawHtml) {
+    public override var rawHtml: String by updatingProperty(rawHtml) {
         element.innerHTML = HtmlSource(it)
+    }
+
+    @Composable
+    override fun rawHtml(rawHtml: String): Unit = composableProperty("rawHtml", {
+        this.rawHtml = ""
+    }) {
+        this.rawHtml = rawHtml
     }
 
     override fun renderToStringBuilder(builder: StringBuilder) {
@@ -61,11 +84,12 @@ public open class RawHtmlBlock(
  * Creates a [RawHtmlBlock] component.
  *
  * @param rawHtml the raw HTML content
+ * @param setup the setup block for additional configuration
  */
 @Composable
-public fun IComponent.rawHtmlBlock(rawHtml: String) {
+public fun IComponent.rawHtmlBlock(rawHtml: String, setup: @Composable IRawHtmlBlock.() -> Unit = {}) {
     val component = remember { RawHtmlBlock(rawHtml, renderConfig = renderConfig) }
     ComponentNode(component, {
         set(rawHtml) { updateProperty(RawHtmlBlock::rawHtml, it) }
-    }) {}
+    }, setup)
 }
