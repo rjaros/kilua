@@ -23,10 +23,11 @@
 
 package dev.kilua.externals
 
-import kotlin.js.JsModule
 import kotlin.js.JsAny
+import kotlin.js.JsModule
+import kotlin.js.definedExternally
 
-internal external class MarkedOptionsJs : JsAny {
+internal external interface MarkedOptionsJs : JsAny {
     var gfm: Boolean
     var breaks: Boolean
     var pedantic: Boolean
@@ -36,6 +37,10 @@ internal external class MarkedOptionsJs : JsAny {
     var walkTokens: (JsAny) -> Unit
 }
 
-internal external fun parse(text: String, options: MarkedOptionsJs): String
+internal external fun parse(text: String, options: MarkedOptionsJs = definedExternally): String
 
 internal external fun use(vararg extension: JsAny)
+
+internal external class Marked(options: MarkedOptionsJs = definedExternally, vararg extension: JsAny) : JsAny {
+    fun parse(text: String, options: MarkedOptionsJs = definedExternally): String
+}

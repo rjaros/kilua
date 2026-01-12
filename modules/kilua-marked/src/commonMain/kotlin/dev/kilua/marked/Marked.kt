@@ -55,7 +55,7 @@ internal fun MarkedOptions.toJs(): MarkedOptionsJs {
 }
 
 /**
- * Parse markdown text to HTML.
+ * Parse Markdown text to HTML.
  *
  * @param text markdown text
  * @param options parser options
@@ -72,4 +72,29 @@ public fun parseMarkdown(text: String, options: MarkedOptions = MarkedOptions())
  */
 public fun useExtension(vararg ext: JsAny) {
     return use(*ext)
+}
+
+/**
+ * Marked parser instance.
+ *
+ * @param options parser options
+ * @param extension extension objects
+ */
+public class Marked(options: MarkedOptions, vararg extension: JsAny) {
+
+    public constructor(vararg extension: JsAny) : this(MarkedOptions(), *extension)
+
+    private val markedInstance = dev.kilua.externals.Marked(options.toJs(), *extension)
+
+    /**
+     * Parse Markdown text to HTML.
+     *
+     * @param text markdown text
+     * @param options parser options
+     * @return HTML text
+     */
+    public fun parse(text: String, options: MarkedOptions = MarkedOptions()): String {
+        return markedInstance.parse(text, options.toJs())
+    }
+
 }
