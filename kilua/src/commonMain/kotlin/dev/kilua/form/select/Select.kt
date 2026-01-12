@@ -133,6 +133,12 @@ public open class Select(
     public override var value: String? by updatingProperty(
         value,
         notifyFunction = { withStateFlowDelegate.updateStateFlow(it) }) {
+        if (it == null) {
+            val realNullValue = getRealNullValue()
+            if (realNullValue != null) {
+                this.value = getRealNullValue()
+            }
+        }
         mapValueToOptions()
     }
 
@@ -292,6 +298,19 @@ public open class Select(
         @Suppress("LeakingThis")
         onChangeDirect {
             mapOptionsToValue()
+        }
+    }
+
+    /**
+     * Gets non-null value for Select with only some non-empty options.
+     */
+    protected open fun getRealNullValue(): String? {
+        val allOptions = findAllOptions()
+        val isEmptyOption = allOptions.any { it.value == SELECT_EMPTY_VALUE }
+        return if (isEmptyOption) {
+            null
+        } else {
+            allOptions.firstOrNull()?.value
         }
     }
 
