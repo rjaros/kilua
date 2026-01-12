@@ -2424,6 +2424,9 @@ class App : Application() {
 
                             select(listOfPairs("Alaska", "Alabama"), value = null, className = "form-select", required = true) {
                                 bind("state")
+                                stateFlow.onEach {
+                                    console.log("state changed: $it")
+                                }.launchIn(KiluaScope)
                             }
                             div("invalid-feedback") {
                                 +"Please select a valid state."
@@ -2458,6 +2461,11 @@ class App : Application() {
                                     this@form.className = "row g-3 was-validated"
                                     val data = this@form.getData()
                                     console.log(data.toString())
+                                }
+                            }
+                            button("Clear") {
+                                onClick {
+                                    this@form.clearData()
                                 }
                             }
                         }
