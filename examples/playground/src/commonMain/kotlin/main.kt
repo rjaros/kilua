@@ -943,27 +943,29 @@ class App : Application() {
 
                 atom("Some label with an icon", "fas fa-plus", separator = " ", iconFirst = false)
 
-                margin(20.px)
-                var enabled by remember { mutableStateOf(true) }
-
-                val width: CssSize by animateCssSizeAsState(if (enabled) 100.px else 900.px)
-                val color: Color by animateColorAsState(if (enabled) Color.hex(0xff0000) else Color.hex(0x0000ff))
                 div {
-                    background(color)
-                    width(width)
-                    height(300.px)
-                    border(1.px, BorderStyle.Solid, Color.Blue)
-                    +"Test 1"
-                    onMouseEnter {
-                        enabled = false
+                    margin(20.px)
+                    var enabled by remember { mutableStateOf(true) }
+
+                    val width: CssSize by animateCssSizeAsState(if (enabled) 100.px else 900.px)
+                    val color: Color by animateColorAsState(if (enabled) Color.hex(0xff0000) else Color.hex(0x0000ff))
+                    div {
+                        background(color)
+                        width(width)
+                        height(300.px)
+                        border(1.px, BorderStyle.Solid, Color.Blue)
+                        +"Test 1"
+                        onMouseEnter {
+                            enabled = false
+                        }
+                        onMouseLeave {
+                            enabled = true
+                        }
                     }
-                    onMouseLeave {
-                        enabled = true
-                    }
-                }
-                button("Toggle") {
-                    onClick {
-                        enabled = !enabled
+                    button("Toggle") {
+                        onClick {
+                            enabled = !enabled
+                        }
                     }
                 }
 
