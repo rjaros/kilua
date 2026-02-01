@@ -1,5 +1,4 @@
 plugins {
-    `kotlin-dsl`
     kotlin("jvm")
     alias(libs.plugins.kotlinx.serialization)
     id("java-gradle-plugin")
@@ -21,7 +20,6 @@ detekt {
     buildUponDefaultConfig = true
 }
 
-@Suppress("UnstableApiUsage")
 gradlePlugin {
     website.set(kiluaUrl)
     vcsUrl.set(kiluaVcsUrl)

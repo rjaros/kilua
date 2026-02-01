@@ -25,7 +25,6 @@ package dev.kilua.gradle
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.ProviderFactory
-import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
 /**
@@ -53,7 +52,7 @@ public abstract class KiluaExtension @Inject constructor(
         val convention = providers.gradleProperty("dev.kilua.plugin.$property")
             .map { it.toBoolean() }
             .orElse(default)
-        return objects.property<Boolean>().convention(convention)
+        return objects.property(Boolean::class.java).convention(convention)
     }
 
     private fun kiluaGradleProperty(
@@ -62,6 +61,6 @@ public abstract class KiluaExtension @Inject constructor(
     ): Property<String> {
         val convention = providers.gradleProperty("dev.kilua.plugin.$property")
             .orElse(default)
-        return objects.property<String>().convention(convention)
+        return objects.property(String::class.java).convention(convention)
     }
 }
