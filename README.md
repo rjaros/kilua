@@ -35,15 +35,12 @@ Contributions and PRs are welcomed. All artifacts are published to Maven Central
 
 ## Documentation and examples
 
-The official guide is published at [https://kilua.gitbook.io/kilua-guide](https://kilua.gitbook.io/kilua-guide). 
-It's still a work in progress and may be incomplete.
+[Kilua website](https://kilua.dev) contains a comprehensive development guide.
 
 Current API documentation is published at [https://rjaros.github.io/kilua/api/](https://rjaros.github.io/kilua/api/).
 
 Different example applications can be found in the [examples directory](https://github.com/rjaros/kilua/tree/main/examples), 
 including fully compatible TodoMVC and Realworld.io (with SSR) implementations.
-
-More documentation, including tutorials and guides, is planned for the future.
 
 ## Building and running the examples
 
@@ -114,24 +111,26 @@ fun main() {
 Kilua is the first Kotlin/Wasm and Kotlin/JS web framework supporting true Server-Side Rendering. 
 SSR is a crucial concept in modern web development that enhances user experience 
 and boosts SEO performance. Kilua SSR support is based on the possibility to run exactly the same 
-application code both in the browser and in NodeJs environment. What's more, you can easily use 
+application code both in the browser and in Node.js environment. What's more, you can easily use 
 WASM compilation target for much better performance.  
 
 ### SSR Features
 
 - Preparing application for SSR is as easy as changing the router class.
 - Ability to use external API calls and fullstack RPC services.
-- Automatically extracting CSS styles from JS bundle and injecting them into the HTML document before sending to the browser.
+- Automatically extracting CSS styles from JS bundle and injecting them into the HTML document before sending to the
+  browser.
 - Serialization of the application state from the server to the client side.
+- Ready to use modules for Ktor, Spring Boot, Micronaut, Javalin, Jooby and Vert.x servers.
 
 ### Current limitations
 
 - The URL address and the browser preferred locale need to be the only source of the application state.
 - Using browser APIs directly is not recommended.
 - Advanced JS components (like RichText, Tabulator etc.) are rendered on the server
-as simple HTML placeholders.
+  as simple HTML placeholders.
 - Rendering authenticated content is not supported at the moment.
-- The "hydration" is implemented in a very primitive way (by replacing the rendered content).
+- The "hydration" is implemented in a simple way (by replacing the rendered content).
 
 ## Leave a star
 
