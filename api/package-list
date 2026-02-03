@@ -5,7 +5,6 @@ module:kilua
 dev.kilua
 dev.kilua.compose
 dev.kilua.core
-dev.kilua.externals
 dev.kilua.form
 dev.kilua.form.check
 dev.kilua.form.color
