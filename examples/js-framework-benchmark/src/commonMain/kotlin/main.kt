@@ -20,28 +20,26 @@
  * SOFTWARE.
  */
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ComposeRuntimeFlags
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import dev.kilua.Application
 import dev.kilua.compose.root
-import dev.kilua.html.Span
+import dev.kilua.core.IComponent
 import dev.kilua.html.a
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.html.h1
-import dev.kilua.html.link
 import dev.kilua.html.span
 import dev.kilua.html.table
 import dev.kilua.html.tbody
 import dev.kilua.html.td
 import dev.kilua.html.tr
 import dev.kilua.startApplication
-import dev.kilua.utils.cast
-import web.events.Event
-import web.events.EventType
-import web.events.addEventListener
+import web.events.EventHandler
 
 var idCounter = 1
 
@@ -100,9 +98,14 @@ val nouns = arrayOf(
     "keyboard"
 )
 
+@Composable
+fun IComponent.group(content: @Composable IComponent.() -> Unit) {
+    content()
+}
+
 class App : Application() {
     var data by mutableStateOf(emptyList<Row>())
-    var selected by mutableStateOf<Row?>(null)
+    var selected by mutableStateOf<Int?>(null)
 
     override fun start() {
         root("root") {
@@ -194,33 +197,20 @@ class App : Application() {
                     table("table table-hover table-striped test-data") {
                         tbody {
                             for (chunk in data.chunked(100)) {
-                                key("${chunk.first().id}#${chunk.last().id}#${chunk.size}") {
+                                group {
                                     for (item in chunk) {
-                                        tr(if (selected?.id == item.id) "danger" else null) {
-                                            td(className = "col-md-1") {
-                                                +item.id.toString()
+                                        val isSelected = selected == item.id
+                                        row(
+                                            item, isSelected,
+                                            select = {
+                                                selected = item.id
+                                            },
+                                            delete = {
+                                                val newData = data.toMutableList()
+                                                newData.remove(item)
+                                                data = newData
                                             }
-                                            td(className = "col-md-4") {
-                                                a(label = item.label) {
-                                                    element.addEventListener(EventType<Event>("click"), {
-                                                        selected = item
-                                                    })
-                                                }
-                                            }
-                                            td(className = "col-md-1") {
-                                                link {
-                                                    span("glyphicon glyphicon-remove") {
-                                                        cast<Span>().setAttribute("aria-hidden", "true")
-                                                    }
-                                                    element.addEventListener(EventType<Event>("click"), {
-                                                        val newData = data.toMutableList()
-                                                        newData.remove(item)
-                                                        data = newData
-                                                    })
-                                                }
-                                            }
-                                            td(className = "col-md-6")
-                                        }
+                                        )
                                     }
                                 }
                             }
@@ -233,8 +223,38 @@ class App : Application() {
             }
         }
     }
+
+    @Composable
+    private fun IComponent.row(item: Row, selected: Boolean, select: () -> Unit, delete: () -> Unit) {
+        tr {
+            className(if (selected) "danger" else null)
+            td(className = "col-md-1") {
+                +item.id.toString()
+            }
+            td(className = "col-md-4") {
+                a(label = item.label) {
+                    element.onclick = EventHandler {
+                        select()
+                    }
+                }
+            }
+            td(className = "col-md-1") {
+                a {
+                    span("glyphicon glyphicon-remove") {
+                        attribute("aria-hidden", "true")
+                    }
+                    element.onclick = EventHandler {
+                        delete()
+                    }
+                }
+            }
+            td(className = "col-md-6")
+        }
+    }
 }
 
+@OptIn(ExperimentalComposeApi::class)
 fun main() {
+    ComposeRuntimeFlags.isLinkBufferComposerEnabled = true
     startApplication(::App)
 }

@@ -9,7 +9,6 @@ import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
-import org.koin.ksp.generated.module
 
 @Module
 @ComponentScan
@@ -21,5 +20,7 @@ fun Application.main() {
     routing {
         getAllServiceManagers().forEach { applyRoutes(it) }
     }
-    initRpc(PingModule().module)
+    initRpc {
+        modules(PingModule().module())
+    }
 }

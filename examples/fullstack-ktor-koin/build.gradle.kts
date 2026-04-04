@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
+    alias(libs.plugins.koin.compiler)
     id("org.jetbrains.compose")
     kotlin("plugin.compose")
     id("com.google.devtools.ksp")
@@ -103,8 +104,4 @@ composeCompiler {
             .filterNot { it == KotlinPlatformType.jvm }
             .asIterable()
     )
-}
-
-dependencies {
-    add("kspJvm", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin.annotations.get()}")
 }

@@ -172,10 +172,9 @@ import dev.kilua.utils.rem
 import dev.kilua.utils.today
 import dev.ktml.templates.KtmlRegistry
 import js.array.jsArrayOf
-import js.core.JsPrimitives.toJsInt
 import js.json.parse
+import js.numbers.JsNumbers.toJsInt
 import js.promise.Promise
-import js.promise.invoke
 import js.regexp.RegExp
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapNotNull
