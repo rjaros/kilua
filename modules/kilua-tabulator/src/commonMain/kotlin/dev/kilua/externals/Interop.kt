@@ -22,12 +22,12 @@
 
 package dev.kilua.externals
 
-import js.core.JsNumber
 import js.promise.Promise
 import web.dom.Element
 import web.events.Event
 import kotlin.js.JsAny
 import kotlin.js.JsArray
+import kotlin.js.JsNumber
 
 /**
  * A set of hrlper functions to convert different Kotlin functions to JavaScript functions (JsAny).

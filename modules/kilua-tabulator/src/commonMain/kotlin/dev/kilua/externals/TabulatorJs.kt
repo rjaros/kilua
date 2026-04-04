@@ -278,6 +278,7 @@ public open external class TabulatorJs(element: HTMLElement, options: JsAny?) : 
     public fun setSheetData(sheet: JsAny, data: JsAny)
     public fun activeSheet(sheet: JsAny)
     public fun removeSheet(sheet: JsAny)
+    public fun setMaxHeight(maxHeight: Int)
 }
 
 /**

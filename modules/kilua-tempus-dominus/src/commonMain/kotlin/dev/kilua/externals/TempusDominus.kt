@@ -24,8 +24,8 @@
 
 package dev.kilua.externals
 
-import js.core.JsInt
 import js.date.Date
+import js.numbers.JsInt
 import web.html.HTMLElement
 import kotlin.js.JsAny
 import kotlin.js.JsArray

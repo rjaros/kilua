@@ -22,7 +22,7 @@
 
 package dev.kilua.ssr
 
-import js.core.JsPrimitives.toKotlinString
+import js.string.JsStrings.toKotlinString
 import kotlin.js.JsAny
 import kotlin.js.JsArray
 import kotlin.js.JsString

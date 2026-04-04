@@ -74,7 +74,6 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
      *
      * To match `foo/bar`, create a [route] inside the first [route].
      */
-    @Routing
     @Composable
     public fun route(
         vararg route: String,
@@ -94,7 +93,6 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
         return relaxedRoute
     }
 
-    @Routing
     @Composable
     public fun redirect(vararg route: String, target: String, hide: Boolean = false) {
         val routes = route.check()
@@ -123,7 +121,6 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
     /**
      * Executes its children when the requested subroute is a non-empty [String].
      */
-    @Routing
     @Composable
     public fun string(nestedRoute: @Composable RouteBuilder.(String) -> Unit) {
         val currentPath = remainingPath.currentPath
@@ -138,7 +135,6 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
     /**
      * Executes its children when the requested subroute is a [Int].
      */
-    @Routing
     @Composable
     public fun int(nestedRoute: @Composable RouteBuilder.(Int) -> Unit) {
         val currentPath = remainingPath.currentPath
@@ -154,7 +150,6 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
     /**
      * Fallback if no matching route is found.
      */
-    @Routing
     @Composable
     public fun noMatch(content: @Composable NoMatch.() -> Unit) {
         if (match == Match.NoMatch) {
@@ -165,7 +160,6 @@ public class RouteBuilder internal constructor(private val basePath: String, pri
     @Immutable
     @Routing
     public class NoMatch internal constructor(public val remainingPath: String, public val parameters: Parameters?) {
-        @Routing
         @Composable
         public fun redirect(target: String, hide: Boolean = false) {
             val router = Router.current

@@ -35,7 +35,7 @@ import dev.kilua.html.IDiv
 import dev.kilua.html.button
 import dev.kilua.html.div
 import dev.kilua.utils.rem
-import js.core.JsPrimitives.toJsInt
+import js.numbers.JsNumbers.toJsInt
 
 /**
  * Pagination state.

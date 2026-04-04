@@ -44,11 +44,11 @@ import dev.kilua.utils.jsTypeOf
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
-import js.core.JsInt
-import js.core.JsPrimitives.toJsInt
-import js.core.JsPrimitives.toKotlinInt
 import js.json.parse
 import js.json.stringify
+import js.numbers.JsInt
+import js.numbers.JsNumbers.toJsInt
+import js.numbers.JsNumbers.toKotlinInt
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule

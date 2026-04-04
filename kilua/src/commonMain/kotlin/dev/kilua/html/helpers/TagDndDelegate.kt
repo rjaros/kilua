@@ -24,7 +24,7 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.Tag
-import js.core.JsPrimitives.toKotlinString
+import js.string.JsStrings.toKotlinString
 import web.dnd.DragEvent
 import web.html.HTMLElement
 import kotlin.js.toList

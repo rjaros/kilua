@@ -23,11 +23,11 @@
 
 package dev.kilua.externals
 
-import js.core.JsNumber
 import web.html.HTMLElement
 import kotlin.js.JsAny
 import kotlin.js.JsArray
 import kotlin.js.JsModule
+import kotlin.js.JsNumber
 import kotlin.js.JsString
 
 internal external class ImaskJs : JsAny {

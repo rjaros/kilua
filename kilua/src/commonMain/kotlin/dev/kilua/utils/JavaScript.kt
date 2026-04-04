@@ -23,12 +23,12 @@
 package dev.kilua.utils
 
 import js.array.ArrayLike
-import js.core.JsPrimitives.toJsDouble
-import js.core.JsPrimitives.toJsInt
-import js.core.JsPrimitives.toKotlinString
+import js.numbers.JsNumbers.toJsDouble
+import js.numbers.JsNumbers.toJsInt
 import js.objects.Object
 import js.objects.unsafeJso
 import js.reflect.Reflect
+import js.string.JsStrings.toKotlinString
 import kotlin.js.JsAny
 import kotlin.js.JsArray
 import kotlin.js.set

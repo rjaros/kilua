@@ -22,7 +22,7 @@
 
 package dev.kilua.ssr
 
-import io.javalin.Javalin
+import io.javalin.config.JavalinConfig
 import io.javalin.config.Key
 import io.javalin.http.ContentType
 import io.javalin.http.Context
@@ -45,7 +45,7 @@ private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Defa
 /**
  * Initialization function for Kilua Server-Side Rendering.
  */
-public fun Javalin.initSsr() {
+public fun JavalinConfig.initSsr() {
     val prop = Properties()
     val stream = this::class.java.getResourceAsStream("/application.properties")
     if (stream != null) {
@@ -68,23 +68,21 @@ public fun Javalin.initSsr() {
         contextPath,
         cacheTime
     )
-    with(unsafeConfig()) {
-        appData(SsrEngineKey, ssrEngine)
-        get("/") {
-            it.respondSsr()
+    appData(SsrEngineKey, ssrEngine)
+    routes.get("/") {
+        it.respondSsr()
+    }
+    routes.get("/index.html") {
+        it.respondSsr()
+    }
+    if (sitemap) {
+        routes.get("/sitemap.xml") {
+            it.respondSitemap()
         }
-        get("/index.html") {
-            it.respondSsr()
-        }
-        if (sitemap) {
-            get("/sitemap.xml") {
-                it.respondSitemap()
-            }
-        }
-        staticFiles.add("/assets", Location.CLASSPATH)
-        spaRoot.addHandler("/") { ctx ->
-            ctx.respondSsr()
-        }
+    }
+    staticFiles.add("/assets", Location.CLASSPATH)
+    spaRoot.addHandler("/") { ctx ->
+        ctx.respondSsr()
     }
 }
 

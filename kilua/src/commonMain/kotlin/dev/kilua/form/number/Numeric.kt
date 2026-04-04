@@ -35,7 +35,7 @@ import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
 import dev.kilua.utils.obj
 import dev.kilua.utils.toFixedNoRound
-import js.core.toLocaleString
+import js.numbers.toLocaleString
 import web.events.Event
 import kotlin.js.toJsString
 

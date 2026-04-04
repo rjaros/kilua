@@ -42,7 +42,7 @@ import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
-import js.core.JsPrimitives.toKotlinString
+import js.string.JsStrings.toKotlinString
 import web.dom.ElementId
 import web.dom.InsertPosition
 import web.dom.document

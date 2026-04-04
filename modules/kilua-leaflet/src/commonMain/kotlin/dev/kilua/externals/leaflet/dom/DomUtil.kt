@@ -27,10 +27,10 @@ package dev.kilua.externals.leaflet.dom
 import dev.kilua.externals.leaflet.dom.DomUtil.preventOutline
 import dev.kilua.externals.leaflet.dom.DomUtil.setPosition
 import dev.kilua.externals.leaflet.geometry.Point
-import js.core.JsNumber
 import web.html.HTMLElement
 import kotlin.js.JsAny
 import kotlin.js.JsModule
+import kotlin.js.JsNumber
 import kotlin.js.definedExternally
 
 /**

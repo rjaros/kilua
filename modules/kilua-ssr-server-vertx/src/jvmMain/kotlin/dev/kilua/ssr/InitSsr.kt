@@ -94,16 +94,16 @@ private suspend fun RoutingContext.respondSsr() {
     if (request().path() == "/favicon.ico") {
         response().setStatusCode(404).end()
     } else {
-        val uri = request().path() + (request().query()?.let { "?$it" } ?: "")
+        val uri = (request().path() ?: "/") + (request().query()?.let { "?$it" } ?: "")
         val language = request().getHeader("Accept-Language")?.split(",")?.firstOrNull()?.split(";")?.firstOrNull()
-        val ssrEngine = get<SsrEngine>(SsrEngineKey)
+        val ssrEngine = get<SsrEngine>(SsrEngineKey)!!
         response().putHeader("Content-Type", "text/html").end(ssrEngine.getSsrContent(uri, language))
     }
 }
 
 private suspend fun RoutingContext.respondSitemap() {
     val baseUrl = externalizeUrl()
-    val ssrEngine = get<SsrEngine>(SsrEngineKey)
+    val ssrEngine = get<SsrEngine>(SsrEngineKey)!!
     response().putHeader("Content-Type", "text/xml").end(ssrEngine.getSitemapContent(baseUrl))
 }
 

@@ -47,10 +47,10 @@ import dev.kilua.utils.nativeMapOf
 import dev.kilua.utils.obj
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toKebabCase
-import js.core.JsPrimitives.toJsDouble
-import js.core.JsPrimitives.toJsInt
 import js.json.parse
 import js.json.stringify
+import js.numbers.JsNumbers.toJsDouble
+import js.numbers.JsNumbers.toJsInt
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

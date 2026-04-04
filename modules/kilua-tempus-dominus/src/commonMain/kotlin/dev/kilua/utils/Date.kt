@@ -22,9 +22,9 @@
 
 package dev.kilua.utils
 
-import js.core.JsPrimitives.toJsDouble
-import js.core.JsPrimitives.toKotlinDouble
 import js.date.Date
+import js.numbers.JsNumbers.toJsDouble
+import js.numbers.JsNumbers.toKotlinDouble
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime

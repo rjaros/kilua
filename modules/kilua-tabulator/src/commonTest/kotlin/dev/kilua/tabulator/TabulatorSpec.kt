@@ -61,9 +61,9 @@ class TabulatorSpec : DomSpec {
         delay(100)
         assertEqualsHtml(
             """
-<div class="table-bordered table-sm tabulator" role="grid" tabulator-layout="fitColumns" style="height: 300px;">
+<div class="table-bordered table-sm tabulator" role="grid" aria-owns="tabulator-table-body" tabulator-layout="fitColumns" style="height: 300px;">
 <div class="tabulator-header" role="rowgroup">
-<div class="tabulator-header-contents" role="rowgroup">
+<div class="tabulator-header-contents">
 <div class="tabulator-headers" role="row" style="height: 0px;">
 <div class="tabulator-col tabulator-sortable tabulator-col-sorter-element" role="columnheader" aria-sort="none" tabulator-field="name" style="min-width: 40px; width: 40px; height: 0px;">
 <div class="tabulator-col-content">
@@ -111,13 +111,12 @@ City
 <span class="tabulator-col-resize-handle" style="height: 0px;">
 </span>
 </div>
-<br>
 <div class="tabulator-frozen-rows-holder" style="min-width: 0px;">
 </div>
 </div>
 </div>
 <div class="tabulator-tableholder" tabindex="0" style="height: calc(100% + 0px); max-height: calc(100% + 0px);">
-<div class="tabulator-table" role="rowgroup">
+<div class="tabulator-table" role="rowgroup" id="tabulator-table-body">
 </div>
 </div>
 </div>            """.trimIndent(),

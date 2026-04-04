@@ -22,7 +22,7 @@
 
 package dev.kilua.i18n
 
-import js.core.toLocaleString
+import js.numbers.toLocaleString
 import web.console.console
 import kotlin.js.toJsString
 import kotlin.text.dropLast

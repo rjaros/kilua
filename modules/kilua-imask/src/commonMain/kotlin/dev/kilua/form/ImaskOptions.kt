@@ -35,10 +35,10 @@ import dev.kilua.utils.assign
 import dev.kilua.utils.jsSet
 import dev.kilua.utils.obj
 import dev.kilua.utils.toKebabCase
-import js.core.JsNumber
-import js.core.JsPrimitives.toJsDouble
+import js.numbers.JsNumbers.toJsDouble
 import js.regexp.RegExp
 import kotlin.js.JsAny
+import kotlin.js.JsNumber
 import kotlin.js.toJsArray
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString

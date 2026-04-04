@@ -44,10 +44,10 @@ import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toDate
 import dev.kilua.utils.toKebabCase
-import js.core.JsPrimitives.toJsInt
 import js.date.Date
 import js.intl.DateTimeFormat
 import js.intl.DateTimeFormatOptions
+import js.numbers.JsNumbers.toJsInt
 import kotlinx.datetime.LocalDate
 import web.dom.document
 import web.events.Event

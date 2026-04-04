@@ -40,11 +40,10 @@ import dev.kilua.utils.jsSet
 import dev.kilua.utils.obj
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.toList
-import js.core.JsInt
-import js.core.JsNumber
-import js.core.JsPrimitives.toJsDouble
-import js.core.JsPrimitives.toJsInt
-import js.core.JsPrimitives.toKotlinInt
+import js.numbers.JsInt
+import js.numbers.JsNumbers.toJsDouble
+import js.numbers.JsNumbers.toJsInt
+import js.numbers.JsNumbers.toKotlinInt
 import js.promise.Promise
 import web.cssom.ClassName
 import web.dom.Element
@@ -58,6 +57,7 @@ import web.timers.setTimeout
 import web.window.window
 import kotlin.js.JsAny
 import kotlin.js.JsArray
+import kotlin.js.JsNumber
 import kotlin.js.toJsArray
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
@@ -1236,6 +1236,7 @@ public data class TabulatorOptions<T : Any>(
     val groupClosedShowCalcs: Boolean? = null,
     val columnCalcs: JsAny? = null,
     val downloadEncoder: JsAny? = null,
+    val selectableRangeBlurEditOnNavigate: Boolean? = null,
 )
 
 /**
@@ -1417,5 +1418,6 @@ internal fun <T : Any> TabulatorOptions<T>.toJs(
         "groupClosedShowCalcs" to groupClosedShowCalcs,
         "columnCalcs" to columnCalcs,
         "downloadEncoder" to downloadEncoder,
+        "selectableRangeBlurEditOnNavigate" to selectableRangeBlurEditOnNavigate,
     )
 }
