@@ -56,37 +56,39 @@ public fun ITag<*>.tooltip(
     html: Boolean = false,
     sanitize: Boolean = true
 ) {
-    disposePopover()
-    val tooltipTrigger = triggers?.joinToString(" ") { it.value }
-    val tooltipDelay: Bootstrap.TooltipDelay? = if (delay != null && hideDelay != null) {
-        obj {
-            show = delay.inWholeMilliseconds.toInt()
-            hide = hideDelay.inWholeMilliseconds.toInt()
-        }
-    } else if (delay != null) {
-        obj {
-            show = delay.inWholeMilliseconds.toInt()
-            hide = delay.inWholeMilliseconds.toInt()
-        }
-    } else if (hideDelay != null) {
-        obj {
-            show = 0
-            hide = hideDelay.inWholeMilliseconds.toInt()
-        }
-    } else null
-    val tooltip = Bootstrap.Tooltip(element, obj {
-        this.title = title
-        this.animation = animation
-        if (tooltipDelay != null) this.delay = tooltipDelay
-        if (placement != null) this.placement = placement.value
-        if (tooltipTrigger != null) this.trigger = tooltipTrigger
-        this.html = html
-        this.sanitize = sanitize
-    })
-    DisposableEffect("kilua_tooltip_${this.cast<Tag<*>>().componentId}") {
-        tooltip.enable()
-        onDispose {
-            tooltip.disable()
+    if (renderConfig.isDom) {
+        disposePopover()
+        val tooltipTrigger = triggers?.joinToString(" ") { it.value }
+        val tooltipDelay: Bootstrap.TooltipDelay? = if (delay != null && hideDelay != null) {
+            obj {
+                show = delay.inWholeMilliseconds.toInt()
+                hide = hideDelay.inWholeMilliseconds.toInt()
+            }
+        } else if (delay != null) {
+            obj {
+                show = delay.inWholeMilliseconds.toInt()
+                hide = delay.inWholeMilliseconds.toInt()
+            }
+        } else if (hideDelay != null) {
+            obj {
+                show = 0
+                hide = hideDelay.inWholeMilliseconds.toInt()
+            }
+        } else null
+        val tooltip = Bootstrap.Tooltip(element, obj {
+            this.title = title
+            this.animation = animation
+            if (tooltipDelay != null) this.delay = tooltipDelay
+            if (placement != null) this.placement = placement.value
+            if (tooltipTrigger != null) this.trigger = tooltipTrigger
+            this.html = html
+            this.sanitize = sanitize
+        })
+        DisposableEffect("kilua_tooltip_${this.cast<Tag<*>>().componentId}") {
+            tooltip.enable()
+            onDispose {
+                tooltip.disable()
+            }
         }
     }
 }
@@ -95,40 +97,40 @@ public fun ITag<*>.tooltip(
  * Show tooltip.
  */
 public fun ITag<*>.showTooltip() {
-    Bootstrap.Tooltip.getInstance(element)?.show()
+    if (renderConfig.isDom) Bootstrap.Tooltip.getInstance(element)?.show()
 }
 
 /**
  * Hide tooltip.
  */
 public fun ITag<*>.hideTooltip() {
-    Bootstrap.Tooltip.getInstance(element)?.hide()
+    if (renderConfig.isDom) Bootstrap.Tooltip.getInstance(element)?.hide()
 }
 
 /**
  * Toggle tooltip.
  */
 public fun ITag<*>.toggleTooltip() {
-    Bootstrap.Tooltip.getInstance(element)?.toggle()
+    if (renderConfig.isDom) Bootstrap.Tooltip.getInstance(element)?.toggle()
 }
 
 /**
  * Enable tooltip.
  */
 public fun ITag<*>.enableTooltip() {
-    Bootstrap.Tooltip.getInstance(element)?.enable()
+    if (renderConfig.isDom) Bootstrap.Tooltip.getInstance(element)?.enable()
 }
 
 /**
  * Disable tooltip.
  */
 public fun ITag<*>.disableTooltip() {
-    Bootstrap.Tooltip.getInstance(element)?.disable()
+    if (renderConfig.isDom) Bootstrap.Tooltip.getInstance(element)?.disable()
 }
 
 /**
  * Dispose tooltip.
  */
 public fun ITag<*>.disposeTooltip() {
-    Bootstrap.Tooltip.getInstance(element)?.dispose()
+    if (renderConfig.isDom) Bootstrap.Tooltip.getInstance(element)?.dispose()
 }

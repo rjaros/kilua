@@ -25,6 +25,7 @@ package dev.kilua.toastify
 import dev.kilua.ToastifyModule
 import dev.kilua.externals.ToastOptions
 import dev.kilua.externals.Toastify
+import dev.kilua.utils.isDom
 import dev.kilua.utils.obj
 import kotlin.time.Duration
 
@@ -133,34 +134,36 @@ internal object ToastifyObj {
         onClick: (() -> Unit)? = null,
         callback: (() -> Unit)? = null
     ) {
-        val positionType = when (position) {
-            ToastPosition.TopRight, ToastPosition.BottomRight -> "right"
-            ToastPosition.TopLeft, ToastPosition.BottomLeft -> "left"
-            else -> null
+        if (isDom) {
+            val positionType = when (position) {
+                ToastPosition.TopRight, ToastPosition.BottomRight -> "right"
+                ToastPosition.TopLeft, ToastPosition.BottomLeft -> "left"
+                else -> null
+            }
+            val gravityType = when (position) {
+                ToastPosition.TopRight, ToastPosition.TopLeft -> "top"
+                ToastPosition.BottomRight, ToastPosition.BottomLeft -> "bottom"
+                else -> null
+            }
+            val optJs = obj<ToastOptions> {
+                this.text = text
+                if (duration != null) this.duration = duration.inWholeMilliseconds.toInt()
+                if (destination != null) this.destination = destination
+                if (newWindow != null) this.newWindow = newWindow
+                if (close != null) this.close = close
+                if (gravityType != null) this.gravity = gravityType
+                if (positionType != null) this.position = positionType
+                if (avatar != null) this.avatar = avatar
+                this.className = className ?: type.className
+                if (stopOnFocus != null) this.stopOnFocus = stopOnFocus
+                if (escapeMarkup != null) this.escapeMarkup = escapeMarkup
+                if (oldestFirst != null) this.oldestFirst = oldestFirst
+                if (ariaLive != null) this.ariaLive = ariaLive
+                if (onClick != null) this.onClick = onClick
+                if (callback != null) this.callback = callback
+            }
+            Toastify(optJs).showToast()
         }
-        val gravityType = when (position) {
-            ToastPosition.TopRight, ToastPosition.TopLeft -> "top"
-            ToastPosition.BottomRight, ToastPosition.BottomLeft -> "bottom"
-            else -> null
-        }
-        val optJs = obj<ToastOptions> {
-            this.text = text
-            if (duration != null) this.duration = duration.inWholeMilliseconds.toInt()
-            if (destination != null) this.destination = destination
-            if (newWindow != null) this.newWindow = newWindow
-            if (close != null) this.close = close
-            if (gravityType != null) this.gravity = gravityType
-            if (positionType != null) this.position = positionType
-            if (avatar != null) this.avatar = avatar
-            this.className = className ?: type.className
-            if (stopOnFocus != null) this.stopOnFocus = stopOnFocus
-            if (escapeMarkup != null) this.escapeMarkup = escapeMarkup
-            if (oldestFirst != null) this.oldestFirst = oldestFirst
-            if (ariaLive != null) this.ariaLive = ariaLive
-            if (onClick != null) this.onClick = onClick
-            if (callback != null) this.callback = callback
-        }
-        Toastify(optJs).showToast()
     }
 
 }

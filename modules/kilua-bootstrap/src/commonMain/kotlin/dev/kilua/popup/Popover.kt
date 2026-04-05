@@ -58,39 +58,41 @@ public fun ITag<*>.popover(
     html: Boolean = false,
     sanitize: Boolean = true
 ) {
-    disposeTooltip()
-    val popoverTrigger = triggers?.joinToString(" ") { it.value }
-    val popoverDelay: Bootstrap.PopoverDelay? = if (delay != null && hideDelay != null) {
-        obj {
-            show = delay.inWholeMilliseconds.toInt()
-            hide = hideDelay.inWholeMilliseconds.toInt()
-        }
-    } else if (delay != null) {
-        obj {
-            show = delay.inWholeMilliseconds.toInt()
-            hide = delay.inWholeMilliseconds.toInt()
-        }
-    } else if (hideDelay != null) {
-        obj {
-            show = 0
-            hide = hideDelay.inWholeMilliseconds.toInt()
-        }
-    } else null
-    val popover = Bootstrap.Popover(element, obj {
-        this.content = content
-        if (title != null) this.title = title
-        this.animation = animation
-        if (popoverDelay != null) this.delay = popoverDelay
-        if (placement != null) this.placement = placement.value
-        if (popoverTrigger != null) this.trigger = popoverTrigger
-        this.html = html
-        this.sanitize = sanitize
-    })
+    if (renderConfig.isDom) {
+        disposeTooltip()
+        val popoverTrigger = triggers?.joinToString(" ") { it.value }
+        val popoverDelay: Bootstrap.PopoverDelay? = if (delay != null && hideDelay != null) {
+            obj {
+                show = delay.inWholeMilliseconds.toInt()
+                hide = hideDelay.inWholeMilliseconds.toInt()
+            }
+        } else if (delay != null) {
+            obj {
+                show = delay.inWholeMilliseconds.toInt()
+                hide = delay.inWholeMilliseconds.toInt()
+            }
+        } else if (hideDelay != null) {
+            obj {
+                show = 0
+                hide = hideDelay.inWholeMilliseconds.toInt()
+            }
+        } else null
+        val popover = Bootstrap.Popover(element, obj {
+            this.content = content
+            if (title != null) this.title = title
+            this.animation = animation
+            if (popoverDelay != null) this.delay = popoverDelay
+            if (placement != null) this.placement = placement.value
+            if (popoverTrigger != null) this.trigger = popoverTrigger
+            this.html = html
+            this.sanitize = sanitize
+        })
 
-    DisposableEffect("kilua_popover_${this.cast<Tag<*>>().componentId}") {
-        popover.enable()
-        onDispose {
-            popover.disable()
+        DisposableEffect("kilua_popover_${this.cast<Tag<*>>().componentId}") {
+            popover.enable()
+            onDispose {
+                popover.disable()
+            }
         }
     }
 }
@@ -99,40 +101,40 @@ public fun ITag<*>.popover(
  * Show popover.
  */
 public fun ITag<*>.showPopover() {
-    Bootstrap.Popover.getInstance(element)?.show()
+    if (renderConfig.isDom) Bootstrap.Popover.getInstance(element)?.show()
 }
 
 /**
  * Hide popover.
  */
 public fun ITag<*>.hidePopover() {
-    Bootstrap.Popover.getInstance(element)?.hide()
+    if (renderConfig.isDom) Bootstrap.Popover.getInstance(element)?.hide()
 }
 
 /**
  * Toggle popover.
  */
 public fun ITag<*>.togglePopover() {
-    Bootstrap.Popover.getInstance(element)?.toggle()
+    if (renderConfig.isDom) Bootstrap.Popover.getInstance(element)?.toggle()
 }
 
 /**
  * Enable popover.
  */
 public fun ITag<*>.enablePopover() {
-    Bootstrap.Popover.getInstance(element)?.enable()
+    if (renderConfig.isDom) Bootstrap.Popover.getInstance(element)?.enable()
 }
 
 /**
  * Disable popover.
  */
 public fun ITag<*>.disablePopover() {
-    Bootstrap.Popover.getInstance(element)?.disable()
+    if (renderConfig.isDom) Bootstrap.Popover.getInstance(element)?.disable()
 }
 
 /**
  * Dispose popover.
  */
 public fun ITag<*>.disposePopover() {
-    Bootstrap.Popover.getInstance(element)?.dispose()
+    if (renderConfig.isDom) Bootstrap.Popover.getInstance(element)?.dispose()
 }

@@ -117,11 +117,13 @@ internal fun IComponent.toasts() {
                                         }
                                     }
                                 }
-                                DisposableEffect(toastId) {
-                                    val bsToast = Bootstrap.Toast(element)
-                                    bsToast.show()
-                                    onDispose {
-                                        bsToast.dispose()
+                                if (renderConfig.isDom) {
+                                    DisposableEffect(toastId) {
+                                        val bsToast = Bootstrap.Toast(element)
+                                        bsToast.show()
+                                        onDispose {
+                                            bsToast.dispose()
+                                        }
                                     }
                                 }
                                 onEvent<Event>("hidden.bs.toast") {
