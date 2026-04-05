@@ -42,6 +42,9 @@ import web.events.Event
  * @param animation determines if the modal window is animated
  * @param centered determines if the modal window is vertically centered
  * @param scrollable determines if the modal window content is scrollable
+ * @param escape determines if the modal window can be closed by pressing the escape key
+ * @param focus determines if the modal window should be focused
+ * @param backdrop the modal backdrop type
  * @param okTitle the title of the OK button
  * @param okIcon the icon of the OK button
  * @param callback the callback function that is called when the alert window is hidden
@@ -55,6 +58,9 @@ public fun alert(
     animation: Boolean = true,
     centered: Boolean = false,
     scrollable: Boolean = false,
+    escape: Boolean = true,
+    focus: Boolean = true,
+    backdrop: ModalBackdrop? = null,
     okTitle: String = "OK",
     okIcon: String? = "fas fa-check",
     callback: (() -> Unit)? = null
@@ -70,8 +76,9 @@ public fun alert(
             animation,
             centered,
             scrollable,
-            true,
-            true,
+            escape,
+            focus,
+            backdrop,
             null,
         ) {
             val component = this

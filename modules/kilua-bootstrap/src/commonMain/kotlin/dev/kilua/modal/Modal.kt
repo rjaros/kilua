@@ -75,6 +75,20 @@ public enum class FullscreenMode {
 }
 
 /**
+ * Modal backdrop types.
+ */
+public enum class ModalBackdrop {
+    True,
+    False,
+    Static;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
  * Bootstrap modal component.
  */
 public interface IModal : ITag<HTMLDivElement> {
@@ -226,6 +240,7 @@ private fun IComponent.modal(
  * @param scrollable determines if the modal window content is scrollable
  * @param escape determines if the modal window can be closed by pressing the escape key
  * @param focus determines if the modal window should be focused
+ * @param backdrop the modal backdrop type
  * @param className the CSS class name
  * @param id the ID attribute of the modal window
  * @param content the content of the modal window
@@ -243,12 +258,25 @@ public fun IComponent.modalRef(
     scrollable: Boolean = false,
     escape: Boolean = true,
     focus: Boolean = true,
+    backdrop: ModalBackdrop? = null,
     className: String? = null,
     id: String? = null,
     content: @Composable IModal.() -> Unit = {}
 ): Modal {
     return modalRef("modal" % if (animation) "fade" else null % className, id) {
-        setupModal(caption, closeButton, closeButtonAction, size, fullscreenMode, centered, scrollable, escape, focus, content)
+        setupModal(
+            caption,
+            closeButton,
+            closeButtonAction,
+            size,
+            fullscreenMode,
+            centered,
+            scrollable,
+            escape,
+            focus,
+            backdrop,
+            content
+        )
     }
 }
 
@@ -265,6 +293,7 @@ public fun IComponent.modalRef(
  * @param scrollable determines if the modal window content is scrollable
  * @param escape determines if the modal window can be closed by pressing the escape key
  * @param focus determines if the modal window should be focused
+ * @param backdrop the modal backdrop type
  * @param className the CSS class name
  * @param id the ID attribute of the modal window
  * @param content the content of the modal window
@@ -281,12 +310,25 @@ public fun IComponent.modal(
     scrollable: Boolean = false,
     escape: Boolean = true,
     focus: Boolean = true,
+    backdrop: ModalBackdrop? = null,
     className: String? = null,
     id: String? = null,
     content: @Composable IModal.() -> Unit = {}
 ) {
     modal("modal" % if (animation) "fade" else null % className, id) {
-        setupModal(caption, closeButton, closeButtonAction, size, fullscreenMode, centered, scrollable, escape, focus, content)
+        setupModal(
+            caption,
+            closeButton,
+            closeButtonAction,
+            size,
+            fullscreenMode,
+            centered,
+            scrollable,
+            escape,
+            focus,
+            backdrop,
+            content
+        )
     }
 }
 
@@ -301,12 +343,13 @@ private fun IModal.setupModal(
     scrollable: Boolean,
     escape: Boolean,
     focus: Boolean,
+    backdrop: ModalBackdrop?,
     content: @Composable (IModal.() -> Unit)
 ) {
     role("dialog")
     tabindex(-1)
     attribute("data-bs-keyboard", "$escape")
-    attribute("data-bs-backdrop", if (escape) "true" else "static")
+    attribute("data-bs-backdrop", backdrop?.value ?: if (escape) "true" else "static")
     attribute("data-bs-focus", "$focus")
     val component = this.cast<Modal>()
     div("modal-dialog" % size?.value % fullscreenMode?.value % if (centered) "modal-dialog-centered" else null % if (scrollable) "modal-dialog-scrollable" else null) {
