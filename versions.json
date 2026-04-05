@@ -1,30 +1,30 @@
 {
-    "kilua": "0.0.32",
-    "kotlin": "2.3.10-RC",
-    "compose": "1.11.0-alpha02",
+    "kilua": "0.0.33",
+    "kotlin": "2.3.20",
+    "compose": "1.11.0-beta01",
     "coroutines": "1.10.2",
-    "ksp": "2.3.5",
-    "kilua-rpc": "0.0.42",
+    "ksp": "2.3.6",
+    "kilua-rpc": "0.0.44",
     "datetime": "0.7.1",
-    "tailwindcss": "4.1.18",
-    "logback": "1.5.27",
+    "tailwindcss": "4.2.2",
+    "logback": "1.5.32",
     "gettext": "0.7.0",
-    "vite-kotlin": "0.8.1",
-    "ktml": "0.1.13",
+    "vite-kotlin": "0.8.3",
+    "ktml": "0.2.3",
     "template-javalin": {
     },
     "template-jooby": {
-        "jooby": "4.0.15"
+        "jooby": "4.2.0"
     },
     "template-ktor": {
-        "ktor": "3.4.0"
+        "ktor": "3.4.2"
     },
     "template-micronaut": {
-        "micronaut": "4.10.7",
-        "micronaut-plugins": "4.6.1"
+        "micronaut": "4.10.11",
+        "micronaut-plugins": "4.6.2"
     },
     "template-spring-boot": {
-        "spring-boot": "4.0.2"
+        "spring-boot": "4.0.5"
     },
     "template-vertx": {
     },
