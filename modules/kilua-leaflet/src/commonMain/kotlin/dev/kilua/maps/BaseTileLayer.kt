@@ -51,6 +51,7 @@ public object DefaultTileLayers {
         tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png") {
             attribution =
                 """&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors"""
+            referrerPolicy = "strict-origin-when-cross-origin".toJsString()
         }
 
     public val EsriWorldImagery: TileLayer<TileLayer.TileLayerOptions> =
