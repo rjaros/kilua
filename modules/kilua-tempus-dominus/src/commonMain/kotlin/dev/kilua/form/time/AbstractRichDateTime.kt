@@ -574,11 +574,12 @@ public abstract class AbstractRichDateTime(
     }
 
     @Composable
-    public override fun keyboardNavigation(keyboardNavigation: Boolean): Unit = composableProperty("keyboardNavigation", {
-        this.keyboardNavigation = true
-    }) {
-        this.keyboardNavigation = keyboardNavigation
-    }
+    public override fun keyboardNavigation(keyboardNavigation: Boolean): Unit =
+        composableProperty("keyboardNavigation", {
+            this.keyboardNavigation = true
+        }) {
+            this.keyboardNavigation = keyboardNavigation
+        }
 
     /**
      * The refresh callback used by the theme change event handler.
@@ -629,11 +630,12 @@ public abstract class AbstractRichDateTime(
         if (renderConfig.isDom) {
             val secondsView = format.contains("ss")
             val language = locale.language
-            val locale = tempusDominusLocales[language]?.localization ?: obj()
-            locale.jsSet("locale", language.toJsString())
-            locale.jsSet("format", inputFormat.toJsString())
+            val tempusDominusLocale = tempusDominusLocales[locale.language] ?: tempusDominusLocales[locale.languageBase]
+            val localization = tempusDominusLocale?.localization ?: obj()
+            localization.jsSet("locale", language.toJsString())
+            localization.jsSet("format", inputFormat.toJsString())
             if (monthHeaderFormat != null || yearHeaderFormat != null) {
-                locale.jsSet(
+                localization.jsSet(
                     "dayViewHeaderFormat", jsObjectOf(
                         "month" to if (monthHeaderFormat != null) monthHeaderFormat!!.value else "long",
                         "year" to if (yearHeaderFormat != null) yearHeaderFormat!!.value else "2-digit"
@@ -641,7 +643,7 @@ public abstract class AbstractRichDateTime(
                 )
             }
             if (hourCycle != null) {
-                locale.jsSet("hourCycle", hourCycle!!.value.toJsString())
+                localization.jsSet("hourCycle", hourCycle!!.value.toJsString())
             }
             val initialViewMode = viewMode ?: if (calendarView) ViewMode.Calendar else ViewMode.Clock
             val currentTheme = if (theme == null || theme == Theme.Auto) {
@@ -723,7 +725,7 @@ public abstract class AbstractRichDateTime(
                     currentTheme?.let { this.theme = it.value }
                     this.keyboardNavigation = component.keyboardNavigation
                 }
-                this.localization = locale
+                this.localization = localization
             }
             tempusDominusInstance = TempusDominus(element, tempusDominusOptions)
             if (disabled == true) {
@@ -768,7 +770,10 @@ public abstract class AbstractRichDateTime(
          */
         private fun guessHourCycle(language: String): HourCycle? {
             val template = jsObjectOf("hour" to "numeric")
-            val hourCycle = DateTimeFormat(language, template.unsafeCast<DateTimeFormatOptions>()).resolvedOptions().hourCycle.toString()
+            val hourCycle = DateTimeFormat(
+                language,
+                template.unsafeCast<DateTimeFormatOptions>()
+            ).resolvedOptions().hourCycle.toString()
             return HourCycle.entries.find { it.name.lowercase() == hourCycle }
         }
     }
