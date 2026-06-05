@@ -1,34 +1,32 @@
 [versions]
 kilua = "0.0.34"
 kilua-published = "0.0.34"
-kotlin = "2.3.20"
-compose = "1.11.0-beta01"
+kotlin = "2.4.0"
+compose = "1.12.0-alpha01"
 dokka = "2.2.0"
-nmcp = "1.4.4"
-ksp = "2.3.6"
+nmcp = "1.5.0"
+ksp = "2.3.9"
 detekt = "1.23.8"
-npm-publish = "4.1.10"
+npm-publish = "3.7.0"
 gradle-plugin-publish = "2.1.1"
-kilua-rpc = "0.0.44"
+kilua-rpc = "0.0.45"
 kilua-gettext = "0.0.2"
-kotlinx-atomicfu = "0.32.1"
-kotlinx-coroutines = "1.10.2"
-kotlinx-serialization = "1.10.0"
-kotlinx-datetime = "0.7.1"
-wrappers = "2026.4.2"
-javalin = "7.1.0"
-jooby = "4.2.0"
-ktor = "3.4.2"
-koin = "4.2.1-RC1"
-koin-annotations = "4.2.0"
-koin-plugin = "0.6.2"
-micronaut = "4.10.11"
-micronaut-plugins = "4.6.2"
-spring-boot = "4.0.5"
-vertx = "5.0.10"
+kotlinx-atomicfu = "0.33.0"
+kotlinx-coroutines = "1.11.0"
+kotlinx-serialization = "1.11.0"
+kotlinx-datetime = "0.8.0"
+wrappers = "2026.6.1"
+javalin = "7.2.2"
+jooby = "4.5.2"
+ktor = "3.5.0"
+koin = "4.2.1"
+micronaut = "5.0.2"
+micronaut-plugins = "5.0.0"
+spring-boot = "4.1.0-RC1"
+vertx = "5.1.1"
 ballast = "5.0.1"
 ktml = "0.2.3"
-logback = "1.5.32"
+logback = "1.5.33"
 tomlj = "1.1.1"
 kaml = "0.104.0"
 resources-optimizer = "2.7.9"
@@ -41,23 +39,25 @@ popperjs-core = "2.11.8"
 bootstrap = "5.3.8"
 bootstrap-icons = "1.13.1"
 fontawesome = "7.2.0"
-trix = "2.1.18"
+trix = "2.1.19"
 toastify = "1.12.0"
 tempus-dominus = "6.10.4"
-tom-select = "2.5.2"
+tom-select = "2.6.1"
 imask = "7.6.1"
 tabulator = "6.4.0"
 rsup-progress = "3.2.0"
 lz-string = "1.5.0"
-marked = "17.0.5"
-sanitize-html = "2.17.2"
-postcss = "8.5.8"
+marked = "18.0.5"
+sanitize-html = "2.17.4"
+postcss = "8.5.15"
 postcss-loader = "8.2.1"
-tailwindcss = "4.2.2"
-cssnano = "7.1.4"
+tailwindcss = "4.3.0"
+cssnano = "8.0.1"
 mini-css-extract-plugin = "2.10.2"
-motion = "12.38.0"
+motion = "12.40.0"
 leaflet = "2.0.0-alpha.1"
+nodejs = "26.3.0"
+binaryen = "130"
 
 [libraries]
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose" }
@@ -78,7 +78,6 @@ ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor"
 ktor-server-compression = { module = "io.ktor:ktor-server-compression", version.ref = "ktor" }
 ktor-server-caching-headers = { module = "io.ktor:ktor-server-caching-headers", version.ref = "ktor" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koin-annotations" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 micronaut-platform = { module = "io.micronaut.platform:micronaut-platform", version.ref = "micronaut" }
@@ -108,7 +107,7 @@ compose-gradle-plugin = { module = "org.jetbrains.compose:compose-gradle-plugin"
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-npm-publish = { id = "org.danilopianini.npm.publish", version.ref = "npm-publish" }
+npm-publish = { id = "org.jetbrains.kotlin.npm-publish", version.ref = "npm-publish" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 nmcp = { id = "com.gradleup.nmcp", version.ref = "nmcp" }
 nmcp-aggregation = { id = "com.gradleup.nmcp.aggregation", version.ref = "nmcp" }
@@ -117,7 +116,6 @@ gradle-plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "gradl
 kilua = { id = "dev.kilua", version.ref = "kilua-published" }
 jooby = { id = "io.jooby.run", version.ref = "jooby" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-koin-compiler = { id = "io.insert-koin.compiler.plugin", version.ref = "koin-plugin" }
 micronaut-application = { id = "io.micronaut.application", version.ref = "micronaut-plugins" }
 micronaut-aot = { id = "io.micronaut.aot", version.ref = "micronaut-plugins" }
 ktml = { id = "dev.ktml.gradle", version.ref = "ktml" }

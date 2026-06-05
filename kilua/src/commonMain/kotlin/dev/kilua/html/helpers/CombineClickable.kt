@@ -62,7 +62,6 @@ public fun TagEvents.onCombineClick(
                 isLongClickTriggered = true
                 onLongClick?.invoke()
                 clickCount = 0
-                null
             }, LONG_CLICK_DURATION)
         }
     }
@@ -97,7 +96,6 @@ public fun TagEvents.onCombineClick(
                     onClick()
                 }
                 clickCount = 0
-                null
             }, DOUBLE_CLICK_DELAY)
         } else if (clickCount == 2) {
             singleClickTimer?.let { clearTimeout(it) }

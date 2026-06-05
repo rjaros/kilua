@@ -54,7 +54,6 @@ public data object BrowserRouter : Router {
             currentLocation.value = window.location.newPath().takeUnless { it == "/" } ?: initPath
             window.onpopstate = EventHandler {
                 currentLocation.value = window.location.newPath()
-                Unit
             }
         }
         return currentLocation

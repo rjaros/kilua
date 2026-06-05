@@ -45,6 +45,7 @@ import js.numbers.JsNumbers.toJsDouble
 import js.numbers.JsNumbers.toJsInt
 import js.numbers.JsNumbers.toKotlinInt
 import js.promise.Promise
+import js.undefined.undefinedOrNull
 import web.cssom.ClassName
 import web.dom.Element
 import web.dom.document
@@ -62,7 +63,6 @@ import kotlin.js.toJsArray
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
 import kotlin.js.toList
-import kotlin.js.undefined
 import kotlin.js.unsafeCast
 import kotlin.reflect.KClass
 
@@ -705,7 +705,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             }
             val rootElement = SafeDomFactory.createElement("div").unsafeCast<HTMLElement>()
             @Suppress("SENSELESS_COMPARISON")
-            if (onRendered != undefined) {
+            if (onRendered != undefinedOrNull) {
                 onRendered {
                     val root = root(rootElement, false, tabulator.renderConfig) {
                         formatterComponentFunction.invoke(this, cell, { callback ->
@@ -713,7 +713,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                         }, data)
                     }
                     tabulator.addCustomRoot(root)
-                    if (cell.jsGet("checkHeight") != undefined) cell.unsafeCast<CellComponent>().checkHeight()
+                    if (cell.jsGet("checkHeight") != undefinedOrNull) cell.unsafeCast<CellComponent>().checkHeight()
                     (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX = "visible"
                     (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY = "visible"
                     onRenderedCallback?.invoke()
@@ -732,7 +732,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             var onRenderedCallback: (() -> Unit)? = null
             val rootElement = SafeDomFactory.createElement("div").unsafeCast<HTMLElement>()
             @Suppress("SENSELESS_COMPARISON")
-            if (onRendered != undefined) {
+            if (onRendered != undefinedOrNull) {
                 onRendered {
                     val root = root(rootElement, false, tabulator.renderConfig) {
                         titleFormatterComponentFunction.invoke(this, cell) { callback ->
@@ -779,7 +779,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
             }
             val rootElement = SafeDomFactory.createElement("div").unsafeCast<HTMLElement>()
             @Suppress("SENSELESS_COMPARISON")
-            if (onRendered != undefined) {
+            if (onRendered != undefinedOrNull) {
                 onRendered {
                     if (EditorRoot.root != null) {
                         EditorRoot.disposeTimer?.let { clearTimeout(it.toJsInt().unsafeCast<Timeout>()) }
@@ -795,12 +795,11 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
                                 EditorRoot.disposeTimer = null
                                 EditorRoot.root = null
                                 EditorRoot.cancel = null
-                                null
                             }, 500).unsafeCast<JsInt>().toKotlinInt()
                         }, cancel, data)
                     }
                     EditorRoot.cancel = cancel
-                    if (cell.jsGet("checkHeight") != undefined) cell.checkHeight()
+                    if (cell.jsGet("checkHeight") != undefinedOrNull) cell.checkHeight()
                     (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowX = "visible"
                     (rootElement.parentElement?.unsafeCast<HTMLElement>())?.style?.overflowY = "visible"
                     onRenderedCallback?.invoke()

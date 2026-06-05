@@ -29,13 +29,13 @@ import js.objects.Object
 import js.objects.unsafeJso
 import js.reflect.Reflect
 import js.string.JsStrings.toKotlinString
+import js.undefined.undefinedOrNull
 import kotlin.js.JsAny
 import kotlin.js.JsArray
 import kotlin.js.set
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
 import kotlin.js.toList
-import kotlin.js.undefined
 import kotlin.js.unsafeCast
 
 /**
@@ -169,7 +169,7 @@ public fun jsObjectOf(
 public fun deepMerge(target: JsAny, source: JsAny): JsAny {
     fun isObject(obj: JsAny?): Boolean {
         @Suppress("SENSELESS_COMPARISON")
-        return obj != null && obj != undefined && jsTypeOf(obj) == "object"
+        return obj != null && obj != undefinedOrNull && jsTypeOf(obj) == "object"
     }
     if (!isObject(target) || !isObject(source)) return source
     for (key in keys(source)) {
