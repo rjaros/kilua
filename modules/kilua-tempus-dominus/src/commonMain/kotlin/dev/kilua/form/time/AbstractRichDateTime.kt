@@ -792,6 +792,7 @@ internal fun IDiv.commonRichDateTime(
     id: String?,
     inline: Boolean,
     icon: String,
+    buttonAriaLabel: String,
     inputClassName: String?,
     onBlurCallback: () -> Unit,
 ): Text {
@@ -820,6 +821,8 @@ internal fun IDiv.commonRichDateTime(
         attribute("data-td-target", "#$bindId")
         attribute("data-td-toggle", "datetimepicker")
         tabindex(0)
+        role("button")
+        ariaLabel(buttonAriaLabel)
         i(icon) {}
     }
     return text

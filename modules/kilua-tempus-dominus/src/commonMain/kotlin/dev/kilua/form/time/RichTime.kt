@@ -222,6 +222,7 @@ private fun IComponent.richTime(
  * @param required determines if the field is required
  * @param locale the locale for i18n
  * @param clockIcon the icon of the clock button
+ * @param buttonAriaLabel the aria-label attribute of the clock button
  * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
@@ -239,6 +240,7 @@ public fun IComponent.richTimeRef(
     format: String = "HH:mm",
     locale: Locale = LocaleManager.currentLocale,
     clockIcon: String = "fas fa-clock",
+    buttonAriaLabel: String = "Select",
     inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
@@ -256,7 +258,18 @@ public fun IComponent.richTimeRef(
         bindId
     ) {
         (this as AbstractRichDateTime).inputText =
-            commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, clockIcon, inputClassName) {
+            commonRichDateTime(
+                bindId,
+                name,
+                placeholder,
+                disabled,
+                required,
+                id,
+                inline,
+                clockIcon,
+                buttonAriaLabel,
+                inputClassName
+            ) {
                 tempusDominusInstance?.hide()
             }
         setup()
@@ -273,6 +286,7 @@ public fun IComponent.richTimeRef(
  * @param required determines if the field is required
  * @param locale the locale for i18n
  * @param clockIcon the icon of the clock button
+ * @param buttonAriaLabel the aria-label attribute of the clock button
  * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
@@ -289,6 +303,7 @@ public fun IComponent.richTime(
     format: String = "HH:mm",
     locale: Locale = LocaleManager.currentLocale,
     clockIcon: String = "fas fa-clock",
+    buttonAriaLabel: String = "Select",
     inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
@@ -306,7 +321,18 @@ public fun IComponent.richTime(
         bindId
     ) {
         (this as AbstractRichDateTime).inputText =
-            commonRichDateTime(bindId, name, placeholder, disabled, required, id, inline, clockIcon, inputClassName) {
+            commonRichDateTime(
+                bindId,
+                name,
+                placeholder,
+                disabled,
+                required,
+                id,
+                inline,
+                clockIcon,
+                buttonAriaLabel,
+                inputClassName
+            ) {
                 tempusDominusInstance?.hide()
             }
         setup()

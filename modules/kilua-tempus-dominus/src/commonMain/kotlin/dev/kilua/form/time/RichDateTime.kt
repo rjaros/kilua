@@ -225,6 +225,7 @@ private fun IComponent.richDateTime(
  * @param required determines if the field is required
  * @param locale the locale for i18n
  * @param calendarIcon the icon of the calendar button
+ * @param buttonAriaLabel the aria-label attribute of the calendar button
  * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
@@ -242,6 +243,7 @@ public fun IComponent.richDateTimeRef(
     format: String = "yyyy-MM-dd HH:mm",
     locale: Locale = LocaleManager.currentLocale,
     calendarIcon: String = "fas fa-calendar-alt",
+    buttonAriaLabel: String = "Select",
     inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
@@ -267,6 +269,7 @@ public fun IComponent.richDateTimeRef(
             id,
             inline,
             calendarIcon,
+            buttonAriaLabel,
             inputClassName
         ) {
             tempusDominusInstance?.hide()
@@ -285,6 +288,7 @@ public fun IComponent.richDateTimeRef(
  * @param required determines if the field is required
  * @param locale the locale for i18n
  * @param calendarIcon the icon of the calendar button
+ * @param buttonAriaLabel the aria-label attribute of the calendar button
  * @param inputClassName the CSS class name of the generated HTML input element
  * @param className the CSS class name
  * @param id the ID of the generated HTML input element
@@ -301,6 +305,7 @@ public fun IComponent.richDateTime(
     format: String = "yyyy-MM-dd HH:mm",
     locale: Locale = LocaleManager.currentLocale,
     calendarIcon: String = "fas fa-calendar-alt",
+    buttonAriaLabel: String = "Select",
     inputClassName: String? = null,
     className: String? = null,
     id: String? = null,
@@ -326,6 +331,7 @@ public fun IComponent.richDateTime(
             id,
             inline,
             calendarIcon,
+            buttonAriaLabel,
             inputClassName
         ) {
             tempusDominusInstance?.hide()
