@@ -26,17 +26,15 @@
 package dev.kilua.compose
 
 import androidx.compose.runtime.Applier
-import androidx.compose.runtime.Stable
-import dev.kilua.test.SimpleSpec
 import dev.kilua.core.Component
-import dev.kilua.core.StringRenderConfig
 import dev.kilua.core.SafeDomFactory
+import dev.kilua.core.StringRenderConfig
 import dev.kilua.html.Tag
+import dev.kilua.test.SimpleSpec
 import web.html.HTMLElement
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@Stable // Workaround https://youtrack.jetbrains.com/issue/KT-67330
 class ComponentApplierSpec : SimpleSpec {
     private val stringRenderConfig = StringRenderConfig()
     private val root = Root(SafeDomFactory.createElement("div"), renderConfig = stringRenderConfig)
