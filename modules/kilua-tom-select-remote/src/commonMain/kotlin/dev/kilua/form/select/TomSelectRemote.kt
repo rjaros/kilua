@@ -47,7 +47,7 @@ import js.json.stringify
 import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
 import web.console.console
-import web.http.RequestInit
+import web.http.Request
 import kotlin.js.JsAny
 import kotlin.js.JsArray
 import kotlin.js.toJsArray
@@ -88,7 +88,7 @@ public open class TomSelectRemote<out T : Any>(
     private val serviceManager: RpcServiceMgr<T>,
     private val function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     private val stateFunction: (() -> String)? = null,
-    private val requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    private val requestFilter: (suspend Request.() -> Unit)? = null,
     openOnFocus: Boolean = false,
     options: List<StringPair>? = null,
     value: String? = null,
@@ -189,7 +189,7 @@ internal fun <T : Any> IComponent.tomSelectRemoteRef(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    requestFilter: (suspend Request.() -> Unit)? = null,
     openOnFocus: Boolean = false,
     options: List<StringPair>? = null,
     value: String? = null,
@@ -264,7 +264,7 @@ internal fun <T : Any> IComponent.tomSelectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    requestFilter: (suspend Request.() -> Unit)? = null,
     openOnFocus: Boolean = false,
     options: List<StringPair>? = null,
     value: String? = null,
@@ -364,7 +364,7 @@ public fun <T : Any> IComponent.tomSelectRemoteRef(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    requestFilter: (suspend Request.() -> Unit)? = null,
     openOnFocus: Boolean = false,
     preload: Boolean = false,
     options: List<StringPair>? = null,
@@ -489,7 +489,7 @@ public fun <T : Any> IComponent.tomSelectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    requestFilter: (suspend Request.() -> Unit)? = null,
     openOnFocus: Boolean = false,
     preload: Boolean = false,
     options: List<StringPair>? = null,
@@ -607,7 +607,7 @@ internal suspend fun <T : Any> getOptionsForTomSelectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?, String?) -> List<RemoteOption>,
     stateFunction: (() -> String)?,
-    requestFilter: (suspend RequestInit.() -> Unit)?,
+    requestFilter: (suspend Request.() -> Unit)?,
     query: String?,
     initial: String?
 ): List<RemoteOptionExt> {
@@ -621,12 +621,7 @@ internal suspend fun <T : Any> getOptionsForTomSelectRemote(
             url,
             listOf(queryParam, initialParam, state),
             method = method,
-            requestFilter = requestFilter?.let { requestFilterParam ->
-                {
-                    val self = this.unsafeCast<RequestInit>()
-                    self.requestFilterParam()
-                }
-            }
+            requestFilter = requestFilter
         )
         RpcSerialization.plain.decodeFromString(ListSerializer(RemoteOption.serializer()), result)
             .mapIndexed { index, option ->

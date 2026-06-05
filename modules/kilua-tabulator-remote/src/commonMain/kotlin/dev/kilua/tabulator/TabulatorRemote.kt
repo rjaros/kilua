@@ -43,16 +43,16 @@ import js.array.jsArrayOf
 import js.globals.globalThis
 import js.json.parse
 import js.json.stringify
+import js.undefined.undefinedOrNull
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
-import web.http.RequestInit
+import web.http.Request
 import kotlin.js.JsAny
 import kotlin.js.JsArray
 import kotlin.js.toJsString
-import kotlin.js.undefined
 import kotlin.js.unsafeCast
 import kotlin.reflect.KClass
 
@@ -181,7 +181,7 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemoteRef(
     serviceManager: RpcServiceMgr<E>,
     noinline function: suspend E.(Int?, Int?, List<RemoteFilter>?, List<RemoteSorter>?, String?) -> RemoteData<T>,
     noinline stateFunction: (() -> String)? = null,
-    noinline requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    noinline requestFilter: (suspend Request.() -> Unit)? = null,
     options: TabulatorOptions<T> = TabulatorOptions(),
     types: Set<TableType> = setOf(),
     serializer: KSerializer<T> = serializer(),
@@ -193,7 +193,7 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemoteRef(
     val optionsState = remember(options.toString()) {
         val (url, _) = serviceManager.requireCall(function)
         val rpcUrlPrefix = globalThis.jsGet("rpc_url_prefix")
-        val urlPrefix: String = if (rpcUrlPrefix != undefined) "$rpcUrlPrefix/" else ""
+        val urlPrefix: String = if (rpcUrlPrefix != undefinedOrNull) "$rpcUrlPrefix/" else ""
         options.copy(
             ajaxURL = urlPrefix + url.drop(1),
             ajaxRequestFunc = { _, _, params ->
@@ -251,7 +251,7 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
     serviceManager: RpcServiceMgr<E>,
     noinline function: suspend E.(Int?, Int?, List<RemoteFilter>?, List<RemoteSorter>?, String?) -> RemoteData<T>,
     noinline stateFunction: (() -> String)? = null,
-    noinline requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    noinline requestFilter: (suspend Request.() -> Unit)? = null,
     options: TabulatorOptions<T> = TabulatorOptions(),
     types: Set<TableType> = setOf(),
     serializer: KSerializer<T> = serializer(),
@@ -263,7 +263,7 @@ public inline fun <reified T : Any, E : Any> IComponent.tabulatorRemote(
     val optionsState = remember(options.toString()) {
         val (url, _) = serviceManager.requireCall(function)
         val rpcUrlPrefix = globalThis.jsGet("rpc_url_prefix")
-        val urlPrefix: String = if (rpcUrlPrefix != undefined) "$rpcUrlPrefix/" else ""
+        val urlPrefix: String = if (rpcUrlPrefix != undefinedOrNull) "$rpcUrlPrefix/" else ""
         options.copy(
             ajaxURL = urlPrefix + url.drop(1),
             ajaxRequestFunc = { _, _, params ->
@@ -305,7 +305,7 @@ public suspend fun <T : Any, E : Any> getDataForTabulatorRemote(
     serviceManager: RpcServiceMgr<E>,
     function: suspend E.(Int?, Int?, List<RemoteFilter>?, List<RemoteSorter>?, String?) -> RemoteData<T>,
     stateFunction: (() -> String)?,
-    requestFilter: (suspend RequestInit.() -> Unit)?,
+    requestFilter: (suspend Request.() -> Unit)?,
     page: String?,
     size: String?,
     filters: String?,
@@ -318,12 +318,8 @@ public suspend fun <T : Any, E : Any> getDataForTabulatorRemote(
         url,
         listOf(page, size, filters, sorters, state),
         method = method,
-        requestFilter = requestFilter?.let { requestFilterParam ->
-            {
-                val self = this.unsafeCast<RequestInit>()
-                self.requestFilterParam()
-            }
-        })
+        requestFilter = requestFilter
+    )
     val result = parse<JsAny>(r)
     return if (page != null) {
         if (result.jsGet("data") == null) {

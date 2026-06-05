@@ -39,7 +39,7 @@ import js.json.stringify
 import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
 import web.console.console
-import web.http.RequestInit
+import web.http.Request
 import kotlin.js.toJsString
 import kotlin.js.unsafeCast
 
@@ -69,7 +69,7 @@ public fun <T : Any> IComponent.selectRemoteRef(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?) -> List<SimpleRemoteOption>,
     stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    requestFilter: (suspend Request.() -> Unit)? = null,
     refreshOnFocus: Boolean = false,
     options: List<StringPair>? = null,
     value: String? = null,
@@ -140,7 +140,7 @@ public fun <T : Any> IComponent.selectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?) -> List<SimpleRemoteOption>,
     stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    requestFilter: (suspend Request.() -> Unit)? = null,
     refreshOnFocus: Boolean = false,
     options: List<StringPair>? = null,
     value: String? = null,
@@ -189,7 +189,7 @@ internal suspend fun <T : Any> getOptionsForSelectRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?) -> List<SimpleRemoteOption>,
     stateFunction: (() -> String)?,
-    requestFilter: (suspend RequestInit.() -> Unit)?,
+    requestFilter: (suspend Request.() -> Unit)?,
 ): List<StringPair> {
     val (url, method) = serviceManager.requireCall(function)
     val callAgent = CallAgent()
@@ -198,12 +198,8 @@ internal suspend fun <T : Any> getOptionsForSelectRemote(
         val result = callAgent.jsonRpcCall(
             url,
             listOf(state),
-            method = method, requestFilter = requestFilter?.let { requestFilterParam ->
-                {
-                    val self = this.unsafeCast<RequestInit>()
-                    self.requestFilterParam()
-                }
-            }
+            method = method,
+            requestFilter = requestFilter
         )
         RpcSerialization.plain.decodeFromString(
             ListSerializer(SimpleRemoteOption.serializer()), result

@@ -41,6 +41,7 @@ import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
 import web.http.BodyInit
 import web.http.Headers
+import web.http.Request
 import web.http.RequestInit
 import web.http.Response
 import web.http.fetchAsync
@@ -177,7 +178,7 @@ public class RestClientConfig {
     /**
      * A request filtering function.
      */
-    public var requestFilter: (RequestInit.() -> Unit)? = null
+    public var requestFilter: (Request.() -> Unit)? = null
 
     /**
      * Base URL address.
@@ -217,7 +218,7 @@ public class RestRequestConfig<T : Any, V : Any> {
     /**
      * A request filtering function.
      */
-    public var requestFilter: (RequestInit.() -> Unit)? = null
+    public var requestFilter: (Request.() -> Unit)? = null
 
     /**
      * An optional transformation function, to modify result received from the server before deserialization.
@@ -320,11 +321,12 @@ public open class RestClient(block: (RestClientConfig.() -> Unit) = {}) {
             url
         }
         val fetchUrl = if (restClientConfig.baseUrl != null) restClientConfig.baseUrl + dataUrl else dataUrl
-        restClientConfig.requestFilter?.invoke(requestInit)
-        restRequestConfig.requestFilter?.invoke(requestInit)
+        val request = Request(fetchUrl, requestInit)
+        restClientConfig.requestFilter?.invoke(request)
+        restRequestConfig.requestFilter?.invoke(request)
         var response: Response? = null
         return try {
-            response = fetchAsync(fetchUrl, requestInit).await()
+            response = fetchAsync(request).await()
             if (response.ok) {
                 val statusText = response.statusText
                 if (response.status != HTTP_NO_CONTENT) {

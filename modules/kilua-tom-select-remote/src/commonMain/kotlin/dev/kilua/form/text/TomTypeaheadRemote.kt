@@ -36,12 +36,11 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
 import web.console.console
-import web.http.RequestInit
+import web.http.Request
 import kotlin.js.JsAny
 import kotlin.js.JsArray
 import kotlin.js.toJsArray
 import kotlin.js.toJsString
-import kotlin.js.unsafeCast
 
 /**
  * Creates [TomTypeahead] component with a remote data source, returning a reference.
@@ -68,7 +67,7 @@ public fun <T : Any> IComponent.tomTypeaheadRemoteRef(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?) -> List<String>,
     stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    requestFilter: (suspend Request.() -> Unit)? = null,
     options: List<String>? = null,
     value: String? = null,
     type: InputType = InputType.Text,
@@ -137,7 +136,7 @@ public fun <T : Any> IComponent.tomTypeaheadRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?) -> List<String>,
     stateFunction: (() -> String)? = null,
-    requestFilter: (suspend RequestInit.() -> Unit)? = null,
+    requestFilter: (suspend Request.() -> Unit)? = null,
     options: List<String>? = null,
     value: String? = null,
     type: InputType = InputType.Text,
@@ -186,7 +185,7 @@ internal suspend fun <T : Any> getOptionsForTomTypeaheadRemote(
     serviceManager: RpcServiceMgr<T>,
     function: suspend T.(String?, String?) -> List<String>,
     stateFunction: (() -> String)?,
-    requestFilter: (suspend RequestInit.() -> Unit)?,
+    requestFilter: (suspend Request.() -> Unit)?,
     query: String?
 ): List<String> {
     val (url, method) = serviceManager.requireCall(function)
@@ -198,12 +197,7 @@ internal suspend fun <T : Any> getOptionsForTomTypeaheadRemote(
             url,
             listOf(queryParam, state),
             method = method,
-            requestFilter = requestFilter?.let { requestFilterParam ->
-                {
-                    val self = this.unsafeCast<RequestInit>()
-                    self.requestFilterParam()
-                }
-            }
+            requestFilter = requestFilter
         )
         RpcSerialization.plain.decodeFromString(ListSerializer(String.serializer()), result)
     } catch (e: Exception) {
