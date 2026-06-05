@@ -239,8 +239,9 @@ public open class TomTypeahead(
             val tomSelectOptions = obj<TomSelectOptionsJs> {
                 this.maxItems = 1
                 this.create = { input: JsString ->
-                    val oldValue = tomSelectInstance?.getValue()?.unsafeCast<JsString>()?.toKotlinString()?.ifBlank { null }
-                        ?.let { "$it " } ?: ""
+                    val oldValue =
+                        tomSelectInstance?.getValue()?.unsafeCast<JsString>()?.toKotlinString()?.ifBlank { null }
+                            ?.let { "$it " } ?: ""
                     jsObjectOf(
                         "value" to "$oldValue$input",
                         "text" to "$oldValue$input",
@@ -265,6 +266,8 @@ public open class TomTypeahead(
                     }
                     this.no_results = null
                 }
+                this.sortField =
+                    listOf(jsObjectOf("field" to $$"$order"), jsObjectOf("field" to $$"$score")).toJsAny()!!
                 this.plugins = listOf("restore_on_backspace", "change_listener").toJsAny()!!
                 if (self.tsCallbacks != null) {
                     val callbacksObj = self.tsCallbacks!!.toJs()

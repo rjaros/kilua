@@ -109,7 +109,7 @@ public external class TomSelectOptionsJs : JsAny {
     public var valueField: String
     public var labelField: String
     public var disabledField: String
-    public var sortField: String
+    public var sortField: JsAny
     public var searchField: JsArray<JsString>
     public var searchConjunction: String
     public var onOptionAdd: ((value: String, data: JsAny) -> Unit)

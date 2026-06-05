@@ -149,7 +149,7 @@ public fun TomSelectOptions.toJs(emptyOption: Boolean): TomSelectOptionsJs {
         if (self.valueField != null) this.valueField = self.valueField
         if (self.labelField != null) this.labelField = self.labelField
         if (self.disabledField != null) this.disabledField = self.disabledField
-        if (self.sortField != null) this.sortField = self.sortField
+        if (self.sortField != null) this.sortField = self.sortField.toJsString()
         if (self.searchField != null) this.searchField = self.searchField.toJsAny().cast()
         if (self.searchConjunction != null) this.searchConjunction = self.searchConjunction
     }
