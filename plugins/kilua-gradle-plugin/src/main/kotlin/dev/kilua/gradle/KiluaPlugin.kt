@@ -35,13 +35,18 @@ import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Sync
 import org.gradle.api.tasks.bundling.Jar
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.NpmVersions
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
 import org.jetbrains.kotlin.gradle.targets.js.npm.BaseNpmExtension
 import org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+import org.jetbrains.kotlin.gradle.targets.wasm.binaryen.BinaryenEnvSpec
+import org.jetbrains.kotlin.gradle.targets.wasm.binaryen.BinaryenPlugin
+import org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsEnvSpec
 import org.jetbrains.kotlin.gradle.targets.wasm.npm.WasmNpmExtension
 import org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.web.yarn.BaseYarnRootExtension
@@ -63,6 +68,11 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     configureProject()
                     configureNodeEcosystem()
                 }
+            }
+            // Workaround https://github.com/WebAssembly/binaryen/issues/8594
+            @OptIn(ExperimentalWasmDsl::class)
+            plugins.withType(BinaryenPlugin::class.java) {
+                extensions.findByType(BinaryenEnvSpec::class.java)?.version?.set(kiluaVersions["binaryen"])
             }
         }
     }
@@ -522,7 +532,8 @@ public abstract class KiluaPlugin : Plugin<Project> {
         project.rootProject.extensions.findByType(WasmYarnRootExtension::class.java)?.apply {
             configureResolutions()
         }
-
+        project.rootProject.extensions.findByType(NodeJsEnvSpec::class.java)?.version?.set(kiluaVersions["nodejs"])
+        project.rootProject.extensions.findByType(WasmNodeJsEnvSpec::class.java)?.version?.set(kiluaVersions["nodejs"])
     }
 
     public companion object {
