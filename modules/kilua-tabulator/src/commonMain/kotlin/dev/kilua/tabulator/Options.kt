@@ -479,6 +479,50 @@ public enum class EditTriggerEvent {
     }
 }
 
+/**
+ * Validation modes.
+ */
+public enum class ValidationMode {
+    Blocking,
+    Highlight,
+    Manual;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
+ * Clipboard modes.
+ */
+public enum class Clipboard {
+    True,
+    False,
+    Copy,
+    Paste;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
+
+/**
+ * Possible row ranges.
+ */
+public enum class RowRange {
+    Visible,
+    Active,
+    Selected,
+    Range,
+    All;
+
+    public val value: String = name.toKebabCase()
+    override fun toString(): String {
+        return value
+    }
+}
 
 /**
  * Download config options.
@@ -503,6 +547,34 @@ internal fun DownloadConfig.toJs(): JsAny {
         "rowHeaders" to rowHeaders,
         "columnHeaders" to columnHeaders,
         "dataTree" to dataTree,
+    )
+}
+
+/**
+ * Clipboard copy options.
+ */
+public data class ClipboardCopyConfig(
+    val columnHeaders: Boolean? = null,
+    val columnGroups: Boolean? = null,
+    val rowHeaders: Boolean? = null,
+    val rowGroups: Boolean? = null,
+    val columnCalcs: Boolean? = null,
+    val dataTree: Boolean? = null,
+    val formatCells: Boolean? = null,
+)
+
+/**
+ * An extension function to convert clipboard copy config class to JS object.
+ */
+internal fun ClipboardCopyConfig.toJs(): JsAny {
+    return jsObjectOf(
+        "columnHeaders" to columnHeaders,
+        "columnGroups" to columnGroups,
+        "rowHeaders" to rowHeaders,
+        "rowGroups" to rowGroups,
+        "columnCalcs" to columnCalcs,
+        "dataTree" to dataTree,
+        "formatCells" to formatCells,
     )
 }
 
@@ -686,6 +758,7 @@ public data class ColumnDefinition<T : Any>(
     val mutatorImportParams: JsAny? = null,
     val accessorDownload: JsAny? = null,
     val accessorDownloadParams: JsAny? = null,
+    val clipboard: Boolean? = null,
 )
 
 /**
@@ -1046,6 +1119,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         "accessorDownload" to accessorDownload,
         "accessorDownloadParams" to accessorDownloadParams,
         *(responsiveCollapseOptions + headerMenuOptions).toTypedArray(),
+        "clipboard" to clipboard
     )
 }
 
@@ -1236,6 +1310,13 @@ public data class TabulatorOptions<T : Any>(
     val columnCalcs: JsAny? = null,
     val downloadEncoder: JsAny? = null,
     val selectableRangeBlurEditOnNavigate: Boolean? = null,
+    val validationMode: ValidationMode? = null,
+    val clipboard: Clipboard? = null,
+    val clipboardCopyConfig: ClipboardCopyConfig? = null,
+    val clipboardCopyRowRange: RowRange? = null,
+    val clipboardCopyStyled: Boolean? = null,
+    val clipboardPasteParser: JsAny? = null,
+    val clipboardPasteAction: JsAny? = null,
 )
 
 /**
@@ -1418,5 +1499,18 @@ internal fun <T : Any> TabulatorOptions<T>.toJs(
         "columnCalcs" to columnCalcs,
         "downloadEncoder" to downloadEncoder,
         "selectableRangeBlurEditOnNavigate" to selectableRangeBlurEditOnNavigate,
+        "validationMode" to validationMode?.value,
+        "clipboard" to when (clipboard) {
+            Clipboard.True -> true.toJsBoolean()
+            Clipboard.False -> false.toJsBoolean()
+            Clipboard.Copy -> "copy".toJsString()
+            Clipboard.Paste -> "paste".toJsString()
+            null -> null
+        },
+        "clipboardCopyConfig" to clipboardCopyConfig?.toJs(),
+        "clipboardCopyRowRange" to clipboardCopyRowRange?.value,
+        "clipboardCopyStyled" to clipboardCopyStyled,
+        "clipboardPasteParser" to clipboardPasteParser,
+        "clipboardPasteAction" to clipboardPasteAction,
     )
 }
