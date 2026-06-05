@@ -1,11 +1,10 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    alias(libs.plugins.koin.compiler)
     id("org.jetbrains.compose")
     kotlin("plugin.compose")
     id("com.google.devtools.ksp")
@@ -17,7 +16,7 @@ val mainClassName = "io.ktor.server.netty.EngineMain"
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(25)
     jvm {
         compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -27,7 +26,7 @@ kotlin {
             mainClass.set(mainClassName)
         }
     }
-    js(IR) {
+    js {
         useEsModules()
         browser {
             commonWebpackConfig {
@@ -91,7 +90,6 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.server.netty)
                 implementation(libs.ktor.server.compression)
-                implementation(libs.koin.annotations)
                 implementation(libs.logback.classic)
             }
         }

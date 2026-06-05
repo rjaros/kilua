@@ -15,12 +15,9 @@ import kotlinx.coroutines.delay
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
-import org.koin.core.annotation.Factory
-import org.koin.core.annotation.Provided
 import kotlin.time.Duration.Companion.seconds
 
-@Factory
-class PingService(@Provided private val call: ApplicationCall) : IPingService {
+class PingService(private val call: ApplicationCall) : IPingService {
 
     override suspend fun ping(message: String?): String {
         println(message)

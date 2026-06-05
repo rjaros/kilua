@@ -11,7 +11,7 @@ plugins {
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
-    js(IR) {
+    js {
         useEsModules()
         browser {
             commonWebpackConfig {
