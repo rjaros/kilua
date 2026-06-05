@@ -61,7 +61,12 @@ public abstract class KiluaPlugin : Plugin<Project> {
 
         val versions =
             Toml.parse(this@KiluaPlugin.javaClass.classLoader.getResourceAsStream("dev.kilua.versions.toml"))
-        val kiluaVersions = versions.toMap().mapNotNull { (k, v) -> if (v is String) k to v else null }.toMap()
+        val kiluaVersions = versions.dottedKeySet().filter { it.startsWith("versions.") }.mapNotNull {
+            val value = versions.getString(it)
+            if (value != null) {
+                it.substring("versions.".length) to value
+            } else null
+        }.toMap()
         with(KiluaPluginContext(project, kiluaExtension, kiluaVersions)) {
             plugins.withId("org.jetbrains.kotlin.multiplatform") {
                 afterEvaluate {
@@ -459,8 +464,8 @@ public abstract class KiluaPlugin : Plugin<Project> {
 
         fun BaseNpmExtension.configureOverrides() {
             if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
-                override("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
-                override("zzz-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
+                override("aaa-kilua-assets", kiluaVersions["npm-kilua-assets"]!!)
+                override("zzz-kilua-assets", kiluaVersions["npm-kilua-assets"]!!)
                 override("split.js", kiluaVersions["splitjs"]!!)
                 override("html-differ", kiluaVersions["html-differ"]!!)
                 override("@popperjs/core", kiluaVersions["popperjs-core"]!!)
@@ -497,8 +502,8 @@ public abstract class KiluaPlugin : Plugin<Project> {
 
         fun BaseYarnRootExtension.configureResolutions() {
             if (kiluaExtension.enableResolutions.get() && kiluaVersions.isNotEmpty()) {
-                resolution("aaa-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
-                resolution("zzz-kilua-assets", kiluaVersions["npm.kilua-assets"]!!)
+                resolution("aaa-kilua-assets", kiluaVersions["npm-kilua-assets"]!!)
+                resolution("zzz-kilua-assets", kiluaVersions["npm-kilua-assets"]!!)
                 resolution("split.js", kiluaVersions["splitjs"]!!)
                 resolution("html-differ", kiluaVersions["html-differ"]!!)
                 resolution("@popperjs/core", kiluaVersions["popperjs-core"]!!)
