@@ -791,6 +791,46 @@ public class Form<K : Any>(
         getFirstFormControl()?.focus()
     }
 
+    /**
+     * Returns the first invalid control on the form.
+     */
+    public fun getFirstInvalidFormControl(): FormControl<*>? {
+        return fields.mapNotNull { (key, control) ->
+            @Suppress("UNCHECKED_CAST")
+            val fieldsParams = (fieldsParams[key] as FieldParams<*, FormControl<*>>)
+            val required = control.required ?: false
+            val isEmptyWhenRequired = (control.getValue() == null || control.value == false)
+                    && control.visible && required
+            if (isEmptyWhenRequired) {
+                control
+            } else if (fieldsParams.validator != null) {
+                val isInvalid = control.visible && !fieldsParams.validator.invoke(control)
+                if (isInvalid) {
+                    control
+                } else {
+                    null
+                }
+            } else if (fieldsParams.validatorWithMessage != null) {
+                val (result, _) = fieldsParams.validatorWithMessage.invoke(control)
+                val isInvalid = control.visible && !result
+                if (isInvalid) {
+                    control
+                } else {
+                    null
+                }
+            } else {
+                null
+            }
+        }.firstOrNull()
+    }
+
+    /**
+     * Focuses the first invalid form control on the form.
+     */
+    public fun focusFirstInvalid() {
+        getFirstInvalidFormControl()?.focus()
+    }
+
     override fun buildHtmlPropertyList(propertyListBuilder: PropertyListBuilder) {
         super.buildHtmlPropertyList(propertyListBuilder)
         propertyListBuilder.add(
