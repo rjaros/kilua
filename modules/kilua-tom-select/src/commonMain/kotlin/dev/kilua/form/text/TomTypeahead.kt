@@ -49,8 +49,11 @@ import web.dom.document
 import kotlin.js.JsAny
 import kotlin.js.JsArray
 import kotlin.js.JsBoolean
+import kotlin.js.JsNumber
 import kotlin.js.JsString
+import kotlin.js.length
 import kotlin.js.toBoolean
+import kotlin.js.toInt
 import kotlin.js.toJsArray
 import kotlin.js.toJsString
 import kotlin.js.toList
@@ -253,10 +256,11 @@ public open class TomTypeahead(
                 this.openOnFocus = true
                 this.duplicates = true
                 if (self.options != null) {
-                    this.options = self.options!!.map {
+                    this.options = self.options!!.mapIndexed { index, string ->
                         jsObjectOf(
-                            "value" to it,
-                            "text" to it
+                            "value" to string,
+                            "text" to string,
+                            "score" to self.options!!.size - index
                         )
                     }.toJsArray()
                 }
@@ -266,8 +270,11 @@ public open class TomTypeahead(
                     }
                     this.no_results = null
                 }
-                this.sortField =
-                    listOf(jsObjectOf("field" to $$"$order"), jsObjectOf("field" to $$"$score")).toJsAny()!!
+                this.score = { _ ->
+                    { item ->
+                        item.jsGet("score")?.unsafeCast<JsNumber>()?.toInt() ?: 0
+                    }
+                }
                 this.plugins = listOf("restore_on_backspace", "change_listener").toJsAny()!!
                 if (self.tsCallbacks != null) {
                     val callbacksObj = self.tsCallbacks!!.toJs()
@@ -275,11 +282,13 @@ public open class TomTypeahead(
                     if (self.tsCallbacks!!.load != null) {
                         this.load = { query: String, callback: (JsArray<JsAny>) -> Unit ->
                             tsCallbacks!!.load!!(query) { options ->
+                                this@TomTypeahead.tomSelectInstance?.clearOptions()
                                 callback(
-                                    options.toList().map {
+                                    options.toList().mapIndexed { index, string ->
                                         jsObjectOf(
-                                            "value" to it,
-                                            "text" to it
+                                            "value" to string,
+                                            "text" to string,
+                                            "score" to options.length - index
                                         )
                                     }.toJsArray()
                                 )

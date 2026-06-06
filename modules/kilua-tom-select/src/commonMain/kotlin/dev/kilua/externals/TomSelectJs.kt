@@ -28,6 +28,7 @@ import kotlin.js.JsAny
 import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.JsString
+import kotlin.js.definedExternally
 
 /**
  * Tom Select renders configuration.
@@ -109,6 +110,7 @@ public external class TomSelectOptionsJs : JsAny {
     public var valueField: String
     public var labelField: String
     public var disabledField: String
+    public var score: (JsAny) -> ((JsAny) -> Int)
     public var sortField: JsAny
     public var searchField: JsArray<JsString>
     public var searchConjunction: String
@@ -130,7 +132,7 @@ public external class TomSelectJs(element: HTMLElement, options: TomSelectOption
     public fun removeOption(value: String)
     public fun getOption(value: String, create: Boolean): JsAny?
     public fun refreshOptions(triggerDropdown: Boolean)
-    public fun clearOptions(clearFilter: (JsAny) -> Boolean)
+    public fun clearOptions(clearFilter: (JsAny) -> Boolean = definedExternally)
 
     public fun clear(silent: Boolean)
     public fun getItem(value: String)
