@@ -171,7 +171,10 @@ import dev.kilua.utils.promise
 import dev.kilua.utils.rem
 import dev.kilua.utils.today
 import dev.ktml.templates.KtmlRegistry
+import js.array.JsArray
 import js.array.jsArrayOf
+import js.array.toJsArray
+import js.array.toList
 import js.json.parse
 import js.numbers.JsNumbers.toJsInt
 import js.promise.Promise
@@ -198,11 +201,8 @@ import web.mouse.MouseEvent
 import web.timers.setTimeout
 import web.window.window
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsModule
-import kotlin.js.toJsArray
 import kotlin.js.toJsString
-import kotlin.js.toList
 import kotlin.js.unsafeCast
 import kotlin.random.Random
 import kotlin.random.nextInt

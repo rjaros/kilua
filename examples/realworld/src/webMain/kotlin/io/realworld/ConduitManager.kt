@@ -34,6 +34,8 @@ import dev.kilua.utils.jsGet
 import dev.kilua.utils.keys
 import io.realworld.model.Article
 import io.realworld.model.User
+import js.array.JsArray
+import js.array.toList
 import js.json.parse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,9 +51,7 @@ import web.console.console
 import web.http.text
 import web.storage.localStorage
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsString
-import kotlin.js.toList
 import kotlin.js.unsafeCast
 
 const val JWT_TOKEN = "jwtToken"
