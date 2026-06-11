@@ -60,7 +60,7 @@ public data class SanitizeHtmlOptions(
     val parseStyleAttributes: Boolean? = null,
     val parser: JsAny? = null,
     val allowedClasses: Map<String, List<String>>? = null,
-    val allowedStyles: Map<String, Map<String, RegExp>>? = null,
+    val allowedStyles: Map<String, Map<String, List<RegExp>>>? = null,
     val transformTags: Map<String, JsAny>? = null,
     val nonTextTags: List<String>? = null,
     val nestingLimit: Int? = null
