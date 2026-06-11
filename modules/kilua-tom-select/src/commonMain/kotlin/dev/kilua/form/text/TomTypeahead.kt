@@ -42,21 +42,20 @@ import dev.kilua.utils.jsObjectOf
 import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
+import js.array.ReadonlyArray
+import js.array.toJsArray
+import js.array.toList
 import js.string.JsStrings.toKotlinString
 import web.dom.ElementId
 import web.dom.InsertPosition
 import web.dom.document
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsBoolean
 import kotlin.js.JsNumber
 import kotlin.js.JsString
-import kotlin.js.length
 import kotlin.js.toBoolean
 import kotlin.js.toInt
-import kotlin.js.toJsArray
 import kotlin.js.toJsString
-import kotlin.js.toList
 import kotlin.js.unsafeCast
 
 /**
@@ -280,7 +279,7 @@ public open class TomTypeahead(
                     val callbacksObj = self.tsCallbacks!!.toJs()
                     assign(this, callbacksObj)
                     if (self.tsCallbacks!!.load != null) {
-                        this.load = { query: String, callback: (JsArray<JsAny>) -> Unit ->
+                        this.load = { query: String, callback: (ReadonlyArray<JsAny>) -> Unit ->
                             tsCallbacks!!.load!!(query) { options ->
                                 this@TomTypeahead.tomSelectInstance?.clearOptions()
                                 callback(
@@ -288,7 +287,7 @@ public open class TomTypeahead(
                                         jsObjectOf(
                                             "value" to string,
                                             "text" to string,
-                                            "score" to options.length - index
+                                            "score" to (options.size - index)
                                         )
                                     }.toJsArray()
                                 )

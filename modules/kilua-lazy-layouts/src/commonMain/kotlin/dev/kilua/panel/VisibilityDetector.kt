@@ -27,9 +27,9 @@ import dev.kilua.core.IComponent
 import dev.kilua.core.SafeDomFactory
 import dev.kilua.html.div
 import dev.kilua.html.px
+import js.array.toList
 import web.console.console
 import web.intersection.IntersectionObserver
-import kotlin.js.toList
 import kotlin.random.Random
 import kotlin.random.nextUInt
 

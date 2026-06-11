@@ -22,7 +22,8 @@
 
 package dev.kilua.utils
 
-import js.array.ArrayLike
+import js.array.JsArray
+import js.array.toList
 import js.numbers.JsNumbers.toJsDouble
 import js.numbers.JsNumbers.toJsInt
 import js.objects.Object
@@ -30,12 +31,14 @@ import js.objects.unsafeJso
 import js.reflect.Reflect
 import js.string.JsStrings.toKotlinString
 import js.undefined.undefinedOrNull
+import web.dom.Element
+import web.dom.Node
+import web.dom.NodeList
+import web.html.HTMLCollectionBase
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.set
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
-import kotlin.js.toList
 import kotlin.js.unsafeCast
 
 /**
@@ -103,9 +106,16 @@ public expect fun isArray(o: JsAny?): Boolean
 public expect fun <T : JsAny> concat(array1: JsArray<T>, array2: JsArray<T>): JsArray<T>
 
 /**
- * Convert ArrayLike to Kotlin List.
+ * Convert NodeList to Kotlin List.
  */
-public fun <T : JsAny> ArrayLike<T>.toList(): List<T> {
+public fun <T : Node> NodeList<T>.toList(): List<T> {
+    return List(length) { get(it) }
+}
+
+/**
+ * Convert HTMLCollectionBase to Kotlin List.
+ */
+public fun <T : Element> HTMLCollectionBase<T>.toList(): List<T> {
     return List(length) { get(it) }
 }
 

@@ -24,8 +24,8 @@ package dev.kilua.form.select
 
 import dev.kilua.externals.TomSelectCallbacksJs
 import dev.kilua.utils.obj
+import js.array.JsArray
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 
 /**
  * Tom Select callback functions.

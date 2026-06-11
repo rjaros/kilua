@@ -31,6 +31,8 @@ import dev.kilua.rpc.CallAgent
 import dev.kilua.rpc.RpcSerialization
 import dev.kilua.rpc.RpcServiceMgr
 import dev.kilua.utils.KiluaScope
+import js.array.ReadonlyArray
+import js.array.toJsArray
 import js.json.stringify
 import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
@@ -38,8 +40,6 @@ import kotlinx.serialization.builtins.serializer
 import web.console.console
 import web.http.Request
 import kotlin.js.JsAny
-import kotlin.js.JsArray
-import kotlin.js.toJsArray
 import kotlin.js.toJsString
 
 /**
@@ -82,7 +82,7 @@ public fun <T : Any> IComponent.tomTypeaheadRemoteRef(
 ): TomTypeahead {
 
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks) {
-        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit) =
+        val loadCallback: ((query: String, callback: (ReadonlyArray<JsAny>) -> Unit) -> Unit) =
             { query, callback ->
                 KiluaScope.launch {
                     val result = getOptionsForTomTypeaheadRemote(
@@ -151,7 +151,7 @@ public fun <T : Any> IComponent.tomTypeaheadRemote(
 ) {
 
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks) {
-        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit) =
+        val loadCallback: ((query: String, callback: (ReadonlyArray<JsAny>) -> Unit) -> Unit) =
             { query, callback ->
                 KiluaScope.launch {
                     val result = getOptionsForTomTypeaheadRemote(

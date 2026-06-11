@@ -43,14 +43,14 @@ import dev.kilua.utils.StringPair
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.obj
 import dev.kilua.utils.rem
+import js.array.ReadonlyArray
+import js.array.toJsArray
 import js.json.stringify
 import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.ListSerializer
 import web.console.console
 import web.http.Request
 import kotlin.js.JsAny
-import kotlin.js.JsArray
-import kotlin.js.toJsArray
 import kotlin.js.toJsString
 import kotlin.js.unsafeCast
 
@@ -387,7 +387,7 @@ public fun <T : Any> IComponent.tomSelectRemoteRef(
     lateinit var tomSelectRemote: TomSelectRemote<T>
 
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks, preload, openOnFocus) {
-        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
+        val loadCallback: ((query: String, callback: (ReadonlyArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
             { query, callback ->
                 tomSelectRemote.clearOptions()
                 KiluaScope.launch {
@@ -512,7 +512,7 @@ public fun <T : Any> IComponent.tomSelectRemote(
     lateinit var tomSelectRemote: TomSelectRemote<T>
 
     val tsCallbacksState: TomSelectCallbacks = remember(tsCallbacks, preload, openOnFocus) {
-        val loadCallback: ((query: String, callback: (JsArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
+        val loadCallback: ((query: String, callback: (ReadonlyArray<JsAny>) -> Unit) -> Unit)? = if (!preload) {
             { query, callback ->
                 tomSelectRemote.clearOptions()
                 KiluaScope.launch {

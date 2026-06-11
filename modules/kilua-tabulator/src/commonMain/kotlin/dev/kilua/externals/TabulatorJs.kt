@@ -26,8 +26,8 @@ package dev.kilua.externals
 
 import js.promise.Promise
 import web.html.HTMLElement
+import js.array.JsArray
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsModule
 
 /**

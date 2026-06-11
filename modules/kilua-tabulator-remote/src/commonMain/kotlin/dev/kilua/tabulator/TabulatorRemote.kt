@@ -40,6 +40,7 @@ import dev.kilua.utils.jsSet
 import dev.kilua.utils.promise
 import dev.kilua.utils.rem
 import js.array.jsArrayOf
+import js.array.JsArray
 import js.globals.globalThis
 import js.json.parse
 import js.json.stringify
@@ -51,7 +52,6 @@ import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
 import web.http.Request
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.toJsString
 import kotlin.js.unsafeCast
 import kotlin.reflect.KClass

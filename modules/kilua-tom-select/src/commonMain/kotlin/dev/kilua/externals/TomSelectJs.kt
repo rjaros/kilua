@@ -23,9 +23,10 @@
 
 package dev.kilua.externals
 
+import js.array.JsArray
+import js.array.ReadonlyArray
 import web.html.HTMLElement
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.JsString
 import kotlin.js.definedExternally
@@ -82,7 +83,7 @@ public external class TomSelectOptionsJs : JsAny {
     public var maxItems: Int?
     public var maxOptions: Int?
     public var allowEmptyOption: Boolean
-    public var options: JsArray<JsAny>
+    public var options: ReadonlyArray<JsAny>
     public var controlInput: HTMLElement?
     public var plugins: JsAny
     public var load: ((query: String, callback: (JsArray<out JsAny>) -> Unit) -> Unit)
@@ -112,7 +113,7 @@ public external class TomSelectOptionsJs : JsAny {
     public var disabledField: String
     public var score: (JsAny) -> ((JsAny) -> Int)
     public var sortField: JsAny
-    public var searchField: JsArray<JsString>
+    public var searchField: ReadonlyArray<JsString>
     public var searchConjunction: String
     public var onOptionAdd: ((value: String, data: JsAny) -> Unit)
     public var onOptionRemove: ((value: JsAny) -> Unit)
@@ -127,7 +128,7 @@ public external class TomSelectOptionsJs : JsAny {
 @kotlin.js.JsName("TomSelect")
 public external class TomSelectJs(element: HTMLElement, options: TomSelectOptionsJs) : JsAny {
     public fun addOption(value: JsAny, userCreated: Boolean)
-    public fun addOptions(value: JsArray<JsAny>, userCreated: Boolean)
+    public fun addOptions(value: ReadonlyArray<JsAny>, userCreated: Boolean)
     public fun updateOption(value: String, data: JsAny)
     public fun removeOption(value: String)
     public fun getOption(value: String, create: Boolean): JsAny?

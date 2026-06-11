@@ -44,6 +44,7 @@ import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toDate
 import dev.kilua.utils.toKebabCase
+import js.array.toJsArray
 import js.date.Date
 import js.intl.DateTimeFormat
 import js.intl.DateTimeFormatOptions
@@ -55,7 +56,6 @@ import web.events.EventType
 import web.events.addEventListener
 import web.events.removeEventListener
 import kotlin.js.JsAny
-import kotlin.js.toJsArray
 import kotlin.js.toJsString
 import kotlin.js.unsafeCast
 import kotlin.time.Duration

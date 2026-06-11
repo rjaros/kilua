@@ -48,15 +48,15 @@ import dev.kilua.utils.obj
 import dev.kilua.utils.rem
 import dev.kilua.utils.toJsAny
 import dev.kilua.utils.toList
+import js.array.JsArray
+import js.array.toList
 import web.dom.InsertPosition
 import web.dom.document
 import web.html.HTMLOptionElement
 import web.html.HTMLSelectElement
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsString
 import kotlin.js.toJsString
-import kotlin.js.toList
 import kotlin.js.unsafeCast
 
 /**

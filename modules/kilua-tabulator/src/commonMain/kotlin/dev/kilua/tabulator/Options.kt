@@ -40,6 +40,10 @@ import dev.kilua.utils.jsSet
 import dev.kilua.utils.obj
 import dev.kilua.utils.toKebabCase
 import dev.kilua.utils.toList
+import js.array.JsArray
+import js.array.ReadonlyArray
+import js.array.toJsArray
+import js.array.toList
 import js.numbers.JsInt
 import js.numbers.JsNumbers.toJsDouble
 import js.numbers.JsNumbers.toJsInt
@@ -57,12 +61,9 @@ import web.timers.clearTimeout
 import web.timers.setTimeout
 import web.window.window
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsNumber
-import kotlin.js.toJsArray
 import kotlin.js.toJsBoolean
 import kotlin.js.toJsString
-import kotlin.js.toList
 import kotlin.js.unsafeCast
 import kotlin.reflect.KClass
 
@@ -882,7 +883,7 @@ internal fun <T : Any> ColumnDefinition<T>.toJs(
         }
     } else editorFunction
 
-    val tmpHeaderColumnsMenu: ((Event) -> JsArray<JsAny>)? = if (this.headerColumnsMenu == true) {
+    val tmpHeaderColumnsMenu: ((Event) -> ReadonlyArray<JsAny>)? = if (this.headerColumnsMenu == true) {
         { _ ->
             val resetTitle = this.headerColumnsMenuResetTitle ?: "Default columns"
             val resetIconPrefix = ClassName(this.headerColumnsMenuResetIconPrefix ?: "fas")
@@ -1265,7 +1266,7 @@ public data class TabulatorOptions<T : Any>(
     val headerSortClickElement: HeaderSortClickElement? = null,
     val rowDblClickPopup: JsAny? = null,
     val rowDblClickMenu: JsAny? = null,
-    val responsiveLayoutCollapseFormatter: ((data: JsArray<JsAny>) -> Element)? = null,
+    val responsiveLayoutCollapseFormatter: ((data: ReadonlyArray<JsAny>) -> Element)? = null,
     val selectableRange: JsAny? = null,
     val selectableRangeColumns: Boolean? = null,
     val selectableRangeRows: Boolean? = null,
@@ -1290,8 +1291,8 @@ public data class TabulatorOptions<T : Any>(
     val paginationIconNext: String? = null,
     val paginationIconLast: String? = null,
     val paginationIconPageSize: String? = null,
-    val importHeaderTransform: ((header: JsAny, headers: JsArray<JsAny>) -> JsAny)? = null,
-    val importValueTransform: ((value: JsAny, values: JsArray<JsAny>) -> JsAny)? = null,
+    val importHeaderTransform: ((header: JsAny, headers: ReadonlyArray<JsAny>) -> JsAny)? = null,
+    val importValueTransform: ((value: JsAny, values: ReadonlyArray<JsAny>) -> JsAny)? = null,
     val importFileValidator: ((file: JsAny) -> JsAny)? = null,
     val importDataValidator: ((data: JsAny) -> JsAny)? = null,
     val paginationOutOfRange: JsAny? = null,

@@ -44,8 +44,8 @@ import dev.kilua.externals.leaflet.layer.vector.Path
 import dev.kilua.externals.leaflet.layer.vector.Renderer
 import web.html.HTMLElement
 import web.pointer.PointerEvent
+import js.array.JsArray
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.JsName
 import kotlin.js.definedExternally

@@ -44,6 +44,8 @@ import dev.kilua.utils.jsTypeOf
 import dev.kilua.utils.nativeListOf
 import dev.kilua.utils.rem
 import dev.kilua.utils.toKebabCase
+import js.array.ReadonlyArray
+import js.array.toJsArray
 import js.json.parse
 import js.json.stringify
 import js.numbers.JsInt
@@ -59,8 +61,6 @@ import web.resize.ResizeObserver
 import web.timers.Timeout
 import web.timers.clearTimeout
 import kotlin.js.JsAny
-import kotlin.js.JsArray
-import kotlin.js.toJsArray
 import kotlin.js.toJsBoolean
 import kotlin.js.unsafeCast
 import kotlin.reflect.KClass
@@ -169,7 +169,7 @@ public open class Tabulator<T : Any>(
     /**
      * The internal data model.
      */
-    protected var internalData: JsArray<JsAny>? = null
+    protected var internalData: ReadonlyArray<JsAny>? = null
 
     /**
      * The current page size.
@@ -380,7 +380,7 @@ public open class Tabulator<T : Any>(
     /**
      * Converts a list of Kotlin data models to an internal (dynamic) data model array
      */
-    protected open fun toPlainObjList(data: List<T>): JsArray<JsAny> {
+    protected open fun toPlainObjList(data: List<T>): ReadonlyArray<JsAny> {
         return if (kClass != null) {
             if (jsonHelper == null || serializer == null) {
                 throw IllegalStateException("The data class can't be deserialized. Please provide a serializer when creating the Tabulator component.")

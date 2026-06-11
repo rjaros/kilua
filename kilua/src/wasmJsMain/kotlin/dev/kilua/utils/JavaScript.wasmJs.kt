@@ -22,7 +22,7 @@
 
 package dev.kilua.utils
 
-import kotlin.js.JsArray
+import js.array.JsArray
 
 public actual fun delete(o: JsAny, key: String): Unit = js("delete o[key]")
 

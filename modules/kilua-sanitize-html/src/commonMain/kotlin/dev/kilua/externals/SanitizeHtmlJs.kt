@@ -23,20 +23,20 @@
 
 package dev.kilua.externals
 
+import js.array.ReadonlyArray
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.JsString
 
 internal external class SanitizeHtmlOptionsJs : JsAny {
     var allowedTags: JsAny
-    var nonBooleanAttributes: JsArray<JsString>
+    var nonBooleanAttributes: ReadonlyArray<JsString>
     var allowedAttributes: JsAny
     var disallowedTagsMode: String
-    var selfClosing: JsArray<JsString>
-    var allowedSchemes: JsArray<JsString>
+    var selfClosing: ReadonlyArray<JsString>
+    var allowedSchemes: ReadonlyArray<JsString>
     var allowedSchemesByTag: JsAny
-    var allowedSchemesAppliedToAttributes: JsArray<JsString>
+    var allowedSchemesAppliedToAttributes: ReadonlyArray<JsString>
     var allowProtocolRelative: Boolean
     var enforceHtmlBoundary: Boolean
     var parseStyleAttributes: Boolean
@@ -44,7 +44,7 @@ internal external class SanitizeHtmlOptionsJs : JsAny {
     var allowedClasses: JsAny
     var allowedStyles: JsAny
     var transformTags: JsAny
-    var nonTextTags: JsArray<JsString>
+    var nonTextTags: ReadonlyArray<JsString>
     var nestingLimit: Int
 }
 

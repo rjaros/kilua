@@ -22,11 +22,11 @@
 
 package dev.kilua.externals
 
+import js.array.ReadonlyArray
 import js.promise.Promise
 import web.dom.Element
 import web.events.Event
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsNumber
 
 /**
@@ -77,12 +77,12 @@ internal expect fun toJsAny(f: (String, JsAny, JsAny) -> JsAny): JsAny
 
 internal expect fun toJsAny(f: (JsAny, JsAny, JsAny) -> JsAny): JsAny
 
-internal expect fun toJsAny(f: (JsArray<JsAny>) -> Element): JsAny
+internal expect fun toJsAny(f: (ReadonlyArray<JsAny>) -> Element): JsAny
 
 internal expect fun toJsAny(f: (JsAny) -> Boolean): JsAny
 
-internal expect fun toJsAny(f: (Event) -> JsArray<JsAny>): JsAny
+internal expect fun toJsAny(f: (Event) -> ReadonlyArray<JsAny>): JsAny
 
-internal expect fun toJsAny(f: (JsAny, JsArray<JsAny>) -> JsAny): JsAny
+internal expect fun toJsAny(f: (JsAny, ReadonlyArray<JsAny>) -> JsAny): JsAny
 
 internal expect fun toJsAny(f: (JsAny) -> JsAny): JsAny

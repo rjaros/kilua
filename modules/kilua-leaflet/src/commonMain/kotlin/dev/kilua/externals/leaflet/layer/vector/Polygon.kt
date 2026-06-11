@@ -25,7 +25,7 @@
 package dev.kilua.externals.leaflet.layer.vector
 
 import dev.kilua.externals.leaflet.geo.LatLng
-import kotlin.js.JsArray
+import js.array.ReadonlyArray
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
@@ -40,7 +40,7 @@ public open external class Polygon :
 
     /** Create a polygon from an array of LatLng points. */
     public constructor(
-        latlngs: JsArray<LatLng>,
+        latlngs: ReadonlyArray<LatLng>,
         options: PolylineOptions = definedExternally
     )
 
@@ -49,7 +49,7 @@ public open external class Polygon :
      * outer shape and the other arrays representing holes in the outer shape.
      */
     public constructor(
-        latlngs: JsArray<JsArray<LatLng>>,
+        latlngs: ReadonlyArray<ReadonlyArray<LatLng>>,
         options: PolylineOptions = definedExternally
     )
 
@@ -57,7 +57,7 @@ public open external class Polygon :
      * @param[latlngs] a multi-dimensional array to represent a MultiPolygon shape.
      */
     public constructor(
-        latlngs: JsArray<JsArray<JsArray<LatLng>>>,
+        latlngs: ReadonlyArray<ReadonlyArray<ReadonlyArray<LatLng>>>,
         options: PolylineOptions = definedExternally
     )
 

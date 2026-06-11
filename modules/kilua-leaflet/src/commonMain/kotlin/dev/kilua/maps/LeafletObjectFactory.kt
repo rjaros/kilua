@@ -66,10 +66,10 @@ import dev.kilua.externals.leaflet.layer.vector.SVG
 import dev.kilua.externals.leaflet.map.LeafletMap
 import dev.kilua.externals.leaflet.map.LeafletMap.LeafletMapOptions
 import dev.kilua.utils.obj
+import js.array.JsArray
+import js.array.toJsArray
 import web.html.HTMLElement
 import web.html.HTMLVideoElement
-import kotlin.js.JsArray
-import kotlin.js.toJsArray
 import kotlin.js.toJsString
 
 /**
@@ -100,18 +100,18 @@ public object LeafletObjectFactory {
         )
 
     public fun polyline(
-        latLngs: Collection<LatLng>,
+        latLngs: List<LatLng>,
         configure: PolylineOptions.() -> Unit = {},
     ): Polyline = Polyline(
-        latLngs.toTypedArray().toJsArray(),
+        latLngs.toJsArray(),
         options = obj(configure),
     )
 
     public fun multiPolyline(
-        latLngs: Collection<Collection<LatLng>>,
+        latLngs: List<List<LatLng>>,
         configure: PolylineOptions.() -> Unit = {},
     ): Polyline = Polyline(
-        latLngs.map { it.toTypedArray().toJsArray() }.toTypedArray().toJsArray(),
+        latLngs.map { it.toJsArray() }.toJsArray(),
         options = obj(configure),
     )
 
@@ -203,12 +203,12 @@ public object LeafletObjectFactory {
         VideoOverlay(video = video, bounds = bounds, options = obj(configure))
 
     public fun videoOverlay(
-        video: Collection<String>,
+        video: List<String>,
         bounds: LatLngBounds,
         configure: VideoOverlayOptions.() -> Unit = {},
     ): VideoOverlay =
         VideoOverlay(
-            video = video.map { it.toJsString() }.toTypedArray().toJsArray(),
+            video = video.map { it.toJsString() }.toJsArray(),
             bounds = bounds,
             options = obj(configure)
         )
@@ -236,25 +236,24 @@ public object LeafletObjectFactory {
 
     /** See [`https://leafletjs.com/reference.html#polygon`](https://leafletjs.com/reference.html#polygon) */
     public fun polygon(
-        latlngs: Collection<LatLng>,
+        latlngs: List<LatLng>,
         configure: PolylineOptions.() -> Unit = {},
     ): dev.kilua.externals.leaflet.layer.vector.Polygon =
         dev.kilua.externals.leaflet.layer.vector.Polygon(
-            latlngs = latlngs.toTypedArray().toJsArray(),
+            latlngs = latlngs.toJsArray(),
             options = obj(configure)
         )
 
     /** See [`https://leafletjs.com/reference.html#polygon`](https://leafletjs.com/reference.html#polygon) */
     public fun multiPolygon(
-        latlngs: Collection<Collection<Collection<LatLng>>>,
+        latlngs: List<List<List<LatLng>>>,
         configure: PolylineOptions.() -> Unit = {},
     ): dev.kilua.externals.leaflet.layer.vector.Polygon =
         dev.kilua.externals.leaflet.layer.vector.Polygon(
             latlngs = latlngs
                 .map {
-                    it.map { it.toTypedArray().toJsArray() }.toTypedArray().toJsArray()
-                }
-                .toTypedArray().toJsArray(),
+                    it.map { it.toJsArray() }.toJsArray()
+                }.toJsArray(),
             options = obj(configure)
         )
 

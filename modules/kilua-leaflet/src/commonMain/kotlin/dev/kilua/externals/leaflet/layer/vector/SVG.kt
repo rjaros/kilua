@@ -26,7 +26,7 @@ package dev.kilua.externals.leaflet.layer.vector
 
 import dev.kilua.externals.leaflet.geometry.Point
 import web.svg.SVGElement
-import kotlin.js.JsArray
+import js.array.JsArray
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
 

@@ -27,8 +27,9 @@ package dev.kilua.externals.leaflet.layer.vector
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geo.LatLngBounds
 import dev.kilua.externals.leaflet.geometry.Point
+import js.array.JsArray
+import js.array.ReadonlyArray
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
@@ -41,13 +42,13 @@ public open external class Polyline : Path<Polyline.PolylineOptions> {
 
     /** Create a polyline from an array of [LatLng] points */
     public constructor(
-        latlngs: JsArray<LatLng>,
+        latlngs: ReadonlyArray<LatLng>,
         options: PolylineOptions = definedExternally
     )
 
     /** @param[latlngs] pass a multi-dimensional array to represent a `MultiPolyline` shape */
     public constructor(
-        latlngs: JsArray<JsArray<LatLng>>,
+        latlngs: ReadonlyArray<ReadonlyArray<LatLng>>,
         options: PolylineOptions = definedExternally
     )
 
@@ -63,12 +64,12 @@ public open external class Polyline : Path<Polyline.PolylineOptions> {
 
     public open fun addLatLng(
         latlng: LatLng,
-        latlngs: JsArray<LatLng> = definedExternally
+        latlngs: ReadonlyArray<LatLng> = definedExternally
     ): Polyline /* this */
 
     public open fun addLatLng(
-        latlng: JsArray<LatLng>,
-        latlngs: JsArray<LatLng> = definedExternally
+        latlng: ReadonlyArray<LatLng>,
+        latlngs: ReadonlyArray<LatLng> = definedExternally
     ): Polyline /* this */
 
     public open fun isEmpty(): Boolean

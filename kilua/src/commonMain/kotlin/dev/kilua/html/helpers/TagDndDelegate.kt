@@ -24,10 +24,10 @@ package dev.kilua.html.helpers
 
 import androidx.compose.runtime.Composable
 import dev.kilua.html.Tag
+import js.array.toList
 import js.string.JsStrings.toKotlinString
 import web.dnd.DragEvent
 import web.html.HTMLElement
-import kotlin.js.toList
 
 /**
  * Common drag and drop methods delegate.

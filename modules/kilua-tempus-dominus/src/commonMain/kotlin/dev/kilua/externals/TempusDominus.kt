@@ -27,8 +27,9 @@ package dev.kilua.externals
 import js.date.Date
 import js.numbers.JsInt
 import web.html.HTMLElement
+import js.array.JsArray
+import js.array.ReadonlyArray
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsModule
 
 /**
@@ -37,11 +38,11 @@ import kotlin.js.JsModule
 public external class TempusDominusRestrictions : JsAny {
     public var minDate: Date
     public var maxDate: Date
-    public var disabledDates: JsArray<Date>
-    public var enabledDates: JsArray<Date>
-    public var daysOfWeekDisabled: JsArray<JsInt>
-    public var disabledHours: JsArray<JsInt>
-    public var enabledHours: JsArray<JsInt>
+    public var disabledDates: ReadonlyArray<Date>
+    public var enabledDates: ReadonlyArray<Date>
+    public var daysOfWeekDisabled: ReadonlyArray<JsInt>
+    public var disabledHours: ReadonlyArray<JsInt>
+    public var enabledHours: ReadonlyArray<JsInt>
 }
 
 /**

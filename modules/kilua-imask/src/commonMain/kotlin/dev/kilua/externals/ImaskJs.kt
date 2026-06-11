@@ -23,9 +23,9 @@
 
 package dev.kilua.externals
 
+import js.array.ReadonlyArray
 import web.html.HTMLElement
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.JsNumber
 import kotlin.js.JsString
@@ -73,7 +73,7 @@ internal external class RangeMaskOptionsJs : ImaskOptionsJs {
 
 internal external class EnumMaskOptionsJs : ImaskOptionsJs {
     var mask: JsAny
-    var enum: JsArray<JsString>
+    var enum: ReadonlyArray<JsString>
     var lazy: Boolean?
     var eager: Boolean?
     var placeholderChar: String?
@@ -87,7 +87,7 @@ internal external class NumberMaskOptionsJs : ImaskOptionsJs {
     var padFractionalZeros: Boolean?
     var normalizeZeros: Boolean?
     var radix: String?
-    var mapToRadix: JsArray<JsString>?
+    var mapToRadix: ReadonlyArray<JsString>?
     var min: JsNumber?
     var max: JsNumber?
 }

@@ -28,8 +28,8 @@ import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.layer.vector.Path.PathOptions
 import js.array.Tuple2
 import js.array.Tuple3
+import js.array.JsArray
 import kotlin.js.JsAny
-import kotlin.js.JsArray
 import kotlin.js.JsModule
 import kotlin.js.JsNumber
 import kotlin.js.definedExternally
