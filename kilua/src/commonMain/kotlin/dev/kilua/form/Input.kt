@@ -159,7 +159,7 @@ public interface IInput<T : Any> : ITag<HTMLInputElement>, GenericFormControl<T>
     /**
      * Set the input mask options using a producer function.
      */
-    public fun maskOptions(maskOptionsProducer: (() -> MaskOptions?)?): Unit
+    public fun maskOptions(maskOptionsProducer: (() -> MaskOptions?)?)
 
     /**
      * Install the input mask controller.

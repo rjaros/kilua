@@ -201,7 +201,7 @@ public class SsrEngine(
     public suspend fun getMetadata(uri: String, locale: String? = null): Meta? {
         val metaJson = getDataFromSsrService(HttpMethod.Put, uri, locale)
         return if (metaJson.isEmpty()) {
-            return null
+            null
         } else {
             json.decodeFromString(metaJson)
         }

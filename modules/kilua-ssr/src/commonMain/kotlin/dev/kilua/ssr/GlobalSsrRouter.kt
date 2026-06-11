@@ -63,6 +63,7 @@ import kotlinx.serialization.json.Json
 import kotlin.js.JsAny
 import kotlin.js.toJsString
 import kotlin.js.unsafeCast
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * A router supporting Server-Side Rendering (SSR).
@@ -193,7 +194,7 @@ internal class SsrRouter(
                     res.statusCode = 200
                     res.setHeader("Content-Type", "text/plain")
                     while (lock) {
-                        delay(1)
+                        delay(1.milliseconds)
                     }
                     lock = true
                     val clientLanguage =
