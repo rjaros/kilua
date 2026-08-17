@@ -23,19 +23,11 @@
 
 package dev.kilua
 
-import kotlin.js.JsAny
-import kotlin.js.JsModule
-
 @JsModule("trix/dist/trix.css")
 internal external object TrixCss : JsAny
 
 @JsModule("zzz-kilua-assets/k-trix.css")
 internal external object CoreTrixCss : JsAny
-
-/**
- * Initializes Trix module.
- */
-internal expect fun initializeTrix()
 
 /**
  * Initializer for Kilua Trix module.
@@ -47,6 +39,5 @@ public object TrixModule : ModuleInitializer {
         useModule(CoreTrixCss)
         CssRegister.register("trix/dist/trix.css")
         CssRegister.register("zzz-kilua-assets/k-trix.css")
-        initializeTrix()
     }
 }

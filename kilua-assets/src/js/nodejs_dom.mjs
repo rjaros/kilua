@@ -2,7 +2,7 @@
  * Fake DOM classes for Node.js.
  */
 
-if (typeof process !== 'undefined') {
+if (typeof document === 'undefined') {
     globalThis.MouseEvent = class MouseEvent extends Event {
     };
     globalThis.InputEvent = class InputEvent extends Event {
@@ -44,6 +44,7 @@ if (typeof process !== 'undefined') {
         document: globalThis.document,
         addEventListener(name, callback) {},
         setTimeout: globalThis.setTimeout,
+        postMessage(message, options) {},
         Element: {
             prototype: null
         }

@@ -28,7 +28,18 @@ config.resolve.alias = {
     "tom-select/dist/css/tom-select.bootstrap5.min.css": false,
     "tom-select/dist/css/tom-select.default.min.css": false,
     "tom-select/dist/css/tom-select.min.css": false,
-    "trix/dist/trix.css": false
+    "trix/dist/trix.css": false,
+    "bootstrap": false,
+    "motion": false,
+    "imask": false,
+    "leaflet": false,
+    "split.js": false,
+    "rsup-progress": false,
+    "tabulator-tables": false,
+    "@eonasdan/tempus-dominus": false,
+    "toastify-js": false,
+    "tom-select": false,
+    "trix": false
 }
 config.resolve.modules.push("kotlin");
 config.devtool = undefined;

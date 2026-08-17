@@ -39,7 +39,6 @@ import dev.kilua.html.helpers.PropertyListBuilder
 import dev.kilua.html.tag
 import dev.kilua.i18n.Locale
 import dev.kilua.i18n.LocaleManager
-import dev.kilua.initializeTrix
 import dev.kilua.state.WithStateFlow
 import dev.kilua.state.WithStateFlowDelegate
 import dev.kilua.state.WithStateFlowDelegateImpl
@@ -51,7 +50,6 @@ import web.html.HTMLButtonElement
 import web.html.HTMLElement
 import web.html.HTMLInputElement
 import web.html.HtmlSource
-import kotlin.js.unsafeCast
 
 /**
  * Trix rich text editor component.
@@ -411,10 +409,6 @@ public open class RichText(
 
     public companion object {
         internal var idCounter: Int = 0
-
-        init {
-            initializeTrix()
-        }
     }
 
 }

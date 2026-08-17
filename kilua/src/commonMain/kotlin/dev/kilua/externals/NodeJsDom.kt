@@ -1,3 +1,4 @@
+@file:JsModule("aaa-kilua-assets/nodejs_dom.mjs")
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -29,14 +30,14 @@ import web.dom.Text
 /**
  * Create a fake DOM Element on Node.js.
  */
-internal expect fun nodeJsCreateElement(): Element
+internal external fun nodeJsCreateElement(): Element
 
 /**
  * Create a fake DOM TextNode on Node.js.
  */
-internal expect fun nodeJsCreateText(): Text
+internal external fun nodeJsCreateText(): Text
 
 /**
  * Create a fake DOM Comment on Node.js.
  */
-internal expect fun nodeJsCreateComment(): Comment
+internal external fun nodeJsCreateComment(): Comment

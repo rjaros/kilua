@@ -29,11 +29,6 @@ import dev.kilua.utils.isDom
 import web.dom.document
 
 /**
- * Initializes Bootstrap module.
- */
-internal expect fun initializeBootstrap()
-
-/**
  * Initializer for Kilua Bootstrap module.
  */
 public object BootstrapModule : ModuleInitializer {
@@ -44,7 +39,6 @@ public object BootstrapModule : ModuleInitializer {
         if (!initialized) {
             @Suppress("UNNECESSARY_SAFE_CALL")
             if (isDom) document.body?.setAttribute("data-bs-no-jquery", "true")
-            initializeBootstrap()
             Root.addTopLevelComposable {
                 modals()
                 toasts()
