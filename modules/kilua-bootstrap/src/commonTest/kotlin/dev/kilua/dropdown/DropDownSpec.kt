@@ -50,7 +50,7 @@ class DropDownSpec : DomSpec {
         }
         assertEqualsHtml(
             """<div class="dropdown">
-<button class="btn btn-danger dropdown-toggle kilua-dropdown-no-arrow icon-link" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+<button class="btn btn-danger dropdown-toggle kilua-dropdown-no-arrow k-icon-link" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
 <i class="fas fa-search">
 </i>
 A dropdown
@@ -93,7 +93,7 @@ Link 2
         }
         assertEqualsHtml(
             """<div class="dropdown">
-<button class="btn btn-danger dropdown-toggle kilua-dropdown-no-arrow icon-link" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+<button class="btn btn-danger dropdown-toggle kilua-dropdown-no-arrow k-icon-link" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
 <i class="fas fa-search">
 </i>
 A dropdown

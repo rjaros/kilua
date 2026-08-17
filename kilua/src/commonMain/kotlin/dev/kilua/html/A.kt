@@ -216,7 +216,7 @@ public fun IComponent.aRef(
     content: @Composable IA.() -> Unit = {}
 ): A {
     val iconClassName = if (label != null && icon != null) {
-        className % "icon-link"
+        className % "k-icon-link"
     } else className
     return aRef(href, target, iconClassName, id) {
         atom(label, icon)
@@ -273,7 +273,7 @@ public fun IComponent.a(
     content: @Composable IA.() -> Unit = {}
 ) {
     val iconClassName = if (label != null && icon != null) {
-        className % "icon-link"
+        className % "k-icon-link"
     } else className
     a(href, target, iconClassName, id) {
         atom(label, icon)

@@ -51,6 +51,7 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJ
         override("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get())
         override("motion", libs.versions.motion.get())
         override("leaflet", libs.versions.leaflet.get())
+        override("lucide-static", libs.versions.lucide.get())
     }
 }
 
@@ -81,6 +82,7 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.wasm.nodejs.Was
         override("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get())
         override("motion", libs.versions.motion.get())
         override("leaflet", libs.versions.leaflet.get())
+        override("lucide-static", libs.versions.lucide.get())
     }
 }
 
@@ -109,6 +111,7 @@ dependencies {
     nmcpAggregation(project(":modules:kilua-ktml"))
     nmcpAggregation(project(":modules:kilua-lazy-layouts"))
     nmcpAggregation(project(":modules:kilua-leaflet"))
+    nmcpAggregation(project(":modules:kilua-lucide"))
     nmcpAggregation(project(":modules:kilua-marked"))
     nmcpAggregation(project(":modules:kilua-rest"))
     nmcpAggregation(project(":modules:kilua-routing"))
@@ -150,6 +153,7 @@ dependencies {
     dokka(project(":modules:kilua-ktml"))
     dokka(project(":modules:kilua-lazy-layouts"))
     dokka(project(":modules:kilua-leaflet"))
+    dokka(project(":modules:kilua-lucide"))
     dokka(project(":modules:kilua-marked"))
     dokka(project(":modules:kilua-rest"))
     dokka(project(":modules:kilua-routing"))

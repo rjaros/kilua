@@ -1,5 +1,5 @@
 .kilua-radio-inline {
-    display: inline-block;
+    display: inline-block !important;
 }
 
 select:required:invalid {

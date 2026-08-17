@@ -124,7 +124,7 @@ public fun IComponent.bsButton(
     content: @Composable IButton.() -> Unit = {}
 ) {
     val iconClassName = if (label != null && icon != null) {
-        className % "icon-link"
+        className % "k-icon-link"
     } else className
     button(label, icon, type, disabled, "btn" % style.value % size?.value % iconClassName, id, content)
 }

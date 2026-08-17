@@ -259,7 +259,7 @@ private fun IAccordion.setupAccordion(
             div("accordion-item") {
                 h2("accordion-header") {
                     val iconLink = if (item.label != null && item.icon != null) {
-                        "icon-link"
+                        "k-icon-link"
                     } else {
                         null
                     }

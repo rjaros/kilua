@@ -492,6 +492,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 override("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
                 override("motion", kiluaVersions["motion"]!!)
                 override("leaflet", kiluaVersions["leaflet"]!!)
+                override("lucide-static", kiluaVersions["lucide"]!!)
             }
         }
 
@@ -530,6 +531,7 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 resolution("mini-css-extract-plugin", kiluaVersions["mini-css-extract-plugin"]!!)
                 resolution("motion", kiluaVersions["motion"]!!)
                 resolution("leaflet", kiluaVersions["leaflet"]!!)
+                resolution("lucide-static", kiluaVersions["lucide"]!!)
             }
         }
 

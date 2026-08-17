@@ -35,7 +35,7 @@ class BsButtonSpec : DomSpec {
             bsButton("A button", "fas fa-home")
         }
         assertEqualsHtml(
-            """<button type="button" class="btn btn-primary icon-link"><i class="fas fa-home"></i> A button</button>""",
+            """<button type="button" class="btn btn-primary k-icon-link"><i class="fas fa-home"></i> A button</button>""",
             root.element.innerHTML.asStringOrNull(),
             "Should render a Bootstrap button component to DOM"
         )
@@ -47,7 +47,7 @@ class BsButtonSpec : DomSpec {
             bsButton("A button", "fas fa-home")
         }
         assertEqualsHtml(
-            """<button type="button" class="btn btn-primary icon-link"><i class="fas fa-home"></i> A button</button>""",
+            """<button type="button" class="btn btn-primary k-icon-link"><i class="fas fa-home"></i> A button</button>""",
             root.innerHTML,
             "Should render a Bootstrap button component to a String"
         )

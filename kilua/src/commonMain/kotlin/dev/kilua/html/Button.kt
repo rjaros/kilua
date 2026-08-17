@@ -210,7 +210,7 @@ public fun IComponent.buttonRef(
     content: @Composable IButton.() -> Unit = {}
 ): Button {
     val iconClassName = if (label != null && icon != null) {
-        className % "icon-link"
+        className % "k-icon-link"
     } else className
     return buttonRef(type, disabled, iconClassName, id) {
         atom(label, icon)

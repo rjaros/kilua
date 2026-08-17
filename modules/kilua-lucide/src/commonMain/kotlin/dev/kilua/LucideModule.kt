@@ -1,3 +1,4 @@
+@file:Suppress("EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE")
 /*
  * Copyright (c) 2023 Robert Jaros
  *
@@ -22,8 +23,18 @@
 
 package dev.kilua
 
-import dev.kilua.externals.nodeJsInit
+import kotlin.js.JsAny
+import kotlin.js.JsModule
 
-internal actual fun initializeBootstrap() {
-    nodeJsInit()
+@JsModule("lucide-static/font/lucide.css")
+public external object LucideCss : JsAny
+
+/**
+ * Initializer for Kilua Lucide Icons module.
+ */
+public object LucideModule : ModuleInitializer {
+
+    override fun initialize() {
+        useModule(LucideCss)
+    }
 }
