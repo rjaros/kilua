@@ -50,6 +50,8 @@ import kotlin.io.path.reader
 
 public const val DEFAULT_SSR_CACHE_TIME: Int = 10
 
+internal class SsrException : Exception("SSR Exception")
+
 /**
  * Server-Side Rendering engine for Kilua.
  *
@@ -101,7 +103,10 @@ public class SsrEngine(
         "zzz-kilua-assets/k-tempus-dominus.css",
         "zzz-kilua-assets/k-toastify.css",
         "zzz-kilua-assets/k-tom-select.css",
-        "zzz-kilua-assets/k-trix.css"
+        "zzz-kilua-assets/k-trix.css",
+        "leaflet/dist/leaflet.css",
+        "toastify-js/src/toastify.css",
+        "trix/dist/trix.css"
     )
 
     private val cache: MutableMap<CacheKey, String> = ExpiringMap.builder()
@@ -267,6 +272,8 @@ public class SsrEngine(
         }
         return if (response.status == HttpStatusCode.OK) {
             response.bodyAsText()
+        } else if (response.status == HttpStatusCode.PreconditionFailed) {
+            throw SsrException()
         } else {
             throw Exception("Connection to the SSR service failed with status ${response.status}")
         }
@@ -298,6 +305,8 @@ public class SsrEngine(
                     getInternalSsrContent(uri, locale)
                 }
             }
+        } catch (_: SsrException) {
+            indexTemplate
         } catch (e: Exception) {
             logger.error("Connection to the SSR service failed", e)
             restartSsrProcess()

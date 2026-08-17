@@ -65,6 +65,14 @@ import kotlin.js.toJsString
 import kotlin.js.unsafeCast
 import kotlin.time.Duration.Companion.milliseconds
 
+internal const val KILUA_SSR_ERROR = "###KILUA_SSR_ERROR###"
+
+internal enum class SsrCondition {
+    WAIT,
+    CHANGE,
+    ERROR
+}
+
 /**
  * A router supporting Server-Side Rendering (SSR).
  * Uses a [BrowserRouter] when running in the browser and a custom router when running on the server.
@@ -88,32 +96,43 @@ internal fun IComponent.GlobalSsrRouter(
         }
 
         var externalCondition by remember {
-            val state = mutableStateOf(false)
+            val state = mutableStateOf(SsrCondition.WAIT)
             LocaleManager.registerSsrLocaleListener {
-                state.value = true
+                state.value = SsrCondition.CHANGE
             }
             state
         }
 
         if (active) {
-            CompositionLocalProvider(DoneCallbackCompositionLocal provides {
-                externalCondition = true
+            CompositionLocalProvider(DoneCallbackCompositionLocal provides { resultOk ->
+                if (resultOk) {
+                    externalCondition = SsrCondition.CHANGE
+                } else {
+                    externalCondition = SsrCondition.ERROR
+                    if (!isDom) {
+                        router.navigate("/kilua_ssr_error")
+                    }
+                }
             }) {
                 router(initPath) {
                     routeBuilder()
                     @Suppress("UNUSED_EXPRESSION")
                     externalCondition // access value to trigger recomposition on locale change
-                    if (!useDoneCallback || externalCondition) {
+                    if (!useDoneCallback || externalCondition != SsrCondition.WAIT) {
                         @OptIn(InternalComposeApi::class)
                         val recomposer = currentCompositionContext
                         SideEffect {
                             recomposer.scheduleFrameEndCallback {
                                 router.sendRender?.let {
-                                    it(router.getRenderingResult())
+                                    if (externalCondition == SsrCondition.CHANGE) {
+                                        it(router.getRenderingResult())
+                                    } else {
+                                        it(KILUA_SSR_ERROR)
+                                    }
                                     router.sendRender = null
                                     router.lock = false
                                 }
-                                externalCondition = false
+                                externalCondition = SsrCondition.WAIT
                             }
                         }
                     }
@@ -204,7 +223,12 @@ internal class SsrRouter(
                     if (localeChanged || pathChanged) {
                         sendRender = {
                             if (req.method == "GET") {
-                                res.end(it)
+                                if (it != KILUA_SSR_ERROR) {
+                                    res.end(it)
+                                } else {
+                                    res.statusCode = 412
+                                    res.end("SSR composition failed")
+                                }
                             } else {
                                 res.end(Meta.current?.cast<MetaImpl>()?.toJson() ?: "")
                             }

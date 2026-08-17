@@ -27,10 +27,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import app.softwork.routingcompose.Router
+import dev.kilua.utils.isDom
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
+import web.console.console
 
-public val DoneCallbackCompositionLocal: ProvidableCompositionLocal<(() -> Unit)?> =
+public val DoneCallbackCompositionLocal: ProvidableCompositionLocal<((Boolean) -> Unit)?> =
     compositionLocalOf { null }
 
 /**
@@ -43,10 +45,18 @@ internal fun RouteEffect(vararg keys: String?, block: suspend () -> Unit) {
     LaunchedEffect(Router.current.currentPath().toString(), *keys) {
         supervisorScope {
             launch {
+                var result = true
                 try {
                     block()
+                } catch (e: Throwable) {
+                    if (isDom) {
+                        throw e
+                    } else {
+                        result = false
+                        console.error("Error inside routing effect:", e.stackTraceToString())
+                    }
                 } finally {
-                    doneCallback?.invoke()
+                    doneCallback?.invoke(result)
                 }
             }
         }
