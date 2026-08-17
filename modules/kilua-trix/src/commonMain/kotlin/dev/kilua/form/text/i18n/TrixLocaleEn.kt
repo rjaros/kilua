@@ -22,9 +22,14 @@
 
 package dev.kilua.form.text.i18n
 
+import dev.kilua.externals.Trix
 import dev.kilua.externals.TrixLocale
+import dev.kilua.utils.assign
+import dev.kilua.utils.obj
 
 /**
  * Get English locale.
  */
-internal expect fun getTrixLocaleEn(): TrixLocale
+internal fun getTrixLocaleEn(): TrixLocale {
+    return obj().apply { assign(this, Trix.config.lang) }.unsafeCast<TrixLocale>()
+}

@@ -34,6 +34,15 @@ internal external class Editor : JsAny {
 }
 
 /**
+ * Internal Element class with editor property.
+ */
+internal external class ElementWithEditor : JsAny {
+    val editor: Editor?
+}
+
+/**
  * Get [Editor] instance from the given [element].
  */
-internal expect fun getEditorFromElement(element: Element): Editor?
+internal fun getEditorFromElement(element: Element): Editor? {
+    return element.unsafeCast<ElementWithEditor>().editor
+}

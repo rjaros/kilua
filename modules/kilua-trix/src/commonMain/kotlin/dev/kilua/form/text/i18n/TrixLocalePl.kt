@@ -23,6 +23,7 @@
 package dev.kilua.form.text.i18n
 
 import dev.kilua.externals.TrixLocale
+import dev.kilua.utils.obj
 
 /**
  * Polish translations.
@@ -60,4 +61,8 @@ internal fun TrixLocale.initTrixLocalePl() {
 /**
  * Get Polish locale.
  */
-internal expect fun getTrixLocalePl(): TrixLocale
+internal fun getTrixLocalePl(): TrixLocale {
+    return obj {
+        initTrixLocalePl()
+    }
+}
