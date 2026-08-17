@@ -1,8 +1,8 @@
 [versions]
-kilua = "0.0.31"
-kotlin = "2.3.0"
-compose = "1.11.0-alpha01"
-vite-kotlin = "0.7.1"
+kilua = "0.0.36-RC"
+kotlin = "2.4.20-RC"
+compose = "1.12.0-rc01"
+vite-kotlin = "0.9.1"
 
 [libraries]
 kilua = { module = "dev.kilua:kilua", version.ref = "kilua" }
