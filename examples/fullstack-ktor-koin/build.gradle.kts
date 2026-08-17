@@ -70,13 +70,13 @@ kotlin {
     }
     applyDefaultHierarchyTemplate()
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 implementation(libs.kilua.rpc.ktor.koin)
                 implementation(project(":modules:kilua-common-types"))
             }
         }
-        val webMain by getting {
+        getByName("webMain") {
             dependencies {
                 implementation(project(":kilua"))
                 implementation(project(":modules:kilua-bootstrap"))
@@ -86,7 +86,7 @@ kotlin {
                 implementation(project(":modules:kilua-tabulator-remote"))
             }
         }
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 implementation(libs.ktor.server.netty)
                 implementation(libs.ktor.server.compression)

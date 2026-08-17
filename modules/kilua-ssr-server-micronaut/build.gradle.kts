@@ -20,7 +20,7 @@ kotlin {
     compilerOptions()
     kotlinJvmTargets()
     sourceSets {
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 implementation(project(":modules:kilua-ssr-server"))
                 implementation(kotlin("reflect"))

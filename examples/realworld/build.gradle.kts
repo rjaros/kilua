@@ -69,7 +69,7 @@ kotlin {
     }
     applyDefaultHierarchyTemplate()
     sourceSets {
-        val webMain by getting {
+        getByName("webMain") {
             dependencies {
                 implementation(project(":kilua"))
                 implementation(project(":modules:kilua-routing"))
@@ -80,7 +80,7 @@ kotlin {
                 implementation(project(":modules:kilua-sanitize-html"))
             }
         }
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 implementation(project(":modules:kilua-ssr-server-ktor"))
                 implementation(libs.ktor.server.netty)

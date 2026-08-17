@@ -71,26 +71,23 @@ kotlin {
     }
     applyDefaultHierarchyTemplate()
     sourceSets {
-        val webMain by getting {
+        getByName("webMain") {
             dependencies {
                 implementation(project(":kilua"))
                 implementation(project(":modules:kilua-bootstrap"))
                 implementation(project(":modules:kilua-ssr"))
             }
         }
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 implementation(project(":modules:kilua-ssr-server-micronaut"))
                 implementation(kotlin("reflect"))
                 implementation("io.micronaut:micronaut-inject")
-                implementation("io.micronaut.validation:micronaut-validation")
-                implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
                 implementation("io.micronaut:micronaut-runtime")
                 implementation("io.micronaut:micronaut-http-server-netty")
                 implementation("io.micronaut:micronaut-http-client")
-                implementation("io.micronaut.session:micronaut-session")
                 implementation("io.micronaut:micronaut-jackson-databind")
-                implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+                implementation("tools.jackson.module:jackson-module-kotlin")
                 implementation("jakarta.validation:jakarta.validation-api")
                 implementation("ch.qos.logback:logback-classic")
                 implementation("org.yaml:snakeyaml")

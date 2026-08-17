@@ -19,7 +19,7 @@ kotlin {
     kotlinJsTargets()
     kotlinWasmTargets()
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 implementation(libs.kotlinx.coroutines)
                 implementation(project(":kilua"))
@@ -29,11 +29,11 @@ kotlin {
                 implementation(npm("html-differ", libs.versions.html.differ.get()))
             }
         }
-        val jsMain by getting {
+        getByName("jsMain") {
             dependencies {
             }
         }
-        val wasmJsMain by getting {
+        getByName("wasmJsMain") {
             dependencies {
             }
         }

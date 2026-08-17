@@ -19,14 +19,14 @@ kotlin {
     kotlinJsTargets()
     kotlinWasmTargets()
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 api(libs.wrappers.browser)
 //                implementation(npm("zzz-kilua-assets", "http://localhost:8001/zzz-kilua-assets-0.0.9-SNAPSHOT.tgz"))
                 implementation(npm("zzz-kilua-assets", libs.versions.npm.kilua.assets.get()))
             }
         }
-        val commonTest by getting {
+        getByName("commonTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
@@ -34,11 +34,11 @@ kotlin {
                 implementation(project(":modules:kilua-testutils"))
             }
         }
-        val jsMain by getting {
+        getByName("jsMain") {
             dependencies {
             }
         }
-        val wasmJsMain by getting {
+        getByName("wasmJsMain") {
             dependencies {
             }
         }

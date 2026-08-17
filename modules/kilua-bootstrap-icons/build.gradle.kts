@@ -19,13 +19,13 @@ kotlin {
     kotlinJsTargets()
     kotlinWasmTargets()
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
                 implementation(npm("bootstrap-icons", libs.versions.bootstrap.icons.get()))
             }
         }
-        val commonTest by getting {
+        getByName("commonTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
@@ -33,11 +33,11 @@ kotlin {
                 implementation(project(":modules:kilua-testutils"))
             }
         }
-        val jsMain by getting {
+        getByName("jsMain") {
             dependencies {
             }
         }
-        val wasmJsMain by getting {
+        getByName("wasmJsMain") {
             dependencies {
             }
         }

@@ -65,14 +65,14 @@ kotlin {
     }
     applyDefaultHierarchyTemplate()
     sourceSets {
-        val webMain by getting {
+        getByName("webMain") {
             dependencies {
                 implementation(project(":kilua"))
                 implementation(project(":modules:kilua-bootstrap"))
                 implementation(project(":modules:kilua-ssr"))
             }
         }
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 implementation(kotlin("reflect"))
                 implementation(project(":modules:kilua-ssr-server-spring-boot"))

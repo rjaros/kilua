@@ -23,7 +23,7 @@ kotlin {
     kotlinJsTargets()
     kotlinWasmTargets()
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 api(libs.compose.runtime)
                 api(libs.kotlinx.atomicfu)
@@ -37,7 +37,7 @@ kotlin {
                 implementation(npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get()))
             }
         }
-        val commonTest by getting {
+        getByName("commonTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
@@ -45,12 +45,12 @@ kotlin {
                 implementation(project(":modules:kilua-testutils"))
             }
         }
-        val jsMain by getting {
+        getByName("jsMain") {
             dependencies {
                 implementation(npm("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get()))
             }
         }
-        val wasmJsMain by getting {
+        getByName("wasmJsMain") {
             dependencies {
             }
         }

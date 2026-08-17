@@ -19,7 +19,7 @@ kotlin {
     compilerOptions()
     kotlinJvmTargets()
     sourceSets {
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 api(libs.kotlinx.serialization.json)
                 api(libs.ktor.client.core)

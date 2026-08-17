@@ -21,21 +21,21 @@ kotlin {
     kotlinWasmTargets()
     kotlinJvmTargets()
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 implementation(libs.kotlinx.serialization.json)
                 api(libs.kotlinx.datetime)
             }
         }
-        val jsMain by getting {
+        getByName("jsMain") {
             dependencies {
             }
         }
-        val wasmJsMain by getting {
+        getByName("wasmJsMain") {
             dependencies {
             }
         }
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
             }
         }

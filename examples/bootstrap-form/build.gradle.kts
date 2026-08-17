@@ -53,7 +53,7 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
                 implementation(project(":modules:kilua-bootstrap"))

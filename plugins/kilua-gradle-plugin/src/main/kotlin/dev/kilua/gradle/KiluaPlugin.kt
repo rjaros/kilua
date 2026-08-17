@@ -232,12 +232,14 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         logger.error("Failed to initialize KotlinWebpack properties", e)
                     }
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
+                    sourceMaps = false
                     inputFilesDirectory.set(kotlinWebpackJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackJs.entryModuleName.get())
                     esModules.set(kotlinWebpackJs.esModules.get())
                     outputDirectory.set(productionExecutableDir)
                     mainOutputFileName.set("main.bundle.js")
                     this.webpackConfigApplier {
+                        it.defineNonBrowserEnvironmentProperties.set(false)
                         it.configDirectory = webpackConfigSsrDir
                     }
                 }
@@ -315,12 +317,14 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         logger.error("Failed to initialize KotlinWebpack properties", e)
                     }
                     mode = KotlinWebpackConfig.Mode.PRODUCTION
+                    sourceMaps = false
                     inputFilesDirectory.set(kotlinWebpackWasmJs.inputFilesDirectory.get())
                     entryModuleName.set(kotlinWebpackWasmJs.entryModuleName.get())
                     esModules.set(kotlinWebpackWasmJs.esModules.get())
                     outputDirectory.set(productionExecutableDir)
                     mainOutputFileName.set("main.bundle.js")
                     this.webpackConfigApplier {
+                        it.defineNonBrowserEnvironmentProperties.set(false)
                         it.configDirectory = webpackConfigSsrDir
                     }
                 }
@@ -359,11 +363,10 @@ public abstract class KiluaPlugin : Plugin<Project> {
                             fileCopyDetails.path = fileCopyDetails.file.relativeTo(nodeModulesDir).toString()
                         } else if (fileCopyDetails.name.equals("main.bundle.js")) {
                             fileCopyDetails.filter {
-                                it.replace(Regex("""createRequire\([^)]+\)"""), """createRequire(__filename)""")
-                                    .replace(
-                                        Regex("""([a-zA-Z_]+)=([a-zA-Z_]+)\.default\.createRequire\([^)]+\),(.*)(\{})\.resolve\(([a-zA-Z_]+)\),(.*)\.readFileSync\([a-zA-Z_]+\.fileURLToPath\(([a-zA-Z_]+)\)\)"""),
-                                        """$1=$2.default.createRequire(__filename),$3$1("path").resolve($5),$6.readFileSync($7)"""
-                                    )
+                                it.replace(
+                                    Regex("""([a-zA-Z_]+)=[a-zA-Z_]+.resolve\(([^)]+)\),(.*)\.readFileSync\([a-zA-Z_]+\.fileURLToPath\([a-zA-Z_]+\)\)"""),
+                                    """$1=(await import("node:path")).resolve($2),$3.readFileSync($1)"""
+                                )
                             }
                         }
                     }

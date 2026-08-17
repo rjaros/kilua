@@ -11,12 +11,12 @@ kotlin {
     compilerOptions()
     kotlinJvmTargets()
     sourceSets {
-        val commonMain by getting {
+        getByName("commonMain") {
             dependencies {
                 api(project(":modules:kilua-annotations"))
             }
         }
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 implementation(libs.ksp.symbol.processing.api)
             }

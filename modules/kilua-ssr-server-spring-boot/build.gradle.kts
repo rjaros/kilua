@@ -19,7 +19,7 @@ kotlin {
     compilerOptions()
     kotlinJvmTargets()
     sourceSets {
-        val jvmMain by getting {
+        getByName("jvmMain") {
             dependencies {
                 implementation(project(":modules:kilua-ssr-server"))
                 api(libs.kotlinx.coroutines.reactor)

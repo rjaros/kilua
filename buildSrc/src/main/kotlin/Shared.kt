@@ -128,6 +128,16 @@ fun Project.setupKsp() {
         .matching { it.name == "compileKotlinJs" || it.name == "compileKotlinWasmJs" }.configureEach {
             it.dependsOn("kspCommonMainKotlinMetadata")
         }
+
+    afterEvaluate {
+        tasks.getByName("kspKotlinJs") {
+            it.dependsOn("kspCommonMainKotlinMetadata")
+        }
+
+        tasks.getByName("kspKotlinWasmJs") {
+            it.dependsOn("kspCommonMainKotlinMetadata")
+        }
+    }
 }
 
 const val kiluaProjectName = "Kilua"

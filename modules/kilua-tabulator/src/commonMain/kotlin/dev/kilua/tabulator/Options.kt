@@ -241,7 +241,9 @@ public enum class Filter(public val filter: String) {
     Greater(">"),
     GreaterEq(">="),
     I("in"),
-    Regex("regex");
+    Regex("regex"),
+    Smart("smart"),
+    Smarter("smarter");
 
     public val value: String = filter
     override fun toString(): String {
@@ -1318,6 +1320,7 @@ public data class TabulatorOptions<T : Any>(
     val clipboardCopyStyled: Boolean? = null,
     val clipboardPasteParser: JsAny? = null,
     val clipboardPasteAction: JsAny? = null,
+    val selectableRangeInitializeDefault: Boolean? = null
 )
 
 /**
@@ -1513,5 +1516,6 @@ internal fun <T : Any> TabulatorOptions<T>.toJs(
         "clipboardCopyStyled" to clipboardCopyStyled,
         "clipboardPasteParser" to clipboardPasteParser,
         "clipboardPasteAction" to clipboardPasteAction,
+        "selectableRangeInitializeDefault" to selectableRangeInitializeDefault,
     )
 }

@@ -22,14 +22,10 @@
 
 package dev.kilua
 
-import kotlin.js.JsAny
-import kotlin.js.JsName
-
 /**
  * Helper function for JS/Wasm compatibility.
  */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun <T> useModule(@Suppress("UNUSED_PARAMETER") module: T) {
+public fun <T> useModule(@Suppress("UNUSED_PARAMETER") module: T) {
     // empty body
 }
 

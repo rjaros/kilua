@@ -12,7 +12,6 @@ import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import org.redundent.kotlin.xml.Node
 import org.redundent.kotlin.xml.TextElement
 import org.redundent.kotlin.xml.parse
@@ -115,4 +114,14 @@ public abstract class KiluaExportHtmlTask : DefaultTask(), KiluaTask {
         }
         println("Export finished")
     }
+
+    private fun File.ensureParentDirsCreated() {
+        val parentFile = parentFile
+        if (!parentFile.exists()) {
+            check(parentFile.mkdirs()) {
+                "Cannot create parent directories for $this"
+            }
+        }
+    }
+
 }
