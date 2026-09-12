@@ -9,7 +9,7 @@ plugins {
 kotlin {
     explicitApi()
     compilerOptions()
-    kotlinJvmTargets()
+    kotlinJvmTargets("21")
     sourceSets {
         getByName("commonMain") {
             dependencies {
