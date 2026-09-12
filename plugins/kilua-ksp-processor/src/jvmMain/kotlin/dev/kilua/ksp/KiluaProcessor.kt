@@ -24,15 +24,10 @@ package dev.kilua.ksp
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.getAnnotationsByType
 import com.google.devtools.ksp.innerArguments
-import com.google.devtools.ksp.processing.CodeGenerator
-import com.google.devtools.ksp.processing.Dependencies
-import com.google.devtools.ksp.processing.KSPLogger
-import com.google.devtools.ksp.processing.Resolver
-import com.google.devtools.ksp.processing.SymbolProcessor
+import com.google.devtools.ksp.processing.*
 import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.validate
 import dev.kilua.annotations.SimpleHtmlComponent
 import java.io.File
@@ -54,7 +49,7 @@ public class KiluaProcessor(
         }
         isInitialInvocation = false
         resolver.getSymbolsWithAnnotation(SimpleHtmlComponent::class.qualifiedName.orEmpty())
-            .filterIsInstance<KSClassDeclaration>().filter(KSNode::validate)
+            .filterIsInstance<KSClassDeclaration>().filter { it.validate(enableNewFeatures = true) }
             .filter { it.classKind == ClassKind.INTERFACE && it.simpleName.asString().startsWith("I") }
             .forEach { classDeclaration ->
                 val simpleHtmlComponent = classDeclaration.getAnnotationsByType(SimpleHtmlComponent::class).first()

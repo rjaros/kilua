@@ -41,8 +41,6 @@ public abstract class KiluaExtension @Inject constructor(
 
     public val enableResolutions: Property<Boolean> = kiluaGradleProperty("enableResolutions")
 
-    public val disableSkiko: Property<Boolean> = kiluaGradleProperty("disableSkiko")
-
     public val kiluaYml: Property<String> = kiluaGradleProperty("kiluaYml", "kilua.yml")
 
     private fun kiluaGradleProperty(

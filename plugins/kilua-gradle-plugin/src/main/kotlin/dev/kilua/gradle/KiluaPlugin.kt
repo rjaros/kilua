@@ -413,12 +413,6 @@ public abstract class KiluaPlugin : Plugin<Project> {
                 }
             }
         }
-        val dontDisableSkikoProjectProperty = project.findProperty("dev.kilua.plugin.disableSkiko") == "false"
-        if (!dontDisableSkikoProjectProperty && kiluaExtension.disableSkiko.get()) {
-            project.tasks.withType(org.jetbrains.compose.web.tasks.UnpackSkikoWasmRuntimeTask::class.java) {
-                it.enabled = false
-            }
-        }
     }
 
     private fun KiluaPluginContext.registerKiluaExportHtmlTask(
