@@ -3,17 +3,10 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.detekt)
     alias(libs.plugins.nmcp)
     id("org.jetbrains.dokka")
     id("maven-publish")
     id("signing")
-}
-
-detekt {
-    toolVersion = libs.versions.detekt.get()
-    config.setFrom("../../detekt-config.yml")
-    buildUponDefaultConfig = true
 }
 
 kotlin {

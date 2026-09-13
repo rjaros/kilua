@@ -2,7 +2,6 @@ plugins {
     kotlin("jvm")
     alias(libs.plugins.kotlinx.serialization)
     id("java-gradle-plugin")
-    alias(libs.plugins.detekt)
     alias(libs.plugins.nmcp)
     id("org.jetbrains.dokka")
     id("maven-publish")
@@ -12,12 +11,6 @@ plugins {
 
 repositories {
     gradlePluginPortal()
-}
-
-detekt {
-    toolVersion = libs.versions.detekt.get()
-    config.setFrom("../../detekt-config.yml")
-    buildUponDefaultConfig = true
 }
 
 gradlePlugin {

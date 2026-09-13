@@ -6,7 +6,6 @@ compose = "1.13.0-alpha01"
 dokka = "2.2.0"
 nmcp = "1.6.2"
 ksp = "2.3.12"
-detekt = "1.23.8"
 npm-publish = "3.7.0"
 gradle-plugin-publish = "2.2.1"
 kilua-rpc = "0.0.46"
@@ -119,7 +118,6 @@ compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 npm-publish = { id = "org.jetbrains.kotlin.npm-publish", version.ref = "npm-publish" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 nmcp = { id = "com.gradleup.nmcp", version.ref = "nmcp" }
 nmcp-aggregation = { id = "com.gradleup.nmcp.aggregation", version.ref = "nmcp" }
 kilua-rpc = { id = "dev.kilua.rpc", version.ref = "kilua-rpc" }

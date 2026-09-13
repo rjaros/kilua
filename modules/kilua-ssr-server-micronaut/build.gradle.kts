@@ -1,18 +1,11 @@
 plugins {
     kotlin("multiplatform")
     alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.detekt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.nmcp)
     id("org.jetbrains.dokka")
     id("maven-publish")
     id("signing")
-}
-
-detekt {
-    toolVersion = libs.versions.detekt.get()
-    config.setFrom("../../detekt-config.yml")
-    buildUponDefaultConfig = true
 }
 
 kotlin {

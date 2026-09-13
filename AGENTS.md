@@ -7,7 +7,6 @@ Kilua: Kotlin Multiplatform web framework (Compose runtime) targeting **both Kot
 - Everything is a Gradle subproject: `./gradlew :kilua:build`, `./gradlew :modules:kilua-routing:allTests`.
 - Root `./gradlew build` builds every module + example — slow, and examples fail unless the snapshot Gradle plugin is published locally (see below). Prefer module-scoped commands.
 - Tests: module tests live in `src/commonTest`. `allTests` runs node AND browser (Karma/ChromeHeadless) suites for both `js` and `wasmJs` — needs Chrome installed. Node-only: `jsNodeTest` / `wasmJsNodeTest`.
-- Lint: detekt per-module (`./gradlew :modules:kilua-routing:detekt`). Config `detekt-config.yml` is shared; `maxIssues: 0`. Root has no detekt task.
 - `gradle.properties`: `org.gradle.jvmargs=-Xmx10g`, config cache off, `kotlin.js.yarn=false` (npm, not yarn; lockfiles under `kotlin-js-store/` and `kotlin-js-store/wasm/`).
 
 ## Repo layout
