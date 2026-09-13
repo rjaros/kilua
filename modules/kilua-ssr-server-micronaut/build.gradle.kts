@@ -30,6 +30,7 @@ kotlin {
                 api("io.micronaut:micronaut-http-server")
                 api("io.micronaut:micronaut-router")
                 api("io.micronaut.reactor:micronaut-reactor")
+                api(libs.logback.classic)
             }
         }
     }

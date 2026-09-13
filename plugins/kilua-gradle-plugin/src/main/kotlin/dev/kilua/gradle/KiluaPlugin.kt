@@ -28,6 +28,7 @@ import com.charleskorn.kaml.YamlNamingStrategy
 import dev.kilua.gradle.tasks.KiluaExportHtmlTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.UnknownTaskException
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.file.RegularFile
@@ -37,6 +38,7 @@ import org.gradle.api.tasks.Sync
 import org.gradle.api.tasks.bundling.Jar
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.targets.js.NpmVersions
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
 import org.jetbrains.kotlin.gradle.targets.js.npm.BaseNpmExtension
@@ -374,39 +376,57 @@ public abstract class KiluaPlugin : Plugin<Project> {
             }
             project.plugins.withId("dev.kilua.rpc") {
                 project.afterEvaluate {
-                    project.afterEvaluate { project ->
-                        project.tasks.findByName("jarWithJs")?.let {
-                            (project.tasks.getByName("jarWithJs") as Jar).apply {
-                                if (project.tasks.findByName("wasmJsArchiveSSR") != null) {
-                                    dependsOn("wasmJsArchiveSSR")
-                                    from(project.tasks.getByName("wasmJsArchiveSSR").outputs.files)
-                                } else {
-                                    dependsOn("jsArchiveSSR")
-                                    from(project.tasks.getByName("jsArchiveSSR").outputs.files)
+                    project.afterEvaluate {
+                        val isJsTarget = kotlinMppExtension.targets.any { it.platformType == KotlinPlatformType.js }
+                        val isWasmJsTarget = kotlinMppExtension.targets.any { it.platformType == KotlinPlatformType.wasm }
+                        if (isJsTarget) {
+                            try {
+                                val jarWithJs = project.tasks.named("jarWithJs", Jar::class.java) {
+                                    if (project.tasks.findByName("wasmJsArchiveSSR") != null) {
+                                        it.dependsOn("wasmJsArchiveSSR")
+                                        it.from(project.tasks.getByName("wasmJsArchiveSSR").outputs.files)
+                                    } else {
+                                        it.dependsOn("jsArchiveSSR")
+                                        it.from(project.tasks.getByName("jsArchiveSSR").outputs.files)
+                                    }
                                 }
-                                registerKiluaExportHtmlTask("exportHtmlWithJs", archiveFile, kiluaConfiguration) {
-                                    dependsOn(it)
+                                registerKiluaExportHtmlTask(
+                                    "exportHtmlWithJs",
+                                    jarWithJs.flatMap { it.archiveFile },
+                                    kiluaConfiguration
+                                ) {
+                                    dependsOn(jarWithJs)
                                 }
                                 registerKiluaExportTask("exportWithJs", "exportHtmlWithJs", "js", false) {
                                     dependsOn("exportHtmlWithJs")
                                 }
+                            } catch (_: UnknownTaskException) {
+                                project.logger.error("No jarWithJs task found. Make sure the Kilua RPC Gradle plugin is applied to the project.")
                             }
                         }
-                        project.tasks.findByName("jarWithWasmJs")?.let {
-                            (project.tasks.getByName("jarWithWasmJs") as Jar).apply {
-                                dependsOn("wasmJsArchiveSSR")
-                                from(project.tasks.getByName("wasmJsArchiveSSR").outputs.files)
-                                registerKiluaExportHtmlTask("exportHtmlWithWasmJs", archiveFile, kiluaConfiguration) {
-                                    dependsOn(it)
+                        if (isWasmJsTarget) {
+                            try {
+                                val jarWithWasmJs = project.tasks.named("jarWithWasmJs", Jar::class.java) {
+                                    it.dependsOn("wasmJsArchiveSSR")
+                                    it.from(project.tasks.getByName("wasmJsArchiveSSR").outputs.files)
+                                }
+                                registerKiluaExportHtmlTask(
+                                    "exportHtmlWithWasmJs",
+                                    jarWithWasmJs.flatMap { it.archiveFile },
+                                    kiluaConfiguration
+                                ) {
+                                    dependsOn(jarWithWasmJs)
                                 }
                                 registerKiluaExportTask(
                                     "exportWithWasmJs",
                                     "exportHtmlWithWasmJs",
                                     "wasmJs",
-                                    project.tasks.findByName("jarWithJs") != null
+                                    isJsTarget
                                 ) {
                                     dependsOn("exportHtmlWithWasmJs")
                                 }
+                            } catch (_: UnknownTaskException) {
+                                project.logger.error("No jarWithWasmJs task found. Make sure the Kilua RPC Gradle plugin is applied to the project.")
                             }
                         }
                     }

@@ -121,7 +121,7 @@ WASM compilation target for much better performance.
 - Automatically extracting CSS styles from JS bundle and injecting them into the HTML document before sending to the
   browser.
 - Serialization of the application state from the server to the client side.
-- Ready to use modules for Ktor, Spring Boot, Micronaut, Javalin, Jooby and Vert.x servers.
+- Ready to use modules for Ktor, Spring Boot, Micronaut, Quarkus, Javalin, Jooby and Vert.x servers.
 
 ### Current limitations
 

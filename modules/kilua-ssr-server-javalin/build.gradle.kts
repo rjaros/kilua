@@ -23,6 +23,7 @@ kotlin {
             dependencies {
                 implementation(project(":modules:kilua-ssr-server"))
                 api(libs.javalin)
+                api(libs.logback.classic)
             }
         }
     }

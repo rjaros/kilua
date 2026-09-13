@@ -28,6 +28,9 @@
     },
     "template-vertx": {
     },
+    "template-quarkus": {
+        "quarkus": "3.39.3"
+    },
     "modules": [
         {
             "name": "kilua-bootstrap",

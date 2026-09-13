@@ -22,6 +22,7 @@ ktor = "3.5.2"
 koin = "4.2.2"
 micronaut = "5.1.5"
 micronaut-plugins = "5.0.2"
+quarkus = "3.39.3"
 spring-boot = "4.1.1"
 vertx = "5.1.8"
 ballast = "5.1.0"
@@ -89,6 +90,15 @@ vertx-lang-kotlin = { module = "io.vertx:vertx-lang-kotlin", version.ref = "vert
 vertx-lang-kotlin-coroutines = { module = "io.vertx:vertx-lang-kotlin-coroutines", version.ref = "vertx" }
 vertx-launcher-application = { module = "io.vertx:vertx-launcher-application", version.ref = "vertx" }
 vertx-codegen-api = { module = "io.vertx:vertx-codegen-api", version.ref = "vertx" }
+quarkus-bom = { module = "io.quarkus.platform:quarkus-bom", version.ref = "quarkus" }
+quarkus-core = { module = "io.quarkus:quarkus-core" }
+quarkus-rest = { module = "io.quarkus:quarkus-rest" }
+quarkus-kotlin = { module = "io.quarkus:quarkus-kotlin" }
+quarkus-rest-kotlin-serialization = { module = "io.quarkus:quarkus-rest-kotlin-serialization" }
+quarkus-config-yaml = { module = "io.quarkus:quarkus-config-yaml" }
+quarkus-arc = { module = "io.quarkus:quarkus-arc" }
+quarkus-vertx-http = { module = "io.quarkus:quarkus-vertx-http" }
+quarkus-vertx-lang-kotlin-coroutines = { module = "io.vertx:vertx-lang-kotlin-coroutines" }
 ballast-core = { module = "io.github.copper-leaf:ballast-core", version.ref = "ballast" }
 ballast-saved-state = { module = "io.github.copper-leaf:ballast-saved-state", version.ref = "ballast" }
 ballast-repository = { module = "io.github.copper-leaf:ballast-repository", version.ref = "ballast" }

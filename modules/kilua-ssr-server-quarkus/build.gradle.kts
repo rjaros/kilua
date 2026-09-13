@@ -22,8 +22,14 @@ kotlin {
         getByName("jvmMain") {
             dependencies {
                 implementation(project(":modules:kilua-ssr-server"))
-                api(libs.ktor.server.core)
-                api(libs.logback.classic)
+                implementation(kotlin("reflect"))
+                api(libs.kotlinx.coroutines)
+                api(project.dependencies.platform(libs.quarkus.bom))
+                api(libs.quarkus.core)
+                api(libs.quarkus.vertx.http)
+                implementation(libs.quarkus.vertx.lang.kotlin.coroutines)
+                api(libs.quarkus.arc)
+                api(libs.quarkus.config.yaml)
             }
         }
     }

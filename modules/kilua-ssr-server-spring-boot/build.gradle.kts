@@ -25,6 +25,7 @@ kotlin {
                 api(libs.kotlinx.coroutines.reactor)
                 api(libs.spring.boot.starter)
                 api(libs.spring.boot.starter.webflux)
+                api(libs.logback.classic)
             }
         }
     }
