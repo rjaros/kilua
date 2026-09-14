@@ -75,6 +75,8 @@ dev.kilua.externals.leaflet.layer.tile
 dev.kilua.externals.leaflet.layer.vector
 dev.kilua.externals.leaflet.map
 dev.kilua.maps
+module:kilua-lucide
+dev.kilua
 module:kilua-marked
 dev.kilua.marked
 module:kilua-rest
@@ -104,6 +106,8 @@ dev.kilua.ssr
 module:kilua-ssr-server-ktor
 dev.kilua.ssr
 module:kilua-ssr-server-micronaut
+dev.kilua.ssr
+module:kilua-ssr-server-quarkus
 dev.kilua.ssr
 module:kilua-ssr-server-spring-boot
 dev.kilua.ssr
