@@ -1,35 +1,35 @@
 {
-    "kilua": "0.0.35",
-    "kotlin": "2.4.0",
-    "compose": "1.12.0-alpha01",
+    "kilua": "0.0.36",
+    "kotlin": "2.4.20",
+    "compose": "1.13.0-alpha01",
     "coroutines": "1.11.0",
-    "ksp": "2.3.9",
-    "kilua-rpc": "0.0.45",
+    "ksp": "2.3.12",
+    "kilua-rpc": "0.0.46",
     "datetime": "0.8.0",
-    "tailwindcss": "4.3.0",
-    "logback": "1.5.34",
+    "tailwindcss": "4.3.3",
+    "logback": "1.6.3",
     "gettext": "0.7.0",
-    "vite-kotlin": "0.9.0",
+    "vite-kotlin": "0.9.1",
     "ktml": "0.2.3",
     "template-javalin": {
     },
     "template-jooby": {
-        "jooby": "4.5.2"
+        "jooby": "4.5.4"
     },
     "template-ktor": {
-        "ktor": "3.5.0"
+        "ktor": "3.5.2"
     },
     "template-micronaut": {
-        "micronaut": "5.0.2",
-        "micronaut-plugins": "5.0.0"
-    },
-    "template-spring-boot": {
-        "spring-boot": "4.1.0"
-    },
-    "template-vertx": {
+        "micronaut": "5.1.5",
+        "micronaut-plugins": "5.0.2"
     },
     "template-quarkus": {
         "quarkus": "3.39.3"
+    },
+    "template-spring-boot": {
+        "spring-boot": "4.1.1"
+    },
+    "template-vertx": {
     },
     "modules": [
         {
@@ -65,6 +65,13 @@
             "description": "Bootstrap Icons",
             "initializers": [
                 "BootstrapIconsModule"
+            ]
+        },
+        {
+            "name": "kilua-lucide",
+            "description": "Lucide Icons",
+            "initializers": [
+                "LucideModule"
             ]
         },
         {
