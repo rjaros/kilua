@@ -6,7 +6,7 @@ plugins {
 
 val packageJsonFun: PackageJson.() -> Unit = {
     main.set("index.js")
-    version.set("0.0.20")
+    version.set("0.0.21")
     description.set("The assets for the Kilua framework")
     keywords.set(listOf("kilua", "kotlin", "wasm"))
     homepage.set("https://kilua.dev")
@@ -24,6 +24,9 @@ val packageJsonFun: PackageJson.() -> Unit = {
 }
 
 npmPublish {
+    nodeBin = file("/usr/bin/node")
+    nodeHome = file("/usr")
+    npmBin = file("/usr/bin/npm")
     dry.set(System.getenv("NPM_AUTH_TOKEN") == null)
     readme.set(file("README.md"))
     packages {

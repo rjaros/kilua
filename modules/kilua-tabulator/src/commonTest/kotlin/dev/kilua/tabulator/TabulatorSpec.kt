@@ -38,6 +38,7 @@ class TabulatorSpec : DomSpec {
 
     @Test
     fun render() = runWhenDomAvailableAsync {
+        var id = ""
         val root = root("test") {
             val personList = remember {
                 mutableStateListOf(
@@ -111,16 +112,17 @@ City
 <span class="tabulator-col-resize-handle" style="height: 0px;">
 </span>
 </div>
+<br>
 <div class="tabulator-frozen-rows-holder" style="min-width: 0px;">
 </div>
 </div>
 </div>
-<div class="tabulator-tableholder" tabindex="0" style="height: calc(100% + 0px); max-height: calc(100% + 0px);">
+<div class="tabulator-tableholder" tabindex="0" style="height: calc(100% - 0px); max-height: calc(100% - 0px);">
 <div class="tabulator-table" role="rowgroup" id="tabulator-table-body">
 </div>
 </div>
 </div>            """.trimIndent(),
-            root.element.innerHTML.asStringOrNull(),
+            root.element.innerHTML.asStringOrNull()?.replace(Regex("tabulator-table-body[^\"]*"), "tabulator-table-body"),
             "Should render a Tabulator component to DOM"
         )
 

@@ -14,22 +14,28 @@ if (typeof document === 'undefined') {
     globalThis.DragEvent = class DragEvent extends Event {
     };
 
+    globalThis.DOMTokenList = class DOMTokenList {
+        add(token) {}
+        remove(token) {}
+    };
+
     globalThis.Node = class Node {
         style = {}
+        classList = new DOMTokenList()
         setAttribute(name, value) {}
         appendChild(node) {}
         querySelector(selector) { return null; }
         insertBefore(node, referenceNode) {}
         addEventListener(name, callback) {}
-    }
+    };
     globalThis.Element = class Element extends Node {
-    }
+    };
     globalThis.HTMLElement = class HTMLElement extends Element {
-    }
+    };
     globalThis.Text = class Text extends Node {
-    }
+    };
     globalThis.Comment = class Comment extends Node {
-    }
+    };
     globalThis.document = {
         kilua: true,
         documentElement: new Element(),
@@ -39,7 +45,7 @@ if (typeof document === 'undefined') {
             return new Element()
         },
         addEventListener(name, callback) {}
-    }
+    };
     globalThis.window = {
         document: globalThis.document,
         addEventListener(name, callback) {},
@@ -48,11 +54,11 @@ if (typeof document === 'undefined') {
         Element: {
             prototype: null
         }
-    }
+    };
     globalThis.customElements = {
         get: function (name) {},
         define: function (name, element) {}
-    }
+    };
 }
 
 function nodeJsInit() {}
