@@ -52,10 +52,15 @@ dependencies {
     implementation(libs.xml.builder)
 }
 
-tasks.getByName("jar", Jar::class) {
-    from(rootProject.layout.projectDirectory.file("gradle/libs.versions.toml")) {
-        rename { "dev.kilua.versions.toml" }
-        filter { line -> line.replaceAfter("kilua = ", "\"${version}\"") }
+tasks {
+    val versionsToml = rootProject.layout.projectDirectory.file("gradle/libs.versions.toml")
+    val version = project.version.toString()
+
+    getByName("jar", Jar::class) {
+        from(versionsToml) {
+            rename { "dev.kilua.versions.toml" }
+            filter { line -> line.replaceAfter("kilua = ", "\"${version}\"") }
+        }
     }
 }
 
@@ -78,4 +83,4 @@ extensions.getByType<SigningExtension>().run {
     sign(extensions.getByType<PublishingExtension>().publications)
 }
 
-setupDokka(tasks.dokkaGenerate, path = "plugins/")
+setupDokka(tasks.dokkaGeneratePublicationHtml, path = "plugins/")

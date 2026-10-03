@@ -34,5 +34,5 @@ dependencies {
     add("kspJvm", "io.micronaut:micronaut-inject-kotlin")
 }
 
-setupDokka(tasks.dokkaGenerate)
+setupDokka(tasks.dokkaGeneratePublicationHtml)
 setupPublishing()
