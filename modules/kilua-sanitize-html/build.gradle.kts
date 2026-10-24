@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("sanitize-html", libs.versions.sanitize.html.get()))
+                npm("sanitize-html", libs.versions.sanitize.html.get())
             }
         }
         getByName("commonTest") {

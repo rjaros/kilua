@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("leaflet", libs.versions.leaflet.get()))
+                npm("leaflet", libs.versions.leaflet.get())
             }
         }
         getByName("commonTest") {

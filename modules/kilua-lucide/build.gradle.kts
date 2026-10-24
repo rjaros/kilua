@@ -15,7 +15,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("lucide-static", libs.versions.lucide.get()))
+                npm("lucide-static", libs.versions.lucide.get())
             }
         }
         getByName("commonTest") {

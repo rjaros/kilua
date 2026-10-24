@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("imask", libs.versions.imask.get()))
+                npm("imask", libs.versions.imask.get())
             }
         }
         getByName("commonTest") {

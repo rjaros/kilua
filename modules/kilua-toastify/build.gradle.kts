@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("toastify-js", libs.versions.toastify.get()))
+                npm("toastify-js", libs.versions.toastify.get())
             }
         }
         getByName("commonTest") {

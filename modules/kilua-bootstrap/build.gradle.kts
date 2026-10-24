@@ -18,8 +18,8 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("@popperjs/core", libs.versions.popperjs.core.get()))
-                implementation(npm("bootstrap", libs.versions.bootstrap.asProvider().get()))
+                npm("@popperjs/core", libs.versions.popperjs.core.get())
+                npm("bootstrap", libs.versions.bootstrap.asProvider().get())
             }
         }
         getByName("commonTest") {

@@ -15,7 +15,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("@fortawesome/fontawesome-free", libs.versions.fontawesome.get()))
+                npm("@fortawesome/fontawesome-free", libs.versions.fontawesome.get())
             }
         }
         getByName("commonTest") {

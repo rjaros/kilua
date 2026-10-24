@@ -18,8 +18,8 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("lz-string", libs.versions.lz.string.get()))
                 api(project(":modules:kilua-routing"))
+                npm("lz-string", libs.versions.lz.string.get())
             }
         }
         getByName("commonTest") {

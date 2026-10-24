@@ -15,7 +15,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("bootstrap-icons", libs.versions.bootstrap.icons.get()))
+                npm("bootstrap-icons", libs.versions.bootstrap.icons.get())
             }
         }
         getByName("commonTest") {

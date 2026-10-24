@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("motion", libs.versions.motion.get()))
+                npm("motion", libs.versions.motion.get())
             }
         }
         getByName("commonTest") {

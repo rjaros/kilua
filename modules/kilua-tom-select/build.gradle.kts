@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("tom-select", libs.versions.tom.select.get()))
+                npm("tom-select", libs.versions.tom.select.get())
             }
         }
         getByName("commonTest") {

@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("rsup-progress", libs.versions.rsup.progress.get()))
+                npm("rsup-progress", libs.versions.rsup.progress.get())
             }
         }
         getByName("commonTest") {

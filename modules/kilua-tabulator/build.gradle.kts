@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("tabulator-tables", libs.versions.tabulator.get()))
+                npm("tabulator-tables", libs.versions.tabulator.get())
             }
         }
         getByName("commonTest") {

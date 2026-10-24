@@ -18,8 +18,8 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("@popperjs/core", libs.versions.popperjs.core.get()))
-                implementation(npm("@eonasdan/tempus-dominus", libs.versions.tempus.dominus.get()))
+                npm("@popperjs/core", libs.versions.popperjs.core.get())
+                npm("@eonasdan/tempus-dominus", libs.versions.tempus.dominus.get())
             }
         }
         getByName("commonTest") {

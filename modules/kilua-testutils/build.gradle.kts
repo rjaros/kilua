@@ -19,7 +19,7 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation(npm("html-differ", libs.versions.html.differ.get()))
+                npm("html-differ", libs.versions.html.differ.get())
             }
         }
         getByName("jsMain") {

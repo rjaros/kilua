@@ -15,8 +15,8 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 api(libs.wrappers.browser)
-//                implementation(npm("zzz-kilua-assets", "http://localhost:8001/zzz-kilua-assets-0.0.9-SNAPSHOT.tgz"))
-                implementation(npm("zzz-kilua-assets", libs.versions.npm.kilua.assets.get()))
+//                npm("zzz-kilua-assets", "http://localhost:8001/zzz-kilua-assets-0.0.9-SNAPSHOT.tgz")
+                npm("zzz-kilua-assets", libs.versions.npm.kilua.assets.get())
             }
         }
         getByName("commonTest") {

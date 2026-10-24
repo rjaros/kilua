@@ -84,7 +84,7 @@ internal fun IComponent.toasts() {
         div("position-relative") {
             attribute("aria-live", "polite")
             attribute("aria-atomic", "true")
-            Toast.toastsMap.map { (position, toasts) ->
+            Toast.toastsMap.forEach { (position, toasts) ->
                 div("toast-container position-fixed p-3" % position.classes) {
                     toasts.forEach { (toastId, toast) ->
                         key(toastId) {

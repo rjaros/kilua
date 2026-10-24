@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("trix", libs.versions.trix.get()))
+                npm("trix", libs.versions.trix.get())
             }
         }
         getByName("commonTest") {

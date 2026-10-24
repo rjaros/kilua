@@ -26,8 +26,8 @@ kotlin {
                 api(project(":modules:kilua-annotations"))
                 api(project(":modules:kilua-common-types"))
                 api(project(":modules:kilua-core-modules"))
-//                implementation(npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.9-SNAPSHOT.tgz"))
-                implementation(npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get()))
+//                npm("aaa-kilua-assets", "http://localhost:8001/aaa-kilua-assets-0.0.9-SNAPSHOT.tgz")
+                npm("aaa-kilua-assets", libs.versions.npm.kilua.assets.get())
             }
         }
         getByName("commonTest") {
@@ -40,7 +40,7 @@ kotlin {
         }
         getByName("jsMain") {
             dependencies {
-                implementation(npm("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get()))
+                npm("mini-css-extract-plugin", libs.versions.mini.css.extract.plugin.get())
             }
         }
         getByName("wasmJsMain") {

@@ -18,7 +18,7 @@ kotlin {
         getByName("commonMain") {
             dependencies {
                 implementation(project(":kilua"))
-                implementation(npm("split.js", libs.versions.splitjs.get()))
+                npm("split.js", libs.versions.splitjs.get())
             }
         }
         getByName("commonTest") {
