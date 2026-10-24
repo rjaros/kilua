@@ -116,11 +116,15 @@ public class SsrEngine(
 
     init {
         Runtime.getRuntime().addShutdownHook(Thread {
+            logger.info("Shutting down SSR engine ...")
             isShuttingDown = true
+            logger.info("Stopping Node.js SSR process ...")
             nodeJsProcess?.destroy()
             Thread.sleep(1000)
+            logger.info("Deleting temporary SSR working directory ...")
             @OptIn(ExperimentalPathApi::class)
             workingDir?.deleteRecursively()
+            logger.info("Shutdown complete")
         })
         if (externalSsrService == null) {
             try {
@@ -139,14 +143,14 @@ public class SsrEngine(
                             processBuilder.redirectErrorStream(true)
                             processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
                             processBuilder.directory(workingDir!!.toFile())
-                            print("NodeJS SSR process is starting ...")
+                            logger.info("Node.js SSR process is starting")
                             nodeJsProcess = processBuilder.start()
-                            println(" done.")
                             Thread.sleep(1000)
                             lockingFlow.value = true
                             nodeJsProcess!!.waitFor()
                             lockingFlow.value = false
                             nodeJsProcess = null
+                            Thread.sleep(1000)
                         }
                     }
                 } else {
