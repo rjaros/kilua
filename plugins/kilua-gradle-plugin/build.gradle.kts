@@ -9,8 +9,16 @@ plugins {
     alias(libs.plugins.gradle.plugin.publish)
 }
 
+// This is an included build, so the root's `allprojects { group/version }` does not reach it and
+// both have to be set here. The version must match the root's so that the processor coordinate the
+// plugin injects resolves to the same version - it is redirected to the local project anyway, but
+// keeping them equal keeps a published plugin and a published library in step.
+group = "dev.kilua"
+version = libs.versions.kilua.asProvider().get() + if (hasProperty("SNAPSHOT")) "-SNAPSHOT" else ""
+
 repositories {
     gradlePluginPortal()
+    mavenCentral()
 }
 
 gradlePlugin {
@@ -52,14 +60,28 @@ dependencies {
     implementation(libs.xml.builder)
 }
 
-tasks {
-    val versionsToml = rootProject.layout.projectDirectory.file("gradle/libs.versions.toml")
-    val version = project.version.toString()
+tasks.processResources {
+    // The plugin reads its own version out of a bundled copy of the catalog (see KiluaPlugin.apply).
+    // It has to sit on the main runtime classpath, not only in the jar: when the plugin is applied from
+    // this included build Gradle may put the project's classes and resources on the consumer's classpath
+    // directly, and a version written into the jar alone would then be missing and fail the apply. A
+    // published plugin packages processResources output into the jar anyway, so one location covers both.
+    val versionsToml = rootProject.layout.projectDirectory.file("../../gradle/libs.versions.toml")
+    val pluginVersion = project.version.toString()
 
-    getByName("jar", Jar::class) {
-        from(versionsToml) {
-            rename { "dev.kilua.versions.toml" }
-            filter { line -> line.replaceAfter("kilua = ", "\"${version}\"") }
+    // The version is threaded through a filter, which Gradle cannot see as an input on its own, so
+    // without this a change of version (e.g. adding -PSNAPSHOT) would leave the resource stale.
+    inputs.property("kiluaPluginVersion", pluginVersion)
+    from(versionsToml) {
+        rename { "dev.kilua.versions.toml" }
+        // Only the `[versions]` entry `kilua = "..."` is rewritten; the `[plugins]` alias
+        // `kilua = { id = "dev.kilua", ... }` declares the same key and must be left alone.
+        filter { line ->
+            if (line.startsWith("kilua = \"")) {
+                line.replaceAfter("kilua = ", "\"${pluginVersion}\"")
+            } else {
+                line
+            }
         }
     }
 }
@@ -83,4 +105,4 @@ extensions.getByType<SigningExtension>().run {
     sign(extensions.getByType<PublishingExtension>().publications)
 }
 
-setupDokka(tasks.dokkaGeneratePublicationHtml, path = "plugins/")
+setupDokka()

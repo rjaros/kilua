@@ -85,6 +85,69 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.wasm.nodejs.Was
     }
 }
 
+// The examples are skipped by default so that `build` means the library. `-Pkilua.examples=true` brings
+// them back for the runs that are meant to check them.
+//
+// The dependencies are removed rather than the task being disabled, because `enabled = false` only
+// stops a task's own actions: everything it depends on still runs, so a disabled `build` left
+// `assemble` and `check` - and the wasm optimiser behind them - to do the bulk of the work anyway.
+//
+// This is done once every project has been evaluated rather than through `configureEach`, because
+// the lifecycle plugin sets `build`'s own dependencies while it is being applied - an action
+// registered before that is quietly overwritten, which is what made the first attempt a no-op.
+//
+// The task container is walked rather than gated on the Kotlin plugin because some of the example
+// subprojects apply kotlin("jvm") or a framework plugin instead of the multiplatform one, and
+// their packaging is the expensive part.
+val buildExamples = providers.gradleProperty("kilua.examples").map { it.toBoolean() }.getOrElse(false)
+
+if (!buildExamples) {
+    gradle.projectsEvaluated {
+        subprojects.filter { it.path.startsWith(":examples") }.forEach { example ->
+            example.tasks.findByName("build")?.setDependsOn(emptyList<Any>())
+        }
+    }
+}
+
+// The examples build the library from source. Their server backbone is a project dependency
+// (`project(":modules:kilua-...")`), not a released coordinate, because a project dependency
+// survives `Configuration.copy()` and the detached configuration a framework plugin builds from the
+// runtime classpath. A Quarkus application model copies the base runtime classpath, and that copy
+// does not carry a per-configuration dependency substitution - so a coordinate declared in an
+// example would resolve from a repository there, which both fails for an unpublished version and
+// silently pins the released artifact for a published one.
+//
+// The one coordinate still injected into the examples is the KSP processor, which the Gradle plugin
+// adds as a string (`dev.kilua:kilua-ksp-processor:<version>`) to the `ksp*` configurations.
+// Those are never copied, so a per-configuration substitution is enough. It is scoped to the
+// examples rather than global so the modules and the nmcp aggregation keep resolving the
+// coordinates they own. It is done from projectsEvaluated so the examples are already registered.
+gradle.projectsEvaluated {
+    val processor = rootProject.project(":plugins:kilua-ksp-processor")
+
+    rootProject.subprojects.filter { it.path.startsWith(":examples") }.forEach { example ->
+        example.configurations.configureEach {
+            resolutionStrategy.dependencySubstitution {
+                substitute(module("dev.kilua:kilua-ksp-processor")).using(project(processor.path))
+            }
+        }
+    }
+}
+
+// The Gradle plugin is an included build now, so the root's `build`/`check`/`clean`/
+// `publishToMavenLocal` no longer cover it: an included build's tasks are not matched by name.
+// Delegate from the root lifecycle tasks so the everyday commands keep doing what they did while
+// the plugin was a subproject.
+val pluginTasks = mapOf(
+    "build" to ":check",
+    "check" to ":check",
+    "clean" to ":clean",
+    "publishToMavenLocal" to ":publishToMavenLocal",
+)
+tasks.matching { it.name in pluginTasks }.configureEach {
+    dependsOn(gradle.includedBuild("kilua-gradle-plugin").task(pluginTasks.getValue(name)))
+}
+
 nmcpAggregation {
     centralPortal {
         username = findProperty("mavenCentralUsername")?.toString()
@@ -137,7 +200,10 @@ dependencies {
     nmcpAggregation(project(":modules:kilua-tom-select"))
     nmcpAggregation(project(":modules:kilua-tom-select-remote"))
     nmcpAggregation(project(":modules:kilua-trix"))
-    nmcpAggregation(project(":plugins:kilua-gradle-plugin"))
+    // The Gradle plugin now lives in an included build, so it is aggregated by coordinate rather
+    // than by project. The version must be the snapshot-aware one, because the composite build only
+    // substitutes a coordinate that matches the included build's own group:name:version.
+    nmcpAggregation("dev.kilua:kilua-gradle-plugin:${version}")
     nmcpAggregation(project(":plugins:kilua-ksp-processor"))
     dokka(project(":kilua"))
     dokka(project(":modules:kilua-animation"))

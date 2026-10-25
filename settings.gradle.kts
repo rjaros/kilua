@@ -16,6 +16,14 @@ dependencyResolutionManagement {
     }
 }
 
+// The Gradle plugin is developed in this repository but consumed by the examples as a plugin. It has
+// to be a top-level included build, not one under pluginManagement: a pluginManagement include only
+// serves plugin resolution, and Gradle does not apply the included build's dependency substitutions
+// (gradle/gradle#30059) - so the coordinate the root `nmcpAggregation` uses would resolve from a
+// repository instead of this source. A top-level include covers both the `plugins {}` resolution in
+// the examples and the substitution of `dev.kilua:kilua-gradle-plugin`.
+includeBuild("plugins/kilua-gradle-plugin")
+
 rootProject.name = "kilua-project"
 include(":kilua")
 include(":modules:kilua-animation")
@@ -58,7 +66,6 @@ include(":modules:kilua-toastify")
 include(":modules:kilua-tom-select")
 include(":modules:kilua-tom-select-remote")
 include(":modules:kilua-trix")
-include(":plugins:kilua-gradle-plugin")
 include(":plugins:kilua-ksp-processor")
 include(":kilua-assets")
 include(":examples:bootstrap-form")
