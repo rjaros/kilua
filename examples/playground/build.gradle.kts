@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
@@ -9,7 +7,6 @@ plugins {
     alias(libs.plugins.ktml)
 }
 
-@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     js {
         useEsModules()

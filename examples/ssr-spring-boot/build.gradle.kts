@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
     kotlin("multiplatform")
@@ -13,7 +12,6 @@ plugins {
 
 extra["mainClassName"] = "example.MainKt"
 
-@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     jvmToolchain(25)
     jvm {

@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
@@ -13,7 +12,6 @@ plugins {
 
 extra["mainClassName"] = "example.MainVerticle"
 
-@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     jvmToolchain(25)
     jvm {

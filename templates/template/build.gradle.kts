@@ -9,7 +9,6 @@ plugins {
     alias(libs.plugins.vite.kotlin)
 }
 
-@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     js {
         useEsModules()
