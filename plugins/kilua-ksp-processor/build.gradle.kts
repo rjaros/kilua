@@ -24,5 +24,5 @@ kotlin {
     }
 }
 
-setupDokka(tasks.dokkaGeneratePublicationHtml, path = "plugins/")
+setupDokka(path = "plugins/")
 setupPublishing()

@@ -193,7 +193,7 @@ fun Project.setupPublishing() {
     }
 }
 
-fun Project.setupDokka(provider: TaskProvider<DokkaGeneratePublicationTask>, path: String = "modules/") {
+fun Project.setupDokka(path: String = "modules/") {
     tasks.register("javadocJar", Jar::class.java) {
         // javadocJar is empty, but it is required for publishing to Maven Central. Dokka generates the actual documentation.
         it.archiveClassifier.set("javadoc")

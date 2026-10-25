@@ -52,5 +52,5 @@ kotlin {
 
 setupKsp()
 
-setupDokka(tasks.dokkaGeneratePublicationHtml, path = "")
+setupDokka(path = "")
 setupPublishing()
