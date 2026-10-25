@@ -338,10 +338,6 @@ public abstract class KiluaPlugin : Plugin<Project> {
                     it.from(wasmJsProcessResources)
                     it.exclude("/tailwind/**")
                     it.from("build/kotlin-webpack/wasmJs.ssr/productionExecutable")
-                    // A wasm file with original name is still loaded from the main js file
-                    it.from("build/compileSync/wasmJs/main/productionExecutable/optimized") {
-                        it.include { it.name.endsWith(".wasm") }
-                    }
                     it.into(productionExecutableDirSSR)
                 }
                 project.tasks.register("wasmJsArchiveSSR", Jar::class.java) {
@@ -366,8 +362,8 @@ public abstract class KiluaPlugin : Plugin<Project> {
                         } else if (fileCopyDetails.name.equals("main.bundle.js")) {
                             fileCopyDetails.filter {
                                 it.replace(
-                                    Regex("""([a-zA-Z_]+)=[a-zA-Z_]+.resolve\(([^)]+)\),(.*)\.readFileSync\([a-zA-Z_]+\.fileURLToPath\([a-zA-Z_]+\)\)"""),
-                                    """$1=(await import("node:path")).resolve($2),$3.readFileSync($1)"""
+                                    Regex("""([a-zA-Z0-9_]+)=await\(import\("node:url"\)\),([a-zA-Z0-9_]+)=new URL\(([a-zA-Z0-9_]+)\(([a-zA-Z0-9_]+)\),([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)\)\.href"""),
+                                    """$1=(await import("node:url")),$2=new URL($1.pathToFileURL($3($4)),$5.$6).href"""
                                 )
                             }
                         }
