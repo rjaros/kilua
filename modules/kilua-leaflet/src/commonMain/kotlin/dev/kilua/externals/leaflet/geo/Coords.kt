@@ -1,4 +1,3 @@
-@file:JsModule("leaflet")
 /*
  * Copyright (c) 2025 Robert Jaros
  * Copyright (c) 2022 Adam S.
@@ -24,10 +23,11 @@
 
 package dev.kilua.externals.leaflet.geo
 
-import dev.kilua.externals.leaflet.geometry.Point
-import kotlin.js.JsModule
-
-
-public open external class Coords : Point {
+/**
+ * Coordinates of a tile: the tile's point plus its zoom level.
+ */
+public external interface Coords {
+    public var x: Double
+    public var y: Double
     public var z: Double
 }

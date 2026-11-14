@@ -1,5 +1,5 @@
+@file:Suppress("INTERFACE_WITH_SUPERCLASS")
 @file:JsModule("leaflet")
-@file:JsQualifier("Control")
 /*
  * Copyright (c) 2025 Robert Jaros
  * Copyright (c) 2022 Adam S.
@@ -23,35 +23,44 @@
  * SOFTWARE.
  */
 
-package dev.kilua.externals.leaflet.control
+package dev.kilua.externals.leaflet.layer.tile
 
-import dev.kilua.externals.leaflet.control.Scale.ScaleOptions
-import dev.kilua.externals.leaflet.events.LeafletEventHandlerFnMap
+import kotlin.js.JsAny
 import kotlin.js.JsModule
-import kotlin.js.JsQualifier
 import kotlin.js.definedExternally
 
 /**
- * A simple scale control that shows the scale of the current center of screen in metric (m/km) and
- * imperial (mi/ft) systems.
+ * Used to display WMS services as tile layers on the map.
  */
-public open external class Scale(options: ScaleOptions = definedExternally) : Control<ScaleOptions> {
+public open external class WMSTileLayer(
+    baseUrl: String,
+    options: WMSTileLayerOptions,
+) : TileLayer<WMSTileLayer.WMSTileLayerOptions> {
 
-    public interface ScaleOptions : ControlOptions {
-        /**
-         * Maximum width of the control in pixels. The width is set dynamically to show round
-         * values (e.g. 100, 200, 500).
-         */
-        public var maxWidth: Int?
-        /** Whether to show the metric scale line (m/km). */
-        public var metric: Boolean?
-        /** Whether to show the imperial scale line (mi/ft). */
-        public var imperial: Boolean?
-        /**
-         * If `true`, the control is updated on [LeafletEventHandlerFnMap.moveend], otherwise it's
-         * always up-to-date (updated on [LeafletEventHandlerFnMap.move]).
-         */
-        public var updateWhenIdle: Boolean?
+    public open var wmsParams: WMSParams
+
+    public open fun setParams(params: JsAny, noRedraw: Boolean = definedExternally): WMSTileLayer /* this */
+
+    public interface WMSTileLayerOptions : TileLayerOptions {
+        public var layers: String?
+        public var styles: String?
+        public var format: String?
+        public var transparent: Boolean?
+        public var version: String?
+        public var crs: JsAny?
+        public var uppercase: Boolean?
+    }
+
+    public interface WMSParams : JsAny {
+        public var format: String?
+        public var layers: String
+        public var request: String?
+        public var service: String?
+        public var styles: String?
+        public var version: String?
+        public var transparent: Boolean?
+        public var width: Int?
+        public var height: Int?
     }
 
 }

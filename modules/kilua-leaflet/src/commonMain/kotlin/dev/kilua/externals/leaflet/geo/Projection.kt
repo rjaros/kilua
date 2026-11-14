@@ -27,56 +27,32 @@ package dev.kilua.externals.leaflet.geo
 import dev.kilua.externals.leaflet.geometry.Bounds
 import dev.kilua.externals.leaflet.geometry.Point
 import kotlin.js.JsAny
-import kotlin.js.JsModule
+import kotlin.js.JsNumber
 
-/**
- * An object with methods for projecting geographical coordinates of the world onto a flat surface
- * (and back).
- *
- * https://leafletjs.com/SlavaUkraini/reference.html#projection
- */
-public external class Projection: JsAny {
-
-    /** The bounds (specified in CRS units) where the projection is valid */
+/** An object with methods for projecting geographical coordinates onto a flat surface and back. */
+public external interface Projection : JsAny {
+    /** The bounds where the projection is valid. */
     public var bounds: Bounds
 
-    /**
-     * Projects geographical coordinates into a 2D point. Only accepts actual [LatLng] instances,
-     * not arrays.
-     */
     public fun project(latlng: LatLng): Point
-
-    /**
-     * The inverse of [project]. Projects a 2D point into a geographical location. Only accepts
-     * actual [Point] instances, not arrays.
-     *
-     * Note that the projection instances do not inherit from Leaflet's
-     * [Class][dev.kilua.externals.leaflet.core.Class] object, and can't be instantiated.
-     * Also, new classes can't inherit from them, and methods can't be added to them with the include
-     * function.
-     */
     public fun unproject(point: Point): LatLng
 
-    public companion object {
-        /**
-         * Equirectangular, or Plate Carree projection — the most simple projection, mostly used by
-         * GIS enthusiasts. Directly maps `x` as longitude, and `y` as latitude. Also suitable for
-         * flat worlds, e.g. game maps. Used by the
-         * [EPSG3857][dev.kilua.externals.leaflet.geo.CRS.EPSG3857] and
-         * [Simple][dev.kilua.externals.leaflet.geo.CRS.Simple] CRS.
-         */
-        public val LonLat: Projection
-        /**
-         * Elliptical Mercator projection — more complex than Spherical Mercator. Assumes that
-         * Earth is an ellipsoid. Used by the
-         * [EPSG3857][dev.kilua.externals.leaflet.geo.CRS.EPSG3857] CRS.
-         */
-        public val Mercator: Projection
-        /**
-         * Spherical Mercator projection — the most common projection for online maps, used by
-         * almost all free and commercial tile providers. Assumes that Earth is a sphere.
-         * Used by the [EPSG3857][dev.kilua.externals.leaflet.geo.CRS.EPSG3857] CRS.
-         */
-        public val SphericalMercator: Projection
-    }
+    /** Earth radius used by the projection. */
+    public var R: Double?
+
+    /** Minor earth radius used by the elliptical Mercator projection. */
+    public var R_MINOR: Double?
+
+    /** Maximum latitude supported by the spherical Mercator projection. */
+    public var MAX_LATITUDE: Double?
 }
+
+/** Equirectangular projection used by [EPSG4326] and [SimpleCRS]. */
+public external val LonLatProjection: Projection
+
+/** Elliptical Mercator projection used by [EPSG3395]. */
+public external val MercatorProjection: Projection
+
+/** Spherical Mercator projection used by [EPSG3857]. */
+public external val SphericalMercatorProjection: Projection
+

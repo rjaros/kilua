@@ -34,8 +34,8 @@ import kotlin.js.definedExternally
 public open external class DivIcon(options: DivIconOptions = definedExternally) : Icon<DivIconOptions> {
 
     public interface DivIconOptions : IconOptions {
-        public var html: JsAny /* String? | HTMLElement? | Boolean? */
-        public var bgPos: Point
+        public var html: JsAny? /* String? | HTMLElement? | false? */
+        public var bgPos: Point?
     }
 
 }

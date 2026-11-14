@@ -25,10 +25,9 @@
 
 package dev.kilua.externals.leaflet.map
 
-import dev.kilua.externals.leaflet.control.Attribution
+import dev.kilua.externals.leaflet.control.AttributionControl
 import dev.kilua.externals.leaflet.control.Control
-import dev.kilua.externals.leaflet.control.Zoom
-import dev.kilua.externals.leaflet.core.Handler
+import dev.kilua.externals.leaflet.control.ZoomControl
 import dev.kilua.externals.leaflet.events.Evented
 import dev.kilua.externals.leaflet.geo.CRS
 import dev.kilua.externals.leaflet.geo.LatLng
@@ -42,12 +41,18 @@ import dev.kilua.externals.leaflet.layer.overlay.Tooltip
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip.TooltipOptions
 import dev.kilua.externals.leaflet.layer.vector.Path
 import dev.kilua.externals.leaflet.layer.vector.Renderer
+import dev.kilua.externals.leaflet.map.handler.BoxZoomHandler
+import dev.kilua.externals.leaflet.map.handler.DoubleClickZoomHandler
+import dev.kilua.externals.leaflet.map.handler.DragHandler
+import dev.kilua.externals.leaflet.map.handler.KeyboardHandler
+import dev.kilua.externals.leaflet.map.handler.PinchZoomHandler
+import dev.kilua.externals.leaflet.map.handler.ScrollWheelZoomHandler
+import dev.kilua.externals.leaflet.map.handler.TapHoldHandler
 import web.html.HTMLElement
 import web.pointer.PointerEvent
 import js.array.JsArray
 import kotlin.js.JsAny
 import kotlin.js.JsModule
-import kotlin.js.JsName
 import kotlin.js.definedExternally
 
 /**
@@ -55,22 +60,22 @@ import kotlin.js.definedExternally
  *
  * https://leafletjs.com/reference.html#map-example
  */
-@JsName("Map")
-// rename the implemented class to `LeafletMap` to avoid name confusion with Kotlin's Map<K, V>
 public open external class LeafletMap : Evented {
 
     public constructor(element: String, options: LeafletMapOptions = definedExternally)
     public constructor(element: HTMLElement, options: LeafletMapOptions = definedExternally)
 
-    public open var attributionControl: Attribution
-    public open var boxZoom: Handler
-    public open var doubleClickZoom: Handler
-    public open var dragging: Handler
-    public open var keyboard: Handler
-    public open var scrollWheelZoom: Handler
-    public open var tap: Handler
-    public open var touchZoom: Handler
-    public open var zoomControl: Zoom
+    public open var attributionControl: AttributionControl?
+    public open var boxZoom: BoxZoomHandler
+    public open var doubleClickZoom: DoubleClickZoomHandler
+    public open var dragging: DragHandler
+    public open var keyboard: KeyboardHandler
+    public open var scrollWheelZoom: ScrollWheelZoomHandler
+    public open var tapHold: TapHoldHandler
+    public open var pinchZoom: PinchZoomHandler
+    @Deprecated("Use pinchZoom")
+    public open var touchZoom: PinchZoomHandler
+    public open var zoomControl: ZoomControl?
     public open var options: LeafletMapOptions
 
     //<editor-fold desc="Methods">
@@ -113,7 +118,7 @@ public open external class LeafletMap : Evented {
         options: TooltipOptions = definedExternally
     ): LeafletMap
 
-    public open fun closeTooltip(tooltip: Tooltip = definedExternally): LeafletMap
+    public open fun closeTooltip(tooltip: Tooltip): LeafletMap
     //</editor-fold>
 
     //<editor-fold desc="Methods for modifying map state">
@@ -123,7 +128,7 @@ public open external class LeafletMap : Evented {
         options: ZoomPanOptions = definedExternally
     ): LeafletMap
 
-    public open fun setZoom(zoom: Int, options: ZoomPanOptions = definedExternally): LeafletMap
+    public open fun setZoom(zoom: Int, options: ZoomOptions = definedExternally): LeafletMap
     public open fun zoomIn(
         delta: Double = definedExternally,
         options: ZoomOptions = definedExternally
@@ -167,7 +172,7 @@ public open external class LeafletMap : Evented {
         options: FitBoundsOptions = definedExternally
     ): LeafletMap
 
-    public open fun setMaxBounds(bounds: LatLngBounds): LeafletMap
+    public open fun setMaxBounds(bounds: LatLngBounds = definedExternally): LeafletMap
     public open fun setMinZoom(zoom: Int): LeafletMap
     public open fun setMaxZoom(zoom: Int): LeafletMap
 
@@ -191,7 +196,7 @@ public open external class LeafletMap : Evented {
      * [InvalidateSizeOptions.debounceMoveend] is true, it will delay `moveend event` so that it
      * doesn't happen often even if the method is called many times in a row.
      */
-    public open fun invalidateSize(options: ZoomPanOptions = definedExternally): LeafletMap
+    public open fun invalidateSize(options: InvalidateSizeOptions = definedExternally): LeafletMap
 
     /** Stops the currently running [panTo] or [flyTo] animation, if any. */
     public open fun stop(): LeafletMap
@@ -206,10 +211,11 @@ public open external class LeafletMap : Evented {
     public open fun addHandler(name: String, HandlerClass: JsAny): LeafletMap
     public open fun remove(): LeafletMap
     public open fun createPane(name: String, container: HTMLElement = definedExternally): HTMLElement
-    public open fun getPane(pane: String): HTMLElement?
-    public open fun getPane(pane: HTMLElement): HTMLElement?
+    public open fun getPane(pane: String): HTMLElement
+    public open fun getPane(pane: HTMLElement): HTMLElement
     public open fun getPanes(): MapPanes
     public open fun getContainer(): HTMLElement
+    public open fun translate(text: String): String
     public open fun whenReady(fn: () -> Unit, context: JsAny = definedExternally): LeafletMap
     //</editor-fold>
 
@@ -226,14 +232,17 @@ public open external class LeafletMap : Evented {
     ): Int
 
     public open fun getSize(): Point
-    public open fun getPixelBounds(): Bounds
+    public open fun getPixelBounds(
+        center: LatLng = definedExternally,
+        zoom: Int = definedExternally
+    ): Bounds
     public open fun getPixelOrigin(): Point
-    public open fun getPixelWorldBounds(zoom: Int = definedExternally): Bounds
+    public open fun getPixelWorldBounds(zoom: Int = definedExternally): Bounds?
     //</editor-fold>
 
     //<editor-fold desc="Conversion Methods">
-    public open fun getZoomScale(toZoom: Int, fromZoom: Int = definedExternally): Int
-    public open fun getScaleZoom(scale: Int, fromZoom: Int = definedExternally): Int
+    public open fun getZoomScale(toZoom: Int, fromZoom: Int = definedExternally): Double
+    public open fun getScaleZoom(scale: Double, fromZoom: Int = definedExternally): Double
     public open fun project(latlng: LatLng, zoom: Int = definedExternally): Point
     public open fun unproject(point: Point, zoom: Int = definedExternally): LatLng
     public open fun layerPointToLatLng(point: Point): LatLng
@@ -255,9 +264,6 @@ public open external class LeafletMap : Evented {
     /** Constructor parameters for [LeafletMap] */
     public interface LeafletMapOptions : JsAny {
 
-        // Options
-        public var preferCanvas: Boolean?
-
         // Control options
         public var attributionControl: Boolean?
         public var zoomControl: Boolean?
@@ -278,7 +284,7 @@ public open external class LeafletMap : Evented {
         public var maxZoom: Int?
         public var minZoom: Int?
         public var layers: JsArray<Layer<*>>?
-        public var maxBounds: LatLngBounds /* LatLngBounds? | LatLngBoundsLiteral? */
+        public var maxBounds: LatLngBounds? /* LatLngBounds? | LatLngBoundsLiteral? */
         public var renderer: Renderer<Renderer.RendererOptions>?
 
         // Animation options
@@ -299,6 +305,8 @@ public open external class LeafletMap : Evented {
         // Keyboard Navigation options
         public var keyboard: Boolean?
         public var keyboardPanDelta: Double?
+        public var ariaKeyShortcuts: JsAny? /* Boolean? | String? */
+        public var translate: ((text: String) -> String?)?
 
         // Mouse wheel options
         public var scrollWheelZoom: JsAny? /* Boolean? | "center" */

@@ -23,9 +23,9 @@
 
 package dev.kilua.maps
 
-import dev.kilua.externals.leaflet.control.Control
 import dev.kilua.externals.leaflet.layer.tile.TileLayer
 import dev.kilua.maps.LeafletObjectFactory.tileLayer
+import kotlin.js.JsAny
 import kotlin.js.toJsString
 
 /**
@@ -95,7 +95,7 @@ public object DefaultTileLayers {
             subdomains = "abc".toJsString()
         }
 
-    public val baseLayers: Control.LayersObject = LeafletObjectFactory.layersObject(
+    public val baseLayers: JsAny = LeafletObjectFactory.layersObject(
         mapOf(
             "Empty" to Empty,
             "Esri.WorldImagery" to EsriWorldImagery,

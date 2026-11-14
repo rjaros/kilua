@@ -77,8 +77,8 @@ public open external class TileLayer<T : TileLayerOptions>(
         public var tms: Boolean?
         public var zoomReverse: Boolean?
         public var detectRetina: Boolean?
-        public var crossOrigin: JsAny /* Boolean? | String? */
-        public var referrerPolicy: JsAny /* Boolean? | String? */
+        public var crossOrigin: JsAny? /* Boolean? | String? */
+        public var referrerPolicy: JsAny? /* Boolean? | String? */
     }
 
 }

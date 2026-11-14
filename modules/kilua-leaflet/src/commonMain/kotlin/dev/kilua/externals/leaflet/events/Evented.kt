@@ -44,14 +44,13 @@ public open external class Evented : Class {
     public open fun on(type: LeafletTooltipEventId,                        fn: TooltipEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
     public open fun on(type: LeafletErrorEventId,                          fn: ErrorEventHandlerFn,           context: JsAny = definedExternally): Evented /* this */
     public open fun on(type: LeafletLocationEventId,                       fn: LocationEventHandlerFn,        context: JsAny = definedExternally): Evented /* this */
-    public open fun on(type: LeafletMouseEventId,                          fn: LeafletMouseEventHandlerFn,    context: JsAny = definedExternally): Evented /* this */
+    public open fun on(type: LeafletPointerEventId,                          fn: LeafletPointerEventHandlerFn,    context: JsAny = definedExternally): Evented /* this */
     public open fun on(type: LeafletKeyboardEventId,                       fn: LeafletKeyboardEventHandlerFn, context: JsAny = definedExternally): Evented /* this */
     public open fun on(type: LeafletZoomAnimEventId,                       fn: ZoomAnimEventHandlerFn,        context: JsAny = definedExternally): Evented /* this */
     public open fun on(type: LeafletDragEndEventId,                        fn: DragEndEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
     public open fun on(type: LeafletTileEventId,                           fn: TileEventHandlerFn,            context: JsAny = definedExternally): Evented /* this */
     public open fun on(type: LeafletTileErrorId,                           fn: TileErrorEventHandlerFn,       context: JsAny = definedExternally): Evented /* this */
-    public open fun on(eventMap: LeafletEventHandlerFnMap): Evented /* this */
-
+    public open fun on(eventMap: JsAny,                                    context: JsAny = definedExternally): Evented /* this */
     public open fun off(type: LeafletEventId,                              fn: LeafletEventHandlerFn = definedExternally,         context: JsAny = definedExternally): Evented /* this */
     public open fun off(type: LeafletAnyEventId): Evented /* this */
     public open fun off(type: LeafletControlEventId,                       fn: LayersControlEventHandlerFn = definedExternally,   context: JsAny = definedExternally): Evented /* this */
@@ -61,13 +60,13 @@ public open external class Evented : Class {
     public open fun off(type: LeafletTooltipEventId,                       fn: TooltipEventHandlerFn = definedExternally,         context: JsAny = definedExternally): Evented /* this */
     public open fun off(type: LeafletErrorEventId,                         fn: ErrorEventHandlerFn = definedExternally,           context: JsAny = definedExternally): Evented /* this */
     public open fun off(type: LeafletLocationEventId,                      fn: LocationEventHandlerFn = definedExternally,        context: JsAny = definedExternally): Evented /* this */
-    public open fun off(type: LeafletMouseEventId,                         fn: LeafletMouseEventHandlerFn = definedExternally,    context: JsAny = definedExternally): Evented /* this */
+    public open fun off(type: LeafletPointerEventId,                         fn: LeafletPointerEventHandlerFn = definedExternally,    context: JsAny = definedExternally): Evented /* this */
     public open fun off(type: LeafletKeyboardEventId,                      fn: LeafletKeyboardEventHandlerFn = definedExternally, context: JsAny = definedExternally): Evented /* this */
     public open fun off(type: LeafletZoomAnimEventId,                      fn: ZoomAnimEventHandlerFn = definedExternally,        context: JsAny = definedExternally): Evented /* this */
     public open fun off(type: LeafletDragEndEventId,                       fn: DragEndEventHandlerFn = definedExternally,         context: JsAny = definedExternally): Evented /* this */
     public open fun off(type: LeafletTileEventId,                          fn: TileEventHandlerFn = definedExternally,            context: JsAny = definedExternally): Evented /* this */
     public open fun off(type: LeafletTileErrorId,                          fn: TileErrorEventHandlerFn = definedExternally,       context: JsAny = definedExternally): Evented /* this */
-    public open fun off(eventMap: LeafletEventHandlerFnMap): Evented /* this */
+    public open fun off(eventMap: JsAny,                                   context: JsAny = definedExternally): Evented /* this */
     public open fun off(): Evented /* this */
 
     public open fun fire(type: String, data: JsAny = definedExternally, propagate: Boolean = definedExternally): Evented /* this */
@@ -82,13 +81,12 @@ public open external class Evented : Class {
     public open fun once(type: LeafletTooltipEventId,                      fn: TooltipEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
     public open fun once(type: LeafletErrorEventId,                        fn: ErrorEventHandlerFn,           context: JsAny = definedExternally): Evented /* this */
     public open fun once(type: LeafletLocationEventId,                     fn: LocationEventHandlerFn,        context: JsAny = definedExternally): Evented /* this */
-    public open fun once(type: LeafletMouseEventId,                        fn: LeafletMouseEventHandlerFn,    context: JsAny = definedExternally): Evented /* this */
+    public open fun once(type: LeafletPointerEventId,                        fn: LeafletPointerEventHandlerFn,    context: JsAny = definedExternally): Evented /* this */
     public open fun once(type: LeafletKeyboardEventId,                     fn: LeafletKeyboardEventHandlerFn, context: JsAny = definedExternally): Evented /* this */
     public open fun once(type: LeafletZoomAnimEventId,                     fn: ZoomAnimEventHandlerFn,        context: JsAny = definedExternally): Evented /* this */
     public open fun once(type: LeafletDragEndEventId,                      fn: DragEndEventHandlerFn,         context: JsAny = definedExternally): Evented /* this */
     public open fun once(type: LeafletTileEventId,                         fn: TileEventHandlerFn,            context: JsAny = definedExternally): Evented /* this */
-    public open fun once(eventMap: LeafletEventHandlerFnMap): Evented /* this */
-
+    public open fun once(eventMap: JsAny,                                  context: JsAny = definedExternally): Evented /* this */
     public open fun addEventParent(obj: Evented): Evented /* this */
 
     public open fun removeEventParent(obj: Evented): Evented /* this */

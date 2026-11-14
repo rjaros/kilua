@@ -27,8 +27,10 @@ package dev.kilua.externals.leaflet.layer.overlay
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geometry.Point
 import dev.kilua.externals.leaflet.layer.Layer
+import dev.kilua.externals.leaflet.layer.Layer.InteractiveLayerOptions
 import dev.kilua.externals.leaflet.layer.overlay.DivOverlay.DivOverlayOptions
 import dev.kilua.externals.leaflet.map.LeafletMap
+import web.dom.DocumentFragment
 import web.html.HTMLElement
 import kotlin.js.JsAny
 import kotlin.js.JsModule
@@ -37,22 +39,32 @@ import kotlin.js.definedExternally
 public open external class DivOverlay<T : DivOverlayOptions>(
     options: DivOverlayOptions = definedExternally,
     source: Layer<*> = definedExternally,
-) : Layer<Layer.LayerOptions> {
+) : Layer<T> {
 
-    public open fun openOn(map: LeafletMap)
-    public open fun close()
-    public open fun toggle(): DivOverlay<T>?
+    public constructor(
+        latlng: LatLng,
+        options: DivOverlayOptions = definedExternally
+    )
+
+    public open fun openOn(map: LeafletMap): DivOverlay<T> /* this */
+    public open fun close(): DivOverlay<T> /* this */
+    public open fun toggle(layer: Layer<*> = definedExternally): DivOverlay<T> /* this */
     public open fun getLatLng(): LatLng?
     public open fun setLatLng(latlng: LatLng): DivOverlay<T> /* this */
     public open fun getContent(): JsAny? /* String? | HTMLElement? */
     public open fun setContent(htmlContent: (source: Layer<*>) -> JsAny): DivOverlay<T> /* this */
     public open fun setContent(htmlContent: String): DivOverlay<T> /* this */
     public open fun setContent(htmlContent: HTMLElement): DivOverlay<T> /* this */
-    public open fun getElement(): JsAny? /* String? | HTMLElement? */
+    public open fun setContent(htmlContent: DocumentFragment): DivOverlay<T> /* this */
+    public open fun getElement(): HTMLElement?
     public open fun update()
     public open fun isOpen(): Boolean
     public open fun bringToFront(): DivOverlay<T> /* this */
     public open fun bringToBack(): DivOverlay<T> /* this */
+
+    override fun remove(): DivOverlay<T> /* this */
+    override fun removeFrom(map: LeafletMap): DivOverlay<T> /* this */
+    override fun getPane(name: String): HTMLElement
 
     public interface DivOverlayOptions : InteractiveLayerOptions {
         /** The offset of the overlay position. */
@@ -60,6 +72,9 @@ public open external class DivOverlay<T : DivOverlayOptions>(
 
         /** A custom CSS class name to assign to the overlay. */
         public var className: String?
+
+        /** Initial overlay content. */
+        public var content: JsAny? /* String? | HTMLElement? | DocumentFragment? | ((Layer<*>) -> JsAny)? */
     }
 
 }

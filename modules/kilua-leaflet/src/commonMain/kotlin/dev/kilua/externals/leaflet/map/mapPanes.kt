@@ -27,56 +27,39 @@
 
 package dev.kilua.externals.leaflet.map
 
-import dev.kilua.externals.leaflet.layer.marker.Icon
-import dev.kilua.externals.leaflet.layer.marker.Marker
-import dev.kilua.externals.leaflet.layer.overlay.ImageOverlay
-import dev.kilua.externals.leaflet.layer.overlay.Popup
-import dev.kilua.externals.leaflet.layer.overlay.Tooltip
-import dev.kilua.externals.leaflet.layer.overlay.VideoOverlay
-import dev.kilua.externals.leaflet.layer.tile.GridLayer
-import dev.kilua.externals.leaflet.layer.tile.TileLayer
-import dev.kilua.externals.leaflet.layer.vector.Polygon
-import dev.kilua.externals.leaflet.layer.vector.Polyline
 import dev.kilua.utils.jsGet
 import dev.kilua.utils.jsSet
 import web.html.HTMLElement
 import kotlin.js.JsAny
 
-/**
- * See [`Map.js#L1124`](https://github.com/Leaflet/Leaflet/blob/v1.8.0/src/map/Map.js#L1124)
- */
-public external interface DefaultMapPanes {
-    /** Pane that contains all other map panes */
+/** Map panes available on a Leaflet map. */
+public external interface MapPanes : JsAny {
+    /** Pane that contains all other map panes. */
     public var mapPane: HTMLElement
 
-    /** Pane for [GridLayer]s and [TileLayer]s */
+    /** Pane for [GridLayer][dev.kilua.externals.leaflet.layer.tile.GridLayer]s and [TileLayer][dev.kilua.externals.leaflet.layer.tile.TileLayer]s. */
     public var tilePane: HTMLElement
 
-    /** Pane for vectors (`Path`s, like [Polyline]s and [Polygon]s), [ImageOverlay]s and [VideoOverlay]s */
+    /** Pane for vectors, [ImageOverlay][dev.kilua.externals.leaflet.layer.overlay.ImageOverlay]s and [VideoOverlay][dev.kilua.externals.leaflet.layer.overlay.VideoOverlay]s. */
     public var overlayPane: HTMLElement
 
-    /** Pane for overlay shadows (e.g. [Marker] shadows) */
+    /** Pane for overlay shadows. */
     public var shadowPane: HTMLElement
 
-    /** Pane for [Icon]s of [Marker]s */
+    /** Pane for [Icon][dev.kilua.externals.leaflet.layer.marker.Icon]s of [Marker][dev.kilua.externals.leaflet.layer.marker.Marker]s. */
     public var markerPane: HTMLElement
 
-    /** Pane for [Tooltip]s. */
+    /** Pane for [Tooltip][dev.kilua.externals.leaflet.layer.overlay.Tooltip]s. */
     public var tooltipPane: HTMLElement
 
-    /** Pane for [Popup]s. */
+    /** Pane for [Popup][dev.kilua.externals.leaflet.layer.overlay.Popup]s. */
     public var popupPane: HTMLElement
 }
 
-public external interface HTMLElementsObject : JsAny
+@Suppress("NOTHING_TO_INLINE")
+public inline operator fun MapPanes.get(name: String): HTMLElement? = jsGet(name) as HTMLElement?
 
 @Suppress("NOTHING_TO_INLINE")
-public inline operator fun HTMLElementsObject.get(name: String): HTMLElement? =
-    jsGet(name) as HTMLElement?
-
-@Suppress("NOTHING_TO_INLINE")
-public inline operator fun HTMLElementsObject.set(name: String, value: HTMLElement) {
+public inline operator fun MapPanes.set(name: String, value: HTMLElement) {
     jsSet(name, value)
 }
-
-public external interface MapPanes : HTMLElementsObject, DefaultMapPanes

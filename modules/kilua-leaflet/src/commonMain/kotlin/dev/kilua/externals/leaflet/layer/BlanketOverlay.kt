@@ -1,8 +1,6 @@
 @file:JsModule("leaflet")
-@file:JsQualifier("Control")
 /*
  * Copyright (c) 2025 Robert Jaros
- * Copyright (c) 2022 Adam S.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,29 +21,24 @@
  * SOFTWARE.
  */
 
-package dev.kilua.externals.leaflet.control
+package dev.kilua.externals.leaflet.layer
 
-import dev.kilua.externals.leaflet.control.Zoom.ZoomControlOptions
-import dev.kilua.externals.leaflet.map.LeafletMap
+import kotlin.js.JsAny
 import kotlin.js.JsModule
-import kotlin.js.JsQualifier
 import kotlin.js.definedExternally
 
 /**
- * A basic zoom control with two buttons (zoom in and zoom out). It is put on the map by default
- * unless you set its [LeafletMap.zoomControl] option to `false`.
+ * Represents an HTML element that covers the entire surface of the map.
  */
-public open external class Zoom(options: ZoomControlOptions = definedExternally) : Control<ZoomControlOptions> {
+public open external class BlanketOverlay<T : BlanketOverlay.BlanketOverlayOptions>(
+    options: T = definedExternally
+) : Layer<T> {
 
-    public interface ZoomControlOptions : ControlOptions {
-        /** The text set on the 'zoom in' button. */
-        public var zoomInText: String?
-        /** The title  set on the 'zoom in' button. */
-        public var zoomInTitle: String?
-        /** The text set on the 'zoom out' button. */
-        public var zoomOutText: String?
-        /** The title set on the 'zoom out' button. */
-        public var zoomOutTitle: String?
+    public interface BlanketOverlayOptions : Layer.LayerOptions {
+        /** How much to extend the clip area around the map view. */
+        public var padding: Double?
+
+        /** Whether to update the blanket during pan/zoom animations. */
+        public var continuous: Boolean?
     }
-
 }

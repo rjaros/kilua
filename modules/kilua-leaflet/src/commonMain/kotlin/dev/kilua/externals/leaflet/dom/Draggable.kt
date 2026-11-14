@@ -40,13 +40,15 @@ import kotlin.js.definedExternally
 public open external class Draggable(
     element: HTMLElement,
     dragStartTarget: HTMLElement = definedExternally,
-    preventOutline: Boolean = definedExternally
+    options: DraggableOptions = definedExternally
 ) : Evented {
     /** Enables the dragging ability */
     public open fun enable()
     /** Disables the dragging ability */
     public open fun disable()
 
+    /** Ends the current drag. */
+    public open fun finishDrag(noInertia: Boolean = definedExternally)
 
     public interface DraggableOptions : JsAny {
         /**

@@ -32,8 +32,8 @@ import dev.kilua.externals.leaflet.geometry.Point
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.Popup
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip
-import js.errors.JsError
-import web.html.HTMLImageElement
+import dev.kilua.externals.leaflet.events.Evented
+import web.html.HTMLElement
 import web.keyboard.KeyboardEvent
 import web.mouse.MouseEvent
 import kotlin.js.JsAny
@@ -41,18 +41,18 @@ import kotlin.js.JsModule
 
 public external interface LeafletEvent : JsAny {
     public var type: String
-    public var target: JsAny
-    public var sourceTarget: JsAny
+    public var target: Evented
+    public var sourceTarget: Evented
 
-    /** Replacement for `public var layer: JsAny` */
-    public var propagatedFrom: JsAny
+    /** For propagated events, the last object that propagated the event to its event parent. */
+    public var propagatedFrom: Evented?
 }
 
-public external interface LeafletMouseEvent : LeafletEvent {
+public external interface LeafletPointerEvent : LeafletEvent {
     public var latlng: LatLng
     public var layerPoint: Point
     public var containerPoint: Point
-    public var originalEvent: MouseEvent
+    public var originalEvent: MouseEvent /* MouseEvent | PointerEvent */
 }
 
 public external interface LeafletKeyboardEvent : LeafletEvent {
@@ -62,12 +62,12 @@ public external interface LeafletKeyboardEvent : LeafletEvent {
 public external interface LocationEvent : LeafletEvent {
     public var latlng: LatLng
     public var bounds: LatLngBounds
-    public var accuracy: Int
-    public var altitude: Int
-    public var altitudeAccuracy: Int
-    public var heading: Double
-    public var speed: Double
-    public var timestamp: Int
+    public var accuracy: Double
+    public var altitude: Double?
+    public var altitudeAccuracy: Double?
+    public var heading: Double?
+    public var speed: Double?
+    public var timestamp: Double
 }
 
 public external interface ErrorEvent : LeafletEvent {
@@ -84,12 +84,12 @@ public external interface LayersControlEvent : LayerEvent {
 }
 
 public external interface TileEvent : LeafletEvent {
-    public var tile: HTMLImageElement
+    public var tile: HTMLElement
     public var coords: Coords
 }
 
 public external interface TileErrorEvent : TileEvent {
-    public var error: JsError
+    public var error: JsAny
 }
 
 public external interface ResizeEvent : LeafletEvent {
@@ -99,9 +99,9 @@ public external interface ResizeEvent : LeafletEvent {
 
 public external interface GeoJSONEvent : LeafletEvent {
     public var layer: Layer<*>
-    public var properties: JsAny
+    public var properties: JsAny?
     public var geometryType: String
-    public var id: String
+    public var id: JsAny? /* String | Number */
 }
 
 public external interface PopupEvent : LeafletEvent {
@@ -113,11 +113,36 @@ public external interface TooltipEvent : LeafletEvent {
 }
 
 public external interface DragEndEvent : LeafletEvent {
-    public var distance: Int
+    public var distance: Double
+    public var noInertia: Boolean?
 }
 
 public external interface ZoomAnimEvent : LeafletEvent {
     public var center: LatLng
     public var zoom: Int
-    public var noUpdate: Boolean?
+    public var noUpdate: Boolean
+}
+
+public external interface ViewChangeEvent : LeafletEvent {
+    public var originalEvent: web.events.Event?
+    public var flyTo: Boolean?
+    public var pinch: Boolean?
+}
+
+public external interface ViewPreResetEvent : LeafletEvent {
+    public var center: LatLng
+    public var zoom: Int
+}
+
+public external interface WorldCopyJumpEvent : LeafletEvent {
+    public var worlds: Double
+}
+
+public external interface BoxZoomEvent : LeafletEvent {
+    public var boxZoomBounds: LatLngBounds
+}
+
+public external interface MarkerMoveEvent : LeafletEvent {
+    public var oldLatLng: LatLng
+    public var latlng: LatLng
 }

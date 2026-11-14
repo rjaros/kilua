@@ -54,11 +54,13 @@ public open external class Marker(
     public open fun setIcon(icon: Icon<*>): Marker /* this */
     public open fun setOpacity(opacity: Double): Marker /* this */
     public open fun getElement(): HTMLElement?
+    public open fun getRotation(): Double?
+    public open fun setRotation(rotation: Double?): Marker /* this */
 
     public interface MarkerOptions : InteractiveLayerOptions, DraggableMarkerOptions {
         /**
          * Icon instance to use for rendering the marker. See [Icon] documentation for details on
-         * how to customize the marker icon. If not specified, a common instance of [Icon.Default]
+         * how to customize the marker icon. If not specified, a common instance of [DefaultIcon]
          * is used.
          */
         public var icon: Icon<*>?
@@ -84,6 +86,9 @@ public open external class Marker(
 
         /** The opacity of the marker.*/
         public var opacity: Double?
+
+        /** Rotation angle in degrees, or `null` to disable rotation. */
+        public var rotation: Double?
 
         /** If `true`, the marker will get on top of others when you hover the mouse over it.*/
         public var riseOnHover: Boolean?

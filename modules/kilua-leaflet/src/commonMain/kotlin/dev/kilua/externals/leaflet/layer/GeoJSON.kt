@@ -52,7 +52,7 @@ public open external class GeoJSON(
         public fun geometryToLayer(
             featureData: JsAny,
             options: GeoJSONOptions = definedExternally
-        ): Layer<*>
+        ): Layer<*>?
 
         /**
          * Creates a LatLng object from 2 numbers (longitude, latitude) used in GeoJSON for points.
@@ -77,13 +77,19 @@ public open external class GeoJSON(
             coordsToLatLng: (coords: Tuple3<JsNumber, JsNumber, JsNumber>) -> LatLng = definedExternally
         ): JsArray<JsAny>
 
-        public fun latLngToCoords(latlng: LatLng): JsArray<JsNumber>
+        public fun latLngToCoords(
+            latlng: LatLng,
+            precision: Double = definedExternally
+        ): JsArray<JsNumber>
+
         public fun latLngsToCoords(
             latlngs: JsArray<JsAny>,
             levelsDeep: Int = definedExternally,
-            closed: Boolean = definedExternally
+            closed: Boolean = definedExternally,
+            precision: Double = definedExternally
         ): JsArray<JsAny>
 
+        public fun getFeature(layer: JsAny, newGeometry: JsAny): JsAny
         public fun asFeature(geojson: JsAny): JsAny
     }
 

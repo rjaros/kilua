@@ -36,7 +36,6 @@ import kotlin.js.JsAny
  * Options for the Leaflet Map.
  */
 public data class MapsOptions(
-    val preferCanvas: Boolean? = null,
     val attributionControl: Boolean? = null,
     val zoomControl: Boolean? = null,
     val closePopupOnClick: Boolean? = null,
@@ -67,6 +66,8 @@ public data class MapsOptions(
     val maxBoundsViscosity: Double? = null,
     val keyboard: Boolean? = null,
     val keyboardPanDelta: Double? = null,
+    val ariaKeyShortcuts: JsAny? = null,
+    val translate: ((text: String) -> String?)? = null,
     val scrollWheelZoom: JsAny? = null,
     val wheelDebounceTime: Double? = null,
     val wheelPxPerZoomLevel: Double? = null,
@@ -77,7 +78,6 @@ public data class MapsOptions(
 )
 
 internal fun MapsOptions.toJs(): LeafletMapOptions = obj {
-    if (this@toJs.preferCanvas != null) this.preferCanvas = this@toJs.preferCanvas
     if (this@toJs.attributionControl != null) this.attributionControl = this@toJs.attributionControl
     if (this@toJs.zoomControl != null) this.zoomControl = this@toJs.zoomControl
     if (this@toJs.closePopupOnClick != null) this.closePopupOnClick = this@toJs.closePopupOnClick
@@ -108,6 +108,8 @@ internal fun MapsOptions.toJs(): LeafletMapOptions = obj {
     if (this@toJs.maxBoundsViscosity != null) this.maxBoundsViscosity = this@toJs.maxBoundsViscosity
     if (this@toJs.keyboard != null) this.keyboard = this@toJs.keyboard
     if (this@toJs.keyboardPanDelta != null) this.keyboardPanDelta = this@toJs.keyboardPanDelta
+    if (this@toJs.ariaKeyShortcuts != null) this.ariaKeyShortcuts = this@toJs.ariaKeyShortcuts
+    if (this@toJs.translate != null) this.translate = this@toJs.translate
     if (this@toJs.scrollWheelZoom != null) this.scrollWheelZoom = this@toJs.scrollWheelZoom
     if (this@toJs.wheelDebounceTime != null) this.wheelDebounceTime = this@toJs.wheelDebounceTime
     if (this@toJs.wheelPxPerZoomLevel != null) this.wheelPxPerZoomLevel = this@toJs.wheelPxPerZoomLevel

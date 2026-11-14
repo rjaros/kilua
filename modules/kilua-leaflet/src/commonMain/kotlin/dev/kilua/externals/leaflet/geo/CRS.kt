@@ -24,106 +24,62 @@
 
 package dev.kilua.externals.leaflet.geo
 
-import dev.kilua.externals.leaflet.core.Class
 import dev.kilua.externals.leaflet.geometry.Bounds
 import dev.kilua.externals.leaflet.geometry.Point
+import dev.kilua.externals.leaflet.geometry.Transformation
 import js.array.Tuple2
 import kotlin.js.JsAny
-import kotlin.js.JsModule
 import kotlin.js.JsNumber
 
 /**
- * ### Coordinate Reference System
- *
  * Object that defines coordinate reference systems for projecting geographical points into pixel
- * (screen) coordinates and back (and to coordinates in other units for
- * [WMS][dev.kilua.externals.leaflet.layer.tile.WMS] services).
- *
- * Leaflet defines the most usual CRSs by default. If you want to use a CRS not defined by default,
- * take a look at the [Proj4Leaflet plugin](https://github.com/kartena/Proj4Leaflet).
- *
- * Note that the CRS instances do not inherit from Leaflet's [Class] object, and can't be
- * instantiated. Also, new classes can't inherit from them, and methods can't be added to them
- * with the `include` public function.
- *
- * See: [`https://leafletjs.com/reference.html#crs-l-crs-base`](https://leafletjs.com/reference.html#crs-l-crs-base)
+ * coordinates and back.
  */
-public abstract external class CRS : JsAny {
-
-    /** Standard code name of the CRS passed into WMS services (e.g. 'EPSG:3857') */
+public external interface CRS : JsAny {
+    /** Standard code name of the CRS passed into WMS services (e.g. `EPSG:3857`). */
     public var code: String?
 
-    /**
-     * A pair of two numbers defining whether the longitude (horizontal) coordinate axis wraps
-     * around a given range and how. Defaults to `[-180, 180]` in most geographical CRSs.
-     *
-     * If undefined, the longitude axis does not wrap around.
-     * @see [wrapLat]
-     */
-    public var wrapLng: Tuple2<JsNumber, JsNumber>? /* JsTuple<Number, Number> */
+    /** The projection the CRS uses to turn geographical coordinates into projected ones. */
+    public var projection: Projection
 
-    /**
-     * Like [wrapLng], but for the latitude (vertical) axis.
-     * @see [wrapLng]
-     */
-    public var wrapLat: Tuple2<JsNumber, JsNumber>? /* JsTuple<Number, Number> */
+    /** The transformation the CRS uses to turn projected coordinates into pixels at zoom 0. */
+    public var transformation: Transformation?
 
-    /** If true, the coordinate space will be unbounded (infinite in both axes) */
+    /** The longitude wrapping range. */
+    public var wrapLng: Tuple2<JsNumber, JsNumber>?
+
+    /** The latitude wrapping range. */
+    public var wrapLat: Tuple2<JsNumber, JsNumber>?
+
+    /** If true, the coordinate space is unbounded in both axes. */
     public var infinite: Boolean?
 
     public fun latLngToPoint(latlng: LatLng, zoom: Int): Point
     public fun pointToLatLng(point: Point, zoom: Int): LatLng
     public fun project(latlng: LatLng): Point
     public fun unproject(point: Point): LatLng
-    public fun scale(zoom: Int): Int
-    public fun zoom(scale: Int): Int
-    public fun getProjectedBounds(zoom: Int): Bounds
+    public fun scale(zoom: Int): Double
+    public fun zoom(scale: Double): Double
+    public fun getProjectedBounds(zoom: Int): Bounds?
     public fun distance(latlng1: LatLng, latlng2: LatLng): JsNumber
     public fun wrapLatLng(latlng: LatLng): LatLng
-
-    public companion object {
-        /**
-         * Rarely used by some commercial tile providers. Uses Elliptical Mercator projection.
-         *
-         * See: [`https://leafletjs.com/reference.html#crs-l-crs-epsg3395`](https://leafletjs.com/reference.html#crs-l-crs-epsg3395)
-         */
-        public val EPSG3395: CRS
-
-        /**
-         * The most common [CRS] for online maps, used by almost all free and commercial tile
-         * providers. Uses Spherical Mercator projection. Set in by default in Map's
-         * [`crs` option][dev.kilua.externals.leaflet.map.LeafletMap.LeafletMapOptions.crs].
-         */
-        public val EPSG3857: CRS
-
-        /** A common CRS among GIS enthusiasts. Uses simple equirectangular projection. */
-        public val EPSG4326: CRS
-
-        /**
-         * Serves as the base for [CRS] that are global such that they cover the earth. Can only be
-         * used as the base for other CRS and cannot be used directly, since it does not have a
-         * [code], `projection` or `transformation`.
-         *
-         * [CRS.distance] returns meters.
-         */
-        public val Earth: CRS
-
-        /**
-         * A simple CRS that maps longitude and latitude into x and y directly. May be used for
-         * maps of flat surfaces (e.g. game maps). Note that the y-axis should still be inverted
-         * (going from bottom to top). `distance()` returns simple euclidean distance.
-         *
-         * See: [`https://leafletjs.com/reference.html#crs-l-crs-simple`](https://leafletjs.com/reference.html#crs-l-crs-simple)
-         */
-        public val Simple: CRS
-
-        /**
-         * Object that defines coordinate reference systems for projecting geographical points
-         * into pixel (screen) coordinates and back (and to coordinates in other units for
-         * [WMS][dev.kilua.externals.leaflet.layer.tile.WMS] services).
-         */
-        public val Base: CRS
-
-        // public val EPSG900913: CRS // defined in DefinitelyTyped, but undocumented
-    }
+    public fun wrapLatLngBounds(bounds: Bounds): LatLngBounds
 }
+
+/** Rarely used by some commercial tile providers. Uses Elliptical Mercator projection. */
+public external val EPSG3395: CRS
+
+/** The most common CRS for online maps. Uses Spherical Mercator projection. */
+public external val EPSG3857: CRS
+
+/** The same CRS as [EPSG3857], with the legacy `EPSG:900913` code. */
+public external val EPSG900913: CRS
+
+/** A common CRS among GIS enthusiasts. Uses simple equirectangular projection. */
+public external val EPSG4326: CRS
+
+/** Serves as the base for CRS that cover the earth. */
+public external val EarthCRS: CRS
+
+/** A simple CRS that maps longitude and latitude into x and y directly. */
+public external val SimpleCRS: CRS

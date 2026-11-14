@@ -24,9 +24,9 @@
 
 package dev.kilua.externals.leaflet.dom
 
-import dev.kilua.externals.leaflet.dom.DomUtil.preventOutline
 import dev.kilua.externals.leaflet.dom.DomUtil.setPosition
 import dev.kilua.externals.leaflet.geometry.Point
+import web.dom.Element
 import web.html.HTMLElement
 import kotlin.js.JsAny
 import kotlin.js.JsModule
@@ -64,35 +64,21 @@ public external object DomUtil : JsAny {
         container: HTMLElement = definedExternally
     ): HTMLElement
 
-    public fun toFront(el: HTMLElement)
-    public fun toBack(el: HTMLElement)
-    public fun setTransform(el: HTMLElement, offset: Point, scale: JsNumber = definedExternally)
+    public fun toFront(el: Element)
+    public fun toBack(el: Element)
+    public fun setTransform(el: Element, offset: Point, scale: JsNumber = definedExternally)
 
     /**
      * Sets the position of el to coordinates specified by position, using CSS translate or
      * top/left positioning depending on the browser (used by Leaflet internally to position its
      * layers).
      */
-    public fun setPosition(el: HTMLElement, position: Point)
+    public fun setPosition(el: Element, position: Point, flat: Boolean = definedExternally)
 
     /** Returns the coordinates of an element previously positioned with [setPosition]. */
-    public fun getPosition(el: HTMLElement): Point
-    public fun disableTextSelection()
-    public fun enableTextSelection()
+    public fun getPosition(el: Element): Point
     public fun disableImageDrag()
     public fun enableImageDrag()
-
-    /**
-     * Makes the outline of the element `el` invisible. Used internally by Leaflet to prevent
-     * focusable elements from displaying an outline when the user performs a drag interaction on
-     * them.
-     */
-    public fun preventOutline(el: HTMLElement)
-
-    /**
-     * Cancels the effects of a previous [preventOutline].
-     */
-    public fun restoreOutline()
 
     /**
      * Finds the closest parent node which size (width and height) is not null.

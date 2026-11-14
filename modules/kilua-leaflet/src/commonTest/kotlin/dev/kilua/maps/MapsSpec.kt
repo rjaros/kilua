@@ -23,15 +23,46 @@
 package dev.kilua.maps
 
 import dev.kilua.compose.root
+import dev.kilua.externals.leaflet.control.AttributionControl
+import dev.kilua.externals.leaflet.control.FullscreenControl
+import dev.kilua.externals.leaflet.control.LayersControl
+import dev.kilua.externals.leaflet.control.ScaleControl
+import dev.kilua.externals.leaflet.control.ZoomControl
+import dev.kilua.externals.leaflet.core.Util
+import dev.kilua.externals.leaflet.geo.EPSG3857
 import dev.kilua.externals.leaflet.geo.LatLng
+import dev.kilua.externals.leaflet.geo.LonLatProjection
+import dev.kilua.externals.leaflet.geometry.LineUtil
+import dev.kilua.externals.leaflet.geometry.Point
+import dev.kilua.externals.leaflet.geometry.Transformation
 import dev.kilua.externals.leaflet.layer.FeatureGroup
+import dev.kilua.externals.leaflet.layer.marker.DefaultIcon
+import dev.kilua.externals.leaflet.version
 import dev.kilua.html.px
 import dev.kilua.test.DomSpec
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import web.html.asStringOrNull
 import web.window.window
-import kotlin.test.Test
 
 class MapsSpec : DomSpec {
+
+    @Test
+    fun beta4Exports() {
+        assertEquals("2.0.0-beta.4", version)
+        AttributionControl()
+        FullscreenControl()
+        LayersControl()
+        ScaleControl()
+        ZoomControl()
+        DefaultIcon()
+        assertEquals("EPSG:3857", EPSG3857.code)
+        assertEquals(512.0, EPSG3857.scale(1), "Should use the exported CRS class")
+        assertEquals(1.0, LonLatProjection.project(LatLng(1.0, 1.0)).x)
+        assertEquals(2.0, Transformation(2.0, 0.0, 0.0, 2.0).transform(Point(1.0, 1.0)).x)
+        assertEquals(false, Util.falseFn())
+        assertEquals(1.0, LineUtil.pointToSegmentDistance(Point(0.0, 1.0), Point(0.0, 0.0), Point(2.0, 0.0)))
+    }
 
     @Test
     fun render() = runWhenDomAvailableAsync {

@@ -1,6 +1,4 @@
-@file:Suppress("INTERFACE_WITH_SUPERCLASS")
 @file:JsModule("leaflet")
-@file:JsQualifier("TileLayer")
 /*
  * Copyright (c) 2025 Robert Jaros
  * Copyright (c) 2022 Adam S.
@@ -24,44 +22,34 @@
  * SOFTWARE.
  */
 
-package dev.kilua.externals.leaflet.layer.tile
+package dev.kilua.externals.leaflet.control
 
-import dev.kilua.externals.leaflet.geo.CRS
-import kotlin.js.JsAny
+import dev.kilua.externals.leaflet.control.ZoomControl.ZoomControlOptions
+import dev.kilua.externals.leaflet.map.LeafletMap
 import kotlin.js.JsModule
-import kotlin.js.JsQualifier
 import kotlin.js.definedExternally
 
 /**
- * Used to display WMS services as tile layers on the map.
+ * A basic zoom control with two buttons (zoom in and zoom out). It is put on the map by default
+ * unless you set its [LeafletMap.zoomControl] option to `false`.
  */
-public open external class WMS(
-    baseUrl: String,
-    options: WMSOptions,
-) : TileLayer<WMS.WMSOptions> {
+public open external class ZoomControl(options: ZoomControlOptions = definedExternally) : Control<ZoomControlOptions> {
 
-    public open fun setParams(params: WMSParams, noRedraw: Boolean = definedExternally): WMS /* this */
+    /** Disables the zoom buttons. */
+    public open fun disable(): ZoomControl /* this */
 
-    public interface WMSOptions : TileLayerOptions {
-        public var layers: String?
-        public var styles: String?
-        public var format: String?
-        public var transparent: Boolean?
-        public var version: String?
-        public var crs: CRS?
-        public var uppercase: Boolean?
-    }
+    /** Enables the zoom buttons again after [disable]. */
+    public open fun enable(): ZoomControl /* this */
 
-    public interface WMSParams : JsAny {
-        public var format: String?
-        public var layers: String
-        public var request: String?
-        public var service: String?
-        public var styles: String?
-        public var version: String?
-        public var transparent: Boolean?
-        public var width: Int?
-        public var height: Int?
+    public interface ZoomControlOptions : ControlOptions {
+        /** The text set on the 'zoom in' button. */
+        public var zoomInText: String?
+        /** The title  set on the 'zoom in' button. */
+        public var zoomInTitle: String?
+        /** The text set on the 'zoom out' button. */
+        public var zoomOutText: String?
+        /** The title set on the 'zoom out' button. */
+        public var zoomOutTitle: String?
     }
 
 }

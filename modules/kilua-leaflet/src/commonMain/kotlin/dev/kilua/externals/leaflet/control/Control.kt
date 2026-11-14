@@ -1,3 +1,4 @@
+@file:JsModule("leaflet")
 @file:Suppress("INTERFACE_WITH_SUPERCLASS")
 /*
  * Copyright (c) 2025 Robert Jaros
@@ -24,19 +25,12 @@
 
 package dev.kilua.externals.leaflet.control
 
-import dev.kilua.externals.leaflet.PositionsUnion
 import dev.kilua.externals.leaflet.control.Control.ControlOptions
-import dev.kilua.externals.leaflet.control.Control.LayersObject
 import dev.kilua.externals.leaflet.core.Class
-import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.map.LeafletMap
-import dev.kilua.utils.jsGet
-import dev.kilua.utils.jsSet
 import web.html.HTMLElement
 import kotlin.js.JsAny
-import kotlin.js.JsModule
 import kotlin.js.definedExternally
-import kotlin.js.unsafeCast
 
 /**
  * `Control` is a base class for implementing map controls. Handles positioning. All other controls
@@ -44,16 +38,15 @@ import kotlin.js.unsafeCast
  *
  * See [`https://leafletjs.com/reference.html#control`](https://leafletjs.com/reference.html#control)
  */
-@JsModule("leaflet")
 public abstract external class Control<T : ControlOptions>(
     options: T = definedExternally
 ) : Class {
 
     /** Returns the position of the control. */
-    public open fun getPosition(): PositionsUnion
+    public open fun getPosition(): ControlPosition
 
     /** Sets the position of the control. */
-    public open fun setPosition(position: PositionsUnion): Control<T> /* this */
+    public open fun setPosition(position: ControlPosition): Control<T> /* this */
 
     /** Returns the HTMLElement that contains the control. */
     public open fun getContainer(): HTMLElement?
@@ -82,25 +75,7 @@ public abstract external class Control<T : ControlOptions>(
          *
          * Possible values are `topleft`, `topright`, `bottomleft` or `bottomright`
          */
-        public var position: PositionsUnion
+        public var position: ControlPosition
     }
 
-    /**
-     * Object literal with layer names as keys and [Layer] objects as values.
-     *
-     * @see [LayersObject.set]
-     * @see [LayersObject.get]
-     */
-    public interface LayersObject : JsAny
-}
-
-/** Native getter for [LayersObject] */
-@Suppress("NOTHING_TO_INLINE")
-public inline operator fun LayersObject.get(name: String): Layer<*>? =
-    jsGet(name)?.unsafeCast<Layer<*>>()
-
-/** Native setter for [LayersObject] */
-@Suppress("NOTHING_TO_INLINE")
-public inline operator fun LayersObject.set(name: String, value: Layer<*>) {
-    jsSet(name, value)
 }

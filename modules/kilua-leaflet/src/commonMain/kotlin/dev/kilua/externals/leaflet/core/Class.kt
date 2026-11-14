@@ -35,23 +35,22 @@ import kotlin.js.JsModule
  * In addition to implementing a simple classical inheritance model, it introduces several special
  * properties for convenient code organization — options, includes and statics.
  */
-public abstract external class Class : JsAny {
-    /** Includes a mixin into the current class. */
-    public fun include(props: JsAny): JsAny
-
-    /** Merges options into the defaults of the class. */
-    public fun mergeOptions(props: JsAny): JsAny
-
-    /** Adds a constructor hook to the class. */
-    public fun addInitHook(initHookFn: () -> Unit): JsAny
-    public fun addInitHook(methodName: String, vararg args: JsAny): JsAny
+public open external class Class : JsAny {
+    /** Runs all constructor hooks of the class chain once. */
+    public fun callInitHooks()
 
     public companion object {
-        /**
-         * [Extends the current class](https://leafletjs.com/SlavaUkraini/reference.html#class-inheritance)
-         * given the properties to be included. Returns a Javascript function that is a class
-         * constructor (to be called with `new`).
-         */
-        public fun extend(props: JsAny): JsAny
+        /** Includes a mixin into the current class. */
+        public fun include(props: JsAny): JsAny
+
+        /** Merges options into the defaults of the class. */
+        public fun mergeOptions(props: JsAny): JsAny
+
+        /** Deprecated alias of [mergeOptions]. */
+        public fun setDefaultOptions(props: JsAny): JsAny
+
+        /** Adds a constructor hook to the class. */
+        public fun addInitHook(initHookFn: () -> Unit): JsAny
+        public fun addInitHook(methodName: String, vararg args: JsAny): JsAny
     }
 }

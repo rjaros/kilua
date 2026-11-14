@@ -25,6 +25,7 @@
 package dev.kilua.externals.leaflet.core
 
 import dev.kilua.externals.leaflet.map.LeafletMap
+import kotlin.js.JsAny
 import kotlin.js.JsModule
 
 /**
@@ -47,4 +48,9 @@ public open external class Handler(map: LeafletMap) : Class {
 
     /** Called when the handler is disabled, should remove the event hooks added previously. */
     public fun removeHooks()
+
+    public companion object {
+        /** Adds a new handler to the given map with the given name. */
+        public fun addTo(map: LeafletMap, name: String): JsAny
+    }
 }

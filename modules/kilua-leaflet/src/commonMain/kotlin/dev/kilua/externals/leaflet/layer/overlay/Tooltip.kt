@@ -24,18 +24,23 @@
 
 package dev.kilua.externals.leaflet.layer.overlay
 
-import dev.kilua.externals.leaflet.DirectionsUnion
+import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip.TooltipOptions
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
 
 public open external class Tooltip(
+    options: TooltipOptions = definedExternally,
     source: Layer<*> = definedExternally,
-    options: TooltipOptions? = definedExternally,
 ) : DivOverlay<TooltipOptions> {
 
-    public open fun setOpacity(param_val: Double)
+    public constructor(
+        latlng: LatLng,
+        options: TooltipOptions = definedExternally,
+    )
+
+    public open fun setOpacity(opacity: Double)
 
     public interface TooltipOptions : DivOverlayOptions {
         /**
@@ -45,7 +50,7 @@ public open external class Tooltip(
          * `auto` will dynamically switch between `right` and `left` according to the tooltip
          * position on the map.
          */
-        public var direction: DirectionsUnion?
+        public var direction: String?
 
         /** Whether to open the tooltip permanently or only on mouseover. */
         public var permanent: Boolean?

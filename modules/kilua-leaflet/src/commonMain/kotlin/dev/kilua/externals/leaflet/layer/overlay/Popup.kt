@@ -24,6 +24,7 @@
 
 package dev.kilua.externals.leaflet.layer.overlay
 
+import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geometry.Point
 import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.Popup.PopupOptions
@@ -39,9 +40,14 @@ import kotlin.js.definedExternally
  * https://leafletjs.com/SlavaUkraini/reference.html#popup
  */
 public external class Popup(
-    source: Layer<*> = definedExternally,
     options: PopupOptions = definedExternally,
+    source: Layer<*> = definedExternally,
 ) : DivOverlay<PopupOptions> {
+
+    public constructor(
+        latlng: LatLng,
+        options: PopupOptions = definedExternally,
+    )
 
     public interface PopupOptions : DivOverlayOptions {
         /** Max width of the popup, in pixels.*/
@@ -95,5 +101,11 @@ public external class Popup(
          * [`closePopupOnClick`][LeafletMap.LeafletMapOptions.closePopupOnClick] option.
          */
         public var closeOnClick: Boolean?
+
+        /** Specifies the `aria-label` attribute of the close button. */
+        public var closeButtonLabel: String?
+
+        /** Whether the popup shall react to changes in the size of its contents. */
+        public var trackResize: Boolean?
     }
 }

@@ -25,11 +25,11 @@
 package dev.kilua.externals.leaflet.layer.marker
 
 import dev.kilua.externals.leaflet.geometry.Point
-import dev.kilua.externals.leaflet.layer.Layer
+import dev.kilua.externals.leaflet.core.Class
+import web.html.HTMLImageElement
 import web.html.HTMLElement
 import kotlin.js.JsAny
 import kotlin.js.JsModule
-import kotlin.js.JsName
 import kotlin.js.definedExternally
 
 /**
@@ -37,35 +37,19 @@ import kotlin.js.definedExternally
  *
  * https://leafletjs.com/SlavaUkraini/reference.html#icon
  */
-public open external class Icon<T : Icon.IconOptions>(options: IconOptions) : Layer<T> {
+public open external class Icon<T : Icon.IconOptions>(options: T = definedExternally) : Class {
 
-    public open fun createIcon(oldIcon: HTMLElement = definedExternally): HTMLElement
-    public open fun createShadow(oldIcon: HTMLElement = definedExternally): HTMLElement
+    public open fun createIcon(oldIcon: HTMLElement? = definedExternally): HTMLElement
+    public open fun createShadow(oldIcon: HTMLElement? = definedExternally): HTMLImageElement?
 
-    public interface DefaultIconOptions : IconOptions {
-        public var imagePath: String?
-    }
-
-    public open class Default(options: DefaultIconOptions = definedExternally) : Icon<DefaultIconOptions> {
-
-        public companion object {
-            public var imagePath: String?
-        }
-    }
-
-    public companion object {
-        @JsName("Default")
-        public val DefaultIcon: Default
-    }
-
-    public interface IconOptions : LayerOptions {
+    public interface IconOptions : JsAny {
         /** **(required)** The URL to the icon image (absolute or relative to your script path). */
-        public var iconUrl: String
+        public var iconUrl: String?
         public var iconRetinaUrl: String?
         public var iconSize: Point?
         public var iconAnchor: Point?
-        public var popupAnchor: Point
-        public var tooltipAnchor: Point
+        public var popupAnchor: Point?
+        public var tooltipAnchor: Point?
         public var shadowUrl: String?
         public var shadowRetinaUrl: String?
 

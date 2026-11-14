@@ -25,20 +25,13 @@
 package dev.kilua.externals.leaflet.layer.overlay
 
 import dev.kilua.externals.leaflet.geo.LatLngBounds
-import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.ImageOverlay.ImageOverlayOptions
 import kotlin.js.JsModule
 import web.svg.SVGElement
 import kotlin.js.definedExternally
 
 
-public open external class SVGOverlay : Layer<ImageOverlayOptions>, MediaOverlay {
-
-    public constructor(
-        svgImage: String,
-        bounds: LatLngBounds,
-        options: ImageOverlayOptions = definedExternally
-    )
+public open external class SVGOverlay : ImageOverlay<ImageOverlayOptions, SVGElement> {
 
     public constructor(
         svgImage: SVGElement,
@@ -53,5 +46,5 @@ public open external class SVGOverlay : Layer<ImageOverlayOptions>, MediaOverlay
     override fun setBounds(bounds: LatLngBounds): SVGOverlay /* this */
     override fun setZIndex(value: Int): SVGOverlay /* this */
 
-    override fun getElement(): SVGElement?
+    override fun getElement(): SVGElement
 }

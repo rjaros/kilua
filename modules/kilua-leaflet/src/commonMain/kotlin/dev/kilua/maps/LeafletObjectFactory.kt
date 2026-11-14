@@ -23,14 +23,12 @@
 
 package dev.kilua.maps
 
-import dev.kilua.externals.leaflet.control.Attribution
-import dev.kilua.externals.leaflet.control.Attribution.AttributionOptions
-import dev.kilua.externals.leaflet.control.Control.LayersObject
-import dev.kilua.externals.leaflet.control.Layers
-import dev.kilua.externals.leaflet.control.Layers.LayersOptions
-import dev.kilua.externals.leaflet.control.Scale
-import dev.kilua.externals.leaflet.control.Scale.ScaleOptions
-import dev.kilua.externals.leaflet.control.set
+import dev.kilua.externals.leaflet.control.AttributionControl
+import dev.kilua.externals.leaflet.control.AttributionControl.AttributionControlOptions
+import dev.kilua.externals.leaflet.control.LayersControl
+import dev.kilua.externals.leaflet.control.LayersControl.LayersControlOptions
+import dev.kilua.externals.leaflet.control.ScaleControl
+import dev.kilua.externals.leaflet.control.ScaleControl.ScaleControlOptions
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geo.LatLngBounds
 import dev.kilua.externals.leaflet.layer.FeatureGroup
@@ -65,9 +63,11 @@ import dev.kilua.externals.leaflet.layer.vector.Renderer.RendererOptions
 import dev.kilua.externals.leaflet.layer.vector.SVG
 import dev.kilua.externals.leaflet.map.LeafletMap
 import dev.kilua.externals.leaflet.map.LeafletMap.LeafletMapOptions
+import dev.kilua.utils.jsSet
 import dev.kilua.utils.obj
 import js.array.JsArray
 import js.array.toJsArray
+import web.html.HTMLImageElement
 import web.html.HTMLElement
 import web.html.HTMLVideoElement
 import kotlin.js.toJsString
@@ -124,10 +124,10 @@ public object LeafletObjectFactory {
     )
 
     public fun layers(
-        baseLayers: LayersObject = layersObject(emptyMap()),
-        overlays: LayersObject = layersObject(emptyMap()),
-        configure: LayersOptions.() -> Unit = {},
-    ): Layers = Layers(
+        baseLayers: JsAny = layersObject(emptyMap()),
+        overlays: JsAny = layersObject(emptyMap()),
+        configure: LayersControlOptions.() -> Unit = {},
+    ): LayersControl = LayersControl(
         baseLayers = baseLayers,
         overlays = overlays,
         options = obj(configure),
@@ -137,11 +137,11 @@ public object LeafletObjectFactory {
      * @param[tileLayers] Map display names to tile layers. The names can contain HTML, which
      * allows you to add additional styling to the items.
      */
-    public fun layersObject(tileLayers: Map<String, TileLayer<*>>): LayersObject =
+    public fun layersObject(tileLayers: Map<String, TileLayer<*>>): JsAny =
         tileLayers
             .entries
             .fold(obj {}) { acc, (name, layer) ->
-                acc[name] = layer
+                acc.jsSet(name, layer)
                 acc
             }
 
@@ -149,19 +149,19 @@ public object LeafletObjectFactory {
         imageUrl: String,
         bounds: LatLngBounds,
         configure: ImageOverlayOptions.() -> Unit = {},
-    ): ImageOverlay = ImageOverlay(
+    ): ImageOverlay<ImageOverlayOptions, HTMLImageElement> = ImageOverlay(
         imageUrl = imageUrl,
         bounds = bounds,
         options = obj(configure),
     )
 
     public fun attribution(
-        configure: AttributionOptions.() -> Unit = {},
-    ): Attribution = Attribution(options = obj(configure))
+        configure: AttributionControlOptions.() -> Unit = {},
+    ): AttributionControl = AttributionControl(options = obj(configure))
 
     public fun scale(
-        configure: ScaleOptions.() -> Unit = {},
-    ): Scale = Scale(options = obj(configure))
+        configure: ScaleControlOptions.() -> Unit = {},
+    ): ScaleControl = ScaleControl(options = obj(configure))
 
     public fun divIcon(
         configure: DivIconOptions.() -> Unit = {},

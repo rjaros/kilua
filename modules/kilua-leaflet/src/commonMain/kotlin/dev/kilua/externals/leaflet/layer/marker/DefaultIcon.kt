@@ -1,7 +1,6 @@
 @file:JsModule("leaflet")
 /*
  * Copyright (c) 2025 Robert Jaros
- * Copyright (c) 2022 Adam S.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,24 +21,18 @@
  * SOFTWARE.
  */
 
-package dev.kilua.externals.leaflet.layer.overlay
+package dev.kilua.externals.leaflet.layer.marker
 
-import dev.kilua.externals.leaflet.geo.LatLngBounds
-import kotlin.js.JsAny
 import kotlin.js.JsModule
+import kotlin.js.definedExternally
 
-/**
- * Artificial interface that does not represent a Leaflet type. It is used to align
- * [ImageOverlay], [SVGOverlay], and [VideoOverlay], because [getElement] and methods that return
- * `this` are dynamic.
- */
-public external interface MediaOverlay {
-    public fun getElement(): JsAny?
+/** The blue icon Leaflet uses for markers by default. */
+public open external class DefaultIcon(
+    options: DefaultIcon.DefaultIconOptions = definedExternally
+) : Icon<DefaultIcon.DefaultIconOptions> {
 
-    public fun setOpacity(opacity: Double): JsAny /* this */
-    public fun bringToFront(): JsAny /* this */
-    public fun bringToBack(): JsAny /* this */
-    public fun setUrl(url: String): JsAny /* this */
-    public fun setBounds(bounds: LatLngBounds): JsAny /* this */
-    public fun setZIndex(value: Int): JsAny /* this */
+    public interface DefaultIconOptions : Icon.IconOptions {
+        /** Paints the pin in the given CSS color instead of the default blue, overriding [Icon.IconOptions.iconUrl]. */
+        public var color: String?
+    }
 }

@@ -1,6 +1,5 @@
 /*
  * Copyright (c) 2025 Robert Jaros
- * Copyright (c) 2022 Adam S.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +20,7 @@
  * SOFTWARE.
  */
 
-package dev.kilua.externals.leaflet
+package dev.kilua.externals.leaflet.control
 
-
-/** `topleft` | `topright` | `bottomleft` | `bottomright` */
-public typealias PositionsUnion = String
-
-/** `right` | `left` | `top` | `bottom` | `center` | `auto` */
-public typealias DirectionsUnion = String
+/** The position of a control on the map. */
+public typealias ControlPosition = String

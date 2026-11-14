@@ -25,7 +25,6 @@
 package dev.kilua.externals.leaflet.layer.overlay
 
 import dev.kilua.externals.leaflet.geo.LatLngBounds
-import dev.kilua.externals.leaflet.layer.Layer
 import dev.kilua.externals.leaflet.layer.overlay.ImageOverlay.ImageOverlayOptions
 import js.array.ReadonlyArray
 import web.html.HTMLVideoElement
@@ -33,7 +32,7 @@ import kotlin.js.JsModule
 import kotlin.js.JsString
 import kotlin.js.definedExternally
 
-public open external class VideoOverlay : Layer<VideoOverlay.VideoOverlayOptions>, MediaOverlay {
+public open external class VideoOverlay : ImageOverlay<VideoOverlay.VideoOverlayOptions, HTMLVideoElement> {
 
     public constructor(
         video: String,
@@ -59,10 +58,11 @@ public open external class VideoOverlay : Layer<VideoOverlay.VideoOverlayOptions
     override fun setUrl(url: String): VideoOverlay /* this */
     override fun setBounds(bounds: LatLngBounds): VideoOverlay /* this */
     override fun setZIndex(value: Int): VideoOverlay /* this */
-    override fun getElement(): HTMLVideoElement?
+    override fun getElement(): HTMLVideoElement
 
     public interface VideoOverlayOptions : ImageOverlayOptions {
         public var autoplay: Boolean?
+        public var controls: Boolean?
         public var loop: Boolean?
         public var keepAspectRatio: Boolean?
         public var playsInline: Boolean?

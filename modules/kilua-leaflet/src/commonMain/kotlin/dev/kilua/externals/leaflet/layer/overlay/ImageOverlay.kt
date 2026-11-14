@@ -27,6 +27,7 @@ package dev.kilua.externals.leaflet.layer.overlay
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.geo.LatLngBounds
 import dev.kilua.externals.leaflet.layer.Layer
+import dev.kilua.externals.leaflet.layer.Layer.InteractiveLayerOptions
 import dev.kilua.externals.leaflet.layer.overlay.ImageOverlay.ImageOverlayOptions
 import web.html.HTMLImageElement
 import kotlin.js.JsAny
@@ -36,21 +37,22 @@ import kotlin.js.definedExternally
 /**
  * Used to load and display a single image over specific bounds of the map.
  */
-public open external class ImageOverlay(
+public open external class ImageOverlay<T : ImageOverlayOptions, E : JsAny>(
     imageUrl: String,
     bounds: LatLngBounds,
-    options: ImageOverlayOptions = definedExternally
-) : Layer<ImageOverlayOptions>, MediaOverlay {
+    options: T = definedExternally
+) : Layer<T> {
 
-    override fun setOpacity(opacity: Double): ImageOverlay /* this */
-    override fun bringToFront(): ImageOverlay /* this */
-    override fun bringToBack(): ImageOverlay /* this */
-    override fun setUrl(url: String): ImageOverlay /* this */
-    override fun setBounds(bounds: LatLngBounds): ImageOverlay /* this */
-    override fun setZIndex(value: Int): ImageOverlay /* this */
+    public open fun setOpacity(opacity: Double): ImageOverlay<T, E> /* this */
+    public open fun setStyle(styleOpts: JsAny): ImageOverlay<T, E> /* this */
+    public open fun bringToFront(): ImageOverlay<T, E> /* this */
+    public open fun bringToBack(): ImageOverlay<T, E> /* this */
+    public open fun setUrl(url: String): ImageOverlay<T, E> /* this */
+    public open fun setBounds(bounds: LatLngBounds): ImageOverlay<T, E> /* this */
+    public open fun setZIndex(value: Int): ImageOverlay<T, E> /* this */
     public fun getBounds(): LatLngBounds
-    override fun getElement(): HTMLImageElement?
-    public fun getCenter(): LatLng?
+    public open fun getElement(): E
+    public fun getCenter(): LatLng
 
     public interface ImageOverlayOptions : InteractiveLayerOptions {
         public var opacity: Double?
@@ -64,10 +66,13 @@ public open external class ImageOverlay(
          * Refer to [CORS Settings](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin)
          * for valid String values.
          */
-        public var crossOrigin: JsAny /* Boolean? | String? */
+        public var crossOrigin: JsAny? /* Boolean? | String? */
         public var errorOverlayUrl: String?
         public var zIndex: Int?
         public var className: String?
+
+        /** Tells the browser how to decode the image. */
+        public var decoding: String?
     }
 
 }

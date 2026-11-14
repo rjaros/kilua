@@ -24,7 +24,7 @@
 
 package dev.kilua.externals.leaflet.layer.vector
 
-import dev.kilua.externals.leaflet.layer.Layer
+import dev.kilua.externals.leaflet.layer.BlanketOverlay
 import dev.kilua.externals.leaflet.layer.vector.Renderer.RendererOptions
 import kotlin.js.JsModule
 import kotlin.js.definedExternally
@@ -42,10 +42,10 @@ import kotlin.js.definedExternally
  */
 public abstract external class Renderer<T : RendererOptions>(
     options: RendererOptions = definedExternally
-) : Layer<T> {
+) : BlanketOverlay<T> {
 
-    public interface RendererOptions : LayerOptions {
-        public var padding: Int?
+    public interface RendererOptions : BlanketOverlayOptions {
+        override var padding: Double?
     }
 
 }

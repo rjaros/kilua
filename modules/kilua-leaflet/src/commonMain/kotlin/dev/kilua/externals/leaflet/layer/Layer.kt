@@ -34,6 +34,7 @@ import dev.kilua.externals.leaflet.layer.overlay.Popup.PopupOptions
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip
 import dev.kilua.externals.leaflet.layer.overlay.Tooltip.TooltipOptions
 import dev.kilua.externals.leaflet.map.LeafletMap
+import web.dom.Element
 import web.html.HTMLElement
 import kotlin.js.JsAny
 import kotlin.js.JsModule
@@ -57,7 +58,9 @@ public abstract external class  Layer<T : LayerOptions>(
     public open fun getAttribution(): String?
     public open fun beforeAdd(map: LeafletMap): Layer<T>? /* this */
 
-    public open fun getPane(name: String = definedExternally): HTMLElement?
+    public open fun getPane(name: String = definedExternally): HTMLElement
+    public open fun addInteractiveTarget(targetEl: Element): Layer<T> /* this */
+    public open fun removeInteractiveTarget(targetEl: Element): Layer<T> /* this */
 
     public open fun bindPopup(
         content: (layer: Layer<T>) -> JsAny,
@@ -127,7 +130,7 @@ public abstract external class  Layer<T : LayerOptions>(
     public interface LayerOptions : JsAny {
         /**
          * By default, the layer will be added to the map's
-         * [overlay pane][dev.kilua.externals.leaflet.map.DefaultMapPanes.overlayPane].
+         * [overlay pane][dev.kilua.externals.leaflet.map.MapPanes.overlayPane].
          * Overriding this option will cause the layer to be placed on another pane by default.
          */
         public var pane: String?
@@ -142,7 +145,7 @@ public abstract external class  Layer<T : LayerOptions>(
 
     /**
      * Some [Layer]s can be made interactive - when the user interacts with such a layer, mouse
-     * events like `click` and `mouseover` can be handled. Use the
+     * events like `click` and `pointerover` can be handled. Use the
      * [event handling methods](https://leafletjs.com/reference.html#evented-method) to handle
      * these events.
      */
