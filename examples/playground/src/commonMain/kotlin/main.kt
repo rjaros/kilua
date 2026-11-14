@@ -20,31 +20,12 @@
  * SOFTWARE.
  */
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.Snapshot
 import app.softwork.routingcompose.Router
 import dev.kilua.*
-import dev.kilua.animation.MotionTransition
-import dev.kilua.animation.TransitionType
-import dev.kilua.animation.animateColorAsState
-import dev.kilua.animation.animateCssSizeAsState
-import dev.kilua.animation.motionAnimatedVisibility
-import dev.kilua.compose.adaptive.Breakpoint
-import dev.kilua.compose.adaptive.TailwindcssBreakpoint
-import dev.kilua.compose.adaptive.WindowWidthSizeClass
-import dev.kilua.compose.adaptive.currentWindowSizeClass
-import dev.kilua.compose.adaptive.rememberBreakpoint
-import dev.kilua.compose.adaptive.rememberOrientation
-import dev.kilua.compose.adaptive.rememberTailwindcssBreakpoint
+import dev.kilua.animation.*
+import dev.kilua.compose.adaptive.*
 import dev.kilua.compose.foundation.layout.Arrangement
 import dev.kilua.compose.foundation.layout.Box
 import dev.kilua.compose.foundation.layout.Row
@@ -68,34 +49,18 @@ import dev.kilua.dropdown.dropDown
 import dev.kilua.externals.animateMini
 import dev.kilua.externals.leaflet.geo.LatLng
 import dev.kilua.externals.leaflet.layer.FeatureGroup
-import dev.kilua.form.Autocomplete
-import dev.kilua.form.EnumMask
-import dev.kilua.form.ImaskOptions
-import dev.kilua.form.MaskAutofix
-import dev.kilua.form.NumberMask
-import dev.kilua.form.PatternMask
-import dev.kilua.form.RangeMask
+import dev.kilua.externals.leaflet.layer.marker.Marker
+import dev.kilua.externals.leaflet.layer.overlay.Popup
+import dev.kilua.externals.leaflet.layer.tile.TileLayer
+import dev.kilua.externals.leaflet.layer.vector.Circle
+import dev.kilua.externals.leaflet.layer.vector.Polygon
+import dev.kilua.form.*
 import dev.kilua.form.check.checkBox
 import dev.kilua.form.check.checkBoxRef
 import dev.kilua.form.check.radioGroup
-import dev.kilua.form.fieldWithLabel
-import dev.kilua.form.form
-import dev.kilua.form.formRef
-import dev.kilua.form.number.imaskNumeric
-import dev.kilua.form.number.numeric
-import dev.kilua.form.number.range
-import dev.kilua.form.number.rangeRef
-import dev.kilua.form.number.spinner
-import dev.kilua.form.select.TomSelectCallbacks
-import dev.kilua.form.select.TomSelectRenders
-import dev.kilua.form.select.select
-import dev.kilua.form.select.tomSelect
-import dev.kilua.form.select.tomSelectRef
-import dev.kilua.form.text.password
-import dev.kilua.form.text.richTextRef
-import dev.kilua.form.text.text
-import dev.kilua.form.text.textRef
-import dev.kilua.form.text.tomTypeaheadRef
+import dev.kilua.form.number.*
+import dev.kilua.form.select.*
+import dev.kilua.form.text.*
 import dev.kilua.form.time.HourCycle
 import dev.kilua.form.time.richDate
 import dev.kilua.form.time.richDateTimeRef
@@ -118,58 +83,25 @@ import dev.kilua.ktml.ktml
 import dev.kilua.maps.DefaultTileLayers
 import dev.kilua.maps.LeafletObjectFactory
 import dev.kilua.maps.maps
-import dev.kilua.modal.FullscreenMode
-import dev.kilua.modal.ModalSize
-import dev.kilua.modal.alert
-import dev.kilua.modal.confirm
-import dev.kilua.modal.modal
-import dev.kilua.modal.modalRef
+import dev.kilua.modal.*
 import dev.kilua.panel.*
-import dev.kilua.popup.Placement
-import dev.kilua.popup.Trigger
-import dev.kilua.popup.disableTooltip
-import dev.kilua.popup.enableTooltip
-import dev.kilua.popup.popover
-import dev.kilua.popup.toggleTooltip
-import dev.kilua.popup.tooltip
+import dev.kilua.popup.*
 import dev.kilua.progress.Progress
 import dev.kilua.progress.ProgressOptions
-import dev.kilua.rest.HttpMethod
-import dev.kilua.rest.RemoteRequestException
-import dev.kilua.rest.RestClient
-import dev.kilua.rest.RestResponse
-import dev.kilua.rest.call
-import dev.kilua.rest.callDynamic
-import dev.kilua.rest.requestDynamic
+import dev.kilua.rest.*
 import dev.kilua.routing.RoutingModel
 import dev.kilua.routing.browserRouter
 import dev.kilua.routing.global
 import dev.kilua.state.collectAsState
 import dev.kilua.svg.path
 import dev.kilua.svg.svg
-import dev.kilua.tabulator.ColumnDefinition
-import dev.kilua.tabulator.Formatter
-import dev.kilua.tabulator.Layout
-import dev.kilua.tabulator.PaginationMode
-import dev.kilua.tabulator.ResponsiveLayout
-import dev.kilua.tabulator.TableType
-import dev.kilua.tabulator.TabulatorOptions
-import dev.kilua.tabulator.tabulator
+import dev.kilua.tabulator.*
 import dev.kilua.theme.ThemeManager
 import dev.kilua.theme.themeSwitcher
 import dev.kilua.toast.ToastPosition
 import dev.kilua.toast.toast
 import dev.kilua.toastify.ToastType
-import dev.kilua.utils.KiluaScope
-import dev.kilua.utils.cast
-import dev.kilua.utils.jsGet
-import dev.kilua.utils.jsObjectOf
-import dev.kilua.utils.listOfPairs
-import dev.kilua.utils.now
-import dev.kilua.utils.obj
-import dev.kilua.utils.promise
-import dev.kilua.utils.rem
-import dev.kilua.utils.today
+import dev.kilua.utils.*
 import dev.ktml.templates.KtmlRegistry
 import js.array.JsArray
 import js.array.jsArrayOf
@@ -191,19 +123,11 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import web.console.console
 import web.dom.Text
-import web.events.CustomEvent
-import web.events.Event
-import web.events.EventType
-import web.events.addEventListener
-import web.events.removeEventListener
+import web.events.*
 import web.html.HTMLElement
 import web.mouse.MouseEvent
 import web.timers.setTimeout
 import web.window.window
-import kotlin.js.JsAny
-import kotlin.js.JsModule
-import kotlin.js.toJsString
-import kotlin.js.unsafeCast
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.random.nextUInt
@@ -312,10 +236,50 @@ class App : Application() {
 
         root("root") {
 
+            maps {
+                width(800.px)
+                height(400.px)
+                configureLeafletMap {
+                    setView(LatLng(51.505, -0.09), 13)
+                    TileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", obj {
+                        attribution =
+                            "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
+                    }).addTo(this)
+                    Marker(LatLng(51.5, -0.09)).addTo(this).bindPopup("<b>Hello world!</b><br>I am a popup.")
+                        .openPopup()
+                    Circle(LatLng(51.508, -0.11), obj {
+                        color = "red"
+                        fillColor = "#f03"
+                        fillOpacity = 0.5
+                        radius = 500
+                    }).addTo(this).bindPopup("I am a circle.")
+                    Polygon(
+                        jsArrayOf(
+                            LatLng(51.509, -0.08),
+                            LatLng(51.503, -0.06),
+                            LatLng(51.51, -0.047)
+                        )
+                    ).addTo(this).bindPopup("I am a polygon.")
+                    val popup = Popup()
+                    fun onMapClick(e: JsAny) {
+                        val latLng = e.jsGet("latlng")?.unsafeCast<LatLng>()
+                        if (latLng != null) {
+                            popup.setLatLng(latLng)
+                                .setContent("You have clicked the map at " + latLng.toString())
+                                .openOn(this)
+                        }
+                    }
+                    on("click", ::onMapClick)
+                }
+            }
+
             div {
                 var templateHeader by remember { mutableStateOf("Ktml Template Header") }
 
-                ktml("card", mutableMapOf("header" to templateHeader, "content" to "This is a card created using Ktml template."))
+                ktml(
+                    "card",
+                    mutableMapOf("header" to templateHeader, "content" to "This is a card created using Ktml template.")
+                )
 
                 button("Change header") {
                     onClick {
@@ -2423,7 +2387,12 @@ class App : Application() {
                                 +"Please select a valid state."
                             }*/
 
-                            select(listOfPairs("Alaska", "Alabama"), value = null, className = "form-select", required = true) {
+                            select(
+                                listOfPairs("Alaska", "Alabama"),
+                                value = null,
+                                className = "form-select",
+                                required = true
+                            ) {
                                 bind("state")
                                 stateFlow.onEach {
                                     console.log("state changed: $it")
