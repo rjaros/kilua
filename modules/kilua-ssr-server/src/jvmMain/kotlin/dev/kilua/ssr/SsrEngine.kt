@@ -116,15 +116,7 @@ public class SsrEngine(
 
     init {
         Runtime.getRuntime().addShutdownHook(Thread {
-            logger.info("Shutting down SSR engine ...")
-            isShuttingDown = true
-            logger.info("Stopping Node.js SSR process ...")
-            nodeJsProcess?.destroy()
-            Thread.sleep(1000)
-            logger.info("Deleting temporary SSR working directory ...")
-            @OptIn(ExperimentalPathApi::class)
-            workingDir?.deleteRecursively()
-            logger.info("Shutdown complete")
+            close()
         })
         if (externalSsrService == null) {
             try {
@@ -159,6 +151,8 @@ public class SsrEngine(
                 }
             } catch (e: Exception) {
                 logger.error("Failed to initialize SSR engine. Disabling SSR.", e)
+                // Free resources if any were allocated before the exception
+                close()
                 isSSR = false
             }
         } else {
@@ -327,7 +321,7 @@ public class SsrEngine(
     }
 
     /**
-     * Restart the SSR NodeJs process.
+     * Restart the SSR Node.js process.
      */
     public suspend fun restartSsrProcess() {
         if (isSSR) {
@@ -337,6 +331,23 @@ public class SsrEngine(
             } catch (_: Exception) {
                 // ignore exceptions
             }
+        }
+    }
+
+    /**
+     * Close the SSR engine and stop the Node.js process.
+     */
+    public fun close() {
+        if (isSSR) {
+            logger.info("Shutting down SSR engine ...")
+            isShuttingDown = true
+            logger.info("Stopping Node.js SSR process ...")
+            nodeJsProcess?.destroy()
+            Thread.sleep(1000)
+            logger.info("Deleting temporary SSR working directory ...")
+            @OptIn(ExperimentalPathApi::class)
+            workingDir?.deleteRecursively()
+            logger.info("Shutdown complete")
         }
     }
 }
