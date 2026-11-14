@@ -47,6 +47,7 @@ import web.events.Event
  * Modal window sizes.
  */
 public enum class ModalSize {
+    ModalXxl,
     ModalXl,
     ModalLg,
     ModalSm;

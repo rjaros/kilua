@@ -23,25 +23,8 @@
 
 package dev.kilua
 
-import dev.kilua.externals.leaflet.layer.marker.Icon
-import dev.kilua.utils.delete
-import dev.kilua.utils.isDom
-import dev.kilua.utils.obj
-import kotlin.Suppress
-import kotlin.js.JsAny
-import kotlin.js.JsModule
-
 @JsModule("leaflet/dist/leaflet.css")
 internal external object LeafletCss : JsAny
-
-@JsModule("leaflet/dist/images/marker-icon-2x.png")
-internal external val markerIcon2xUrl: JsAny
-
-@JsModule("leaflet/dist/images/marker-icon.png")
-internal external val markerIconUrl: JsAny
-
-@JsModule("leaflet/dist/images/marker-shadow.png")
-internal external val markerShadowUrl: JsAny
 
 /**
  * Initializer for Kilua Leaflet module.
@@ -51,13 +34,5 @@ public object LeafletModule : ModuleInitializer {
     override fun initialize() {
         useModule(LeafletCss)
         CssRegister.register("leaflet/dist/leaflet.css")
-        if (isDom) {
-            delete(Icon.DefaultIcon, "_getIconUrl")
-            Icon.DefaultIcon.mergeOptions(obj<Icon.IconOptions> {
-                this.iconRetinaUrl = markerIcon2xUrl.toString()
-                this.iconUrl = markerIconUrl.toString()
-                this.shadowUrl = markerShadowUrl.toString()
-            })
-        }
     }
 }

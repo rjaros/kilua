@@ -21,7 +21,9 @@
  */
 package dev.kilua.ksp
 
+import com.google.devtools.ksp.ApiFeatures
 import com.google.devtools.ksp.KspExperimental
+import com.google.devtools.ksp.buildApiFeatures
 import com.google.devtools.ksp.getAnnotationsByType
 import com.google.devtools.ksp.innerArguments
 import com.google.devtools.ksp.processing.*
@@ -41,6 +43,12 @@ public class KiluaProcessor(
 
     private var isInitialInvocation = true
 
+    override val apiFeatures: ApiFeatures
+        get() = buildApiFeatures {
+            enableContextParameters = true
+            enableBackingFields = true
+        }
+
     @OptIn(KspExperimental::class)
     override fun process(resolver: Resolver): List<KSAnnotated> {
         if (!isInitialInvocation) {
@@ -49,7 +57,7 @@ public class KiluaProcessor(
         }
         isInitialInvocation = false
         resolver.getSymbolsWithAnnotation(SimpleHtmlComponent::class.qualifiedName.orEmpty())
-            .filterIsInstance<KSClassDeclaration>().filter { it.validate(enableNewFeatures = true) }
+            .filterIsInstance<KSClassDeclaration>().filter { it.validate(apiFeatures = apiFeatures) }
             .filter { it.classKind == ClassKind.INTERFACE && it.simpleName.asString().startsWith("I") }
             .forEach { classDeclaration ->
                 val simpleHtmlComponent = classDeclaration.getAnnotationsByType(SimpleHtmlComponent::class).first()
